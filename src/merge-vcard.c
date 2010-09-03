@@ -73,13 +73,13 @@ static void           gl_merge_vcard_get_property    (GObject          *object,
                                                       GValue           *value,
                                                       GParamSpec       *pspec);
 
-static GList         *gl_merge_vcard_get_key_list    (glMerge          *merge);
-static gchar         *gl_merge_vcard_get_primary_key (glMerge          *merge);
+static GList         *gl_merge_vcard_get_key_list    (const glMerge    *merge);
+static gchar         *gl_merge_vcard_get_primary_key (const glMerge    *merge);
 static void           gl_merge_vcard_open            (glMerge          *merge);
 static void           gl_merge_vcard_close           (glMerge          *merge);
 static glMergeRecord *gl_merge_vcard_get_record      (glMerge          *merge);
 static void           gl_merge_vcard_copy            (glMerge          *dst_merge,
-                                                      glMerge          *src_merge);
+                                                      const glMerge    *src_merge);
 static char *         parse_next_vcard               (FILE             *fp);
 
 
@@ -190,7 +190,7 @@ gl_merge_vcard_get_property (GObject     *object,
 /* Get key list.                                                            */
 /*--------------------------------------------------------------------------*/
 static GList *
-gl_merge_vcard_get_key_list (glMerge *merge)
+gl_merge_vcard_get_key_list (const glMerge *merge)
 {
         glMergeVCard   *merge_vcard;
         GList          *key_list = NULL;
@@ -215,7 +215,7 @@ gl_merge_vcard_get_key_list (glMerge *merge)
 /* Get "primary" key.                                                       */
 /*--------------------------------------------------------------------------*/
 static gchar *
-gl_merge_vcard_get_primary_key (glMerge *merge)
+gl_merge_vcard_get_primary_key (const glMerge *merge)
 {
         return g_strdup (e_contact_pretty_name(E_CONTACT_FILE_AS));
 }
@@ -321,8 +321,8 @@ gl_merge_vcard_get_record (glMerge *merge)
 /* Copy merge_vcard specific fields.                                         */
 /*---------------------------------------------------------------------------*/
 static void
-gl_merge_vcard_copy (glMerge *dst_merge,
-                     glMerge *src_merge)
+gl_merge_vcard_copy (glMerge       *dst_merge,
+                     const glMerge *src_merge)
 {
         glMergeVCard *dst_merge_vcard;
         glMergeVCard *src_merge_vcard;

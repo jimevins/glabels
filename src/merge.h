@@ -64,18 +64,18 @@ struct _glMerge {
 struct _glMergeClass {
 	GObjectClass     parent_class;
 
-        GList         *(*get_key_list)    (glMerge *merge);
+        GList         *(*get_key_list)    (const glMerge *merge);
 
-        gchar         *(*get_primary_key) (glMerge *merge);
+        gchar         *(*get_primary_key) (const glMerge *merge);
 
-	void           (*open)            (glMerge *merge);
+	void           (*open)            (glMerge       *merge);
 
-	void           (*close)           (glMerge *merge);
+	void           (*close)           (glMerge       *merge);
 
-	glMergeRecord *(*get_record)      (glMerge *merge);
+	glMergeRecord *(*get_record)      (glMerge       *merge);
 
-	void           (*copy)            (glMerge *dst_merge,
-					   glMerge *src_merge);
+	void           (*copy)            (glMerge       *dst_merge,
+					   const glMerge *src_merge);
 };
 
 
@@ -94,33 +94,33 @@ gchar            *gl_merge_description_to_name (gchar *description);
 
 GType             gl_merge_get_type            (void) G_GNUC_CONST;
 
-glMerge          *gl_merge_new                 (gchar             *name);
+glMerge          *gl_merge_new                 (const gchar         *name);
 
-glMerge          *gl_merge_dup                 (glMerge           *orig);
+glMerge          *gl_merge_dup                 (const glMerge       *orig);
 
-gchar            *gl_merge_get_name            (glMerge           *merge);
+gchar            *gl_merge_get_name            (const glMerge       *merge);
 
-gchar            *gl_merge_get_description     (glMerge           *merge);
+gchar            *gl_merge_get_description     (const glMerge       *merge);
 
-glMergeSrcType    gl_merge_get_src_type        (glMerge           *merge);
+glMergeSrcType    gl_merge_get_src_type        (const glMerge       *merge);
 
-void              gl_merge_set_src             (glMerge           *merge,
-						gchar             *src);
+void              gl_merge_set_src             (glMerge             *merge,
+						const gchar         *src);
 
-gchar            *gl_merge_get_src             (glMerge           *merge);
+gchar            *gl_merge_get_src             (const glMerge       *merge);
 
-GList            *gl_merge_get_key_list        (glMerge           *merge);
+GList            *gl_merge_get_key_list        (const glMerge       *merge);
 
-void              gl_merge_free_key_list       (GList            **keys);
+void              gl_merge_free_key_list       (GList              **keys);
 
-gchar            *gl_merge_get_primary_key     (glMerge           *merge);
+gchar            *gl_merge_get_primary_key     (const glMerge       *merge);
 
-gchar            *gl_merge_eval_key            (glMergeRecord     *record,
-						gchar             *key);
+gchar            *gl_merge_eval_key            (const glMergeRecord *record,
+                                                const gchar         *key);
 
-const GList      *gl_merge_get_record_list     (glMerge           *merge);
+const GList      *gl_merge_get_record_list     (const glMerge       *merge);
 
-gint              gl_merge_get_record_count    (glMerge           *merge);
+gint              gl_merge_get_record_count    (const glMerge       *merge);
 
 G_END_DECLS
 

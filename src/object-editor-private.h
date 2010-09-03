@@ -22,6 +22,7 @@
 #define __OBJECT_EDITOR_PRIVATE_H__
 
 #include <gtk/gtk.h>
+#include "label-barcode.h"
 
 G_BEGIN_DECLS
 
@@ -122,6 +123,7 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *edit_insert_field_button;
 
 	GtkWidget  *bc_page_vbox;
+	GtkWidget  *bc_backend_combo;
 	GtkWidget  *bc_style_combo;
 	GtkWidget  *bc_text_check;
 	GtkWidget  *bc_cs_check;
@@ -349,23 +351,19 @@ void        gl_object_editor_set_text_buffer      (glObjectEditor      *editor,
 /*
  * Barcode Page
  */
-void        gl_object_editor_set_bc_style         (glObjectEditor      *editor,
-						   gchar               *id,
-						   gboolean             text_flag,
-						   gboolean             checksum_flag,
-						   guint                format_digits);
+void        gl_object_editor_load_bc_styles        (glObjectEditor            *editor,
+                                                    const gchar               *backend_id);
 
-void        gl_object_editor_get_bc_style         (glObjectEditor      *editor,
-						   gchar              **id,
-						   gboolean            *text_flag,
-						   gboolean            *checksum_flag,
-						   guint               *format_digits);
+void        gl_object_editor_set_bc_style          (glObjectEditor            *editor,
+                                                    const glLabelBarcodeStyle *bc_style);
 
-void        gl_object_editor_set_bc_color         (glObjectEditor      *editor,
-						   gboolean             merge_flag,
-						   glColorNode         *color_node);
+glLabelBarcodeStyle *gl_object_editor_get_bc_style (glObjectEditor            *editor);
 
-glColorNode* gl_object_editor_get_bc_color        (glObjectEditor      *editor);
+void        gl_object_editor_set_bc_color          (glObjectEditor            *editor,
+                                                    gboolean                   merge_flag,
+                                                    glColorNode               *color_node);
+
+glColorNode* gl_object_editor_get_bc_color         (glObjectEditor            *editor);
 
 
 /*

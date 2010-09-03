@@ -44,6 +44,14 @@
 <!ENTITY % FONT_WEIGHT_TYPE   "(Regular | Bold)">
 
 <!-- Barcode related enumerations/types -->
+<!ENTITY % BC_BACKEND_TYPE    "CDATA">
+                              <!-- one of:
+                              "(built-in    |
+                                gnu-barcode |
+				zint        |
+				libiec16022 |
+				libqrencode")
+                               -->
 <!ENTITY % BC_STYLE_TYPE      "CDATA">
                               <!-- one of:
                               "(POSTNET    |
@@ -392,6 +400,7 @@
 <!ATTLIST Object-barcode
                  %position_attrs;
                  %size_attrs;
+                 backend          %BC_BACKEND_TYPE;       #REQUIRED
                  style            %BC_STYLE_TYPE;         #REQUIRED
                  text             %BOOLEAN_TYPE;          #REQUIRED
                  checksum         %BOOLEAN_TYPE;          #REQUIRED

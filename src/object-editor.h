@@ -26,7 +26,6 @@
 #include "text-node.h"
 #include "label.h"
 #include "merge.h"
-#include "bc.h"
 #include "color.h"
 
 G_BEGIN_DECLS

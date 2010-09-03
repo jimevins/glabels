@@ -121,6 +121,8 @@ glabels_3_SOURCES = 			\
 	template-designer.h		\
 	bc.c				\
 	bc.h				\
+	bc-backends.c			\
+	bc-backends.h			\
 	bc-gnubarcode.c			\
 	bc-gnubarcode.h			\
 	bc-zint.c			\
@@ -248,6 +250,8 @@ glabels_3_batch_SOURCES = 		\
 	print-op.h			\
 	bc.c				\
 	bc.h				\
+	bc-backends.c			\
+	bc-backends.h			\
 	bc-gnubarcode.c			\
 	bc-gnubarcode.h			\
 	bc-zint.c			\

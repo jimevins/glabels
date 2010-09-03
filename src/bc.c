@@ -43,246 +43,29 @@
 /* Private types.                                         */
 /*========================================================*/
 
-typedef struct {
-	gchar            *id;
-	gchar            *name;
-	glBarcodeNewFunc  new;
-	gboolean          can_text;
-	gboolean          text_optional;
-	gboolean          can_checksum;
-	gboolean          checksum_optional;
-	gchar            *default_digits;
-	gboolean          can_freeform;
-	guint             prefered_n;
-} Backend;
-
 
 /*========================================================*/
 /* Private globals.                                       */
 /*========================================================*/
-
-static const Backend backends[] = {
-
-	{ "POSTNET", N_("POSTNET (any)"), gl_barcode_postnet_new,
-	  FALSE, FALSE, TRUE, FALSE, "12345-6789-12", FALSE, 11},
-
-	{ "POSTNET-5", N_("POSTNET-5 (ZIP only)"), gl_barcode_postnet_new,
-	  FALSE, FALSE, TRUE, FALSE, "12345", FALSE, 5},
-
-	{ "POSTNET-9", N_("POSTNET-9 (ZIP+4)"), gl_barcode_postnet_new,
-	  FALSE, FALSE, TRUE, FALSE, "12345-6789", FALSE, 9},
-
-	{ "POSTNET-11", N_("POSTNET-11 (DPBC)"), gl_barcode_postnet_new,
-	  FALSE, FALSE, TRUE, FALSE, "12345-6789-12", FALSE, 11},
-
-#ifdef HAVE_LIBBARCODE
-
-	{ "CEPNET", N_("CEPNET"), gl_barcode_postnet_new,
-	  FALSE, FALSE, TRUE, FALSE, "12345-678", FALSE, 8},
-
-	{ "EAN", N_("EAN (any)"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "000000000000 00000", FALSE, 17},
-
-	{ "EAN-8", N_("EAN-8"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "0000000", FALSE, 7},
-
-	{ "EAN-8+2", N_("EAN-8 +2"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "0000000 00", FALSE, 9},
-
-	{ "EAN-8+5", N_("EAN-8 +5"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "0000000 00000", FALSE, 12},
-
-	{ "EAN-13", N_("EAN-13"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "000000000000", FALSE, 12},
-
-	{ "EAN-13+2", N_("EAN-13 +2"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "000000000000 00", FALSE, 14},
-
-	{ "EAN-13+5", N_("EAN-13 +5"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "000000000000 00000", FALSE, 17},
-
-	{ "UPC", N_("UPC (UPC-A or UPC-E)"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "00000000000 00000", FALSE, 16},
-
-	{ "UPC-A", N_("UPC-A"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "00000000000", FALSE, 11},
-
-	{ "UPC-A+2", N_("UPC-A +2"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "00000000000 00", FALSE, 13},
-
-	{ "UPC-A+5", N_("UPC-A +5"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "00000000000 00000", FALSE, 16},
-
-	{ "UPC-E", N_("UPC-E"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "000000", FALSE, 6},
-
-	{ "UPC-E+2", N_("UPC-E +2"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "000000 00", FALSE, 8},
-
-	{ "UPC-E+5", N_("UPC-E +5"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "000000 00000", FALSE, 11},
-
-	{ "ISBN", N_("ISBN"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, TRUE, "0-00000-000-0", FALSE, 10},
-
-	{ "ISBN+5", N_("ISBN +5"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, TRUE, "0-00000-000-0 00000", FALSE, 15},
-
-	{ "Code39", N_("Code 39"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
-
-	{ "Code128", N_("Code 128"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
-
-	{ "Code128C", N_("Code 128C"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
-
-	{ "Code128B", N_("Code 128B"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
-
-	{ "I25", N_("Interleaved 2 of 5"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
-
-	{ "CBR", N_("Codabar"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
-
-	{ "MSI", N_("MSI"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
-
-	{ "PLS", N_("Plessey"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
-
-	{ "Code93", N_("Code 93"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
-
-#endif /* HAVE_LIBBARCODE */
-
-#ifdef HAVE_LIBZINT
-
-        { "GS1-128", N_("GS1-128"), gl_barcode_zint_new,
-	  TRUE, TRUE, FALSE, FALSE, "[00]001234560000000018", TRUE, 16},
-
-#endif /* HAVE_LIBZINT */
-
-#ifdef HAVE_LIBIEC16022
-
-	{ "IEC16022", N_("IEC16022 (DataMatrix)"), gl_barcode_iec16022_new,
-	  FALSE, FALSE, TRUE, FALSE, "12345678", TRUE, 8},
-
-#endif /* HAVE_LIBIEC16022 */
-
-#ifdef HAVE_LIBQRENCODE
-
-	{ "IEC18004", N_("IEC18004 (QRCode)"), gl_barcode_iec18004_new,
-	  FALSE, FALSE, TRUE, FALSE, "12345678", TRUE, 8},
-
-#endif /* HAVE_LIBQRENCODE */
-
-	{ NULL, NULL, NULL, FALSE, FALSE, FALSE, FALSE, NULL, FALSE, 0}
-
-};
 
 
 /*========================================================*/
 /* Private function prototypes.                           */
 /*========================================================*/
 
+static void gl_barcode_add_shape        (glBarcode      *bc,
+                                         glBarcodeShape *shape);
 
-/*---------------------------------------------------------------------------*/
-/* Convert id to index into above table.                                     */
-/*---------------------------------------------------------------------------*/
-static gint
-id_to_index (const gchar *id)
-{
-	gint i;
-
-	if (id == 0) {
-		return 0; /* NULL request default. I.e., the first element. */
-	}
-
-	for (i=0; backends[i].id != NULL; i++) {
-		if (g_ascii_strcasecmp (id, backends[i].id) == 0) {
-			return i;
-		}
-	}
-
-	g_message( "Unknown barcode id \"%s\"", id );
-	return 0;
-}
-
-
-/*---------------------------------------------------------------------------*/
-/* Convert name to index into above table.                                   */
-/*---------------------------------------------------------------------------*/
-static gint
-name_to_index (const gchar *name)
-{
-	gint i;
-
-	g_return_val_if_fail (name!=NULL, 0);
-
-	for (i=0; backends[i].id != NULL; i++) {
-		if (strcmp (name, gettext (backends[i].name)) == 0) {
-			return i;
-		}
-	}
-
-	g_message( "Unknown barcode name \"%s\"", name );
-	return 0;
-}
+static void gl_barcode_shape_free       (glBarcodeShape *shape);
 
 
 /*****************************************************************************/
-/* Allocate new Line shape.                                                  */
-/*****************************************************************************/
-glBarcodeShapeLine *
-gl_barcode_shape_line_new (void)
-{
-        glBarcodeShapeLine *line_shape = g_new0 (glBarcodeShapeLine, 1);
-        line_shape->type = GL_BARCODE_SHAPE_LINE;
-
-        return line_shape;
-}
-
-
-/*****************************************************************************/
-/* Allocate new Alpha shape.                                                 */
-/*****************************************************************************/
-glBarcodeShapeAlpha *
-gl_barcode_shape_alpha_new (void)
-{
-        glBarcodeShapeAlpha *alpha_shape = g_new0 (glBarcodeShapeAlpha, 1);
-        alpha_shape->type = GL_BARCODE_SHAPE_ALPHA;
-
-        return alpha_shape;
-}
-
-
-/*****************************************************************************/
-/* Call appropriate barcode backend to create barcode in intermediate format.*/
+/* Allocate new empty glBarcode structure.                                   */
 /*****************************************************************************/
 glBarcode *
-gl_barcode_new (const gchar    *id,
-		gboolean        text_flag,
-		gboolean        checksum_flag,
-		gdouble         w,
-		gdouble         h,
-		const gchar    *digits)
+gl_barcode_new (void)
 {
-	glBarcode *gbc;
-	gint       i;
-
-	g_return_val_if_fail (digits!=NULL, NULL);
-
-	i = id_to_index (id);
-	gbc = backends[i].new (backends[i].id,
-			       text_flag,
-			       checksum_flag,
-			       w,
-			       h,
-			       digits);
-
-	return gbc;
+        return g_new0 (glBarcode, 1);
 }
 
 
@@ -292,168 +75,186 @@ gl_barcode_new (const gchar    *id,
 void
 gl_barcode_free (glBarcode **gbc)
 {
-	GList *p;
+        GList *p;
 
-	if (*gbc != NULL) {
+        if (*gbc != NULL)
+        {
 
-		for (p = (*gbc)->shapes; p != NULL; p = p->next) {
-			g_free (p->data);
-			p->data = NULL;
-		}
-		g_list_free ((*gbc)->shapes);
-		(*gbc)->shapes = NULL;
+                for (p = (*gbc)->shapes; p != NULL; p = p->next)
+                {
+                        gl_barcode_shape_free ((glBarcodeShape *)p->data);
+                        p->data = NULL;
+                }
+                g_list_free ((*gbc)->shapes);
+                (*gbc)->shapes = NULL;
 
-		g_free (*gbc);
-		*gbc = NULL;
-	}
+                g_free (*gbc);
+                *gbc = NULL;
+        }
+}
+
+
+/*****************************************************************************/
+/* Add a line.                                                               */
+/*****************************************************************************/
+void
+gl_barcode_add_line (glBarcode      *bc,
+                     gdouble         x,
+                     gdouble         y,
+                     gdouble         length,
+                     gdouble         width)
+{
+        glBarcodeShapeLine *line_shape = g_new0 (glBarcodeShapeLine, 1);
+        line_shape->type = GL_BARCODE_SHAPE_LINE;
+
+        line_shape->x      = x;
+        line_shape->y      = y;
+        line_shape->length = length;
+        line_shape->width  = width;
+
+        gl_barcode_add_shape (bc, (glBarcodeShape *)line_shape);
+}
+
+
+/*****************************************************************************/
+/* Add box.                                                                  */
+/*****************************************************************************/
+void
+gl_barcode_add_box (glBarcode      *bc,
+                    gdouble         x,
+                    gdouble         y,
+                    gdouble         width,
+                    gdouble         height)
+{
+        glBarcodeShapeBox *box_shape = g_new0 (glBarcodeShapeBox, 1);
+        box_shape->type = GL_BARCODE_SHAPE_BOX;
+
+        box_shape->x      = x;
+        box_shape->y      = y;
+        box_shape->width  = width;
+        box_shape->height = height;
+
+        gl_barcode_add_shape (bc, (glBarcodeShape *)box_shape);
+}
+
+
+/*****************************************************************************/
+/* Add character.                                                            */
+/*****************************************************************************/
+void
+gl_barcode_add_char (glBarcode      *bc,
+                     gdouble         x,
+                     gdouble         y,
+                     gdouble         fsize,
+                     gchar           c)
+{
+        glBarcodeShapeChar *char_shape = g_new0 (glBarcodeShapeChar, 1);
+        char_shape->type = GL_BARCODE_SHAPE_CHAR;
+
+        char_shape->x      = x;
+        char_shape->y      = y;
+        char_shape->fsize  = fsize;
+        char_shape->c      = c;
+
+        gl_barcode_add_shape (bc, (glBarcodeShape *)char_shape);
+}
+
+
+/*****************************************************************************/
+/* Add string.                                                               */
+/*****************************************************************************/
+void
+gl_barcode_add_string (glBarcode      *bc,
+                       gdouble         x,
+                       gdouble         y,
+                       gdouble         fsize,
+                       gchar          *string,
+                       gsize           length)
+{
+        glBarcodeShapeString *string_shape = g_new0 (glBarcodeShapeString, 1);
+        string_shape->type = GL_BARCODE_SHAPE_STRING;
+
+        string_shape->x      = x;
+        string_shape->y      = y;
+        string_shape->fsize  = fsize;
+        string_shape->string = g_strndup(string, length);
+
+        gl_barcode_add_shape (bc, (glBarcodeShape *)string_shape);
+}
+
+/*****************************************************************************/
+/* Add ring.                                                                 */
+/*****************************************************************************/
+void
+gl_barcode_add_ring (glBarcode      *bc,
+                     gdouble         x,
+                     gdouble         y,
+                     gdouble         radius,
+                     gdouble         line_width)
+{
+        glBarcodeShapeRing *ring_shape = g_new0 (glBarcodeShapeRing, 1);
+        ring_shape->type = GL_BARCODE_SHAPE_RING;
+
+        ring_shape->x          = x;
+        ring_shape->y          = y;
+        ring_shape->radius     = radius;
+        ring_shape->line_width = line_width;
+
+        gl_barcode_add_shape (bc, (glBarcodeShape *)ring_shape);
+}
+
+/*****************************************************************************/
+/* Add hexagon.                                                              */
+/*****************************************************************************/
+void
+gl_barcode_add_hexagon (glBarcode      *bc,
+                        gdouble         x,
+                        gdouble         y)
+{
+        glBarcodeShapeHexagon *hexagon_shape = g_new0 (glBarcodeShapeHexagon, 1);
+        hexagon_shape->type = GL_BARCODE_SHAPE_HEXAGON;
+
+        hexagon_shape->x      = x;
+        hexagon_shape->y      = y;
+
+        gl_barcode_add_shape (bc, (glBarcodeShape *)hexagon_shape);
 }
 
 
 /*****************************************************************************/
 /* Add shape to barcode.                                                     */
 /*****************************************************************************/
-void
+static void
 gl_barcode_add_shape (glBarcode      *bc,
                       glBarcodeShape *shape)
 {
-	g_return_if_fail (bc);
-	g_return_if_fail (shape);
+        g_return_if_fail (bc);
+        g_return_if_fail (shape);
 
         bc->shapes = g_list_prepend (bc->shapes, shape);
 }
 
 
 /*****************************************************************************/
-/* Get a list of names for valid barcode styles.                             */
+/* Free a shape primitive.                                                   */
 /*****************************************************************************/
-GList *
-gl_barcode_get_styles_list  (void)
+static void
+gl_barcode_shape_free (glBarcodeShape *shape)
 {
-	gint   i;
-	GList *list = NULL;
+        switch (shape->type)
+        {
 
-	for (i=0; backends[i].id != NULL; i++) {
-		list = g_list_prepend (list, g_strdup (gettext (backends[i].name)));
-	}
+        case GL_BARCODE_SHAPE_STRING:
+                g_free (shape->string.string);
+                break;
 
-	return g_list_reverse (list);
+        default:
+                break;
+        }
+
+        g_free (shape);
 }
 
-
-/*****************************************************************************/
-/* Free up a previously allocated list of style names.                       */
-/*****************************************************************************/
-void
-gl_barcode_free_styles_list (GList *styles_list)
-{
-	GList *p;
-
-	for (p=styles_list; p != NULL; p=p->next) {
-		g_free (p->data);
-		p->data = NULL;
-	}
-
-	g_list_free (styles_list);
-}
-
-
-/*****************************************************************************/
-/* Return an appropriate set of digits for the given barcode style.          */
-/*****************************************************************************/
-gchar *
-gl_barcode_default_digits (const gchar *id,
-			   guint        n)
-{
-	int i;
-
-	i = id_to_index (id);
-
-	if (backends[i].can_freeform) {
-
-		return g_strnfill (MAX (n,1), '0');
-
-	} else {
-
-		return g_strdup (backends[i].default_digits);
-
-	}
-}
-
-
-/*****************************************************************************/
-/* Query text capabilities.                                                  */
-/*****************************************************************************/
-gboolean
-gl_barcode_can_text (const gchar *id)
-{
-	return backends[id_to_index (id)].can_text;
-}
-
-
-gboolean
-gl_barcode_text_optional (const gchar *id)
-{
-	return backends[id_to_index (id)].text_optional;
-}
-
-
-/*****************************************************************************/
-/* Query checksum capabilities.                                              */
-/*****************************************************************************/
-gboolean
-gl_barcode_can_csum (const gchar *id)
-{
-	return backends[id_to_index (id)].can_checksum;
-}
-
-
-gboolean
-gl_barcode_csum_optional (const gchar *id)
-{
-	return backends[id_to_index (id)].checksum_optional;
-}
-
-
-/*****************************************************************************/
-/* Query if freeform input is allowed.                                       */
-/*****************************************************************************/
-gboolean
-gl_barcode_can_freeform     (const gchar    *id)
-{
-	return backends[id_to_index (id)].can_freeform;
-}
-
-
-/*****************************************************************************/
-/* Query prefered number of digits of input.                                 */
-/*****************************************************************************/
-guint
-gl_barcode_get_prefered_n (const gchar    *id)
-{
-	return backends[id_to_index (id)].prefered_n;
-}
-
-
-/*****************************************************************************/
-/* Convert style to text.                                                    */
-/*****************************************************************************/
-const gchar *
-gl_barcode_id_to_name (const gchar *id)
-{
-	return gettext (backends[id_to_index (id)].name);
-}
-
-
-/*****************************************************************************/
-/* Convert name to style.                                                    */
-/*****************************************************************************/
-const gchar *
-gl_barcode_name_to_id (const gchar *name)
-{
-	g_return_val_if_fail (name!=NULL, backends[0].id);
-
-	return backends[name_to_index (name)].id;
-}
 
 
 

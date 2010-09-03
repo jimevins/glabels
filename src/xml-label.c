@@ -38,6 +38,7 @@
 #include "label-ellipse.h"
 #include "label-image.h"
 #include "label-barcode.h"
+#include "bc-backends.h"
 #include "xml-label-04.h"
 #include "str-util.h"
 #include "prefs.h"
@@ -739,16 +740,15 @@ static void
 xml_parse_object_barcode (xmlNodePtr  node,
 			  glLabel    *label)
 {
-	GObject            *object;
-	gdouble             x, y;
-	gdouble             w, h;
-	gchar              *string;
-	glTextNode         *text_node;
-	gchar              *id;
-	gboolean            text_flag;
-	gboolean            checksum_flag;
-	glColorNode        *color_node;
-	guint               format_digits;
+	GObject             *object;
+	gdouble              x, y;
+	gdouble              w, h;
+	gchar               *string;
+	glTextNode          *text_node;
+	gchar               *backend_id;
+	gchar               *id;
+        glLabelBarcodeStyle *style;
+	glColorNode         *color_node;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -764,14 +764,23 @@ xml_parse_object_barcode (xmlNodePtr  node,
 	h = lgl_xml_get_prop_length (node, "h", 0);
 	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h, FALSE);
 
-	/* prop attrs */
+	/* style attrs */
+        style = gl_label_barcode_style_new ();
+	backend_id = lgl_xml_get_prop_string (node, "backend", NULL);
 	id = lgl_xml_get_prop_string (node, "style", NULL);
-	text_flag = lgl_xml_get_prop_boolean (node, "text", FALSE);
-	checksum_flag = lgl_xml_get_prop_boolean (node, "checksum", TRUE);
-	format_digits = lgl_xml_get_prop_uint (node, "format", 10);
-	gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
-				    (gchar *)id, text_flag, checksum_flag, format_digits, FALSE);
+        if ( !backend_id )
+        {
+                backend_id = g_strdup (gl_barcode_backends_guess_backend_id (id));
+        }
+        gl_label_barcode_style_set_backend_id (style, backend_id);
+        gl_label_barcode_style_set_style_id (style, id);
+	style->text_flag = lgl_xml_get_prop_boolean (node, "text", FALSE);
+	style->checksum_flag = lgl_xml_get_prop_boolean (node, "checksum", TRUE);
+	style->format_digits = lgl_xml_get_prop_uint (node, "format", 10);
+	gl_label_barcode_set_style (GL_LABEL_BARCODE(object), style, FALSE);
+	g_free (backend_id);
 	g_free (id);
+        gl_label_barcode_style_free (style);
 	
 	color_node = gl_color_node_new_default ();
 	string = lgl_xml_get_prop_string (node, "color_field", NULL);
@@ -967,6 +976,7 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 	GList            *lines, *text_nodes;
 	xmlNodePtr        child;
 	glTextNode       *text_node;
+	GRegex					 *strip_regex;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -1008,22 +1018,10 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 	/* Now descend children, and build lines of text nodes */
 	lines = NULL;
 	text_nodes = NULL;
+	strip_regex = g_regex_new("\\A\\n\\s*|\\n\\s*\\Z", 0, 0, NULL);
 	for (child = node->xmlChildrenNode; child != NULL; child = child->next) {
 
-		if (xmlNodeIsText (child)) {
-			gchar *data = lgl_xml_get_node_content (child); 
-
-			/* Hack: if the first char is LF, it's an xml formatting string */
-			if (data[0] != '\n') { 
-				/* Literal text */
-				text_node = g_new0 (glTextNode, 1);
-				text_node->field_flag = FALSE;
-				text_node->data = g_strdup ((gchar *)data);
-				text_nodes = g_list_append (text_nodes, text_node);
-			}
-			g_free (data);
-
-		} else if (lgl_xml_is_node (child, "Span")) {
+		if (lgl_xml_is_node (child, "Span")) {
 
 			g_message ("Unexpected rich text (not supported, yet!)");
 
@@ -1042,11 +1040,29 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 			lines = g_list_append (lines, text_nodes);
 			text_nodes = NULL;
 
+    } else if (xmlNodeIsText (child)) {
+			gchar *orig_data = lgl_xml_get_node_content (child); 
+			gchar *data;
+
+			/* Literal text */
+
+			/* Stip out white space before and after */
+			data = g_regex_replace(strip_regex, orig_data, -1, 0, "", 0, NULL);
+			g_free (orig_data);
+
+			text_node = g_new0 (glTextNode, 1);
+			text_node->field_flag = FALSE;
+			text_node->data = g_strdup ((gchar *)data);
+			text_nodes = g_list_append (text_nodes, text_node);
+
+			g_free (data);
+
 		} else {
 			g_message ("Unexpected Span child: \"%s\"", child->name);
 		}
 
 	}
+  g_free (strip_regex);
 	if ( text_nodes ) {
 		/* Store last line. */
 		lines = g_list_append (lines, text_nodes);
@@ -1575,15 +1591,12 @@ xml_create_object_barcode (xmlNodePtr     parent,
 			   xmlNsPtr       ns,
 			   glLabelObject *object)
 {
-	xmlNodePtr        node;
-	gdouble           x, y;
-	gdouble           w, h;
-	glTextNode       *text_node;
-	gchar            *id;
-	gboolean          text_flag;
-	gboolean          checksum_flag;
-	glColorNode      *color_node;
-	guint             format_digits;
+	xmlNodePtr           node;
+	gdouble              x, y;
+	gdouble              w, h;
+	glTextNode          *text_node;
+        glLabelBarcodeStyle *style;
+	glColorNode         *color_node;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -1600,13 +1613,11 @@ xml_create_object_barcode (xmlNodePtr     parent,
 	lgl_xml_set_prop_length (node, "h", h);
 
 	/* Barcode properties attrs */
-	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
-				    &id, &text_flag, &checksum_flag, &format_digits);
-	lgl_xml_set_prop_string (node, "style", id);
-	lgl_xml_set_prop_boolean (node, "text", text_flag);
-	lgl_xml_set_prop_boolean (node, "checksum", checksum_flag);
-	
-	g_free (id);
+	style = gl_label_barcode_get_style (GL_LABEL_BARCODE(object));
+	lgl_xml_set_prop_string (node, "backend", style->backend_id);
+	lgl_xml_set_prop_string (node, "style", style->id);
+	lgl_xml_set_prop_boolean (node, "text", style->text_flag);
+	lgl_xml_set_prop_boolean (node, "checksum", style->checksum_flag);
 	
 	color_node = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
 	if (color_node->field_flag)
@@ -1624,7 +1635,7 @@ xml_create_object_barcode (xmlNodePtr     parent,
 	text_node = gl_label_barcode_get_data (GL_LABEL_BARCODE(object));
 	if (text_node->field_flag) {
 		lgl_xml_set_prop_string (node, "field", text_node->data);
-	        lgl_xml_set_prop_int (node, "format", format_digits);
+	        lgl_xml_set_prop_int (node, "format", style->format_digits);
 	} else {
 		lgl_xml_set_prop_string (node, "data", text_node->data);
 	}
@@ -1635,6 +1646,8 @@ xml_create_object_barcode (xmlNodePtr     parent,
 
 	/* shadow attrs */
 	xml_create_shadow_attrs (node, object);
+
+        gl_label_barcode_style_free (style);
 
 	gl_debug (DEBUG_XML, "END");
 }

@@ -101,7 +101,6 @@ render_iec18004 (const gchar *grid,
                  gdouble      h)
 {
         glBarcode          *gbc;
-        glBarcodeShapeLine *line;
         gint                x, y;
         gdouble             aspect_ratio, pixel_size;
 
@@ -121,7 +120,7 @@ render_iec18004 (const gchar *grid,
                 pixel_size = MIN_PIXEL_SIZE;
         }
 
-        gbc = g_new0 (glBarcode, 1);
+        gbc = gl_barcode_new ();
 
         /* Now traverse the code string and create a list of boxes */
         for ( y = 0; y < i_height; y++ )
@@ -136,12 +135,7 @@ render_iec18004 (const gchar *grid,
                          * bits are meaningless for us. */
                         if ((*grid++) & 1)
                         {
-                                line = gl_barcode_shape_line_new ();
-                                line->x      = x*pixel_size + pixel_size/2.0;
-                                line->y      = y*pixel_size;
-                                line->length = pixel_size;
-                                line->width  = pixel_size;
-                                gl_barcode_add_shape (gbc, (glBarcodeShape *)line);
+                                gl_barcode_add_box (gbc, x*pixel_size, y*pixel_size, pixel_size, pixel_size);
                         }
 
                 }

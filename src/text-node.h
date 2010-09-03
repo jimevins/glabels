@@ -31,23 +31,23 @@ typedef struct {
 	gchar *data;
 } glTextNode;
 
-gchar      *gl_text_node_expand              (glTextNode     *text_node,
-					      glMergeRecord  *record);
-glTextNode *gl_text_node_new_from_text       (gchar          *text);
-glTextNode *gl_text_node_dup                 (glTextNode     *text_node);
-void        gl_text_node_free                (glTextNode    **text_node);
+gchar      *gl_text_node_expand              (const glTextNode    *text_node,
+					      const glMergeRecord *record);
+glTextNode *gl_text_node_new_from_text       (const gchar         *text);
+glTextNode *gl_text_node_dup                 (const glTextNode    *text_node);
+void        gl_text_node_free                (glTextNode         **text_node);
 
-gboolean    gl_text_node_equal               (glTextNode     *text_node1,
-					      glTextNode     *text_node2);
+gboolean    gl_text_node_equal               (const glTextNode    *text_node1,
+					      const glTextNode    *text_node2);
 
-gchar      *gl_text_node_lines_expand        (GList          *lines,
-					      glMergeRecord  *record);
-GList      *gl_text_node_lines_new_from_text (gchar          *text);
-GList      *gl_text_node_lines_dup           (GList          *lines);
-void        gl_text_node_lines_free          (GList         **lines);
+gchar      *gl_text_node_lines_expand        (GList               *lines,
+					      const glMergeRecord *record);
+GList      *gl_text_node_lines_new_from_text (const gchar         *text);
+GList      *gl_text_node_lines_dup           (GList               *lines);
+void        gl_text_node_lines_free          (GList              **lines);
 
 /* debug function */
-void        gl_text_node_lines_print         (GList          *lines);
+void        gl_text_node_lines_print         (GList               *lines);
 
 G_END_DECLS
 

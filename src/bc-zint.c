@@ -43,7 +43,6 @@
 /* Local function prototypes                 */
 /*===========================================*/
 static glBarcode *render_zint     (struct zint_symbol *symbol, gboolean text_flag);
-gint module_is_set(struct zint_symbol *symbol, gint y_coord, gint x_coord);
 
 
 
@@ -60,7 +59,6 @@ gl_barcode_zint_new (const gchar          *id,
 {
 	glBarcode           *gbc;
 	struct zint_symbol  *symbol;
-	gint                 type;
 	gint		     result;
 
 	symbol = ZBarcode_Create();
@@ -73,13 +71,74 @@ gl_barcode_zint_new (const gchar          *id,
         }
 
 	/* Assign type flag.  Pre-filter by length for subtypes. */
-	if (g_ascii_strcasecmp (id, "GS1-128") == 0) {
-		symbol->symbology = BARCODE_EAN128;
-	} else {
-		g_message( "Illegal barcode id %s", id );
-		ZBarcode_Delete (symbol);
-		return NULL;
-	}
+	if (g_ascii_strcasecmp (id, "AUSP") == 0) { symbol->symbology = BARCODE_AUSPOST; }
+	if (g_ascii_strcasecmp (id, "AUSRP") == 0) { symbol->symbology = BARCODE_AUSREPLY; }
+	if (g_ascii_strcasecmp (id, "AUSRT") == 0) { symbol->symbology = BARCODE_AUSROUTE; }
+	if (g_ascii_strcasecmp (id, "AUSRD") == 0) { symbol->symbology = BARCODE_AUSREDIRECT; }
+	if (g_ascii_strcasecmp (id, "AZTEC") == 0) { symbol->symbology = BARCODE_AZTEC; }
+	if (g_ascii_strcasecmp (id, "AZRUN") == 0) { symbol->symbology = BARCODE_AZRUNE; }
+	if (g_ascii_strcasecmp (id, "CBR") == 0) { symbol->symbology = BARCODE_CODABAR; }
+	if (g_ascii_strcasecmp (id, "Code1") == 0) { symbol->symbology = BARCODE_CODEONE; }
+	if (g_ascii_strcasecmp (id, "Code11") == 0) { symbol->symbology = BARCODE_CODE11; }
+	if (g_ascii_strcasecmp (id, "C16K") == 0) { symbol->symbology = BARCODE_CODE16K; }
+	if (g_ascii_strcasecmp (id, "C25M") == 0) { symbol->symbology = BARCODE_C25MATRIX; }
+	if (g_ascii_strcasecmp (id, "C25I") == 0) { symbol->symbology = BARCODE_C25IATA; }
+	if (g_ascii_strcasecmp (id, "C25DL") == 0) { symbol->symbology = BARCODE_C25LOGIC; }
+	if (g_ascii_strcasecmp (id, "Code32") == 0) { symbol->symbology = BARCODE_CODE32; }
+	if (g_ascii_strcasecmp (id, "Code39") == 0) { symbol->symbology = BARCODE_CODE39; }
+	if (g_ascii_strcasecmp (id, "Code39E") == 0) { symbol->symbology = BARCODE_EXCODE39; }
+	if (g_ascii_strcasecmp (id, "Code49") == 0) { symbol->symbology = BARCODE_CODE49; }
+	if (g_ascii_strcasecmp (id, "Code93") == 0) { symbol->symbology = BARCODE_CODE93; }
+	if (g_ascii_strcasecmp (id, "Code128") == 0) { symbol->symbology = BARCODE_CODE128; }
+	if (g_ascii_strcasecmp (id, "Code128B") == 0) { symbol->symbology = BARCODE_CODE128B; }
+	if (g_ascii_strcasecmp (id, "DAFT") == 0) { symbol->symbology = BARCODE_DAFT; }
+	if (g_ascii_strcasecmp (id, "DMTX") == 0) { symbol->symbology = BARCODE_DATAMATRIX; }
+	if (g_ascii_strcasecmp (id, "DPL") == 0) { symbol->symbology = BARCODE_DPLEIT; }
+	if (g_ascii_strcasecmp (id, "DPI") == 0) { symbol->symbology = BARCODE_DPIDENT; }
+	if (g_ascii_strcasecmp (id, "KIX") == 0) { symbol->symbology = BARCODE_KIX; }
+	if (g_ascii_strcasecmp (id, "EAN") == 0) { symbol->symbology = BARCODE_EANX; }
+	if (g_ascii_strcasecmp (id, "HIBC128") == 0) { symbol->symbology = BARCODE_HIBC_128; }
+	if (g_ascii_strcasecmp (id, "HIBC39") == 0) { symbol->symbology = BARCODE_HIBC_39; }
+	if (g_ascii_strcasecmp (id, "HIBCDM") == 0) { symbol->symbology = BARCODE_HIBC_DM; }
+	if (g_ascii_strcasecmp (id, "HIBCQR") == 0) { symbol->symbology = BARCODE_HIBC_QR; }
+	if (g_ascii_strcasecmp (id, "HIBCPDF") == 0) { symbol->symbology = BARCODE_HIBC_MICPDF; }
+	if (g_ascii_strcasecmp (id, "HIBCMPDF") == 0) { symbol->symbology = BARCODE_HIBC_AZTEC; }
+	if (g_ascii_strcasecmp (id, "HIBCAZ") == 0) { symbol->symbology = BARCODE_C25INTER; }
+	if (g_ascii_strcasecmp (id, "I25") == 0) { symbol->symbology = BARCODE_C25INTER; }
+	if (g_ascii_strcasecmp (id, "ISBN") == 0) { symbol->symbology = BARCODE_ISBNX; }
+	if (g_ascii_strcasecmp (id, "ITF14") == 0) { symbol->symbology = BARCODE_ITF14; }
+	if (g_ascii_strcasecmp (id, "GMTX") == 0) { symbol->symbology = BARCODE_GRIDMATRIX; }
+	if (g_ascii_strcasecmp (id, "GS1-128") == 0) { symbol->symbology = BARCODE_EAN128; }
+	if (g_ascii_strcasecmp (id, "LOGM") == 0) { symbol->symbology = BARCODE_LOGMARS; }
+	if (g_ascii_strcasecmp (id, "RSS14") == 0) { symbol->symbology = BARCODE_RSS14; }
+	if (g_ascii_strcasecmp (id, "RSSLTD") == 0) { symbol->symbology = BARCODE_RSS_LTD; }
+	if (g_ascii_strcasecmp (id, "RSSEXP") == 0) { symbol->symbology = BARCODE_RSS_EXP; }
+	if (g_ascii_strcasecmp (id, "RSSS") == 0) { symbol->symbology = BARCODE_RSS14STACK; }
+	if (g_ascii_strcasecmp (id, "RSSSO") == 0) { symbol->symbology = BARCODE_RSS14STACK_OMNI; }
+	if (g_ascii_strcasecmp (id, "RSSSE") == 0) { symbol->symbology = BARCODE_RSS_EXPSTACK; }
+	if (g_ascii_strcasecmp (id, "PHARMA") == 0) { symbol->symbology = BARCODE_PHARMA; }
+	if (g_ascii_strcasecmp (id, "PHARMA2") == 0) { symbol->symbology = BARCODE_PHARMA_TWO; }
+	if (g_ascii_strcasecmp (id, "PZN") == 0) { symbol->symbology = BARCODE_PZN; }
+	if (g_ascii_strcasecmp (id, "TELE") == 0) { symbol->symbology = BARCODE_TELEPEN; }
+	if (g_ascii_strcasecmp (id, "TELEX") == 0) { symbol->symbology = BARCODE_TELEPEN_NUM; }
+	if (g_ascii_strcasecmp (id, "JAPAN") == 0) { symbol->symbology = BARCODE_JAPANPOST; }
+	if (g_ascii_strcasecmp (id, "KOREA") == 0) { symbol->symbology = BARCODE_KOREAPOST; }
+	if (g_ascii_strcasecmp (id, "MAXI") == 0) { symbol->symbology = BARCODE_MAXICODE; }
+	if (g_ascii_strcasecmp (id, "MPDF") == 0) { symbol->symbology = BARCODE_MICROPDF417; }
+	if (g_ascii_strcasecmp (id, "MSI") == 0) { symbol->symbology = BARCODE_MSI_PLESSEY; }
+	if (g_ascii_strcasecmp (id, "MQR") == 0) { symbol->symbology = BARCODE_MICROQR; }
+	if (g_ascii_strcasecmp (id, "NVE") == 0) { symbol->symbology = BARCODE_NVE18; }
+	if (g_ascii_strcasecmp (id, "PLAN") == 0) { symbol->symbology = BARCODE_PLANET; }
+	if (g_ascii_strcasecmp (id, "POSTNET") == 0) { symbol->symbology = BARCODE_POSTNET; }
+	if (g_ascii_strcasecmp (id, "PDF") == 0) { symbol->symbology = BARCODE_PDF417; }
+	if (g_ascii_strcasecmp (id, "PDFT") == 0) { symbol->symbology = BARCODE_PDF417TRUNC; }
+	if (g_ascii_strcasecmp (id, "QR") == 0) { symbol->symbology = BARCODE_QRCODE; }
+	if (g_ascii_strcasecmp (id, "RM4") == 0) { symbol->symbology = BARCODE_RM4SCC; }
+	if (g_ascii_strcasecmp (id, "UPC-A") == 0) { symbol->symbology = BARCODE_UPCA; }
+	if (g_ascii_strcasecmp (id, "UPC-E") == 0) { symbol->symbology = BARCODE_UPCE; }
+	if (g_ascii_strcasecmp (id, "USPS") == 0) { symbol->symbology = BARCODE_ONECODE; }
+	if (g_ascii_strcasecmp (id, "PLS") == 0) { symbol->symbology = BARCODE_PLESSEY; }
+
 
 	/* Checksum not supported yet!! 
 	if (!checksum_flag) {
@@ -89,15 +148,20 @@ gl_barcode_zint_new (const gchar          *id,
 
 	result = ZBarcode_Encode(symbol, (unsigned char *)digits, 0);
 	if (result) {
-		ZBarcode_Delete (symbol);
 		gl_debug (DEBUG_BARCODE, "Zint Error: %s", symbol->errtxt);
+		ZBarcode_Delete (symbol);
 		return NULL;
 	}
+	
+	if(!text_flag) {
+		symbol->show_hrt = 0;
+	}
 
-	/* Scale calculated after height, always maintain aspect ratio */
-	symbol->scale = (w / symbol->width);
-	symbol->height = h / symbol->scale; /* height always in standard size */
-
+	if (!ZBarcode_Render(symbol, (float) w, (float) h)) {
+		g_message("Zint Rendering Error: %s", symbol->errtxt);
+		ZBarcode_Delete(symbol);
+		return NULL;
+	}
 
 	/* Convert Sums provided by zint encode */
 	gbc = render_zint(symbol, text_flag);
@@ -110,179 +174,52 @@ gl_barcode_zint_new (const gchar          *id,
 
 /*--------------------------------------------------------------------------
  * PRIVATE. Render to glBarcode the provided Zint symbol.
- *
- * Based on the SVG output from Zint library, handles lots of otherwise
- * internal  Zint code to convert directly to glBarcode representation.
- *
  *--------------------------------------------------------------------------*/
-static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag) {
-
-        glBarcode           *gbc;
-        glBarcodeShapeLine  *line;
-        glBarcodeShapeAlpha *bchar;
-	
-	gint i, r, block_width, latch, this_row;
-	gfloat textpos, large_bar_height, preset_height, row_height, row_posn = 0.0;
-	gint error_number = 0;
-	gint textoffset, textheight, xoffset, yoffset, textdone, main_width;
-	gchar textpart[10], addon[6];
-	gint large_bar_count, comp_offset;
-	gfloat addon_text_posn;
-	gfloat default_text_posn;
-	gfloat scaler = symbol->scale;
-	gchar *p;
-
-	gbc = g_new0(glBarcode, 1);
-
-	row_height = 0;
-	textdone = 0;
-	main_width = symbol->width;
-	strcpy(addon, "");
-	comp_offset = 0;
-	addon_text_posn = 0.0;
-
-	if (symbol->height < 15) {
-		symbol->height = 15;
-	}
-
-	if(text_flag && strlen(symbol->text) != 0) {
-		textheight = 9.0;
-		textoffset = 2.0;
-	} else {
-		textheight = textoffset = 0.0;
-	}
-	/* Update height for texts */
-	symbol->height -= textheight + textoffset;
-
-	large_bar_count = 0;
-	preset_height = 0.0;
-	for(i = 0; i < symbol->rows; i++) {
-		preset_height += symbol->row_height[i];
-		if(symbol->row_height[i] == 0) {
-			large_bar_count++;
-		}
-	}
-	large_bar_height = (symbol->height - preset_height) / large_bar_count;
-
-	if (large_bar_count == 0) {
-		symbol->height = preset_height;
-	}
-	
-	while(!(module_is_set(symbol, symbol->rows - 1, comp_offset))) {
-		comp_offset++;
-	}
-
-	xoffset = symbol->border_width + symbol->whitespace_width;
-	yoffset = symbol->border_width;
-
-	gbc->width = (gdouble) (symbol->width + xoffset + xoffset) * scaler;
-	gbc->height = (gdouble) (symbol->height + textheight + textoffset + yoffset + yoffset) * scaler;
-
-	default_text_posn = (symbol->height + textoffset + symbol->border_width) * scaler;
-
-	if(symbol->symbology != BARCODE_MAXICODE) {
-		/* everything else uses rectangles (or squares) */
-		/* Works from the bottom of the symbol up */
-		int addon_latch = 0;
-		
-		for(r = 0; r < symbol->rows; r++) {
-			this_row = r;
-			if(symbol->row_height[this_row] == 0) {
-				row_height = large_bar_height;
-			} else {
-				row_height = symbol->row_height[this_row];
-			}
-			row_posn = 0;
-			for(i = 0; i < r; i++) {
-				if(symbol->row_height[i] == 0) {
-					row_posn += large_bar_height;
-				} else {
-					row_posn += symbol->row_height[i];
-				}
-			}
-			row_posn += yoffset;
-			
-			i = 0;
-			if(module_is_set(symbol, this_row, 0)) {
-				latch = 1;
-			} else {
-				latch = 0;
-			}
-
-			do {
-				block_width = 0;
-				do {
-					block_width++;
-				} while (module_is_set(symbol, this_row, i + block_width) == module_is_set(symbol, this_row, i));
-				if((addon_latch == 0) && (r == (symbol->rows - 1)) && (i > main_width)) {
-					addon_text_posn = (row_posn + 8.0) * scaler;
-					addon_latch = 1;
-				} 
-				if(latch == 1) {
-					/* a bar */
-                                        line = gl_barcode_shape_line_new ();
-
-					line->width = block_width * scaler;
-					/* glBarcodeLine centers based on width, counter-act!!! */
-					line->x = ((i + xoffset) + (block_width / 2.0)) * scaler;
-				
-					if(addon_latch == 0) {
-						line->y = row_posn * scaler;
-						line->length = row_height * scaler;
-					} else {
-						line->y = (row_posn + 10.0) * scaler;
-						line->length = (row_height - 5.0) * scaler;
-					}
-					latch = 0;
-                                        gl_barcode_add_shape (gbc, (glBarcodeShape *)line);
-				} else {
-					/* a space */
-					latch = 1;
-				}
-				i += block_width;
-				
-			} while (i < symbol->width);
-		}
-	}
-	/* That's done the actual data area, everything else is human-friendly */
-
-
-	/* Add the text */
-	xoffset -= comp_offset;
-
-	if (text_flag) {
-		/* caculate start xoffset to center text */
-		xoffset = symbol->width / 2.0;
-		xoffset -= (strlen(symbol->text) / 2) * 5.0;
-
-		for (p = symbol->text; *p != 0; p++) {
-			if (p != (gchar *)symbol->text && *p == '(') xoffset += 3.0;
-                        bchar = gl_barcode_shape_alpha_new ();
-			bchar->x = (textpos + xoffset) * scaler;
-			bchar->y = default_text_posn;
-			bchar->fsize = 8.0 * scaler;
-			bchar->c = (gchar) *p;
-                        gl_barcode_add_shape (gbc, (glBarcodeShape *)bchar);
-			/* Poor mans kerning */
-			if (*p == '(') {
-				xoffset += 3.0;
-			} else if (*p == ')') {
-				xoffset += 3.0;
-			} else {
-				xoffset += 5.0;
-			}
-		}
-	}
-
-	return gbc;
-}
-
-/*
- * Stolen from Zint common.c
- */
-gint module_is_set(struct zint_symbol *symbol, gint y_coord, gint x_coord)
+static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag)
 {
-	return (symbol->encoded_data[y_coord][x_coord / 7] & (1 << (x_coord % 7))) ? 1 : 0;
+        glBarcode            *gbc;
+
+        struct zint_render         *render;
+        struct zint_render_line    *zline;
+        struct zint_render_string  *zstring;
+        struct zint_render_ring    *zring;
+        struct zint_render_hexagon *zhexagon;
+
+        render = symbol->rendered;
+        gbc = gl_barcode_new ();
+	
+        for ( zline = render->lines; zline != NULL; zline = zline->next )
+        {
+                gl_barcode_add_box (gbc, zline->x, zline->y, zline->width, zline->length);
+        }
+
+        for ( zring = render->rings; zring != NULL; zring = zring->next )
+        {
+                gl_barcode_add_ring (gbc, zring->x, zring->y, zring->radius, zring->line_width);
+        }
+
+        for ( zhexagon = render->hexagons; zhexagon != NULL; zhexagon = zhexagon->next )
+        {
+                gl_barcode_add_hexagon (gbc, zhexagon->x, zhexagon->y);
+        }
+
+        if(text_flag)
+        {
+                for ( zstring = render->strings; zstring != NULL; zstring = zstring->next )
+                {
+                        gl_barcode_add_string (gbc,
+                                               zstring->x, zstring->y,
+                                               zstring->fsize, (gchar *)zstring->text, zstring->length);
+                }
+        }
+
+        /*
+         * Finally add complete sizes
+         */
+        gbc->width = (gdouble) render->width;
+        gbc->height = (gdouble) render->height;
+
+        return gbc;
 }
 
 #endif /* HAVE_LIBZINT */

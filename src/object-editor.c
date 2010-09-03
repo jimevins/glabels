@@ -280,11 +280,12 @@ static void
 set_object (glObjectEditor  *editor,
             glLabelObject   *object)
 {
-        gchar         *image;
-        gchar         *title;
-        gchar         *s;
-        GtkTextBuffer *buffer;
-        gint           old_page, new_page;
+        gchar               *image;
+        gchar               *title;
+        gchar               *s;
+        GtkTextBuffer       *buffer;
+        gint                 old_page, new_page;
+        glLabelBarcodeStyle *bc_style;
 
 	gl_debug (DEBUG_EDITOR, "START");
 
@@ -298,8 +299,6 @@ set_object (glObjectEditor  *editor,
         if (object)
         {
                 editor->priv->object = g_object_ref (object);
-
-                object_changed_cb (object, editor);
 
                 old_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (editor->priv->notebook));
 
@@ -415,6 +414,10 @@ set_object (glObjectEditor  *editor,
                         gtk_widget_hide     (editor->priv->shadow_page_vbox);
 
                         gtk_widget_hide     (editor->priv->size_reset_image_button);
+
+                        bc_style = gl_label_barcode_get_style (GL_LABEL_BARCODE(object));
+                        gl_object_editor_load_bc_styles (editor, bc_style->backend_id);
+                        gl_label_barcode_style_free (bc_style);
                 }
 
                 gtk_image_set_from_stock (GTK_IMAGE(editor->priv->title_image),
@@ -444,6 +447,8 @@ set_object (glObjectEditor  *editor,
                         gtk_notebook_set_current_page (GTK_NOTEBOOK (editor->priv->notebook), 1);
                         gtk_notebook_set_current_page (GTK_NOTEBOOK (editor->priv->notebook), 0);
                 }
+
+                object_changed_cb (object, editor);
 
                 g_signal_connect (G_OBJECT (object), "changed",
                                   G_CALLBACK (object_changed_cb), editor);
@@ -729,31 +734,29 @@ static void
 object_changed_cb (glLabelObject  *object,
                    glObjectEditor *editor)
 {
-        gdouble          x, y;
-        gdouble          w, h;
-        glColorNode     *line_color_node;
-        gdouble          line_width;
-        glColorNode     *fill_color_node;
-        gchar           *font_family;
-        gdouble          font_size;
-        PangoWeight      font_weight;
-        gboolean         font_italic_flag;
-        glColorNode     *text_color_node;
-        PangoAlignment   align;
-        gdouble          text_line_spacing;
-        gboolean         auto_shrink;
-        gdouble          image_w, image_h;
-        glTextNode      *filename;
-        glTextNode      *bc_data;
-        gchar           *id;
-        gboolean         text_flag, cs_flag;
-        guint            format_digits;
-        gboolean         shadow_state;
-        gdouble          shadow_x, shadow_y;
-        glColorNode     *shadow_color_node;
-        gdouble          shadow_opacity;
-        glLabel         *label;
-        glMerge         *merge;
+        gdouble              x, y;
+        gdouble              w, h;
+        glColorNode         *line_color_node;
+        gdouble              line_width;
+        glColorNode         *fill_color_node;
+        gchar               *font_family;
+        gdouble              font_size;
+        PangoWeight          font_weight;
+        gboolean             font_italic_flag;
+        glColorNode         *text_color_node;
+        PangoAlignment       align;
+        gdouble              text_line_spacing;
+        gboolean             auto_shrink;
+        gdouble              image_w, image_h;
+        glTextNode          *filename;
+        glTextNode          *bc_data;
+        glLabelBarcodeStyle *bc_style;
+        gboolean             shadow_state;
+        gdouble              shadow_x, shadow_y;
+        glColorNode         *shadow_color_node;
+        gdouble              shadow_opacity;
+        glLabel             *label;
+        glMerge             *merge;
 
         gl_debug (DEBUG_EDITOR, "BEGIN");
 
@@ -845,17 +848,17 @@ object_changed_cb (glLabelObject  *object,
         {
 
                 gl_label_object_get_size (object, &w, &h);
-                bc_data = gl_label_barcode_get_data (GL_LABEL_BARCODE(object));
-                gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
-                                            &id, &text_flag, &cs_flag, &format_digits);
-                line_color_node   = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
+                bc_data  = gl_label_barcode_get_data (GL_LABEL_BARCODE(object));
+                bc_style = gl_label_barcode_get_style (GL_LABEL_BARCODE(object));
+                line_color_node = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
 
                 gl_object_editor_set_size (editor, w, h);
                 gl_object_editor_set_data (editor, (merge != NULL), bc_data);
-                gl_object_editor_set_bc_style (editor, id, text_flag, cs_flag, format_digits);
+                gl_object_editor_set_bc_style (editor, bc_style);
                 gl_object_editor_set_bc_color (editor, (merge != NULL), line_color_node);
 
                 gl_text_node_free (&bc_data);
+                gl_label_barcode_style_free (bc_style);
 
         }
 
@@ -885,31 +888,29 @@ object_changed_cb (glLabelObject  *object,
 void
 gl_object_editor_changed_cb (glObjectEditor *editor)
 {
-        glLabelObject     *object = editor->priv->object;
-        gdouble            x, y;
-        glColorNode       *line_color_node;
-        gdouble            line_width;
-        glColorNode       *fill_color_node;
-        gchar             *font_family;
-        gdouble            font_size;
-        PangoWeight        font_weight;
-        gboolean           font_italic_flag;
-        glColorNode       *text_color_node;
-        PangoAlignment     align;
-        gdouble            text_line_spacing;
-        gboolean           auto_shrink;
-        glTextNode        *filename;
-        gdouble            w, h;
-        gdouble            image_w, image_h;
-        gdouble            new_w, new_h;
-        glTextNode        *bc_data;
-        gchar             *id;
-        gboolean           text_flag, cs_flag;
-        guint              format_digits;
-        gboolean           shadow_state;
-        gdouble            shadow_x, shadow_y;
-        glColorNode       *shadow_color_node;
-        gdouble            shadow_opacity;
+        glLabelObject       *object = editor->priv->object;
+        gdouble              x, y;
+        glColorNode         *line_color_node;
+        gdouble              line_width;
+        glColorNode         *fill_color_node;
+        gchar               *font_family;
+        gdouble              font_size;
+        PangoWeight          font_weight;
+        gboolean             font_italic_flag;
+        glColorNode         *text_color_node;
+        PangoAlignment       align;
+        gdouble              text_line_spacing;
+        gboolean             auto_shrink;
+        glTextNode          *filename;
+        gdouble              w, h;
+        gdouble              image_w, image_h;
+        gdouble              new_w, new_h;
+        glTextNode          *bc_data;
+        glLabelBarcodeStyle *bc_style;
+        gboolean             shadow_state;
+        gdouble              shadow_x, shadow_y;
+        glColorNode         *shadow_color_node;
+        gdouble              shadow_opacity;
 
         gl_debug (DEBUG_EDITOR, "BEGIN");
 
@@ -999,18 +1000,16 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
         {
 
                 line_color_node = gl_object_editor_get_bc_color (editor);
-                bc_data = gl_object_editor_get_data (editor);
-                gl_object_editor_get_bc_style (editor,
-                                               &id, &text_flag, &cs_flag, &format_digits);
+                bc_data  = gl_object_editor_get_data (editor);
+                bc_style = gl_object_editor_get_bc_style (editor);
 
                 gl_label_object_set_line_color (object, line_color_node, TRUE);
                 gl_label_barcode_set_data (GL_LABEL_BARCODE(object), bc_data, TRUE);
-                gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
-                                            id, text_flag, cs_flag, format_digits, TRUE);
+                gl_label_barcode_set_style (GL_LABEL_BARCODE(object), bc_style, TRUE);
 
                 gl_color_node_free (&line_color_node);
                 gl_text_node_free (&bc_data);
-                g_free (id);
+                gl_label_barcode_style_free (bc_style);
 
         }
 
