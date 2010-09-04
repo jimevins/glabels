@@ -63,6 +63,7 @@ glabels-*.tar.gz
 
 /help/glabels-*.omf
 /help/*/.xml2po.mo
+/help/*/*.mo
 /help/*/glabels*.xml
 !/help/C/glabels*.xml
 
