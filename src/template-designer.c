@@ -403,7 +403,7 @@ gl_template_designer_construct (glTemplateDesigner *dialog)
 
 	gtk_window_set_title (GTK_WINDOW(dialog), _("New gLabels Template"));
 
-        logo_filename = g_build_filename (GLABELS_ICON_DIR, GLABELS_ICON, NULL);
+        logo_filename = g_build_filename (GLABELS_DATA_DIR, "pixmaps", "new-select.png", NULL);
 	logo = gdk_pixbuf_new_from_file (logo_filename, NULL);
         g_free (logo_filename);
 

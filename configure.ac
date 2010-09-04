@@ -31,6 +31,7 @@ AC_PATH_PROG(GLIB_GENMARSHAL,         glib-genmarshal)
 AC_PATH_PROG(GDK_PIXBUF_CSOURCE,      gdk-pixbuf-csource)
 AC_PATH_PROG(UPDATE_MIME_DATABASE,    update-mime-database)
 AC_PATH_PROG(UPDATE_DESKTOP_DATABASE, update-desktop-database)
+AC_PATH_PROG(GTK_UPDATE_ICON_CACHE,   gtk-update-icon-cache)
 
 dnl ---------------------------------------------------------------------------
 dnl - GLABELS branch
@@ -275,11 +276,17 @@ src/Makefile
 src/pixmaps/Makefile
 src/stock-pixmaps/Makefile
 data/Makefile
-data/pixmaps/Makefile
-data/mime/Makefile
-data/ui/Makefile
 data/desktop/Makefile
+data/icons/Makefile
+data/icons/16x16/Makefile
+data/icons/22x22/Makefile
+data/icons/24x24/Makefile
+data/icons/32x32/Makefile
+data/icons/48x48/Makefile
 data/man/Makefile
+data/mime/Makefile
+data/pixmaps/Makefile
+data/ui/Makefile
 templates/Makefile
 po/Makefile.in
 help/Makefile

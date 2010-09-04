@@ -66,13 +66,12 @@ main (int argc, char **argv)
 	};
 
 	GOptionContext *option_context;
-	gchar          *icon_file;
 	GList          *file_list = NULL, *p;
 	GtkWidget      *win;
 	gchar	       *utf8_filename;
         GError         *error = NULL;
 
-	bindtextdomain (GETTEXT_PACKAGE, GLABELS_LOCALEDIR);
+	bindtextdomain (GETTEXT_PACKAGE, GLABELS_LOCALE_DIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
@@ -98,17 +97,7 @@ main (int argc, char **argv)
 	gl_warning_handler_init();
 
 	/* Set default icon */
-	icon_file = g_build_filename (GLABELS_ICON_DIR, GLABELS_ICON, NULL);
-	if (!g_file_test (icon_file, G_FILE_TEST_EXISTS))
-	{
-		g_message ("Could not find %s", icon_file);
-	}
-	else
-	{
-		gtk_window_set_default_icon_from_file (icon_file, NULL);
-	}
-        g_free (icon_file);
-
+        gtk_window_set_default_icon_name (GLABELS_ICON_NAME);
 	
 	/* Initialize subsystems */
 	gl_debug_init ();

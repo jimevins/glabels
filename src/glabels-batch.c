@@ -90,7 +90,7 @@ main (int argc, char **argv)
 	gchar	          *utf8_filename;
         GError            *error = NULL;
 
-        bindtextdomain (GETTEXT_PACKAGE, GLABELS_LOCALEDIR);
+        bindtextdomain (GETTEXT_PACKAGE, GLABELS_LOCALE_DIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
         textdomain (GETTEXT_PACKAGE);
 

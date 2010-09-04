@@ -12,10 +12,9 @@ INCLUDES = \
 	$(LIBQRENCODE_CFLAGS)					\
 	$(LIBIEC16022_CFLAGS)					\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
-	-DGLABELS_LOCALEDIR=\""$(datadir)/locale"\" 		\
-	-DGLABELS_ICON_DIR=\""$(datadir)/pixmaps"\"		\
-	-DGLABELS_ICON=\""$(GLABELS_BRANCH).png"\"		\
+	-DGLABELS_LOCALE_DIR=\""$(datadir)/locale"\" 		\
 	-DGLABELS_DATA_DIR=\""$(datadir)/$(GLABELS_BRANCH)"\"	\
+	-DGLABELS_ICON_NAME=\""$(GLABELS_BRANCH)\""		\
 	-DG_LOG_DOMAIN=\""glabels\""
 
 glabels_3_LDFLAGS = -export-dynamic
