@@ -7,6 +7,7 @@ glabels_pixmaps_DATA = \
 	new-select.png		\
 	new-rotate.png		\
 	new-confirm.png		\
+	template-designer.png	\
 	ex-rect-size.png	\
 	ex-round-size.png	\
 	ex-cd-size.png		\
