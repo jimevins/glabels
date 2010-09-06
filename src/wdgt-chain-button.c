@@ -31,8 +31,6 @@
 
 #include <gtk/gtk.h>
 
-#include "stock.h"
-
 
 enum
 {
@@ -50,10 +48,10 @@ static gboolean  gl_wdgt_chain_button_draw_lines       (GtkWidget          *widg
 
 static const gchar *gl_wdgt_chain_stock_items[] =
 {
-  GL_STOCK_HCHAIN,
-  GL_STOCK_HCHAIN_BROKEN,
-  GL_STOCK_VCHAIN,
-  GL_STOCK_VCHAIN_BROKEN
+  "glabels-hchain",
+  "glabels-hchain-broken",
+  "glabels-vchain",
+  "glabels-vchain-broken"
 };
 
 
@@ -136,7 +134,7 @@ gl_wdgt_chain_button_new (glWdgtChainPosition position)
 
   button->position = position;
 
-  gtk_image_set_from_stock
+  gtk_image_set_from_icon_name
     (GTK_IMAGE (button->image),
      gl_wdgt_chain_stock_items[((position & GL_WDGT_CHAIN_LEFT) << 1) + ! button->active],
      GTK_ICON_SIZE_BUTTON);
@@ -191,9 +189,9 @@ gl_wdgt_chain_button_set_active (glWdgtChainButton  *button,
 
       num = ((button->position & GL_WDGT_CHAIN_LEFT) << 1) + (active ? 0 : 1);
 
-      gtk_image_set_from_stock (GTK_IMAGE (button->image),
-                                gl_wdgt_chain_stock_items[num],
-                                GTK_ICON_SIZE_BUTTON);
+      gtk_image_set_from_icon_name (GTK_IMAGE (button->image),
+                                    gl_wdgt_chain_stock_items[num],
+                                    GTK_ICON_SIZE_BUTTON);
     }
 }
 

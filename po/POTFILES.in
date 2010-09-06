@@ -138,8 +138,6 @@ src/message-bar.c
 src/message-bar.h
 src/recent.c
 src/recent.h
-src/stock.c
-src/stock.h
 src/str-util.c
 src/str-util.h
 src/svg-cache.c

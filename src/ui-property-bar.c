@@ -29,7 +29,6 @@
 #include "builder-util.h"
 #include "font-combo.h"
 #include "color-combo-button.h"
-#include "stock-pixmaps/stockpixbufs.h"
 #include "prefs.h"
 #include "color.h"
 
@@ -236,7 +235,6 @@ gl_ui_property_bar_construct (glUIPropertyBar   *this)
                                         "adjustment1", "adjustment2",
                                         NULL };
         GError        *error = NULL;
-	GdkPixbuf     *pixbuf = NULL;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
@@ -274,39 +272,33 @@ gl_ui_property_bar_construct (glUIPropertyBar   *this)
         gtk_container_add (GTK_CONTAINER (this->priv->font_family_eventbox),
                            this->priv->font_family_combo);
 
-        pixbuf = gdk_pixbuf_new_from_inline (-1, stock_text_24, FALSE, NULL);
         this->priv->text_color_button =
-                gl_color_combo_button_new (pixbuf,
+                gl_color_combo_button_new ("glabels-text",
                                            _("Default"),
                                            GL_COLOR_TEXT_DEFAULT,
                                            gl_prefs_model_get_default_text_color (gl_prefs));
         gl_color_combo_button_set_relief (GL_COLOR_COMBO_BUTTON(this->priv->text_color_button),
                                           GTK_RELIEF_NONE);
-	g_object_unref (G_OBJECT (pixbuf));
         gtk_container_add (GTK_CONTAINER (this->priv->text_color_eventbox),
                            this->priv->text_color_button);
 
-        pixbuf = gdk_pixbuf_new_from_inline (-1, stock_bucket_fill_24, FALSE, NULL);
         this->priv->fill_color_button =
-                gl_color_combo_button_new (pixbuf,
+                gl_color_combo_button_new ("glabels-bucket-fill",
                                            _("No Fill"),
                                            GL_COLOR_NO_FILL,
                                            gl_prefs_model_get_default_fill_color (gl_prefs));
         gl_color_combo_button_set_relief (GL_COLOR_COMBO_BUTTON(this->priv->fill_color_button),
                                           GTK_RELIEF_NONE);
-	g_object_unref (G_OBJECT (pixbuf));
         gtk_container_add (GTK_CONTAINER (this->priv->fill_color_eventbox),
                            this->priv->fill_color_button);
 
-        pixbuf = gdk_pixbuf_new_from_inline (-1, stock_pencil_24, FALSE, NULL);
         this->priv->line_color_button =
-                gl_color_combo_button_new (pixbuf,
+                gl_color_combo_button_new ("glabels-pencil",
                                            _("No Line"),
                                            GL_COLOR_NO_LINE,
                                            gl_prefs_model_get_default_line_color (gl_prefs));
 	gl_color_combo_button_set_relief (GL_COLOR_COMBO_BUTTON(this->priv->line_color_button),
                                           GTK_RELIEF_NONE);
-	g_object_unref (G_OBJECT (pixbuf));
         gtk_container_add (GTK_CONTAINER (this->priv->line_color_eventbox),
                            this->priv->line_color_button);
 

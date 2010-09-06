@@ -182,14 +182,14 @@ gl_color_combo_button_finalize (GObject *object)
 /** New Object Generator.                                                    */
 /*****************************************************************************/
 GtkWidget *
-gl_color_combo_button_new (GdkPixbuf    *icon,
+gl_color_combo_button_new (const gchar  *icon_name,
                            const gchar  *default_label,
                            guint         default_color,
                            guint         color)
 {
         glColorComboButton *this;
-        GdkPixbuf          *pixbuf;
         GtkWidget          *wimage;
+        GdkPixbuf          *pixbuf1, *pixbuf2;
 
         this = g_object_new (TYPE_GL_COLOR_COMBO_BUTTON, NULL);
 
@@ -201,11 +201,15 @@ gl_color_combo_button_new (GdkPixbuf    *icon,
         this->priv->default_color = default_color;
         this->priv->color = color;
 
-        if (icon)
+        if (icon_name)
         {
-                pixbuf = gdk_pixbuf_new_subpixbuf (icon, 0, 0, IMAGE_W, IMAGE_H-SWATCH_H);
-                wimage = gtk_image_new_from_pixbuf (pixbuf);
-                g_object_unref (G_OBJECT (pixbuf));
+                pixbuf1 = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
+                                                    icon_name, IMAGE_W, 0, NULL);
+                pixbuf2 = gdk_pixbuf_new_subpixbuf (pixbuf1, 0, 0, IMAGE_W, IMAGE_H-SWATCH_H);
+
+                wimage = gtk_image_new_from_pixbuf (pixbuf2);
+                g_object_unref (G_OBJECT (pixbuf1));
+                g_object_unref (G_OBJECT (pixbuf2));
                 gtk_box_pack_start (GTK_BOX (this->priv->button_vbox), wimage, FALSE, FALSE, 0);
 
                 this->priv->swatch = gl_color_swatch_new (IMAGE_W, SWATCH_H, color);

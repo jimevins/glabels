@@ -62,7 +62,7 @@ struct _glColorComboButtonClass {
 
 GType            gl_color_combo_button_get_type       (void) G_GNUC_CONST;
 
-GtkWidget       *gl_color_combo_button_new            (GdkPixbuf          *icon,
+GtkWidget       *gl_color_combo_button_new            (const gchar        *icon_name,
                                                        const gchar        *default_label,
                                                        guint               default_color,
                                                        guint               color);

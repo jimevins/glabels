@@ -28,7 +28,6 @@ AC_PROG_INSTALL
 GNOME_COMPILE_WARNINGS
 
 AC_PATH_PROG(GLIB_GENMARSHAL,         glib-genmarshal)
-AC_PATH_PROG(GDK_PIXBUF_CSOURCE,      gdk-pixbuf-csource)
 AC_PATH_PROG(UPDATE_MIME_DATABASE,    update-mime-database)
 AC_PATH_PROG(UPDATE_DESKTOP_DATABASE, update-desktop-database)
 AC_PATH_PROG(GTK_UPDATE_ICON_CACHE,   gtk-update-icon-cache)
@@ -274,7 +273,6 @@ libglabels/Makefile
 libglabels/${LIBGLABELS_BRANCH}.pc
 src/Makefile
 src/pixmaps/Makefile
-src/stock-pixmaps/Makefile
 data/Makefile
 data/desktop/Makefile
 data/icons/Makefile

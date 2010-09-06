@@ -25,7 +25,6 @@
 #include <libglabels.h>
 #include "warning-handler.h"
 #include "critical-error-handler.h"
-#include "stock.h"
 #include "merge-init.h"
 #include "recent.h"
 #include "mini-preview-pixbuf-cache.h"
@@ -96,12 +95,15 @@ main (int argc, char **argv)
 	gl_critical_error_handler_init();
 	gl_warning_handler_init();
 
+	/* Add glabels specific icons to search path */
+        gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
+                                           GLABELS_DATA_DIR G_DIR_SEPARATOR_S "icons");
+
 	/* Set default icon */
         gtk_window_set_default_icon_name (GLABELS_ICON_NAME);
 	
 	/* Initialize subsystems */
 	gl_debug_init ();
-	gl_stock_init ();
 	lgl_db_init ();
 	gl_prefs_init ();
 	gl_mini_preview_pixbuf_cache_init ();

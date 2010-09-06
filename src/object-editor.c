@@ -27,7 +27,6 @@
 #include <math.h>
 
 #include "prefs.h"
-#include "stock.h"
 #include "color-combo.h"
 #include "color.h"
 #include "wdgt-chain-button.h"
@@ -151,9 +150,9 @@ gl_object_editor_init (glObjectEditor *editor)
 
 	gtk_widget_show_all (GTK_WIDGET(editor));
 
-        gtk_image_set_from_stock (GTK_IMAGE(editor->priv->title_image),
-                                  GL_STOCK_PROPERTIES,
-                                  GTK_ICON_SIZE_LARGE_TOOLBAR);
+        gtk_image_set_from_icon_name (GTK_IMAGE(editor->priv->title_image),
+                                      "glabels-object-properties",
+                                      GTK_ICON_SIZE_LARGE_TOOLBAR);
 
         s = g_strdup_printf ("<span weight=\"bold\">%s</span>",
                              _("Object properties"));
@@ -304,7 +303,7 @@ set_object (glObjectEditor  *editor,
 
                 if (GL_IS_LABEL_BOX (object))
                 {
-                        image = GL_STOCK_BOX;
+                        image = "glabels-box";
                         title = _("Box object properties");
 
                         gtk_widget_show_all (editor->priv->pos_page_vbox);
@@ -323,7 +322,7 @@ set_object (glObjectEditor  *editor,
                 }
                 else if (GL_IS_LABEL_ELLIPSE (object))
                 {
-                        image = GL_STOCK_ELLIPSE;
+                        image = "glabels-ellipse";
                         title = _("Ellipse object properties");
 
                         gtk_widget_show_all (editor->priv->pos_page_vbox);
@@ -342,7 +341,7 @@ set_object (glObjectEditor  *editor,
                 }
                 else if (GL_IS_LABEL_LINE (object))
                 {
-                        image = GL_STOCK_LINE;
+                        image = "glabels-line";
                         title = _("Line object properties");
 
                         gtk_widget_show_all (editor->priv->pos_page_vbox);
@@ -359,7 +358,7 @@ set_object (glObjectEditor  *editor,
                 }
                 else if (GL_IS_LABEL_IMAGE (object))
                 {
-                        image = GL_STOCK_IMAGE;
+                        image = "glabels-image";
                         title = _("Image object properties");
 
                         gtk_widget_show_all (editor->priv->pos_page_vbox);
@@ -376,7 +375,7 @@ set_object (glObjectEditor  *editor,
                 }
                 else if (GL_IS_LABEL_TEXT (object))
                 {
-                        image = GL_STOCK_TEXT;
+                        image = "glabels-text";
                         title = _("Text object properties");
 
                         gtk_widget_show_all (editor->priv->pos_page_vbox);
@@ -398,7 +397,7 @@ set_object (glObjectEditor  *editor,
                 }
                 else if (GL_IS_LABEL_BARCODE (object))
                 {
-                        image = GL_STOCK_BARCODE;
+                        image = "glabels-barcode";
                         title = _("Barcode object properties");
 
                         gtk_widget_show_all (editor->priv->pos_page_vbox);
@@ -420,9 +419,9 @@ set_object (glObjectEditor  *editor,
                         gl_label_barcode_style_free (bc_style);
                 }
 
-                gtk_image_set_from_stock (GTK_IMAGE(editor->priv->title_image),
-                                          image,
-					  GTK_ICON_SIZE_LARGE_TOOLBAR);
+                gtk_image_set_from_icon_name (GTK_IMAGE(editor->priv->title_image),
+                                              image,
+                                              GTK_ICON_SIZE_LARGE_TOOLBAR);
 
 		s = g_strdup_printf ("<span weight=\"bold\">%s</span>",
 				     title);
@@ -457,9 +456,9 @@ set_object (glObjectEditor  *editor,
         {
                 editor->priv->object = NULL;
 
-                gtk_image_set_from_stock (GTK_IMAGE(editor->priv->title_image),
-					  GL_STOCK_PROPERTIES,
-					  GTK_ICON_SIZE_LARGE_TOOLBAR);
+                gtk_image_set_from_icon_name (GTK_IMAGE(editor->priv->title_image),
+                                              "glabels-object-properties",
+                                              GTK_ICON_SIZE_LARGE_TOOLBAR);
 
 		s = g_strdup_printf ("<span weight=\"bold\">%s</span>",
 				     _("Object properties"));

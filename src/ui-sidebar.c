@@ -26,7 +26,6 @@
 
 #include "ui-util.h"
 #include "object-editor.h"
-#include "stock.h"
 
 #include "debug.h"
 

@@ -1,5 +1,5 @@
 
-SUBDIRS= ../libglabels pixmaps stock-pixmaps
+SUBDIRS= ../libglabels pixmaps
 
 bin_PROGRAMS = glabels-3 glabels-3-batch
 
@@ -53,8 +53,6 @@ glabels_3_SOURCES = 			\
 	critical-error-handler.h	\
 	window.c			\
 	window.h			\
-	stock.c				\
-	stock.h				\
 	ui.h				\
 	ui.c				\
 	ui-util.h			\
