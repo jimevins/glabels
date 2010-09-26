@@ -656,6 +656,18 @@
     </Label-rectangle>
   </Template>
 
+  <!-- =================================================================== -->
+  <!-- Best Office Self-adhesive labels.                                   -->
+  <!-- =================================================================== -->
+  <Template brand="Best Office" part="75753" size="A4" _description="Self-adhesive labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Label-rectangle id="0" width="70mm" height="36mm" round="0mm" x_waste="0mm" y_waste="0mm">
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="3" ny="8" x0="0mm" y0="4mm" dx="70mm" dy="36mm"/>
+    </Label-rectangle>
+  </Template>
+
   <!-- ******************************************************************** -->
   <!-- Misc. A6 products.                                                   -->
   <!-- ******************************************************************** -->
