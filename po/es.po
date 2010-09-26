@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-09-06 03:05+0000\n"
-"PO-Revision-Date: 2010-09-06 21:14+0200\n"
+"POT-Creation-Date: 2010-09-26 09:59+0000\n"
+"PO-Revision-Date: 2010-09-26 12:21+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -142,27 +142,27 @@ msgstr "Code 93"
 
 #: ../src/bc-backends.c:197
 msgid "Australia Post Standard"
-msgstr ""
+msgstr "Australia Post Standard"
 
 #: ../src/bc-backends.c:200
 msgid "Australia Post Reply Paid"
-msgstr ""
+msgstr "Australia Post Reply Paid"
 
 #: ../src/bc-backends.c:203
 msgid "Australia Post Route Code"
-msgstr ""
+msgstr "Australia Post Route Code"
 
 #: ../src/bc-backends.c:206
 msgid "Australia Post Redirect"
-msgstr ""
+msgstr "Australia Post Redirect"
 
 #: ../src/bc-backends.c:209
 msgid "Aztec Code"
-msgstr ""
+msgstr "Código Azteca"
 
 #: ../src/bc-backends.c:212
 msgid "Aztec Rune"
-msgstr ""
+msgstr "Runa Azteca"
 
 #: ../src/bc-backends.c:218
 msgid "Code One"
@@ -178,19 +178,19 @@ msgstr "Code 16K"
 
 #: ../src/bc-backends.c:227
 msgid "Code 2 of 5 Matrix"
-msgstr ""
+msgstr "Code 2 de 5 Matrix"
 
 #: ../src/bc-backends.c:230
 msgid "Code 2 of 5 IATA"
-msgstr ""
+msgstr "Code 2 de 5 IATA"
 
 #: ../src/bc-backends.c:233
 msgid "Code 2 of 5 Data Logic"
-msgstr ""
+msgstr "Code 2 de 5 Data Logic"
 
 #: ../src/bc-backends.c:236
 msgid "Code 32 (Italian Pharmacode)"
-msgstr ""
+msgstr "Code 32 (Pharmacode italiano)"
 
 #: ../src/bc-backends.c:242
 msgid "Code 39 Extended"
@@ -202,7 +202,7 @@ msgstr "Code 49"
 
 #: ../src/bc-backends.c:254
 msgid "Code 128 (Mode C supression)"
-msgstr ""
+msgstr "Code 128 (Mode C supression)"
 
 #: ../src/bc-backends.c:257
 msgid "DAFT Code"
@@ -214,15 +214,15 @@ msgstr "Matriz de datos"
 
 #: ../src/bc-backends.c:263
 msgid "Deutsche Post Leitcode"
-msgstr ""
+msgstr "Deutsche Post Leitcode"
 
 #: ../src/bc-backends.c:266
 msgid "Deutsche Post Identcode"
-msgstr ""
+msgstr "Deutsche Post Identcode"
 
 #: ../src/bc-backends.c:269
 msgid "Dutch Post KIX Code"
-msgstr ""
+msgstr "Post KIX Code de los Países Bajos"
 
 #: ../src/bc-backends.c:272
 msgid "EAN"
@@ -230,7 +230,7 @@ msgstr "EAN"
 
 #: ../src/bc-backends.c:275
 msgid "Grid Matrix"
-msgstr ""
+msgstr "Matriz de rejilla"
 
 #: ../src/bc-backends.c:278
 msgid "GS1-128"
@@ -242,15 +242,15 @@ msgstr "GS1 DataBar-14"
 
 #: ../src/bc-backends.c:290
 msgid "GS1 DataBar-14 Stacked"
-msgstr ""
+msgstr "GS1 DataBar-14 Stacked"
 
 #: ../src/bc-backends.c:293
 msgid "GS1 DataBar-14 Stacked Omni."
-msgstr ""
+msgstr "GS1 DataBar-14 Stacked Omni."
 
 #: ../src/bc-backends.c:296
 msgid "GS1 DataBar Extended Stacked"
-msgstr ""
+msgstr "GS1 DataBar Extended Stacked"
 
 #: ../src/bc-backends.c:299
 msgid "HIBC Code 128"
@@ -278,7 +278,7 @@ msgstr "HIBC Micro PDF417"
 
 #: ../src/bc-backends.c:317
 msgid "HIBC Aztec Code"
-msgstr "HIBC Aztec Code"
+msgstr "HIBC código Azteca"
 
 #: ../src/bc-backends.c:326
 msgid "ITF-14"
@@ -286,7 +286,7 @@ msgstr "ITF-14"
 
 #: ../src/bc-backends.c:329
 msgid "Japanese Postal"
-msgstr ""
+msgstr "Postal japonés"
 
 #: ../src/bc-backends.c:332
 msgid "Korean Postal"
@@ -322,7 +322,7 @@ msgstr "PDF417"
 
 #: ../src/bc-backends.c:356
 msgid "PDF417 Truncated"
-msgstr ""
+msgstr "PDF417 truncatedo"
 
 #: ../src/bc-backends.c:359
 msgid "PLANET"
@@ -342,7 +342,7 @@ msgstr "Pharmacode 2-track"
 
 #: ../src/bc-backends.c:371
 msgid "Pharmazentral Nummer (PZN)"
-msgstr ""
+msgstr "Pharmazentral Nummer (PZN)"
 
 #: ../src/bc-backends.c:374
 msgid "QR Code"
@@ -350,7 +350,7 @@ msgstr "QR Code"
 
 #: ../src/bc-backends.c:377
 msgid "Royal Mail 4-State"
-msgstr ""
+msgstr "Royal Mail 4-State"
 
 #: ../src/bc-backends.c:380
 msgid "Telepen"
@@ -358,11 +358,11 @@ msgstr "Telepen"
 
 #: ../src/bc-backends.c:383
 msgid "Telepen Numeric"
-msgstr ""
+msgstr "Telepen numérico"
 
 #: ../src/bc-backends.c:392
 msgid "USPS One Code"
-msgstr ""
+msgstr "USPS One Code"
 
 #: ../src/bc-backends.c:395
 msgid "UK Plessey"
@@ -3001,11 +3001,17 @@ msgstr "Etiquetas de correo - 3 columnas"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:46
+#: ../templates/pearl-iso-templates.xml.h:54
+msgid "Self-adhesive labels"
+msgstr "Etiquetas autoadhesivas"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:48
 msgid "Universal Labels"
 msgstr "Etiquetas universales"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:48
+#: ../templates/misc-iso-templates.xml.h:50
 msgid "Video Labels (face only)"
 msgstr "Etiqeutas de video (solo frente)"
 
@@ -3123,11 +3129,6 @@ msgstr "Capa transparente autoadhesiva"
 #: ../templates/pearl-iso-templates.xml.h:52
 msgid "Self-adhesive film weatherproof"
 msgstr "Capa autoadhesiva resistente a la intemperie"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:54
-msgid "Self-adhesive labels"
-msgstr "Etiquetas autoadhesivas"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:56
