@@ -81,7 +81,7 @@ LIBEBOOK_REQUIRED=2.28.0
 LIBBARCODE_REQUIRED=0.98
 LIBQRENCODE_REQUIRED=3.1.0
 LIBIEC16022_REQUIRED=0.2.4
-LIBZINT_REQUIRED=2.3.1
+LIBZINT_REQUIRED=2.4.0
 
 dnl Make above strings available for packaging files (e.g. rpm spec files)
 AC_SUBST(GLIB_REQUIRED)
@@ -169,7 +169,7 @@ AC_ARG_WITH(libzint,
 	    [AS_HELP_STRING([--without-libzint],[build without Zint Barcode support])])
 have_libzint=no
 if test "x$with_libzint" != xno; then
-   AC_CHECK_LIB(zint, ZBarcode_Create,
+   AC_CHECK_LIB(zint, ZBarcode_Render,
 		[have_libzint=yes], [have_libzint=no])
 fi
 
