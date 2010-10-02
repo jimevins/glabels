@@ -22,32 +22,27 @@
 
 #include "font-history-model.h"
 
-#include <gconf/gconf-client.h>
+#include <gio/gio.h>
 
 #include <libglabels.h>
 #include "font-util.h"
 #include "marshal.h"
 
 
-#define BASE_KEY          "/apps/glabels"
-#define RECENT_FONTS_KEY  BASE_KEY "/recent-fonts"
-
-
 /*========================================================*/
 /* Private types.                                         */
 /*========================================================*/
 
-/** GL_FONT_HISTORY_MODEL Private fields */
 struct _glFontHistoryModelPrivate {
 
-	GConfClient *gconf_client;
+        GSettings   *history;
 
         guint        max_n;
 };
 
 enum {
-	CHANGED,
-	LAST_SIGNAL
+        CHANGED,
+        LAST_SIGNAL
 };
 
 
@@ -64,10 +59,7 @@ static guint signals[LAST_SIGNAL] = {0};
 
 static void gl_font_history_model_finalize      (GObject             *object);
 
-static void conf_notify_cb                      (GConfClient         *client,
-                                                 guint                cnxn_id,
-                                                 GConfEntry          *entry,
-                                                 glFontHistoryModel  *this);
+static void history_changed_cb                  (glFontHistoryModel  *this);
 
 
 /*****************************************************************************/
@@ -88,15 +80,15 @@ gl_font_history_model_class_init (glFontHistoryModelClass *class)
 
         gobject_class->finalize = gl_font_history_model_finalize;
 
-	signals[CHANGED] =
-		g_signal_new ("changed",
-			      G_OBJECT_CLASS_TYPE (gobject_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (glFontHistoryModelClass, changed),
-			      NULL, NULL,
-			      gl_marshal_VOID__VOID,
-			      G_TYPE_NONE,
-			      0);
+        signals[CHANGED] =
+                g_signal_new ("changed",
+                              G_OBJECT_CLASS_TYPE (gobject_class),
+                              G_SIGNAL_RUN_LAST,
+                              G_STRUCT_OFFSET (glFontHistoryModelClass, changed),
+                              NULL, NULL,
+                              gl_marshal_VOID__VOID,
+                              G_TYPE_NONE,
+                              0);
 }
 
 
@@ -108,19 +100,13 @@ gl_font_history_model_init (glFontHistoryModel *this)
 {
         this->priv = g_new0 (glFontHistoryModelPrivate, 1);
 
-        this->priv->gconf_client = gconf_client_get_default ();
+        this->priv->history = g_settings_new ("org.gnome.glabels-3.history");
 
-        g_return_if_fail (this->priv->gconf_client != NULL);
+        g_return_if_fail (this->priv->history != NULL);
 
-        gconf_client_add_dir (this->priv->gconf_client,
-                              BASE_KEY,
-                              GCONF_CLIENT_PRELOAD_ONELEVEL,
-                              NULL);
-
-        gconf_client_notify_add (this->priv->gconf_client,
-                                 RECENT_FONTS_KEY,
-                                 (GConfClientNotifyFunc)conf_notify_cb, this,
-                                 NULL, NULL);
+        g_signal_connect_swapped (G_OBJECT (this->priv->history),
+                                  "changed::recent-fonts",
+                                  G_CALLBACK (history_changed_cb), this);
 }
 
 
@@ -135,7 +121,7 @@ gl_font_history_model_finalize (GObject *object)
         g_return_if_fail (object && IS_GL_FONT_HISTORY_MODEL (object));
         this = GL_FONT_HISTORY_MODEL (object);
 
-        g_object_unref (G_OBJECT(this->priv->gconf_client));
+        g_object_unref (G_OBJECT(this->priv->history));
         g_free (this->priv);
 
         G_OBJECT_CLASS (gl_font_history_model_parent_class)->finalize (object);
@@ -165,62 +151,39 @@ void
 gl_font_history_model_add_family (glFontHistoryModel *this,
                                   const gchar        *family)
 {
-        GSList *list = NULL;
-        GList  *old_list;
-        GList  *p;
-        GSList *ps;
+        gchar **old;
+        gchar **new;
+        gint    i, j;
 
-        /*
-         * Start new list with this family.
-         */
-        list = g_slist_append (list, (gchar *)family);
+        old = g_settings_get_strv (this->priv->history, "recent-fonts");
+                                   
+        new = g_new0 (gchar *, this->priv->max_n+1);
 
-        /*
-         * Transfer old list to new list, ignoring any duplicate of this family
-         */
-        old_list = gl_font_history_model_get_family_list (this);
-        for ( p = old_list; p; p=p->next )
+        /* Put in first slot. */
+        new[0] = g_strdup (family);
+
+        /* Push everthing else down, pruning any duplicate found. */
+        for ( i = 0, j = 1; (j < (this->priv->max_n-1)) && old[i]; i++ )
         {
-                if ( lgl_str_utf8_casecmp (family, p->data) )
+                if ( lgl_str_utf8_casecmp (family, old[i]) != 0 )
                 {
-                        list = g_slist_append (list, p->data);
-                }
-                else
-                {
-                        g_free (p->data);
+                        new[j++] = g_strdup (old[i]);
                 }
         }
-        g_list_free (old_list);
 
-        /*
-         * Truncate list to maximum size
-         */
-        while (g_slist_length (list) > this->priv->max_n)
-        {
-                ps = g_slist_last (list);
-                list = g_slist_remove_link (list, ps);
-                g_slist_free_1 (ps);
-        }
+        g_settings_set_strv (this->priv->history, "recent-fonts",
+                             (const gchar * const *)new);
 
-        /*
-         * Update conf
-         */
-        gconf_client_set_list (this->priv->gconf_client,
-                               RECENT_FONTS_KEY,
-                               GCONF_VALUE_STRING,
-                               list,
-                               NULL);
+        g_strfreev (old);
+        g_strfreev (new);
 }
 
 
 /*****************************************************************************/
-/* GConf notify callback.                                                    */
+/* History changed callback.                                                 */
 /*****************************************************************************/
 static void
-conf_notify_cb (GConfClient         *client,
-                guint                cnxn_id,
-                GConfEntry          *entry,
-                glFontHistoryModel  *this)
+history_changed_cb                  (glFontHistoryModel  *this)
 {
         g_signal_emit (G_OBJECT(this), signals[CHANGED], 0);
 }
@@ -232,33 +195,23 @@ conf_notify_cb (GConfClient         *client,
 GList *
 gl_font_history_model_get_family_list (glFontHistoryModel *this)
 {
+        gchar **strv;
         GList  *list = NULL;
-        GSList *tmp_list;
-        GSList *p;
+        gint    i;
+
+        strv = g_settings_get_strv (this->priv->history, "recent-fonts");
 
         /*
-         * Get family list.
+         * Proof read name list; transfer storage to new list.
          */
-	tmp_list = gconf_client_get_list (this->priv->gconf_client,
-                                          RECENT_FONTS_KEY,
-                                          GCONF_VALUE_STRING,
-                                          NULL);
-
-        /*
-         * Proof read family list; transfer storage to new list.
-         */
-        for (p=tmp_list; p != NULL; p=p->next)
+        for ( i = 0; strv[i]; i++ )
         {
-                if ( gl_font_util_is_family_installed (p->data) )
+                if ( gl_font_util_is_family_installed (strv[i]) )
                 {
-                        list = g_list_append (list, p->data);
-                }
-                else
-                {
-                        g_free (p->data);
+                        list = g_list_append (list, g_strdup (strv[i]));
                 }
         }
-        g_slist_free (tmp_list);
+        g_strfreev (strv);
 
         return list;
 }

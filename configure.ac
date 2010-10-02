@@ -21,6 +21,8 @@ LT_INIT
 GNOME_DOC_INIT
 GTK_DOC_CHECK(1.0)
 
+GLIB_GSETTINGS
+
 AC_SEARCH_LIBS([strerror],[cposix])
 AC_PROG_CC
 AC_PROG_INSTALL
@@ -70,9 +72,8 @@ dnl ---------------------------------------------------------------------------
 dnl - Library dependencies
 dnl ---------------------------------------------------------------------------
 dnl Required dependencies
-GLIB_REQUIRED=2.24.0
+GLIB_REQUIRED=2.25.11
 GTK_REQUIRED=2.20.0
-GCONF_REQUIRED=2.28.0
 LIBXML_REQUIRED=2.7.0
 LIBRSVG_REQUIRED=2.26.0
 
@@ -86,7 +87,6 @@ LIBZINT_REQUIRED=2.4.0
 dnl Make above strings available for packaging files (e.g. rpm spec files)
 AC_SUBST(GLIB_REQUIRED)
 AC_SUBST(GTK_REQUIRED)
-AC_SUBST(GCONF_REQUIRED)
 AC_SUBST(LIBXML_REQUIRED)
 AC_SUBST(LIBEBOOK_REQUIRED)
 AC_SUBST(LIBBARCODE_REQUIRED)
@@ -101,7 +101,6 @@ dnl ---------------------------------------------------------------------------
 PKG_CHECK_MODULES(GLABELS, [\
 	glib-2.0 >= $GLIB_REQUIRED \
 	gtk+-2.0 >= $GTK_REQUIRED \
-	gconf-2.0 >= $GCONF_REQUIRED \
 	libxml-2.0 >= $LIBXML_REQUIRED \
 	librsvg-2.0 > $LIBRSVG_REQUIRED \
 ])
@@ -115,7 +114,6 @@ dnl - LIBGLABELS more modest prerequisites
 dnl ---------------------------------------------------------------------------
 PKG_CHECK_MODULES(LIBGLABELS, [\
 	glib-2.0 >= $GLIB_REQUIRED \
-	gconf-2.0 >= $GCONF_REQUIRED \
 	libxml-2.0 >= $LIBXML_REQUIRED \
 ])
 
@@ -284,6 +282,8 @@ data/icons/48x48/Makefile
 data/man/Makefile
 data/mime/Makefile
 data/pixmaps/Makefile
+data/schemas/Makefile
+data/schemas/org.gnome.glabels-3.gschema.xml.in
 data/ui/Makefile
 templates/Makefile
 po/Makefile.in

@@ -22,24 +22,19 @@
 
 #include "template-history-model.h"
 
-#include <gconf/gconf-client.h>
+#include <gio/gio.h>
 
 #include <libglabels.h>
 #include "marshal.h"
-
-
-#define BASE_KEY              "/apps/glabels"
-#define RECENT_TEMPLATES_KEY  BASE_KEY "/recent-templates"
 
 
 /*========================================================*/
 /* Private types.                                         */
 /*========================================================*/
 
-/** GL_TEMPLATE_HISTORY_MODEL Private fields */
 struct _glTemplateHistoryModelPrivate {
 
-	GConfClient *gconf_client;
+	GSettings   *history;
 
         guint        max_n;
 };
@@ -63,10 +58,7 @@ static guint signals[LAST_SIGNAL] = {0};
 
 static void gl_template_history_model_finalize (GObject                 *object);
 
-static void conf_notify_cb                     (GConfClient             *client,
-                                                guint                    cnxn_id,
-                                                GConfEntry              *entry,
-                                                glTemplateHistoryModel  *this);
+static void history_changed_cb                 (glTemplateHistoryModel  *this);
 
 
 /*****************************************************************************/
@@ -107,19 +99,13 @@ gl_template_history_model_init (glTemplateHistoryModel *this)
 {
         this->priv = g_new0 (glTemplateHistoryModelPrivate, 1);
 
-        this->priv->gconf_client = gconf_client_get_default ();
+        this->priv->history = g_settings_new ("org.gnome.glabels-3.history");
 
-        g_return_if_fail (this->priv->gconf_client != NULL);
+        g_return_if_fail (this->priv->history != NULL);
 
-        gconf_client_add_dir (this->priv->gconf_client,
-                              BASE_KEY,
-                              GCONF_CLIENT_PRELOAD_ONELEVEL,
-                              NULL);
-
-        gconf_client_notify_add (this->priv->gconf_client,
-                                 RECENT_TEMPLATES_KEY,
-                                 (GConfClientNotifyFunc)conf_notify_cb, this,
-                                 NULL, NULL);
+        g_signal_connect_swapped (G_OBJECT (this->priv->history),
+                                  "changed::recent-templates",
+                                  G_CALLBACK (history_changed_cb), this);
 }
 
 
@@ -134,7 +120,7 @@ gl_template_history_model_finalize (GObject *object)
         g_return_if_fail (object && IS_GL_TEMPLATE_HISTORY_MODEL (object));
         this = GL_TEMPLATE_HISTORY_MODEL (object);
 
-        g_object_unref (G_OBJECT(this->priv->gconf_client));
+        g_object_unref (G_OBJECT(this->priv->history));
         g_free (this->priv);
 
         G_OBJECT_CLASS (gl_template_history_model_parent_class)->finalize (object);
@@ -158,68 +144,45 @@ gl_template_history_model_new (guint n)
 
 
 /*****************************************************************************/
-/* Add template to history.                                                      */
+/* Add template to history.                                                  */
 /*****************************************************************************/
 void
 gl_template_history_model_add_name (glTemplateHistoryModel *this,
                                     const gchar            *name)
 {
-        GSList *list = NULL;
-        GList  *old_list;
-        GList  *p;
-        GSList *ps;
+        gchar **old;
+        gchar **new;
+        gint    i, j;
 
-        /*
-         * Start new list with this name.
-         */
-        list = g_slist_append (list, (gchar *)name);
+        old = g_settings_get_strv (this->priv->history, "recent-templates");
+                                   
+        new = g_new0 (gchar *, this->priv->max_n+1);
 
-        /*
-         * Transfer old list to new list, ignoring any duplicate of this name
-         */
-        old_list = gl_template_history_model_get_name_list (this);
-        for ( p = old_list; p; p=p->next )
+        /* Put in first slot. */
+        new[0] = g_strdup (name);
+
+        /* Push everthing else down, pruning any duplicate found. */
+        for ( i = 0, j = 1; (j < (this->priv->max_n-1)) && old[i]; i++ )
         {
-                if ( lgl_str_utf8_casecmp (name, p->data) )
+                if ( lgl_str_utf8_casecmp (name, old[i]) != 0 )
                 {
-                        list = g_slist_append (list, p->data);
-                }
-                else
-                {
-                        g_free (p->data);
+                        new[j++] = g_strdup (old[i]);
                 }
         }
-        g_list_free (old_list);
 
-        /*
-         * Truncate list to maximum size
-         */
-        while (g_slist_length (list) > this->priv->max_n)
-        {
-                ps = g_slist_last (list);
-                list = g_slist_remove_link (list, ps);
-                g_slist_free_1 (ps);
-        }
+        g_settings_set_strv (this->priv->history, "recent-templates",
+                             (const gchar * const *)new);
 
-        /*
-         * Update conf
-         */
-        gconf_client_set_list (this->priv->gconf_client,
-                               RECENT_TEMPLATES_KEY,
-                               GCONF_VALUE_STRING,
-                               list,
-                               NULL);
+        g_strfreev (old);
+        g_strfreev (new);
 }
 
 
 /*****************************************************************************/
-/* GConf notify callback.                                                    */
+/* History changed callback.                                                 */
 /*****************************************************************************/
 static void
-conf_notify_cb (GConfClient         *client,
-                guint                cnxn_id,
-                GConfEntry          *entry,
-                glTemplateHistoryModel  *this)
+history_changed_cb (glTemplateHistoryModel  *this)
 {
         g_signal_emit (G_OBJECT(this), signals[CHANGED], 0);
 }
@@ -231,33 +194,23 @@ conf_notify_cb (GConfClient         *client,
 GList *
 gl_template_history_model_get_name_list (glTemplateHistoryModel *this)
 {
+        gchar **strv;
         GList  *list = NULL;
-        GSList *tmp_list;
-        GSList *p;
+        gint    i;
 
-        /*
-         * Get name list.
-         */
-	tmp_list = gconf_client_get_list (this->priv->gconf_client,
-                                          RECENT_TEMPLATES_KEY,
-                                          GCONF_VALUE_STRING,
-                                          NULL);
+        strv = g_settings_get_strv (this->priv->history, "recent-templates");
 
         /*
          * Proof read name list; transfer storage to new list.
          */
-        for (p=tmp_list; p != NULL; p=p->next)
+        for ( i = 0; strv[i]; i++ )
         {
-                if ( lgl_db_does_template_name_exist (p->data) )
+                if ( lgl_db_does_template_name_exist (strv[i]) )
                 {
-                        list = g_list_append (list, p->data);
-                }
-                else
-                {
-                        g_free (p->data);
+                        list = g_list_append (list, g_strdup (strv[i]));
                 }
         }
-        g_slist_free (tmp_list);
+        g_strfreev (strv);
 
         return list;
 }
