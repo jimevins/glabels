@@ -98,12 +98,14 @@ gl_wdgt_chain_button_init (glWdgtChainButton *button)
 	g_signal_connect (button->button, "clicked",
 			  G_CALLBACK (gl_wdgt_chain_button_clicked_callback),
 			  button);
+#if 0
 	g_signal_connect (button->line1, "expose_event",
 			  G_CALLBACK (gl_wdgt_chain_button_draw_lines),
 			  button);
 	g_signal_connect (button->line2, "expose_event",
 			  G_CALLBACK (gl_wdgt_chain_button_draw_lines),
 			  button);
+#endif
 }
 
 
@@ -307,6 +309,7 @@ gl_wdgt_chain_button_draw_lines (GtkWidget         *widget,
       points[2] = buf;
     }
 
+#if 0
   gtk_paint_polygon (gtk_widget_get_style (widget),
 		     gtk_widget_get_window (widget),
 		     GTK_STATE_NORMAL,
@@ -317,6 +320,7 @@ gl_wdgt_chain_button_draw_lines (GtkWidget         *widget,
 		     points,
 		     3,
 		     FALSE);
+#endif
 
   return TRUE;
 }

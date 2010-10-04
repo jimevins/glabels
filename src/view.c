@@ -125,8 +125,8 @@ static gdouble    get_home_scale                  (glView         *view);
 
 static void       prefs_changed_cb                (glView         *view);
 
-static gboolean   expose_cb                       (glView         *view,
-                                                   GdkEventExpose *event);
+static gboolean   draw_cb                         (glView         *view,
+                                                   cairo_t        *cr);
 
 static void       realize_cb                      (glView         *view);
 
@@ -308,8 +308,8 @@ gl_view_init (glView *view)
 
         g_signal_connect_swapped (G_OBJECT (gl_prefs), "changed",
                                   G_CALLBACK (prefs_changed_cb), view);
-	g_signal_connect_swapped (G_OBJECT (view->canvas), "expose-event",
-				  G_CALLBACK (expose_cb), view);
+	g_signal_connect_swapped (G_OBJECT (view->canvas), "draw",
+				  G_CALLBACK (draw_cb), view);
 	g_signal_connect_swapped (G_OBJECT (view->canvas), "realize",
 				  G_CALLBACK (realize_cb), view);
 	g_signal_connect_swapped (G_OBJECT (view->canvas), "size-allocate",
@@ -472,23 +472,24 @@ prefs_changed_cb (glView         *view)
 void
 gl_view_update (glView  *view)
 {
-        GdkWindow *window;
-	GdkRegion *region;
-	
+        GdkWindow     *window;
+        GtkAllocation  allocation;
+
 	gl_debug (DEBUG_VIEW, "START");
 
         window = gtk_widget_get_window (GTK_WIDGET (view->canvas));
         
-	if (!window) return;
-
-        if ( !view->update_scheduled_flag )
+	if (window)
         {
-                view->update_scheduled_flag = TRUE;
 
-                region = gdk_drawable_get_clip_region (window);
-                /* redraw the cairo canvas completely by exposing it */
-                gdk_window_invalidate_region (window, region, TRUE);
-                gdk_region_destroy (region);
+                if ( !view->update_scheduled_flag )
+                {
+                        view->update_scheduled_flag = TRUE;
+
+                        gtk_widget_get_allocation (GTK_WIDGET (view->canvas), &allocation);
+                        gdk_window_invalidate_rect (window, &allocation, TRUE);
+                }
+
         }
 
 	gl_debug (DEBUG_VIEW, "END");
@@ -536,27 +537,13 @@ gl_view_update_region (glView        *view,
 /* PRIVATE.  Expose handler.                                                 */
 /*---------------------------------------------------------------------------*/
 static gboolean
-expose_cb (glView         *view,
-           GdkEventExpose *event)
+draw_cb (glView         *view,
+         cairo_t        *cr)
 {
-        GdkWindow *bin_window;
-	cairo_t   *cr;
-
 	gl_debug (DEBUG_VIEW, "START");
 
         view->update_scheduled_flag = FALSE;
-
-        bin_window = gtk_layout_get_bin_window (GTK_LAYOUT (view->canvas));
-	cr = gdk_cairo_create (bin_window);
-
-	cairo_rectangle (cr,
-			event->area.x, event->area.y,
-			event->area.width, event->area.height);
-	cairo_clip (cr);
-	
 	draw_layers (view, cr);
-
-	cairo_destroy (cr);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -705,7 +692,8 @@ draw_layers (glView  *view,
         scale = view->home_scale * view->zoom;
         gtk_layout_set_size (GTK_LAYOUT (view->canvas), w*scale+8, h*scale+8);
 
-        gdk_drawable_get_size (bin_window, &canvas_w, &canvas_h);
+        canvas_w = gdk_window_get_width (bin_window);
+        canvas_h = gdk_window_get_height (bin_window);
 
         view->x0 = (canvas_w/scale - w) / 2.0;
         view->y0 = (canvas_h/scale - h) / 2.0;
@@ -1822,24 +1810,24 @@ key_press_event_cb (glView            *view,
         {
                 switch (event->keyval) {
 
-                case GDK_Left:
-                case GDK_KP_Left:
+                case GDK_KEY_Left:
+                case GDK_KEY_KP_Left:
                         gl_label_move_selection (view->label, -1.0 / (view->zoom), 0.0);
                         break;
-                case GDK_Up:
-                case GDK_KP_Up:
+                case GDK_KEY_Up:
+                case GDK_KEY_KP_Up:
                         gl_label_move_selection (view->label, 0.0, -1.0 / (view->zoom));
                         break;
-                case GDK_Right:
-                case GDK_KP_Right:
+                case GDK_KEY_Right:
+                case GDK_KEY_KP_Right:
                         gl_label_move_selection (view->label, 1.0 / (view->zoom), 0.0);
                         break;
-                case GDK_Down:
-                case GDK_KP_Down:
+                case GDK_KEY_Down:
+                case GDK_KEY_KP_Down:
                         gl_label_move_selection (view->label, 0.0, 1.0 / (view->zoom));
                         break;
-                case GDK_Delete:
-                case GDK_KP_Delete:
+                case GDK_KEY_Delete:
+                case GDK_KEY_KP_Delete:
                         gl_label_delete_selection (view->label);
                         cursor = gdk_cursor_new (GDK_LEFT_PTR);
                         gdk_window_set_cursor (window, cursor);

@@ -30,6 +30,7 @@ AC_PROG_INSTALL
 GNOME_COMPILE_WARNINGS
 
 AC_PATH_PROG(GLIB_GENMARSHAL,         glib-genmarshal)
+AC_PATH_PROG(GDK_PIXBUF_CSOURCE,      gdk-pixbuf-csource)
 AC_PATH_PROG(UPDATE_MIME_DATABASE,    update-mime-database)
 AC_PATH_PROG(UPDATE_DESKTOP_DATABASE, update-desktop-database)
 AC_PATH_PROG(GTK_UPDATE_ICON_CACHE,   gtk-update-icon-cache)
@@ -72,13 +73,13 @@ dnl ---------------------------------------------------------------------------
 dnl - Library dependencies
 dnl ---------------------------------------------------------------------------
 dnl Required dependencies
-GLIB_REQUIRED=2.25.11
-GTK_REQUIRED=2.20.0
-LIBXML_REQUIRED=2.7.0
-LIBRSVG_REQUIRED=2.26.0
+GLIB_REQUIRED=2.27.1
+GTK_REQUIRED=2.91.1
+LIBXML_REQUIRED=2.7.7
+LIBRSVG_REQUIRED=2.26.3
 
 dnl Optional dependencies
-LIBEBOOK_REQUIRED=2.28.0
+LIBEBOOK_REQUIRED=2.30.3
 LIBBARCODE_REQUIRED=0.98
 LIBQRENCODE_REQUIRED=3.1.0
 LIBIEC16022_REQUIRED=0.2.4
@@ -100,9 +101,9 @@ dnl - GLABELS prerequisites
 dnl ---------------------------------------------------------------------------
 PKG_CHECK_MODULES(GLABELS, [\
 	glib-2.0 >= $GLIB_REQUIRED \
-	gtk+-2.0 >= $GTK_REQUIRED \
+	gtk+-3.0 >= $GTK_REQUIRED \
 	libxml-2.0 >= $LIBXML_REQUIRED \
-	librsvg-2.0 > $LIBRSVG_REQUIRED \
+	librsvg-2.0 >= $LIBRSVG_REQUIRED \
 ])
 
 AC_SUBST(GLABELS_CFLAGS)
@@ -270,6 +271,7 @@ Makefile
 libglabels/Makefile
 libglabels/${LIBGLABELS_BRANCH}.pc
 src/Makefile
+src/cursors/Makefile
 src/pixmaps/Makefile
 data/Makefile
 data/desktop/Makefile

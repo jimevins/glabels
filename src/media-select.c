@@ -132,7 +132,7 @@ static void   custom_delete_clicked_cb   (GtkButton              *button,
                                           gpointer                user_data);
 
 static void   page_changed_cb            (GtkNotebook            *notebook,
-                                          GtkNotebookPage        *page,
+                                          GtkWidget              *page,
                                           guint                   page_num,
                                           gpointer                user_data);
 
@@ -648,7 +648,7 @@ custom_delete_clicked_cb (GtkButton  *button,
 /*--------------------------------------------------------------------------*/
 static void
 page_changed_cb (GtkNotebook            *notebook,
-                 GtkNotebookPage        *page,
+                 GtkWidget              *page,
                  guint                   page_num,
                  gpointer                user_data)
 {

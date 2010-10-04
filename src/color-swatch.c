@@ -58,8 +58,8 @@ static void       style_set_cb                (GtkWidget      *widget,
 
 static void       redraw                      (glColorSwatch  *this);
 
-static gboolean   expose_event_cb             (GtkWidget      *widget,
-                                               GdkEventExpose *event);
+static gboolean   draw_cb                     (GtkWidget      *widget,
+                                               cairo_t        *cr);
 
 static void       draw_swatch                 (glColorSwatch  *this,
                                                cairo_t        *cr);
@@ -85,8 +85,8 @@ gl_color_swatch_class_init (glColorSwatchClass *class)
 
 	gobject_class->finalize    = gl_color_swatch_finalize;
 
-        widget_class->expose_event = expose_event_cb;
         widget_class->style_set    = style_set_cb;
+        widget_class->draw         = draw_cb;
 }
 
 
@@ -172,17 +172,15 @@ style_set_cb (GtkWidget        *widget,
 static void
 redraw (glColorSwatch  *this)
 {
-        GdkWindow *window;
-	GdkRegion *region;
+        GdkWindow     *window;
+        GtkAllocation  allocation;
 
         window = gtk_widget_get_window (GTK_WIDGET (this));
 
         if (window)
         {
-                /* redraw the cairo canvas forcing an expose event */
-                region = gdk_drawable_get_clip_region (window);
-                gdk_window_invalidate_region (window, region, TRUE);
-                gdk_region_destroy (region);
+                gtk_widget_get_allocation (GTK_WIDGET (this), &allocation);
+                gdk_window_invalidate_rect (window, &allocation, FALSE);
         }
 }
 
@@ -191,28 +189,12 @@ redraw (glColorSwatch  *this)
 /* "Expose event" callback.                                                  */
 /*****************************************************************************/
 static gboolean
-expose_event_cb (GtkWidget      *widget,
-                 GdkEventExpose *event)
+draw_cb (GtkWidget      *widget,
+         cairo_t        *cr)
 {
-        GdkWindow     *window;
-	cairo_t       *cr;
         GtkAllocation  allocation;
 
-        window = gtk_widget_get_window (widget);
-
-	cr = gdk_cairo_create (window);
-
-	cairo_rectangle (cr,
-			event->area.x, event->area.y,
-			event->area.width, event->area.height);
-	cairo_clip (cr);
-
-        gtk_widget_get_allocation (widget, &allocation);
-        cairo_translate (cr, allocation.x, allocation.y);
-
 	draw_swatch (GL_COLOR_SWATCH (widget), cr);
-
-	cairo_destroy (cr);
 
 	return FALSE;
 }

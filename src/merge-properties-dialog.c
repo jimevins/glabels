@@ -154,7 +154,6 @@ gl_merge_properties_dialog_init (glMergePropertiesDialog *dialog)
 
         vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
 
-	gtk_dialog_set_has_separator (GTK_DIALOG(dialog), FALSE);
 	gtk_dialog_add_button (GTK_DIALOG (dialog),
                                GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
 	dialog->priv->ok_button = gtk_dialog_add_button (GTK_DIALOG (dialog),
