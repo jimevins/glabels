@@ -46,6 +46,7 @@ glabels-*.tar.gz
 
 /src/marshal.[ch]
 /src/stock-pixmaps/stockpixbufs.h
+/src/cursors/cursor_pixdata.h
 /src/glabels
 /src/glabels-3
 /src/glabels-batch
@@ -54,6 +55,10 @@ glabels-*.tar.gz
 /data/desktop/glabels*.desktop
 
 /data/mime/glabels*.xml
+
+/data/schemas/*.gschema.valid
+/data/schemas/*.gschema.xml
+/data/schemas/*.gschema.xml.in
 
 /po/.intltool-merge-cache
 /po/*.gmo

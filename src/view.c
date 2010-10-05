@@ -486,7 +486,10 @@ gl_view_update (glView  *view)
                 {
                         view->update_scheduled_flag = TRUE;
 
-                        gtk_widget_get_allocation (GTK_WIDGET (view->canvas), &allocation);
+                        allocation.x      = 0;
+                        allocation.y      = 0;
+                        allocation.width  = gtk_widget_get_allocated_width (view->canvas);
+                        allocation.height = gtk_widget_get_allocated_height (view->canvas);
                         gdk_window_invalidate_rect (window, &allocation, TRUE);
                 }
 
@@ -540,10 +543,19 @@ static gboolean
 draw_cb (glView         *view,
          cairo_t        *cr)
 {
+        GdkWindow *bin_window;
+        cairo_t   *bin_cr;
+
 	gl_debug (DEBUG_VIEW, "START");
 
         view->update_scheduled_flag = FALSE;
-	draw_layers (view, cr);
+
+        bin_window = gtk_layout_get_bin_window (GTK_LAYOUT (view->canvas));
+        bin_cr = gdk_cairo_create (bin_window);
+
+	draw_layers (view, bin_cr);
+
+        cairo_destroy (bin_cr);
 
 	gl_debug (DEBUG_VIEW, "END");
 
