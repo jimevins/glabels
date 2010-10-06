@@ -29,6 +29,7 @@
 
 #include "wdgt-chain-button.h"
 
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
 
@@ -42,16 +43,23 @@ enum
 static void      gl_wdgt_chain_button_clicked_callback (GtkWidget          *widget,
 							glWdgtChainButton  *button);
 static gboolean  gl_wdgt_chain_button_draw_lines       (GtkWidget          *widget,
-							GdkEventExpose     *eevent,
+                                                        cairo_t            *cr,
 							glWdgtChainButton  *button);
 
 
 static const gchar *gl_wdgt_chain_stock_items[] =
 {
+#if 0
   "glabels-hchain",
   "glabels-hchain-broken",
   "glabels-vchain",
   "glabels-vchain-broken"
+#else
+  "changes-prevent",
+  "changes-allow",
+  "changes-prevent",
+  "changes-allow",
+#endif
 };
 
 
@@ -89,23 +97,23 @@ gl_wdgt_chain_button_init (glWdgtChainButton *button)
 	button->line2    = gtk_drawing_area_new ();
 	button->image    = gtk_image_new ();
 
-	button->button   = gtk_button_new ();
+	button->button   = gtk_toggle_button_new ();
 
 	gtk_button_set_relief (GTK_BUTTON (button->button), GTK_RELIEF_NONE);
+        gtk_button_set_focus_on_click (GTK_BUTTON (button->button), FALSE);
 	gtk_container_add (GTK_CONTAINER (button->button), button->image);
 	gtk_widget_show (button->image);
 
 	g_signal_connect (button->button, "clicked",
 			  G_CALLBACK (gl_wdgt_chain_button_clicked_callback),
 			  button);
-#if 0
-	g_signal_connect (button->line1, "expose_event",
+	g_signal_connect (button->line1, "draw",
 			  G_CALLBACK (gl_wdgt_chain_button_draw_lines),
 			  button);
-	g_signal_connect (button->line2, "expose_event",
+	g_signal_connect (button->line2, "draw",
 			  G_CALLBACK (gl_wdgt_chain_button_draw_lines),
 			  button);
-#endif
+
 }
 
 
@@ -146,20 +154,20 @@ gl_wdgt_chain_button_new (glWdgtChainPosition position)
       gtk_table_resize (GTK_TABLE (button), 3, 1);
       gtk_table_attach (GTK_TABLE (button), button->button, 0, 1, 1, 2,
 			GTK_SHRINK, GTK_SHRINK, 0, 0);
-      gtk_table_attach_defaults (GTK_TABLE (button),
-				 button->line1, 0, 1, 0, 1);
-      gtk_table_attach_defaults (GTK_TABLE (button),
-				 button->line2, 0, 1, 2, 3);
+      gtk_table_attach (GTK_TABLE (button), button->line1, 0, 1, 0, 1,
+                        GTK_FILL, GTK_EXPAND|GTK_FILL, 0, 0 );
+      gtk_table_attach (GTK_TABLE (button), button->line2, 0, 1, 2, 3,
+                        GTK_FILL, GTK_EXPAND|GTK_FILL, 0, 0 );
     }
   else
     {
       gtk_table_resize (GTK_TABLE (button), 1, 3);
       gtk_table_attach (GTK_TABLE (button), button->button, 1, 2, 0, 1,
 			GTK_SHRINK, GTK_SHRINK, 0, 0);
-      gtk_table_attach_defaults (GTK_TABLE (button),
-				 button->line1, 0, 1, 0, 1);
-      gtk_table_attach_defaults (GTK_TABLE (button),
-				 button->line2, 2, 3, 0, 1);
+      gtk_table_attach (GTK_TABLE (button), button->line1, 0, 1, 0, 1,
+                        GTK_EXPAND|GTK_FILL, GTK_FILL, 0, 0 );
+      gtk_table_attach (GTK_TABLE (button), button->line2, 2, 3, 0, 1,
+                        GTK_EXPAND|GTK_FILL, GTK_FILL, 0, 0 );
     }
 
   gtk_widget_show (button->button);
@@ -179,7 +187,7 @@ gl_wdgt_chain_button_new (glWdgtChainPosition position)
  */
 void
 gl_wdgt_chain_button_set_active (glWdgtChainButton  *button,
-			      gboolean          active)
+                                 gboolean          active)
 {
   g_return_if_fail (GL_WDGT_IS_CHAIN_BUTTON (button));
 
@@ -193,7 +201,13 @@ gl_wdgt_chain_button_set_active (glWdgtChainButton  *button,
 
       gtk_image_set_from_icon_name (GTK_IMAGE (button->image),
                                     gl_wdgt_chain_stock_items[num],
-                                    GTK_ICON_SIZE_BUTTON);
+                                    GTK_ICON_SIZE_MENU);
+
+      g_signal_handlers_block_by_func (G_OBJECT (button->button),
+                                       gl_wdgt_chain_button_clicked_callback, button);
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button->button), active);
+      g_signal_handlers_unblock_by_func (G_OBJECT (button->button),
+                                         gl_wdgt_chain_button_clicked_callback, button);
     }
 }
 
@@ -215,7 +229,7 @@ gl_wdgt_chain_button_get_active (glWdgtChainButton *button)
 
 static void
 gl_wdgt_chain_button_clicked_callback (GtkWidget       *widget,
-				    glWdgtChainButton *button)
+                                       glWdgtChainButton *button)
 {
   g_return_if_fail (GL_WDGT_IS_CHAIN_BUTTON (button));
 
@@ -226,25 +240,19 @@ gl_wdgt_chain_button_clicked_callback (GtkWidget       *widget,
 
 static gboolean
 gl_wdgt_chain_button_draw_lines (GtkWidget         *widget,
-				 GdkEventExpose    *eevent,
+                                 cairo_t           *cr,
 				 glWdgtChainButton *button)
 {
   GtkAllocation        allocation;
-  GdkPoint             points[3];
-  GdkPoint             buf;
-  GtkShadowType	       shadow;
+  gdouble              w, h;
   glWdgtChainPosition  position;
   gint                 which_line;
-
-#define SHORT_LINE 4
-  /* don't set this too high, there's no check against drawing outside
-     the widgets bounds yet (and probably never will be) */
 
   g_return_val_if_fail (GL_WDGT_IS_CHAIN_BUTTON (button), FALSE);
 
   gtk_widget_get_allocation (widget, &allocation);
-  points[0].x = allocation.width / 2;
-  points[0].y = allocation.height / 2;
+  w = allocation.width;
+  h = allocation.height;
 
   which_line = (widget == button->line1) ? 1 : -1;
 
@@ -266,61 +274,34 @@ gl_wdgt_chain_button_draw_lines (GtkWidget         *widget,
   switch (position)
     {
     case GL_WDGT_CHAIN_LEFT:
-      points[0].x += SHORT_LINE;
-      points[1].x = points[0].x - SHORT_LINE;
-      points[1].y = points[0].y;
-      points[2].x = points[1].x;
-      points[2].y = (which_line == 1) ? allocation.height - 1 : 0;
-      shadow = GTK_SHADOW_ETCHED_IN;
+      cairo_move_to (cr, w-2, (which_line == 1) ? 0.6*h : 0.4*h);
+      cairo_line_to (cr, w/2, (which_line == 1) ? 0.6*h : 0.4*h);
+      cairo_line_to (cr, w/2, (which_line == 1) ? h-2 : 1);
       break;
     case GL_WDGT_CHAIN_RIGHT:
-      points[0].x -= SHORT_LINE;
-      points[1].x = points[0].x + SHORT_LINE;
-      points[1].y = points[0].y;
-      points[2].x = points[1].x;
-      points[2].y = (which_line == 1) ? allocation.height - 1 : 0;
-      shadow = GTK_SHADOW_ETCHED_OUT;
+      cairo_move_to (cr, 1,   (which_line == 1) ? 0.6*h : 0.4*h);
+      cairo_line_to (cr, w/2, (which_line == 1) ? 0.6*h : 0.4*h);
+      cairo_line_to (cr, w/2, (which_line == 1) ? h-2 : 1);
       break;
     case GL_WDGT_CHAIN_TOP:
-      points[0].y += SHORT_LINE;
-      points[1].x = points[0].x;
-      points[1].y = points[0].y - SHORT_LINE;
-      points[2].x = (which_line == 1) ? allocation.width - 1 : 0;
-      points[2].y = points[1].y;
-      shadow = GTK_SHADOW_ETCHED_OUT;
+      cairo_move_to (cr, w/2, h-2);
+      cairo_line_to (cr, w/2, h/2);
+      cairo_line_to (cr, (which_line == 1) ? w-2 : 1, h/2);
       break;
     case GL_WDGT_CHAIN_BOTTOM:
-      points[0].y -= SHORT_LINE;
-      points[1].x = points[0].x;
-      points[1].y = points[0].y + SHORT_LINE;
-      points[2].x = (which_line == 1) ? allocation.width - 1 : 0;
-      points[2].y = points[1].y;
-      shadow = GTK_SHADOW_ETCHED_IN;
+      cairo_move_to (cr, w/2, 1);
+      cairo_line_to (cr, w/2, h/2);
+      cairo_line_to (cr, (which_line == 1) ? w-2 : 1, h/2);
       break;
     default:
       return FALSE;
     }
 
-  if ( ((shadow == GTK_SHADOW_ETCHED_OUT) && (which_line == -1)) ||
-       ((shadow == GTK_SHADOW_ETCHED_IN) && (which_line == 1)) )
-    {
-      buf = points[0];
-      points[0] = points[2];
-      points[2] = buf;
-    }
+  cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
+  cairo_set_line_width (cr, 1.0);
+  cairo_set_source_rgb (cr, 0, 0, 0);
 
-#if 0
-  gtk_paint_polygon (gtk_widget_get_style (widget),
-		     gtk_widget_get_window (widget),
-		     GTK_STATE_NORMAL,
-		     shadow,
-		     &eevent->area,
-		     widget,
-		     "chainbutton",
-		     points,
-		     3,
-		     FALSE);
-#endif
+  cairo_stroke (cr);
 
   return TRUE;
 }
