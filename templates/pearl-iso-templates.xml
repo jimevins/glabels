@@ -291,6 +291,53 @@
     </Label-rectangle>
   </Template>
 
+  <!-- =================================================================== -->
+  <!-- PEARL: Inlet for DVD boxes, 182mm x 276mm, 1 per sheet              -->
+  <!-- =================================================================== -->
+
+  <Template brand="PEARL" part="VM-6630" size="A4" _description="DVD inlet">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Meta product_url="http://www.pearl.de/a-VM6630-2211.shtml"/>
+    <Label-rectangle id="0" width="182mm" height="276mm" round="0mm" x_waste="5mm" y_waste="5mm">
+    <Markup-rect x1="2mm" y1="2mm" w="178mm" h="128mm"/>
+    <Markup-rect x1="2mm" y1="146mm" w="178mm" h="128mm"/>
+    <Markup-line x1="0mm" y1="132mm" x2="182mm" y2="132mm"/>
+    <Markup-line x1="0mm" y1="144mm" x2="182mm" y2="144mm"/>
+      <Layout nx="1" ny="1" x0="14mm" y0="10.5mm" dx="192mm" dy="286mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- PEARL: Inlet for CD boxes (front), 120mm x 120mm, 1 per sheet       -->
+  <!-- =================================================================== -->
+
+  <Template brand="PEARL" part="VM-5513-1" size="A4" _description="CD inlet (front)">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Meta product_url="http://www.pearl.de/a-VM5513-2214.shtml"/>
+    <Label-rectangle id="0" width="120mm" height="120mm" round="0mm" x_waste="5mm" y_waste="5mm">
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="1" ny="1" x0="61mm" y0="24mm" dx="130mm" dy="130mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- PEARL: Inlay for CD boxes (back), 150mm x 117.5mm, 1 per sheet      -->
+  <!-- =================================================================== -->
+
+  <Template brand="PEARL" part="VM-5513-2" size="A4" _description="CD inlet (back)">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Meta product_url="http://www.pearl.de/a-VM5513-2214.shtml"/>
+    <Label-rectangle id="0" width="150mm" height="117.5mm" round="0mm" x_waste="5mm" y_waste="5mm">
+    <Markup-rect x1="8mm" y1="2mm" w="134mm" h="113.5mm"/>
+    <Markup-line x1="6mm" y1="0mm" x2="6mm" y2="117.5mm"/>
+    <Markup-line x1="144mm" y1="0mm" x2="144mm" y2="117.5mm"/>
+      <Layout nx="1" ny="1" x0="30.5mm" y0="154.5mm" dx="160mm" dy="127.5mm"/>
+    </Label-rectangle>
+  </Template>
+
   <!-- ******************************************************************** -->
   <!-- Sattleford products                                                  -->
   <!-- ******************************************************************** -->
