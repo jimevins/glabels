@@ -1,19 +1,19 @@
 # Spanish translation of glabels.
 # sergio rivadero <sergiorivadero@argentina.com>, 2005.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010.
 # Jorge González <jorgegonz@svn.gnome.org>, 2010.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-09-26 09:59+0000\n"
-"PO-Revision-Date: 2010-09-26 12:21+0200\n"
-"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
-"Language-Team: Español <gnome-es-list@gnome.org>\n"
+"POT-Creation-Date: 2010-10-10 16:05+0000\n"
+"PO-Revision-Date: 2010-10-11 09:48+0200\n"
+"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
+"Language-Team: es <gnome-es-list@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../src/bc-backends.c:81
@@ -2563,7 +2563,7 @@ msgid "Rectangular labels"
 msgstr "Etiquetas rectangulares"
 
 #. ===================================================================
-#: ../templates/categories.xml.h:7 ../templates/pearl-iso-templates.xml.h:46
+#: ../templates/categories.xml.h:7 ../templates/pearl-iso-templates.xml.h:52
 msgid "Round labels"
 msgstr "Etiquetas redondeadas"
 
@@ -2605,7 +2605,7 @@ msgstr "Tarjetas de visita"
 #: ../templates/avery-iso-templates.xml.h:14
 #: ../templates/misc-us-templates.xml.h:8
 #: ../templates/misc-iso-templates.xml.h:16
-#: ../templates/pearl-iso-templates.xml.h:20
+#: ../templates/pearl-iso-templates.xml.h:24
 #: ../templates/worldlabel-us-templates.xml.h:2
 #: ../templates/zweckform-iso-templates.xml.h:8
 msgid "CD/DVD Labels"
@@ -3001,7 +3001,7 @@ msgstr "Etiquetas de correo - 3 columnas"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:46
-#: ../templates/pearl-iso-templates.xml.h:54
+#: ../templates/pearl-iso-templates.xml.h:60
 msgid "Self-adhesive labels"
 msgstr "Etiquetas autoadhesivas"
 
@@ -3056,82 +3056,97 @@ msgid "Business cards punched glossy"
 msgstr "Tarjetas de visita perforadas satinadas"
 
 #. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:20
+msgid "CD inlet (back)"
+msgstr "Interior de CD (trasera)"
+
+#. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:22
+msgid "CD inlet (front)"
+msgstr "Interior de CD (delantera)"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:26
+msgid "DVD inlet"
+msgstr "Interior de DVD"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:28
 msgid "Floppy disk labels"
 msgstr "Etiquetas de disquete"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:24
+#: ../templates/pearl-iso-templates.xml.h:30
 msgid "Foldable business cards"
 msgstr "Tarjetas de visita plegables"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:26
+#: ../templates/pearl-iso-templates.xml.h:32
 msgid "Foldable business cards glossy/dull"
 msgstr "Etiquetas de visita plegables brillantes/mate"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:28
+#: ../templates/pearl-iso-templates.xml.h:34
 msgid "Labels A4"
 msgstr "Etiquetas A4"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:30
+#: ../templates/pearl-iso-templates.xml.h:36
 msgid "Labels A5"
 msgstr "Etiquetas A5"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:32
+#: ../templates/pearl-iso-templates.xml.h:38
 msgid "Labels A6"
 msgstr "Etiquetas A6"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:34
+#: ../templates/pearl-iso-templates.xml.h:40
 msgid "Membership cards"
 msgstr "Tarjetas de socio"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:36
+#: ../templates/pearl-iso-templates.xml.h:42
 msgid "Membership cards, both sides printable"
 msgstr "Tarjetas de socio, imprimible por ambas caras"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:38
+#: ../templates/pearl-iso-templates.xml.h:44
 msgid "Name plates"
 msgstr "Placas de nombre"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:40
+#: ../templates/pearl-iso-templates.xml.h:46
 msgid "Passport photo labels glossy"
 msgstr "Etiquetas satinadas para fotos de pasaporte"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:42
+#: ../templates/pearl-iso-templates.xml.h:48
 msgid "Photo labels"
 msgstr "Etiquetas para fotos"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:44
+#: ../templates/pearl-iso-templates.xml.h:50
 msgid "Photo labels semiglossy"
 msgstr "Etiquetas para fotos semi-satinadas"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:48
+#: ../templates/pearl-iso-templates.xml.h:54
 msgid "SD card labels"
 msgstr "Etiquetas para tarjetas SD"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:50
+#: ../templates/pearl-iso-templates.xml.h:56
 msgid "Self-adhesive film transparent"
 msgstr "Capa transparente autoadhesiva"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:52
+#: ../templates/pearl-iso-templates.xml.h:58
 msgid "Self-adhesive film weatherproof"
 msgstr "Capa autoadhesiva resistente a la intemperie"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:56
+#: ../templates/pearl-iso-templates.xml.h:62
 msgid "Self-adhesive window film"
 msgstr "Capa autoadhesiva para ventanas"
 
