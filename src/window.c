@@ -44,7 +44,7 @@
 #define DEFAULT_WINDOW_HEIGHT 600
 
 #define CURSOR_INFO_WIDTH     150
-#define ZOOM_INFO_WIDTH        50
+#define ZOOM_INFO_WIDTH        75
 
 
 /*===========================================================================*/
@@ -167,7 +167,6 @@ gl_window_init (glWindow *window)
 	gtk_box_pack_start (GTK_BOX (vbox1), status_hbox, FALSE, FALSE, 0);
 
 	window->status_bar = gtk_statusbar_new ();
-	gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (window->status_bar), FALSE);
 	gtk_box_pack_start (GTK_BOX (status_hbox),
 			    window->status_bar,
 			    TRUE, TRUE, 0);
