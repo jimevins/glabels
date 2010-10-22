@@ -21,4 +21,4 @@ DOC_FIGURES = figures/glabels-template-cd.png      	\
 	      figures/print-copies.png			\
 	      figures/print-merge.png
 
-DOC_LINGUAS = cs de es fr
+DOC_LINGUAS = cs de es fr sl
