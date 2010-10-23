@@ -123,6 +123,8 @@ glabels_3_SOURCES = 			\
 	bc-gnubarcode.h			\
 	bc-zint.c			\
 	bc-zint.h 			\
+	bc-onecode.c			\
+	bc-onecode.h			\
 	bc-postnet.c			\
 	bc-postnet.h			\
 	bc-iec16022.c			\
@@ -252,6 +254,8 @@ glabels_3_batch_SOURCES = 		\
 	bc-gnubarcode.h			\
 	bc-zint.c			\
 	bc-zint.h			\
+	bc-onecode.c			\
+	bc-onecode.h			\
 	bc-postnet.c			\
 	bc-postnet.h			\
 	bc-iec16022.c			\

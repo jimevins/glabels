@@ -26,6 +26,7 @@
 #include <glib/gi18n.h>
 
 #include "bc-postnet.h"
+#include "bc-onecode.h"
 #include "bc-gnubarcode.h"
 #include "bc-zint.h"
 #include "bc-iec16022.h"
@@ -112,6 +113,9 @@ static const Style styles[] = {
 
         { "built-in", "CEPNET", N_("CEPNET"), gl_barcode_postnet_new,
           FALSE, FALSE, TRUE, FALSE, "12345-678", FALSE, 8},
+
+        { "built-in", "ONECODE", N_("One Code"), gl_barcode_onecode_new,
+          FALSE, FALSE, TRUE, FALSE, "12345678901234567890", FALSE, 20},
 
 #ifdef HAVE_LIBBARCODE
 
