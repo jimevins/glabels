@@ -193,6 +193,15 @@
           menuitems are also available by right-clicking
           the display area when there is a non-empty selection.</p>
 
+         <note>
+         <p>
+	  This feature could be useful when you are designing CD box inlays. For 
+          the spine caption, you need vertical aligned text. After you have created
+          a basic text box, choose <guiseq> <gui>Objects</gui><gui>Rotate/Flip</gui> </guiseq>
+          to rotate the text box according to your needs.
+         </p>
+         </note>
+
       </section>
 
       <section id="other-alignment">
