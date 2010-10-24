@@ -31,6 +31,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
           <object class="GtkVBox" id="name_page">
             <property name="visible">True</property>
             <property name="border_width">18</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">24</property>
             <child>
               <object class="GtkLabel" id="label1">
@@ -261,6 +262,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
           <object class="GtkVBox" id="pg_size_page">
             <property name="visible">True</property>
             <property name="border_width">18</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">24</property>
             <child>
               <object class="GtkLabel" id="label43">
@@ -445,6 +447,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
           <object class="GtkVBox" id="shape_page">
             <property name="visible">True</property>
             <property name="border_width">18</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">24</property>
             <child>
               <object class="GtkLabel" id="label13">
@@ -461,6 +464,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
             <child>
               <object class="GtkVBox" id="vbox7">
                 <property name="visible">True</property>
+                <property name="orientation">vertical</property>
                 <property name="spacing">6</property>
                 <child>
                   <object class="GtkRadioButton" id="shape_rect_radio">
@@ -494,6 +498,21 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
                   </packing>
                 </child>
                 <child>
+                  <object class="GtkRadioButton" id="shape_ellipse_radio">
+                    <property name="label" translatable="yes">Elliptical</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">False</property>
+                    <property name="draw_indicator">True</property>
+                    <property name="group">shape_rect_radio</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+                <child>
                   <object class="GtkRadioButton" id="shape_cd_radio">
                     <property name="label" translatable="yes">CD/DVD (including credit card CDs)</property>
                     <property name="visible">True</property>
@@ -506,7 +525,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">False</property>
-                    <property name="position">2</property>
+                    <property name="position">3</property>
                   </packing>
                 </child>
               </object>
@@ -533,6 +552,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
           <object class="GtkVBox" id="rect_size_page">
             <property name="visible">True</property>
             <property name="border_width">18</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">24</property>
             <child>
               <object class="GtkLabel" id="label14">
@@ -849,9 +869,248 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
           </packing>
         </child>
         <child>
+          <object class="GtkVBox" id="ellipse_size_page">
+            <property name="visible">True</property>
+            <property name="border_width">18</property>
+            <property name="orientation">vertical</property>
+            <property name="spacing">24</property>
+            <child>
+              <object class="GtkLabel" id="label3">
+                <property name="visible">True</property>
+                <property name="xalign">0</property>
+                <property name="label" translatable="yes">Please enter the following size parameters of a single label or card in your template.</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkHBox" id="hbox1">
+                <property name="visible">True</property>
+                <property name="spacing">12</property>
+                <child>
+                  <object class="GtkTable" id="table5">
+                    <property name="visible">True</property>
+                    <property name="n_rows">4</property>
+                    <property name="n_columns">3</property>
+                    <property name="column_spacing">12</property>
+                    <property name="row_spacing">12</property>
+                    <child>
+                      <object class="GtkLabel" id="label4">
+                        <property name="visible">True</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">1. Width:</property>
+                      </object>
+                      <packing>
+                        <property name="x_options">GTK_FILL</property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label5">
+                        <property name="visible">True</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">2. Height:</property>
+                      </object>
+                      <packing>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                        <property name="x_options">GTK_FILL</property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label7">
+                        <property name="visible">True</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">3. Waste (overprint allowed):</property>
+                      </object>
+                      <packing>
+                        <property name="top_attach">2</property>
+                        <property name="bottom_attach">3</property>
+                        <property name="x_options">GTK_FILL</property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="ellipse_w_units_label">
+                        <property name="visible">True</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">inches</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">2</property>
+                        <property name="right_attach">3</property>
+                        <property name="x_options">GTK_FILL</property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="ellipse_h_units_label">
+                        <property name="visible">True</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">inches</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">2</property>
+                        <property name="right_attach">3</property>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                        <property name="x_options">GTK_FILL</property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="ellipse_waste_units_label">
+                        <property name="visible">True</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">inches</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">2</property>
+                        <property name="right_attach">3</property>
+                        <property name="top_attach">2</property>
+                        <property name="bottom_attach">3</property>
+                        <property name="x_options">GTK_FILL</property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkSpinButton" id="ellipse_w_spin">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="invisible_char">&#x25CF;</property>
+                        <property name="adjustment">adjustment3</property>
+                        <property name="climb_rate">0.0099999997764800008</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkSpinButton" id="ellipse_h_spin">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="invisible_char">&#x25CF;</property>
+                        <property name="adjustment">adjustment4</property>
+                        <property name="climb_rate">0.0099999997764800008</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkSpinButton" id="ellipse_waste_spin">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="invisible_char">&#x25CF;</property>
+                        <property name="adjustment">adjustment6</property>
+                        <property name="climb_rate">0.0099999997764800008</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">2</property>
+                        <property name="bottom_attach">3</property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label8">
+                        <property name="visible">True</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">4. Margin</property>
+                      </object>
+                      <packing>
+                        <property name="top_attach">3</property>
+                        <property name="bottom_attach">4</property>
+                        <property name="x_options">GTK_FILL</property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkSpinButton" id="ellipse_margin_spin">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="invisible_char">&#x25CF;</property>
+                        <property name="adjustment">adjustment8</property>
+                        <property name="climb_rate">0.0099999997764800008</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">3</property>
+                        <property name="bottom_attach">4</property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="ellipse_margin_units_label">
+                        <property name="visible">True</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">inches</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">2</property>
+                        <property name="right_attach">3</property>
+                        <property name="top_attach">3</property>
+                        <property name="bottom_attach">4</property>
+                        <property name="x_options">GTK_FILL</property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkImage" id="ellipse_image">
+                    <property name="visible">True</property>
+                    <property name="xalign">1</property>
+                    <property name="yalign">0</property>
+                  </object>
+                  <packing>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="position">5</property>
+          </packing>
+        </child>
+        <child type="tab">
+          <object class="GtkLabel" id="label2">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">ellipse_page</property>
+          </object>
+          <packing>
+            <property name="position">10</property>
+            <property name="tab_fill">False</property>
+          </packing>
+        </child>
+        <child>
           <object class="GtkVBox" id="round_size_page">
             <property name="visible">True</property>
             <property name="border_width">18</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">24</property>
             <child>
               <object class="GtkLabel" id="label23">
@@ -1025,7 +1284,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
             </child>
           </object>
           <packing>
-            <property name="position">5</property>
+            <property name="position">6</property>
           </packing>
         </child>
         <child type="tab">
@@ -1034,7 +1293,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
             <property name="label">round_size_page</property>
           </object>
           <packing>
-            <property name="position">5</property>
+            <property name="position">6</property>
             <property name="tab_fill">False</property>
           </packing>
         </child>
@@ -1042,6 +1301,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
           <object class="GtkVBox" id="cd_size_page">
             <property name="visible">True</property>
             <property name="border_width">18</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">24</property>
             <child>
               <object class="GtkLabel" id="label32">
@@ -1344,7 +1604,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
             </child>
           </object>
           <packing>
-            <property name="position">6</property>
+            <property name="position">7</property>
           </packing>
         </child>
         <child type="tab">
@@ -1353,7 +1613,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
             <property name="label">cd_size_page</property>
           </object>
           <packing>
-            <property name="position">6</property>
+            <property name="position">7</property>
             <property name="tab_fill">False</property>
           </packing>
         </child>
@@ -1361,6 +1621,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
           <object class="GtkVBox" id="nlayouts_page">
             <property name="visible">True</property>
             <property name="border_width">18</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">24</property>
             <child>
               <object class="GtkLabel" id="label9">
@@ -1385,6 +1646,7 @@ The second example illustrates when two layouts are needed.</property>
                 <child>
                   <object class="GtkVBox" id="vbox4">
                     <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkImage" id="nlayouts_image1">
                         <property name="visible">True</property>
@@ -1414,6 +1676,7 @@ one layout.</property>
                 <child>
                   <object class="GtkVBox" id="vbox5">
                     <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkImage" id="nlayouts_image2">
                         <property name="visible">True</property>
@@ -1487,7 +1750,7 @@ two layouts.</property>
             </child>
           </object>
           <packing>
-            <property name="position">7</property>
+            <property name="position">8</property>
           </packing>
         </child>
         <child type="tab">
@@ -1496,7 +1759,7 @@ two layouts.</property>
             <property name="label">nlayouts_page</property>
           </object>
           <packing>
-            <property name="position">7</property>
+            <property name="position">8</property>
             <property name="tab_fill">False</property>
           </packing>
         </child>
@@ -1504,6 +1767,7 @@ two layouts.</property>
           <object class="GtkVBox" id="layout_page">
             <property name="visible">True</property>
             <property name="border_width">18</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">12</property>
             <child>
               <object class="GtkLabel" id="label48">
@@ -1906,6 +2170,7 @@ two layouts.</property>
                     <child>
                       <object class="GtkVBox" id="vbox15">
                         <property name="visible">True</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkVBox" id="mini_preview_vbox">
@@ -1954,7 +2219,7 @@ two layouts.</property>
             </child>
           </object>
           <packing>
-            <property name="position">8</property>
+            <property name="position">9</property>
           </packing>
         </child>
         <child type="tab">
@@ -1963,7 +2228,7 @@ two layouts.</property>
             <property name="label">layout_page</property>
           </object>
           <packing>
-            <property name="position">8</property>
+            <property name="position">9</property>
             <property name="tab_fill">False</property>
           </packing>
         </child>
@@ -1979,7 +2244,7 @@ Otherwise, you may click "Cancel" to abandon your design
 or "Back" to continue editing this design.</property>
           </object>
           <packing>
-            <property name="position">9</property>
+            <property name="position">10</property>
           </packing>
         </child>
         <child type="tab">
@@ -1988,7 +2253,7 @@ or "Back" to continue editing this design.</property>
             <property name="label">finish_page</property>
           </object>
           <packing>
-            <property name="position">9</property>
+            <property name="position">10</property>
             <property name="tab_fill">False</property>
           </packing>
         </child>

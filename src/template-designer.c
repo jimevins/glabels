@@ -49,6 +49,10 @@
 #define DEFAULT_RECT_R        0.0
 #define DEFAULT_RECT_WASTE    0.0 /* Should never exceed 1/2 the distance between items. */
 
+#define DEFAULT_ELLIPSE_W      252.0
+#define DEFAULT_ELLIPSE_H      144.0
+#define DEFAULT_ELLIPSE_WASTE    0.0 /* Should never exceed 1/2 the distance between items. */
+
 #define DEFAULT_ROUND_R      72.0
 #define DEFAULT_ROUND_WASTE   0.0 /* Should never exceed 1/2 the distance between items. */
 
@@ -78,6 +82,7 @@ struct _glTemplateDesignerPrivate
 	GtkWidget       *pg_size_page;
 	GtkWidget       *shape_page;
 	GtkWidget       *rect_size_page;
+	GtkWidget       *ellipse_size_page;
 	GtkWidget       *round_size_page;
 	GtkWidget       *cd_size_page;
 	GtkWidget       *nlayouts_page;
@@ -100,6 +105,7 @@ struct _glTemplateDesignerPrivate
 
 	/* Shape page controls */
 	GtkWidget       *shape_rect_radio;
+	GtkWidget       *shape_ellipse_radio;
 	GtkWidget       *shape_round_radio;
 	GtkWidget       *shape_cd_radio;
 
@@ -117,6 +123,17 @@ struct _glTemplateDesignerPrivate
 	GtkWidget       *rect_x_waste_units_label;
 	GtkWidget       *rect_y_waste_units_label;
 	GtkWidget       *rect_margin_units_label;
+
+	/* Label size (elliptical) page controls */
+	GtkWidget       *ellipse_image;
+	GtkWidget       *ellipse_w_spin;
+	GtkWidget       *ellipse_h_spin;
+	GtkWidget       *ellipse_waste_spin;
+	GtkWidget       *ellipse_margin_spin;
+	GtkWidget       *ellipse_w_units_label;
+	GtkWidget       *ellipse_h_units_label;
+	GtkWidget       *ellipse_waste_units_label;
+	GtkWidget       *ellipse_margin_units_label;
 
 	/* Label size (round) page controls */
 	GtkWidget       *round_image;
@@ -187,6 +204,7 @@ enum {
         PG_SIZE_PAGE_NUM,
         SHAPE_PAGE_NUM,
         RECT_SIZE_PAGE_NUM,
+        ELLIPSE_SIZE_PAGE_NUM,
         ROUND_SIZE_PAGE_NUM,
         CD_SIZE_PAGE_NUM,
         NLAYOUTS_PAGE_NUM,
@@ -222,6 +240,9 @@ static void     construct_shape_page              (glTemplateDesigner      *dial
 static void     construct_rect_size_page          (glTemplateDesigner      *dialog,
 						   GdkPixbuf               *logo);
 
+static void     construct_ellipse_size_page       (glTemplateDesigner      *dialog,
+						   GdkPixbuf               *logo);
+
 static void     construct_round_size_page         (glTemplateDesigner      *dialog,
 						   GdkPixbuf               *logo);
 
@@ -251,6 +272,8 @@ static void     name_page_changed_cb              (glTemplateDesigner      *dial
 static void     pg_size_page_changed_cb           (glTemplateDesigner      *dialog);
 
 static void     rect_size_page_prepare_cb         (glTemplateDesigner      *dialog);
+
+static void     ellipse_size_page_prepare_cb      (glTemplateDesigner      *dialog);
 
 static void     round_size_page_prepare_cb        (glTemplateDesigner      *dialog);
 
@@ -291,6 +314,7 @@ gl_template_designer_init (glTemplateDesigner *dialog)
                                             "pg_size_page",
                                             "shape_page",
                                             "rect_size_page",
+                                            "ellipse_size_page",
                                             "round_size_page",
                                             "cd_size_page",
                                             "nlayouts_page",
@@ -413,6 +437,7 @@ gl_template_designer_construct (glTemplateDesigner *dialog)
 	construct_pg_size_page (dialog, logo);
 	construct_shape_page (dialog, logo);
 	construct_rect_size_page (dialog, logo);
+	construct_ellipse_size_page (dialog, logo);
 	construct_round_size_page (dialog, logo);
 	construct_cd_size_page (dialog, logo);
 	construct_nlayouts_page (dialog, logo);
@@ -599,10 +624,11 @@ construct_shape_page (glTemplateDesigner      *dialog,
 	gl_debug (DEBUG_TEMPLATE, "START");
 
         gl_builder_util_get_widgets (dialog->priv->builder,
-                                     "shape_page",        &dialog->priv->shape_page,
-                                     "shape_rect_radio",  &dialog->priv->shape_rect_radio,
-                                     "shape_round_radio", &dialog->priv->shape_round_radio,
-                                     "shape_cd_radio",    &dialog->priv->shape_cd_radio,
+                                     "shape_page",          &dialog->priv->shape_page,
+                                     "shape_rect_radio",    &dialog->priv->shape_rect_radio,
+                                     "shape_ellipse_radio", &dialog->priv->shape_ellipse_radio,
+                                     "shape_round_radio",   &dialog->priv->shape_round_radio,
+                                     "shape_cd_radio",      &dialog->priv->shape_cd_radio,
                                      NULL);
 
 
@@ -722,6 +748,91 @@ construct_rect_size_page (glTemplateDesigner      *dialog,
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->rect_y_waste_spin),
 				   DEFAULT_RECT_WASTE * dialog->priv->units_per_point);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->rect_margin_spin),
+				   DEFAULT_MARGIN * dialog->priv->units_per_point);
+
+	gl_debug (DEBUG_TEMPLATE, "END");
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Construct ellipse size page.                                   */
+/*--------------------------------------------------------------------------*/
+static void
+construct_ellipse_size_page (glTemplateDesigner      *dialog,
+                             GdkPixbuf               *logo)
+{
+        gchar           *pixbuf_filename;
+	GdkPixbuf       *pixbuf;
+
+	gl_debug (DEBUG_TEMPLATE, "START");
+
+        gl_builder_util_get_widgets (dialog->priv->builder,
+                                     "ellipse_size_page",           &dialog->priv->ellipse_size_page,
+                                     "ellipse_image",               &dialog->priv->ellipse_image,
+                                     "ellipse_w_spin",              &dialog->priv->ellipse_w_spin,
+                                     "ellipse_h_spin",              &dialog->priv->ellipse_h_spin,
+                                     "ellipse_waste_spin",          &dialog->priv->ellipse_waste_spin,
+                                     "ellipse_margin_spin",         &dialog->priv->ellipse_margin_spin,
+                                     "ellipse_w_units_label",       &dialog->priv->ellipse_w_units_label,
+                                     "ellipse_h_units_label",       &dialog->priv->ellipse_h_units_label,
+                                     "ellipse_waste_units_label",   &dialog->priv->ellipse_waste_units_label,
+                                     "ellipse_margin_units_label",  &dialog->priv->ellipse_margin_units_label,
+                                     NULL);
+
+
+        gtk_assistant_append_page (GTK_ASSISTANT (dialog),
+                                   dialog->priv->ellipse_size_page);
+
+        gtk_assistant_set_page_title (GTK_ASSISTANT (dialog),
+                                      dialog->priv->ellipse_size_page,
+                                      _("Label or Card Size"));
+        gtk_assistant_set_page_header_image (GTK_ASSISTANT (dialog),
+                                             dialog->priv->ellipse_size_page,
+                                             logo);
+        gtk_assistant_set_page_complete (GTK_ASSISTANT (dialog),
+                                         dialog->priv->ellipse_size_page,
+                                         TRUE);
+
+	/* Initialize illustration. */
+        pixbuf_filename = g_build_filename (GLABELS_DATA_DIR, "pixmaps", "ex-ellipse-size.png", NULL);
+	pixbuf = gdk_pixbuf_new_from_file (pixbuf_filename, NULL);
+        g_free (pixbuf_filename);
+	gtk_image_set_from_pixbuf (GTK_IMAGE(dialog->priv->ellipse_image), pixbuf);
+
+	/* Apply units to spinbuttons and units labels. */
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->ellipse_w_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->ellipse_w_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->ellipse_w_units_label),
+			    dialog->priv->units_string);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->ellipse_h_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->ellipse_h_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->ellipse_h_units_label),
+			    dialog->priv->units_string);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->ellipse_waste_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->ellipse_waste_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->ellipse_waste_units_label),
+			    dialog->priv->units_string);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->ellipse_margin_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->ellipse_margin_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->ellipse_margin_units_label),
+			    dialog->priv->units_string);
+
+	/* Load some realistic defaults. */
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->ellipse_w_spin),
+				   DEFAULT_ELLIPSE_W * dialog->priv->units_per_point);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->ellipse_h_spin),
+				   DEFAULT_ELLIPSE_H * dialog->priv->units_per_point);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->ellipse_waste_spin),
+				   DEFAULT_ELLIPSE_WASTE * dialog->priv->units_per_point);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->ellipse_margin_spin),
 				   DEFAULT_MARGIN * dialog->priv->units_per_point);
 
 	gl_debug (DEBUG_TEMPLATE, "END");
@@ -1170,6 +1281,10 @@ gl_template_designer_set_from_name (glTemplateDesigner *dialog,
                         break;
 
                 case LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE:
+                        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->priv->shape_ellipse_radio), TRUE);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->ellipse_w_spin),     frame->rect.w*upp);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->ellipse_h_spin),     frame->rect.h*upp);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->ellipse_waste_spin), frame->rect.y_waste*upp);
                         break;
 
                 case LGL_TEMPLATE_FRAME_SHAPE_ROUND:
@@ -1195,6 +1310,7 @@ gl_template_designer_set_from_name (glTemplateDesigner *dialog,
                         if ( markup->type == LGL_TEMPLATE_MARKUP_MARGIN )
                         {
                                 gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->rect_margin_spin),  markup->margin.size*upp);
+                                gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->ellipse_margin_spin),  markup->margin.size*upp);
                                 gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->round_margin_spin), markup->margin.size*upp);
                                 gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->cd_margin_spin),    markup->margin.size*upp);
                         }
@@ -1314,6 +1430,10 @@ prepare_cb (glTemplateDesigner      *dialog,
                 rect_size_page_prepare_cb (dialog);
                 break;
 
+        case ELLIPSE_SIZE_PAGE_NUM:
+                ellipse_size_page_prepare_cb (dialog);
+                break;
+
         case ROUND_SIZE_PAGE_NUM:
                 round_size_page_prepare_cb (dialog);
                 break;
@@ -1358,6 +1478,9 @@ forward_page_function (gint     current_page,
 		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dialog->priv->shape_rect_radio))) {
                         return RECT_SIZE_PAGE_NUM;
 		}
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dialog->priv->shape_ellipse_radio))) {
+                        return ELLIPSE_SIZE_PAGE_NUM;
+		}
 		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dialog->priv->shape_round_radio))) {
                         return ROUND_SIZE_PAGE_NUM;
 		}
@@ -1367,6 +1490,7 @@ forward_page_function (gint     current_page,
                 break;
 
         case RECT_SIZE_PAGE_NUM:
+        case ELLIPSE_SIZE_PAGE_NUM:
         case ROUND_SIZE_PAGE_NUM:
         case CD_SIZE_PAGE_NUM:
                 return NLAYOUTS_PAGE_NUM;
@@ -1535,6 +1659,41 @@ rect_size_page_prepare_cb (glTemplateDesigner *dialog)
 
 
 /*--------------------------------------------------------------------------*/
+/* PRIVATE.  Prepare ellipse size page.                                     */
+/*--------------------------------------------------------------------------*/
+static void
+ellipse_size_page_prepare_cb (glTemplateDesigner *dialog)
+{
+	gdouble max_w, max_h;
+	gdouble w, h, waste, margin;
+
+	/* Limit label size based on already chosen page size. */
+	max_w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->pg_w_spin));
+	max_h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->pg_h_spin));
+
+	w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->ellipse_w_spin));
+	h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->ellipse_h_spin));
+	waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->ellipse_waste_spin));
+	margin = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->ellipse_margin_spin));
+
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->ellipse_w_spin),
+                                   dialog->priv->climb_rate, max_w);
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->ellipse_h_spin),
+                                   dialog->priv->climb_rate, max_h);
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->ellipse_waste_spin),
+                                   0.0, MIN(max_w, max_h)/4.0);
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->ellipse_margin_spin),
+                                   0.0, MIN(max_w, max_h)/4.0);
+
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->ellipse_w_spin), w);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->ellipse_h_spin), h);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->ellipse_waste_spin), waste);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->ellipse_margin_spin), margin);
+
+}
+
+
+/*--------------------------------------------------------------------------*/
 /* PRIVATE.  Prepare round size page.                                       */
 /*--------------------------------------------------------------------------*/
 static void
@@ -1635,11 +1794,16 @@ layout_page_prepare_cb (glTemplateDesigner *dialog)
 		x_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->rect_x_waste_spin));
 		y_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->rect_y_waste_spin));
 	}
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dialog->priv->shape_ellipse_radio))) {
+		w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->ellipse_w_spin));
+		h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->ellipse_h_spin));
+		y_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->ellipse_waste_spin));
+		y_waste = x_waste;
+	}
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dialog->priv->shape_round_radio))) {
 		w = 2*gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->round_r_spin));
 		h = w;
 		x_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->round_waste_spin));
-		y_waste = x_waste;
 	}
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dialog->priv->shape_cd_radio))) {
 		w = 2*gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->cd_radius_spin));
@@ -1831,6 +1995,14 @@ build_template (glTemplateDesigner      *dialog)
 		margin = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->rect_margin_spin));
 	}
 
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dialog->priv->shape_ellipse_radio))) {
+		shape = LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE;
+		w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->ellipse_w_spin));
+		h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->ellipse_h_spin));
+		waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->ellipse_waste_spin));
+		margin = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->ellipse_margin_spin));
+	}
+
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dialog->priv->shape_round_radio))) {
 		shape = LGL_TEMPLATE_FRAME_SHAPE_ROUND;
 		r = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->round_r_spin));
@@ -1867,18 +2039,16 @@ build_template (glTemplateDesigner      *dialog)
 
 	switch (shape) {
 	case LGL_TEMPLATE_FRAME_SHAPE_RECT:
-		frame = lgl_template_frame_rect_new ("0",
-                                                    w/upp, h/upp, r/upp,
-                                                    x_waste/upp, y_waste/upp);
+		frame = lgl_template_frame_rect_new ("0", w/upp, h/upp, r/upp, x_waste/upp, y_waste/upp);
+		break;
+	case LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE:
+		frame = lgl_template_frame_ellipse_new ("0", w/upp, h/upp, waste/upp);
 		break;
 	case LGL_TEMPLATE_FRAME_SHAPE_ROUND:
 		frame = lgl_template_frame_round_new ("0", r/upp, waste/upp);
 		break;
 	case LGL_TEMPLATE_FRAME_SHAPE_CD:
-		frame = lgl_template_frame_cd_new ("0",
-                                                  radius/upp, hole/upp,
-                                                  w/upp, h/upp,
-                                                  waste/upp);
+		frame = lgl_template_frame_cd_new ("0", radius/upp, hole/upp, w/upp, h/upp, waste/upp);
 		break;
         default:
                 g_assert_not_reached ();
