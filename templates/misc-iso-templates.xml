@@ -669,6 +669,33 @@
   </Template>
 
   <!-- ******************************************************************** -->
+  <!-- JAC CD label sheet with rectangular labels.                          -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="987349-1" size="A4" _description="CD/DVD Labels">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+    <Label-cd id="0" radius="58mm" hole="20.8mm" waste="0mm">
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="1" ny="2" x0="5.5mm" y0="5.5mm" dx="116mm" dy="169mm"/>
+      <Layout nx="1" ny="1" x0="87.5mm" y0="90mm" dx="116mm" dy="116mm"/>
+    </Label-cd>
+  </Template>
+
+  <Template brand="JAC" part="987349-2" size="A4" _description="Rectangular labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+    <Label-rectangle id="0" width="70mm" height="34mm" round="1.2mm" x_waste="5mm" y_waste="1.5mm">
+      <Markup-margin size="2mm"/>
+      <Layout nx="1" ny="2" x0="133.5mm" y0="5.5mm" dx="80mm" dy="39mm"/>
+      <Layout nx="1" ny="2" x0="133mm" y0="216.5mm" dx="80mm" dy="39mm"/>
+      <Layout nx="1" ny="1" x0="5.5mm" y0="130mm" dx="80mm" dy="37mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
   <!-- Misc. A6 products.                                                   -->
   <!-- ******************************************************************** -->
 
