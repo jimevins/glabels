@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
-"POT-Creation-Date: 2010-10-23 17:13+0000\n"
-"PO-Revision-Date: 2010-10-24 11:46+0100\n"
+"POT-Creation-Date: 2010-10-24 09:51+0000\n"
+"PO-Revision-Date: 2010-10-24 12:25+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -272,8 +272,8 @@ msgstr ""
 "<gui>Löschen</gui> manipuliert werden."
 
 #: C/select.page:94(title)
-msgid "<gui>Cut</gui> (<key><key>Ctrl</key><key>X</key></key>)"
-msgstr "<gui>Ausschneiden</gui> (<key><key>Strg</key><key>X</key></key>)"
+msgid "<gui>Cut</gui> (<keyseq><key>Ctrl</key><key>X</key></keyseq>)"
+msgstr "<gui>Ausschneiden</gui> (<keyseq><key>Strg</key><key>X</key></keyseq>)"
 
 #: C/select.page:96(p)
 msgid ""
@@ -285,8 +285,8 @@ msgstr ""
 "eingefügt zu werden."
 
 #: C/select.page:103(title)
-msgid "<gui>Copy</gui> (<key><key>Ctrl</key><key>C</key></key>)"
-msgstr "<gui>Kopieren</gui> (<key><key>Strg</key><key>C</key></key>)"
+msgid "<gui>Copy</gui> (<keyseq><key>Ctrl</key><key>C</key></keyseq>)"
+msgstr "<gui>Kopieren</gui> (<keyseq><key>Strg</key><key>C</key></keyseq>)"
 
 #: C/select.page:105(p)
 msgid ""
@@ -299,8 +299,8 @@ msgstr ""
 "Dokument oder ein anderes Dokument eingefügt zu werden."
 
 #: C/select.page:112(title)
-msgid "<gui>Paste</gui> (<key><key>Ctrl</key><key>V</key></key>)"
-msgstr "<gui>Einfügen</gui> (<key><key>Strg</key><key>V</key></key>)"
+msgid "<gui>Paste</gui> (<keyseq><key>Ctrl</key><key>V</key></keyseq>)"
+msgstr "<gui>Einfügen</gui> (<keyseq><key>Strg</key><key>V</key></keyseq>)"
 
 #: C/select.page:114(p)
 msgid ""
