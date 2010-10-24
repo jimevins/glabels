@@ -40,7 +40,7 @@ McGarret,Steve,O,"404 Piikoi Street",,Honolulu,HI,96813
 Kramer,Cosmo,,"Apt 5B","129 W. 81 St.","New York",NY,10024-7207
       </code>
 
-      <p>In <app>glabels</app> we have created a new glabels
+      <p>In <app>glabels</app> we have created a new <app>glabels</app>
         document using the Avery 5512 "Address Labels" template.  Next we use the
         <guiseq> <gui>Objects</gui>
         <gui>Merge Properties</gui> </guiseq> menu item to display
@@ -65,7 +65,7 @@ Kramer,Cosmo,,"Apt 5B","129 W. 81 St.","New York",NY,10024-7207
         selections in this dialog we click <gui>OK</gui> to accept the
         changes.</p>
 
-      <p>Now we start adding objects to our glabels document as shown.</p>
+      <p>Now we start adding objects to our <app>glabels</app> document as shown.</p>
 
       <!-- ==== Figure ==== -->
 		<media type="image" src="figures/merge-ex2-2.png" mime="image/png" style="right">

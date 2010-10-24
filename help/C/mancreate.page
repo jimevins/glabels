@@ -27,7 +27,7 @@
     <p>Predefined templates are defined by XML files located in
       either <file>/usr/share/libglabels-3.0/templates/</file> or
       <file>/usr/local/share/libglabels-3.0/templates/</file>,
-      depending on where glabels was installed.  Glabels will
+      depending on where <app>glabels</app> was installed.  <app>Glabels</app> will
       also search for user defined templates in the directory
       <file>${HOME}/.config/libglabels/templates/</file>.  User
       defined template files should be named with a 
@@ -36,7 +36,7 @@
 
     <p>The format for these files is defined in the DTD:
       <link href="http://glabels.org/xmlns/2.3/glabels-2.3.dtd.txt">glabels-2.3.dtd</link>.
-      (This DTD also describes other XML formats used by glabels.)</p>
+      (This DTD also describes other XML formats used by <app>glabels</app>.)</p>
 
     <section id="template-assumptions">
       <title>Assumptions/caveats</title>
@@ -331,7 +331,7 @@
       <title>Markup Nodes</title>
 
       <p>Templates may contain optional markup nodes.  These nodes are used to describe
-      a simple set of markup lines that are visible in the glabels drawing canvas, but
+      a simple set of markup lines that are visible in the <app>glabels</app> drawing canvas, but
       not visible when printed.  These lines can represent margins, fold lines, center lines,
       special areas, or other helpful hints to the user of a template.</p>
 

@@ -68,7 +68,7 @@
         selections in this dialog, we will click the <gui>OK</gui> button to
 	accept the changes.</p>
 
-      <p>Now we start adding objects to our glabels document as shown.</p>
+      <p>Now we start adding objects to our <app>glabels</app> document as shown.</p>
 
       <!-- ==== Figure ==== -->
 		<media type="image" src="figures/merge-ex3-2.png" mime="image/png" style="right">

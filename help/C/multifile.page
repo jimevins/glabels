@@ -30,7 +30,7 @@
         <key>Return</key>:</p>
 
       <p><cmd>glabels
-      <replaceable>file1.glabels file2.glabels file3.glabels</replaceable>
+      <var>file1.glabels file2.glabels file3.glabels</var>
       </cmd></p>
 
       <p>When the application starts, the files that you specify are
