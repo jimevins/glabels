@@ -1,378 +1,382 @@
 # Spanish translation of glabels.
 # sergio rivadero <sergiorivadero@argentina.com>, 2005.
-# Jorge González <jorgegonz@svn.gnome.org>, 2010.
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2010.
+# Jorge González <jorgegonz@svn.gnome.org>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-10-10 16:05+0000\n"
-"PO-Revision-Date: 2010-10-11 09:48+0200\n"
-"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
-"Language-Team: es <gnome-es-list@gmail.com>\n"
+"POT-Creation-Date: 2010-10-24 21:06+0000\n"
+"PO-Revision-Date: 2010-10-25 16:31+0200\n"
+"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
+"Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: es\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/bc-backends.c:81
+#: ../src/bc-backends.c:82
 msgid "Built-in"
 msgstr "Integrado"
 
-#: ../src/bc-backends.c:101
+#: ../src/bc-backends.c:102
 msgid "POSTNET (any)"
 msgstr "POSTNET (cualquiera)"
 
-#: ../src/bc-backends.c:104
+#: ../src/bc-backends.c:105
 msgid "POSTNET-5 (ZIP only)"
 msgstr "POSTNET-5 (solo código postal)"
 
-#: ../src/bc-backends.c:107
+#: ../src/bc-backends.c:108
 msgid "POSTNET-9 (ZIP+4)"
 msgstr "POSTNET-9 (código postal+4)"
 
-#: ../src/bc-backends.c:110
+#: ../src/bc-backends.c:111
 msgid "POSTNET-11 (DPBC)"
 msgstr "POSTNET-11 (DPBC)"
 
-#: ../src/bc-backends.c:113
+#: ../src/bc-backends.c:114
 msgid "CEPNET"
 msgstr "CEPNET"
 
-#: ../src/bc-backends.c:118
+#: ../src/bc-backends.c:117
+msgid "One Code"
+msgstr "Código One"
+
+#: ../src/bc-backends.c:122
 msgid "EAN (any)"
 msgstr "EAN (cualquiera)"
 
-#: ../src/bc-backends.c:121
+#: ../src/bc-backends.c:125
 msgid "EAN-8"
 msgstr "EAN-8"
 
-#: ../src/bc-backends.c:124
+#: ../src/bc-backends.c:128
 msgid "EAN-8 +2"
 msgstr "EAN-8 +2"
 
-#: ../src/bc-backends.c:127
+#: ../src/bc-backends.c:131
 msgid "EAN-8 +5"
 msgstr "EAN-8 +5"
 
-#: ../src/bc-backends.c:130
+#: ../src/bc-backends.c:134
 msgid "EAN-13"
 msgstr "EAN-13"
 
-#: ../src/bc-backends.c:133
+#: ../src/bc-backends.c:137
 msgid "EAN-13 +2"
 msgstr "EAN-13 2"
 
-#: ../src/bc-backends.c:136
+#: ../src/bc-backends.c:140
 msgid "EAN-13 +5"
 msgstr "EAN-13 +5"
 
-#: ../src/bc-backends.c:139
+#: ../src/bc-backends.c:143
 msgid "UPC (UPC-A or UPC-E)"
 msgstr "UPC (UPC-A o UPC-E)"
 
-#: ../src/bc-backends.c:142 ../src/bc-backends.c:386
+#: ../src/bc-backends.c:146 ../src/bc-backends.c:390
 msgid "UPC-A"
 msgstr "UPC-A"
 
-#: ../src/bc-backends.c:145
+#: ../src/bc-backends.c:149
 msgid "UPC-A +2"
 msgstr "UPC-A +2"
 
-#: ../src/bc-backends.c:148
+#: ../src/bc-backends.c:152
 msgid "UPC-A +5"
 msgstr "UPC-A +5"
 
-#: ../src/bc-backends.c:151 ../src/bc-backends.c:389
+#: ../src/bc-backends.c:155 ../src/bc-backends.c:393
 msgid "UPC-E"
 msgstr "UPC-E"
 
-#: ../src/bc-backends.c:154
+#: ../src/bc-backends.c:158
 msgid "UPC-E +2"
 msgstr "UPC-E +2"
 
-#: ../src/bc-backends.c:157
+#: ../src/bc-backends.c:161
 msgid "UPC-E +5"
 msgstr "UPC-E +5"
 
-#: ../src/bc-backends.c:160 ../src/bc-backends.c:323
+#: ../src/bc-backends.c:164 ../src/bc-backends.c:327
 msgid "ISBN"
 msgstr "ISBN"
 
-#: ../src/bc-backends.c:163
+#: ../src/bc-backends.c:167
 msgid "ISBN +5"
 msgstr "ISBN +5"
 
-#: ../src/bc-backends.c:166 ../src/bc-backends.c:239
+#: ../src/bc-backends.c:170 ../src/bc-backends.c:243
 msgid "Code 39"
 msgstr "Code 39"
 
-#: ../src/bc-backends.c:169 ../src/bc-backends.c:251
+#: ../src/bc-backends.c:173 ../src/bc-backends.c:255
 msgid "Code 128"
 msgstr "Code 128"
 
-#: ../src/bc-backends.c:172
+#: ../src/bc-backends.c:176
 msgid "Code 128C"
 msgstr "Code 128C"
 
-#: ../src/bc-backends.c:175
+#: ../src/bc-backends.c:179
 msgid "Code 128B"
 msgstr "Code 128B"
 
-#: ../src/bc-backends.c:178 ../src/bc-backends.c:320
+#: ../src/bc-backends.c:182 ../src/bc-backends.c:324
 msgid "Interleaved 2 of 5"
 msgstr "Intercalado 2 de 5"
 
-#: ../src/bc-backends.c:181 ../src/bc-backends.c:215
+#: ../src/bc-backends.c:185 ../src/bc-backends.c:219
 msgid "Codabar"
 msgstr "Codabar"
 
-#: ../src/bc-backends.c:184
+#: ../src/bc-backends.c:188
 msgid "MSI"
 msgstr "MSI"
 
-#: ../src/bc-backends.c:187
+#: ../src/bc-backends.c:191
 msgid "Plessey"
 msgstr "Plessey"
 
-#: ../src/bc-backends.c:190 ../src/bc-backends.c:248
+#: ../src/bc-backends.c:194 ../src/bc-backends.c:252
 msgid "Code 93"
 msgstr "Code 93"
 
-#: ../src/bc-backends.c:197
+#: ../src/bc-backends.c:201
 msgid "Australia Post Standard"
 msgstr "Australia Post Standard"
 
-#: ../src/bc-backends.c:200
+#: ../src/bc-backends.c:204
 msgid "Australia Post Reply Paid"
 msgstr "Australia Post Reply Paid"
 
-#: ../src/bc-backends.c:203
+#: ../src/bc-backends.c:207
 msgid "Australia Post Route Code"
 msgstr "Australia Post Route Code"
 
-#: ../src/bc-backends.c:206
+#: ../src/bc-backends.c:210
 msgid "Australia Post Redirect"
 msgstr "Australia Post Redirect"
 
-#: ../src/bc-backends.c:209
+#: ../src/bc-backends.c:213
 msgid "Aztec Code"
 msgstr "Código Azteca"
 
-#: ../src/bc-backends.c:212
+#: ../src/bc-backends.c:216
 msgid "Aztec Rune"
 msgstr "Runa Azteca"
 
-#: ../src/bc-backends.c:218
+#: ../src/bc-backends.c:222
 msgid "Code One"
 msgstr "Code One"
 
-#: ../src/bc-backends.c:221
+#: ../src/bc-backends.c:225
 msgid "Code 11"
 msgstr "Code 11"
 
-#: ../src/bc-backends.c:224
+#: ../src/bc-backends.c:228
 msgid "Code 16K"
 msgstr "Code 16K"
 
-#: ../src/bc-backends.c:227
+#: ../src/bc-backends.c:231
 msgid "Code 2 of 5 Matrix"
 msgstr "Code 2 de 5 Matrix"
 
-#: ../src/bc-backends.c:230
+#: ../src/bc-backends.c:234
 msgid "Code 2 of 5 IATA"
 msgstr "Code 2 de 5 IATA"
 
-#: ../src/bc-backends.c:233
+#: ../src/bc-backends.c:237
 msgid "Code 2 of 5 Data Logic"
 msgstr "Code 2 de 5 Data Logic"
 
-#: ../src/bc-backends.c:236
+#: ../src/bc-backends.c:240
 msgid "Code 32 (Italian Pharmacode)"
 msgstr "Code 32 (Pharmacode italiano)"
 
-#: ../src/bc-backends.c:242
+#: ../src/bc-backends.c:246
 msgid "Code 39 Extended"
 msgstr "Code 39 extendido"
 
-#: ../src/bc-backends.c:245
+#: ../src/bc-backends.c:249
 msgid "Code 49"
 msgstr "Code 49"
 
-#: ../src/bc-backends.c:254
+#: ../src/bc-backends.c:258
 msgid "Code 128 (Mode C supression)"
 msgstr "Code 128 (Mode C supression)"
 
-#: ../src/bc-backends.c:257
+#: ../src/bc-backends.c:261
 msgid "DAFT Code"
 msgstr "DAFT Code"
 
-#: ../src/bc-backends.c:260
+#: ../src/bc-backends.c:264
 msgid "Data Matrix"
 msgstr "Matriz de datos"
 
-#: ../src/bc-backends.c:263
+#: ../src/bc-backends.c:267
 msgid "Deutsche Post Leitcode"
 msgstr "Deutsche Post Leitcode"
 
-#: ../src/bc-backends.c:266
+#: ../src/bc-backends.c:270
 msgid "Deutsche Post Identcode"
 msgstr "Deutsche Post Identcode"
 
-#: ../src/bc-backends.c:269
+#: ../src/bc-backends.c:273
 msgid "Dutch Post KIX Code"
 msgstr "Post KIX Code de los Países Bajos"
 
-#: ../src/bc-backends.c:272
+#: ../src/bc-backends.c:276
 msgid "EAN"
 msgstr "EAN"
 
-#: ../src/bc-backends.c:275
+#: ../src/bc-backends.c:279
 msgid "Grid Matrix"
 msgstr "Matriz de rejilla"
 
-#: ../src/bc-backends.c:278
+#: ../src/bc-backends.c:282
 msgid "GS1-128"
 msgstr "GS1-128"
 
-#: ../src/bc-backends.c:281
+#: ../src/bc-backends.c:285
 msgid "GS1 DataBar-14"
 msgstr "GS1 DataBar-14"
 
-#: ../src/bc-backends.c:290
+#: ../src/bc-backends.c:294
 msgid "GS1 DataBar-14 Stacked"
 msgstr "GS1 DataBar-14 Stacked"
 
-#: ../src/bc-backends.c:293
+#: ../src/bc-backends.c:297
 msgid "GS1 DataBar-14 Stacked Omni."
 msgstr "GS1 DataBar-14 Stacked Omni."
 
-#: ../src/bc-backends.c:296
+#: ../src/bc-backends.c:300
 msgid "GS1 DataBar Extended Stacked"
 msgstr "GS1 DataBar Extended Stacked"
 
-#: ../src/bc-backends.c:299
+#: ../src/bc-backends.c:303
 msgid "HIBC Code 128"
 msgstr "HIBC Code 128"
 
-#: ../src/bc-backends.c:302
+#: ../src/bc-backends.c:306
 msgid "HIBC Code 39"
 msgstr "HIBC Code 39"
 
-#: ../src/bc-backends.c:305
+#: ../src/bc-backends.c:309
 msgid "HIBC Data Matrix"
 msgstr "Matriz de datos HIBC"
 
-#: ../src/bc-backends.c:308
+#: ../src/bc-backends.c:312
 msgid "HIBC QR Code"
 msgstr "HIBC QR Code"
 
-#: ../src/bc-backends.c:311
+#: ../src/bc-backends.c:315
 msgid "HIBC PDF417"
 msgstr "HIBC PDF417"
 
-#: ../src/bc-backends.c:314
+#: ../src/bc-backends.c:318
 msgid "HIBC Micro PDF417"
 msgstr "HIBC Micro PDF417"
 
-#: ../src/bc-backends.c:317
+#: ../src/bc-backends.c:321
 msgid "HIBC Aztec Code"
 msgstr "HIBC código Azteca"
 
-#: ../src/bc-backends.c:326
+#: ../src/bc-backends.c:330
 msgid "ITF-14"
 msgstr "ITF-14"
 
-#: ../src/bc-backends.c:329
+#: ../src/bc-backends.c:333
 msgid "Japanese Postal"
 msgstr "Postal japonés"
 
-#: ../src/bc-backends.c:332
+#: ../src/bc-backends.c:336
 msgid "Korean Postal"
 msgstr "Postal coreano"
 
-#: ../src/bc-backends.c:335
+#: ../src/bc-backends.c:339
 msgid "LOGMARS"
 msgstr "LOGMARS"
 
-#: ../src/bc-backends.c:338
+#: ../src/bc-backends.c:342
 msgid "Maxicode"
 msgstr "Maxicode"
 
-#: ../src/bc-backends.c:341
+#: ../src/bc-backends.c:345
 msgid "Micro PDF417"
 msgstr "Micro PDF417"
 
-#: ../src/bc-backends.c:344
+#: ../src/bc-backends.c:348
 msgid "Micro QR Code"
 msgstr "Micro QR Code"
 
-#: ../src/bc-backends.c:347
+#: ../src/bc-backends.c:351
 msgid "MSI Plessey"
 msgstr "MSI Plessey"
 
-#: ../src/bc-backends.c:350
+#: ../src/bc-backends.c:354
 msgid "NVE-18"
 msgstr "NVE-18"
 
-#: ../src/bc-backends.c:353
+#: ../src/bc-backends.c:357
 msgid "PDF417"
 msgstr "PDF417"
 
-#: ../src/bc-backends.c:356
+#: ../src/bc-backends.c:360
 msgid "PDF417 Truncated"
 msgstr "PDF417 truncatedo"
 
-#: ../src/bc-backends.c:359
+#: ../src/bc-backends.c:363
 msgid "PLANET"
 msgstr "PLANET"
 
-#: ../src/bc-backends.c:362
+#: ../src/bc-backends.c:366
 msgid "PostNet"
 msgstr "PostNet"
 
-#: ../src/bc-backends.c:365
+#: ../src/bc-backends.c:369
 msgid "Pharmacode"
 msgstr "Pharmacode"
 
-#: ../src/bc-backends.c:368
+#: ../src/bc-backends.c:372
 msgid "Pharmacode 2-track"
 msgstr "Pharmacode 2-track"
 
-#: ../src/bc-backends.c:371
+#: ../src/bc-backends.c:375
 msgid "Pharmazentral Nummer (PZN)"
 msgstr "Pharmazentral Nummer (PZN)"
 
-#: ../src/bc-backends.c:374
+#: ../src/bc-backends.c:378
 msgid "QR Code"
 msgstr "QR Code"
 
-#: ../src/bc-backends.c:377
+#: ../src/bc-backends.c:381
 msgid "Royal Mail 4-State"
 msgstr "Royal Mail 4-State"
 
-#: ../src/bc-backends.c:380
+#: ../src/bc-backends.c:384
 msgid "Telepen"
 msgstr "Telepen"
 
-#: ../src/bc-backends.c:383
+#: ../src/bc-backends.c:387
 msgid "Telepen Numeric"
 msgstr "Telepen numérico"
 
-#: ../src/bc-backends.c:392
+#: ../src/bc-backends.c:396
 msgid "USPS One Code"
 msgstr "USPS One Code"
 
-#: ../src/bc-backends.c:395
+#: ../src/bc-backends.c:399
 msgid "UK Plessey"
 msgstr "Plessey del Reino Unido"
 
-#: ../src/bc-backends.c:402
+#: ../src/bc-backends.c:406
 msgid "IEC16022 (DataMatrix)"
 msgstr "IEC16022 (matriz de datos)"
 
-#: ../src/bc-backends.c:409
+#: ../src/bc-backends.c:413
 msgid "IEC18004 (QRCode)"
 msgstr "IEC18004 (Código QR)"
 
@@ -1168,55 +1172,55 @@ msgstr "Preferencias de gLabels"
 msgid "Labels"
 msgstr "Etiquetas"
 
-#: ../src/template-designer.c:404
+#: ../src/template-designer.c:428
 msgid "New gLabels Template"
 msgstr "Plantilla nueva de gLabels"
 
-#: ../src/template-designer.c:461
+#: ../src/template-designer.c:486
 msgid "Welcome"
 msgstr "Bienvenido"
 
-#: ../src/template-designer.c:500
+#: ../src/template-designer.c:525
 msgid "Name and Description"
 msgstr "Nombre y descripción:"
 
-#: ../src/template-designer.c:548
+#: ../src/template-designer.c:573
 msgid "Page Size"
 msgstr "Tamaño de la página"
 
-#: ../src/template-designer.c:614
+#: ../src/template-designer.c:640
 msgid "Label or Card Shape"
 msgstr "Forma de etiqueta o tarjeta"
 
-#: ../src/template-designer.c:661
+#: ../src/template-designer.c:687 ../src/template-designer.c:788
 msgid "Label or Card Size"
 msgstr "Etiqueta o tamaño de tarjeta"
 
-#: ../src/template-designer.c:760
+#: ../src/template-designer.c:871
 msgid "Label Size (round)"
 msgstr "Tamaño de etiqueta (redondeada)"
 
-#: ../src/template-designer.c:841
+#: ../src/template-designer.c:952
 msgid "Label Size (CD/DVD)"
 msgstr "Tamaño de etiqueta (CD/DVD)"
 
-#: ../src/template-designer.c:932
+#: ../src/template-designer.c:1043
 msgid "Number of Layouts"
 msgstr "Cantidad de disposiciones"
 
-#: ../src/template-designer.c:1000
+#: ../src/template-designer.c:1111
 msgid "Layout(s)"
 msgstr "Disposicion(es):"
 
-#: ../src/template-designer.c:1105
+#: ../src/template-designer.c:1216
 msgid "Design Completed"
 msgstr "Diseño completo"
 
-#: ../src/template-designer.c:1133
+#: ../src/template-designer.c:1244
 msgid "Edit gLabels Template"
 msgstr "Editar plantilla de gLabels"
 
-#: ../src/template-designer.c:1423
+#: ../src/template-designer.c:1547
 msgid "Brand and part# match an existing template!"
 msgstr "La marca y el número de parte coinciden con una plantilla existente"
 
@@ -1790,7 +1794,7 @@ msgstr "puntos"
 
 #. [LGL_UNITS_INCH]
 #: ../libglabels/units.c:66 ../data/ui/object-editor.ui.h:39
-#: ../data/ui/template-designer.ui.h:62
+#: ../data/ui/template-designer.ui.h:66
 msgid "inches"
 msgstr "pulgadas"
 
@@ -1885,7 +1889,7 @@ msgid "Custom"
 msgstr "Personalizada"
 
 #: ../data/ui/media-select.ui.h:4 ../data/ui/new-label-dialog.ui.h:6
-#: ../data/ui/template-designer.ui.h:42
+#: ../data/ui/template-designer.ui.h:45
 msgid "Page size:"
 msgstr "Tamaño de la página:"
 
@@ -1905,7 +1909,7 @@ msgstr ""
 "Seleccionar una etiqueta o tarjeta de producto de cientos de plantillas "
 "predefinidas o definir las suyas propias."
 
-#: ../data/ui/new-label-dialog.ui.h:2 ../data/ui/template-designer.ui.h:27
+#: ../data/ui/new-label-dialog.ui.h:2 ../data/ui/template-designer.ui.h:29
 msgid "Description:"
 msgstr "Descripción:"
 
@@ -1921,7 +1925,7 @@ msgstr "Disposición:"
 msgid "Normal"
 msgstr "Normal"
 
-#: ../data/ui/new-label-dialog.ui.h:7 ../data/ui/template-designer.ui.h:43
+#: ../data/ui/new-label-dialog.ui.h:7 ../data/ui/template-designer.ui.h:46
 msgid "Part #:"
 msgstr "Número de parte:"
 
@@ -1990,7 +1994,7 @@ msgstr "Archivo:"
 msgid "Fill"
 msgstr "Relleno"
 
-#: ../data/ui/object-editor.ui.h:14 ../data/ui/template-designer.ui.h:30
+#: ../data/ui/object-editor.ui.h:14 ../data/ui/template-designer.ui.h:33
 msgid "Height:"
 msgstr "Alto:"
 
@@ -2043,7 +2047,7 @@ msgid "Style:"
 msgstr "Estilo:"
 
 #: ../data/ui/object-editor.ui.h:30 ../data/ui/prefs-dialog.ui.h:20
-#: ../data/ui/template-designer.ui.h:61
+#: ../data/ui/template-designer.ui.h:64
 msgid "Width:"
 msgstr "Ancho:"
 
@@ -2189,41 +2193,49 @@ msgstr "3. Ancho de recorte:"
 
 #: ../data/ui/template-designer.ui.h:11
 msgid "3. Margin"
-msgstr "3. Márgen"
+msgstr "3. Margen"
 
 #: ../data/ui/template-designer.ui.h:12
 msgid "3. Round (radius of corner):"
 msgstr "3. Redondez (radio de las esquinas)"
 
 #: ../data/ui/template-designer.ui.h:13
+msgid "3. Waste (overprint allowed):"
+msgstr "3. Sobrante (sobreimpresión permitida):"
+
+#: ../data/ui/template-designer.ui.h:14
 msgid "4. Clipping height:"
 msgstr "4. Alto de recorte:"
 
-#: ../data/ui/template-designer.ui.h:14
+#: ../data/ui/template-designer.ui.h:15
 msgid "4. Horiz. waste (overprint allowed):"
 msgstr "4. Sobrante horizontal (sobreimpresión permitida):"
 
-#: ../data/ui/template-designer.ui.h:15
+#: ../data/ui/template-designer.ui.h:16
+msgid "4. Margin"
+msgstr "4. Márgen"
+
+#: ../data/ui/template-designer.ui.h:17
 msgid "5. Vert. waste (overprint allowed):"
 msgstr "5. Sobrante vertical (sobreimpresión permitida):"
 
-#: ../data/ui/template-designer.ui.h:16
+#: ../data/ui/template-designer.ui.h:18
 msgid "5. Waste (overprint allowed):"
 msgstr "5. Sobrante (sobreimpresión permitida):"
 
-#: ../data/ui/template-designer.ui.h:17
+#: ../data/ui/template-designer.ui.h:19
 msgid "6. Margin"
 msgstr "6. Margen"
 
-#: ../data/ui/template-designer.ui.h:18
+#: ../data/ui/template-designer.ui.h:20
 msgid "Brand/Manufacturer:"
 msgstr "Marca/Fabricante:"
 
-#: ../data/ui/template-designer.ui.h:19
+#: ../data/ui/template-designer.ui.h:21
 msgid "CD/DVD (including credit card CDs)"
 msgstr "CD/DVD (incluyendo CD-tarjeta)"
 
-#: ../data/ui/template-designer.ui.h:20
+#: ../data/ui/template-designer.ui.h:22
 msgid ""
 "Congratulations!\n"
 "\n"
@@ -2241,19 +2253,23 @@ msgstr ""
 "Puede pulsar \"Cancelar\" para abandonar su diseño\n"
 "o \"Atrás\" para volver a editarlo."
 
-#: ../data/ui/template-designer.ui.h:28
+#: ../data/ui/template-designer.ui.h:30
 msgid "Distance from left edge (x0):"
 msgstr "Distancia desde el borde izquierdo (x0):"
 
-#: ../data/ui/template-designer.ui.h:29
+#: ../data/ui/template-designer.ui.h:31
 msgid "Distance from top edge (y0):"
 msgstr "Distancia desde el borde superior (y0):"
 
-#: ../data/ui/template-designer.ui.h:31
+#: ../data/ui/template-designer.ui.h:32
+msgid "Elliptical"
+msgstr "Elíptica"
+
+#: ../data/ui/template-designer.ui.h:34
 msgid "Horizontal pitch (dx):"
 msgstr "Desplazamiento horizontal (dx):"
 
-#: ../data/ui/template-designer.ui.h:32
+#: ../data/ui/template-designer.ui.h:35
 msgid ""
 "How many layouts will your template contain? \n"
 "\n"
@@ -2269,44 +2285,44 @@ msgstr ""
 "primer ejemplo.\n"
 "El segundo ejemplo muestra dos disposiciones."
 
-#: ../data/ui/template-designer.ui.h:37
+#: ../data/ui/template-designer.ui.h:40
 msgid "Layout #1"
 msgstr "Disposición 1:"
 
-#: ../data/ui/template-designer.ui.h:38
+#: ../data/ui/template-designer.ui.h:41
 msgid "Layout #2"
 msgstr "Disposición 2:"
 
-#: ../data/ui/template-designer.ui.h:39
+#: ../data/ui/template-designer.ui.h:42
 msgid "Number across (nx):"
 msgstr "Cantidad horizontal (nx):"
 
-#: ../data/ui/template-designer.ui.h:40
+#: ../data/ui/template-designer.ui.h:43
 msgid "Number down (ny):"
 msgstr "Cantidad vertical (ny):"
 
-#: ../data/ui/template-designer.ui.h:41
+#: ../data/ui/template-designer.ui.h:44
 msgid "Number of layouts:"
 msgstr "Cantidad de disposiciones:"
 
-#: ../data/ui/template-designer.ui.h:44
+#: ../data/ui/template-designer.ui.h:47
 msgid ""
 "Please enter the following identifying information about the template "
 "stationery."
 msgstr ""
 "Por favor ingrese la siguiente información que identifique la plantilla."
 
-#: ../data/ui/template-designer.ui.h:45
+#: ../data/ui/template-designer.ui.h:48
 msgid "Please enter the following layout information."
 msgstr "Por favor ingrese la siguiente información sobre la disposición."
 
-#: ../data/ui/template-designer.ui.h:46
+#: ../data/ui/template-designer.ui.h:49
 msgid ""
 "Please enter the following size parameters of a single label in your "
 "template."
 msgstr "Por favor ingrese las medidas de cada etiqueta de su plantilla."
 
-#: ../data/ui/template-designer.ui.h:47
+#: ../data/ui/template-designer.ui.h:50
 msgid ""
 "Please enter the following size parameters of a single label or card in your "
 "template."
@@ -2314,27 +2330,27 @@ msgstr ""
 "Por favor ingrese los siguientes parámetros de tamaño para cada etiqueta en "
 "su plantilla."
 
-#: ../data/ui/template-designer.ui.h:48
+#: ../data/ui/template-designer.ui.h:51
 msgid "Please select the basic shape of the labels or cards."
 msgstr "Por favor seleccione la forma básica de las etiquetas o tarjetas."
 
-#: ../data/ui/template-designer.ui.h:49
+#: ../data/ui/template-designer.ui.h:52
 msgid "Please select the page size of the template stationery."
 msgstr "Por favor seleccione el tamaño de la página para la plantilla."
 
-#: ../data/ui/template-designer.ui.h:50
+#: ../data/ui/template-designer.ui.h:53
 msgid "Print test sheet"
 msgstr "Imprimir página de prueba"
 
-#: ../data/ui/template-designer.ui.h:51
+#: ../data/ui/template-designer.ui.h:54
 msgid "Rectangular or square (can have rounded corners)"
 msgstr "Rectangular o cuadrada (puede tener bordes redondeados)"
 
-#: ../data/ui/template-designer.ui.h:52
+#: ../data/ui/template-designer.ui.h:55
 msgid "Round"
 msgstr "Redonda"
 
-#: ../data/ui/template-designer.ui.h:53
+#: ../data/ui/template-designer.ui.h:56
 msgid ""
 "Templates needing\n"
 "two layouts."
@@ -2342,7 +2358,7 @@ msgstr ""
 "Plantillas que necesitan\n"
 "dos disposiciones."
 
-#: ../data/ui/template-designer.ui.h:55
+#: ../data/ui/template-designer.ui.h:58
 msgid ""
 "Templates needing only\n"
 "one layout."
@@ -2350,11 +2366,11 @@ msgstr ""
 "Plantillas que necesitan\n"
 "una disposición."
 
-#: ../data/ui/template-designer.ui.h:57
+#: ../data/ui/template-designer.ui.h:60
 msgid "Vertical pitch (dy):"
 msgstr "Desplazamiento vertical (dy):"
 
-#: ../data/ui/template-designer.ui.h:58
+#: ../data/ui/template-designer.ui.h:61
 msgid ""
 "Welcome to the gLabels Template Designer.\n"
 "\n"
@@ -2363,6 +2379,10 @@ msgstr ""
 "Bienvenido al diseñador de plantillas de gLabels.\n"
 "\n"
 "Este diálogo le asistirá en la creación de una plantilla personalizada."
+
+#: ../data/ui/template-designer.ui.h:65
+msgid "ellipse_page"
+msgstr "ellipse_page"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:1
 msgid "Collate"
@@ -2558,7 +2578,7 @@ msgstr "CD/DVD u otros soportes"
 msgid "Mailing/shipping products"
 msgstr "Productos para correo/envío"
 
-#: ../templates/categories.xml.h:6
+#: ../templates/categories.xml.h:6 ../templates/misc-iso-templates.xml.h:45
 msgid "Rectangular labels"
 msgstr "Etiquetas rectangulares"
 
@@ -2600,6 +2620,8 @@ msgstr "Tarjetas de visita"
 
 #. ===================================================================
 #. ===============================================================
+#. ===================================================================
+#. ********************************************************************
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:6
 #: ../templates/avery-iso-templates.xml.h:14
@@ -3000,18 +3022,18 @@ msgid "Mailing Labels-3 columns"
 msgstr "Etiquetas de correo - 3 columnas"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:46
+#: ../templates/misc-iso-templates.xml.h:47
 #: ../templates/pearl-iso-templates.xml.h:60
 msgid "Self-adhesive labels"
 msgstr "Etiquetas autoadhesivas"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:48
+#: ../templates/misc-iso-templates.xml.h:49
 msgid "Universal Labels"
 msgstr "Etiquetas universales"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:50
+#: ../templates/misc-iso-templates.xml.h:51
 msgid "Video Labels (face only)"
 msgstr "Etiqeutas de video (solo frente)"
 
@@ -3323,9 +3345,6 @@ msgstr "Etiquetas de video (dorso)"
 
 #~ msgid "nlayouts_page"
 #~ msgstr "nlayouts_page"
-
-#~ msgid "pg_size_page"
-#~ msgstr "pg_size_page"
 
 #~ msgid "rect_size_page"
 #~ msgstr "rect_size_page"
