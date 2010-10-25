@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-10-23 03:39+0000\n"
-"PO-Revision-Date: 2010-10-23 22:21+0100\n"
+"POT-Creation-Date: 2010-10-24 21:06+0000\n"
+"PO-Revision-Date: 2010-10-25 19:22+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1178,55 +1178,55 @@ msgstr "gLabels-Einstellungen"
 msgid "Labels"
 msgstr "Labels"
 
-#: ../src/template-designer.c:404
+#: ../src/template-designer.c:428
 msgid "New gLabels Template"
 msgstr "Neue gLabels-Vorlage"
 
-#: ../src/template-designer.c:461
+#: ../src/template-designer.c:486
 msgid "Welcome"
 msgstr "Willkommen"
 
-#: ../src/template-designer.c:500
+#: ../src/template-designer.c:525
 msgid "Name and Description"
 msgstr "Name und Beschreibung"
 
-#: ../src/template-designer.c:548
+#: ../src/template-designer.c:573
 msgid "Page Size"
 msgstr "Seitenformat"
 
-#: ../src/template-designer.c:614
+#: ../src/template-designer.c:640
 msgid "Label or Card Shape"
 msgstr "Form des neuen Etiketts oder der neuen Karte"
 
-#: ../src/template-designer.c:661
+#: ../src/template-designer.c:687 ../src/template-designer.c:788
 msgid "Label or Card Size"
 msgstr "Größe des neuen Etiketts oder der neuen Karte"
 
-#: ../src/template-designer.c:760
+#: ../src/template-designer.c:871
 msgid "Label Size (round)"
 msgstr "Etikettengröße (rund)"
 
-#: ../src/template-designer.c:841
+#: ../src/template-designer.c:952
 msgid "Label Size (CD/DVD)"
 msgstr "Etikettengröße (CD/DVD)"
 
-#: ../src/template-designer.c:932
+#: ../src/template-designer.c:1043
 msgid "Number of Layouts"
 msgstr "Anzahl der Layouts"
 
-#: ../src/template-designer.c:1000
+#: ../src/template-designer.c:1111
 msgid "Layout(s)"
 msgstr "Layout(s)"
 
-#: ../src/template-designer.c:1105
+#: ../src/template-designer.c:1216
 msgid "Design Completed"
 msgstr "Design ist komplett"
 
-#: ../src/template-designer.c:1133
+#: ../src/template-designer.c:1244
 msgid "Edit gLabels Template"
 msgstr "gLabels-Vorlage bearbeiten"
 
-#: ../src/template-designer.c:1423
+#: ../src/template-designer.c:1547
 msgid "Brand and part# match an existing template!"
 msgstr "Für diese Marke und Nummer wurde eine Vorlage gefunden!"
 
@@ -1804,7 +1804,7 @@ msgstr "Punkte"
 
 #. [LGL_UNITS_INCH]
 #: ../libglabels/units.c:66 ../data/ui/object-editor.ui.h:39
-#: ../data/ui/template-designer.ui.h:62
+#: ../data/ui/template-designer.ui.h:66
 msgid "inches"
 msgstr "Zoll"
 
@@ -1899,7 +1899,7 @@ msgid "Custom"
 msgstr "Benutzerdefiniert"
 
 #: ../data/ui/media-select.ui.h:4 ../data/ui/new-label-dialog.ui.h:6
-#: ../data/ui/template-designer.ui.h:42
+#: ../data/ui/template-designer.ui.h:45
 msgid "Page size:"
 msgstr "Seitenformat:"
 
@@ -1919,7 +1919,7 @@ msgstr ""
 "Wählen Sie ein Etikett oder eine Karte aus Hunderten von mitgelieferten "
 "Vorlagen oder erstellen Sie Ihre eigene Vorlage."
 
-#: ../data/ui/new-label-dialog.ui.h:2 ../data/ui/template-designer.ui.h:27
+#: ../data/ui/new-label-dialog.ui.h:2 ../data/ui/template-designer.ui.h:29
 msgid "Description:"
 msgstr "Beschreibung:"
 
@@ -1935,7 +1935,7 @@ msgstr "Anordnung:"
 msgid "Normal"
 msgstr "Normal"
 
-#: ../data/ui/new-label-dialog.ui.h:7 ../data/ui/template-designer.ui.h:43
+#: ../data/ui/new-label-dialog.ui.h:7 ../data/ui/template-designer.ui.h:46
 msgid "Part #:"
 msgstr "Nummer:"
 
@@ -2004,7 +2004,7 @@ msgstr "Datei:"
 msgid "Fill"
 msgstr "Füllen"
 
-#: ../data/ui/object-editor.ui.h:14 ../data/ui/template-designer.ui.h:30
+#: ../data/ui/object-editor.ui.h:14 ../data/ui/template-designer.ui.h:33
 msgid "Height:"
 msgstr "Höhe"
 
@@ -2057,7 +2057,7 @@ msgid "Style:"
 msgstr "Stil:"
 
 #: ../data/ui/object-editor.ui.h:30 ../data/ui/prefs-dialog.ui.h:20
-#: ../data/ui/template-designer.ui.h:61
+#: ../data/ui/template-designer.ui.h:64
 msgid "Width:"
 msgstr "Breite:"
 
@@ -2210,34 +2210,42 @@ msgid "3. Round (radius of corner):"
 msgstr "3. Rundung (Radius der Ecken):"
 
 #: ../data/ui/template-designer.ui.h:13
+msgid "3. Waste (overprint allowed):"
+msgstr "2. Überstand (Bedrucken erlaubt):"
+
+#: ../data/ui/template-designer.ui.h:14
 msgid "4. Clipping height:"
 msgstr "4. Innere Höhe:"
 
-#: ../data/ui/template-designer.ui.h:14
+#: ../data/ui/template-designer.ui.h:15
 msgid "4. Horiz. waste (overprint allowed):"
 msgstr "4. Horiz. Überstand (Bedrucken erlaubt):"
 
-#: ../data/ui/template-designer.ui.h:15
+#: ../data/ui/template-designer.ui.h:16
+msgid "4. Margin"
+msgstr "3. Ränder"
+
+#: ../data/ui/template-designer.ui.h:17
 msgid "5. Vert. waste (overprint allowed):"
 msgstr "3. Vert. Überstand (Bedrucken erlaubt):"
 
-#: ../data/ui/template-designer.ui.h:16
+#: ../data/ui/template-designer.ui.h:18
 msgid "5. Waste (overprint allowed):"
 msgstr "5. Überstand (Bedrucken erlaubt):"
 
-#: ../data/ui/template-designer.ui.h:17
+#: ../data/ui/template-designer.ui.h:19
 msgid "6. Margin"
 msgstr "6. Rand"
 
-#: ../data/ui/template-designer.ui.h:18
+#: ../data/ui/template-designer.ui.h:20
 msgid "Brand/Manufacturer:"
 msgstr "Marke/Hersteller:"
 
-#: ../data/ui/template-designer.ui.h:19
+#: ../data/ui/template-designer.ui.h:21
 msgid "CD/DVD (including credit card CDs)"
 msgstr "CD/DVD (einschließlich Kreditkarten-CDs)"
 
-#: ../data/ui/template-designer.ui.h:20
+#: ../data/ui/template-designer.ui.h:22
 msgid ""
 "Congratulations!\n"
 "\n"
@@ -2257,19 +2265,23 @@ msgstr ""
 "Vorlage zu verwerfen, oder auf »Zurück«,\n"
 "um die Vorlage erneut zu bearbeiten."
 
-#: ../data/ui/template-designer.ui.h:28
+#: ../data/ui/template-designer.ui.h:30
 msgid "Distance from left edge (x0):"
 msgstr "Abstand vom linken Rand (x0):"
 
-#: ../data/ui/template-designer.ui.h:29
+#: ../data/ui/template-designer.ui.h:31
 msgid "Distance from top edge (y0):"
 msgstr "Abstand vom oberen Rand (x0):"
 
-#: ../data/ui/template-designer.ui.h:31
+#: ../data/ui/template-designer.ui.h:32
+msgid "Elliptical"
+msgstr "Elliptisch"
+
+#: ../data/ui/template-designer.ui.h:34
 msgid "Horizontal pitch (dx):"
 msgstr "Horizontaler Abstand (dx):"
 
-#: ../data/ui/template-designer.ui.h:32
+#: ../data/ui/template-designer.ui.h:35
 msgid ""
 "How many layouts will your template contain? \n"
 "\n"
@@ -2284,27 +2296,27 @@ msgstr ""
 "angeordnet sind. Die meisten Vorlagen verwenden nur ein Layout, wie im\n"
 "ersten Beispiel. Das zweite Beispiel zeigt die Verwendung zweier Layouts."
 
-#: ../data/ui/template-designer.ui.h:37
+#: ../data/ui/template-designer.ui.h:40
 msgid "Layout #1"
 msgstr "Layout #1"
 
-#: ../data/ui/template-designer.ui.h:38
+#: ../data/ui/template-designer.ui.h:41
 msgid "Layout #2"
 msgstr "Layout #2"
 
-#: ../data/ui/template-designer.ui.h:39
+#: ../data/ui/template-designer.ui.h:42
 msgid "Number across (nx):"
 msgstr "Anzahl horizontal (nx):"
 
-#: ../data/ui/template-designer.ui.h:40
+#: ../data/ui/template-designer.ui.h:43
 msgid "Number down (ny):"
 msgstr "Anzahl vertikal (ny):"
 
-#: ../data/ui/template-designer.ui.h:41
+#: ../data/ui/template-designer.ui.h:44
 msgid "Number of layouts:"
 msgstr "Anzahl der Layouts:"
 
-#: ../data/ui/template-designer.ui.h:44
+#: ../data/ui/template-designer.ui.h:47
 msgid ""
 "Please enter the following identifying information about the template "
 "stationery."
@@ -2312,18 +2324,18 @@ msgstr ""
 "Bitte geben Sie die folgenden Identifizierungsinformationen über die Vorlage "
 "an."
 
-#: ../data/ui/template-designer.ui.h:45
+#: ../data/ui/template-designer.ui.h:48
 msgid "Please enter the following layout information."
 msgstr "Bitte geben Sie die folgenden Layout-Informationen ein."
 
-#: ../data/ui/template-designer.ui.h:46
+#: ../data/ui/template-designer.ui.h:49
 msgid ""
 "Please enter the following size parameters of a single label in your template."
 msgstr ""
 "Bitte geben Sie die folgenden Größenwerte des einzelnen Etiketts in Ihrer "
 "Vorlage an."
 
-#: ../data/ui/template-designer.ui.h:47
+#: ../data/ui/template-designer.ui.h:50
 msgid ""
 "Please enter the following size parameters of a single label or card in your "
 "template."
@@ -2331,27 +2343,27 @@ msgstr ""
 "Bitte geben Sie die folgenden Größenwerte des einzelnen Etiketts oder der "
 "einzelnen Karte in Ihrer Vorlage an."
 
-#: ../data/ui/template-designer.ui.h:48
+#: ../data/ui/template-designer.ui.h:51
 msgid "Please select the basic shape of the labels or cards."
 msgstr "Bitte wählen Sie die Grundform der Etiketten oder Karten aus."
 
-#: ../data/ui/template-designer.ui.h:49
+#: ../data/ui/template-designer.ui.h:52
 msgid "Please select the page size of the template stationery."
 msgstr "Bitte wählen Sie das Papierformat der Vorlage aus."
 
-#: ../data/ui/template-designer.ui.h:50
+#: ../data/ui/template-designer.ui.h:53
 msgid "Print test sheet"
 msgstr "Textseite drucken"
 
-#: ../data/ui/template-designer.ui.h:51
+#: ../data/ui/template-designer.ui.h:54
 msgid "Rectangular or square (can have rounded corners)"
 msgstr "Rechteckig oder quadratisch (auch mit abgerundeten Ecken)"
 
-#: ../data/ui/template-designer.ui.h:52
+#: ../data/ui/template-designer.ui.h:55
 msgid "Round"
 msgstr "Rund"
 
-#: ../data/ui/template-designer.ui.h:53
+#: ../data/ui/template-designer.ui.h:56
 msgid ""
 "Templates needing\n"
 "two layouts."
@@ -2359,7 +2371,7 @@ msgstr ""
 "Vorlagen benötigen\n"
 "zwei Layouts."
 
-#: ../data/ui/template-designer.ui.h:55
+#: ../data/ui/template-designer.ui.h:58
 msgid ""
 "Templates needing only\n"
 "one layout."
@@ -2367,11 +2379,11 @@ msgstr ""
 "Vorlagen benötigen nur\n"
 "ein Layout."
 
-#: ../data/ui/template-designer.ui.h:57
+#: ../data/ui/template-designer.ui.h:60
 msgid "Vertical pitch (dy):"
 msgstr "Vertikaler Abstand (dy):"
 
-#: ../data/ui/template-designer.ui.h:58
+#: ../data/ui/template-designer.ui.h:61
 msgid ""
 "Welcome to the gLabels Template Designer.\n"
 "\n"
@@ -2381,6 +2393,10 @@ msgstr ""
 "\n"
 "Dieser Dialog wird Sie beim Erstellen einer benutzerdefinierten\n"
 "gLabels-Vorlage unterstützen."
+
+#: ../data/ui/template-designer.ui.h:65
+msgid "ellipse_page"
+msgstr "ellipse_page"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:1
 msgid "Collate"
@@ -2576,7 +2592,7 @@ msgstr "CD/DVD oder andere Medien"
 msgid "Mailing/shipping products"
 msgstr "Post- und Versandprodukte"
 
-#: ../templates/categories.xml.h:6
+#: ../templates/categories.xml.h:6 ../templates/misc-iso-templates.xml.h:45
 msgid "Rectangular labels"
 msgstr "Rechteckige Etiketten"
 
@@ -2618,6 +2634,8 @@ msgstr "Visitenkarten"
 
 #. ===================================================================
 #. ===============================================================
+#. ===================================================================
+#. ********************************************************************
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:6
 #: ../templates/avery-iso-templates.xml.h:14
@@ -3008,18 +3026,18 @@ msgid "Mailing Labels-3 columns"
 msgstr "Adressaufkleber 3-spaltig"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:46
+#: ../templates/misc-iso-templates.xml.h:47
 #: ../templates/pearl-iso-templates.xml.h:60
 msgid "Self-adhesive labels"
 msgstr "Selbstklebende Etiketten"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:48
+#: ../templates/misc-iso-templates.xml.h:49
 msgid "Universal Labels"
 msgstr "Universelle Etiketten"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:50
+#: ../templates/misc-iso-templates.xml.h:51
 msgid "Video Labels (face only)"
 msgstr "Video-Etiketten (nur Vorderseite)"
 
