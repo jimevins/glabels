@@ -9,6 +9,7 @@ glabels_pixmaps_DATA = \
 	new-confirm.png		\
 	template-designer.png	\
 	ex-rect-size.png	\
+	ex-ellipse-size.png	\
 	ex-round-size.png	\
 	ex-cd-size.png		\
 	ex-1layout.png		\

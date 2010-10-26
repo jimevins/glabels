@@ -1099,7 +1099,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
         <child type="tab">
           <object class="GtkLabel" id="label2">
             <property name="visible">True</property>
-            <property name="label" translatable="yes">ellipse_page</property>
+            <property name="label">ellipse_page</property>
           </object>
           <packing>
             <property name="position">10</property>
