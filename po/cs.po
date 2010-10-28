@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Glabels 2.0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-10 21:01+0200\n"
-"PO-Revision-Date: 2010-09-07 19:12+0200\n"
+"POT-Creation-Date: 2010-10-28 12:05+0200\n"
+"PO-Revision-Date: 2010-10-14 12:45+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -22,363 +22,368 @@ msgstr ""
 "X-Poedit-Language: Czech\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../src/bc-backends.c:81
+#: ../src/bc-backends.c:82
 msgid "Built-in"
 msgstr "Vestavěný"
 
-#: ../src/bc-backends.c:101
+#: ../src/bc-backends.c:102
 msgid "POSTNET (any)"
 msgstr "POSTNET (jakýkoli)"
 
-#: ../src/bc-backends.c:104
+#: ../src/bc-backends.c:105
 msgid "POSTNET-5 (ZIP only)"
 msgstr "POSTNET-5 (pouze PSČ)"
 
-#: ../src/bc-backends.c:107
+#: ../src/bc-backends.c:108
 msgid "POSTNET-9 (ZIP+4)"
 msgstr "POSTNET-9 (PSČ+4)"
 
-#: ../src/bc-backends.c:110
+#: ../src/bc-backends.c:111
 msgid "POSTNET-11 (DPBC)"
 msgstr "POSTNET-11 (DPBC)"
 
-#: ../src/bc-backends.c:113
+#: ../src/bc-backends.c:114
 msgid "CEPNET"
 msgstr "CEPNET"
 
-#: ../src/bc-backends.c:118
+#: ../src/bc-backends.c:117
+#, fuzzy
+msgid "One Code"
+msgstr "USPS One Code"
+
+#: ../src/bc-backends.c:122
 msgid "EAN (any)"
 msgstr "EAN (jakýkoli)"
 
-#: ../src/bc-backends.c:121
+#: ../src/bc-backends.c:125
 msgid "EAN-8"
 msgstr "EAN-8"
 
-#: ../src/bc-backends.c:124
+#: ../src/bc-backends.c:128
 msgid "EAN-8 +2"
 msgstr "EAN-8 +2"
 
-#: ../src/bc-backends.c:127
+#: ../src/bc-backends.c:131
 msgid "EAN-8 +5"
 msgstr "EAN-8 +5"
 
-#: ../src/bc-backends.c:130
+#: ../src/bc-backends.c:134
 msgid "EAN-13"
 msgstr "EAN-13"
 
-#: ../src/bc-backends.c:133
+#: ../src/bc-backends.c:137
 msgid "EAN-13 +2"
 msgstr "EAN-13 +2"
 
-#: ../src/bc-backends.c:136
+#: ../src/bc-backends.c:140
 msgid "EAN-13 +5"
 msgstr "EAN-13 +5"
 
-#: ../src/bc-backends.c:139
+#: ../src/bc-backends.c:143
 msgid "UPC (UPC-A or UPC-E)"
 msgstr "UPC (UPC-A nebo UPC-E)"
 
-#: ../src/bc-backends.c:142 ../src/bc-backends.c:386
+#: ../src/bc-backends.c:146 ../src/bc-backends.c:390
 msgid "UPC-A"
 msgstr "UPC-A"
 
-#: ../src/bc-backends.c:145
+#: ../src/bc-backends.c:149
 msgid "UPC-A +2"
 msgstr "UPC-A +2"
 
-#: ../src/bc-backends.c:148
+#: ../src/bc-backends.c:152
 msgid "UPC-A +5"
 msgstr "UPC-A +5"
 
-#: ../src/bc-backends.c:151 ../src/bc-backends.c:389
+#: ../src/bc-backends.c:155 ../src/bc-backends.c:393
 msgid "UPC-E"
 msgstr "UPC-E"
 
-#: ../src/bc-backends.c:154
+#: ../src/bc-backends.c:158
 msgid "UPC-E +2"
 msgstr "UPC-E +2"
 
-#: ../src/bc-backends.c:157
+#: ../src/bc-backends.c:161
 msgid "UPC-E +5"
 msgstr "UPC-E +5"
 
-#: ../src/bc-backends.c:160 ../src/bc-backends.c:323
+#: ../src/bc-backends.c:164 ../src/bc-backends.c:327
 msgid "ISBN"
 msgstr "ISBN"
 
-#: ../src/bc-backends.c:163
+#: ../src/bc-backends.c:167
 msgid "ISBN +5"
 msgstr "ISBN +5"
 
-#: ../src/bc-backends.c:166 ../src/bc-backends.c:239
+#: ../src/bc-backends.c:170 ../src/bc-backends.c:243
 msgid "Code 39"
 msgstr "Code 39"
 
-#: ../src/bc-backends.c:169 ../src/bc-backends.c:251
+#: ../src/bc-backends.c:173 ../src/bc-backends.c:255
 msgid "Code 128"
 msgstr "Code 128"
 
-#: ../src/bc-backends.c:172
+#: ../src/bc-backends.c:176
 msgid "Code 128C"
 msgstr "Code 128C"
 
-#: ../src/bc-backends.c:175
+#: ../src/bc-backends.c:179
 msgid "Code 128B"
 msgstr "Code 128B"
 
-#: ../src/bc-backends.c:178 ../src/bc-backends.c:320
+#: ../src/bc-backends.c:182 ../src/bc-backends.c:324
 msgid "Interleaved 2 of 5"
 msgstr "Prokládaný 2 z 5"
 
-#: ../src/bc-backends.c:181 ../src/bc-backends.c:215
+#: ../src/bc-backends.c:185 ../src/bc-backends.c:219
 msgid "Codabar"
 msgstr "Codabar"
 
-#: ../src/bc-backends.c:184
+#: ../src/bc-backends.c:188
 msgid "MSI"
 msgstr "MSI"
 
-#: ../src/bc-backends.c:187
+#: ../src/bc-backends.c:191
 msgid "Plessey"
 msgstr "Plessey"
 
-#: ../src/bc-backends.c:190 ../src/bc-backends.c:248
+#: ../src/bc-backends.c:194 ../src/bc-backends.c:252
 msgid "Code 93"
 msgstr "Code 93"
 
-#: ../src/bc-backends.c:197
+#: ../src/bc-backends.c:201
 msgid "Australia Post Standard"
 msgstr "Australský poštovní standard"
 
-#: ../src/bc-backends.c:200
+#: ../src/bc-backends.c:204
 msgid "Australia Post Reply Paid"
 msgstr "Australský poštovní odpovědní"
 
-#: ../src/bc-backends.c:203
+#: ../src/bc-backends.c:207
 msgid "Australia Post Route Code"
 msgstr "Australský poštovní směrový kód"
 
-#: ../src/bc-backends.c:206
+#: ../src/bc-backends.c:210
 msgid "Australia Post Redirect"
 msgstr "Australský poštovní přesměrovávací"
 
-#: ../src/bc-backends.c:209
+#: ../src/bc-backends.c:213
 msgid "Aztec Code"
 msgstr "Aztec Code"
 
-#: ../src/bc-backends.c:212
+#: ../src/bc-backends.c:216
 msgid "Aztec Rune"
 msgstr "Aztec Rune"
 
-#: ../src/bc-backends.c:218
+#: ../src/bc-backends.c:222
 msgid "Code One"
 msgstr "Code One"
 
-#: ../src/bc-backends.c:221
+#: ../src/bc-backends.c:225
 msgid "Code 11"
 msgstr "Code 11"
 
-#: ../src/bc-backends.c:224
+#: ../src/bc-backends.c:228
 msgid "Code 16K"
 msgstr "Code 16K"
 
-#: ../src/bc-backends.c:227
+#: ../src/bc-backends.c:231
 msgid "Code 2 of 5 Matrix"
 msgstr "Kód 2 z 5 Matrix"
 
-#: ../src/bc-backends.c:230
+#: ../src/bc-backends.c:234
 msgid "Code 2 of 5 IATA"
 msgstr "Kód 2 z 5 IATA"
 
-#: ../src/bc-backends.c:233
+#: ../src/bc-backends.c:237
 msgid "Code 2 of 5 Data Logic"
 msgstr "Kód 2 z 5 Data Logic"
 
-#: ../src/bc-backends.c:236
+#: ../src/bc-backends.c:240
 msgid "Code 32 (Italian Pharmacode)"
 msgstr "Code 32 (italský farmaceutický)"
 
-#: ../src/bc-backends.c:242
+#: ../src/bc-backends.c:246
 msgid "Code 39 Extended"
 msgstr "Code 39 rozšířený"
 
-#: ../src/bc-backends.c:245
+#: ../src/bc-backends.c:249
 msgid "Code 49"
 msgstr "Code 49"
 
-#: ../src/bc-backends.c:254
+#: ../src/bc-backends.c:258
 msgid "Code 128 (Mode C supression)"
 msgstr "Code 128 (režim utajení C)"
 
-#: ../src/bc-backends.c:257
+#: ../src/bc-backends.c:261
 msgid "DAFT Code"
 msgstr "DAFT Code"
 
-#: ../src/bc-backends.c:260
+#: ../src/bc-backends.c:264
 msgid "Data Matrix"
 msgstr "Data Matrix"
 
-#: ../src/bc-backends.c:263
+#: ../src/bc-backends.c:267
 msgid "Deutsche Post Leitcode"
 msgstr "Německý poštovní Leitcode"
 
-#: ../src/bc-backends.c:266
+#: ../src/bc-backends.c:270
 msgid "Deutsche Post Identcode"
 msgstr "Německý poštovní Identcode"
 
-#: ../src/bc-backends.c:269
+#: ../src/bc-backends.c:273
 msgid "Dutch Post KIX Code"
 msgstr "Nizozemský poštovní KIX Code"
 
-#: ../src/bc-backends.c:272
+#: ../src/bc-backends.c:276
 msgid "EAN"
 msgstr "EAN"
 
-#: ../src/bc-backends.c:275
+#: ../src/bc-backends.c:279
 msgid "Grid Matrix"
 msgstr "Grid Matrix"
 
-#: ../src/bc-backends.c:278
+#: ../src/bc-backends.c:282
 msgid "GS1-128"
 msgstr "GS1-128"
 
-#: ../src/bc-backends.c:281
+#: ../src/bc-backends.c:285
 msgid "GS1 DataBar-14"
 msgstr "GS1 DataBar-14"
 
-#: ../src/bc-backends.c:290
+#: ../src/bc-backends.c:294
 msgid "GS1 DataBar-14 Stacked"
 msgstr "GS1 DataBar-14 vrstvený"
 
-#: ../src/bc-backends.c:293
+#: ../src/bc-backends.c:297
 msgid "GS1 DataBar-14 Stacked Omni."
 msgstr "GS1 DataBar-14 vrstvený nesměrový"
 
-#: ../src/bc-backends.c:296
+#: ../src/bc-backends.c:300
 msgid "GS1 DataBar Extended Stacked"
 msgstr "GS1 DataBar rozšířený vrstvený"
 
-#: ../src/bc-backends.c:299
+#: ../src/bc-backends.c:303
 msgid "HIBC Code 128"
 msgstr "HIBC Code 128"
 
-#: ../src/bc-backends.c:302
+#: ../src/bc-backends.c:306
 msgid "HIBC Code 39"
 msgstr "HIBC Code 39"
 
-#: ../src/bc-backends.c:305
+#: ../src/bc-backends.c:309
 msgid "HIBC Data Matrix"
 msgstr "HIBC Data Matrix"
 
-#: ../src/bc-backends.c:308
+#: ../src/bc-backends.c:312
 msgid "HIBC QR Code"
 msgstr "HIBC QR Code"
 
-#: ../src/bc-backends.c:311
+#: ../src/bc-backends.c:315
 msgid "HIBC PDF417"
 msgstr "HIBC PDF417"
 
-#: ../src/bc-backends.c:314
+#: ../src/bc-backends.c:318
 msgid "HIBC Micro PDF417"
 msgstr "HIBC Micro PDF417"
 
-#: ../src/bc-backends.c:317
+#: ../src/bc-backends.c:321
 msgid "HIBC Aztec Code"
 msgstr "HIBC Aztec Code"
 
-#: ../src/bc-backends.c:326
+#: ../src/bc-backends.c:330
 msgid "ITF-14"
 msgstr "ITF-14"
 
-#: ../src/bc-backends.c:329
+#: ../src/bc-backends.c:333
 msgid "Japanese Postal"
 msgstr "Japonský poštovní"
 
-#: ../src/bc-backends.c:332
+#: ../src/bc-backends.c:336
 msgid "Korean Postal"
 msgstr "Korejský poštovní"
 
-#: ../src/bc-backends.c:335
+#: ../src/bc-backends.c:339
 msgid "LOGMARS"
 msgstr "LOGMARS"
 
-#: ../src/bc-backends.c:338
+#: ../src/bc-backends.c:342
 msgid "Maxicode"
 msgstr "Maxicode"
 
-#: ../src/bc-backends.c:341
+#: ../src/bc-backends.c:345
 msgid "Micro PDF417"
 msgstr "Micro PDF417"
 
-#: ../src/bc-backends.c:344
+#: ../src/bc-backends.c:348
 msgid "Micro QR Code"
 msgstr "Micro QR Code"
 
-#: ../src/bc-backends.c:347
+#: ../src/bc-backends.c:351
 msgid "MSI Plessey"
 msgstr "MSI Plessey"
 
-#: ../src/bc-backends.c:350
+#: ../src/bc-backends.c:354
 msgid "NVE-18"
 msgstr "NVE-18"
 
-#: ../src/bc-backends.c:353
+#: ../src/bc-backends.c:357
 msgid "PDF417"
 msgstr "PDF417"
 
-#: ../src/bc-backends.c:356
+#: ../src/bc-backends.c:360
 msgid "PDF417 Truncated"
 msgstr "PDF417 zkrácený"
 
-#: ../src/bc-backends.c:359
+#: ../src/bc-backends.c:363
 msgid "PLANET"
 msgstr "PLANET"
 
-#: ../src/bc-backends.c:362
+#: ../src/bc-backends.c:366
 msgid "PostNet"
 msgstr "PostNet"
 
-#: ../src/bc-backends.c:365
+#: ../src/bc-backends.c:369
 msgid "Pharmacode"
 msgstr "Pharmacode"
 
-#: ../src/bc-backends.c:368
+#: ../src/bc-backends.c:372
 msgid "Pharmacode 2-track"
 msgstr "Pharmacode binární"
 
-#: ../src/bc-backends.c:371
+#: ../src/bc-backends.c:375
 msgid "Pharmazentral Nummer (PZN)"
 msgstr "Pharmazentral Nummer (PZN)"
 
-#: ../src/bc-backends.c:374
+#: ../src/bc-backends.c:378
 msgid "QR Code"
 msgstr "QR Code"
 
-#: ../src/bc-backends.c:377
+#: ../src/bc-backends.c:381
 msgid "Royal Mail 4-State"
 msgstr "Royal Mail 4stavový"
 
-#: ../src/bc-backends.c:380
+#: ../src/bc-backends.c:384
 msgid "Telepen"
 msgstr "Telepen"
 
-#: ../src/bc-backends.c:383
+#: ../src/bc-backends.c:387
 msgid "Telepen Numeric"
 msgstr "Telepen číselný"
 
-#: ../src/bc-backends.c:392
+#: ../src/bc-backends.c:396
 msgid "USPS One Code"
 msgstr "USPS One Code"
 
-#: ../src/bc-backends.c:395
+#: ../src/bc-backends.c:399
 msgid "UK Plessey"
 msgstr "UK Plessey"
 
-#: ../src/bc-backends.c:402
+#: ../src/bc-backends.c:406
 msgid "IEC16022 (DataMatrix)"
 msgstr "IEC16022 (DataMatrix)"
 
-#: ../src/bc-backends.c:409
+#: ../src/bc-backends.c:413
 msgid "IEC18004 (QRCode)"
 msgstr "IEC18004 (QRCode)"
 
@@ -1173,55 +1178,55 @@ msgstr "Předvolby gLabels"
 msgid "Labels"
 msgstr "Etikety"
 
-#: ../src/template-designer.c:404
+#: ../src/template-designer.c:428
 msgid "New gLabels Template"
 msgstr "Nová šablona gLabels"
 
-#: ../src/template-designer.c:461
+#: ../src/template-designer.c:486
 msgid "Welcome"
 msgstr "Vítejte"
 
-#: ../src/template-designer.c:500
+#: ../src/template-designer.c:525
 msgid "Name and Description"
 msgstr "Název a popis"
 
-#: ../src/template-designer.c:548
+#: ../src/template-designer.c:573
 msgid "Page Size"
 msgstr "Velikost stránky"
 
-#: ../src/template-designer.c:614
+#: ../src/template-designer.c:640
 msgid "Label or Card Shape"
 msgstr "Tvar etikety či vizitky"
 
-#: ../src/template-designer.c:661
+#: ../src/template-designer.c:687 ../src/template-designer.c:788
 msgid "Label or Card Size"
 msgstr "Velikost etikety či vizitky"
 
-#: ../src/template-designer.c:760
+#: ../src/template-designer.c:871
 msgid "Label Size (round)"
 msgstr "Velikost etikety (oválná)"
 
-#: ../src/template-designer.c:841
+#: ../src/template-designer.c:952
 msgid "Label Size (CD/DVD)"
 msgstr "Velikost etikety (CD/DVD)"
 
-#: ../src/template-designer.c:932
+#: ../src/template-designer.c:1043
 msgid "Number of Layouts"
 msgstr "Počet rozvržení"
 
-#: ../src/template-designer.c:1000
+#: ../src/template-designer.c:1111
 msgid "Layout(s)"
 msgstr "Rozvržení"
 
-#: ../src/template-designer.c:1105
+#: ../src/template-designer.c:1216
 msgid "Design Completed"
 msgstr "Návrh byl dokončen"
 
-#: ../src/template-designer.c:1133
+#: ../src/template-designer.c:1244
 msgid "Edit gLabels Template"
 msgstr "Upravit šablonu gLabels"
 
-#: ../src/template-designer.c:1423
+#: ../src/template-designer.c:1547
 msgid "Brand and part# match an existing template!"
 msgstr "Značka a produktové číslo odpovídají již existující šabloně!"
 
@@ -1795,7 +1800,7 @@ msgstr "body"
 
 #. [LGL_UNITS_INCH]
 #: ../libglabels/units.c:66 ../data/ui/object-editor.ui.h:39
-#: ../data/ui/template-designer.ui.h:62
+#: ../data/ui/template-designer.ui.h:65
 msgid "inches"
 msgstr "palce"
 
@@ -1890,7 +1895,7 @@ msgid "Custom"
 msgstr "Vlastní"
 
 #: ../data/ui/media-select.ui.h:4 ../data/ui/new-label-dialog.ui.h:6
-#: ../data/ui/template-designer.ui.h:42
+#: ../data/ui/template-designer.ui.h:45
 msgid "Page size:"
 msgstr "Velikost stránky:"
 
@@ -1910,7 +1915,7 @@ msgstr ""
 "Zvolte produkt s etiketami nebo vizitkami ze stovek předdefinovaných šablon "
 "nebo si vytvořte vlastní."
 
-#: ../data/ui/new-label-dialog.ui.h:2 ../data/ui/template-designer.ui.h:27
+#: ../data/ui/new-label-dialog.ui.h:2 ../data/ui/template-designer.ui.h:29
 msgid "Description:"
 msgstr "Popis:"
 
@@ -1926,7 +1931,7 @@ msgstr "Rozvržení:"
 msgid "Normal"
 msgstr "Normálně"
 
-#: ../data/ui/new-label-dialog.ui.h:7 ../data/ui/template-designer.ui.h:43
+#: ../data/ui/new-label-dialog.ui.h:7 ../data/ui/template-designer.ui.h:46
 msgid "Part #:"
 msgstr "Produktové číslo:"
 
@@ -1995,7 +2000,7 @@ msgstr "Soubor:"
 msgid "Fill"
 msgstr "Výplň"
 
-#: ../data/ui/object-editor.ui.h:14 ../data/ui/template-designer.ui.h:30
+#: ../data/ui/object-editor.ui.h:14 ../data/ui/template-designer.ui.h:33
 msgid "Height:"
 msgstr "Výška:"
 
@@ -2048,7 +2053,7 @@ msgid "Style:"
 msgstr "Styl:"
 
 #: ../data/ui/object-editor.ui.h:30 ../data/ui/prefs-dialog.ui.h:20
-#: ../data/ui/template-designer.ui.h:61
+#: ../data/ui/template-designer.ui.h:64
 msgid "Width:"
 msgstr "Šířka:"
 
@@ -2201,34 +2206,44 @@ msgid "3. Round (radius of corner):"
 msgstr "3. Zaoblení (poloměr rohu):"
 
 #: ../data/ui/template-designer.ui.h:13
+#, fuzzy
+msgid "3. Waste (overprint allowed):"
+msgstr "2. Odsazení (umožňuje přetisk):"
+
+#: ../data/ui/template-designer.ui.h:14
 msgid "4. Clipping height:"
 msgstr "4. Výška oříznutí:"
 
-#: ../data/ui/template-designer.ui.h:14
+#: ../data/ui/template-designer.ui.h:15
 msgid "4. Horiz. waste (overprint allowed):"
 msgstr "4. Vodorovné odsazení (umožňuje přetisk):"
 
-#: ../data/ui/template-designer.ui.h:15
+#: ../data/ui/template-designer.ui.h:16
+#, fuzzy
+msgid "4. Margin"
+msgstr "3. Okraj"
+
+#: ../data/ui/template-designer.ui.h:17
 msgid "5. Vert. waste (overprint allowed):"
 msgstr "5. Svislé odsazení (umožňuje přetisk):"
 
-#: ../data/ui/template-designer.ui.h:16
+#: ../data/ui/template-designer.ui.h:18
 msgid "5. Waste (overprint allowed):"
 msgstr "5. Odsazení (umožňuje přetisk):"
 
-#: ../data/ui/template-designer.ui.h:17
+#: ../data/ui/template-designer.ui.h:19
 msgid "6. Margin"
 msgstr "6. Okraj"
 
-#: ../data/ui/template-designer.ui.h:18
+#: ../data/ui/template-designer.ui.h:20
 msgid "Brand/Manufacturer:"
 msgstr "Značka/Výrobce:"
 
-#: ../data/ui/template-designer.ui.h:19
+#: ../data/ui/template-designer.ui.h:21
 msgid "CD/DVD (including credit card CDs)"
 msgstr "CD/DVD (včetně vizitkových CD)"
 
-#: ../data/ui/template-designer.ui.h:20
+#: ../data/ui/template-designer.ui.h:22
 msgid ""
 "Congratulations!\n"
 "\n"
@@ -2246,19 +2261,24 @@ msgstr ""
 "V opačném případě klikněte na „Zrušit“ pro zahození návrhu\n"
 "nebo na „Zpět“ pro další úpravy tohoto návrhu."
 
-#: ../data/ui/template-designer.ui.h:28
+#: ../data/ui/template-designer.ui.h:30
 msgid "Distance from left edge (x0):"
 msgstr "Vzdálenost od levého okraje (x0):"
 
-#: ../data/ui/template-designer.ui.h:29
+#: ../data/ui/template-designer.ui.h:31
 msgid "Distance from top edge (y0):"
 msgstr "Vzdálenost od horního okraje (y0):"
 
-#: ../data/ui/template-designer.ui.h:31
+#: ../data/ui/template-designer.ui.h:32
+#, fuzzy
+msgid "Elliptical"
+msgstr "Překlopit svisle"
+
+#: ../data/ui/template-designer.ui.h:34
 msgid "Horizontal pitch (dx):"
 msgstr "Vodorovná rozteč (dx):"
 
-#: ../data/ui/template-designer.ui.h:32
+#: ../data/ui/template-designer.ui.h:35
 msgid ""
 "How many layouts will your template contain? \n"
 "\n"
@@ -2272,38 +2292,38 @@ msgstr ""
 "jednoduché mřížce. Většina šablon potřebuje jedno rozvržení jako v\n"
 "prvním příkladu. Druhý příklad ilustruje dvě rozvržení."
 
-#: ../data/ui/template-designer.ui.h:37
+#: ../data/ui/template-designer.ui.h:40
 msgid "Layout #1"
 msgstr "Rozvržení č. 1"
 
-#: ../data/ui/template-designer.ui.h:38
+#: ../data/ui/template-designer.ui.h:41
 msgid "Layout #2"
 msgstr "Rozvržení č. 2"
 
-#: ../data/ui/template-designer.ui.h:39
+#: ../data/ui/template-designer.ui.h:42
 msgid "Number across (nx):"
 msgstr "Počet napříč (nx):"
 
-#: ../data/ui/template-designer.ui.h:40
+#: ../data/ui/template-designer.ui.h:43
 msgid "Number down (ny):"
 msgstr "Počet svisle (ny):"
 
-#: ../data/ui/template-designer.ui.h:41
+#: ../data/ui/template-designer.ui.h:44
 msgid "Number of layouts:"
 msgstr "Počet rozvržení:"
 
-#: ../data/ui/template-designer.ui.h:44
+#: ../data/ui/template-designer.ui.h:47
 msgid ""
 "Please enter the following identifying information about the template "
 "stationery."
 msgstr ""
 "Vyplňte, prosím, následující identifikační informace o papíru pro šablonu."
 
-#: ../data/ui/template-designer.ui.h:45
+#: ../data/ui/template-designer.ui.h:48
 msgid "Please enter the following layout information."
 msgstr "Vyplňte, prosím, následující informaci o rozvržení."
 
-#: ../data/ui/template-designer.ui.h:46
+#: ../data/ui/template-designer.ui.h:49
 msgid ""
 "Please enter the following size parameters of a single label in your "
 "template."
@@ -2311,7 +2331,7 @@ msgstr ""
 "Vyplňte, prosím, následující parametry velikosti jedné etikety ve vaší "
 "šabloně."
 
-#: ../data/ui/template-designer.ui.h:47
+#: ../data/ui/template-designer.ui.h:50
 msgid ""
 "Please enter the following size parameters of a single label or card in your "
 "template."
@@ -2319,27 +2339,27 @@ msgstr ""
 "Vyplňte, prosím, následující parametry velikosti jedné etikety nebo vizitky "
 "ve vaší šabloně."
 
-#: ../data/ui/template-designer.ui.h:48
+#: ../data/ui/template-designer.ui.h:51
 msgid "Please select the basic shape of the labels or cards."
 msgstr "Vyberte, prosím, základní tvar etiket nebo vizitek."
 
-#: ../data/ui/template-designer.ui.h:49
+#: ../data/ui/template-designer.ui.h:52
 msgid "Please select the page size of the template stationery."
 msgstr "Vyberte, prosím, velikost stránky papíru pro šablonu."
 
-#: ../data/ui/template-designer.ui.h:50
+#: ../data/ui/template-designer.ui.h:53
 msgid "Print test sheet"
 msgstr "Vytisknout testovací stránku"
 
-#: ../data/ui/template-designer.ui.h:51
+#: ../data/ui/template-designer.ui.h:54
 msgid "Rectangular or square (can have rounded corners)"
 msgstr "Obdélníkový nebo čtvercový (může mít zaoblené rohy)"
 
-#: ../data/ui/template-designer.ui.h:52
+#: ../data/ui/template-designer.ui.h:55
 msgid "Round"
 msgstr "Oválný"
 
-#: ../data/ui/template-designer.ui.h:53
+#: ../data/ui/template-designer.ui.h:56
 msgid ""
 "Templates needing\n"
 "two layouts."
@@ -2347,7 +2367,7 @@ msgstr ""
 "Šablony, které potřebují\n"
 "dvě rozvržení."
 
-#: ../data/ui/template-designer.ui.h:55
+#: ../data/ui/template-designer.ui.h:58
 msgid ""
 "Templates needing only\n"
 "one layout."
@@ -2355,11 +2375,11 @@ msgstr ""
 "Šablony, které potřebují\n"
 "jedno rozvržení."
 
-#: ../data/ui/template-designer.ui.h:57
+#: ../data/ui/template-designer.ui.h:60
 msgid "Vertical pitch (dy):"
 msgstr "Svislá rozteč (dy):"
 
-#: ../data/ui/template-designer.ui.h:58
+#: ../data/ui/template-designer.ui.h:61
 msgid ""
 "Welcome to the gLabels Template Designer.\n"
 "\n"
@@ -2563,12 +2583,12 @@ msgstr "CD/DVD nebo jiná média"
 msgid "Mailing/shipping products"
 msgstr "Poštovní/přepravní produkty"
 
-#: ../templates/categories.xml.h:6
+#: ../templates/categories.xml.h:6 ../templates/misc-iso-templates.xml.h:45
 msgid "Rectangular labels"
 msgstr "Obdélníkové etikety"
 
 #. ===================================================================
-#: ../templates/categories.xml.h:7 ../templates/pearl-iso-templates.xml.h:46
+#: ../templates/categories.xml.h:7 ../templates/pearl-iso-templates.xml.h:52
 msgid "Round labels"
 msgstr "Oválné etikety"
 
@@ -2606,11 +2626,13 @@ msgstr "Vizitky"
 #. ===================================================================
 #. ===============================================================
 #. ===================================================================
+#. ********************************************************************
+#. ===================================================================
 #: ../templates/avery-us-templates.xml.h:6
 #: ../templates/avery-iso-templates.xml.h:14
 #: ../templates/misc-us-templates.xml.h:8
 #: ../templates/misc-iso-templates.xml.h:16
-#: ../templates/pearl-iso-templates.xml.h:20
+#: ../templates/pearl-iso-templates.xml.h:24
 #: ../templates/worldlabel-us-templates.xml.h:2
 #: ../templates/zweckform-iso-templates.xml.h:8
 msgid "CD/DVD Labels"
@@ -2746,12 +2768,12 @@ msgstr "Univerzální etikety"
 #. ===============================================================
 #: ../templates/avery-iso-templates.xml.h:10
 msgid "CD Booklet"
-msgstr "Přebal CD"
+msgstr "Brožurka do CD"
 
 #. ===============================================================
 #: ../templates/avery-iso-templates.xml.h:12
 msgid "CD Inlet"
-msgstr "Vsuvky do krabičky na CD"
+msgstr "Přebal CD"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:18
@@ -2995,12 +3017,18 @@ msgid "Mailing Labels-3 columns"
 msgstr "Poštovní etikety - 3 sloupce"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:46
+#: ../templates/misc-iso-templates.xml.h:47
+#: ../templates/pearl-iso-templates.xml.h:60
+msgid "Self-adhesive labels"
+msgstr "Samolepicí etikety"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:49
 msgid "Universal Labels"
 msgstr "Univerzální etikety"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:48
+#: ../templates/misc-iso-templates.xml.h:51
 msgid "Video Labels (face only)"
 msgstr "Etikety na videokazety (pouze předek)"
 
@@ -3045,87 +3073,97 @@ msgid "Business cards punched glossy"
 msgstr "Vizitky perforované lesklé"
 
 #. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:20
+msgid "CD inlet (back)"
+msgstr "Přebal CD (zadní)"
+
+#. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:22
+msgid "CD inlet (front)"
+msgstr "Přebal CD (přední)"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:26
+msgid "DVD inlet"
+msgstr "Přebal DVD"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:28
 msgid "Floppy disk labels"
 msgstr "Etikety na diskety"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:24
+#: ../templates/pearl-iso-templates.xml.h:30
 msgid "Foldable business cards"
 msgstr "Skládací vizitky"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:26
+#: ../templates/pearl-iso-templates.xml.h:32
 msgid "Foldable business cards glossy/dull"
 msgstr "Skládací vizitky lesklé/matné"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:28
+#: ../templates/pearl-iso-templates.xml.h:34
 msgid "Labels A4"
 msgstr "Etikety A4"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:30
+#: ../templates/pearl-iso-templates.xml.h:36
 msgid "Labels A5"
 msgstr "Etikety A5"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:32
+#: ../templates/pearl-iso-templates.xml.h:38
 msgid "Labels A6"
 msgstr "Etikety A6"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:34
+#: ../templates/pearl-iso-templates.xml.h:40
 msgid "Membership cards"
 msgstr "Členské karty"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:36
+#: ../templates/pearl-iso-templates.xml.h:42
 msgid "Membership cards, both sides printable"
 msgstr "Členské karty, oboustranně potisknutelné"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:38
+#: ../templates/pearl-iso-templates.xml.h:44
 msgid "Name plates"
 msgstr "Cedule"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:40
+#: ../templates/pearl-iso-templates.xml.h:46
 msgid "Passport photo labels glossy"
 msgstr "Fotografické etikety na průkazy"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:42
+#: ../templates/pearl-iso-templates.xml.h:48
 msgid "Photo labels"
 msgstr "Fotografické etikety"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:44
+#: ../templates/pearl-iso-templates.xml.h:50
 msgid "Photo labels semiglossy"
 msgstr "Fotografické etikety polomatné"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:48
+#: ../templates/pearl-iso-templates.xml.h:54
 msgid "SD card labels"
 msgstr "Etikety na karty SD"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:50
+#: ../templates/pearl-iso-templates.xml.h:56
 msgid "Self-adhesive film transparent"
 msgstr "Samolepicí průhledná fólie"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:52
+#: ../templates/pearl-iso-templates.xml.h:58
 msgid "Self-adhesive film weatherproof"
 msgstr "Samolepicí vodě odolná fólie "
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:54
-msgid "Self-adhesive labels"
-msgstr "Samolepicí etikety"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:56
+#: ../templates/pearl-iso-templates.xml.h:62
 msgid "Self-adhesive window film"
 msgstr "Samolepicí fólie na okno"
 
