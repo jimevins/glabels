@@ -42,8 +42,8 @@
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
-static glBarcode *render_pass1     (struct Barcode_Item *bci,
-				    gint                 flags);
+static lglBarcode *render_pass1     (struct Barcode_Item *bci,
+                                     gint                 flags);
 
 static gboolean   is_length_valid  (const gchar         *digits,
 				    gint                 n1,
@@ -61,7 +61,7 @@ static gboolean   is_length2_valid (const gchar         *digits,
 /*****************************************************************************/
 /* Generate intermediate representation of barcode.                          */
 /*****************************************************************************/
-glBarcode *
+lglBarcode *
 gl_barcode_gnubarcode_new (const gchar    *id,
 			   gboolean        text_flag,
 			   gboolean        checksum_flag,
@@ -69,7 +69,7 @@ gl_barcode_gnubarcode_new (const gchar    *id,
 			   gdouble         h,
 			   const gchar    *digits)
 {
-	glBarcode           *gbc;
+	lglBarcode          *gbc;
 	struct Barcode_Item *bci;
 	gint                 flags;
 
@@ -202,7 +202,7 @@ gl_barcode_gnubarcode_new (const gchar    *id,
 
 
 /*--------------------------------------------------------------------------
- * PRIVATE.  Render to glBarcode intermediate representation of barcode.
+ * PRIVATE.  Render to lglBarcode intermediate representation of barcode.
  *
  *  Some of this code is borrowed from the postscript renderer (ps.c)
  *  from the GNU barcode library:
@@ -211,12 +211,12 @@ gl_barcode_gnubarcode_new (const gchar    *id,
  *     Copyright (C) 1999 Prosa Srl. (prosa@prosa.it)
  *
  *--------------------------------------------------------------------------*/
-static glBarcode *
+static lglBarcode *
 render_pass1 (struct Barcode_Item *bci,
 	      gint                 flags)
 {
 	gint                 validbits = BARCODE_NO_ASCII;
-	glBarcode           *gbc;
+	lglBarcode          *gbc;
 	gdouble              scalef = 1.0;
 	gdouble              x;
 	gint                 i, j, barlen;
@@ -282,7 +282,7 @@ render_pass1 (struct Barcode_Item *bci,
 		bci->height = i * scalef;
 	}
 
-	gbc = gl_barcode_new ();
+	gbc = lgl_barcode_new ();
 
 	/* Now traverse the code string and create a list of lines */
 	x = bci->margin + (bci->partial[0] - '0') * scalef;
@@ -313,7 +313,7 @@ render_pass1 (struct Barcode_Item *bci,
 					yr -= (isdigit (*p) ? 20 : 10) * scalef;
 				}
 			}
-                        gl_barcode_add_line (gbc, x0, y0, yr, (j * scalef) - SHRINK_AMOUNT);
+                        lgl_barcode_add_line (gbc, x0, y0, yr, (j * scalef) - SHRINK_AMOUNT);
 		}
 		x += j * scalef;
 
@@ -341,7 +341,7 @@ render_pass1 (struct Barcode_Item *bci,
 			} else {
 				y0 = bci->margin;
 			}
-                        gl_barcode_add_char (gbc, x0, y0, (f2 * FONT_SCALE * scalef), c);
+                        lgl_barcode_add_char (gbc, x0, y0, (f2 * FONT_SCALE * scalef), c);
 		}
 	}
 

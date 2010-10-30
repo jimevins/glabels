@@ -42,14 +42,14 @@
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
-static glBarcode *render_zint     (struct zint_symbol *symbol, gboolean text_flag);
+static lglBarcode *render_zint     (struct zint_symbol *symbol, gboolean text_flag);
 
 
 
 /*****************************************************************************/
 /* Generate intermediate representation of barcode.                          */
 /*****************************************************************************/
-glBarcode *
+lglBarcode *
 gl_barcode_zint_new (const gchar          *id,
 			   gboolean        text_flag,
 			   gboolean        checksum_flag,
@@ -57,7 +57,7 @@ gl_barcode_zint_new (const gchar          *id,
 			   gdouble         h,
 			   const gchar    *digits)
 {
-	glBarcode           *gbc;
+	lglBarcode          *gbc;
 	struct zint_symbol  *symbol;
 	gint		     result;
 
@@ -173,11 +173,11 @@ gl_barcode_zint_new (const gchar          *id,
 
 
 /*--------------------------------------------------------------------------
- * PRIVATE. Render to glBarcode the provided Zint symbol.
+ * PRIVATE. Render to lglBarcode the provided Zint symbol.
  *--------------------------------------------------------------------------*/
-static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag)
+static lglBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag)
 {
-        glBarcode            *gbc;
+        lglBarcode            *gbc;
 
         struct zint_render         *render;
         struct zint_render_line    *zline;
@@ -186,30 +186,30 @@ static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag)
         struct zint_render_hexagon *zhexagon;
 
         render = symbol->rendered;
-        gbc = gl_barcode_new ();
+        gbc = lgl_barcode_new ();
 	
         for ( zline = render->lines; zline != NULL; zline = zline->next )
         {
-                gl_barcode_add_box (gbc, zline->x, zline->y, zline->width, zline->length);
+                lgl_barcode_add_box (gbc, zline->x, zline->y, zline->width, zline->length);
         }
 
         for ( zring = render->rings; zring != NULL; zring = zring->next )
         {
-                gl_barcode_add_ring (gbc, zring->x, zring->y, zring->radius, zring->line_width);
+                lgl_barcode_add_ring (gbc, zring->x, zring->y, zring->radius, zring->line_width);
         }
 
         for ( zhexagon = render->hexagons; zhexagon != NULL; zhexagon = zhexagon->next )
         {
-                gl_barcode_add_hexagon (gbc, zhexagon->x, zhexagon->y);
+                lgl_barcode_add_hexagon (gbc, zhexagon->x, zhexagon->y, 2.89);
         }
 
         if(text_flag)
         {
                 for ( zstring = render->strings; zstring != NULL; zstring = zstring->next )
                 {
-                        gl_barcode_add_string (gbc,
-                                               zstring->x, zstring->y,
-                                               zstring->fsize, (gchar *)zstring->text, zstring->length);
+                        lgl_barcode_add_string (gbc,
+                                                zstring->x, zstring->y,
+                                                zstring->fsize, (gchar *)zstring->text, zstring->length);
                 }
         }
 

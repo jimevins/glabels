@@ -3,6 +3,7 @@
 SUBDIRS = \
 	po \
 	libglabels \
+	libglbarcode \
 	src \
 	data \
 	templates \

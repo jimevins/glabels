@@ -25,8 +25,7 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 
-#include "bc-postnet.h"
-#include "bc-onecode.h"
+#include "bc-builtin.h"
 #include "bc-gnubarcode.h"
 #include "bc-zint.h"
 #include "bc-iec16022.h"
@@ -44,12 +43,12 @@
 /* Private types.                                         */
 /*========================================================*/
 
-typedef glBarcode *(*glBarcodeNewFunc) (const gchar    *id,
-                                        gboolean        text_flag,
-                                        gboolean        checksum_flag,
-                                        gdouble         w,
-                                        gdouble         h,
-                                        const gchar    *digits);
+typedef lglBarcode *(*glBarcodeNewFunc) (const gchar    *id,
+                                         gboolean        text_flag,
+                                         gboolean        checksum_flag,
+                                         gdouble         w,
+                                         gdouble         h,
+                                         const gchar    *digits);
 
 
 typedef struct {
@@ -99,23 +98,29 @@ static const Backend backends[] = {
 
 static const Style styles[] = {
 
-        { "built-in", "POSTNET", N_("POSTNET (any)"), gl_barcode_postnet_new,
+        { "built-in", "POSTNET", N_("POSTNET (any)"), gl_barcode_builtin_new,
           FALSE, FALSE, TRUE, FALSE, "12345-6789-12", FALSE, 11},
 
-        { "built-in", "POSTNET-5", N_("POSTNET-5 (ZIP only)"), gl_barcode_postnet_new,
+        { "built-in", "POSTNET-5", N_("POSTNET-5 (ZIP only)"), gl_barcode_builtin_new,
           FALSE, FALSE, TRUE, FALSE, "12345", FALSE, 5},
 
-        { "built-in", "POSTNET-9", N_("POSTNET-9 (ZIP+4)"), gl_barcode_postnet_new,
+        { "built-in", "POSTNET-9", N_("POSTNET-9 (ZIP+4)"), gl_barcode_builtin_new,
           FALSE, FALSE, TRUE, FALSE, "12345-6789", FALSE, 9},
 
-        { "built-in", "POSTNET-11", N_("POSTNET-11 (DPBC)"), gl_barcode_postnet_new,
+        { "built-in", "POSTNET-11", N_("POSTNET-11 (DPBC)"), gl_barcode_builtin_new,
           FALSE, FALSE, TRUE, FALSE, "12345-6789-12", FALSE, 11},
 
-        { "built-in", "CEPNET", N_("CEPNET"), gl_barcode_postnet_new,
+        { "built-in", "CEPNET", N_("CEPNET"), gl_barcode_builtin_new,
           FALSE, FALSE, TRUE, FALSE, "12345-678", FALSE, 8},
 
-        { "built-in", "ONECODE", N_("One Code"), gl_barcode_onecode_new,
+        { "built-in", "ONECODE", N_("One Code"), gl_barcode_builtin_new,
           FALSE, FALSE, TRUE, FALSE, "12345678901234567890", FALSE, 20},
+
+        { "built-in", "Code39", N_("Code 39"), gl_barcode_builtin_new,
+          TRUE, TRUE, TRUE, TRUE, "1234567890", TRUE, 10},
+
+        { "built-in", "Code39Ext", N_("Code 39 Extended"), gl_barcode_builtin_new,
+          TRUE, TRUE, TRUE, TRUE, "1234567890", TRUE, 10},
 
 #ifdef HAVE_LIBBARCODE
 
@@ -241,7 +246,7 @@ static const Style styles[] = {
           TRUE, TRUE, TRUE, FALSE, "12345678", TRUE, 8},
 
         { "zint", "Code39", N_("Code 39"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          TRUE, TRUE, FALSE, FALSE, "0000000000", TRUE, 10},
           
         { "zint", "Code39E", N_("Code 39 Extended"),  gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
@@ -796,7 +801,7 @@ gl_barcode_backends_style_get_prefered_n (const gchar *backend_id,
 /*****************************************************************************/
 /* Call appropriate barcode backend to create barcode in intermediate format.*/
 /*****************************************************************************/
-glBarcode *
+lglBarcode *
 gl_barcode_backends_new_barcode (const gchar    *backend_id,
                                  const gchar    *id,
                                  gboolean        text_flag,
@@ -805,8 +810,8 @@ gl_barcode_backends_new_barcode (const gchar    *backend_id,
                                  gdouble         h,
                                  const gchar    *digits)
 {
-        glBarcode *gbc;
-        gint       i;
+        lglBarcode *gbc;
+        gint        i;
 
         g_return_val_if_fail (digits!=NULL, NULL);
 

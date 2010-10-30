@@ -1,6 +1,5 @@
 /*
- *  bc-zint.h
- *  Copyright (C) 2010  Sam Lown <me@samlown.com>.
+ *  bc-builtin.h
  *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of gLabels.
@@ -19,23 +18,24 @@
  *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __BC_ZINT_H__
-#define __BC_ZINT_H__
+#ifndef __BC_BUILTIN_H__
+#define __BC_BUILTIN_H__
 
 #include <libglbarcode.h>
 
+
 G_BEGIN_DECLS
 
-lglBarcode *gl_barcode_zint_new (const gchar    *id,
-                                 gboolean        text_flag,
-                                 gboolean        checksum_flag,
-                                 gdouble         w,
-                                 gdouble         h,
-                                 const gchar    *digits);
+lglBarcode *gl_barcode_builtin_new (const gchar    *id,
+                                    gboolean        text_flag,
+                                    gboolean        checksum_flag,
+                                    gdouble         w,
+                                    gdouble         h,
+                                    const gchar    *digits);
 
 G_END_DECLS
 
-#endif /* __BC_ZINT_H__ */
+#endif /* __BC_BUILTIN_H__ */
 
 
 

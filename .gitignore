@@ -66,6 +66,8 @@ glabels-*.tar.gz
 /help/*/*.mo
 /help/*/glabels*.xml
 !/help/C/glabels*.xml
+/help/*/*.page
+!/help/C/*.page
 
 /docs/libglabels/*.stamp
 /docs/libglabels/xml/

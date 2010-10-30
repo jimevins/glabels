@@ -1,10 +1,11 @@
 
-SUBDIRS= ../libglabels pixmaps
+SUBDIRS= ../libglabels ../libglbarcode pixmaps
 
 bin_PROGRAMS = glabels-3 glabels-3-batch
 
 INCLUDES = \
 	-I$(top_builddir)/libglabels				\
+	-I$(top_builddir)/libglbarcode				\
 	$(GLABELS_CFLAGS) 					\
 	$(LIBEBOOK_CFLAGS)					\
 	$(LIBBARCODE_CFLAGS)					\
@@ -22,6 +23,7 @@ glabels_3_LDFLAGS = -export-dynamic
 glabels_3_LDADD = 				\
 	$(GLABELS_LIBS)				\
 	../libglabels/$(LIBGLABELS_BRANCH).la	\
+	../libglbarcode/$(LIBGLBARCODE_BRANCH).la	\
 	$(LIBEBOOK_LIBS)		 	\
 	$(LIBBARCODE_LIBS)		 	\
 	$(LIBZINT_LIBS)				\
@@ -34,6 +36,7 @@ glabels_3_batch_LDFLAGS = -export-dynamic
 glabels_3_batch_LDADD = 			\
 	$(GLABELS_LIBS)				\
 	../libglabels/$(LIBGLABELS_BRANCH).la	\
+	../libglbarcode/$(LIBGLBARCODE_BRANCH).la	\
 	$(LIBEBOOK_LIBS)		 	\
 	$(LIBBARCODE_LIBS)		 	\
 	$(LIBZINT_LIBS)				\
@@ -115,18 +118,14 @@ glabels_3_SOURCES = 			\
 	print-op-dialog.h		\
 	template-designer.c		\
 	template-designer.h		\
-	bc.c				\
-	bc.h				\
 	bc-backends.c			\
 	bc-backends.h			\
+	bc-builtin.c			\
+	bc-builtin.h			\
 	bc-gnubarcode.c			\
 	bc-gnubarcode.h			\
 	bc-zint.c			\
 	bc-zint.h 			\
-	bc-onecode.c			\
-	bc-onecode.h			\
-	bc-postnet.c			\
-	bc-postnet.h			\
 	bc-iec16022.c			\
 	bc-iec16022.h			\
 	bc-iec18004.c			\
@@ -246,18 +245,14 @@ glabels_3_batch_SOURCES = 		\
 	print.h				\
 	print-op.c			\
 	print-op.h			\
-	bc.c				\
-	bc.h				\
 	bc-backends.c			\
 	bc-backends.h			\
+	bc-builtin.c			\
+	bc-builtin.h			\
 	bc-gnubarcode.c			\
 	bc-gnubarcode.h			\
 	bc-zint.c			\
 	bc-zint.h			\
-	bc-onecode.c			\
-	bc-onecode.h			\
-	bc-postnet.c			\
-	bc-postnet.h			\
 	bc-iec16022.c			\
 	bc-iec16022.h			\
 	bc-iec18004.c			\
@@ -338,8 +333,11 @@ EXTRA_DIST = \
 
 CLEANFILES = $(BUILT_SOURCES)
 
-$(bin_PROGRAMS): ../libglabels/$(LIBGLABELS_BRANCH).la
+$(bin_PROGRAMS): ../libglabels/$(LIBGLABELS_BRANCH).la ../libglbarcode/$(LIBGLBARCODE_BRANCH).la
 
 ../libglabels/$(LIBGLABELS_BRANCH).la:
 	cd ../libglabels; $(MAKE)
+
+../libglbarcode/$(LIBGLBARCODE_BRANCH).la:
+	cd ../libglbarcode; $(MAKE)
 

@@ -1,7 +1,6 @@
 /*
- *  bc-zint.h
- *  Copyright (C) 2010  Sam Lown <me@samlown.com>.
- *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
+ *  lgl-barcode-code39.h
+ *  Copyright (C) 2001-2010  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of gLabels.
  *
@@ -19,23 +18,24 @@
  *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __BC_ZINT_H__
-#define __BC_ZINT_H__
+#ifndef __LGL_BARCODE_CODE39_H__
+#define __LGL_BARCODE_CODE39_H__
 
-#include <libglbarcode.h>
+#include "lgl-barcode.h"
+#include "lgl-barcode-type.h"
 
 G_BEGIN_DECLS
 
-lglBarcode *gl_barcode_zint_new (const gchar    *id,
-                                 gboolean        text_flag,
-                                 gboolean        checksum_flag,
-                                 gdouble         w,
-                                 gdouble         h,
-                                 const gchar    *digits);
+lglBarcode *lgl_barcode_code39_new (lglBarcodeType  type,
+                                    gboolean        text_flag,
+                                    gboolean        checksum_flag,
+                                    gdouble         w,
+                                    gdouble         h,
+                                    const gchar    *data);
 
 G_END_DECLS
 
-#endif /* __BC_ZINT_H__ */
+#endif /* __LGL_BARCODE_CODE39_H__ */
 
 
 

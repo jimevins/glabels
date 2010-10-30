@@ -42,17 +42,17 @@
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
-static glBarcode *render_iec16022 (const gchar *grid,
-                                   gint         i_width,
-                                   gint         i_height,
-                                   gdouble      w,
-                                   gdouble      h);
+static lglBarcode *render_iec16022 (const gchar *grid,
+                                    gint         i_width,
+                                    gint         i_height,
+                                    gdouble      w,
+                                    gdouble      h);
 
 
 /*****************************************************************************/
 /* Generate intermediate representation of barcode.                          */
 /*****************************************************************************/
-glBarcode *
+lglBarcode *
 gl_barcode_iec16022_new (const gchar    *id,
                          gboolean        text_flag,
                          gboolean        checksum_flag,
@@ -62,7 +62,7 @@ gl_barcode_iec16022_new (const gchar    *id,
 {
         gchar               *grid;
         gint                 i_width, i_height;
-        glBarcode           *gbc;
+        lglBarcode          *gbc;
 
         if ( strlen (digits) == 0 )
         {
@@ -86,16 +86,16 @@ gl_barcode_iec16022_new (const gchar    *id,
 
 
 /*--------------------------------------------------------------------------
- * PRIVATE.  Render to glBarcode intermediate representation of barcode.
+ * PRIVATE.  Render to lglBarcode intermediate representation of barcode.
  *--------------------------------------------------------------------------*/
-static glBarcode *
+static lglBarcode *
 render_iec16022 (const gchar *grid,
                  gint         i_width,
                  gint         i_height,
                  gdouble      w,
                  gdouble      h)
 {
-        glBarcode          *gbc;
+        lglBarcode         *gbc;
         gint                x, y;
         gdouble             aspect_ratio, pixel_size;
 
@@ -115,7 +115,7 @@ render_iec16022 (const gchar *grid,
                 pixel_size = MIN_PIXEL_SIZE;
         }
 
-        gbc = gl_barcode_new ();
+        gbc = lgl_barcode_new ();
 
         /* Now traverse the code string and create a list of boxes */
         for ( y = i_height-1; y >= 0; y-- )
@@ -126,7 +126,7 @@ render_iec16022 (const gchar *grid,
 
                         if (*grid++)
                         {
-                                gl_barcode_add_box (gbc, x*pixel_size, y*pixel_size, pixel_size, pixel_size);
+                                lgl_barcode_add_box (gbc, x*pixel_size, y*pixel_size, pixel_size, pixel_size);
                         }
 
                 }

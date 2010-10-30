@@ -1,5 +1,5 @@
 /*
- *  bc-onecode.c
+ *  lgl-barcode-onecode.c
  *  Copyright (C) 2010  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of gLabels.
@@ -25,14 +25,11 @@
 
 #include <config.h>
 
-#include "bc-onecode.h"
+#include "lgl-barcode-onecode.h"
 
 #include <glib.h>
 #include <ctype.h>
 #include <string.h>
-
-#include "debug.h"
-
 
 /*========================================================*/
 /* Private macros and constants.                          */
@@ -301,84 +298,59 @@ static guint character_table[] = {
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
-static gboolean  is_string_valid   (const gchar      *digits);
+static gboolean     is_string_valid    (const gchar      *data);
 
-static gchar    *onecode_code      (const gchar      *digits);
+static gchar       *onecode_encode     (const gchar      *data);
 
-static void      int104_mult_uint  (Int104           *x,
-                                    guint             y);
-static void      int104_add_uint   (Int104           *x,
-                                    guint             y);
-static void      int104_add_uint64 (Int104           *x,
-                                    guint64           y);
-static guint     int104_div_uint   (Int104           *x,
-                                    guint             y);
-static void      int104_print      (Int104           *x);
+static void         int104_mult_uint   (Int104           *x,
+                                        guint             y);
+static void         int104_add_uint    (Int104           *x,
+                                        guint             y);
+static void         int104_add_uint64  (Int104           *x,
+                                        guint64           y);
+static guint        int104_div_uint    (Int104           *x,
+                                        guint             y);
+#ifdef DEBUG
+static void         int104_print       (Int104           *x);
+#endif
 
-unsigned short   USPS_MSB_Math_CRC11GenerateFrameCheckSequence( unsigned char *ByteArrayPtr );
+static unsigned short   USPS_MSB_Math_CRC11GenerateFrameCheckSequence( unsigned char *ByteArrayPtr );
+
+static lglBarcode  *onecode_vectorize  (const gchar      *code);
 
 
 /****************************************************************************/
 /* Generate list of lines that form the barcode for the given digits.       */
 /****************************************************************************/
-glBarcode *
-gl_barcode_onecode_new (const gchar    *id,
-                        gboolean        text_flag,
-                        gboolean        checksum_flag,
-                        gdouble         w,
-                        gdouble         h,
-                        const gchar    *digits)
+lglBarcode *
+lgl_barcode_onecode_new (lglBarcodeType  type,
+                         gboolean        text_flag,
+                         gboolean        checksum_flag,
+                         gdouble         w,
+                         gdouble         h,
+                         const gchar    *data)
 {
-        gchar              *code, *p;
-        glBarcode          *gbc;
-        gdouble             x, y, length, width;
+        gchar              *code;
+        lglBarcode         *bc;
+
+        if ( type != LGL_BARCODE_TYPE_ONECODE )
+        {
+                g_message ("Invalid barcode type for ONECODE backend.");
+                return NULL;
+        }
 
         /* First get code string */
-        code = onecode_code (digits);
+        code = onecode_encode (data);
         if (code == NULL) {
                 return NULL;
         }
 
-        gbc = gl_barcode_new ();
-
-        /* Now traverse the code string and create a list of lines */
-        x = ONECODE_HORIZ_MARGIN;
-        for (p = code; *p != 0; p++) {
-                y = ONECODE_VERT_MARGIN;
-                switch ( *p )
-                {
-                case 'T':
-                        y      += ONECODE_TRACKER_OFFSET;
-                        length  = ONECODE_TRACKER_HEIGHT;
-                        break;
-                case 'D':
-                        y      += ONECODE_DESCENDER_OFFSET;
-                        length  = ONECODE_DESCENDER_HEIGHT;
-                        break;
-                case 'A':
-                        y      += ONECODE_ASCENDER_OFFSET;
-                        length  = ONECODE_ASCENDER_HEIGHT;
-                        break;
-                case 'F':
-                        y      += ONECODE_FULL_OFFSET;
-                        length  = ONECODE_FULL_HEIGHT;
-                        break;
-                default:
-                        break;
-                }
-                width = ONECODE_BAR_WIDTH;
-
-                gl_barcode_add_line (gbc, x, y, length, width);
-
-                x += ONECODE_BAR_PITCH;
-        }
+        /* Now vectorize encoded data. */
+        bc = onecode_vectorize (code);
 
         g_free (code);
 
-        gbc->width = x + ONECODE_HORIZ_MARGIN;
-        gbc->height = ONECODE_FULL_HEIGHT + 2 * ONECODE_VERT_MARGIN;
-
-        return gbc;
+        return bc;
 }
 
 
@@ -386,18 +358,17 @@ gl_barcode_onecode_new (const gchar    *id,
 /* PRIVATE.  Generate string of symbols, representing barcode.              */
 /*--------------------------------------------------------------------------*/
 static gchar *
-onecode_code (const gchar *digits)
+onecode_encode (const gchar *data)
 {
-        Int104   value = {0};
+        Int104   value = {{0}};
         gint     i;
         guint    crc11;
         guint    codeword[10];
         guint    character[10];
         gint     d, a;
         GString *code;
-        gchar   *ret;
 
-        if ( !is_string_valid (digits) )
+        if ( !is_string_valid (data) )
         {
                 return NULL;
         }
@@ -408,10 +379,10 @@ onecode_code (const gchar *digits)
         /*-----------------------------------------------------------*/
 
         /* Step 1.a -- Routing Code */
-        for ( i = 20; digits[i] != 0; i++ )
+        for ( i = 20; data[i] != 0; i++ )
         {
                 int104_mult_uint (&value, 10);
-                int104_add_uint  (&value, digits[i] - '0');
+                int104_add_uint  (&value, data[i] - '0');
         }
         switch ( i-20 )
         {
@@ -436,14 +407,14 @@ onecode_code (const gchar *digits)
 
         /* Step 1.b -- Tracking Code */
         int104_mult_uint (&value, 10);
-        int104_add_uint  (&value, digits[0] - '0');
+        int104_add_uint  (&value, data[0] - '0');
         int104_mult_uint (&value, 5);
-        int104_add_uint  (&value, digits[1] - '0');
+        int104_add_uint  (&value, data[1] - '0');
 
         for ( i = 2; i < 20; i++ )
         {
                 int104_mult_uint (&value, 10);
-                int104_add_uint  (&value, digits[i] - '0');
+                int104_add_uint  (&value, data[i] - '0');
         }
 
 
@@ -503,10 +474,7 @@ onecode_code (const gchar *digits)
         }
 
 
-        ret = g_strdup (code->str);
-        g_string_free (code, TRUE);
-
-        return ret;
+        return g_string_free (code, FALSE);
 }
 
 
@@ -514,16 +482,16 @@ onecode_code (const gchar *digits)
 /* Validate if string is of proper length & contains only valid characters. */
 /*--------------------------------------------------------------------------*/
 static gboolean
-is_string_valid (const gchar *digits)
+is_string_valid (const gchar *data)
 {
         gchar *p;
         gint   str_length;
 
-        if (!digits) {
+        if (!data) {
                 return FALSE;
         }
 
-        str_length = strlen (digits);
+        str_length = strlen (data);
         if ( (str_length != 20) &&
              (str_length != 25) &&
              (str_length != 29) &&
@@ -532,7 +500,7 @@ is_string_valid (const gchar *digits)
                 return FALSE;
         }
 
-        for ( p = (gchar *)digits; *p != 0; p++ )
+        for ( p = (gchar *)data; *p != 0; p++ )
         {
                 if (!g_ascii_isdigit (*p))
                 {
@@ -540,7 +508,7 @@ is_string_valid (const gchar *digits)
                 }
         }
 
-        if (digits[1] > '4')
+        if (data[1] > '4')
         {
                 return FALSE; /* Invalid Barcode Identifier. */
         }
@@ -638,6 +606,7 @@ int104_div_uint (Int104 *x,
 /*--------------------------------------------------------------------------*/
 /* Print hex representation of 104 bit integer.  (For debugging)            */
 /*--------------------------------------------------------------------------*/
+#ifdef DEBUG
 static void
 int104_print (Int104  *x)
 {
@@ -649,6 +618,7 @@ int104_print (Int104  *x)
         }
         g_print ("\n");
 }
+#endif
 
 
 /***************************************************************************
@@ -667,49 +637,101 @@ int104_print (Int104  *x)
 unsigned short
 USPS_MSB_Math_CRC11GenerateFrameCheckSequence( unsigned char *ByteArrayPtr )
 {
-	unsigned short  GeneratorPolynomial = 0x0F35;
-	unsigned short  FrameCheckSequence  = 0x07FF;
-	unsigned short  Data;
-	int             ByteIndex, Bit;
+        unsigned short  GeneratorPolynomial = 0x0F35;
+        unsigned short  FrameCheckSequence  = 0x07FF;
+        unsigned short  Data;
+        int             ByteIndex, Bit;
 
-	/* Do most significant byte skipping the 2 most significant bits */
-	Data = *ByteArrayPtr << 5;
-	ByteArrayPtr++;
-	for ( Bit = 2; Bit < 8; Bit++ )
-	{
-		if ( (FrameCheckSequence ^ Data) & 0x400 )
+        /* Do most significant byte skipping the 2 most significant bits */
+        Data = *ByteArrayPtr << 5;
+        ByteArrayPtr++;
+        for ( Bit = 2; Bit < 8; Bit++ )
+        {
+                if ( (FrameCheckSequence ^ Data) & 0x400 )
                 {
-			FrameCheckSequence = (FrameCheckSequence << 1) ^ GeneratorPolynomial;
+                        FrameCheckSequence = (FrameCheckSequence << 1) ^ GeneratorPolynomial;
                 }
-		else
+                else
                 {
-			FrameCheckSequence = (FrameCheckSequence << 1);
+                        FrameCheckSequence = (FrameCheckSequence << 1);
                 }
-		FrameCheckSequence &= 0x7FF;
-		Data <<= 1;
-	}
+                FrameCheckSequence &= 0x7FF;
+                Data <<= 1;
+        }
 
-	/* Do rest of the bytes */
-	for ( ByteIndex = 1; ByteIndex < 13; ByteIndex++ )
-	{
-		Data = *ByteArrayPtr << 3;
-		ByteArrayPtr++;
-		for ( Bit = 0; Bit < 8; Bit++ )
-		{
-			if ( (FrameCheckSequence ^ Data) & 0x0400 )
+        /* Do rest of the bytes */
+        for ( ByteIndex = 1; ByteIndex < 13; ByteIndex++ )
+        {
+                Data = *ByteArrayPtr << 3;
+                ByteArrayPtr++;
+                for ( Bit = 0; Bit < 8; Bit++ )
+                {
+                        if ( (FrameCheckSequence ^ Data) & 0x0400 )
                         {
-				FrameCheckSequence = (FrameCheckSequence << 1) ^ GeneratorPolynomial;
-			}
+                                FrameCheckSequence = (FrameCheckSequence << 1) ^ GeneratorPolynomial;
+                        }
                         else
                         {
-				FrameCheckSequence = (FrameCheckSequence << 1);
-			}
-			FrameCheckSequence &= 0x7FF;
-			Data <<= 1;
-		}
-	}
+                                FrameCheckSequence = (FrameCheckSequence << 1);
+                        }
+                        FrameCheckSequence &= 0x7FF;
+                        Data <<= 1;
+                }
+        }
 
-	return FrameCheckSequence;
+        return FrameCheckSequence;
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* Vectorize encoded data.                                                  */
+/*--------------------------------------------------------------------------*/
+static lglBarcode *
+onecode_vectorize (const gchar  *code)
+{
+        lglBarcode         *bc;
+        gchar              *p;
+        gdouble             x, y, length, width;
+
+        bc = lgl_barcode_new ();
+
+        /* Now traverse the code string and create a list of lines */
+        x = ONECODE_HORIZ_MARGIN;
+        for (p = (gchar *)code; *p != 0; p++)
+        {
+                y = ONECODE_VERT_MARGIN;
+                switch ( *p )
+                {
+                case 'T':
+                        y      += ONECODE_TRACKER_OFFSET;
+                        length  = ONECODE_TRACKER_HEIGHT;
+                        break;
+                case 'D':
+                        y      += ONECODE_DESCENDER_OFFSET;
+                        length  = ONECODE_DESCENDER_HEIGHT;
+                        break;
+                case 'A':
+                        y      += ONECODE_ASCENDER_OFFSET;
+                        length  = ONECODE_ASCENDER_HEIGHT;
+                        break;
+                case 'F':
+                        y      += ONECODE_FULL_OFFSET;
+                        length  = ONECODE_FULL_HEIGHT;
+                        break;
+                default:
+                        break;
+                }
+                width = ONECODE_BAR_WIDTH;
+
+                lgl_barcode_add_box (bc, x, y, width, length);
+
+                x += ONECODE_BAR_PITCH;
+        }
+
+        bc->width = x + ONECODE_HORIZ_MARGIN;
+        bc->height = ONECODE_FULL_HEIGHT + 2 * ONECODE_VERT_MARGIN;
+
+        return bc;
 }
 
 

@@ -22,7 +22,7 @@
 #define __BC_BACKENDS_H__
 
 #include <glib.h>
-#include "bc.h"
+#include <libglbarcode.h>
 
 G_BEGIN_DECLS
 
@@ -62,7 +62,7 @@ gboolean         gl_barcode_backends_style_can_freeform   (const gchar    *backe
 guint            gl_barcode_backends_style_get_prefered_n (const gchar    *backend_id,
                                                            const gchar    *id);
 
-glBarcode       *gl_barcode_backends_new_barcode          (const gchar    *backend_id,
+lglBarcode      *gl_barcode_backends_new_barcode          (const gchar    *backend_id,
                                                            const gchar    *id,
                                                            gboolean        text_flag,
                                                            gboolean        checksum_flag,

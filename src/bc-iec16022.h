@@ -21,16 +21,16 @@
 #ifndef __BC_IEC16022_H__
 #define __BC_IEC16022_H__
 
-#include "bc.h"
+#include <libglbarcode.h>
 
 G_BEGIN_DECLS
 
-glBarcode *gl_barcode_iec16022_new (const gchar    *id,
-                                    gboolean        text_flag,
-                                    gboolean        checksum_flag,
-                                    gdouble         w,
-                                    gdouble         h,
-                                    const gchar    *digits);
+lglBarcode *gl_barcode_iec16022_new (const gchar    *id,
+                                     gboolean        text_flag,
+                                     gboolean        checksum_flag,
+                                     gdouble         w,
+                                     gdouble         h,
+                                     const gchar    *digits);
 
 G_END_DECLS
 

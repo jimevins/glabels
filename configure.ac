@@ -45,6 +45,12 @@ LIBGLABELS_BRANCH=libglabels-3.0
 AC_SUBST(LIBGLABELS_BRANCH)
 
 dnl ---------------------------------------------------------------------------
+dnl - LIBGLBARCODE branch
+dnl ---------------------------------------------------------------------------
+LIBGLBARCODE_BRANCH=libglbarcode-3.0
+AC_SUBST(LIBGLBARCODE_BRANCH)
+
+dnl ---------------------------------------------------------------------------
 dnl - LIBGLABELS API versioning
 dnl ---------------------------------------------------------------------------
 dnl From the libtool manual:
@@ -67,6 +73,28 @@ LIBGLABELS_API_VERSION=${LIBGLABELS_C}:${LIBGLABELS_R}:${LIBGLABELS_A}
 AC_SUBST(LIBGLABELS_API_VERSION)
 
 dnl ---------------------------------------------------------------------------
+dnl - LIBGLBARCODE API versioning
+dnl ---------------------------------------------------------------------------
+dnl From the libtool manual:
+dnl 1. Start with version information of `0:0:0' for each libtool library.
+dnl 2. Update the version information only immediately before a public release.
+dnl    More frequent updates are unnecessary, and only guarantee that the current
+dnl    interface number gets larger faster.
+dnl 3. If the library source code has changed at all since the last update, then increment
+dnl    revision (`c:r:a' becomes `c:r+1:a').
+dnl 4. If any interfaces have been added, removed, or changed since the last update,
+dnl    increment current, and set revision to 0.
+dnl 5. If any interfaces have been added since the last public release, then increment age.
+dnl 6. If any interfaces have been removed since the last public release, then set age
+dnl    to 0.
+LIBGLBARCODE_C=0
+LIBGLBARCODE_R=0
+LIBGLBARCODE_A=0
+
+LIBGLBARCODE_API_VERSION=${LIBGLBARCODE_C}:${LIBGLBARCODE_R}:${LIBGLBARCODE_A}
+AC_SUBST(LIBGLBARCODE_API_VERSION)
+
+dnl ---------------------------------------------------------------------------
 dnl - Library dependencies
 dnl ---------------------------------------------------------------------------
 dnl Required dependencies
@@ -75,6 +103,8 @@ GTK_REQUIRED=2.20.0
 GCONF_REQUIRED=2.28.0
 LIBXML_REQUIRED=2.7.0
 LIBRSVG_REQUIRED=2.26.0
+CAIRO_REQUIRED=1.8.0
+PANGO_REQUIRED=1.28.0
 
 dnl Optional dependencies
 LIBEBOOK_REQUIRED=2.28.0
@@ -88,6 +118,9 @@ AC_SUBST(GLIB_REQUIRED)
 AC_SUBST(GTK_REQUIRED)
 AC_SUBST(GCONF_REQUIRED)
 AC_SUBST(LIBXML_REQUIRED)
+AC_SUBST(LIBRSVG_REQUIRED)
+AC_SUBST(CAIRO_REQUIRED)
+AC_SUBST(PANGO_REQUIRED)
 AC_SUBST(LIBEBOOK_REQUIRED)
 AC_SUBST(LIBBARCODE_REQUIRED)
 AC_SUBST(LIBQRENCODE_REQUIRED)
@@ -121,6 +154,19 @@ PKG_CHECK_MODULES(LIBGLABELS, [\
 
 AC_SUBST(LIBGLABELS_CFLAGS)
 AC_SUBST(LIBGLABELS_LIBS)
+
+
+dnl ---------------------------------------------------------------------------
+dnl - LIBGLBARCODE more modest prerequisites
+dnl ---------------------------------------------------------------------------
+PKG_CHECK_MODULES(LIBGLBARCODE, [\
+	glib-2.0 >= $GLIB_REQUIRED \
+	cairo >= $CAIRO_REQUIRED \
+	pango >= $PANGO_REQUIRED \
+])
+
+AC_SUBST(LIBGLBARCODE_CFLAGS)
+AC_SUBST(LIBGLBARCODE_LIBS)
 
 
 dnl ---------------------------------------------------------------------------
@@ -271,6 +317,8 @@ AC_CONFIG_FILES([
 Makefile
 libglabels/Makefile
 libglabels/${LIBGLABELS_BRANCH}.pc
+libglbarcode/Makefile
+libglbarcode/${LIBGLBARCODE_BRANCH}.pc
 src/Makefile
 src/pixmaps/Makefile
 data/Makefile

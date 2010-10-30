@@ -36,6 +36,8 @@
 #define FONT_SCALE (72.0/96.0)
 #define PI 3.141592654
 
+#define GL_BARCODE_FONT_FAMILY      "Sans"
+
 
 /*========================================================*/
 /* Private types.                                         */
@@ -302,7 +304,7 @@ get_size (glLabelObject *object,
         glLabelBarcode      *lbc = (glLabelBarcode *)object;
         gchar               *data;
         gdouble              w_parent, h_parent;
-        glBarcode           *gbc;
+        lglBarcode          *gbc;
 
         gl_debug (DEBUG_LABEL, "START");
 
@@ -354,7 +356,7 @@ get_size (glLabelObject *object,
                 *h = 72;
         }
 
-        gl_barcode_free (&gbc);
+        lgl_barcode_free (gbc);
 
         gl_debug (DEBUG_LABEL, "END");
 }
@@ -413,26 +415,15 @@ draw_object (glLabelObject *object,
 {
         gdouble               x0, y0;
         cairo_matrix_t        matrix;
-        glBarcode            *gbc;
-        glBarcodeShape       *shape;
-        glBarcodeShapeLine   *line;
-        glBarcodeShapeBox    *box;
-        glBarcodeShapeRing   *ring;
-        glBarcodeShapeHexagon *hexagon;
-        glBarcodeShapeChar   *bchar;
-        glBarcodeShapeString *bstring;
-        GList                *p;
-        gdouble               x_offset, y_offset;
+        lglBarcode           *gbc;
         PangoLayout          *layout;
         PangoFontDescription *desc;
-        gchar                *text, *cstring;
+        gchar                *text;
         glTextNode           *text_node;
         glLabelBarcodeStyle  *style;
         guint                 color;
         glColorNode          *color_node;
         gdouble               w, h;
-        gint                  iw, ih;
-        gdouble               layout_width;
 
         gl_debug (DEBUG_LABEL, "START");
 
@@ -487,111 +478,9 @@ draw_object (glLabelObject *object,
 
         } else {
 
-                for (p = gbc->shapes; p != NULL; p = p->next) {
-                        shape = (glBarcodeShape *)p->data;
-                        switch (shape->type)
-                        {
+                lgl_barcode_render_to_cairo (gbc, cr);
 
-                        case GL_BARCODE_SHAPE_LINE:
-                                line = (glBarcodeShapeLine *) shape;
-
-                                cairo_move_to (cr, line->x, line->y);
-                                cairo_line_to (cr, line->x, line->y + line->length);
-                                cairo_set_line_width (cr, line->width);
-                                cairo_stroke (cr);
-
-                                break;
-
-                        case GL_BARCODE_SHAPE_BOX:
-                                box = (glBarcodeShapeBox *) shape;
-
-                                cairo_rectangle (cr, box->x, box->y, box->width, box->height);
-                                cairo_fill (cr);
-
-                                break;
-
-                        case GL_BARCODE_SHAPE_CHAR:
-                                bchar = (glBarcodeShapeChar *) shape;
-
-                                layout = pango_cairo_create_layout (cr);
-
-                                desc = pango_font_description_new ();
-                                pango_font_description_set_family (desc, GL_BARCODE_FONT_FAMILY);
-                                pango_font_description_set_size   (desc, bchar->fsize * PANGO_SCALE * FONT_SCALE);
-                                pango_layout_set_font_description (layout, desc);
-                                pango_font_description_free       (desc);
-
-                                cstring = g_strdup_printf ("%c", bchar->c);
-                                pango_layout_set_text (layout, cstring, -1);
-                                g_free (cstring);
-
-                                y_offset = 0.2 * bchar->fsize;
-
-                                cairo_move_to (cr, bchar->x, bchar->y-y_offset);
-                                pango_cairo_show_layout (cr, layout);
-
-                                g_object_unref (layout);
-
-                                break;
-
-                        case GL_BARCODE_SHAPE_STRING:
-                                bstring = (glBarcodeShapeString *) shape;
-
-                                layout = pango_cairo_create_layout (cr);
-
-                                desc = pango_font_description_new ();
-                                pango_font_description_set_family (desc, GL_BARCODE_FONT_FAMILY);
-                                pango_font_description_set_size   (desc, bstring->fsize * PANGO_SCALE * FONT_SCALE);
-                                pango_layout_set_font_description (layout, desc);
-                                pango_font_description_free       (desc);
-
-                                pango_layout_set_text (layout, bstring->string, -1);
-
-                                pango_layout_get_size (layout, &iw, &ih);
-                                layout_width = (gdouble)iw / (gdouble)PANGO_SCALE;
-
-                                x_offset = layout_width / 2.0;
-                                y_offset = 0.2 * bstring->fsize;
-
-                                cairo_move_to (cr, (bstring->x - x_offset), (bstring->y - y_offset));
-                                pango_cairo_show_layout (cr, layout);
-
-                                g_object_unref (layout);
-
-                                break;
-
-                        case GL_BARCODE_SHAPE_RING:
-                                ring = (glBarcodeShapeRing *) shape;
-
-                                cairo_arc (cr, ring->x, ring->y, ring->radius, 0.0, 2 * PI);
-                                cairo_set_line_width (cr, ring->line_width);
-                                cairo_stroke (cr);
-
-                                break;
-
-                        case GL_BARCODE_SHAPE_HEXAGON:
-                                hexagon = (glBarcodeShapeHexagon *) shape;
-
-                                cairo_move_to (cr, hexagon->x, hexagon->y);
-                                cairo_line_to (cr, hexagon->x + 1.25, hexagon->y + 0.70);
-                                cairo_line_to (cr, hexagon->x + 1.25, hexagon->y + 2.18);
-                                cairo_line_to (cr, hexagon->x, hexagon->y + 2.89);
-                                cairo_line_to (cr, hexagon->x - 1.25, hexagon->y + 2.18);
-                                cairo_line_to (cr, hexagon->x - 1.25, hexagon->y + 0.70);
-                                cairo_close_path (cr);
-                                cairo_fill (cr);
-
-                                break;
-
-                        default:
-                                g_assert_not_reached ();
-                                break;
-
-                        }
-
-                }
-
-                gl_barcode_free (&gbc);
+                lgl_barcode_free (gbc);
 
         }
 

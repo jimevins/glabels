@@ -1,6 +1,6 @@
 /*
- *  bc-postnet.h
- *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
+ *  lgl-barcode-render-to-cairo.h
+ *  Copyright (C) 2010  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of gLabels.
  *
@@ -18,23 +18,20 @@
  *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __BC_POSTNET_H__
-#define __BC_POSTNET_H__
+#ifndef __LGL_RENDER_TO_CAIRO_H__
+#define __LGL_RENDER_TO_CAIRO_H__
 
-#include "bc.h"
+#include "lgl-barcode.h"
+#include <cairo.h>
 
 G_BEGIN_DECLS
 
-glBarcode *gl_barcode_postnet_new (const gchar    *id,
-				   gboolean        text_flag,
-				   gboolean        checksum_flag,
-				   gdouble         w,
-				   gdouble         h,
-				   const gchar    *digits);
+void  lgl_barcode_render_to_cairo (const lglBarcode *bc,
+                                   cairo_t          *cr);
 
 G_END_DECLS
 
-#endif /* __BC_POSTNET_H__ */
+#endif /* __LGL_RENDER_TO_CAIRO_H__ */
 
 
 
