@@ -25,6 +25,30 @@
     gLabels label and business card designer
   </title>
 
+  <p>
+    The <app>gLabels</app> application is a lightweight program for creating labels and 
+    business cards for the GNOME desktop environment. It is designed to work with 
+    various laser/ink-jet peel-off label and business card sheets that you'll find 
+    at most office supply stores.
+  </p>
+ 
+  <p>
+    <app>gLabels</app> can be used to design address labels, name tags, price tags,
+    cd/dvd labels, or just about anything else that is organized in a regular
+    pattern on a sheet of paper.  Labels (or cards) can contain text, images, lines,
+    shapes, and barcodes.  <app>gLabels</app> also includes a document-merge
+    feature which lets you print a unique label for each record from an external
+    data source, such as a CSV file or an <app>Evolution</app> address book.
+  </p>
+
+  <figure>
+    <title><app>gLabels</app> main window</title>
+    <desc><app>gLabels</app> main window</desc>
+    <media type="image" src="figures/introduction-glabels-main-window.png" mime="image/png" style="right">
+      <p><app>gLabels</app> main window.</p>
+    </media>
+  </figure>
+
   <section id="usage" style="2column">
     <title>Usage</title>
   </section>
