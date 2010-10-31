@@ -10,8 +10,6 @@ src/bc-iec16022.c
 src/bc-iec16022.h
 src/bc-iec18004.c
 src/bc-iec18004.h
-src/bc-postnet.c
-src/bc-postnet.h
 src/builder-util.c
 src/builder-util.h
 src/cairo-ellipse-path.c
