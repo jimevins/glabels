@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
-"POT-Creation-Date: 2010-10-24 10:45+0000\n"
-"PO-Revision-Date: 2010-10-24 12:45+0100\n"
+"POT-Creation-Date: 2010-10-31 14:29+0000\n"
+"PO-Revision-Date: 2010-10-31 15:35+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -2000,6 +2000,14 @@ msgid ""
 "@@image: 'figures/glabels-logo.png'; md5=7b8d3b2afa219313ec0b41e8fa281d96"
 msgstr "translated"
 
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/index.page:47(None)
+msgid ""
+"@@image: 'figures/introduction-glabels-main-window.png'; "
+"md5=2309c89ac6b5556daaf04adb72c39ffb"
+msgstr ""
+
 #: C/index.page:7(title) C/index.page:8(title)
 msgid "gLabels label and business card designer"
 msgstr "gLabels Etiketten- und Visitenkarten-Designer"
@@ -2012,15 +2020,57 @@ msgstr ""
 "<media type=\"image\" mime=\"image/png\" src=\"figures/glabels-logo.png"
 "\">gLabels logo</media> gLabels Etiketten- und Visitenkarten-Designer"
 
-#: C/index.page:29(title)
+#: C/index.page:28(p)
+msgid ""
+"The <app>gLabels</app> application is a lightweight program for creating "
+"labels and business cards for the GNOME desktop environment. It is designed "
+"to work with various laser/ink-jet peel-off label and business card sheets "
+"that you'll find at most office supply stores."
+msgstr ""
+"Die Anwendung <app>gLabels</app> ist ein ressourcenschonendes Programm zum "
+"Erstellen von Etiketten und Visitenkarten für die GNOME-Arbeitsumgebung. Es "
+"wurde für die verschiedensten mit Laser- oder Tintenstrahldruckern "
+"bedruckbaren (auch selbstklebenden) Etiketten sowie Visitenkarten entworfen, "
+"so wie Sie sie in den meisten Schreibwarengeschäften finden."
+
+#: C/index.page:35(p)
+msgid ""
+"<app>gLabels</app> can be used to design address labels, name tags, price "
+"tags, cd/dvd labels, or just about anything else that is organized in a "
+"regular pattern on a sheet of paper. Labels (or cards) can contain text, "
+"images, lines, shapes, and barcodes. <app>gLabels</app> also includes a "
+"document-merge feature which lets you print a unique label for each record "
+"from an external data source, such as a CSV file or an <app>Evolution</app> "
+"address book."
+msgstr ""
+"<app>gLabels</app> kann zum Enwerfen von Adressaufklebern, Namens- und "
+"Preisschildern, Etiketten für CDs und DVDs oder für alles Andere verwendet "
+"werden, was mit dem Bedrucken von Papieren zu tun hat, die Etiketten oder "
+"Karten in einer regulären Anordnung enthalten. Die Etiketten oder Karten "
+"können Text, Bilder, Linien, Formen oder Strichcodes enthalten. <app>gLabels</"
+"app> verfügt auch über ein Funktionsmerkmal zur Dokumentmischung. Das "
+"bedeutet, dass Sie eine externe Datenquelle dazu verwenden können, ein "
+"Etikett für jeden Datensatz zu drucken. Als Datenquelle kann dabei "
+"beispielsweise eine CSV-Datei oder das Adressbuch von <app>Evolution</app> "
+"genutzt werden."
+
+#: C/index.page:45(title) C/index.page:46(desc)
+msgid "<app>gLabels</app> main window"
+msgstr "<app>gLabels</app>-Hauptfenster"
+
+#: C/index.page:48(p)
+msgid "<app>gLabels</app> main window."
+msgstr "<app>gLabels</app>-Hauptfenster"
+
+#: C/index.page:53(title)
 msgid "Usage"
 msgstr "Benutzung"
 
-#: C/index.page:33(title)
+#: C/index.page:57(title)
 msgid "Document Merging"
 msgstr "Dokumentmischung"
 
-#: C/index.page:37(title)
+#: C/index.page:61(title)
 msgid "Advanced usage"
 msgstr "Fortgeschrittene Verwendung"
 
@@ -3073,21 +3123,6 @@ msgstr "Mario Blättermann <mariobl@gnome.org>, 2008, 2009, 2010"
 
 #~ msgid "Introduction"
 #~ msgstr "Einführung"
-
-#~ msgid ""
-#~ "The <placeholder-1/> application is a lightweight program for creating "
-#~ "labels and business cards for the GNOME desktop environment. It is "
-#~ "designed to work with various laser/ink-jet peel-off label and business "
-#~ "card sheets that you'll find at most office supply stores."
-#~ msgstr ""
-#~ "Die Anwendung <placeholder-1/> ist ein ressourcenschonendes Programm zum "
-#~ "Erstellen von Etiketten und Visitenkarten für die GNOME-Arbeitsumgebung. "
-#~ "Es wurde für die verschiedensten mit Laser- oder Tintenstrahldruckern "
-#~ "bedruckbaren (auch selbstklebenden) Etiketten sowie Visitenkarten "
-#~ "entworfen, so wie Sie sie in den meisten Schreibwarengeschäften finden."
-
-#~ msgid "<app>gLabels</app> main window"
-#~ msgstr "<app>gLabels</app>-Hauptfenster"
 
 #~ msgid "<placeholder-1/> main window"
 #~ msgstr "Hauptfenster von <placeholder-1/>"
