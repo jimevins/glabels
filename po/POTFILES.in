@@ -4,12 +4,16 @@ src/bc.c
 src/bc.h
 src/bc-backends.c
 src/bc-backends.h
+src/bc-builtin.c
+src/bc-builtin.h
 src/bc-gnubarcode.c
 src/bc-gnubarcode.h
 src/bc-iec16022.c
 src/bc-iec16022.h
 src/bc-iec18004.c
 src/bc-iec18004.h
+src/bc-zint.c
+src/bc-zint.h
 src/builder-util.c
 src/builder-util.h
 src/cairo-ellipse-path.c
