@@ -26,8 +26,11 @@
 
 G_BEGIN_DECLS
 
-void  lgl_barcode_render_to_cairo (const lglBarcode *bc,
-                                   cairo_t          *cr);
+void  lgl_barcode_render_to_cairo      (const lglBarcode *bc,
+                                        cairo_t          *cr);
+
+void  lgl_barcode_render_to_cairo_path (const lglBarcode *bc,
+                                        cairo_t          *cr);
 
 G_END_DECLS
 

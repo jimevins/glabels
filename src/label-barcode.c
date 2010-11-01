@@ -38,6 +38,9 @@
 
 #define GL_BARCODE_FONT_FAMILY      "Sans"
 
+#define HANDLE_OUTLINE_RGBA_ARGS   0.5,   0.5,   0.5,   0.75
+#define HANDLE_OUTLINE_WIDTH_PIXELS   2.0
+
 
 /*========================================================*/
 /* Private types.                                         */
@@ -86,6 +89,9 @@ static gboolean object_at                   (glLabelObject       *object,
                                              gdouble              x_pixels,
                                              gdouble              y_pixels);
 
+static void     draw_handles                (glLabelObject       *object,
+                                             cairo_t             *cr);
+
 
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
@@ -108,6 +114,7 @@ gl_label_barcode_class_init (glLabelBarcodeClass *class)
         label_object_class->draw_object    = draw_object;
         label_object_class->draw_shadow    = NULL;
         label_object_class->object_at      = object_at;
+        label_object_class->draw_handles   = draw_handles;
 
         object_class->finalize = gl_label_barcode_finalize;
 }
@@ -442,7 +449,6 @@ draw_object (glLabelObject *object,
 
         gl_label_object_get_size (object, &w, &h);
 
-        text_node = gl_label_barcode_get_data(GL_LABEL_BARCODE(object));
         text = gl_text_node_expand (text_node, record);
         if (text_node->field_flag && screen_flag) {
                 text = gl_barcode_backends_style_default_digits (style->backend_id, style->id, style->format_digits);
@@ -502,19 +508,86 @@ object_at (glLabelObject *object,
            gdouble        x,
            gdouble        y)
 {
-        gdouble           w, h;
+        gdouble               w, h;
+        lglBarcode           *gbc;
+        glLabelBarcodeStyle  *style;
+        glTextNode           *text_node;
+        gchar                *text;
 
         gl_label_object_get_size (object, &w, &h);
 
-        cairo_new_path (cr);
-        cairo_rectangle (cr, 0.0, 0.0, w, h);
-
-        if (cairo_in_fill (cr, x, y))
+        if ( (x >= 0) && (x <= w) && (y >= 0) && (y <= h) )
         {
-                return TRUE;
+
+                style = gl_label_barcode_get_style (GL_LABEL_BARCODE (object));
+                text_node = gl_label_barcode_get_data(GL_LABEL_BARCODE(object));
+                text = gl_text_node_expand (text_node, NULL);
+                if (text_node->field_flag) {
+                        text = gl_barcode_backends_style_default_digits (style->backend_id, style->id, style->format_digits);
+                }
+                gbc = gl_barcode_backends_new_barcode (style->backend_id,
+                                                       style->id,
+                                                       style->text_flag,
+                                                       style->checksum_flag,
+                                                       w, h,
+                                                       text);
+                if ( gbc )
+                {
+                        lgl_barcode_render_to_cairo_path (gbc, cr);
+                        lgl_barcode_free (gbc);
+                }
+
+                if (cairo_in_fill (cr, x, y))
+                {
+                        return TRUE;
+                }
+
+        }
+
+        if (gl_label_object_is_selected (object))
+        {
+                cairo_new_path (cr);
+                cairo_rectangle (cr, 0, 0, w, h);
+                if (cairo_in_stroke (cr, x, y))
+                {
+                        return TRUE;
+                }
         }
 
         return FALSE;
+}
+
+
+/*****************************************************************************/
+/* Draw barcode style handles.                                               */
+/*****************************************************************************/
+static void
+draw_handles (glLabelObject     *object,
+              cairo_t           *cr)
+{
+        gdouble w, h;
+        gdouble scale_x, scale_y;
+        gdouble dashes[2] = { 2, 2 };
+
+        gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
+
+        cairo_save (cr);
+
+        cairo_rectangle (cr, 0, 0, w, h);
+
+        scale_x = 1.0;
+        scale_y = 1.0;
+        cairo_device_to_user_distance (cr, &scale_x, &scale_y);
+        cairo_scale (cr, scale_x, scale_y);
+
+        cairo_set_dash (cr, dashes, 2, 0);
+        cairo_set_line_width (cr, HANDLE_OUTLINE_WIDTH_PIXELS);
+        cairo_set_source_rgba (cr, HANDLE_OUTLINE_RGBA_ARGS);
+        cairo_stroke (cr);
+
+        cairo_restore (cr);
+
+        gl_label_object_draw_handles_box (object, cr);
 }
 
 
