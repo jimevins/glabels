@@ -1,388 +1,386 @@
 # French translation of glabels.
 # Copyright (C) 2001 Jim Evins <evins@snaught.com>
 # Olivier Berger <oberger@gnu.org>
-# Florent Morel <florent@taket.org>, 2001, 2004
-# Claude Paroz <claude@2xlibre.net>, 2007-2010
-# Gérard Baylard <gerard.b@bbox.fr>, 2010
+#
+# Florent Morel <florent@taket.org>, 2001, 2004.
+# Claude Paroz <claude@2xlibre.net>, 2007-2010.
+# Gérard Baylard <gerard.b@bbox.fr>, 2010.
+# Bruno Brouard <annoa.b@gmail.com>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-10 00:37-0400\n"
-"PO-Revision-Date: 2010-05-27 00:17+0200\n"
-"Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
+"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
+"POT-Creation-Date: 2010-11-01 00:40+0000\n"
+"PO-Revision-Date: 2010-09-09 11:50+0200\n"
+"Last-Translator: Bruno Brouard <annoa.b@gmail.com>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: ../src/bc.c:66
+#: ../src/bc-backends.c:81
+msgid "Built-in"
+msgstr "Interne"
+
+#: ../src/bc-backends.c:101
 msgid "POSTNET (any)"
 msgstr "POSTNET (tous)"
 
-#: ../src/bc.c:69
+#: ../src/bc-backends.c:104
 msgid "POSTNET-5 (ZIP only)"
 msgstr "POSTNET-5 (seulement ZIP)"
 
-#: ../src/bc.c:72
+#: ../src/bc-backends.c:107
 msgid "POSTNET-9 (ZIP+4)"
 msgstr "POSTNET-9 (ZIP+4)"
 
-#: ../src/bc.c:75
+#: ../src/bc-backends.c:110
 msgid "POSTNET-11 (DPBC)"
 msgstr "POSTNET-11 (DPBC)"
 
-#: ../src/bc.c:80
+#: ../src/bc-backends.c:113
 msgid "CEPNET"
 msgstr "CEPNET"
 
-#: ../src/bc.c:83
-msgid "EAN (any)"
-msgstr "EAN (tous)"
+#: ../src/bc-backends.c:116
+msgid "One Code"
+msgstr "Code One"
 
-#: ../src/bc.c:86
-msgid "EAN-8"
-msgstr "EAN-8"
-
-#: ../src/bc.c:89
-msgid "EAN-8 +2"
-msgstr "EAN-8 +2"
-
-#: ../src/bc.c:92
-msgid "EAN-8 +5"
-msgstr "EAN-8 +5"
-
-#: ../src/bc.c:95
-msgid "EAN-13"
-msgstr "EAN-13"
-
-#: ../src/bc.c:98
-msgid "EAN-13 +2"
-msgstr "EAN-13 +2"
-
-#: ../src/bc.c:101
-msgid "EAN-13 +5"
-msgstr "EAN-13 +5"
-
-#: ../src/bc.c:104
-msgid "UPC (UPC-A or UPC-E)"
-msgstr "UPC (UPC-A ou UPC-E)"
-
-#: ../src/bc.c:107 ../src/bc.c:348
-msgid "UPC-A"
-msgstr "UPC-A"
-
-#: ../src/bc.c:110
-msgid "UPC-A +2"
-msgstr "UPC-A +2"
-
-#: ../src/bc.c:113
-msgid "UPC-A +5"
-msgstr "UPC-A +5"
-
-#: ../src/bc.c:116 ../src/bc.c:351
-msgid "UPC-E"
-msgstr "UPC-E"
-
-#: ../src/bc.c:119
-msgid "UPC-E +2"
-msgstr "UPC-E +2"
-
-#: ../src/bc.c:122
-msgid "UPC-E +5"
-msgstr "UPC-E +5"
-
-#: ../src/bc.c:125 ../src/bc.c:288
-msgid "ISBN"
-msgstr "ISBN"
-
-#: ../src/bc.c:128
-msgid "ISBN +5"
-msgstr "ISBN +5"
-
-#: ../src/bc.c:131 ../src/bc.c:204
+#: ../src/bc-backends.c:119 ../src/bc-backends.c:175 ../src/bc-backends.c:248
 msgid "Code 39"
 msgstr "Code 39"
 
-#: ../src/bc.c:134 ../src/bc.c:216
+#: ../src/bc-backends.c:122 ../src/bc-backends.c:251
+msgid "Code 39 Extended"
+msgstr "Code 39 étendu"
+
+#: ../src/bc-backends.c:127
+msgid "EAN (any)"
+msgstr "EAN (tous)"
+
+#: ../src/bc-backends.c:130
+msgid "EAN-8"
+msgstr "EAN-8"
+
+#: ../src/bc-backends.c:133
+msgid "EAN-8 +2"
+msgstr "EAN-8 +2"
+
+#: ../src/bc-backends.c:136
+msgid "EAN-8 +5"
+msgstr "EAN-8 +5"
+
+#: ../src/bc-backends.c:139
+msgid "EAN-13"
+msgstr "EAN-13"
+
+#: ../src/bc-backends.c:142
+msgid "EAN-13 +2"
+msgstr "EAN-13 +2"
+
+#: ../src/bc-backends.c:145
+msgid "EAN-13 +5"
+msgstr "EAN-13 +5"
+
+#: ../src/bc-backends.c:148
+msgid "UPC (UPC-A or UPC-E)"
+msgstr "UPC (UPC-A ou UPC-E)"
+
+#: ../src/bc-backends.c:151 ../src/bc-backends.c:395
+msgid "UPC-A"
+msgstr "UPC-A"
+
+#: ../src/bc-backends.c:154
+msgid "UPC-A +2"
+msgstr "UPC-A +2"
+
+#: ../src/bc-backends.c:157
+msgid "UPC-A +5"
+msgstr "UPC-A +5"
+
+#: ../src/bc-backends.c:160 ../src/bc-backends.c:398
+msgid "UPC-E"
+msgstr "UPC-E"
+
+#: ../src/bc-backends.c:163
+msgid "UPC-E +2"
+msgstr "UPC-E +2"
+
+#: ../src/bc-backends.c:166
+msgid "UPC-E +5"
+msgstr "UPC-E +5"
+
+#: ../src/bc-backends.c:169 ../src/bc-backends.c:332
+msgid "ISBN"
+msgstr "ISBN"
+
+#: ../src/bc-backends.c:172
+msgid "ISBN +5"
+msgstr "ISBN +5"
+
+#: ../src/bc-backends.c:178 ../src/bc-backends.c:260
 msgid "Code 128"
 msgstr "Code 128"
 
-#: ../src/bc.c:137
+#: ../src/bc-backends.c:181
 msgid "Code 128C"
 msgstr "Code 128C"
 
-#: ../src/bc.c:140
+#: ../src/bc-backends.c:184
 msgid "Code 128B"
 msgstr "Code 128B"
 
-#: ../src/bc.c:143 ../src/bc.c:285
+#: ../src/bc-backends.c:187 ../src/bc-backends.c:329
 msgid "Interleaved 2 of 5"
 msgstr "Entrelacé 2 de 5"
 
-#: ../src/bc.c:146 ../src/bc.c:180
+#: ../src/bc-backends.c:190 ../src/bc-backends.c:224
 msgid "Codabar"
 msgstr "Code-barre"
 
-#: ../src/bc.c:149
+#: ../src/bc-backends.c:193
 msgid "MSI"
 msgstr "MSI"
 
-#: ../src/bc.c:152
+#: ../src/bc-backends.c:196
 msgid "Plessey"
 msgstr "Plessey"
 
-#: ../src/bc.c:155 ../src/bc.c:213
+#: ../src/bc-backends.c:199 ../src/bc-backends.c:257
 msgid "Code 93"
 msgstr "Code 93"
 
-#: ../src/bc.c:162
+#: ../src/bc-backends.c:206
 msgid "Australia Post Standard"
-msgstr ""
+msgstr "Poste australienne standard"
 
-#: ../src/bc.c:165
+#: ../src/bc-backends.c:209
 msgid "Australia Post Reply Paid"
-msgstr ""
+msgstr "Poste australienne Reply Paid"
 
-#: ../src/bc.c:168
+#: ../src/bc-backends.c:212
 msgid "Australia Post Route Code"
-msgstr ""
+msgstr "Code australien Post Route"
 
-#: ../src/bc.c:171
+#: ../src/bc-backends.c:215
 msgid "Australia Post Redirect"
-msgstr ""
+msgstr "Poste australienne Redirect"
 
-#: ../src/bc.c:174
+#: ../src/bc-backends.c:218
 msgid "Aztec Code"
-msgstr ""
+msgstr "Code Aztec"
 
-#: ../src/bc.c:177
+#: ../src/bc-backends.c:221
 msgid "Aztec Rune"
-msgstr ""
+msgstr "Rune Aztec"
 
-#: ../src/bc.c:183
-#, fuzzy
+#: ../src/bc-backends.c:227
 msgid "Code One"
-msgstr "Code 39"
+msgstr "Code One"
 
-#: ../src/bc.c:186
-#, fuzzy
+#: ../src/bc-backends.c:230
 msgid "Code 11"
-msgstr "Code 128"
+msgstr "Code 11"
 
-#: ../src/bc.c:189
-#, fuzzy
+#: ../src/bc-backends.c:233
 msgid "Code 16K"
-msgstr "Code 128"
+msgstr "Code 16K"
 
-#: ../src/bc.c:192
+#: ../src/bc-backends.c:236
 msgid "Code 2 of 5 Matrix"
-msgstr ""
+msgstr "Code 2 par 5 Matrix"
 
-#: ../src/bc.c:195
+#: ../src/bc-backends.c:239
 msgid "Code 2 of 5 IATA"
-msgstr ""
+msgstr "Code 2 par 5 IATA"
 
-#: ../src/bc.c:198
+#: ../src/bc-backends.c:242
 msgid "Code 2 of 5 Data Logic"
-msgstr ""
+msgstr "Code 2 par 5 Data Logic"
 
-#: ../src/bc.c:201
+#: ../src/bc-backends.c:245
 msgid "Code 32 (Italian Pharmacode)"
-msgstr ""
+msgstr "Code 32 (Pharmacode italien)"
 
-#: ../src/bc.c:207
-#, fuzzy
-msgid "Code 39 Extended"
-msgstr "Code 39"
-
-#: ../src/bc.c:210
-#, fuzzy
+#: ../src/bc-backends.c:254
 msgid "Code 49"
-msgstr "Code 39"
+msgstr "Code 49"
 
-#: ../src/bc.c:219
+#: ../src/bc-backends.c:263
 msgid "Code 128 (Mode C supression)"
-msgstr ""
+msgstr "Code 128 (suppression mode C)"
 
-#: ../src/bc.c:222
+#: ../src/bc-backends.c:266
 msgid "DAFT Code"
-msgstr ""
+msgstr "Code DAFT"
 
-#: ../src/bc.c:225
-#, fuzzy
+#: ../src/bc-backends.c:269
 msgid "Data Matrix"
-msgstr "IEC16022 (DataMatrix)"
+msgstr "Data Matrix"
 
-#: ../src/bc.c:228
+#: ../src/bc-backends.c:272
 msgid "Deutsche Post Leitcode"
-msgstr ""
+msgstr "Poste allemande Leitcode"
 
-#: ../src/bc.c:231
+#: ../src/bc-backends.c:275
 msgid "Deutsche Post Identcode"
-msgstr ""
+msgstr "Poste allemande Identcode"
 
-#: ../src/bc.c:234
+#: ../src/bc-backends.c:278
 msgid "Dutch Post KIX Code"
-msgstr ""
+msgstr "Code postal néerlandais KIX"
 
-#: ../src/bc.c:237
-msgid "European Article Number (EAN)"
-msgstr ""
+#: ../src/bc-backends.c:281
+msgid "EAN"
+msgstr "EAN"
 
-#: ../src/bc.c:240
+#: ../src/bc-backends.c:284
 msgid "Grid Matrix"
-msgstr ""
+msgstr "Grid Matrix"
 
-#: ../src/bc.c:243
+#: ../src/bc-backends.c:287
 msgid "GS1-128"
 msgstr "GS1-128"
 
-#: ../src/bc.c:246
+#: ../src/bc-backends.c:290
 msgid "GS1 DataBar-14"
-msgstr ""
+msgstr "GS1 DataBar-14"
 
-#: ../src/bc.c:255
+#: ../src/bc-backends.c:299
 msgid "GS1 DataBar-14 Stacked"
-msgstr ""
+msgstr "GS1 DataBar-14 empilé"
 
-#: ../src/bc.c:258
+#: ../src/bc-backends.c:302
 msgid "GS1 DataBar-14 Stacked Omni."
-msgstr ""
+msgstr "GS1 DataBar-14 empilé omni."
 
-#: ../src/bc.c:261
+#: ../src/bc-backends.c:305
 msgid "GS1 DataBar Extended Stacked"
-msgstr ""
+msgstr "GS1 DataBar empilé étendu"
 
-#: ../src/bc.c:264
-#, fuzzy
+#: ../src/bc-backends.c:308
 msgid "HIBC Code 128"
-msgstr "Code 128"
+msgstr "Code 128 HIBC"
 
-#: ../src/bc.c:267
-#, fuzzy
+#: ../src/bc-backends.c:311
 msgid "HIBC Code 39"
-msgstr "Code 39"
+msgstr "Code 39 HIBC"
 
-#: ../src/bc.c:270
-#, fuzzy
+#: ../src/bc-backends.c:314
 msgid "HIBC Data Matrix"
-msgstr "IEC16022 (DataMatrix)"
+msgstr "Data Matrix HIBC"
 
-#: ../src/bc.c:273
-#, fuzzy
+#: ../src/bc-backends.c:317
 msgid "HIBC QR Code"
-msgstr "IEC18004 (QRCode)"
+msgstr "Code HIBC QR"
 
-#: ../src/bc.c:276
+#: ../src/bc-backends.c:320
 msgid "HIBC PDF417"
-msgstr ""
+msgstr "HIBC PDF417"
 
-#: ../src/bc.c:279
+#: ../src/bc-backends.c:323
 msgid "HIBC Micro PDF417"
-msgstr ""
+msgstr "HIBC Micro PDF417"
 
-#: ../src/bc.c:282
+#: ../src/bc-backends.c:326
 msgid "HIBC Aztec Code"
-msgstr ""
+msgstr "Code Aztec HIBC"
 
-#: ../src/bc.c:291
+#: ../src/bc-backends.c:335
 msgid "ITF-14"
-msgstr ""
+msgstr "ITF-14"
 
-#: ../src/bc.c:294
+#: ../src/bc-backends.c:338
 msgid "Japanese Postal"
-msgstr ""
+msgstr "Poste japonaise"
 
-#: ../src/bc.c:297
+#: ../src/bc-backends.c:341
 msgid "Korean Postal"
-msgstr ""
+msgstr "Poste coréenne"
 
-#: ../src/bc.c:300
+#: ../src/bc-backends.c:344
 msgid "LOGMARS"
-msgstr ""
+msgstr "LOGMARS"
 
-#: ../src/bc.c:303
+#: ../src/bc-backends.c:347
+msgid "Maxicode"
+msgstr "Maxicode"
+
+#: ../src/bc-backends.c:350
 msgid "Micro PDF417"
-msgstr ""
+msgstr "Micro PDF417"
 
-#: ../src/bc.c:306
+#: ../src/bc-backends.c:353
 msgid "Micro QR Code"
-msgstr ""
+msgstr "Micro QR Code"
 
-#: ../src/bc.c:309
-#, fuzzy
+#: ../src/bc-backends.c:356
 msgid "MSI Plessey"
-msgstr "Plessey"
+msgstr "MSI Plessey"
 
-#: ../src/bc.c:312
+#: ../src/bc-backends.c:359
 msgid "NVE-18"
-msgstr ""
+msgstr "NVE-18"
 
-#: ../src/bc.c:315
+#: ../src/bc-backends.c:362
 msgid "PDF417"
-msgstr ""
+msgstr "PDF417"
 
-#: ../src/bc.c:318
+#: ../src/bc-backends.c:365
 msgid "PDF417 Truncated"
-msgstr ""
+msgstr "PDF417 tronqué"
 
-#: ../src/bc.c:321
-#, fuzzy
+#: ../src/bc-backends.c:368
 msgid "PLANET"
-msgstr "CEPNET"
+msgstr "PLANET"
 
-#: ../src/bc.c:324
-#, fuzzy
+#: ../src/bc-backends.c:371
 msgid "PostNet"
-msgstr "Coller"
+msgstr "PostNet"
 
-#: ../src/bc.c:327
-#, fuzzy
+#: ../src/bc-backends.c:374
 msgid "Pharmacode"
-msgstr "Code-barre"
+msgstr "Pharmacode"
 
-#: ../src/bc.c:330
-#, fuzzy
+#: ../src/bc-backends.c:377
 msgid "Pharmacode 2-track"
-msgstr "Données de code-barre"
+msgstr "Pharmacode 2-track"
 
-#: ../src/bc.c:333
+#: ../src/bc-backends.c:380
 msgid "Pharmazentral Nummer (PZN)"
-msgstr ""
+msgstr "Pharmazentral Nummer (PZN)"
 
-#: ../src/bc.c:336
+#: ../src/bc-backends.c:383
 msgid "QR Code"
-msgstr ""
+msgstr "Code QR"
 
-#: ../src/bc.c:339
+#: ../src/bc-backends.c:386
 msgid "Royal Mail 4-State"
-msgstr ""
+msgstr "Royal Mail 4-State"
 
-#: ../src/bc.c:342
-#, fuzzy
+#: ../src/bc-backends.c:389
 msgid "Telepen"
-msgstr "Supprimer"
+msgstr "Telepen"
 
-#: ../src/bc.c:345
+#: ../src/bc-backends.c:392
 msgid "Telepen Numeric"
-msgstr ""
+msgstr "Telepen Numeric"
 
-#: ../src/bc.c:354
+#: ../src/bc-backends.c:401
 msgid "USPS One Code"
-msgstr ""
+msgstr "Code USPS One"
 
-#: ../src/bc.c:357
-#, fuzzy
+#: ../src/bc-backends.c:404
 msgid "UK Plessey"
-msgstr "Plessey"
+msgstr "UK Plessey"
 
-#: ../src/bc.c:364
+#: ../src/bc-backends.c:411
 msgid "IEC16022 (DataMatrix)"
 msgstr "IEC16022 (DataMatrix)"
 
-#: ../src/bc.c:371
+#: ../src/bc-backends.c:418
 msgid "IEC18004 (QRCode)"
 msgstr "IEC18004 (QRCode)"
 
@@ -595,7 +593,7 @@ msgstr "Impossible d'enregistrer « %s »"
 msgid "Error encountered during save.  The file is still not saved."
 msgstr ""
 "Erreur au cours de l'enregistrement. Le fichier n'a pas été encore "
-"enregistré. "
+"enregistré."
 
 #: ../src/file.c:535
 #, c-format
@@ -723,7 +721,7 @@ msgstr "imprimer les guides de coupe"
 msgid "input file for merging"
 msgstr "fichier d'entrée pour la fusion"
 
-#: ../src/glabels-batch.c:69 ../src/glabels.c:64
+#: ../src/glabels-batch.c:69 ../src/glabels.c:63
 msgid "[FILE...]"
 msgstr "[FICHIER...]"
 
@@ -731,7 +729,7 @@ msgstr "[FICHIER...]"
 msgid "Print files created with gLabels."
 msgstr "Imprimer des fichiers créés avec gLabels."
 
-#: ../src/glabels-batch.c:107 ../src/glabels.c:89
+#: ../src/glabels-batch.c:107 ../src/glabels.c:87
 #, c-format
 msgid ""
 "%s\n"
@@ -752,27 +750,27 @@ msgstr ""
 msgid "cannot open glabels file %s\n"
 msgstr "impossible d'ouvrir le fichier gLabels %s\n"
 
-#: ../src/glabels.c:81
+#: ../src/glabels.c:79
 msgid "Launch gLabels label and business card designer."
 msgstr "Lance gLabels, créateur d'étiquettes et de cartes de visite."
 
-#: ../src/label-barcode.c:154 ../src/ui.c:319
+#: ../src/label-barcode.c:164 ../src/ui.c:318
 msgid "Create barcode object"
 msgstr "Crée un objet code-barre"
 
-#: ../src/label-barcode.c:227 ../src/label-barcode.c:389
+#: ../src/label-barcode.c:240 ../src/label-barcode.c:390
 msgid "Barcode data"
 msgstr "Données de code-barre"
 
-#: ../src/label-barcode.c:263
+#: ../src/label-barcode.c:269
 msgid "Barcode property"
 msgstr "Propriété de code-barre"
 
-#: ../src/label-barcode.c:485
+#: ../src/label-barcode.c:473
 msgid "Barcode data empty"
 msgstr "Données de code-barre vides"
 
-#: ../src/label-barcode.c:489
+#: ../src/label-barcode.c:477
 msgid "Invalid barcode data"
 msgstr "Données de code-barre non valides"
 
@@ -780,13 +778,13 @@ msgstr "Données de code-barre non valides"
 msgid "Create box object"
 msgstr "Créer un objet boîte"
 
-#: ../src/label-box.c:230 ../src/label-ellipse.c:232 ../src/stock.c:93
+#: ../src/label-box.c:230 ../src/label-ellipse.c:232
 #: ../data/ui/property-bar.ui.h:3
 msgid "Fill color"
 msgstr "Couleur de remplissage"
 
 #: ../src/label-box.c:261 ../src/label-ellipse.c:261 ../src/label-line.c:212
-#: ../src/stock.c:94 ../data/ui/property-bar.ui.h:8
+#: ../data/ui/property-bar.ui.h:8
 msgid "Line color"
 msgstr "Couleur de ligne"
 
@@ -799,19 +797,19 @@ msgstr "Largeur de la ligne"
 msgid "Untitled"
 msgstr "Sans titre"
 
-#: ../src/label.c:705 ../src/ui.c:422
+#: ../src/label.c:705 ../src/ui.c:421
 msgid "Merge properties"
 msgstr "Propriétés de fusion"
 
-#: ../src/label.c:1197 ../src/ui.c:215
+#: ../src/label.c:1197 ../src/ui.c:214
 msgid "Delete"
 msgstr "Supprimer"
 
-#: ../src/label.c:1230 ../src/ui.c:324
+#: ../src/label.c:1230 ../src/ui.c:323
 msgid "Bring to front"
 msgstr "Mettre en premier plan"
 
-#: ../src/label.c:1266 ../src/ui.c:331
+#: ../src/label.c:1266 ../src/ui.c:330
 msgid "Send to back"
 msgstr "Placer en arrière-plan"
 
@@ -819,55 +817,55 @@ msgstr "Placer en arrière-plan"
 msgid "Rotate"
 msgstr "Rotation"
 
-#: ../src/label.c:1342 ../src/ui.c:338
+#: ../src/label.c:1342 ../src/ui.c:337
 msgid "Rotate left"
 msgstr "Rotation gauche"
 
-#: ../src/label.c:1375 ../src/ui.c:345
+#: ../src/label.c:1375 ../src/ui.c:344
 msgid "Rotate right"
 msgstr "Rotation droite"
 
-#: ../src/label.c:1410 ../src/ui.c:352
+#: ../src/label.c:1410 ../src/ui.c:351
 msgid "Flip horizontally"
 msgstr "Retourner horizontalement"
 
-#: ../src/label.c:1445 ../src/ui.c:359
+#: ../src/label.c:1445 ../src/ui.c:358
 msgid "Flip vertically"
 msgstr "Retourner verticalement"
 
-#: ../src/label.c:1485 ../src/ui.c:366
+#: ../src/label.c:1485 ../src/ui.c:365
 msgid "Align left"
 msgstr "Aligner à gauche"
 
-#: ../src/label.c:1542 ../src/ui.c:373
+#: ../src/label.c:1542 ../src/ui.c:372
 msgid "Align right"
 msgstr "Aligner à droite"
 
-#: ../src/label.c:1603 ../src/ui.c:380
+#: ../src/label.c:1603 ../src/ui.c:379
 msgid "Align horizontal center"
 msgstr "Aligner horizontalement les centres"
 
-#: ../src/label.c:1679 ../src/ui.c:387
+#: ../src/label.c:1679 ../src/ui.c:386
 msgid "Align tops"
 msgstr "Aligner les sommets"
 
-#: ../src/label.c:1736 ../src/ui.c:394
+#: ../src/label.c:1736 ../src/ui.c:393
 msgid "Align bottoms"
 msgstr "Aligner les bases"
 
-#: ../src/label.c:1797 ../src/ui.c:401
+#: ../src/label.c:1797 ../src/ui.c:400
 msgid "Align vertical center"
 msgstr "Aligner verticalement les centres"
 
-#: ../src/label.c:1875 ../src/ui.c:408
+#: ../src/label.c:1875 ../src/ui.c:407
 msgid "Center horizontally"
 msgstr "Centrer horizontalement"
 
-#: ../src/label.c:1922 ../src/ui.c:415
+#: ../src/label.c:1922 ../src/ui.c:414
 msgid "Center vertically"
 msgstr "Centrer verticalement"
 
-#: ../src/label.c:2610 ../src/label.c:2652 ../src/label.c:2678 ../src/ui.c:208
+#: ../src/label.c:2610 ../src/label.c:2652 ../src/label.c:2678 ../src/ui.c:207
 msgid "Paste"
 msgstr "Coller"
 
@@ -875,7 +873,7 @@ msgstr "Coller"
 msgid "Create ellipse object"
 msgstr "Crée un objet ellipse"
 
-#: ../src/label-image.c:200 ../src/ui.c:312
+#: ../src/label-image.c:200 ../src/ui.c:311
 msgid "Create image object"
 msgstr "Crée un objet image"
 
@@ -883,7 +881,7 @@ msgstr "Crée un objet image"
 msgid "Set image"
 msgstr "Définir l'image"
 
-#: ../src/label-line.c:147 ../src/ui.c:298
+#: ../src/label-line.c:147 ../src/ui.c:297
 msgid "Create line object"
 msgstr "Crée un objet ligne"
 
@@ -911,7 +909,7 @@ msgstr "Couleur de l'ombre"
 msgid "Shadow opacity"
 msgstr "Opacité de l'ombre"
 
-#: ../src/label-text.c:279 ../src/ui.c:284
+#: ../src/label-text.c:279 ../src/ui.c:283
 msgid "Create text object"
 msgstr "Crée un objet texte"
 
@@ -1053,15 +1051,14 @@ msgstr ""
 "Texte : valeurs séparées par des deux-points avec en-têtes en première ligne"
 
 #: ../src/merge-init.c:102
-#, fuzzy
 msgid "Text: Semicolon separated values"
-msgstr "Texte : valeurs séparées par des deux-points"
+msgstr "Texte : valeurs séparées par des points-virgules"
 
 #: ../src/merge-init.c:109
-#, fuzzy
 msgid "Text: Semicolon separated values with keys on line 1"
 msgstr ""
-"Texte : valeurs séparées par des deux-points avec en-têtes en première ligne"
+"Texte : valeurs séparées par des points-virgules avec en-têtes en première "
+"ligne"
 
 #: ../src/merge-init.c:119
 msgid "Evolution Addressbook"
@@ -1071,27 +1068,27 @@ msgstr "Carnet d'adresses Evolution"
 msgid "VCards"
 msgstr "VCard"
 
-#: ../src/merge-properties-dialog.c:282
+#: ../src/merge-properties-dialog.c:279
 msgid "Merge Properties"
 msgstr "Propriétés de la fusion"
 
-#: ../src/merge-properties-dialog.c:308 ../src/merge-properties-dialog.c:424
+#: ../src/merge-properties-dialog.c:305 ../src/merge-properties-dialog.c:421
 msgid "Select merge-database source"
 msgstr "Sélection du fichier de données pour la fusion"
 
-#: ../src/merge-properties-dialog.c:319 ../src/merge-properties-dialog.c:450
+#: ../src/merge-properties-dialog.c:316 ../src/merge-properties-dialog.c:447
 msgid "N/A"
 msgstr "Non défini"
 
-#: ../src/merge-properties-dialog.c:345
+#: ../src/merge-properties-dialog.c:342
 msgid "Select"
 msgstr "Sélectionner"
 
-#: ../src/merge-properties-dialog.c:352
+#: ../src/merge-properties-dialog.c:349
 msgid "Record/Field"
 msgstr "Enregistrements/Champs"
 
-#: ../src/merge-properties-dialog.c:360 ../data/ui/object-editor.ui.h:8
+#: ../src/merge-properties-dialog.c:357 ../data/ui/object-editor.ui.h:9
 msgid "Data"
 msgstr "Données"
 
@@ -1099,7 +1096,7 @@ msgstr "Données"
 #. * no further choices to further define the source of data.  E.g. if you select the
 #. * evolution-data-server, there are no further choices -- the source is "Fixed."
 #.
-#: ../src/merge-properties-dialog.c:443
+#: ../src/merge-properties-dialog.c:440
 msgid "Fixed"
 msgstr "fixé"
 
@@ -1120,37 +1117,37 @@ msgstr "Choix de l'orientation"
 msgid "Review"
 msgstr "Révision"
 
-#: ../src/object-editor-bc-page.c:93 ../src/object-editor-shadow-page.c:93
-#: ../src/object-editor-text-page.c:97 ../src/prefs-dialog.c:339
-#: ../src/ui-property-bar.c:280
+#: ../src/object-editor-bc-page.c:97 ../src/object-editor-shadow-page.c:93
+#: ../src/object-editor-text-page.c:97 ../src/prefs-dialog.c:336
+#: ../src/ui-property-bar.c:277
 msgid "Default"
 msgstr "Par défaut"
 
-#: ../src/object-editor.c:159 ../src/object-editor.c:460
+#: ../src/object-editor.c:158 ../src/object-editor.c:464
 msgid "Object properties"
 msgstr "Propriétés de l'objet"
 
-#: ../src/object-editor.c:309
+#: ../src/object-editor.c:307
 msgid "Box object properties"
 msgstr "Propriétés de l'objet boîte"
 
-#: ../src/object-editor.c:328
+#: ../src/object-editor.c:326
 msgid "Ellipse object properties"
 msgstr "Propriétés de l'objet ellipse"
 
-#: ../src/object-editor.c:347
+#: ../src/object-editor.c:345
 msgid "Line object properties"
 msgstr "Propriétés de l'objet ligne"
 
-#: ../src/object-editor.c:364
+#: ../src/object-editor.c:362
 msgid "Image object properties"
 msgstr "Propriétés de l'objet image"
 
-#: ../src/object-editor.c:381
+#: ../src/object-editor.c:379
 msgid "Text object properties"
 msgstr "Propriétés de l'objet texte"
 
-#: ../src/object-editor.c:403
+#: ../src/object-editor.c:401
 msgid "Barcode object properties"
 msgstr "Propriétés de l'objet code-barre"
 
@@ -1158,8 +1155,8 @@ msgstr "Propriétés de l'objet code-barre"
 msgid "Insert merge field"
 msgstr "Insérer un champ de fusion"
 
-#: ../src/object-editor-fill-page.c:79 ../src/prefs-dialog.c:345
-#: ../src/ui-property-bar.c:292
+#: ../src/object-editor-fill-page.c:79 ../src/prefs-dialog.c:342
+#: ../src/ui-property-bar.c:287
 msgid "No Fill"
 msgstr "Pas de remplissage"
 
@@ -1176,12 +1173,12 @@ msgstr "Toutes les images"
 msgid "%s (*.%s)"
 msgstr "%s (*.%s)"
 
-#: ../src/object-editor-line-page.c:79 ../src/prefs-dialog.c:342
-#: ../src/ui-property-bar.c:304
+#: ../src/object-editor-line-page.c:79 ../src/prefs-dialog.c:339
+#: ../src/ui-property-bar.c:297
 msgid "No Line"
 msgstr "Pas de ligne"
 
-#: ../src/prefs-dialog.c:172 ../data/ui/prefs-dialog.ui.h:21
+#: ../src/prefs-dialog.c:169 ../data/ui/prefs-dialog.ui.h:21
 msgid "gLabels Preferences"
 msgstr "Préférences de gLabels"
 
@@ -1192,538 +1189,439 @@ msgstr "Préférences de gLabels"
 msgid "Labels"
 msgstr "Étiquettes"
 
-#: ../src/stock.c:70
-msgid "_Select Mode"
-msgstr "Mode _sélection"
-
-#: ../src/stock.c:71
-msgid "_Text"
-msgstr "_Texte"
-
-#: ../src/stock.c:72
-msgid "_Line"
-msgstr "_Ligne"
-
-#: ../src/stock.c:73
-msgid "_Box"
-msgstr "_Boîte"
-
-#: ../src/stock.c:74
-msgid "_Ellipse"
-msgstr "_Ellipse"
-
-#: ../src/stock.c:75
-msgid "_Image"
-msgstr "_Image"
-
-#: ../src/stock.c:76
-msgid "Bar_code"
-msgstr "_Code-barre"
-
-#: ../src/stock.c:77
-msgid "_Merge Properties"
-msgstr "Propriétés de _fusion"
-
-#: ../src/stock.c:78
-msgid "Object _Properties"
-msgstr "_Propriétés de l'objet"
-
-#: ../src/stock.c:79
-msgid "Bring to _Front"
-msgstr "_Mettre en premier plan"
-
-#: ../src/stock.c:80
-msgid "Send to _Back"
-msgstr "_Placer en arrière-plan"
-
-#: ../src/stock.c:81
-msgid "Rotate _Left"
-msgstr "Rotation _gauche"
-
-#: ../src/stock.c:82
-msgid "Rotate _Right"
-msgstr "Rotation _droite"
-
-#: ../src/stock.c:83
-msgid "Flip _Horizontally"
-msgstr "Retourner _horizontalement"
-
-#: ../src/stock.c:84
-msgid "Flip _Vertically"
-msgstr "Retourner _verticalement"
-
-#: ../src/stock.c:85
-msgid "_Lefts"
-msgstr "_Gauches"
-
-#: ../src/stock.c:86
-msgid "_Rights"
-msgstr "_Droites"
-
-#: ../src/stock.c:87
-msgid "_Centers"
-msgstr "_Centres"
-
-#: ../src/stock.c:88
-msgid "_Tops"
-msgstr "_Sommets"
-
-#: ../src/stock.c:89
-msgid "Bottoms"
-msgstr "Bases"
-
-#: ../src/stock.c:90
-msgid "Centers"
-msgstr "Centres"
-
-#: ../src/stock.c:91 ../src/stock.c:92
-msgid "Label Ce_nter"
-msgstr "Ce_ntre de l'étiquette"
-
-#: ../src/stock.c:95 ../src/stock.c:97
-msgid "Linked"
-msgstr "Lié"
-
-#: ../src/stock.c:96 ../src/stock.c:98
-msgid "Not Linked"
-msgstr "Non lié"
-
-#: ../src/template-designer.c:404
+#: ../src/template-designer.c:428
 msgid "New gLabels Template"
 msgstr "Nouveau modèle gLabels"
 
-#: ../src/template-designer.c:461
+#: ../src/template-designer.c:486
 msgid "Welcome"
 msgstr "Bienvenue"
 
-#: ../src/template-designer.c:500
+#: ../src/template-designer.c:525
 msgid "Name and Description"
 msgstr "Nom et description"
 
-#: ../src/template-designer.c:548
+#: ../src/template-designer.c:573
 msgid "Page Size"
 msgstr "Taille de page"
 
-#: ../src/template-designer.c:614
+#: ../src/template-designer.c:640
 msgid "Label or Card Shape"
 msgstr "Forme de carte ou d'étiquette"
 
-#: ../src/template-designer.c:661
+#: ../src/template-designer.c:687 ../src/template-designer.c:788
 msgid "Label or Card Size"
 msgstr "Taille de carte ou d'étiquette"
 
-#: ../src/template-designer.c:760
+#: ../src/template-designer.c:871
 msgid "Label Size (round)"
 msgstr "Taille d'étiquette (ronde)"
 
-#: ../src/template-designer.c:841
+#: ../src/template-designer.c:952
 msgid "Label Size (CD/DVD)"
 msgstr "Taille d'étiquette (CD/DVD)"
 
-#: ../src/template-designer.c:932
+#: ../src/template-designer.c:1043
 msgid "Number of Layouts"
 msgstr "Nombre de dispositions"
 
-#: ../src/template-designer.c:1000
+#: ../src/template-designer.c:1111
 msgid "Layout(s)"
 msgstr "Disposition(s) :"
 
-#: ../src/template-designer.c:1105
+#: ../src/template-designer.c:1216
 msgid "Design Completed"
 msgstr "Création terminée"
 
 # Window title
-#: ../src/template-designer.c:1133
+#: ../src/template-designer.c:1244
 msgid "Edit gLabels Template"
 msgstr "Modifier un modèle gLabels"
 
-#: ../src/template-designer.c:1423
-#, fuzzy
+#: ../src/template-designer.c:1547
 msgid "Brand and part# match an existing template!"
-msgstr ""
-"<span foreground='red' weight='bold'>La marque et le numéro d'article "
-"correspondent à un modèle existant.</span>"
+msgstr "La marque et le numéro d'article correspondent à un modèle existant."
 
 #. Menu entries.
-#: ../src/ui.c:93
+#: ../src/ui.c:92
 msgid "_File"
 msgstr "_Fichier"
 
-#: ../src/ui.c:94
+#: ../src/ui.c:93
 msgid "Open Recent _Files"
 msgstr "_Fichiers récents"
 
-#: ../src/ui.c:95
+#: ../src/ui.c:94
 msgid "_Edit"
 msgstr "É_dition"
 
-#: ../src/ui.c:96
+#: ../src/ui.c:95
 msgid "_View"
 msgstr "_Affichage"
 
-#: ../src/ui.c:97
+#: ../src/ui.c:96
 msgid "Customize Main Toolbar"
 msgstr "Personnaliser le barre d'outils principale"
 
-#: ../src/ui.c:98
+#: ../src/ui.c:97
 msgid "Customize Drawing Toolbar"
 msgstr "Personnaliser la barre d'outils dessin"
 
-#: ../src/ui.c:99
+#: ../src/ui.c:98
 msgid "Customize Properties Toolbar"
 msgstr "Personnaliser la barre d'outils des propriétés"
 
-#: ../src/ui.c:100
+#: ../src/ui.c:99
 msgid "_Objects"
 msgstr "_Objets"
 
-#: ../src/ui.c:101
+#: ../src/ui.c:100
 msgid "_Create"
 msgstr "_Créer"
 
-#: ../src/ui.c:102
+#: ../src/ui.c:101
 msgid "_Order"
 msgstr "_Ordre"
 
-#: ../src/ui.c:103
+#: ../src/ui.c:102
 msgid "_Rotate/Flip"
 msgstr "_Rotation/Retournement"
 
-#: ../src/ui.c:104
+#: ../src/ui.c:103
 msgid "Align _Horizontal"
 msgstr "Aligner _horizontalement"
 
-#: ../src/ui.c:105
+#: ../src/ui.c:104
 msgid "Align _Vertical"
 msgstr "Aligner _verticalement"
 
-#: ../src/ui.c:106
+#: ../src/ui.c:105
 msgid "_Help"
 msgstr "Aid_e"
 
 #. Popup entries.
-#: ../src/ui.c:109 ../src/ui.c:110
+#: ../src/ui.c:108 ../src/ui.c:109
 msgid "Context Menu"
 msgstr "Menu contextuel"
 
-#: ../src/ui.c:115
+#: ../src/ui.c:114
 msgid "_New"
 msgstr "_Nouveau"
 
-#: ../src/ui.c:117
+#: ../src/ui.c:116
 msgid "Create a new file"
 msgstr "Crée un nouveau document"
 
-#: ../src/ui.c:122
+#: ../src/ui.c:121
 msgid "_Open..."
 msgstr "_Ouvrir..."
 
-#: ../src/ui.c:124
+#: ../src/ui.c:123
 msgid "Open a file"
 msgstr "Ouvre un fichier"
 
-#: ../src/ui.c:129
+#: ../src/ui.c:128
 msgid "_Save"
 msgstr "_Enregistrer"
 
-#: ../src/ui.c:131
+#: ../src/ui.c:130
 msgid "Save current file"
 msgstr "Enregistrer le fichier en cours"
 
-#: ../src/ui.c:136
+#: ../src/ui.c:135
 msgid "Save _As..."
 msgstr "Enregistrer _sous..."
 
-#: ../src/ui.c:138
+#: ../src/ui.c:137
 msgid "Save the current file to a different name"
 msgstr "Enregistre le fichier en cours avec un nom différent"
 
-#: ../src/ui.c:143
+#: ../src/ui.c:142
 msgid "_Print..."
 msgstr "Im_primer..."
 
-#: ../src/ui.c:145
+#: ../src/ui.c:144
 msgid "Print the current file"
 msgstr "Imprime le fichier en cours"
 
-#: ../src/ui.c:150
+#: ../src/ui.c:149
 msgid "Properties..."
 msgstr "Propriétés..."
 
-#: ../src/ui.c:152
+#: ../src/ui.c:151
 msgid "Modify document properties"
 msgstr "Modifier les propriétés du document"
 
-#: ../src/ui.c:157
+#: ../src/ui.c:156
 msgid "Template _Designer..."
 msgstr "_Créateur de modèles..."
 
-#: ../src/ui.c:159
+#: ../src/ui.c:158
 msgid "Create a custom template"
 msgstr "Créer un modèle personnalisé"
 
-#: ../src/ui.c:164
+#: ../src/ui.c:163
 msgid "_Close"
 msgstr "_Fermer"
 
-#: ../src/ui.c:166
+#: ../src/ui.c:165
 msgid "Close the current file"
 msgstr "Ferme le fichier en cours"
 
-#: ../src/ui.c:171
+#: ../src/ui.c:170
 msgid "_Quit"
 msgstr "_Quitter"
 
-#: ../src/ui.c:173
+#: ../src/ui.c:172
 msgid "Quit the program"
 msgstr "Quitte le programme"
 
-#: ../src/ui.c:180 ../src/ui.c:182 ../src/ui.c:967
+#: ../src/ui.c:179 ../src/ui.c:181 ../src/ui.c:966
 msgid "Undo"
 msgstr "Annuler"
 
-#: ../src/ui.c:187 ../src/ui.c:189 ../src/ui.c:974
+#: ../src/ui.c:186 ../src/ui.c:188 ../src/ui.c:973
 msgid "Redo"
 msgstr "Rétablir"
 
-#: ../src/ui.c:194
+#: ../src/ui.c:193
 msgid "Cut"
 msgstr "Couper"
 
-#: ../src/ui.c:196
+#: ../src/ui.c:195
 msgid "Cut the selection"
 msgstr "Coupe la sélection"
 
-#: ../src/ui.c:201
+#: ../src/ui.c:200
 msgid "Copy"
 msgstr "Copier"
 
-#: ../src/ui.c:203
+#: ../src/ui.c:202
 msgid "Copy the selection"
 msgstr "Copie la sélection"
 
-#: ../src/ui.c:210
+#: ../src/ui.c:209
 msgid "Paste the clipboard"
 msgstr "Colle le presse-papiers"
 
-#: ../src/ui.c:217
+#: ../src/ui.c:216
 msgid "Delete the selected objects"
 msgstr "Supprime les objets sélectionnés"
 
-#: ../src/ui.c:222
+#: ../src/ui.c:221
 msgid "Select All"
 msgstr "Tout sélectionner"
 
-#: ../src/ui.c:224
+#: ../src/ui.c:223
 msgid "Select all objects"
 msgstr "Sélectionne tous les objets"
 
-#: ../src/ui.c:229
+#: ../src/ui.c:228
 msgid "Un-select All"
 msgstr "Désélectionner tout"
 
-#: ../src/ui.c:231
+#: ../src/ui.c:230
 msgid "Remove all selections"
 msgstr "Annule toutes les sélections"
 
-#: ../src/ui.c:236
+#: ../src/ui.c:235
 msgid "Preferences"
 msgstr "Préférences"
 
-#: ../src/ui.c:238
+#: ../src/ui.c:237
 msgid "Configure the application"
 msgstr "Configure le logiciel"
 
-#: ../src/ui.c:245
+#: ../src/ui.c:244
 msgid "Zoom in"
 msgstr "Zoom avant"
 
-#: ../src/ui.c:247
+#: ../src/ui.c:246
 msgid "Increase magnification"
 msgstr "Augmente la taille"
 
-#: ../src/ui.c:252
+#: ../src/ui.c:251
 msgid "Zoom out"
 msgstr "Zoom arrière"
 
-#: ../src/ui.c:254
+#: ../src/ui.c:253
 msgid "Decrease magnification"
 msgstr "Diminue la taille"
 
-#: ../src/ui.c:259
+#: ../src/ui.c:258
 msgid "Zoom 1 to 1"
 msgstr "Zoom 1:1"
 
-#: ../src/ui.c:261
+#: ../src/ui.c:260
 msgid "Restore scale to 100%"
 msgstr "Remet l'échelle à 100%"
 
-#: ../src/ui.c:266
+#: ../src/ui.c:265
 msgid "Zoom to fit"
 msgstr "Ajuster à la fenêtre"
 
-#: ../src/ui.c:268
+#: ../src/ui.c:267
 msgid "Set scale to fit window"
 msgstr "Adapte l'échelle à la taille de la fenêtre"
 
-#: ../src/ui.c:275
+#: ../src/ui.c:274
 msgid "Select Mode"
 msgstr "Mode sélection"
 
-#: ../src/ui.c:277
+#: ../src/ui.c:276
 msgid "Select, move and modify objects"
 msgstr "Sélectionne, déplace et modifie les objets"
 
-#: ../src/ui.c:282 ../src/view-text.c:102 ../data/ui/object-editor.ui.h:28
+#: ../src/ui.c:281 ../src/view-text.c:102 ../data/ui/object-editor.ui.h:29
 #: ../data/ui/prefs-dialog.ui.h:17
 msgid "Text"
 msgstr "Texte"
 
-#: ../src/ui.c:289
+#: ../src/ui.c:288
 msgid "Box"
 msgstr "Boîte"
 
-#: ../src/ui.c:291
+#: ../src/ui.c:290
 msgid "Create box/rectangle object"
 msgstr "Crée un objet boîte/rectangle"
 
-#: ../src/ui.c:296 ../data/ui/object-editor.ui.h:17
+#: ../src/ui.c:295 ../data/ui/object-editor.ui.h:18
 #: ../data/ui/prefs-dialog.ui.h:9
 msgid "Line"
 msgstr "Ligne"
 
-#: ../src/ui.c:303
+#: ../src/ui.c:302
 msgid "Ellipse"
 msgstr "Ellipse"
 
-#: ../src/ui.c:305
+#: ../src/ui.c:304
 msgid "Create ellipse/circle object"
 msgstr "Crée un objet ellipse/cercle"
 
-#: ../src/ui.c:310 ../data/ui/object-editor.ui.h:14
+#: ../src/ui.c:309 ../data/ui/object-editor.ui.h:15
 msgid "Image"
 msgstr "Image"
 
-#: ../src/ui.c:317
+#: ../src/ui.c:316
 msgid "Barcode"
 msgstr "Code-barre"
 
-#: ../src/ui.c:326
+#: ../src/ui.c:325
 msgid "Raise object to top"
 msgstr "Place l'objet en avant-plan"
 
-#: ../src/ui.c:333
+#: ../src/ui.c:332
 msgid "Lower object to bottom"
 msgstr "Place l'objet en arrière-plan"
 
-#: ../src/ui.c:340
+#: ../src/ui.c:339
 msgid "Rotate object 90 degrees counter-clockwise"
 msgstr ""
 "Tourne l'objet de 90 degrés dans le sens inverse des aiguilles d'une montre"
 
-#: ../src/ui.c:347
+#: ../src/ui.c:346
 msgid "Rotate object 90 degrees clockwise"
 msgstr "Tourne l'objet de 90 degrés dans le sens des aiguilles d'une montre"
 
-#: ../src/ui.c:354
+#: ../src/ui.c:353
 msgid "Flip object horizontally"
 msgstr "Retourne l'objet horizontalement"
 
-#: ../src/ui.c:361
+#: ../src/ui.c:360
 msgid "Flip object vertically"
 msgstr "Retourne l'objet verticalement"
 
-#: ../src/ui.c:368
+#: ../src/ui.c:367
 msgid "Align objects to left edges"
 msgstr "Aligne les côtés gauches des objets"
 
-#: ../src/ui.c:375
+#: ../src/ui.c:374
 msgid "Align objects to right edges"
 msgstr "Aligne les côtés droits des objets"
 
-#: ../src/ui.c:382
+#: ../src/ui.c:381
 msgid "Align objects to horizontal centers"
 msgstr "Aligne horizontalement les centres des objets"
 
-#: ../src/ui.c:389
+#: ../src/ui.c:388
 msgid "Align objects to top edges"
 msgstr "Aligne les sommets des objets"
 
-#: ../src/ui.c:396
+#: ../src/ui.c:395
 msgid "Align objects to bottom edges"
 msgstr "Aligne les bases des objets"
 
-#: ../src/ui.c:403
+#: ../src/ui.c:402
 msgid "Align objects to vertical centers"
 msgstr "Aligne verticalement les centres des objets"
 
-#: ../src/ui.c:410
+#: ../src/ui.c:409
 msgid "Center objects to horizontal label center"
 msgstr "Centre les objets sur la médiatrice horizontale de l'étiquette"
 
-#: ../src/ui.c:417
+#: ../src/ui.c:416
 msgid "Center objects to vertical label center"
 msgstr "Centre les objets sur le médiatrice verticale de l'étiquette"
 
-#: ../src/ui.c:424
+#: ../src/ui.c:423
 msgid "Edit merge properties"
 msgstr "Édite les propriétés de fusion"
 
-#: ../src/ui.c:431
+#: ../src/ui.c:430
 msgid "Contents"
 msgstr "Sommaire"
 
-#: ../src/ui.c:433
+#: ../src/ui.c:432
 msgid "Open glabels manual"
 msgstr "Ouvre le manuel de gLabels"
 
-#: ../src/ui.c:438
+#: ../src/ui.c:437
 msgid "About..."
 msgstr "À propos..."
 
-#: ../src/ui.c:440
+#: ../src/ui.c:439 ../src/ui-commands.c:1198
 msgid "About glabels"
 msgstr "À propos de gLabels"
 
-#: ../src/ui.c:450
+#: ../src/ui.c:449
 msgid "Property toolbar"
 msgstr "Barre d'outils des propriétés"
 
-#: ../src/ui.c:452
+#: ../src/ui.c:451
 msgid "Change the visibility of the property toolbar in the current window"
 msgstr ""
 "Afficher ou masquer la barre d'outils des propriétés dans la fenêtre actuelle"
 
-#: ../src/ui.c:458
+#: ../src/ui.c:457
 msgid "Grid"
 msgstr "Grille"
 
-#: ../src/ui.c:460
+#: ../src/ui.c:459
 msgid "Change the visibility of the grid in the current window"
 msgstr "Afficher ou masquer la grille dans la fenêtre actuelle"
 
-#: ../src/ui.c:466
+#: ../src/ui.c:465
 msgid "Markup"
 msgstr "Marges"
 
-#: ../src/ui.c:468
+#: ../src/ui.c:467
 msgid "Change the visibility of markup lines in the current window"
 msgstr "Afficher ou masquer les lignes des marges dans la fenêtre actuelle"
 
-#: ../src/ui.c:479
+#: ../src/ui.c:478
 msgid "Main toolbar"
 msgstr "Barre d'outils principale"
 
-#: ../src/ui.c:481
+#: ../src/ui.c:480
 msgid "Change the visibility of the main toolbar in the current window"
 msgstr ""
 "Afficher ou masquer la barre d'outils principale dans la fenêtre actuelle"
 
-#: ../src/ui.c:487
+#: ../src/ui.c:486
 msgid "Drawing toolbar"
 msgstr "Barre d'outils dessin"
 
-#: ../src/ui.c:489
+#: ../src/ui.c:488
 msgid "Change the visibility of the drawing toolbar in the current window"
 msgstr "Afficher ou masquer la barre d'outils dessin dans la fenêtre actuelle"
 
@@ -1731,20 +1629,20 @@ msgstr "Afficher ou masquer la barre d'outils dessin dans la fenêtre actuelle"
 msgid "Glabels includes contributions from:"
 msgstr "Ont également contribué à Glabels :"
 
-#: ../src/ui-commands.c:1141
+#: ../src/ui-commands.c:1144
 msgid "See the file AUTHORS for additional credits,"
 msgstr ""
 "Voir le fichier AUTHORS pour les remerciements aux autres contributeurs,"
 
-#: ../src/ui-commands.c:1142
+#: ../src/ui-commands.c:1145
 msgid "or visit http://glabels.org/"
 msgstr "ou visitez http://glabels.org/"
 
-#: ../src/ui-commands.c:1154
+#: ../src/ui-commands.c:1162
 msgid "A label and business card creation program.\n"
 msgstr "Un logiciel de création de cartes de visite et d'étiquettes.\n"
 
-#: ../src/ui-commands.c:1158
+#: ../src/ui-commands.c:1166
 msgid "translator-credits"
 msgstr ""
 "Olivier Berger <oberger@gnu.org>\n"
@@ -1752,7 +1650,7 @@ msgstr ""
 "Claude Paroz <claude@2xlibre.net>, 2007-2010\n"
 "Gérard Baylard <gerard.b@bbox.fr>, 2010"
 
-#: ../src/ui-commands.c:1161
+#: ../src/ui-commands.c:1169
 msgid ""
 "gLabels is free software: you can redistribute it and/or modify\n"
 "it under the terms of the GNU General Public License as published by\n"
@@ -1777,10 +1675,6 @@ msgstr ""
 "de CONFORMITÉ À UNE UTILISATION PARTICULIÈRE. Pour plus de détails, \n"
 "voir la Licence Publique Générale GNU.\n"
 
-#: ../src/ui-commands.c:1190
-msgid "glabels"
-msgstr "glabels"
-
 #: ../src/warning-handler.c:69
 msgid "gLabels Error!"
 msgstr "Erreur de gLabels !"
@@ -1793,57 +1687,57 @@ msgstr "(vide) - gLabels"
 msgid "(modified)"
 msgstr "(modifié)"
 
-#: ../src/xml-label-04.c:75 ../src/xml-label.c:333
+#: ../src/xml-label-04.c:76 ../src/xml-label.c:334
 #, c-format
 msgid "Bad root node = \"%s\""
 msgstr "Nœud racine incorrect = \"%s\""
 
-#: ../src/xml-label-04.c:123 ../src/xml-label.c:416
+#: ../src/xml-label-04.c:124 ../src/xml-label.c:417
 #, c-format
 msgid "bad node =  \"%s\""
-msgstr "nœud incorrect =  \"%s\""
+msgstr "nœud incorrect = \"%s\""
 
-#: ../src/xml-label.c:199 ../src/xml-label.c:237
+#: ../src/xml-label.c:200 ../src/xml-label.c:238
 msgid "xmlParseFile error"
 msgstr "erreur xmlParseFile"
 
-#: ../src/xml-label.c:274
+#: ../src/xml-label.c:275
 msgid "No document root"
 msgstr "Pas de racine de document"
 
-#: ../src/xml-label.c:282
+#: ../src/xml-label.c:283
 msgid "Importing from glabels 0.1 format"
 msgstr "Importation à partir du format glabels 0.1"
 
-#: ../src/xml-label.c:291
+#: ../src/xml-label.c:292
 msgid "Importing from glabels 0.4 format"
 msgstr "Importation à partir du format glabels 0.4"
 
-#: ../src/xml-label.c:301
+#: ../src/xml-label.c:302
 #, c-format
 msgid "Unknown glabels Namespace -- Using %s"
 msgstr "Espace de noms inconnu de glabels -- Utilisation de %s"
 
-#: ../src/xml-label.c:370
+#: ../src/xml-label.c:371
 #, c-format
 msgid "bad node in Document node =  \"%s\""
 msgstr "nœud racine incorrect dans le nœud Document = « %s »"
 
-#: ../src/xml-label.c:868
+#: ../src/xml-label.c:877
 #, c-format
 msgid "bad node in Data node =  \"%s\""
 msgstr "nœud incorrect dans le nœud Données = « %s »"
 
-#: ../src/xml-label.c:944
-#, fuzzy, c-format
+#: ../src/xml-label.c:953
+#, c-format
 msgid "Unknown embedded file format: \"%s\""
-msgstr "Identifiant ou nom de taille de papier « %s » inconnu"
+msgstr "Format du fichier incorporé « %s » inconnu"
 
-#: ../src/xml-label.c:1150 ../libglabels/xml-template.c:802
+#: ../src/xml-label.c:1159 ../libglabels/xml-template.c:802
 msgid "Utf8 conversion error."
 msgstr "Erreur de conversion Utf8."
 
-#: ../src/xml-label.c:1157
+#: ../src/xml-label.c:1166
 msgid "Problem saving xml file."
 msgstr "Problème lors de l'enregistrement du fichier xml."
 
@@ -1887,7 +1781,7 @@ msgstr ""
 #: ../libglabels/db.c:2164
 #, c-format
 msgid "%s full page label"
-msgstr "Page %s complète d'étiquettes"
+msgstr "Étiquette pleine page %s"
 
 #: ../libglabels/template.c:156
 #, c-format
@@ -1902,13 +1796,13 @@ msgstr "Partie équivalente (« %s ») pour « %s », non définie auparavan
 #: ../libglabels/template.c:727
 #, c-format
 msgid "%d × %d (%d per sheet)"
-msgstr ""
+msgstr "%d × %d (%d par page)"
 
 #. Translators: %d is the total number of labels on a page (sheet).
 #: ../libglabels/template.c:732
-#, fuzzy, c-format
+#, c-format
 msgid "%d per sheet"
-msgstr "par feuille"
+msgstr "%d par page"
 
 #: ../libglabels/template.c:802 ../libglabels/template.c:808
 #: ../libglabels/template.c:818 ../libglabels/template.c:824
@@ -1919,14 +1813,14 @@ msgstr "diamètre"
 #. the CSS2 Specification (Section 4.3.2)
 #. This table must be sorted exactly as the enumerations in lglUnits
 #. [LGL_UNITS_POINT]
-#: ../libglabels/units.c:65 ../data/ui/object-editor.ui.h:39
+#: ../libglabels/units.c:65 ../data/ui/object-editor.ui.h:40
 #: ../data/ui/prefs-dialog.ui.h:22
 msgid "points"
 msgstr "points"
 
 #. [LGL_UNITS_INCH]
-#: ../libglabels/units.c:66 ../data/ui/object-editor.ui.h:38
-#: ../data/ui/template-designer.ui.h:62
+#: ../libglabels/units.c:66 ../data/ui/object-editor.ui.h:39
+#: ../data/ui/template-designer.ui.h:65
 msgid "inches"
 msgstr "pouces"
 
@@ -1993,18 +1887,16 @@ msgid "Location:"
 msgstr "Emplacement :"
 
 #: ../data/ui/merge-properties-dialog.ui.h:3
-#, fuzzy
 msgid "Record selection/preview"
-msgstr "<b>Sélection/Aperçu des enregistrements</b>"
+msgstr "Sélection/aperçu des enregistrements"
 
 #: ../data/ui/merge-properties-dialog.ui.h:4
 msgid "Select all"
 msgstr "Tout sélectionner"
 
 #: ../data/ui/merge-properties-dialog.ui.h:5
-#, fuzzy
 msgid "Source"
-msgstr "<b>Source</b>"
+msgstr "Source"
 
 #: ../data/ui/merge-properties-dialog.ui.h:6
 msgid "Unselect all"
@@ -2023,7 +1915,7 @@ msgid "Custom"
 msgstr "Personnalisé"
 
 #: ../data/ui/media-select.ui.h:4 ../data/ui/new-label-dialog.ui.h:6
-#: ../data/ui/template-designer.ui.h:42
+#: ../data/ui/template-designer.ui.h:45
 msgid "Page size:"
 msgstr "Taille de page :"
 
@@ -2043,7 +1935,7 @@ msgstr ""
 "Choisissez un produit carte ou étiquette parmi des centaines de modèles "
 "prédéfinis ou définissez votre propre modèle."
 
-#: ../data/ui/new-label-dialog.ui.h:2 ../data/ui/template-designer.ui.h:27
+#: ../data/ui/new-label-dialog.ui.h:2 ../data/ui/template-designer.ui.h:29
 msgid "Description:"
 msgstr "Description :"
 
@@ -2059,7 +1951,7 @@ msgstr "Disposition :"
 msgid "Normal"
 msgstr "Normal"
 
-#: ../data/ui/new-label-dialog.ui.h:7 ../data/ui/template-designer.ui.h:43
+#: ../data/ui/new-label-dialog.ui.h:7 ../data/ui/template-designer.ui.h:46
 msgid "Part #:"
 msgstr "N° Ref :"
 
@@ -2102,115 +1994,119 @@ msgid "Angle:"
 msgstr "Angle :"
 
 #: ../data/ui/object-editor.ui.h:6
+msgid "Backend:"
+msgstr "Arrière-plan :"
+
+#: ../data/ui/object-editor.ui.h:7
 msgid "Checksum"
 msgstr "Somme de contrôle"
 
-#: ../data/ui/object-editor.ui.h:7 ../data/ui/prefs-dialog.ui.h:3
+#: ../data/ui/object-editor.ui.h:8 ../data/ui/prefs-dialog.ui.h:3
 msgid "Color:"
 msgstr "Couleur :"
 
-#: ../data/ui/object-editor.ui.h:9
+#: ../data/ui/object-editor.ui.h:10
 msgid "Enable shadow"
 msgstr "Activer l'ombrage"
 
-#: ../data/ui/object-editor.ui.h:10
+#: ../data/ui/object-editor.ui.h:11
 msgid "Family:"
 msgstr "Famille :"
 
-#: ../data/ui/object-editor.ui.h:11
+#: ../data/ui/object-editor.ui.h:12
 msgid "File:"
 msgstr "Fichier :"
 
-#: ../data/ui/object-editor.ui.h:12 ../data/ui/prefs-dialog.ui.h:5
+#: ../data/ui/object-editor.ui.h:13 ../data/ui/prefs-dialog.ui.h:5
 msgid "Fill"
 msgstr "Remplissage"
 
-#: ../data/ui/object-editor.ui.h:13 ../data/ui/template-designer.ui.h:30
+#: ../data/ui/object-editor.ui.h:14 ../data/ui/template-designer.ui.h:33
 msgid "Height:"
 msgstr "Hauteur :"
 
-#: ../data/ui/object-editor.ui.h:15
+#: ../data/ui/object-editor.ui.h:16
 msgid "Key:"
 msgstr "Clé :"
 
-#: ../data/ui/object-editor.ui.h:16
+#: ../data/ui/object-editor.ui.h:17
 msgid "Length:"
 msgstr "Longueur :"
 
-#: ../data/ui/object-editor.ui.h:18 ../data/ui/prefs-dialog.ui.h:10
+#: ../data/ui/object-editor.ui.h:19 ../data/ui/prefs-dialog.ui.h:10
 msgid "Line Spacing:"
 msgstr "Espacement :"
 
-#: ../data/ui/object-editor.ui.h:19
+#: ../data/ui/object-editor.ui.h:20
 msgid "Literal:"
 msgstr "Littéral :"
 
-#: ../data/ui/object-editor.ui.h:20
+#: ../data/ui/object-editor.ui.h:21
 msgid "Opacity:"
 msgstr "Opacité :"
 
-#: ../data/ui/object-editor.ui.h:21
+#: ../data/ui/object-editor.ui.h:22
 msgid "Position"
 msgstr "Position"
 
-#: ../data/ui/object-editor.ui.h:22
+#: ../data/ui/object-editor.ui.h:23
 msgid "Reset image size"
 msgstr "Restaurer la taille d'image"
 
-#: ../data/ui/object-editor.ui.h:23
+#: ../data/ui/object-editor.ui.h:24
 msgid "Shadow"
 msgstr "Ombre"
 
-#: ../data/ui/object-editor.ui.h:24
+#: ../data/ui/object-editor.ui.h:25
 msgid "Size"
 msgstr "Taille"
 
-#: ../data/ui/object-editor.ui.h:25
+#: ../data/ui/object-editor.ui.h:26
 msgid "Size:"
 msgstr "Taille :"
 
-#: ../data/ui/object-editor.ui.h:26
+#: ../data/ui/object-editor.ui.h:27
 msgid "Style"
 msgstr "Style"
 
-#: ../data/ui/object-editor.ui.h:27
+#: ../data/ui/object-editor.ui.h:28
 msgid "Style:"
 msgstr "Style :"
 
-#: ../data/ui/object-editor.ui.h:29 ../data/ui/prefs-dialog.ui.h:20
-#: ../data/ui/template-designer.ui.h:61
+#: ../data/ui/object-editor.ui.h:30 ../data/ui/prefs-dialog.ui.h:20
+#: ../data/ui/template-designer.ui.h:64
 msgid "Width:"
 msgstr "Largeur :"
 
-#: ../data/ui/object-editor.ui.h:30
+#: ../data/ui/object-editor.ui.h:31
 msgid "X Offset:"
 msgstr "Décalage X :"
 
-#: ../data/ui/object-editor.ui.h:31
+#: ../data/ui/object-editor.ui.h:32
 msgid "X:"
 msgstr "X :"
 
-#: ../data/ui/object-editor.ui.h:32
+#: ../data/ui/object-editor.ui.h:33
 msgid "Y Offset:"
 msgstr "Décalage Y :"
 
-#: ../data/ui/object-editor.ui.h:33
+#: ../data/ui/object-editor.ui.h:34
 msgid "Y:"
 msgstr "Y :"
 
-#: ../data/ui/object-editor.ui.h:34
+#: ../data/ui/object-editor.ui.h:35
 msgid "degrees"
 msgstr "degrés"
 
-#: ../data/ui/object-editor.ui.h:35
+#: ../data/ui/object-editor.ui.h:36
 msgid "dialog1"
 msgstr "dialog1"
 
-#: ../data/ui/object-editor.ui.h:36
+#: ../data/ui/object-editor.ui.h:37
 msgid "digits:"
 msgstr "chiffres :"
 
-#: ../data/ui/object-editor.ui.h:37
+#: ../data/ui/object-editor.ui.h:38
 msgid "format:"
 msgstr "format :"
 
@@ -2219,9 +2115,8 @@ msgid "   "
 msgstr "   "
 
 #: ../data/ui/prefs-dialog.ui.h:4
-#, fuzzy
 msgid "Default page size"
-msgstr "Restaurer la taille d'image"
+msgstr "Taille de page par défaut"
 
 #: ../data/ui/prefs-dialog.ui.h:6
 msgid "Font:"
@@ -2264,9 +2159,8 @@ msgid "US Letter"
 msgstr "Letter US"
 
 #: ../data/ui/prefs-dialog.ui.h:19
-#, fuzzy
 msgid "Units"
-msgstr "Sans titre"
+msgstr "Unités"
 
 #: ../data/ui/property-bar.ui.h:1
 msgid "Bold"
@@ -2333,34 +2227,42 @@ msgid "3. Round (radius of corner):"
 msgstr "3. Arrondi (rayon d'angle) :"
 
 #: ../data/ui/template-designer.ui.h:13
+msgid "3. Waste (overprint allowed):"
+msgstr "3. Déchet (impression en surcharge autorisée) :"
+
+#: ../data/ui/template-designer.ui.h:14
 msgid "4. Clipping height:"
 msgstr "4. Hauteur de découpe :"
 
-#: ../data/ui/template-designer.ui.h:14
+#: ../data/ui/template-designer.ui.h:15
 msgid "4. Horiz. waste (overprint allowed):"
 msgstr "4. Déchet horiz. (impression en surcharge autorisée) :"
 
-#: ../data/ui/template-designer.ui.h:15
+#: ../data/ui/template-designer.ui.h:16
+msgid "4. Margin"
+msgstr "4. Marge"
+
+#: ../data/ui/template-designer.ui.h:17
 msgid "5. Vert. waste (overprint allowed):"
 msgstr "5. Déchet vert. (impression en surcharge autorisée) :"
 
-#: ../data/ui/template-designer.ui.h:16
+#: ../data/ui/template-designer.ui.h:18
 msgid "5. Waste (overprint allowed):"
 msgstr "5. Déchet (impression en surcharge autorisée) :"
 
-#: ../data/ui/template-designer.ui.h:17
+#: ../data/ui/template-designer.ui.h:19
 msgid "6. Margin"
 msgstr "6. Marge"
 
-#: ../data/ui/template-designer.ui.h:18
+#: ../data/ui/template-designer.ui.h:20
 msgid "Brand/Manufacturer:"
 msgstr "Marque/Fabricant :"
 
-#: ../data/ui/template-designer.ui.h:19
+#: ../data/ui/template-designer.ui.h:21
 msgid "CD/DVD (including credit card CDs)"
 msgstr "CD/DVD (y compris CD au format carte de crédit)"
 
-#: ../data/ui/template-designer.ui.h:20
+#: ../data/ui/template-designer.ui.h:22
 msgid ""
 "Congratulations!\n"
 "\n"
@@ -2379,19 +2281,23 @@ msgstr ""
 "Dans le cas contraire, cliquez sur « Annuler » pour abandonner votre\n"
 "création ou sur « Précédent » pour poursuivre les modification du modèle."
 
-#: ../data/ui/template-designer.ui.h:28
+#: ../data/ui/template-designer.ui.h:30
 msgid "Distance from left edge (x0):"
 msgstr "Distance par rapport au bord gauche (x0) :"
 
-#: ../data/ui/template-designer.ui.h:29
+#: ../data/ui/template-designer.ui.h:31
 msgid "Distance from top edge (y0):"
 msgstr "Distance par rapport au bord haut (y0) :"
 
-#: ../data/ui/template-designer.ui.h:31
+#: ../data/ui/template-designer.ui.h:32
+msgid "Elliptical"
+msgstr "Elliptique"
+
+#: ../data/ui/template-designer.ui.h:34
 msgid "Horizontal pitch (dx):"
 msgstr "Espacement horizontal (dx) :"
 
-#: ../data/ui/template-designer.ui.h:32
+#: ../data/ui/template-designer.ui.h:35
 msgid ""
 "How many layouts will your template contain? \n"
 "\n"
@@ -2407,44 +2313,44 @@ msgstr ""
 "premier exemple.\n"
 "Le deuxième exemple illustre le cas où deux dispositions sont nécessaires."
 
-#: ../data/ui/template-designer.ui.h:37
+#: ../data/ui/template-designer.ui.h:40
 msgid "Layout #1"
 msgstr "Disposition n°1"
 
-#: ../data/ui/template-designer.ui.h:38
+#: ../data/ui/template-designer.ui.h:41
 msgid "Layout #2"
 msgstr "Disposition n°2"
 
-#: ../data/ui/template-designer.ui.h:39
+#: ../data/ui/template-designer.ui.h:42
 msgid "Number across (nx):"
 msgstr "Nombre sur la largeur (nx) :"
 
-#: ../data/ui/template-designer.ui.h:40
+#: ../data/ui/template-designer.ui.h:43
 msgid "Number down (ny):"
 msgstr "Nombre sur la hauteur (ny) :"
 
-#: ../data/ui/template-designer.ui.h:41
+#: ../data/ui/template-designer.ui.h:44
 msgid "Number of layouts:"
 msgstr "Nombre de dispositions :"
 
-#: ../data/ui/template-designer.ui.h:44
+#: ../data/ui/template-designer.ui.h:47
 msgid ""
 "Please enter the following identifying information about the template "
 "stationery."
 msgstr "Entrez les informations suivantes à propos du modèle de fourniture."
 
-#: ../data/ui/template-designer.ui.h:45
+#: ../data/ui/template-designer.ui.h:48
 msgid "Please enter the following layout information."
 msgstr "Entrez les informations suivantes sur la disposition."
 
-#: ../data/ui/template-designer.ui.h:46
+#: ../data/ui/template-designer.ui.h:49
 msgid ""
 "Please enter the following size parameters of a single label in your "
 "template."
 msgstr ""
 "Entrez les paramètres de taille suivants pour une étiquette de votre modèle."
 
-#: ../data/ui/template-designer.ui.h:47
+#: ../data/ui/template-designer.ui.h:50
 msgid ""
 "Please enter the following size parameters of a single label or card in your "
 "template."
@@ -2452,27 +2358,27 @@ msgstr ""
 "Entrez les paramètres de taille suivants pour une carte ou une étiquette de "
 "votre modèle."
 
-#: ../data/ui/template-designer.ui.h:48
+#: ../data/ui/template-designer.ui.h:51
 msgid "Please select the basic shape of the labels or cards."
 msgstr "Sélectionnez la forme de base des cartes ou des étiquettes."
 
-#: ../data/ui/template-designer.ui.h:49
+#: ../data/ui/template-designer.ui.h:52
 msgid "Please select the page size of the template stationery."
 msgstr "Sélectionnez la taille du papier."
 
-#: ../data/ui/template-designer.ui.h:50
+#: ../data/ui/template-designer.ui.h:53
 msgid "Print test sheet"
 msgstr "Imprimer une page test"
 
-#: ../data/ui/template-designer.ui.h:51
+#: ../data/ui/template-designer.ui.h:54
 msgid "Rectangular or square (can have rounded corners)"
 msgstr "Rectangulaire ou carré (éventuellement à bords arrondis)"
 
-#: ../data/ui/template-designer.ui.h:52
+#: ../data/ui/template-designer.ui.h:55
 msgid "Round"
 msgstr "Circulaire"
 
-#: ../data/ui/template-designer.ui.h:53
+#: ../data/ui/template-designer.ui.h:56
 msgid ""
 "Templates needing\n"
 "two layouts."
@@ -2480,7 +2386,7 @@ msgstr ""
 "Modèle nécessitant\n"
 "deux dispositions."
 
-#: ../data/ui/template-designer.ui.h:55
+#: ../data/ui/template-designer.ui.h:58
 msgid ""
 "Templates needing only\n"
 "one layout."
@@ -2488,11 +2394,11 @@ msgstr ""
 "Modèle ne nécessitant\n"
 "qu'une disposition."
 
-#: ../data/ui/template-designer.ui.h:57
+#: ../data/ui/template-designer.ui.h:60
 msgid "Vertical pitch (dy):"
 msgstr "Espacement vertical (dy) :"
 
-#: ../data/ui/template-designer.ui.h:58
+#: ../data/ui/template-designer.ui.h:61
 msgid ""
 "Welcome to the gLabels Template Designer.\n"
 "\n"
@@ -2507,27 +2413,24 @@ msgid "Collate"
 msgstr "Assembler"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:2
-#, fuzzy
 msgid "Copies"
-msgstr "Copies :"
+msgstr "Copies"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:3
 msgid "Copies:"
 msgstr "Copies :"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:5
-#, fuzzy
 msgid "Merge Control"
-msgstr "<b>Contrôle de la fusion</b>"
+msgstr "Contrôle de la fusion"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:6
-#, fuzzy
 msgid "Options"
-msgstr "<b>Options</b>"
+msgstr "Options"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:7
 msgid "Sheets:"
-msgstr "Feuilles :"
+msgstr "Pages :"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:8
 msgid "Start on label"
@@ -2699,12 +2602,12 @@ msgstr "CD/DVD ou autre support"
 msgid "Mailing/shipping products"
 msgstr "Produits pour publipostage ou expédition"
 
-#: ../templates/categories.xml.h:6
+#: ../templates/categories.xml.h:6 ../templates/misc-iso-templates.xml.h:45
 msgid "Rectangular labels"
 msgstr "Étiquettes rectangulaires"
 
 #. ===================================================================
-#: ../templates/categories.xml.h:7 ../templates/pearl-iso-templates.xml.h:46
+#: ../templates/categories.xml.h:7 ../templates/pearl-iso-templates.xml.h:52
 msgid "Round labels"
 msgstr "Étiquettes circulaires"
 
@@ -2742,11 +2645,13 @@ msgstr "Cartes de visite"
 #. ===================================================================
 #. ===============================================================
 #. ===================================================================
+#. ********************************************************************
+#. ===================================================================
 #: ../templates/avery-us-templates.xml.h:6
 #: ../templates/avery-iso-templates.xml.h:14
 #: ../templates/misc-us-templates.xml.h:8
 #: ../templates/misc-iso-templates.xml.h:16
-#: ../templates/pearl-iso-templates.xml.h:20
+#: ../templates/pearl-iso-templates.xml.h:24
 #: ../templates/worldlabel-us-templates.xml.h:2
 #: ../templates/zweckform-iso-templates.xml.h:8
 msgid "CD/DVD Labels"
@@ -2894,9 +2799,14 @@ msgstr "Jaquette de CD"
 msgid "Diskette labels"
 msgstr "Étiquettes de disquette"
 
-#. ===============================================================
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:20
+msgid "Identification Labels"
+msgstr "Étiquettes d'identification"
+
+#. ===============================================================
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:22
 #: ../templates/misc-us-templates.xml.h:20
 #: ../templates/misc-iso-templates.xml.h:36
 #: ../templates/zweckform-iso-templates.xml.h:16
@@ -2904,22 +2814,30 @@ msgid "Mailing Labels"
 msgstr "Étiquettes de publipostage"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:22
+#: ../templates/avery-iso-templates.xml.h:24
 msgid "Mailing labels"
 msgstr "Étiquettes de publipostage"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:24
+#: ../templates/avery-iso-templates.xml.h:26
 msgid "Mini Address Labels"
 msgstr "Étiquettes de mini-adresse"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:26
+#: ../templates/avery-iso-templates.xml.h:28
 msgid "Mini Labels"
 msgstr "Mini-étiquettes"
 
+#. ============================================================
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:28
+#: ../templates/avery-iso-templates.xml.h:30
+#: ../templates/misc-iso-templates.xml.h:44
+#: ../templates/zweckform-iso-templates.xml.h:24
+msgid "Rectangular Labels"
+msgstr "Étiquettes rectangulaires"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:32
 msgid "Shipping labels"
 msgstr "Étiquettes postales"
 
@@ -3118,18 +3036,18 @@ msgid "Mailing Labels-3 columns"
 msgstr "Étiquettes de publipostage (3 colonnes)"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:44
-#: ../templates/zweckform-iso-templates.xml.h:24
-msgid "Rectangular Labels"
-msgstr "Étiquettes rectangulaires"
+#: ../templates/misc-iso-templates.xml.h:47
+#: ../templates/pearl-iso-templates.xml.h:60
+msgid "Self-adhesive labels"
+msgstr "Étiquettes autocollantes"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:46
+#: ../templates/misc-iso-templates.xml.h:49
 msgid "Universal Labels"
 msgstr "Étiquettes universelles"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:48
+#: ../templates/misc-iso-templates.xml.h:51
 msgid "Video Labels (face only)"
 msgstr "Étiquettes de vidéos (face uniquement)"
 
@@ -3174,87 +3092,97 @@ msgid "Business cards punched glossy"
 msgstr "Cartes de visite prédécoupées brillantes"
 
 #. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:20
+msgid "CD inlet (back)"
+msgstr "Jaquette de CD (arrière)"
+
+#. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:22
+msgid "CD inlet (front)"
+msgstr "Jaquette de CD (avant)"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:26
+msgid "DVD inlet"
+msgstr "Jaquette de DVD"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:28
 msgid "Floppy disk labels"
 msgstr "Étiquettes pour disquettes"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:24
+#: ../templates/pearl-iso-templates.xml.h:30
 msgid "Foldable business cards"
 msgstr "Cartes de visite pliables"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:26
+#: ../templates/pearl-iso-templates.xml.h:32
 msgid "Foldable business cards glossy/dull"
 msgstr "Cartes de visite pliables brillantes/mates"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:28
+#: ../templates/pearl-iso-templates.xml.h:34
 msgid "Labels A4"
 msgstr "Étiquettes A4"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:30
+#: ../templates/pearl-iso-templates.xml.h:36
 msgid "Labels A5"
 msgstr "Étiquettes A5"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:32
+#: ../templates/pearl-iso-templates.xml.h:38
 msgid "Labels A6"
 msgstr "Étiquettes A6"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:34
+#: ../templates/pearl-iso-templates.xml.h:40
 msgid "Membership cards"
 msgstr "Cartes de membre"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:36
+#: ../templates/pearl-iso-templates.xml.h:42
 msgid "Membership cards, both sides printable"
 msgstr "Cartes de membre, imprimables sur les deux faces"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:38
+#: ../templates/pearl-iso-templates.xml.h:44
 msgid "Name plates"
 msgstr "Porte-nom"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:40
+#: ../templates/pearl-iso-templates.xml.h:46
 msgid "Passport photo labels glossy"
 msgstr "Étiquettes pour photos passeport, brillantes"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:42
+#: ../templates/pearl-iso-templates.xml.h:48
 msgid "Photo labels"
 msgstr "Étiquettes pour photos"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:44
+#: ../templates/pearl-iso-templates.xml.h:50
 msgid "Photo labels semiglossy"
 msgstr "Étiquettes pour photos, satinées"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:48
+#: ../templates/pearl-iso-templates.xml.h:54
 msgid "SD card labels"
 msgstr "Étiquettes pour cartes SD"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:50
+#: ../templates/pearl-iso-templates.xml.h:56
 msgid "Self-adhesive film transparent"
 msgstr "Film transparent autocollant"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:52
+#: ../templates/pearl-iso-templates.xml.h:58
 msgid "Self-adhesive film weatherproof"
 msgstr "Films autocollants résistant aux intempéries"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:54
-msgid "Self-adhesive labels"
-msgstr "Étiquettes autocollantes"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:56
+#: ../templates/pearl-iso-templates.xml.h:62
 msgid "Self-adhesive window film"
 msgstr "Film autocollant pour fenêtre"
 
@@ -3292,25 +3220,3 @@ msgstr "Étiquettes rectangulaires pour copieur"
 #: ../templates/zweckform-iso-templates.xml.h:26
 msgid "Video Labels (back)"
 msgstr "Étiquettes vidéo (dos)"
-
-#~ msgid "<span weight=\"bold\" size=\"larger\">Xxx object properties</span>"
-#~ msgstr ""
-#~ "<span weight=\"bold\" size=\"larger\">Propriétés de l'objet Xxx</span>"
-
-#~ msgid "<span weight=\"bold\">Default page size</span>"
-#~ msgstr "<span weight=\"bold\">Taille de page par défaut</span>"
-
-#~ msgid "<span weight=\"bold\">Fill</span>"
-#~ msgstr "<span weight=\"bold\">Remplissage</span>"
-
-#~ msgid "<span weight=\"bold\">Line</span>"
-#~ msgstr "<span weight=\"bold\">Ligne</span>"
-
-#~ msgid "<span weight=\"bold\">Text</span>"
-#~ msgstr "<span weight=\"bold\">Texte</span>"
-
-#~ msgid "<span weight=\"bold\">Units</span>"
-#~ msgstr "<span weight=\"bold\">Unités</span>"
-
-#~ msgid "<b>Copies</b>"
-#~ msgstr "<b>Copies</b>"
