@@ -2,16 +2,16 @@
 # Spanish translation for glabels.
 # Copyright (C) 2010 glabels's COPYRIGHT HOLDER
 # This file is distributed under the same license as the glabels package.
-# Jorge González <jorgegonz@svn.gnome.org>, 2010.
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2010.
+# Jorge González <jorgegonz@svn.gnome.org>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-26 18:52+0000\n"
-"PO-Revision-Date: 2010-10-27 12:34+0200\n"
-"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
+"POT-Creation-Date: 2010-10-31 14:29+0000\n"
+"PO-Revision-Date: 2010-11-03 13:04+0100\n"
+"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -103,10 +103,8 @@ msgid "Creative Commons Share Alike 3.0"
 msgstr "Creative Commons Compartir Igual 3.0"
 
 #: C/skipfields.page:25(title)
-#, fuzzy
-#| msgid "Printing address labels"
 msgid "Skipping blank address lines"
-msgstr "Imprimir etiquetas de dirección"
+msgstr "Omitir líneas de dirección vacías"
 
 #: C/skipfields.page:27(p)
 msgid ""
@@ -459,12 +457,12 @@ msgid "glabels <placeholder-1/>"
 msgstr "glabels <placeholder-1/>"
 
 #: C/multifile.page:36(p)
-#, fuzzy
-#| msgid "To Start <application>gLabels</application>"
 msgid ""
 "When the application starts, the files that you specify are displayed in "
 "separate <app>gLabels</app> windows."
-msgstr "Para iniciar <application>gLabels</application>"
+msgstr ""
+"Cuando se inicia la aplicación, se muestran los archivos que especifique en "
+"ventanas de <app>gLabels</app> separadas."
 
 #: C/merge.page:9(desc)
 msgid "Merge a data source to create multiple documents."
@@ -543,10 +541,8 @@ msgid ""
 msgstr ""
 
 #: C/merge-ex4.page:9(desc)
-#, fuzzy
-#| msgid "To Create a New Label or Card"
 msgid "Create address labels from a vCard file."
-msgstr "Crear una etiqueta nueva o una tarjeta"
+msgstr "Crear etiquetas de dirección desde un archivo vCard."
 
 #: C/merge-ex4.page:25(title)
 msgid "Example 4: Address Labels Using a vCard file"
@@ -646,10 +642,6 @@ msgid ""
 msgstr ""
 
 #: C/merge-ex3.page:71(p) C/merge-ex2.page:68(p) C/merge-ex1.page:65(p)
-#, fuzzy
-#| msgid ""
-#| "Now we start adding objects to our <application>gLabels</application> "
-#| "document as shown."
 msgid ""
 "Now we start adding objects to our <app>glabels</app> document as shown."
 msgstr ""
@@ -669,20 +661,14 @@ msgid ""
 msgstr ""
 
 #: C/merge-ex3.page:82(p)
-#, fuzzy
-#| msgid ""
-#| "Now we can print our address labels by selecting the "
-#| "<menuchoice><guimenu>File</guimenu><guimenuitem>Print</guimenuitem></"
-#| "menuchoice> menu item. This will display the print dialog as shown below."
 msgid ""
 "Now we can print our address labels by selecting the <guiseq><gui>File</"
 "gui><gui>Print</gui></guiseq> menu item. This will display the print dialog "
 "as shown below."
 msgstr ""
 "Ahora podemos imprimir nuestra etiquetas de dirección seleccionando el "
-"elemento de menú <menuchoice><guimenu>Archivo</"
-"guimenu><guimenuitem>Imprimir</guimenuitem></menuchoice>. Esto mostrará el "
-"diálogo de impresión como se muestra a continuación."
+"elemento de menú <guiseq><gui>Archivo</gui><gui>Imprimir</gui></guiseq>. "
+"Esto mostrará el diálogo de impresión como se muestra a continuación."
 
 #: C/merge-ex3.page:89(p) C/merge-ex2.page:90(p)
 msgid "Printing address labels"
@@ -801,20 +787,14 @@ msgid ""
 msgstr ""
 
 #: C/merge-ex2.page:83(p)
-#, fuzzy
-#| msgid ""
-#| "Now we can print our address labels by selecting the "
-#| "<menuchoice><guimenu>File</guimenu><guimenuitem>Print</guimenuitem></"
-#| "menuchoice> menu item. This will display the print dialog as shown below."
 msgid ""
 "Now we can print our address labels by selecting the <guiseq><gui>File</"
 "gui><gui>Print</gui></guiseq> menu item. This will display print dialog as "
 "shown below."
 msgstr ""
 "Ahora podemos imprimir nuestra etiquetas de dirección seleccionando el "
-"elemento de menú <menuchoice><guimenu>Archivo</"
-"guimenu><guimenuitem>Imprimir</guimenuitem></menuchoice>. Esto mostrará el "
-"diálogo de impresión como se muestra a continuación."
+"elemento de menú <guiseq><gui>Archivo</gui><gui>Imprimir</gui></guiseq>. "
+"Esto mostrará el diálogo de impresión como se muestra a continuación."
 
 #: C/merge-ex2.page:101(p)
 msgid "Address labels preview"
@@ -913,20 +893,14 @@ msgid ""
 msgstr ""
 
 #: C/merge-ex1.page:83(p)
-#, fuzzy
-#| msgid ""
-#| "Now we can print our address labels by selecting the "
-#| "<menuchoice><guimenu>File</guimenu><guimenuitem>Print</guimenuitem></"
-#| "menuchoice> menu item. This will display the print dialog as shown below."
 msgid ""
 "Now we can print our name tags by selecting the <guiseq><gui>File</"
 "gui><gui>Print</gui></guiseq> menu item. This will display print dialog as "
 "shown below."
 msgstr ""
-"Ahora podemos imprimir nuestra etiquetas de dirección seleccionando el "
-"elemento de menú <menuchoice><guimenu>Archivo</"
-"guimenu><guimenuitem>Imprimir</guimenuitem></menuchoice>. Esto mostrará el "
-"diálogo de impresión como se muestra a continuación."
+"Ahora podemos imprimir nuestra etiquetas de nombre seleccionando el elemento "
+"de menú <guiseq><gui>Archivo</gui><gui>Imprimir</gui></guiseq>. Esto "
+"mostrará el diálogo de impresión como se muestra a continuación."
 
 #: C/merge-ex1.page:90(p)
 msgid "Printing name tags"
@@ -1005,11 +979,12 @@ msgstr ""
 #: C/mancreate.page:27(p)
 msgid ""
 "Predefined templates are defined by XML files located in either <file>/usr/"
-"share/libglabels-3.0/templates/</file> or <file>/usr/local/share/libglabels-"
-"3.0/templates/</file>, depending on where <app>glabels</app> was installed. "
-"<app>Glabels</app> will also search for user defined templates in the "
-"directory <file>${HOME}/.config/libglabels/templates/</file>. User defined "
-"template files should be named with a <file>*.template</file> extension."
+"share/libglabels-3.0/templates/</file> or <file>/usr/local/share/"
+"libglabels-3.0/templates/</file>, depending on where <app>glabels</app> was "
+"installed. <app>Glabels</app> will also search for user defined templates in "
+"the directory <file>${HOME}/.config/libglabels/templates/</file>. User "
+"defined template files should be named with a <file>*.template</file> "
+"extension."
 msgstr ""
 
 #: C/mancreate.page:37(p)
@@ -1055,6 +1030,14 @@ msgid ""
 "&lt;/Glabels-templates&gt;\n"
 "      "
 msgstr ""
+"\n"
+"&lt;?xml version=\"1.0\"?&gt;\n"
+"&lt;Glabels-templates&gt;\n"
+"\n"
+"   <replaceable>...plantillas...</replaceable>\n"
+"\n"
+"&lt;/Glabels-templates&gt;\n"
+"      "
 
 #: C/mancreate.page:77(title)
 msgid "Example Template"
@@ -1139,7 +1122,7 @@ msgstr ""
 
 #: C/mancreate.page:123(p)
 msgid "_description"
-msgstr ""
+msgstr "_descripción"
 
 #: C/mancreate.page:123(p)
 msgid ""
@@ -1180,7 +1163,7 @@ msgstr ""
 
 #: C/mancreate.page:149(p)
 msgid "category"
-msgstr ""
+msgstr "categoría"
 
 #: C/mancreate.page:149(p)
 msgid ""
@@ -1226,10 +1209,8 @@ msgid "Width of label/card"
 msgstr ""
 
 #: C/mancreate.page:183(p)
-#, fuzzy
-#| msgid "Height of rectangle."
 msgid "Heigth of label/card"
-msgstr "Altura del rectángulo."
+msgstr "Altura de la etiqueta/tarjeta"
 
 #: C/mancreate.page:186(p)
 msgid "round"
@@ -1332,7 +1313,7 @@ msgstr ""
 
 #: C/mancreate.page:305(p)
 msgid "hole"
-msgstr ""
+msgstr "agujero"
 
 #: C/mancreate.page:305(p)
 msgid "Radius of concentric hole"
@@ -1455,7 +1436,7 @@ msgstr ""
 
 #: C/mancreate.page:404(p)
 msgid "Radius of circle."
-msgstr ""
+msgstr "Radio del círculo."
 
 #: C/mancreate.page:410(title)
 msgid "Markup-rect Node"
@@ -1606,7 +1587,7 @@ msgstr ""
 
 #: C/license.page:8(desc)
 msgid "Legal information."
-msgstr ""
+msgstr "Información legal."
 
 #: C/license.page:11(title)
 msgid "License"
@@ -1624,7 +1605,7 @@ msgstr ""
 
 #: C/license.page:25(em)
 msgid "To share"
-msgstr ""
+msgstr "Compartir"
 
 #: C/license.page:26(p)
 msgid "To copy, distribute and transmit the work."
@@ -1695,13 +1676,17 @@ msgid ""
 msgstr ""
 "@@image: 'figures/glabels-logo.png'; md5=7b8d3b2afa219313ec0b41e8fa281d96"
 
-#: C/index.page:7(title) C/index.page:8(title)
-#, fuzzy
-#| msgid "User manual for the gLabels label and business card creation program"
-msgid "gLabels label and business card designer"
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/index.page:47(None)
+msgid ""
+"@@image: 'figures/introduction-glabels-main-window.png'; "
+"md5=2309c89ac6b5556daaf04adb72c39ffb"
 msgstr ""
-"Manual de usuario para el programa de creación de etiquetas y tarjetas de "
-"visita"
+
+#: C/index.page:7(title) C/index.page:8(title)
+msgid "gLabels label and business card designer"
+msgstr "Diseñador de etiquetas y de tarjetas de visita gLabels."
 
 #: C/index.page:23(title)
 msgid ""
@@ -1709,15 +1694,46 @@ msgid ""
 "\">gLabels logo</media> gLabels label and business card designer"
 msgstr ""
 
-#: C/index.page:29(title)
+#: C/index.page:28(p)
+msgid ""
+"The <app>gLabels</app> application is a lightweight program for creating "
+"labels and business cards for the GNOME desktop environment. It is designed "
+"to work with various laser/ink-jet peel-off label and business card sheets "
+"that you'll find at most office supply stores."
+msgstr ""
+
+#: C/index.page:35(p)
+msgid ""
+"<app>gLabels</app> can be used to design address labels, name tags, price "
+"tags, cd/dvd labels, or just about anything else that is organized in a "
+"regular pattern on a sheet of paper. Labels (or cards) can contain text, "
+"images, lines, shapes, and barcodes. <app>gLabels</app> also includes a "
+"document-merge feature which lets you print a unique label for each record "
+"from an external data source, such as a CSV file or an <app>Evolution</app> "
+"address book."
+msgstr ""
+
+#: C/index.page:45(title) C/index.page:46(desc)
+#, fuzzy
+#| msgid "About <app>gLabels</app>"
+msgid "<app>gLabels</app> main window"
+msgstr "Acerca de <app>gLabels</app>"
+
+#: C/index.page:48(p)
+#, fuzzy
+#| msgid "About <app>gLabels</app>"
+msgid "<app>gLabels</app> main window."
+msgstr "Acerca de <app>gLabels</app>"
+
+#: C/index.page:53(title)
 msgid "Usage"
 msgstr "Uso"
 
-#: C/index.page:33(title)
+#: C/index.page:57(title)
 msgid "Document Merging"
 msgstr ""
 
-#: C/index.page:37(title)
+#: C/index.page:61(title)
 msgid "Advanced usage"
 msgstr ""
 
@@ -1732,10 +1748,8 @@ msgstr ""
 "md5=08e152bad535a2b3d1ff7ed73de5b483"
 
 #: C/editprop.page:9(desc)
-#, fuzzy
-#| msgid "To Change Label Properties"
 msgid "Change the properties of objects."
-msgstr "Cambiar las propiedades de una etiqueta"
+msgstr "Cambiar las propiedades de objetos."
 
 #: C/editprop.page:25(title)
 msgid "To edit object properties"
@@ -2038,11 +2052,11 @@ msgstr "Usar milímetros."
 
 #: C/customize.page:54(p)
 msgid "Default: <gui>Inches</gui>."
-msgstr ""
+msgstr "Predeterminado: <gui>pulgadas</gui>."
 
 #: C/customize.page:58(title)
 msgid "Default page size"
-msgstr ""
+msgstr "Tamaño de página predeterminado"
 
 #: C/customize.page:59(p)
 msgid ""
@@ -2073,8 +2087,6 @@ msgid "Default: <gui>US Letter</gui>."
 msgstr ""
 
 #: C/customize.page:77(title)
-#, fuzzy
-#| msgid "Object defaults"
 msgid "Object Defaults"
 msgstr "Opciones predeterminadas para el objeto"
 
@@ -2159,7 +2171,7 @@ msgstr ""
 
 #: C/createnew.page:25(title)
 msgid "To create new objects"
-msgstr ""
+msgstr "Crear objetos nuevos"
 
 #: C/createnew.page:27(p)
 msgid ""
@@ -2231,7 +2243,7 @@ msgstr ""
 
 #: C/createnew.page:85(title)
 msgid "Barcode"
-msgstr ""
+msgstr "Código de barras"
 
 #: C/createnew.page:86(p)
 msgid ""
@@ -2247,7 +2259,7 @@ msgstr ""
 
 #: C/basicusage.page:25(title)
 msgid "Basic usage"
-msgstr ""
+msgstr "Uso básico"
 
 #: C/basicusage.page:28(title)
 msgid "To open a file"
@@ -2296,17 +2308,12 @@ msgid "You can save files in the following ways:"
 msgstr "Puede guardar archivos de cualquiera de estas maneras:"
 
 #: C/basicusage.page:66(p)
-#, fuzzy
-#| msgid ""
-#| "To save changes to an existing file, choose <menuchoice><guimenu>File</"
-#| "guimenu><guimenuitem>Save</guimenuitem></menuchoice>."
 msgid ""
 "To save changes to an existing file, choose <guiseq><gui>File</"
 "gui><gui>Save</gui></guiseq>."
 msgstr ""
-"Para guardar los cambios a un archivo existente, elija "
-"<menuchoice><guimenu>Archivo</guimenu><guimenuitem>Guardar</guimenuitem></"
-"menuchoice>."
+"Para guardar los cambios a un archivo existente, elija <guiseq><gui>Archivo</"
+"gui><gui>Guardar</gui></guiseq>."
 
 #: C/basicusage.page:73(p)
 msgid ""
@@ -2335,49 +2342,28 @@ msgid "About <app>gLabels</app>"
 msgstr "Acerca de <app>gLabels</app>"
 
 #: C/about.page:27(p)
-#, fuzzy
-#| msgid ""
-#| "<application>gLabels</application> was written by Jim Evins "
-#| "(<email>evins@snaught.com</email>). To find more information about "
-#| "<application>gLabels</application>, please visit the <ulink url=\"http://"
-#| "glabels.sourceforge.net\" type=\"http\">gLabels Web page</ulink>."
 msgid ""
 "<app>gLabels</app> was written by <credit><name>Jim Evins "
 "(<email>evins@snaught.com</email>)</name></credit>. To find more information "
 "about <app>gLabels</app>, please visit the <link href=\"http://glabels.org\" "
 "type=\"http\"><app>gLabels</app> Web page</link>."
 msgstr ""
-"Jim Evins (<email>evins@snaught.com</email>) escribió <application>gLabels</"
-"application>. Para obtener más información acerca de <application>gLabels</"
-"application>, visite la <ulink url=\"http://glabels.sourceforge.net\" type="
-"\"http\">página web de gLabels</ulink>."
+"<credit><name>Jim Evins (<email>evins@snaught.com</email>)</name></credit> "
+"escribió <app>gLabels</app>. Para obtener más información acerca de "
+"<app>gLabels</app>, visite la <link href=\"http://glabels.org\" type=\"http"
+"\">página web de<app>gLabels</app></link>."
 
 #: C/about.page:32(p)
-#, fuzzy
-#| msgid ""
-#| "<application>gLabels</application> was written by Jim Evins "
-#| "(<email>evins@snaught.com</email>). To find more information about "
-#| "<application>gLabels</application>, please visit the <ulink url=\"http://"
-#| "glabels.sourceforge.net\" type=\"http\">gLabels Web page</ulink>."
 msgid ""
 "To report a bug or make a suggestion regarding this application or this "
 "manual, follow the directions at the <link href=\"http://glabels.org/contact/"
 "\" type=\"http\"><app>gLabels</app> Contact Page</link>."
 msgstr ""
-"<application>gLabels</application> lo ha escrito Jim Evins "
-"(<email>evins@snaught.com</email>). Para encontrar más información sobre "
-"<application>gLabels</application>, visite la <ulink url=\"http://glabels."
-"sourceforge.net\" type=\"http\">página web de gLabels</ulink>."
+"Para informar de un error o hacer una sugerencia acerca de esta aplicación o "
+"este manual, siga las indicaciones en la <link href=\"http://glabels.org/"
+"contact/\" type=\"http\">página de contacto de <app>gLabels</app></link>."
 
 #: C/about.page:38(p)
-#, fuzzy
-#| msgid ""
-#| "This program is distributed under the terms of the GNU General Public "
-#| "license as published by the Free Software Foundation; either version 2 of "
-#| "the License, or (at your option) any later version. A copy of this "
-#| "license can be found at this <ulink url=\"ghelp:gpl\" type=\"help\">link</"
-#| "ulink>, or in the file COPYING included with the source code of this "
-#| "program."
 msgid ""
 "This program is distributed under the terms of the GNU General Public "
 "license as published by the Free Software Foundation; either version 3 of "
@@ -2385,11 +2371,11 @@ msgid ""
 "can be found at this <link href=\"ghelp:gpl\" type=\"help\">link</link>, or "
 "in the file COPYING included with the source code of this program."
 msgstr ""
-"Este programa se distribuye bajo los términos de la Licencia Pública General "
-"GNU tal como la publica la Free Software Foundation; en cualquiera de las "
-"versiones 2 de la Licencia o (a su elección) cualquier versión posterior. "
-"Puede encontrar una copia de esta licencia en este <ulink url=\"ghelp:gpl\" "
-"type=\"help\">enlace</ulink>, o en el archivo COPYING incluido con el código "
+"Este programa se distribuye bajo los términos de la Licencia Pública General "
+"GNU tal como la publica la Free Software Foundation; tanto en la versión 3 "
+"de la Licencia, o (a su elección) cualquier otra versión posterior. Puede "
+"encontrarse una copia de esta licencia en este <link href=\"ghelp:gpl\" type="
+"\"help\">enlace</link>, o en el archivo COPYING incluido con el código "
 "fuente de este programa."
 
 #. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
