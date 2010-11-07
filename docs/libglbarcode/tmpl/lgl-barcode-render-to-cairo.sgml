@@ -1,0 +1,40 @@
+<!-- ##### SECTION Title ##### -->
+Cairo Renderer
+
+<!-- ##### SECTION Short_Description ##### -->
+Render barcode to cairo context
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+This section describes the cairo barcode renderer.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### FUNCTION lgl_barcode_render_to_cairo ##### -->
+<para>
+
+</para>
+
+@bc: 
+@cr: 
+
+
+<!-- ##### FUNCTION lgl_barcode_render_to_cairo_path ##### -->
+<para>
+
+</para>
+
+@bc: 
+@cr: 
+
+

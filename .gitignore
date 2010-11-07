@@ -43,6 +43,7 @@ glabels-*.tar.gz
 /xmldocs.make
 
 /libglabels/libglabels*.pc
+/libglbarcode/libglbarcode*.pc
 
 /src/marshal.[ch]
 /src/stock-pixmaps/stockpixbufs.h

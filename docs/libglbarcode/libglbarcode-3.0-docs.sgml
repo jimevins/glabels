@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY libglbarcode-intro SYSTEM "intro.sgml">
+]>
+<book id="index">
+
+  <bookinfo>
+    <title>LibGlbarcode 3.0 Reference Manual</title>
+  </bookinfo>
+
+  <chapter id="overview">
+    <title>LibGlbarcode Overview</title>
+
+    &libglbarcode-intro;
+
+  </chapter>
+
+  <chapter id="api">
+    <title>API Reference</title>
+
+    <xi:include href="xml/lgl-barcode.xml"/>
+    <xi:include href="xml/lgl-barcode-create.xml"/>
+    <xi:include href="xml/lgl-barcode-render-to-cairo.xml"/>
+    <xi:include href="xml/lgl-barcode-type.xml"/>
+
+  </chapter>
+
+</book>

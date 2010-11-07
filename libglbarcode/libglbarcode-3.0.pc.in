@@ -8,5 +8,6 @@ Description: GLabels Built-In Barcode Library
 Requires: glib-2.0 cairo pango
 Version: @VERSION@
 Libs: -L${libdir} -lglbarcode-3.0
+Libs.private: -lm
 Cflags: -I${includedir}/@LIBGLBARCODE_BRANCH@
 

@@ -1,0 +1,161 @@
+<refentry id="libglbarcode-intro" revision="07 Nov 2010">
+<refmeta>
+<refentrytitle role="top_of_page" id="libglbarcode-intro.top_of_page">Introduction</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  LIBGLBARCODE-3.0 Library
+</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>Introduction</refname>
+<refpurpose>
+Introduction to libglbarcode library
+</refpurpose>
+</refnamediv>
+
+
+<refsect1>
+<title>Overview</title>
+
+<para>
+Libglbarcode provides the core barcode functionality for <application>glabels</application>.  It provides
+an intermediate barcode format, a small set of built-in barcode back-ends, and a cairo renderer.  While
+libglbarcode does not currently include a large set of built-in barcode back-ends or renderers, its
+simple architecture would easily support extending its functionality beyond the needs of
+<application>glabels</application>.
+</para>
+
+</refsect1>
+
+
+<refsect1>
+<title>Basic Usage</title>
+
+<programlisting>
+
+#include &lt;libglbarcode/lgl-barcode-create.h&gt;
+#include &lt;libglbarcode/lgl-barcode-render-to-cairo.h&gt;
+
+void
+example (gchar   *data,
+         cairo_t *cr)
+{
+        glBarcode *bc;
+
+        bc = lgl_barcode_create (LGL_BARCODE_TYPE_CODE39, TRUE, FALSE, 0, 0, data);
+
+        /* Render to cairo context.  Assume context has appropriate scale and translation.
+         * Scale should be such that world units are points (1 point = 1/72 inch) and that
+         * positive y values go downward.
+         */
+        lgl_barcode_render_to_cairo (bc, cr);
+
+        lgl_free (bc);
+}
+
+</programlisting>
+
+
+</refsect1>
+
+
+<refsect1>
+<title>Writing Renderers</title>
+
+<para>
+The <link linkend="lglBarcode">lglBarcode</link> structure is independent of
+barcode type, and consists of a simple list of drawing primitives.
+A renderer simply traverses this list translating these primitives into native
+drawing commands for its target format or device.
+All renderers will follow this simple pattern as illustrated in the example
+below.
+</para>
+
+<programlisting>
+
+#include &lt;libglbarcode/lgl-barcode.h&gt;
+#include &lt;xxx.h&gt;
+
+void
+lgl_barcode_render_to_xxx (const lglBarcode  *bc)
+{
+        GList                  *p;
+
+        lglBarcodeShape        *shape;
+        lglBarcodeShapeLine    *line;
+        lglBarcodeShapeBox     *box;
+        lglBarcodeShapeChar    *bchar;
+        lglBarcodeShapeString  *bstring;
+        lglBarcodeShapeRing    *ring;
+        lglBarcodeShapeHexagon *hexagon;
+
+
+        for (p = bc->shapes; p != NULL; p = p->next) {
+
+                shape = (lglBarcodeShape *)p->data;
+
+                switch (shape->type)
+                {
+
+                case LGL_BARCODE_SHAPE_LINE:
+                        line = (lglBarcodeShapeLine *) shape;
+
+                        xxx_plot_line (line->x, line->y,
+                                       line->x, line->y + line->length,
+                                       line->width );
+                        break;
+
+                case LGL_BARCODE_SHAPE_BOX:
+                        box = (lglBarcodeShapeBox *) shape;
+
+                        xxx_plot_rectangle (box->x, box->y,
+                                            box->width, box->height);
+                        break;
+
+                case LGL_BARCODE_SHAPE_CHAR:
+                        bchar = (lglBarcodeShapeChar *) shape;
+
+                        ...
+                        xxx_plot_char (...);
+                        break;
+
+                case LGL_BARCODE_SHAPE_STRING:
+                        bstring = (lglBarcodeShapeString *) shape;
+
+                        ...
+                        xxx_plot_string (...);
+                        break;
+
+                case LGL_BARCODE_SHAPE_RING:
+                        ring = (lglBarcodeShapeRing *) shape;
+
+                        ...
+                        xxx_plot_circle (...);
+                        break;
+
+                case LGL_BARCODE_SHAPE_HEXAGON:
+                        hexagon = (lglBarcodeShapeHexagon *) shape;
+
+                        ...
+                        xxx_plot_polygon (...);
+                        break;
+
+                default:
+                        g_assert_not_reached ();
+                        break;
+
+                }
+
+        }
+
+}
+
+
+</programlisting>
+
+
+</refsect1>
+
+
+</refentry>

@@ -1,0 +1,37 @@
+<!-- ##### SECTION Title ##### -->
+Barcode Factory
+
+<!-- ##### SECTION Short_Description ##### -->
+Basic end-user barcode creation API
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+This section describes a simple API to select and create #glBarcode structures using a built-in
+barcode backend.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### FUNCTION lgl_barcode_create ##### -->
+<para>
+
+</para>
+
+@type: 
+@text_flag: 
+@checksum_flag: 
+@w: 
+@h: 
+@data: 
+@Returns: 
+
+

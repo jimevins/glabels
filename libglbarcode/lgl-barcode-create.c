@@ -68,8 +68,28 @@ BarcodeNewFunc create_func[LGL_BARCODE_N_TYPES] = {
 
 
 /****************************************************************************/
-/* Lookup barcode type and create appropriate barcode.                      */
-/****************************************************************************/
+/**
+ * lgl_barcode_create:
+ * @type:           Barcode type selection (#lglBarcodeType)
+ * @text_flag:      %TRUE to show text, if supported by barcode type
+ * @checksum_flag:  %TRUE to include checksum, if supported or optional for barcode type
+ * @w:              Suggested width of barcode
+ * @h:              Suggested height of barcode
+ * @data:           Data to encode into barcode
+ *
+ * Create a new barcode structure, encoding @data with selected barcode type and
+ * characteristics.
+ *
+ * Barcode dimensions (@w and @h) are in points ( 1 point = 1/72 inch ).
+ * If either @w or @h are zero, the barcode will be rendered in a nominal size
+ * appropriate for the barcode type and data.  The actual size of the resulting
+ * barcode may also be limited by required tolerances of line sizes and spacing
+ * for the given barcode type. 
+ *
+ *
+ * Returns: A newly allocated #lglBarcode structure.  Use lgl_barcode_free() to
+ *          free it.
+ */
 lglBarcode *
 lgl_barcode_create (lglBarcodeType     type,
                     gboolean           text_flag,

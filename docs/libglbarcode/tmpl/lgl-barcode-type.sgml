@@ -1,0 +1,36 @@
+<!-- ##### SECTION Title ##### -->
+Barcode Types
+
+<!-- ##### SECTION Short_Description ##### -->
+Enumeration of supported barcode types
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+This section describes an enumeration for selecting one of the barcode types supported by libglbarcode.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### ENUM lglBarcodeType ##### -->
+<para>
+This enumeration is used to select a built-in barcode type.  The currently supported barcode types are
+</para>
+
+@LGL_BARCODE_TYPE_POSTNET:     USPS Postnet Barcode (5, 9, or 11 digits)
+@LGL_BARCODE_TYPE_POSTNET_5:   USPS Postnet Barcode (5 digits)
+@LGL_BARCODE_TYPE_POSTNET_9:   USPS Postnet Barcode (9 digits)
+@LGL_BARCODE_TYPE_POSTNET_11:  USPS Postnet Barcode (11 digits)
+@LGL_BARCODE_TYPE_CEPNET:      Brazilian Postal Code
+@LGL_BARCODE_TYPE_ONECODE:     USPS Intelligent Mail Barcode
+@LGL_BARCODE_TYPE_CODE39:      Code 39
+@LGL_BARCODE_TYPE_CODE39_EXT:  Extended Code 39 (Supports full ASCII character set)
+

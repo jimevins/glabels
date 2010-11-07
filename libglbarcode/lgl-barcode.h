@@ -30,6 +30,19 @@ G_BEGIN_DECLS
 /* Barcode Intermediate Format. */
 /********************************/
 
+/**
+ * lglBarcode:
+ *  @width:    Width of barcode bounding box (points)
+ *  @height:   Height of barcode bounding box (points)
+ *  @shapes:   List of #lglBarcodeShape drawing primitives
+ *
+ * This structure contains the libglbarcode intermediate barcode format.  This
+ * structure contains a simple vectorized representation of the barcode.  This
+ * vectorized representation is easy to interpret by a rendering backend for
+ * either vector or raster formats.  A simple API is provided for constructing
+ * barcodes in this format.
+ *
+ */
 typedef struct {
 
         gdouble  width;
@@ -97,6 +110,7 @@ typedef enum {
         LGL_BARCODE_SHAPE_HEXAGON,
 } lglBarcodeShapeType;
 
+
 typedef struct {
 
         /* Begin Common Fields */
@@ -107,8 +121,18 @@ typedef struct {
 
 } lglBarcodeShapeAny;
 
-/*
+
+/**
  * lglBarcodeShapeLine:
+ * @type:   Always %LGL_BARCODE_SHAPE_LINE
+ * @x:      x coordinate of top of line
+ * @y:      y coordinate of top of line
+ * @length: Length of line
+ * @width:  Width of line
+ *
+ * A vertical line drawing primitive.
+ *
+ *<programlisting>
  *
  * @ =  origin (x,y) from top left corner of barcode
  *
@@ -122,6 +146,10 @@ typedef struct {
  *              |     |
  *              +-----+
  *               width
+ *
+ *</programlisting>
+ *
+ * All units are in points ( 1 point = 1/72 inch ).
  */
 typedef struct {
 
@@ -136,8 +164,18 @@ typedef struct {
 
 } lglBarcodeShapeLine;
 
-/*
+
+/**
  * lglBarcodeShapeBox:
+ * @type:   Always %LGL_BARCODE_SHAPE_BOX
+ * @x:      x coordinate of top left corner of box
+ * @y:      y coordinate of top left corner of box
+ * @width:  Width of box
+ * @height: Height of box
+ *
+ * A solid box drawing primitive.
+ *
+ *<programlisting>
  *
  * @ =  origin (x,y) from top left corner of barcode
  *
@@ -151,6 +189,10 @@ typedef struct {
  *              |         |
  *              +---------+
  *                 width
+ *
+ *</programlisting>
+ *
+ * All units are in points ( 1 point = 1/72 inch ).
  */
 typedef struct {
 
@@ -165,8 +207,18 @@ typedef struct {
 
 } lglBarcodeShapeBox;
 
-/*
+
+/**
  * lglBarcodeShapeChar:
+ * @type:   Always %LGL_BARCODE_SHAPE_CHAR
+ * @x:      x coordinate of left baseline of character
+ * @y:      y coordinate of left baseline of character
+ * @fsize:  Font size
+ * @c:      Character to add
+ *
+ * An single byte character drawing primitive.
+ *
+ *<programlisting>
  *
  * @ =  origin (x,y) from top left corner of barcode
  *
@@ -179,6 +231,10 @@ typedef struct {
  *        /__/        \__\      |
  *                              v
  *       @ ----------------------
+ *
+ *</programlisting>
+ *
+ * All units are in points ( 1 point = 1/72 inch ).
  */
 typedef struct {
 
@@ -193,8 +249,19 @@ typedef struct {
 
 } lglBarcodeShapeChar;
 
-/*
+
+/**
  * lglBarcodeShapeString:
+ * @type:   Always %LGL_BARCODE_SHAPE_STRING
+ * @x:      x coordinate of horizontal center of baseline of string
+ * @y:      y coordinate of horizontal center of baseline of string
+ * @fsize:  Font size
+ * @string: String to add
+ * @length: Number of bytes in string
+ *
+ * A character string drawing primitive.
+ *
+ *<programlisting>
  *
  * @ =  origin (x,y) from top left corner of barcode
  *
@@ -208,6 +275,10 @@ typedef struct {
  *                                              v
  *                           @ ------------------
  *                           x = horizontal center
+ *
+ *</programlisting>
+ *
+ * All units are in points ( 1 point = 1/72 inch ).
  */
 typedef struct {
 
@@ -222,8 +293,18 @@ typedef struct {
 
 } lglBarcodeShapeString;
 
-/*
+
+/**
  * lglBarcodeShapeRing:
+ * @type:       Always %LGL_BARCODE_SHAPE_RING
+ * @x:          x coordinate of center of circle
+ * @y:          y coordinate of center of circle
+ * @radius:     Radius of ring (center of line)
+ * @line_width: Width of line
+ *
+ * A ring (an open circle) drawing primitive.
+ *
+ *<programlisting>
  *
  * @ = origin (x,y) is centre of circle
  *
@@ -237,6 +318,10 @@ typedef struct {
  *        \   `.____.'   /      | radius
  *         `._    ...._.'.......|
  *            `-....-'
+ *
+ *</programlisting>
+ *
+ * All units are in points ( 1 point = 1/72 inch ).
  */
 
 typedef struct {
@@ -252,8 +337,17 @@ typedef struct {
 
 } lglBarcodeShapeRing;
 
-/*
- * lglBarcodeShapeHexagon;
+
+/**
+ * lglBarcodeShapeHexagon:
+ * @type:   Always %LGL_BARCODE_SHAPE_HEXAGON
+ * @x:      x coordinate of top point of hexagon
+ * @y:      y coordinate of top point of hexagon
+ * @height: Height of hexagon
+ *
+ * A solid regular hexagon (oriented with vertexes at top and bottom) drawing primitive.
+ *
+ *<programlisting>
  *
  * @ = origin (x,y) is top of hexagon
  *
@@ -272,6 +366,9 @@ typedef struct {
  *               "-_ _-"               v
  *                  " ------------------
  *
+ *</programlisting>
+ *
+ * All units are in points ( 1 point = 1/72 inch ).
  */
 
 typedef struct {
@@ -285,6 +382,7 @@ typedef struct {
         gdouble              height;
 
 } lglBarcodeShapeHexagon;
+
 
 typedef union {
 

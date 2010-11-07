@@ -28,15 +28,18 @@ G_BEGIN_DECLS
 
 typedef enum {
 
-        LGL_BARCODE_TYPE_POSTNET,
-        LGL_BARCODE_TYPE_POSTNET_5,
-        LGL_BARCODE_TYPE_POSTNET_9,
-        LGL_BARCODE_TYPE_POSTNET_11,
-        LGL_BARCODE_TYPE_CEPNET,
-        LGL_BARCODE_TYPE_ONECODE,
-        LGL_BARCODE_TYPE_CODE39,
-        LGL_BARCODE_TYPE_CODE39_EXT,
+        LGL_BARCODE_TYPE_POSTNET,        /* USPS Postnet Barcode (5, 9, or 11 digits) */
+        LGL_BARCODE_TYPE_POSTNET_5,      /* USPS Postnet Barcode (5 digits) */
+        LGL_BARCODE_TYPE_POSTNET_9,      /* USPS Postnet Barcode (9 digits) */
+        LGL_BARCODE_TYPE_POSTNET_11,     /* USPS Postnet Barcode (11 digits) */
+        LGL_BARCODE_TYPE_CEPNET,         /* Brazilian Postal Code */
 
+        LGL_BARCODE_TYPE_ONECODE,        /* USPS Intelligent Mail Barcode */
+
+        LGL_BARCODE_TYPE_CODE39,         /* Code 39 */
+        LGL_BARCODE_TYPE_CODE39_EXT,     /* Extended Code 39 (Supports full ASCII character set) */
+
+        /*< private >*/
         LGL_BARCODE_N_TYPES
 
 } lglBarcodeType;

@@ -338,6 +338,7 @@ po/Makefile.in
 help/Makefile
 docs/Makefile
 docs/libglabels/Makefile
+docs/libglbarcode/Makefile
 glabels.spec
 ])
 AC_OUTPUT

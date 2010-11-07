@@ -28,8 +28,9 @@
 
 #include <libglbarcode/lgl-barcode-render-to-cairo.h>
 
-#include <libglbarcode/lgl-barcode-postnet.h>
+#include <libglbarcode/lgl-barcode-code39.h>
 #include <libglbarcode/lgl-barcode-onecode.h>
+#include <libglbarcode/lgl-barcode-postnet.h>
 
 
 #endif /* __LIBGLBARCODE_H__ */

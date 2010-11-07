@@ -1,0 +1,214 @@
+<!-- ##### SECTION Title ##### -->
+lglBarcode
+
+<!-- ##### SECTION Short_Description ##### -->
+Barcode structure
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+This section describes the #lglBarcode structure and the #lglBarcodeShape family of simple drawing primitives.
+These structures form the basic intermediate barcode representation used by libglbarcode.
+The section also defines a set of functions for constructing an #lglBarcode structure and populating it with drawing primitives.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### STRUCT lglBarcode ##### -->
+<para>
+
+</para>
+
+@width: 
+@height: 
+@shapes: 
+
+<!-- ##### FUNCTION lgl_barcode_new ##### -->
+<para>
+
+</para>
+
+@void: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_barcode_free ##### -->
+<para>
+
+</para>
+
+@bc: 
+
+
+<!-- ##### ENUM lglBarcodeShapeType ##### -->
+<para>
+
+</para>
+
+@LGL_BARCODE_SHAPE_LINE: 
+@LGL_BARCODE_SHAPE_BOX: 
+@LGL_BARCODE_SHAPE_CHAR: 
+@LGL_BARCODE_SHAPE_STRING: 
+@LGL_BARCODE_SHAPE_RING: 
+@LGL_BARCODE_SHAPE_HEXAGON: 
+
+<!-- ##### UNION lglBarcodeShape ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT lglBarcodeShapeAny ##### -->
+<para>
+
+</para>
+
+@type: 
+@x: 
+@y: 
+
+<!-- ##### STRUCT lglBarcodeShapeLine ##### -->
+<para>
+
+</para>
+
+@type: 
+@x: 
+@y: 
+@length: 
+@width: 
+
+<!-- ##### STRUCT lglBarcodeShapeBox ##### -->
+<para>
+
+</para>
+
+@type: 
+@x: 
+@y: 
+@width: 
+@height: 
+
+<!-- ##### STRUCT lglBarcodeShapeChar ##### -->
+<para>
+
+</para>
+
+@type: 
+@x: 
+@y: 
+@fsize: 
+@c: 
+
+<!-- ##### STRUCT lglBarcodeShapeString ##### -->
+<para>
+
+</para>
+
+@type: 
+@x: 
+@y: 
+@fsize: 
+@string: 
+
+<!-- ##### STRUCT lglBarcodeShapeRing ##### -->
+<para>
+
+</para>
+
+@type: 
+@x: 
+@y: 
+@radius: 
+@line_width: 
+
+<!-- ##### STRUCT lglBarcodeShapeHexagon ##### -->
+<para>
+
+</para>
+
+@type: 
+@x: 
+@y: 
+@height: 
+
+<!-- ##### FUNCTION lgl_barcode_add_line ##### -->
+<para>
+
+</para>
+
+@bc: 
+@x: 
+@y: 
+@length: 
+@width: 
+
+
+<!-- ##### FUNCTION lgl_barcode_add_box ##### -->
+<para>
+
+</para>
+
+@bc: 
+@x: 
+@y: 
+@width: 
+@height: 
+
+
+<!-- ##### FUNCTION lgl_barcode_add_char ##### -->
+<para>
+
+</para>
+
+@bc: 
+@x: 
+@y: 
+@fsize: 
+@c: 
+
+
+<!-- ##### FUNCTION lgl_barcode_add_string ##### -->
+<para>
+
+</para>
+
+@bc: 
+@x: 
+@y: 
+@fsize: 
+@string: 
+@length: 
+
+
+<!-- ##### FUNCTION lgl_barcode_add_ring ##### -->
+<para>
+
+</para>
+
+@bc: 
+@x: 
+@y: 
+@radius: 
+@line_width: 
+
+
+<!-- ##### FUNCTION lgl_barcode_add_hexagon ##### -->
+<para>
+
+</para>
+
+@bc: 
+@x: 
+@y: 
+@height: 
+
+

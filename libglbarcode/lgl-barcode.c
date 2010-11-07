@@ -49,8 +49,23 @@ static void lgl_barcode_shape_free       (lglBarcodeShape *shape);
 
 
 /*****************************************************************************/
-/* Allocate new empty lglBarcode structure.                                  */
-/*****************************************************************************/
+/**
+ * lgl_barcode_new:
+ *
+ * Allocate a new #lglBarcode structure.
+ *
+ * This function allocates a new #lglBarcode structure.
+ * 
+ * <note><para>
+ *       This function is intended to be used internally by barcode implementations.
+ *       Typically an end-user would use lgl_barcode_create() instead.
+ * </para></note>
+ * 
+ *
+ * Returns: A newly allocated #lglBarcode structure.  Use lgl_barcode_free() to
+ *          free it.
+ *
+ */
 lglBarcode *
 lgl_barcode_new (void)
 {
@@ -59,8 +74,13 @@ lgl_barcode_new (void)
 
 
 /*****************************************************************************/
-/* Free previously created barcode.                                          */
-/*****************************************************************************/
+/**
+ * lgl_barcode_free:
+ * @bc: The #lglBarcode structure to free
+ *
+ * Free a previously allocated #lglBarcode structure.
+ *
+ */
 void
 lgl_barcode_free (lglBarcode *bc)
 {
@@ -82,8 +102,22 @@ lgl_barcode_free (lglBarcode *bc)
 
 
 /*****************************************************************************/
-/* Add a line.                                                               */
-/*****************************************************************************/
+/**
+ * lgl_barcode_add_line:
+ * @bc:     An #lglBarcode structure
+ * @x:      x coordinate of top of line
+ * @y:      y coordinate of top of line
+ * @length: Length of line
+ * @width:  Width of line
+ *
+ * Add a vertical line to barcode.  Coordinates are relative to top left corner
+ * of barcode.  All units are in points ( 1 point = 1/72 inch ).
+ *
+ * <note><para>
+ *        This function is intended to be used internally by barcode implementations.
+ * </para></note>
+ *
+ */
 void
 lgl_barcode_add_line (lglBarcode      *bc,
                       gdouble          x,
@@ -104,8 +138,22 @@ lgl_barcode_add_line (lglBarcode      *bc,
 
 
 /*****************************************************************************/
-/* Add box.                                                                  */
-/*****************************************************************************/
+/**
+ * lgl_barcode_add_box:
+ * @bc:     An #lglBarcode structure
+ * @x:      x coordinate of top left corner of box
+ * @y:      y coordinate of top left corner of box
+ * @width:  Width of box
+ * @height: Height of box
+ *
+ * Add a box to barcode.  Coordinates are relative to top left corner
+ * of barcode.  All units are in points ( 1 point = 1/72 inch ).
+ *
+ * <note><para>
+ *        This function is intended to be used internally by barcode implementations.
+ * </para></note>
+ *
+ */
 void
 lgl_barcode_add_box (lglBarcode      *bc,
                      gdouble          x,
@@ -126,8 +174,22 @@ lgl_barcode_add_box (lglBarcode      *bc,
 
 
 /*****************************************************************************/
-/* Add character.                                                            */
-/*****************************************************************************/
+/**
+ * lgl_barcode_add_char:
+ * @bc:     An #lglBarcode structure
+ * @x:      x coordinate of left baseline of character
+ * @y:      y coordinate of left baseline of character
+ * @fsize:  Font size
+ * @c:      Character to add
+ *
+ * Add an ASCII character to barcode.  Coordinates are relative to top left corner
+ * of barcode.  All units are in points ( 1 point = 1/72 inch ).
+ *
+ * <note><para>
+ *        This function is intended to be used internally by barcode implementations.
+ * </para></note>
+ *
+ */
 void
 lgl_barcode_add_char (lglBarcode      *bc,
                       gdouble          x,
@@ -148,8 +210,23 @@ lgl_barcode_add_char (lglBarcode      *bc,
 
 
 /*****************************************************************************/
-/* Add string.                                                               */
-/*****************************************************************************/
+/**
+ * lgl_barcode_add_string:
+ * @bc:     An #lglBarcode structure
+ * @x:      x coordinate of horizontal center of baseline of string
+ * @y:      y coordinate of horizontal center of baseline of string
+ * @fsize:  Font size
+ * @string: String to add
+ * @length: Number of bytes in string
+ *
+ * Add a character string to barcode.  Coordinates are relative to top left corner
+ * of barcode.  All units are in points ( 1 point = 1/72 inch ).
+ *
+ * <note><para>
+ *        This function is intended to be used internally by barcode implementations.
+ * </para></note>
+ *
+ */
 void
 lgl_barcode_add_string (lglBarcode      *bc,
                         gdouble          x,
@@ -170,8 +247,22 @@ lgl_barcode_add_string (lglBarcode      *bc,
 }
 
 /*****************************************************************************/
-/* Add ring.                                                                 */
-/*****************************************************************************/
+/**
+ * lgl_barcode_add_ring:
+ * @bc:         An #lglBarcode structure
+ * @x:          x coordinate of center of circle
+ * @y:          y coordinate of center of circle
+ * @radius:     Radius of ring (center of line)
+ * @line_width: Width of line
+ *
+ * Add a ring to barcode.  Coordinates are relative to top left corner
+ * of barcode.  All units are in points ( 1 point = 1/72 inch ).
+ *
+ * <note><para>
+ *        This function is intended to be used internally by barcode implementations.
+ * </para></note>
+ *
+ */
 void
 lgl_barcode_add_ring (lglBarcode      *bc,
                       gdouble          x,
@@ -191,8 +282,22 @@ lgl_barcode_add_ring (lglBarcode      *bc,
 }
 
 /*****************************************************************************/
-/* Add hexagon.                                                              */
-/*****************************************************************************/
+/**
+ * lgl_barcode_add_hexagon:
+ * @bc:         An #lglBarcode structure
+ * @x:          x coordinate of top point of hexagon
+ * @y:          y coordinate of top point of hexagon
+ * @height:     Height of hexagon
+ *
+ * Add a regular hexagon (oriented with vertexes at top and bottom) to barcode.
+ * Coordinates are relative to top left corner of barcode.  All units are in
+ * points ( 1 point = 1/72 inch ).
+ *
+ * <note><para>
+ *        This function is intended to be used internally by barcode implementations.
+ * </para></note>
+ *
+ */
 void
 lgl_barcode_add_hexagon (lglBarcode      *bc,
                          gdouble          x,

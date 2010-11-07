@@ -51,8 +51,18 @@
 
 
 /****************************************************************************/
-/* Render barcode to cairo context.                                         */
-/****************************************************************************/
+/**
+ * lgl_barcode_render_to_cairo:
+ * @bc:     An #lglBarcode structure
+ * @cr:     A #cairo_t context
+ *
+ * Render barcode to cairo context.  Context should be prepared with desired
+ * translation and appropriate scale.  Context should be translated such that
+ * the origin is at the desired location of the upper left hand corner of the
+ * barcode bounding box.  Context should be scaled such that all dimensions
+ * are in points ( 1 point = 1/72 inch ) and that positive y coordinates
+ * go down the surface.
+ */
 void
 lgl_barcode_render_to_cairo (const lglBarcode  *bc,
                              cairo_t           *cr)
@@ -185,8 +195,19 @@ lgl_barcode_render_to_cairo (const lglBarcode  *bc,
 
 
 /****************************************************************************/
-/* Render barcode to cairo context (creating a path only).                  */
-/****************************************************************************/
+/**
+ * lgl_barcode_render_to_cairo_path:
+ * @bc:     An #lglBarcode structure
+ * @cr:     A #cairo_t context
+ *
+ * Render barcode to cairo context, but only create a path to be filled or
+ * tested against.  Context should be prepared with desired
+ * translation and appropriate scale.  Context should be translated such that
+ * the origin is at the desired location of the upper left hand corner of the
+ * barcode bounding box.  Context should be scaled such that all dimensions
+ * are in points ( 1 point = 1/72 inch ) and that positive y coordinates
+ * go down the surface.
+ */
 void
 lgl_barcode_render_to_cairo_path (const lglBarcode  *bc,
                                   cairo_t           *cr)

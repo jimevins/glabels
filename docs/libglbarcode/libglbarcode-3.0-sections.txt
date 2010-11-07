@@ -1,0 +1,46 @@
+<SECTION>
+<FILE>lgl-barcode</FILE>
+<INCLUDE>libglbarcode/lgl-barcode.h</INCLUDE>
+<SUBSECTION Barcode Structure>
+lglBarcode
+<SUBSECTION Barcode Structure Management>
+lgl_barcode_new
+lgl_barcode_free
+<SUBSECTION Barcode Drawing Primitives>
+lglBarcodeShapeType
+lglBarcodeShape
+lglBarcodeShapeAny
+lglBarcodeShapeLine
+lglBarcodeShapeBox
+lglBarcodeShapeChar
+lglBarcodeShapeString
+lglBarcodeShapeRing
+lglBarcodeShapeHexagon
+<SUBSECTION Barcode Construction>
+lgl_barcode_add_line
+lgl_barcode_add_box
+lgl_barcode_add_char
+lgl_barcode_add_string
+lgl_barcode_add_ring
+lgl_barcode_add_hexagon
+</SECTION>
+
+<SECTION>
+<FILE>lgl-barcode-create</FILE>
+<INCLUDE>libglbarcode/lgl-barcode-create.h</INCLUDE>
+lgl_barcode_create
+</SECTION>
+
+<SECTION>
+<FILE>lgl-barcode-render-to-cairo</FILE>
+<INCLUDE>libglbarcode/lgl-barcode-render-to-cairo.h</INCLUDE>
+lgl_barcode_render_to_cairo
+lgl_barcode_render_to_cairo_path
+</SECTION>
+
+<SECTION>
+<FILE>lgl-barcode-type</FILE>
+<INCLUDE>libglbarcode/lgl-barcode-type.h</INCLUDE>
+lglBarcodeType
+</SECTION>
+

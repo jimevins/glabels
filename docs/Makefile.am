@@ -1,3 +1,5 @@
 ## Process this file with automake to produce Makefile.in.
 
-SUBDIRS = libglabels
+SUBDIRS = \
+	libglabels \
+	libglbarcode
