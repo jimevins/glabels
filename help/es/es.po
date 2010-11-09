@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-31 14:29+0000\n"
-"PO-Revision-Date: 2010-11-03 13:04+0100\n"
+"POT-Creation-Date: 2010-11-03 12:05+0000\n"
+"PO-Revision-Date: 2010-11-09 10:39+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -151,7 +151,7 @@ msgstr "Salida"
 
 #: C/select.page:9(desc)
 msgid "How to select objects."
-msgstr ""
+msgstr "Cómo seleccionar objetos."
 
 #: C/select.page:25(title)
 msgid "To select objects"
@@ -208,7 +208,7 @@ msgstr ""
 
 #: C/select.page:72(title)
 msgid "Unselecting objects"
-msgstr ""
+msgstr "Deseleccionar objetos"
 
 #: C/select.page:74(p)
 msgid ""
@@ -222,7 +222,7 @@ msgstr ""
 
 #: C/select.page:86(title)
 msgid "Clipboard Commands"
-msgstr ""
+msgstr "Comandos del portapapeles"
 
 #: C/select.page:88(p)
 msgid ""
@@ -232,7 +232,7 @@ msgstr ""
 
 #: C/select.page:94(title)
 msgid "<gui>Cut</gui> (<keyseq><key>Ctrl</key><key>X</key></keyseq>)"
-msgstr ""
+msgstr "<gui>Cortar</gui> (<keyseq><key>Ctrl</key><key>X</key></keyseq>)"
 
 #: C/select.page:96(p)
 msgid ""
@@ -263,7 +263,7 @@ msgstr ""
 
 #: C/select.page:121(title)
 msgid "<gui>Delete</gui> (<key>Del</key>)"
-msgstr ""
+msgstr "<gui>Eliminar</gui> (<key>Supr</key>)"
 
 #: C/select.page:123(p)
 msgid "Deletes selected objects without placing them on the clipboard."
@@ -291,7 +291,7 @@ msgstr ""
 
 #: C/printfile.page:25(title)
 msgid "To print labels and cards"
-msgstr ""
+msgstr "Imprimir etiquetas y tarjetas"
 
 #: C/printfile.page:27(p)
 msgid ""
@@ -396,7 +396,7 @@ msgstr ""
 
 #: C/printfile.page:102(gui)
 msgid "print in reverse"
-msgstr ""
+msgstr "imprimir en el reverso"
 
 #: C/printfile.page:103(p)
 msgid ""
@@ -450,7 +450,7 @@ msgstr ""
 
 #: C/multifile.page:33(var)
 msgid "file1.glabels file2.glabels file3.glabels"
-msgstr ""
+msgstr "archivo1.glabels archivo2.glabels archivo3.glabels"
 
 #: C/multifile.page:32(cmd)
 msgid "glabels <placeholder-1/>"
@@ -650,7 +650,7 @@ msgstr ""
 
 #: C/merge-ex3.page:75(p) C/merge-ex2.page:72(p) C/merge-ex1.page:69(p)
 msgid "Adding objects"
-msgstr ""
+msgstr "Añadir objetos"
 
 #. ==== End of Figure ====
 #: C/merge-ex3.page:79(p)
@@ -684,7 +684,7 @@ msgstr ""
 
 #: C/merge-ex3.page:100(p)
 msgid "Addess labels preview"
-msgstr ""
+msgstr "Vista previa de las etiquetas de dirección"
 
 #. ==== End of Figure ====
 #: C/merge-ex3.page:104(p) C/merge-ex2.page:105(p)
@@ -720,11 +720,11 @@ msgstr ""
 
 #: C/merge-ex2.page:9(desc)
 msgid "Create address labels from a CSV file."
-msgstr ""
+msgstr "Crear etiquetas de dirección desde un archivo CSV."
 
 #: C/merge-ex2.page:25(title)
 msgid "Example 2: Address labels"
-msgstr ""
+msgstr "Ejemplo 2: etiquetas de dirección"
 
 #: C/merge-ex2.page:27(p)
 msgid ""
@@ -798,7 +798,7 @@ msgstr ""
 
 #: C/merge-ex2.page:101(p)
 msgid "Address labels preview"
-msgstr ""
+msgstr "Vista previa de las etiquetas de dirección"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
@@ -834,11 +834,11 @@ msgstr ""
 
 #: C/merge-ex1.page:9(desc)
 msgid "Create name tags from a CSV file."
-msgstr ""
+msgstr "Crear etiquetas de nombre desde un archivo CSV."
 
 #: C/merge-ex1.page:25(title)
 msgid "Example 1: Name Tags"
-msgstr ""
+msgstr "Ejemplo 1: etiquetas de nombre"
 
 #: C/merge-ex1.page:27(p)
 msgid ""
@@ -908,7 +908,7 @@ msgstr "Imprimir etiquetas de nombre"
 
 #: C/merge-ex1.page:101(p)
 msgid "Name tags preview"
-msgstr ""
+msgstr "Vista previa de las etiquetas de nombre"
 
 #. ==== End of Figure ====
 #: C/merge-ex1.page:105(p)
@@ -974,7 +974,7 @@ msgstr ""
 
 #: C/mancreate.page:25(title)
 msgid "Manually creating new templates"
-msgstr ""
+msgstr "Crear plantillas nuevas manualmente"
 
 #: C/mancreate.page:27(p)
 msgid ""
@@ -1683,6 +1683,8 @@ msgid ""
 "@@image: 'figures/introduction-glabels-main-window.png'; "
 "md5=2309c89ac6b5556daaf04adb72c39ffb"
 msgstr ""
+"@@image: 'figures/introduction-glabels-main-window.png'; "
+"md5=2309c89ac6b5556daaf04adb72c39ffb"
 
 #: C/index.page:7(title) C/index.page:8(title)
 msgid "gLabels label and business card designer"
@@ -1714,16 +1716,12 @@ msgid ""
 msgstr ""
 
 #: C/index.page:45(title) C/index.page:46(desc)
-#, fuzzy
-#| msgid "About <app>gLabels</app>"
 msgid "<app>gLabels</app> main window"
-msgstr "Acerca de <app>gLabels</app>"
+msgstr "Ventana principal de <app>gLabels</app>"
 
 #: C/index.page:48(p)
-#, fuzzy
-#| msgid "About <app>gLabels</app>"
 msgid "<app>gLabels</app> main window."
-msgstr "Acerca de <app>gLabels</app>"
+msgstr "Ventana principal de <app>gLabels</app>."
 
 #: C/index.page:53(title)
 msgid "Usage"
