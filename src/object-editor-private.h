@@ -123,7 +123,9 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *edit_insert_field_button;
 
 	GtkWidget  *bc_page_vbox;
+	GtkWidget  *bc_backend_combo_hbox;
 	GtkWidget  *bc_backend_combo;
+	GtkWidget  *bc_style_combo_hbox;
 	GtkWidget  *bc_style_combo;
 	GtkWidget  *bc_text_check;
 	GtkWidget  *bc_cs_check;

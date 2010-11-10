@@ -26,13 +26,11 @@
 
 G_BEGIN_DECLS
 
-void gl_combo_util_set_strings     (GtkComboBox       *combo,
+void gl_combo_util_set_strings     (GtkComboBoxText   *combo,
                                     GList             *list);
 
 void gl_combo_util_set_active_text (GtkComboBox       *combo,
                                     const gchar       *text);
-
-void gl_combo_util_add_text_model  (GtkComboBox       *combo);
 
 G_END_DECLS
 

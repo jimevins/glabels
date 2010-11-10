@@ -45,6 +45,7 @@ struct _glMergePropertiesDialogPrivate {
 
         GtkBuilder   *builder;
 
+	GtkWidget    *type_combo_hbox;
 	GtkWidget    *type_combo;
 	GtkWidget    *location_vbox;
 	GtkWidget    *src_entry;
@@ -173,7 +174,7 @@ gl_merge_properties_dialog_init (glMergePropertiesDialog *dialog)
 
         gl_builder_util_get_widgets (builder,
                                      "merge_properties_vbox", &merge_properties_vbox,
-                                     "type_combo",            &dialog->priv->type_combo,
+                                     "type_combo_hbox",       &dialog->priv->type_combo_hbox,
                                      "location_vbox",         &dialog->priv->location_vbox,
                                      "treeview",              &dialog->priv->treeview,
                                      "select_all_button",     &dialog->priv->select_all_button,
@@ -183,8 +184,8 @@ gl_merge_properties_dialog_init (glMergePropertiesDialog *dialog)
 	gtk_container_add (GTK_CONTAINER (vbox), merge_properties_vbox);
         dialog->priv->builder = builder;
 
-	gl_combo_util_add_text_model (GTK_COMBO_BOX (dialog->priv->type_combo));
-
+        dialog->priv->type_combo = gtk_combo_box_text_new ();
+        gtk_box_pack_start (GTK_BOX (dialog->priv->type_combo_hbox), dialog->priv->type_combo, TRUE, TRUE, 0);
 
 	gl_debug (DEBUG_MERGE, "END");
 }
@@ -289,11 +290,9 @@ gl_merge_properties_dialog_construct (glMergePropertiesDialog *dialog,
 			gl_debug (DEBUG_MERGE, "    \"%s\"", p->data);
 		}
 	}
-	gl_combo_util_set_strings (GTK_COMBO_BOX (dialog->priv->type_combo),
-                                   texts);
+	gl_combo_util_set_strings (GTK_COMBO_BOX_TEXT (dialog->priv->type_combo), texts);
 	gl_merge_free_descriptions (&texts);
-	gl_combo_util_set_active_text (GTK_COMBO_BOX (dialog->priv->type_combo),
-                                       description);
+	gl_combo_util_set_active_text (GTK_COMBO_BOX (dialog->priv->type_combo), description);
 	g_signal_connect (G_OBJECT (dialog->priv->type_combo), "changed",
 			  G_CALLBACK (type_changed_cb), dialog);
 
@@ -397,7 +396,7 @@ type_changed_cb (GtkWidget               *widget,
 
 	gl_debug (DEBUG_MERGE, "START");
 
-	description = gtk_combo_box_get_active_text (GTK_COMBO_BOX (dialog->priv->type_combo));
+	description = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (dialog->priv->type_combo));
 	name = gl_merge_description_to_name (description);
 
 	src = gl_merge_get_src (dialog->priv->merge); /* keep current src if possible */

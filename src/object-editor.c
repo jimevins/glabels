@@ -164,7 +164,7 @@ gl_object_editor_init (glObjectEditor *editor)
         gtk_widget_set_sensitive (editor->priv->title_label, FALSE);
 
 	/* Hide all notebook pages to start with. */
-	gtk_widget_hide_all (editor->priv->notebook);
+	gtk_widget_hide (editor->priv->notebook);
 	gtk_widget_set_no_show_all (editor->priv->notebook, TRUE);
 
 	gl_debug (DEBUG_EDITOR, "END");

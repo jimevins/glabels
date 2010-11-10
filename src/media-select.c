@@ -76,8 +76,11 @@ struct _glMediaSelectPrivate {
         GtkWidget    *search_all_tab_vbox;
         GtkWidget    *search_all_info_vbox;
         GtkWidget    *search_all_info_bar;
+        GtkWidget    *brand_combo_hbox;
         GtkWidget    *brand_combo;
+        GtkWidget    *page_size_combo_hbox;
         GtkWidget    *page_size_combo;
+        GtkWidget    *category_combo_hbox;
         GtkWidget    *category_combo;
         GtkWidget    *search_all_treeview;
         GtkListStore *search_all_store;
@@ -290,9 +293,9 @@ gl_media_select_construct (glMediaSelect *this)
                                      "recent_info_vbox",       &this->priv->recent_info_vbox,
                                      "recent_treeview",        &this->priv->recent_treeview,
                                      "search_all_tab_vbox",    &this->priv->search_all_tab_vbox,
-                                     "brand_combo",            &this->priv->brand_combo,
-                                     "page_size_combo",        &this->priv->page_size_combo,
-                                     "category_combo",         &this->priv->category_combo,
+                                     "brand_combo_hbox",       &this->priv->brand_combo_hbox,
+                                     "page_size_combo_hbox",   &this->priv->page_size_combo_hbox,
+                                     "category_combo_hbox",    &this->priv->category_combo_hbox,
                                      "search_all_info_vbox",   &this->priv->search_all_info_vbox,
                                      "search_all_treeview",    &this->priv->search_all_treeview,
                                      "custom_tab_vbox",        &this->priv->custom_tab_vbox,
@@ -315,6 +318,13 @@ gl_media_select_construct (glMediaSelect *this)
         this->priv->custom_page_num =
                 gtk_notebook_page_num (GTK_NOTEBOOK (this->priv->notebook),
                                        this->priv->custom_tab_vbox);
+
+        this->priv->brand_combo = gtk_combo_box_text_new ();
+        gtk_box_pack_start (GTK_BOX (this->priv->brand_combo_hbox), this->priv->brand_combo, FALSE, FALSE, 0);
+        this->priv->page_size_combo = gtk_combo_box_text_new ();
+        gtk_box_pack_start (GTK_BOX (this->priv->page_size_combo_hbox), this->priv->page_size_combo, FALSE, FALSE, 0);
+        this->priv->category_combo = gtk_combo_box_text_new ();
+        gtk_box_pack_start (GTK_BOX (this->priv->category_combo_hbox), this->priv->category_combo, FALSE, FALSE, 0);
 
         gtk_widget_show_all (GTK_WIDGET (this));
 
@@ -344,31 +354,25 @@ gl_media_select_construct (glMediaSelect *this)
         page_size_name = lgl_db_lookup_paper_name_from_id (page_size_id);
 
         /* Brand selection control */
-        gl_combo_util_add_text_model (GTK_COMBO_BOX (this->priv->brand_combo));
         brands = lgl_db_get_brand_list (NULL, NULL);
         brands = g_list_prepend (brands, g_strdup (C_("Brand", "Any")));
-        gl_combo_util_set_strings (GTK_COMBO_BOX (this->priv->brand_combo), brands);
+        gl_combo_util_set_strings (GTK_COMBO_BOX_TEXT (this->priv->brand_combo), brands);
         lgl_db_free_brand_list (brands);
-        gl_combo_util_set_active_text (GTK_COMBO_BOX (this->priv->brand_combo),
-                                       C_("Brand", "Any"));
+        gl_combo_util_set_active_text (GTK_COMBO_BOX (this->priv->brand_combo), C_("Brand", "Any"));
 
         /* Page size selection control */
-        gl_combo_util_add_text_model (GTK_COMBO_BOX (this->priv->page_size_combo));
         page_sizes = lgl_db_get_paper_name_list ();
         page_sizes = g_list_prepend (page_sizes, g_strdup (C_("Page size", "Any")));
-        gl_combo_util_set_strings (GTK_COMBO_BOX (this->priv->page_size_combo), page_sizes);
+        gl_combo_util_set_strings (GTK_COMBO_BOX_TEXT (this->priv->page_size_combo), page_sizes);
         lgl_db_free_paper_name_list (page_sizes);
-        gl_combo_util_set_active_text (GTK_COMBO_BOX (this->priv->page_size_combo),
-                                       page_size_name);
+        gl_combo_util_set_active_text (GTK_COMBO_BOX (this->priv->page_size_combo), page_size_name);
 
         /* Category selection control */
-        gl_combo_util_add_text_model (GTK_COMBO_BOX (this->priv->category_combo));
         categories = lgl_db_get_category_name_list ();
         categories = g_list_prepend (categories, g_strdup (C_("Category", "Any")));
-        gl_combo_util_set_strings (GTK_COMBO_BOX (this->priv->category_combo), categories);
-        gl_combo_util_set_active_text (GTK_COMBO_BOX (this->priv->category_combo),
-                                       C_("Category", "Any"));
+        gl_combo_util_set_strings (GTK_COMBO_BOX_TEXT (this->priv->category_combo), categories);
         lgl_db_free_category_name_list (categories);
+        gl_combo_util_set_active_text (GTK_COMBO_BOX (this->priv->category_combo), C_("Category", "Any"));
 
         /* Search all treeview */
         this->priv->search_all_store = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_UINT, G_TYPE_STRING);
@@ -489,9 +493,9 @@ filter_changed_cb (glMediaSelect *this)
 	this->priv->stop_signals = TRUE;
 
         /* Update template selections for new filter settings */
-        brand = gtk_combo_box_get_active_text (GTK_COMBO_BOX (this->priv->brand_combo));
-        page_size_name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (this->priv->page_size_combo));
-        category_name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (this->priv->category_combo));
+        brand = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (this->priv->brand_combo));
+        page_size_name = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (this->priv->page_size_combo));
+        category_name = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (this->priv->category_combo));
         if ( brand && strlen(brand) &&
              page_size_name && strlen(page_size_name) &&
              category_name && strlen(category_name) )
@@ -691,9 +695,9 @@ db_changed_cb (glMediaSelect *this)
         lgl_db_free_template_name_list (list);
 
         /* Update search all page. */
-        brand = gtk_combo_box_get_active_text (GTK_COMBO_BOX (this->priv->brand_combo));
-        page_size_name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (this->priv->page_size_combo));
-        category_name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (this->priv->category_combo));
+        brand = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (this->priv->brand_combo));
+        page_size_name = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (this->priv->page_size_combo));
+        category_name = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (this->priv->category_combo));
         if ( brand && strlen(brand) &&
              page_size_name && strlen(page_size_name) &&
              category_name && strlen(category_name) )
@@ -838,12 +842,12 @@ gl_media_select_get_filter_parameters (glMediaSelect  *this,
         g_free (*category_id);
 
         page_size_name =
-                gtk_combo_box_get_active_text (GTK_COMBO_BOX (this->priv->page_size_combo));
+                gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (this->priv->page_size_combo));
 
         *page_size_id = lgl_db_lookup_paper_id_from_name (page_size_name);
 
         category_name =
-                gtk_combo_box_get_active_text (GTK_COMBO_BOX (this->priv->category_combo));
+                gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (this->priv->category_combo));
 
         *category_id = lgl_db_lookup_category_id_from_name (category_name);
 

@@ -92,6 +92,7 @@ struct _glTemplateDesignerPrivate
 	GtkWidget       *description_entry;
 
 	/* Page size page controls */
+	GtkWidget       *pg_size_combo_hbox;
 	GtkWidget       *pg_size_combo;
 	GtkWidget       *pg_w_spin;
 	GtkWidget       *pg_h_spin;
@@ -529,16 +530,17 @@ construct_pg_size_page (glTemplateDesigner      *dialog,
 	gl_debug (DEBUG_TEMPLATE, "START");
 
         gl_builder_util_get_widgets (dialog->priv->builder,
-                                     "pg_size_page",     &dialog->priv->pg_size_page,
-                                     "pg_size_combo",    &dialog->priv->pg_size_combo,
-                                     "pg_w_spin",        &dialog->priv->pg_w_spin,
-                                     "pg_h_spin",        &dialog->priv->pg_h_spin,
-                                     "pg_w_units_label", &dialog->priv->pg_w_units_label,
-                                     "pg_h_units_label", &dialog->priv->pg_h_units_label,
+                                     "pg_size_page",        &dialog->priv->pg_size_page,
+                                     "pg_size_combo_combo", &dialog->priv->pg_size_combo_hbox,
+                                     "pg_w_spin",           &dialog->priv->pg_w_spin,
+                                     "pg_h_spin",           &dialog->priv->pg_h_spin,
+                                     "pg_w_units_label",    &dialog->priv->pg_w_units_label,
+                                     "pg_h_units_label",    &dialog->priv->pg_h_units_label,
                                      NULL);
 
 
-	gl_combo_util_add_text_model (GTK_COMBO_BOX (dialog->priv->pg_size_combo));
+        dialog->priv->pg_size_combo = gtk_combo_box_text_new ();
+        gtk_box_pack_start (GTK_BOX (dialog->priv->pg_size_combo_hbox), dialog->priv->pg_size_combo, FALSE, FALSE, 0);
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
                                    dialog->priv->pg_size_page);
@@ -555,7 +557,7 @@ construct_pg_size_page (glTemplateDesigner      *dialog,
 
 	/* Load page size combo */
 	page_sizes = lgl_db_get_paper_name_list ();
-	gl_combo_util_set_strings (GTK_COMBO_BOX (dialog->priv->pg_size_combo), page_sizes);
+	gl_combo_util_set_strings (GTK_COMBO_BOX_TEXT (dialog->priv->pg_size_combo), page_sizes);
 	lgl_db_free_paper_name_list (page_sizes);
 	default_page_size_id = gl_prefs_model_get_default_page_size (gl_prefs);
 	default_page_size_name = lgl_db_lookup_paper_name_from_id (default_page_size_id);
@@ -1454,7 +1456,7 @@ pg_size_page_changed_cb (glTemplateDesigner *dialog)
 	
 
 	page_size_name =
-		gtk_combo_box_get_active_text (GTK_COMBO_BOX (dialog->priv->pg_size_combo));
+		gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (dialog->priv->pg_size_combo));
 
 	if (page_size_name && strlen(page_size_name)) {
 
@@ -1810,7 +1812,7 @@ build_template (glTemplateDesigner      *dialog)
 	desc     = gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->description_entry), 0, -1);
 
 	page_size_name =
-		gtk_combo_box_get_active_text (GTK_COMBO_BOX (dialog->priv->pg_size_combo));
+		gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (dialog->priv->pg_size_combo));
 	paper = lgl_db_lookup_paper_from_name (page_size_name);
 	if ( g_ascii_strcasecmp (paper->id, "Other") == 0 ) {
 		paper->width =
