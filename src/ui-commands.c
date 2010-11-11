@@ -1103,7 +1103,7 @@ gl_ui_cmd_help_contents (GtkAction *action,
 
         gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (window)),
                       "ghelp:glabels-3.0",
-                      GDK_CURRENT_TIME, 
+                      gtk_get_current_event_time(),
                       &error);
         
         if (error != NULL)
