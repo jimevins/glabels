@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk+" version="2.16"/>
+  <requires lib="gtk+" version="2.20"/>
   <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkSizeGroup" id="width_sizegroup">
     <widgets>
@@ -2311,27 +2311,6 @@
                   </object>
                   <packing>
                     <property name="position">10</property>
-                    <property name="tab_fill">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkVBox" id="dummy_vbox">
-                    <property name="visible">True</property>
-                    <child>
-                      <placeholder/>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="position">11</property>
-                  </packing>
-                </child>
-                <child type="tab">
-                  <object class="GtkLabel" id="dummy_page">
-                    <property name="visible">True</property>
-                    <property name="label" translatable="yes">label48</property>
-                  </object>
-                  <packing>
-                    <property name="position">11</property>
                     <property name="tab_fill">False</property>
                   </packing>
                 </child>
