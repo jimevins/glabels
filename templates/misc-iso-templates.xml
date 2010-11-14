@@ -798,6 +798,342 @@
   </Template>
 
   <!-- ******************************************************************** -->
+  <!-- JAC 7016 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="7016" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="70mm" height="16.9mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="2mm"/>
+      <Layout nx="3" ny="17" x0="0mm" y0="4.85mm" dx="70mm" dy="16.9mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
+  <!-- JAC 6339 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="7025" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="70mm" height="25.4mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="2mm"/>
+      <Layout nx="3" ny="11" x0="0mm" y0="8.8mm" dx="70mm" dy="25.4mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
+  <!-- JAC 7029 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="7029" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="70mm" height="29.7mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="2mm"/>
+      <Layout nx="3" ny="10" x0="0mm" y0="0mm" dx="70mm" dy="29.7mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
+  <!-- JAC 7032 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="7032" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="70mm" height="32mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="2mm"/>
+      <Layout nx="3" ny="9" x0="0mm" y0="4.5mm" dx="70mm" dy="32mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
+  <!-- JAC 7036 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="7036" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="70mm" height="36mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="3" ny="8" x0="0mm" y0="9mm" dx="70mm" dy="36mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
+  <!-- JAC 7037 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="7037" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="70mm" height="37.12mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="3" ny="8" x0="0mm" y0="0mm" dx="70mm" dy="37.12mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
+  <!-- JAC 7041 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="7041" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="70mm" height="41mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="3" ny="7" x0="0mm" y0="10mm" dx="70mm" dy="41mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
+  <!-- JAC 7042 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="7042" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="70mm" height="42.4mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="3" ny="7" x0="0mm" y0="0mm" dx="70mm" dy="42.4mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
+  <!-- JAC 7050 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="7050" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="70mm" height="50.8mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="3" ny="5" x0="0mm" y0="21.5mm" dx="70mm" dy="50.8mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
+  <!-- JAC 7067 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="7067" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="70mm" height="67.7mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="3" ny="4" x0="0mm" y0="13.1mm" dx="70mm" dy="67.7mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
+  <!-- JAC 8937 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="8937" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="89mm" height="37.12mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="2" ny="8" x0="11mm" y0="0mm" dx="89mm" dy="37.12mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
+  <!-- JAC 9633 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="9633" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="96.5mm" height="33.8mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="2" ny="8" x0="8.5mm" y0="13.3mm" dx="96.5mm" dy="33.8mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
+  <!-- JAC 9642 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="9642" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="96.5mm" height="42.3mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="2" ny="6" x0="8.5mm" y0="21.6mm" dx="96.5mm" dy="42.3mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
+  <!-- JAC 9667 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="9667" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="96.5mm" height="67.7mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="2" ny="4" x0="8.5mm" y0="13.1mm" dx="96.5mm" dy="67.7mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
+  <!-- JAC 10537 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="10537" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="105mm" height="37mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="2" ny="8" x0="0mm" y0="0.5mm" dx="105mm" dy="37mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
+  <!-- JAC 10541 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="10541" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="105mm" height="41mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="2" ny="7" x0="0mm" y0="10mm" dx="105mm" dy="41mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
+  <!-- JAC 10542 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="10542" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="105mm" height="42.4mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="2" ny="7" x0="0mm" y0="1.5mm" dx="105mm" dy="42.4mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
+  <!-- JAC 10548 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="10548" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="105mm" height="48mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="2" ny="6" x0="0mm" y0="4.5mm" dx="105mm" dy="48mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
+  <!-- JAC 10557 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="10557" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="105mm" height="57mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="2" ny="5" x0="0mm" y0="6mm" dx="105mm" dy="57mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
+  <!-- JAC 10570 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="10570" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="105mm" height="70mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="2" ny="4" x0="0mm" y0="8.5mm" dx="105mm" dy="70mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
+  <!-- JAC 10574 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="10574" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="105mm" height="74.25mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="2" ny="4" x0="0mm" y0="0mm" dx="105mm" dy="74.25mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
+  <!-- JAC 70362 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="70362" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="70mm" height="36mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="3" ny="8" x0="0mm" y0="4.5mm" dx="70mm" dy="36mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
+  <!-- JAC 70412 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="70412" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="70mm" height="41mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="3" ny="7" x0="0mm" y0="5mm" dx="70mm" dy="41mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
+  <!-- JAC 105148 rectangular labels.		                            -->
+  <!-- ******************************************************************** -->
+
+  <Template brand="JAC" part="105148" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="105mm" height="148mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.tagswiss.ch/deutsch/Etiketten/"/>
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="2" ny="2" x0="0mm" y0="0mm" dx="105mm" dy="148mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************** -->
   <!-- Misc. A6 products.                                                   -->
   <!-- ******************************************************************** -->
 
