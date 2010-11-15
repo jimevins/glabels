@@ -531,7 +531,7 @@ construct_pg_size_page (glTemplateDesigner      *dialog,
 
         gl_builder_util_get_widgets (dialog->priv->builder,
                                      "pg_size_page",        &dialog->priv->pg_size_page,
-                                     "pg_size_combo_combo", &dialog->priv->pg_size_combo_hbox,
+                                     "pg_size_combo_hbox",  &dialog->priv->pg_size_combo_hbox,
                                      "pg_w_spin",           &dialog->priv->pg_w_spin,
                                      "pg_h_spin",           &dialog->priv->pg_h_spin,
                                      "pg_w_units_label",    &dialog->priv->pg_w_units_label,
