@@ -23,7 +23,6 @@
 #include "ui.h"
 
 #include <glib/gi18n.h>
-#include <gconf/gconf-client.h>
 #include <gtk/gtk.h>
 #include <string.h>
 

@@ -77,19 +77,19 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
 
 	/* Extract widgets from XML tree. */
         gl_builder_util_get_widgets (editor->priv->builder,
-                                     "bc_page_vbox",      &editor->priv->bc_page_vbox,
-                                     "bc_backend_combo",  &editor->priv->bc_backend_combo,
-                                     "bc_style_combo",    &editor->priv->bc_style_combo,
-                                     "bc_text_check",     &editor->priv->bc_text_check,
-                                     "bc_cs_check",       &editor->priv->bc_cs_check,
-                                     "bc_color_hbox",     &editor->priv->bc_color_hbox,
-                                     "bc_key_hbox",       &editor->priv->bc_key_hbox,
-                                     "bc_key_radio",      &editor->priv->bc_key_radio,
-                                     "bc_color_radio",    &editor->priv->bc_color_radio,
-                                     "data_format_label", &editor->priv->data_format_label,
-                                     "data_ex_label",     &editor->priv->data_ex_label,
-                                     "data_digits_label", &editor->priv->data_digits_label,
-                                     "data_digits_spin",  &editor->priv->data_digits_spin,
+                                     "bc_page_vbox",          &editor->priv->bc_page_vbox,
+                                     "bc_backend_combo_hbox", &editor->priv->bc_backend_combo_hbox,
+                                     "bc_style_combo_hbox",   &editor->priv->bc_style_combo_hbox,
+                                     "bc_text_check",         &editor->priv->bc_text_check,
+                                     "bc_cs_check",           &editor->priv->bc_cs_check,
+                                     "bc_color_hbox",         &editor->priv->bc_color_hbox,
+                                     "bc_key_hbox",           &editor->priv->bc_key_hbox,
+                                     "bc_key_radio",          &editor->priv->bc_key_radio,
+                                     "bc_color_radio",        &editor->priv->bc_color_radio,
+                                     "data_format_label",     &editor->priv->data_format_label,
+                                     "data_ex_label",         &editor->priv->data_ex_label,
+                                     "data_digits_label",     &editor->priv->data_digits_label,
+                                     "data_digits_spin",      &editor->priv->data_digits_spin,
                                      NULL);
 
 	editor->priv->data_format_fixed_flag = FALSE;
@@ -106,12 +106,19 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
                             editor->priv->bc_key_combo,
                             TRUE, TRUE, 0);
 
-	gl_combo_util_add_text_model ( GTK_COMBO_BOX(editor->priv->bc_backend_combo));
-	gl_combo_util_add_text_model ( GTK_COMBO_BOX(editor->priv->bc_style_combo));
+        editor->priv->bc_backend_combo = gtk_combo_box_text_new ();
+        gtk_box_pack_start (GTK_BOX (editor->priv->bc_backend_combo_hbox),
+                            editor->priv->bc_backend_combo,
+                            TRUE, TRUE, 0);
+
+        editor->priv->bc_style_combo   = gtk_combo_box_text_new ();
+        gtk_box_pack_start (GTK_BOX (editor->priv->bc_style_combo_hbox),
+                            editor->priv->bc_style_combo,
+                            TRUE, TRUE, 0);
 
 	/* Load barcode backends */
 	backends = gl_barcode_backends_get_backend_list ();
-	gl_combo_util_set_strings (GTK_COMBO_BOX(editor->priv->bc_backend_combo),
+	gl_combo_util_set_strings (GTK_COMBO_BOX_TEXT(editor->priv->bc_backend_combo),
                                    backends);
 
         /* Kludge: Load styles for each backend once, so that when they are loaded for real the size of
@@ -186,7 +193,7 @@ backend_changed_cb (glObjectEditor       *editor)
         if (editor->priv->stop_signals) return;
 
         backend_name =
-		gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->bc_backend_combo));
+		gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (editor->priv->bc_backend_combo));
 
         backend_id = gl_barcode_backends_backend_name_to_id (backend_name);
 
@@ -216,12 +223,12 @@ style_changed_cb (glObjectEditor       *editor)
         if (editor->priv->stop_signals) return;
 
         backend_name =
-		gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->bc_backend_combo));
+		gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (editor->priv->bc_backend_combo));
 
         backend_id = gl_barcode_backends_backend_name_to_id (backend_name);
 
         style_string =
-		gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->bc_style_combo));
+		gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (editor->priv->bc_style_combo));
 
         /* Don't emit if entry is empty. */
         if ( style_string && *style_string != 0 ) {
@@ -280,7 +287,7 @@ gl_object_editor_load_bc_styles (glObjectEditor      *editor,
         editor->priv->stop_signals = TRUE;
 
 	styles = gl_barcode_backends_get_styles_list (backend_id);
-	gl_combo_util_set_strings (GTK_COMBO_BOX(editor->priv->bc_style_combo), styles);
+	gl_combo_util_set_strings (GTK_COMBO_BOX_TEXT(editor->priv->bc_style_combo), styles);
 	gl_barcode_backends_free_styles_list (styles);
 
         editor->priv->stop_signals = FALSE;
@@ -372,10 +379,10 @@ gl_object_editor_get_bc_style (glObjectEditor      *editor)
 
 	gl_debug (DEBUG_EDITOR, "START");
                                                                                 
-        backend_name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->bc_backend_combo));
+        backend_name = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (editor->priv->bc_backend_combo));
         backend_id = gl_barcode_backends_backend_name_to_id (backend_name);
 
-        style_name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->bc_style_combo));
+        style_name = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (editor->priv->bc_style_combo));
         id = gl_barcode_backends_style_name_to_id (backend_id, style_name);
 
         bc_style = gl_label_barcode_style_new ();
@@ -518,21 +525,21 @@ data_digits_spin_changed_cb (glObjectEditor *editor)
 
         if (editor->priv->stop_signals) return;
 
-        backend_name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->bc_backend_combo));
+        backend_name = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (editor->priv->bc_backend_combo));
         backend_id = gl_barcode_backends_backend_name_to_id (backend_name);
 
-        style_name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->bc_style_combo));
-        if ( *style_name != 0 ) {
+        style_name = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (editor->priv->bc_style_combo));
+        if ( style_name && *style_name != '\0' ) {
                 id = gl_barcode_backends_style_name_to_id (backend_id, style_name);
 
                 digits = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->data_digits_spin));
                 ex_string = gl_barcode_backends_style_default_digits (backend_id, id, digits);
                 gtk_label_set_text (GTK_LABEL(editor->priv->data_ex_label), ex_string);
+                g_free (ex_string);
         }
 
         g_free (backend_name);
         g_free (style_name);
-        g_free (ex_string);
 
         gl_object_editor_changed_cb (editor);
 }

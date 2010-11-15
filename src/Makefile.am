@@ -1,5 +1,9 @@
 
-SUBDIRS= ../libglabels ../libglbarcode pixmaps
+SUBDIRS= \
+	../libglabels \
+	../libglbarcode \
+	pixmaps \
+	cursors
 
 bin_PROGRAMS = glabels-3 glabels-3-batch
 

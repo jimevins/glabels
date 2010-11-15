@@ -86,11 +86,12 @@ gl_object_editor_prepare_size_page (glObjectEditor       *editor)
                                      NULL);
 
 	editor->priv->size_aspect_checkbutton = gl_wdgt_chain_button_new (GL_WDGT_CHAIN_RIGHT);
+        gtk_widget_set_tooltip_text (editor->priv->size_aspect_checkbutton, _("Lock aspect ratio."));
 	gl_wdgt_chain_button_set_active (GL_WDGT_CHAIN_BUTTON(editor->priv->size_aspect_checkbutton),
                                          TRUE);
         gtk_box_pack_start (GTK_BOX (editor->priv->size_aspect_vbox),
                             editor->priv->size_aspect_checkbutton,
-                            FALSE, FALSE, 0);
+                            TRUE, TRUE, 0);
 
 
 	/* Get configuration information */

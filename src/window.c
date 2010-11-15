@@ -44,7 +44,7 @@
 #define DEFAULT_WINDOW_HEIGHT 600
 
 #define CURSOR_INFO_WIDTH     150
-#define ZOOM_INFO_WIDTH        50
+#define ZOOM_INFO_WIDTH        75
 
 
 /*===========================================================================*/
@@ -59,7 +59,7 @@ static GList *window_list = NULL;
 /*===========================================================================*/
 
 static void     gl_window_finalize     (GObject       *object);
-static void     gl_window_destroy      (GtkObject     *gtk_object);
+static void     gl_window_dispose      (GObject       *object);
 
 static void     set_window_title       (glWindow *window,
 					glLabel  *label);
@@ -119,15 +119,13 @@ static void
 gl_window_class_init (glWindowClass *class)
 {
 	GObjectClass   *object_class     = G_OBJECT_CLASS (class);
-	GtkObjectClass *gtk_object_class = GTK_OBJECT_CLASS (class);
 
 	gl_debug (DEBUG_WINDOW, "START");
 
 	gl_window_parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_window_finalize;
-
-	gtk_object_class->destroy = gl_window_destroy;
+	object_class->dispose  = gl_window_dispose;
 
 	gl_debug (DEBUG_WINDOW, "END");
 }
@@ -169,7 +167,6 @@ gl_window_init (glWindow *window)
 	gtk_box_pack_start (GTK_BOX (vbox1), status_hbox, FALSE, FALSE, 0);
 
 	window->status_bar = gtk_statusbar_new ();
-	gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (window->status_bar), FALSE);
 	gtk_box_pack_start (GTK_BOX (status_hbox),
 			    window->status_bar,
 			    TRUE, TRUE, 0);
@@ -232,17 +229,17 @@ gl_window_finalize (GObject *object)
 
 
 static void
-gl_window_destroy (GtkObject *gtk_object)
+gl_window_dispose (GObject *object)
 {
 	glWindow          *window;
         GtkClipboard      *clipboard;
 
 	gl_debug (DEBUG_WINDOW, "START");
 
-	g_return_if_fail (gtk_object != NULL);
-	g_return_if_fail (GL_IS_WINDOW (gtk_object));
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GL_IS_WINDOW (object));
 
-	window = GL_WINDOW (gtk_object);
+	window = GL_WINDOW (object);
 	window_list = g_list_remove (window_list, window);
 
         if (window->ui) {
@@ -262,8 +259,8 @@ gl_window_destroy (GtkObject *gtk_object)
 		g_object_unref (window->label);
         }
 
-	if (GTK_OBJECT_CLASS (gl_window_parent_class)->destroy) {
-		GTK_OBJECT_CLASS (gl_window_parent_class)->destroy (gtk_object);
+	if (G_OBJECT_CLASS (gl_window_parent_class)->dispose) {
+		G_OBJECT_CLASS (gl_window_parent_class)->dispose (object);
 	}
 
 	gl_debug (DEBUG_WINDOW, "END");

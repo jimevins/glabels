@@ -22,10 +22,10 @@
 
 #include "view-line.h"
 
-#include "label-line.h"
+#include <gdk-pixbuf/gdk-pixdata.h>
 
-#include "pixmaps/cursor_line.xbm"
-#include "pixmaps/cursor_line_mask.xbm"
+#include "label-line.h"
+#include "cursors/cursor_pixdata.h"
 
 #include "debug.h"
 
@@ -33,6 +33,9 @@
 /*========================================================*/
 /* Private macros and constants.                          */
 /*========================================================*/
+
+#define X_HOTSPOT 7
+#define Y_HOTSPOT 7
 
 
 /*========================================================*/
@@ -57,23 +60,13 @@ GdkCursor *
 gl_view_line_get_create_cursor (void)
 {
 	GdkCursor       *cursor = NULL;
-	GdkPixmap       *pixmap_data, *pixmap_mask;
-	GdkColor         fg = { 0, 0, 0, 0 };
-	GdkColor         bg = { 0, 65535, 65535, 65535 };
+	GdkPixbuf       *pixbuf;
 
 	gl_debug (DEBUG_VIEW, "START");
 
-        pixmap_data = gdk_bitmap_create_from_data (NULL,
-                                                   (gchar *)cursor_line_bits,
-                                                   cursor_line_width,
-                                                   cursor_line_height);
-        pixmap_mask = gdk_bitmap_create_from_data (NULL,
-                                                   (gchar *)cursor_line_mask_bits,
-                                                   cursor_line_mask_width,
-                                                   cursor_line_mask_height);
-        cursor = gdk_cursor_new_from_pixmap (pixmap_data, pixmap_mask, &fg,
-                                             &bg, cursor_line_x_hot,
-                                             cursor_line_y_hot);
+        pixbuf = gdk_pixbuf_from_pixdata (&cursor_line_pixdata, FALSE, NULL);
+        cursor = gdk_cursor_new_from_pixbuf (gdk_display_get_default (), pixbuf, X_HOTSPOT, Y_HOTSPOT);
+        g_object_unref (pixbuf);
 
 	gl_debug (DEBUG_VIEW, "END");
 

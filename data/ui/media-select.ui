@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy toplevel-contextual -->
@@ -17,11 +17,9 @@
                 <property name="height_request">320</property>
                 <property name="visible">True</property>
                 <property name="border_width">6</property>
-                <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkVBox" id="recent_info_vbox">
                     <property name="visible">True</property>
-                    <property name="orientation">vertical</property>
                     <child>
                       <placeholder/>
                     </child>
@@ -47,6 +45,8 @@
                     </child>
                   </object>
                   <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -66,7 +66,6 @@
               <object class="GtkVBox" id="search_all_tab_vbox">
                 <property name="visible">True</property>
                 <property name="border_width">6</property>
-                <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkHBox" id="hbox6">
                     <property name="visible">True</property>
@@ -87,12 +86,15 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkComboBox" id="brand_combo">
+                          <object class="GtkHBox" id="brand_combo_hbox">
                             <property name="visible">True</property>
-                            <property name="focus_on_click">False</property>
+                            <child>
+                              <placeholder/>
+                            </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
+                            <property name="fill">False</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
@@ -119,18 +121,22 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkComboBox" id="page_size_combo">
+                          <object class="GtkHBox" id="page_size_combo_hbox">
                             <property name="visible">True</property>
-                            <property name="focus_on_click">False</property>
+                            <child>
+                              <placeholder/>
+                            </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
+                            <property name="fill">False</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
+                        <property name="fill">True</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
@@ -150,24 +156,29 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkComboBox" id="category_combo">
+                          <object class="GtkHBox" id="category_combo_hbox">
                             <property name="visible">True</property>
-                            <property name="focus_on_click">False</property>
+                            <child>
+                              <placeholder/>
+                            </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
+                            <property name="fill">False</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
+                        <property name="fill">True</property>
                         <property name="position">2</property>
                       </packing>
                     </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
+                    <property name="fill">True</property>
                     <property name="padding">6</property>
                     <property name="position">0</property>
                   </packing>
@@ -175,7 +186,6 @@
                 <child>
                   <object class="GtkVBox" id="search_all_info_vbox">
                     <property name="visible">True</property>
-                    <property name="orientation">vertical</property>
                     <child>
                       <placeholder/>
                     </child>
@@ -201,6 +211,8 @@
                     </child>
                   </object>
                   <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
                     <property name="position">2</property>
                   </packing>
                 </child>
@@ -225,11 +237,9 @@
                 <property name="height_request">320</property>
                 <property name="visible">True</property>
                 <property name="border_width">6</property>
-                <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkVBox" id="custom_info_vbox">
                     <property name="visible">True</property>
-                    <property name="orientation">vertical</property>
                     <child>
                       <placeholder/>
                     </child>
@@ -256,6 +266,8 @@
                     </child>
                   </object>
                   <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -287,6 +299,7 @@
                       </object>
                       <packing>
                         <property name="expand">False</property>
+                        <property name="fill">True</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
@@ -331,6 +344,8 @@
             </child>
           </object>
           <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
             <property name="position">0</property>
           </packing>
         </child>

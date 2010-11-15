@@ -120,8 +120,8 @@ static gboolean button_release_event_cb        (GtkWidget              *widget,
                                                 GdkEventButton         *event);
 
 
-static gboolean expose_event_cb                (GtkWidget              *widget,
-                                                GdkEventExpose         *event,
+static gboolean draw_cb                        (GtkWidget              *widget,
+                                                cairo_t                *cr,
                                                 glMiniPreview          *this);
 static void     style_set_cb                   (GtkWidget              *widget,
                                                 GtkStyle               *previous_style,
@@ -237,8 +237,8 @@ gl_mini_preview_init (glMiniPreview *this)
         gtk_widget_set_has_window(this->priv->canvas, FALSE);
         gtk_container_add (GTK_CONTAINER (this), this->priv->canvas);
 
-        g_signal_connect (G_OBJECT (this->priv->canvas), "expose-event",
-                          G_CALLBACK (expose_event_cb), this);
+        g_signal_connect (G_OBJECT (this->priv->canvas), "draw",
+                          G_CALLBACK (draw_cb), this);
         g_signal_connect (G_OBJECT (this->priv->canvas), "style-set",
                           G_CALLBACK (style_set_cb), this);
 
@@ -788,33 +788,14 @@ find_closest_label (glMiniPreview      *this,
 /* Expose event handler.                                                    */
 /*--------------------------------------------------------------------------*/
 static gboolean
-expose_event_cb (GtkWidget       *widget,
-                 GdkEventExpose  *event,
-                 glMiniPreview   *this)
+draw_cb (GtkWidget       *widget,
+         cairo_t         *cr,
+         glMiniPreview   *this)
 {
-        GdkWindow     *window;
-        cairo_t       *cr;
-        GtkAllocation  allocation;
-
         gl_debug (DEBUG_MINI_PREVIEW, "START");
 
         this->priv->update_scheduled_flag = FALSE;
-
-        window = gtk_widget_get_window (widget);
-
-        cr = gdk_cairo_create (window);
-
-        cairo_rectangle (cr,
-                        event->area.x, event->area.y,
-                        event->area.width, event->area.height);
-        cairo_clip (cr);
-
-        gtk_widget_get_allocation (widget, &allocation);
-        cairo_translate (cr, allocation.x, allocation.y);
-
         draw (this, cr);
-
-        cairo_destroy (cr);
 
         gl_debug (DEBUG_MINI_PREVIEW, "END");
         return FALSE;
@@ -843,8 +824,8 @@ style_set_cb (GtkWidget        *widget,
 static void
 redraw (glMiniPreview      *this)
 {
-        GdkWindow *window;
-        GdkRegion *region;
+        GdkWindow     *window;
+        GtkAllocation  allocation;
 
         gl_debug (DEBUG_MINI_PREVIEW, "START");
 
@@ -857,9 +838,8 @@ redraw (glMiniPreview      *this)
                 {
                         this->priv->update_scheduled_flag = TRUE;
 
-                        region = gdk_drawable_get_clip_region (window);
-                        gdk_window_invalidate_region (window, region, TRUE);
-                        gdk_region_destroy (region);
+                        gtk_widget_get_allocation (GTK_WIDGET (this), &allocation);
+                        gdk_window_invalidate_rect (window, &allocation, FALSE);
                 }
         }
 

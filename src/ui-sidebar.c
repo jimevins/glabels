@@ -141,7 +141,9 @@ gl_ui_sidebar_construct (glUISidebar       *sidebar)
 	sidebar->priv->editor = gl_object_editor_new ();
 	gtk_widget_show (sidebar->priv->editor);
 
-	gtk_container_add (GTK_CONTAINER(sidebar), sidebar->priv->editor);
+        gtk_box_pack_start (GTK_BOX (sidebar), sidebar->priv->editor, FALSE, FALSE, 0);
+        gtk_widget_set_vexpand (GTK_WIDGET (sidebar->priv->editor), FALSE);
+        gtk_widget_set_hexpand (GTK_WIDGET (sidebar->priv->editor), FALSE);
 
 	gl_debug (DEBUG_UI, "END");
 }

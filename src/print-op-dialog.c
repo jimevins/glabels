@@ -322,7 +322,7 @@ create_custom_widget_cb (GtkPrintOperation *operation,
                                               op->priv->labels_per_sheet);
 
 		gtk_widget_show_all (op->priv->simple_frame);
-		gtk_widget_hide_all (op->priv->merge_frame);
+		gtk_widget_hide     (op->priv->merge_frame);
 
                 g_signal_connect (G_OBJECT (op->priv->simple_sheets_radio), "toggled",
                                   G_CALLBACK (simple_sheets_radio_cb), op);
@@ -377,7 +377,7 @@ create_custom_widget_cb (GtkPrintOperation *operation,
                                                   gl_print_op_get_collate_flag (GL_PRINT_OP(op)));
 
 
-		gtk_widget_hide_all (op->priv->simple_frame);
+		gtk_widget_hide     (op->priv->simple_frame);
 		gtk_widget_show_all (op->priv->merge_frame);
 
                 g_signal_connect (G_OBJECT (op->priv->merge_first_spin), "changed",

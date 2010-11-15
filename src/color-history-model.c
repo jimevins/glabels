@@ -22,30 +22,25 @@
 
 #include "color-history-model.h"
 
-#include <gconf/gconf-client.h>
+#include <gio/gio.h>
 
 #include "marshal.h"
-
-
-#define BASE_KEY          "/apps/glabels"
-#define RECENT_COLORS_KEY  BASE_KEY "/recent-colors"
 
 
 /*========================================================*/
 /* Private types.                                         */
 /*========================================================*/
 
-/** GL_COLOR_HISTORY_MODEL Private fields */
 struct _glColorHistoryModelPrivate {
 
-	GConfClient *gconf_client;
+        GSettings   *history;
 
         guint        max_n;
 };
 
 enum {
-	CHANGED,
-	LAST_SIGNAL
+        CHANGED,
+        LAST_SIGNAL
 };
 
 
@@ -60,14 +55,15 @@ static guint signals[LAST_SIGNAL] = {0};
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void gl_color_history_model_finalize     (GObject             *object);
+static void    gl_color_history_model_finalize  (GObject             *object);
 
-static void conf_notify_cb                      (GConfClient         *client,
-                                                 guint                cnxn_id,
-                                                 GConfEntry          *entry,
-                                                 glColorHistoryModel *this);
+static void    history_changed_cb               (glColorHistoryModel *this);
 
-static GSList *get_color_list                   (glColorHistoryModel *this);
+static guint  *get_color_array                  (glColorHistoryModel *this,
+                                                 guint               *n_elements);
+static void    set_color_array                  (glColorHistoryModel *this,
+                                                 guint               *array,
+                                                 guint                n_elements);
 
 
 /*****************************************************************************/
@@ -88,15 +84,15 @@ gl_color_history_model_class_init (glColorHistoryModelClass *class)
 
         gobject_class->finalize = gl_color_history_model_finalize;
 
-	signals[CHANGED] =
-		g_signal_new ("changed",
-			      G_OBJECT_CLASS_TYPE (gobject_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (glColorHistoryModelClass, changed),
-			      NULL, NULL,
-			      gl_marshal_VOID__VOID,
-			      G_TYPE_NONE,
-			      0);
+        signals[CHANGED] =
+                g_signal_new ("changed",
+                              G_OBJECT_CLASS_TYPE (gobject_class),
+                              G_SIGNAL_RUN_LAST,
+                              G_STRUCT_OFFSET (glColorHistoryModelClass, changed),
+                              NULL, NULL,
+                              gl_marshal_VOID__VOID,
+                              G_TYPE_NONE,
+                              0);
 }
 
 
@@ -108,19 +104,13 @@ gl_color_history_model_init (glColorHistoryModel *this)
 {
         this->priv = g_new0 (glColorHistoryModelPrivate, 1);
 
-        this->priv->gconf_client = gconf_client_get_default ();
+        this->priv->history = g_settings_new ("org.gnome.glabels-3.history");
 
-        g_return_if_fail (this->priv->gconf_client != NULL);
+        g_return_if_fail (this->priv->history != NULL);
 
-        gconf_client_add_dir (this->priv->gconf_client,
-                              BASE_KEY,
-                              GCONF_CLIENT_PRELOAD_ONELEVEL,
-                              NULL);
-
-        gconf_client_notify_add (this->priv->gconf_client,
-                                 RECENT_COLORS_KEY,
-                                 (GConfClientNotifyFunc)conf_notify_cb, this,
-                                 NULL, NULL);
+        g_signal_connect_swapped (G_OBJECT (this->priv->history),
+                                  "changed::recent-colors",
+                                  G_CALLBACK (history_changed_cb), this);
 }
 
 
@@ -135,7 +125,7 @@ gl_color_history_model_finalize (GObject *object)
         g_return_if_fail (object && IS_GL_COLOR_HISTORY_MODEL (object));
         this = GL_COLOR_HISTORY_MODEL (object);
 
-        g_object_unref (G_OBJECT(this->priv->gconf_client));
+        g_object_unref (G_OBJECT(this->priv->history));
         g_free (this->priv);
 
         G_OBJECT_CLASS (gl_color_history_model_parent_class)->finalize (object);
@@ -165,57 +155,33 @@ void
 gl_color_history_model_add_color (glColorHistoryModel *this,
                                   guint                color)
 {
-        GSList  *list = NULL;
-        GSList  *old_list;
-        GSList  *p;
+        guint  *old;
+        guint  *new;
+        guint   i, n;
 
-        /*
-         * Start new list with this color.
-         */
-        list = g_slist_append (list, GINT_TO_POINTER (color));
+        old = get_color_array (this, &n);
+                                   
+        new = g_new0 (guint, this->priv->max_n);
 
-        /*
-         * Transfer old list to new list, ignoring any duplicate of this color
-         */
-        old_list = get_color_list (this);
-        for ( p = old_list; p; p=p->next )
+        new[0] = color;
+
+        for ( i = 0; (i < (this->priv->max_n-1)) && (i < n); i++ )
         {
-                if ( color != (guint)GPOINTER_TO_INT (p->data) )
-                {
-                        list = g_slist_append (list, p->data);
-                }
-        }
-        g_slist_free (old_list);
-
-        /*
-         * Truncate list to maximum size
-         */
-        while (g_slist_length (list) > this->priv->max_n)
-        {
-                p = g_slist_last (list);
-                list = g_slist_remove_link (list, p);
-                g_slist_free_1 (p);
+                new[i+1] = old[i];
         }
 
-        /*
-         * Update conf
-         */
-        gconf_client_set_list (this->priv->gconf_client,
-                               RECENT_COLORS_KEY,
-                               GCONF_VALUE_INT,
-                               list,
-                               NULL);
+        set_color_array (this, new, i+1);
+
+        g_free (old);
+        g_free (new);
 }
 
 
 /*****************************************************************************/
-/* GConf notify callback.                                                    */
+/* History changed callback.                                                 */
 /*****************************************************************************/
 static void
-conf_notify_cb (GConfClient         *client,
-                guint                cnxn_id,
-                GConfEntry          *entry,
-                glColorHistoryModel  *this)
+history_changed_cb (glColorHistoryModel  *this)
 {
         g_signal_emit (G_OBJECT(this), signals[CHANGED], 0);
 }
@@ -224,19 +190,57 @@ conf_notify_cb (GConfClient         *client,
 /*****************************************************************************/
 /* Get list of colors.                                                       */
 /*****************************************************************************/
-static GSList *
-get_color_list (glColorHistoryModel *this)
+static guint *
+get_color_array (glColorHistoryModel *this,
+                 guint               *n_elements)
 {
-        GSList *list;
+        GVariant *value;
+        GVariant *child_value;
+        gsize     i;
+        guint    *array;
 
-        /*
-         * Get color list.
-         */
-	list = gconf_client_get_list (this->priv->gconf_client,
-                                      RECENT_COLORS_KEY,
-                                      GCONF_VALUE_INT,
-                                      NULL);
-        return list;
+        value = g_settings_get_value (this->priv->history, "recent-colors");
+        *n_elements = g_variant_n_children (value);
+
+        array = g_new0 (guint, *n_elements);
+
+        for ( i = 0; i < *n_elements; i++ )
+        {
+                child_value = g_variant_get_child_value (value, i);
+                array[i] = g_variant_get_uint32 (child_value);
+                g_variant_unref (child_value);
+        }
+
+        g_variant_unref (value);
+
+        return array;
+}
+
+
+/*****************************************************************************/
+/* Set list of colors.                                                       */
+/*****************************************************************************/
+static void
+set_color_array (glColorHistoryModel *this,
+                 guint               *array,
+                 guint                n_elements)
+{
+        GVariant  *value;
+        GVariant **child_values;
+        gsize      i;
+
+        child_values = g_new (GVariant *, n_elements);
+
+        for ( i = 0; i < n_elements; i++ )
+        {
+                child_values[i] = g_variant_new_uint32 (array[i]);
+        }
+
+        value = g_variant_new_array (G_VARIANT_TYPE_UINT32, child_values, n_elements);
+
+        g_settings_set_value (this->priv->history, "recent-colors", value);
+
+        g_free (child_values);
 }
 
 
@@ -247,17 +251,16 @@ guint
 gl_color_history_model_get_color (glColorHistoryModel *this,
                                   guint                i)
 {
+        guint  *array;
         guint   color = 0;
-        GSList *list;
-        GSList *p;
+        guint   n;
 
-        list = get_color_list (this);
-        p = g_slist_nth (list, i);
-        if (p)
+        array = get_color_array (this, &n);
+        if ( array && (i < n) )
         {
-                color = GPOINTER_TO_INT (p->data);
+                color = array[i];
         }
-        g_slist_free (list);
+        g_free (array);
 
         return color;
 }
