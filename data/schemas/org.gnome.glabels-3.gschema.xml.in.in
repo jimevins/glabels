@@ -72,7 +72,7 @@
       </choices>
       <default>''</default>
       <_summary>Default page size.</_summary>
-      <_description>The prefered page size when searching templates.</_description>
+      <_description>The preferred page size when searching templates.</_description>
     </key>
 
   </schema>
