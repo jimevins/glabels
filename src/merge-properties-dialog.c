@@ -186,6 +186,7 @@ gl_merge_properties_dialog_init (glMergePropertiesDialog *dialog)
 
         dialog->priv->type_combo = gtk_combo_box_text_new ();
         gtk_box_pack_start (GTK_BOX (dialog->priv->type_combo_hbox), dialog->priv->type_combo, TRUE, TRUE, 0);
+	gtk_widget_show_all (GTK_WIDGET (dialog->priv->type_combo));
 
 	gl_debug (DEBUG_MERGE, "END");
 }
