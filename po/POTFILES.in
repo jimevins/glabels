@@ -1,5 +1,6 @@
 # List of source files containing translatable strings.
 
+data/schemas/org.gnome.glabels-3.gschema.xml.in.in
 src/bc.c
 src/bc.h
 src/bc-backends.c
@@ -82,8 +83,6 @@ src/label-object.c
 src/label-object.h
 src/label-text.c
 src/label-text.h
-#src/marshal.c
-#src/marshal.h
 src/media-select.c
 src/media-select.h
 src/merge.c
