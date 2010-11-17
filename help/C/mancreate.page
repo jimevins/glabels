@@ -50,7 +50,7 @@
 	  <p>Distances can be expressed in units of <em>pt</em>,
             <em>in</em>, <em>mm</em>,
             <em>cm</em>, or <em>pc</em>.  For example:
-            "<literal>1.0in</literal>" or "<literal>2.54cm</literal>".  If no
+            "<code>1.0in</code>" or "<code>2.54cm</code>".  If no
             units are specified, computer points (<em>pt</em>) will
             be assumed (1 <em>pt</em> =
             1/72 <em>in</em> = 0.352778 <em>mm</em>).
@@ -66,7 +66,7 @@
 &lt;?xml version="1.0"?&gt;
 &lt;Glabels-templates&gt;
 
-   <replaceable>...templates...</replaceable>
+   <var>...templates...</var>
 
 &lt;/Glabels-templates&gt;
       </code>
@@ -285,7 +285,7 @@
     <section id="template-label-cd-node">
       <title>Label-cd Node</title>
 
-      <p>A <em>Label-round</em> node describes the dimensions
+      <p>A <em>Label-cd</em> node describes the dimensions
         of a CD, DVD, or business card CD.</p>
 
 <table frame="all" rules="rows">
@@ -308,7 +308,7 @@
     <td><p>width</p></td> <td><p>If present, the label is clipped to the given width.
                   (Useful for "business card CDs").</p></td>
   </tr>  <tr>
-    <td><p>heigth</p></td> <td><p>If present, the label is clipped to the given height.
+    <td><p>height</p></td> <td><p>If present, the label is clipped to the given height.
                   (Useful for "business card CDs").</p></td>
   </tr>  <tr>
     <td><p>waste</p></td> <td><p>Amount of waste (over-print) to allow.  This is useful
