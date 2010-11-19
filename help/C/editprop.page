@@ -50,7 +50,7 @@
       </section>
 
       <section id="object-editor-image">
-	<title>Image Tabbed Section (Image objecs)</title>
+	<title>Image Tabbed Section (Image objects)</title>
 
 	<p>This section contains a file entry with preview to select
           image files.  The browse button can be used to easily locate
@@ -60,7 +60,7 @@
       </section>
 
       <section id="object-editor-data">
-	<title>Data Tabbed Section (Barcode objecs)</title>
+	<title>Data Tabbed Section (Barcode objects)</title>
 
 	<p>This section contains a text entry to enter literal barcode
           data.  Alternatively, a document merge key can be used to
@@ -78,7 +78,7 @@
       </section>
 
       <section id="object-editor-barcode">
-	<title>Style Tabbed Section (Barcode objecs)</title>
+	<title>Style Tabbed Section (Barcode objects)</title>
 
 	<p>This section contains controls to select barcode properties,
           including barcode style, color, whether to print text, and whether
@@ -213,7 +213,7 @@
           <gui>Objects</gui>
           <gui>Align Horizontal</gui>
           </guiseq> or  <guiseq> <gui>Objects</gui>
-          <gui>Align Horizontal</gui> </guiseq> sub-menus.
+          <gui>Align Vertical</gui> </guiseq> sub-menus.
           These menuitems are also available by right-clicking
           the display area when there is a non-empty selection.</p>
 

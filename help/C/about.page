@@ -24,8 +24,7 @@
 
     <title>About <app>gLabels</app></title>
 
-    <p> <app>gLabels</app> was written by <credit><name>Jim Evins
-      (<email>evins@snaught.com</email>)</name></credit>. To find more information about
+    <p> <app>gLabels</app> was written by <name>Jim Evins (<email>evins@snaught.com</email>)</name>. To find more information about
       <app>gLabels</app>, please visit the 
       <link href="http://glabels.org" type="http"><app>gLabels</app> Web
 	page</link>. </p>

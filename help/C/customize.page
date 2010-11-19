@@ -104,7 +104,7 @@
 	   <list>
 		<item>
 		<p><gui>Width</gui></p>
-		<p>These controls are selects the default line width.</p>
+		<p>This control selects the default line width.</p>
 		</item>
 		<item>
 		<p><gui>Color</gui></p>
@@ -115,12 +115,12 @@
 
 	<section>
 	<title>Fill</title>
-	<p>Use these controls to set the default fill properties of
-              new objects.  These properties are:</p>
+	<p>Use this control to set the default fill property of
+              new objects.  This property is:</p>
 	   <list>
 		<item>
 		<p><gui>Color</gui></p>
-		<p>These controls are selects the default fill color.</p>
+		<p>This control selects the default fill color.</p>
 		</item>
 	   </list>
 	</section>
