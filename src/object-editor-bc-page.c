@@ -310,6 +310,8 @@ gl_object_editor_set_bc_style (glObjectEditor            *editor,
  
 	gl_debug (DEBUG_EDITOR, "START");
 
+        gl_object_editor_load_bc_styles (editor, bc_style->backend_id);
+
         editor->priv->stop_signals = TRUE;
 
         backend_name = gl_barcode_backends_backend_id_to_name (bc_style->backend_id);
@@ -357,7 +359,7 @@ gl_object_editor_set_bc_style (glObjectEditor            *editor,
 		gtk_widget_set_sensitive (editor->priv->data_digits_spin,
 					  !editor->priv->data_format_fixed_flag);
 	}
- 
+
         editor->priv->stop_signals = FALSE;
 
 	gl_debug (DEBUG_EDITOR, "END");

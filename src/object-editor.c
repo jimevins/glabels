@@ -284,7 +284,6 @@ set_object (glObjectEditor  *editor,
         gchar               *s;
         GtkTextBuffer       *buffer;
         gint                 old_page, new_page;
-        glLabelBarcodeStyle *bc_style;
 
 	gl_debug (DEBUG_EDITOR, "START");
 
@@ -413,10 +412,6 @@ set_object (glObjectEditor  *editor,
                         gtk_widget_hide     (editor->priv->shadow_page_vbox);
 
                         gtk_widget_hide     (editor->priv->size_reset_image_button);
-
-                        bc_style = gl_label_barcode_get_style (GL_LABEL_BARCODE(object));
-                        gl_object_editor_load_bc_styles (editor, bc_style->backend_id);
-                        gl_label_barcode_style_free (bc_style);
                 }
 
                 gtk_image_set_from_icon_name (GTK_IMAGE(editor->priv->title_image),
@@ -432,7 +427,9 @@ set_object (glObjectEditor  *editor,
                 gtk_widget_set_sensitive (editor->priv->title_image, TRUE);
                 gtk_widget_set_sensitive (editor->priv->title_label, TRUE);
 
+                editor->priv->stop_signals = TRUE;
                 gtk_widget_show (editor->priv->notebook);
+                editor->priv->stop_signals = FALSE;
 
                 /* if the old active page is no longer visible, set to 1st visible page. */
                 new_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (editor->priv->notebook));
