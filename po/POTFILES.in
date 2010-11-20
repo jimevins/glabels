@@ -1,8 +1,6 @@
 # List of source files containing translatable strings.
 
 data/schemas/org.gnome.glabels-3.gschema.xml.in.in
-src/bc.c
-src/bc.h
 src/bc-backends.c
 src/bc-backends.h
 src/bc-builtin.c
