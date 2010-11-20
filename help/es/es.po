@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-03 12:05+0000\n"
-"PO-Revision-Date: 2010-11-09 10:39+0100\n"
+"POT-Creation-Date: 2010-11-19 02:55+0000\n"
+"PO-Revision-Date: 2010-11-20 14:19+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1008,10 +1008,10 @@ msgstr ""
 #: C/mancreate.page:50(p)
 msgid ""
 "Distances can be expressed in units of <em>pt</em>, <em>in</em>, <em>mm</"
-"em>, <em>cm</em>, or <em>pc</em>. For example: \"<literal>1.0in</literal>\" "
-"or \"<literal>2.54cm</literal>\". If no units are specified, computer points "
-"(<em>pt</em>) will be assumed (1 <em>pt</em> = 1/72 <em>in</em> = 0.352778 "
-"<em>mm</em>)."
+"em>, <em>cm</em>, or <em>pc</em>. For example: \"<code>1.0in</code>\" or "
+"\"<code>2.54cm</code>\". If no units are specified, computer points (<em>pt</"
+"em>) will be assumed (1 <em>pt</em> = 1/72 <em>in</em> = 0.352778 <em>mm</"
+"em>)."
 msgstr ""
 
 #: C/mancreate.page:63(title)
@@ -1019,13 +1019,22 @@ msgid "Template Files"
 msgstr ""
 
 #: C/mancreate.page:65(code)
-#, no-wrap
+#, fuzzy, no-wrap
+#| msgid ""
+#| "\n"
+#| "&lt;?xml version=\"1.0\"?&gt;\n"
+#| "&lt;Glabels-templates&gt;\n"
+#| "\n"
+#| "   <replaceable>...templates...</replaceable>\n"
+#| "\n"
+#| "&lt;/Glabels-templates&gt;\n"
+#| "      "
 msgid ""
 "\n"
 "&lt;?xml version=\"1.0\"?&gt;\n"
 "&lt;Glabels-templates&gt;\n"
 "\n"
-"   <replaceable>...templates...</replaceable>\n"
+"   <var>...templates...</var>\n"
 "\n"
 "&lt;/Glabels-templates&gt;\n"
 "      "
@@ -1140,6 +1149,7 @@ msgid "Page width. Only valid if size=\"Other\""
 msgstr ""
 
 #: C/mancreate.page:129(p) C/mancreate.page:183(p) C/mancreate.page:231(p)
+#: C/mancreate.page:311(p)
 msgid "height"
 msgstr "altura"
 
@@ -1303,8 +1313,8 @@ msgstr ""
 
 #: C/mancreate.page:288(p)
 msgid ""
-"A <em>Label-round</em> node describes the dimensions of a CD, DVD, or "
-"business card CD."
+"A <em>Label-cd</em> node describes the dimensions of a CD, DVD, or business "
+"card CD."
 msgstr ""
 
 #: C/mancreate.page:302(p)
@@ -1324,10 +1334,6 @@ msgid ""
 "If present, the label is clipped to the given width. (Useful for \"business "
 "card CDs\")."
 msgstr ""
-
-#: C/mancreate.page:311(p)
-msgid "heigth"
-msgstr "altura"
 
 #: C/mancreate.page:311(p)
 msgid ""
@@ -1672,9 +1678,9 @@ msgstr ""
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/index.page:24(None)
 msgid ""
-"@@image: 'figures/glabels-logo.png'; md5=7b8d3b2afa219313ec0b41e8fa281d96"
+"@@image: 'figures/glabels-logo.png'; md5=80b9ac843f534bc98b45a2445119494e"
 msgstr ""
-"@@image: 'figures/glabels-logo.png'; md5=7b8d3b2afa219313ec0b41e8fa281d96"
+"@@image: 'figures/glabels-logo.png'; md5=80b9ac843f534bc98b45a2445119494e"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
@@ -1693,7 +1699,7 @@ msgstr "Diseñador de etiquetas y de tarjetas de visita gLabels."
 #: C/index.page:23(title)
 msgid ""
 "<media type=\"image\" mime=\"image/png\" src=\"figures/glabels-logo.png"
-"\">gLabels logo</media> gLabels label and business card designer"
+"\">gLabels logo</media> gLabels Manual"
 msgstr ""
 
 #: C/index.page:28(p)
@@ -1779,7 +1785,7 @@ msgid ""
 msgstr ""
 
 #: C/editprop.page:53(title)
-msgid "Image Tabbed Section (Image objecs)"
+msgid "Image Tabbed Section (Image objects)"
 msgstr ""
 
 #: C/editprop.page:55(p)
@@ -1790,7 +1796,7 @@ msgid ""
 msgstr ""
 
 #: C/editprop.page:63(title)
-msgid "Data Tabbed Section (Barcode objecs)"
+msgid "Data Tabbed Section (Barcode objects)"
 msgstr ""
 
 #: C/editprop.page:65(p)
@@ -1811,7 +1817,7 @@ msgid ""
 msgstr ""
 
 #: C/editprop.page:81(title)
-msgid "Style Tabbed Section (Barcode objecs)"
+msgid "Style Tabbed Section (Barcode objects)"
 msgstr ""
 
 #: C/editprop.page:83(p)
@@ -1881,7 +1887,7 @@ msgstr ""
 
 #: C/editprop.page:146(title)
 msgid "Other Manipulations of Objects"
-msgstr ""
+msgstr "Otras manipulaciones de objetos"
 
 #: C/editprop.page:148(p)
 msgid "Objects can also be manipulated in the following ways."
@@ -1889,7 +1895,7 @@ msgstr ""
 
 #: C/editprop.page:151(title)
 msgid "Moving and Resizing Objects"
-msgstr ""
+msgstr "Mover y redimensionar objetos"
 
 #: C/editprop.page:153(p)
 msgid ""
@@ -1947,21 +1953,21 @@ msgstr ""
 
 #: C/editprop.page:208(title)
 msgid "Aligning Objects"
-msgstr ""
+msgstr "Alinear objetos"
 
 #: C/editprop.page:210(p)
 msgid ""
 "Objects can be aligned horizontally or vertically, relative to one another, "
 "or relative to the center line of the label, by choosing the appropriate "
 "menuitem from the <guiseq><gui>Objects</gui><gui>Align Horizontal</gui></"
-"guiseq> or <guiseq><gui>Objects</gui><gui>Align Horizontal</gui></guiseq> "
-"sub-menus. These menuitems are also available by right-clicking the display "
-"area when there is a non-empty selection."
+"guiseq> or <guiseq><gui>Objects</gui><gui>Align Vertical</gui></guiseq> sub-"
+"menus. These menuitems are also available by right-clicking the display area "
+"when there is a non-empty selection."
 msgstr ""
 
 #: C/editprop.page:223(title)
 msgid "Using the Property Bar"
-msgstr ""
+msgstr "Usar la barra de propiedades"
 
 #: C/editprop.page:225(p)
 msgid ""
@@ -1978,7 +1984,7 @@ msgstr ""
 
 #: C/customtemplate.page:25(title)
 msgid "To create a custom template"
-msgstr ""
+msgstr "Crear una plantilla personalizada"
 
 #: C/customtemplate.page:27(p)
 msgid ""
@@ -1996,7 +2002,7 @@ msgstr ""
 
 #: C/customize.page:9(desc)
 msgid "Customize <app>gLabels</app> to match your needs."
-msgstr ""
+msgstr "Personalizar <app>gLabels</app> para ajustarlo a sus necesidades."
 
 #. Use this section to describe how to customize the application.
 #: C/customize.page:25(title)
@@ -2030,7 +2036,7 @@ msgstr "Puntos"
 
 #: C/customize.page:43(p)
 msgid "Use points (1 point = 1/72 in = 0.352778 mm)."
-msgstr ""
+msgstr "Usar puntos (1 punto = 1/72 pulgadas = 0.352778 mm)."
 
 #: C/customize.page:46(gui)
 msgid "Inches"
@@ -2142,12 +2148,13 @@ msgid "Width"
 msgstr "Anchura"
 
 #: C/customize.page:107(p)
-msgid "These controls are selects the default line width."
-msgstr ""
+#| msgid "This control selects the default line color."
+msgid "This control selects the default line width."
+msgstr "Este control selecciona la anchura predeterminada de la línea."
 
 #: C/customize.page:111(p)
 msgid "This control selects the default line color."
-msgstr ""
+msgstr "Este control selecciona el color predeterminado de la línea."
 
 #: C/customize.page:117(title)
 msgid "Fill"
@@ -2155,17 +2162,19 @@ msgstr "Relleno"
 
 #: C/customize.page:118(p)
 msgid ""
-"Use these controls to set the default fill properties of new objects. These "
-"properties are:"
+"Use this control to set the default fill property of new objects. This "
+"property is:"
 msgstr ""
 
 #: C/customize.page:123(p)
-msgid "These controls are selects the default fill color."
-msgstr ""
+#, fuzzy
+#| msgid "This control selects the default line color."
+msgid "This control selects the default fill color."
+msgstr "Este control selecciona el color de línea predeterminado."
 
 #: C/createnew.page:9(desc)
 msgid "Create new objects within your document."
-msgstr ""
+msgstr "Crear objetos nuevos dentro de su documento."
 
 #: C/createnew.page:25(title)
 msgid "To create new objects"
@@ -2190,7 +2199,7 @@ msgstr ""
 msgid ""
 "Click the desired location of the upper left corner of the text object. New "
 "text objects are initialized with the string \"Text.\" To change this text, "
-"or other properties, see <xref linkend=\"glabels-object-properties\"/>."
+"or other properties, see <link xref=\"editprop\"/>."
 msgstr ""
 
 #: C/createnew.page:47(title)
@@ -2202,7 +2211,7 @@ msgid ""
 "Click the desired location of the upper left corner of the box object and "
 "drag to the desired location of the lower right corner. If you simply click "
 "in a single location, a square box will be created. To change properties of "
-"the box object, see <xref linkend=\"glabels-object-properties\"/>."
+"the box object, see <link xref=\"editprop\"/>."
 msgstr ""
 
 #: C/createnew.page:57(p)
@@ -2210,7 +2219,7 @@ msgid ""
 "Click the desired location of one end of the line object and drag to the "
 "desired location of the other end. If you simply click in a single location, "
 "a diagonal line will be created. To change properties of the line object, "
-"see <link xref=\"glabels-object-properties\"/>."
+"see <link xref=\"editprop\"/>."
 msgstr ""
 
 #: C/createnew.page:65(title)
@@ -2222,7 +2231,7 @@ msgid ""
 "Click the desired location of the upper left corner of the ellipse object "
 "and drag to the desired location of the lower right corner. If you simply "
 "click in a single location, a circle will be created. To change properties "
-"of the ellipse object, see <link xref=\"glabels-object-properties\"/>."
+"of the ellipse object, see <link xref=\"editprop\"/>."
 msgstr ""
 
 #: C/createnew.page:74(title)
@@ -2235,8 +2244,7 @@ msgid ""
 "drag to the desired location of the lower right corner. If you simply click "
 "in a single location, a square will be created. New image objects are "
 "initialized with a simple checkerboard image. To change this image, or other "
-"properties of the image object, see <link xref=\"glabels-object-properties\"/"
-">."
+"properties of the image object, see <link xref=\"editprop\"/>."
 msgstr ""
 
 #: C/createnew.page:85(title)
@@ -2247,13 +2255,13 @@ msgstr "Código de barras"
 msgid ""
 "Click the desired location of the upper left corner of the barcode object. "
 "New barcode objects are initialized to a POSTNET barcode with representative "
-"data. To change data and properties of the barcode object, see <xref linkend="
-"\"glabels-object-properties\"/>."
+"data. To change data and properties of the barcode object, see <link xref="
+"\"editprop\"/>."
 msgstr ""
 
 #: C/basicusage.page:9(desc)
 msgid "Handling files and quit the application."
-msgstr ""
+msgstr "Manejar archivos y salir de la aplicación."
 
 #: C/basicusage.page:25(title)
 msgid "Basic usage"
@@ -2270,12 +2278,18 @@ msgid ""
 "open, then click <gui>OK</gui>. The file is displayed in the display area of "
 "the <app>gLabels</app> window."
 msgstr ""
+"Para abrir un archivo, elija  <guiseq><gui>Archivo</gui><gui>Abrir</gui></"
+"guiseq> para mostrar el diálogo de <gui>Abrir archivo</gui>. Seleccione el "
+"archivo que quiere abrir y pulse <gui>Aceptar</gui>. El archivo se muestra "
+"en el área de visualización de la ventana de <app>gLabels</app>."
 
 #: C/basicusage.page:37(p)
 msgid ""
 "You can also open multiple files in <app>gLabels</app>. The application "
 "creates a separate application window for each open file."
 msgstr ""
+"Puede abrir múltiples archivos en <app>gLabels</app>. La aplicación crea una "
+"ventana de aplicación separada para cada archivo abierto."
 
 #: C/basicusage.page:41(p)
 msgid ""
@@ -2330,28 +2344,37 @@ msgid ""
 "guiseq>. This is equivalent to closing all open windows. See <link xref="
 "\"basicusage#closefile\"/>."
 msgstr ""
+"Para salir de <app>gLabels</app>, elija <guiseq><gui>Archivo</"
+"gui><gui>Quitar</gui></guiseq>. Esto es equivalente a cerrar todas las "
+"ventanas abiertas. Consulte la <link xref=\"basicusage#closefile\"/>."
 
 #: C/about.page:9(desc)
 msgid "Information about <app>gLabels</app>."
-msgstr ""
+msgstr "Información acerca de <app>gLabels</app>."
 
 #: C/about.page:25(title)
 msgid "About <app>gLabels</app>"
 msgstr "Acerca de <app>gLabels</app>"
 
 #: C/about.page:27(p)
+#, fuzzy
+#| msgid ""
+#| "<app>gLabels</app> was written by <credit><name>Jim Evins "
+#| "(<email>evins@snaught.com</email>)</name></credit>. To find more "
+#| "information about <app>gLabels</app>, please visit the <link href="
+#| "\"http://glabels.org\" type=\"http\"><app>gLabels</app> Web page</link>."
 msgid ""
-"<app>gLabels</app> was written by <credit><name>Jim Evins "
-"(<email>evins@snaught.com</email>)</name></credit>. To find more information "
-"about <app>gLabels</app>, please visit the <link href=\"http://glabels.org\" "
-"type=\"http\"><app>gLabels</app> Web page</link>."
+"<app>gLabels</app> was written by <name>Jim Evins (<email>evins@snaught.com</"
+"email>)</name>. To find more information about <app>gLabels</app>, please "
+"visit the <link href=\"http://glabels.org\" type=\"http\"><app>gLabels</app> "
+"Web page</link>."
 msgstr ""
 "<credit><name>Jim Evins (<email>evins@snaught.com</email>)</name></credit> "
 "escribió <app>gLabels</app>. Para obtener más información acerca de "
 "<app>gLabels</app>, visite la <link href=\"http://glabels.org\" type=\"http"
 "\">página web de<app>gLabels</app></link>."
 
-#: C/about.page:32(p)
+#: C/about.page:31(p)
 msgid ""
 "To report a bug or make a suggestion regarding this application or this "
 "manual, follow the directions at the <link href=\"http://glabels.org/contact/"
@@ -2361,7 +2384,7 @@ msgstr ""
 "este manual, siga las indicaciones en la <link href=\"http://glabels.org/"
 "contact/\" type=\"http\">página de contacto de <app>gLabels</app></link>."
 
-#: C/about.page:38(p)
+#: C/about.page:37(p)
 msgid ""
 "This program is distributed under the terms of the GNU General Public "
 "license as published by the Free Software Foundation; either version 3 of "
@@ -2380,6 +2403,12 @@ msgstr ""
 #: C/index.page:0(None)
 msgid "translator-credits"
 msgstr "Jorge González <jorgegonz@svn.gnome.org>, 2010"
+
+#~ msgid "heigth"
+#~ msgstr "altura"
+
+#~ msgid "These controls are selects the default fill color."
+#~ msgstr "Estos controles seleccionan el color de relleno predeterminado."
 
 #~| msgid "<application>gLabels</application> Manual V2.2.6"
 #~ msgid "<application>gLabels</application> Manual V2.2"
