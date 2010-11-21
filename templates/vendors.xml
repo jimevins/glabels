@@ -2,17 +2,17 @@
 
 <Glabels-vendors>
 
-  <Vendor name="Avery"          url="http://www.avery.com/"           />
-  <Vendor name="Brother"        url="http://www.brother-usa.com/"     />
-  <Vendor name="DECAdry"        url="http://www.decadry.com/"         />
-  <Vendor name="Dymo"           url="http://global.dymo.com/"         />
-  <Vendor name="Herma"          url="http://www.herma.de/"            />
-  <Vendor name="Maco"           url="http://www.maco.com/"            />
-  <Vendor name="Online Labels"  url="http://www.onlinelabels.com/"    />
-  <Vendor name="PEARL"          url="http://www.pearl.de"             />
-  <Vendor name="Uline"          url="http://www.uline.com/"           />
-  <Vendor name="Worldlabel"     url="http://www.worldlabel.com/"      />
-  <Vendor name="Zweckform"      url="http://www.avery-zweckform.com/" />
-
+  <Vendor name="Avery"          url="http://www.avery.com/"           		/>
+  <Vendor name="Brother"        url="http://www.brother-usa.com/"     		/>
+  <Vendor name="DECAdry"        url="http://www.decadry.com/"         		/>
+  <Vendor name="Dymo"           url="http://global.dymo.com/"         		/>
+  <Vendor name="Herma"          url="http://www.herma.de/"            		/>
+  <Vendor name="JAC"      	url="http://www.tagswiss.ch/deutsch/Etiketten/" />
+  <Vendor name="Maco"           url="http://www.maco.com/"            		/>
+  <Vendor name="Online Labels"  url="http://www.onlinelabels.com/"    		/>
+  <Vendor name="PEARL"          url="http://www.pearl.de"             		/>
+  <Vendor name="Uline"          url="http://www.uline.com/"           		/>
+  <Vendor name="Worldlabel"     url="http://www.worldlabel.com/"      		/>
+  <Vendor name="Zweckform"      url="http://www.avery-zweckform.com/" 		/>
 
 </Glabels-vendors>
