@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-11-15 18:39+0000\n"
-"PO-Revision-Date: 2010-11-15 20:04+0100\n"
+"POT-Creation-Date: 2010-11-21 14:58+0000\n"
+"PO-Revision-Date: 2010-11-21 16:10+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1115,47 +1115,56 @@ msgid "Auto shrink"
 msgstr "Automatisch schrumpfen"
 
 #: ../src/media-select.c:358 ../src/media-select.c:361
-#: ../src/media-select.c:506 ../src/media-select.c:705
+#: ../src/media-select.c:506 ../src/media-select.c:723
 msgctxt "Brand"
 msgid "Any"
 msgstr "Beliebig"
 
-#: ../src/media-select.c:365 ../src/media-select.c:875
+#: ../src/media-select.c:365 ../src/media-select.c:893
 msgctxt "Page size"
 msgid "Any"
 msgstr "Beliebig"
 
 #: ../src/media-select.c:372 ../src/media-select.c:375
-#: ../src/media-select.c:884
+#: ../src/media-select.c:902
 msgctxt "Category"
 msgid "Any"
 msgstr "Beliebig"
 
-#: ../src/media-select.c:972
+#: ../src/media-select.c:648
+#, c-format
+msgid "Delete template \"%s\"?"
+msgstr "Vorlagen »%s« löschen?"
+
+#: ../src/media-select.c:650
+msgid "This action will permanently delete this template."
+msgstr "Dadurch wird diese Vorlage dauerhaft gelöscht."
+
+#: ../src/media-select.c:990
 msgid "No recent templates found."
 msgstr "Keine zuletzt benutzte Vorlagen gefunden"
 
-#: ../src/media-select.c:974
+#: ../src/media-select.c:992
 msgid "Try selecting a template in the \"Search all\" tab."
 msgstr ""
 "Bitte versuchen Sie, eine Vorlage im Reiter »Alle durchsuchen« auszuwählen."
 
 #. Translators: "No match" means that for the given template search criteria, there
 #. * were no matches found.
-#: ../src/media-select.c:1065
+#: ../src/media-select.c:1083
 msgid "No match."
 msgstr "Keine Treffer."
 
-#: ../src/media-select.c:1067
+#: ../src/media-select.c:1085
 msgid "Try selecting a different brand, page size or category."
 msgstr ""
 "Versuchen Sie eine andere Marke, Seitengröße oder Kategorie auszuwählen."
 
-#: ../src/media-select.c:1161
+#: ../src/media-select.c:1179
 msgid "No custom templates found."
 msgstr "Keine benutzerdefinierten Vorlage gefunden."
 
-#: ../src/media-select.c:1163
+#: ../src/media-select.c:1181
 msgid ""
 "You may create new templates or try searching for pre-defined templates in "
 "the \"Search all\" tab."
@@ -1280,31 +1289,31 @@ msgstr "Überprüfen"
 msgid "Default"
 msgstr "Standard"
 
-#: ../src/object-editor.c:158 ../src/object-editor.c:464
+#: ../src/object-editor.c:158 ../src/object-editor.c:461
 msgid "Object properties"
 msgstr "Objekteigenschaften"
 
-#: ../src/object-editor.c:307
+#: ../src/object-editor.c:306
 msgid "Box object properties"
 msgstr "Eigenschaften des Rechteck-Objekts"
 
-#: ../src/object-editor.c:326
+#: ../src/object-editor.c:325
 msgid "Ellipse object properties"
 msgstr "Eigenschaften des Ellipsen-Objekts"
 
-#: ../src/object-editor.c:345
+#: ../src/object-editor.c:344
 msgid "Line object properties"
 msgstr "Eigenschaften des Linien-Objekts"
 
-#: ../src/object-editor.c:362
+#: ../src/object-editor.c:361
 msgid "Image object properties"
 msgstr "Eigenschaften des Bild-Objekts"
 
-#: ../src/object-editor.c:379
+#: ../src/object-editor.c:378
 msgid "Text object properties"
 msgstr "Eigenschaften des Text-Objekts"
 
-#: ../src/object-editor.c:401
+#: ../src/object-editor.c:400
 msgid "Barcode object properties"
 msgstr "Eigenschaften des Strichcode-Objekts"
 
