@@ -16,6 +16,7 @@ templates_DATA = \
 	avery-other-templates.xml \
 	brother-other-templates.xml \
 	dymo-other-templates.xml \
+	jac-iso-templates.xml \
 	maco-us-templates.xml \
 	misc-us-templates.xml \
 	misc-iso-templates.xml \
