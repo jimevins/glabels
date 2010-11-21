@@ -627,6 +627,9 @@ custom_delete_clicked_cb (GtkButton  *button,
         GtkTreeIter        iter;
         GtkTreeModel      *model;        
         gchar             *name;
+        GtkWidget         *window;
+        GtkWidget         *dialog;
+        gint               ret;
 
 	this->priv->stop_signals = TRUE;
 
@@ -637,8 +640,23 @@ custom_delete_clicked_cb (GtkButton  *button,
                 gtk_tree_selection_get_selected (selection, &model, &iter);
                 gtk_tree_model_get (model, &iter, NAME_COLUMN, &name, -1);
 
-                lgl_db_delete_template_by_name (name);
-                gl_mini_preview_pixbuf_cache_delete_by_name (name);
+                window = gtk_widget_get_toplevel (GTK_WIDGET (this));
+                dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+                                                 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                 GTK_MESSAGE_QUESTION,
+                                                 GTK_BUTTONS_YES_NO,
+                                                 _("Delete template \"%s\"?"), name);
+                gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+                                                          _("This action will permanently delete this template."));
+
+                ret = gtk_dialog_run (GTK_DIALOG (dialog));
+                gtk_widget_destroy (dialog);
+                
+                if ( ret == GTK_RESPONSE_YES )
+                {
+                        lgl_db_delete_template_by_name (name);
+                        gl_mini_preview_pixbuf_cache_delete_by_name (name);
+                }
 
                 g_free (name);
         }
