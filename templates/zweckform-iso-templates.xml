@@ -201,6 +201,38 @@
     </Label-rectangle>
   </Template>
 
+
+  <!-- =============================================================== -->
+  <!-- Zweckform J8435: CD Inlets Booklet part                         -->
+  <!-- =============================================================== -->
+  <Template brand="Zweckform" part="J8435A" size="A4" _description="CD Booklet">
+    <Meta category="media"/>
+    <Label-rectangle id="0" width="155mm" height="125mm" round="0">
+      <Markup-margin size="2mm"/>
+      <Markup-line x1="32mm" y1="0mm" x2="32mm" y2="125mm"/>
+      <Layout nx="1" ny="1" x0="27.5mm" y0="22mm" dx="155mm" dy="125mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <Template brand="Zweckform" part="32250A" equiv="J8435A"/>
+
+
+  <!-- =============================================================== -->
+  <!-- Zweckform J8435: CD Inlets Inlet part                           -->
+  <!-- =============================================================== -->
+  <Template brand="Zweckform" part="J8435B" size="A4" _description="CD Inlet">
+    <Meta category="media"/>
+    <Label-rectangle id="0" width="155mm" height="122mm" round="0">
+      <Markup-margin size="2mm"/>
+      <Markup-line x1="8.5mm" y1="0mm" x2="8.5mm" y2="122mm"/>
+      <Markup-line x1="146.5mm" y1="0mm" x2="146.5mm" y2="122mm"/>
+      <Layout nx="1" ny="1" x0="27.5mm" y0="21mm" dx="155mm" dy="122mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <Template brand="Zweckform" part="32250B" equiv="J8435B"/>
+
+
   <!-- =================================================================== -->
   <!-- Zweckform 32010: Business Cards, 54.0 x 85.0 mm, 10 per sheet       -->
   <!-- =================================================================== -->
@@ -216,6 +248,20 @@
     <Alias brand="DECAdry" part="OCC-3342"/>
     <Alias brand="DECAdry" part="DAW-327"/>
   </Template>
+
+
+  <!-- ============================================================ -->
+  <!-- Avery 32015: Business Cards                                  -->
+  <!-- ============================================================ -->
+  <Template brand="Zweckform" part="32015" size="A4" _description="Business Cards">
+    <Meta category="card"/>
+    <Meta category="business-card"/>
+    <Label-rectangle id="0" width="85mm" height="54mm" round="0mm">
+      <Markup-margin size="5mm"/>
+      <Layout nx="2" ny="4" x0="17mm" y0="31.5mm" dx="91mm" dy="60mm"/>
+    </Label-rectangle>
+  </Template>
+
 
   <!-- =================================================================== -->
   <!-- Zweckform 4760: File Labels, 192 x 38 mm, 7 per sheet               -->

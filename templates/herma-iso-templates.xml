@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+
+<Glabels-templates>
+
+
+  <!-- ******************************************************************** -->
+  <!-- ******************************************************************** -->
+  <!--                                                                      -->
+  <!-- Herma A4 products.                                                   -->
+  <!--                                                                      -->
+  <!-- ******************************************************************** -->
+  <!-- ******************************************************************** -->
+
+
+  <!-- =================================================================== -->
+  <!-- Data Becker Etiketten Paket: Ordnerrucken, 6 per sheet              -->
+  <!-- =================================================================== -->
+  <Template brand="Herma" part="4283" size="A4" _description="Arch File Labels (small)">
+    <Meta category="label"/>
+    <Label-rectangle id="0" width="544.252" height="110.551" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="1" ny="6" x0="25.5118" y0="32.5984" dx="544.252" dy="133.228"/>
+    </Label-rectangle>
+  </Template>
+
+  <Template brand="Herma" part="5090" equiv="4283"/>
+  <Template brand="Herma" part="5091" equiv="4283"/>
+  
+
+  <!-- =================================================================== -->
+  <!-- Data Becker Etiketten Paket: Ordnerrucken, 4 per sheet              -->
+  <!-- =================================================================== -->
+  <Template brand="Herma" part="4284" size="A4" _description="Arch File Labels (large)">
+    <Meta category="label"/>
+    <Label-rectangle id="0" width="544.252" height="174.331" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="1" ny="4" x0="25.5118" y0="38.2677" dx="544.252" dy="197.008"/>
+    </Label-rectangle>
+  </Template>
+
+  <Template brand="Herma" part="5095" equiv="4284"/>
+  <Template brand="Herma" part="5096" equiv="4284"/>
+
+
+  <!-- =================================================================== -->
+  <!-- Herma Musteretiketten: Ordnerrucken, 192 x 38 mm, 7 per sheet       -->
+  <!-- =================================================================== -->
+  <Template brand="Herma" part="4293" size="A4" _description="Arch File Labels">
+    <Meta category="label"/>
+    <Label-rectangle id="0" width="544.252" height="107.716" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="1" ny="7" x0="25.5118" y0="42.5197" dx="544.252" dy="107.716"/>
+    </Label-rectangle>
+  </Template>
+
+  <Template brand="Herma" part="5092" equiv="4293"/>
+
+
+  <!-- =================================================================== -->
+  <!-- Herma 4464: Mailing Labels - 3 columns, 70 x 37.125 mm, 24 per sheet-->
+  <!-- =================================================================== -->
+  <Template brand="Herma" part="4464" size="A4" _description="Mailing Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="199" height="105" round="0">
+      <Markup-margin size="5"/>
+      <Layout nx="3" ny="8" x0="0" y0="0" dx="199" dy="105"/>
+    </Label-rectangle>
+  </Template>
+
+
+  <!-- =================================================================== -->
+  <!-- Otto Versand: Allzweck Etiketten, 38 x 21,2 mm, 65 per sheet        -->
+  <!-- =================================================================== -->
+  <Template brand="Herma" part="4606" size="A4" _description="Allround Labels">
+    <Meta category="label"/>
+    <Label-rectangle id="0" width="107.716" height="60.0945" round="0">
+      <Markup-margin size="5"/>
+      <Layout nx="5" ny="13" x0="26.9291" y0="29.7638" dx="107.716" dy="60.0945"/>
+    </Label-rectangle>
+  </Template>
+
+  <Template brand="Herma" part="4270" equiv="4606"/>
+
+  
+  <!-- =================================================================== -->
+  <!-- Herma Musteretiketten: Allzweck Etiketten, 48,3 x 16,9 mm           -->
+  <!-- =================================================================== -->
+  <Template brand="Herma" part="4607" size="A4" _description="Allround Labels">
+    <Meta category="label"/>
+    <Label-rectangle id="0" width="136.913" height="47.9055" round="0">
+      <Markup-margin size="5"/>
+      <Layout nx="4" ny="16" x0="24.0945" y0="39.6853" dx="136.913" dy="47.9055"/>
+    </Label-rectangle>
+  </Template>
+
+  <Template brand="Herma" part="4271" equiv="4607"/>
+
+  
+  <!-- =================================================================== -->
+  <!-- Herma Musteretiketten: Allzweck Etiketten, 44 per sheet             -->
+  <!-- =================================================================== -->
+  <Template brand="Herma" part="4608" size="A4" _description="Allround Labels">
+    <Meta category="label"/>
+    <Label-rectangle id="0" width="136.913" height="72" round="0">
+      <Markup-margin size="5"/>
+      <Layout nx="4" ny="11" x0="24.0945" y0="24.0945" dx="136.913" dy="72"/>
+    </Label-rectangle>
+  </Template>
+
+  <Template brand="Herma" part="4272" equiv="4608"/>
+  <Template brand="Herma" part="5051" equiv="4608"/>
+
+  
+  <!-- =================================================================== -->
+  <!-- Herma Musteretiketten: Allzweck Etiketten, 24 per sheet             -->
+  <!-- =================================================================== -->
+  <Template brand="Herma" part="4614" size="A4" _description="Allround Labels">
+    <Meta category="label"/>
+    <Label-rectangle id="0" width="187.086" height="95.811" round="0">
+      <Markup-margin size="5"/>
+      <Layout nx="3" ny="8" x0="16.1575" y0="36.8504" dx="187.086" dy="95.811"/>
+    </Label-rectangle>
+  </Template>
+
+  <Template brand="Herma" part="4670" equiv="4614"/>
+  <Template brand="Herma" part="5053" equiv="4614"/>
+
+  
+  <!-- =================================================================== -->
+  <!-- Herma 4620: Mailing Labels - 2 columns, 107 x 37 mm, 16 per sheet   -->
+  <!-- =================================================================== -->
+  <Template brand="Herma" part="4620" size="A4" _description="Mailing Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="298" height="105" round="0">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="8" x0="0" y0="0" dx="298" dy="105"/>
+    </Label-rectangle>
+  </Template>
+
+
+  <!-- =================================================================== -->
+  <!-- Herma Musteretiketten: Adress Etiketten, 24 per sheet               -->
+  <!-- =================================================================== -->
+  <Template brand="Herma" part="4625" size="A4" _description="Mailing Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="297.638" height="119.905" round="0">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="7" x0="0" y0="0" dx="297.638" dy="119.905"/>
+    </Label-rectangle>
+  </Template>
+
+  <Template brand="Herma" part="4674" equiv="4625"/>
+  <Template brand="Herma" part="5057" equiv="4625"/>
+
+
+  <!-- =================================================================== -->
+  <!-- Data Becker Etiketten Paket: Video Etiketten, 12 per sheet          -->
+  <!-- =================================================================== -->
+  <Template brand="Herma" part="4828" size="A4" _description="Video Labels (face only)">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Label-rectangle id="0" width="223.086" height="131.811" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="6" x0="38.5512" y0="24.9449" dx="295.086" dy="131.811"/>
+    </Label-rectangle>
+  </Template>
+
+  <Template brand="Herma" part="5070" equiv="4828"/>
+
+  
+  <!-- =================================================================== -->
+  <!-- Herma 5079: CD/DVD Labels, 2 per sheet                              -->
+  <!-- =================================================================== -->
+  <Template brand="Herma" part="5079" size="A4" _description="CD/DVD Labels">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Label-cd id="0" radius="164.409pt" hole="58.1102pt" waste="9pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="1" ny="2" x0="133.228pt" y0="46.7717pt" dx="346.819pt" dy="419.528pt"/>
+    </Label-cd>
+  </Template>
+
+
+  <!-- =================================================================== -->
+  <!-- Data Becker Etiketten Paket: Disketten Etiketten, 10 per sheet      -->
+  <!-- =================================================================== -->
+  <Template brand="Herma" part="8803" size="A4" _description="Diskette Labels (face only)">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Label-rectangle id="0" width="198.425" height="144" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="5" x0="60.9448" y0="60.9448" dx="270.425" dy="144"/>
+    </Label-rectangle>
+  </Template>
+
+  <Template brand="Herma" part="8839" equiv="8803"/>
+
+  
+
+</Glabels-templates>
+
+
+
+
