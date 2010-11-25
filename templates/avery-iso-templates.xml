@@ -140,7 +140,6 @@
       <Markup-margin size="5"/>
       <Layout nx="3" ny="4" x0="20.84" y0="10" dx="187.08" dy="204.038"/>
     </Label-rectangle>
-    <Alias brand="Biltema" part="23-756"/>
   </Template>
 
   <Template brand="Avery" part="L7164" equiv="7164"/>
