@@ -80,21 +80,14 @@ void
 gl_mini_preview_pixbuf_cache_add_by_template (lglTemplate *template)
 {
         GdkPixbuf        *pixbuf;
-        GList            *p;
-        lglTemplateAlias *alias;
         gchar            *name;
 
 	gl_debug (DEBUG_PIXBUF_CACHE, "START");
 
         pixbuf = gl_mini_preview_pixbuf_new (template, 72, 72);
 
-        for ( p=template->aliases; p != NULL; p=p->next )
-        {
-                alias = (lglTemplateAlias *)p->data;
-
-                name = g_strdup_printf ("%s %s", alias->brand, alias->part);
-                g_hash_table_insert (mini_preview_pixbuf_cache, name, g_object_ref (pixbuf));
-        }
+        name = g_strdup_printf ("%s %s", template->brand, template->part);
+        g_hash_table_insert (mini_preview_pixbuf_cache, name, g_object_ref (pixbuf));
 
         g_object_unref (pixbuf);
 

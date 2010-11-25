@@ -73,9 +73,9 @@ static gint         compare_origins              (gconstpointer           a,
  *   @page_height:  Page height in points, set to zero unless paper_id="Other"
  *
  * Create a new template structure, with the given top-level attributes.  The
- * created template will have no initial aliases, categories, or frames
- * associated with it.  See lgl_template_add_alias(), lgl_template_add_category(),
- * and lgl_template_add_frame() to add these.
+ * created template will have no initial categories, or frames associated with
+ * it.  See lgl_template_add_category() and lgl_template_add_frame() to add
+ * these.
  *
  * Returns: pointer to a newly allocated #lglTemplate structure.
  *
@@ -89,7 +89,6 @@ lgl_template_new (const gchar         *brand,
                   gdouble              page_height)
 {
 	lglTemplate      *template;
-	lglTemplateAlias *alias;
 
 	template = g_new0 (lglTemplate,1);
 
@@ -99,11 +98,6 @@ lgl_template_new (const gchar         *brand,
 	template->paper_id    = g_strdup (paper_id);
 	template->page_width  = page_width;
 	template->page_height = page_height;
-
-	/* Always include primary name in alias list. */
-	template->aliases = NULL;
-        alias = lgl_template_alias_new (brand, part);
-        lgl_template_add_alias (template, alias);
 
 	return template;
 }
@@ -128,8 +122,6 @@ lgl_template_new_from_equiv (const gchar          *brand,
                              const gchar          *equiv_part)
 {
         lglTemplate      *template;
-        GList            *p_alias;
-        lglTemplateAlias *alias;
 
         template = lgl_db_lookup_template_from_brand_part (brand, equiv_part);
         if (template)
@@ -139,17 +131,6 @@ lgl_template_new_from_equiv (const gchar          *brand,
 
                 template->part       = g_strdup (part);
                 template->equiv_part = g_strdup (equiv_part);
-
-                for ( p_alias = template->aliases; p_alias != NULL; p_alias = p_alias->next )
-                {
-                        alias = (lglTemplateAlias *)p_alias->data;
-                        lgl_template_alias_free (alias);
-                }
-                g_list_free (template->aliases);
-                template->aliases = NULL;
-
-                alias = lgl_template_alias_new (brand, part);
-                lgl_template_add_alias (template, alias);
         }
         else
         {
@@ -392,50 +373,6 @@ lgl_template_are_templates_identical (const lglTemplate   *template1,
         return TRUE;
 }
 
-
-/**
- * lgl_template_alias_new:
- *   @brand:        Alias brand
- *   @part:         Alias part name/number
- *
- * Create a new template alias structure, with the given brand and part number.
- *
- * Returns: pointer to a newly allocated #lglTemplateAlias structure.
- *
- */
-lglTemplateAlias *
-lgl_template_alias_new (const gchar         *brand,
-                        const gchar         *part)
-{
-	lglTemplateAlias *alias;
-
-	alias = g_new0 (lglTemplateAlias,1);
-
-	alias->brand       = g_strdup (brand);
-	alias->part        = g_strdup (part);
-
-	return alias;
-}
-
-
-/**
- * lgl_template_add_alias:
- *   @template:  Pointer to template structure
- *   @alias:     Alias string
- *
- * This function adds the given alias to a templates list of aliases.
- *
- */
-void
-lgl_template_add_alias (lglTemplate         *template,
-                        lglTemplateAlias    *alias)
-{
-	g_return_if_fail (template);
-	g_return_if_fail (alias);
-
-	template->aliases = g_list_append (template->aliases, alias);
-}
- 
 
 /**
  * lgl_template_add_frame:
@@ -1115,7 +1052,6 @@ lglTemplate *
 lgl_template_dup (const lglTemplate *orig_template)
 {
 	lglTemplate         *template;
-	lglTemplateAlias    *alias;
 	GList               *p;
 	lglTemplateFrame    *frame;
 
@@ -1131,17 +1067,6 @@ lgl_template_dup (const lglTemplate *orig_template)
         template->equiv_part  = g_strdup (orig_template->equiv_part);
         template->product_url = g_strdup (orig_template->product_url);
 
-	for ( p=orig_template->aliases; p != NULL; p=p->next )
-        {
-                alias = (lglTemplateAlias *)p->data;
-
-		if ( !(UTF8_EQUAL (template->brand, alias->brand) &&
-                       UTF8_EQUAL (template->part, alias->part)) )
-                {
-			lgl_template_add_alias (template, lgl_template_alias_dup (alias));
-		}
-
-	}
 
 	for ( p=orig_template->category_ids; p != NULL; p=p->next )
         {
@@ -1186,15 +1111,6 @@ lgl_template_free (lglTemplate *template)
 		g_free (template->paper_id);
 		template->paper_id = NULL;
 
-		for ( p=template->aliases; p != NULL; p=p->next ) {
-
-			lgl_template_alias_free (p->data);
-			p->data = NULL;
-
-		}
-		g_list_free (template->aliases);
-		template->aliases = NULL;
-
 		for ( p=template->category_ids; p != NULL; p=p->next ) {
 
 			g_free (p->data);
@@ -1218,48 +1134,6 @@ lgl_template_free (lglTemplate *template)
 
 	}
 
-}
-
-
-/**
- * lgl_template_alias_dup:
- *   @orig_alias: Alias to duplicate.
- *
- * This function duplicates a template alias structure.
- *
- * Returns:  a newly allocated #lglTemplateAlias structure.
- *
- */
-lglTemplateAlias *
-lgl_template_alias_dup (const lglTemplateAlias *orig_alias)
-{
-	g_return_val_if_fail (orig_alias, NULL);
-
-	return lgl_template_alias_new (orig_alias->brand, orig_alias->part);
-}
-
-
-/**
- * lgl_template_alias_free:
- *   @alias: Alias to free.
- *
- * This function frees all memory associated with given template alias structure.
- *
- */
-void
-lgl_template_alias_free (lglTemplateAlias *alias)
-{
-
-	if ( alias != NULL )
-        {
-		g_free (alias->brand);
-		alias->brand = NULL;
-
-		g_free (alias->part);
-		alias->part = NULL;
-
-		g_free (alias);
-	}
 }
 
 
@@ -1498,9 +1372,6 @@ compare_origins (gconstpointer a,
 void
 lgl_template_print (const lglTemplate *template)
 {
-        GList            *p;
-        lglTemplateAlias *alias;
-
         g_print ("---- %s( TEMPLATE=%p ) ----\n", __FUNCTION__, template);
 
         g_print("brand=\"%s\", part=\"%s\", description=\"%s\"\n",
@@ -1508,13 +1379,6 @@ lgl_template_print (const lglTemplate *template)
 
         g_print("paper_id=\"%s\", page_width=%g, page_height=%g\n",
                 template->paper_id, template->page_width, template->page_height);
-
-        for (p=template->aliases; p!=NULL; p=p->next)
-        {
-                alias = (lglTemplateAlias *)p->data;
-                g_print("Alias: brand=\"%s\", part=\"%s\"\n", alias->brand, alias->part);
-
-        }
 
         g_print ("\n");
 

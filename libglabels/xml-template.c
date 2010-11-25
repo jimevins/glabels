@@ -93,9 +93,6 @@ static void  xml_create_markup_rect_node    (const lglTemplateMarkup      *circl
 static void  xml_create_markup_ellipse_node (const lglTemplateMarkup      *circle,
 					     xmlNodePtr                    root,
 					     const xmlNsPtr                ns);
-static void  xml_create_alias_node          (const lglTemplateAlias       *alias,
-					     xmlNodePtr                    root,
-					     const xmlNsPtr                ns);
 
 
 /**
@@ -726,43 +723,15 @@ xml_parse_markup_ellipse_node (xmlNodePtr          markup_node,
 
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Parse XML Template->Alias Node.                                */
+/* PRIVATE.  Parse deprecated XML Template->Alias Node.                     */
 /*--------------------------------------------------------------------------*/
 static void
 xml_parse_alias_node (xmlNodePtr   alias_node,
 		      lglTemplate *template)
 {
-	gchar             *brand;
-	gchar             *part;
-	gchar             *name;
-        gchar            **v;
-
-	brand = lgl_xml_get_prop_string (alias_node, "brand", NULL);
-	part  = lgl_xml_get_prop_string (alias_node, "part", NULL);
-        if (!brand || !part)
-        {
-                name = lgl_xml_get_prop_string (alias_node, "name", NULL);
-                if (name)
-                {
-			g_message (_("Missing required \"brand\" or \"part\" attribute, trying deprecated name."));
-                        v = g_strsplit (name, " ", 2);
-                        brand = g_strdup (v[0]);
-                        part  = g_strdup (v[1]);
-                        g_free (name);
-                        g_strfreev (v);
-                        
-                }
-                else
-                {
-			g_message (_("Name attribute also missing."));
-                }
-        }
-
-	lgl_template_add_alias (template, lgl_template_alias_new (brand, part));
-
-	g_free (brand);
-	g_free (part);
+        g_message (_("Skipping deprecated \"Alias\" node."));
 }
+
 
 /**
  * lgl_xml_template_write_templates_to_file:
@@ -857,7 +826,6 @@ lgl_xml_template_create_template_node (const lglTemplate *template,
 {
 	xmlNodePtr          node;
 	GList              *p;
-	lglTemplateAlias   *alias;
 	lglTemplateFrame   *frame;
 
 	node = xmlNewChild (root, ns, (xmlChar *)"Template", NULL);
@@ -876,14 +844,6 @@ lgl_xml_template_create_template_node (const lglTemplate *template,
 
 	lgl_xml_set_prop_string (node, "description", template->description);
 
-	for ( p=template->aliases; p != NULL; p=p->next ) {
-                alias = (lglTemplateAlias *)p->data;
-		if ( !(xmlStrEqual ((xmlChar *)template->brand, (xmlChar *)alias->brand) &&
-                       xmlStrEqual ((xmlChar *)template->part, (xmlChar *)alias->part)) )
-                {
-			xml_create_alias_node ( alias, node, ns );
-		}
-	}
         xml_create_meta_node ("product_url", template->product_url, node, ns );
 	for ( p=template->category_ids; p != NULL; p=p->next )
         {
@@ -1119,24 +1079,6 @@ xml_create_markup_ellipse_node (const lglTemplateMarkup *markup,
 	lgl_xml_set_prop_length (node, "y1", markup->ellipse.y1);
 	lgl_xml_set_prop_length (node, "w",  markup->ellipse.w);
 	lgl_xml_set_prop_length (node, "h",  markup->ellipse.h);
-
-}
-
-
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  Add XML Template->Alias Node.                                  */
-/*--------------------------------------------------------------------------*/
-static void
-xml_create_alias_node (const lglTemplateAlias *alias,
-		       xmlNodePtr              root,
-		       const xmlNsPtr          ns)
-{
-	xmlNodePtr node;
-
-	node = xmlNewChild (root, ns, (xmlChar *)"Alias", NULL);
-
-	lgl_xml_set_prop_string (node, "brand", alias->brand);
-	lgl_xml_set_prop_string (node, "part",  alias->part);
 
 }
 

@@ -432,11 +432,3 @@ Defines the type of notify callback function to be called when database changes.
 @void: 
 
 
-<!-- ##### FUNCTION lgl_db_print_aliases ##### -->
-<para>
-
-</para>
-
-@template: 
-
-

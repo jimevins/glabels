@@ -180,7 +180,7 @@
 <!ENTITY % label_element  "Label-rectangle | Label-round | Label-ellipse | Label-cd">
 <!ENTITY % markup_element "Markup-margin | Markup-line | Markup-circle | Markup-rect | Markup-ellipse">
 
-<!ELEMENT Template (Meta*, (%label_element;)*, Alias*)>
+<!ELEMENT Template (Meta*, (%label_element;)*)>
 <!ATTLIST Template
                  brand           %STRING_TYPE;           #REQUIRED
                  part            %STRING_TYPE;           #REQUIRED
@@ -283,12 +283,6 @@
                  dy              %LENGTH_TYPE;           "0 pt"
 >
 
-<!ELEMENT Alias EMPTY>
-<!ATTLIST Alias
-                 brand           %STRING_TYPE;           #REQUIRED
-                 part            %STRING_TYPE;           #REQUIRED
-                 name            %STRING_TYPE;           #IMPLIED
->
 
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!-- Objects Section                                                      -->

@@ -28,8 +28,6 @@ G_BEGIN_DECLS
 
 typedef struct _lglTemplate                lglTemplate;
 
-typedef struct _lglTemplateAlias           lglTemplateAlias;
-
 typedef union  _lglTemplateFrame           lglTemplateFrame;
 typedef struct _lglTemplateFrameAll        lglTemplateFrameAll;
 typedef struct _lglTemplateFrameRect       lglTemplateFrameRect;
@@ -71,21 +69,8 @@ struct _lglTemplate {
 	 * template. */
 	GList               *frames;
 
-	/* Deprecated: List of (lglTemplateAlias *) alias structures. */
-	GList               *aliases;
-
 };
 
-
-/*
- *   Top-level Template Structure
- */
-struct _lglTemplateAlias {
-
-	gchar               *brand;
-        gchar               *part;
-
-};
 
 /*
  *   Possible Frame Shapes
@@ -339,17 +324,11 @@ lglTemplate         *lgl_template_new_from_equiv       (const gchar          *br
                                                         const gchar          *part,
                                                         const gchar          *equiv_part);
 
-void                 lgl_template_add_alias            (lglTemplate          *template,
-                                                        lglTemplateAlias     *alias);
-
 void                 lgl_template_add_category         (lglTemplate          *template,
                                                         const gchar          *category_id);
 
 void                 lgl_template_add_frame            (lglTemplate          *template,
                                                         lglTemplateFrame     *frame);
-
-lglTemplateAlias    *lgl_template_alias_new            (const gchar          *brand,
-                                                        const gchar          *part);
 
 lglTemplateFrame    *lgl_template_frame_rect_new       (const gchar          *id,
                                                         gdouble               w,
@@ -412,9 +391,6 @@ lglTemplateMarkup   *lgl_template_markup_ellipse_new   (gdouble               x1
 lglTemplate         *lgl_template_dup                  (const lglTemplate    *orig_template);
 
 void                 lgl_template_free                 (lglTemplate          *template);
-
-lglTemplateAlias    *lgl_template_alias_dup            (const lglTemplateAlias     *orig_alias);
-void                 lgl_template_alias_free           (lglTemplateAlias           *alias);
 
 lglTemplateFrame    *lgl_template_frame_dup            (const lglTemplateFrame     *orig_frame);
 void                 lgl_template_frame_free           (lglTemplateFrame           *frame);

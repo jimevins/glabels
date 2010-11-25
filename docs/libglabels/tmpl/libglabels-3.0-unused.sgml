@@ -227,7 +227,6 @@ template3
 @page_height: 
 @categories: 
 @frames: 
-@aliases: 
 
 <!-- ##### UNION glTemplateFrame ##### -->
 <para>
@@ -599,14 +598,6 @@ the CSS2 Specification (Section 4.3.2).
 </para>
 
 
-<!-- ##### FUNCTION gl_template_add_alias ##### -->
-<para>
-
-</para>
-
-@template: 
-@alias: 
-
 <!-- ##### FUNCTION gl_template_add_category ##### -->
 <para>
 
@@ -975,13 +966,6 @@ the CSS2 Specification (Section 4.3.2).
 @page_width: 
 @page_height: 
 @Returns: 
-
-<!-- ##### FUNCTION gl_template_print_aliases ##### -->
-<para>
-
-</para>
-
-@template: 
 
 <!-- ##### FUNCTION gl_template_print_known_templates ##### -->
 <para>
@@ -1526,13 +1510,6 @@ attributes.
 
 </para>
 
-
-<!-- ##### FUNCTION lgl_template_print_aliases ##### -->
-<para>
-
-</para>
-
-@template: 
 
 <!-- ##### FUNCTION lgl_template_print_known_templates ##### -->
 <para>

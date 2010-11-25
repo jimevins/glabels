@@ -84,8 +84,6 @@
       &lt;Markup-margin size="5pt"/&gt;
       &lt;Layout nx="3" ny="10" x0="11.25pt" y0="36pt" dx="200pt" dy="72pt"/&gt;
     &lt;/Label-rectangle&gt;
-    &lt;Alias brand="Avery" part="5160"/&gt;
-    &lt;Alias brand="Avery" part="6233"/&gt;
   &lt;/Template&gt;
       </code>
     </section>
@@ -96,9 +94,7 @@
       <p>A <em>Template</em> node describes a single stationary
         product.  It must contain one instance of any type of Label node
         (<em>Label-rectangle</em>,
-        <em>Label-round</em>, or <em>Label-cd</em>).
-        This node can be followed by zero or more 
-        <em>Alias</em> nodes.</p>
+        <em>Label-round</em>, or <em>Label-cd</em>).</p>
 
 <table frame="all" rules="rows">
   <tr>
@@ -127,6 +123,9 @@
   </tr>
   <tr>
     <td><p>height</p></td>  <td><p>Page height.  Only valid if size="Other"</p></td>
+  </tr>
+  <tr>
+    <td><p>equiv</p></td>  <td><p>Equivalent part number.  If this property is present, the template is a clone of another template of the same brand.  The template will inheret all properties, except brand and name from the other template.  This equiv property must refer to a previously defined template -- libglabels does not currently support forward references.</p></td>
   </tr>
 </table>
 
@@ -512,30 +511,6 @@
     		</media>
 	      </figure>
 	      <!-- ==== End of Figure ==== -->
-    </section>
-
-    <section id="template-alias-node">
-      <title>Alias Node</title>
-
-      <p>An <em>Alias</em> node provides the name of a
-        product with the same size and layout characteristics as the
-        parent template.</p>
-
-<table frame="all" rules="rows">
-  <tr>
-    <td><p>Property</p></td>  <td><p>Description</p></td>
-  </tr>
-  <tr>
-    <td><p></p></td>  <td><p></p></td>
-  </tr>
-  <tr>
-    <td><p>brand</p></td>  <td><p>The brand or manufacturer of the equivalent product.</p></td>
-  </tr>
-  <tr>
-    <td><p>part</p></td>  <td><p>The part number of the equivalent product.</p></td>
-  </tr>
-</table>
-
     </section>
 
 

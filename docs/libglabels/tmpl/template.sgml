@@ -38,17 +38,6 @@ of peel-off labels or cards.
 @category_ids: A list of category IDs that this template belongs to.
 @frames: A list of (#lglTemplateFrame *) structures.  GLabels currently only supports one frame
 per template -- future versions may support multiple frames per template.
-@aliases: A list of alternate names for this template.  Often a single template can be used for
-multiple products.
-
-<!-- ##### STRUCT lglTemplateAlias ##### -->
-<para>
-This structure defines an alias for the parent template structure.  An alias is used for
-different products that can use the same template.
-</para>
-
-@brand: Brand name of label or card.  E.g. "Avery."
-@part: Part name or number of label or card.  E.g. "8160."
 
 <!-- ##### ENUM lglTemplateFrameShape ##### -->
 <para>
@@ -292,15 +281,6 @@ relative to the upper left corner of the page.
 @frame: 
 
 
-<!-- ##### FUNCTION lgl_template_add_alias ##### -->
-<para>
-
-</para>
-
-@template: 
-@alias: 
-
-
 <!-- ##### FUNCTION lgl_template_get_name ##### -->
 <para>
 
@@ -358,33 +338,6 @@ relative to the upper left corner of the page.
 @template1: 
 @template2: 
 @Returns: 
-
-
-<!-- ##### FUNCTION lgl_template_alias_new ##### -->
-<para>
-
-</para>
-
-@brand: 
-@part: 
-@Returns: 
-
-
-<!-- ##### FUNCTION lgl_template_alias_dup ##### -->
-<para>
-
-</para>
-
-@orig_alias: 
-@Returns: 
-
-
-<!-- ##### FUNCTION lgl_template_alias_free ##### -->
-<para>
-
-</para>
-
-@alias: 
 
 
 <!-- ##### FUNCTION lgl_template_frame_rect_new ##### -->

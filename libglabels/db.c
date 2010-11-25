@@ -1400,9 +1400,8 @@ GList *
 lgl_db_get_brand_list (const gchar *paper_id,
                        const gchar *category_id)
 {
-	GList            *p_tmplt, *p_alias;
+	GList            *p_tmplt;
 	lglTemplate      *template;
-	lglTemplateAlias *alias;
 	GList            *brands = NULL;
 
 	if (!model)
@@ -1416,19 +1415,14 @@ lgl_db_get_brand_list (const gchar *paper_id,
 		if (lgl_template_does_page_size_match (template, paper_id) &&
                     lgl_template_does_category_match (template, category_id))
                 {
-			for (p_alias = template->aliases; p_alias != NULL;
-			     p_alias = p_alias->next)
-                        {
-                                alias = (lglTemplateAlias *)p_alias->data;
 
-                                if ( !g_list_find_custom (brands, alias->brand,
-                                                          (GCompareFunc)lgl_str_utf8_casecmp) )
-                                {
-                                        brands = g_list_insert_sorted (brands,
-                                                                       g_strdup (alias->brand),
-                                                                       (GCompareFunc)lgl_str_utf8_casecmp);
-                                }
-			}
+                        if ( !g_list_find_custom (brands, template->brand,
+                                                  (GCompareFunc)lgl_str_utf8_casecmp) )
+                        {
+                                brands = g_list_insert_sorted (brands,
+                                                               g_strdup (template->brand),
+                                                               (GCompareFunc)lgl_str_utf8_casecmp);
+                        }
 		}
 	}
 
@@ -1647,9 +1641,8 @@ gboolean
 lgl_db_does_template_exist (const gchar *brand,
                             const gchar *part)
 {
-	GList            *p_tmplt, *p_alias;
+	GList            *p_tmplt;
 	lglTemplate      *template;
-        lglTemplateAlias *alias;
 
 	if (!model)
         {
@@ -1664,16 +1657,12 @@ lgl_db_does_template_exist (const gchar *brand,
 	for (p_tmplt = model->templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
         {
 		template = (lglTemplate *) p_tmplt->data;
-		for (p_alias = template->aliases; p_alias != NULL; p_alias = p_alias->next)
-                {
-                        alias = (lglTemplateAlias *)p_alias->data;
 
-			if ( UTF8_EQUAL (brand, alias->brand) &&
-                             UTF8_EQUAL (part, alias->part) )
-                        {
-				return TRUE;
-			}
-		}
+                if ( UTF8_EQUAL (brand, template->brand) &&
+                     UTF8_EQUAL (part, template->part) )
+                {
+                        return TRUE;
+                }
 	}
 
 	return FALSE;
@@ -1692,9 +1681,8 @@ lgl_db_does_template_exist (const gchar *brand,
 gboolean
 lgl_db_does_template_name_exist (const gchar *name)
 {
-	GList            *p_tmplt, *p_alias;
+	GList            *p_tmplt;
         lglTemplate      *template;
-        lglTemplateAlias *alias;
         gchar            *candidate_name;
 
 	if (!model)
@@ -1710,17 +1698,14 @@ lgl_db_does_template_name_exist (const gchar *name)
 	for (p_tmplt = model->templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
         {
 		template = (lglTemplate *) p_tmplt->data;
-		for (p_alias = template->aliases; p_alias != NULL; p_alias = p_alias->next)
-                {
-                        alias = (lglTemplateAlias *)p_alias->data;
-                        candidate_name = g_strdup_printf ("%s %s", alias->brand, alias->part);
+                candidate_name = g_strdup_printf ("%s %s", template->brand, template->part);
 
-			if ( UTF8_EQUAL (candidate_name, name) ) {
-                                g_free (candidate_name);
-                                return TRUE;
-			}
+                if ( UTF8_EQUAL (candidate_name, name) )
+                {
                         g_free (candidate_name);
-		}
+                        return TRUE;
+                }
+                g_free (candidate_name);
 	}
 
 	return FALSE;
@@ -1782,7 +1767,7 @@ lgl_db_get_template_name_list_unique (const gchar *brand,
  * @paper_id: If non NULL, limit results to given page size.
  * @category_id: If non NULL, limit results to given template category.
  *
- * Get a list of all valid names and aliases of templates in the template database.
+ * Get a list of all valid names of templates in the template database.
  * Results can be filtered by page size and/or template category.  A list of valid page
  * sizes can be obtained using lgl_db_get_paper_id_list().  A list of valid template
  * categories can be obtained using lgl_db_get_category_id_list().
@@ -1790,16 +1775,15 @@ lgl_db_get_template_name_list_unique (const gchar *brand,
  * This function differs from lgl_db_get_template_name_list_unique(), because it will
  * return multiple names for the same template.
  *
- * Returns: a list of template names and aliases.
+ * Returns: a list of template names.
  */
 GList *
 lgl_db_get_template_name_list_all (const gchar *brand,
                                    const gchar *paper_id,
                                    const gchar *category_id)
 {
-	GList            *p_tmplt, *p_alias;
+	GList            *p_tmplt;
 	lglTemplate      *template;
-	lglTemplateAlias *alias;
         gchar            *name;
 	GList            *names = NULL;
 
@@ -1814,17 +1798,12 @@ lgl_db_get_template_name_list_all (const gchar *brand,
 		if (lgl_template_does_page_size_match (template, paper_id) &&
                     lgl_template_does_category_match (template, category_id))
                 {
-			for (p_alias = template->aliases; p_alias != NULL;
-			     p_alias = p_alias->next)
-                        {
-                                alias = (lglTemplateAlias *)p_alias->data;
 
-                                if ( !brand || UTF8_EQUAL( alias->brand, brand) )
-                                {
-                                        name = g_strdup_printf ("%s %s", alias->brand, alias->part);
-                                        names = g_list_insert_sorted (names, name,
-                                                                      (GCompareFunc)lgl_str_part_name_cmp);
-                                }
+                        if ( !brand || UTF8_EQUAL( template->brand, brand) )
+                        {
+                                name = g_strdup_printf ("%s %s", template->brand, template->part);
+                                names = g_list_insert_sorted (names, name,
+                                                              (GCompareFunc)lgl_str_part_name_cmp);
 			}
 		}
 	}
@@ -1837,18 +1816,17 @@ lgl_db_get_template_name_list_all (const gchar *brand,
  * lgl_db_get_similar_template_name_list:
  * @name:     Name of template under test.
  *
- * Get a list of all valid names and aliases of templates in the template database that
+ * Get a list of all valid names of templates in the template database that
  * have the same size and layout characteristics as the given template.
  *
- * Returns: a list of template names and aliases.
+ * Returns: a list of template names.
  */
 GList *
 lgl_db_get_similar_template_name_list (const gchar  *name)
 {
-	GList            *p_tmplt, *p_alias;
+	GList            *p_tmplt;
 	lglTemplate      *template1;
 	lglTemplate      *template2;
-	lglTemplateAlias *alias;
         gchar            *name2;
 	GList            *names = NULL;
 
@@ -1868,35 +1846,20 @@ lgl_db_get_similar_template_name_list (const gchar  *name)
                 return NULL;
         }
 
-        for (p_alias = template1->aliases; p_alias != NULL; p_alias = p_alias->next)
-        {
-                alias = (lglTemplateAlias *)p_alias->data;
-
-                name2 = g_strdup_printf ("%s %s", alias->brand, alias->part);
-                if ( !UTF8_EQUAL (name2, name) )
-                {
-                        names = g_list_insert_sorted (names, name2,
-                                                      (GCompareFunc)lgl_str_part_name_cmp);
-                }
-        }
-
 	for (p_tmplt = model->templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
         {
 		template2 = (lglTemplate *) p_tmplt->data;
 
                 if ( lgl_template_are_templates_identical (template1, template2) )
                 {
-			for (p_alias = template2->aliases; p_alias != NULL; p_alias = p_alias->next)
-                        {
-                                alias = (lglTemplateAlias *)p_alias->data;
 
-                                name2 = g_strdup_printf ("%s %s", alias->brand, alias->part);
-                                if ( !UTF8_EQUAL (name2, name) )
-                                {
-                                        names = g_list_insert_sorted (names, name2,
-                                                                      (GCompareFunc)lgl_str_part_name_cmp);
-                                }
-			}
+                        name2 = g_strdup_printf ("%s %s", template2->brand, template2->part);
+                        if ( !UTF8_EQUAL (name2, name) )
+                        {
+                                names = g_list_insert_sorted (names, name2,
+                                                              (GCompareFunc)lgl_str_part_name_cmp);
+                        }
+
 		}
 	}
 
@@ -1939,10 +1902,7 @@ lgl_db_free_template_name_list (GList *names)
 lglTemplate *
 lgl_db_lookup_template_from_name (const gchar *name)
 {
-	GList            *p_alias;
 	lglTemplate      *template;
-        lglTemplateAlias *alias;
-        gchar            *candidate_name;
 	lglTemplate      *new_template;
 
 	if (!model)
@@ -1960,24 +1920,8 @@ lgl_db_lookup_template_from_name (const gchar *name)
 
         if (template)
         {
-                for (p_alias = template->aliases; p_alias != NULL; p_alias = p_alias->next)
-                {
-                        alias = (lglTemplateAlias *)p_alias->data;
-                        candidate_name = g_strdup_printf ("%s %s", alias->brand, alias->part);
-
-                        if ( UTF8_EQUAL (candidate_name, name) )
-                        {
-                                g_free (candidate_name);
-                                new_template = lgl_template_dup (template);
-                                g_free (new_template->brand);
-                                new_template->brand = g_strdup (alias->brand);
-                                g_free (new_template->part);
-                                new_template->part = g_strdup (alias->part);
-                                return new_template;
-                        }
-
-                        g_free (candidate_name);
-                }
+                new_template = lgl_template_dup (template);
+                return new_template;
         }
 
 	/* No matching template has been found so return the first template */
@@ -2000,10 +1944,7 @@ lgl_db_lookup_template_from_brand_part(const gchar *brand,
                                        const gchar *part)
 {
         gchar            *name;
-	GList            *p_alias;
 	lglTemplate      *template;
-        lglTemplateAlias *alias;
-        gchar            *candidate_name;
 	lglTemplate      *new_template;
 
 	if (!model)
@@ -2022,25 +1963,8 @@ lgl_db_lookup_template_from_brand_part(const gchar *brand,
 
         if (template)
         {
-                for (p_alias = template->aliases; p_alias != NULL; p_alias = p_alias->next)
-                {
-                        alias = (lglTemplateAlias *)p_alias->data;
-                        candidate_name = g_strdup_printf ("%s %s", alias->brand, alias->part);
-
-                        if ( UTF8_EQUAL (candidate_name, name) )
-                        {
-                                g_free (candidate_name);
-                                new_template = lgl_template_dup (template);
-                                g_free (new_template->brand);
-                                new_template->brand = g_strdup (alias->brand);
-                                g_free (new_template->part);
-                                new_template->part = g_strdup (alias->part);
-                                g_free (name);
-                                return new_template;
-                        }
-
-                        g_free (candidate_name);
-                }
+                new_template = lgl_template_dup (template);
+                return new_template;
         }
 
 	/* No matching template has been found so return the first template */
@@ -2052,17 +1976,11 @@ lgl_db_lookup_template_from_brand_part(const gchar *brand,
 static void
 add_to_template_cache (lglTemplate *template)
 {
-	GList            *p_alias;
-        lglTemplateAlias *alias;
         gchar            *name;
 
-        for ( p_alias=template->aliases; p_alias != NULL; p_alias=p_alias->next )
-        {
-                alias = (lglTemplateAlias *)p_alias->data;
-                name = g_strdup_printf ("%s %s", alias->brand, alias->part);
+        name = g_strdup_printf ("%s %s", template->brand, template->part);
 
-                g_hash_table_insert (model->template_cache, name, template);
-        }
+        g_hash_table_insert (model->template_cache, name, template);
 }
 
 
@@ -2277,36 +2195,6 @@ lgl_db_print_known_templates (void)
 
 }
 
-
-/**
- * lgl_db_print_aliases:
- *   @template: template
- *
- * Print all aliases of a template (for debugging purposes).
- *
- */
-void
-lgl_db_print_aliases (const lglTemplate *template)
-{
-	GList            *p;
-        lglTemplateAlias *alias;
-
-        if (!model)
-        {
-                lgl_db_init ();
-        }
-
-	g_print ("%s():\n", __FUNCTION__);
-	for (p=template->aliases; p!=NULL; p=p->next)
-        {
-                alias = (lglTemplateAlias *)p->data;
-		
-		g_print("Alias: brand=\"%s\", part=\"%s\"\n", alias->brand, alias->part);
-
-	}
-	g_print ("\n");
-
-}
 
 
 
