@@ -78,9 +78,6 @@
       <Markup-margin size="5"/>
       <Layout nx="3" ny="7" x0="21.2" y0="43.9" dx="187.2" dy="108.0"/>
     </Label-rectangle>
-    <Alias brand="DECAdry" part="DLW-1731"/>
-    <Alias brand="DECAdry" part="OLW-4731"/>
-    <Alias brand="DECAdry" part="OLW-7131"/>
   </Template>
 
   <Template brand="Avery" part="L7160" equiv="7160"/>

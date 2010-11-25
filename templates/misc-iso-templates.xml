@@ -370,57 +370,6 @@
   </Template>
 
   <!-- =================================================================== -->
-  <!-- DECAdry OCC 3342 Business Cards.                                    -->
-  <!-- =================================================================== -->
-  <Template brand="DECAdry" part="OCC 3342" size="A4" _description="Business Cards">
-    <Meta category="card"/>
-    <Meta category="business-card"/>
-    <Label-rectangle id="0" width="240.945pt" height="153.071pt" round="0pt" x_waste="0pt" y_waste="0pt">
-      <Markup-margin size="0pt"/>
-      <Layout nx="2" ny="5" x0="42.5197pt" y0="38.2677pt" dx="269.291pt" dy="153.071pt"/>
-    </Label-rectangle>
-  </Template>
-
-  <!-- =================================================================== -->
-  <!-- DECAdry DLW-1734: Mailing Labels.                                   -->
-  <!-- =================================================================== -->
-  <Template brand="DECAdry" part="DLW-1734" size="A4" _description="Mailing Labels">
-    <Meta category="label"/>
-    <Meta category="mail"/>
-    <Label-rectangle id="0" width="99.1mm" height="67.7mm" round="2mm" x_waste="0mm" y_waste="0mm">
-      <Markup-margin size="3.175mm"/>
-      <Layout nx="2" ny="4" x0="4.65mm" y0="13.1mm" dx="101.5mm" dy="67.7mm"/>
-    </Label-rectangle>
-    <Alias brand="DECAdry" part="OLW-4734"/>
-  </Template>
-
-  <!-- =================================================================== -->
-  <!-- DECAdry DLW-1786: Mailing Labels.                                   -->
-  <!-- =================================================================== -->
-  <Template brand="DECAdry" part="DLW-1786" size="A4" _description="Mailing Labels">
-    <Meta category="label"/>
-    <Meta category="mail"/>
-    <Label-rectangle id="0" width="105mm" height="39mm" round="0mm" x_waste="0mm" y_waste="0mm">
-      <Markup-margin size="3.175mm"/>
-      <Layout nx="2" ny="7" x0="0mm" y0="12mm" dx="105mm" dy="39mm"/>
-    </Label-rectangle>
-    <Alias brand="DECAdry" part="OLW-4786"/>
-  </Template>
-
-  <!-- =================================================================== -->
-  <!-- DECAdry DLW-1787: Mailing Labels.                                   -->
-  <!-- =================================================================== -->
-  <Template brand="DECAdry" part="DLW-1787" size="A4" _description="Mailing Labels">
-    <Meta category="label"/>
-    <Meta category="mail"/>
-    <Label-rectangle id="0" width="70mm" height="35mm" round="0mm" x_waste="0mm" y_waste="0mm">
-      <Markup-margin size="3.2mm"/>
-      <Layout nx="3" ny="8" x0="0mm" y0="8.5mm" dx="70mm" dy="35mm"/>
-    </Label-rectangle>
-    <Alias brand="DECAdry" part="OLW-4787"/>
-  </Template>
-
-  <!-- =================================================================== -->
   <!-- Connect KF10647 Mailing Labels..                                    -->
   <!-- =================================================================== -->
   <Template brand="Connect" part="KF10647" size="A4" _description="Mailing Labels">

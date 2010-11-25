@@ -243,10 +243,6 @@
       <Markup-margin size="5"/>
       <Layout nx="2" ny="5" x0="40" y0="40" dx="269" dy="153"/>
     </Label-rectangle>
-    <Alias brand="DECAdry" part="SCW-2090"/>
-    <Alias brand="DECAdry" part="OCB-3327"/>
-    <Alias brand="DECAdry" part="OCC-3342"/>
-    <Alias brand="DECAdry" part="DAW-327"/>
   </Template>
 
 
