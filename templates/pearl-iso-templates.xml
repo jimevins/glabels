@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Glabels-templates xmlns="http://snaught.com/glabels/3.0/">
+<Glabels-templates xmlns="http://glabels.org/xmlns/2.3/">
 
   <!-- ******************************************************************** -->
   <!-- PEARL products                                                       -->
@@ -491,6 +491,20 @@
       <Layout nx="1" ny="5" x0="15mm" y0="14mm" dx="180mm" dy="55mm"/>
       <Layout nx="1" ny="5" x0="15mm" y0="14mm" dx="180mm" dy="55mm"/>
     </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Sattleford: Elliptical labels, 63.5mm x 42.3mm, 18 per sheet        -->
+  <!-- =================================================================== -->
+
+  <Template brand="Sattleford" part="VM-6084" size="A4" _description="Elliptical labels">
+    <Meta category="label"/>
+    <Meta category="elliptical-label"/>
+    <Meta product_url="http://www.pearl.de/a-VM6084-2204.shtml"/>
+    <Label-ellipse id="0" width="63.5mm" height="42.3mm" waste="0mm">
+      <Markup-margin size="2mm"/>
+      <Layout nx="3" ny="6" x0="7.25mm" y0="11.6mm" dx="66mm" dy="46.3mm"/>
+    </Label-ellipse>
   </Template>
 
   <!-- ******************************************************************** -->

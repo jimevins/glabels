@@ -4,6 +4,7 @@
 
   <Category id="label"            _name="Any label"/>
   <Category id="round-label"      _name="Round labels"/>
+  <Category id="elliptical-label" _name="Elliptical labels"/>
   <Category id="square-label"     _name="Square labels"/>
   <Category id="rectangle-label"  _name="Rectangular labels"/>
   <Category id="card"	          _name="Any card"/>
