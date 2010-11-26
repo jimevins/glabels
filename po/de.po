@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-11-25 21:27+0000\n"
-"PO-Revision-Date: 2010-11-26 12:48+0100\n"
+"POT-Creation-Date: 2010-11-26 14:02+0000\n"
+"PO-Revision-Date: 2010-11-26 15:01+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,174 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
-msgid "Controls maximum number of recent files tracked."
-msgstr "Legt die maximale Anzahl der zuletzt geöffneten Dateien fest."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:2
-msgid "Controls visibility of drawing toolbar."
-msgstr "Legt die Sichtbarkeit der Zeichenwerkzeugleiste fest."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:3
-msgid "Controls visibility of grid."
-msgstr "Legt die Sichtbarkeit des Zeichengitters fest."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:4
-msgid "Controls visibility of main toolbar."
-msgstr "Legt die Sichtbarkeit der Haupt-Werkzeugleiste fest."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:5
-msgid "Controls visibility of markup lines."
-msgstr "Legt die Sichtbarkeit von Markierungslinien fest."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:6
-msgid "Controls visibility of property toolbar."
-msgstr "Legt die Sichtbarkeit der Eigenschaften-Werkzeugleiste fest."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:7
-msgid "Default fill color."
-msgstr "Vorgegebene Füllfarbe."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:8
-msgid "Default font family."
-msgstr "Vorgegebene Schriftfamilie."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:9
-msgid "Default font italic flag."
-msgstr "Vorgegebener Kursiv-Status."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:10
-msgid "Default font size."
-msgstr "Vorgegebene Schriftgröße."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:11
-msgid "Default font weight."
-msgstr "Vorgegebene Schriftstärke."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:12
-msgid "Default line color."
-msgstr "Vorgegebene Linienfarbe."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:13
-msgid "Default line width."
-msgstr "Vorgegebene Linienbreite."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:14
-msgid "Default page size."
-msgstr "Vorgegebene Seitengröße."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:15
-msgid "Default text alignment."
-msgstr "Vorgegebene Textausrichtung."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:16
-msgid "Default text color."
-msgstr "Vorgegebene Textfarbe."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:17
-msgid "Default text line spacing."
-msgstr "Vorgegebener Zeilenabstand des Textes."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:18
-msgid "Maximum recent files."
-msgstr "Maximale Anzahl zuletzt geöffneter Dateien."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:19
-msgid "Recent colors."
-msgstr "Zuletzt benutzte Farben."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:20
-msgid "Recent fonts."
-msgstr "Zuletzt benutzte Schriften."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:21
-msgid "Recent templates."
-msgstr "Zuletzt benutzte Vorlagen."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:22
-msgid "Recently created custom colors."
-msgstr "Zuletzt erstellte benutzerdefinierte Farben."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:23
-msgid "Recently used font families."
-msgstr "Zuletzt benutzte Schriftfamilien."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:24
-msgid "Recently used templates."
-msgstr "Zuletzt benutzte Vorlagen."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:25
-msgid "Show/hide drawing toolbar."
-msgstr "Zeichenwerkzeugleiste anzeigen oder verbergen."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:26
-msgid "Show/hide grid."
-msgstr "Zeichengitter anzeigen oder verbergen."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:27
-msgid "Show/hide main toolbar."
-msgstr "Haupt-Werkzeugleiste anzeigen oder verbergen."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:28
-msgid "Show/hide markup."
-msgstr "Markierungen anzeigen oder verbergen."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:29
-msgid "Show/hide property toolbar."
-msgstr "Eigenschaften-Werkzeugleiste anzeigen oder verbergen."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:30
-msgid "The default color of text for new text objects (0xRRGGBBAA)."
-msgstr "Die vorgegebene Textfarbe für neue Textobjekte (0xRRGGBBAA)."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:31
-msgid "The default fill color new objects (0xRRGGBBAA)."
-msgstr "Die vorgegebene Füllfarbe für neue Objekte (0xRRGGBBAA)."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:32
-msgid "The default font family for new text objects."
-msgstr "Die vorgegebene Schriftfamilie für neue Textobjekte."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:33
-msgid "The default font italic state for new text objects."
-msgstr "Der vorgegebene Kursiv-Status für neue Textobjekte."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:34
-msgid "The default font size for new text objects."
-msgstr "Die vorgegebene Schriftgröße für neue Textobjekte."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:35
-msgid "The default font weight for new text objects."
-msgstr "Die vorgegebene Schriftstärke für neue Textobjekte."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:36
-msgid "The default line color new objects (0xRRGGBBAA)."
-msgstr "Die vorgegebene Linienfarbe für neue Objekte (0xRRGGBBAA)."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:37
-msgid "The default line spacing for new text objects."
-msgstr "Der vorgegebene Zeilenabstand für neue Textobjekte."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:38
-msgid "The default line width for new objects."
-msgstr "Die vorgegebene Linienbreite für neue Objekte."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:39
-msgid "The default text alignment for new text objects."
-msgstr "Die vorgegebene Textausrichtung für neue Textobjekte."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:40
-msgid "The default unit of measurement."
-msgstr "Die vorgegebene Maßeinheit."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:41
-msgid "The preferred page size when searching templates."
-msgstr "Die bevorzugte Seitengröße bei der Vorlagensuche."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:42
-msgid "Units."
-msgstr "Einheiten."
 
 #: ../src/bc-backends.c:81
 msgid "Built-in"
@@ -2608,6 +2440,174 @@ msgstr "auf erster Seite"
 msgid "to:"
 msgstr "bis:"
 
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
+msgid "Controls maximum number of recent files tracked."
+msgstr "Legt die maximale Anzahl der zuletzt geöffneten Dateien fest."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:2
+msgid "Controls visibility of drawing toolbar."
+msgstr "Legt die Sichtbarkeit der Zeichenwerkzeugleiste fest."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:3
+msgid "Controls visibility of grid."
+msgstr "Legt die Sichtbarkeit des Zeichengitters fest."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:4
+msgid "Controls visibility of main toolbar."
+msgstr "Legt die Sichtbarkeit der Haupt-Werkzeugleiste fest."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:5
+msgid "Controls visibility of markup lines."
+msgstr "Legt die Sichtbarkeit von Markierungslinien fest."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:6
+msgid "Controls visibility of property toolbar."
+msgstr "Legt die Sichtbarkeit der Eigenschaften-Werkzeugleiste fest."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:7
+msgid "Default fill color."
+msgstr "Vorgegebene Füllfarbe."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:8
+msgid "Default font family."
+msgstr "Vorgegebene Schriftfamilie."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:9
+msgid "Default font italic flag."
+msgstr "Vorgegebener Kursiv-Status."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:10
+msgid "Default font size."
+msgstr "Vorgegebene Schriftgröße."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:11
+msgid "Default font weight."
+msgstr "Vorgegebene Schriftstärke."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:12
+msgid "Default line color."
+msgstr "Vorgegebene Linienfarbe."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:13
+msgid "Default line width."
+msgstr "Vorgegebene Linienbreite."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:14
+msgid "Default page size."
+msgstr "Vorgegebene Seitengröße."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:15
+msgid "Default text alignment."
+msgstr "Vorgegebene Textausrichtung."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:16
+msgid "Default text color."
+msgstr "Vorgegebene Textfarbe."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:17
+msgid "Default text line spacing."
+msgstr "Vorgegebener Zeilenabstand des Textes."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:18
+msgid "Maximum recent files."
+msgstr "Maximale Anzahl zuletzt geöffneter Dateien."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:19
+msgid "Recent colors."
+msgstr "Zuletzt benutzte Farben."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:20
+msgid "Recent fonts."
+msgstr "Zuletzt benutzte Schriften."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:21
+msgid "Recent templates."
+msgstr "Zuletzt benutzte Vorlagen."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:22
+msgid "Recently created custom colors."
+msgstr "Zuletzt erstellte benutzerdefinierte Farben."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:23
+msgid "Recently used font families."
+msgstr "Zuletzt benutzte Schriftfamilien."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:24
+msgid "Recently used templates."
+msgstr "Zuletzt benutzte Vorlagen."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:25
+msgid "Show/hide drawing toolbar."
+msgstr "Zeichenwerkzeugleiste anzeigen oder verbergen."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:26
+msgid "Show/hide grid."
+msgstr "Zeichengitter anzeigen oder verbergen."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:27
+msgid "Show/hide main toolbar."
+msgstr "Haupt-Werkzeugleiste anzeigen oder verbergen."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:28
+msgid "Show/hide markup."
+msgstr "Markierungen anzeigen oder verbergen."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:29
+msgid "Show/hide property toolbar."
+msgstr "Eigenschaften-Werkzeugleiste anzeigen oder verbergen."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:30
+msgid "The default color of text for new text objects (0xRRGGBBAA)."
+msgstr "Die vorgegebene Textfarbe für neue Textobjekte (0xRRGGBBAA)."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:31
+msgid "The default fill color new objects (0xRRGGBBAA)."
+msgstr "Die vorgegebene Füllfarbe für neue Objekte (0xRRGGBBAA)."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:32
+msgid "The default font family for new text objects."
+msgstr "Die vorgegebene Schriftfamilie für neue Textobjekte."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:33
+msgid "The default font italic state for new text objects."
+msgstr "Der vorgegebene Kursiv-Status für neue Textobjekte."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:34
+msgid "The default font size for new text objects."
+msgstr "Die vorgegebene Schriftgröße für neue Textobjekte."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:35
+msgid "The default font weight for new text objects."
+msgstr "Die vorgegebene Schriftstärke für neue Textobjekte."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:36
+msgid "The default line color new objects (0xRRGGBBAA)."
+msgstr "Die vorgegebene Linienfarbe für neue Objekte (0xRRGGBBAA)."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:37
+msgid "The default line spacing for new text objects."
+msgstr "Der vorgegebene Zeilenabstand für neue Textobjekte."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:38
+msgid "The default line width for new objects."
+msgstr "Die vorgegebene Linienbreite für neue Objekte."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:39
+msgid "The default text alignment for new text objects."
+msgstr "Die vorgegebene Textausrichtung für neue Textobjekte."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:40
+msgid "The default unit of measurement."
+msgstr "Die vorgegebene Maßeinheit."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:41
+msgid "The preferred page size when searching templates."
+msgstr "Die bevorzugte Seitengröße bei der Vorlagensuche."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:42
+msgid "Units."
+msgstr "Einheiten."
+
 #: ../data/desktop/glabels-3.0.desktop.in.h:1
 msgid "Create labels, business cards and media covers"
 msgstr "Erstellen von Etiketten, Visitenkarten und Medien-Covern"
@@ -2758,21 +2758,26 @@ msgstr "Visitenkarten"
 msgid "CD/DVD or other media"
 msgstr "CD/DVD oder andere Medien"
 
-#: ../templates/categories.xml.h:5
+#. ===================================================================
+#: ../templates/categories.xml.h:5 ../templates/pearl-iso-templates.xml.h:28
+msgid "Elliptical labels"
+msgstr "Elliptische Etiketten"
+
+#: ../templates/categories.xml.h:6
 msgid "Mailing/shipping products"
 msgstr "Post- und Versandprodukte"
 
 #. ********************************************************************
-#: ../templates/categories.xml.h:6 ../templates/jac-iso-templates.xml.h:4
+#: ../templates/categories.xml.h:7 ../templates/jac-iso-templates.xml.h:4
 msgid "Rectangular labels"
 msgstr "Rechteckige Etiketten"
 
 #. ===================================================================
-#: ../templates/categories.xml.h:7 ../templates/pearl-iso-templates.xml.h:52
+#: ../templates/categories.xml.h:8 ../templates/pearl-iso-templates.xml.h:54
 msgid "Round labels"
 msgstr "Runde Etiketten"
 
-#: ../templates/categories.xml.h:8
+#: ../templates/categories.xml.h:9
 msgid "Square labels"
 msgstr "Quadratische Etiketten"
 
@@ -3207,7 +3212,7 @@ msgstr "Inkjet/Laseretiketten 70x37mm"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:34
-#: ../templates/pearl-iso-templates.xml.h:60
+#: ../templates/pearl-iso-templates.xml.h:62
 msgid "Self-adhesive labels"
 msgstr "Selbstklebende Etiketten"
 
@@ -3272,82 +3277,82 @@ msgid "DVD inlet"
 msgstr "DVD-Einleger"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:28
+#: ../templates/pearl-iso-templates.xml.h:30
 msgid "Floppy disk labels"
 msgstr "Diskettenaufkleber"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:30
+#: ../templates/pearl-iso-templates.xml.h:32
 msgid "Foldable business cards"
 msgstr "Faltbare Visitenkarten"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:32
+#: ../templates/pearl-iso-templates.xml.h:34
 msgid "Foldable business cards glossy/dull"
 msgstr "Faltbare Visitenkarten glänzend/matt"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:34
+#: ../templates/pearl-iso-templates.xml.h:36
 msgid "Labels A4"
 msgstr "Etiketten A4"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:36
+#: ../templates/pearl-iso-templates.xml.h:38
 msgid "Labels A5"
 msgstr "Etiketten A5"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:38
+#: ../templates/pearl-iso-templates.xml.h:40
 msgid "Labels A6"
 msgstr "Etiketten A6"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:40
+#: ../templates/pearl-iso-templates.xml.h:42
 msgid "Membership cards"
 msgstr "Club-Karten"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:42
+#: ../templates/pearl-iso-templates.xml.h:44
 msgid "Membership cards, both sides printable"
 msgstr "Club-Karten beidseitig"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:44
+#: ../templates/pearl-iso-templates.xml.h:46
 msgid "Name plates"
 msgstr "Namensschilder"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:46
+#: ../templates/pearl-iso-templates.xml.h:48
 msgid "Passport photo labels glossy"
 msgstr "Passbild-Etiketten glänzend"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:48
+#: ../templates/pearl-iso-templates.xml.h:50
 msgid "Photo labels"
 msgstr "Fotoetiketten"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:50
+#: ../templates/pearl-iso-templates.xml.h:52
 msgid "Photo labels semiglossy"
 msgstr "Fotoetiketten semigloss"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:54
+#: ../templates/pearl-iso-templates.xml.h:56
 msgid "SD card labels"
 msgstr "SD-Karten-Etiketten"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:56
+#: ../templates/pearl-iso-templates.xml.h:58
 msgid "Self-adhesive film transparent"
 msgstr "Selbstklebende Folie transparent"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:58
+#: ../templates/pearl-iso-templates.xml.h:60
 msgid "Self-adhesive film weatherproof"
 msgstr "Selbstklebende Folie wetterfest"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:62
+#: ../templates/pearl-iso-templates.xml.h:64
 msgid "Self-adhesive window film"
 msgstr "Selbstklebende Fensterfolie"
 
