@@ -63,9 +63,9 @@
     <property name="page_increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment18">
+    <property name="value">1</property>
     <property name="lower">1</property>
     <property name="upper">2</property>
-    <property name="value">1</property>
     <property name="step_increment">1</property>
     <property name="page_increment">1</property>
   </object>
@@ -145,14 +145,14 @@
     <property name="page_increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment2">
-    <property name="upper">100</property>
     <property name="value">1</property>
+    <property name="upper">100</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment1">
-    <property name="upper">100</property>
     <property name="value">1</property>
+    <property name="upper">100</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
@@ -185,7 +185,6 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
           <object class="GtkVBox" id="name_page">
             <property name="visible">True</property>
             <property name="border_width">18</property>
-            <property name="orientation">vertical</property>
             <property name="spacing">24</property>
             <child>
               <object class="GtkLabel" id="label1">
@@ -367,7 +366,6 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
                       </object>
                       <packing>
                         <property name="expand">False</property>
-                        <property name="fill">True</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
@@ -395,8 +393,6 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
                 </child>
               </object>
               <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -419,7 +415,6 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
           <object class="GtkVBox" id="pg_size_page">
             <property name="visible">True</property>
             <property name="border_width">18</property>
-            <property name="orientation">vertical</property>
             <property name="spacing">24</property>
             <child>
               <object class="GtkLabel" id="label43">
@@ -607,7 +602,6 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
           <object class="GtkVBox" id="shape_page">
             <property name="visible">True</property>
             <property name="border_width">18</property>
-            <property name="orientation">vertical</property>
             <property name="spacing">24</property>
             <child>
               <object class="GtkLabel" id="label13">
@@ -624,7 +618,6 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
             <child>
               <object class="GtkVBox" id="vbox7">
                 <property name="visible">True</property>
-                <property name="orientation">vertical</property>
                 <property name="spacing">6</property>
                 <child>
                   <object class="GtkRadioButton" id="shape_rect_radio">
@@ -690,8 +683,6 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
                 </child>
               </object>
               <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -714,7 +705,6 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
           <object class="GtkVBox" id="rect_size_page">
             <property name="visible">True</property>
             <property name="border_width">18</property>
-            <property name="orientation">vertical</property>
             <property name="spacing">24</property>
             <child>
               <object class="GtkLabel" id="label14">
@@ -1005,8 +995,6 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
                     <property name="yalign">0</property>
                   </object>
                   <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -1036,7 +1024,6 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
           <object class="GtkVBox" id="ellipse_size_page">
             <property name="visible">True</property>
             <property name="border_width">18</property>
-            <property name="orientation">vertical</property>
             <property name="spacing">24</property>
             <child>
               <object class="GtkLabel" id="label3">
@@ -1145,7 +1132,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
                       <object class="GtkSpinButton" id="ellipse_w_spin">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="invisible_char">&#x25CF;</property>
+                        <property name="invisible_char">●</property>
                         <property name="adjustment">adjustment3</property>
                         <property name="climb_rate">0.0099999997764800008</property>
                       </object>
@@ -1159,7 +1146,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
                       <object class="GtkSpinButton" id="ellipse_h_spin">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="invisible_char">&#x25CF;</property>
+                        <property name="invisible_char">●</property>
                         <property name="adjustment">adjustment4</property>
                         <property name="climb_rate">0.0099999997764800008</property>
                       </object>
@@ -1175,7 +1162,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
                       <object class="GtkSpinButton" id="ellipse_waste_spin">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="invisible_char">&#x25CF;</property>
+                        <property name="invisible_char">●</property>
                         <property name="adjustment">adjustment6</property>
                         <property name="climb_rate">0.0099999997764800008</property>
                       </object>
@@ -1204,7 +1191,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
                       <object class="GtkSpinButton" id="ellipse_margin_spin">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="invisible_char">&#x25CF;</property>
+                        <property name="invisible_char">●</property>
                         <property name="adjustment">adjustment8</property>
                         <property name="climb_rate">0.0099999997764800008</property>
                       </object>
@@ -1274,7 +1261,6 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
           <object class="GtkVBox" id="round_size_page">
             <property name="visible">True</property>
             <property name="border_width">18</property>
-            <property name="orientation">vertical</property>
             <property name="spacing">24</property>
             <child>
               <object class="GtkLabel" id="label23">
@@ -1436,8 +1422,6 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
                     <property name="yalign">0</property>
                   </object>
                   <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -1467,7 +1451,6 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
           <object class="GtkVBox" id="cd_size_page">
             <property name="visible">True</property>
             <property name="border_width">18</property>
-            <property name="orientation">vertical</property>
             <property name="spacing">24</property>
             <child>
               <object class="GtkLabel" id="label32">
@@ -1758,8 +1741,6 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
                     <property name="yalign">0</property>
                   </object>
                   <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -1789,7 +1770,6 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
           <object class="GtkVBox" id="nlayouts_page">
             <property name="visible">True</property>
             <property name="border_width">18</property>
-            <property name="orientation">vertical</property>
             <property name="spacing">24</property>
             <child>
               <object class="GtkLabel" id="label9">
@@ -1814,14 +1794,11 @@ The second example illustrates when two layouts are needed.</property>
                 <child>
                   <object class="GtkVBox" id="vbox4">
                     <property name="visible">True</property>
-                    <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkImage" id="nlayouts_image1">
                         <property name="visible">True</property>
                       </object>
                       <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
                         <property name="position">0</property>
                       </packing>
                     </child>
@@ -1840,22 +1817,17 @@ one layout.</property>
                     </child>
                   </object>
                   <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
                   <object class="GtkVBox" id="vbox5">
                     <property name="visible">True</property>
-                    <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkImage" id="nlayouts_image2">
                         <property name="visible">True</property>
                       </object>
                       <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
                         <property name="position">0</property>
                       </packing>
                     </child>
@@ -1874,8 +1846,6 @@ two layouts.</property>
                     </child>
                   </object>
                   <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -1884,6 +1854,16 @@ two layouts.</property>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
                 <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label6">
+                <property name="visible">True</property>
+                <property name="xalign">0</property>
+                <property name="label" translatable="yes">Note: if more than 2 layouts are required, the template must be edited manually.</property>
+              </object>
+              <packing>
+                <property name="position">2</property>
               </packing>
             </child>
             <child>
@@ -1921,7 +1901,7 @@ two layouts.</property>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="position">2</property>
+                <property name="position">3</property>
               </packing>
             </child>
           </object>
@@ -1943,7 +1923,6 @@ two layouts.</property>
           <object class="GtkVBox" id="layout_page">
             <property name="visible">True</property>
             <property name="border_width">18</property>
-            <property name="orientation">vertical</property>
             <property name="spacing">12</property>
             <child>
               <object class="GtkLabel" id="label48">
@@ -2340,15 +2319,12 @@ two layouts.</property>
                         <property name="label">  </property>
                       </object>
                       <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
                         <property name="position">0</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkVBox" id="vbox15">
                         <property name="visible">True</property>
-                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkVBox" id="mini_preview_vbox">
@@ -2358,8 +2334,6 @@ two layouts.</property>
                             </child>
                           </object>
                           <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
                             <property name="position">0</property>
                           </packing>
                         </child>
@@ -2387,8 +2361,6 @@ two layouts.</property>
                     </child>
                   </object>
                   <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
