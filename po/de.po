@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-11-26 14:02+0000\n"
-"PO-Revision-Date: 2010-11-26 15:01+0100\n"
+"POT-Creation-Date: 2010-11-26 15:42+0000\n"
+"PO-Revision-Date: 2010-11-26 17:16+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1817,7 +1817,7 @@ msgstr "Punkte"
 
 #. [LGL_UNITS_INCH]
 #: ../libglabels/units.c:66 ../data/ui/object-editor.ui.h:39
-#: ../data/ui/template-designer.ui.h:65
+#: ../data/ui/template-designer.ui.h:66
 msgid "inches"
 msgstr "Zoll"
 
@@ -1905,7 +1905,7 @@ msgid "Custom"
 msgstr "Benutzerdefiniert"
 
 #: ../data/ui/media-select.ui.h:4 ../data/ui/new-label-dialog.ui.h:6
-#: ../data/ui/template-designer.ui.h:45
+#: ../data/ui/template-designer.ui.h:46
 msgid "Page size:"
 msgstr "Seitenformat:"
 
@@ -1941,7 +1941,7 @@ msgstr "Anordnung:"
 msgid "Normal"
 msgstr "Normal"
 
-#: ../data/ui/new-label-dialog.ui.h:7 ../data/ui/template-designer.ui.h:46
+#: ../data/ui/new-label-dialog.ui.h:7 ../data/ui/template-designer.ui.h:47
 msgid "Part #:"
 msgstr "Nummer:"
 
@@ -2063,7 +2063,7 @@ msgid "Style:"
 msgstr "Stil:"
 
 #: ../data/ui/object-editor.ui.h:30 ../data/ui/prefs-dialog.ui.h:20
-#: ../data/ui/template-designer.ui.h:64
+#: ../data/ui/template-designer.ui.h:65
 msgid "Width:"
 msgstr "Breite:"
 
@@ -2311,18 +2311,26 @@ msgid "Layout #2"
 msgstr "Layout #2"
 
 #: ../data/ui/template-designer.ui.h:42
+msgid ""
+"Note: if more than 2 layouts are required, the template must be edited "
+"manually."
+msgstr ""
+"Hinweis: Falls mehr als zwei Layouts erforderlich sein sollten, muss die "
+"Vorlage manuell nachbearbeitet werden."
+
+#: ../data/ui/template-designer.ui.h:43
 msgid "Number across (nx):"
 msgstr "Anzahl horizontal (nx):"
 
-#: ../data/ui/template-designer.ui.h:43
+#: ../data/ui/template-designer.ui.h:44
 msgid "Number down (ny):"
 msgstr "Anzahl vertikal (ny):"
 
-#: ../data/ui/template-designer.ui.h:44
+#: ../data/ui/template-designer.ui.h:45
 msgid "Number of layouts:"
 msgstr "Anzahl der Layouts:"
 
-#: ../data/ui/template-designer.ui.h:47
+#: ../data/ui/template-designer.ui.h:48
 msgid ""
 "Please enter the following identifying information about the template "
 "stationery."
@@ -2330,18 +2338,18 @@ msgstr ""
 "Bitte geben Sie die folgenden Identifizierungsinformationen über die Vorlage "
 "an."
 
-#: ../data/ui/template-designer.ui.h:48
+#: ../data/ui/template-designer.ui.h:49
 msgid "Please enter the following layout information."
 msgstr "Bitte geben Sie die folgenden Layout-Informationen ein."
 
-#: ../data/ui/template-designer.ui.h:49
+#: ../data/ui/template-designer.ui.h:50
 msgid ""
 "Please enter the following size parameters of a single label in your template."
 msgstr ""
 "Bitte geben Sie die folgenden Größenwerte des einzelnen Etiketts in Ihrer "
 "Vorlage an."
 
-#: ../data/ui/template-designer.ui.h:50
+#: ../data/ui/template-designer.ui.h:51
 msgid ""
 "Please enter the following size parameters of a single label or card in your "
 "template."
@@ -2349,27 +2357,27 @@ msgstr ""
 "Bitte geben Sie die folgenden Größenwerte des einzelnen Etiketts oder der "
 "einzelnen Karte in Ihrer Vorlage an."
 
-#: ../data/ui/template-designer.ui.h:51
+#: ../data/ui/template-designer.ui.h:52
 msgid "Please select the basic shape of the labels or cards."
 msgstr "Bitte wählen Sie die Grundform der Etiketten oder Karten aus."
 
-#: ../data/ui/template-designer.ui.h:52
+#: ../data/ui/template-designer.ui.h:53
 msgid "Please select the page size of the template stationery."
 msgstr "Bitte wählen Sie das Papierformat der Vorlage aus."
 
-#: ../data/ui/template-designer.ui.h:53
+#: ../data/ui/template-designer.ui.h:54
 msgid "Print test sheet"
 msgstr "Textseite drucken"
 
-#: ../data/ui/template-designer.ui.h:54
+#: ../data/ui/template-designer.ui.h:55
 msgid "Rectangular or square (can have rounded corners)"
 msgstr "Rechteckig oder quadratisch (auch mit abgerundeten Ecken)"
 
-#: ../data/ui/template-designer.ui.h:55
+#: ../data/ui/template-designer.ui.h:56
 msgid "Round"
 msgstr "Rund"
 
-#: ../data/ui/template-designer.ui.h:56
+#: ../data/ui/template-designer.ui.h:57
 msgid ""
 "Templates needing\n"
 "two layouts."
@@ -2377,7 +2385,7 @@ msgstr ""
 "Vorlagen benötigen\n"
 "zwei Layouts."
 
-#: ../data/ui/template-designer.ui.h:58
+#: ../data/ui/template-designer.ui.h:59
 msgid ""
 "Templates needing only\n"
 "one layout."
@@ -2385,11 +2393,11 @@ msgstr ""
 "Vorlagen benötigen nur\n"
 "ein Layout."
 
-#: ../data/ui/template-designer.ui.h:60
+#: ../data/ui/template-designer.ui.h:61
 msgid "Vertical pitch (dy):"
 msgstr "Vertikaler Abstand (dy):"
 
-#: ../data/ui/template-designer.ui.h:61
+#: ../data/ui/template-designer.ui.h:62
 msgid ""
 "Welcome to the gLabels Template Designer.\n"
 "\n"
