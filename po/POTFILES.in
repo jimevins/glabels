@@ -1,6 +1,5 @@
 # List of source files containing translatable strings.
 
-data/schemas/org.gnome.glabels-3.gschema.xml.in.in
 src/bc-backends.c
 src/bc-backends.h
 src/bc-builtin.c
@@ -216,6 +215,8 @@ libglabels/xml-template.h
 [type: gettext/glade]data/ui/property-bar.ui
 [type: gettext/glade]data/ui/template-designer.ui
 [type: gettext/glade]data/ui/print-op-dialog-custom-widget.ui
+
+data/schemas/org.gnome.glabels-3.gschema.xml.in.in
 
 [type: gettext/ini]data/desktop/glabels-3.0.desktop.in
 

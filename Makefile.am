@@ -15,7 +15,7 @@ EXTRA_DIST = \
 	COPYING.README_FIRST \
 	COPYING \
 	COPYING-DOCS \
-	COPYING-LIBGLABELS \
+	COPYING-LIBS \
 	COPYING-TEMPLATES \
 	AUTHORS \
 	ChangeLog \
@@ -32,7 +32,9 @@ EXTRA_DIST = \
 
 DISTCLEANFILES = gnome-doc-utils.make
 
-DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
+DISTCHECK_CONFIGURE_FLAGS = \
+	--disable-scrollkeeper	\
+	--enable-gtk-doc
 
 dist-hook:
 	@if test -d "$(srcdir)/.git"; \

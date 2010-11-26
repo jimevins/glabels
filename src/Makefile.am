@@ -1,14 +1,16 @@
 
 SUBDIRS= \
-	../libglabels \
-	../libglbarcode \
 	pixmaps \
 	cursors
 
 bin_PROGRAMS = glabels-3 glabels-3-batch
 
 INCLUDES = \
+	-I$(top_srcdir)						\
+	-I$(top_builddir)					\
+	-I$(top_srcdir)/libglabels				\
 	-I$(top_builddir)/libglabels				\
+	-I$(top_srcdir)/libglbarcode				\
 	-I$(top_builddir)/libglbarcode				\
 	$(GLABELS_CFLAGS) 					\
 	$(LIBEBOOK_CFLAGS)					\

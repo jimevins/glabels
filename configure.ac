@@ -1,8 +1,24 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_PREREQ(2.63)
 
-AC_INIT([glabels],[2.3.0],[http://sourceforge.net/tracker/?func=add&group_id=46122&atid=445116])
+dnl ---------------------------------------------------------------------------
+dnl - GLABELS version
+dnl ---------------------------------------------------------------------------
+m4_define([glabels_major_version], [2])
+m4_define([glabels_minor_version], [3])
+m4_define([glabels_micro_version], [1])
+
+m4_define([glabels_version],
+          [glabels_major_version.glabels_minor_version.glabels_micro_version])
+
+dnl ---------------------------------------------------------------------------
+
+
+AC_PREREQ(2.64)
+AC_INIT([glabels],[glabels_version],
+	[http://bugzilla.gnome.org/enter_bug.cgi?product=glabels],
+	[glabels])
+
 AC_CONFIG_SRCDIR(src/glabels.c)
 
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
@@ -31,9 +47,8 @@ GNOME_COMPILE_WARNINGS
 
 AC_PATH_PROG(GLIB_GENMARSHAL,         glib-genmarshal)
 AC_PATH_PROG(GDK_PIXBUF_CSOURCE,      gdk-pixbuf-csource)
-AC_PATH_PROG(UPDATE_MIME_DATABASE,    update-mime-database)
-AC_PATH_PROG(UPDATE_DESKTOP_DATABASE, update-desktop-database)
 AC_PATH_PROG(GTK_UPDATE_ICON_CACHE,   gtk-update-icon-cache)
+
 
 dnl ---------------------------------------------------------------------------
 dnl - GLABELS branch
@@ -285,18 +300,6 @@ if test "x$enable_deprecations" = "xyes"; then
 "
    AC_SUBST(DISABLE_DEPRECATED_CFLAGS)
 fi
-
-
-dnl ---------------------------------------------------------------------------
-dnl - Disable updating of mime and desktop databases
-dnl ---------------------------------------------------------------------------
-AC_ARG_ENABLE(update-mimedb, AS_HELP_STRING([--disable-update-mimedb],[disable the update-mime-database after install [default=no]]),,
-              enable_update_mimedb=yes)
-AM_CONDITIONAL(ENABLE_UPDATE_MIMEDB, test x$enable_update_mimedb = xyes)
-
-AC_ARG_ENABLE(update-desktopdb, AS_HELP_STRING([--disable-update-desktopdb],[disable the update-desktop-database after install [default=no]]),,
-              enable_update_desktopdb=yes)
-AM_CONDITIONAL(ENABLE_UPDATE_DESKTOPDB, test x$enable_update_desktopdb = xyes)
 
 
 dnl ---------------------------------------------------------------------------
