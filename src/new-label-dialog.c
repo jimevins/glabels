@@ -460,6 +460,7 @@ set_info (glNewLabelDialog  *this,
                 escaped_url = g_markup_escape_text (vendor->url, -1);
                 markup = g_strdup_printf ("<a href='%s'>%s</a>", escaped_url, vendor->name);
                 gtk_label_set_markup (GTK_LABEL (this->priv->vendor_label), markup);
+                gtk_widget_set_tooltip_text (this->priv->vendor_label, escaped_url);
                 g_free (escaped_url);
                 g_free (markup);
         }
@@ -467,6 +468,7 @@ set_info (glNewLabelDialog  *this,
         {
                 /* FIXME: Using set_markup instead of set_text to clear out previous link. */
                 gtk_label_set_markup (GTK_LABEL (this->priv->vendor_label), template->brand);
+                gtk_widget_set_has_tooltip (this->priv->vendor_label, FALSE);
         }
 
         if ( template->product_url )
@@ -477,6 +479,7 @@ set_info (glNewLabelDialog  *this,
                 escaped_url = g_markup_escape_text (template->product_url, -1);
                 markup = g_strdup_printf ("<a href='%s'>%s</a>", escaped_url, template->part);
                 gtk_label_set_markup (GTK_LABEL (this->priv->part_label), markup);
+                gtk_widget_set_tooltip_text (this->priv->part_label, escaped_url);
                 g_free (escaped_url);
                 g_free (markup);
         }
@@ -484,6 +487,7 @@ set_info (glNewLabelDialog  *this,
         {
                 /* FIXME: Using set_markup instead of set_text to clear out previous link. */
                 gtk_label_set_markup (GTK_LABEL (this->priv->part_label), template->part);
+                gtk_widget_set_has_tooltip (this->priv->part_label, FALSE);
         }
 
         list = lgl_db_get_similar_template_name_list (name);
