@@ -92,6 +92,9 @@ static gboolean object_at                   (glLabelObject       *object,
 static void     draw_handles                (glLabelObject       *object,
                                              cairo_t             *cr);
 
+static void     create_alt_msg_path         (cairo_t             *cr,
+                                             gchar               *text);
+
 
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
@@ -423,8 +426,6 @@ draw_object (glLabelObject *object,
         gdouble               x0, y0;
         cairo_matrix_t        matrix;
         lglBarcode           *gbc;
-        PangoLayout          *layout;
-        PangoFontDescription *desc;
         gchar                *text;
         glTextNode           *text_node;
         glLabelBarcodeStyle  *style;
@@ -458,36 +459,15 @@ draw_object (glLabelObject *object,
 
         cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (color));
 
-        if (gbc == NULL) {
-
-                layout = pango_cairo_create_layout (cr);
-
-                desc = pango_font_description_new ();
-                pango_font_description_set_family (desc, GL_BARCODE_FONT_FAMILY);
-                pango_font_description_set_size   (desc, 12 * PANGO_SCALE * FONT_SCALE);
-                pango_layout_set_font_description (layout, desc);
-                pango_font_description_free       (desc);
-
-                if (text == NULL || *text == '\0')
-                {
-                        pango_layout_set_text (layout, _("Barcode data empty"), -1);
-                }
-                else
-                {
-                        pango_layout_set_text (layout, _("Invalid barcode data"), -1);
-                }
-
-                cairo_move_to (cr, 0, 0);
-                pango_cairo_show_layout (cr, layout);
-
-                g_object_unref (layout);
-
-        } else {
-
+        if (gbc == NULL)
+        {
+                create_alt_msg_path (cr, text);
+                cairo_fill (cr);
+        }
+        else
+        {
                 lgl_barcode_render_to_cairo (gbc, cr);
-
                 lgl_barcode_free (gbc);
-
         }
 
         g_free (text);
@@ -531,7 +511,11 @@ object_at (glLabelObject *object,
                                                        style->checksum_flag,
                                                        w, h,
                                                        text);
-                if ( gbc )
+                if ( gbc == NULL )
+                {
+                        create_alt_msg_path (cr, text);
+                }
+                else
                 {
                         lgl_barcode_render_to_cairo_path (gbc, cr);
                         lgl_barcode_free (gbc);
@@ -588,6 +572,40 @@ draw_handles (glLabelObject     *object,
         cairo_restore (cr);
 
         gl_label_object_draw_handles_box (object, cr);
+}
+
+
+/*****************************************************************************/
+/* Create a cairo path with apropos message.                                 */
+/*****************************************************************************/
+static void
+create_alt_msg_path (cairo_t *cr,
+                     gchar   *text)
+{
+        PangoLayout          *layout;
+        PangoFontDescription *desc;
+
+        layout = pango_cairo_create_layout (cr);
+
+        desc = pango_font_description_new ();
+        pango_font_description_set_family (desc, GL_BARCODE_FONT_FAMILY);
+        pango_font_description_set_size   (desc, 12 * PANGO_SCALE * FONT_SCALE);
+        pango_layout_set_font_description (layout, desc);
+        pango_font_description_free       (desc);
+
+        if (text == NULL || *text == '\0')
+        {
+                pango_layout_set_text (layout, _("Barcode data empty"), -1);
+        }
+        else
+        {
+                pango_layout_set_text (layout, _("Invalid barcode data"), -1);
+        }
+
+        cairo_move_to (cr, 0, 0);
+        pango_cairo_layout_path (cr, layout);
+
+        g_object_unref (layout);
 }
 
 
