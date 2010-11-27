@@ -427,9 +427,7 @@ set_object (glObjectEditor  *editor,
                 gtk_widget_set_sensitive (editor->priv->title_image, TRUE);
                 gtk_widget_set_sensitive (editor->priv->title_label, TRUE);
 
-                editor->priv->stop_signals = TRUE;
                 gtk_widget_show (editor->priv->notebook);
-                editor->priv->stop_signals = FALSE;
 
                 /* if the old active page is no longer visible, set to 1st visible page. */
                 new_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (editor->priv->notebook));
@@ -756,9 +754,6 @@ object_changed_cb (glLabelObject  *object,
 
         gl_debug (DEBUG_EDITOR, "BEGIN");
 
-        if (editor->priv->stop_signals) return;
-        editor->priv->stop_signals = TRUE;
-
 
         gl_label_object_get_position (object, &x, &y);
         gl_object_editor_set_position (editor, x, y);
@@ -872,8 +867,6 @@ object_changed_cb (glLabelObject  *object,
         gl_color_node_free (&shadow_color_node);
 
 
-        editor->priv->stop_signals = FALSE;
-
         gl_debug (DEBUG_EDITOR, "END");
 }
 
@@ -910,8 +903,8 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
 
         gl_debug (DEBUG_EDITOR, "BEGIN");
 
-        if (editor->priv->stop_signals) return;
-        editor->priv->stop_signals = TRUE;
+
+        g_signal_handlers_block_by_func (G_OBJECT (object), object_changed_cb, editor);
 
 
         gl_object_editor_get_position (editor, &x, &y);
@@ -1023,7 +1016,7 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
         gl_color_node_free (&shadow_color_node);
 
 
-        editor->priv->stop_signals = FALSE;
+        g_signal_handlers_unblock_by_func (G_OBJECT (object), object_changed_cb, editor);
 
         gl_debug (DEBUG_EDITOR, "END");
 }
@@ -1040,8 +1033,7 @@ gl_object_editor_size_changed_cb (glObjectEditor *editor)
 
         gl_debug (DEBUG_EDITOR, "BEGIN");
 
-        if (editor->priv->stop_signals) return;
-        editor->priv->stop_signals = TRUE;
+        g_signal_handlers_block_by_func (G_OBJECT (object), object_changed_cb, editor);
 
 
         if ( GL_IS_LABEL_LINE (object) )
@@ -1056,7 +1048,7 @@ gl_object_editor_size_changed_cb (glObjectEditor *editor)
         gl_label_object_set_size (object, w, h, TRUE);
 
 
-        editor->priv->stop_signals = FALSE;
+        g_signal_handlers_unblock_by_func (G_OBJECT (object), object_changed_cb, editor);
 
         gl_debug (DEBUG_EDITOR, "END");
 }

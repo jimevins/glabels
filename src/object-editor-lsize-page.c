@@ -99,11 +99,11 @@ gl_object_editor_prepare_lsize_page (glObjectEditor       *editor)
 
 	/* Connect signals */
 	g_signal_connect_swapped (G_OBJECT (editor->priv->lsize_r_spin),
-				  "changed",
+				  "value-changed",
 				  G_CALLBACK (gl_object_editor_size_changed_cb),
 				  G_OBJECT (editor));
 	g_signal_connect_swapped (G_OBJECT (editor->priv->lsize_theta_spin),
-				  "changed",
+				  "value-changed",
 				  G_CALLBACK (gl_object_editor_size_changed_cb),
 				  G_OBJECT (editor));
 
@@ -123,7 +123,12 @@ gl_object_editor_set_lsize (glObjectEditor      *editor,
 
 	gl_debug (DEBUG_EDITOR, "START");
 
-        editor->priv->stop_signals = TRUE;
+
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->lsize_r_spin),
+                                         gl_object_editor_size_changed_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->lsize_theta_spin),
+                                         gl_object_editor_size_changed_cb, editor);
+
 
 	/* save a copy in internal units */
 	editor->priv->dx = dx;
@@ -143,7 +148,12 @@ gl_object_editor_set_lsize (glObjectEditor      *editor,
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->lsize_theta_spin),
 				   theta);
 
-        editor->priv->stop_signals = FALSE;
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->lsize_r_spin),
+                                           gl_object_editor_size_changed_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->lsize_theta_spin),
+                                           gl_object_editor_size_changed_cb, editor);
+
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -161,30 +171,35 @@ gl_object_editor_set_max_lsize (glObjectEditor      *editor,
 
 	gl_debug (DEBUG_EDITOR, "START");
 
-        if (editor->priv->lsize_page_vbox)
-        {
 
-                editor->priv->stop_signals = TRUE;
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->lsize_r_spin),
+                                         gl_object_editor_size_changed_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->lsize_theta_spin),
+                                         gl_object_editor_size_changed_cb, editor);
 
-                /* save a copy in internal units */
-                editor->priv->dx_max = dx_max;
-                editor->priv->dy_max = dy_max;
 
-                /* convert internal units to displayed units */
-                gl_debug (DEBUG_EDITOR, "internal dx_max,dy_max = %g, %g", dx_max, dy_max);
-                dx_max *= editor->priv->units_per_point;
-                dy_max *= editor->priv->units_per_point;
-                gl_debug (DEBUG_EDITOR, "display dx_max,dy_max = %g, %g", dx_max, dy_max);
+        /* save a copy in internal units */
+        editor->priv->dx_max = dx_max;
+        editor->priv->dy_max = dy_max;
 
-                /* Set widget values */
-                tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->lsize_r_spin));
-                gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->lsize_r_spin),
-                                           0.0, 2.0*LENGTH (dx_max, dy_max));
-                gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->lsize_r_spin), tmp);
+        /* convert internal units to displayed units */
+        gl_debug (DEBUG_EDITOR, "internal dx_max,dy_max = %g, %g", dx_max, dy_max);
+        dx_max *= editor->priv->units_per_point;
+        dy_max *= editor->priv->units_per_point;
+        gl_debug (DEBUG_EDITOR, "display dx_max,dy_max = %g, %g", dx_max, dy_max);
 
-                editor->priv->stop_signals = FALSE;
+        /* Set widget values */
+        tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->lsize_r_spin));
+        gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->lsize_r_spin),
+                                   0.0, 2.0*LENGTH (dx_max, dy_max));
+        gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->lsize_r_spin), tmp);
 
-        }
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->lsize_r_spin),
+                                           gl_object_editor_size_changed_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->lsize_theta_spin),
+                                           gl_object_editor_size_changed_cb, editor);
+
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -233,6 +248,13 @@ lsize_prefs_changed_cb (glObjectEditor *editor)
 
 	gl_debug (DEBUG_EDITOR, "START");
 
+
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->lsize_r_spin),
+                                         gl_object_editor_size_changed_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->lsize_theta_spin),
+                                         gl_object_editor_size_changed_cb, editor);
+
+
         /* Get new configuration information */
         units = gl_prefs_model_get_units (gl_prefs);
         units_string = lgl_units_get_name (units);
@@ -241,12 +263,8 @@ lsize_prefs_changed_cb (glObjectEditor *editor)
         digits = gl_units_util_get_precision (units);
 
 	/* Update characteristics of r_spin */
-        editor->priv->stop_signals = TRUE;
-	gtk_spin_button_set_digits (GTK_SPIN_BUTTON(editor->priv->lsize_r_spin),
-				    digits);
-	gtk_spin_button_set_increments (GTK_SPIN_BUTTON(editor->priv->lsize_r_spin),
-					climb_rate, 0);
-        editor->priv->stop_signals = FALSE;
+	gtk_spin_button_set_digits (GTK_SPIN_BUTTON(editor->priv->lsize_r_spin), digits);
+	gtk_spin_button_set_increments (GTK_SPIN_BUTTON(editor->priv->lsize_r_spin), climb_rate, 0);
 
 	/* Update r_units_label */
 	gtk_label_set_text (GTK_LABEL(editor->priv->lsize_r_units_label),
@@ -259,6 +277,13 @@ lsize_prefs_changed_cb (glObjectEditor *editor)
 	gl_object_editor_set_max_lsize (editor,
 					editor->priv->dx_max,
 					editor->priv->dy_max);
+
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->lsize_r_spin),
+                                           gl_object_editor_size_changed_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->lsize_theta_spin),
+                                           gl_object_editor_size_changed_cb, editor);
+
 
 	gl_debug (DEBUG_EDITOR, "END");
 }

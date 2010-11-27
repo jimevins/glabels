@@ -167,8 +167,6 @@ struct _glObjectEditorPrivate {
 	gdouble     shadow_x_max;
 	gdouble     shadow_y_max;
 
-        /* Prevent recursion */
-	gboolean    stop_signals;
 };
 
 enum {

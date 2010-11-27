@@ -118,11 +118,11 @@ gl_object_editor_prepare_size_page (glObjectEditor       *editor)
 				  G_CALLBACK (aspect_toggle_cb),
 				  G_OBJECT (editor));
 	g_signal_connect_swapped (G_OBJECT (editor->priv->size_w_spin),
-				  "changed",
+				  "value-changed",
 				  G_CALLBACK (w_spin_cb),
 				  G_OBJECT (editor));
 	g_signal_connect_swapped (G_OBJECT (editor->priv->size_h_spin),
-				  "changed",
+				  "value-changed",
 				  G_CALLBACK (h_spin_cb),
 				  G_OBJECT (editor));
         g_signal_connect_swapped (G_OBJECT (editor->priv->size_reset_image_button),
@@ -142,8 +142,6 @@ aspect_toggle_cb (glObjectEditor *editor)
 {
         glWdgtChainButton *toggle;
 	gdouble            w, h;
-
-        if (editor->priv->stop_signals) return;
 
 	gl_debug (DEBUG_EDITOR, "START");
 
@@ -171,8 +169,6 @@ w_spin_cb (glObjectEditor *editor)
 	gdouble            w, h;
         glWdgtChainButton *toggle;
 
-        if (editor->priv->stop_signals) return;
-
 	gl_debug (DEBUG_EDITOR, "START");
 
 	toggle = GL_WDGT_CHAIN_BUTTON (editor->priv->size_aspect_checkbutton);
@@ -184,9 +180,9 @@ w_spin_cb (glObjectEditor *editor)
                 h = w * editor->priv->size_aspect_ratio;
                                                                                 
                 /* Update our sibling control, blocking recursion. */
-                editor->priv->stop_signals = TRUE;
+                g_signal_handlers_block_by_func (G_OBJECT (editor->priv->size_h_spin), h_spin_cb, editor);
                 gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->size_h_spin), h);
-                editor->priv->stop_signals = FALSE;
+                g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->size_h_spin), h_spin_cb, editor);
         }
                                                                                 
         gl_object_editor_size_changed_cb (editor);
@@ -204,8 +200,6 @@ h_spin_cb (glObjectEditor *editor)
 	gdouble            w, h;
         glWdgtChainButton *toggle;
 
-        if (editor->priv->stop_signals) return;
-
 	gl_debug (DEBUG_EDITOR, "START");
 
         toggle = GL_WDGT_CHAIN_BUTTON (editor->priv->size_aspect_checkbutton);
@@ -217,9 +211,9 @@ h_spin_cb (glObjectEditor *editor)
                 w = h / editor->priv->size_aspect_ratio;
                                                                                 
                 /* Update our sibling control, blocking recursion. */
-                editor->priv->stop_signals = TRUE;
+                g_signal_handlers_block_by_func (G_OBJECT (editor->priv->size_w_spin), w_spin_cb, editor);
                 gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->size_w_spin), w);
-                editor->priv->stop_signals = FALSE;
+                g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->size_w_spin), w_spin_cb, editor);
         }
                                                                                 
         gl_object_editor_size_changed_cb (editor);
@@ -238,11 +232,12 @@ size_reset_cb (glObjectEditor *editor)
 	gdouble w_max, h_max, wh_max;
 	gdouble aspect_ratio;
 
-        if (editor->priv->stop_signals) return;
-
 	gl_debug (DEBUG_EDITOR, "START");
 
-        editor->priv->stop_signals = TRUE;
+
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->size_w_spin), w_spin_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->size_h_spin), h_spin_cb, editor);
+
 
 	w_base = editor->priv->w_base;
 	h_base = editor->priv->h_base;
@@ -273,7 +268,10 @@ size_reset_cb (glObjectEditor *editor)
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->size_h_spin),
 				   h_base);
 
-        editor->priv->stop_signals = FALSE;
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->size_w_spin), w_spin_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->size_h_spin), h_spin_cb, editor);
+
 
         gl_object_editor_size_changed_cb (editor);
 
@@ -286,12 +284,15 @@ size_reset_cb (glObjectEditor *editor)
 /*****************************************************************************/
 void
 gl_object_editor_set_size (glObjectEditor      *editor,
-			     gdouble                w,
-			     gdouble                h)
+                           gdouble              w,
+                           gdouble              h)
 {
 	gl_debug (DEBUG_EDITOR, "START");
 
-        editor->priv->stop_signals = TRUE;
+
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->size_w_spin), w_spin_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->size_h_spin), h_spin_cb, editor);
+
 
 	/* save a copy in internal units */
 	editor->priv->w = w;
@@ -310,7 +311,10 @@ gl_object_editor_set_size (glObjectEditor      *editor,
 	/* Update aspect ratio */
 	editor->priv->size_aspect_ratio = h / w;
 
-        editor->priv->stop_signals = FALSE;
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->size_w_spin), w_spin_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->size_h_spin), h_spin_cb, editor);
+
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -329,35 +333,36 @@ gl_object_editor_set_max_size (glObjectEditor      *editor,
 
 	gl_debug (DEBUG_EDITOR, "START");
 
-        if (editor->priv->size_page_vbox)
-        {
 
-                editor->priv->stop_signals = TRUE;
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->size_w_spin), w_spin_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->size_h_spin), h_spin_cb, editor);
 
-                /* save a copy in internal units */
-                editor->priv->w_max = w_max;
-                editor->priv->h_max = h_max;
 
-                /* convert internal units to displayed units */
-                gl_debug (DEBUG_EDITOR, "internal w_max,h_max = %g, %g", w_max, h_max);
-                w_max *= editor->priv->units_per_point;
-                h_max *= editor->priv->units_per_point;
-                wh_max = MAX( w_max, h_max );
-                gl_debug (DEBUG_EDITOR, "display w_max,h_max = %g, %g", w_max, h_max);
+        /* save a copy in internal units */
+        editor->priv->w_max = w_max;
+        editor->priv->h_max = h_max;
 
-                /* Set widget values */
-                tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->size_w_spin));
-                gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->size_w_spin),
-                                           0.0, 2.0*wh_max);
-                gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->size_w_spin), tmp);
-                tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->size_h_spin));
-                gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->size_h_spin),
-                                           0.0, 2.0*wh_max);
-                gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->size_h_spin), tmp);
+        /* convert internal units to displayed units */
+        gl_debug (DEBUG_EDITOR, "internal w_max,h_max = %g, %g", w_max, h_max);
+        w_max *= editor->priv->units_per_point;
+        h_max *= editor->priv->units_per_point;
+        wh_max = MAX( w_max, h_max );
+        gl_debug (DEBUG_EDITOR, "display w_max,h_max = %g, %g", w_max, h_max);
 
-                editor->priv->stop_signals = FALSE;
+        /* Set widget values */
+        tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->size_w_spin));
+        gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->size_w_spin),
+                                   0.0, 2.0*wh_max);
+        gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->size_w_spin), tmp);
+        tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->size_h_spin));
+        gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->size_h_spin),
+                                   0.0, 2.0*wh_max);
+        gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->size_h_spin), tmp);
 
-        }
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->size_w_spin), w_spin_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->size_h_spin), h_spin_cb, editor);
+
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -419,6 +424,11 @@ size_prefs_changed_cb (glObjectEditor *editor)
 
 	gl_debug (DEBUG_EDITOR, "START");
 
+
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->size_w_spin), w_spin_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->size_h_spin), h_spin_cb, editor);
+
+
         /* Get new configuration information */
         units = gl_prefs_model_get_units (gl_prefs);
         units_string = lgl_units_get_name (units);
@@ -427,16 +437,12 @@ size_prefs_changed_cb (glObjectEditor *editor)
         digits = gl_units_util_get_precision (units);
 
 	/* Update characteristics of w_spin/h_spin */
-        editor->priv->stop_signals = TRUE;
-	gtk_spin_button_set_digits (GTK_SPIN_BUTTON(editor->priv->size_w_spin),
-				    digits);
-	gtk_spin_button_set_digits (GTK_SPIN_BUTTON(editor->priv->size_h_spin),
-				    digits);
+	gtk_spin_button_set_digits (GTK_SPIN_BUTTON(editor->priv->size_w_spin), digits);
+	gtk_spin_button_set_digits (GTK_SPIN_BUTTON(editor->priv->size_h_spin), digits);
 	gtk_spin_button_set_increments (GTK_SPIN_BUTTON(editor->priv->size_w_spin),
 					climb_rate, 10.0*climb_rate);
 	gtk_spin_button_set_increments (GTK_SPIN_BUTTON(editor->priv->size_h_spin),
 					climb_rate, 10.0*climb_rate);
-        editor->priv->stop_signals = FALSE;
 
 	/* Update units_labels */
 	gtk_label_set_text (GTK_LABEL(editor->priv->size_w_units_label),
@@ -445,12 +451,13 @@ size_prefs_changed_cb (glObjectEditor *editor)
 			    units_string);
 
 	/* Update values of w_spin/h_spin */
-	gl_object_editor_set_size (editor,
-				   editor->priv->w,
-				   editor->priv->h);
-	gl_object_editor_set_max_size (editor,
-				       editor->priv->w_max,
-				       editor->priv->h_max);
+	gl_object_editor_set_size (editor, editor->priv->w, editor->priv->h);
+	gl_object_editor_set_max_size (editor, editor->priv->w_max, editor->priv->h_max);
+
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->size_w_spin), w_spin_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->size_h_spin), h_spin_cb, editor);
+
 
 	gl_debug (DEBUG_EDITOR, "END");
 }

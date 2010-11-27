@@ -128,11 +128,11 @@ gl_object_editor_prepare_shadow_page (glObjectEditor *editor)
 				  G_CALLBACK (shadow_enable_check_toggled_cb),
 				  G_OBJECT (editor));				  
 	g_signal_connect_swapped (G_OBJECT (editor->priv->shadow_x_spin),
-				  "changed",
+				  "value-changed",
 				  G_CALLBACK (gl_object_editor_changed_cb),
 				  G_OBJECT (editor));
 	g_signal_connect_swapped (G_OBJECT (editor->priv->shadow_y_spin),
-				  "changed",
+				  "value-changed",
 				  G_CALLBACK (gl_object_editor_changed_cb),
 				  G_OBJECT (editor));
 	g_signal_connect_swapped (G_OBJECT (editor->priv->shadow_color_combo),
@@ -152,7 +152,7 @@ gl_object_editor_prepare_shadow_page (glObjectEditor *editor)
 				  G_CALLBACK (shadow_color_radio_toggled_cb),
 				  G_OBJECT (editor));				  
 	g_signal_connect_swapped (G_OBJECT (editor->priv->shadow_opacity_spin),
-				  "changed",
+				  "value-changed",
 				  G_CALLBACK (gl_object_editor_changed_cb),
 				  G_OBJECT (editor));
 
@@ -169,13 +169,18 @@ gl_object_editor_set_shadow_state (glObjectEditor      *editor,
 {
 	gl_debug (DEBUG_EDITOR, "START");
 
-        editor->priv->stop_signals = TRUE;
 
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->shadow_enable_check),
-                                      state);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->shadow_enable_check),
+                                         shadow_enable_check_toggled_cb, editor);
+
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->shadow_enable_check), state);
         gtk_widget_set_sensitive (editor->priv->shadow_controls_table, state);
 
-        editor->priv->stop_signals = FALSE;
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->shadow_enable_check),
+                                           shadow_enable_check_toggled_cb, editor);
+
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -188,7 +193,12 @@ gl_object_editor_set_shadow_offset (glObjectEditor      *editor,
 {
 	gl_debug (DEBUG_EDITOR, "START");
 
-        editor->priv->stop_signals = TRUE;
+
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->shadow_x_spin),
+                                         gl_object_editor_changed_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->shadow_y_spin),
+                                         gl_object_editor_changed_cb, editor);
+
 
 	/* save a copy in internal units */
 	editor->priv->shadow_x = x;
@@ -204,7 +214,12 @@ gl_object_editor_set_shadow_offset (glObjectEditor      *editor,
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->shadow_x_spin), x);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->shadow_y_spin), y);
 
-        editor->priv->stop_signals = FALSE;
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->shadow_x_spin),
+                                           gl_object_editor_changed_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->shadow_y_spin),
+                                           gl_object_editor_changed_cb, editor);
+
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -222,30 +237,39 @@ gl_object_editor_set_shadow_color (glObjectEditor      *editor,
                 return;
         }
 
-        editor->priv->stop_signals = TRUE;
+
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->shadow_color_combo),
+                                         gl_object_editor_changed_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->shadow_color_radio),
+                                         shadow_color_radio_toggled_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->shadow_key_radio),
+                                         shadow_color_radio_toggled_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->shadow_key_combo),
+                                         gl_object_editor_changed_cb, editor);
+
 
 	gtk_widget_set_sensitive (editor->priv->shadow_key_radio, merge_flag);
 
-	if ( color_node->color == GL_COLOR_NONE ) {
-
+	if ( color_node->color == GL_COLOR_NONE )
+        {
 		gl_color_combo_set_to_default (GL_COLOR_COMBO(editor->priv->shadow_color_combo));
-
-	} else {
-
+	}
+        else
+        {
 		gl_color_combo_set_color (GL_COLOR_COMBO(editor->priv->shadow_color_combo),
                                           color_node->color);
-
 	}
 	
-	if (!color_node->field_flag || !merge_flag) {
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-						  (editor->priv->shadow_color_radio), TRUE); 
+	if (!color_node->field_flag || !merge_flag)
+        {
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->shadow_color_radio), TRUE); 
 		gtk_widget_set_sensitive (editor->priv->shadow_color_combo, TRUE);
 		gtk_widget_set_sensitive (editor->priv->shadow_key_combo, FALSE);
 		
-	} else {
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-						  (editor->priv->shadow_key_radio), TRUE); 
+	}
+        else
+        {
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->shadow_key_radio), TRUE); 
 		gtk_widget_set_sensitive (editor->priv->shadow_color_combo, FALSE);
 		gtk_widget_set_sensitive (editor->priv->shadow_key_combo, TRUE);
 		
@@ -253,7 +277,16 @@ gl_object_editor_set_shadow_color (glObjectEditor      *editor,
                                          color_node->key);
 	}
 	
-        editor->priv->stop_signals = FALSE;
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->shadow_color_combo),
+                                           gl_object_editor_changed_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->shadow_color_radio),
+                                           shadow_color_radio_toggled_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->shadow_key_radio),
+                                           shadow_color_radio_toggled_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->shadow_key_combo),
+                                           gl_object_editor_changed_cb, editor);
+
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -265,12 +298,17 @@ gl_object_editor_set_shadow_opacity (glObjectEditor      *editor,
 {
 	gl_debug (DEBUG_EDITOR, "START");
 
-        editor->priv->stop_signals = TRUE;
 
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->shadow_opacity_spin),
-				   alpha * 100.0);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->shadow_opacity_spin),
+                                         gl_object_editor_changed_cb, editor);
 
-        editor->priv->stop_signals = FALSE;
+
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->shadow_opacity_spin), alpha * 100.0);
+
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->shadow_opacity_spin),
+                                           gl_object_editor_changed_cb, editor);
+
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -288,34 +326,37 @@ gl_object_editor_set_max_shadow_offset (glObjectEditor      *editor,
 
 	gl_debug (DEBUG_EDITOR, "START");
 
-        if (editor->priv->shadow_page_vbox)
-        {
 
-                editor->priv->stop_signals = TRUE;
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->shadow_x_spin),
+                                         gl_object_editor_changed_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->shadow_y_spin),
+                                         gl_object_editor_changed_cb, editor);
 
-                /* save a copy in internal units */
-                editor->priv->shadow_x_max = x_max;
-                editor->priv->shadow_y_max = y_max;
 
-                /* convert internal units to displayed units */
-                gl_debug (DEBUG_EDITOR, "internal x_max,y_max = %g, %g", x_max, y_max);
-                x_max *= editor->priv->units_per_point;
-                y_max *= editor->priv->units_per_point;
-                gl_debug (DEBUG_EDITOR, "display x_max,y_max = %g, %g", x_max, y_max);
+        /* save a copy in internal units */
+        editor->priv->shadow_x_max = x_max;
+        editor->priv->shadow_y_max = y_max;
 
-                /* Set widget values */
-                tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->shadow_x_spin));
-                gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->shadow_x_spin),
-                                           -x_max, x_max);
-                gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->shadow_x_spin), tmp);
-                tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->shadow_y_spin));
-                gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->shadow_y_spin),
-                                           -y_max, y_max);
-                gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->shadow_y_spin), tmp);
+        /* convert internal units to displayed units */
+        gl_debug (DEBUG_EDITOR, "internal x_max,y_max = %g, %g", x_max, y_max);
+        x_max *= editor->priv->units_per_point;
+        y_max *= editor->priv->units_per_point;
+        gl_debug (DEBUG_EDITOR, "display x_max,y_max = %g, %g", x_max, y_max);
 
-                editor->priv->stop_signals = FALSE;
+        /* Set widget values */
+        tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->shadow_x_spin));
+        gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->shadow_x_spin), -x_max, x_max);
+        gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->shadow_x_spin), tmp);
+        tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->shadow_y_spin));
+        gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->shadow_y_spin), -y_max, y_max);
+        gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->shadow_y_spin), tmp);
 
-        }
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->shadow_x_spin),
+                                           gl_object_editor_changed_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->shadow_y_spin),
+                                           gl_object_editor_changed_cb, editor);
+
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -422,6 +463,13 @@ shadow_prefs_changed_cb (glObjectEditor *editor)
 
 	gl_debug (DEBUG_EDITOR, "START");
 
+
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->shadow_x_spin),
+                                         gl_object_editor_changed_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->shadow_y_spin),
+                                         gl_object_editor_changed_cb, editor);
+
+
         /* Get new configuration information */
         units = gl_prefs_model_get_units (gl_prefs);
         units_string = lgl_units_get_name (units);
@@ -430,7 +478,6 @@ shadow_prefs_changed_cb (glObjectEditor *editor)
         digits = gl_units_util_get_precision (units);
 
 	/* Update characteristics of x_spin/y_spin */
-        editor->priv->stop_signals = TRUE;
 	gtk_spin_button_set_digits (GTK_SPIN_BUTTON(editor->priv->shadow_x_spin),
 				    digits);
 	gtk_spin_button_set_digits (GTK_SPIN_BUTTON(editor->priv->shadow_y_spin),
@@ -439,7 +486,6 @@ shadow_prefs_changed_cb (glObjectEditor *editor)
 					climb_rate, 10.0*climb_rate);
 	gtk_spin_button_set_increments (GTK_SPIN_BUTTON(editor->priv->shadow_y_spin),
 					climb_rate, 10.0*climb_rate);
-        editor->priv->stop_signals = FALSE;
 
 	/* Update units_labels */
 	gtk_label_set_text (GTK_LABEL(editor->priv->shadow_x_units_label),
@@ -455,6 +501,13 @@ shadow_prefs_changed_cb (glObjectEditor *editor)
 						editor->priv->shadow_x_max,
 						editor->priv->shadow_y_max);
 
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->shadow_x_spin),
+                                           gl_object_editor_changed_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->shadow_y_spin),
+                                           gl_object_editor_changed_cb, editor);
+
+
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
@@ -466,8 +519,6 @@ static void
 shadow_enable_check_toggled_cb (glObjectEditor *editor)
 {
 	gboolean state;
-
-        if (editor->priv->stop_signals) return;
 
         gl_debug (DEBUG_EDITOR, "START");
 
@@ -487,8 +538,6 @@ shadow_enable_check_toggled_cb (glObjectEditor *editor)
 static void
 shadow_color_radio_toggled_cb (glObjectEditor *editor)
 {
-        if (editor->priv->stop_signals) return;
-
         gl_debug (DEBUG_EDITOR, "START");
 	
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->shadow_color_radio))) {

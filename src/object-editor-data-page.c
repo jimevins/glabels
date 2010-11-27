@@ -111,8 +111,6 @@ gl_object_editor_prepare_data_page (glObjectEditor *editor)
 static void
 data_radio_toggled_cb (glObjectEditor *editor)
 {
-        if (editor->priv->stop_signals) return;
-
         gl_debug (DEBUG_WDGT, "START");
  
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->data_literal_radio))) {
@@ -150,14 +148,23 @@ gl_object_editor_set_data (glObjectEditor      *editor,
         gint pos;
  
         gl_debug (DEBUG_EDITOR, "START");
+
  
-        editor->priv->stop_signals = TRUE;
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->data_literal_radio),
+                                         data_radio_toggled_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->data_key_radio),
+                                         data_radio_toggled_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->data_text_entry),
+                                         gl_object_editor_changed_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->data_key_combo),
+                                         gl_object_editor_changed_cb, editor);
+
 
         gtk_widget_set_sensitive (editor->priv->data_key_radio, merge_flag);
  
-        if (!text_node->field_flag || !merge_flag) {
- 
-                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
+        if (!text_node->field_flag || !merge_flag)
+        {
+                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
                                               (editor->priv->data_literal_radio), TRUE); 
                 gtk_widget_set_sensitive (editor->priv->data_text_entry, TRUE);
                 gtk_widget_set_sensitive (editor->priv->data_key_combo, FALSE);
@@ -168,15 +175,16 @@ gl_object_editor_set_data (glObjectEditor      *editor,
  
                 gtk_editable_delete_text (GTK_EDITABLE (editor->priv->data_text_entry), 0, -1);
                 pos = 0;
-                if (text_node->data != NULL ) {
+                if (text_node->data != NULL )
+                {
 			gtk_editable_insert_text (GTK_EDITABLE (editor->priv->data_text_entry),
 						  text_node->data,
 						  strlen (text_node->data),
 						  &pos);
                 }
-
-        } else {
-                                                                                
+        }
+        else
+        {
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
                                               (editor->priv->data_key_radio), TRUE);
                                                                                 
@@ -195,14 +203,22 @@ gl_object_editor_set_data (glObjectEditor      *editor,
         }
                                                                                 
 
-        editor->priv->stop_signals = FALSE;
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->data_literal_radio),
+                                           data_radio_toggled_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->data_key_radio),
+                                           data_radio_toggled_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->data_text_entry),
+                                           gl_object_editor_changed_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->data_key_combo),
+                                           gl_object_editor_changed_cb, editor);
+
 
         gl_debug (DEBUG_EDITOR, "END");
 }
 
 
 /*****************************************************************************/
-/* Query data.                                                              */
+/* Query data.                                                               */
 /*****************************************************************************/
 glTextNode *
 gl_object_editor_get_data (glObjectEditor      *editor)
@@ -213,12 +229,14 @@ gl_object_editor_get_data (glObjectEditor      *editor)
  
         text_node = g_new0(glTextNode,1);
  
-        if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->data_literal_radio))) {
+        if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->data_literal_radio)))
+        {
                 text_node->field_flag = FALSE;
                 text_node->data =
-                    gtk_editable_get_chars (GTK_EDITABLE (editor->priv->data_text_entry),
-                                            0, -1);
-        } else {
+                    gtk_editable_get_chars (GTK_EDITABLE (editor->priv->data_text_entry), 0, -1);
+        }
+        else
+        {
                 text_node->field_flag = TRUE;
                 text_node->data =
 			gl_field_button_get_key (GL_FIELD_BUTTON (editor->priv->data_key_combo));

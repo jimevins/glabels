@@ -102,7 +102,7 @@ gl_object_editor_prepare_line_page (glObjectEditor *editor)
 
 	/* Connect signals */
 	g_signal_connect_swapped (G_OBJECT (editor->priv->line_width_spin),
-				  "changed",
+				  "value-changed",
 				  G_CALLBACK (gl_object_editor_changed_cb),
 				  G_OBJECT (editor));
 	g_signal_connect_swapped (G_OBJECT (editor->priv->line_color_combo),
@@ -135,13 +135,19 @@ gl_object_editor_set_line_width (glObjectEditor      *editor,
 {
 	gl_debug (DEBUG_EDITOR, "START");
 
-        editor->priv->stop_signals = TRUE;
+
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->line_width_spin),
+                                         gl_object_editor_changed_cb, editor);
+
 
 	/* Set widget values */
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->line_width_spin),
 				   width);
 
-        editor->priv->stop_signals = FALSE;
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->line_width_spin),
+                                           gl_object_editor_changed_cb, editor);
+
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -180,7 +186,16 @@ gl_object_editor_set_line_color (glObjectEditor      *editor,
                 return;
         }
 
-        editor->priv->stop_signals = TRUE;
+
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->line_color_combo),
+                                         gl_object_editor_changed_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->line_color_radio),
+                                         line_radio_toggled_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->line_key_radio),
+                                         line_radio_toggled_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->line_key_combo),
+                                         gl_object_editor_changed_cb, editor);
+
 
 	gl_debug (DEBUG_EDITOR, "color field %s(%d) / %X", color_node->key, color_node->field_flag, color_node->color);
 	gtk_widget_set_sensitive (editor->priv->line_key_radio, merge_flag);
@@ -212,7 +227,16 @@ gl_object_editor_set_line_color (glObjectEditor      *editor,
                                          color_node->key);
 	}
 
-        editor->priv->stop_signals = FALSE;
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->line_color_combo),
+                                           gl_object_editor_changed_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->line_color_radio),
+                                           line_radio_toggled_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->line_key_radio),
+                                           line_radio_toggled_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->line_key_combo),
+                                           gl_object_editor_changed_cb, editor);
+
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -259,8 +283,6 @@ gl_object_editor_get_line_color (glObjectEditor      *editor)
 static void
 line_radio_toggled_cb (glObjectEditor *editor)
 {
-        if (editor->priv->stop_signals) return;
-
         gl_debug (DEBUG_EDITOR, "START");
 	
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->line_color_radio))) {

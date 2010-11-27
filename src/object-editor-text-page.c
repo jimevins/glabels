@@ -121,7 +121,7 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 				  G_CALLBACK (gl_object_editor_changed_cb),
 				  G_OBJECT (editor));
 	g_signal_connect_swapped (G_OBJECT (editor->priv->text_size_spin),
-				  "changed",
+				  "value-changed",
 				  G_CALLBACK (gl_object_editor_changed_cb),
 				  G_OBJECT (editor));
 	g_signal_connect_swapped (G_OBJECT (editor->priv->text_bold_toggle),
@@ -163,7 +163,7 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 			  G_OBJECT (editor));
 
 	g_signal_connect_swapped (G_OBJECT (editor->priv->text_line_spacing_spin),
-				  "changed",
+				  "value-changed",
 				  G_CALLBACK (gl_object_editor_changed_cb),
 				  G_OBJECT (editor));
 
@@ -183,8 +183,6 @@ static void
 align_toggle_cb (GtkToggleButton *toggle,
 		 glObjectEditor  *editor)
 {
-        if (editor->priv->stop_signals) return;
-
         if (gtk_toggle_button_get_active (toggle)) {
  
                 if (GTK_WIDGET (toggle) == GTK_WIDGET (editor->priv->text_left_toggle)) {
@@ -234,7 +232,10 @@ gl_object_editor_set_font_family (glObjectEditor      *editor,
 
 	gl_debug (DEBUG_EDITOR, "START");
 
-        editor->priv->stop_signals = TRUE;
+
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->text_family_combo),
+                                         gl_object_editor_changed_cb, editor);
+
 
 	old_font_family = gl_font_combo_get_family (GL_FONT_COMBO (editor->priv->text_family_combo));
 
@@ -246,7 +247,10 @@ gl_object_editor_set_font_family (glObjectEditor      *editor,
 
         g_free (old_font_family);
 
-        editor->priv->stop_signals = FALSE;
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->text_family_combo),
+                                           gl_object_editor_changed_cb, editor);
+
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -279,12 +283,18 @@ gl_object_editor_set_font_size (glObjectEditor      *editor,
 {
 	gl_debug (DEBUG_EDITOR, "START");
 
-        editor->priv->stop_signals = TRUE;
+
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->text_size_spin),
+                                         gl_object_editor_changed_cb, editor);
+
 
         gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->text_size_spin),
                                    font_size);
 
-        editor->priv->stop_signals = FALSE;
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->text_size_spin),
+                                           gl_object_editor_changed_cb, editor);
+
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -318,12 +328,18 @@ gl_object_editor_set_font_weight (glObjectEditor      *editor,
 {
 	gl_debug (DEBUG_EDITOR, "START");
 
-        editor->priv->stop_signals = TRUE;
+
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->text_bold_toggle),
+                                         gl_object_editor_changed_cb, editor);
+
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->text_bold_toggle),
                                       (font_weight == PANGO_WEIGHT_BOLD));
 
-        editor->priv->stop_signals = FALSE;
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->text_bold_toggle),
+                                           gl_object_editor_changed_cb, editor);
+
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -361,12 +377,18 @@ gl_object_editor_set_font_italic_flag (glObjectEditor      *editor,
 {
 	gl_debug (DEBUG_EDITOR, "START");
 
-        editor->priv->stop_signals = TRUE;
+
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->text_italic_toggle),
+                                         gl_object_editor_changed_cb, editor);
+
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->text_italic_toggle),
                                       font_italic_flag);
 
-        editor->priv->stop_signals = FALSE;
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->text_italic_toggle),
+                                           gl_object_editor_changed_cb, editor);
+
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -401,7 +423,11 @@ gl_object_editor_set_text_alignment (glObjectEditor      *editor,
 {
 	gl_debug (DEBUG_EDITOR, "START");
 
-        editor->priv->stop_signals = TRUE;
+
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->text_left_toggle), align_toggle_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->text_center_toggle), align_toggle_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->text_right_toggle), align_toggle_cb, editor);
+
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->text_left_toggle),
                                       (align == PANGO_ALIGN_LEFT));
@@ -410,7 +436,11 @@ gl_object_editor_set_text_alignment (glObjectEditor      *editor,
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->text_right_toggle),
                                       (align == PANGO_ALIGN_RIGHT));
 
-        editor->priv->stop_signals = FALSE;
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->text_left_toggle), align_toggle_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->text_center_toggle), align_toggle_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->text_right_toggle), align_toggle_cb, editor);
+
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -462,9 +492,19 @@ gl_object_editor_set_text_color (glObjectEditor      *editor,
                 return;
         }
 
-        editor->priv->stop_signals = TRUE;
 
-	gl_debug (DEBUG_EDITOR, "color field %s(%d) / %X", text_color_node->key, text_color_node->field_flag, text_color_node->color);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->text_color_combo),
+                                         gl_object_editor_changed_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->text_color_radio),
+                                         text_radio_toggled_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->text_color_key_radio),
+                                         text_radio_toggled_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->text_color_key_combo),
+                                         gl_object_editor_changed_cb, editor);
+
+
+	gl_debug (DEBUG_EDITOR, "color field %s(%d) / %X",
+                  text_color_node->key, text_color_node->field_flag, text_color_node->color);
 	
 	gtk_widget_set_sensitive (editor->priv->text_color_key_radio, merge_flag);
 
@@ -478,24 +518,34 @@ gl_object_editor_set_text_color (glObjectEditor      *editor,
                                           text_color_node->color);
 	}
 	
-	if (!text_color_node->field_flag || !merge_flag) {
+	if (!text_color_node->field_flag || !merge_flag)
+        {
 		gl_debug (DEBUG_EDITOR, "color field false");
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-						  (editor->priv->text_color_radio), TRUE); 
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->text_color_radio), TRUE); 
 		gtk_widget_set_sensitive (editor->priv->text_color_combo, TRUE);
 		gtk_widget_set_sensitive (editor->priv->text_color_key_combo, FALSE);
 		
-	} else {
+	}
+        else
+        {
 		gl_debug (DEBUG_EDITOR, "color field true");
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-						  (editor->priv->text_color_key_radio), TRUE); 
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->text_color_key_radio), TRUE); 
 		gtk_widget_set_sensitive (editor->priv->text_color_combo, FALSE);
 		gtk_widget_set_sensitive (editor->priv->text_color_key_combo, TRUE);
 		
 		gl_field_button_set_key (GL_FIELD_BUTTON (editor->priv->text_color_key_combo), "");
 	}
 
-        editor->priv->stop_signals = FALSE;
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->text_color_combo),
+                                           gl_object_editor_changed_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->text_color_radio),
+                                           text_radio_toggled_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->text_color_key_radio),
+                                           text_radio_toggled_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->text_color_key_combo),
+                                           gl_object_editor_changed_cb, editor);
+
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -548,12 +598,18 @@ gl_object_editor_set_text_line_spacing (glObjectEditor      *editor,
 {
 	gl_debug (DEBUG_EDITOR, "START");
 
-        editor->priv->stop_signals = TRUE;
+
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->text_line_spacing_spin),
+                                         gl_object_editor_changed_cb, editor);
+
 
         gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->text_line_spacing_spin),
                                    text_line_spacing);
 
-        editor->priv->stop_signals = FALSE;
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->text_line_spacing_spin),
+                                           gl_object_editor_changed_cb, editor);
+
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -587,12 +643,18 @@ gl_object_editor_set_text_auto_shrink (glObjectEditor      *editor,
 {
 	gl_debug (DEBUG_EDITOR, "START");
 
-        editor->priv->stop_signals = TRUE;
+
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->text_auto_shrink_check),
+                                         gl_object_editor_changed_cb, editor);
+
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->text_auto_shrink_check),
                                       auto_shrink);
 
-        editor->priv->stop_signals = FALSE;
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->text_auto_shrink_check),
+                                           gl_object_editor_changed_cb, editor);
+
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -622,8 +684,6 @@ gboolean    gl_object_editor_get_text_auto_shrink (glObjectEditor      *editor)
 static void
 text_radio_toggled_cb (glObjectEditor *editor)
 {
-        if (editor->priv->stop_signals) return;
-
         gl_debug (DEBUG_EDITOR, "START");
 	
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->text_color_radio))) {

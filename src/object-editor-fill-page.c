@@ -134,38 +134,54 @@ gl_object_editor_set_fill_color (glObjectEditor      *editor,
                 return;
         }
 
-        editor->priv->stop_signals = TRUE;
+
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->fill_color_combo),
+                                         gl_object_editor_changed_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->fill_color_radio),
+                                         fill_radio_toggled_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->fill_key_radio),
+                                         fill_radio_toggled_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->fill_key_combo),
+                                         gl_object_editor_changed_cb, editor);
+
 
 	gtk_widget_set_sensitive (editor->priv->fill_key_radio, merge_flag);
 
-	if ( color_node->color == GL_COLOR_NONE ) {
-
-		gl_color_combo_set_to_default (GL_COLOR_COMBO(editor->priv->fill_color_combo));
-
-	} else {
-
-		gl_color_combo_set_color (GL_COLOR_COMBO(editor->priv->fill_color_combo),
-					   color_node->color);
-
+	if ( color_node->color == GL_COLOR_NONE )
+        {
+                gl_color_combo_set_to_default (GL_COLOR_COMBO(editor->priv->fill_color_combo));
+	}
+        else
+        {
+                gl_color_combo_set_color (GL_COLOR_COMBO(editor->priv->fill_color_combo), color_node->color);
 	}
 	
-	if (!color_node->field_flag || !merge_flag) {
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-						  (editor->priv->fill_color_radio), TRUE); 
+	if (!color_node->field_flag || !merge_flag)
+        {
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->fill_color_radio), TRUE); 
 		gtk_widget_set_sensitive (editor->priv->fill_color_combo, TRUE);
 		gtk_widget_set_sensitive (editor->priv->fill_key_combo, FALSE);
 		
-	} else {
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-						  (editor->priv->fill_key_radio), TRUE); 
+	}
+        else
+        {
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->fill_key_radio), TRUE); 
 		gtk_widget_set_sensitive (editor->priv->fill_color_combo, FALSE);
 		gtk_widget_set_sensitive (editor->priv->fill_key_combo, TRUE);
 		
-		gl_field_button_set_key (GL_FIELD_BUTTON (editor->priv->fill_key_combo),
-                                         color_node->key);
+		gl_field_button_set_key (GL_FIELD_BUTTON (editor->priv->fill_key_combo), color_node->key);
 	}
 	
-        editor->priv->stop_signals = FALSE;
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->fill_color_combo),
+                                           gl_object_editor_changed_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->fill_color_radio),
+                                           fill_radio_toggled_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->fill_key_radio),
+                                           fill_radio_toggled_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->fill_key_combo),
+                                           gl_object_editor_changed_cb, editor);
+
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -212,17 +228,17 @@ gl_object_editor_get_fill_color (glObjectEditor      *editor)
 static void
 fill_radio_toggled_cb (glObjectEditor *editor)
 {
-        if (editor->priv->stop_signals) return;
-
         gl_debug (DEBUG_EDITOR, "START");
 	
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->fill_color_radio))) {
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->fill_color_radio)))
+        {
                 gtk_widget_set_sensitive (editor->priv->fill_color_combo, TRUE);
                 gtk_widget_set_sensitive (editor->priv->fill_key_combo, FALSE);
-    } else {
+        }
+        else
+        {
                 gtk_widget_set_sensitive (editor->priv->fill_color_combo, FALSE);
                 gtk_widget_set_sensitive (editor->priv->fill_key_combo, TRUE);
-		
 	}
  
         gl_object_editor_changed_cb (editor);

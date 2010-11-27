@@ -128,8 +128,6 @@ gl_object_editor_prepare_image_page (glObjectEditor *editor)
 static void
 img_radio_toggled_cb (glObjectEditor *editor)
 {
-        if (editor->priv->stop_signals) return;
-
         gl_debug (DEBUG_WDGT, "START");
  
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->img_file_radio))) {
@@ -156,27 +154,38 @@ gl_object_editor_set_image (glObjectEditor      *editor,
 {
         gl_debug (DEBUG_EDITOR, "START");
  
-        editor->priv->stop_signals = TRUE;
+
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->img_file_radio),
+                                         img_radio_toggled_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->img_key_radio),
+                                         img_radio_toggled_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->img_file_button),
+                                         img_selection_changed_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->img_key_combo),
+                                         gl_object_editor_changed_cb, editor);
+
 
         gtk_widget_set_sensitive (editor->priv->img_key_radio, merge_flag);
  
-        if (!text_node->field_flag || !merge_flag) {
- 
-                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                              (editor->priv->img_file_radio), TRUE); 
+        if (!text_node->field_flag || !merge_flag)
+        {
+                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->img_file_radio), TRUE); 
                 gtk_widget_set_sensitive (editor->priv->img_file_button, TRUE);
                 gtk_widget_set_sensitive (editor->priv->img_key_combo, FALSE);
  
-                if (text_node->data != NULL ) {
+                if (text_node->data != NULL )
+                {
 			gtk_file_chooser_set_filename (GTK_FILE_CHOOSER(editor->priv->img_file_button),
                                                        text_node->data);
-                } else {
+                }
+                else
+                {
 			gtk_file_chooser_unselect_all (GTK_FILE_CHOOSER(editor->priv->img_file_button));
                 }
-        } else {
-                                                                                
-                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                              (editor->priv->img_key_radio), TRUE);
+        }
+        else
+        {
+                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->img_key_radio), TRUE);
                                                                                 
                 gtk_widget_set_sensitive (editor->priv->img_file_button, FALSE);
                 gtk_widget_set_sensitive (editor->priv->img_key_combo, TRUE);
@@ -185,7 +194,16 @@ gl_object_editor_set_image (glObjectEditor      *editor,
                                          text_node->data);
         }
                                                                                 
-        editor->priv->stop_signals = FALSE;
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->img_file_radio),
+                                           img_radio_toggled_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->img_key_radio),
+                                           img_radio_toggled_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->img_file_button),
+                                           img_selection_changed_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->img_key_combo),
+                                           gl_object_editor_changed_cb, editor);
+
                                                                                 
         gl_debug (DEBUG_EDITOR, "END");
 }
@@ -203,11 +221,14 @@ gl_object_editor_get_image (glObjectEditor      *editor)
  
         text_node = g_new0(glTextNode,1);
  
-        if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->img_file_radio))) {
+        if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->img_file_radio)))
+        {
                 text_node->field_flag = FALSE;
                 text_node->data =
 			gtk_file_chooser_get_filename (GTK_FILE_CHOOSER(editor->priv->img_file_button));
-        } else {
+        }
+        else
+        {
                 text_node->field_flag = TRUE;
                 text_node->data =
 			gl_field_button_get_key (GL_FIELD_BUTTON (editor->priv->img_key_combo));
@@ -237,7 +258,8 @@ update_preview_cb (GtkFileChooser *file_chooser, gpointer data)
         preview = GTK_WIDGET (data);
         filename = gtk_file_chooser_get_preview_filename (file_chooser);
 
-        if (filename) {
+        if (filename)
+        {
                 gl_debug (DEBUG_EDITOR, "filename =\"%s\"", filename);
                 pixbuf = gdk_pixbuf_new_from_file_at_size (filename, 128, 128, NULL);
                 if (pixbuf != NULL)
@@ -249,7 +271,9 @@ update_preview_cb (GtkFileChooser *file_chooser, gpointer data)
                                                                     TRUE);
                 }
                 g_free (filename);
-        } else {
+        }
+        else
+        {
                 gtk_file_chooser_set_preview_widget_active (file_chooser, FALSE);
         }
 
@@ -284,7 +308,8 @@ add_image_filters_to_chooser (GtkFileChooser *chooser)
 
 	/* Individual image filters */
 	formats = gdk_pixbuf_get_formats ();
-	for (it = formats; it != NULL; it = it->next) {
+	for (it = formats; it != NULL; it = it->next)
+        {
 		gchar *filter_name;
 		GdkPixbufFormat *format;
 		filter = gtk_file_filter_new ();
@@ -302,14 +327,16 @@ add_image_filters_to_chooser (GtkFileChooser *chooser)
 		g_free (filter_name);
 
 		mime_types = gdk_pixbuf_format_get_mime_types ((GdkPixbufFormat *) it->data);
-		for (i = 0; mime_types[i] != NULL; i++) {
+		for (i = 0; mime_types[i] != NULL; i++)
+                {
 			gtk_file_filter_add_mime_type (filter, mime_types[i]);
 			gtk_file_filter_add_mime_type (all_img_filter, mime_types[i]);
 		}
 		g_strfreev (mime_types);
  
 		pattern = gdk_pixbuf_format_get_extensions ((GdkPixbufFormat *) it->data);
-		for (i = 0; pattern[i] != NULL; i++) {
+		for (i = 0; pattern[i] != NULL; i++)
+                {
 			tmp = g_strconcat ("*.", pattern[i], NULL);
 			gtk_file_filter_add_pattern (filter, tmp);
 			gtk_file_filter_add_pattern (all_img_filter, tmp);
@@ -341,8 +368,6 @@ static void
 img_selection_changed_cb (glObjectEditor *editor)
 {
         gchar *filename;
-
-        if (editor->priv->stop_signals) return;
 
 	gl_debug (DEBUG_EDITOR, "START");
 
