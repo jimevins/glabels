@@ -15,6 +15,7 @@ templates_DATA = \
 	avery-iso-templates.xml \
 	avery-other-templates.xml \
 	brother-other-templates.xml \
+	databecker-iso-templates.xml \
 	decadry-iso-templates.xml \
 	dymo-other-templates.xml \
 	herma-iso-templates.xml \
