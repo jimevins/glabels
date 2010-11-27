@@ -198,7 +198,27 @@
 
   <Template brand="Herma" part="8839" equiv="8803"/>
 
-  
+  <!-- =================================================================== -->
+  <!-- Herma 4457: Superprint Labels 105mm x 48mm, 12 per sheet            -->
+  <!-- =================================================================== -->
+  <Template brand="Herma" part="4457" size="A4" _description="Rectangular Labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Label-rectangle id="0" width="105mm" height="48mm" round="0mm" x_waste="0mm" y_waste="0mm">
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="2" ny="6" x0="0mm" y0="5.5mm" dx="105mm" dy="48mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Herma 10809: Superprint Labels 105mm x 148mm, 4 per sheet           -->
+  <!-- =================================================================== -->
+    <Template brand="Herma" part="10809" size="A4" _description="Rectangular labels">
+    <Label-rectangle id="0" width="105mm" height="148mm" round="0mm" x_waste="0mm" y_waste="0mm">
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="2" ny="2" x0="0mm" y0="0mm" dx="105mm" dy="148mm"/>
+    </Label-rectangle>
+  </Template>
 
 </Glabels-templates>
 
