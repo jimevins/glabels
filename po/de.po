@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-11-26 15:42+0000\n"
-"PO-Revision-Date: 2010-11-26 17:16+0100\n"
+"POT-Creation-Date: 2010-11-30 20:53+0000\n"
+"PO-Revision-Date: 2010-11-30 21:51+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -751,23 +751,23 @@ msgstr "glabels-Datei %s kann nicht geöffnet werden\n"
 msgid "Launch gLabels label and business card designer."
 msgstr "gLabels Etiketten- und Visitenkarten-Designer ausführen."
 
-#: ../src/label-barcode.c:164 ../src/ui.c:317
+#: ../src/label-barcode.c:167 ../src/ui.c:317
 msgid "Create barcode object"
 msgstr "Strichcodeobjekt erzeugen"
 
-#: ../src/label-barcode.c:240 ../src/label-barcode.c:390
+#: ../src/label-barcode.c:243 ../src/label-barcode.c:393
 msgid "Barcode data"
 msgstr "Strichcode-Daten"
 
-#: ../src/label-barcode.c:269
+#: ../src/label-barcode.c:272
 msgid "Barcode property"
 msgstr "Strichcode-Eigenschaft"
 
-#: ../src/label-barcode.c:473
+#: ../src/label-barcode.c:598
 msgid "Barcode data empty"
 msgstr "Strichcode-Daten sind leer"
 
-#: ../src/label-barcode.c:477
+#: ../src/label-barcode.c:602
 msgid "Invalid barcode data"
 msgstr "Ungültige Strichcode-Daten"
 
@@ -1121,7 +1121,7 @@ msgstr "Überprüfen"
 msgid "Default"
 msgstr "Standard"
 
-#: ../src/object-editor.c:158 ../src/object-editor.c:461
+#: ../src/object-editor.c:158 ../src/object-editor.c:459
 msgid "Object properties"
 msgstr "Objekteigenschaften"
 
@@ -1158,15 +1158,15 @@ msgstr "Datenfeld einfügen"
 msgid "No Fill"
 msgstr "Keine Füllung"
 
-#: ../src/object-editor-image-page.c:278
+#: ../src/object-editor-image-page.c:302
 msgid "All Files"
 msgstr "Alle Dateien"
 
-#: ../src/object-editor-image-page.c:283
+#: ../src/object-editor-image-page.c:307
 msgid "All Images"
 msgstr "Alle Bilder"
 
-#: ../src/object-editor-image-page.c:298
+#: ../src/object-editor-image-page.c:323
 #, c-format
 msgid "%s (*.%s)"
 msgstr "%s (*.%s)"
@@ -1187,7 +1187,7 @@ msgstr "gLabels-Einstellungen"
 #. TODO: Is this the actual part #?
 #: ../src/print-op.c:205 ../src/print-op-dialog.c:217
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:4
-#: ../templates/misc-iso-templates.xml.h:26
+#: ../templates/misc-iso-templates.xml.h:24
 msgid "Labels"
 msgstr "Labels"
 
@@ -2772,20 +2772,26 @@ msgid "Elliptical labels"
 msgstr "Elliptische Etiketten"
 
 #: ../templates/categories.xml.h:6
+msgid "Foldable cards"
+msgstr "Faltbare Karten"
+
+#: ../templates/categories.xml.h:7
 msgid "Mailing/shipping products"
 msgstr "Post- und Versandprodukte"
 
+#. ===================================================================
 #. ********************************************************************
-#: ../templates/categories.xml.h:7 ../templates/jac-iso-templates.xml.h:4
+#: ../templates/categories.xml.h:8 ../templates/herma-iso-templates.xml.h:18
+#: ../templates/jac-iso-templates.xml.h:4
 msgid "Rectangular labels"
 msgstr "Rechteckige Etiketten"
 
 #. ===================================================================
-#: ../templates/categories.xml.h:8 ../templates/pearl-iso-templates.xml.h:54
+#: ../templates/categories.xml.h:9 ../templates/pearl-iso-templates.xml.h:54
 msgid "Round labels"
 msgstr "Runde Etiketten"
 
-#: ../templates/categories.xml.h:9
+#: ../templates/categories.xml.h:10
 msgid "Square labels"
 msgstr "Quadratische Etiketten"
 
@@ -2794,6 +2800,7 @@ msgstr "Quadratische Etiketten"
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:2
 #: ../templates/avery-iso-templates.xml.h:2
+#: ../templates/databecker-iso-templates.xml.h:2
 #: ../templates/dymo-other-templates.xml.h:4
 #: ../templates/maco-us-templates.xml.h:2
 #: ../templates/misc-iso-templates.xml.h:2
@@ -2810,6 +2817,7 @@ msgstr "Adressaufkleber"
 #. ============================================================
 #: ../templates/avery-us-templates.xml.h:4
 #: ../templates/avery-iso-templates.xml.h:8
+#: ../templates/databecker-iso-templates.xml.h:4
 #: ../templates/decadry-iso-templates.xml.h:2
 #: ../templates/misc-us-templates.xml.h:4
 #: ../templates/misc-iso-templates.xml.h:6
@@ -2990,7 +2998,7 @@ msgstr "Kennzeichnungsetiketten"
 #: ../templates/decadry-iso-templates.xml.h:4
 #: ../templates/herma-iso-templates.xml.h:14
 #: ../templates/misc-us-templates.xml.h:20
-#: ../templates/misc-iso-templates.xml.h:28
+#: ../templates/misc-iso-templates.xml.h:26
 #: ../templates/zweckform-iso-templates.xml.h:20
 msgid "Mailing Labels"
 msgstr "Adressaufkleber"
@@ -3012,10 +3020,13 @@ msgid "Mini Labels"
 msgstr "Mini-Etiketten"
 
 #. ============================================================
+#. ===================================================================
 #. TODO: What is the actual part #?
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:30
-#: ../templates/misc-iso-templates.xml.h:32
+#: ../templates/databecker-iso-templates.xml.h:10
+#: ../templates/herma-iso-templates.xml.h:16
+#: ../templates/misc-iso-templates.xml.h:30
 #: ../templates/zweckform-iso-templates.xml.h:28
 msgid "Rectangular Labels"
 msgstr "Rechteckige Etiketten"
@@ -3053,6 +3064,17 @@ msgstr "Versandetiketten 62mm x 100mm"
 #: ../templates/brother-other-templates.xml.h:20
 msgid "Standard Address Labels 29mm x 90mm"
 msgstr "Standard-Adressaufkleber 29mm x 90mm"
+
+#. ===================================================================
+#: ../templates/databecker-iso-templates.xml.h:6
+#: ../templates/misc-iso-templates.xml.h:8
+msgid "CD Labels"
+msgstr "CD-Aufkleber"
+
+#. ===================================================================
+#: ../templates/databecker-iso-templates.xml.h:8
+msgid "CD/DVD Labels Standard Format (face only)"
+msgstr "CD/DVD-Etiketten im Standardformat (nur Vorderseite)"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:2
@@ -3106,7 +3128,7 @@ msgid "Diskette Labels (face only)"
 msgstr "Diskettenaufkleber (nur Vorderseite)"
 
 #. ===================================================================
-#: ../templates/herma-iso-templates.xml.h:16
+#: ../templates/herma-iso-templates.xml.h:20
 msgid "Video Labels (face only)"
 msgstr "Video-Etiketten (nur Vorderseite)"
 
@@ -3170,7 +3192,7 @@ msgstr "PRO-CD-Etiketten 2-up (nur Vorderseite)"
 #. ===================================================================
 #. TODO: Is this the actual part #?
 #: ../templates/misc-us-templates.xml.h:30
-#: ../templates/misc-iso-templates.xml.h:30
+#: ../templates/misc-iso-templates.xml.h:28
 msgid "PRO CD Labels 2-up (face only)"
 msgstr "PRO-CD-Etiketten 2-up (nur Vorderseite)"
 
@@ -3184,48 +3206,38 @@ msgid "Slimline CD Case (upside down)"
 msgstr "Slimline CD-Box (umgekehrt)"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:8
-msgid "CD Labels"
-msgstr "CD-Aufkleber"
-
-#. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:14
-msgid "CD/DVD Labels Standard Format (face only)"
-msgstr "CD/DVD-Etiketten im Standardformat (nur Vorderseite)"
-
-#. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:16
 msgid "EPSON Photo Stickers 16"
 msgstr "EPSON Photo Stickers 16"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:18
+#: ../templates/misc-iso-templates.xml.h:16
 msgid "Etiketten"
 msgstr "Etiketten"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:20
+#: ../templates/misc-iso-templates.xml.h:18
 msgid "Fridge Magnet Stickers"
 msgstr "Aufkleber für Kühlschrankmagnete"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:22
+#: ../templates/misc-iso-templates.xml.h:20
 msgid "General Labels"
 msgstr "Allgemeine Etiketten"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:24
+#: ../templates/misc-iso-templates.xml.h:22
 msgid "Inkjet/Laser Labels 70x37mm"
 msgstr "Inkjet/Laseretiketten 70x37mm"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:34
+#: ../templates/misc-iso-templates.xml.h:32
 #: ../templates/pearl-iso-templates.xml.h:62
 msgid "Self-adhesive labels"
 msgstr "Selbstklebende Etiketten"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:36
+#: ../templates/misc-iso-templates.xml.h:34
 msgid "Universal Labels"
 msgstr "Universelle Etiketten"
 
