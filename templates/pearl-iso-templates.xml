@@ -439,6 +439,7 @@
   <Template brand="Sattleford" part="VM-6200" size="A4" _description="Business cards glossy, both sides printable">
     <Meta category="card"/>
     <Meta category="business-card"/>
+    <Meta category="foldable"/>
     <Meta product_url="http://www.pearl.de/a-VM6200-2013.shtml"/>
     <Label-rectangle id="0" width="180mm" height="50mm" round="3mm" x_waste="0mm" y_waste="2.5mm">
       <Markup-rect x1="3.2mm" y1="3.2mm" w="83.6mm" h="43.6mm"/>
@@ -467,6 +468,7 @@
   <Template brand="Sattleford" part="VM-6356, VM-5856" size="A4" _description="Foldable business cards glossy/dull">
     <Meta category="card"/>
     <Meta category="business-card"/>
+    <Meta category="foldable"/>
     <Meta product_url="http://www.pearl.de/a-VM6356-2013.shtml"/>
     <Label-rectangle id="0" width="170mm" height="54mm" round="0mm" x_waste="0mm" y_waste="0mm">
       <Markup-rect x1="3.2mm" y1="3.2mm" w="78.6mm" h="47.6mm"/>
@@ -483,6 +485,7 @@
   <Template brand="Sattleford" part="VM-6700" size="A4" _description="Foldable business cards">
     <Meta category="card"/>
     <Meta category="business-card"/>
+    <Meta category="foldable"/>
     <Meta product_url="http://www.pearl.de/a-VM6700-2013.shtml"/>
     <Label-rectangle id="0" width="180mm" height="50mm" round="0mm" x_waste="0mm" y_waste="2.5mm">
       <Markup-rect x1="3.2mm" y1="3.2mm" w="83.6mm" h="43.6mm"/>
