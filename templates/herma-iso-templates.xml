@@ -100,7 +100,7 @@
   <!-- =================================================================== -->
   <!-- Herma Musteretiketten: Allzweck Etiketten, 44 per sheet             -->
   <!-- =================================================================== -->
-  <Template brand="Herma" part="4608" size="A4" _description="Allround Labels">
+  <Template brand="Herma" part="4102" size="A4" _description="Allround Labels">
     <Meta category="label"/>
     <Label-rectangle id="0" width="136.913" height="72" round="0">
       <Markup-margin size="5"/>
@@ -108,8 +108,21 @@
     </Label-rectangle>
   </Template>
 
+  <Template brand="Herma" part="4109" equiv="4608"/>
+  <Template brand="Herma" part="4112" equiv="4608"/>
   <Template brand="Herma" part="4272" equiv="4608"/>
+  <Template brand="Herma" part="4357" equiv="4608"/>
+  <Template brand="Herma" part="4608" equiv="4608"/>
+  <Template brand="Herma" part="4680" equiv="4608"/>
+  <Template brand="Herma" part="4690" equiv="4608"/>
+  <Template brand="Herma" part="4812" equiv="4608"/>
   <Template brand="Herma" part="5051" equiv="4608"/>
+  <Template brand="Herma" part="8631" equiv="4608"/>
+  <Template brand="Herma" part="8835" equiv="4608"/>
+  <Template brand="Herma" part="8961" equiv="4608"/>
+  <Template brand="Herma" part="8971" equiv="4608"/>
+  <Template brand="Herma" part="8981" equiv="4608"/>
+  <Template brand="Herma" part="10801" equiv="4608"/>
 
   
   <!-- =================================================================== -->
