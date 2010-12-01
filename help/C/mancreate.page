@@ -125,7 +125,7 @@
     <td><p>height</p></td>  <td><p>Page height.  Only valid if size="Other"</p></td>
   </tr>
   <tr>
-    <td><p>equiv</p></td>  <td><p>Equivalent part number.  If this property is present, the template is a clone of another template of the same brand.  The template will inheret all properties, except brand and name from the other template.  This equiv property must refer to a previously defined template -- libglabels does not currently support forward references.</p></td>
+    <td><p>equiv</p></td>  <td><p>Equivalent part number.  If this property is present, the template is a clone of another template of the same brand.  The template will inherit all properties, except brand and name from the other template.  This equiv property must refer to a previously defined template -- libglabels does not currently support forward references.</p></td>
   </tr>
 </table>
 
@@ -148,7 +148,25 @@
     <td><p>category</p></td>  <td><p>The category which this product is assigned to. The value
 	of this category is used by the <app>gLabels'</app> template chooser to filter the 
 	view to display only mailing labels, or labels in common and suppress any other products
-	which the user don't want to find. One product can be assigned to several categories.</p></td>
+	which the user don't want to find.</p>
+	<p>One product can be assigned to several categories.  You may choose from the
+	following categories:</p>
+	<list>
+	  <item><p>label</p></item>
+	  <item><p>round-label</p></item>
+	  <item><p>elliptical-label</p></item>
+	  <item><p>square-label</p></item>
+	  <item><p>rectangle-label</p></item>
+	  <item><p>card</p></item>
+	  <item><p>business-card</p></item>
+	  <item><p>media</p></item>
+	  <item><p>mail</p></item>
+	  <item><p>foldable</p></item>
+	</list>
+	<note><p>If you have any ideas for new categories, please send your suggestions to the 
+	developer's mailing list of <app>gLabels</app>: <sys>glabels-devel@lists.sourceforge.net</sys>.
+	</p></note>
+    </td>
   </tr>
   <tr>
     <td><p>product_url</p></td> <td><p>This address points to the vendor's website. Ideally, 
