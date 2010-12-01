@@ -172,9 +172,9 @@
 
   
   <!-- =================================================================== -->
-  <!-- Herma 5079: CD/DVD Labels, 2 per sheet                              -->
+  <!-- Herma 4093: CD/DVD Labels, 2 per sheet                              -->
   <!-- =================================================================== -->
-  <Template brand="Herma" part="5079" size="A4" _description="CD/DVD Labels">
+  <Template brand="Herma" part="4093" size="A4" _description="CD/DVD Labels">
     <Meta category="label"/>
     <Meta category="media"/>
     <Label-cd id="0" radius="164.409pt" hole="58.1102pt" waste="9pt">
@@ -183,6 +183,32 @@
     </Label-cd>
   </Template>
 
+  <Template brand="Herma" part="4094" equiv="4093"/>
+  <Template brand="Herma" part="4374" equiv="4093"/>
+  <Template brand="Herma" part="4471" equiv="4093"/>
+  <Template brand="Herma" part="4699" equiv="4093"/>
+  <Template brand="Herma" part="4818" equiv="4093"/>
+  <Template brand="Herma" part="4849" equiv="4093"/>
+  <Template brand="Herma" part="4850" equiv="4093"/>
+  <Template brand="Herma" part="4914" equiv="4093"/>
+  <Template brand="Herma" part="5079" equiv="4093"/>
+  <Template brand="Herma" part="5083" equiv="4093"/>
+  <Template brand="Herma" part="5084" equiv="4093"/>
+  <Template brand="Herma" part="5085" equiv="4093"/>
+  <Template brand="Herma" part="5086" equiv="4093"/>
+  <Template brand="Herma" part="5115" equiv="4093"/>
+  <Template brand="Herma" part="8624" equiv="4093"/>
+  <Template brand="Herma" part="8625a" equiv="4093"/>
+  <Template brand="Herma" part="8683" equiv="4093"/>
+  <Template brand="Herma" part="8740" equiv="4093"/>
+  <Template brand="Herma" part="8885" equiv="4093"/>
+  <Template brand="Herma" part="8900" equiv="4093"/>
+  <Template brand="Herma" part="8928" equiv="4093"/>
+  <Template brand="Herma" part="8943" equiv="4093"/>
+  <Template brand="Herma" part="8968" equiv="4093"/>
+  <Template brand="Herma" part="8975" equiv="4093"/>
+  <Template brand="Herma" part="8984" equiv="4093"/>
+  <Template brand="Herma" part="8994" equiv="4093"/>
 
   <!-- =================================================================== -->
   <!-- Data Becker Etiketten Paket: Disketten Etiketten, 10 per sheet      -->
@@ -223,21 +249,6 @@
   </Template>
 
   <!-- =================================================================== -->
-  <!-- Herma 4093: Rectangular Labels 116mm x 116mm, 2 per sheet           -->
-  <!-- =================================================================== -->
-
-  <Template brand="Herma" part="4093" size="A4" _description="Rectangular labels">
-    <Meta category="label"/>
-    <Meta category="rectangle-label"/>
-    <Label-rectangle id="0" width="116mm" height="116mm" round="0mm" x_waste="0mm" y_waste="0mm">
-      <Markup-margin size="3.175mm"/>
-      <Layout nx="1" ny="2" x0="47.5mm" y0="16mm" dx="116mm" dy="148mm"/>
-    </Label-rectangle>
-  </Template>
-
-  <Template brand="Herma" part="4094" equiv="4093"/>
-
-  <!-- =================================================================== -->
   <!-- Herma 4097: Rectangular Labels 45.72mm x 21.2mm, 2 per sheet        -->
   <!-- =================================================================== -->
 
@@ -252,6 +263,7 @@
 
   <Template brand="Herma" part="4221" equiv="4097"/>
   <Template brand="Herma" part="4232" equiv="4097"/>
+  <Template brand="Herma" part="4235" equiv="4097"/>
   <Template brand="Herma" part="4346" equiv="4097"/>
   <Template brand="Herma" part="4366" equiv="4097"/>
   <Template brand="Herma" part="4367" equiv="4097"/>
