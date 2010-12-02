@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-11-27 05:05+0000\n"
-"PO-Revision-Date: 2010-11-27 16:31+0100\n"
+"POT-Creation-Date: 2010-11-30 20:53+0000\n"
+"PO-Revision-Date: 2010-12-02 18:34+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1181,7 +1181,7 @@ msgstr "Preferencias de gLabels"
 #. TODO: Is this the actual part #?
 #: ../src/print-op.c:205 ../src/print-op-dialog.c:217
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:4
-#: ../templates/misc-iso-templates.xml.h:26
+#: ../templates/misc-iso-templates.xml.h:24
 msgid "Labels"
 msgstr "Etiquetas"
 
@@ -1848,7 +1848,7 @@ msgstr "No se soporta el seguimiento de referencias."
 
 #: ../libglabels/xml-template.c:732
 msgid "Skipping deprecated \"Alias\" node."
-msgstr ""
+msgstr "Omitiendo el nodo obsoleto «Alias». "
 
 #.
 #. * Local Variables:       -- emacs
@@ -2304,6 +2304,8 @@ msgid ""
 "Note: if more than 2 layouts are required, the template must be edited "
 "manually."
 msgstr ""
+"Nota: si se requieren más de dos disposiciones, se debe editar la plantilla "
+"manualmente."
 
 #: ../data/ui/template-designer.ui.h:43
 msgid "Number across (nx):"
@@ -2760,26 +2762,31 @@ msgstr "CD/DVD u otros soportes"
 
 #. ===================================================================
 #: ../templates/categories.xml.h:5 ../templates/pearl-iso-templates.xml.h:28
-#, fuzzy
-#| msgid "Elliptical"
 msgid "Elliptical labels"
-msgstr "Elíptica"
+msgstr "Etiquetas elípticas"
 
 #: ../templates/categories.xml.h:6
+#| msgid "Foldable business cards"
+msgid "Foldable cards"
+msgstr "Tarjetas plegables"
+
+#: ../templates/categories.xml.h:7
 msgid "Mailing/shipping products"
 msgstr "Productos para correo/envío"
 
+#. ===================================================================
 #. ********************************************************************
-#: ../templates/categories.xml.h:7 ../templates/jac-iso-templates.xml.h:4
+#: ../templates/categories.xml.h:8 ../templates/herma-iso-templates.xml.h:18
+#: ../templates/jac-iso-templates.xml.h:4
 msgid "Rectangular labels"
 msgstr "Etiquetas rectangulares"
 
 #. ===================================================================
-#: ../templates/categories.xml.h:8 ../templates/pearl-iso-templates.xml.h:54
+#: ../templates/categories.xml.h:9 ../templates/pearl-iso-templates.xml.h:54
 msgid "Round labels"
 msgstr "Etiquetas redondeadas"
 
-#: ../templates/categories.xml.h:9
+#: ../templates/categories.xml.h:10
 msgid "Square labels"
 msgstr "Etiquetas cuadradas"
 
@@ -2788,6 +2795,7 @@ msgstr "Etiquetas cuadradas"
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:2
 #: ../templates/avery-iso-templates.xml.h:2
+#: ../templates/databecker-iso-templates.xml.h:2
 #: ../templates/dymo-other-templates.xml.h:4
 #: ../templates/maco-us-templates.xml.h:2
 #: ../templates/misc-iso-templates.xml.h:2
@@ -2804,6 +2812,7 @@ msgstr "Etiquetas de dirección"
 #. ============================================================
 #: ../templates/avery-us-templates.xml.h:4
 #: ../templates/avery-iso-templates.xml.h:8
+#: ../templates/databecker-iso-templates.xml.h:4
 #: ../templates/decadry-iso-templates.xml.h:2
 #: ../templates/misc-us-templates.xml.h:4
 #: ../templates/misc-iso-templates.xml.h:6
@@ -2984,7 +2993,7 @@ msgstr "Etiquetas de identificación"
 #: ../templates/decadry-iso-templates.xml.h:4
 #: ../templates/herma-iso-templates.xml.h:14
 #: ../templates/misc-us-templates.xml.h:20
-#: ../templates/misc-iso-templates.xml.h:28
+#: ../templates/misc-iso-templates.xml.h:26
 #: ../templates/zweckform-iso-templates.xml.h:20
 msgid "Mailing Labels"
 msgstr "Etiquetas de correo"
@@ -3006,10 +3015,13 @@ msgid "Mini Labels"
 msgstr "Minietiquetas"
 
 #. ============================================================
+#. ===================================================================
 #. TODO: What is the actual part #?
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:30
-#: ../templates/misc-iso-templates.xml.h:32
+#: ../templates/databecker-iso-templates.xml.h:10
+#: ../templates/herma-iso-templates.xml.h:16
+#: ../templates/misc-iso-templates.xml.h:30
 #: ../templates/zweckform-iso-templates.xml.h:28
 msgid "Rectangular Labels"
 msgstr "Etiquetas rectangulares"
@@ -3047,6 +3059,17 @@ msgstr "Etiquetas de envío de 62mm x 100mm"
 #: ../templates/brother-other-templates.xml.h:20
 msgid "Standard Address Labels 29mm x 90mm"
 msgstr "Etiquetas de dirección estándar de 29mm x 90mm"
+
+#. ===================================================================
+#: ../templates/databecker-iso-templates.xml.h:6
+#: ../templates/misc-iso-templates.xml.h:8
+msgid "CD Labels"
+msgstr "Etiquetas para CD"
+
+#. ===================================================================
+#: ../templates/databecker-iso-templates.xml.h:8
+msgid "CD/DVD Labels Standard Format (face only)"
+msgstr "Etieuats CD/DVD Formato estándar (sólo frente)"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:2
@@ -3104,7 +3127,7 @@ msgid "Diskette Labels (face only)"
 msgstr "Etiquetas para disquette (sólo cara)"
 
 #. ===================================================================
-#: ../templates/herma-iso-templates.xml.h:16
+#: ../templates/herma-iso-templates.xml.h:20
 msgid "Video Labels (face only)"
 msgstr "Etiqeutas de video (solo frente)"
 
@@ -3172,7 +3195,7 @@ msgstr "Etiquetas para CD (sólo carátula)"
 #. ===================================================================
 #. TODO: Is this the actual part #?
 #: ../templates/misc-us-templates.xml.h:30
-#: ../templates/misc-iso-templates.xml.h:30
+#: ../templates/misc-iso-templates.xml.h:28
 msgid "PRO CD Labels 2-up (face only)"
 msgstr "PRO CD Labels 2-up (sólo la cara)"
 
@@ -3188,48 +3211,38 @@ msgid "Slimline CD Case (upside down)"
 msgstr "Caja extraplana de CD (boca abajo)"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:8
-msgid "CD Labels"
-msgstr "Etiquetas para CD"
-
-#. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:14
-msgid "CD/DVD Labels Standard Format (face only)"
-msgstr "Etieuats CD/DVD Formato estándar (sólo frente)"
-
-#. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:16
 msgid "EPSON Photo Stickers 16"
 msgstr "Pegatinas EPSON Photo Stickers 16"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:18
+#: ../templates/misc-iso-templates.xml.h:16
 msgid "Etiketten"
 msgstr "Etiketten"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:20
+#: ../templates/misc-iso-templates.xml.h:18
 msgid "Fridge Magnet Stickers"
 msgstr "Pegatinas magnéticas para frigorífico"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:22
+#: ../templates/misc-iso-templates.xml.h:20
 msgid "General Labels"
 msgstr "Etiquetas generales"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:24
+#: ../templates/misc-iso-templates.xml.h:22
 msgid "Inkjet/Laser Labels 70x37mm"
 msgstr "Etiquetas para impresora de inyección/láser de 70x37mm"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:34
+#: ../templates/misc-iso-templates.xml.h:32
 #: ../templates/pearl-iso-templates.xml.h:62
 msgid "Self-adhesive labels"
 msgstr "Etiquetas autoadhesivas"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:36
+#: ../templates/misc-iso-templates.xml.h:34
 msgid "Universal Labels"
 msgstr "Etiquetas universales"
 
