@@ -2,16 +2,16 @@
 # Spanish translation for glabels.
 # Copyright (C) 2010 glabels's COPYRIGHT HOLDER
 # This file is distributed under the same license as the glabels package.
-# Jorge González <jorgegonz@svn.gnome.org>, 2010.
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2010.
+# Jorge González <jorgegonz@svn.gnome.org>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-02 15:12+0000\n"
-"PO-Revision-Date: 2010-11-29 17:41+0100\n"
-"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
+"PO-Revision-Date: 2010-12-02 18:43+0100\n"
+"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -985,11 +985,12 @@ msgstr "Crear plantillas nuevas manualmente"
 #: C/mancreate.page:27(p)
 msgid ""
 "Predefined templates are defined by XML files located in either <file>/usr/"
-"share/libglabels-3.0/templates/</file> or <file>/usr/local/share/libglabels-"
-"3.0/templates/</file>, depending on where <app>glabels</app> was installed. "
-"<app>Glabels</app> will also search for user defined templates in the "
-"directory <file>${HOME}/.config/libglabels/templates/</file>. User defined "
-"template files should be named with a <file>*.template</file> extension."
+"share/libglabels-3.0/templates/</file> or <file>/usr/local/share/"
+"libglabels-3.0/templates/</file>, depending on where <app>glabels</app> was "
+"installed. <app>Glabels</app> will also search for user defined templates in "
+"the directory <file>${HOME}/.config/libglabels/templates/</file>. User "
+"defined template files should be named with a <file>*.template</file> "
+"extension."
 msgstr ""
 
 #: C/mancreate.page:37(p)
@@ -1000,7 +1001,7 @@ msgid ""
 msgstr ""
 "El formato de esos archivos está definido en el DTD: <link href=\"http://"
 "glabels.org/xmlns/2.3/glabels-2.3.dtd.txt\">glabels-2.3.dtd</link>. (Este "
-"DTD también describe otros formatos XML usados por <app>glabels</app>)."
+"DTD también describe otros formatos XML usados por <app>glabels</app>.)"
 
 #: C/mancreate.page:42(title)
 msgid "Assumptions/caveats"
@@ -1113,9 +1114,8 @@ msgid "size"
 msgstr "tamaño"
 
 #: C/mancreate.page:113(p)
-#, fuzzy
 msgid "Size of sheet. E.g., \"US-Letter,\" \"A4\", ..."
-msgstr "Tamaño de la hoja. Ej. «carta», «A4», ..."
+msgstr "Tamaño de la hoja. Ej. «US Letter», «A4», ..."
 
 #: C/mancreate.page:116(p)
 msgid "description"
@@ -1142,7 +1142,7 @@ msgstr "anchura"
 
 #: C/mancreate.page:122(p)
 msgid "Page width. Only valid if size=\"Other\""
-msgstr "Ancho de la página. Sólo es válido si tamaño=«Otro»"
+msgstr "Ancho de la página. Sólo es válido si tamaño=«Otro»."
 
 #: C/mancreate.page:125(p) C/mancreate.page:201(p) C/mancreate.page:249(p)
 #: C/mancreate.page:329(p)
