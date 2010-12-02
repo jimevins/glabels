@@ -164,7 +164,8 @@
 	  <item><p>foldable</p></item>
 	</list>
 	<note><p>If you have any ideas for new categories, please send your suggestions to the 
-	developer's mailing list of <app>gLabels</app>: <sys>glabels-devel@lists.sourceforge.net</sys>.
+	developer's <link href="mailto:glabels-devel@lists.sourceforge.net">mailing list</link>
+        of <app>gLabels</app>.
 	</p></note>
     </td>
   </tr>
