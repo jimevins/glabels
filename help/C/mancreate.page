@@ -89,13 +89,13 @@
     </section>
 
     <section id="template-template-node">
-      <title><span translate="no">Template</span> Node</title>
+      <title><span its:translate="no">Template</span> Node</title>
 
-      <p>A <em><span translate="no">Template</span></em> node describes a single
+      <p>A <em><span its:translate="no">Template</span></em> node describes a single
 	stationery product.  It must contain one instance of any type of Label node
-        (<em><span translate="no">Label-rectangle</span></em>,
-        <em><span translate="no">Label-round</span></em>, or
-	<em><span translate="no">Label-cd</span></em>).</p>
+        (<em><span its:translate="no">Label-rectangle</span></em>,
+        <em><span its:translate="no">Label-round</span></em>, or
+	<em><span its:translate="no">Label-cd</span></em>).</p>
 
 <table frame="all" rules="rows">
   <tr>
@@ -105,36 +105,36 @@
     <td><p></p></td>  <td><p></p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">brand</span></p></td>  
+    <td><p><span its:translate="no">brand</span></p></td>  
     <td><p>Brand or manufacturer of stationery product. E.g. "Avery"</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">part</span></p></td>
+    <td><p><span its:translate="no">part</span></p></td>
     <td><p>Part number or name of stationery product. E.g. "8160"</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">size</span></p></td>
+    <td><p><span its:translate="no">size</span></p></td>
     <td><p>Size of sheet.  E.g., "US-Letter," "A4", ...</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">description</span></p></td>
+    <td><p><span its:translate="no">description</span></p></td>
     <td><p>Description of stationery product.  E.g, "Mailing Labels."</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">_description</span></p></td>
+    <td><p><span its:translate="no">_description</span></p></td>
     <td><p>Translatable description of stationery product. E.g, "Mailing Labels."
            (Only useful for predefined templates)</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">width</span></p></td>
+    <td><p><span its:translate="no">width</span></p></td>
     <td><p>Page width.  Only valid if size="Other"</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">height</span></p></td>
+    <td><p><span its:translate="no">height</span></p></td>
     <td><p>Page height.  Only valid if size="Other"</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">equiv</span></p></td>
+    <td><p><span its:translate="no">equiv</span></p></td>
     <td><p>Equivalent part number.  If this property is present, the template
 	   is a clone of another template of the same brand.  The template will
 	   inherit all properties, except brand and name from the other template.
@@ -146,9 +146,9 @@
 </section>
 
     <section id="template-template-node">
-      <title><span translate="no">Meta</span> Node</title>
+      <title><span its:translate="no">Meta</span> Node</title>
 
-      <p>A <em><span translate="no">Meta</span></em> node contains some additional
+      <p>A <em><span its:translate="no">Meta</span></em> node contains some additional
 	   properties of that product.	This node may appear more than once, with a
 	   subnode each.</p>
 
@@ -160,7 +160,7 @@
     <td><p></p></td>  <td><p></p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">category</span></p></td>
+    <td><p><span its:translate="no">category</span></p></td>
     <td><p>The category which this product is assigned to. The value
 	of this category is used by the <app>gLabels'</app> template chooser to filter the 
 	view to display only mailing labels, or labels in common and suppress any other products
@@ -168,16 +168,16 @@
 	<p>One product can be assigned to several categories.  You may choose from the
 	following categories:</p>
 	<list>
-	  <item><p><span translate="no">label</span></p></item>
-	  <item><p><span translate="no">round-label</span></p></item>
-	  <item><p><span translate="no">elliptical-label</span></p></item>
-	  <item><p><span translate="no">square-label</span></p></item>
-	  <item><p><span translate="no">rectangle-label</span></p></item>
-	  <item><p><span translate="no">card</span></p></item>
-	  <item><p><span translate="no">business-card</span></p></item>
-	  <item><p><span translate="no">media</span></p></item>
-	  <item><p><span translate="no">mail</span></p></item>
-	  <item><p><span translate="no">foldable</span></p></item>
+	  <item><p><span its:translate="no">label</span></p></item>
+	  <item><p><span its:translate="no">round-label</span></p></item>
+	  <item><p><span its:translate="no">elliptical-label</span></p></item>
+	  <item><p><span its:translate="no">square-label</span></p></item>
+	  <item><p><span its:translate="no">rectangle-label</span></p></item>
+	  <item><p><span its:translate="no">card</span></p></item>
+	  <item><p><span its:translate="no">business-card</span></p></item>
+	  <item><p><span its:translate="no">media</span></p></item>
+	  <item><p><span its:translate="no">mail</span></p></item>
+	  <item><p><span its:translate="no">foldable</span></p></item>
 	</list>
 	<note><p>If you have any ideas for new categories, please send your suggestions to the 
 	developer's <link href="mailto:glabels-devel@lists.sourceforge.net">mailing list</link>
@@ -186,7 +186,7 @@
     </td>
   </tr>
   <tr>
-    <td><p><span translate="no">product_url</span></p></td>
+    <td><p><span its:translate="no">product_url</span></p></td>
     <td><p>This address points to the vendor's website. Ideally, 
 	the link shows the URL of that certain product, if available.</p></td>
   </tr>
@@ -195,9 +195,9 @@
 </section>
 
     <section id="template-label-rectangle-node">
-      <title><span translate="no">Label-rectangle</span> Node</title>
+      <title><span its:translate="no">Label-rectangle</span> Node</title>
 
-      <p>A <em><span translate="no">Label-rectangle</span></em> node describes the
+      <p>A <em><span its:translate="no">Label-rectangle</span></em> node describes the
         dimensions of a single label or business card that is rectangular
         in shape (may have rounded edges).</p>
 
@@ -209,30 +209,30 @@
     <td><p></p></td>  <td><p></p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">id</span></p></td>
+    <td><p><span its:translate="no">id</span></p></td>
     <td><p>Reserved for future use.  Should always be 0.</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">width</span></p></td>
+    <td><p><span its:translate="no">width</span></p></td>
     <td><p>Width of label/card</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">height</span></p></td>
+    <td><p><span its:translate="no">height</span></p></td>
     <td><p>Heigth of label/card</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">round</span></p></td>
+    <td><p><span its:translate="no">round</span></p></td>
     <td><p>Radius of corners.  For items with square edges (business cards),
            the radius should be 0.</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">x_waste</span></p></td>
+    <td><p><span its:translate="no">x_waste</span></p></td>
     <td><p>Amount of horizontal waste (over-print) to allow.  This is useful
                   for minimizing alignment problems when using non-white
                   backgrounds (e.g. images).</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">y_waste</span></p></td>
+    <td><p><span its:translate="no">y_waste</span></p></td>
     <td><p>Amount of vertical waste (over-print) to allow.  This is useful
                   for minimizing alignment problems when using non-white
                   backgrounds (e.g. images).</p></td>
@@ -241,18 +241,18 @@
 
       <!-- ==== Figure ==== -->
       <figure>
-      		<desc><span translate="no">Label-rectangle</span> parameters</desc>
+      		<desc><span its:translate="no">Label-rectangle</span> parameters</desc>
 		<media type="image" src="figures/glabels-template-rect-label.png" mime="image/png" style="right">
-      		<p><span translate="no">Label-rectangle</span> parameters</p>
+      		<p><span its:translate="no">Label-rectangle</span> parameters</p>
     		</media>
       </figure>
       <!-- ==== End of Figure ==== -->
 	</section>
 
     <section id="template-label-rectangle-node">
-      <title><span translate="no">Label-ellipse</span> Node</title>
+      <title><span its:translate="no">Label-ellipse</span> Node</title>
 
-      <p>A <em><span translate="no">Label-ellipse</span></em> node describes the
+      <p>A <em><span its:translate="no">Label-ellipse</span></em> node describes the
         dimensions of a single label or business card that is elliptic
         in shape.</p>
 
@@ -264,19 +264,19 @@
     <td><p></p></td>  <td><p></p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">id</span></p></td>
+    <td><p><span its:translate="no">id</span></p></td>
     <td><p>Reserved for future use.  Should always be 0.</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">width</span></p></td>
+    <td><p><span its:translate="no">width</span></p></td>
     <td><p>Width of the ellipse</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">height</span></p></td>
+    <td><p><span its:translate="no">height</span></p></td>
     <td><p>Heigth of the ellipse</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">waste</span></p></td>
+    <td><p><span its:translate="no">waste</span></p></td>
     <td><p>Amount of waste (over-print) to allow.  This is useful
                   for minimizing alignment problems when using non-white
                   backgrounds (e.g. images).</p></td>
@@ -285,18 +285,18 @@
 
       <!-- ==== Figure ==== -->
       <figure>
-      		<desc><span translate="no">Label-ellipse</span> parameters</desc>
+      		<desc><span its:translate="no">Label-ellipse</span> parameters</desc>
 		<media type="image" src="figures/glabels-template-ellipse-label.png" mime="image/png" style="right">
-		<p><span translate="no">Label-ellipse</span> parameters</p>
+		<p><span its:translate="no">Label-ellipse</span> parameters</p>
     		</media>
       </figure>
       <!-- ==== End of Figure ==== -->
 	</section>
 
     <section id="template-label-round-node">
-      <title><span translate="no">Label-round</span> Node</title>
+      <title><span its:translate="no">Label-round</span> Node</title>
 
-      <p>A <em><span translate="no">Label-round</span></em> node describes the dimensions
+      <p>A <em><span its:translate="no">Label-round</span></em> node describes the dimensions
         of a simple round label (not a CD).</p>
 
 <table frame="all" rules="rows">
@@ -307,15 +307,15 @@
     <td><p></p></td>  <td><p></p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">id</span></p></td>
+    <td><p><span its:translate="no">id</span></p></td>
     <td><p>Reserved for future use.  Should always be 0.</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">radius</span></p></td>
+    <td><p><span its:translate="no">radius</span></p></td>
     <td><p>Radius (1/2 diameter) of label</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">waste</span></p></td>
+    <td><p><span its:translate="no">waste</span></p></td>
     <td><p>Amount of waste (over-print) to allow.  This is useful
                   for minimizing alignment problems when using non-white
                   backgrounds (e.g. images).</p></td>
@@ -324,18 +324,18 @@
 
       <!-- ==== Figure ==== -->
       <figure>
-      		<desc><span translate="no">Label-ellipse</span> parameters</desc>
+      		<desc><span its:translate="no">Label-ellipse</span> parameters</desc>
 		<media type="image" src="figures/glabels-template-circle-label.png" mime="image/png" style="right">
-      		<p><span translate="no">Label-ellipse</span> parameters</p>
+      		<p><span its:translate="no">Label-ellipse</span> parameters</p>
     		</media>
       </figure>
       <!-- ==== End of Figure ==== -->
     </section>
 
     <section id="template-label-cd-node">
-      <title><span translate="no">Label-cd</span> Node</title>
+      <title><span its:translate="no">Label-cd</span> Node</title>
 
-      <p>A <em><span translate="no">Label-cd</span></em> node describes the dimensions
+      <p>A <em><span its:translate="no">Label-cd</span></em> node describes the dimensions
         of a CD, DVD, or business card CD.</p>
 
 <table frame="all" rules="rows">
@@ -346,29 +346,29 @@
     <td><p></p></td>  <td><p></p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">id</span></p></td>
+    <td><p><span its:translate="no">id</span></p></td>
     <td><p>Reserved for future use.  Should always be 0.</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">radius</span></p></td>
+    <td><p><span its:translate="no">radius</span></p></td>
     <td><p>Outer radius of label</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">hole</span></p></td>
+    <td><p><span its:translate="no">hole</span></p></td>
     <td><p>Radius of concentric hole</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">width</span></p></td>
+    <td><p><span its:translate="no">width</span></p></td>
     <td><p>If present, the label is clipped to the given width.
                   (Useful for "business card CDs").</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">height</span></p></td>
+    <td><p><span its:translate="no">height</span></p></td>
     <td><p>If present, the label is clipped to the given height.
                   (Useful for "business card CDs").</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">waste</span></p></td>
+    <td><p><span its:translate="no">waste</span></p></td>
     <td><p>Amount of waste (over-print) to allow.  This is useful
                   for minimizing alignment problems when using non-white
                   backgrounds (e.g. images).</p></td>
@@ -377,7 +377,7 @@
 
 	      <!-- ==== Figure ==== -->
 	      <figure>
-      		<desc><span translate="no">Label-cd</span> parameters</desc>
+      		<desc><span its:translate="no">Label-cd</span> parameters</desc>
 		<media type="image" src="figures/glabels-template-cd-label.png" mime="image/png" style="right">
       		<p>CD label parameters</p>
     		</media>
@@ -386,7 +386,7 @@
     </section>
 
     <section id="template-markup">
-      <title><span translate="no">Markup</span> Nodes</title>
+      <title><span its:translate="no">Markup</span> Nodes</title>
 
       <p>Templates may contain optional markup nodes.  These nodes are used to describe
       a simple set of markup lines that are visible in the <app>glabels</app> drawing canvas, but
@@ -394,9 +394,9 @@
       special areas, or other helpful hints to the user of a template.</p>
 
     <section id="template-markup-margin-node">
-      <title><span translate="no">Markup-margin</span> Node</title>
+      <title><span its:translate="no">Markup-margin</span> Node</title>
 
-      <p>A <em><span translate="no">Markup-margin</span></em> describes a margin along
+      <p>A <em><span its:translate="no">Markup-margin</span></em> describes a margin along
         all edges of a label.</p>
 
 <table frame="all" rules="rows">
@@ -407,7 +407,7 @@
     <td><p></p></td>  <td><p></p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">size</span></p></td>
+    <td><p><span its:translate="no">size</span></p></td>
     <td><p>Size of the margin.  I.e. the distance of the margin
                   line from the edge of the card/label.</p></td>
   </tr>
@@ -415,9 +415,9 @@
     </section>
 
     <section id="template-markup-line-node">
-      <title><span translate="no">Markup-line</span> Node</title>
+      <title><span its:translate="no">Markup-line</span> Node</title>
 
-      <p>A <em><span translate="no">Markup-line</span></em> node describes a markup line.</p>
+      <p>A <em><span its:translate="no">Markup-line</span></em> node describes a markup line.</p>
 
 <table frame="all" rules="rows">
   <tr>
@@ -427,28 +427,28 @@
     <td><p></p></td>  <td><p></p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">x1</span></p></td>
+    <td><p><span its:translate="no">x1</span></p></td>
     <td><p>x coordinate of 1st endpoint of the line segment.</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">y1</span></p></td>
+    <td><p><span its:translate="no">y1</span></p></td>
     <td><p>y coordinate of 1st endpoint of the line segment.</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">x2</span></p></td>
+    <td><p><span its:translate="no">x2</span></p></td>
     <td><p>x coordinate of 2st endpoint of the line segment.</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">y2</span></p></td>
+    <td><p><span its:translate="no">y2</span></p></td>
     <td><p>y coordinate of 2st endpoint of the line segment.</p></td>
   </tr>
 </table>
     </section>
 
     <section id="template-markup-circle-node">
-      <title><span translate="no">Markup-circle</span> Node</title>
+      <title><span its:translate="no">Markup-circle</span> Node</title>
 
-      <p>A <em><span translate="no">Markup-circle</span></em> describes a markup circle.</p>
+      <p>A <em><span its:translate="no">Markup-circle</span></em> describes a markup circle.</p>
 
 <table frame="all" rules="rows">
   <tr>
@@ -458,24 +458,24 @@
     <td><p></p></td>  <td><p></p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">x0</span></p></td>
+    <td><p><span its:translate="no">x0</span></p></td>
     <td><p>x coordinate of circle origin (center).</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">y0</span></p></td>
+    <td><p><span its:translate="no">y0</span></p></td>
     <td><p>y coordinate of circle origin (center).</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">radius</span></p></td>
+    <td><p><span its:translate="no">radius</span></p></td>
     <td><p>Radius of circle.</p></td>
   </tr>
 </table>
     </section>
 
     <section id="template-markup-rect-node">
-      <title><span translate="no">Markup-rect</span> Node</title>
+      <title><span its:translate="no">Markup-rect</span> Node</title>
 
-      <p>A <em><span translate="no">Markup-rect</span></em> describes a markup rectangle.</p>
+      <p>A <em><span its:translate="no">Markup-rect</span></em> describes a markup rectangle.</p>
 
 <table frame="all" rules="rows">
   <tr>
@@ -485,32 +485,32 @@
     <td><p></p></td>  <td><p></p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">x1</span></p></td>
+    <td><p><span its:translate="no">x1</span></p></td>
     <td><p>x coordinate of upper left corner of rectangle.</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">y1</span></p></td>
+    <td><p><span its:translate="no">y1</span></p></td>
     <td><p>y coordinate of upper left corner of rectangle.</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">w</span></p></td>
+    <td><p><span its:translate="no">w</span></p></td>
     <td><p>Width of rectangle.</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">h</span></p></td>
+    <td><p><span its:translate="no">h</span></p></td>
     <td><p>Height of rectangle.</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">r</span></p></td>
+    <td><p><span its:translate="no">r</span></p></td>
     <td><p>Radius of rounded corners of rectangle.</p></td>
   </tr>
 </table>
     </section>
 
     <section id="template-markup-ellipse-node">
-      <title><span translate="no">Markup-ellipse</span> Node</title>
+      <title><span its:translate="no">Markup-ellipse</span> Node</title>
 
-      <p>A <em><span translate="no">Markup-ellipse</span></em> describes a markup ellipse.</p>
+      <p>A <em><span its:translate="no">Markup-ellipse</span></em> describes a markup ellipse.</p>
 
 <table frame="all" rules="rows">
   <tr>
@@ -520,19 +520,19 @@
     <td><p></p></td>  <td><p></p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">x1</span></p></td>
+    <td><p><span its:translate="no">x1</span></p></td>
     <td><p>x coordinate of upper left corner of ellipse.</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">y1</span></p></td>
+    <td><p><span its:translate="no">y1</span></p></td>
     <td><p>y coordinate of upper left corner of ellipse.</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">w</span></p></td>
+    <td><p><span its:translate="no">w</span></p></td>
     <td><p>Width of ellipse.</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">h</span></p></td>
+    <td><p><span its:translate="no">h</span></p></td>
     <td><p>Height of ellipse.</p></td>
   </tr>
 </table>
@@ -541,13 +541,13 @@
     </section>
 
     <section id="template-layout-node">
-      <title><span translate="no">Layout</span> Node</title>
+      <title><span its:translate="no">Layout</span> Node</title>
 
-      <p>A label node may contain multiple <em><span translate="no">Layout</span></em>
+      <p>A label node may contain multiple <em><span its:translate="no">Layout</span></em>
         children.  If labels are arranged in a simple grid pattern, only
         one layout is needed.  However, if labels are arranged in multiple
         grids, such as a running bond pattern, multiple
-        <em><span translate="no">Layout</span></em> tags can be used. 
+        <em><span its:translate="no">Layout</span></em> tags can be used. 
 	Note: a single label can always be treated as a grid of one.</p>
 
 <table frame="all" rules="rows">
@@ -558,38 +558,38 @@
     <td><p></p></td>  <td><p></p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">nx</span></p></td>
+    <td><p><span its:translate="no">nx</span></p></td>
     <td><p>Number of labels/cards across in the grid (horizontal)</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">ny</span></p></td>
+    <td><p><span its:translate="no">ny</span></p></td>
     <td><p>Number of labels/cards across in the grid (vertical)</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">x0</span></p></td>
+    <td><p><span its:translate="no">x0</span></p></td>
     <td><p>Distance from left edge of sheet to the left edge of
                   the left column of cards/labels in the layout.</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">y0</span></p></td>
+    <td><p><span its:translate="no">y0</span></p></td>
     <td><p>Distance from the top edge of sheet to the top edge of
                   the top row of labels/cards in the layout.</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">dx</span></p></td>
+    <td><p><span its:translate="no">dx</span></p></td>
     <td><p>Horizontal pitch of grid.</p></td>
   </tr>
   <tr>
-    <td><p><span translate="no">dy</span></p></td>
+    <td><p><span its:translate="no">dy</span></p></td>
     <td><p>Vertical pitch of grid.</p></td>
   </tr>
 </table>
 
 	      <!-- ==== Figure ==== -->
 	      <figure>
-      		<desc><span translate="no">Layout</span> parameters</desc>
+      		<desc><span its:translate="no">Layout</span> parameters</desc>
 		<media type="image" src="figures/glabels-template-layout.png" mime="image/png" style="right">
-      		<p><span translate="no">Layout</span> Parameters</p>
+      		<p><span its:translate="no">Layout</span> Parameters</p>
     		</media>
 	      </figure>
 	      <!-- ==== End of Figure ==== -->
