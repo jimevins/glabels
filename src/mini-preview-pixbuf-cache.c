@@ -58,7 +58,7 @@ gl_mini_preview_pixbuf_cache_init (void)
 
 	mini_preview_pixbuf_cache = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_object_unref);
 
-        names = lgl_db_get_template_name_list_unique (NULL, NULL, NULL);
+        names = lgl_db_get_template_name_list_all (NULL, NULL, NULL);
         for ( p=names; p != NULL; p=p->next )
         {
                 gl_debug (DEBUG_PIXBUF_CACHE, "name = \"%s\"", p->data);

@@ -152,10 +152,6 @@ gboolean       lgl_db_does_template_exist            (const gchar         *brand
 
 gboolean       lgl_db_does_template_name_exist       (const gchar         *name);
 
-GList         *lgl_db_get_template_name_list_unique  (const gchar         *brand,
-                                                      const gchar         *paper_id,
-                                                      const gchar         *category_id);
-
 GList         *lgl_db_get_template_name_list_all     (const gchar         *brand,
                                                       const gchar         *paper_id,
                                                       const gchar         *category_id);

@@ -1713,55 +1713,6 @@ lgl_db_does_template_name_exist (const gchar *name)
 
 
 /**
- * lgl_db_get_template_name_list_unique:
- * @brand:     If non NULL, limit results to given brand
- * @paper_id: If non NULL, limit results to given page size.
- * @category_id: If non NULL, limit results to given template category.
- *
- * Get a list of valid names of unique templates in the template database.  Results
- * can be filtered by page size and/or template category.  A list of valid page sizes
- * can be obtained using lgl_db_get_paper_id_list().  A list of valid template categories
- * can be obtained using lgl_db_get_category_id_list().
- *
- * This function differs from lgl_db_get_template_name_list_all(), because it does not
- * return multiple names for the same template.
- *
- * Returns: a list of template names.
- */
-GList *
-lgl_db_get_template_name_list_unique (const gchar *brand,
-                                      const gchar *paper_id,
-                                      const gchar *category_id)
-{
-	GList       *p_tmplt;
-	lglTemplate *template;
-        gchar       *name;
-	GList       *names = NULL;
-
-	if (!model)
-        {
-		lgl_db_init ();
-	}
-
-	for (p_tmplt = model->templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
-        {
-		template = (lglTemplate *) p_tmplt->data;
-
-                if (lgl_template_does_brand_match (template, brand) &&
-                    lgl_template_does_page_size_match (template, paper_id) &&
-                    lgl_template_does_category_match (template, category_id))
-                {
-                        name = g_strdup_printf ("%s %s", template->brand, template->part);
-                        names = g_list_insert_sorted (names, name,
-                                                      (GCompareFunc)lgl_str_part_name_cmp);
-                }
-	}
-
-	return names;
-}
-
-
-/**
  * lgl_db_get_template_name_list_all:
  * @brand:     If non NULL, limit results to given brand
  * @paper_id: If non NULL, limit results to given page size.
@@ -1771,9 +1722,6 @@ lgl_db_get_template_name_list_unique (const gchar *brand,
  * Results can be filtered by page size and/or template category.  A list of valid page
  * sizes can be obtained using lgl_db_get_paper_id_list().  A list of valid template
  * categories can be obtained using lgl_db_get_category_id_list().
- *
- * This function differs from lgl_db_get_template_name_list_unique(), because it will
- * return multiple names for the same template.
  *
  * Returns: a list of template names.
  */
@@ -1795,16 +1743,12 @@ lgl_db_get_template_name_list_all (const gchar *brand,
 	for (p_tmplt = model->templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
         {
 		template = (lglTemplate *) p_tmplt->data;
-		if (lgl_template_does_page_size_match (template, paper_id) &&
+		if (lgl_template_does_brand_match (template, brand) &&
+                    lgl_template_does_page_size_match (template, paper_id) &&
                     lgl_template_does_category_match (template, category_id))
                 {
-
-                        if ( !brand || UTF8_EQUAL( template->brand, brand) )
-                        {
-                                name = g_strdup_printf ("%s %s", template->brand, template->part);
-                                names = g_list_insert_sorted (names, name,
-                                                              (GCompareFunc)lgl_str_part_name_cmp);
-			}
+                        name = g_strdup_printf ("%s %s", template->brand, template->part);
+                        names = g_list_insert_sorted (names, name, (GCompareFunc)lgl_str_part_name_cmp);
 		}
 	}
 
