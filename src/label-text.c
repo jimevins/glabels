@@ -43,6 +43,8 @@
 #define HANDLE_OUTLINE_RGBA_ARGS   0.5,   0.5,   0.5,   0.75
 #define HANDLE_OUTLINE_WIDTH_PIXELS   2.0
 
+#define SELECTION_SLOP_PIXELS 4.0
+
 
 /*========================================================*/
 /* Private types.                                         */
@@ -1203,6 +1205,7 @@ object_at (glLabelObject *object,
            gdouble        y)
 {
         gdouble           w, h;
+        gdouble           scale_x, scale_y;
 
         gl_label_object_get_size (object, &w, &h);
 
@@ -1214,16 +1217,37 @@ object_at (glLabelObject *object,
                 {
                         return TRUE;
                 }
-        }
 
-        if (gl_label_object_is_selected (object))
-        {
-                cairo_new_path (cr);
-                cairo_rectangle (cr, 0, 0, w, h);
+
+                scale_x = 1.0;
+                scale_y = 1.0;
+                cairo_device_to_user_distance (cr, &scale_x, &scale_y);
+
+                cairo_set_line_width (cr, 2*SELECTION_SLOP_PIXELS*scale_x);
+
                 if (cairo_in_stroke (cr, x, y))
                 {
                         return TRUE;
                 }
+
+
+                if (gl_label_object_is_selected (object))
+                {
+                        cairo_new_path (cr);
+                        cairo_rectangle (cr, 0, 0, w, h);
+
+                        scale_x = 1.0;
+                        scale_y = 1.0;
+                        cairo_device_to_user_distance (cr, &scale_x, &scale_y);
+
+                        cairo_set_line_width (cr, 2*SELECTION_SLOP_PIXELS*scale_x);
+
+                        if (cairo_in_stroke (cr, x, y))
+                        {
+                                return TRUE;
+                        }
+                }
+
         }
 
         return FALSE;
