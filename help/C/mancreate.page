@@ -1,5 +1,6 @@
 <page xmlns="http://projectmallard.org/1.0/"
       xmlns:e="http://projectmallard.org/experimental/"
+      xmlns:its="http://www.w3.org/2005/11/its"
       type="guide"
       id="mancreate">
 
