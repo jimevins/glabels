@@ -307,17 +307,6 @@ Defines the type of notify callback function to be called when database changes.
 @Returns: 
 
 
-<!-- ##### FUNCTION lgl_db_get_template_name_list_unique ##### -->
-<para>
-
-</para>
-
-@brand: 
-@paper_id: 
-@category_id: 
-@Returns: 
-
-
 <!-- ##### FUNCTION lgl_db_get_template_name_list_all ##### -->
 <para>
 

@@ -88,6 +88,7 @@ glabels-*.tar.gz
 /docs/libglabels/libglabels*.interfaces
 /docs/libglabels/libglabels*.prerequisites
 /docs/libglabels/libglabels*.signals
+/docs/libglabels/tmpl/libglabels*-unused.sgml
 
 /docs/libglbarcode/*.stamp
 /docs/libglbarcode/xml/
@@ -102,6 +103,7 @@ glabels-*.tar.gz
 /docs/libglbarcode/libglbarcode*.interfaces
 /docs/libglbarcode/libglbarcode*.prerequisites
 /docs/libglbarcode/libglbarcode*.signals
+/docs/libglbarcode/tmpl/libglbarcode*-unused.sgml
 
 #
 # Ignore artifacts from editors, patching, etc.

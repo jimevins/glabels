@@ -1818,7 +1818,7 @@ lgl_db_get_similar_template_name_list (const gchar  *name)
  * @names: List of template name strings to be freed.
  *
  * Free up all storage associated with a list of template names obtained with
- * lgl_db_get_template_name_list_all() or lgl_db_get_template_name_list_unique().
+ * lgl_db_get_template_name_list_all().
  *
  */
 void
