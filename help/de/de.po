@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
-"POT-Creation-Date: 2010-12-02 15:12+0000\n"
-"PO-Revision-Date: 2010-12-02 16:12+0100\n"
+"POT-Creation-Date: 2010-12-04 14:30+0000\n"
+"PO-Revision-Date: 2010-12-05 21:12+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1142,7 +1142,7 @@ msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/mancreate.page:221(None)
+#: C/mancreate.page:245(None)
 msgid ""
 "@@image: 'figures/glabels-template-rect-label.png'; "
 "md5=9c7ae1c1a888e1c9eefd19655d093971"
@@ -1150,7 +1150,7 @@ msgstr "translated"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/mancreate.page:261(None)
+#: C/mancreate.page:289(None)
 msgid ""
 "@@image: 'figures/glabels-template-ellipse-label.png'; "
 "md5=ba612c86b5fb8fcd2b5384ecc1c331d2"
@@ -1158,7 +1158,7 @@ msgstr "translated"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/mancreate.page:296(None)
+#: C/mancreate.page:328(None)
 msgid ""
 "@@image: 'figures/glabels-template-circle-label.png'; "
 "md5=841e36a1f92aeed01e8fbaacc67758f1"
@@ -1166,7 +1166,7 @@ msgstr "translated"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/mancreate.page:341(None)
+#: C/mancreate.page:381(None)
 msgid ""
 "@@image: 'figures/glabels-template-cd-label.png'; "
 "md5=c7952ac1b26ecbfa53facfbbf6486841"
@@ -1174,7 +1174,7 @@ msgstr "translated"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/mancreate.page:528(None)
+#: C/mancreate.page:591(None)
 msgid ""
 "@@image: 'figures/glabels-template-layout.png'; "
 "md5=fe1c9652d5448b2e0ece086777d3a287"
@@ -1301,100 +1301,104 @@ msgstr ""
 "      "
 
 #: C/mancreate.page:92(title)
-msgid "Template Node"
-msgstr "Knoten »Template«"
+msgid "<span translate=\"no\">Template</span> Node"
+msgstr "<span translate=\"no\">Template</span>-Knoten"
 
 #: C/mancreate.page:94(p)
 msgid ""
-"A <em>Template</em> node describes a single stationary product. It must "
-"contain one instance of any type of Label node (<em>Label-rectangle</em>, "
-"<em>Label-round</em>, or <em>Label-cd</em>)."
+"A <em><span translate=\"no\">Template</span></em> node describes a single "
+"stationery product. It must contain one instance of any type of Label node "
+"(<em><span translate=\"no\">Label-rectangle</span></em>, <em><span translate="
+"\"no\">Label-round</span></em>, or <em><span translate=\"no\">Label-cd</"
+"span></em>)."
 msgstr ""
-"Ein <em>Template</em>-Knoten beschreibt ein einzelnes Produkt. Es muss eine "
-"Instanz eines der anderen Label-Knoten (<em>Label-rectangle</em>, <em>Label-"
-"round</em>, or <em>Label-cd</em>) enthalten."
+"Ein <em><span translate=\"no\">Template</span></em>-Knoten beschreibt ein "
+"einzelnes Produkt. Es muss eine Instanz eines der anderen Label-Knoten "
+"(<em><span translate=\"no\">Label-rectangle</span></em>, <em><span translate="
+"\"no\">Label-round</span></em> oder <em><span translate=\"no\">Label-cd</"
+"span></em>) enthalten."
 
-#: C/mancreate.page:101(p) C/mancreate.page:189(p) C/mancreate.page:237(p)
-#: C/mancreate.page:275(p) C/mancreate.page:311(p) C/mancreate.page:364(p)
-#: C/mancreate.page:383(p) C/mancreate.page:410(p) C/mancreate.page:434(p)
-#: C/mancreate.page:464(p) C/mancreate.page:498(p)
+#: C/mancreate.page:102(p) C/mancreate.page:206(p) C/mancreate.page:261(p)
+#: C/mancreate.page:304(p) C/mancreate.page:343(p) C/mancreate.page:404(p)
+#: C/mancreate.page:424(p) C/mancreate.page:455(p) C/mancreate.page:482(p)
+#: C/mancreate.page:517(p) C/mancreate.page:555(p)
 msgid "Property"
 msgstr "Eigenschaft"
 
-#: C/mancreate.page:101(p) C/mancreate.page:142(p) C/mancreate.page:189(p)
-#: C/mancreate.page:237(p) C/mancreate.page:275(p) C/mancreate.page:311(p)
-#: C/mancreate.page:364(p) C/mancreate.page:383(p) C/mancreate.page:410(p)
-#: C/mancreate.page:434(p) C/mancreate.page:464(p) C/mancreate.page:498(p)
+#: C/mancreate.page:102(p) C/mancreate.page:157(p) C/mancreate.page:206(p)
+#: C/mancreate.page:261(p) C/mancreate.page:304(p) C/mancreate.page:343(p)
+#: C/mancreate.page:404(p) C/mancreate.page:424(p) C/mancreate.page:455(p)
+#: C/mancreate.page:482(p) C/mancreate.page:517(p) C/mancreate.page:555(p)
 msgid "Description"
 msgstr "Beschreibung"
 
-#: C/mancreate.page:107(p)
+#: C/mancreate.page:108(span)
 msgid "brand"
 msgstr "brand"
 
-#: C/mancreate.page:107(p)
-msgid "Brand or manufacturer of stationary product. E.g. \"Avery\""
+#: C/mancreate.page:109(p)
+msgid "Brand or manufacturer of stationery product. E.g. \"Avery\""
 msgstr "Marke oder Hersteller des Produkts, z.B. »Avery«"
 
-#: C/mancreate.page:110(p)
+#: C/mancreate.page:112(span)
 msgid "part"
 msgstr "part"
 
-#: C/mancreate.page:110(p)
-msgid "Part number or name of stationary product. E.g. \"8160\""
+#: C/mancreate.page:113(p)
+msgid "Part number or name of stationery product. E.g. \"8160\""
 msgstr "Bestellnummer oder Name des Produkts, z.B. »8160«"
 
-#: C/mancreate.page:113(p) C/mancreate.page:370(p)
+#: C/mancreate.page:116(span) C/mancreate.page:410(span)
 msgid "size"
 msgstr "size"
 
-#: C/mancreate.page:113(p)
+#: C/mancreate.page:117(p)
 msgid "Size of sheet. E.g., \"US-Letter,\" \"A4\", ..."
 msgstr "Größe des Papiers, z.B.  »US-Letter«, »A4«, …"
 
-#: C/mancreate.page:116(p)
+#: C/mancreate.page:120(span)
 msgid "description"
 msgstr "description"
 
-#: C/mancreate.page:116(p)
-msgid "Description of stationary product. E.g, \"Mailing Labels.\""
+#: C/mancreate.page:121(p)
+msgid "Description of stationery product. E.g, \"Mailing Labels.\""
 msgstr "Beschreibung des Produkts, z.B. »Mailing Labels«."
 
-#: C/mancreate.page:119(p)
+#: C/mancreate.page:124(span)
 msgid "_description"
 msgstr "_description"
 
-#: C/mancreate.page:119(p)
+#: C/mancreate.page:125(p)
 msgid ""
-"Translatable description of stationary product. E.g, \"Mailing Labels."
+"Translatable description of stationery product. E.g, \"Mailing Labels."
 "\" (Only useful for predefined templates)"
 msgstr ""
 "Übersetzbare Beschreibung des Produkts, z.B. »Mailing Labels« (nur sinnvoll "
 "für vordefinierte Vorlagen)"
 
-#: C/mancreate.page:122(p) C/mancreate.page:198(p) C/mancreate.page:246(p)
-#: C/mancreate.page:326(p)
+#: C/mancreate.page:129(span) C/mancreate.page:216(span)
+#: C/mancreate.page:271(span) C/mancreate.page:361(span)
 msgid "width"
 msgstr "width"
 
-#: C/mancreate.page:122(p)
+#: C/mancreate.page:130(p)
 msgid "Page width. Only valid if size=\"Other\""
 msgstr "Seitenbreite. Nur gültig, wenn als Größe »Other« festgelegt ist."
 
-#: C/mancreate.page:125(p) C/mancreate.page:201(p) C/mancreate.page:249(p)
-#: C/mancreate.page:329(p)
+#: C/mancreate.page:133(span) C/mancreate.page:220(span)
+#: C/mancreate.page:275(span) C/mancreate.page:366(span)
 msgid "height"
 msgstr "height"
 
-#: C/mancreate.page:125(p)
+#: C/mancreate.page:134(p)
 msgid "Page height. Only valid if size=\"Other\""
 msgstr "Seitenhöhe. Nur gültig, wenn als Größe »Other« festgelegt ist."
 
-#: C/mancreate.page:128(p)
+#: C/mancreate.page:137(span)
 msgid "equiv"
 msgstr "equiv"
 
-#: C/mancreate.page:128(p)
+#: C/mancreate.page:138(p)
 msgid ""
 "Equivalent part number. If this property is present, the template is a clone "
 "of another template of the same brand. The template will inherit all "
@@ -1409,28 +1413,29 @@ msgstr ""
 "bereits definierte Vorlage beziehen, denn derzeit unterstützt libglabels "
 "keine Vorwärtsreferenzen."
 
-#: C/mancreate.page:135(title)
-msgid "Meta Node"
-msgstr "Meta-Knoten"
+#: C/mancreate.page:149(title)
+msgid "<span translate=\"no\">Meta</span> Node"
+msgstr "<span translate=\"no\">Meta</span>-Knoten"
 
-#: C/mancreate.page:137(p)
+#: C/mancreate.page:151(p)
 msgid ""
-"A <em>Meta</em> node contains some additional properties of that product. "
-"This node may appear more than once, with a subnode each."
+"A <em><span translate=\"no\">Meta</span></em> node contains some additional "
+"properties of that product. This node may appear more than once, with a "
+"subnode each."
 msgstr ""
-"Ein <em>Meta</em>-Knoten enthält eine Reihe zusätzlicher Eigenschaften des "
-"jeweiligen Produkts. Dieser Knoten kann mehrfach erscheinen, jeweils mit "
-"einem Unterknoten."
+"Ein <em><span translate=\"no\">Meta</span></em>-Knoten enthält eine Reihe "
+"zusätzlicher Eigenschaften des jeweiligen Produkts. Dieser Knoten kann "
+"mehrfach erscheinen, jeweils mit einem Unterknoten."
 
-#: C/mancreate.page:142(p)
+#: C/mancreate.page:157(p)
 msgid "Subnode"
 msgstr "Unterknoten"
 
-#: C/mancreate.page:148(p)
+#: C/mancreate.page:163(span)
 msgid "category"
 msgstr "category"
 
-#: C/mancreate.page:148(p)
+#: C/mancreate.page:164(p)
 msgid ""
 "The category which this product is assigned to. The value of this category is "
 "used by the <app>gLabels'</app> template chooser to filter the view to "
@@ -1444,7 +1449,7 @@ msgstr ""
 "zu unterdrücken, an denen der Benutzer im jeweiligen Fall nicht interessiert "
 "ist."
 
-#: C/mancreate.page:152(p)
+#: C/mancreate.page:168(p)
 msgid ""
 "One product can be assigned to several categories. You may choose from the "
 "following categories:"
@@ -1452,47 +1457,47 @@ msgstr ""
 " Dabei kann ein Produkt mehreren Kategorien angehören. Sie können aus "
 "folgenden Kategorien wählen:"
 
-#: C/mancreate.page:155(p)
+#: C/mancreate.page:171(span)
 msgid "label"
 msgstr "label"
 
-#: C/mancreate.page:156(p)
+#: C/mancreate.page:172(span)
 msgid "round-label"
 msgstr "round-label"
 
-#: C/mancreate.page:157(p)
+#: C/mancreate.page:173(span)
 msgid "elliptical-label"
 msgstr "elliptical-label"
 
-#: C/mancreate.page:158(p)
+#: C/mancreate.page:174(span)
 msgid "square-label"
 msgstr "square-label"
 
-#: C/mancreate.page:159(p)
+#: C/mancreate.page:175(span)
 msgid "rectangle-label"
 msgstr "rectangle-label"
 
-#: C/mancreate.page:160(p)
+#: C/mancreate.page:176(span)
 msgid "card"
 msgstr "card"
 
-#: C/mancreate.page:161(p)
+#: C/mancreate.page:177(span)
 msgid "business-card"
 msgstr "business-card"
 
-#: C/mancreate.page:162(p)
+#: C/mancreate.page:178(span)
 msgid "media"
 msgstr "media"
 
-#: C/mancreate.page:163(p)
+#: C/mancreate.page:179(span)
 msgid "mail"
 msgstr "mail"
 
-#: C/mancreate.page:164(p)
+#: C/mancreate.page:180(span)
 msgid "foldable"
 msgstr "foldable"
 
-#: C/mancreate.page:166(p)
+#: C/mancreate.page:182(p)
 msgid ""
 "If you have any ideas for new categories, please send your suggestions to the "
 "developer's <link href=\"mailto:glabels-devel@lists.sourceforge.net\">mailing "
@@ -1502,11 +1507,11 @@ msgstr ""
 "an die <link href=\"mailto:glabels-devel@lists.sourceforge.net"
 "\">Mailingliste</link> der <app>gLabels</app>-Entwickler."
 
-#: C/mancreate.page:173(p)
+#: C/mancreate.page:189(span)
 msgid "product_url"
 msgstr "product_url"
 
-#: C/mancreate.page:173(p)
+#: C/mancreate.page:190(p)
 msgid ""
 "This address points to the vendor's website. Ideally, the link shows the URL "
 "of that certain product, if available."
@@ -1514,42 +1519,43 @@ msgstr ""
 "Diese Adresse leitet auf die Webseite des Anbieters weiter. Idealerweise ist "
 "dies die Adresse genau dieses Produkts, falls diese verfügbar ist."
 
-#: C/mancreate.page:181(title)
-msgid "Label-rectangle Node"
-msgstr "Knoten »Label-rectangle«"
+#: C/mancreate.page:198(title)
+msgid "<span translate=\"no\">Label-rectangle</span> Node"
+msgstr "<span translate=\"no\">Label-rectangle</span>-Knoten"
 
-#: C/mancreate.page:183(p)
+#: C/mancreate.page:200(p)
 msgid ""
-"A <em>Label-rectangle</em> node describes the dimensions of a single label or "
-"business card that is rectangular in shape (may have rounded edges)."
+"A <em><span translate=\"no\">Label-rectangle</span></em> node describes the "
+"dimensions of a single label or business card that is rectangular in shape "
+"(may have rounded edges)."
 msgstr ""
-"Ein <em>Label-rectangle</em>-Knoten beschreibt die Abmessungen eines "
-"einzelnen Etiketts oder einer einzelnen Karte in rechteckiger Form, wobei "
-"abgerundete Ecken möglich sind."
+"Ein <em><span translate=\"no\">Label-rectangle</span></em>-Knoten beschreibt "
+"die Abmessungen eines einzelnen Etiketts oder einer einzelnen Karte in "
+"rechteckiger Form, wobei abgerundete Ecken möglich sind."
 
-#: C/mancreate.page:195(p) C/mancreate.page:243(p) C/mancreate.page:281(p)
-#: C/mancreate.page:317(p)
+#: C/mancreate.page:212(span) C/mancreate.page:267(span)
+#: C/mancreate.page:310(span) C/mancreate.page:349(span)
 msgid "id"
 msgstr "id"
 
-#: C/mancreate.page:195(p) C/mancreate.page:243(p) C/mancreate.page:281(p)
-#: C/mancreate.page:317(p)
+#: C/mancreate.page:213(p) C/mancreate.page:268(p) C/mancreate.page:311(p)
+#: C/mancreate.page:350(p)
 msgid "Reserved for future use. Should always be 0."
 msgstr "Für zukünftige Verwendung reserviert. Sollte immer 0 sein."
 
-#: C/mancreate.page:198(p)
+#: C/mancreate.page:217(p)
 msgid "Width of label/card"
 msgstr "Breite des Etiketts oder der Karte"
 
-#: C/mancreate.page:201(p)
+#: C/mancreate.page:221(p)
 msgid "Heigth of label/card"
 msgstr "Höhe des Etiketts oder der Karte"
 
-#: C/mancreate.page:204(p)
+#: C/mancreate.page:224(span)
 msgid "round"
 msgstr "round"
 
-#: C/mancreate.page:204(p)
+#: C/mancreate.page:225(p)
 msgid ""
 "Radius of corners. For items with square edges (business cards), the radius "
 "should be 0."
@@ -1557,11 +1563,11 @@ msgstr ""
 "Radius der Ecken. Für Objekte mit nicht abgerundeten Ecken (Visitenkarten) "
 "sollte der Radius 0 sein."
 
-#: C/mancreate.page:207(p)
+#: C/mancreate.page:229(span)
 msgid "x_waste"
 msgstr "x_waste"
 
-#: C/mancreate.page:207(p)
+#: C/mancreate.page:230(p)
 msgid ""
 "Amount of horizontal waste (over-print) to allow. This is useful for "
 "minimizing alignment problems when using non-white backgrounds (e.g. images)."
@@ -1569,11 +1575,11 @@ msgstr ""
 "Erlaubte Breite des horizontalen Überdruckens. Dies minimiert "
 "Ausrichtungsprobleme auf anderen als weißen Hintergründen (z.B. Bilder)."
 
-#: C/mancreate.page:212(p)
+#: C/mancreate.page:235(span)
 msgid "y_waste"
 msgstr "y_waste"
 
-#: C/mancreate.page:212(p)
+#: C/mancreate.page:236(p)
 msgid ""
 "Amount of vertical waste (over-print) to allow. This is useful for minimizing "
 "alignment problems when using non-white backgrounds (e.g. images)."
@@ -1581,35 +1587,37 @@ msgstr ""
 "Erlaubte Breite des vertikalen Überdruckens. Dies minimiert "
 "Ausrichtungsprobleme auf anderen als weißen Hintergründen (z.B. Bilder)."
 
-#: C/mancreate.page:220(desc) C/mancreate.page:222(p)
-msgid "Label-rectangle parameters"
-msgstr "Parameter zu Label-rectangle "
+#: C/mancreate.page:244(desc) C/mancreate.page:246(p)
+msgid "<span translate=\"no\">Label-rectangle</span> parameters"
+msgstr "Parameter zu <span translate=\"no\">Label-rectangle</span>"
 
-#: C/mancreate.page:229(title)
-msgid "Label-ellipse Node"
-msgstr "Knoten »Label-ellipse«"
+#: C/mancreate.page:253(title)
+msgid "<span translate=\"no\">Label-ellipse</span> Node"
+msgstr "<span translate=\"no\">Label-ellipse</span>-Knoten"
 
-#: C/mancreate.page:231(p)
+#: C/mancreate.page:255(p)
 msgid ""
-"A <em>Label-ellipse</em> node describes the dimensions of a single label or "
-"business card that is elliptic in shape."
+"A <em><span translate=\"no\">Label-ellipse</span></em> node describes the "
+"dimensions of a single label or business card that is elliptic in shape."
 msgstr ""
-"Ein <em>Label-rectangle</em>-Knoten beschreibt die Abmessungen eines "
-"einzelnen Etiketts oder einer einzelnen Karte in elliptischer Form."
+"Ein <em><span translate=\"no\">Label-ellipse</span></em>-Knoten beschreibt "
+"die Abmessungen eines einzelnen Etiketts oder einer einzelnen Karte in "
+"elliptischer Form."
 
-#: C/mancreate.page:246(p)
+#: C/mancreate.page:272(p)
 msgid "Width of the ellipse"
 msgstr "Breite der Ellipse"
 
-#: C/mancreate.page:249(p)
+#: C/mancreate.page:276(p)
 msgid "Heigth of the ellipse"
 msgstr "Höhe der Ellipse"
 
-#: C/mancreate.page:252(p) C/mancreate.page:287(p) C/mancreate.page:332(p)
+#: C/mancreate.page:279(span) C/mancreate.page:318(span)
+#: C/mancreate.page:371(span)
 msgid "waste"
 msgstr "waste"
 
-#: C/mancreate.page:252(p) C/mancreate.page:287(p) C/mancreate.page:332(p)
+#: C/mancreate.page:280(p) C/mancreate.page:319(p) C/mancreate.page:372(p)
 msgid ""
 "Amount of waste (over-print) to allow. This is useful for minimizing "
 "alignment problems when using non-white backgrounds (e.g. images)."
@@ -1617,56 +1625,57 @@ msgstr ""
 "Erlaubte Breite des Überdruckens. Dies minimiert Ausrichtungsprobleme auf "
 "anderen als weißen Hintergründen (z.B. Bilder)."
 
-#: C/mancreate.page:260(desc) C/mancreate.page:295(desc)
-#: C/mancreate.page:297(p)
-msgid "Label-ellipse parameters"
-msgstr "Parameter zu Label-ellipse "
+#: C/mancreate.page:288(desc) C/mancreate.page:290(p)
+#: C/mancreate.page:327(desc) C/mancreate.page:329(p)
+msgid "<span translate=\"no\">Label-ellipse</span> parameters"
+msgstr "Parameter zu <span translate=\"no\">Label-ellipse</span>"
 
-#: C/mancreate.page:268(title)
-msgid "Label-round Node"
-msgstr "Knoten »Label-round«"
+#: C/mancreate.page:297(title)
+msgid "<span translate=\"no\">Label-round</span> Node"
+msgstr "<span translate=\"no\">Label-round</span>-Knoten"
 
-#: C/mancreate.page:270(p)
+#: C/mancreate.page:299(p)
 msgid ""
-"A <em>Label-round</em> node describes the dimensions of a simple round label "
-"(not a CD)."
+"A <em><span translate=\"no\">Label-round</span></em> node describes the "
+"dimensions of a simple round label (not a CD)."
 msgstr ""
-"Ein <em>Label-round</em>-Knoten beschreibt die Abmessungen eines einfachen "
-"Rundetiketts (nicht einer CD)."
+"Ein <em><span translate=\"no\">Label-round</span></em>-Knoten beschreibt die "
+"Abmessungen eines einfachen Rundetiketts (nicht einer CD)."
 
-#: C/mancreate.page:284(p) C/mancreate.page:320(p) C/mancreate.page:422(p)
+#: C/mancreate.page:314(span) C/mancreate.page:353(span)
+#: C/mancreate.page:469(span)
 msgid "radius"
 msgstr "radius"
 
-#: C/mancreate.page:284(p)
+#: C/mancreate.page:315(p)
 msgid "Radius (1/2 diameter) of label"
 msgstr "Radius (halber Durchmesser) des Etiketts"
 
-#: C/mancreate.page:304(title)
-msgid "Label-cd Node"
-msgstr "Knoten »Label-cd«"
+#: C/mancreate.page:336(title)
+msgid "<span translate=\"no\">Label-cd</span> Node"
+msgstr "<span translate=\"no\">Label-cd</span>-Knoten"
 
-#: C/mancreate.page:306(p)
+#: C/mancreate.page:338(p)
 msgid ""
-"A <em>Label-cd</em> node describes the dimensions of a CD, DVD, or business "
-"card CD."
+"A <em><span translate=\"no\">Label-cd</span></em> node describes the "
+"dimensions of a CD, DVD, or business card CD."
 msgstr ""
-"Ein <em>Label-cd</em>-Knoten beschreibt die Abmessungen einer CD, DVD oder "
-"Visitenkarten-CD."
+"Ein <em><span translate=\"no\">Label-cd</span></em>-Knoten beschreibt die "
+"Abmessungen einer CD, DVD oder Visitenkarten-CD."
 
-#: C/mancreate.page:320(p)
+#: C/mancreate.page:354(p)
 msgid "Outer radius of label"
 msgstr "Äußerer Radius des Etiketts"
 
-#: C/mancreate.page:323(p)
+#: C/mancreate.page:357(span)
 msgid "hole"
 msgstr "hole"
 
-#: C/mancreate.page:323(p)
+#: C/mancreate.page:358(p)
 msgid "Radius of concentric hole"
 msgstr "Radius des Mittellochs"
 
-#: C/mancreate.page:326(p)
+#: C/mancreate.page:362(p)
 msgid ""
 "If present, the label is clipped to the given width. (Useful for \"business "
 "card CDs\")."
@@ -1674,7 +1683,7 @@ msgstr ""
 "Falls vorhanden, wird das Etikett auf die angegebene Größe begrenzt (nützlich "
 "für »Visitenkarten-CDs«)"
 
-#: C/mancreate.page:329(p)
+#: C/mancreate.page:367(p)
 msgid ""
 "If present, the label is clipped to the given height. (Useful for \"business "
 "card CDs\")."
@@ -1682,19 +1691,19 @@ msgstr ""
 "Falls vorhanden, wird das Etikett auf die angegebene Höhe begrenzt (nützlich "
 "für »Visitenkarten-CDs«)"
 
-#: C/mancreate.page:340(desc)
-msgid "Label-cd parameters"
-msgstr "Parameter zu Label-CD"
+#: C/mancreate.page:380(desc)
+msgid "<span translate=\"no\">Label-cd</span> parameters"
+msgstr "<span translate=\"no\">Label-cd</span>-Parameter"
 
-#: C/mancreate.page:342(p)
+#: C/mancreate.page:382(p)
 msgid "CD label parameters"
 msgstr "CD-Label-Parameter"
 
-#: C/mancreate.page:349(title)
-msgid "Markup Nodes"
-msgstr "Markup-Knoten"
+#: C/mancreate.page:389(title)
+msgid "<span translate=\"no\">Markup</span> Nodes"
+msgstr "<span translate=\"no\">Markup</span>-Knoten"
 
-#: C/mancreate.page:351(p)
+#: C/mancreate.page:391(p)
 msgid ""
 "Templates may contain optional markup nodes. These nodes are used to describe "
 "a simple set of markup lines that are visible in the <app>glabels</app> "
@@ -1709,17 +1718,19 @@ msgstr ""
 "spezielle Bereiche darstellen sowie dem Benutzer einer Vorlage weitere "
 "hilfreiche Hinweise geben."
 
-#: C/mancreate.page:357(title)
-msgid "Markup-margin Node"
-msgstr "Knoten »Markup-margin«"
+#: C/mancreate.page:397(title)
+msgid "<span translate=\"no\">Markup-margin</span> Node"
+msgstr "<span translate=\"no\">Markup-margin</span>-Knoten"
 
-#: C/mancreate.page:359(p)
-msgid "A <em>Markup-margin</em> describes a margin along all edges of a label."
+#: C/mancreate.page:399(p)
+msgid ""
+"A <em><span translate=\"no\">Markup-margin</span></em> describes a margin "
+"along all edges of a label."
 msgstr ""
-"Ein <em>Markup-margin</em>-Knoten beschreibt die Ränder entlang der Seiten "
-"eines Etiketts."
+"Ein <em><span translate=\"no\">Markup-margin</span></em>-Knoten beschreibt "
+"die Ränder entlang der Seiten eines Etiketts."
 
-#: C/mancreate.page:370(p)
+#: C/mancreate.page:411(p)
 msgid ""
 "Size of the margin. I.e. the distance of the margin line from the edge of the "
 "card/label."
@@ -1727,176 +1738,196 @@ msgstr ""
 "Randbreite. Die Breite des Bereichs zwischen der Randlinie und dem Rand des "
 "Etiketts/der Karte."
 
-#: C/mancreate.page:377(title)
-msgid "Markup-line Node"
-msgstr "Knoten »Markup-line«"
+#: C/mancreate.page:418(title)
+msgid "<span translate=\"no\">Markup-line</span> Node"
+msgstr "<span translate=\"no\">Markup-line</span>-Knoten"
 
-#: C/mancreate.page:379(p)
-msgid "A <em>Markup-line</em> describes a markup line."
-msgstr "Ein <em>Markup-line</em>-Knoten beschreibt eine Markierungslinie."
+#: C/mancreate.page:420(p)
+msgid ""
+"A <em><span translate=\"no\">Markup-line</span></em> node describes a markup "
+"line."
+msgstr ""
+"Ein <em><span translate=\"no\">Markup-line</span></em>-Knoten beschreibt eine "
+"Markierungslinie."
 
-#: C/mancreate.page:389(p) C/mancreate.page:440(p) C/mancreate.page:470(p)
+#: C/mancreate.page:430(span) C/mancreate.page:488(span)
+#: C/mancreate.page:523(span)
 msgid "x1"
 msgstr "x1"
 
-#: C/mancreate.page:389(p)
+#: C/mancreate.page:431(p)
 msgid "x coordinate of 1st endpoint of the line segment."
 msgstr "x-Koordinate des Anfangspunkts des Linienabschnitts."
 
-#: C/mancreate.page:392(p) C/mancreate.page:443(p) C/mancreate.page:473(p)
+#: C/mancreate.page:434(span) C/mancreate.page:492(span)
+#: C/mancreate.page:527(span)
 msgid "y1"
 msgstr "y1"
 
-#: C/mancreate.page:392(p)
+#: C/mancreate.page:435(p)
 msgid "y coordinate of 1st endpoint of the line segment."
 msgstr "y-Koordinate des Anfangspunkts des Linienabschnitts."
 
-#: C/mancreate.page:395(p)
+#: C/mancreate.page:438(span)
 msgid "x2"
 msgstr "x2"
 
-#: C/mancreate.page:395(p)
+#: C/mancreate.page:439(p)
 msgid "x coordinate of 2st endpoint of the line segment."
 msgstr "x-Koordinate des zweiten Endpunkts des Linienabschnitts."
 
-#: C/mancreate.page:398(p)
+#: C/mancreate.page:442(span)
 msgid "y2"
 msgstr "y2"
 
-#: C/mancreate.page:398(p)
+#: C/mancreate.page:443(p)
 msgid "y coordinate of 2st endpoint of the line segment."
 msgstr "y-Koordinate des zweiten Endpunkts des Linienabschnitts."
 
-#: C/mancreate.page:404(title)
-msgid "Markup-circle Node"
-msgstr "Knoten »Markup-circle«"
+#: C/mancreate.page:449(title)
+msgid "<span translate=\"no\">Markup-circle</span> Node"
+msgstr "<span translate=\"no\">Markup-circle</span>-Knoten"
 
-#: C/mancreate.page:406(p)
-msgid "A <em>Markup-circle</em> describes a markup circle."
-msgstr "Ein <em>Markup-circle</em>-Knoten beschreibt einen Markierungskreis."
+#: C/mancreate.page:451(p)
+msgid ""
+"A <em><span translate=\"no\">Markup-circle</span></em> describes a markup "
+"circle."
+msgstr ""
+"Ein <em><span translate=\"no\">Markup-circle</span></em>-Knoten beschreibt "
+"einen Markierungskreis."
 
-#: C/mancreate.page:416(p) C/mancreate.page:510(p)
+#: C/mancreate.page:461(span) C/mancreate.page:569(span)
 msgid "x0"
 msgstr "x0"
 
-#: C/mancreate.page:416(p)
+#: C/mancreate.page:462(p)
 msgid "x coordinate of circle origin (center)."
 msgstr "x-Koordinate des Kreismittelpunkts."
 
-#: C/mancreate.page:419(p) C/mancreate.page:514(p)
+#: C/mancreate.page:465(span) C/mancreate.page:574(span)
 msgid "y0"
 msgstr "y0"
 
-#: C/mancreate.page:419(p)
+#: C/mancreate.page:466(p)
 msgid "y coordinate of circle origin (center)."
 msgstr "y-Koordinate des Kreismittelpunkts."
 
-#: C/mancreate.page:422(p)
+#: C/mancreate.page:470(p)
 msgid "Radius of circle."
 msgstr "Radius des Kreises."
 
-#: C/mancreate.page:428(title)
-msgid "Markup-rect Node"
-msgstr "Knoten »Markup-rect«"
+#: C/mancreate.page:476(title)
+msgid "<span translate=\"no\">Markup-rect</span> Node"
+msgstr "<span translate=\"no\">Markup-rect</span>-Knoten"
 
-#: C/mancreate.page:430(p)
-msgid "A <em>Markup-rect</em> describes a markup rectangle."
-msgstr "Ein <em>Markup-rect</em>-Knoten beschreibt ein Markierungsrechteck."
+#: C/mancreate.page:478(p)
+msgid ""
+"A <em><span translate=\"no\">Markup-rect</span></em> describes a markup "
+"rectangle."
+msgstr ""
+"Ein <em><span translate=\"no\">Markup-rect</span></em>-Knoten beschreibt ein "
+"Markierungsrechteck."
 
-#: C/mancreate.page:440(p)
+#: C/mancreate.page:489(p)
 msgid "x coordinate of upper left corner of rectangle."
 msgstr "x-Koordinate der oberen linken Ecke des Rechtecks."
 
-#: C/mancreate.page:443(p)
+#: C/mancreate.page:493(p)
 msgid "y coordinate of upper left corner of rectangle."
 msgstr "y-Koordinate der oberen linken Ecke des Rechtecks."
 
-#: C/mancreate.page:446(p) C/mancreate.page:476(p)
+#: C/mancreate.page:496(span) C/mancreate.page:531(span)
 msgid "w"
 msgstr "w"
 
-#: C/mancreate.page:446(p)
+#: C/mancreate.page:497(p)
 msgid "Width of rectangle."
 msgstr "Breite des Rechtecks."
 
-#: C/mancreate.page:449(p) C/mancreate.page:479(p)
+#: C/mancreate.page:500(span) C/mancreate.page:535(span)
 msgid "h"
 msgstr "h"
 
-#: C/mancreate.page:449(p)
+#: C/mancreate.page:501(p)
 msgid "Height of rectangle."
 msgstr "Höhe des Rechtecks."
 
-#: C/mancreate.page:452(p)
+#: C/mancreate.page:504(span)
 msgid "r"
 msgstr "r"
 
-#: C/mancreate.page:452(p)
+#: C/mancreate.page:505(p)
 msgid "Radius of rounded corners of rectangle."
 msgstr "Radius der abgerundeten Ecken des Rechtecks."
 
-#: C/mancreate.page:458(title)
-msgid "Markup-ellipse Node"
-msgstr "Knoten »Markup-ellipse«"
+#: C/mancreate.page:511(title)
+msgid "<span translate=\"no\">Markup-ellipse</span> Node"
+msgstr "<span translate=\"no\">Markup-ellipse</span>-Knoten"
 
-#: C/mancreate.page:460(p)
-msgid "A <em>Markup-ellipse</em> describes a markup ellipse."
-msgstr "Ein <em>Markup-ellipse</em>-Knoten beschreibt eine Markierungsellipse."
+#: C/mancreate.page:513(p)
+msgid ""
+"A <em><span translate=\"no\">Markup-ellipse</span></em> describes a markup "
+"ellipse."
+msgstr ""
+"Ein <em><span translate=\"no\">Markup-ellipse</span></em>-Knoten beschreibt "
+"eine Markierungsellipse."
 
-#: C/mancreate.page:470(p)
+#: C/mancreate.page:524(p)
 msgid "x coordinate of upper left corner of ellipse."
 msgstr ""
 "x-Koordinate der oberen linken Ecke des die Ellipse umschließenden Rechtecks."
 
-#: C/mancreate.page:473(p)
+#: C/mancreate.page:528(p)
 msgid "y coordinate of upper left corner of ellipse."
 msgstr ""
 "x-Koordinate der oberen linken Ecke des die Ellipse umschließenden Rechtecks."
 
-#: C/mancreate.page:476(p)
+#: C/mancreate.page:532(p)
 msgid "Width of ellipse."
 msgstr "Die Breite der Ellipse."
 
-#: C/mancreate.page:479(p)
+#: C/mancreate.page:536(p)
 msgid "Height of ellipse."
 msgstr "Die Höhe der Ellipse."
 
-#: C/mancreate.page:487(title)
-msgid "Layout Node"
-msgstr "Knoten »Layout«"
+#: C/mancreate.page:544(title)
+msgid "<span translate=\"no\">Layout</span> Node"
+msgstr "<span translate=\"no\">Layout</span>-Knoten"
 
-#: C/mancreate.page:489(p)
+#: C/mancreate.page:546(p)
 msgid ""
-"A label node may contain multiple <em>Layout</em> children. If labels are "
-"arranged in a simple grid pattern, only one layout is needed. However, if "
-"labels are arranged in multiple grids, such as a running bond pattern, "
-"multiple <em>layout</em> tags can be used. Note: a single label can always be "
-"treated as a grid of one."
+"A label node may contain multiple <em><span translate=\"no\">Layout</span></"
+"em> children. If labels are arranged in a simple grid pattern, only one "
+"layout is needed. However, if labels are arranged in multiple grids, such as "
+"a running bond pattern, multiple <em><span translate=\"no\">Layout</span></"
+"em> tags can be used. Note: a single label can always be treated as a grid of "
+"one."
 msgstr ""
-"Ein Label-Knoten kann mehrere <em>Layout</em>-Unterknoten enthalten. Wenn die "
-"Etiketten in einem einfachen rechteckigen Raster angeordnet sind, dann wird "
-"nur ein Layout benötigt. Falls die Etiketten jedoch in komplizierteren "
-"Rasteranordnungen vorliegen, können mehrere <em>Layout</em>-Unterknoten "
-"verwendet werden. Beachten Sie, dass ein einzelnes Etikett immer auch als ein "
-"Raster aus Etiketten betrachtet werden kann."
+"Ein Label-Knoten kann mehrere <em><span translate=\"no\">Layout</span></em>-"
+"Unterknoten enthalten. Wenn die Etiketten in einem einfachen rechteckigen "
+"Raster angeordnet sind, dann wird nur ein Layout benötigt. Falls die "
+"Etiketten jedoch in komplizierteren Rasteranordnungen vorliegen, können "
+"mehrere <em><span translate=\"no\">Layout</span></em>-Unterknoten verwendet "
+"werden. Beachten Sie, dass ein einzelnes Etikett immer auch als ein Raster "
+"aus Etiketten betrachtet werden kann."
 
-#: C/mancreate.page:504(p)
+#: C/mancreate.page:561(span)
 msgid "nx"
 msgstr "nx"
 
-#: C/mancreate.page:504(p)
+#: C/mancreate.page:562(p)
 msgid "Number of labels/cards across in the grid (horizontal)"
 msgstr "Anzahl der Etiketten/Karten im Raster in horizontaler Richtung"
 
-#: C/mancreate.page:507(p)
+#: C/mancreate.page:565(span)
 msgid "ny"
 msgstr "ny"
 
-#: C/mancreate.page:507(p)
+#: C/mancreate.page:566(p)
 msgid "Number of labels/cards across in the grid (vertical)"
 msgstr "Anzahl der Etiketten/Karten im Raster in vertikaler Richtung"
 
-#: C/mancreate.page:510(p)
+#: C/mancreate.page:570(p)
 msgid ""
 "Distance from left edge of sheet to the left edge of the left column of cards/"
 "labels in the layout."
@@ -1904,7 +1935,7 @@ msgstr ""
 "Abstand von linken Rand des Papiers zum linken Rand der linken Reihe der "
 "Karten/Etiketten im Layout."
 
-#: C/mancreate.page:514(p)
+#: C/mancreate.page:575(p)
 msgid ""
 "Distance from the top edge of sheet to the top edge of the top row of labels/"
 "cards in the layout."
@@ -1912,29 +1943,29 @@ msgstr ""
 "Abstand von oberen Rand des Papiers zum oberen Rand der oberen Reihe der "
 "Karten/Etiketten im Layout."
 
-#: C/mancreate.page:518(p)
+#: C/mancreate.page:579(span)
 msgid "dx"
 msgstr "dx"
 
-#: C/mancreate.page:518(p)
+#: C/mancreate.page:580(p)
 msgid "Horizontal pitch of grid."
 msgstr "Horizontaler Rasterabstand des Zeichengitters."
 
-#: C/mancreate.page:521(p)
+#: C/mancreate.page:583(span)
 msgid "dy"
 msgstr "dy"
 
-#: C/mancreate.page:521(p)
+#: C/mancreate.page:584(p)
 msgid "Vertical pitch of grid."
 msgstr "Vertikaler Rasterabstand des Zeichengitters."
 
-#: C/mancreate.page:527(desc)
-msgid "Layout parameters"
-msgstr "Layout-Parameter"
+#: C/mancreate.page:590(desc)
+msgid "<span translate=\"no\">Layout</span> parameters"
+msgstr "<span translate=\"no\">Layout</span>-Parameter"
 
-#: C/mancreate.page:529(p)
-msgid "Layout Parameters"
-msgstr "Layout-Parameter"
+#: C/mancreate.page:592(p)
+msgid "<span translate=\"no\">Layout</span> Parameters"
+msgstr "<span translate=\"no\">Layout</span>-Parameter"
 
 #: C/license.page:8(desc)
 msgid "Legal information."
@@ -2932,663 +2963,3 @@ msgstr ""
 #: C/index.page:0(None)
 msgid "translator-credits"
 msgstr "Mario Blättermann <mariobl@gnome.org>, 2008, 2009, 2010"
-
-#~ msgid "Alias Node"
-#~ msgstr "Knoten »Alias«"
-
-#~ msgid ""
-#~ "An <em>Alias</em> node provides the name of a product with the same size "
-#~ "and layout characteristics as the parent template."
-#~ msgstr ""
-#~ "Ein <em>Alias</em>-Knoten beschreibt den Namen eines Produkts mit der "
-#~ "gleichen Größe und dem gleichen Layout einer anderen Vorlage."
-
-#~ msgid "The brand or manufacturer of the equivalent product."
-#~ msgstr "Die Marke oder der Hersteller des entsprechenden Produkts."
-
-#~ msgid "The part number of the equivalent product."
-#~ msgstr "Die Bestellnummer des entsprechenden Produkts."
-
-#~ msgid "heigth"
-#~ msgstr "heigth"
-
-#~ msgid "These controls are selects the default fill color."
-#~ msgstr "Diese Einstellung wählt die Standard-Füllfarbe aus."
-
-#~ msgid "Objects"
-#~ msgstr "Objekte"
-
-#~ msgid "Select Mode"
-#~ msgstr "Auswahlmodus"
-
-#~ msgid "Drawing Toolbar"
-#~ msgstr "Zeichenwerkzeugleiste"
-
-#~ msgid "Ctrl"
-#~ msgstr "Strg"
-
-#~ msgid "Edit"
-#~ msgstr "Bearbeiten"
-
-#~ msgid "Select All"
-#~ msgstr "Alles markieren"
-
-#~ msgid "Un-select All"
-#~ msgstr "Alle Markierungen löschen"
-
-#~ msgid "Cut"
-#~ msgstr "Ausschneiden"
-
-#~ msgid "Copy"
-#~ msgstr "Kopieren"
-
-#~ msgid "Paste"
-#~ msgstr "Einfügen"
-
-#~ msgid "Delete"
-#~ msgstr "Löschen"
-
-#~ msgid ""
-#~ "Object selections can be manipulated using the standard clipboard "
-#~ "operations <placeholder-1/>, <placeholder-2/>, <placeholder-3/>, and "
-#~ "<placeholder-4/>."
-#~ msgstr ""
-#~ "Objektauswahlen können mit Hilfe der Standardoperationen der "
-#~ "Zwischenablage <placeholder-1/>, <placeholder-2/>, <placeholder-3/> und "
-#~ "<placeholder-4/> ausgeführt werden."
-
-#~ msgid "gLabels"
-#~ msgstr "gLabels"
-
-#~ msgid "File"
-#~ msgstr "Datei"
-
-#~ msgid "Print"
-#~ msgstr "Drucken"
-
-#~ msgid "Print Preview"
-#~ msgstr "Druckvorschau"
-
-#~ msgid "New"
-#~ msgstr "Neu"
-
-#~ msgid "New Label or Card"
-#~ msgstr "Neues Etikett oder neue Karte"
-
-#~ msgid "OK"
-#~ msgstr "OK"
-
-#~ msgid "Return"
-#~ msgstr "Eingabetaste"
-
-#~ msgid "Merge Properties"
-#~ msgstr "Mischeinstellungen"
-
-#~ msgid "merge properties"
-#~ msgstr "Mischeinstellungen"
-
-#~ msgid "Evolution"
-#~ msgstr "Evolution"
-
-#~ msgid "evolution-data-server"
-#~ msgstr "evolution-data-server"
-
-#~ msgid "Merge properties"
-#~ msgstr "Mischeinstellungen"
-
-#, fuzzy
-#~ msgid "Data from default Evolution addressbook"
-#~ msgstr "Daten aus dem vorgegebenen Evolution-Adressbuch"
-
-#~ msgid "Select all"
-#~ msgstr "Alles markieren"
-
-#~ msgid "Unselect all"
-#~ msgstr "Markierung aufheben"
-
-#~ msgid "Print outlines"
-#~ msgstr "Begrenzungen drucken"
-
-#~ msgid "gnumeric"
-#~ msgstr "gnumeric"
-
-#, fuzzy
-#~ msgid "/usr/share/libglabels-3.0/templates/"
-#~ msgstr "update-mime-database /usr/share/mime"
-
-#~ msgid "/usr/local/share/libglabels-3.0/templates/"
-#~ msgstr "/usr/local/share/libglabels-3.0/templates/"
-
-#~ msgid "${HOME}/.config/libglabels/templates/"
-#~ msgstr "${HOME}/.config/libglabels/templates/"
-
-#, fuzzy
-#~ msgid "*.template"
-#~ msgstr "Vorlage"
-
-#, fuzzy
-#~ msgid "glabels-2.3.dtd"
-#~ msgstr "gLabels-Dokumente"
-
-#, fuzzy
-#~ msgid "pt"
-#~ msgstr "pt"
-
-#, fuzzy
-#~ msgid "in"
-#~ msgstr "in | durch"
-
-#, fuzzy
-#~ msgid "mm"
-#~ msgstr "mm"
-
-#, fuzzy
-#~ msgid "cm"
-#~ msgstr "cm"
-
-#, fuzzy
-#~ msgid "pc"
-#~ msgstr "pc"
-
-#~ msgid "1.0in"
-#~ msgstr "1.0in"
-
-#~ msgid "2.54cm"
-#~ msgstr "2.54cm"
-
-#, fuzzy
-#~ msgid "...templates..."
-#~ msgstr "Vorlagen"
-
-#, fuzzy
-#~ msgid "Template"
-#~ msgstr "Vorlage"
-
-#, fuzzy
-#~ msgid "Label-round"
-#~ msgstr "Etikettengröße (rund)"
-
-#, fuzzy
-#~ msgid "Label-cd"
-#~ msgstr "Knoten »Label-cd«"
-
-#, fuzzy
-#~ msgid "Alias"
-#~ msgstr "Alias"
-
-#, fuzzy
-#~ msgid "Meta"
-#~ msgstr "Meta"
-
-#, fuzzy
-#~ msgid "gLabels'"
-#~ msgstr "glabels"
-
-#, fuzzy
-#~ msgid "Label-ellipse"
-#~ msgstr "Ellipse erstellen"
-
-#, fuzzy
-#~ msgid "Markup-margin"
-#~ msgstr "Knoten »Markup-margin«"
-
-#, fuzzy
-#~ msgid "Markup-line"
-#~ msgstr "Knoten »Markup-line«"
-
-#, fuzzy
-#~ msgid "Markup-circle"
-#~ msgstr "Knoten »Markup-circle«"
-
-#, fuzzy
-#~ msgid "Markup-rect"
-#~ msgstr "Knoten »Markup-rect«"
-
-#, fuzzy
-#~ msgid "Markup-ellipse"
-#~ msgstr "Ellipse erstellen"
-
-#~ msgid "Layout"
-#~ msgstr "Layout"
-
-#~ msgid "layout"
-#~ msgstr "layout"
-
-#~ msgid "CreativeCommons website"
-#~ msgstr "CreativeCommons-Webseite"
-
-#~ msgid "Commons Deed"
-#~ msgstr "Commons Deed"
-
-#~ msgid ""
-#~ "For the full text of the license, see the <placeholder-1/>, or read the "
-#~ "full <placeholder-2/>."
-#~ msgstr ""
-#~ "Den vollständigen Text der Lizenz finden Sie in <placeholder-1/>, oder im "
-#~ "<placeholder-2/>."
-
-#~ msgid "Properties"
-#~ msgstr "Eigenschaften"
-
-#~ msgid "Label properties"
-#~ msgstr "Etiketten-Eigenschaften"
-
-#~ msgid ""
-#~ "Introduction to the <placeholder-1/> label and business card designer."
-#~ msgstr ""
-#~ "Einführung in den <placeholder-1/> Etiketten- und Visitenkarten-Designer."
-
-#~ msgid "Introduction"
-#~ msgstr "Einführung"
-
-#~ msgid "<placeholder-1/> main window"
-#~ msgstr "Hauptfenster von <placeholder-1/>"
-
-#~ msgid "<placeholder-1/> main window."
-#~ msgstr "Hauptfenster von <placeholder-1/>."
-
-#~ msgid "Order"
-#~ msgstr "Reihenfolge"
-
-#~ msgid "Bring to Front"
-#~ msgstr "Ganz nach vorn"
-
-#~ msgid "Send to Back"
-#~ msgstr "Nach hinten setzen"
-
-#~ msgid "Rotate/Flip"
-#~ msgstr "Drehen/Spiegeln"
-
-#, fuzzy
-#~ msgid "Align Horizontal"
-#~ msgstr "_Horizontal"
-
-#~ msgid "Template Designer ..."
-#~ msgstr "Vorlagen-Designer …"
-
-#~ msgid "Template Designer"
-#~ msgstr "Vorlagen-Designer"
-
-#, fuzzy
-#~ msgid "Preferences"
-#~ msgstr "Einstellungen"
-
-#~ msgid ""
-#~ "To configure <placeholder-1/>, choose <guiseq><placeholder-2/"
-#~ "><placeholder-3/></guiseq>. The <placeholder-4/> dialog contains the "
-#~ "following tabbed sections:"
-#~ msgstr ""
-#~ "Um <placeholder-1/> zu konfigurieren, wählen Sie <guiseq><placeholder-2/"
-#~ "><placeholder-3/></guiseq>. Der Dialog <placeholder-4/> enthält die "
-#~ "folgenden Reiterabschnitte:"
-
-#, fuzzy
-#~ msgid "Default: <placeholder-1/>."
-#~ msgstr "Voreingestellte Notiz von <placeholder-1/>"
-
-#, fuzzy
-#~ msgid "Create Object"
-#~ msgstr "Strichcodeobjekt erzeugen"
-
-#, fuzzy
-#~ msgid "Open"
-#~ msgstr "Öffnen"
-
-#, fuzzy
-#~ msgid "Open File"
-#~ msgstr "Datei öffnen"
-
-#, fuzzy
-#~ msgid "Recent Files"
-#~ msgstr "Zuletzt geöffnete Dateien"
-
-#, fuzzy
-#~ msgid "Close"
-#~ msgstr "Schließen"
-
-#, fuzzy
-#~ msgid "Save"
-#~ msgstr "Speichern"
-
-#~ msgid "Save As"
-#~ msgstr "Speichern unter"
-
-#~ msgid "Quit"
-#~ msgstr "Beenden"
-
-#~ msgid "Information about <placeholder-1/>."
-#~ msgstr "Informationen zu <placeholder-1/>."
-
-#~ msgid "Jim Evins (<placeholder-1/>)"
-#~ msgstr "Jim Evins (<placeholder-1/>)"
-
-#~ msgid "gLabels Web page"
-#~ msgstr "gLabels-Webseite"
-
-#~ msgid ""
-#~ "<placeholder-1/> was written by <credit><placeholder-2/></credit>. To find "
-#~ "more information about <placeholder-3/>, please visit the <placeholder-4/>."
-#~ msgstr ""
-#~ "<placeholder-1/> wurde von <credit><placeholder-2/></credit> geschrieben. "
-#~ "Weiter Informationen über <placeholder-3/> finden Sie auf der "
-#~ "<placeholder-4/>."
-
-#~ msgid "<placeholder-1/> Contact Page"
-#~ msgstr "<placeholder-1/>-Kontaktseite"
-
-#~ msgid ""
-#~ "To report a bug or make a suggestion regarding this application or this "
-#~ "manual, follow the directions at the <placeholder-1/>."
-#~ msgstr ""
-#~ "Um einen Fehler zu melden oder einen Vorschlag zu dieser Anwendung oder zu "
-#~ "diesem Handbuch zu machen, folgen Sie den Anweisungen auf der "
-#~ "<placeholder-1/>."
-
-#~ msgid "link"
-#~ msgstr "link"
-
-#~ msgid "<application>gLabels</application> Manual V2.2"
-#~ msgstr "<application>gLabels</application>-Handbuch V2.2"
-
-#~ msgid "2003-2007"
-#~ msgstr "2003-2007"
-
-#~ msgid ""
-#~ "Permission is granted to copy, distribute and/or modify this document "
-#~ "under the terms of the GNU Free Documentation License (GFDL), Version 1.1 "
-#~ "or any later version published by the Free Software Foundation with no "
-#~ "Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. You can "
-#~ "find a copy of the GFDL at this <ulink type=\"help\" url=\"ghelp:fdl"
-#~ "\">link</ulink> or in the file COPYING-DOCS distributed with this manual."
-#~ msgstr ""
-#~ "Das vorliegende Dokument kann gemäß den Bedingungen der GNU Free "
-#~ "Documentation License (GFDL), Version 1.1 oder jeder späteren, von der "
-#~ "Free Software Foundation veröffentlichten Version ohne unveränderbare "
-#~ "Abschnitte sowie ohne Texte auf dem vorderen und hinteren Buchdeckel "
-#~ "kopiert, verteilt und/oder modifiziert werden. Eine Kopie der GFDL finden "
-#~ "Sie unter diesem <ulink type=\"help\" url=\"ghelp:fdl\">Link</ulink> oder "
-#~ "in der mit diesem Handbuch gelieferten Datei COPYING-DOCS."
-
-#~ msgid ""
-#~ "This manual is part of a collection of GNOME manuals distributed under the "
-#~ "GFDL. If you want to distribute this manual separately from the "
-#~ "collection, you can do so by adding a copy of the license to the manual, "
-#~ "as described in section 6 of the license."
-#~ msgstr ""
-#~ "Dieses Handbuch ist Teil einer Sammlung von GNOME-Handbüchern, die unter "
-#~ "der GFDL veröffentlicht werden. Wenn Sie dieses Handbuch getrennt von der "
-#~ "Sammlung weiterverbreiten möchten, können Sie das tun, indem Sie eine "
-#~ "Kopie der Lizenz zum Handbuch hinzufügen, wie es in Abschnitt 6 der Lizenz "
-#~ "beschrieben ist."
-
-#~ msgid ""
-#~ "Many of the names used by companies to distinguish their products and "
-#~ "services are claimed as trademarks. Where those names appear in any GNOME "
-#~ "documentation, and the members of the GNOME Documentation Project are made "
-#~ "aware of those trademarks, then the names are in capital letters or "
-#~ "initial capital letters."
-#~ msgstr ""
-#~ "Viele der Namen, die von Unternehmen verwendet werden, um ihre Produkte "
-#~ "und Dienstleistungen von anderen zu unterscheiden, sind eingetragene "
-#~ "Warenzeichen. An den Stellen, an denen diese Namen in einer GNOME-"
-#~ "Dokumentation erscheinen, werden die Namen in Großbuchstaben oder mit "
-#~ "einem großen Anfangsbuchstaben geschrieben, wenn das GNOME-"
-#~ "Dokumentationsprojekt auf diese Warenzeichen hingewiesen wird."
-
-#~ msgid ""
-#~ "DOCUMENT IS PROVIDED ON AN \"AS IS\" BASIS, WITHOUT WARRANTY OF ANY KIND, "
-#~ "EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES "
-#~ "THAT THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS FREE OF DEFECTS "
-#~ "MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE OR NON-INFRINGING. THE ENTIRE "
-#~ "RISK AS TO THE QUALITY, ACCURACY, AND PERFORMANCE OF THE DOCUMENT OR "
-#~ "MODIFIED VERSION OF THE DOCUMENT IS WITH YOU. SHOULD ANY DOCUMENT OR "
-#~ "MODIFIED VERSION PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL "
-#~ "WRITER, AUTHOR OR ANY CONTRIBUTOR) ASSUME THE COST OF ANY NECESSARY "
-#~ "SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF WARRANTY CONSTITUTES "
-#~ "AN ESSENTIAL PART OF THIS LICENSE. NO USE OF ANY DOCUMENT OR MODIFIED "
-#~ "VERSION OF THE DOCUMENT IS AUTHORIZED HEREUNDER EXCEPT UNDER THIS "
-#~ "DISCLAIMER; AND"
-#~ msgstr ""
-#~ "DIESES DOKUMENT WIRD »WIE VORLIEGEND« GELIEFERT, OHNE GARANTIEN "
-#~ "IRGENDEINER ART, SOWOHL AUSDRÜCKLICH GENANNTE ALS AUCH ANGEDEUTETE. DIES "
-#~ "BEZIEHT SICH AUCH OHNE EINSCHRÄNKUNG AUF GARANTIEN, DASS DIESES DOKUMENT "
-#~ "ODER VERÄNDERTE FASSUNGEN DIESES DOKUMENTS FREI VON HANDELSDEFEKTEN, FÜR "
-#~ "EINEN BESTIMMTEN ZWECK GEEIGNET IST ODER DASS ES KEINE RECHTE DRITTER "
-#~ "VERLETZT. DAS VOLLE RISIKO WAS QUALITÄT, GENAUIGKEIT UND LEISTUNG DES "
-#~ "DOKUMENTS ODER VERÄNDERTE FASSUNGEN DES DOKUMENTS LIEGT BEI IHNEN. SOLLTE "
-#~ "EIN DOKUMENT ODER EINE VERÄNDERTE FASSUNG DAVON FEHLER IRGENDEINER ART "
-#~ "BEINHALTEN, TRAGEN SIE (NICHT DER URSPRUNGSAUTOR, DER AUTOR ODER EIN "
-#~ "MITWIRKENDER) DIE KOSTEN FÜR NOTWENDIGE DIENSTLEISTUNGEN, REPARATUREN ODER "
-#~ "FEHLERKORREKTUREN. DIESER HAFTUNGSAUSSCHLUSS IST EIN ESSENZIELLER TEIL "
-#~ "DIESER LIZENZ. DIE VERWENDUNG EINES DOKUMENTS ODER EINER VERÄNDERTEN "
-#~ "VERSION DES DOKUMENTS IST NICHT GESTATTET AUßER UNTER BEACHTUNG DIESES "
-#~ "HAFTUNGSAUSSCHLUSSES UND"
-
-#~ msgid ""
-#~ "UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY, WHETHER IN TORT "
-#~ "(INCLUDING NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE AUTHOR, INITIAL "
-#~ "WRITER, ANY CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE DOCUMENT OR MODIFIED "
-#~ "VERSION OF THE DOCUMENT, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE "
-#~ "TO ANY PERSON FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR "
-#~ "CONSEQUENTIAL DAMAGES OF ANY CHARACTER INCLUDING, WITHOUT LIMITATION, "
-#~ "DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR "
-#~ "MALFUNCTION, OR ANY AND ALL OTHER DAMAGES OR LOSSES ARISING OUT OF OR "
-#~ "RELATING TO USE OF THE DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT, "
-#~ "EVEN IF SUCH PARTY SHALL HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH "
-#~ "DAMAGES."
-#~ msgstr ""
-#~ "UNTER KEINEN UMSTÄNDEN UND AUF BASIS KEINER RECHTSGRUNDLAGE, EGAL OB DURCH "
-#~ "UNERLAUBTEN HANDLUNGEN (EINSCHLIEßLICH FAHRLÄSSIGKEIT), VERTRAG ODER "
-#~ "ANDERWEITIG KANN DER AUTOR, URSPRUNGSAUTOR, EIN MITWIRKENDER ODER EIN "
-#~ "VERTRIEBSPARTNER DIESES DOKUMENTS ODER EINER VERÄNDERTEN FASSUNG DES "
-#~ "DOKUMENTS ODER EIN ZULIEFERER EINER DIESER PARTEIEN, HAFTBAR GEMACHT "
-#~ "WERDEN FÜR DIREKTE, INDIREKTE, SPEZIELLE, VERSEHENTLICHE ODER FOLGESCHÄDEN "
-#~ "JEGLICHER ART, EINSCHLIEßLICH UND OHNE EINSCHRÄNKUNGEN SCHÄDEN DURCH "
-#~ "VERLUST VON KULANZ, ARBEITSAUSFALL, COMPUTERVERSAGEN ODER "
-#~ "COMPUTERFEHLFUNKTIONEN ODER ALLE ANDEREN SCHÄDEN ODER VERLUSTE, DIE SICH "
-#~ "AUS ODER IN VERBINDUNG MIT DER VERWENDUNG DES DOKUMENTS UND VERÄNDERTER "
-#~ "FASSUNGEN DES DOKUMENTS ERGEBEN, AUCH WENN DIE OBEN GENANNTEN PARTEIEN "
-#~ "ÜBER DIE MÖGLICHKEIT SOLCHER SCHÄDEN INFORMIERT WAREN."
-
-#~ msgid ""
-#~ "DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT ARE PROVIDED UNDER THE "
-#~ "TERMS OF THE GNU FREE DOCUMENTATION LICENSE WITH THE FURTHER UNDERSTANDING "
-#~ "THAT: <placeholder-1/>"
-#~ msgstr ""
-#~ "DAS DOKUMENT UND VERÄNDERTE FASSUNGEN DES DOKUMENTS WERDEN UNTER DEN "
-#~ "BEDINGUNGEN DER GNU FREE DOCUMENTATION LICENSE ZUR VERFÜGUNG GESTELLT MIT "
-#~ "DEM WEITERGEHENDEN VERSTÄNDNIS, DASS: <placeholder-1/>"
-
-#~ msgid "Jim"
-#~ msgstr "Jim"
-
-#~ msgid "Evins"
-#~ msgstr "Evins"
-
-#~ msgid "gLabels Manual V2.2"
-#~ msgstr "gLabels-Handbuch V2.2"
-
-#~ msgid "Jim Evins <email>evins@snaught.com</email>"
-#~ msgstr "Jim Evins <email>evins@snaught.com</email>"
-
-#~ msgid "This manual describes version 2.2 of gLabels."
-#~ msgstr "Dieses Handbuch beschreibt Version 2.2 von gLabels."
-
-#~ msgid "Feedback"
-#~ msgstr "Rückmeldungen"
-
-#~ msgid "Getting Started"
-#~ msgstr "Erste Schritte"
-
-#~ msgid ""
-#~ "You can start <application><application>gLabels</application></"
-#~ "application> in the following ways:"
-#~ msgstr ""
-#~ "Sie können <application>gLabels</application> auf folgende Arten starten:"
-
-#~ msgid "<gui>Applications</gui> menu"
-#~ msgstr "Menü <gui>Anwendungen</gui>"
-
-#~ msgid ""
-#~ "Choose <guiseq><guisubmenu>Office</guisubmenu><gui>gLabels</gui></guiseq>."
-#~ msgstr ""
-#~ "Wählen Sie <guiseq><guisubmenu>Büroanwendungen</guisubmenu><gui>gLabels</"
-#~ "gui></guiseq>."
-
-#~ msgid "Command line"
-#~ msgstr "Befehlszeile"
-
-#~ msgid "Type <command>glabels</command>, then press <keycap>Return</keycap>:"
-#~ msgstr ""
-#~ "Geben Sie <command>glabels</command> ein, und drücken Sie dann die "
-#~ "<keycap>Eingabetaste</keycap>."
-
-#~ msgid "When You Start <application>gLabels</application>"
-#~ msgstr "Beim Start von <application>gLabels</application>"
-
-#~ msgid ""
-#~ "When you start <application><application>gLabels</application></"
-#~ "application>, the following window is displayed."
-#~ msgstr ""
-#~ "Wenn Sie <application>gLabels</application> starten, wird folgendes "
-#~ "Fenster angezeigt."
-
-#~ msgid ""
-#~ "The <application>gLabels</application> window contains the following "
-#~ "elements:"
-#~ msgstr ""
-#~ "Das <application>gLabels</application>-Fenster enthält folgende Elemente:"
-
-#~ msgid "Menubar."
-#~ msgstr "Menüleiste."
-
-#~ msgid ""
-#~ "The menus on the menubar contain all of the commands you need to create "
-#~ "and edit labels and business cards in <application><application>gLabels</"
-#~ "application></application>."
-#~ msgstr ""
-#~ "Die Menüs in der Menüleiste enthalten alle Befehle, die Sie zum Erstellen "
-#~ "und Bearbeiten von Etiketten und Visitenkarten in <application>gLabels</"
-#~ "application> benötigen."
-
-#~ msgid "Main toolbar."
-#~ msgstr "Haupt-Werkzeugleiste."
-
-#~ msgid ""
-#~ "The main toolbar contains a subset of common File and Edit commands that "
-#~ "you can access from the menubar."
-#~ msgstr ""
-#~ "Die Haupt-Werkzeugleiste enthält eine Auswahl der Befehle, die Sie über "
-#~ "die Menüleiste in den Menüs »Datei« und »Bearbeiten« erreichen."
-
-#~ msgid ""
-#~ "The drawing toolbar contains a subset of commands for editing the current "
-#~ "glabels document."
-#~ msgstr ""
-#~ "Die Zeichenwerkzeugleiste enthält eine Auswahl von Befehlen zum Bearbeiten "
-#~ "des aktuellen gLabels-Dokuments."
-
-#~ msgid "Display area."
-#~ msgstr "Anzeigebereich."
-
-#~ msgid ""
-#~ "The display area is the main drawing interface to "
-#~ "<application><application>gLabels</application></application>."
-#~ msgstr ""
-#~ "Der Anzeigebereich ist die Zeichenfläche für <application>gLabels</"
-#~ "application>."
-
-#~ msgid ""
-#~ "The object sidebar provides an interface for viewing and editing all "
-#~ "properties of an individual object."
-#~ msgstr ""
-#~ "Die Objekt-Seitenleiste stellt eine Schnittstelle zum Betrachten und "
-#~ "Bearbeiten der Eigenschaften eines bestimmten Objekts zur Verfügung."
-
-#~ msgid "Properties toolbar."
-#~ msgstr "Eingenschaften-Werkzeugleiste."
-
-#~ msgid ""
-#~ "The properties toolbar contains a set of tools to manipulate the "
-#~ "properties of selected objects and set default properties for new objects."
-#~ msgstr ""
-#~ "Die Eigenschaften-Werkzeugleiste enthält eine Reihe von Werkzeugen zum "
-#~ "Manipulieren der Eigenschaften ausgewählter Objekte sowie zum Setzen der "
-#~ "Standardeigenschaften für neue Objekte."
-
-#~ msgid "Statusbar."
-#~ msgstr "Statusleiste."
-
-#~ msgid ""
-#~ "The statusbar displays information about current "
-#~ "<application><application>gLabels</application></application> activity and "
-#~ "contextual information about the menu items."
-#~ msgstr ""
-#~ "In der Statusleiste werden Informationen über die aktuelle "
-#~ "<application>gLabels</application>-Aktivität und Kontextinformationen über "
-#~ "die Menüpunkte angezeigt."
-
-#~ msgid ""
-#~ "If your particular media type is missing from this dialog, see <xref "
-#~ "linkend=\"glabels-create-template\"/>"
-#~ msgstr ""
-#~ "Falls Ihr spezieller Medientyp in diesem Dialog nicht angezeigt wird, "
-#~ "siehe <xref linkend=\"glabels-create-template\"/>."
-
-#~ msgid "To Quit <application><application>gLabels</application></application>"
-#~ msgstr ""
-#~ "<application><application>gLabels</application></application> beenden"
-
-#~ msgid ""
-#~ "To quit <application><application>gLabels</application></application>, "
-#~ "choose <guiseq><gui>File</gui><gui>Quit</gui></guiseq>. This is equivalent "
-#~ "to closing all open windows. See <xref linkend=\"glabels-close-file\"/>."
-#~ msgstr ""
-#~ "Um <application><application>gLabels</application></application> zu "
-#~ "beenden, wählen Sie <guiseq><gui>Datei</gui><gui>Beenden</gui></guiseq>. "
-#~ "Dadurch werden alle offenen Fenster geschlossen. Siehe <xref linkend="
-#~ "\"glabels-close-file\"/>."
-
-#~ msgid "X"
-#~ msgstr "X"
-
-#~ msgid "C"
-#~ msgstr "C"
-
-#~ msgid "V"
-#~ msgstr "V"
-
-#~ msgid "Object Editor Sidebar"
-#~ msgstr "Objekteditor-Seitenleiste"
-
-#~ msgid ""
-#~ "Predefined templates are defined by XML files located in <filename>"
-#~ "${prefix}/share/glabels/</filename>, where <filename>${prefix}</filename> "
-#~ "is usually something like <filename>/usr/local</filename> or <filename>/"
-#~ "usr</filename> depending on the configuration option <filename>prefix</"
-#~ "filename>. gLabels will use all files of the form <filename>*-templates."
-#~ "xml</filename> or <filename>*.template</filename>, that it finds in "
-#~ "<filename>${prefix}/share/glabels/</filename> and <filename>${HOME}/."
-#~ "glabels/</filename>. Additional templates can be added by creating "
-#~ "additional <filename>*.template</filename> files in either of these "
-#~ "directories."
-#~ msgstr ""
-#~ "Vordefinierte Vorlagen sind als XML-Dateien verfügbar, die in <filename>"
-#~ "${prefix}/share/glabels/</filename> gespeichert sind, wobei <filename>"
-#~ "${prefix}</filename> üblicherweise <filename>/usr/local</filename> oder "
-#~ "<filename>/usr</filename> ist, abhängig von der Konfigurationsoption "
-#~ "<filename>prefix</filename>. <application>gLabels</application> verwendet "
-#~ "alle Dateien der Form <filename>*-templates.xml</filename> oder "
-#~ "<filename>*.template</filename>, die es in <filename>${prefix}/share/"
-#~ "glabels/</filename> und <filename>${HOME}/.glabels/</filename> findet. "
-#~ "Zusätzliche Vorlagen können unter Verwendung der Dateiendung <filename>*."
-#~ "template</filename> in einem dieser Ordner gespeichert werden."
-
-#~ msgid "x coordinate of 2nd endpoint of the line segment."
-#~ msgstr "x-Koordinate des Endpunkts des Linienabschnitts."
-
-#~ msgid "y coordinate of 2nd endpoint of the line segment."
-#~ msgstr "y-Koordinate des Endpunkts des Linienabschnitts."
-
-#~ msgid "Number of labels/cards up and down in the grid (vertical)"
-#~ msgstr "Anzahl der Etiketten/Karten im Raster in vertikaler Richtung"
