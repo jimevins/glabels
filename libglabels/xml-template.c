@@ -147,26 +147,37 @@ lgl_xml_template_parse_templates_doc (const xmlDocPtr templates_doc)
 	LIBXML_TEST_VERSION;
 
 	root = xmlDocGetRootElement (templates_doc);
-	if (!root || !root->name) {
+	if (!root || !root->name)
+        {
 		g_message ("\"%s\" is not a glabels template file (no root node)",
 			   templates_doc->URL);
 		return;
 	}
-	if (!lgl_xml_is_node (root, "Glabels-templates")) {
+	if (!lgl_xml_is_node (root, "Glabels-templates"))
+        {
 		g_message ("\"%s\" is not a glabels template file (wrong root node)",
 		      templates_doc->URL);
 		return;
 	}
 
-	for (node = root->xmlChildrenNode; node != NULL; node = node->next) {
+	for (node = root->xmlChildrenNode; node != NULL; node = node->next)
+        {
 
-		if (lgl_xml_is_node (node, "Template")) {
+		if (lgl_xml_is_node (node, "Template"))
+                {
 			template = lgl_xml_template_parse_template_node (node);
-                        _lgl_db_register_template_internal (template);
-                        lgl_template_free (template);
-		} else {
-			if ( !xmlNodeIsText(node) ) {
-				if (!lgl_xml_is_node (node,"comment")) {
+                        if (template)
+                        {
+                                _lgl_db_register_template_internal (template);
+                                lgl_template_free (template);
+                        }
+		}
+                else
+                {
+			if ( !xmlNodeIsText(node) )
+                        {
+				if (!lgl_xml_is_node (node,"comment"))
+                                {
 					g_message ("bad node =  \"%s\"",node->name);
 				}
 			}

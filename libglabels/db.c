@@ -43,7 +43,7 @@
 /* Data system and user data directories.  (must free w/ g_free()) */
 #define SYSTEM_CONFIG_DIR     g_build_filename (LIBGLABELS_CONFIG_DIR, "templates", NULL)
 #define USER_CONFIG_DIR       g_build_filename (g_get_user_config_dir (), "libglabels", "templates" , NULL)
-#define USER_CONFIG_DIR_OLD22 g_build_filename (g_get_home_dir (), ".glabels", NULL)
+#define ALT_USER_CONFIG_DIR   g_build_filename (g_get_home_dir (), ".glabels", NULL)
 
 
 /*===========================================*/
@@ -125,8 +125,6 @@ static void   read_templates               (void);
 static void   read_template_files_from_dir (const gchar *dirname);
 
 static lglTemplate *template_full_page     (const gchar *page_size);
-
-static void   copy_old_custom_files        (void);
 
 
 /*****************************************************************************/
@@ -253,8 +251,6 @@ lgl_db_init (void)
         lglTemplate *template;
         GList       *page_sizes;
         GList       *p;
-
-        copy_old_custom_files ();
 
         model = lgl_db_model_new ();
 
@@ -1569,6 +1565,12 @@ lgl_db_delete_template_by_name (const gchar *name)
 		filename = g_strdup_printf ("%s_%s.template", template->brand, template->part);
 		abs_filename = g_build_filename (dir, filename, NULL);
 
+                if (!g_file_test (abs_filename, G_FILE_TEST_EXISTS))
+                {
+                        g_message ("File \"%s\" does not exist.  Cannot delete it.");
+                        return LGL_DB_DELETE_DOES_NOT_EXIST;
+                }
+
                 g_unlink (abs_filename);
 
 		g_free (dir);
@@ -1948,6 +1950,13 @@ read_templates (void)
         }
 
         /*
+         * Alternate user defined templates.  (Used for manually created templates).
+         */
+	data_dir = ALT_USER_CONFIG_DIR;
+	read_template_files_from_dir (data_dir);
+	g_free (data_dir);
+
+        /*
          * System templates.
          */
 	data_dir = SYSTEM_CONFIG_DIR;
@@ -2047,65 +2056,6 @@ template_full_page (const gchar *paper_id)
 	paper = NULL;
 
 	return template;
-}
-
-
-/*
- * Migrate custom files from the old ~/.glabels location to the new
- * ~/.config/libglabels/templates directory.  Place a timestamp file
- * in the old directory to prevent future copies.
- */
-static void
-copy_old_custom_files (void)
-{
-        gchar       *old_dir_name;
-        gchar       *new_dir_name;
-        gchar       *timestamp_file_name;
-        GDir        *dir;
-        const gchar *name;
-        gchar       *old_full_name, *new_full_name;
-        gchar       *contents;
-        gsize        length;
-
-        old_dir_name = USER_CONFIG_DIR_OLD22;
-        timestamp_file_name = g_build_filename (old_dir_name, ".copied_to_30", NULL);
-
-        if ( g_file_test (old_dir_name, G_FILE_TEST_EXISTS) &&
-             !g_file_test (timestamp_file_name, G_FILE_TEST_EXISTS) )
-        {
-
-                new_dir_name = USER_CONFIG_DIR;
-		g_mkdir_with_parents (new_dir_name, 0775); /* Try to make sure directory exists. */
-
-                dir = g_dir_open (old_dir_name, 0, NULL);
-
-                if (dir)
-                {
-                        while ((name = g_dir_read_name (dir)) != NULL)
-                        {
-                                old_full_name = g_build_filename (old_dir_name, name, NULL);
-                                new_full_name = g_build_filename (new_dir_name, name, NULL);
-
-                                if ( g_file_get_contents (old_full_name, &contents, &length, NULL) )
-                                {
-                                        g_file_set_contents (new_full_name, contents, length, NULL);
-                                        g_free (contents);
-                                }
-
-                                g_free (old_full_name);
-                                g_free (new_full_name);
-                        }
-
-                        g_dir_close (dir);
-
-                        g_file_set_contents (timestamp_file_name, NULL, 0, NULL);
-                }
-
-                g_free (new_dir_name);
-        }
-
-        g_free (timestamp_file_name);
-        g_free (old_dir_name);
 }
 
 

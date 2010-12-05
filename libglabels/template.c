@@ -121,11 +121,12 @@ lgl_template_new_from_equiv (const gchar          *brand,
                              const gchar          *part,
                              const gchar          *equiv_part)
 {
-        lglTemplate      *template;
+        lglTemplate      *template = NULL;
 
-        template = lgl_db_lookup_template_from_brand_part (brand, equiv_part);
-        if (template)
+        if ( lgl_db_does_template_exist (brand, equiv_part) )
         {
+                template = lgl_db_lookup_template_from_brand_part (brand, equiv_part);
+
                 g_free (template->part);
                 g_free (template->equiv_part);
 
