@@ -8,11 +8,57 @@
   <!--                           -->
   <!-- ************************* -->
 
+
+  <!-- =================================================================== -->
+  <!-- Geha Z22.  CD/DVD Labels.                                     	   -->
+  <!-- =================================================================== -->
+  <Template brand="Geha" part="Z22" size="A4" _description="CD/DVD Labels">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Meta product_url="http://www.geha.de/index.php?id=1047&amp;pid=30101"/>
+    <Label-cd id="0" radius="58.5mm" hole="8.5mm" waste="3.175mm">
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="1" ny="2" x0="46.5mm" y0="21.5mm" dx="123.35mm" dy="137mm"/>
+    </Label-cd>
+  </Template>
+
+  <Template brand="Geha" part="Z23" equiv="Z22"/>
+
+
+  <!-- =================================================================== -->
+  <!-- Geha Z25-1.  Video Tape Spine Labels.                           	   -->
+  <!-- =================================================================== -->
+  <Template brand="Geha" part="Z25-1" size="A4" _description="Video Tape Spine Labels">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Meta product_url="http://www.geha.de/index.php?id=1047&amp;pid=30262"/>
+    <Label-rectangle id="0" width="147.32mm" height="20mm" round="2.8mm" x_waste="0mm" y_waste="0mm">
+      <Markup-margin size="2mm"/>
+      <Layout nx="1" ny="13" x0="31.38mm" y0="18.4mm" dx="147.32mm" dy="20mm"/>
+    </Label-rectangle>
+  </Template>
+
+
+  <!-- =================================================================== -->
+  <!-- Geha Z25-2.  Video Tape Face Labels.                           	   -->
+  <!-- =================================================================== -->
+  <Template brand="Geha" part="Z25-2" size="A4" _description="Video Tape Face Labels">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Meta product_url="http://www.geha.de/index.php?id=1047&amp;pid=30262"/>
+    <Label-rectangle id="0" width="78.74mm" height="46.6mm" round="2mm" x_waste="0mm" y_waste="0mm">
+      <Markup-margin size="2mm"/>
+      <Layout nx="2" ny="6" x0="25mm" y0="8.7mm" dx="81.38mm" dy="46.6mm"/>
+    </Label-rectangle>
+  </Template>
+
+
   <!-- =================================================================== -->
   <!-- Geha Z53.  Address Labels.                                     	   -->
   <!-- =================================================================== -->
   <Template brand="Geha" part="Z53" size="A4" _description="Address Labels">
     <Meta category="label"/>
+    <Meta category="mail"/>
     <Meta category="rectangle-label"/>
     <Meta product_url="http://www.geha.de/index.php?id=1047&amp;pid=30767"/>
     <Label-rectangle id="0" width="99.1mm" height="38.1mm" round="0.2mm" x_waste="0mm" y_waste="0mm">
@@ -20,6 +66,40 @@
       <Layout nx="2" ny="7" x0="3mm" y0="15.9mm" dx="101.6mm" dy="38.1mm"/>
     </Label-rectangle>
   </Template>
+
+
+  <!-- =================================================================== -->
+  <!-- Geha Z80.  Arch File Labels.					   -->
+  <!-- =================================================================== -->
+  <Template brand="Geha" part="Z80" size="A4" _description="Arch File Labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.geha.de/index.php?id=1047&amp;pid=30002"/>
+    <Label-rectangle id="0" width="192mm" height="61mm" round="0mm" x_waste="0mm" y_waste="0mm">
+      <Markup-margin size="3.175mm"/>
+      <Markup-line x1="172mm" y1="0mm" x2="172mm" y2="61mm"/>
+      <Layout nx="1" ny="4" x0="9mm" y0="26.4mm" dx="192mm" dy="61mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <Template brand="Geha" part="Z88" equiv="Z80"/>
+
+
+  <!-- =================================================================== -->
+  <!-- Geha Z81.  Arch File Labels.					   -->
+  <!-- =================================================================== -->
+  <Template brand="Geha" part="Z81" size="A4" _description="Arch File Labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.geha.de/index.php?id=1047&amp;pid=30026"/>
+    <Label-rectangle id="0" width="192mm" height="38mm" round="0mm" x_waste="0mm" y_waste="0mm">
+      <Markup-margin size="2mm"/>
+      <Markup-line x1="172mm" y1="0mm" x2="172mm" y2="38mm"/>
+      <Layout nx="1" ny="7" x0="9mm" y0="15.4mm" dx="192mm" dy="38mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <Template brand="Geha" part="Z89" equiv="Z81"/>
 
 </Glabels-templates>
 
