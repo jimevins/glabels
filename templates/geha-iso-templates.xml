@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<Glabels-templates xmlns="http://glabels.org/xmlns/2.3/">
+
+  <!-- ************************* -->
+  <!--                           -->
+  <!-- Geha                      -->
+  <!--                           -->
+  <!-- ************************* -->
+
+  <!-- =================================================================== -->
+  <!-- Geha Z53.  Address Labels.                                     	   -->
+  <!-- =================================================================== -->
+  <Template brand="Geha" part="Z53" size="A4" _description="Address Labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.geha.de/index.php?id=1047&amp;pid=30767"/>
+    <Label-rectangle id="0" width="99.1mm" height="38.1mm" round="0.2mm" x_waste="0mm" y_waste="0mm">
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="2" ny="7" x0="3mm" y0="15.9mm" dx="101.6mm" dy="38.1mm"/>
+    </Label-rectangle>
+  </Template>
+
+</Glabels-templates>
+
+
+
+
