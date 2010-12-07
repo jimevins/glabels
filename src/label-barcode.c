@@ -54,6 +54,11 @@ struct _glLabelBarcodePrivate {
         glLabelBarcodeStyle *style;
         glColorNode         *color_node;
 
+        /* Cached info.  Only regenerate when text_node,
+         * style, or raw size changed */
+        lglBarcode          *display_gbc;
+        gdouble              w, h;
+
 };
 
 
@@ -70,6 +75,13 @@ static void  gl_label_barcode_finalize      (GObject             *object);
 
 static void  copy                           (glLabelObject       *dst_object,
                                              glLabelObject       *src_object);
+
+static void  update_barcode                 (glLabelBarcode      *lbc);
+
+static void  set_size                       (glLabelObject       *object,
+                                             gdouble              w,
+                                             gdouble              h,
+                                             gboolean             checkpoint);
 
 static void  get_size                       (glLabelObject       *object,
                                              gdouble             *w,
@@ -113,6 +125,7 @@ gl_label_barcode_class_init (glLabelBarcodeClass *class)
         gl_label_barcode_parent_class = g_type_class_peek_parent (class);
 
         label_object_class->copy           = copy;
+        label_object_class->set_size       = set_size;
         label_object_class->get_size       = get_size;
         label_object_class->set_line_color = set_line_color;
         label_object_class->get_line_color = get_line_color;
@@ -143,6 +156,7 @@ gl_label_barcode_finalize (GObject *object)
         gl_text_node_free (&lbc->priv->text_node);
         gl_label_barcode_style_free (lbc->priv->style);
         gl_color_node_free (&(lbc->priv->color_node));
+        lgl_barcode_free (lbc->priv->display_gbc);
         g_free (lbc->priv);
 
         G_OBJECT_CLASS (gl_label_barcode_parent_class)->finalize (object);
@@ -177,6 +191,7 @@ gl_label_barcode_new (glLabel *label,
                 style->checksum_flag = gl_barcode_backends_style_can_csum (style->backend_id, style->id);
                 style->format_digits = gl_barcode_backends_style_get_prefered_n (style->backend_id, style->id);
                 lbc->priv->style = style;
+                update_barcode (lbc);
 
                 line_color_node = gl_color_node_new_default ();
                 line_color_node->color = gl_label_get_default_line_color(label);
@@ -212,12 +227,11 @@ copy (glLabelObject *dst_object,
         style = gl_label_barcode_get_style (lbc);
         color_node = get_line_color (src_object);
 
-        gl_label_barcode_set_data (new_lbc, text_node, FALSE);
-        gl_label_barcode_set_style (new_lbc, style, FALSE);
-        set_line_color (dst_object, color_node, FALSE);
+        new_lbc->priv->text_node  = text_node;
+        new_lbc->priv->style      = style;
+        new_lbc->priv->color_node = color_node;
 
-        gl_color_node_free (&color_node);
-        gl_text_node_free (&text_node);
+        update_barcode (new_lbc);
 
         gl_debug (DEBUG_LABEL, "END");
 }
@@ -248,6 +262,8 @@ gl_label_barcode_set_data (glLabelBarcode   *lbc,
                 gl_text_node_free (&lbc->priv->text_node);
                 lbc->priv->text_node = gl_text_node_dup (text_node);
 
+                update_barcode (lbc);
+
                 gl_label_object_emit_changed (GL_LABEL_OBJECT(lbc));
         }
 
@@ -276,6 +292,8 @@ gl_label_barcode_set_style (glLabelBarcode            *lbc,
 
                 gl_label_barcode_style_free (lbc->priv->style);
                 lbc->priv->style = gl_label_barcode_style_dup (style);
+
+                update_barcode (lbc);
 
                 gl_label_object_emit_changed (GL_LABEL_OBJECT(lbc));
         }
@@ -306,43 +324,47 @@ gl_label_barcode_get_style (glLabelBarcode *lbc)
 
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Get object size method.                                         */
+/* PRIVATE.  Update cached lglBarcode.                                       */
 /*---------------------------------------------------------------------------*/
 static void
-get_size (glLabelObject *object,
-          gdouble       *w,
-          gdouble       *h)
+update_barcode (glLabelBarcode *lbc)
 {
-        glLabelBarcode      *lbc = (glLabelBarcode *)object;
+        gdouble              w_raw, h_raw;
         gchar               *data;
-        gdouble              w_parent, h_parent;
-        lglBarcode          *gbc;
 
         gl_debug (DEBUG_LABEL, "START");
 
         g_return_if_fail (lbc && GL_IS_LABEL_BARCODE (lbc));
 
-        gl_label_object_get_raw_size (object, &w_parent, &h_parent);
+        gl_label_object_get_raw_size (GL_LABEL_OBJECT (lbc), &w_raw, &h_raw);
 
-        if (lbc->priv->text_node->field_flag) {
+        lgl_barcode_free (lbc->priv->display_gbc);
+
+        if (lbc->priv->text_node->field_flag)
+        {
                 data = gl_barcode_backends_style_default_digits (lbc->priv->style->backend_id,
                                                                  lbc->priv->style->id,
                                                                  lbc->priv->style->format_digits);
-        } else {
+        }
+        else
+        {
                 data = gl_text_node_expand (lbc->priv->text_node, NULL);
         }
 
-        gbc = gl_barcode_backends_new_barcode (lbc->priv->style->backend_id,
-                                               lbc->priv->style->id,
-                                               lbc->priv->style->text_flag,
-                                               lbc->priv->style->checksum_flag,
-                                               w_parent,
-                                               h_parent,
-                                               data);
+        lbc->priv->display_gbc = gl_barcode_backends_new_barcode (lbc->priv->style->backend_id,
+                                                                  lbc->priv->style->id,
+                                                                  lbc->priv->style->text_flag,
+                                                                  lbc->priv->style->checksum_flag,
+                                                                  w_raw,
+                                                                  h_raw,
+                                                                  data);
         g_free (data);
 
-        if ( gbc == NULL ) {
-                /* Try again with default digits. */
+        if ( lbc->priv->display_gbc == NULL )
+        {
+                lglBarcode *gbc;
+
+                /* Try again with default digits, but don't save -- just extract size. */
                 data = gl_barcode_backends_style_default_digits (lbc->priv->style->backend_id,
                                                                  lbc->priv->style->id,
                                                                  lbc->priv->style->format_digits);
@@ -350,25 +372,69 @@ get_size (glLabelObject *object,
                                                        lbc->priv->style->id,
                                                        lbc->priv->style->text_flag,
                                                        lbc->priv->style->checksum_flag,
-                                                       w_parent,
-                                                       h_parent,
+                                                       w_raw,
+                                                       h_raw,
                                                        data);
                 g_free (data);
-        }
 
-        if ( gbc != NULL )
-        {
-                *w = gbc->width;
-                *h = gbc->height;
+                if ( gbc != NULL )
+                {
+                        lbc->priv->w = gbc->width;
+                        lbc->priv->h = gbc->height;
+                }
+                else
+                {
+                        /* If we still can't render, just set a default size. */
+                        lbc->priv->w = 144;
+                        lbc->priv->h = 72;
+                }
+
+                lgl_barcode_free (gbc);
         }
         else
         {
-                /* If we still can't render, just set a default size. */
-                *w = 144;
-                *h = 72;
+                lbc->priv->w = lbc->priv->display_gbc->width;
+                lbc->priv->h = lbc->priv->display_gbc->height;
         }
 
-        lgl_barcode_free (gbc);
+        gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Set object size method.                                         */
+/*---------------------------------------------------------------------------*/
+static void
+set_size (glLabelObject       *object,
+          gdouble              w,
+          gdouble              h,
+          gboolean             checkpoint)
+{
+        gl_debug (DEBUG_LABEL, "START");
+
+        g_return_if_fail (object && GL_IS_LABEL_BARCODE (object));
+
+        gl_label_object_set_raw_size (object, w, h, checkpoint);
+        update_barcode (GL_LABEL_BARCODE (object));
+
+        gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Get object size method.                                         */
+/*---------------------------------------------------------------------------*/
+static void
+get_size (glLabelObject *object,
+          gdouble       *w,
+          gdouble       *h)
+{
+        gl_debug (DEBUG_LABEL, "START");
+
+        g_return_if_fail (object && GL_IS_LABEL_BARCODE (object));
+
+        *w = GL_LABEL_BARCODE (object)->priv->w;
+        *h = GL_LABEL_BARCODE (object)->priv->h;
 
         gl_debug (DEBUG_LABEL, "END");
 }
@@ -425,6 +491,7 @@ draw_object (glLabelObject *object,
              gboolean       screen_flag,
              glMergeRecord *record)
 {
+        glLabelBarcode       *lbc     = (glLabelBarcode *)object;
         gdouble               x0, y0;
         cairo_matrix_t        matrix;
         lglBarcode           *gbc;
@@ -450,29 +517,39 @@ draw_object (glLabelObject *object,
                 color = GL_COLOR_MERGE_DEFAULT;
         }
 
-        gl_label_object_get_size (object, &w, &h);
-
-        text = gl_text_node_expand (text_node, record);
-        if (text_node->field_flag && screen_flag) {
-                text = gl_barcode_backends_style_default_digits (style->backend_id, style->id, style->format_digits);
-        }
-
-        gbc = gl_barcode_backends_new_barcode (style->backend_id, style->id, style->text_flag, style->checksum_flag, w, h, text);
-
         cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (color));
 
-        if (gbc == NULL)
-        {
-                create_alt_msg_path (cr, text);
-                cairo_fill (cr);
+        if (text_node->field_flag && !screen_flag) {
+
+                gl_label_object_get_raw_size (object, &w, &h);
+
+                text = gl_text_node_expand (text_node, record);
+                gbc = gl_barcode_backends_new_barcode (style->backend_id, style->id, style->text_flag, style->checksum_flag, w, h, text);
+                g_free (text);
+
+                if ( gbc != NULL )
+                {
+                        lgl_barcode_render_to_cairo (gbc, cr);
+                        lgl_barcode_free (gbc);
+                }
+
         }
         else
         {
-                lgl_barcode_render_to_cairo (gbc, cr);
-                lgl_barcode_free (gbc);
+
+                if (lbc->priv->display_gbc == NULL)
+                {
+                        create_alt_msg_path (cr, text_node->data);
+                        cairo_fill (cr);
+                }
+                else
+                {
+                        lgl_barcode_render_to_cairo (lbc->priv->display_gbc, cr);
+                        lgl_barcode_free (gbc);
+                }
+
         }
 
-        g_free (text);
         gl_text_node_free (&text_node);
         gl_label_barcode_style_free (style);
         gl_color_node_free (&color_node);
@@ -490,6 +567,7 @@ object_at (glLabelObject *object,
            gdouble        x,
            gdouble        y)
 {
+        glLabelBarcode       *lbc     = (glLabelBarcode *)object;
         gdouble               w, h;
         lglBarcode           *gbc;
         glLabelBarcodeStyle  *style;
@@ -502,26 +580,15 @@ object_at (glLabelObject *object,
         if ( (x >= 0) && (x <= w) && (y >= 0) && (y <= h) )
         {
 
-                style = gl_label_barcode_get_style (GL_LABEL_BARCODE (object));
                 text_node = gl_label_barcode_get_data(GL_LABEL_BARCODE(object));
-                text = gl_text_node_expand (text_node, NULL);
-                if (text_node->field_flag) {
-                        text = gl_barcode_backends_style_default_digits (style->backend_id, style->id, style->format_digits);
-                }
-                gbc = gl_barcode_backends_new_barcode (style->backend_id,
-                                                       style->id,
-                                                       style->text_flag,
-                                                       style->checksum_flag,
-                                                       w, h,
-                                                       text);
-                if ( gbc == NULL )
+
+                if ( lbc->priv->display_gbc == NULL )
                 {
-                        create_alt_msg_path (cr, text);
+                        create_alt_msg_path (cr, text_node->data);
                 }
                 else
                 {
-                        lgl_barcode_render_to_cairo_path (gbc, cr);
-                        lgl_barcode_free (gbc);
+                        lgl_barcode_render_to_cairo_path (lbc->priv->display_gbc, cr);
                 }
 
                 if (cairo_in_fill (cr, x, y))

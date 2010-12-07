@@ -237,7 +237,7 @@ gl_label_object_dup (glLabelObject *src_object,
 	shadow_state      = gl_label_object_get_shadow_state   (src_object);
 
 	gl_label_object_set_position (dst_object, x, y, FALSE);
-	gl_label_object_set_size     (dst_object, w, h, FALSE);
+	gl_label_object_set_raw_size (dst_object, w, h, FALSE);
 	gl_label_object_set_matrix   (dst_object, &matrix);
 	gl_label_object_set_shadow_offset  (dst_object, shadow_x, shadow_y, FALSE);
 	gl_label_object_set_shadow_color   (dst_object, shadow_color_node, FALSE);
@@ -507,6 +507,26 @@ gl_label_object_set_size (glLabelObject *object,
 
 		object->priv->aspect_ratio = h / w;
 	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/*****************************************************************************/
+/* Set raw size of object.                                                   */
+/*****************************************************************************/
+void
+gl_label_object_set_raw_size (glLabelObject *object,
+                              gdouble        w,
+                              gdouble        h,
+                              gboolean       checkpoint)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+        set_size (object, w, h, checkpoint);
+        object->priv->aspect_ratio = h / w;
 
 	gl_debug (DEBUG_LABEL, "END");
 }
