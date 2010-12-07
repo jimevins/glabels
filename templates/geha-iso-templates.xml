@@ -281,7 +281,6 @@
     <Meta category="label"/>
     <Meta category="rectangle-label"/>
     <Meta category="mail"/>
-    <Meta category="rectangle-label"/>
     <Meta product_url="http://www.geha.de/index.php?id=1047&amp;pid=30767"/>
     <Label-rectangle id="0" width="99.1mm" height="38.1mm" round="0.2mm" x_waste="0mm" y_waste="0mm">
       <Markup-margin size="3.2mm"/>
