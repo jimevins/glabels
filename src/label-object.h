@@ -194,6 +194,9 @@ struct _glLabelObjectClass {
         void        (*changed) (glLabelObject *object,
                                 gpointer       user_data);
 
+        void        (*moved)   (glLabelObject *object,
+                                gpointer       user_data);
+
 };
 
 

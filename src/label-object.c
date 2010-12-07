@@ -73,6 +73,7 @@ struct _glLabelObjectPrivate {
 
 enum {
         CHANGED,
+        MOVED,
         LAST_SIGNAL
 };
 
@@ -124,6 +125,16 @@ gl_label_object_class_init (glLabelObjectClass *class)
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (glLabelObjectClass, changed),
+			      NULL, NULL,
+			      gl_marshal_VOID__VOID,
+			      G_TYPE_NONE,
+			      0);
+
+	signals[MOVED] =
+		g_signal_new ("moved",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (glLabelObjectClass, moved),
 			      NULL, NULL,
 			      gl_marshal_VOID__VOID,
 			      G_TYPE_NONE,
@@ -388,9 +399,10 @@ gl_label_object_set_position (glLabelObject *object,
 
 		object->priv->x = x;
 		object->priv->y = y;
-	}
 
-        gl_label_object_emit_changed (object);
+                g_signal_emit (G_OBJECT(object), signals[MOVED], 0);
+
+	}
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -422,9 +434,9 @@ gl_label_object_set_position_relative (glLabelObject *object,
 		gl_debug (DEBUG_LABEL, "       x = %f, y= %f",
 			  object->priv->x,
 			  object->priv->y);
-	}
 
-        gl_label_object_emit_changed (object);
+                g_signal_emit (G_OBJECT(object), signals[MOVED], 0);
+	}
 
 	gl_debug (DEBUG_LABEL, "END");
 }

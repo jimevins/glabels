@@ -87,6 +87,9 @@ static void set_key_names                       (glObjectEditor       *editor,
 static void object_changed_cb                   (glLabelObject        *object,
                                                  glObjectEditor       *editor);
 
+static void object_moved_cb                     (glLabelObject        *object,
+                                                 glObjectEditor       *editor);
+
 
 
 /*****************************************************************************/
@@ -198,6 +201,8 @@ gl_object_editor_finalize (GObject *object)
         {
                 g_signal_handlers_disconnect_by_func (G_OBJECT(editor->priv->object),
                                                       object_changed_cb, editor);
+                g_signal_handlers_disconnect_by_func (G_OBJECT(editor->priv->object),
+                                                      object_moved_cb, editor);
                 g_object_unref (editor->priv->object);
         }
 
@@ -291,6 +296,8 @@ set_object (glObjectEditor  *editor,
         {
                 g_signal_handlers_disconnect_by_func (G_OBJECT(editor->priv->object),
                                                       object_changed_cb, editor);
+                g_signal_handlers_disconnect_by_func (G_OBJECT(editor->priv->object),
+                                                      object_moved_cb, editor);
                 g_object_unref (editor->priv->object);
         }
 
@@ -442,10 +449,13 @@ set_object (glObjectEditor  *editor,
                         gtk_notebook_set_current_page (GTK_NOTEBOOK (editor->priv->notebook), 0);
                 }
 
+                object_moved_cb (object, editor);
                 object_changed_cb (object, editor);
 
                 g_signal_connect (G_OBJECT (object), "changed",
                                   G_CALLBACK (object_changed_cb), editor);
+                g_signal_connect (G_OBJECT (object), "moved",
+                                  G_CALLBACK (object_moved_cb), editor);
         }
         else
         {
@@ -728,7 +738,6 @@ static void
 object_changed_cb (glLabelObject  *object,
                    glObjectEditor *editor)
 {
-        gdouble              x, y;
         gdouble              w, h;
         glColorNode         *line_color_node;
         gdouble              line_width;
@@ -754,9 +763,6 @@ object_changed_cb (glLabelObject  *object,
 
         gl_debug (DEBUG_EDITOR, "BEGIN");
 
-
-        gl_label_object_get_position (object, &x, &y);
-        gl_object_editor_set_position (editor, x, y);
 
         label = gl_label_object_get_parent (object);
         merge = gl_label_get_merge (label);
@@ -871,6 +877,24 @@ object_changed_cb (glLabelObject  *object,
 }
 
 
+/*---------------------------------------------------------------------------*/
+/* PRIVATE. object "moved" callback.                                         */
+/*---------------------------------------------------------------------------*/
+static void
+object_moved_cb (glLabelObject  *object,
+                 glObjectEditor *editor)
+{
+        gdouble              x, y;
+
+        gl_debug (DEBUG_EDITOR, "BEGIN");
+
+        gl_label_object_get_position (object, &x, &y);
+        gl_object_editor_set_position (editor, x, y);
+
+        gl_debug (DEBUG_EDITOR, "END");
+}
+
+
 /*****************************************************************************/
 /* Object editor "changed" callback.                                         */
 /*****************************************************************************/
@@ -905,6 +929,7 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
 
 
         g_signal_handlers_block_by_func (G_OBJECT (object), object_changed_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (object), object_moved_cb, editor);
 
 
         gl_object_editor_get_position (editor, &x, &y);
@@ -1017,6 +1042,7 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
 
 
         g_signal_handlers_unblock_by_func (G_OBJECT (object), object_changed_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (object), object_moved_cb, editor);
 
         gl_debug (DEBUG_EDITOR, "END");
 }

@@ -141,6 +141,9 @@ static void gl_label_finalize      (GObject *object);
 static void object_changed_cb      (glLabelObject *object,
                                     glLabel       *label);
 
+static void object_moved_cb        (glLabelObject *object,
+                                    glLabel       *label);
+
 static void do_modify              (glLabel       *label);
 
 static void begin_selection_op     (glLabel       *label);
@@ -519,6 +522,17 @@ object_changed_cb (glLabelObject *object,
 
 
 /****************************************************************************/
+/* Object "moved" callback.                                                 */
+/****************************************************************************/
+static void
+object_moved_cb (glLabelObject *object,
+                 glLabel       *label)
+{
+        do_modify (label);
+}
+
+
+/****************************************************************************/
 /* Do modify.                                                               */
 /****************************************************************************/
 static void
@@ -771,6 +785,8 @@ gl_label_add_object (glLabel       *label,
 
         g_signal_connect (G_OBJECT (object), "changed",
                           G_CALLBACK (object_changed_cb), label);
+        g_signal_connect (G_OBJECT (object), "moved",
+                          G_CALLBACK (object_moved_cb), label);
 
         do_modify (label);
 
@@ -794,6 +810,8 @@ gl_label_delete_object (glLabel       *label,
 
         g_signal_handlers_disconnect_by_func (G_OBJECT (object),
                                               G_CALLBACK (object_changed_cb), label);
+        g_signal_handlers_disconnect_by_func (G_OBJECT (object),
+                                              G_CALLBACK (object_moved_cb), label);
         g_object_unref (object);
 
         do_modify (label);
