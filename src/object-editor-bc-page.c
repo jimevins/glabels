@@ -280,15 +280,22 @@ gl_object_editor_load_bc_styles (glObjectEditor      *editor,
  
 	gl_debug (DEBUG_EDITOR, "START");
 
-        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->bc_style_combo),
-                                         style_changed_cb, editor);
+        if ( !editor->priv->current_backend_id ||
+             strcmp(editor->priv->current_backend_id, backend_id) != 0 )
+        {
+                g_signal_handlers_block_by_func (G_OBJECT (editor->priv->bc_style_combo),
+                                                 style_changed_cb, editor);
 
-	styles = gl_barcode_backends_get_styles_list (backend_id);
-	gl_combo_util_set_strings (GTK_COMBO_BOX_TEXT(editor->priv->bc_style_combo), styles);
-	gl_barcode_backends_free_styles_list (styles);
+                styles = gl_barcode_backends_get_styles_list (backend_id);
+                gl_combo_util_set_strings (GTK_COMBO_BOX_TEXT(editor->priv->bc_style_combo), styles);
+                gl_barcode_backends_free_styles_list (styles);
 
-        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->bc_style_combo),
-                                         style_changed_cb, editor);
+                g_free (editor->priv->current_backend_id);
+                editor->priv->current_backend_id = g_strdup (backend_id);
+
+                g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->bc_style_combo),
+                                                   style_changed_cb, editor);
+        }
 
 	gl_debug (DEBUG_EDITOR, "END");
 }

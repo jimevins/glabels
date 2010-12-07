@@ -208,6 +208,7 @@ gl_object_editor_finalize (GObject *object)
 
         g_object_unref (editor->priv->builder);
 
+        g_free (editor->priv->current_backend_id);
 	g_free (editor->priv);
 
 	G_OBJECT_CLASS (gl_object_editor_parent_class)->finalize (object);

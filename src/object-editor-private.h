@@ -135,6 +135,7 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *bc_key_radio;
 	GtkWidget  *bc_key_hbox;
 	GtkWidget  *bc_key_combo;
+        gchar      *current_backend_id;
 
 	GtkWidget  *data_page_vbox;
 	GtkWidget  *data_literal_radio;
