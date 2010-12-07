@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-11-30 20:53+0000\n"
-"PO-Revision-Date: 2010-11-30 21:51+0100\n"
+"POT-Creation-Date: 2010-12-07 20:22+0000\n"
+"PO-Revision-Date: 2010-12-07 21:24+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -550,7 +550,7 @@ msgstr "Schwerwiegender Fehler in gLabels!"
 msgid "New Label or Card"
 msgstr "Neues Etikett oder neue Karte"
 
-#: ../src/file.c:175 ../src/label.c:587 ../src/label.c:631
+#: ../src/file.c:175 ../src/label.c:601 ../src/label.c:645
 msgid "Label properties"
 msgstr "Etiketten-Eigenschaften"
 
@@ -751,23 +751,23 @@ msgstr "glabels-Datei %s kann nicht geöffnet werden\n"
 msgid "Launch gLabels label and business card designer."
 msgstr "gLabels Etiketten- und Visitenkarten-Designer ausführen."
 
-#: ../src/label-barcode.c:167 ../src/ui.c:317
+#: ../src/label-barcode.c:183 ../src/ui.c:317
 msgid "Create barcode object"
 msgstr "Strichcodeobjekt erzeugen"
 
-#: ../src/label-barcode.c:243 ../src/label-barcode.c:393
+#: ../src/label-barcode.c:259 ../src/label-barcode.c:461
 msgid "Barcode data"
 msgstr "Strichcode-Daten"
 
-#: ../src/label-barcode.c:272
+#: ../src/label-barcode.c:290
 msgid "Barcode property"
 msgstr "Strichcode-Eigenschaft"
 
-#: ../src/label-barcode.c:598
+#: ../src/label-barcode.c:688
 msgid "Barcode data empty"
 msgstr "Strichcode-Daten sind leer"
 
-#: ../src/label-barcode.c:602
+#: ../src/label-barcode.c:692
 msgid "Invalid barcode data"
 msgstr "Ungültige Strichcode-Daten"
 
@@ -790,79 +790,79 @@ msgstr "Linienfarbe"
 msgid "Line width"
 msgstr "Linienbreite"
 
-#: ../src/label.c:402
+#: ../src/label.c:405
 msgid "Untitled"
 msgstr "Unbenannt"
 
-#: ../src/label.c:705 ../src/ui.c:420
+#: ../src/label.c:719 ../src/ui.c:420
 msgid "Merge properties"
 msgstr "Mischeinstellungen"
 
-#: ../src/label.c:1197 ../src/ui.c:213
+#: ../src/label.c:1215 ../src/ui.c:213
 msgid "Delete"
 msgstr "Löschen"
 
-#: ../src/label.c:1230 ../src/ui.c:322
+#: ../src/label.c:1248 ../src/ui.c:322
 msgid "Bring to front"
 msgstr "Ganz nach vorn"
 
-#: ../src/label.c:1266 ../src/ui.c:329
+#: ../src/label.c:1284 ../src/ui.c:329
 msgid "Send to back"
 msgstr "Ganz nach hinten"
 
-#: ../src/label.c:1307
+#: ../src/label.c:1325
 msgid "Rotate"
 msgstr "Drehen"
 
-#: ../src/label.c:1342 ../src/ui.c:336
+#: ../src/label.c:1360 ../src/ui.c:336
 msgid "Rotate left"
 msgstr "Links drehen"
 
-#: ../src/label.c:1375 ../src/ui.c:343
+#: ../src/label.c:1393 ../src/ui.c:343
 msgid "Rotate right"
 msgstr "Rechts drehen"
 
-#: ../src/label.c:1410 ../src/ui.c:350
+#: ../src/label.c:1428 ../src/ui.c:350
 msgid "Flip horizontally"
 msgstr "Horizontal spiegeln"
 
-#: ../src/label.c:1445 ../src/ui.c:357
+#: ../src/label.c:1463 ../src/ui.c:357
 msgid "Flip vertically"
 msgstr "Vertikal spiegeln"
 
-#: ../src/label.c:1485 ../src/ui.c:364
+#: ../src/label.c:1503 ../src/ui.c:364
 msgid "Align left"
 msgstr "Linksbündig"
 
-#: ../src/label.c:1542 ../src/ui.c:371
+#: ../src/label.c:1560 ../src/ui.c:371
 msgid "Align right"
 msgstr "Rechtsbündig"
 
-#: ../src/label.c:1603 ../src/ui.c:378
+#: ../src/label.c:1621 ../src/ui.c:378
 msgid "Align horizontal center"
 msgstr "Horizontal mittig anordnen"
 
-#: ../src/label.c:1679 ../src/ui.c:385
+#: ../src/label.c:1697 ../src/ui.c:385
 msgid "Align tops"
 msgstr "Oben bündig"
 
-#: ../src/label.c:1736 ../src/ui.c:392
+#: ../src/label.c:1754 ../src/ui.c:392
 msgid "Align bottoms"
 msgstr "Unten bündig"
 
-#: ../src/label.c:1797 ../src/ui.c:399
+#: ../src/label.c:1815 ../src/ui.c:399
 msgid "Align vertical center"
 msgstr "Vertikal mittig anordnen"
 
-#: ../src/label.c:1875 ../src/ui.c:406
+#: ../src/label.c:1893 ../src/ui.c:406
 msgid "Center horizontally"
 msgstr "Horizontal zentrieren"
 
-#: ../src/label.c:1922 ../src/ui.c:413
+#: ../src/label.c:1940 ../src/ui.c:413
 msgid "Center vertically"
 msgstr "Vertikal zentrieren"
 
-#: ../src/label.c:2610 ../src/label.c:2652 ../src/label.c:2678 ../src/ui.c:206
+#: ../src/label.c:2628 ../src/label.c:2670 ../src/label.c:2696 ../src/ui.c:206
 msgid "Paste"
 msgstr "Einfügen"
 
@@ -882,67 +882,67 @@ msgstr "Bild festlegen"
 msgid "Create line object"
 msgstr "Linienobjekt erzeugen"
 
-#: ../src/label-object.c:383 ../src/label-object.c:416
+#: ../src/label-object.c:394 ../src/label-object.c:428
 msgid "Move"
 msgstr "Verschieben"
 
-#: ../src/label-object.c:467
+#: ../src/label-object.c:479
 msgid "Resize"
 msgstr "Größe ändern"
 
-#: ../src/label-object.c:1185
+#: ../src/label-object.c:1217
 msgid "Shadow state"
 msgstr "Schattierung"
 
-#: ../src/label-object.c:1228
+#: ../src/label-object.c:1260
 msgid "Shadow offset"
 msgstr "Schattierungsfarbe"
 
-#: ../src/label-object.c:1276
+#: ../src/label-object.c:1308
 msgid "Shadow color"
 msgstr "Schattierungsversatz"
 
-#: ../src/label-object.c:1319
+#: ../src/label-object.c:1351
 msgid "Shadow opacity"
 msgstr "Schattierungstransparenz"
 
-#: ../src/label-text.c:279 ../src/ui.c:282
+#: ../src/label-text.c:281 ../src/ui.c:282
 msgid "Create text object"
 msgstr "Textobjekt erzeugen"
 
-#: ../src/label-text.c:451
+#: ../src/label-text.c:453
 msgid "Typing"
 msgstr "Texteingabe"
 
-#: ../src/label-text.c:584 ../data/ui/property-bar.ui.h:4
+#: ../src/label-text.c:586 ../data/ui/property-bar.ui.h:4
 msgid "Font family"
 msgstr "Schriftfamilie"
 
-#: ../src/label-text.c:622 ../data/ui/property-bar.ui.h:5
+#: ../src/label-text.c:624 ../data/ui/property-bar.ui.h:5
 msgid "Font size"
 msgstr "Schriftgröße"
 
-#: ../src/label-text.c:655
+#: ../src/label-text.c:657
 msgid "Font weight"
 msgstr "Schriftstärke"
 
-#: ../src/label-text.c:688 ../data/ui/property-bar.ui.h:6
+#: ../src/label-text.c:690 ../data/ui/property-bar.ui.h:6
 msgid "Italic"
 msgstr "Kursiv"
 
-#: ../src/label-text.c:721
+#: ../src/label-text.c:723
 msgid "Align text"
 msgstr "Text anordnen"
 
-#: ../src/label-text.c:754
+#: ../src/label-text.c:756
 msgid "Line spacing"
 msgstr "Linienabstand"
 
-#: ../src/label-text.c:787 ../data/ui/property-bar.ui.h:11
+#: ../src/label-text.c:789 ../data/ui/property-bar.ui.h:11
 msgid "Text color"
 msgstr "Textfarbe"
 
-#: ../src/label-text.c:931
+#: ../src/label-text.c:933
 msgid "Auto shrink"
 msgstr "Automatisch schrumpfen"
 
@@ -1121,31 +1121,31 @@ msgstr "Überprüfen"
 msgid "Default"
 msgstr "Standard"
 
-#: ../src/object-editor.c:158 ../src/object-editor.c:459
+#: ../src/object-editor.c:161 ../src/object-editor.c:470
 msgid "Object properties"
 msgstr "Objekteigenschaften"
 
-#: ../src/object-editor.c:306
+#: ../src/object-editor.c:314
 msgid "Box object properties"
 msgstr "Eigenschaften des Rechteck-Objekts"
 
-#: ../src/object-editor.c:325
+#: ../src/object-editor.c:333
 msgid "Ellipse object properties"
 msgstr "Eigenschaften des Ellipsen-Objekts"
 
-#: ../src/object-editor.c:344
+#: ../src/object-editor.c:352
 msgid "Line object properties"
 msgstr "Eigenschaften des Linien-Objekts"
 
-#: ../src/object-editor.c:361
+#: ../src/object-editor.c:369
 msgid "Image object properties"
 msgstr "Eigenschaften des Bild-Objekts"
 
-#: ../src/object-editor.c:378
+#: ../src/object-editor.c:386
 msgid "Text object properties"
 msgstr "Eigenschaften des Text-Objekts"
 
-#: ../src/object-editor.c:400
+#: ../src/object-editor.c:408
 msgid "Barcode object properties"
 msgstr "Eigenschaften des Strichcode-Objekts"
 
@@ -1187,7 +1187,7 @@ msgstr "gLabels-Einstellungen"
 #. TODO: Is this the actual part #?
 #: ../src/print-op.c:205 ../src/print-op-dialog.c:217
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:4
-#: ../templates/misc-iso-templates.xml.h:24
+#: ../templates/misc-iso-templates.xml.h:22
 msgid "Labels"
 msgstr "Labels"
 
@@ -1730,7 +1730,7 @@ msgstr "Ungültiger Node im Daten-Node = »%s«"
 msgid "Unknown embedded file format: \"%s\""
 msgstr "Unbekanntes eingebettetes Dateiformat: »%s«"
 
-#: ../src/xml-label.c:1159 ../libglabels/xml-template.c:771
+#: ../src/xml-label.c:1159 ../libglabels/xml-template.c:782
 msgid "Utf8 conversion error."
 msgstr "Fehler in der UTF8-Umwandlung."
 
@@ -1742,16 +1742,16 @@ msgstr "Problem beim Speichern der XML-Datei."
 #. Translators: "Other" here means other page size.  Meaning a page size
 #. * other than the standard ones that libglabels knows about such as
 #. * "letter", "A4", etc.
-#: ../libglabels/db.c:270
+#: ../libglabels/db.c:266
 msgid "Other"
 msgstr "Andere"
 
 #. Create and append a "User defined" entry.
-#: ../libglabels/db.c:279
+#: ../libglabels/db.c:275
 msgid "User defined"
 msgstr "Benutzerdefiniert"
 
-#: ../libglabels/db.c:665
+#: ../libglabels/db.c:661
 msgid ""
 "Unable to locate paper size definitions.  Libglabels may not be installed "
 "correctly!"
@@ -1759,7 +1759,7 @@ msgstr ""
 "Die Definitionen der Papiergrößen konnten nicht gefunden werden. Libglabels "
 "ist möglicherweise nicht korrekt installiert!"
 
-#: ../libglabels/db.c:1057
+#: ../libglabels/db.c:1053
 msgid ""
 "Unable to locate category definitions.  Libglabels may not be installed "
 "correctly!"
@@ -1767,7 +1767,7 @@ msgstr ""
 "Es war nicht möglich, Kategorie-Definitionen zu finden. Libglabels könnte "
 "möglicherweise nicht korrekt installiert sein!"
 
-#: ../libglabels/db.c:2015
+#: ../libglabels/db.c:1968
 msgid ""
 "Unable to locate any template files.  Libglabels may not be installed "
 "correctly!"
@@ -1775,12 +1775,12 @@ msgstr ""
 "Es konnten keine Vorlagendateien gefunden werden. Möglicherweise ist "
 "libglabels nicht korrekt installiert!"
 
-#: ../libglabels/db.c:2082
+#: ../libglabels/db.c:2035
 #, c-format
 msgid "%s full page label"
 msgstr "Ganzseitenetikett %s"
 
-#: ../libglabels/template.c:137
+#: ../libglabels/template.c:138
 #, c-format
 msgid "Equivalent part (\"%s\") for \"%s\", not previously defined."
 msgstr "Äquivalenter Teil »%s« für »%s« wurde zuvor nicht definiert."
@@ -1790,19 +1790,19 @@ msgstr "Äquivalenter Teil »%s« für »%s« wurde zuvor nicht definiert."
 #. *              2nd %d = number of labels down a page,
 #. *              3rd %d = total number of labels on a page (sheet).
 #.
-#: ../libglabels/template.c:664
+#: ../libglabels/template.c:665
 #, c-format
 msgid "%d × %d (%d per sheet)"
 msgstr "%d × %d (%d pro Seite)"
 
 #. Translators: %d is the total number of labels on a page (sheet).
-#: ../libglabels/template.c:669
+#: ../libglabels/template.c:670
 #, c-format
 msgid "%d per sheet"
 msgstr "%d pro Seite"
 
-#: ../libglabels/template.c:739 ../libglabels/template.c:745
-#: ../libglabels/template.c:755 ../libglabels/template.c:761
+#: ../libglabels/template.c:740 ../libglabels/template.c:746
+#: ../libglabels/template.c:756 ../libglabels/template.c:762
 msgid "diameter"
 msgstr "Durchmesser"
 
@@ -1836,27 +1836,27 @@ msgstr "cm"
 msgid "picas"
 msgstr "picas"
 
-#: ../libglabels/xml-template.c:220
+#: ../libglabels/xml-template.c:231
 msgid "Missing name or brand/part attributes."
 msgstr "Name oder Attribute für Marke/Nummer fehlen."
 
 #. This should always be an id, but just in case a name
 #. slips by!
-#: ../libglabels/xml-template.c:241
+#: ../libglabels/xml-template.c:252
 #, c-format
 msgid "Unknown page size id \"%s\", trying as name"
 msgstr "Unbekannte Kennung der Seitengröße »%s«, wird als Name versucht"
 
-#: ../libglabels/xml-template.c:253
+#: ../libglabels/xml-template.c:264
 #, c-format
 msgid "Unknown page size id or name \"%s\""
 msgstr "Unbekannte Kennung der Seitengröße oder Name »%s«"
 
-#: ../libglabels/xml-template.c:272
+#: ../libglabels/xml-template.c:283
 msgid "Forward references not supported."
 msgstr "Vorwärtsreferenzen werden nicht unterstützt."
 
-#: ../libglabels/xml-template.c:732
+#: ../libglabels/xml-template.c:743
 msgid "Skipping deprecated \"Alias\" node."
 msgstr "Missbilligter »Alias«-Knoten wird übersprungen."
 
@@ -2758,7 +2758,8 @@ msgid "Any label"
 msgstr "Alle Etiketten"
 
 #. ===================================================================
-#: ../templates/categories.xml.h:3 ../templates/pearl-iso-templates.xml.h:8
+#: ../templates/categories.xml.h:3 ../templates/geha-iso-templates.xml.h:8
+#: ../templates/pearl-iso-templates.xml.h:8
 msgid "Business cards"
 msgstr "Visitenkarten"
 
@@ -2802,8 +2803,8 @@ msgstr "Quadratische Etiketten"
 #: ../templates/avery-iso-templates.xml.h:2
 #: ../templates/databecker-iso-templates.xml.h:2
 #: ../templates/dymo-other-templates.xml.h:4
+#: ../templates/geha-iso-templates.xml.h:2
 #: ../templates/maco-us-templates.xml.h:2
-#: ../templates/misc-iso-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:1
 #: ../templates/zweckform-iso-templates.xml.h:2
@@ -2820,7 +2821,7 @@ msgstr "Adressaufkleber"
 #: ../templates/databecker-iso-templates.xml.h:4
 #: ../templates/decadry-iso-templates.xml.h:2
 #: ../templates/misc-us-templates.xml.h:4
-#: ../templates/misc-iso-templates.xml.h:6
+#: ../templates/misc-iso-templates.xml.h:4
 #: ../templates/zweckform-iso-templates.xml.h:6
 msgid "Business Cards"
 msgstr "Visitenkarten"
@@ -2832,10 +2833,11 @@ msgstr "Visitenkarten"
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:6
 #: ../templates/avery-iso-templates.xml.h:14
+#: ../templates/geha-iso-templates.xml.h:10
 #: ../templates/herma-iso-templates.xml.h:10
 #: ../templates/jac-iso-templates.xml.h:2
 #: ../templates/misc-us-templates.xml.h:8
-#: ../templates/misc-iso-templates.xml.h:10
+#: ../templates/misc-iso-templates.xml.h:8
 #: ../templates/pearl-iso-templates.xml.h:24
 #: ../templates/worldlabel-us-templates.xml.h:2
 #: ../templates/zweckform-iso-templates.xml.h:12
@@ -2949,19 +2951,21 @@ msgstr "Klappkarten"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:44
+#: ../templates/geha-iso-templates.xml.h:26
 #: ../templates/worldlabel-us-templates.xml.h:11
 msgid "Video Tape Face Labels"
 msgstr "Etiketten für Videokassetten (Vorderseite)"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:46
+#: ../templates/geha-iso-templates.xml.h:28
 #: ../templates/worldlabel-us-templates.xml.h:12
 msgid "Video Tape Spine Labels"
 msgstr "Etiketten für Videokassetten (Schmalseite)"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:4
-#: ../templates/misc-iso-templates.xml.h:4
+#: ../templates/misc-iso-templates.xml.h:2
 msgid "Address labels"
 msgstr "Adressaufkleber"
 
@@ -2998,7 +3002,7 @@ msgstr "Kennzeichnungsetiketten"
 #: ../templates/decadry-iso-templates.xml.h:4
 #: ../templates/herma-iso-templates.xml.h:14
 #: ../templates/misc-us-templates.xml.h:20
-#: ../templates/misc-iso-templates.xml.h:26
+#: ../templates/misc-iso-templates.xml.h:24
 #: ../templates/zweckform-iso-templates.xml.h:20
 msgid "Mailing Labels"
 msgstr "Adressaufkleber"
@@ -3026,7 +3030,7 @@ msgstr "Mini-Etiketten"
 #: ../templates/avery-iso-templates.xml.h:30
 #: ../templates/databecker-iso-templates.xml.h:10
 #: ../templates/herma-iso-templates.xml.h:16
-#: ../templates/misc-iso-templates.xml.h:30
+#: ../templates/misc-iso-templates.xml.h:28
 #: ../templates/zweckform-iso-templates.xml.h:28
 msgid "Rectangular Labels"
 msgstr "Rechteckige Etiketten"
@@ -3067,7 +3071,7 @@ msgstr "Standard-Adressaufkleber 29mm x 90mm"
 
 #. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:6
-#: ../templates/misc-iso-templates.xml.h:8
+#: ../templates/misc-iso-templates.xml.h:6
 msgid "CD Labels"
 msgstr "CD-Aufkleber"
 
@@ -3093,6 +3097,7 @@ msgstr "Hängemappe"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:10
+#: ../templates/geha-iso-templates.xml.h:18
 msgid "Large Address Labels"
 msgstr "Große Adressaufkleber"
 
@@ -3102,15 +3107,54 @@ msgid "Shipping Address Labels"
 msgstr "Versand-Adressaufkleber"
 
 #. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:4
+#: ../templates/herma-iso-templates.xml.h:4
+msgid "Arch File Labels"
+msgstr "Etiketten für Archivierungsordner"
+
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:6
+msgid "Arch File inserts"
+msgstr "Ordner-Einsteckschilder"
+
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:12
+#: ../templates/pearl-iso-templates.xml.h:26
+msgid "DVD inlet"
+msgstr "DVD-Einleger"
+
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:14
+msgid "Flyer paper"
+msgstr "Flyer-Papier"
+
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:16
+msgid "Greeting cards"
+msgstr "Grußkarten"
+
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:20
+#: ../templates/misc-other-templates.xml.h:2
+msgid "Multi-Purpose Labels"
+msgstr "Mehrzweck-Etiketten"
+
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:22
+msgid "Passport photo labels"
+msgstr "Passbild-Etiketten"
+
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:24
+#: ../templates/pearl-iso-templates.xml.h:50
+msgid "Photo labels"
+msgstr "Fotoetiketten"
+
+#. ===================================================================
 #: ../templates/herma-iso-templates.xml.h:2
 #: ../templates/zweckform-iso-templates.xml.h:4
 msgid "Allround Labels"
 msgstr "Universal-Etiketten"
-
-#. ===================================================================
-#: ../templates/herma-iso-templates.xml.h:4
-msgid "Arch File Labels"
-msgstr "Etiketten für Archivierungsordner"
 
 #. ===================================================================
 #: ../templates/herma-iso-templates.xml.h:6
@@ -3150,7 +3194,7 @@ msgstr "CD/DVD-Etiketten (nur Vorderseite)"
 #. ===================================================================
 #. TODO: Is this the actual part #?
 #: ../templates/misc-us-templates.xml.h:12
-#: ../templates/misc-iso-templates.xml.h:12
+#: ../templates/misc-iso-templates.xml.h:10
 msgid "CD/DVD Labels (face only)"
 msgstr "CD/DVD-Etiketten (nur Vorderseite)"
 
@@ -3192,7 +3236,7 @@ msgstr "PRO-CD-Etiketten 2-up (nur Vorderseite)"
 #. ===================================================================
 #. TODO: Is this the actual part #?
 #: ../templates/misc-us-templates.xml.h:30
-#: ../templates/misc-iso-templates.xml.h:28
+#: ../templates/misc-iso-templates.xml.h:26
 msgid "PRO CD Labels 2-up (face only)"
 msgstr "PRO-CD-Etiketten 2-up (nur Vorderseite)"
 
@@ -3206,45 +3250,40 @@ msgid "Slimline CD Case (upside down)"
 msgstr "Slimline CD-Box (umgekehrt)"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:14
+#: ../templates/misc-iso-templates.xml.h:12
 msgid "EPSON Photo Stickers 16"
 msgstr "EPSON Photo Stickers 16"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:16
+#: ../templates/misc-iso-templates.xml.h:14
 msgid "Etiketten"
 msgstr "Etiketten"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:18
+#: ../templates/misc-iso-templates.xml.h:16
 msgid "Fridge Magnet Stickers"
 msgstr "Aufkleber für Kühlschrankmagnete"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:20
+#: ../templates/misc-iso-templates.xml.h:18
 msgid "General Labels"
 msgstr "Allgemeine Etiketten"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:22
+#: ../templates/misc-iso-templates.xml.h:20
 msgid "Inkjet/Laser Labels 70x37mm"
 msgstr "Inkjet/Laseretiketten 70x37mm"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:32
+#: ../templates/misc-iso-templates.xml.h:30
 #: ../templates/pearl-iso-templates.xml.h:62
 msgid "Self-adhesive labels"
 msgstr "Selbstklebende Etiketten"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:34
+#: ../templates/misc-iso-templates.xml.h:32
 msgid "Universal Labels"
 msgstr "Universelle Etiketten"
-
-#. ===================================================================
-#: ../templates/misc-other-templates.xml.h:2
-msgid "Multi-Purpose Labels"
-msgstr "Mehrzweck-Etiketten"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:4
@@ -3290,11 +3329,6 @@ msgstr "CD-Einleger (Rückseite)"
 #: ../templates/pearl-iso-templates.xml.h:22
 msgid "CD inlet (front)"
 msgstr "CD-Einleger (Vorderseite)"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:26
-msgid "DVD inlet"
-msgstr "DVD-Einleger"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:30
@@ -3345,11 +3379,6 @@ msgstr "Namensschilder"
 #: ../templates/pearl-iso-templates.xml.h:48
 msgid "Passport photo labels glossy"
 msgstr "Passbild-Etiketten glänzend"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:50
-msgid "Photo labels"
-msgstr "Fotoetiketten"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:52
