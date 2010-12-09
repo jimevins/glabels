@@ -288,8 +288,61 @@
   <Template brand="Herma" part="9531" equiv="4097"/>
   <Template brand="Herma" part="10004" equiv="4097"/>
 
-</Glabels-templates>
 
+  <!-- =================================================================== -->
+  <!-- Herma 4098: Rectangular Labels 63.5mm x 29.6mm, 27 per sheet        -->
+  <!-- =================================================================== -->
+  <Template brand="Herma" part="4098" size="A4" _description="Rectangular labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Label-rectangle id="0" width="63.5mm" height="29.6mm" round="0mm" x_waste="1.5mm" y_waste="0mm">
+      <Markup-margin size="2mm"/>
+      <Layout nx="3" ny="9" x0="7.8mm" y0="15.5mm" dx="66.5mm" dy="29.6mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <Template brand="Herma" part="4222" equiv="4098"/>
+  <Template brand="Herma" part="4233" equiv="4098"/>
+  <Template brand="Herma" part="4347" equiv="4098"/>
+  <Template brand="Herma" part="4418" equiv="4098"/>
+  <Template brand="Herma" part="4419" equiv="4098"/>
+  <Template brand="Herma" part="4864" equiv="4098"/>
+  <Template brand="Herma" part="5045" equiv="4098"/>
+  <Template brand="Herma" part="5140" equiv="4098"/>
+  <Template brand="Herma" part="5141" equiv="4098"/>
+  <Template brand="Herma" part="5142" equiv="4098"/>
+  <Template brand="Herma" part="5143" equiv="4098"/>
+  <Template brand="Herma" part="5140" equiv="4098"/>
+  <Template brand="Herma" part="8865" equiv="4098"/>
+  <Template brand="Herma" part="8966" equiv="4098"/>
+  <Template brand="Herma" part="10006" equiv="4098"/>
+  <Template brand="Herma" part="10300" equiv="4098"/>
+
+
+  <!-- =================================================================== -->
+  <!-- Herma 4099: Rectangular Labels 96mm x 50.8mm, 10 per sheet	   -->
+  <!-- =================================================================== -->
+  <Template brand="Herma" part="4099" size="A4" _description="Rectangular labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Label-rectangle id="0" width="96mm" height="50.8mm" round="0mm" x_waste="1.5mm" y_waste="0mm">
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="2" ny="5" x0="8mm" y0="21.5mm" dx="99mm" dy="50.8mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <Template brand="Herma" part="4223" equiv="4099"/>
+  <Template brand="Herma" part="4349" equiv="4099"/>
+  <Template brand="Herma" part="4667" equiv="4099"/>
+  <Template brand="Herma" part="8653" equiv="4099"/>
+  <Template brand="Herma" part="8806" equiv="4099"/>
+  <Template brand="Herma" part="8845" equiv="4099"/>
+  <Template brand="Herma" part="8893" equiv="4099"/>
+  <Template brand="Herma" part="8967" equiv="4099"/>
+  <Template brand="Herma" part="10013" equiv="4099"/>
+  <Template brand="Herma" part="10307" equiv="4099"/>
+
+</Glabels-templates>
 
 
 
