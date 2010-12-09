@@ -69,7 +69,7 @@
     <Meta product_url="http://www.geha.de/index.php?id=1057&amp;pid=90815"/>
     <Label-rectangle id="0" width="210mm" height="297mm" round="0mm" x_waste="0mm" y_waste="0mm">
       <Markup-margin size="0mm"/>
-      <Markup-line x1="105mm" y1="0mm" x2="105mm" y2="148.5mm"/>
+      <Markup-line x1="0mm" y1="148.5mm" x2="210mm" y2="148.5mm"/>
       <Layout nx="1" ny="1" x0="0mm" y0="0mm" dx="210mm" dy="297mm"/>
     </Label-rectangle>
   </Template>
