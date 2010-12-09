@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-12-09 15:00+0000\n"
-"PO-Revision-Date: 2010-12-09 15:58+0100\n"
+"POT-Creation-Date: 2010-12-09 19:31+0000\n"
+"PO-Revision-Date: 2010-12-09 21:56+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -2761,7 +2761,7 @@ msgstr "Alle Etiketten"
 #. ====================================================================
 #. ===================================================================
 #: ../templates/categories.xml.h:3 ../templates/geha-iso-templates.xml.h:8
-#: ../templates/hama-iso-templates.xml.h:2
+#: ../templates/hama-iso-templates.xml.h:6
 #: ../templates/pearl-iso-templates.xml.h:8
 msgid "Business cards"
 msgstr "Visitenkarten"
@@ -2790,7 +2790,7 @@ msgstr "Fotoprodukte"
 #. ====================================================================
 #. ===================================================================
 #. ********************************************************************
-#: ../templates/categories.xml.h:9 ../templates/hama-iso-templates.xml.h:12
+#: ../templates/categories.xml.h:9 ../templates/hama-iso-templates.xml.h:24
 #: ../templates/herma-iso-templates.xml.h:18
 #: ../templates/jac-iso-templates.xml.h:4
 msgid "Rectangular labels"
@@ -2798,7 +2798,7 @@ msgstr "Rechteckige Etiketten"
 
 #. ====================================================================
 #. ===================================================================
-#: ../templates/categories.xml.h:10 ../templates/hama-iso-templates.xml.h:14
+#: ../templates/categories.xml.h:10 ../templates/hama-iso-templates.xml.h:26
 #: ../templates/pearl-iso-templates.xml.h:54
 msgid "Round labels"
 msgstr "Runde Etiketten"
@@ -2998,7 +2998,9 @@ msgid "CD Inlet"
 msgstr "CD-Einleger"
 
 #. ===================================================================
+#. ====================================================================
 #: ../templates/avery-iso-templates.xml.h:18
+#: ../templates/hama-iso-templates.xml.h:12
 msgid "Diskette labels"
 msgstr "Diskettenaufkleber"
 
@@ -3036,10 +3038,13 @@ msgstr "Mini-Etiketten"
 
 #. ============================================================
 #. ===================================================================
+#. ====================================================================
+#. ===================================================================
 #. TODO: What is the actual part #?
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:30
 #: ../templates/databecker-iso-templates.xml.h:10
+#: ../templates/hama-iso-templates.xml.h:22
 #: ../templates/herma-iso-templates.xml.h:16
 #: ../templates/misc-iso-templates.xml.h:28
 #: ../templates/zweckform-iso-templates.xml.h:28
@@ -3118,7 +3123,10 @@ msgid "Shipping Address Labels"
 msgstr "Versand-Adressaufkleber"
 
 #. ===================================================================
+#. ====================================================================
+#. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:4
+#: ../templates/hama-iso-templates.xml.h:2
 #: ../templates/herma-iso-templates.xml.h:4
 msgid "Arch File Labels"
 msgstr "Etiketten für Archivierungsordner"
@@ -3144,7 +3152,9 @@ msgid "Flyer paper"
 msgstr "Flyer-Papier"
 
 #. ===================================================================
+#. ====================================================================
 #: ../templates/geha-iso-templates.xml.h:17
+#: ../templates/hama-iso-templates.xml.h:14
 msgid "Greeting cards"
 msgstr "Grußkarten"
 
@@ -3163,28 +3173,38 @@ msgstr "Passbild-Etiketten"
 #. ====================================================================
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:25
-#: ../templates/hama-iso-templates.xml.h:8
+#: ../templates/hama-iso-templates.xml.h:18
 #: ../templates/pearl-iso-templates.xml.h:50
 msgid "Photo labels"
 msgstr "Fotoetiketten"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:4
+msgid "Arch File labels"
+msgstr "Etiketten für Archivierungsordner"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:8
 msgid "CD inlet"
 msgstr "CD-Einleger"
 
 #. ====================================================================
-#: ../templates/hama-iso-templates.xml.h:6
+#: ../templates/hama-iso-templates.xml.h:10
 msgid "CD/DVD labels"
 msgstr "CD/DVD-Etiketten"
 
 #. ====================================================================
-#: ../templates/hama-iso-templates.xml.h:10
+#: ../templates/hama-iso-templates.xml.h:16
+msgid "Mini Disc labels"
+msgstr "MiniDisc-Etiketten"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:20
 msgid "Printable mousepad"
 msgstr "Bedruckbares Mauspad"
 
 #. ====================================================================
-#: ../templates/hama-iso-templates.xml.h:16
+#: ../templates/hama-iso-templates.xml.h:28
 msgid "Zip disc labels"
 msgstr "Zip-Diskettenaufkleber"
 
