@@ -17,4 +17,30 @@
     </Label-round>
   </Template>
 
+  <!-- ==================================================================== -->
+  <!-- Hama 50390. Photo labels.			                    -->
+  <!-- ==================================================================== -->
+  <Template brand="Hama" part="50390" size="A4" _description="Photo labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta category="photo"/>
+    <Label-rectangle id="0" width="130mm" height="90mm" round="0mm" x_waste="40mm" y_waste="27.5mm">
+      <Markup-margin size="0mm"/>
+      <Layout nx="1" ny="2" x0="40mm" y0="30.1mm" dx="210mm" dy="150mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ==================================================================== -->
+  <!-- Hama 50393. Photo labels.			                    -->
+  <!-- ==================================================================== -->
+  <Template brand="Hama" part="50393" size="A4" _description="Photo labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta category="photo"/>
+    <Label-rectangle id="0" width="151mm" height="100mm" round="0mm" x_waste="25mm" y_waste="24mm">
+      <Markup-margin size="0mm"/>
+      <Layout nx="1" ny="2" x0="29mm" y0="24mm" dx="201mm" dy="149mm"/>
+    </Label-rectangle>
+  </Template>
+
 </Glabels-templates>

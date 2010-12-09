@@ -208,6 +208,7 @@
   <Template brand="Geha" part="Z40" size="A4" _description="Photo labels">
     <Meta category="label"/>
     <Meta category="rectangle-label"/>
+    <Meta category="photo"/>
     <Meta product_url="http://www.geha.de/index.php?id=1047&amp;pid=30569"/>
     <Label-rectangle id="0" width="88.9mm" height="127mm" round="0mm" x_waste="2.5mm" y_waste="2mm">
       <Markup-margin size="0mm"/>
@@ -224,6 +225,7 @@
   <Template brand="Geha" part="Z41" size="A4" _description="Photo labels">
     <Meta category="label"/>
     <Meta category="rectangle-label"/>
+    <Meta category="photo"/>
     <Meta product_url="http://www.geha.de/index.php?id=1047&amp;pid=30545"/>
     <Label-rectangle id="0" width="150mm" height="100mm" round="0mm" x_waste="30mm" y_waste="24mm">
       <Markup-margin size="0mm"/>
@@ -240,6 +242,7 @@
   <Template brand="Geha" part="Z45" size="A4" _description="Photo labels">
     <Meta category="label"/>
     <Meta category="rectangle-label"/>
+    <Meta category="photo"/>
     <Meta product_url="http://www.geha.de/index.php?id=1047&amp;pid=30521"/>
     <Label-rectangle id="0" width="178mm" height="127mm" round="0mm" x_waste="16mm" y_waste="3mm">
       <Markup-margin size="0mm"/>
@@ -256,6 +259,7 @@
   <Template brand="Geha" part="Z46" size="A4" _description="Passport photo labels">
     <Meta category="label"/>
     <Meta category="rectangle-label"/>
+    <Meta category="photo"/>
     <Meta product_url="http://www.geha.de/index.php?id=1047&amp;pid=30538"/>
     <Label-rectangle id="0" width="35mm" height="45mm" round="0mm" x_waste="5mm" y_waste="4mm">
       <Markup-margin size="0mm"/>

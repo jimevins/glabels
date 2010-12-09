@@ -12,5 +12,6 @@
   <Category id="media"	          _name="CD/DVD or other media"/>
   <Category id="mail"             _name="Mailing/shipping products"/>
   <Category id="foldable"         _name="Foldable cards"/>
+  <Category id="photo"            _name="Photo products"/>
 
 </Glabels-categories>
