@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-12-07 20:22+0000\n"
-"PO-Revision-Date: 2010-12-07 21:24+0100\n"
+"POT-Creation-Date: 2010-12-09 10:33+0000\n"
+"PO-Revision-Date: 2010-12-09 11:31+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -2833,7 +2833,7 @@ msgstr "Visitenkarten"
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:6
 #: ../templates/avery-iso-templates.xml.h:14
-#: ../templates/geha-iso-templates.xml.h:10
+#: ../templates/geha-iso-templates.xml.h:11
 #: ../templates/herma-iso-templates.xml.h:10
 #: ../templates/jac-iso-templates.xml.h:2
 #: ../templates/misc-us-templates.xml.h:8
@@ -2951,14 +2951,14 @@ msgstr "Klappkarten"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:44
-#: ../templates/geha-iso-templates.xml.h:26
+#: ../templates/geha-iso-templates.xml.h:27
 #: ../templates/worldlabel-us-templates.xml.h:11
 msgid "Video Tape Face Labels"
 msgstr "Etiketten für Videokassetten (Vorderseite)"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:46
-#: ../templates/geha-iso-templates.xml.h:28
+#: ../templates/geha-iso-templates.xml.h:29
 #: ../templates/worldlabel-us-templates.xml.h:12
 msgid "Video Tape Spine Labels"
 msgstr "Etiketten für Videokassetten (Schmalseite)"
@@ -3097,7 +3097,7 @@ msgstr "Hängemappe"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:10
-#: ../templates/geha-iso-templates.xml.h:18
+#: ../templates/geha-iso-templates.xml.h:19
 msgid "Large Address Labels"
 msgstr "Große Adressaufkleber"
 
@@ -3117,35 +3117,39 @@ msgstr "Etiketten für Archivierungsordner"
 msgid "Arch File inserts"
 msgstr "Ordner-Einsteckschilder"
 
+#: ../templates/geha-iso-templates.xml.h:9
+msgid "CD/DVD Inlet"
+msgstr "CD/DVD-Einleger"
+
 #. ===================================================================
-#: ../templates/geha-iso-templates.xml.h:12
+#: ../templates/geha-iso-templates.xml.h:13
 #: ../templates/pearl-iso-templates.xml.h:26
 msgid "DVD inlet"
 msgstr "DVD-Einleger"
 
 #. ===================================================================
-#: ../templates/geha-iso-templates.xml.h:14
+#: ../templates/geha-iso-templates.xml.h:15
 msgid "Flyer paper"
 msgstr "Flyer-Papier"
 
 #. ===================================================================
-#: ../templates/geha-iso-templates.xml.h:16
+#: ../templates/geha-iso-templates.xml.h:17
 msgid "Greeting cards"
 msgstr "Grußkarten"
 
 #. ===================================================================
-#: ../templates/geha-iso-templates.xml.h:20
+#: ../templates/geha-iso-templates.xml.h:21
 #: ../templates/misc-other-templates.xml.h:2
 msgid "Multi-Purpose Labels"
 msgstr "Mehrzweck-Etiketten"
 
 #. ===================================================================
-#: ../templates/geha-iso-templates.xml.h:22
+#: ../templates/geha-iso-templates.xml.h:23
 msgid "Passport photo labels"
 msgstr "Passbild-Etiketten"
 
 #. ===================================================================
-#: ../templates/geha-iso-templates.xml.h:24
+#: ../templates/geha-iso-templates.xml.h:25
 #: ../templates/pearl-iso-templates.xml.h:50
 msgid "Photo labels"
 msgstr "Fotoetiketten"
