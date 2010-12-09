@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<Glabels-templates xmlns="http://glabels.org/xmlns/2.3/">
+
+  <!-- ******************************************************************** -->
+  <!-- Hama products.	                                                    -->
+  <!-- ******************************************************************** -->
+
+  <!-- ==================================================================== -->
+  <!-- Hama 50151. Round labels 40mm.			                    -->
+  <!-- ==================================================================== -->
+  <Template brand="Hama" part="50151" size="A4" _description="Round labels">
+    <Meta category="label"/>
+    <Meta category="round-label"/>
+    <Label-round id="0" radius="20mm" waste="3mm">
+      <Markup-margin size="2mm"/>
+      <Layout nx="4" ny="6" x0="16mm" y0="16mm" dx="46mm" dy="46.5mm"/>
+    </Label-round>
+  </Template>
+
+</Glabels-templates>
