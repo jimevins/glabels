@@ -19,6 +19,7 @@ templates_DATA = \
 	decadry-iso-templates.xml \
 	dymo-other-templates.xml \
 	geha-iso-templates.xml	\
+	hama-iso-templates.xml	\
 	herma-iso-templates.xml \
 	jac-iso-templates.xml \
 	maco-us-templates.xml \
