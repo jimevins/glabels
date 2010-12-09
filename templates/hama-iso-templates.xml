@@ -30,10 +30,12 @@
     </Label-rectangle>
   </Template>
 
+  <Template brand="Hama" part="50392" equiv="50390"/>
+
   <!-- ==================================================================== -->
   <!-- Hama 50393. Photo labels.			                    -->
   <!-- ==================================================================== -->
-  <Template brand="Hama" part="50393" size="A4" _description="Photo labels">
+  <Template brand="Hama" part="50391" size="A4" _description="Photo labels">
     <Meta category="label"/>
     <Meta category="rectangle-label"/>
     <Meta category="photo"/>
@@ -42,5 +44,7 @@
       <Layout nx="1" ny="2" x0="29mm" y0="24mm" dx="201mm" dy="149mm"/>
     </Label-rectangle>
   </Template>
+
+  <Template brand="Hama" part="50393" equiv="50391"/>
 
 </Glabels-templates>
