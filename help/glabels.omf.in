@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="no"?>
+<omf>
+  <resource>
+    <subject category="Applications|Office"/>
+    <type>
+	manual
+    </type>
+	<relation seriesid="283ccb74-3d5c-11de-8d40-e8b06f874863"/>
+    	<rights type="Creative Commons" license.version="3.0"
+      license="http://creativecommons.org/licenses/by-sa/3.0/" holder="Jim Evins"/>
+  </resource>
+</omf>
