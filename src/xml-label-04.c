@@ -73,7 +73,7 @@ glLabel      *gl_xml_label_04_parse      (xmlNodePtr       root,
 	*status = XML_LABEL_OK;
 
 	if (!xmlStrEqual (root->name, (xmlChar *)"Label")) {
-		g_message (_("Bad root node = \"%s\""), root->name);
+		g_message ("Bad root node = \"%s\"", root->name);
 		*status = XML_LABEL_ERROR_OPEN_PARSE;
 		return NULL;
 	}
@@ -121,7 +121,7 @@ glLabel      *gl_xml_label_04_parse      (xmlNodePtr       root,
 			} else if (xmlStrEqual (node->name, (xmlChar *)"Merge_Properties")) {
 				xml04_parse_merge_properties (node, label);
 			} else {
-				g_message (_("bad node =  \"%s\""), node->name);
+				g_message ("bad node =  \"%s\"", node->name);
 			}
 		}
 	}

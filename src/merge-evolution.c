@@ -313,13 +313,13 @@ gl_merge_evolution_open (glMerge *merge)
 
         query = e_book_query_from_string(merge_evolution->priv->query);
         if (!query) {
-                g_warning (_("Couldn't construct query"));
+                g_warning ("Couldn't construct query");
                 return;
         }
 
         merge_evolution->priv->book = e_book_new_system_addressbook(&error);
         if (!merge_evolution->priv->book) {
-                g_warning (_("Couldn't open addressbook."));
+                g_warning ("Couldn't open addressbook.");
                 if (error)
                 {
                         g_warning ("e_book_new_system_addressbook: %s", error->message);
@@ -330,7 +330,7 @@ gl_merge_evolution_open (glMerge *merge)
         }
 
         if (!e_book_open(merge_evolution->priv->book, FALSE, &error)) {
-                g_warning (_("Couldn't open addressbook."));
+                g_warning ("Couldn't open addressbook.");
                 if (error)
                 {
                         g_warning ("e_book_open: %s", error->message);
@@ -345,7 +345,7 @@ gl_merge_evolution_open (glMerge *merge)
         /* fetch the list of fields supported by this address book */
         status = e_book_get_supported_fields(merge_evolution->priv->book, &fields, &error);
         if (status == FALSE) {
-                g_warning (_("Couldn't list available fields."));
+                g_warning ("Couldn't list available fields.");
                 if (error)
                 {
                         g_warning ("e_book_get_supported_fields: %s", error->message);
@@ -381,7 +381,7 @@ gl_merge_evolution_open (glMerge *merge)
                                       &merge_evolution->priv->contacts,
                                       &error);
         if (status == FALSE) {
-                g_warning (_("Couldn't get contacts."));
+                g_warning ("Couldn't get contacts.");
                 if (error)
                 {
                         g_warning ("e_book_get_contacts: %s", error->message);

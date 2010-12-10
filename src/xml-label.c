@@ -197,7 +197,7 @@ gl_xml_label_open (const gchar      *utf8_filename,
 
         doc = xmlReadFile (filename, NULL, XML_PARSE_HUGE);
 	if (!doc) {
-		g_message (_("xmlParseFile error"));
+		g_message ("xmlParseFile error");
 		*status = XML_LABEL_ERROR_OPEN_PARSE;
 		return NULL;
 	}
@@ -235,7 +235,7 @@ gl_xml_label_open_buffer (const gchar      *buffer,
 
         doc = xmlReadDoc ((xmlChar *) buffer, NULL, NULL, XML_PARSE_HUGE);
 	if (!doc) {
-		g_message (_("xmlParseFile error"));
+		g_message ("xmlParseFile error");
 		*status = XML_LABEL_ERROR_OPEN_PARSE;
 		return NULL;
 	}
@@ -272,7 +272,7 @@ xml_doc_to_label (xmlDocPtr         doc,
 
 	root = xmlDocGetRootElement (doc);
 	if (!root || !root->name) {
-		g_message (_("No document root"));
+		g_message ("No document root");
 		*status = XML_LABEL_ERROR_OPEN_PARSE;
 		return NULL;
 	}
@@ -280,7 +280,7 @@ xml_doc_to_label (xmlDocPtr         doc,
         /* Try compatability mode 0.1 */
         if (xmlSearchNsByHref (doc, root, (xmlChar *)COMPAT01_NAME_SPACE))
 	{
-                g_message (_("Importing from glabels 0.1 format"));
+                g_message ("Importing from glabels 0.1 format");
                 g_message ("TODO");
                 label = NULL; /* TODO */
                 return label;
@@ -289,7 +289,7 @@ xml_doc_to_label (xmlDocPtr         doc,
         /* Try compatability mode 0.4 */
         if (xmlSearchNsByHref (doc, root, (xmlChar *)COMPAT04_NAME_SPACE))
 	{
-                g_message (_("Importing from glabels 0.4 format"));
+                g_message ("Importing from glabels 0.4 format");
                 label = gl_xml_label_04_parse (root, status);
                 return label;
         }
@@ -299,7 +299,7 @@ xml_doc_to_label (xmlDocPtr         doc,
              !xmlSearchNsByHref (doc, root, (xmlChar *)COMPAT22_NAME_SPACE) &&
              !xmlSearchNsByHref (doc, root, (xmlChar *)LGL_XML_NAME_SPACE) )
         {
-                g_message (_("Unknown glabels Namespace -- Using %s"),
+                g_message ("Unknown glabels Namespace -- Using %s",
                            LGL_XML_NAME_SPACE);
         }
 
@@ -331,7 +331,7 @@ xml_parse_label (xmlNodePtr        root,
 	*status = XML_LABEL_OK;
 
 	if (!lgl_xml_is_node (root, "Glabels-document")) {
-		g_message (_("Bad root node = \"%s\""), root->name);
+		g_message ("Bad root node = \"%s\"", root->name);
 		*status = XML_LABEL_ERROR_OPEN_PARSE;
 		return NULL;
 	}
@@ -368,7 +368,7 @@ xml_parse_label (xmlNodePtr        root,
 			/* Handled in pass 1. */
 		} else {
 			if (!xmlNodeIsText (child_node)) {
-				g_message (_("bad node in Document node =  \"%s\""),
+				g_message ("bad node in Document node =  \"%s\"",
 					   child_node->name);
 				g_object_unref (label);
 				*status = XML_LABEL_ERROR_OPEN_PARSE;
@@ -414,7 +414,7 @@ xml_parse_objects (xmlNodePtr  node,
 			xml_parse_object_barcode (child, label);
 		} else {
 			if (!xmlNodeIsText (child)) {
-				g_message (_("bad node =  \"%s\""), child->name);
+				g_message ("bad node =  \"%s\"", child->name);
 				break;
 			}
 		}
@@ -874,7 +874,7 @@ xml_parse_data (xmlNodePtr  node,
 			xml_parse_file_node (child, label);
 		} else {
 			if (!xmlNodeIsText (child)) {
-				g_message (_("bad node in Data node =  \"%s\""),
+				g_message ("bad node in Data node =  \"%s\"",
 					   child->name);
 			}
 		}
@@ -950,7 +950,7 @@ xml_parse_file_node (xmlNodePtr  node,
         }
         else
         {
-                g_message (_("Unknown embedded file format: \"%s\""), format);
+                g_message ("Unknown embedded file format: \"%s\"", format);
                 
         }
 
@@ -1156,14 +1156,14 @@ gl_xml_label_save (glLabel          *label,
 
 	filename = g_filename_from_utf8 (utf8_filename, -1, NULL, NULL, NULL);
 	if (!filename)
-		g_message (_("Utf8 conversion error."));
+		g_message ("Utf8 conversion error.");
 	else {
 		xmlSetDocCompressMode (doc, gl_label_get_compression (label));
 		xml_ret = xmlSaveFormatFile (filename, doc, TRUE);
 		xmlFreeDoc (doc);
 		if (xml_ret == -1) {
 
-			g_message (_("Problem saving xml file."));
+			g_message ("Problem saving xml file.");
 			*status = XML_LABEL_ERROR_SAVE_FILE;
 
 		} else {
