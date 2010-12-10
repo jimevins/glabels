@@ -192,8 +192,6 @@ static gboolean
 draw_cb (GtkWidget      *widget,
          cairo_t        *cr)
 {
-        GtkAllocation  allocation;
-
 	draw_swatch (GL_COLOR_SWATCH (widget), cr);
 
 	return FALSE;

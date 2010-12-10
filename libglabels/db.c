@@ -24,6 +24,7 @@
 
 #include <glib/gi18n.h>
 #include <glib.h>
+#include <glib/gstdio.h>
 #include <glib-object.h>
 #include <string.h>
 #include <sys/stat.h>
@@ -1567,7 +1568,7 @@ lgl_db_delete_template_by_name (const gchar *name)
 
                 if (!g_file_test (abs_filename, G_FILE_TEST_EXISTS))
                 {
-                        g_message ("File \"%s\" does not exist.  Cannot delete it.");
+                        g_message ("File \"%s\" does not exist.  Cannot delete template.", abs_filename);
                         return LGL_DB_DELETE_DOES_NOT_EXIST;
                 }
 

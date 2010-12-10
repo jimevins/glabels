@@ -545,7 +545,6 @@ draw_object (glLabelObject *object,
                 else
                 {
                         lgl_barcode_render_to_cairo (lbc->priv->display_gbc, cr);
-                        lgl_barcode_free (gbc);
                 }
 
         }
@@ -569,10 +568,7 @@ object_at (glLabelObject *object,
 {
         glLabelBarcode       *lbc     = (glLabelBarcode *)object;
         gdouble               w, h;
-        lglBarcode           *gbc;
-        glLabelBarcodeStyle  *style;
         glTextNode           *text_node;
-        gchar                *text;
         gdouble               scale_x, scale_y;
 
         gl_label_object_get_size (object, &w, &h);

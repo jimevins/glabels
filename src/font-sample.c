@@ -183,8 +183,6 @@ static gboolean
 draw_cb (GtkWidget      *widget,
          cairo_t        *cr)
 {
-        GtkAllocation  allocation;
-
 	draw_sample (GL_FONT_SAMPLE (widget), cr);
 
 	return FALSE;
