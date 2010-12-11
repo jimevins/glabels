@@ -135,7 +135,7 @@ lgl_template_new_from_equiv (const gchar          *brand,
         }
         else
         {
-                g_message (_("Equivalent part (\"%s\") for \"%s\", not previously defined."),
+                g_message ("Equivalent part (\"%s\") for \"%s\", not previously defined.",
                            equiv_part, part);
         }
 

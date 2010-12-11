@@ -228,7 +228,7 @@ lgl_xml_template_parse_template_node (const xmlNodePtr template_node)
                 }
                 else
                 {
-			g_message (_("Missing name or brand/part attributes."));
+			g_message ("Missing name or brand/part attributes.");
                 }
         }
 
@@ -249,7 +249,7 @@ lgl_xml_template_parse_template_node (const xmlNodePtr template_node)
 		if (paper == NULL) {
 			/* This should always be an id, but just in case a name
 			   slips by! */
-			g_message (_("Unknown page size id \"%s\", trying as name"),
+			g_message ("Unknown page size id \"%s\", trying as name",
 				   paper_id);
 			paper = lgl_db_lookup_paper_from_name (paper_id);
 			g_free (paper_id);
@@ -261,7 +261,7 @@ lgl_xml_template_parse_template_node (const xmlNodePtr template_node)
 		} else {
 			page_width  = 612;
 			page_height = 792;
-			g_message (_("Unknown page size id or name \"%s\""),
+			g_message ("Unknown page size id or name \"%s\"",
 				   paper_id);
 		}
 		lgl_paper_free (paper);
@@ -280,7 +280,7 @@ lgl_xml_template_parse_template_node (const xmlNodePtr template_node)
 
                 if (!template)
                 {
-			g_message (_("Forward references not supported."));
+			g_message ("Forward references not supported.");
                         return NULL;
                 }
         }
@@ -740,7 +740,7 @@ static void
 xml_parse_alias_node (xmlNodePtr   alias_node,
 		      lglTemplate *template)
 {
-        g_message (_("Skipping deprecated \"Alias\" node."));
+        g_message ("Skipping deprecated \"Alias\" node.");
 }
 
 
@@ -779,7 +779,7 @@ lgl_xml_template_write_templates_to_file (GList       *templates,
 	filename = g_filename_from_utf8 (utf8_filename, -1, NULL, NULL, NULL);
 	if (!filename)
         {
-		g_message (_("Utf8 conversion error."));
+		g_message ("Utf8 conversion error.");
                 return -1;
         }
 	else
