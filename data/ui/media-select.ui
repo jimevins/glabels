@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk+" version="2.16"/>
+  <requires lib="gtk+" version="2.20"/>
   <!-- interface-naming-policy toplevel-contextual -->
+  <object class="GtkSizeGroup" id="custom_buttons_sizegroup">
+    <widgets>
+      <widget name="custom_delete_button"/>
+      <widget name="custom_edit_button"/>
+      <widget name="custom_add_button"/>
+    </widgets>
+  </object>
   <object class="GtkWindow" id="window1">
     <property name="visible">True</property>
     <property name="title" translatable="yes">window1</property>
@@ -351,12 +358,5 @@
         </child>
       </object>
     </child>
-  </object>
-  <object class="GtkSizeGroup" id="custom_buttons_sizegroup">
-    <widgets>
-      <widget name="custom_delete_button"/>
-      <widget name="custom_edit_button"/>
-      <widget name="custom_add_button"/>
-    </widgets>
   </object>
 </interface>

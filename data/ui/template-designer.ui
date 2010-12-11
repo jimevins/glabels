@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk+" version="2.16"/>
+  <requires lib="gtk+" version="2.20"/>
   <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkAdjustment" id="adjustment30">
     <property name="upper">100</property>
@@ -63,9 +63,9 @@
     <property name="page_increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment18">
-    <property name="value">1</property>
     <property name="lower">1</property>
     <property name="upper">2</property>
+    <property name="value">1</property>
     <property name="step_increment">1</property>
     <property name="page_increment">1</property>
   </object>
@@ -145,14 +145,14 @@
     <property name="page_increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment2">
-    <property name="value">1</property>
     <property name="upper">100</property>
+    <property name="value">1</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment1">
-    <property name="value">1</property>
     <property name="upper">100</property>
+    <property name="value">1</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
@@ -366,6 +366,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
                       </object>
                       <packing>
                         <property name="expand">False</property>
+                        <property name="fill">True</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
@@ -393,6 +394,8 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
                 </child>
               </object>
               <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -495,6 +498,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="right_attach">2</property>
+                    <property name="x_options">GTK_FILL</property>
                     <property name="y_options">GTK_FILL</property>
                   </packing>
                 </child>
@@ -683,6 +687,8 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
                 </child>
               </object>
               <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -995,6 +1001,8 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
                     <property name="yalign">0</property>
                   </object>
                   <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -1232,6 +1240,8 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
                     <property name="yalign">0</property>
                   </object>
                   <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -1422,6 +1432,8 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
                     <property name="yalign">0</property>
                   </object>
                   <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -1741,6 +1753,8 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
                     <property name="yalign">0</property>
                   </object>
                   <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -1791,6 +1805,7 @@ The second example illustrates when two layouts are needed.</property>
               <object class="GtkHBox" id="hbox5">
                 <property name="visible">True</property>
                 <property name="spacing">12</property>
+                <property name="homogeneous">True</property>
                 <child>
                   <object class="GtkVBox" id="vbox4">
                     <property name="visible">True</property>
@@ -1799,6 +1814,8 @@ The second example illustrates when two layouts are needed.</property>
                         <property name="visible">True</property>
                       </object>
                       <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
                         <property name="position">0</property>
                       </packing>
                     </child>
@@ -1817,6 +1834,8 @@ one layout.</property>
                     </child>
                   </object>
                   <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">False</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
@@ -1828,6 +1847,8 @@ one layout.</property>
                         <property name="visible">True</property>
                       </object>
                       <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
                         <property name="position">0</property>
                       </packing>
                     </child>
@@ -1846,6 +1867,8 @@ two layouts.</property>
                     </child>
                   </object>
                   <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">False</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -1863,6 +1886,8 @@ two layouts.</property>
                 <property name="label" translatable="yes">Note: if more than 2 layouts are required, the template must be edited manually.</property>
               </object>
               <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
                 <property name="position">2</property>
               </packing>
             </child>
@@ -2319,6 +2344,8 @@ two layouts.</property>
                         <property name="label">  </property>
                       </object>
                       <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
                         <property name="position">0</property>
                       </packing>
                     </child>
@@ -2334,6 +2361,8 @@ two layouts.</property>
                             </child>
                           </object>
                           <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">0</property>
                           </packing>
                         </child>
@@ -2361,6 +2390,8 @@ two layouts.</property>
                     </child>
                   </object>
                   <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
