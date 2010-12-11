@@ -347,6 +347,9 @@ gl_view_finalize (GObject *object)
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GL_IS_VIEW (view));
 
+        g_signal_handlers_disconnect_by_func (G_OBJECT (gl_prefs),
+                                              G_CALLBACK (prefs_changed_cb), view);
+
 	G_OBJECT_CLASS (gl_view_parent_class)->finalize (object);
 
 	gl_debug (DEBUG_VIEW, "END");
