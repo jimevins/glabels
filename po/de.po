@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-12-09 19:31+0000\n"
-"PO-Revision-Date: 2010-12-09 21:56+0100\n"
+"POT-Creation-Date: 2010-12-11 19:41+0000\n"
+"PO-Revision-Date: 2010-12-12 14:09+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -763,11 +763,11 @@ msgstr "Strichcode-Daten"
 msgid "Barcode property"
 msgstr "Strichcode-Eigenschaft"
 
-#: ../src/label-barcode.c:688
+#: ../src/label-barcode.c:684
 msgid "Barcode data empty"
 msgstr "Strichcode-Daten sind leer"
 
-#: ../src/label-barcode.c:692
+#: ../src/label-barcode.c:688
 msgid "Invalid barcode data"
 msgstr "Ungültige Strichcode-Daten"
 
@@ -1010,22 +1010,6 @@ msgstr ""
 msgid "None"
 msgstr "Keine"
 
-#: ../src/merge-evolution.c:316
-msgid "Couldn't construct query"
-msgstr "Abfrage konnte nicht erstellt werden"
-
-#: ../src/merge-evolution.c:322 ../src/merge-evolution.c:333
-msgid "Couldn't open addressbook."
-msgstr "Adressbuch konnte nicht geöffnet werden"
-
-#: ../src/merge-evolution.c:348
-msgid "Couldn't list available fields."
-msgstr "Verfügbare Felder konnten nicht aufgelistet werden."
-
-#: ../src/merge-evolution.c:384
-msgid "Couldn't get contacts."
-msgstr "Kontakte konnten nicht geholt werden."
-
 #: ../src/merge-init.c:57
 msgid "Text: Comma Separated Values (CSV)"
 msgstr "Text: Durch Kommata getrennte Werte (CSV)"
@@ -1086,7 +1070,7 @@ msgstr "Markieren"
 msgid "Record/Field"
 msgstr "Feld"
 
-#: ../src/merge-properties-dialog.c:356 ../data/ui/object-editor.ui.h:9
+#: ../src/merge-properties-dialog.c:356 ../data/ui/object-editor.ui.h:10
 msgid "Data"
 msgstr "Wert"
 
@@ -1473,7 +1457,7 @@ msgstr "Modus auswählen"
 msgid "Select, move and modify objects"
 msgstr "Objekte auswählen, bewegen, ändern"
 
-#: ../src/ui.c:280 ../src/view-text.c:94 ../data/ui/object-editor.ui.h:29
+#: ../src/ui.c:280 ../src/view-text.c:94 ../data/ui/object-editor.ui.h:30
 #: ../data/ui/prefs-dialog.ui.h:17
 msgid "Text"
 msgstr "Text"
@@ -1486,7 +1470,7 @@ msgstr "Rechteck"
 msgid "Create box/rectangle object"
 msgstr "Rechteck-Objekt erzeugen"
 
-#: ../src/ui.c:294 ../data/ui/object-editor.ui.h:18
+#: ../src/ui.c:294 ../data/ui/object-editor.ui.h:19
 #: ../data/ui/prefs-dialog.ui.h:9
 msgid "Line"
 msgstr "Linie"
@@ -1499,7 +1483,7 @@ msgstr "Ellipse"
 msgid "Create ellipse/circle object"
 msgstr "Ellipsen- oder Kreisobjekt erzeugen"
 
-#: ../src/ui.c:308 ../data/ui/object-editor.ui.h:15
+#: ../src/ui.c:308 ../data/ui/object-editor.ui.h:16
 msgid "Image"
 msgstr "Bild"
 
@@ -1684,74 +1668,20 @@ msgstr "(Unbenannt) - gLabels"
 msgid "(modified)"
 msgstr "(geändert)"
 
-#: ../src/xml-label-04.c:76 ../src/xml-label.c:334
-#, c-format
-msgid "Bad root node = \"%s\""
-msgstr "Fehlerhafter root node = »%s«"
-
-#: ../src/xml-label-04.c:124 ../src/xml-label.c:417
-#, c-format
-msgid "bad node =  \"%s\""
-msgstr "fehlerhafter node =  »%s«"
-
-#: ../src/xml-label.c:200 ../src/xml-label.c:238
-msgid "xmlParseFile error"
-msgstr "Fehler: xmlParseFile error"
-
-#: ../src/xml-label.c:275
-msgid "No document root"
-msgstr "Kein document root"
-
-#: ../src/xml-label.c:283
-msgid "Importing from glabels 0.1 format"
-msgstr "Aus dem glabels 0.1-Format wird importiert"
-
-#: ../src/xml-label.c:292
-msgid "Importing from glabels 0.4 format"
-msgstr "Aus dem glabels 0.4-Format wird importiert"
-
-#: ../src/xml-label.c:302
-#, c-format
-msgid "Unknown glabels Namespace -- Using %s"
-msgstr "Unbekannter glabels-Namensraum -- %s wird verwendet"
-
-#: ../src/xml-label.c:371
-#, c-format
-msgid "bad node in Document node =  \"%s\""
-msgstr "Ungültiger Node im Dokument-Node = »%s«"
-
-#: ../src/xml-label.c:877
-#, c-format
-msgid "bad node in Data node =  \"%s\""
-msgstr "Ungültiger Node im Daten-Node = »%s«"
-
-#: ../src/xml-label.c:953
-#, c-format
-msgid "Unknown embedded file format: \"%s\""
-msgstr "Unbekanntes eingebettetes Dateiformat: »%s«"
-
-#: ../src/xml-label.c:1159 ../libglabels/xml-template.c:782
-msgid "Utf8 conversion error."
-msgstr "Fehler in der UTF8-Umwandlung."
-
-#: ../src/xml-label.c:1166
-msgid "Problem saving xml file."
-msgstr "Problem beim Speichern der XML-Datei."
-
 #. Create and append an "Other" entry.
 #. Translators: "Other" here means other page size.  Meaning a page size
 #. * other than the standard ones that libglabels knows about such as
 #. * "letter", "A4", etc.
-#: ../libglabels/db.c:266
+#: ../libglabels/db.c:267
 msgid "Other"
 msgstr "Andere"
 
 #. Create and append a "User defined" entry.
-#: ../libglabels/db.c:275
+#: ../libglabels/db.c:276
 msgid "User defined"
 msgstr "Benutzerdefiniert"
 
-#: ../libglabels/db.c:661
+#: ../libglabels/db.c:662
 msgid ""
 "Unable to locate paper size definitions.  Libglabels may not be installed "
 "correctly!"
@@ -1759,7 +1689,7 @@ msgstr ""
 "Die Definitionen der Papiergrößen konnten nicht gefunden werden. Libglabels "
 "ist möglicherweise nicht korrekt installiert!"
 
-#: ../libglabels/db.c:1053
+#: ../libglabels/db.c:1054
 msgid ""
 "Unable to locate category definitions.  Libglabels may not be installed "
 "correctly!"
@@ -1767,7 +1697,7 @@ msgstr ""
 "Es war nicht möglich, Kategorie-Definitionen zu finden. Libglabels könnte "
 "möglicherweise nicht korrekt installiert sein!"
 
-#: ../libglabels/db.c:1968
+#: ../libglabels/db.c:1969
 msgid ""
 "Unable to locate any template files.  Libglabels may not be installed "
 "correctly!"
@@ -1775,15 +1705,10 @@ msgstr ""
 "Es konnten keine Vorlagendateien gefunden werden. Möglicherweise ist "
 "libglabels nicht korrekt installiert!"
 
-#: ../libglabels/db.c:2035
+#: ../libglabels/db.c:2036
 #, c-format
 msgid "%s full page label"
 msgstr "Ganzseitenetikett %s"
-
-#: ../libglabels/template.c:138
-#, c-format
-msgid "Equivalent part (\"%s\") for \"%s\", not previously defined."
-msgstr "Äquivalenter Teil »%s« für »%s« wurde zuvor nicht definiert."
 
 #.
 #. * Translators: 1st %d = number of labels across a page,
@@ -1810,13 +1735,13 @@ msgstr "Durchmesser"
 #. the CSS2 Specification (Section 4.3.2)
 #. This table must be sorted exactly as the enumerations in lglUnits
 #. [LGL_UNITS_POINT]
-#: ../libglabels/units.c:65 ../data/ui/object-editor.ui.h:40
+#: ../libglabels/units.c:65 ../data/ui/object-editor.ui.h:42
 #: ../data/ui/prefs-dialog.ui.h:22
 msgid "points"
 msgstr "Punkte"
 
 #. [LGL_UNITS_INCH]
-#: ../libglabels/units.c:66 ../data/ui/object-editor.ui.h:39
+#: ../libglabels/units.c:66 ../data/ui/object-editor.ui.h:40
 #: ../data/ui/template-designer.ui.h:66
 msgid "inches"
 msgstr "Zoll"
@@ -1835,30 +1760,6 @@ msgstr "cm"
 #: ../libglabels/units.c:69
 msgid "picas"
 msgstr "picas"
-
-#: ../libglabels/xml-template.c:231
-msgid "Missing name or brand/part attributes."
-msgstr "Name oder Attribute für Marke/Nummer fehlen."
-
-#. This should always be an id, but just in case a name
-#. slips by!
-#: ../libglabels/xml-template.c:252
-#, c-format
-msgid "Unknown page size id \"%s\", trying as name"
-msgstr "Unbekannte Kennung der Seitengröße »%s«, wird als Name versucht"
-
-#: ../libglabels/xml-template.c:264
-#, c-format
-msgid "Unknown page size id or name \"%s\""
-msgstr "Unbekannte Kennung der Seitengröße oder Name »%s«"
-
-#: ../libglabels/xml-template.c:283
-msgid "Forward references not supported."
-msgstr "Vorwärtsreferenzen werden nicht unterstützt."
-
-#: ../libglabels/xml-template.c:743
-msgid "Skipping deprecated \"Alias\" node."
-msgstr "Missbilligter »Alias«-Knoten wird übersprungen."
 
 #.
 #. * Local Variables:       -- emacs
@@ -1965,139 +1866,147 @@ msgstr "Ähnliche Produkte:"
 msgid "Vendor:"
 msgstr "Hersteller:"
 
-#: ../data/ui/object-editor.ui.h:2
+#: ../data/ui/object-editor.ui.h:1
+msgid " "
+msgstr " "
+
+#: ../data/ui/object-editor.ui.h:3
 #, no-c-format
 msgid "%"
 msgstr "%"
 
-#: ../data/ui/object-editor.ui.h:3 ../data/ui/prefs-dialog.ui.h:2
+#: ../data/ui/object-editor.ui.h:4 ../data/ui/prefs-dialog.ui.h:2
 msgid "Alignment:"
 msgstr "Ausrichtung:"
 
-#: ../data/ui/object-editor.ui.h:4
+#: ../data/ui/object-editor.ui.h:5
 msgid "Allow merge to automatically shrink text"
 msgstr "Automatisches Anpassen der Textgröße erlauben"
 
-#: ../data/ui/object-editor.ui.h:5
+#: ../data/ui/object-editor.ui.h:6
 msgid "Angle:"
 msgstr "Winkel:"
 
-#: ../data/ui/object-editor.ui.h:6
+#: ../data/ui/object-editor.ui.h:7
 msgid "Backend:"
 msgstr "Backend:"
 
-#: ../data/ui/object-editor.ui.h:7
+#: ../data/ui/object-editor.ui.h:8
 msgid "Checksum"
 msgstr "Prüfsumme"
 
-#: ../data/ui/object-editor.ui.h:8 ../data/ui/prefs-dialog.ui.h:3
+#: ../data/ui/object-editor.ui.h:9 ../data/ui/prefs-dialog.ui.h:3
 msgid "Color:"
 msgstr "Farbe:"
 
-#: ../data/ui/object-editor.ui.h:10
+#: ../data/ui/object-editor.ui.h:11
 msgid "Enable shadow"
 msgstr "Schattierung aktivieren"
 
-#: ../data/ui/object-editor.ui.h:11
+#: ../data/ui/object-editor.ui.h:12
 msgid "Family:"
 msgstr "Familie:"
 
-#: ../data/ui/object-editor.ui.h:12
+#: ../data/ui/object-editor.ui.h:13
 msgid "File:"
 msgstr "Datei:"
 
-#: ../data/ui/object-editor.ui.h:13 ../data/ui/prefs-dialog.ui.h:5
+#: ../data/ui/object-editor.ui.h:14 ../data/ui/prefs-dialog.ui.h:5
 msgid "Fill"
 msgstr "Füllen"
 
-#: ../data/ui/object-editor.ui.h:14 ../data/ui/template-designer.ui.h:33
+#: ../data/ui/object-editor.ui.h:15 ../data/ui/template-designer.ui.h:33
 msgid "Height:"
 msgstr "Höhe"
 
-#: ../data/ui/object-editor.ui.h:16
+#: ../data/ui/object-editor.ui.h:17
 msgid "Key:"
 msgstr "Schlüssel:"
 
-#: ../data/ui/object-editor.ui.h:17
+#: ../data/ui/object-editor.ui.h:18
 msgid "Length:"
 msgstr "Länge:"
 
-#: ../data/ui/object-editor.ui.h:19 ../data/ui/prefs-dialog.ui.h:10
+#: ../data/ui/object-editor.ui.h:20 ../data/ui/prefs-dialog.ui.h:10
 msgid "Line Spacing:"
 msgstr "Zeilenabstand:"
 
-#: ../data/ui/object-editor.ui.h:20
+#: ../data/ui/object-editor.ui.h:21
 msgid "Literal:"
 msgstr "Literale:"
 
-#: ../data/ui/object-editor.ui.h:21
+#: ../data/ui/object-editor.ui.h:22
 msgid "Opacity:"
 msgstr "Transparenz:"
 
-#: ../data/ui/object-editor.ui.h:22
+#: ../data/ui/object-editor.ui.h:23
 msgid "Position"
 msgstr "Position"
 
-#: ../data/ui/object-editor.ui.h:23
+#: ../data/ui/object-editor.ui.h:24
 msgid "Reset image size"
 msgstr "Bildgröße zurücksetzen"
 
-#: ../data/ui/object-editor.ui.h:24
+#: ../data/ui/object-editor.ui.h:25
 msgid "Shadow"
 msgstr "Schattierung"
 
-#: ../data/ui/object-editor.ui.h:25
+#: ../data/ui/object-editor.ui.h:26
 msgid "Size"
 msgstr "Breite"
 
-#: ../data/ui/object-editor.ui.h:26
+#: ../data/ui/object-editor.ui.h:27
 msgid "Size:"
 msgstr "Größe:"
 
-#: ../data/ui/object-editor.ui.h:27
+#: ../data/ui/object-editor.ui.h:28
 msgid "Style"
 msgstr "Stil"
 
-#: ../data/ui/object-editor.ui.h:28
+#: ../data/ui/object-editor.ui.h:29
 msgid "Style:"
 msgstr "Stil:"
 
-#: ../data/ui/object-editor.ui.h:30 ../data/ui/prefs-dialog.ui.h:20
+#: ../data/ui/object-editor.ui.h:31 ../data/ui/prefs-dialog.ui.h:20
 #: ../data/ui/template-designer.ui.h:65
 msgid "Width:"
 msgstr "Breite:"
 
-#: ../data/ui/object-editor.ui.h:31
+#: ../data/ui/object-editor.ui.h:32
 msgid "X Offset:"
 msgstr "X-Versatz:"
 
-#: ../data/ui/object-editor.ui.h:32
+#: ../data/ui/object-editor.ui.h:33
 msgid "X:"
 msgstr "X:"
 
-#: ../data/ui/object-editor.ui.h:33
+#: ../data/ui/object-editor.ui.h:34
 msgid "Y Offset:"
 msgstr "Y-Versatz:"
 
-#: ../data/ui/object-editor.ui.h:34
+#: ../data/ui/object-editor.ui.h:35
 msgid "Y:"
 msgstr "Y:"
 
-#: ../data/ui/object-editor.ui.h:35
+#: ../data/ui/object-editor.ui.h:36
 msgid "degrees"
 msgstr "Grad"
 
-#: ../data/ui/object-editor.ui.h:36
+#: ../data/ui/object-editor.ui.h:37
 msgid "dialog1"
 msgstr "dialog1"
 
-#: ../data/ui/object-editor.ui.h:37
+#: ../data/ui/object-editor.ui.h:38
 msgid "digits:"
 msgstr "Zeichen:"
 
-#: ../data/ui/object-editor.ui.h:38
+#: ../data/ui/object-editor.ui.h:39
 msgid "format:"
 msgstr "Format:"
+
+#: ../data/ui/object-editor.ui.h:41
+msgid "key:"
+msgstr "Schlüssel:"
 
 #: ../data/ui/prefs-dialog.ui.h:1
 msgid "   "
@@ -3497,6 +3406,72 @@ msgstr "Rechteckige Kopieretiketten"
 #: ../templates/zweckform-iso-templates.xml.h:30
 msgid "Video Labels (back)"
 msgstr "Video-Etiketten (Rückseite)"
+
+#~ msgid "Couldn't construct query"
+#~ msgstr "Abfrage konnte nicht erstellt werden"
+
+#~ msgid "Couldn't open addressbook."
+#~ msgstr "Adressbuch konnte nicht geöffnet werden"
+
+#~ msgid "Couldn't list available fields."
+#~ msgstr "Verfügbare Felder konnten nicht aufgelistet werden."
+
+#~ msgid "Couldn't get contacts."
+#~ msgstr "Kontakte konnten nicht geholt werden."
+
+#~ msgid "Bad root node = \"%s\""
+#~ msgstr "Fehlerhafter root node = »%s«"
+
+#~ msgid "bad node =  \"%s\""
+#~ msgstr "fehlerhafter node =  »%s«"
+
+#~ msgid "xmlParseFile error"
+#~ msgstr "Fehler: xmlParseFile error"
+
+#~ msgid "No document root"
+#~ msgstr "Kein document root"
+
+#~ msgid "Importing from glabels 0.1 format"
+#~ msgstr "Aus dem glabels 0.1-Format wird importiert"
+
+#~ msgid "Importing from glabels 0.4 format"
+#~ msgstr "Aus dem glabels 0.4-Format wird importiert"
+
+#~ msgid "Unknown glabels Namespace -- Using %s"
+#~ msgstr "Unbekannter glabels-Namensraum -- %s wird verwendet"
+
+#~ msgid "bad node in Document node =  \"%s\""
+#~ msgstr "Ungültiger Node im Dokument-Node = »%s«"
+
+#~ msgid "bad node in Data node =  \"%s\""
+#~ msgstr "Ungültiger Node im Daten-Node = »%s«"
+
+#~ msgid "Unknown embedded file format: \"%s\""
+#~ msgstr "Unbekanntes eingebettetes Dateiformat: »%s«"
+
+#~ msgid "Utf8 conversion error."
+#~ msgstr "Fehler in der UTF8-Umwandlung."
+
+#~ msgid "Problem saving xml file."
+#~ msgstr "Problem beim Speichern der XML-Datei."
+
+#~ msgid "Equivalent part (\"%s\") for \"%s\", not previously defined."
+#~ msgstr "Äquivalenter Teil »%s« für »%s« wurde zuvor nicht definiert."
+
+#~ msgid "Missing name or brand/part attributes."
+#~ msgstr "Name oder Attribute für Marke/Nummer fehlen."
+
+#~ msgid "Unknown page size id \"%s\", trying as name"
+#~ msgstr "Unbekannte Kennung der Seitengröße »%s«, wird als Name versucht"
+
+#~ msgid "Unknown page size id or name \"%s\""
+#~ msgstr "Unbekannte Kennung der Seitengröße oder Name »%s«"
+
+#~ msgid "Forward references not supported."
+#~ msgstr "Vorwärtsreferenzen werden nicht unterstützt."
+
+#~ msgid "Skipping deprecated \"Alias\" node."
+#~ msgstr "Missbilligter »Alias«-Knoten wird übersprungen."
 
 #~ msgid ""
 #~ "Missing required \"brand\" or \"part\" attribute, trying deprecated name."
