@@ -1,15 +1,15 @@
 # Spanish translation of glabels.
 # sergio rivadero <sergiorivadero@argentina.com>, 2005.
-# Jorge González <jorgegonz@svn.gnome.org>, 2010.
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2010.
+# Jorge González <jorgegonz@svn.gnome.org>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-12-11 10:14+0000\n"
-"PO-Revision-Date: 2010-12-06 18:12+0100\n"
-"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
+"POT-Creation-Date: 2010-12-13 20:59+0000\n"
+"PO-Revision-Date: 2010-12-15 22:16+0100\n"
+"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1064,7 +1064,7 @@ msgstr "Seleccionar"
 msgid "Record/Field"
 msgstr "Registro/Campo"
 
-#: ../src/merge-properties-dialog.c:356 ../data/ui/object-editor.ui.h:9
+#: ../src/merge-properties-dialog.c:356 ../data/ui/object-editor.ui.h:10
 msgid "Data"
 msgstr "Datos"
 
@@ -1451,7 +1451,7 @@ msgstr "Modo de selección"
 msgid "Select, move and modify objects"
 msgstr "Seleccionar, mover y modificar objetos"
 
-#: ../src/ui.c:280 ../src/view-text.c:94 ../data/ui/object-editor.ui.h:29
+#: ../src/ui.c:280 ../src/view-text.c:94 ../data/ui/object-editor.ui.h:30
 #: ../data/ui/prefs-dialog.ui.h:17
 msgid "Text"
 msgstr "Texto"
@@ -1464,7 +1464,7 @@ msgstr "Caja"
 msgid "Create box/rectangle object"
 msgstr "Crear un objeto de caja o rectángulo"
 
-#: ../src/ui.c:294 ../data/ui/object-editor.ui.h:18
+#: ../src/ui.c:294 ../data/ui/object-editor.ui.h:19
 #: ../data/ui/prefs-dialog.ui.h:9
 msgid "Line"
 msgstr "Línea"
@@ -1477,7 +1477,7 @@ msgstr "Elipse"
 msgid "Create ellipse/circle object"
 msgstr "Crear un círculo o elipse"
 
-#: ../src/ui.c:308 ../data/ui/object-editor.ui.h:15
+#: ../src/ui.c:308 ../data/ui/object-editor.ui.h:16
 msgid "Image"
 msgstr "Imagen"
 
@@ -1725,13 +1725,13 @@ msgstr "diámetro"
 #. the CSS2 Specification (Section 4.3.2)
 #. This table must be sorted exactly as the enumerations in lglUnits
 #. [LGL_UNITS_POINT]
-#: ../libglabels/units.c:65 ../data/ui/object-editor.ui.h:40
+#: ../libglabels/units.c:65 ../data/ui/object-editor.ui.h:42
 #: ../data/ui/prefs-dialog.ui.h:22
 msgid "points"
 msgstr "puntos"
 
 #. [LGL_UNITS_INCH]
-#: ../libglabels/units.c:66 ../data/ui/object-editor.ui.h:39
+#: ../libglabels/units.c:66 ../data/ui/object-editor.ui.h:40
 #: ../data/ui/template-designer.ui.h:66
 msgid "inches"
 msgstr "pulgadas"
@@ -1856,139 +1856,147 @@ msgstr "Productos similares:"
 msgid "Vendor:"
 msgstr "Fabricante:"
 
-#: ../data/ui/object-editor.ui.h:2
+#: ../data/ui/object-editor.ui.h:1
+msgid " "
+msgstr " "
+
+#: ../data/ui/object-editor.ui.h:3
 #, no-c-format
 msgid "%"
 msgstr "%"
 
-#: ../data/ui/object-editor.ui.h:3 ../data/ui/prefs-dialog.ui.h:2
+#: ../data/ui/object-editor.ui.h:4 ../data/ui/prefs-dialog.ui.h:2
 msgid "Alignment:"
 msgstr "Alineación:"
 
-#: ../data/ui/object-editor.ui.h:4
+#: ../data/ui/object-editor.ui.h:5
 msgid "Allow merge to automatically shrink text"
 msgstr "Permitir ampliar texto automáticamente"
 
-#: ../data/ui/object-editor.ui.h:5
+#: ../data/ui/object-editor.ui.h:6
 msgid "Angle:"
 msgstr "Ángulo:"
 
-#: ../data/ui/object-editor.ui.h:6
+#: ../data/ui/object-editor.ui.h:7
 msgid "Backend:"
 msgstr "«Backend»:"
 
-#: ../data/ui/object-editor.ui.h:7
+#: ../data/ui/object-editor.ui.h:8
 msgid "Checksum"
 msgstr "Verificación"
 
-#: ../data/ui/object-editor.ui.h:8 ../data/ui/prefs-dialog.ui.h:3
+#: ../data/ui/object-editor.ui.h:9 ../data/ui/prefs-dialog.ui.h:3
 msgid "Color:"
 msgstr "Color:"
 
-#: ../data/ui/object-editor.ui.h:10
+#: ../data/ui/object-editor.ui.h:11
 msgid "Enable shadow"
 msgstr "Activar sombra"
 
-#: ../data/ui/object-editor.ui.h:11
+#: ../data/ui/object-editor.ui.h:12
 msgid "Family:"
 msgstr "Familia:"
 
-#: ../data/ui/object-editor.ui.h:12
+#: ../data/ui/object-editor.ui.h:13
 msgid "File:"
 msgstr "Archivo:"
 
-#: ../data/ui/object-editor.ui.h:13 ../data/ui/prefs-dialog.ui.h:5
+#: ../data/ui/object-editor.ui.h:14 ../data/ui/prefs-dialog.ui.h:5
 msgid "Fill"
 msgstr "Relleno"
 
-#: ../data/ui/object-editor.ui.h:14 ../data/ui/template-designer.ui.h:33
+#: ../data/ui/object-editor.ui.h:15 ../data/ui/template-designer.ui.h:33
 msgid "Height:"
 msgstr "Alto:"
 
-#: ../data/ui/object-editor.ui.h:16
+#: ../data/ui/object-editor.ui.h:17
 msgid "Key:"
 msgstr "Clave:"
 
-#: ../data/ui/object-editor.ui.h:17
+#: ../data/ui/object-editor.ui.h:18
 msgid "Length:"
 msgstr "Longitud:"
 
-#: ../data/ui/object-editor.ui.h:19 ../data/ui/prefs-dialog.ui.h:10
+#: ../data/ui/object-editor.ui.h:20 ../data/ui/prefs-dialog.ui.h:10
 msgid "Line Spacing:"
 msgstr "Espaciado:"
 
-#: ../data/ui/object-editor.ui.h:20
+#: ../data/ui/object-editor.ui.h:21
 msgid "Literal:"
 msgstr "Literal:"
 
-#: ../data/ui/object-editor.ui.h:21
+#: ../data/ui/object-editor.ui.h:22
 msgid "Opacity:"
 msgstr "Opacidad:"
 
-#: ../data/ui/object-editor.ui.h:22
+#: ../data/ui/object-editor.ui.h:23
 msgid "Position"
 msgstr "Posición"
 
-#: ../data/ui/object-editor.ui.h:23
+#: ../data/ui/object-editor.ui.h:24
 msgid "Reset image size"
 msgstr "Restablecer el tamaño de la imagen"
 
-#: ../data/ui/object-editor.ui.h:24
+#: ../data/ui/object-editor.ui.h:25
 msgid "Shadow"
 msgstr "Sombra"
 
-#: ../data/ui/object-editor.ui.h:25
+#: ../data/ui/object-editor.ui.h:26
 msgid "Size"
 msgstr "Tamaño"
 
-#: ../data/ui/object-editor.ui.h:26
+#: ../data/ui/object-editor.ui.h:27
 msgid "Size:"
 msgstr "Tamaño:"
 
-#: ../data/ui/object-editor.ui.h:27
+#: ../data/ui/object-editor.ui.h:28
 msgid "Style"
 msgstr "Estilo"
 
-#: ../data/ui/object-editor.ui.h:28
+#: ../data/ui/object-editor.ui.h:29
 msgid "Style:"
 msgstr "Estilo:"
 
-#: ../data/ui/object-editor.ui.h:30 ../data/ui/prefs-dialog.ui.h:20
+#: ../data/ui/object-editor.ui.h:31 ../data/ui/prefs-dialog.ui.h:20
 #: ../data/ui/template-designer.ui.h:65
 msgid "Width:"
 msgstr "Ancho:"
 
-#: ../data/ui/object-editor.ui.h:31
+#: ../data/ui/object-editor.ui.h:32
 msgid "X Offset:"
 msgstr "Desplazamiento en X:"
 
-#: ../data/ui/object-editor.ui.h:32
+#: ../data/ui/object-editor.ui.h:33
 msgid "X:"
 msgstr "X:"
 
-#: ../data/ui/object-editor.ui.h:33
+#: ../data/ui/object-editor.ui.h:34
 msgid "Y Offset:"
 msgstr "Desplazamiento en Y:"
 
-#: ../data/ui/object-editor.ui.h:34
+#: ../data/ui/object-editor.ui.h:35
 msgid "Y:"
 msgstr "Y:"
 
-#: ../data/ui/object-editor.ui.h:35
+#: ../data/ui/object-editor.ui.h:36
 msgid "degrees"
 msgstr "grados"
 
-#: ../data/ui/object-editor.ui.h:36
+#: ../data/ui/object-editor.ui.h:37
 msgid "dialog1"
 msgstr "dialogo1"
 
-#: ../data/ui/object-editor.ui.h:37
+#: ../data/ui/object-editor.ui.h:38
 msgid "digits:"
 msgstr "dígitos:"
 
-#: ../data/ui/object-editor.ui.h:38
+#: ../data/ui/object-editor.ui.h:39
 msgid "format:"
 msgstr "Formato:"
+
+#: ../data/ui/object-editor.ui.h:41
+msgid "key:"
+msgstr "clave:"
 
 #: ../data/ui/prefs-dialog.ui.h:1
 msgid "   "
@@ -2680,7 +2688,7 @@ msgstr "Productos para correo/envío"
 
 #: ../templates/categories.xml.h:8
 msgid "Photo products"
-msgstr ""
+msgstr "Productos para fotos"
 
 #. ====================================================================
 #. ===================================================================
@@ -3030,16 +3038,13 @@ msgstr "Etiquetas de dossier"
 # REVISAR
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:6
-#, fuzzy
 #| msgid "Arch File Labels"
 msgid "Arch File inserts"
-msgstr "Etiquetas de dossier"
+msgstr "Separadores de archivadores"
 
 #: ../templates/geha-iso-templates.xml.h:9
-#, fuzzy
-#| msgid "CD Inlet"
 msgid "CD/DVD Inlet"
-msgstr "Interior de CD"
+msgstr "Interior de CD/DVD"
 
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:13
@@ -3050,16 +3055,14 @@ msgstr "Interior de DVD"
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:15
 msgid "Flyer paper"
-msgstr ""
+msgstr "Papel para panfletos"
 
 #. ===================================================================
 #. ====================================================================
 #: ../templates/geha-iso-templates.xml.h:17
 #: ../templates/hama-iso-templates.xml.h:14
-#, fuzzy
-#| msgid "Membership cards"
 msgid "Greeting cards"
-msgstr "Tarjetas de socio"
+msgstr "Tarjetas de felicitación"
 
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:21
@@ -3069,10 +3072,8 @@ msgstr "Etiquetas multipropósito"
 
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:23
-#, fuzzy
-#| msgid "Passport photo labels glossy"
 msgid "Passport photo labels"
-msgstr "Etiquetas satinadas para fotos de pasaporte"
+msgstr "Etiquetas para fotos de pasaporte"
 
 #. ===================================================================
 #. ====================================================================
@@ -3086,43 +3087,33 @@ msgstr "Etiquetas para fotos"
 # REVISAR
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:4
-#, fuzzy
-#| msgid "Arch File Labels"
 msgid "Arch File labels"
 msgstr "Etiquetas de dossier"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:8
-#, fuzzy
-#| msgid "CD Inlet"
 msgid "CD inlet"
 msgstr "Interior de CD"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:10
-#, fuzzy
-#| msgid "CD/DVD Labels"
 msgid "CD/DVD labels"
 msgstr "Etiquetas de CD/DVD"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:16
-#, fuzzy
-#| msgid "Mini Labels"
 msgid "Mini Disc labels"
-msgstr "Minietiquetas"
+msgstr "Etiquetas de Minidisc"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:20
 msgid "Printable mousepad"
-msgstr ""
+msgstr "Alfombrilla de ratón imprimible"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:28
-#, fuzzy
-#| msgid "Floppy disk labels"
 msgid "Zip disc labels"
-msgstr "Etiquetas de disquete"
+msgstr "Etiquetas de disco Zip"
 
 # REVISAR
 #. ===================================================================
@@ -3673,9 +3664,6 @@ msgstr "Etiquetas de video (dorso)"
 
 #~ msgid "missing glabels file\n"
 #~ msgstr "archivo glabels perdido\n"
-
-#~ msgid " "
-#~ msgstr " "
 
 #, fuzzy
 #~ msgid "Media Type"
