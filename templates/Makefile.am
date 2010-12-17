@@ -11,6 +11,7 @@ templates_DATA = \
 	paper-sizes.xml \
 	categories.xml \
 	vendors.xml \
+	ascom-iso-templates.xml	\
 	avery-us-templates.xml \
 	avery-iso-templates.xml \
 	avery-other-templates.xml \
