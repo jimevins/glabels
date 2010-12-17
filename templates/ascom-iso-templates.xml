@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<Glabels-templates xmlns="http://glabels.org/xmlns/2.3/">
+
+  <!-- ************************* -->
+  <!--                           -->
+  <!-- Ascom                     -->
+  <!--                           -->
+  <!-- ************************* -->
+
+  <!-- Ascom was bought some years ago by Hovat.		-->
+  <!-- Label data are now available from the following URL:	-->
+  <!-- http://www.hovat.co.uk/office_templates.zip		-->
+
+  <!-- =================================================================== -->
+  <!-- Ascom A4/24/MKII: Rectangular Labels, 24 per sheet                  -->
+  <!-- =================================================================== -->
+  <!-- TODO: Is this the real part #? -->
+  <Template brand="Ascom" part="A4/24/MKII" size="A4" _description="Rectangular Labels">
+    <Meta category="label"/>
+    <Label-rectangle id="0" width="181" height="96" round="10">
+      <Markup-margin size="5"/>
+      <Layout nx="3" ny="8" x0="19" y0="36" dx="187" dy="96"/>
+    </Label-rectangle>
+  </Template>
+
+</Glabels-templates>
+
+
+
+
