@@ -542,6 +542,18 @@
     </Label-rectangle>
   </Template>
 
+  <!-- =================================================================== -->
+  <!-- Sigel DE 160: Bottle labels, 4 per sheet				   -->
+  <!-- =================================================================== -->
+  <Template brand="Sigel" part="DE 160" size="A4" _description="Bottle labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Label-rectangle id="0" width="80mm" height="120mm" round="0mm" x_waste="0mm" y_waste="0mm">
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="2" ny="2" x0="15mm" y0="19.5mm" dx="100mm" dy="138mm"/>
+    </Label-rectangle>
+  </Template>
+
   <Template brand="Sigel" part="DP 930" equiv="DP 830"/>
 
 
