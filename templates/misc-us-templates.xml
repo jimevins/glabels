@@ -268,15 +268,19 @@
   <!-- =================================================================== -->
   <!-- Southworth BC: Business Cards, 2'' x 3_1/2'', 10 per sheet          -->
   <!-- =================================================================== -->
-  <!-- TODO: Is this the actual part #? -->
-  <Template brand="Southworth" part="BC" size="US-Letter" _description="Business Cards">
+  <Template brand="Southworth" part="BC554" size="US-Letter" _description="Business Cards">
     <Meta category="card"/>
     <Meta category="business-card"/>
+    <Meta product_url="http://shop.southworth.com/groups.php?cat=1&amp;group=6"/>
     <Label-rectangle id="0" width="252" height="144" round="0">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="5" x0="36" y0="36" dx="288" dy="144"/>
     </Label-rectangle>
   </Template>
+
+  <Template brand="Southworth" part="BC564" equiv="BC554"/>
+  <Template brand="Southworth" part="BC#11" equiv="BC554"/>
+  <Template brand="Southworth" part="BC#12" equiv="BC554"/>
 
 
   <!-- ************************* -->
