@@ -217,6 +217,8 @@ lgl_barcode_code39_new (lglBarcodeType  type,
         /* First get code string */
         code = code39_encode (canon_data, checksum_flag);
         if (code == NULL) {
+                g_free (canon_data);
+                g_free (display_data);
                 return NULL;
         }
 
