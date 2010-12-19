@@ -113,7 +113,7 @@ static void     create_alt_msg_path         (cairo_t             *cr,
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-G_DEFINE_TYPE (glLabelBarcode, gl_label_barcode, GL_TYPE_LABEL_OBJECT);
+G_DEFINE_TYPE (glLabelBarcode, gl_label_barcode, GL_TYPE_LABEL_OBJECT)
 
 
 static void

@@ -117,7 +117,7 @@ static void       set_info                            (glNewLabelDialog  *this,
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-G_DEFINE_TYPE (glNewLabelDialog, gl_new_label_dialog, GTK_TYPE_ASSISTANT);
+G_DEFINE_TYPE (glNewLabelDialog, gl_new_label_dialog, GTK_TYPE_ASSISTANT)
 
 
 /*****************************************************************************/

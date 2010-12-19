@@ -35,7 +35,7 @@ typedef enum {
         GL_VIEW_ARROW_SELECT_REGION,
         GL_VIEW_ARROW_MOVE,
         GL_VIEW_ARROW_RESIZE,
-        GL_VIEW_CREATE_DRAG,
+        GL_VIEW_CREATE_DRAG
 } glViewState;
 
 #define GL_TYPE_VIEW            (gl_view_get_type ())

@@ -163,7 +163,7 @@ lgl_barcode_render_to_cairo (const lglBarcode  *bc,
                 case LGL_BARCODE_SHAPE_RING:
                         ring = (lglBarcodeShapeRing *) shape;
 
-                        cairo_arc (cr, ring->x, ring->y, ring->radius, 0.0, 2 * M_PI);
+                        cairo_arc (cr, ring->x, ring->y, ring->radius, 0.0, 2 * G_PI);
                         cairo_set_line_width (cr, ring->line_width);
                         cairo_stroke (cr);
 
@@ -305,10 +305,10 @@ lgl_barcode_render_to_cairo_path (const lglBarcode  *bc,
                         ring = (lglBarcodeShapeRing *) shape;
 
                         cairo_new_sub_path (cr);
-                        cairo_arc (cr, ring->x, ring->y, ring->radius + ring->line_width/2, 0.0, 2 * M_PI);
+                        cairo_arc (cr, ring->x, ring->y, ring->radius + ring->line_width/2, 0.0, 2 * G_PI);
                         cairo_close_path (cr);
                         cairo_new_sub_path (cr);
-                        cairo_arc (cr, ring->x, ring->y, ring->radius - ring->line_width/2, 0.0, 2 * M_PI);
+                        cairo_arc (cr, ring->x, ring->y, ring->radius - ring->line_width/2, 0.0, 2 * G_PI);
                         cairo_close_path (cr);
                         break;
 

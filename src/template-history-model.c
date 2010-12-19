@@ -64,7 +64,7 @@ static void history_changed_cb                 (glTemplateHistoryModel  *this);
 /*****************************************************************************/
 /* Object infrastructure.                                                    */
 /*****************************************************************************/
-G_DEFINE_TYPE (glTemplateHistoryModel, gl_template_history_model, G_TYPE_OBJECT);
+G_DEFINE_TYPE (glTemplateHistoryModel, gl_template_history_model, G_TYPE_OBJECT)
 
 
 /*****************************************************************************/

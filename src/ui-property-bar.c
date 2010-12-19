@@ -148,7 +148,7 @@ static void     set_line_width_items_sensitive   (glUIPropertyBar      *this,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-G_DEFINE_TYPE (glUIPropertyBar, gl_ui_property_bar, GTK_TYPE_HBOX);
+G_DEFINE_TYPE (glUIPropertyBar, gl_ui_property_bar, GTK_TYPE_HBOX)
 
 
 static void
@@ -860,14 +860,12 @@ font_family_changed_cb (GtkComboBox     *combo,
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
 	font_family = gl_font_combo_get_family (GL_FONT_COMBO (combo));
-	if ( strlen(font_family) )
+	if ( *font_family != '\0' )
         {
-		gl_label_set_selection_font_family (this->priv->label,
-                                                    font_family);
-		gl_label_set_default_font_family   (this->priv->label,
-                                                    font_family);
-	}
-	g_free (font_family);
+                gl_label_set_selection_font_family (this->priv->label, font_family);
+                gl_label_set_default_font_family   (this->priv->label, font_family);
+        }
+        g_free (font_family);
 
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
 

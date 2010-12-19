@@ -64,7 +64,7 @@ static void gl_font_combo_menu_item_finalize    (GObject                *object)
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-G_DEFINE_TYPE (glFontComboMenuItem, gl_font_combo_menu_item, GTK_TYPE_MENU_ITEM);
+G_DEFINE_TYPE (glFontComboMenuItem, gl_font_combo_menu_item, GTK_TYPE_MENU_ITEM)
 
 
 /*****************************************************************************/

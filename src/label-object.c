@@ -102,7 +102,7 @@ static void     set_size                  (glLabelObject      *object,
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-G_DEFINE_TYPE (glLabelObject, gl_label_object, G_TYPE_OBJECT);
+G_DEFINE_TYPE (glLabelObject, gl_label_object, G_TYPE_OBJECT)
 
 
 static void

@@ -51,7 +51,7 @@ enum {
 enum {
 	ARG_0,
 	ARG_DELIM,
-	ARG_LINE1_HAS_KEYS,
+	ARG_LINE1_HAS_KEYS
 };
 
 
@@ -98,7 +98,7 @@ static void           free_fields                   (GList           **fields);
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-G_DEFINE_TYPE (glMergeText, gl_merge_text, GL_TYPE_MERGE);
+G_DEFINE_TYPE (glMergeText, gl_merge_text, GL_TYPE_MERGE)
 
 
 static void

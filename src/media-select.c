@@ -160,7 +160,7 @@ static void   load_search_all_list       (glMediaSelect          *this,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-G_DEFINE_TYPE (glMediaSelect, gl_media_select, GTK_TYPE_VBOX);
+G_DEFINE_TYPE (glMediaSelect, gl_media_select, GTK_TYPE_VBOX)
 
 
 static void
@@ -827,7 +827,7 @@ gl_media_select_set_name (glMediaSelect *this,
               flag = gtk_tree_model_iter_next(model, &iter) )
         {
                 gtk_tree_model_get (model, &iter, NAME_COLUMN, &name_i, -1); 
-                if (strcasecmp(name, name_i) == 0)
+                if (lgl_str_utf8_casecmp(name, name_i) == 0)
                 {
                         gtk_tree_selection_select_iter (selection, &iter);
                         path = gtk_tree_model_get_path (model, &iter);

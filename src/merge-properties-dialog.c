@@ -117,7 +117,7 @@ static void unselect_all_button_clicked_cb        (GtkWidget                    
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-G_DEFINE_TYPE (glMergePropertiesDialog, gl_merge_properties_dialog, GTK_TYPE_DIALOG);
+G_DEFINE_TYPE (glMergePropertiesDialog, gl_merge_properties_dialog, GTK_TYPE_DIALOG)
 
 
 /*****************************************************************************/

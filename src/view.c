@@ -193,7 +193,7 @@ static void       resize_event                    (glView            *view,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-G_DEFINE_TYPE (glView, gl_view, GTK_TYPE_VBOX);
+G_DEFINE_TYPE (glView, gl_view, GTK_TYPE_VBOX)
 
 
 static void
@@ -867,7 +867,7 @@ draw_markup_layer (glView  *view,
                 if (rotate_flag)
                 {
                         lgl_template_frame_get_size (frame, &width, &height);
-                        cairo_rotate (cr, -M_PI/2.0);
+                        cairo_rotate (cr, -G_PI/2.0);
                         cairo_translate (cr, -width, 0.0);
                 }
 

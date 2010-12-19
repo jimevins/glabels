@@ -60,7 +60,7 @@ static void       gl_message_bar_construct      (glMessageBar          *this,
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-G_DEFINE_TYPE (glMessageBar, gl_message_bar, GTK_TYPE_INFO_BAR);
+G_DEFINE_TYPE (glMessageBar, gl_message_bar, GTK_TYPE_INFO_BAR)
 
 
 /*****************************************************************************/

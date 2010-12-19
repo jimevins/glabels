@@ -98,7 +98,7 @@ menu_selection_done_cb (GtkMenuShell               *object,
 /*****************************************************************************/
 /* Object infrastructure.                                                    */
 /*****************************************************************************/
-G_DEFINE_TYPE (glColorComboButton, gl_color_combo_button, GTK_TYPE_HBOX);
+G_DEFINE_TYPE (glColorComboButton, gl_color_combo_button, GTK_TYPE_HBOX)
 
 
 /*****************************************************************************/

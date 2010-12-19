@@ -58,7 +58,7 @@ enum {
 
 enum {
         ARG_0,
-        ARG_QUERY,
+        ARG_QUERY
 };
 
 
@@ -97,7 +97,7 @@ static void           free_field_list                    (GList *fields);
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-G_DEFINE_TYPE (glMergeEvolution, gl_merge_evolution, GL_TYPE_MERGE);
+G_DEFINE_TYPE (glMergeEvolution, gl_merge_evolution, GL_TYPE_MERGE)
 
 static void
 gl_merge_evolution_class_init (glMergeEvolutionClass *class)
@@ -271,26 +271,26 @@ gl_merge_evolution_get_primary_key (const glMerge *merge)
  */
 static gint sort_contact_by_file_as(gconstpointer *a, gconstpointer *b)
 {
-  /* 
-   * Returns : 	negative value if a < b; zero if a = b; positive value if a > b 
-   */
+        /*
+         * Returns : 	negative value if a < b; zero if a = b; positive value if a > b 
+         */
 
-  // Check and cast a and b to EContact
-  EContact *contact_a = E_CONTACT(a);
-  EContact *contact_b = E_CONTACT(b);
+        /* Check and cast a and b to EContact */
+        EContact *contact_a = E_CONTACT(a);
+        EContact *contact_b = E_CONTACT(b);
 
-  // Extract file_as for each contact and compare...
-  gchar *a_file_as = e_contact_get (contact_a, E_CONTACT_FILE_AS);
-  gchar *b_file_as = e_contact_get (contact_b, E_CONTACT_FILE_AS);
-  gint res = lgl_str_utf8_casecmp(a_file_as, b_file_as);
+        /* Extract file_as for each contact and compare... */
+        gchar *a_file_as = e_contact_get (contact_a, E_CONTACT_FILE_AS);
+        gchar *b_file_as = e_contact_get (contact_b, E_CONTACT_FILE_AS);
+        gint res = lgl_str_utf8_casecmp(a_file_as, b_file_as);
 
-  gl_debug(DEBUG_MERGE, "Sort comparing contacts '%s' and '%s' = %d", a_file_as, b_file_as, res);
+        gl_debug(DEBUG_MERGE, "Sort comparing contacts '%s' and '%s' = %d", a_file_as, b_file_as, res);
 
-  // free file_as strings created earlier....
-  g_free (a_file_as);
-  g_free (b_file_as);
+        /* free file_as strings created earlier.... */
+        g_free (a_file_as);
+        g_free (b_file_as);
 
-  return res;
+        return res;
 }
 
 
@@ -505,10 +505,10 @@ gl_merge_evolution_copy (glMerge       *dst_merge,
 {
         GList *src_iter, *dst_iter;
 
-        gl_debug (DEBUG_MERGE, "BEGIN");
-
         glMergeEvolution *dst_merge_evolution;
         glMergeEvolution *src_merge_evolution;
+
+        gl_debug (DEBUG_MERGE, "BEGIN");
 
         dst_merge_evolution = GL_MERGE_EVOLUTION (dst_merge);
         src_merge_evolution = GL_MERGE_EVOLUTION (src_merge);

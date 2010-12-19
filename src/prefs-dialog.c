@@ -119,7 +119,7 @@ static void update_prefs_from_object_page (glPrefsDialog      *dialog);
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-G_DEFINE_TYPE (glPrefsDialog, gl_prefs_dialog, GTK_TYPE_DIALOG);
+G_DEFINE_TYPE (glPrefsDialog, gl_prefs_dialog, GTK_TYPE_DIALOG)
 
 
 static void
@@ -529,11 +529,11 @@ update_object_page_from_prefs (glPrefsDialog *dialog)
                                   gl_prefs_model_get_default_text_color (gl_prefs));
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->priv->text_left_toggle),
-                                 (gl_prefs_model_get_default_text_alignment (gl_prefs) == GTK_JUSTIFY_LEFT));
+                                 (gl_prefs_model_get_default_text_alignment (gl_prefs) == PANGO_ALIGN_LEFT));
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->priv->text_center_toggle),
-                                 (gl_prefs_model_get_default_text_alignment (gl_prefs) == GTK_JUSTIFY_CENTER));
+                                 (gl_prefs_model_get_default_text_alignment (gl_prefs) == PANGO_ALIGN_CENTER));
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->priv->text_right_toggle),
-                                 (gl_prefs_model_get_default_text_alignment (gl_prefs) == GTK_JUSTIFY_RIGHT));
+                                 (gl_prefs_model_get_default_text_alignment (gl_prefs) == PANGO_ALIGN_RIGHT));
 
         gtk_spin_button_set_value (GTK_SPIN_BUTTON (dialog->priv->text_line_spacing_spin),
                                    gl_prefs_model_get_default_text_line_spacing (gl_prefs));

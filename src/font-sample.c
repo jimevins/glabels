@@ -72,7 +72,7 @@ static void       draw_sample                 (glFontSample   *this,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-G_DEFINE_TYPE (glFontSample, gl_font_sample, GTK_TYPE_DRAWING_AREA);
+G_DEFINE_TYPE (glFontSample, gl_font_sample, GTK_TYPE_DRAWING_AREA)
 
 
 /*****************************************************************************/

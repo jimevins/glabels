@@ -48,7 +48,7 @@ enum {
 };
 
 enum {
-        ARG_0,
+        ARG_0
 };
 
 
@@ -86,7 +86,7 @@ static char *         parse_next_vcard               (FILE             *fp);
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-G_DEFINE_TYPE (glMergeVCard, gl_merge_vcard, GL_TYPE_MERGE);
+G_DEFINE_TYPE (glMergeVCard, gl_merge_vcard, GL_TYPE_MERGE)
 
 
 static void
@@ -152,11 +152,10 @@ gl_merge_vcard_set_property (GObject      *object,
                              const GValue *value,
                              GParamSpec   *pspec)
 {
-        glMergeVCard *merge_vcard;
-
-        merge_vcard = GL_MERGE_VCARD (object);
-
         switch (param_id) {
+
+        /* Currently no vcard specific properties. */
+
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
                 break;
@@ -173,11 +172,10 @@ gl_merge_vcard_get_property (GObject     *object,
                              GValue      *value,
                              GParamSpec  *pspec)
 {
-        glMergeVCard *merge_vcard;
-
-        merge_vcard = GL_MERGE_VCARD (object);
-
         switch (param_id) {
+
+        /* Currently no vcard specific properties. */
+
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
                 break;
@@ -192,13 +190,10 @@ gl_merge_vcard_get_property (GObject     *object,
 static GList *
 gl_merge_vcard_get_key_list (const glMerge *merge)
 {
-        glMergeVCard   *merge_vcard;
         GList          *key_list = NULL;
         EContactField   field_id;
         
         gl_debug (DEBUG_MERGE, "BEGIN");
-
-        merge_vcard = GL_MERGE_VCARD (merge);
 
         for ( field_id = E_CONTACT_FIELD_FIRST; field_id <= E_CONTACT_LAST_SIMPLE_STRING; field_id++ )
         {
@@ -324,11 +319,7 @@ static void
 gl_merge_vcard_copy (glMerge       *dst_merge,
                      const glMerge *src_merge)
 {
-        glMergeVCard *dst_merge_vcard;
-        glMergeVCard *src_merge_vcard;
-
-        dst_merge_vcard = GL_MERGE_VCARD (dst_merge);
-        src_merge_vcard = GL_MERGE_VCARD (src_merge);
+        /* Currently nothing to copy. */
 }
 
 

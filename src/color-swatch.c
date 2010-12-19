@@ -69,7 +69,7 @@ static void       draw_swatch                 (glColorSwatch  *this,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-G_DEFINE_TYPE (glColorSwatch, gl_color_swatch, GTK_TYPE_DRAWING_AREA);
+G_DEFINE_TYPE (glColorSwatch, gl_color_swatch, GTK_TYPE_DRAWING_AREA)
 
 
 /*****************************************************************************/

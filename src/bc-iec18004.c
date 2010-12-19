@@ -63,9 +63,9 @@ gl_barcode_iec18004_new (const gchar    *id,
 {
         gint             i_width, i_height;
         lglBarcode      *gbc;
-	QRcode          *qrcode;
+        QRcode          *qrcode;
 
-        if ( strlen (digits) == 0 )
+        if ( *digits == '\0' )
         {
                 return NULL;
         }
@@ -80,12 +80,12 @@ gl_barcode_iec18004_new (const gchar    *id,
                 return NULL;
         }
         
-	i_width = i_height = qrcode->width;
-	gbc = render_iec18004 ((const gchar *)qrcode->data, i_width, i_height,
+        i_width = i_height = qrcode->width;
+        gbc = render_iec18004 ((const gchar *)qrcode->data, i_width, i_height,
                                w, h);
 
-	QRcode_free ( qrcode );
-	 
+        QRcode_free ( qrcode );
+
         return gbc;
 }
 
@@ -104,14 +104,17 @@ render_iec18004 (const gchar *grid,
         gint                x, y;
         gdouble             aspect_ratio, pixel_size;
 
-	/* Treat requested size as a bounding box, scale to maintain aspect
-	 * ratio while fitting it in this bounding box. */
-	aspect_ratio = (gdouble)i_height / (gdouble)i_width;
-	if ( h > w*aspect_ratio ) {
-		h = w * aspect_ratio;
-	} else {
-		w = h / aspect_ratio;
-	}
+        /* Treat requested size as a bounding box, scale to maintain aspect
+         * ratio while fitting it in this bounding box. */
+        aspect_ratio = (gdouble)i_height / (gdouble)i_width;
+        if ( h > w*aspect_ratio )
+        {
+                h = w * aspect_ratio;
+        }
+        else
+        {
+                w = h / aspect_ratio;
+        }
 
         /* Now determine pixel size. */
         pixel_size = w / i_width;

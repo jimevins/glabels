@@ -95,7 +95,7 @@ static void object_moved_cb                     (glLabelObject        *object,
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-G_DEFINE_TYPE (glObjectEditor, gl_object_editor, GTK_TYPE_VBOX);
+G_DEFINE_TYPE (glObjectEditor, gl_object_editor, GTK_TYPE_VBOX)
 
 
 static void

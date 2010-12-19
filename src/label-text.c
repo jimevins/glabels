@@ -179,7 +179,7 @@ static void            draw_handles                (glLabelObject    *object,
 /*****************************************************************************/
 /* Object infrastructure.                                                    */
 /*****************************************************************************/
-G_DEFINE_TYPE (glLabelText, gl_label_text, GL_TYPE_LABEL_OBJECT);
+G_DEFINE_TYPE (glLabelText, gl_label_text, GL_TYPE_LABEL_OBJECT)
 
 
 /*****************************************************************************/

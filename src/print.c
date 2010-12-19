@@ -499,12 +499,9 @@ print_label (PrintInfo     *pi,
 	     gboolean       outline_flag,
 	     gboolean       reverse_flag)
 {
-	const lglTemplateFrame *frame;
 	gdouble                 width, height;
 
 	gl_debug (DEBUG_PRINT, "START");
-
-        frame = (lglTemplateFrame *)pi->template->frames->data;
 
 	gl_label_get_size (label, &width, &height);
 
@@ -523,7 +520,7 @@ print_label (PrintInfo     *pi,
         /* Special transformations. */
 	if (pi->rotate_flag) {
 		gl_debug (DEBUG_PRINT, "Rotate flag set");
-		cairo_rotate (pi->cr, M_PI/2.0);
+		cairo_rotate (pi->cr, G_PI/2.0);
 		cairo_translate (pi->cr, 0.0, -height);
 	}
 	if ( reverse_flag ) {

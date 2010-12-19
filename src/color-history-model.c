@@ -69,7 +69,7 @@ static void    set_color_array                  (glColorHistoryModel *this,
 /*****************************************************************************/
 /* Object infrastructure.                                                    */
 /*****************************************************************************/
-G_DEFINE_TYPE (glColorHistoryModel, gl_color_history_model, G_TYPE_OBJECT);
+G_DEFINE_TYPE (glColorHistoryModel, gl_color_history_model, G_TYPE_OBJECT)
 
 
 /*****************************************************************************/

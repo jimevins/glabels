@@ -226,7 +226,7 @@ gl_merge_description_to_name (gchar *description)
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-G_DEFINE_TYPE (glMerge, gl_merge, G_TYPE_OBJECT);
+G_DEFINE_TYPE (glMerge, gl_merge, G_TYPE_OBJECT)
 
 static void
 gl_merge_class_init (glMergeClass *class)

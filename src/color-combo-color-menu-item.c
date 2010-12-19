@@ -65,7 +65,7 @@ static void gl_color_combo_color_menu_item_finalize    (GObject                *
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-G_DEFINE_TYPE (glColorComboColorMenuItem, gl_color_combo_color_menu_item, GTK_TYPE_MENU_ITEM);
+G_DEFINE_TYPE (glColorComboColorMenuItem, gl_color_combo_color_menu_item, GTK_TYPE_MENU_ITEM)
 
 
 /*****************************************************************************/

@@ -39,7 +39,7 @@ typedef enum {
         LGL_UNITS_FIRST = LGL_UNITS_POINT,
         LGL_UNITS_LAST  = LGL_UNITS_PICA,
 
-        LGL_UNITS_INVALID = -1,
+        LGL_UNITS_INVALID = -1
 } lglUnits;
 
 

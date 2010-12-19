@@ -51,7 +51,7 @@ typedef enum {
         GL_LABEL_OBJECT_HANDLE_SE,
         GL_LABEL_OBJECT_HANDLE_SW,
         GL_LABEL_OBJECT_HANDLE_P1,
-        GL_LABEL_OBJECT_HANDLE_P2,
+        GL_LABEL_OBJECT_HANDLE_P2
 } glLabelObjectHandle;
 
 

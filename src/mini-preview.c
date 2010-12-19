@@ -164,7 +164,7 @@ static gdouble  set_transform_and_get_scale    (glMiniPreview          *this,
 /****************************************************************************/
 /* Object infrastructure.                                                   */
 /****************************************************************************/
-G_DEFINE_TYPE (glMiniPreview, gl_mini_preview, GTK_TYPE_EVENT_BOX);
+G_DEFINE_TYPE (glMiniPreview, gl_mini_preview, GTK_TYPE_EVENT_BOX)
 
 
 /*****************************************************************************/
@@ -1077,7 +1077,7 @@ draw_arrow  (glMiniPreview      *this,
                 cairo_scale (cr, 1, -1);
                 if ( this->priv->rotate_flag )
                 {
-                        cairo_rotate (cr, -M_PI/2.0);
+                        cairo_rotate (cr, -G_PI/2.0);
                 }
 
                 cairo_new_path (cr);

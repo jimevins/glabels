@@ -66,7 +66,7 @@ static void gl_field_button_menu_finalize      (GObject              *object);
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-G_DEFINE_TYPE (glFieldButtonMenu, gl_field_button_menu, GTK_TYPE_MENU);
+G_DEFINE_TYPE (glFieldButtonMenu, gl_field_button_menu, GTK_TYPE_MENU)
 
 
 static void

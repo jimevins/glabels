@@ -82,7 +82,7 @@ static void       font_history_changed_cb     (glFontComboMenu     *this);
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-G_DEFINE_TYPE (glFontComboMenu, gl_font_combo_menu, GTK_TYPE_MENU);
+G_DEFINE_TYPE (glFontComboMenu, gl_font_combo_menu, GTK_TYPE_MENU)
 
 
 /*****************************************************************************/

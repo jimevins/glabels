@@ -112,7 +112,7 @@ static void     label_changed_cb       (glLabel       *label,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-G_DEFINE_TYPE (glWindow, gl_window, GTK_TYPE_WINDOW);
+G_DEFINE_TYPE (glWindow, gl_window, GTK_TYPE_WINDOW)
 
 
 static void

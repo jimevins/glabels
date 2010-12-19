@@ -64,7 +64,7 @@ typedef enum {
 	GLABELS_DEBUG_WDGT         = 1 << 21,
         GLABELS_DEBUG_PATH         = 1 << 22,
 	GLABELS_DEBUG_FIELD_BUTTON = 1 << 23,
-        GLABELS_DEBUG_BARCODE      = 1 << 24,
+        GLABELS_DEBUG_BARCODE      = 1 << 24
 } glDebugSection;
 
 

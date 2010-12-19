@@ -106,7 +106,7 @@ static void     draw_page_cb                  (GtkPrintOperation *operation,
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-G_DEFINE_TYPE (glPrintOp, gl_print_op, GTK_TYPE_PRINT_OPERATION);
+G_DEFINE_TYPE (glPrintOp, gl_print_op, GTK_TYPE_PRINT_OPERATION)
 
 
 static void

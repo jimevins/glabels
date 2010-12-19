@@ -49,17 +49,10 @@ static gboolean  gl_wdgt_chain_button_draw_lines       (GtkWidget          *widg
 
 static const gchar *gl_wdgt_chain_stock_items[] =
 {
-#if 0
-  "glabels-hchain",
-  "glabels-hchain-broken",
-  "glabels-vchain",
-  "glabels-vchain-broken"
-#else
   "changes-prevent",
   "changes-allow",
   "changes-prevent",
-  "changes-allow",
-#endif
+  "changes-allow"
 };
 
 
@@ -67,7 +60,7 @@ static guint gl_wdgt_chain_button_signals[LAST_SIGNAL] = { 0 };
 
 
 
-G_DEFINE_TYPE (glWdgtChainButton, gl_wdgt_chain_button, GTK_TYPE_TABLE);
+G_DEFINE_TYPE (glWdgtChainButton, gl_wdgt_chain_button, GTK_TYPE_TABLE)
 
 
 static void

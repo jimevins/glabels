@@ -63,7 +63,7 @@ static void     gl_ui_sidebar_construct     (glUISidebar          *sidebar);
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-G_DEFINE_TYPE (glUISidebar, gl_ui_sidebar, GTK_TYPE_VBOX);
+G_DEFINE_TYPE (glUISidebar, gl_ui_sidebar, GTK_TYPE_VBOX)
 
 
 static void

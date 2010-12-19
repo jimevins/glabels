@@ -292,7 +292,7 @@ static lglTemplate *build_template                (glTemplateDesigner      *dial
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-G_DEFINE_TYPE (glTemplateDesigner, gl_template_designer, GTK_TYPE_ASSISTANT);
+G_DEFINE_TYPE (glTemplateDesigner, gl_template_designer, GTK_TYPE_ASSISTANT)
 
 
 static void

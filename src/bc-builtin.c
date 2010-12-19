@@ -50,36 +50,44 @@
 /****************************************************************************/
 lglBarcode *
 gl_barcode_builtin_new (const gchar    *id,
-			gboolean        text_flag,
-			gboolean        checksum_flag,
-			gdouble         w,
-			gdouble         h,
-			const gchar    *digits)
+                        gboolean        text_flag,
+                        gboolean        checksum_flag,
+                        gdouble         w,
+                        gdouble         h,
+                        const gchar    *digits)
 {
-	if ( (g_ascii_strcasecmp (id, "POSTNET") == 0) ) {
+        if ( (g_ascii_strcasecmp (id, "POSTNET") == 0) )
+        {
                 return lgl_barcode_create (LGL_BARCODE_TYPE_POSTNET, text_flag, checksum_flag, w, h, digits);
-	}
-	if ( (g_ascii_strcasecmp (id, "POSTNET-5") == 0) ) {
+        }
+        if ( (g_ascii_strcasecmp (id, "POSTNET-5") == 0) )
+        {
                 return lgl_barcode_create (LGL_BARCODE_TYPE_POSTNET_5, text_flag, checksum_flag, w, h, digits);
-	}
-	if ( (g_ascii_strcasecmp (id, "POSTNET-9") == 0) ) {
+        }
+        if ( (g_ascii_strcasecmp (id, "POSTNET-9") == 0) )
+        {
                 return lgl_barcode_create (LGL_BARCODE_TYPE_POSTNET_9, text_flag, checksum_flag, w, h, digits);
-	}
-	if ( (g_ascii_strcasecmp (id, "POSTNET-11") == 0) ) {
+        }
+        if ( (g_ascii_strcasecmp (id, "POSTNET-11") == 0) )
+        {
                 return lgl_barcode_create (LGL_BARCODE_TYPE_POSTNET_11, text_flag, checksum_flag, w, h, digits);
-	}
-	if ( (g_ascii_strcasecmp (id, "CEPNET") == 0) ) {
+        }
+        if ( (g_ascii_strcasecmp (id, "CEPNET") == 0) )
+        {
                 return lgl_barcode_create (LGL_BARCODE_TYPE_CEPNET, text_flag, checksum_flag, w, h, digits);
-	}
-	if ( (g_ascii_strcasecmp (id, "ONECODE") == 0) ) {
+        }
+        if ( (g_ascii_strcasecmp (id, "ONECODE") == 0) )
+        {
                 return lgl_barcode_create (LGL_BARCODE_TYPE_ONECODE, text_flag, checksum_flag, w, h, digits);
-	}
-	if ( (g_ascii_strcasecmp (id, "Code39") == 0) ) {
+        }
+        if ( (g_ascii_strcasecmp (id, "Code39") == 0) )
+        {
                 return lgl_barcode_create (LGL_BARCODE_TYPE_CODE39, text_flag, checksum_flag, w, h, digits);
-	}
-	if ( (g_ascii_strcasecmp (id, "Code39Ext") == 0) ) {
+        }
+        if ( (g_ascii_strcasecmp (id, "Code39Ext") == 0) )
+        {
                 return lgl_barcode_create (LGL_BARCODE_TYPE_CODE39_EXT, text_flag, checksum_flag, w, h, digits);
-	}
+        }
 
         g_message ("Invalid builtin barcode ID: \"%s\"\n", id);
         return NULL;

@@ -107,7 +107,7 @@ typedef enum {
         LGL_BARCODE_SHAPE_CHAR,
         LGL_BARCODE_SHAPE_STRING,
         LGL_BARCODE_SHAPE_RING,
-        LGL_BARCODE_SHAPE_HEXAGON,
+        LGL_BARCODE_SHAPE_HEXAGON
 } lglBarcodeShapeType;
 
 

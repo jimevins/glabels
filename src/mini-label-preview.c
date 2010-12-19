@@ -73,7 +73,7 @@ static void       draw_preview                   (glMiniLabelPreview   *this,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-G_DEFINE_TYPE (glMiniLabelPreview, gl_mini_label_preview, GTK_TYPE_DRAWING_AREA);
+G_DEFINE_TYPE (glMiniLabelPreview, gl_mini_label_preview, GTK_TYPE_DRAWING_AREA)
 
 
 /*****************************************************************************/

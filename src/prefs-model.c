@@ -83,7 +83,7 @@ static void           gsettings_changed_cb         (glPrefsModel        *prefs_m
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-G_DEFINE_TYPE (glPrefsModel, gl_prefs_model, G_TYPE_OBJECT);
+G_DEFINE_TYPE (glPrefsModel, gl_prefs_model, G_TYPE_OBJECT)
 
 
 static void
@@ -201,7 +201,7 @@ gl_prefs_model_get_units (glPrefsModel     *this)
         string = g_settings_get_string (this->priv->locale, "units");
         
         /* If not set, make educated guess about locale default. */
-        if ( !string || !strlen(string) )
+        if ( !string || (*string == '\0') )
         {
                 pgsize = gtk_paper_size_get_default ();
                 if ( strcmp (pgsize, GTK_PAPER_NAME_LETTER) == 0 )
@@ -261,7 +261,7 @@ gl_prefs_model_get_default_page_size (glPrefsModel     *this)
         page_size = g_settings_get_string (this->priv->locale, "default-page-size");
 
         /* If not set, make educated guess about locale default. */
-        if ( !page_size || !strlen(page_size) )
+        if ( !page_size || (*page_size == '\0') )
         {
                 pgsize = gtk_paper_size_get_default ();
                 if ( strcmp (pgsize, GTK_PAPER_NAME_LETTER) == 0 )

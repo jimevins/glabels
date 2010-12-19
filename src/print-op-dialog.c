@@ -69,8 +69,6 @@ struct _glPrintOpDialogPrivate {
 
         GtkWidget  *preview;
 
-        gboolean   force_outline_flag;
-
         gint       labels_per_sheet;
         gboolean   merge_flag;
         gint       n_records;
@@ -135,7 +133,7 @@ static void     option_toggled_cb             (GtkToggleButton   *togglebutton,
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-G_DEFINE_TYPE (glPrintOpDialog, gl_print_op_dialog, GL_TYPE_PRINT_OP);
+G_DEFINE_TYPE (glPrintOpDialog, gl_print_op_dialog, GL_TYPE_PRINT_OP)
 
 
 static void

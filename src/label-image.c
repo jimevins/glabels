@@ -100,7 +100,7 @@ static gboolean object_at                (glLabelObject     *object,
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-G_DEFINE_TYPE (glLabelImage, gl_label_image, GL_TYPE_LABEL_OBJECT);
+G_DEFINE_TYPE (glLabelImage, gl_label_image, GL_TYPE_LABEL_OBJECT)
 
 
 static void

@@ -189,7 +189,7 @@ static void   state_restore        (State            *state,
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-G_DEFINE_TYPE (glLabel, gl_label, G_TYPE_OBJECT);
+G_DEFINE_TYPE (glLabel, gl_label, G_TYPE_OBJECT)
 
 
 static void

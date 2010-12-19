@@ -27,7 +27,7 @@ G_BEGIN_DECLS
 
 typedef enum {
 	GL_MERGE_SRC_IS_FIXED,
-	GL_MERGE_SRC_IS_FILE,
+	GL_MERGE_SRC_IS_FILE
 } glMergeSrcType;
 
 typedef struct {

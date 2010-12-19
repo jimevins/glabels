@@ -65,7 +65,7 @@ static void history_changed_cb                  (glFontHistoryModel  *this);
 /*****************************************************************************/
 /* Object infrastructure.                                                    */
 /*****************************************************************************/
-G_DEFINE_TYPE (glFontHistoryModel, gl_font_history_model, G_TYPE_OBJECT);
+G_DEFINE_TYPE (glFontHistoryModel, gl_font_history_model, G_TYPE_OBJECT)
 
 
 /*****************************************************************************/

@@ -154,7 +154,7 @@ static void history_menu_item_activate_cb (GtkMenuItem      *item,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-G_DEFINE_TYPE (glColorComboMenu, gl_color_combo_menu, GTK_TYPE_MENU);
+G_DEFINE_TYPE (glColorComboMenu, gl_color_combo_menu, GTK_TYPE_MENU)
 
 
 /*****************************************************************************/
