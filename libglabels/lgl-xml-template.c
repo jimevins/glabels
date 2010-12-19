@@ -1,6 +1,6 @@
 /*
- *  xml-template.c
- *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
+ *  lgl-xml-template.c
+ *  Copyright (C) 2001-2010  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of libglabels.
  *
@@ -20,7 +20,7 @@
 
 #include <config.h>
 
-#include "xml-template.h"
+#include "lgl-xml-template.h"
 
 #include <glib/gi18n.h>
 #include <glib.h>
@@ -29,8 +29,8 @@
 
 #include "libglabels-private.h"
 
-#include "db.h"
-#include "xml.h"
+#include "lgl-db.h"
+#include "lgl-xml.h"
 
 /*===========================================*/
 /* Private types                             */

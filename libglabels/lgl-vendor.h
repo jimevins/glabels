@@ -1,6 +1,6 @@
 /*
- *  category.h
- *  Copyright (C) 2006-2009  Jim Evins <evins@snaught.com>.
+ *  lgl-vendor.h
+ *  Copyright (C) 2003-2010  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of libglabels.
  *
@@ -18,37 +18,38 @@
  *  along with libglabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LGL_CATEGORY_H__
-#define __LGL_CATEGORY_H__
+#ifndef __LGL_VENDOR_H__
+#define __LGL_VENDOR_H__
 
 #include <glib.h>
 
 G_BEGIN_DECLS
 
-/*
- *   Template class
- */
-typedef struct _lglCategory lglCategory;
 
-struct _lglCategory {
-	gchar               *id;     /* Unique ID of category */
-	gchar               *name;   /* Localized name of category */
+/*
+ *   lglVendor structure
+ */
+typedef struct _lglVendor lglVendor;
+
+struct _lglVendor {
+	gchar               *name;           /* Vendor name */
+	gchar               *url;            /* Vendor URL */
 };
 
 
 /*
- * Category construction
+ * Vendor construction
  */
-lglCategory      *lgl_category_new                 (gchar             *id,
-                                                    gchar             *name);
+lglVendor           *lgl_vendor_new                (gchar           *name);
 
-lglCategory      *lgl_category_dup                 (const lglCategory *orig);
-void              lgl_category_free                (lglCategory       *category);
+lglVendor           *lgl_vendor_dup                (const lglVendor *orig);
+
+void                 lgl_vendor_free               (lglVendor       *vendor);
 
 
 G_END_DECLS
 
-#endif /* __LGL_CATEGORY_H__ */
+#endif /* __LGL_VENDOR_H__ */
 
 
 

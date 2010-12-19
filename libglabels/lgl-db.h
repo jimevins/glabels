@@ -1,6 +1,6 @@
 /*
- *  db.h
- *  Copyright (C) 2006-2009  Jim Evins <evins@snaught.com>.
+ *  lgl-db.h
+ *  Copyright (C) 2006-2010  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of libglabels.
  *
@@ -23,10 +23,10 @@
 
 #include <glib.h>
 
-#include "paper.h"
-#include "category.h"
-#include "vendor.h"
-#include "template.h"
+#include "lgl-paper.h"
+#include "lgl-category.h"
+#include "lgl-vendor.h"
+#include "lgl-template.h"
 
 G_BEGIN_DECLS
 

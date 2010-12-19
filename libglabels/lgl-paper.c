@@ -1,6 +1,6 @@
 /*
- *  paper.c
- *  Copyright (C) 2003-2009  Jim Evins <evins@snaught.com>.
+ *  lgl-paper.c
+ *  Copyright (C) 2003-2010  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of libglabels.
  *
@@ -20,7 +20,7 @@
 
 #include <config.h>
 
-#include "paper.h"
+#include "lgl-paper.h"
 
 #include <glib/gi18n.h>
 #include <glib.h>

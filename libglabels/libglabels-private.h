@@ -23,8 +23,8 @@
 
 #include <glib.h>
 
-#include "str.h"
-#include "template.h"
+#include "lgl-str.h"
+#include "lgl-template.h"
 
 #undef  G_LOG_DOMAIN
 #define G_LOG_DOMAIN "LibGlabels"

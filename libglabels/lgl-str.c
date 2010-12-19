@@ -1,6 +1,6 @@
 /*
- *  str.c
- *  Copyright (C) 2007-2009  Jim Evins <evins@snaught.com>.
+ *  lgl-str.c
+ *  Copyright (C) 2007-2010  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of libglabels.
  *
@@ -20,7 +20,7 @@
 
 #include <config.h>
 
-#include "str.h"
+#include "lgl-str.h"
 
 #include <string.h>
 #include <math.h>

@@ -1,6 +1,6 @@
 /*
- *  xml-category.c
- *  Copyright (C) 2006-2009  Jim Evins <evins@snaught.com>.
+ *  lgl-xml-category.c
+ *  Copyright (C) 2006-2010  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of libglabels.
  *
@@ -20,7 +20,7 @@
 
 #include <config.h>
 
-#include "xml-category.h"
+#include "lgl-xml-category.h"
 
 #include <glib/gi18n.h>
 #include <glib.h>
@@ -29,7 +29,7 @@
 
 #include "libglabels-private.h"
 
-#include "xml.h"
+#include "lgl-xml.h"
 
 /*===========================================*/
 /* Private types                             */

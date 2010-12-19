@@ -1,6 +1,6 @@
 /*
- *  xml-paper.h
- *  Copyright (C) 2003-2009  Jim Evins <evins@snaught.com>.
+ *  lgl-category.h
+ *  Copyright (C) 2006-2010  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of libglabels.
  *
@@ -18,26 +18,37 @@
  *  along with libglabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LGL_XML_PAPER_H__
-#define __LGL_XML_PAPER_H__
+#ifndef __LGL_CATEGORY_H__
+#define __LGL_CATEGORY_H__
 
 #include <glib.h>
-#include <libxml/tree.h>
-
-#include "paper.h"
 
 G_BEGIN_DECLS
 
-GList       *lgl_xml_paper_read_papers_from_file (gchar        *utf8_filename);
+/*
+ *   Template class
+ */
+typedef struct _lglCategory lglCategory;
 
-GList       *lgl_xml_paper_parse_papers_doc      (xmlDocPtr     papers_doc);
+struct _lglCategory {
+	gchar               *id;     /* Unique ID of category */
+	gchar               *name;   /* Localized name of category */
+};
 
-lglPaper    *lgl_xml_paper_parse_paper_node      (xmlNodePtr    paper_node);
+
+/*
+ * Category construction
+ */
+lglCategory      *lgl_category_new                 (gchar             *id,
+                                                    gchar             *name);
+
+lglCategory      *lgl_category_dup                 (const lglCategory *orig);
+void              lgl_category_free                (lglCategory       *category);
 
 
 G_END_DECLS
 
-#endif /* __LGL_XML_PAPER_H__ */
+#endif /* __LGL_CATEGORY_H__ */
 
 
 

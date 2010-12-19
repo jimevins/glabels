@@ -21,16 +21,16 @@
 #ifndef __LIBGLABELS_H__
 #define __LIBGLABELS_H__
 
-#include <libglabels/db.h>
-#include <libglabels/paper.h>
-#include <libglabels/category.h>
-#include <libglabels/template.h>
-#include <libglabels/units.h>
-#include <libglabels/str.h>
-#include <libglabels/xml-paper.h>
-#include <libglabels/xml-category.h>
-#include <libglabels/xml-template.h>
-#include <libglabels/xml.h>
+#include <libglabels/lgl-db.h>
+#include <libglabels/lgl-paper.h>
+#include <libglabels/lgl-category.h>
+#include <libglabels/lgl-template.h>
+#include <libglabels/lgl-units.h>
+#include <libglabels/lgl-str.h>
+#include <libglabels/lgl-xml-paper.h>
+#include <libglabels/lgl-xml-category.h>
+#include <libglabels/lgl-xml-template.h>
+#include <libglabels/lgl-xml.h>
 
 #endif /* __LIBGLABELS_H__ */
 

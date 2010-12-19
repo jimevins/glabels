@@ -1,6 +1,6 @@
 /*
- *  vendor.h
- *  Copyright (C) 2003-2009  Jim Evins <evins@snaught.com>.
+ *  lgl-str.h
+ *  Copyright (C) 2007-2010  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of libglabels.
  *
@@ -18,38 +18,25 @@
  *  along with libglabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LGL_VENDOR_H__
-#define __LGL_VENDOR_H__
+#ifndef __LGL_STR_H__
+#define __LGL_STR_H__
 
 #include <glib.h>
 
 G_BEGIN_DECLS
 
+gint   lgl_str_utf8_casecmp    (const gchar *s1,
+                                const gchar *s2);
 
-/*
- *   lglVendor structure
- */
-typedef struct _lglVendor lglVendor;
+gint   lgl_str_part_name_cmp   (const gchar *s1,
+                                const gchar *s2);
 
-struct _lglVendor {
-	gchar               *name;           /* Vendor name */
-	gchar               *url;            /* Vendor URL */
-};
-
-
-/*
- * Vendor construction
- */
-lglVendor           *lgl_vendor_new                (gchar           *name);
-
-lglVendor           *lgl_vendor_dup                (const lglVendor *orig);
-
-void                 lgl_vendor_free               (lglVendor       *vendor);
-
+gchar *lgl_str_format_fraction (gdouble      x);
 
 G_END_DECLS
 
-#endif /* __LGL_VENDOR_H__ */
+
+#endif /* __LGL_STR_H__ */
 
 
 

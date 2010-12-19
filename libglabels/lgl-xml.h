@@ -1,6 +1,6 @@
 /*
- *  xml.h
- *  Copyright (C) 2003-2009  Jim Evins <evins@snaught.com>.
+ *  lgl-xml.h
+ *  Copyright (C) 2003-2010  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of libglabels.
  *
@@ -24,7 +24,7 @@
 #include <glib.h>
 #include <libxml/tree.h>
 
-#include "units.h"
+#include "lgl-units.h"
 
 #define LGL_XML_NAME_SPACE "http://glabels.org/xmlns/2.3/"
 

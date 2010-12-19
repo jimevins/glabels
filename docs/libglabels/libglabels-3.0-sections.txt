@@ -1,6 +1,6 @@
 <SECTION>
 <FILE>db</FILE>
-<INCLUDE>libglabels/db.h</INCLUDE>
+<INCLUDE>libglabels/lgl-db.h</INCLUDE>
 lglDbRegStatus
 lglDbDeleteStatus
 <SUBSECTION Init Functions>
@@ -58,7 +58,7 @@ lgl_db_print_known_vendors
 
 <SECTION>
 <FILE>template</FILE>
-<INCLUDE>libglabels/template.h</INCLUDE>
+<INCLUDE>libglabels/lgl-template.h</INCLUDE>
 lglTemplate
 <SUBSECTION Frame Structure>
 lglTemplateFrameShape
@@ -127,7 +127,7 @@ lgl_template_print
 
 <SECTION>
 <FILE>paper</FILE>
-<INCLUDE>libglabels/paper.h</INCLUDE>
+<INCLUDE>libglabels/lgl-paper.h</INCLUDE>
 lglPaper
 lgl_paper_new
 lgl_paper_dup
@@ -136,7 +136,7 @@ lgl_paper_free
 
 <SECTION>
 <FILE>category</FILE>
-<INCLUDE>libglabels/category.h</INCLUDE>
+<INCLUDE>libglabels/lgl-category.h</INCLUDE>
 lglCategory
 lgl_category_new
 lgl_category_dup
@@ -145,7 +145,7 @@ lgl_category_free
 
 <SECTION>
 <FILE>vendor</FILE>
-<INCLUDE>libglabels/vendor.h</INCLUDE>
+<INCLUDE>libglabels/lgl-vendor.h</INCLUDE>
 lglVendor
 lgl_vendor_new
 lgl_vendor_dup
@@ -154,7 +154,7 @@ lgl_vendor_free
 
 <SECTION>
 <FILE>xml-paper</FILE>
-<INCLUDE>libglabels/xml-paper.h</INCLUDE>
+<INCLUDE>libglabels/lgl-xml-paper.h</INCLUDE>
 lgl_xml_paper_read_papers_from_file
 lgl_xml_paper_parse_papers_doc
 lgl_xml_paper_parse_paper_node
@@ -162,7 +162,7 @@ lgl_xml_paper_parse_paper_node
 
 <SECTION>
 <FILE>xml-category</FILE>
-<INCLUDE>libglabels/xml-category.h</INCLUDE>
+<INCLUDE>libglabels/lgl-xml-category.h</INCLUDE>
 lgl_xml_category_read_categories_from_file
 lgl_xml_category_parse_categories_doc
 lgl_xml_category_parse_category_node
@@ -170,7 +170,7 @@ lgl_xml_category_parse_category_node
 
 <SECTION>
 <FILE>xml-template</FILE>
-<INCLUDE>libglabels/xml-templates.h</INCLUDE>
+<INCLUDE>libglabels/lgl-xml-templates.h</INCLUDE>
 lgl_xml_template_read_templates_from_file
 lgl_xml_template_parse_templates_doc
 lgl_xml_template_parse_template_node
@@ -181,7 +181,7 @@ lgl_xml_template_create_template_node
 
 <SECTION>
 <FILE>xml-vendor</FILE>
-<INCLUDE>libglabels/xml-vendor.h</INCLUDE>
+<INCLUDE>libglabels/lgl-xml-vendor.h</INCLUDE>
 lgl_xml_vendor_read_vendors_from_file
 lgl_xml_vendor_parse_vendors_doc
 lgl_xml_vendor_parse_vendor_node
@@ -189,7 +189,7 @@ lgl_xml_vendor_parse_vendor_node
 
 <SECTION>
 <FILE>xml</FILE>
-<INCLUDE>libglabels/xml.h</INCLUDE>
+<INCLUDE>libglabels/lgl-xml.h</INCLUDE>
 LGL_XML_NAME_SPACE
 <SUBSECTION Get Property Functions>
 lgl_xml_get_prop_string
@@ -215,7 +215,7 @@ lgl_xml_set_default_units
 
 <SECTION>
 <FILE>units</FILE>
-<INCLUDE>libglabels/units.h</INCLUDE>
+<INCLUDE>libglabels/lgl-units.h</INCLUDE>
 lglUnits
 lgl_units_get_id
 lgl_units_from_id
@@ -227,7 +227,7 @@ lgl_units_get_units_per_point
 
 <SECTION>
 <FILE>str</FILE>
-<INCLUDE>libglabels/str.h</INCLUDE>
+<INCLUDE>libglabels/lgl-str.h</INCLUDE>
 lgl_str_utf8_casecmp
 lgl_str_part_name_cmp
 lgl_str_format_fraction

@@ -1,6 +1,6 @@
 /*
- *  vendor.c
- *  Copyright (C) 2003-2009  Jim Evins <evins@snaught.com>.
+ *  lgl-vendor.c
+ *  Copyright (C) 2003-2010  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of libglabels.
  *
@@ -20,7 +20,7 @@
 
 #include <config.h>
 
-#include "vendor.h"
+#include "lgl-vendor.h"
 
 #include <glib/gi18n.h>
 #include <glib.h>

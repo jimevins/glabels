@@ -1,6 +1,6 @@
 /*
- *  db.c
- *  Copyright (C) 2003-2009  Jim Evins <evins@snaught.com>.
+ *  lgl-db.c
+ *  Copyright (C) 2003-2010  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of libglabels.
  *
@@ -20,7 +20,7 @@
 
 #include <config.h>
 
-#include "db.h"
+#include "lgl-db.h"
 
 #include <glib/gi18n.h>
 #include <glib.h>
@@ -32,10 +32,10 @@
 
 #include "libglabels-private.h"
 
-#include "xml-paper.h"
-#include "xml-category.h"
-#include "xml-vendor.h"
-#include "xml-template.h"
+#include "lgl-xml-paper.h"
+#include "lgl-xml-category.h"
+#include "lgl-xml-vendor.h"
+#include "lgl-xml-template.h"
 
 /*===========================================*/
 /* Private macros and constants.             */

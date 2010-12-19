@@ -1,6 +1,6 @@
 /*
- *  str.h
- *  Copyright (C) 2007-2009  Jim Evins <evins@snaught.com>.
+ *  lgl-paper.h
+ *  Copyright (C) 2003-2010  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of libglabels.
  *
@@ -18,25 +18,45 @@
  *  along with libglabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LGL_STR_H__
-#define __LGL_STR_H__
+#ifndef __LGL_PAPER_H__
+#define __LGL_PAPER_H__
 
 #include <glib.h>
 
 G_BEGIN_DECLS
 
-gint   lgl_str_utf8_casecmp    (const gchar *s1,
-                                const gchar *s2);
 
-gint   lgl_str_part_name_cmp   (const gchar *s1,
-                                const gchar *s2);
+/*
+ *   lglPaper structure
+ */
+typedef struct _lglPaper lglPaper;
 
-gchar *lgl_str_format_fraction (gdouble      x);
+struct _lglPaper {
+	gchar               *id;       /* Unique ID of paper definition */
+	gchar               *name;     /* Localized name of paper */
+	gdouble              width;    /* Width (in points) */
+	gdouble              height;   /* Height (in points) */
+	gchar               *pwg_size; /* PWG 5101.1-2002 size name */
+};
+
+
+/*
+ * Paper construction
+ */
+lglPaper            *lgl_paper_new                 (gchar           *id,
+						    gchar           *name,
+						    gdouble          width,
+						    gdouble          height,
+						    gchar           *pwg_size);
+
+lglPaper             *lgl_paper_dup                (const lglPaper   *orig);
+
+void                 lgl_paper_free                (lglPaper         *paper);
+
 
 G_END_DECLS
 
-
-#endif /* __LGL_STR_H__ */
+#endif /* __LGL_PAPER_H__ */
 
 
 

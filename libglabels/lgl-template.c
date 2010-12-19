@@ -1,6 +1,6 @@
 /*
- *  template.c
- *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
+ *  lgl-template.c
+ *  Copyright (C) 2001-2010  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of libglabels.
  *
@@ -20,7 +20,7 @@
 
 #include <config.h>
 
-#include "template.h"
+#include "lgl-template.h"
 
 #include <glib/gi18n.h>
 #include <glib.h>
@@ -31,8 +31,8 @@
 
 #include "libglabels-private.h"
 
-#include "db.h"
-#include "paper.h"
+#include "lgl-db.h"
+#include "lgl-paper.h"
 
 /*===========================================*/
 /* Private macros and constants.             */

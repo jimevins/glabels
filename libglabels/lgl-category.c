@@ -1,6 +1,6 @@
 /*
- *  category.c
- *  Copyright (C) 2006-2009  Jim Evins <evins@snaught.com>.
+ *  lgl-category.c
+ *  Copyright (C) 2006-2010  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of libglabels.
  *
@@ -20,7 +20,7 @@
 
 #include <config.h>
 
-#include "category.h"
+#include "lgl-category.h"
 
 #include <glib/gi18n.h>
 #include <glib.h>

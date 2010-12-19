@@ -1,6 +1,6 @@
 /*
- *  paper.h
- *  Copyright (C) 2003-2009  Jim Evins <evins@snaught.com>.
+ *  lgl-xml-category.h
+ *  Copyright (C) 2006-2010  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of libglabels.
  *
@@ -18,45 +18,26 @@
  *  along with libglabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LGL_PAPER_H__
-#define __LGL_PAPER_H__
+#ifndef __LGL_XML_CATEGORY_H__
+#define __LGL_XML_CATEGORY_H__
 
 #include <glib.h>
+#include <libxml/tree.h>
+
+#include "lgl-category.h"
 
 G_BEGIN_DECLS
 
+GList       *lgl_xml_category_read_categories_from_file (gchar        *utf8_filename);
 
-/*
- *   lglPaper structure
- */
-typedef struct _lglPaper lglPaper;
+GList       *lgl_xml_category_parse_categories_doc      (xmlDocPtr     categories_doc);
 
-struct _lglPaper {
-	gchar               *id;       /* Unique ID of paper definition */
-	gchar               *name;     /* Localized name of paper */
-	gdouble              width;    /* Width (in points) */
-	gdouble              height;   /* Height (in points) */
-	gchar               *pwg_size; /* PWG 5101.1-2002 size name */
-};
-
-
-/*
- * Paper construction
- */
-lglPaper            *lgl_paper_new                 (gchar           *id,
-						    gchar           *name,
-						    gdouble          width,
-						    gdouble          height,
-						    gchar           *pwg_size);
-
-lglPaper             *lgl_paper_dup                (const lglPaper   *orig);
-
-void                 lgl_paper_free                (lglPaper         *paper);
+lglCategory *lgl_xml_category_parse_category_node       (xmlNodePtr    category_node);
 
 
 G_END_DECLS
 
-#endif /* __LGL_PAPER_H__ */
+#endif /* __LGL_XML_CATEGORY_H__ */
 
 
 

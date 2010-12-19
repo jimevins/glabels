@@ -185,27 +185,27 @@ src/xml-label-04.h
 src/xml-label.c
 src/xml-label.h
 
-libglabels/category.c
-libglabels/category.h
-libglabels/db.c
-libglabels/db.h
+libglabels/lgl-category.c
+libglabels/lgl-category.h
+libglabels/lgl-db.c
+libglabels/lgl-db.h
+libglabels/lgl-paper.c
+libglabels/lgl-paper.h
+libglabels/lgl-str.c
+libglabels/lgl-str.h
+libglabels/lgl-template.c
+libglabels/lgl-template.h
+libglabels/lgl-units.c
+libglabels/lgl-units.h
+libglabels/lgl-xml.c
+libglabels/lgl-xml.h
+libglabels/lgl-xml-category.c
+libglabels/lgl-xml-category.h
+libglabels/lgl-xml-paper.c
+libglabels/lgl-xml-paper.h
+libglabels/lgl-xml-template.c
+libglabels/lgl-xml-template.h
 libglabels/libglabels-private.h
-libglabels/paper.c
-libglabels/paper.h
-libglabels/str.c
-libglabels/str.h
-libglabels/template.c
-libglabels/template.h
-libglabels/units.c
-libglabels/units.h
-libglabels/xml.c
-libglabels/xml.h
-libglabels/xml-category.c
-libglabels/xml-category.h
-libglabels/xml-paper.c
-libglabels/xml-paper.h
-libglabels/xml-template.c
-libglabels/xml-template.h
 
 [type: gettext/glade]data/ui/merge-properties-dialog.ui
 [type: gettext/glade]data/ui/media-select.ui

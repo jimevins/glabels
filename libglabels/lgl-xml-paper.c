@@ -1,6 +1,6 @@
 /*
- *  xml-paper.c
- *  Copyright (C) 2003-2009  Jim Evins <evins@snaught.com>.
+ *  lgl-xml-paper.c
+ *  Copyright (C) 2003-2010  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of libglabels.
  *
@@ -20,7 +20,7 @@
 
 #include <config.h>
 
-#include "xml-paper.h"
+#include "lgl-xml-paper.h"
 
 #include <glib/gi18n.h>
 #include <glib.h>
@@ -29,7 +29,7 @@
 
 #include "libglabels-private.h"
 
-#include "xml.h"
+#include "lgl-xml.h"
 
 /*===========================================*/
 /* Private types                             */

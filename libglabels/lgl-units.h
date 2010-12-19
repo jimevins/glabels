@@ -1,6 +1,6 @@
 /*
- *  units.h
- *  Copyright (C) 2003-2009  Jim Evins <evins@snaught.com>.
+ *  lgl-units.h
+ *  Copyright (C) 2003-2010  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of libglabels.
  *

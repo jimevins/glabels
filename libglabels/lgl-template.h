@@ -1,6 +1,6 @@
 /*
- *  template.h
- *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
+ *  lgl-template.h
+ *  Copyright (C) 2001-2010  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of libglabels.
  *
@@ -22,7 +22,7 @@
 #define __LGL_TEMPLATE_H__
 
 #include <glib.h>
-#include "units.h"
+#include "lgl-units.h"
 
 G_BEGIN_DECLS
 
