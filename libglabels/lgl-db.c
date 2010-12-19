@@ -112,7 +112,7 @@ static void   add_to_template_cache        (lglTemplate *template);
 
 static GList *read_papers                  (void);
 static GList *read_paper_files_from_dir    (GList       *papers,
-					    const gchar *dirname);
+                                            const gchar *dirname);
 
 static GList *read_categories              (void);
 static GList *read_category_files_from_dir (GList       *categories,
@@ -120,7 +120,7 @@ static GList *read_category_files_from_dir (GList       *categories,
 
 static GList *read_vendors                 (void);
 static GList *read_vendor_files_from_dir   (GList       *vendors,
-					    const gchar *dirname);
+                                            const gchar *dirname);
 
 static void   read_templates               (void);
 static void   read_template_files_from_dir (const gchar *dirname);
@@ -182,33 +182,33 @@ lgl_db_model_finalize (GObject *object)
 
         g_hash_table_unref (this->template_cache);
 
-	for (p = this->papers; p != NULL; p = p->next)
+        for (p = this->papers; p != NULL; p = p->next)
         {
-		g_free (p->data);
-		p->data = NULL;
-	}
-	g_list_free (this->papers);
+                g_free (p->data);
+                p->data = NULL;
+        }
+        g_list_free (this->papers);
 
-	for (p = this->categories; p != NULL; p = p->next)
+        for (p = this->categories; p != NULL; p = p->next)
         {
-		g_free (p->data);
-		p->data = NULL;
-	}
-	g_list_free (this->categories);
+                g_free (p->data);
+                p->data = NULL;
+        }
+        g_list_free (this->categories);
 
-	for (p = this->vendors; p != NULL; p = p->next)
+        for (p = this->vendors; p != NULL; p = p->next)
         {
-		g_free (p->data);
-		p->data = NULL;
-	}
-	g_list_free (this->vendors);
+                g_free (p->data);
+                p->data = NULL;
+        }
+        g_list_free (this->vendors);
 
-	for (p = this->templates; p != NULL; p = p->next)
+        for (p = this->templates; p != NULL; p = p->next)
         {
-		lgl_template_free ((lglTemplate *)p->data);
-		p->data = NULL;
-	}
-	g_list_free (this->templates);
+                lgl_template_free ((lglTemplate *)p->data);
+                p->data = NULL;
+        }
+        g_list_free (this->templates);
 
         G_OBJECT_CLASS (lgl_db_model_parent_class)->finalize (object);
 }
@@ -247,7 +247,7 @@ lgl_db_model_new (void)
 void
 lgl_db_init (void)
 {
-	lglPaper    *paper_other;
+        lglPaper    *paper_other;
         lglCategory *category_user_defined;
         lglTemplate *template;
         GList       *page_sizes;
@@ -315,10 +315,10 @@ gulong
 lgl_db_notify_add (lglDbNotifyFunc func,
                    gpointer        user_data)
 {
-	if (!model)
+        if (!model)
         {
-		lgl_db_init ();
-	}
+                lgl_db_init ();
+        }
 
         return g_signal_connect_swapped (G_OBJECT (model), "changed", G_CALLBACK (func), user_data);
 }
@@ -352,22 +352,22 @@ lgl_db_notify_remove  (gulong id)
 GList *
 lgl_db_get_paper_id_list (void)
 {
-	GList           *ids = NULL;
-	GList           *p;
-	lglPaper        *paper;
+        GList           *ids = NULL;
+        GList           *p;
+        lglPaper        *paper;
 
-	if (!model)
+        if (!model)
         {
-		lgl_db_init ();
-	}
+                lgl_db_init ();
+        }
 
-	for ( p=model->papers; p != NULL; p=p->next )
+        for ( p=model->papers; p != NULL; p=p->next )
         {
-		paper = (lglPaper *)p->data;
-		ids = g_list_append (ids, g_strdup (paper->id));
-	}
+                paper = (lglPaper *)p->data;
+                ids = g_list_append (ids, g_strdup (paper->id));
+        }
 
-	return ids;
+        return ids;
 }
 
 
@@ -382,15 +382,15 @@ lgl_db_get_paper_id_list (void)
 void
 lgl_db_free_paper_id_list (GList *ids)
 {
-	GList *p;
+        GList *p;
 
-	for (p = ids; p != NULL; p = p->next)
+        for (p = ids; p != NULL; p = p->next)
         {
-		g_free (p->data);
-		p->data = NULL;
-	}
+                g_free (p->data);
+                p->data = NULL;
+        }
 
-	g_list_free (ids);
+        g_list_free (ids);
 }
 
 
@@ -405,22 +405,22 @@ lgl_db_free_paper_id_list (GList *ids)
 GList *
 lgl_db_get_paper_name_list (void)
 {
-	GList           *names = NULL;
-	GList           *p;
-	lglPaper        *paper;
+        GList           *names = NULL;
+        GList           *p;
+        lglPaper        *paper;
 
-	if (!model)
+        if (!model)
         {
-		lgl_db_init ();
-	}
+                lgl_db_init ();
+        }
 
-	for ( p=model->papers; p != NULL; p=p->next )
+        for ( p=model->papers; p != NULL; p=p->next )
         {
-		paper = (lglPaper *)p->data;
-		names = g_list_append (names, g_strdup (paper->name));
-	}
+                paper = (lglPaper *)p->data;
+                names = g_list_append (names, g_strdup (paper->name));
+        }
 
-	return names;
+        return names;
 }
 
 
@@ -435,15 +435,15 @@ lgl_db_get_paper_name_list (void)
 void
 lgl_db_free_paper_name_list (GList *names)
 {
-	GList *p;
+        GList *p;
 
-	for (p = names; p != NULL; p = p->next)
+        for (p = names; p != NULL; p = p->next)
         {
-		g_free (p->data);
-		p->data = NULL;
-	}
+                g_free (p->data);
+                p->data = NULL;
+        }
 
-	g_list_free (names);
+        g_list_free (names);
 }
 
 
@@ -459,30 +459,30 @@ lgl_db_free_paper_name_list (GList *names)
 lglPaper *
 lgl_db_lookup_paper_from_name (const gchar *name)
 {
-	GList       *p;
-	lglPaper    *paper;
+        GList       *p;
+        lglPaper    *paper;
 
-	if (!model)
+        if (!model)
         {
-		lgl_db_init ();
-	}
+                lgl_db_init ();
+        }
 
-	if (name == NULL)
+        if (name == NULL)
         {
-		/* If no name, return first paper as a default */
-		return lgl_paper_dup ((lglPaper *) model->papers->data);
-	}
+                /* If no name, return first paper as a default */
+                return lgl_paper_dup ((lglPaper *) model->papers->data);
+        }
 
-	for (p = model->papers; p != NULL; p = p->next)
+        for (p = model->papers; p != NULL; p = p->next)
         {
-		paper = (lglPaper *) p->data;
-		if (UTF8_EQUAL (paper->name, name))
+                paper = (lglPaper *) p->data;
+                if (UTF8_EQUAL (paper->name, name))
                 {
-			return lgl_paper_dup (paper);
-		}
-	}
+                        return lgl_paper_dup (paper);
+                }
+        }
 
-	return NULL;
+        return NULL;
 }
 
 
@@ -498,30 +498,30 @@ lgl_db_lookup_paper_from_name (const gchar *name)
 lglPaper *
 lgl_db_lookup_paper_from_id (const gchar *id)
 {
-	GList       *p;
-	lglPaper    *paper;
+        GList       *p;
+        lglPaper    *paper;
 
-	if (!model)
+        if (!model)
         {
-		lgl_db_init ();
-	}
+                lgl_db_init ();
+        }
 
-	if (id == NULL)
+        if (id == NULL)
         {
-		/* If no id, return first paper as a default */
-		return lgl_paper_dup ((lglPaper *) model->papers->data);
-	}
+                /* If no id, return first paper as a default */
+                return lgl_paper_dup ((lglPaper *) model->papers->data);
+        }
 
-	for (p = model->papers; p != NULL; p = p->next)
+        for (p = model->papers; p != NULL; p = p->next)
         {
-		paper = (lglPaper *) p->data;
-		if (ASCII_EQUAL (paper->id, id))
+                paper = (lglPaper *) p->data;
+                if (ASCII_EQUAL (paper->id, id))
                 {
-			return lgl_paper_dup (paper);
-		}
-	}
+                        return lgl_paper_dup (paper);
+                }
+        }
 
-	return NULL;
+        return NULL;
 }
 
 
@@ -537,21 +537,21 @@ lgl_db_lookup_paper_from_id (const gchar *id)
 gchar *
 lgl_db_lookup_paper_id_from_name (const gchar *name)
 {
-	lglPaper *paper = NULL;
-	gchar    *id = NULL;
+        lglPaper *paper = NULL;
+        gchar    *id = NULL;
 
-	if (name != NULL)
-	{
-		paper = lgl_db_lookup_paper_from_name (name);
-		if ( paper != NULL )
-		{
-			id = g_strdup (paper->id);
-			lgl_paper_free (paper);
-			paper = NULL;
-		}
-	}
+        if (name != NULL)
+        {
+                paper = lgl_db_lookup_paper_from_name (name);
+                if ( paper != NULL )
+                {
+                        id = g_strdup (paper->id);
+                        lgl_paper_free (paper);
+                        paper = NULL;
+                }
+        }
 
-	return id;
+        return id;
 }
 
 
@@ -567,21 +567,21 @@ lgl_db_lookup_paper_id_from_name (const gchar *name)
 gchar *
 lgl_db_lookup_paper_name_from_id (const gchar         *id)
 {
-	lglPaper *paper = NULL;
-	gchar    *name = NULL;
+        lglPaper *paper = NULL;
+        gchar    *name = NULL;
 
-	if (id != NULL)
-	{
-		paper = lgl_db_lookup_paper_from_id (id);
-		if ( paper != NULL )
-		{
-			name = g_strdup (paper->name);
-			lgl_paper_free (paper);
-			paper = NULL;
-		}
-	}
+        if (id != NULL)
+        {
+                paper = lgl_db_lookup_paper_from_id (id);
+                if ( paper != NULL )
+                {
+                        name = g_strdup (paper->name);
+                        lgl_paper_free (paper);
+                        paper = NULL;
+                }
+        }
 
-	return name;
+        return name;
 }
 
 
@@ -597,29 +597,29 @@ lgl_db_lookup_paper_name_from_id (const gchar         *id)
 gboolean
 lgl_db_is_paper_id_known (const gchar *id)
 {
-	GList       *p;
-	lglPaper    *paper;
+        GList       *p;
+        lglPaper    *paper;
 
-	if (!model)
+        if (!model)
         {
-		lgl_db_init ();
-	}
+                lgl_db_init ();
+        }
 
-	if (id == NULL)
+        if (id == NULL)
         {
-		return FALSE;
-	}
+                return FALSE;
+        }
 
-	for (p = model->papers; p != NULL; p = p->next)
+        for (p = model->papers; p != NULL; p = p->next)
         {
-		paper = (lglPaper *) p->data;
-		if (ASCII_EQUAL (paper->id, id))
+                paper = (lglPaper *) p->data;
+                if (ASCII_EQUAL (paper->id, id))
                 {
-			return TRUE;
-		}
-	}
+                        return TRUE;
+                }
+        }
 
-	return FALSE;
+        return FALSE;
 }
 
 
@@ -635,88 +635,94 @@ lgl_db_is_paper_id_known (const gchar *id)
 gboolean
 lgl_db_is_paper_id_other (const gchar *id)
 {
-	if (id == NULL)
+        if (id == NULL)
         {
-		return FALSE;
-	}
+                return FALSE;
+        }
 
-	return (ASCII_EQUAL (id, "Other"));
+        return (ASCII_EQUAL (id, "Other"));
 }
 
 
 static GList *
 read_papers (void)
 {
-	gchar *data_dir;
-	GList *papers = NULL;
+        gchar *data_dir;
+        GList *papers = NULL;
 
-	data_dir = SYSTEM_CONFIG_DIR;
-	papers = read_paper_files_from_dir (papers, data_dir);
-	g_free (data_dir);
+        data_dir = SYSTEM_CONFIG_DIR;
+        papers = read_paper_files_from_dir (papers, data_dir);
+        g_free (data_dir);
 
-	data_dir = USER_CONFIG_DIR;
-	papers = read_paper_files_from_dir (papers, data_dir);
-	g_free (data_dir);
+        data_dir = USER_CONFIG_DIR;
+        papers = read_paper_files_from_dir (papers, data_dir);
+        g_free (data_dir);
 
-	if (papers == NULL) {
-		g_critical (_("Unable to locate paper size definitions.  Libglabels may not be installed correctly!"));
-	}
+        if (papers == NULL)
+        {
+                g_critical (_("Unable to locate paper size definitions.  Libglabels may not be installed correctly!"));
+        }
 
-	return papers;
+        return papers;
 }
 
 
 static GList *
 read_paper_files_from_dir (GList       *papers,
-			   const gchar *dirname)
+                           const gchar *dirname)
 {
-	GDir        *dp;
-	const gchar *filename, *extension;
-	gchar       *full_filename = NULL;
-	GError      *gerror = NULL;
-	GList       *new_papers = NULL;
+        GDir        *dp;
+        const gchar *filename, *extension;
+        gchar       *full_filename = NULL;
+        GError      *gerror = NULL;
+        GList       *new_papers = NULL;
 
-	if (dirname == NULL) {
-		return papers;
-	}
+        if (dirname == NULL)
+        {
+                return papers;
+        }
 
-	if (!g_file_test (dirname, G_FILE_TEST_EXISTS)) {
-		return papers;
-	}
+        if (!g_file_test (dirname, G_FILE_TEST_EXISTS))
+        {
+                return papers;
+        }
 
-	dp = g_dir_open (dirname, 0, &gerror);
-	if (gerror != NULL) {
-	        g_message ("cannot open data directory: %s", gerror->message );
-		return papers;
-	}
+        dp = g_dir_open (dirname, 0, &gerror);
+        if (gerror != NULL)
+        {
+                g_message ("cannot open data directory: %s", gerror->message );
+                return papers;
+        }
 
-	while ((filename = g_dir_read_name (dp)) != NULL) {
+        while ((filename = g_dir_read_name (dp)) != NULL)
+        {
 
-		extension = strrchr (filename, '.');
+                extension = strrchr (filename, '.');
 
-		if (extension != NULL) {
+                if (extension != NULL)
+                {
 
-			if ( ASCII_EQUAL (filename, "paper-sizes.xml") )
+                        if ( ASCII_EQUAL (filename, "paper-sizes.xml") )
                         {
 
-				full_filename =
-				    g_build_filename (dirname, filename, NULL);
-				new_papers =
-				    lgl_xml_paper_read_papers_from_file (full_filename);
-				g_free (full_filename);
+                                full_filename =
+                                    g_build_filename (dirname, filename, NULL);
+                                new_papers =
+                                    lgl_xml_paper_read_papers_from_file (full_filename);
+                                g_free (full_filename);
 
-				papers = g_list_concat (papers, new_papers);
-				new_papers = NULL;
+                                papers = g_list_concat (papers, new_papers);
+                                new_papers = NULL;
 
-			}
+                        }
 
-		}
+                }
 
-	}
+        }
 
-	g_dir_close (dp);
+        g_dir_close (dp);
 
-	return papers;
+        return papers;
 }
 
 
@@ -730,22 +736,23 @@ read_paper_files_from_dir (GList       *papers,
 void
 lgl_db_print_known_papers (void)
 {
-	GList       *p;
-	lglPaper    *paper;
+        GList       *p;
+        lglPaper    *paper;
 
-	if (!model) {
-		lgl_db_init ();
-	}
+        if (!model)
+        {
+                lgl_db_init ();
+        }
 
-	g_print ("%s():\n", __FUNCTION__);
-	for (p = model->papers; p != NULL; p = p->next) {
-		paper = (lglPaper *) p->data;
+        g_print ("%s():\n", __FUNCTION__);
+        for (p = model->papers; p != NULL; p = p->next)
+        {
+                paper = (lglPaper *) p->data;
 
-		g_print ("PAPER id=\"%s\", name=\"%s\", width=%gpts, height=%gpts\n",
-			 paper->id, paper->name, paper->width, paper->height);
-
-	}
-	g_print ("\n");
+                g_print ("PAPER id=\"%s\", name=\"%s\", width=%gpts, height=%gpts\n",
+                         paper->id, paper->name, paper->width, paper->height);
+        }
+        g_print ("\n");
 
 }
 
@@ -765,22 +772,22 @@ lgl_db_print_known_papers (void)
 GList *
 lgl_db_get_category_id_list (void)
 {
-	GList           *ids = NULL;
-	GList           *p;
-	lglCategory     *category;
+        GList           *ids = NULL;
+        GList           *p;
+        lglCategory     *category;
 
-	if (!model)
+        if (!model)
         {
-		lgl_db_init ();
-	}
+                lgl_db_init ();
+        }
 
-	for ( p=model->categories; p != NULL; p=p->next )
+        for ( p=model->categories; p != NULL; p=p->next )
         {
-		category = (lglCategory *)p->data;
-		ids = g_list_append (ids, g_strdup (category->id));
-	}
+                category = (lglCategory *)p->data;
+                ids = g_list_append (ids, g_strdup (category->id));
+        }
 
-	return ids;
+        return ids;
 }
 
 
@@ -795,15 +802,15 @@ lgl_db_get_category_id_list (void)
 void
 lgl_db_free_category_id_list (GList *ids)
 {
-	GList *p;
+        GList *p;
 
-	for (p = ids; p != NULL; p = p->next)
+        for (p = ids; p != NULL; p = p->next)
         {
-		g_free (p->data);
-		p->data = NULL;
-	}
+                g_free (p->data);
+                p->data = NULL;
+        }
 
-	g_list_free (ids);
+        g_list_free (ids);
 }
 
 
@@ -818,22 +825,22 @@ lgl_db_free_category_id_list (GList *ids)
 GList *
 lgl_db_get_category_name_list (void)
 {
-	GList           *names = NULL;
-	GList           *p;
-	lglCategory     *category;
+        GList           *names = NULL;
+        GList           *p;
+        lglCategory     *category;
 
-	if (!model)
+        if (!model)
         {
-		lgl_db_init ();
-	}
+                lgl_db_init ();
+        }
 
-	for ( p=model->categories; p != NULL; p=p->next )
+        for ( p=model->categories; p != NULL; p=p->next )
         {
-		category = (lglCategory *)p->data;
-		names = g_list_append (names, g_strdup (category->name));
-	}
+                category = (lglCategory *)p->data;
+                names = g_list_append (names, g_strdup (category->name));
+        }
 
-	return names;
+        return names;
 }
 
 
@@ -848,15 +855,15 @@ lgl_db_get_category_name_list (void)
 void
 lgl_db_free_category_name_list (GList *names)
 {
-	GList *p;
+        GList *p;
 
-	for (p = names; p != NULL; p = p->next)
+        for (p = names; p != NULL; p = p->next)
         {
-		g_free (p->data);
-		p->data = NULL;
-	}
+                g_free (p->data);
+                p->data = NULL;
+        }
 
-	g_list_free (names);
+        g_list_free (names);
 }
 
 
@@ -872,30 +879,30 @@ lgl_db_free_category_name_list (GList *names)
 lglCategory *
 lgl_db_lookup_category_from_name (const gchar *name)
 {
-	GList       *p;
-	lglCategory *category;
+        GList       *p;
+        lglCategory *category;
 
-	if (!model)
+        if (!model)
         {
-		lgl_db_init ();
-	}
+                lgl_db_init ();
+        }
 
-	if (name == NULL)
+        if (name == NULL)
         {
-		/* If no name, return first category as a default */
-		return lgl_category_dup ((lglCategory *) model->categories->data);
-	}
+                /* If no name, return first category as a default */
+                return lgl_category_dup ((lglCategory *) model->categories->data);
+        }
 
-	for (p = model->categories; p != NULL; p = p->next)
+        for (p = model->categories; p != NULL; p = p->next)
         {
-		category = (lglCategory *) p->data;
-		if (UTF8_EQUAL (category->name, name))
+                category = (lglCategory *) p->data;
+                if (UTF8_EQUAL (category->name, name))
                 {
-			return lgl_category_dup (category);
-		}
-	}
+                        return lgl_category_dup (category);
+                }
+        }
 
-	return NULL;
+        return NULL;
 }
 
 
@@ -911,30 +918,30 @@ lgl_db_lookup_category_from_name (const gchar *name)
 lglCategory *
 lgl_db_lookup_category_from_id (const gchar *id)
 {
-	GList       *p;
-	lglCategory *category;
+        GList       *p;
+        lglCategory *category;
 
-	if (!model)
+        if (!model)
         {
-		lgl_db_init ();
-	}
+                lgl_db_init ();
+        }
 
-	if (id == NULL)
+        if (id == NULL)
         {
-		/* If no id, return first category as a default */
-		return lgl_category_dup ((lglCategory *) model->categories->data);
-	}
+                /* If no id, return first category as a default */
+                return lgl_category_dup ((lglCategory *) model->categories->data);
+        }
 
-	for (p = model->categories; p != NULL; p = p->next)
+        for (p = model->categories; p != NULL; p = p->next)
         {
-		category = (lglCategory *) p->data;
-		if (ASCII_EQUAL (category->id, id))
+                category = (lglCategory *) p->data;
+                if (ASCII_EQUAL (category->id, id))
                 {
-			return lgl_category_dup (category);
-		}
-	}
+                        return lgl_category_dup (category);
+                }
+        }
 
-	return NULL;
+        return NULL;
 }
 
 
@@ -950,21 +957,21 @@ lgl_db_lookup_category_from_id (const gchar *id)
 gchar *
 lgl_db_lookup_category_id_from_name (const gchar *name)
 {
-	lglCategory *category = NULL;
-	gchar       *id = NULL;
+        lglCategory *category = NULL;
+        gchar       *id = NULL;
 
-	if (name != NULL)
-	{
-		category = lgl_db_lookup_category_from_name (name);
-		if ( category != NULL )
-		{
-			id = g_strdup (category->id);
-			lgl_category_free (category);
-			category = NULL;
-		}
-	}
+        if (name != NULL)
+        {
+                category = lgl_db_lookup_category_from_name (name);
+                if ( category != NULL )
+                {
+                        id = g_strdup (category->id);
+                        lgl_category_free (category);
+                        category = NULL;
+                }
+        }
 
-	return id;
+        return id;
 }
 
 
@@ -980,21 +987,21 @@ lgl_db_lookup_category_id_from_name (const gchar *name)
 gchar *
 lgl_db_lookup_category_name_from_id (const gchar         *id)
 {
-	lglCategory *category = NULL;
-	gchar       *name = NULL;
+        lglCategory *category = NULL;
+        gchar       *name = NULL;
 
-	if (id != NULL)
-	{
-		category = lgl_db_lookup_category_from_id (id);
-		if ( category != NULL )
-		{
-			name = g_strdup (category->name);
-			lgl_category_free (category);
-			category = NULL;
-		}
-	}
+        if (id != NULL)
+        {
+                category = lgl_db_lookup_category_from_id (id);
+                if ( category != NULL )
+                {
+                        name = g_strdup (category->name);
+                        lgl_category_free (category);
+                        category = NULL;
+                }
+        }
 
-	return name;
+        return name;
 }
 
 
@@ -1010,51 +1017,52 @@ lgl_db_lookup_category_name_from_id (const gchar         *id)
 gboolean
 lgl_db_is_category_id_known (const gchar *id)
 {
-	GList       *p;
-	lglCategory *category;
+        GList       *p;
+        lglCategory *category;
 
-	if (!model)
+        if (!model)
         {
-		lgl_db_init ();
-	}
+                lgl_db_init ();
+        }
 
-	if (id == NULL)
+        if (id == NULL)
         {
-		return FALSE;
-	}
+                return FALSE;
+        }
 
-	for (p = model->categories; p != NULL; p = p->next)
+        for (p = model->categories; p != NULL; p = p->next)
         {
-		category = (lglCategory *) p->data;
-		if (ASCII_EQUAL (category->id, id))
+                category = (lglCategory *) p->data;
+                if (ASCII_EQUAL (category->id, id))
                 {
-			return TRUE;
-		}
-	}
+                        return TRUE;
+                }
+        }
 
-	return FALSE;
+        return FALSE;
 }
 
 
 static GList *
 read_categories (void)
 {
-	gchar *data_dir;
-	GList *categories = NULL;
+        gchar *data_dir;
+        GList *categories = NULL;
 
-	data_dir = SYSTEM_CONFIG_DIR;
-	categories = read_category_files_from_dir (categories, data_dir);
-	g_free (data_dir);
+        data_dir = SYSTEM_CONFIG_DIR;
+        categories = read_category_files_from_dir (categories, data_dir);
+        g_free (data_dir);
 
-	data_dir = USER_CONFIG_DIR;
-	categories = read_category_files_from_dir (categories, data_dir);
-	g_free (data_dir);
+        data_dir = USER_CONFIG_DIR;
+        categories = read_category_files_from_dir (categories, data_dir);
+        g_free (data_dir);
 
-	if (categories == NULL) {
-		g_critical (_("Unable to locate category definitions.  Libglabels may not be installed correctly!"));
-	}
+        if (categories == NULL)
+        {
+                g_critical (_("Unable to locate category definitions.  Libglabels may not be installed correctly!"));
+        }
 
-	return categories;
+        return categories;
 }
 
 
@@ -1062,53 +1070,58 @@ static GList *
 read_category_files_from_dir (GList       *categories,
                               const gchar *dirname)
 {
-	GDir        *dp;
-	const gchar *filename, *extension;
-	gchar       *full_filename = NULL;
-	GError      *gerror = NULL;
-	GList       *new_categories = NULL;
+        GDir        *dp;
+        const gchar *filename, *extension;
+        gchar       *full_filename = NULL;
+        GError      *gerror = NULL;
+        GList       *new_categories = NULL;
 
-	if (dirname == NULL) {
-		return categories;
-	}
+        if (dirname == NULL)
+        {
+                return categories;
+        }
 
-	if (!g_file_test (dirname, G_FILE_TEST_EXISTS)) {
-		return categories;
-	}
+        if (!g_file_test (dirname, G_FILE_TEST_EXISTS))
+        {
+                return categories;
+        }
 
-	dp = g_dir_open (dirname, 0, &gerror);
-	if (gerror != NULL) {
-	        g_message ("cannot open data directory: %s", gerror->message );
-		return categories;
-	}
+        dp = g_dir_open (dirname, 0, &gerror);
+        if (gerror != NULL)
+        {
+                g_message ("cannot open data directory: %s", gerror->message );
+                return categories;
+        }
 
-	while ((filename = g_dir_read_name (dp)) != NULL) {
+        while ((filename = g_dir_read_name (dp)) != NULL)
+        {
 
-		extension = strrchr (filename, '.');
+                extension = strrchr (filename, '.');
 
-		if (extension != NULL) {
+                if (extension != NULL)
+                {
 
-			if ( ASCII_EQUAL (filename, "categories.xml") )
+                        if ( ASCII_EQUAL (filename, "categories.xml") )
                         {
 
-				full_filename =
-				    g_build_filename (dirname, filename, NULL);
-				new_categories =
-				    lgl_xml_category_read_categories_from_file (full_filename);
-				g_free (full_filename);
+                                full_filename =
+                                    g_build_filename (dirname, filename, NULL);
+                                new_categories =
+                                    lgl_xml_category_read_categories_from_file (full_filename);
+                                g_free (full_filename);
 
-				categories = g_list_concat (categories, new_categories);
-				new_categories = NULL;
+                                categories = g_list_concat (categories, new_categories);
+                                new_categories = NULL;
 
-			}
+                        }
 
-		}
+                }
 
-	}
+        }
 
-	g_dir_close (dp);
+        g_dir_close (dp);
 
-	return categories;
+        return categories;
 }
 
 
@@ -1122,21 +1135,22 @@ read_category_files_from_dir (GList       *categories,
 void
 lgl_db_print_known_categories (void)
 {
-	GList       *p;
-	lglCategory *category;
+        GList       *p;
+        lglCategory *category;
 
-	if (!model) {
-		lgl_db_init ();
-	}
+        if (!model)
+        {
+                lgl_db_init ();
+        }
 
-	g_print ("%s():\n", __FUNCTION__);
-	for (p = model->categories; p != NULL; p = p->next) {
-		category = (lglCategory *) p->data;
+        g_print ("%s():\n", __FUNCTION__);
+        for (p = model->categories; p != NULL; p = p->next)
+        {
+                category = (lglCategory *) p->data;
 
-		g_print ("CATEGORY id=\"%s\", name=\"%s\"\n", category->id, category->name);
-
-	}
-	g_print ("\n");
+                g_print ("CATEGORY id=\"%s\", name=\"%s\"\n", category->id, category->name);
+        }
+        g_print ("\n");
 
 }
 
@@ -1156,22 +1170,22 @@ lgl_db_print_known_categories (void)
 GList *
 lgl_db_get_vendor_name_list (void)
 {
-	GList           *names = NULL;
-	GList           *p;
-	lglVendor       *vendor;
+        GList           *names = NULL;
+        GList           *p;
+        lglVendor       *vendor;
 
-	if (!model)
+        if (!model)
         {
-		lgl_db_init ();
-	}
+                lgl_db_init ();
+        }
 
-	for ( p=model->vendors; p != NULL; p=p->next )
+        for ( p=model->vendors; p != NULL; p=p->next )
         {
-		vendor = (lglVendor *)p->data;
-		names = g_list_append (names, g_strdup (vendor->name));
-	}
+                vendor = (lglVendor *)p->data;
+                names = g_list_append (names, g_strdup (vendor->name));
+        }
 
-	return names;
+        return names;
 }
 
 
@@ -1186,15 +1200,15 @@ lgl_db_get_vendor_name_list (void)
 void
 lgl_db_free_vendor_name_list (GList *names)
 {
-	GList *p;
+        GList *p;
 
-	for (p = names; p != NULL; p = p->next)
+        for (p = names; p != NULL; p = p->next)
         {
-		g_free (p->data);
-		p->data = NULL;
-	}
+                g_free (p->data);
+                p->data = NULL;
+        }
 
-	g_list_free (names);
+        g_list_free (names);
 }
 
 
@@ -1210,30 +1224,30 @@ lgl_db_free_vendor_name_list (GList *names)
 lglVendor *
 lgl_db_lookup_vendor_from_name (const gchar *name)
 {
-	GList       *p;
-	lglVendor   *vendor;
+        GList       *p;
+        lglVendor   *vendor;
 
-	if (!model)
+        if (!model)
         {
-		lgl_db_init ();
-	}
+                lgl_db_init ();
+        }
 
-	if (name == NULL)
+        if (name == NULL)
         {
-		/* If no name, return first vendor as a default */
-		return lgl_vendor_dup ((lglVendor *) model->vendors->data);
-	}
+                /* If no name, return first vendor as a default */
+                return lgl_vendor_dup ((lglVendor *) model->vendors->data);
+        }
 
-	for (p = model->vendors; p != NULL; p = p->next)
+        for (p = model->vendors; p != NULL; p = p->next)
         {
-		vendor = (lglVendor *) p->data;
-		if (UTF8_EQUAL (vendor->name, name))
+                vendor = (lglVendor *) p->data;
+                if (UTF8_EQUAL (vendor->name, name))
                 {
-			return lgl_vendor_dup (vendor);
-		}
-	}
+                        return lgl_vendor_dup (vendor);
+                }
+        }
 
-	return NULL;
+        return NULL;
 }
 
 
@@ -1249,101 +1263,106 @@ lgl_db_lookup_vendor_from_name (const gchar *name)
 gboolean
 lgl_db_is_vendor_name_known (const gchar *name)
 {
-	GList       *p;
-	lglVendor   *vendor;
+        GList       *p;
+        lglVendor   *vendor;
 
-	if (!model)
+        if (!model)
         {
-		lgl_db_init ();
-	}
+                lgl_db_init ();
+        }
 
-	if (name == NULL)
+        if (name == NULL)
         {
-		return FALSE;
-	}
+                return FALSE;
+        }
 
-	for (p = model->vendors; p != NULL; p = p->next)
+        for (p = model->vendors; p != NULL; p = p->next)
         {
-		vendor = (lglVendor *) p->data;
-		if (UTF8_EQUAL (vendor->name, name))
+                vendor = (lglVendor *) p->data;
+                if (UTF8_EQUAL (vendor->name, name))
                 {
-			return TRUE;
-		}
-	}
+                        return TRUE;
+                }
+        }
 
-	return FALSE;
+        return FALSE;
 }
 
 
 static GList *
 read_vendors (void)
 {
-	gchar *data_dir;
-	GList *vendors = NULL;
+        gchar *data_dir;
+        GList *vendors = NULL;
 
-	data_dir = SYSTEM_CONFIG_DIR;
-	vendors = read_vendor_files_from_dir (vendors, data_dir);
-	g_free (data_dir);
+        data_dir = SYSTEM_CONFIG_DIR;
+        vendors = read_vendor_files_from_dir (vendors, data_dir);
+        g_free (data_dir);
 
-	data_dir = USER_CONFIG_DIR;
-	vendors = read_vendor_files_from_dir (vendors, data_dir);
-	g_free (data_dir);
+        data_dir = USER_CONFIG_DIR;
+        vendors = read_vendor_files_from_dir (vendors, data_dir);
+        g_free (data_dir);
 
-	return vendors;
+        return vendors;
 }
 
 
 static GList *
 read_vendor_files_from_dir (GList      *vendors,
-			   const gchar *dirname)
+                           const gchar *dirname)
 {
-	GDir        *dp;
-	const gchar *filename, *extension;
-	gchar       *full_filename = NULL;
-	GError      *gerror = NULL;
-	GList       *new_vendors = NULL;
+        GDir        *dp;
+        const gchar *filename, *extension;
+        gchar       *full_filename = NULL;
+        GError      *gerror = NULL;
+        GList       *new_vendors = NULL;
 
-	if (dirname == NULL) {
-		return vendors;
-	}
+        if (dirname == NULL)
+        {
+                return vendors;
+        }
 
-	if (!g_file_test (dirname, G_FILE_TEST_EXISTS)) {
-		return vendors;
-	}
+        if (!g_file_test (dirname, G_FILE_TEST_EXISTS))
+        {
+                return vendors;
+        }
 
-	dp = g_dir_open (dirname, 0, &gerror);
-	if (gerror != NULL) {
-	        g_message ("cannot open data directory: %s", gerror->message );
-		return vendors;
-	}
+        dp = g_dir_open (dirname, 0, &gerror);
+        if (gerror != NULL)
+        {
+                g_message ("cannot open data directory: %s", gerror->message );
+                return vendors;
+        }
 
-	while ((filename = g_dir_read_name (dp)) != NULL) {
+        while ((filename = g_dir_read_name (dp)) != NULL)
+        {
 
-		extension = strrchr (filename, '.');
+                extension = strrchr (filename, '.');
 
-		if (extension != NULL) {
+                if (extension != NULL)
+                {
 
-			if ( ASCII_EQUAL (filename, "vendors.xml") )
+                        if ( ASCII_EQUAL (filename, "vendors.xml") )
                         {
 
-				full_filename =
-				    g_build_filename (dirname, filename, NULL);
-				new_vendors =
-				    lgl_xml_vendor_read_vendors_from_file (full_filename);
-				g_free (full_filename);
+                                full_filename =
+                                    g_build_filename (dirname, filename, NULL);
+                                new_vendors =
+                                    lgl_xml_vendor_read_vendors_from_file (full_filename);
+                                g_free (full_filename);
 
-				vendors = g_list_concat (vendors, new_vendors);
-				new_vendors = NULL;
+                                vendors = g_list_concat (vendors, new_vendors);
+                                new_vendors = NULL;
 
-			}
+                        }
 
-		}
+                }
 
-	}
+        }
 
-	g_dir_close (dp);
+        g_dir_close (dp);
 
-	return vendors;
+        return vendors;
 }
 
 
@@ -1357,22 +1376,23 @@ read_vendor_files_from_dir (GList      *vendors,
 void
 lgl_db_print_known_vendors (void)
 {
-	GList       *p;
-	lglVendor   *vendor;
+        GList       *p;
+        lglVendor   *vendor;
 
-	if (!model) {
-		lgl_db_init ();
-	}
+        if (!model)
+        {
+                lgl_db_init ();
+        }
 
-	g_print ("%s():\n", __FUNCTION__);
-	for (p = model->vendors; p != NULL; p = p->next) {
-		vendor = (lglVendor *) p->data;
+        g_print ("%s():\n", __FUNCTION__);
+        for (p = model->vendors; p != NULL; p = p->next)
+        {
+                vendor = (lglVendor *) p->data;
 
-		g_print ("VENDOR name=\"%s\", url=\"%s\"\n",
-			 vendor->name, vendor->url);
-
-	}
-	g_print ("\n");
+                g_print ("VENDOR name=\"%s\", url=\"%s\"\n",
+                         vendor->name, vendor->url);
+        }
+        g_print ("\n");
 
 }
 
@@ -1397,19 +1417,19 @@ GList *
 lgl_db_get_brand_list (const gchar *paper_id,
                        const gchar *category_id)
 {
-	GList            *p_tmplt;
-	lglTemplate      *template;
-	GList            *brands = NULL;
+        GList            *p_tmplt;
+        lglTemplate      *template;
+        GList            *brands = NULL;
 
-	if (!model)
+        if (!model)
         {
-		lgl_db_init ();
-	}
+                lgl_db_init ();
+        }
 
-	for (p_tmplt = model->templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
+        for (p_tmplt = model->templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
         {
-		template = (lglTemplate *) p_tmplt->data;
-		if (lgl_template_does_page_size_match (template, paper_id) &&
+                template = (lglTemplate *) p_tmplt->data;
+                if (lgl_template_does_page_size_match (template, paper_id) &&
                     lgl_template_does_category_match (template, category_id))
                 {
 
@@ -1420,10 +1440,10 @@ lgl_db_get_brand_list (const gchar *paper_id,
                                                                g_strdup (template->brand),
                                                                (GCompareFunc)lgl_str_utf8_casecmp);
                         }
-		}
-	}
+                }
+        }
 
-	return brands;
+        return brands;
 }
 
 
@@ -1438,15 +1458,15 @@ lgl_db_get_brand_list (const gchar *paper_id,
 void
 lgl_db_free_brand_list (GList *brands)
 {
-	GList *p_brand;
+        GList *p_brand;
 
-	for (p_brand = brands; p_brand != NULL; p_brand = p_brand->next)
+        for (p_brand = brands; p_brand != NULL; p_brand = p_brand->next)
         {
-		g_free (p_brand->data);
-		p_brand->data = NULL;
-	}
+                g_free (p_brand->data);
+                p_brand->data = NULL;
+        }
 
-	g_list_free (brands);
+        g_list_free (brands);
 }
 
 
@@ -1467,7 +1487,7 @@ _lgl_db_register_template_internal (const lglTemplate   *template)
         }
         else
         {
-		g_message ("Duplicate template: %s %s.", template->brand, template->part);
+                g_message ("Duplicate template: %s %s.", template->brand, template->part);
         }
 }
 
@@ -1488,26 +1508,26 @@ lgl_db_register_template (const lglTemplate *template)
         gchar       *dir, *filename, *abs_filename;
         gint         bytes_written;
 
-	if (!model)
+        if (!model)
         {
-		lgl_db_init ();
-	}
+                lgl_db_init ();
+        }
 
         if (lgl_db_does_template_exist (template->brand, template->part))
         {
                 return LGL_DB_REG_BRAND_PART_EXISTS;
         }
 
-	if (lgl_db_is_paper_id_known (template->paper_id))
+        if (lgl_db_is_paper_id_known (template->paper_id))
         {
-		dir = USER_CONFIG_DIR;
-		g_mkdir_with_parents (dir, 0775); /* Try to make sure directory exists. */
-		filename = g_strdup_printf ("%s_%s.template", template->brand, template->part);
-		abs_filename = g_build_filename (dir, filename, NULL);
-		bytes_written = lgl_xml_template_write_template_to_file (template, abs_filename);
-		g_free (dir);
-		g_free (filename);
-		g_free (abs_filename);
+                dir = USER_CONFIG_DIR;
+                g_mkdir_with_parents (dir, 0775); /* Try to make sure directory exists. */
+                filename = g_strdup_printf ("%s_%s.template", template->brand, template->part);
+                abs_filename = g_build_filename (dir, filename, NULL);
+                bytes_written = lgl_xml_template_write_template_to_file (template, abs_filename);
+                g_free (dir);
+                g_free (filename);
+                g_free (abs_filename);
 
                 if (bytes_written > 0)
                 {
@@ -1522,12 +1542,12 @@ lgl_db_register_template (const lglTemplate *template)
                 {
                         return LGL_DB_REG_FILE_WRITE_ERROR;
                 }
-	}
+        }
         else
         {
-		g_message ("Cannot register new template with unknown page size.");
+                g_message ("Cannot register new template with unknown page size.");
                 return LGL_DB_REG_BAD_PAPER_ID;
-	}
+        }
 
 }
 
@@ -1549,10 +1569,10 @@ lgl_db_delete_template_by_name (const gchar *name)
         gchar       *dir, *filename, *abs_filename;
         GList       *p;
 
-	if (!model)
+        if (!model)
         {
-		lgl_db_init ();
-	}
+                lgl_db_init ();
+        }
 
         if (!lgl_db_does_template_name_exist (name))
         {
@@ -1562,9 +1582,9 @@ lgl_db_delete_template_by_name (const gchar *name)
         template = lgl_db_lookup_template_from_name (name);
         if ( lgl_template_does_category_match (template, "user-defined") )
         {
-		dir = USER_CONFIG_DIR;
-		filename = g_strdup_printf ("%s_%s.template", template->brand, template->part);
-		abs_filename = g_build_filename (dir, filename, NULL);
+                dir = USER_CONFIG_DIR;
+                filename = g_strdup_printf ("%s_%s.template", template->brand, template->part);
+                abs_filename = g_build_filename (dir, filename, NULL);
 
                 if (!g_file_test (abs_filename, G_FILE_TEST_EXISTS))
                 {
@@ -1574,9 +1594,9 @@ lgl_db_delete_template_by_name (const gchar *name)
 
                 g_unlink (abs_filename);
 
-		g_free (dir);
-		g_free (filename);
-		g_free (abs_filename);
+                g_free (dir);
+                g_free (filename);
+                g_free (abs_filename);
 
                 for ( p=model->templates; p != NULL; p=p->next )
                 {
@@ -1644,31 +1664,31 @@ gboolean
 lgl_db_does_template_exist (const gchar *brand,
                             const gchar *part)
 {
-	GList            *p_tmplt;
-	lglTemplate      *template;
+        GList            *p_tmplt;
+        lglTemplate      *template;
 
-	if (!model)
+        if (!model)
         {
-		lgl_db_init ();
-	}
+                lgl_db_init ();
+        }
 
-	if ((brand == NULL) || (part == NULL))
+        if ((brand == NULL) || (part == NULL))
         {
-		return FALSE;
-	}
+                return FALSE;
+        }
 
-	for (p_tmplt = model->templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
+        for (p_tmplt = model->templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
         {
-		template = (lglTemplate *) p_tmplt->data;
+                template = (lglTemplate *) p_tmplt->data;
 
                 if ( UTF8_EQUAL (brand, template->brand) &&
                      UTF8_EQUAL (part, template->part) )
                 {
                         return TRUE;
                 }
-	}
+        }
 
-	return FALSE;
+        return FALSE;
 }
 
 
@@ -1684,23 +1704,23 @@ lgl_db_does_template_exist (const gchar *brand,
 gboolean
 lgl_db_does_template_name_exist (const gchar *name)
 {
-	GList            *p_tmplt;
+        GList            *p_tmplt;
         lglTemplate      *template;
         gchar            *candidate_name;
 
-	if (!model)
+        if (!model)
         {
-		lgl_db_init ();
-	}
+                lgl_db_init ();
+        }
 
-	if (name == NULL)
+        if (name == NULL)
         {
-		return FALSE;
-	}
+                return FALSE;
+        }
 
-	for (p_tmplt = model->templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
+        for (p_tmplt = model->templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
         {
-		template = (lglTemplate *) p_tmplt->data;
+                template = (lglTemplate *) p_tmplt->data;
                 candidate_name = g_strdup_printf ("%s %s", template->brand, template->part);
 
                 if ( UTF8_EQUAL (candidate_name, name) )
@@ -1709,9 +1729,9 @@ lgl_db_does_template_name_exist (const gchar *name)
                         return TRUE;
                 }
                 g_free (candidate_name);
-	}
+        }
 
-	return FALSE;
+        return FALSE;
 }
 
 
@@ -1733,29 +1753,29 @@ lgl_db_get_template_name_list_all (const gchar *brand,
                                    const gchar *paper_id,
                                    const gchar *category_id)
 {
-	GList            *p_tmplt;
-	lglTemplate      *template;
+        GList            *p_tmplt;
+        lglTemplate      *template;
         gchar            *name;
-	GList            *names = NULL;
+        GList            *names = NULL;
 
-	if (!model)
+        if (!model)
         {
-		lgl_db_init ();
-	}
+                lgl_db_init ();
+        }
 
-	for (p_tmplt = model->templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
+        for (p_tmplt = model->templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
         {
-		template = (lglTemplate *) p_tmplt->data;
-		if (lgl_template_does_brand_match (template, brand) &&
+                template = (lglTemplate *) p_tmplt->data;
+                if (lgl_template_does_brand_match (template, brand) &&
                     lgl_template_does_page_size_match (template, paper_id) &&
                     lgl_template_does_category_match (template, category_id))
                 {
                         name = g_strdup_printf ("%s %s", template->brand, template->part);
                         names = g_list_insert_sorted (names, name, (GCompareFunc)lgl_str_part_name_cmp);
-		}
-	}
+                }
+        }
 
-	return names;
+        return names;
 }
 
 
@@ -1771,16 +1791,16 @@ lgl_db_get_template_name_list_all (const gchar *brand,
 GList *
 lgl_db_get_similar_template_name_list (const gchar  *name)
 {
-	GList            *p_tmplt;
-	lglTemplate      *template1;
-	lglTemplate      *template2;
+        GList            *p_tmplt;
+        lglTemplate      *template1;
+        lglTemplate      *template2;
         gchar            *name2;
-	GList            *names = NULL;
+        GList            *names = NULL;
 
-	if (!model)
+        if (!model)
         {
-		lgl_db_init ();
-	}
+                lgl_db_init ();
+        }
 
         if ( !name )
         {
@@ -1793,9 +1813,9 @@ lgl_db_get_similar_template_name_list (const gchar  *name)
                 return NULL;
         }
 
-	for (p_tmplt = model->templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
+        for (p_tmplt = model->templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
         {
-		template2 = (lglTemplate *) p_tmplt->data;
+                template2 = (lglTemplate *) p_tmplt->data;
 
                 if ( lgl_template_are_templates_identical (template1, template2) )
                 {
@@ -1807,10 +1827,10 @@ lgl_db_get_similar_template_name_list (const gchar  *name)
                                                               (GCompareFunc)lgl_str_part_name_cmp);
                         }
 
-		}
-	}
+                }
+        }
 
-	return names;
+        return names;
 }
 
 
@@ -1825,15 +1845,15 @@ lgl_db_get_similar_template_name_list (const gchar  *name)
 void
 lgl_db_free_template_name_list (GList *names)
 {
-	GList *p_name;
+        GList *p_name;
 
-	for (p_name = names; p_name != NULL; p_name = p_name->next)
+        for (p_name = names; p_name != NULL; p_name = p_name->next)
         {
-		g_free (p_name->data);
-		p_name->data = NULL;
-	}
+                g_free (p_name->data);
+                p_name->data = NULL;
+        }
 
-	g_list_free (names);
+        g_list_free (names);
 }
 
 
@@ -1849,19 +1869,19 @@ lgl_db_free_template_name_list (GList *names)
 lglTemplate *
 lgl_db_lookup_template_from_name (const gchar *name)
 {
-	lglTemplate      *template;
-	lglTemplate      *new_template;
+        lglTemplate      *template;
+        lglTemplate      *new_template;
 
-	if (!model)
+        if (!model)
         {
-		lgl_db_init ();
-	}
+                lgl_db_init ();
+        }
 
-	if (name == NULL)
+        if (name == NULL)
         {
-		/* If no name, return first template as a default */
-		return lgl_template_dup ((lglTemplate *) model->templates->data);
-	}
+                /* If no name, return first template as a default */
+                return lgl_template_dup ((lglTemplate *) model->templates->data);
+        }
 
         template = g_hash_table_lookup (model->template_cache, name);
 
@@ -1871,8 +1891,8 @@ lgl_db_lookup_template_from_name (const gchar *name)
                 return new_template;
         }
 
-	/* No matching template has been found so return the first template */
-	return lgl_template_dup ((lglTemplate *) model->templates->data);
+        /* No matching template has been found so return the first template */
+        return lgl_template_dup ((lglTemplate *) model->templates->data);
 }
 
 
@@ -1891,19 +1911,19 @@ lgl_db_lookup_template_from_brand_part(const gchar *brand,
                                        const gchar *part)
 {
         gchar            *name;
-	lglTemplate      *template;
-	lglTemplate      *new_template;
+        lglTemplate      *template;
+        lglTemplate      *new_template;
 
-	if (!model)
+        if (!model)
         {
-		lgl_db_init ();
-	}
+                lgl_db_init ();
+        }
 
-	if ((brand == NULL) || (part == NULL))
+        if ((brand == NULL) || (part == NULL))
         {
-		/* If no name, return first template as a default */
-		return lgl_template_dup ((lglTemplate *) model->templates->data);
-	}
+                /* If no name, return first template as a default */
+                return lgl_template_dup ((lglTemplate *) model->templates->data);
+        }
 
         name = g_strdup_printf ("%s %s", brand, part);
         template = g_hash_table_lookup (model->template_cache, name);
@@ -1914,9 +1934,9 @@ lgl_db_lookup_template_from_brand_part(const gchar *brand,
                 return new_template;
         }
 
-	/* No matching template has been found so return the first template */
+        /* No matching template has been found so return the first template */
         g_free (name);
-	return lgl_template_dup ((lglTemplate *) model->templates->data);
+        return lgl_template_dup ((lglTemplate *) model->templates->data);
 }
 
 
@@ -1934,16 +1954,16 @@ add_to_template_cache (lglTemplate *template)
 void
 read_templates (void)
 {
-	gchar       *data_dir;
+        gchar       *data_dir;
         GList       *p;
         lglTemplate *template;
 
         /*
          * User defined templates.  Add to user-defined category.
          */
-	data_dir = USER_CONFIG_DIR;
-	read_template_files_from_dir (data_dir);
-	g_free (data_dir);
+        data_dir = USER_CONFIG_DIR;
+        read_template_files_from_dir (data_dir);
+        g_free (data_dir);
         for ( p=model->templates; p != NULL; p=p->next )
         {
                 template = (lglTemplate *)p->data;
@@ -1953,110 +1973,110 @@ read_templates (void)
         /*
          * Alternate user defined templates.  (Used for manually created templates).
          */
-	data_dir = ALT_USER_CONFIG_DIR;
-	read_template_files_from_dir (data_dir);
-	g_free (data_dir);
+        data_dir = ALT_USER_CONFIG_DIR;
+        read_template_files_from_dir (data_dir);
+        g_free (data_dir);
 
         /*
          * System templates.
          */
-	data_dir = SYSTEM_CONFIG_DIR;
-	read_template_files_from_dir (data_dir);
-	g_free (data_dir);
+        data_dir = SYSTEM_CONFIG_DIR;
+        read_template_files_from_dir (data_dir);
+        g_free (data_dir);
 
-	if (model->templates == NULL)
+        if (model->templates == NULL)
         {
-		g_critical (_("Unable to locate any template files.  Libglabels may not be installed correctly!"));
-	}
+                g_critical (_("Unable to locate any template files.  Libglabels may not be installed correctly!"));
+        }
 }
 
 
 void
 read_template_files_from_dir (const gchar *dirname)
 {
-	GDir        *dp;
-	const gchar *filename, *extension, *extension2;
-	gchar       *full_filename = NULL;
-	GError      *gerror = NULL;
+        GDir        *dp;
+        const gchar *filename, *extension, *extension2;
+        gchar       *full_filename = NULL;
+        GError      *gerror = NULL;
 
-	if (dirname == NULL)
-		return;
+        if (dirname == NULL)
+                return;
 
-	if (!g_file_test (dirname, G_FILE_TEST_EXISTS))
+        if (!g_file_test (dirname, G_FILE_TEST_EXISTS))
         {
-		return;
-	}
+                return;
+        }
 
-	dp = g_dir_open (dirname, 0, &gerror);
-	if (gerror != NULL)
+        dp = g_dir_open (dirname, 0, &gerror);
+        if (gerror != NULL)
         {
-	        g_message ("cannot open data directory: %s", gerror->message );
-		return;
-	}
+                g_message ("cannot open data directory: %s", gerror->message );
+                return;
+        }
 
-	while ((filename = g_dir_read_name (dp)) != NULL)
+        while ((filename = g_dir_read_name (dp)) != NULL)
         {
 
-		extension = strrchr (filename, '.');
-		extension2 = strrchr (filename, '-');
+                extension = strrchr (filename, '.');
+                extension2 = strrchr (filename, '-');
 
-		if ( (extension && ASCII_EQUAL (extension, ".template")) ||
-		     (extension2 && ASCII_EQUAL (extension2, "-templates.xml")) )
+                if ( (extension && ASCII_EQUAL (extension, ".template")) ||
+                     (extension2 && ASCII_EQUAL (extension2, "-templates.xml")) )
                 {
 
-			full_filename = g_build_filename (dirname, filename, NULL);
+                        full_filename = g_build_filename (dirname, filename, NULL);
                         lgl_xml_template_read_templates_from_file (full_filename);
-			g_free (full_filename);
-		}
+                        g_free (full_filename);
+                }
 
-	}
+        }
 
-	g_dir_close (dp);
+        g_dir_close (dp);
 }
 
 
 static lglTemplate *
 template_full_page (const gchar *paper_id)
 {
-	lglPaper              *paper = NULL;
-	lglTemplate           *template = NULL;
-	lglTemplateFrame      *frame = NULL;
+        lglPaper              *paper = NULL;
+        lglTemplate           *template = NULL;
+        lglTemplateFrame      *frame = NULL;
         gchar                 *part;
         gchar                 *desc;
 
-	g_return_val_if_fail (paper_id, NULL);
+        g_return_val_if_fail (paper_id, NULL);
 
-	paper = lgl_db_lookup_paper_from_id (paper_id);
-	if ( paper == NULL )
+        paper = lgl_db_lookup_paper_from_id (paper_id);
+        if ( paper == NULL )
         {
-		return NULL;
-	}
+                return NULL;
+        }
 
-	part = g_strdup_printf ("%s-Full-Page", paper->id);
-	desc = g_strdup_printf (_("%s full page label"), paper->name);
+        part = g_strdup_printf ("%s-Full-Page", paper->id);
+        desc = g_strdup_printf (_("%s full page label"), paper->name);
 
-	template = lgl_template_new ("Generic", part, desc,
+        template = lgl_template_new ("Generic", part, desc,
                                      paper_id, paper->width, paper->height);
 
 
-	frame = lgl_template_frame_rect_new ("0",
+        frame = lgl_template_frame_rect_new ("0",
                                              paper->width,
                                              paper->height,
                                              0.0,
                                              0.0,
                                              0.0);
-	lgl_template_add_frame (template, frame);
+        lgl_template_add_frame (template, frame);
 
-	lgl_template_frame_add_layout (frame, lgl_template_layout_new (1, 1, 0., 0., 0., 0.));
+        lgl_template_frame_add_layout (frame, lgl_template_layout_new (1, 1, 0., 0., 0., 0.));
 
-	lgl_template_frame_add_markup (frame, lgl_template_markup_margin_new (9.0));
+        lgl_template_frame_add_markup (frame, lgl_template_markup_margin_new (9.0));
 
-	g_free (desc);
-	desc = NULL;
-	lgl_paper_free (paper);
-	paper = NULL;
+        g_free (desc);
+        desc = NULL;
+        lgl_paper_free (paper);
+        paper = NULL;
 
-	return template;
+        return template;
 }
 
 
@@ -2069,24 +2089,24 @@ template_full_page (const gchar *paper_id)
 void
 lgl_db_print_known_templates (void)
 {
-	GList       *p;
-	lglTemplate *template;
+        GList       *p;
+        lglTemplate *template;
 
         if (!model)
         {
                 lgl_db_init ();
         }
 
-	g_print ("%s():\n", __FUNCTION__);
-	for (p=model->templates; p!=NULL; p=p->next)
+        g_print ("%s():\n", __FUNCTION__);
+        for (p=model->templates; p!=NULL; p=p->next)
         {
-		template = (lglTemplate *)p->data;
+                template = (lglTemplate *)p->data;
 
-		g_print("TEMPLATE brand=\"%s\", part=\"%s\", description=\"%s\"\n",
-			template->brand, template->part, template->description);
+                g_print("TEMPLATE brand=\"%s\", part=\"%s\", description=\"%s\"\n",
+                        template->brand, template->part, template->description);
 
-	}
-	g_print ("\n");
+        }
+        g_print ("\n");
 
 }
 

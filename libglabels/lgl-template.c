@@ -88,18 +88,18 @@ lgl_template_new (const gchar         *brand,
                   gdouble              page_width,
                   gdouble              page_height)
 {
-	lglTemplate      *template;
+        lglTemplate      *template;
 
-	template = g_new0 (lglTemplate,1);
+        template = g_new0 (lglTemplate,1);
 
-	template->brand       = g_strdup (brand);
-	template->part        = g_strdup (part);
-	template->description = g_strdup (description);
-	template->paper_id    = g_strdup (paper_id);
-	template->page_width  = page_width;
-	template->page_height = page_height;
+        template->brand       = g_strdup (brand);
+        template->part        = g_strdup (part);
+        template->description = g_strdup (description);
+        template->paper_id    = g_strdup (paper_id);
+        template->page_width  = page_width;
+        template->page_height = page_height;
 
-	return template;
+        return template;
 }
 
 
@@ -156,7 +156,7 @@ lgl_template_new_from_equiv (const gchar          *brand,
 gchar *
 lgl_template_get_name (const lglTemplate  *template)
 {
-	g_return_val_if_fail (template, NULL);
+        g_return_val_if_fail (template, NULL);
 
         return g_strdup_printf ("%s %s", template->brand, template->part);
 }
@@ -177,8 +177,8 @@ gboolean
 lgl_template_do_templates_match (const lglTemplate  *template1,
                                  const lglTemplate  *template2)
 {
-	g_return_val_if_fail (template1, FALSE);
-	g_return_val_if_fail (template2, FALSE);
+        g_return_val_if_fail (template1, FALSE);
+        g_return_val_if_fail (template2, FALSE);
 
         return (UTF8_EQUAL (template1->brand, template2->brand) &&
                 UTF8_EQUAL (template1->part, template2->part));
@@ -199,7 +199,7 @@ gboolean
 lgl_template_does_brand_match (const lglTemplate  *template,
                                const gchar        *brand)
 {
-	g_return_val_if_fail (template, FALSE);
+        g_return_val_if_fail (template, FALSE);
 
         /* NULL matches everything. */
         if (brand == NULL)
@@ -225,7 +225,7 @@ gboolean
 lgl_template_does_page_size_match (const lglTemplate  *template,
                                    const gchar        *paper_id)
 {
-	g_return_val_if_fail (template, FALSE);
+        g_return_val_if_fail (template, FALSE);
 
         /* NULL matches everything. */
         if (paper_id == NULL)
@@ -253,7 +253,7 @@ lgl_template_does_category_match  (const lglTemplate  *template,
 {
         GList *p;
 
-	g_return_val_if_fail (template, FALSE);
+        g_return_val_if_fail (template, FALSE);
 
         /* NULL matches everything. */
         if (category_id == NULL)
@@ -391,10 +391,10 @@ void
 lgl_template_add_frame (lglTemplate      *template,
                         lglTemplateFrame *frame)
 {
-	g_return_if_fail (template);
-	g_return_if_fail (frame);
+        g_return_if_fail (template);
+        g_return_if_fail (frame);
 
-	template->frames = g_list_append (template->frames, frame);
+        template->frames = g_list_append (template->frames, frame);
 }
 
  
@@ -410,10 +410,10 @@ void
 lgl_template_add_category (lglTemplate         *template,
                            const gchar         *category_id)
 {
-	g_return_if_fail (template);
-	g_return_if_fail (category_id);
+        g_return_if_fail (template);
+        g_return_if_fail (category_id);
 
-	template->category_ids = g_list_append (template->category_ids,
+        template->category_ids = g_list_append (template->category_ids,
                                                 g_strdup (category_id));
 }
 
@@ -440,20 +440,20 @@ lgl_template_frame_rect_new  (const gchar         *id,
                               gdouble              x_waste,
                               gdouble              y_waste)
 {
-	lglTemplateFrame *frame;
+        lglTemplateFrame *frame;
 
-	frame = g_new0 (lglTemplateFrame, 1);
+        frame = g_new0 (lglTemplateFrame, 1);
 
-	frame->shape = LGL_TEMPLATE_FRAME_SHAPE_RECT;
-	frame->rect.id = g_strdup (id);
+        frame->shape = LGL_TEMPLATE_FRAME_SHAPE_RECT;
+        frame->rect.id = g_strdup (id);
 
-	frame->rect.w = w;
-	frame->rect.h = h;
-	frame->rect.r = r;
-	frame->rect.x_waste = x_waste;
-	frame->rect.y_waste = y_waste;
+        frame->rect.w = w;
+        frame->rect.h = h;
+        frame->rect.r = r;
+        frame->rect.x_waste = x_waste;
+        frame->rect.y_waste = y_waste;
 
-	return frame;
+        return frame;
 }
 
 
@@ -475,18 +475,18 @@ lgl_template_frame_ellipse_new  (const gchar         *id,
                                  gdouble              h,
                                  gdouble              waste)
 {
-	lglTemplateFrame *frame;
+        lglTemplateFrame *frame;
 
-	frame = g_new0 (lglTemplateFrame, 1);
+        frame = g_new0 (lglTemplateFrame, 1);
 
-	frame->shape = LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE;
-	frame->ellipse.id = g_strdup (id);
+        frame->shape = LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE;
+        frame->ellipse.id = g_strdup (id);
 
-	frame->ellipse.w = w;
-	frame->ellipse.h = h;
-	frame->ellipse.waste = waste;
+        frame->ellipse.w = w;
+        frame->ellipse.h = h;
+        frame->ellipse.waste = waste;
 
-	return frame;
+        return frame;
 }
 
 
@@ -506,17 +506,17 @@ lgl_template_frame_round_new (const gchar         *id,
                               gdouble              r,
                               gdouble              waste)
 {
-	lglTemplateFrame *frame;
+        lglTemplateFrame *frame;
 
-	frame = g_new0 (lglTemplateFrame, 1);
+        frame = g_new0 (lglTemplateFrame, 1);
 
-	frame->shape = LGL_TEMPLATE_FRAME_SHAPE_ROUND;
-	frame->round.id = g_strdup (id);
+        frame->shape = LGL_TEMPLATE_FRAME_SHAPE_ROUND;
+        frame->round.id = g_strdup (id);
 
-	frame->round.r = r;
-	frame->round.waste = waste;
+        frame->round.r = r;
+        frame->round.waste = waste;
 
-	return frame;
+        return frame;
 }
 
                                                                                
@@ -542,20 +542,20 @@ lgl_template_frame_cd_new (const gchar         *id,
                            gdouble              h,
                            gdouble              waste)
 {
-	lglTemplateFrame *frame;
+        lglTemplateFrame *frame;
 
-	frame = g_new0 (lglTemplateFrame, 1);
+        frame = g_new0 (lglTemplateFrame, 1);
 
-	frame->shape = LGL_TEMPLATE_FRAME_SHAPE_CD;
-	frame->cd.id = g_strdup (id);
+        frame->shape = LGL_TEMPLATE_FRAME_SHAPE_CD;
+        frame->cd.id = g_strdup (id);
 
-	frame->cd.r1 = r1;
-	frame->cd.r2 = r2;
-	frame->cd.w  = w;
-	frame->cd.h  = h;
-	frame->cd.waste = waste;
+        frame->cd.r1 = r1;
+        frame->cd.r2 = r2;
+        frame->cd.w  = w;
+        frame->cd.h  = h;
+        frame->cd.waste = waste;
 
-	return frame;
+        return frame;
 }
 
 
@@ -573,38 +573,45 @@ lgl_template_frame_get_size (const lglTemplateFrame *frame,
                              gdouble                *w,
                              gdouble                *h)
 {
-	g_return_if_fail (frame);
+        g_return_if_fail (frame);
 
-	switch (frame->shape) {
-	case LGL_TEMPLATE_FRAME_SHAPE_RECT:
-		*w = frame->rect.w;
-		*h = frame->rect.h;
-		break;
-	case LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE:
-		*w = frame->ellipse.w;
-		*h = frame->ellipse.h;
-		break;
-	case LGL_TEMPLATE_FRAME_SHAPE_ROUND:
-		*w = 2.0 * frame->round.r;
-		*h = 2.0 * frame->round.r;
-		break;
-	case LGL_TEMPLATE_FRAME_SHAPE_CD:
-		if (frame->cd.w == 0.0) {
-			*w = 2.0 * frame->cd.r1;
-		} else {
-			*w = frame->cd.w;
-		}
-		if (frame->cd.h == 0.0) {
-			*h = 2.0 * frame->cd.r1;
-		} else {
-			*h = frame->cd.h;
-		}
-		break;
-	default:
-		*w = 0.0;
-		*h = 0.0;
-		break;
-	}
+        switch (frame->shape)
+        {
+        case LGL_TEMPLATE_FRAME_SHAPE_RECT:
+                *w = frame->rect.w;
+                *h = frame->rect.h;
+                break;
+        case LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE:
+                *w = frame->ellipse.w;
+                *h = frame->ellipse.h;
+                break;
+        case LGL_TEMPLATE_FRAME_SHAPE_ROUND:
+                *w = 2.0 * frame->round.r;
+                *h = 2.0 * frame->round.r;
+                break;
+        case LGL_TEMPLATE_FRAME_SHAPE_CD:
+                if (frame->cd.w == 0.0)
+                {
+                        *w = 2.0 * frame->cd.r1;
+                }
+                else
+                {
+                        *w = frame->cd.w;
+                }
+                if (frame->cd.h == 0.0)
+                {
+                        *h = 2.0 * frame->cd.r1;
+                }
+                else
+                {
+                        *h = frame->cd.h;
+                }
+                break;
+        default:
+                *w = 0.0;
+                *h = 0.0;
+                break;
+        }
 }
 
 
@@ -620,19 +627,20 @@ lgl_template_frame_get_size (const lglTemplateFrame *frame,
 gint
 lgl_template_frame_get_n_labels (const lglTemplateFrame *frame)
 {
-	gint               n_labels = 0;
-	GList             *p;
-	lglTemplateLayout *layout;
+        gint               n_labels = 0;
+        GList             *p;
+        lglTemplateLayout *layout;
 
-	g_return_val_if_fail (frame, 0);
+        g_return_val_if_fail (frame, 0);
 
-	for ( p=frame->all.layouts; p != NULL; p=p->next ) {
-		layout = (lglTemplateLayout *)p->data;
+        for ( p=frame->all.layouts; p != NULL; p=p->next )
+        {
+                layout = (lglTemplateLayout *)p->data;
 
-		n_labels += layout->nx * layout->ny;
-	}
+                n_labels += layout->nx * layout->ny;
+        }
 
-	return n_labels;
+        return n_labels;
 }
 
 
@@ -695,9 +703,12 @@ lgl_template_frame_get_size_description (const lglTemplateFrame *frame,
         units_string    = lgl_units_get_name (units);
         units_per_point = lgl_units_get_units_per_point (units);
 
-        switch (frame->shape) {
+        switch (frame->shape)
+        {
+
         case LGL_TEMPLATE_FRAME_SHAPE_RECT:
-                if ( units == LGL_UNITS_INCH ) {
+                if ( units == LGL_UNITS_INCH )
+                {
                         gchar *xstr, *ystr;
 
                         xstr = lgl_str_format_fraction (frame->rect.w*units_per_point);
@@ -706,15 +717,19 @@ lgl_template_frame_get_size_description (const lglTemplateFrame *frame,
                                                   xstr, ystr, units_string);
                         g_free (xstr);
                         g_free (ystr);
-                } else {
+                }
+                else
+                {
                         string = g_strdup_printf ("%.5g × %.5g %s",
                                                   frame->rect.w*units_per_point,
                                                   frame->rect.h*units_per_point,
                                                   units_string);
                 }
                 break;
+
         case LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE:
-                if ( units == LGL_UNITS_INCH ) {
+                if ( units == LGL_UNITS_INCH )
+                {
                         gchar *xstr, *ystr;
 
                         xstr = lgl_str_format_fraction (frame->ellipse.w*units_per_point);
@@ -723,15 +738,19 @@ lgl_template_frame_get_size_description (const lglTemplateFrame *frame,
                                                   xstr, ystr, units_string);
                         g_free (xstr);
                         g_free (ystr);
-                } else {
+                }
+                else
+                {
                         string = g_strdup_printf ("%.5g × %.5g %s",
                                                   frame->ellipse.w*units_per_point,
                                                   frame->ellipse.h*units_per_point,
                                                   units_string);
                 }
                 break;
+
         case LGL_TEMPLATE_FRAME_SHAPE_ROUND:
-                if ( units == LGL_UNITS_INCH ) {
+                if ( units == LGL_UNITS_INCH )
+                {
                         gchar *dstr;
 
                         dstr = lgl_str_format_fraction (2.0*frame->round.r*units_per_point);
@@ -739,15 +758,19 @@ lgl_template_frame_get_size_description (const lglTemplateFrame *frame,
                                                   dstr, units_string,
                                                   _("diameter"));
                         g_free (dstr);
-                } else {
+                }
+                else
+                {
                         string = g_strdup_printf ("%.5g %s %s",
                                                   2.0*frame->round.r*units_per_point,
                                                   units_string,
                                                   _("diameter"));
                 }
                 break;
+
         case LGL_TEMPLATE_FRAME_SHAPE_CD:
-                if ( units == LGL_UNITS_INCH ) {
+                if ( units == LGL_UNITS_INCH )
+                {
                         gchar *dstr;
 
                         dstr = lgl_str_format_fraction (2.0*frame->cd.r1*units_per_point);
@@ -755,15 +778,19 @@ lgl_template_frame_get_size_description (const lglTemplateFrame *frame,
                                                   dstr, units_string,
                                                   _("diameter"));
                         g_free (dstr);
-                } else {
+                }
+                else
+                {
                         string = g_strdup_printf ("%.5g %s %s",
                                                   2.0*frame->cd.r1*units_per_point,
                                                   units_string,
                                                   _("diameter"));
                 }
                 break;
+
         default:
                 break;
+
         }
 
         return string;
@@ -785,32 +812,35 @@ lgl_template_frame_get_size_description (const lglTemplateFrame *frame,
 lglTemplateOrigin *
 lgl_template_frame_get_origins (const lglTemplateFrame *frame)
 {
-	gint               i_label, n_labels, ix, iy;
-	lglTemplateOrigin *origins;
-	GList             *p;
-	lglTemplateLayout *layout;
+        gint               i_label, n_labels, ix, iy;
+        lglTemplateOrigin *origins;
+        GList             *p;
+        lglTemplateLayout *layout;
 
-	g_return_val_if_fail (frame, NULL);
+        g_return_val_if_fail (frame, NULL);
 
-	n_labels = lgl_template_frame_get_n_labels (frame);
-	origins = g_new0 (lglTemplateOrigin, n_labels);
+        n_labels = lgl_template_frame_get_n_labels (frame);
+        origins = g_new0 (lglTemplateOrigin, n_labels);
 
-	i_label = 0;
-	for ( p=frame->all.layouts; p != NULL; p=p->next ) {
-		layout = (lglTemplateLayout *)p->data;
+        i_label = 0;
+        for ( p=frame->all.layouts; p != NULL; p=p->next )
+        {
+                layout = (lglTemplateLayout *)p->data;
 
-		for (iy = 0; iy < layout->ny; iy++) {
-			for (ix = 0; ix < layout->nx; ix++, i_label++) {
-				origins[i_label].x = ix*layout->dx + layout->x0;
-				origins[i_label].y = iy*layout->dy + layout->y0;
-			}
-		}
-	}
+                for (iy = 0; iy < layout->ny; iy++)
+                {
+                        for (ix = 0; ix < layout->nx; ix++, i_label++)
+                        {
+                                origins[i_label].x = ix*layout->dx + layout->x0;
+                                origins[i_label].y = iy*layout->dy + layout->y0;
+                        }
+                }
+        }
 
-	g_qsort_with_data (origins, n_labels, sizeof(lglTemplateOrigin),
-			   compare_origins, NULL);
+        g_qsort_with_data (origins, n_labels, sizeof(lglTemplateOrigin),
+                           compare_origins, NULL);
 
-	return origins;
+        return origins;
 }
 
 
@@ -826,10 +856,10 @@ void
 lgl_template_frame_add_layout (lglTemplateFrame   *frame,
                                lglTemplateLayout  *layout)
 {
-	g_return_if_fail (frame);
-	g_return_if_fail (layout);
+        g_return_if_fail (frame);
+        g_return_if_fail (layout);
 
-	frame->all.layouts = g_list_append (frame->all.layouts, layout);
+        frame->all.layouts = g_list_append (frame->all.layouts, layout);
 }
  
 
@@ -845,10 +875,10 @@ void
 lgl_template_frame_add_markup (lglTemplateFrame   *frame,
                                lglTemplateMarkup  *markup)
 {
-	g_return_if_fail (frame);
-	g_return_if_fail (markup);
+        g_return_if_fail (frame);
+        g_return_if_fail (markup);
 
-	frame->all.markups = g_list_append (frame->all.markups, markup);
+        frame->all.markups = g_list_append (frame->all.markups, markup);
 }
  
 
@@ -874,18 +904,18 @@ lgl_template_layout_new (gint    nx,
                          gdouble dx,
                          gdouble dy)
 {
-	lglTemplateLayout *layout;
+        lglTemplateLayout *layout;
 
-	layout = g_new0 (lglTemplateLayout, 1);
+        layout = g_new0 (lglTemplateLayout, 1);
 
-	layout->nx = nx;
-	layout->ny = ny;
-	layout->x0 = x0;
-	layout->y0 = y0;
-	layout->dx = dx;
-	layout->dy = dy;
+        layout->nx = nx;
+        layout->ny = ny;
+        layout->x0 = x0;
+        layout->y0 = y0;
+        layout->dx = dx;
+        layout->dy = dy;
 
-	return layout;
+        return layout;
 }
 
 
@@ -901,14 +931,14 @@ lgl_template_layout_new (gint    nx,
 lglTemplateMarkup *
 lgl_template_markup_margin_new (gdouble size)
 {
-	lglTemplateMarkup *markup;
+        lglTemplateMarkup *markup;
 
-	markup = g_new0 (lglTemplateMarkup, 1);
+        markup = g_new0 (lglTemplateMarkup, 1);
 
-	markup->type        = LGL_TEMPLATE_MARKUP_MARGIN;
-	markup->margin.size = size;
+        markup->type        = LGL_TEMPLATE_MARKUP_MARGIN;
+        markup->margin.size = size;
 
-	return markup;
+        return markup;
 }
 
 
@@ -930,17 +960,17 @@ lgl_template_markup_line_new (gdouble x1,
                               gdouble x2,
                               gdouble y2)
 {
-	lglTemplateMarkup *markup;
+        lglTemplateMarkup *markup;
 
-	markup = g_new0 (lglTemplateMarkup, 1);
+        markup = g_new0 (lglTemplateMarkup, 1);
 
-	markup->type        = LGL_TEMPLATE_MARKUP_LINE;
-	markup->line.x1     = x1;
-	markup->line.y1     = y1;
-	markup->line.x2     = x2;
-	markup->line.y2     = y2;
+        markup->type        = LGL_TEMPLATE_MARKUP_LINE;
+        markup->line.x1     = x1;
+        markup->line.y1     = y1;
+        markup->line.x2     = x2;
+        markup->line.y2     = y2;
 
-	return markup;
+        return markup;
 }
 
 
@@ -960,16 +990,16 @@ lgl_template_markup_circle_new (gdouble x0,
                                 gdouble y0,
                                 gdouble r)
 {
-	lglTemplateMarkup *markup;
+        lglTemplateMarkup *markup;
 
-	markup = g_new0 (lglTemplateMarkup, 1);
+        markup = g_new0 (lglTemplateMarkup, 1);
 
-	markup->type        = LGL_TEMPLATE_MARKUP_CIRCLE;
-	markup->circle.x0   = x0;
-	markup->circle.y0   = y0;
-	markup->circle.r    = r;
+        markup->type        = LGL_TEMPLATE_MARKUP_CIRCLE;
+        markup->circle.x0   = x0;
+        markup->circle.y0   = y0;
+        markup->circle.r    = r;
 
-	return markup;
+        return markup;
 }
 
 
@@ -993,18 +1023,18 @@ lgl_template_markup_rect_new (gdouble x1,
                               gdouble h,
                               gdouble r)
 {
-	lglTemplateMarkup *markup;
+        lglTemplateMarkup *markup;
 
-	markup = g_new0 (lglTemplateMarkup, 1);
+        markup = g_new0 (lglTemplateMarkup, 1);
 
-	markup->type        = LGL_TEMPLATE_MARKUP_RECT;
-	markup->rect.x1     = x1;
-	markup->rect.y1     = y1;
-	markup->rect.w      = w;
-	markup->rect.h      = h;
-	markup->rect.r      = r;
+        markup->type        = LGL_TEMPLATE_MARKUP_RECT;
+        markup->rect.x1     = x1;
+        markup->rect.y1     = y1;
+        markup->rect.w      = w;
+        markup->rect.h      = h;
+        markup->rect.r      = r;
 
-	return markup;
+        return markup;
 }
 
 
@@ -1026,17 +1056,17 @@ lgl_template_markup_ellipse_new (gdouble x1,
                                  gdouble w,
                                  gdouble h)
 {
-	lglTemplateMarkup *markup;
+        lglTemplateMarkup *markup;
 
-	markup = g_new0 (lglTemplateMarkup, 1);
+        markup = g_new0 (lglTemplateMarkup, 1);
 
-	markup->type        = LGL_TEMPLATE_MARKUP_ELLIPSE;
-	markup->ellipse.x1     = x1;
-	markup->ellipse.y1     = y1;
-	markup->ellipse.w      = w;
-	markup->ellipse.h      = h;
+        markup->type        = LGL_TEMPLATE_MARKUP_ELLIPSE;
+        markup->ellipse.x1     = x1;
+        markup->ellipse.y1     = y1;
+        markup->ellipse.w      = w;
+        markup->ellipse.h      = h;
 
-	return markup;
+        return markup;
 }
 
 
@@ -1052,13 +1082,13 @@ lgl_template_markup_ellipse_new (gdouble x1,
 lglTemplate *
 lgl_template_dup (const lglTemplate *orig_template)
 {
-	lglTemplate         *template;
-	GList               *p;
-	lglTemplateFrame    *frame;
+        lglTemplate         *template;
+        GList               *p;
+        lglTemplateFrame    *frame;
 
-	g_return_val_if_fail (orig_template, NULL);
+        g_return_val_if_fail (orig_template, NULL);
 
-	template = lgl_template_new (orig_template->brand,
+        template = lgl_template_new (orig_template->brand,
                                      orig_template->part,
                                      orig_template->description,
                                      orig_template->paper_id,
@@ -1069,19 +1099,19 @@ lgl_template_dup (const lglTemplate *orig_template)
         template->product_url = g_strdup (orig_template->product_url);
 
 
-	for ( p=orig_template->category_ids; p != NULL; p=p->next )
+        for ( p=orig_template->category_ids; p != NULL; p=p->next )
         {
                 lgl_template_add_category (template, p->data);
-	}
+        }
 
-	for ( p=orig_template->frames; p != NULL; p=p->next )
+        for ( p=orig_template->frames; p != NULL; p=p->next )
         {
-		frame = (lglTemplateFrame *)p->data;
+                frame = (lglTemplateFrame *)p->data;
 
-		lgl_template_add_frame (template, lgl_template_frame_dup (frame));
-	}
+                lgl_template_add_frame (template, lgl_template_frame_dup (frame));
+        }
 
-	return template;
+        return template;
 }
 
 
@@ -1095,45 +1125,44 @@ lgl_template_dup (const lglTemplate *orig_template)
 void
 lgl_template_free (lglTemplate *template)
 {
-	GList            *p;
-	lglTemplateFrame *frame;
+        GList            *p;
+        lglTemplateFrame *frame;
 
-	if ( template != NULL ) {
+        if ( template != NULL )
+        {
+                g_free (template->brand);
+                template->brand = NULL;
 
-		g_free (template->brand);
-		template->brand = NULL;
+                g_free (template->part);
+                template->part = NULL;
 
-		g_free (template->part);
-		template->part = NULL;
+                g_free (template->description);
+                template->description = NULL;
 
-		g_free (template->description);
-		template->description = NULL;
+                g_free (template->paper_id);
+                template->paper_id = NULL;
 
-		g_free (template->paper_id);
-		template->paper_id = NULL;
+                for ( p=template->category_ids; p != NULL; p=p->next )
+                {
+                        g_free (p->data);
+                        p->data = NULL;
+                }
+                g_list_free (template->category_ids);
+                template->category_ids = NULL;
 
-		for ( p=template->category_ids; p != NULL; p=p->next ) {
+                for ( p=template->frames; p != NULL; p=p->next )
+                {
+                        frame = (lglTemplateFrame *)p->data;
 
-			g_free (p->data);
-			p->data = NULL;
+                        lgl_template_frame_free (frame);
+                        p->data = NULL;
+                }
+                g_list_free (template->frames);
+                template->frames = NULL;
 
-		}
-		g_list_free (template->category_ids);
-		template->category_ids = NULL;
+                g_free (template);
 
-		for ( p=template->frames; p != NULL; p=p->next ) {
-
-			frame = (lglTemplateFrame *)p->data;
-
-			lgl_template_frame_free (frame);
-			p->data = NULL;
-		}
-		g_list_free (template->frames);
-		template->frames = NULL;
-
-		g_free (template);
-
-	}
+        }
 
 }
 
@@ -1150,70 +1179,71 @@ lgl_template_free (lglTemplate *template)
 lglTemplateFrame *
 lgl_template_frame_dup (const lglTemplateFrame *orig_frame)
 {
-	lglTemplateFrame    *frame;
-	GList               *p;
-	lglTemplateLayout   *layout;
-	lglTemplateMarkup   *markup;
+        lglTemplateFrame    *frame;
+        GList               *p;
+        lglTemplateLayout   *layout;
+        lglTemplateMarkup   *markup;
 
-	g_return_val_if_fail (orig_frame, NULL);
+        g_return_val_if_fail (orig_frame, NULL);
 
-	switch (orig_frame->shape) {
+        switch (orig_frame->shape)
+        {
 
-	case LGL_TEMPLATE_FRAME_SHAPE_RECT:
-		frame =
-			lgl_template_frame_rect_new (orig_frame->all.id,
+        case LGL_TEMPLATE_FRAME_SHAPE_RECT:
+                frame =
+                        lgl_template_frame_rect_new (orig_frame->all.id,
                                                      orig_frame->rect.w,
                                                      orig_frame->rect.h,
                                                      orig_frame->rect.r,
                                                      orig_frame->rect.x_waste,
                                                      orig_frame->rect.y_waste);
-		break;
+                break;
 
-	case LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE:
-		frame =
-			lgl_template_frame_ellipse_new (orig_frame->all.id,
+        case LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE:
+                frame =
+                        lgl_template_frame_ellipse_new (orig_frame->all.id,
                                                         orig_frame->ellipse.w,
                                                         orig_frame->ellipse.h,
                                                         orig_frame->ellipse.waste);
-		break;
+                break;
 
-	case LGL_TEMPLATE_FRAME_SHAPE_ROUND:
-		frame =
-			lgl_template_frame_round_new (orig_frame->all.id,
+        case LGL_TEMPLATE_FRAME_SHAPE_ROUND:
+                frame =
+                        lgl_template_frame_round_new (orig_frame->all.id,
                                                       orig_frame->round.r,
                                                       orig_frame->round.waste);
-		break;
+                break;
 
-	case LGL_TEMPLATE_FRAME_SHAPE_CD:
-		frame =
-			lgl_template_frame_cd_new (orig_frame->all.id,
+        case LGL_TEMPLATE_FRAME_SHAPE_CD:
+                frame =
+                        lgl_template_frame_cd_new (orig_frame->all.id,
                                                    orig_frame->cd.r1,
                                                    orig_frame->cd.r2,
                                                    orig_frame->cd.w,
                                                    orig_frame->cd.h,
                                                    orig_frame->cd.waste);
-		break;
+                break;
 
-	default:
-		return NULL;
-		break;
-	}
+        default:
+                return NULL;
+                break;
+        }
 
-	for ( p=orig_frame->all.layouts; p != NULL; p=p->next ) {
+        for ( p=orig_frame->all.layouts; p != NULL; p=p->next )
+        {
+                layout = (lglTemplateLayout *)p->data;
 
-		layout = (lglTemplateLayout *)p->data;
+                lgl_template_frame_add_layout (frame, lgl_template_layout_dup (layout));
+        }
 
-		lgl_template_frame_add_layout (frame, lgl_template_layout_dup (layout));
-	}
+        for ( p=orig_frame->all.markups; p != NULL; p=p->next )
+        {
+                markup = (lglTemplateMarkup *)p->data;
 
-	for ( p=orig_frame->all.markups; p != NULL; p=p->next ) {
+                lgl_template_frame_add_markup (frame, lgl_template_markup_dup (markup));
+        }
 
-		markup = (lglTemplateMarkup *)p->data;
-
-		lgl_template_frame_add_markup (frame, lgl_template_markup_dup (markup));
-	}
-
-	return frame;
+        return frame;
 }
 
 
@@ -1227,38 +1257,39 @@ lgl_template_frame_dup (const lglTemplateFrame *orig_frame)
 void
 lgl_template_frame_free (lglTemplateFrame *frame)
 {
-	GList                *p;
-	lglTemplateLayout    *layout;
-	lglTemplateMarkup    *markup;
+        GList                *p;
+        lglTemplateLayout    *layout;
+        lglTemplateMarkup    *markup;
 
-	if ( frame != NULL ) {
+        if ( frame != NULL )
+        {
 
-		g_free (frame->all.id);
-		frame->all.id = NULL;
+                g_free (frame->all.id);
+                frame->all.id = NULL;
 
-		for ( p=frame->all.layouts; p != NULL; p=p->next ) {
+                for ( p=frame->all.layouts; p != NULL; p=p->next )
+                {
+                        layout = (lglTemplateLayout *)p->data;
 
-			layout = (lglTemplateLayout *)p->data;
+                        lgl_template_layout_free (layout);
+                        p->data = NULL;
+                }
+                g_list_free (frame->all.layouts);
+                frame->all.layouts = NULL;
 
-			lgl_template_layout_free (layout);
-			p->data = NULL;
-		}
-		g_list_free (frame->all.layouts);
-		frame->all.layouts = NULL;
+                for ( p=frame->all.markups; p != NULL; p=p->next )
+                {
+                        markup = (lglTemplateMarkup *)p->data;
 
-		for ( p=frame->all.markups; p != NULL; p=p->next ) {
+                        lgl_template_markup_free (markup);
+                        p->data = NULL;
+                }
+                g_list_free (frame->all.markups);
+                frame->all.markups = NULL;
 
-			markup = (lglTemplateMarkup *)p->data;
+                g_free (frame);
 
-			lgl_template_markup_free (markup);
-			p->data = NULL;
-		}
-		g_list_free (frame->all.markups);
-		frame->all.markups = NULL;
-
-		g_free (frame);
-
-	}
+        }
 
 }
 
@@ -1275,16 +1306,16 @@ lgl_template_frame_free (lglTemplateFrame *frame)
 lglTemplateLayout *
 lgl_template_layout_dup (const lglTemplateLayout *orig_layout)
 {
-	lglTemplateLayout *layout;
+        lglTemplateLayout *layout;
 
-	g_return_val_if_fail (orig_layout, NULL);
+        g_return_val_if_fail (orig_layout, NULL);
 
-	layout = g_new0 (lglTemplateLayout, 1);
+        layout = g_new0 (lglTemplateLayout, 1);
 
-	/* copy contents */
-	*layout = *orig_layout;
+        /* copy contents */
+        *layout = *orig_layout;
 
-	return layout;
+        return layout;
 }
 
 
@@ -1298,7 +1329,7 @@ lgl_template_layout_dup (const lglTemplateLayout *orig_layout)
 void
 lgl_template_layout_free (lglTemplateLayout *layout)
 {
-	g_free (layout);
+        g_free (layout);
 }
 
 
@@ -1314,15 +1345,15 @@ lgl_template_layout_free (lglTemplateLayout *layout)
 lglTemplateMarkup *
 lgl_template_markup_dup (const lglTemplateMarkup *orig_markup)
 {
-	lglTemplateMarkup *markup;
+        lglTemplateMarkup *markup;
 
-	g_return_val_if_fail (orig_markup, NULL);
+        g_return_val_if_fail (orig_markup, NULL);
 
-	markup = g_new0 (lglTemplateMarkup, 1);
+        markup = g_new0 (lglTemplateMarkup, 1);
 
-	*markup = *orig_markup;
+        *markup = *orig_markup;
 
-	return markup;
+        return markup;
 }
 
 
@@ -1336,30 +1367,40 @@ lgl_template_markup_dup (const lglTemplateMarkup *orig_markup)
 void
 lgl_template_markup_free (lglTemplateMarkup *markup)
 {
-	g_free (markup);
+        g_free (markup);
 }
 
 
 static gint
 compare_origins (gconstpointer a,
-		 gconstpointer b,
-		 gpointer      user_data)
+                 gconstpointer b,
+                 gpointer      user_data)
 {
-	const lglTemplateOrigin *a_origin = a, *b_origin = b;
+        const lglTemplateOrigin *a_origin = a, *b_origin = b;
 
-	if ( a_origin->y < b_origin->y ) {
-		return -1;
-	} else if ( a_origin->y > b_origin->y ) {
-		return +1;
-	} else {
-		if ( a_origin->x < b_origin->x ) {
-			return -1;
-		} else if ( a_origin->x > b_origin->x ) {
-			return +1;
-		} else {
-			return 0; /* hopefully 2 labels won't have the same origin */
-		}
-	}
+        if ( a_origin->y < b_origin->y )
+        {
+                return -1;
+        }
+        else if ( a_origin->y > b_origin->y )
+        {
+                return +1;
+        }
+        else
+        {
+                if ( a_origin->x < b_origin->x )
+                {
+                        return -1;
+                }
+                else if ( a_origin->x > b_origin->x )
+                {
+                        return +1;
+                }
+                else
+                {
+                        return 0; /* hopefully 2 labels won't have the same origin */
+                }
+        }
 }
 
 

@@ -56,31 +56,33 @@
 GList *
 lgl_xml_category_read_categories_from_file (gchar *utf8_filename)
 {
-	gchar      *filename;
-	GList      *categories;
-	xmlDocPtr   categories_doc;
+        gchar      *filename;
+        GList      *categories;
+        xmlDocPtr   categories_doc;
 
-	LIBXML_TEST_VERSION;
+        LIBXML_TEST_VERSION;
 
-	filename = g_filename_from_utf8 (utf8_filename, -1, NULL, NULL, NULL);
-	if (!filename) {
-		g_message ("Utf8 filename conversion error");
-		return NULL;
-	}
+        filename = g_filename_from_utf8 (utf8_filename, -1, NULL, NULL, NULL);
+        if (!filename)
+        {
+                g_message ("Utf8 filename conversion error");
+                return NULL;
+        }
 
-	categories_doc = xmlParseFile (filename);
-	if (!categories_doc) {
-		g_message ("\"%s\" is not a glabels category file (not XML)",
-			   filename);
-		return NULL;
-	}
+        categories_doc = xmlParseFile (filename);
+        if (!categories_doc)
+        {
+                g_message ("\"%s\" is not a glabels category file (not XML)",
+                           filename);
+                return NULL;
+        }
 
-	categories = lgl_xml_category_parse_categories_doc (categories_doc);
+        categories = lgl_xml_category_parse_categories_doc (categories_doc);
 
-	g_free (filename);
-	xmlFreeDoc (categories_doc);
+        g_free (filename);
+        xmlFreeDoc (categories_doc);
 
-	return categories;
+        return categories;
 }
 
 
@@ -97,41 +99,49 @@ lgl_xml_category_read_categories_from_file (gchar *utf8_filename)
 GList *
 lgl_xml_category_parse_categories_doc (xmlDocPtr  categories_doc)
 {
-	GList       *categories = NULL;
-	xmlNodePtr   root, node;
-	lglCategory *category;
+        GList       *categories = NULL;
+        xmlNodePtr   root, node;
+        lglCategory *category;
 
-	LIBXML_TEST_VERSION;
+        LIBXML_TEST_VERSION;
 
-	root = xmlDocGetRootElement (categories_doc);
-	if (!root || !root->name) {
-		g_message ("\"%s\" is not a glabels category file (no root node)",
-			   categories_doc->name);
-		xmlFreeDoc (categories_doc);
-		return categories;
-	}
-	if (!lgl_xml_is_node (root, "Glabels-categories")) {
-		g_message ("\"%s\" is not a glabels category file (wrong root node)",
-			   categories_doc->name);
-		xmlFreeDoc (categories_doc);
-		return categories;
-	}
+        root = xmlDocGetRootElement (categories_doc);
+        if (!root || !root->name)
+        {
+                g_message ("\"%s\" is not a glabels category file (no root node)",
+                           categories_doc->name);
+                xmlFreeDoc (categories_doc);
+                return categories;
+        }
+        if (!lgl_xml_is_node (root, "Glabels-categories"))
+        {
+                g_message ("\"%s\" is not a glabels category file (wrong root node)",
+                           categories_doc->name);
+                xmlFreeDoc (categories_doc);
+                return categories;
+        }
 
-	for (node = root->xmlChildrenNode; node != NULL; node = node->next) {
+        for (node = root->xmlChildrenNode; node != NULL; node = node->next)
+        {
 
-		if (lgl_xml_is_node (node, "Category")) {
-			category = lgl_xml_category_parse_category_node (node);
-			categories = g_list_append (categories, category);
-		} else {
-			if ( !xmlNodeIsText(node) ) {
-				if (!lgl_xml_is_node (node, "comment")) {
-					g_message ("bad node =  \"%s\"",node->name);
-				}
-			}
-		}
-	}
+                if (lgl_xml_is_node (node, "Category"))
+                {
+                        category = lgl_xml_category_parse_category_node (node);
+                        categories = g_list_append (categories, category);
+                }
+                else
+                {
+                        if ( !xmlNodeIsText(node) )
+                        {
+                                if (!lgl_xml_is_node (node, "comment"))
+                                {
+                                        g_message ("bad node =  \"%s\"",node->name);
+                                }
+                        }
+                }
+        }
 
-	return categories;
+        return categories;
 }
 
 
@@ -147,20 +157,20 @@ lgl_xml_category_parse_categories_doc (xmlDocPtr  categories_doc)
 lglCategory *
 lgl_xml_category_parse_category_node (xmlNodePtr category_node)
 {
-	lglCategory           *category;
-	gchar                 *id, *name;
+        lglCategory           *category;
+        gchar                 *id, *name;
 
-	LIBXML_TEST_VERSION;
+        LIBXML_TEST_VERSION;
 
-	id   = lgl_xml_get_prop_string (category_node, "id", NULL);
-	name = lgl_xml_get_prop_i18n_string (category_node, "name", NULL);
+        id   = lgl_xml_get_prop_string (category_node, "id", NULL);
+        name = lgl_xml_get_prop_i18n_string (category_node, "name", NULL);
 
-	category = lgl_category_new (id, name);
+        category = lgl_category_new (id, name);
 
-	g_free (id);
-	g_free (name);
+        g_free (id);
+        g_free (name);
 
-	return category;
+        return category;
 }
 
 

@@ -60,24 +60,26 @@ static lglUnits  default_units        = LGL_UNITS_POINT;
  */
 gchar *
 lgl_xml_get_prop_string (xmlNodePtr   node,
-			 const gchar *property,
-			 const gchar *default_val)
+                         const gchar *property,
+                         const gchar *default_val)
 {
-	gchar   *val;
-	xmlChar *string;
+        gchar   *val;
+        xmlChar *string;
 
-	string = xmlGetProp (node, (xmlChar *)property);
-	if ( string != NULL ) {
-		val = g_strdup ((gchar *)string);
-		xmlFree (string);
-		return val;
-	}
+        string = xmlGetProp (node, (xmlChar *)property);
+        if ( string != NULL )
+        {
+                val = g_strdup ((gchar *)string);
+                xmlFree (string);
+                return val;
+        }
 
-	if (default_val) {
-		return g_strdup (default_val);
-	}
+        if (default_val)
+        {
+                return g_strdup (default_val);
+        }
 
-	return NULL;
+        return NULL;
 }
 
 
@@ -95,37 +97,38 @@ lgl_xml_get_prop_string (xmlNodePtr   node,
  */
 gchar *
 lgl_xml_get_prop_i18n_string (xmlNodePtr   node,
-			      const gchar *property,
-			      const gchar *default_val)
+                              const gchar *property,
+                              const gchar *default_val)
 {
-	gchar   *_property;
-	gchar   *val;
-	xmlChar *string;
+        gchar   *_property;
+        gchar   *val;
+        xmlChar *string;
 
-	_property = g_strdup_printf ("_%s", property);
-	string = xmlGetProp (node, (xmlChar *)_property);
-	g_free (_property);
+        _property = g_strdup_printf ("_%s", property);
+        string = xmlGetProp (node, (xmlChar *)_property);
+        g_free (_property);
 
-	if ( string != NULL ) {
+        if ( string != NULL )
+        {
+                val = g_strdup (gettext ((char *)string));
+                xmlFree (string);
+                return val;
+        }
 
-		val = g_strdup (gettext ((char *)string));
-		xmlFree (string);
-		return val;
+        string = xmlGetProp (node, (xmlChar *)property);
+        if ( string != NULL )
+        {
+                val = g_strdup ((gchar *)string);
+                xmlFree (string);
+                return val;
+        }
 
-	}
+        if (default_val)
+        {
+                return g_strdup (default_val);
+        }
 
-	string = xmlGetProp (node, (xmlChar *)property);
-	if ( string != NULL ) {
-		val = g_strdup ((gchar *)string);
-		xmlFree (string);
-		return val;
-	}
-
-	if (default_val) {
-		return g_strdup (default_val);
-	}
-
-	return NULL;
+        return NULL;
 }
 
 
@@ -142,20 +145,21 @@ lgl_xml_get_prop_i18n_string (xmlNodePtr   node,
  */
 gdouble
 lgl_xml_get_prop_double (xmlNodePtr   node,
-			 const gchar *property,
-			 gdouble      default_val)
+                         const gchar *property,
+                         gdouble      default_val)
 {
-	gdouble  val;
-	xmlChar *string;
+        gdouble  val;
+        xmlChar *string;
 
-	string = xmlGetProp (node, (xmlChar *)property);
-	if ( string != NULL ) {
-		val = g_strtod ((gchar *)string, NULL);
-		xmlFree (string);
-		return val;
-	}
+        string = xmlGetProp (node, (xmlChar *)property);
+        if ( string != NULL )
+        {
+                val = g_strtod ((gchar *)string, NULL);
+                xmlFree (string);
+                return val;
+        }
 
-	return default_val;
+        return default_val;
 }
 
 
@@ -172,21 +176,22 @@ lgl_xml_get_prop_double (xmlNodePtr   node,
  */
 gboolean
 lgl_xml_get_prop_boolean (xmlNodePtr   node,
-			 const gchar *property,
-			 gboolean     default_val)
+                         const gchar *property,
+                         gboolean     default_val)
 {
-	gboolean  val;
-	xmlChar  *string;
+        gboolean  val;
+        xmlChar  *string;
 
-	string = xmlGetProp (node, (xmlChar *)property);
-	if ( string != NULL ) {
-		val = !((xmlStrcasecmp (string, (xmlChar *)"false") == 0) ||
-			xmlStrEqual (string, (xmlChar *)"0"));;
-		xmlFree (string);
-		return val;
-	}
+        string = xmlGetProp (node, (xmlChar *)property);
+        if ( string != NULL )
+        {
+                val = !((xmlStrcasecmp (string, (xmlChar *)"false") == 0) ||
+                        xmlStrEqual (string, (xmlChar *)"0"));;
+                xmlFree (string);
+                return val;
+        }
 
-	return default_val;
+        return default_val;
 }
 
 
@@ -203,20 +208,21 @@ lgl_xml_get_prop_boolean (xmlNodePtr   node,
  */
 gint
 lgl_xml_get_prop_int (xmlNodePtr   node,
-		      const gchar *property,
-		      gint         default_val)
+                      const gchar *property,
+                      gint         default_val)
 {
-	gint     val;
-	xmlChar *string;
+        gint     val;
+        xmlChar *string;
 
-	string = xmlGetProp (node, (xmlChar *)property);
-	if ( string != NULL ) {
-		val = strtol ((char *)string, NULL, 0);
-		xmlFree (string);
-		return val;
-	}
+        string = xmlGetProp (node, (xmlChar *)property);
+        if ( string != NULL )
+        {
+                val = strtol ((char *)string, NULL, 0);
+                xmlFree (string);
+                return val;
+        }
 
-	return default_val;
+        return default_val;
 }
 
 
@@ -233,20 +239,21 @@ lgl_xml_get_prop_int (xmlNodePtr   node,
  */
 guint
 lgl_xml_get_prop_uint (xmlNodePtr   node,
-		       const gchar *property,
-		       guint        default_val)
+                       const gchar *property,
+                       guint        default_val)
 {
-	guint    val;
-	xmlChar *string;
+        guint    val;
+        xmlChar *string;
 
-	string = xmlGetProp (node, (xmlChar *)property);
-	if ( string != NULL ) {
-		val = strtoul ((char *)string, NULL, 0);
-		xmlFree (string);
-		return val;
-	}
+        string = xmlGetProp (node, (xmlChar *)property);
+        if ( string != NULL )
+        {
+                val = strtoul ((char *)string, NULL, 0);
+                xmlFree (string);
+                return val;
+        }
 
-	return default_val;
+        return default_val;
 }
 
 
@@ -268,21 +275,23 @@ lgl_xml_get_prop_uint (xmlNodePtr   node,
  */
 gdouble
 lgl_xml_get_prop_length (xmlNodePtr   node,
-			 const gchar *property,
-			 gdouble      default_val)
+                         const gchar *property,
+                         gdouble      default_val)
 {
-	gdouble  val;
-	xmlChar *string;
-	xmlChar *unit_id;
+        gdouble  val;
+        xmlChar *string;
+        xmlChar *unit_id;
         lglUnits units;
 
-	string = xmlGetProp (node, (xmlChar *)property);
-	if ( string != NULL ) {
+        string = xmlGetProp (node, (xmlChar *)property);
+        if ( string != NULL )
+        {
 
-		val = g_strtod ((gchar *)string, (gchar **)&unit_id);
+                val = g_strtod ((gchar *)string, (gchar **)&unit_id);
 
-		if (unit_id != string) {
-			unit_id = (xmlChar *)g_strchug ((gchar *)unit_id);
+                if (unit_id != string)
+                {
+                        unit_id = (xmlChar *)g_strchug ((gchar *)unit_id);
                         units = lgl_units_from_id ((gchar *)unit_id);
                         if (units != LGL_UNITS_INVALID)
                         {
@@ -293,16 +302,17 @@ lgl_xml_get_prop_length (xmlNodePtr   node,
                                 g_message ("Line %ld, Node \"%s\", Property \"%s\": Unknown unit \"%s\", assuming points",
                                            xmlGetLineNo (node), node->name, property, unit_id);
                         }
-		}
-		else {
-			val = 0.0;
-		}
+                }
+                else
+                {
+                        val = 0.0;
+                }
 
-		xmlFree (string);
-		return val;
-	}
+                xmlFree (string);
+                return val;
+        }
 
-	return default_val;
+        return default_val;
 }
 
 
@@ -317,12 +327,13 @@ lgl_xml_get_prop_length (xmlNodePtr   node,
  */
 void
 lgl_xml_set_prop_string (xmlNodePtr    node,
-			 const gchar  *property,
-			 const gchar  *val)
+                         const gchar  *property,
+                         const gchar  *val)
 {
-	if (val != NULL) {
-		xmlSetProp (node, (xmlChar *)property, (xmlChar *)val);
-	}
+        if (val != NULL)
+        {
+                xmlSetProp (node, (xmlChar *)property, (xmlChar *)val);
+        }
 }
 
 
@@ -337,15 +348,15 @@ lgl_xml_set_prop_string (xmlNodePtr    node,
  */
 void
 lgl_xml_set_prop_double (xmlNodePtr    node,
-			 const gchar  *property,
-			 gdouble       val)
+                         const gchar  *property,
+                         gdouble       val)
 {
-	gchar  *string, buffer[G_ASCII_DTOSTR_BUF_SIZE];
+        gchar  *string, buffer[G_ASCII_DTOSTR_BUF_SIZE];
 
-	/* Guarantee "C" locale by use of g_ascii_formatd */
-	string = g_ascii_formatd (buffer, G_ASCII_DTOSTR_BUF_SIZE, "%g", val);
+        /* Guarantee "C" locale by use of g_ascii_formatd */
+        string = g_ascii_formatd (buffer, G_ASCII_DTOSTR_BUF_SIZE, "%g", val);
 
-	xmlSetProp (node, (xmlChar *)property, (xmlChar *)string);
+        xmlSetProp (node, (xmlChar *)property, (xmlChar *)string);
 }
 
 
@@ -360,10 +371,10 @@ lgl_xml_set_prop_double (xmlNodePtr    node,
  */
 void
 lgl_xml_set_prop_boolean (xmlNodePtr    node,
-			  const gchar  *property,
-			  gboolean      val)
+                          const gchar  *property,
+                          gboolean      val)
 {
-	xmlSetProp (node, (xmlChar *)property, (xmlChar *)(val ? "True" : "False"));
+        xmlSetProp (node, (xmlChar *)property, (xmlChar *)(val ? "True" : "False"));
 }
 
 /**
@@ -377,14 +388,14 @@ lgl_xml_set_prop_boolean (xmlNodePtr    node,
  */
 void
 lgl_xml_set_prop_int (xmlNodePtr    node,
-		      const gchar  *property,
-		      gint          val)
+                      const gchar  *property,
+                      gint          val)
 {
-	gchar  *string;
+        gchar  *string;
 
-	string = g_strdup_printf ("%d", val);
-	xmlSetProp (node, (xmlChar *)property, (xmlChar *)string);
-	g_free (string);
+        string = g_strdup_printf ("%d", val);
+        xmlSetProp (node, (xmlChar *)property, (xmlChar *)string);
+        g_free (string);
 }
 
 /**
@@ -398,14 +409,14 @@ lgl_xml_set_prop_int (xmlNodePtr    node,
  */
 void
 lgl_xml_set_prop_uint_hex (xmlNodePtr    node,
-			   const gchar  *property,
-			   guint         val)
+                           const gchar  *property,
+                           guint         val)
 {
-	gchar  *string;
+        gchar  *string;
 
-	string = g_strdup_printf ("0x%08x", val);
-	xmlSetProp (node, (xmlChar *)property, (xmlChar *)string);
-	g_free (string);
+        string = g_strdup_printf ("0x%08x", val);
+        xmlSetProp (node, (xmlChar *)property, (xmlChar *)string);
+        g_free (string);
 }
 
 /**
@@ -422,20 +433,20 @@ lgl_xml_set_prop_uint_hex (xmlNodePtr    node,
  */
 void
 lgl_xml_set_prop_length (xmlNodePtr    node,
-			 const gchar  *property,
-			 gdouble       val)
+                         const gchar  *property,
+                         gdouble       val)
 {
-	gchar  *string, buffer[G_ASCII_DTOSTR_BUF_SIZE];
-	gchar  *string_unit;
+        gchar  *string, buffer[G_ASCII_DTOSTR_BUF_SIZE];
+        gchar  *string_unit;
 
-	/* Convert to default units */
-	val *= lgl_units_get_units_per_point (default_units);
+        /* Convert to default units */
+        val *= lgl_units_get_units_per_point (default_units);
 
-	/* Guarantee "C" locale by use of g_ascii_formatd */
-	string = g_ascii_formatd (buffer, G_ASCII_DTOSTR_BUF_SIZE, "%g", val);
+        /* Guarantee "C" locale by use of g_ascii_formatd */
+        string = g_ascii_formatd (buffer, G_ASCII_DTOSTR_BUF_SIZE, "%g", val);
 
-	string_unit = g_strdup_printf ("%s%s", string, lgl_units_get_id (default_units));
-	xmlSetProp (node, (xmlChar *)property, (xmlChar *)string_unit);
+        string_unit = g_strdup_printf ("%s%s", string, lgl_units_get_id (default_units));
+        xmlSetProp (node, (xmlChar *)property, (xmlChar *)string_unit);
         g_free (string_unit);
 }
 
@@ -451,9 +462,9 @@ lgl_xml_set_prop_length (xmlNodePtr    node,
  */
 gboolean
 lgl_xml_is_node (xmlNodePtr   node,
-		 const gchar *name)
+                 const gchar *name)
 {
-	return xmlStrEqual (node->name, (xmlChar *)name);
+        return xmlStrEqual (node->name, (xmlChar *)name);
 }
 
 
@@ -469,20 +480,19 @@ lgl_xml_is_node (xmlNodePtr   node,
 gchar *
 lgl_xml_get_node_content (xmlNodePtr   node)
 {
-	xmlChar *xml_content;
-	gchar   *g_content;
+        xmlChar *xml_content;
+        gchar   *g_content;
 
-	xml_content = xmlNodeGetContent (node);
+        xml_content = xmlNodeGetContent (node);
 
-	if (xml_content != NULL) {
+        if (xml_content != NULL)
+        {
+                g_content = g_strdup ((gchar *)xml_content);
+                xmlFree (xml_content);
+                return g_content;
+        }
 
-		g_content = g_strdup ((gchar *)xml_content);
-		xmlFree (xml_content);
-		return g_content;
-
-	}
-
-	return NULL;
+        return NULL;
 }
 
 
@@ -497,9 +507,9 @@ lgl_xml_get_node_content (xmlNodePtr   node)
 void
 lgl_xml_set_default_units (lglUnits   units)
 {
-	g_return_if_fail ((units >= LGL_UNITS_FIRST) && (units <= LGL_UNITS_LAST));
+        g_return_if_fail ((units >= LGL_UNITS_FIRST) && (units <= LGL_UNITS_LAST));
 
-	default_units = units;
+        default_units = units;
 }
 
 

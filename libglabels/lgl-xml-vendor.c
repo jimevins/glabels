@@ -56,31 +56,33 @@
 GList *
 lgl_xml_vendor_read_vendors_from_file (gchar *utf8_filename)
 {
-	gchar      *filename;
-	GList      *vendors;
-	xmlDocPtr   vendors_doc;
+        gchar      *filename;
+        GList      *vendors;
+        xmlDocPtr   vendors_doc;
 
-	LIBXML_TEST_VERSION;
+        LIBXML_TEST_VERSION;
 
-	filename = g_filename_from_utf8 (utf8_filename, -1, NULL, NULL, NULL);
-	if (!filename) {
-		g_message ("Utf8 filename conversion error");
-		return NULL;
-	}
+        filename = g_filename_from_utf8 (utf8_filename, -1, NULL, NULL, NULL);
+        if (!filename)
+        {
+                g_message ("Utf8 filename conversion error");
+                return NULL;
+        }
 
-	vendors_doc = xmlParseFile (filename);
-	if (!vendors_doc) {
-		g_message ("\"%s\" is not a glabels vendor file (not XML)",
-			   filename);
-		return NULL;
-	}
+        vendors_doc = xmlParseFile (filename);
+        if (!vendors_doc)
+        {
+                g_message ("\"%s\" is not a glabels vendor file (not XML)",
+                           filename);
+                return NULL;
+        }
 
-	vendors = lgl_xml_vendor_parse_vendors_doc (vendors_doc);
+        vendors = lgl_xml_vendor_parse_vendors_doc (vendors_doc);
 
-	g_free (filename);
-	xmlFreeDoc (vendors_doc);
+        g_free (filename);
+        xmlFreeDoc (vendors_doc);
 
-	return vendors;
+        return vendors;
 }
 
 
@@ -96,41 +98,48 @@ lgl_xml_vendor_read_vendors_from_file (gchar *utf8_filename)
 GList *
 lgl_xml_vendor_parse_vendors_doc (xmlDocPtr  vendors_doc)
 {
-	GList       *vendors = NULL;
-	xmlNodePtr   root, node;
-	lglVendor   *vendor;
+        GList       *vendors = NULL;
+        xmlNodePtr   root, node;
+        lglVendor   *vendor;
 
-	LIBXML_TEST_VERSION;
+        LIBXML_TEST_VERSION;
 
-	root = xmlDocGetRootElement (vendors_doc);
-	if (!root || !root->name) {
-		g_message ("\"%s\" is not a glabels vendor file (no root node)",
-			   vendors_doc->name);
-		xmlFreeDoc (vendors_doc);
-		return vendors;
-	}
-	if (!lgl_xml_is_node (root, "Glabels-vendors")) {
-		g_message ("\"%s\" is not a glabels vendor file (wrong root node)",
-			   vendors_doc->name);
-		xmlFreeDoc (vendors_doc);
-		return vendors;
-	}
+        root = xmlDocGetRootElement (vendors_doc);
+        if (!root || !root->name)
+        {
+                g_message ("\"%s\" is not a glabels vendor file (no root node)",
+                           vendors_doc->name);
+                xmlFreeDoc (vendors_doc);
+                return vendors;
+        }
+        if (!lgl_xml_is_node (root, "Glabels-vendors"))
+        {
+                g_message ("\"%s\" is not a glabels vendor file (wrong root node)",
+                           vendors_doc->name);
+                xmlFreeDoc (vendors_doc);
+                return vendors;
+        }
 
-	for (node = root->xmlChildrenNode; node != NULL; node = node->next) {
+        for (node = root->xmlChildrenNode; node != NULL; node = node->next)
+        {
+                if (lgl_xml_is_node (node, "Vendor"))
+                {
+                        vendor = lgl_xml_vendor_parse_vendor_node (node);
+                        vendors = g_list_append (vendors, vendor);
+                }
+                else
+                {
+                        if ( !xmlNodeIsText(node) )
+                        {
+                                if (!lgl_xml_is_node (node, "comment"))
+                                {
+                                        g_message ("bad node =  \"%s\"",node->name);
+                                }
+                        }
+                }
+        }
 
-		if (lgl_xml_is_node (node, "Vendor")) {
-			vendor = lgl_xml_vendor_parse_vendor_node (node);
-			vendors = g_list_append (vendors, vendor);
-		} else {
-			if ( !xmlNodeIsText(node) ) {
-				if (!lgl_xml_is_node (node, "comment")) {
-					g_message ("bad node =  \"%s\"",node->name);
-				}
-			}
-		}
-	}
-
-	return vendors;
+        return vendors;
 }
 
 
@@ -146,20 +155,20 @@ lgl_xml_vendor_parse_vendors_doc (xmlDocPtr  vendors_doc)
 lglVendor *
 lgl_xml_vendor_parse_vendor_node (xmlNodePtr vendor_node)
 {
-	lglVendor             *vendor;
-	gchar                 *name;
+        lglVendor             *vendor;
+        gchar                 *name;
 
-	LIBXML_TEST_VERSION;
+        LIBXML_TEST_VERSION;
 
-	name = lgl_xml_get_prop_i18n_string (vendor_node, "name", NULL);
+        name = lgl_xml_get_prop_i18n_string (vendor_node, "name", NULL);
 
-	vendor = lgl_vendor_new (name);
+        vendor = lgl_vendor_new (name);
 
         vendor->url = lgl_xml_get_prop_i18n_string (vendor_node, "url", NULL);
 
-	g_free (name);
+        g_free (name);
 
-	return vendor;
+        return vendor;
 }
 
 

@@ -51,23 +51,23 @@ typedef struct _lglTemplateOrigin          lglTemplateOrigin;
  */
 struct _lglTemplate {
 
-	gchar               *brand;
+        gchar               *brand;
         gchar               *part;
         gchar               *equiv_part;
 
-	gchar               *description;
-	gchar               *paper_id;
-	gdouble              page_width;
-	gdouble              page_height;
+        gchar               *description;
+        gchar               *paper_id;
+        gdouble              page_width;
+        gdouble              page_height;
 
         /* Meta information. */
         gchar               *product_url;   /* URL to manufacturer's product website. */
-	GList               *category_ids;  /* List of (gchar *) category ids. */
+        GList               *category_ids;  /* List of (gchar *) category ids. */
 
-	/* List of (lglTemplateFrame *) label frame structures.
-	 * Currently glabels only supports a single label frame per
-	 * template. */
-	GList               *frames;
+        /* List of (lglTemplateFrame *) label frame structures.
+         * Currently glabels only supports a single label frame per
+         * template. */
+        GList               *frames;
 
 };
 
@@ -76,10 +76,10 @@ struct _lglTemplate {
  *   Possible Frame Shapes
  */
 typedef enum {
-	LGL_TEMPLATE_FRAME_SHAPE_RECT,
-	LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE,
-	LGL_TEMPLATE_FRAME_SHAPE_ROUND,
-	LGL_TEMPLATE_FRAME_SHAPE_CD,
+        LGL_TEMPLATE_FRAME_SHAPE_RECT,
+        LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE,
+        LGL_TEMPLATE_FRAME_SHAPE_ROUND,
+        LGL_TEMPLATE_FRAME_SHAPE_CD,
 } lglTemplateFrameShape;
 
 
@@ -89,22 +89,22 @@ typedef enum {
 struct _lglTemplateFrameAll {
 
         /* Begin Common Fields */
-	lglTemplateFrameShape shape;
+        lglTemplateFrameShape shape;
 
-	gchar                *id;       /* Id, currently always "0" */
-	GList                *layouts;  /* List of lglTemplateLayouts */
-	GList                *markups;  /* List of lglTemplateMarkups */
+        gchar                *id;       /* Id, currently always "0" */
+        GList                *layouts;  /* List of lglTemplateLayouts */
+        GList                *markups;  /* List of lglTemplateMarkups */
         /* End Common Fields */
 };
 
 struct _lglTemplateFrameRect {
 
         /* Begin Common Fields */
-	lglTemplateFrameShape shape;    /* Always LGL_TEMPLATE_FRAME_SHAPE_RECT. */
+        lglTemplateFrameShape shape;    /* Always LGL_TEMPLATE_FRAME_SHAPE_RECT. */
 
-	gchar                *id;       /* Id, currently always "0" */
-	GList                *layouts;  /* List of lglTemplateLayouts */
-	GList                *markups;  /* List of lglTemplateMarkups */
+        gchar                *id;       /* Id, currently always "0" */
+        GList                *layouts;  /* List of lglTemplateLayouts */
+        GList                *markups;  /* List of lglTemplateMarkups */
         /* End Common Fields */
 
         gdouble               w;        /* Width */
@@ -117,11 +117,11 @@ struct _lglTemplateFrameRect {
 struct _lglTemplateFrameEllipse {
 
         /* Begin Common Fields */
-	lglTemplateFrameShape shape;    /* Always LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE. */
+        lglTemplateFrameShape shape;    /* Always LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE. */
 
-	gchar                *id;       /* Id, currently always "0" */
-	GList                *layouts;  /* List of lglTemplateLayouts */
-	GList                *markups;  /* List of lglTemplateMarkups */
+        gchar                *id;       /* Id, currently always "0" */
+        GList                *layouts;  /* List of lglTemplateLayouts */
+        GList                *markups;  /* List of lglTemplateMarkups */
         /* End Common Fields */
 
         gdouble               w;        /* Width */
@@ -132,11 +132,11 @@ struct _lglTemplateFrameEllipse {
 struct _lglTemplateFrameRound {
 
         /* Begin Common Fields */
-	lglTemplateFrameShape shape;    /* Always LGL_TEMPLATE_FRAME_SHAPE_ROUND. */
+        lglTemplateFrameShape shape;    /* Always LGL_TEMPLATE_FRAME_SHAPE_ROUND. */
 
-	gchar                *id;       /* Id, currently always "0" */
-	GList                *layouts;  /* List of lglTemplateLayouts */
-	GList                *markups;  /* List of lglTemplateMarkups */
+        gchar                *id;       /* Id, currently always "0" */
+        GList                *layouts;  /* List of lglTemplateLayouts */
+        GList                *markups;  /* List of lglTemplateMarkups */
         /* End Common Fields */
 
         gdouble               r;      /* Radius */
@@ -146,11 +146,11 @@ struct _lglTemplateFrameRound {
 struct _lglTemplateFrameCD {
 
         /* Begin Common Fields */
-	lglTemplateFrameShape shape;    /* Always LGL_TEMPLATE_FRAME_SHAPE_CD. */
+        lglTemplateFrameShape shape;    /* Always LGL_TEMPLATE_FRAME_SHAPE_CD. */
 
-	gchar                *id;       /* Id, currently always "0" */
-	GList                *layouts;  /* List of lglTemplateLayouts */
-	GList                *markups;  /* List of lglTemplateMarkups */
+        gchar                *id;       /* Id, currently always "0" */
+        GList                *layouts;  /* List of lglTemplateLayouts */
+        GList                *markups;  /* List of lglTemplateMarkups */
         /* End Common Fields */
 
         gdouble               r1;     /* Outer radius */
@@ -162,13 +162,13 @@ struct _lglTemplateFrameCD {
 
 union _lglTemplateFrame{
 
-	lglTemplateFrameShape   shape;
+        lglTemplateFrameShape   shape;
 
-	lglTemplateFrameAll     all;
-	lglTemplateFrameRect    rect;
-	lglTemplateFrameEllipse ellipse;
-	lglTemplateFrameRound   round;
-	lglTemplateFrameCD      cd;
+        lglTemplateFrameAll     all;
+        lglTemplateFrameRect    rect;
+        lglTemplateFrameEllipse ellipse;
+        lglTemplateFrameRound   round;
+        lglTemplateFrameCD      cd;
 };
 
 
@@ -177,14 +177,14 @@ union _lglTemplateFrame{
  */
 struct _lglTemplateLayout {
 
-	gint                  nx;  /* Number of labels across */
-	gint                  ny;  /* Number of labels up and down */
+        gint                  nx;  /* Number of labels across */
+        gint                  ny;  /* Number of labels up and down */
 
-	gdouble               x0;  /* Left of grid from left edge of paper */
-	gdouble               y0;  /* Top of grid from top edge of paper */
+        gdouble               x0;  /* Left of grid from left edge of paper */
+        gdouble               y0;  /* Top of grid from top edge of paper */
 
-	gdouble               dx;  /* Horizontal pitch of grid */
-	gdouble               dy;  /* Vertical pitch of grid */
+        gdouble               dx;  /* Horizontal pitch of grid */
+        gdouble               dy;  /* Vertical pitch of grid */
 
 };
 
@@ -193,11 +193,11 @@ struct _lglTemplateLayout {
  * Possible Markup Types
  */
 typedef enum {
-	LGL_TEMPLATE_MARKUP_MARGIN,
-	LGL_TEMPLATE_MARKUP_LINE,
-	LGL_TEMPLATE_MARKUP_CIRCLE,
-	LGL_TEMPLATE_MARKUP_RECT,
-	LGL_TEMPLATE_MARKUP_ELLIPSE,
+        LGL_TEMPLATE_MARKUP_MARGIN,
+        LGL_TEMPLATE_MARKUP_LINE,
+        LGL_TEMPLATE_MARKUP_CIRCLE,
+        LGL_TEMPLATE_MARKUP_RECT,
+        LGL_TEMPLATE_MARKUP_ELLIPSE,
 } lglTemplateMarkupType;
 
 
@@ -206,14 +206,14 @@ typedef enum {
  */
 struct _lglTemplateMarkupMargin {
 
-	lglTemplateMarkupType  type;  /* Always LGL_TEMPLATE_MARKUP_MARGIN */
+        lglTemplateMarkupType  type;  /* Always LGL_TEMPLATE_MARKUP_MARGIN */
 
         gdouble                size;  /* Margin size */
 };
 
 struct _lglTemplateMarkupLine {
 
-	lglTemplateMarkupType  type;   /* Always LGL_TEMPLATE_MARKUP_LINE */
+        lglTemplateMarkupType  type;   /* Always LGL_TEMPLATE_MARKUP_LINE */
 
         gdouble                x1, y1; /* 1st endpoint */
         gdouble                x2, y2; /* 2nd endpoint */
@@ -221,7 +221,7 @@ struct _lglTemplateMarkupLine {
 
 struct _lglTemplateMarkupCircle {
 
-	lglTemplateMarkupType  type;   /* Always LGL_TEMPLATE_MARKUP_CIRCLE */
+        lglTemplateMarkupType  type;   /* Always LGL_TEMPLATE_MARKUP_CIRCLE */
 
         gdouble                x0, y0; /* Center of circle */
         gdouble                r;      /* Radius of circle */
@@ -229,7 +229,7 @@ struct _lglTemplateMarkupCircle {
 
 struct _lglTemplateMarkupRect {
 
-	lglTemplateMarkupType  type;   /* Always LGL_TEMPLATE_MARKUP_RECT */
+        lglTemplateMarkupType  type;   /* Always LGL_TEMPLATE_MARKUP_RECT */
 
         gdouble                x1, y1; /* Upper left corner */
         gdouble                w, h;   /* Width and height. */
@@ -238,7 +238,7 @@ struct _lglTemplateMarkupRect {
 
 struct _lglTemplateMarkupEllipse {
 
-	lglTemplateMarkupType  type;   /* Always LGL_TEMPLATE_MARKUP_ELLIPSE */
+        lglTemplateMarkupType  type;   /* Always LGL_TEMPLATE_MARKUP_ELLIPSE */
 
         gdouble                x1, y1; /* Upper left corner */
         gdouble                w, h;   /* Width and height. */
@@ -246,13 +246,13 @@ struct _lglTemplateMarkupEllipse {
 
 union _lglTemplateMarkup {
 
-	lglTemplateMarkupType    type;
+        lglTemplateMarkupType    type;
 
-	lglTemplateMarkupMargin  margin;
-	lglTemplateMarkupLine    line;
-	lglTemplateMarkupCircle  circle;
-	lglTemplateMarkupRect    rect;
-	lglTemplateMarkupEllipse ellipse;
+        lglTemplateMarkupMargin  margin;
+        lglTemplateMarkupLine    line;
+        lglTemplateMarkupCircle  circle;
+        lglTemplateMarkupRect    rect;
+        lglTemplateMarkupEllipse ellipse;
 };
 
 
@@ -261,8 +261,8 @@ union _lglTemplateMarkup {
  */
 struct _lglTemplateOrigin {
 
-	gdouble               x, y; /* Label origin relative to upper 
-				     * upper left hand corner of paper */
+        gdouble               x, y; /* Label origin relative to upper 
+                                     * upper left hand corner of paper */
 
 };
 

@@ -34,66 +34,66 @@ G_BEGIN_DECLS
  * Get property functions
  */
 gchar *  lgl_xml_get_prop_string   (xmlNodePtr    node,
-				    const gchar  *property,
-				    const gchar  *default_val);
+                                    const gchar  *property,
+                                    const gchar  *default_val);
 
 gchar *  lgl_xml_get_prop_i18n_string (xmlNodePtr    node,
-				       const gchar  *property,
-				       const gchar  *default_val);
+                                       const gchar  *property,
+                                       const gchar  *default_val);
 
 gdouble  lgl_xml_get_prop_double   (xmlNodePtr    node,
-				    const gchar  *property,
-				    gdouble       default_val);
+                                    const gchar  *property,
+                                    gdouble       default_val);
 
 gboolean lgl_xml_get_prop_boolean  (xmlNodePtr    node,
-				    const gchar  *property,
-				    gboolean      default_val);
+                                    const gchar  *property,
+                                    gboolean      default_val);
 
 gint     lgl_xml_get_prop_int      (xmlNodePtr    node,
-				    const gchar  *property,
-				    gint          default_val);
+                                    const gchar  *property,
+                                    gint          default_val);
 
 guint    lgl_xml_get_prop_uint     (xmlNodePtr    node,
-				    const gchar  *property,
-				    guint         default_val);
+                                    const gchar  *property,
+                                    guint         default_val);
 
 gdouble  lgl_xml_get_prop_length   (xmlNodePtr    node,
-				    const gchar  *property,
-				    gdouble       default_val);
+                                    const gchar  *property,
+                                    gdouble       default_val);
 
 
 /*
  * Set property functions
  */
 void     lgl_xml_set_prop_string   (xmlNodePtr    node,
-				    const gchar  *property,
-				    const gchar  *val);
+                                    const gchar  *property,
+                                    const gchar  *val);
 
 void     lgl_xml_set_prop_double   (xmlNodePtr    node,
-				    const gchar  *property,
-				    gdouble       val);
+                                    const gchar  *property,
+                                    gdouble       val);
 
 void     lgl_xml_set_prop_boolean  (xmlNodePtr    node,
-				    const gchar  *property,
-				    gboolean      val);
+                                    const gchar  *property,
+                                    gboolean      val);
 
 void     lgl_xml_set_prop_int      (xmlNodePtr    node,
-				    const gchar  *property,
-				    gint          val);
+                                    const gchar  *property,
+                                    gint          val);
 
 void     lgl_xml_set_prop_uint_hex (xmlNodePtr    node,
-				    const gchar  *property,
-				    guint         val);
+                                    const gchar  *property,
+                                    guint         val);
 
 void     lgl_xml_set_prop_length   (xmlNodePtr    node,
-				    const gchar  *property,
-				    gdouble       val);
+                                    const gchar  *property,
+                                    gdouble       val);
 
 /*
  * Other node functions
  */
 gboolean lgl_xml_is_node           (xmlNodePtr    node,
-				    const gchar  *name);
+                                    const gchar  *name);
 
 gchar *  lgl_xml_get_node_content  (xmlNodePtr    node);
 

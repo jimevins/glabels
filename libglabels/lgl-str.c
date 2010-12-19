@@ -124,9 +124,9 @@ lgl_str_part_name_cmp (const gchar *s1,
         gboolean done;
         gint   result;
 
-	if ( s1 == s2 ) return 0;
-	if (s1 == NULL) return -1;
-	if (s2 == NULL) return 1;
+        if ( s1 == s2 ) return 0;
+        if (s1 == NULL) return -1;
+        if (s2 == NULL) return 1;
 
         folded_s1 = g_utf8_casefold (s1, -1);
         folded_s2 = g_utf8_casefold (s2, -1);
@@ -160,7 +160,7 @@ lgl_str_part_name_cmp (const gchar *s1,
                         isnum2 = FALSE;
                 }
 
-                if ( (strlen(chunk1) == 0) && (strlen(chunk2) == 0) )
+                if ( (*chunk1 == '\0') && (*chunk2 == '\0') )
                 {
                         /* Case 1: Both are empty. */
                         done = TRUE;
@@ -233,37 +233,43 @@ span_non_digits (gchar **p)
 gchar *
 lgl_str_format_fraction (gdouble x)
 {
-	static gdouble denom[]        = {  1.,  2., 3.,  4.,  8.,  16.,  32.,  0. };
+        static gdouble denom[]        = {  1.,  2., 3.,  4.,  8.,  16.,  32.,  0. };
         static gchar  *denom_string[] = { "1", "₂", "₃", "₄", "₈", "₁₆", "₃₂", NULL };
         static gchar  *num_string[]   = {  "⁰",  "¹",  "²",  "³",  "⁴",  "⁵",  "⁶",  "⁷",  "⁸",  "⁹",
                                           "¹⁰", "¹¹", "¹²", "¹³", "¹⁴", "¹⁵", "¹⁶", "¹⁷", "¹⁸", "¹⁹",
                                           "²⁰", "²¹", "²²", "²³", "²⁴", "²⁵", "²⁶", "²⁷", "²⁸", "²⁹",
                                           "³⁰", "³¹" };
-	gint i;
-	gdouble product, remainder;
-	gint n, d;
+        gint i;
+        gdouble product, remainder;
+        gint n, d;
 
-	for ( i=0; denom[i] != 0.0; i++ ) {
-		product = x * denom[i];
-		remainder = fabs(product - ((gint)(product+0.5)));
-		if ( remainder < FRAC_EPSILON ) break;
-	}
+        for ( i=0; denom[i] != 0.0; i++ )
+        {
+                product = x * denom[i];
+                remainder = fabs(product - ((gint)(product+0.5)));
+                if ( remainder < FRAC_EPSILON ) break;
+        }
 
-	if ( denom[i] == 0.0 ) {
-		/* None of our denominators work. */
-		return g_strdup_printf ("%.5g", x);
-	}
-	if ( denom[i] == 1.0 ) {
-		/* Simple integer. */
-		return g_strdup_printf ("%.0f", x);
-	}
-	n = (gint)( x * denom[i] + 0.5 );
-	d = (gint)denom[i];
-	if ( n > d ) {
-		return g_strdup_printf ("%d%s/%s", (n/d), num_string[n%d], denom_string[i]);
-	} else {
-		return g_strdup_printf ("%s/%s", num_string[n%d], denom_string[i]);
-	}
+        if ( denom[i] == 0.0 )
+        {
+                /* None of our denominators work. */
+                return g_strdup_printf ("%.5g", x);
+        }
+        if ( denom[i] == 1.0 )
+        {
+                /* Simple integer. */
+                return g_strdup_printf ("%.0f", x);
+        }
+        n = (gint)( x * denom[i] + 0.5 );
+        d = (gint)denom[i];
+        if ( n > d )
+        {
+                return g_strdup_printf ("%d%s/%s", (n/d), num_string[n%d], denom_string[i]);
+        }
+        else
+        {
+                return g_strdup_printf ("%s/%s", num_string[n%d], denom_string[i]);
+        }
 }
 
 

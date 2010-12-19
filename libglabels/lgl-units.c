@@ -45,9 +45,9 @@
 /*========================================================*/
 
 typedef struct {
-	gchar       *id;
-	gchar       *name;
-	gdouble      points_per_unit;
+        gchar       *id;
+        gchar       *name;
+        gdouble      points_per_unit;
 } UnitTableEntry;
 
 
@@ -57,16 +57,16 @@ typedef struct {
 
 static UnitTableEntry unit_table[] = {
 
-	/* The ids are identical to the absolute length units supported in
-	   the CSS2 Specification (Section 4.3.2) */
+        /* The ids are identical to the absolute length units supported in
+           the CSS2 Specification (Section 4.3.2) */
 
-	/* This table must be sorted exactly as the enumerations in lglUnits */
+        /* This table must be sorted exactly as the enumerations in lglUnits */
 
-	/* [LGL_UNITS_POINT] */   {"pt", N_("points"), POINTS_PER_POINT},
-	/* [LGL_UNITS_INCH]  */   {"in", N_("inches"), POINTS_PER_INCH},
-	/* [LGL_UNITS_MM]    */   {"mm", N_("mm"),     POINTS_PER_MM},
-	/* [LGL_UNITS_CM]    */   {"cm", N_("cm"),     POINTS_PER_CM},
-	/* [LGL_UNITS_PICA]  */   {"pc", N_("picas"),  POINTS_PER_PICA},
+        /* [LGL_UNITS_POINT] */   {"pt", N_("points"), POINTS_PER_POINT},
+        /* [LGL_UNITS_INCH]  */   {"in", N_("inches"), POINTS_PER_INCH},
+        /* [LGL_UNITS_MM]    */   {"mm", N_("mm"),     POINTS_PER_MM},
+        /* [LGL_UNITS_CM]    */   {"cm", N_("cm"),     POINTS_PER_CM},
+        /* [LGL_UNITS_PICA]  */   {"pc", N_("picas"),  POINTS_PER_PICA},
 
 };
 
@@ -117,26 +117,31 @@ lgl_units_from_id (const gchar *id)
         lglUnits units;
 
         /* An empty or missing id defaults to points. */
-        if ( (id == NULL) || (strlen (id) == 0) )
+        if ( (id == NULL) || (*id == '\0') )
         {
                 return LGL_UNITS_POINT;
         }
 
-        for ( units = LGL_UNITS_FIRST; units <= LGL_UNITS_LAST; units++) {
-                if (g_ascii_strcasecmp (id, unit_table[units].id) == 0) {
+        for ( units = LGL_UNITS_FIRST; units <= LGL_UNITS_LAST; units++)
+        {
+                if (g_ascii_strcasecmp (id, unit_table[units].id) == 0)
+                {
                         return units;
                 }
         }
 
         /* Try name as a fallback. (Will catch some legacy preferences.) */
-        for ( units = LGL_UNITS_FIRST; units <= LGL_UNITS_LAST; units++) {
-                if (g_ascii_strcasecmp (id, unit_table[units].name) == 0) {
+        for ( units = LGL_UNITS_FIRST; units <= LGL_UNITS_LAST; units++)
+        {
+                if (g_ascii_strcasecmp (id, unit_table[units].name) == 0)
+                {
                         return units;
                 }
         }
 
         /* For compatibility with old preferences. */
-        if (g_ascii_strcasecmp (id, "Millimeters") == 0) {
+        if (g_ascii_strcasecmp (id, "Millimeters") == 0)
+        {
                 return LGL_UNITS_MM;
         }
 
@@ -184,8 +189,10 @@ lgl_units_from_name (const gchar *name)
 {
         lglUnits units;
 
-        for ( units = LGL_UNITS_FIRST; units <= LGL_UNITS_LAST; units++) {
-                if (g_ascii_strcasecmp (name, gettext ((char *)unit_table[units].name) ) == 0) {
+        for ( units = LGL_UNITS_FIRST; units <= LGL_UNITS_LAST; units++)
+        {
+                if (g_ascii_strcasecmp (name, gettext ((char *)unit_table[units].name) ) == 0)
+                {
                         return units;
                 }
         }

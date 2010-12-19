@@ -59,13 +59,13 @@
 lglVendor *
 lgl_vendor_new (gchar             *name)
 {
-	lglVendor *vendor;
+        lglVendor *vendor;
 
-	vendor           = g_new0 (lglVendor,1);
+        vendor           = g_new0 (lglVendor,1);
 
-	vendor->name     = g_strdup (name);
+        vendor->name     = g_strdup (name);
 
-	return vendor;
+        return vendor;
 }
 
 
@@ -80,16 +80,16 @@ lgl_vendor_new (gchar             *name)
  */
 lglVendor *lgl_vendor_dup (const lglVendor *orig)
 {
-	lglVendor       *vendor;
+        lglVendor       *vendor;
 
-	g_return_val_if_fail (orig, NULL);
+        g_return_val_if_fail (orig, NULL);
 
-	vendor = g_new0 (lglVendor,1);
+        vendor = g_new0 (lglVendor,1);
 
-	vendor->name  = g_strdup (orig->name);
-	vendor->url   = g_strdup (orig->url);
+        vendor->name  = g_strdup (orig->name);
+        vendor->url   = g_strdup (orig->url);
 
-	return vendor;
+        return vendor;
 }
 
 
@@ -103,16 +103,16 @@ lglVendor *lgl_vendor_dup (const lglVendor *orig)
 void lgl_vendor_free (lglVendor *vendor)
 {
 
-	if ( vendor != NULL ) {
+        if ( vendor != NULL )
+        {
+                g_free (vendor->name);
+                vendor->name = NULL;
 
-		g_free (vendor->name);
-		vendor->name = NULL;
+                g_free (vendor->url);
+                vendor->url = NULL;
 
-		g_free (vendor->url);
-		vendor->url = NULL;
-
-		g_free (vendor);
-	}
+                g_free (vendor);
+        }
 
 }
 

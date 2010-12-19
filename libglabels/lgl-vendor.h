@@ -32,8 +32,8 @@ G_BEGIN_DECLS
 typedef struct _lglVendor lglVendor;
 
 struct _lglVendor {
-	gchar               *name;           /* Vendor name */
-	gchar               *url;            /* Vendor URL */
+        gchar               *name;           /* Vendor name */
+        gchar               *url;            /* Vendor URL */
 };
 
 

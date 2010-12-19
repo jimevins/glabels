@@ -63,13 +63,13 @@ lglCategory *
 lgl_category_new (gchar             *id,
                   gchar             *name)
 {
-	lglCategory *category;
+        lglCategory *category;
 
-	category         = g_new0 (lglCategory,1);
-	category->id     = g_strdup (id);
-	category->name   = g_strdup (name);
+        category         = g_new0 (lglCategory,1);
+        category->id     = g_strdup (id);
+        category->name   = g_strdup (name);
 
-	return category;
+        return category;
 }
 
 
@@ -84,16 +84,16 @@ lgl_category_new (gchar             *id,
  */
 lglCategory *lgl_category_dup (const lglCategory *orig)
 {
-	lglCategory       *category;
+        lglCategory       *category;
 
-	g_return_val_if_fail (orig, NULL);
+        g_return_val_if_fail (orig, NULL);
 
-	category = g_new0 (lglCategory,1);
+        category = g_new0 (lglCategory,1);
 
-	category->id     = g_strdup (orig->id);
-	category->name   = g_strdup (orig->name);
+        category->id     = g_strdup (orig->id);
+        category->name   = g_strdup (orig->name);
 
-	return category;
+        return category;
 }
 
 
@@ -107,16 +107,16 @@ lglCategory *lgl_category_dup (const lglCategory *orig)
 void lgl_category_free (lglCategory *category)
 {
 
-	if ( category != NULL ) {
+        if ( category != NULL )
+        {
+                g_free (category->id);
+                category->id = NULL;
 
-		g_free (category->id);
-		category->id = NULL;
+                g_free (category->name);
+                category->name = NULL;
 
-		g_free (category->name);
-		category->name = NULL;
-
-		g_free (category);
-	}
+                g_free (category);
+        }
 
 }
 

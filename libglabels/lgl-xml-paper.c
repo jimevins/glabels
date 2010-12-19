@@ -56,31 +56,33 @@
 GList *
 lgl_xml_paper_read_papers_from_file (gchar *utf8_filename)
 {
-	gchar      *filename;
-	GList      *papers;
-	xmlDocPtr   papers_doc;
+        gchar      *filename;
+        GList      *papers;
+        xmlDocPtr   papers_doc;
 
-	LIBXML_TEST_VERSION;
+        LIBXML_TEST_VERSION;
 
-	filename = g_filename_from_utf8 (utf8_filename, -1, NULL, NULL, NULL);
-	if (!filename) {
-		g_message ("Utf8 filename conversion error");
-		return NULL;
-	}
+        filename = g_filename_from_utf8 (utf8_filename, -1, NULL, NULL, NULL);
+        if (!filename)
+        {
+                g_message ("Utf8 filename conversion error");
+                return NULL;
+        }
 
-	papers_doc = xmlParseFile (filename);
-	if (!papers_doc) {
-		g_message ("\"%s\" is not a glabels paper file (not XML)",
-			   filename);
-		return NULL;
-	}
+        papers_doc = xmlParseFile (filename);
+        if (!papers_doc)
+        {
+                g_message ("\"%s\" is not a glabels paper file (not XML)",
+                           filename);
+                return NULL;
+        }
 
-	papers = lgl_xml_paper_parse_papers_doc (papers_doc);
+        papers = lgl_xml_paper_parse_papers_doc (papers_doc);
 
-	g_free (filename);
-	xmlFreeDoc (papers_doc);
+        g_free (filename);
+        xmlFreeDoc (papers_doc);
 
-	return papers;
+        return papers;
 }
 
 
@@ -96,41 +98,49 @@ lgl_xml_paper_read_papers_from_file (gchar *utf8_filename)
 GList *
 lgl_xml_paper_parse_papers_doc (xmlDocPtr  papers_doc)
 {
-	GList      *papers = NULL;
-	xmlNodePtr  root, node;
-	lglPaper   *paper;
+        GList      *papers = NULL;
+        xmlNodePtr  root, node;
+        lglPaper   *paper;
 
-	LIBXML_TEST_VERSION;
+        LIBXML_TEST_VERSION;
 
-	root = xmlDocGetRootElement (papers_doc);
-	if (!root || !root->name) {
-		g_message ("\"%s\" is not a glabels paper file (no root node)",
-			   papers_doc->name);
-		xmlFreeDoc (papers_doc);
-		return papers;
-	}
-	if (!lgl_xml_is_node (root, "Glabels-paper-sizes")) {
-		g_message ("\"%s\" is not a glabels paper file (wrong root node)",
-			   papers_doc->name);
-		xmlFreeDoc (papers_doc);
-		return papers;
-	}
+        root = xmlDocGetRootElement (papers_doc);
+        if (!root || !root->name)
+        {
+                g_message ("\"%s\" is not a glabels paper file (no root node)",
+                           papers_doc->name);
+                xmlFreeDoc (papers_doc);
+                return papers;
+        }
+        if (!lgl_xml_is_node (root, "Glabels-paper-sizes"))
+        {
+                g_message ("\"%s\" is not a glabels paper file (wrong root node)",
+                           papers_doc->name);
+                xmlFreeDoc (papers_doc);
+                return papers;
+        }
 
-	for (node = root->xmlChildrenNode; node != NULL; node = node->next) {
+        for (node = root->xmlChildrenNode; node != NULL; node = node->next)
+        {
 
-		if (lgl_xml_is_node (node, "Paper-size")) {
-			paper = lgl_xml_paper_parse_paper_node (node);
-			papers = g_list_append (papers, paper);
-		} else {
-			if ( !xmlNodeIsText(node) ) {
-				if (!lgl_xml_is_node (node, "comment")) {
-					g_message ("bad node =  \"%s\"",node->name);
-				}
-			}
-		}
-	}
+                if (lgl_xml_is_node (node, "Paper-size"))
+                {
+                        paper = lgl_xml_paper_parse_paper_node (node);
+                        papers = g_list_append (papers, paper);
+                }
+                else
+                {
+                        if ( !xmlNodeIsText(node) )
+                        {
+                                if (!lgl_xml_is_node (node, "comment"))
+                                {
+                                        g_message ("bad node =  \"%s\"",node->name);
+                                }
+                        }
+                }
+        }
 
-	return papers;
+        return papers;
 }
 
 
@@ -146,28 +156,28 @@ lgl_xml_paper_parse_papers_doc (xmlDocPtr  papers_doc)
 lglPaper *
 lgl_xml_paper_parse_paper_node (xmlNodePtr paper_node)
 {
-	lglPaper              *paper;
-	gchar                 *id, *name, *pwg_size;
-	gdouble                width, height;
+        lglPaper              *paper;
+        gchar                 *id, *name, *pwg_size;
+        gdouble                width, height;
 
-	LIBXML_TEST_VERSION;
+        LIBXML_TEST_VERSION;
 
-	id   = lgl_xml_get_prop_string (paper_node, "id", NULL);
+        id   = lgl_xml_get_prop_string (paper_node, "id", NULL);
 
-	name = lgl_xml_get_prop_i18n_string (paper_node, "name", NULL);
+        name = lgl_xml_get_prop_i18n_string (paper_node, "name", NULL);
 
-	width  = lgl_xml_get_prop_length (paper_node, "width", 0);
-	height = lgl_xml_get_prop_length (paper_node, "height", 0);
+        width  = lgl_xml_get_prop_length (paper_node, "width", 0);
+        height = lgl_xml_get_prop_length (paper_node, "height", 0);
 
-	pwg_size = lgl_xml_get_prop_string (paper_node, "pwg_size", NULL);
+        pwg_size = lgl_xml_get_prop_string (paper_node, "pwg_size", NULL);
 
-	paper = lgl_paper_new (id, name, width, height, pwg_size);
+        paper = lgl_paper_new (id, name, width, height, pwg_size);
 
-	g_free (id);
-	g_free (name);
-	g_free (pwg_size);
+        g_free (id);
+        g_free (name);
+        g_free (pwg_size);
 
-	return paper;
+        return paper;
 }
 
 

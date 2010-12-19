@@ -31,8 +31,8 @@ G_BEGIN_DECLS
 typedef struct _lglCategory lglCategory;
 
 struct _lglCategory {
-	gchar               *id;     /* Unique ID of category */
-	gchar               *name;   /* Localized name of category */
+        gchar               *id;     /* Unique ID of category */
+        gchar               *name;   /* Localized name of category */
 };
 
 

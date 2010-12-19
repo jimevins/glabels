@@ -63,22 +63,22 @@
  */
 lglPaper *
 lgl_paper_new (gchar             *id,
-	       gchar             *name,
-	       gdouble            width,
-	       gdouble            height,
-	       gchar             *pwg_size)
+               gchar             *name,
+               gdouble            width,
+               gdouble            height,
+               gchar             *pwg_size)
 {
-	lglPaper *paper;
+        lglPaper *paper;
 
-	paper           = g_new0 (lglPaper,1);
+        paper           = g_new0 (lglPaper,1);
 
-	paper->id       = g_strdup (id);
-	paper->name     = g_strdup (name);
-	paper->width    = width;
-	paper->height   = height;
-	paper->pwg_size = g_strdup (pwg_size);
+        paper->id       = g_strdup (id);
+        paper->name     = g_strdup (name);
+        paper->width    = width;
+        paper->height   = height;
+        paper->pwg_size = g_strdup (pwg_size);
 
-	return paper;
+        return paper;
 }
 
 
@@ -93,19 +93,19 @@ lgl_paper_new (gchar             *id,
  */
 lglPaper *lgl_paper_dup (const lglPaper *orig)
 {
-	lglPaper       *paper;
+        lglPaper       *paper;
 
-	g_return_val_if_fail (orig, NULL);
+        g_return_val_if_fail (orig, NULL);
 
-	paper = g_new0 (lglPaper,1);
+        paper = g_new0 (lglPaper,1);
 
-	paper->id       = g_strdup (orig->id);
-	paper->name     = g_strdup (orig->name);
-	paper->width    = orig->width;
-	paper->height   = orig->height;
-	paper->pwg_size = g_strdup (orig->pwg_size);
+        paper->id       = g_strdup (orig->id);
+        paper->name     = g_strdup (orig->name);
+        paper->width    = orig->width;
+        paper->height   = orig->height;
+        paper->pwg_size = g_strdup (orig->pwg_size);
 
-	return paper;
+        return paper;
 }
 
 
@@ -119,19 +119,19 @@ lglPaper *lgl_paper_dup (const lglPaper *orig)
 void lgl_paper_free (lglPaper *paper)
 {
 
-	if ( paper != NULL ) {
+        if ( paper != NULL )
+        {
+                g_free (paper->id);
+                paper->id = NULL;
 
-		g_free (paper->id);
-		paper->id = NULL;
+                g_free (paper->name);
+                paper->name = NULL;
 
-		g_free (paper->name);
-		paper->name = NULL;
+                g_free (paper->pwg_size);
+                paper->pwg_size = NULL;
 
-		g_free (paper->pwg_size);
-		paper->pwg_size = NULL;
-
-		g_free (paper);
-	}
+                g_free (paper);
+        }
 
 }
 
