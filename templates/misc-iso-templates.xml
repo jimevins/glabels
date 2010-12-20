@@ -167,25 +167,6 @@
 
   <!-- ************************* -->
   <!--                           -->
-  <!-- Dataline                  -->
-  <!--                           -->
-  <!-- ************************* -->
-
-  <!-- =================================================================== -->
-  <!-- Dataline 57125: Business Cards, 54.0 x 86.0 mm, 10 per sheet        -->
-  <!-- =================================================================== -->
-  <Template brand="Dataline" part="57125" size="A4" _description="Business Cards">
-    <Meta category="card"/>
-    <Meta category="business-card"/>
-    <Label-rectangle id="0" width="86.00mm" height="54.00mm" round="0">
-      <Markup-margin size="0mm"/>
-      <Layout nx="2" ny="5" x0="16mm" y0="11mm" dx="91mm" dy="55.625mm"/>
-    </Label-rectangle>
-  </Template>
-
-
-  <!-- ************************* -->
-  <!--                           -->
   <!-- Ednet                     -->
   <!--                           -->
   <!-- ************************* -->
