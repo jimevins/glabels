@@ -754,6 +754,7 @@
                           <object class="GtkVBox" id="vbox2">
                             <property name="visible">True</property>
                             <property name="spacing">6</property>
+			    <property name="vexpand">False</property>
                             <child>
                               <object class="GtkHBox" id="hbox38">
                                 <property name="visible">True</property>
@@ -874,6 +875,7 @@
                       <object class="GtkHBox" id="hbox73">
                         <property name="visible">True</property>
                         <property name="spacing">12</property>
+			<property name="vexpand">False</property>
                         <child>
                           <object class="GtkLabel" id="fill_color_label">
                             <property name="visible">True</property>
@@ -1313,6 +1315,7 @@
                         <property name="n_columns">2</property>
                         <property name="column_spacing">6</property>
                         <property name="row_spacing">6</property>
+			<property name="vexpand">False</property>
                         <child>
                           <object class="GtkLabel" id="bc_be_label">
                             <property name="visible">True</property>
@@ -1404,6 +1407,7 @@
                       <object class="GtkHBox" id="hbox80">
                         <property name="visible">True</property>
                         <property name="spacing">12</property>
+			<property name="vexpand">False</property>
                         <child>
                           <object class="GtkLabel" id="bc_color_label">
                             <property name="visible">True</property>
@@ -2001,6 +2005,7 @@
                       <object class="GtkVBox" id="shadow_controls_table">
                         <property name="visible">True</property>
                         <property name="spacing">12</property>
+			<property name="vexpand">False</property>
                         <child>
                           <object class="GtkHBox" id="hbox63">
                             <property name="visible">True</property>
