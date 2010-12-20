@@ -25,6 +25,7 @@ templates_DATA = \
 	herma-iso-templates.xml \
 	jac-iso-templates.xml \
 	maco-us-templates.xml \
+	meritline-us-templates.xml \
 	misc-us-templates.xml \
 	misc-iso-templates.xml \
 	misc-other-templates.xml \

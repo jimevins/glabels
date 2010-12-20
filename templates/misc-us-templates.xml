@@ -93,27 +93,6 @@
 
   <!-- ************************* -->
   <!--                           -->
-  <!-- Meritline                 -->
-  <!--                           -->
-  <!-- ************************* -->
-
-  <!-- ===================================================================-->
-  <!-- Meritline Mini CD/DVD Labels (face only), 5 per sheet              -->
-  <!-- ===================================================================-->
-  <!-- TODO: Is this the actual part #? -->
-  <Template brand="Meritline" part="Mini-CD" size="US-Letter" _description="Mini-CD Labels">
-    <Meta category="label"/>
-    <Meta category="media"/>
-    <Label-cd id="0" radius="110.5" hole="57.5" waste="5">
-      <Markup-margin size="5"/>
-      <Layout nx="2" ny="2" x0="48.4" y0="47.6" dx="299.5" dy="481.5"/>
-      <Layout nx="1" ny="1" x0="197.3" y0="289.5" dx="0" dy="0"/>
-    </Label-cd>
-  </Template>
-
-
-  <!-- ************************* -->
-  <!--                           -->
   <!-- Neato                     -->
   <!--                           -->
   <!-- ************************* -->
