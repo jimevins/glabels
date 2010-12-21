@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-12-11 19:41+0000\n"
-"PO-Revision-Date: 2010-12-12 14:09+0100\n"
+"POT-Creation-Date: 2010-12-21 16:58+0000\n"
+"PO-Revision-Date: 2010-12-21 17:58+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1169,9 +1169,9 @@ msgid "gLabels Preferences"
 msgstr "gLabels-Einstellungen"
 
 #. TODO: Is this the actual part #?
-#: ../src/print-op.c:205 ../src/print-op-dialog.c:217
+#: ../src/print-op.c:205 ../src/print-op-dialog.c:215
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:4
-#: ../templates/misc-iso-templates.xml.h:22
+#: ../templates/misc-iso-templates.xml.h:24
 msgid "Labels"
 msgstr "Labels"
 
@@ -1672,16 +1672,16 @@ msgstr "(geändert)"
 #. Translators: "Other" here means other page size.  Meaning a page size
 #. * other than the standard ones that libglabels knows about such as
 #. * "letter", "A4", etc.
-#: ../libglabels/db.c:267
+#: ../libglabels/lgl-db.c:267
 msgid "Other"
 msgstr "Andere"
 
 #. Create and append a "User defined" entry.
-#: ../libglabels/db.c:276
+#: ../libglabels/lgl-db.c:276
 msgid "User defined"
 msgstr "Benutzerdefiniert"
 
-#: ../libglabels/db.c:662
+#: ../libglabels/lgl-db.c:663
 msgid ""
 "Unable to locate paper size definitions.  Libglabels may not be installed "
 "correctly!"
@@ -1689,7 +1689,7 @@ msgstr ""
 "Die Definitionen der Papiergrößen konnten nicht gefunden werden. Libglabels "
 "ist möglicherweise nicht korrekt installiert!"
 
-#: ../libglabels/db.c:1054
+#: ../libglabels/lgl-db.c:1062
 msgid ""
 "Unable to locate category definitions.  Libglabels may not be installed "
 "correctly!"
@@ -1697,7 +1697,7 @@ msgstr ""
 "Es war nicht möglich, Kategorie-Definitionen zu finden. Libglabels könnte "
 "möglicherweise nicht korrekt installiert sein!"
 
-#: ../libglabels/db.c:1969
+#: ../libglabels/lgl-db.c:1989
 msgid ""
 "Unable to locate any template files.  Libglabels may not be installed "
 "correctly!"
@@ -1705,7 +1705,7 @@ msgstr ""
 "Es konnten keine Vorlagendateien gefunden werden. Möglicherweise ist "
 "libglabels nicht korrekt installiert!"
 
-#: ../libglabels/db.c:2036
+#: ../libglabels/lgl-db.c:2056
 #, c-format
 msgid "%s full page label"
 msgstr "Ganzseitenetikett %s"
@@ -1715,19 +1715,19 @@ msgstr "Ganzseitenetikett %s"
 #. *              2nd %d = number of labels down a page,
 #. *              3rd %d = total number of labels on a page (sheet).
 #.
-#: ../libglabels/template.c:665
+#: ../libglabels/lgl-template.c:673
 #, c-format
 msgid "%d × %d (%d per sheet)"
 msgstr "%d × %d (%d pro Seite)"
 
 #. Translators: %d is the total number of labels on a page (sheet).
-#: ../libglabels/template.c:670
+#: ../libglabels/lgl-template.c:678
 #, c-format
 msgid "%d per sheet"
 msgstr "%d pro Seite"
 
-#: ../libglabels/template.c:740 ../libglabels/template.c:746
-#: ../libglabels/template.c:756 ../libglabels/template.c:762
+#: ../libglabels/lgl-template.c:759 ../libglabels/lgl-template.c:767
+#: ../libglabels/lgl-template.c:779 ../libglabels/lgl-template.c:787
 msgid "diameter"
 msgstr "Durchmesser"
 
@@ -1735,29 +1735,29 @@ msgstr "Durchmesser"
 #. the CSS2 Specification (Section 4.3.2)
 #. This table must be sorted exactly as the enumerations in lglUnits
 #. [LGL_UNITS_POINT]
-#: ../libglabels/units.c:65 ../data/ui/object-editor.ui.h:42
+#: ../libglabels/lgl-units.c:65 ../data/ui/object-editor.ui.h:42
 #: ../data/ui/prefs-dialog.ui.h:22
 msgid "points"
 msgstr "Punkte"
 
 #. [LGL_UNITS_INCH]
-#: ../libglabels/units.c:66 ../data/ui/object-editor.ui.h:40
+#: ../libglabels/lgl-units.c:66 ../data/ui/object-editor.ui.h:40
 #: ../data/ui/template-designer.ui.h:66
 msgid "inches"
 msgstr "Zoll"
 
 #. [LGL_UNITS_MM]
-#: ../libglabels/units.c:67
+#: ../libglabels/lgl-units.c:67
 msgid "mm"
 msgstr "mm"
 
 #. [LGL_UNITS_CM]
-#: ../libglabels/units.c:68
+#: ../libglabels/lgl-units.c:68
 msgid "cm"
 msgstr "cm"
 
 #. [LGL_UNITS_PICA]
-#: ../libglabels/units.c:69
+#: ../libglabels/lgl-units.c:69
 msgid "picas"
 msgstr "picas"
 
@@ -2696,10 +2696,12 @@ msgstr "Post- und Versandprodukte"
 msgid "Photo products"
 msgstr "Fotoprodukte"
 
+#. ===================================================================
 #. ====================================================================
 #. ===================================================================
 #. ********************************************************************
-#: ../templates/categories.xml.h:9 ../templates/hama-iso-templates.xml.h:24
+#: ../templates/categories.xml.h:9 ../templates/ascom-iso-templates.xml.h:6
+#: ../templates/hama-iso-templates.xml.h:29
 #: ../templates/herma-iso-templates.xml.h:18
 #: ../templates/jac-iso-templates.xml.h:4
 msgid "Rectangular labels"
@@ -2707,14 +2709,49 @@ msgstr "Rechteckige Etiketten"
 
 #. ====================================================================
 #. ===================================================================
-#: ../templates/categories.xml.h:10 ../templates/hama-iso-templates.xml.h:26
+#: ../templates/categories.xml.h:10 ../templates/hama-iso-templates.xml.h:31
 #: ../templates/pearl-iso-templates.xml.h:54
 msgid "Round labels"
 msgstr "Runde Etiketten"
 
-#: ../templates/categories.xml.h:11
+#. ====================================================================
+#: ../templates/categories.xml.h:11 ../templates/hama-iso-templates.xml.h:33
 msgid "Square labels"
 msgstr "Quadratische Etiketten"
+
+#. ===================================================================
+#. ===============================================================
+#: ../templates/ascom-iso-templates.xml.h:2
+#: ../templates/avery-iso-templates.xml.h:12
+#: ../templates/zweckform-iso-templates.xml.h:10
+msgid "CD Inlet"
+msgstr "CD-Einleger"
+
+#. TODO: Is this the real part #?
+#. ============================================================
+#. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#. TODO: What is the actual part #?
+#. ===================================================================
+#: ../templates/ascom-iso-templates.xml.h:4
+#: ../templates/avery-iso-templates.xml.h:30
+#: ../templates/databecker-iso-templates.xml.h:10
+#: ../templates/hama-iso-templates.xml.h:27
+#: ../templates/herma-iso-templates.xml.h:16
+#: ../templates/misc-iso-templates.xml.h:30
+#: ../templates/zweckform-iso-templates.xml.h:28
+msgid "Rectangular Labels"
+msgstr "Rechteckige Etiketten"
+
+#. ===================================================================
+#: ../templates/ascom-iso-templates.xml.h:8
+#: ../templates/avery-us-templates.xml.h:46
+#: ../templates/geha-iso-templates.xml.h:29
+#: ../templates/meritline-us-templates.xml.h:18
+#: ../templates/worldlabel-us-templates.xml.h:12
+msgid "Video Tape Spine Labels"
+msgstr "Etiketten für Videokassetten (Schmalseite)"
 
 #. ===================================================================
 #. ********************************************************************
@@ -2725,6 +2762,7 @@ msgstr "Quadratische Etiketten"
 #: ../templates/dymo-other-templates.xml.h:4
 #: ../templates/geha-iso-templates.xml.h:2
 #: ../templates/maco-us-templates.xml.h:2
+#: ../templates/meritline-us-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:1
 #: ../templates/zweckform-iso-templates.xml.h:2
@@ -2739,9 +2777,10 @@ msgstr "Adressaufkleber"
 #: ../templates/avery-us-templates.xml.h:4
 #: ../templates/avery-iso-templates.xml.h:8
 #: ../templates/databecker-iso-templates.xml.h:4
+#: ../templates/dataline-iso-templates.xml.h:2
 #: ../templates/decadry-iso-templates.xml.h:2
 #: ../templates/misc-us-templates.xml.h:4
-#: ../templates/misc-iso-templates.xml.h:4
+#: ../templates/misc-iso-templates.xml.h:6
 #: ../templates/zweckform-iso-templates.xml.h:6
 msgid "Business Cards"
 msgstr "Visitenkarten"
@@ -2757,7 +2796,7 @@ msgstr "Visitenkarten"
 #: ../templates/herma-iso-templates.xml.h:10
 #: ../templates/jac-iso-templates.xml.h:2
 #: ../templates/misc-us-templates.xml.h:8
-#: ../templates/misc-iso-templates.xml.h:8
+#: ../templates/misc-iso-templates.xml.h:10
 #: ../templates/pearl-iso-templates.xml.h:24
 #: ../templates/worldlabel-us-templates.xml.h:2
 #: ../templates/zweckform-iso-templates.xml.h:12
@@ -2777,6 +2816,7 @@ msgstr "CD/DVD-Etiketten (Spine Labels)"
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:12
 #: ../templates/avery-iso-templates.xml.h:16
+#: ../templates/meritline-us-templates.xml.h:4
 #: ../templates/worldlabel-us-templates.xml.h:3
 msgid "Diskette Labels"
 msgstr "Diskettenaufkleber"
@@ -2801,6 +2841,7 @@ msgstr "Ordneretiketten"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:20
+#: ../templates/meritline-us-templates.xml.h:6
 #: ../templates/worldlabel-us-templates.xml.h:6
 msgid "Full Sheet Labels"
 msgstr "Ganzseitige Etiketten"
@@ -2834,6 +2875,7 @@ msgstr "Postkarten"
 #. ********************************************************************
 #: ../templates/avery-us-templates.xml.h:32
 #: ../templates/dymo-other-templates.xml.h:12
+#: ../templates/meritline-us-templates.xml.h:10
 #: ../templates/worldlabel-us-templates.xml.h:8
 msgid "Return Address Labels"
 msgstr "Rückantwort-Adressaufkleber"
@@ -2841,7 +2883,8 @@ msgstr "Rückantwort-Adressaufkleber"
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:34
 #: ../templates/maco-us-templates.xml.h:3
-#: ../templates/misc-us-templates.xml.h:32
+#: ../templates/meritline-us-templates.xml.h:12
+#: ../templates/misc-us-templates.xml.h:30
 #: ../templates/worldlabel-us-templates.xml.h:9
 msgid "Round Labels"
 msgstr "Runde Etiketten"
@@ -2849,6 +2892,7 @@ msgstr "Runde Etiketten"
 #. ===================================================================
 #. ********************************************************************
 #: ../templates/avery-us-templates.xml.h:36
+#: ../templates/meritline-us-templates.xml.h:14
 #: ../templates/uline-us-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Shipping Labels"
@@ -2872,16 +2916,10 @@ msgstr "Klappkarten"
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:44
 #: ../templates/geha-iso-templates.xml.h:27
+#: ../templates/meritline-us-templates.xml.h:16
 #: ../templates/worldlabel-us-templates.xml.h:11
 msgid "Video Tape Face Labels"
 msgstr "Etiketten für Videokassetten (Vorderseite)"
-
-#. ===================================================================
-#: ../templates/avery-us-templates.xml.h:46
-#: ../templates/geha-iso-templates.xml.h:29
-#: ../templates/worldlabel-us-templates.xml.h:12
-msgid "Video Tape Spine Labels"
-msgstr "Etiketten für Videokassetten (Schmalseite)"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:4
@@ -2900,16 +2938,10 @@ msgstr "Universal-Etiketten"
 msgid "CD Booklet"
 msgstr "CD-Einlegeheft"
 
-#. ===============================================================
-#: ../templates/avery-iso-templates.xml.h:12
-#: ../templates/zweckform-iso-templates.xml.h:10
-msgid "CD Inlet"
-msgstr "CD-Einleger"
-
 #. ===================================================================
 #. ====================================================================
 #: ../templates/avery-iso-templates.xml.h:18
-#: ../templates/hama-iso-templates.xml.h:12
+#: ../templates/hama-iso-templates.xml.h:17
 msgid "Diskette labels"
 msgstr "Diskettenaufkleber"
 
@@ -2924,7 +2956,7 @@ msgstr "Kennzeichnungsetiketten"
 #: ../templates/decadry-iso-templates.xml.h:4
 #: ../templates/herma-iso-templates.xml.h:14
 #: ../templates/misc-us-templates.xml.h:20
-#: ../templates/misc-iso-templates.xml.h:24
+#: ../templates/misc-iso-templates.xml.h:26
 #: ../templates/zweckform-iso-templates.xml.h:20
 msgid "Mailing Labels"
 msgstr "Adressaufkleber"
@@ -2944,21 +2976,6 @@ msgstr "Mini-Adressaufkleber"
 #: ../templates/avery-iso-templates.xml.h:28
 msgid "Mini Labels"
 msgstr "Mini-Etiketten"
-
-#. ============================================================
-#. ===================================================================
-#. ====================================================================
-#. ===================================================================
-#. TODO: What is the actual part #?
-#. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:30
-#: ../templates/databecker-iso-templates.xml.h:10
-#: ../templates/hama-iso-templates.xml.h:22
-#: ../templates/herma-iso-templates.xml.h:16
-#: ../templates/misc-iso-templates.xml.h:28
-#: ../templates/zweckform-iso-templates.xml.h:28
-msgid "Rectangular Labels"
-msgstr "Rechteckige Etiketten"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:32
@@ -2996,7 +3013,7 @@ msgstr "Standard-Adressaufkleber 29mm x 90mm"
 
 #. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:6
-#: ../templates/misc-iso-templates.xml.h:6
+#: ../templates/misc-iso-templates.xml.h:8
 msgid "CD Labels"
 msgstr "CD-Aufkleber"
 
@@ -3050,7 +3067,10 @@ msgid "CD/DVD Inlet"
 msgstr "CD/DVD-Einleger"
 
 #. ===================================================================
+#. ====================================================================
+#. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:13
+#: ../templates/hama-iso-templates.xml.h:15
 #: ../templates/pearl-iso-templates.xml.h:26
 msgid "DVD inlet"
 msgstr "DVD-Einleger"
@@ -3063,7 +3083,7 @@ msgstr "Flyer-Papier"
 #. ===================================================================
 #. ====================================================================
 #: ../templates/geha-iso-templates.xml.h:17
-#: ../templates/hama-iso-templates.xml.h:14
+#: ../templates/hama-iso-templates.xml.h:19
 msgid "Greeting cards"
 msgstr "Grußkarten"
 
@@ -3082,7 +3102,7 @@ msgstr "Passbild-Etiketten"
 #. ====================================================================
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:25
-#: ../templates/hama-iso-templates.xml.h:18
+#: ../templates/hama-iso-templates.xml.h:23
 #: ../templates/pearl-iso-templates.xml.h:50
 msgid "Photo labels"
 msgstr "Fotoetiketten"
@@ -3097,23 +3117,56 @@ msgstr "Etiketten für Archivierungsordner"
 msgid "CD inlet"
 msgstr "CD-Einleger"
 
+#. ===================================================================
+#: ../templates/hama-iso-templates.xml.h:9
+#: ../templates/pearl-iso-templates.xml.h:20
+msgid "CD inlet (back)"
+msgstr "CD-Einleger (Rückseite)"
+
 #. ====================================================================
-#: ../templates/hama-iso-templates.xml.h:10
+#. ===================================================================
+#: ../templates/hama-iso-templates.xml.h:11
+#: ../templates/pearl-iso-templates.xml.h:22
+msgid "CD inlet (front)"
+msgstr "CD-Einleger (Vorderseite)"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:13
 msgid "CD/DVD labels"
 msgstr "CD/DVD-Etiketten"
 
 #. ====================================================================
-#: ../templates/hama-iso-templates.xml.h:16
+#: ../templates/hama-iso-templates.xml.h:21
 msgid "Mini Disc labels"
 msgstr "MiniDisc-Etiketten"
 
 #. ====================================================================
-#: ../templates/hama-iso-templates.xml.h:20
+#: ../templates/hama-iso-templates.xml.h:25
 msgid "Printable mousepad"
 msgstr "Bedruckbares Mauspad"
 
 #. ====================================================================
-#: ../templates/hama-iso-templates.xml.h:28
+#: ../templates/hama-iso-templates.xml.h:35
+msgid "VHS inlet"
+msgstr "VHS-Einleger"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:37
+msgid "VHS-C inlet"
+msgstr "VHS-C-Einleger"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:39
+msgid "Video-8 inlet"
+msgstr "Video-8-Einleger"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:41
+msgid "Zip disc inlet"
+msgstr "Zip-Disketteneinleger"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:43
 msgid "Zip disc labels"
 msgstr "Zip-Diskettenaufkleber"
 
@@ -3144,6 +3197,11 @@ msgid "Video Labels (face only)"
 msgstr "Video-Etiketten (nur Vorderseite)"
 
 #. ===================================================================
+#: ../templates/meritline-us-templates.xml.h:8
+msgid "Mini-CD Labels"
+msgstr "Mini-CD-Etiketten"
+
+#. ===================================================================
 #: ../templates/misc-us-templates.xml.h:2
 msgid "Business Card CD"
 msgstr "Visitenkarten-CD"
@@ -3161,7 +3219,7 @@ msgstr "CD/DVD-Etiketten (nur Vorderseite)"
 #. ===================================================================
 #. TODO: Is this the actual part #?
 #: ../templates/misc-us-templates.xml.h:12
-#: ../templates/misc-iso-templates.xml.h:10
+#: ../templates/misc-iso-templates.xml.h:12
 msgid "CD/DVD Labels (face only)"
 msgstr "CD/DVD-Etiketten (nur Vorderseite)"
 
@@ -3185,70 +3243,71 @@ msgstr "Einleger für CD-Boxen"
 msgid "Microtube labels"
 msgstr "Microtube-Etiketten"
 
-#. TODO: Is this the actual part #?
-#: ../templates/misc-us-templates.xml.h:24
-msgid "Mini-CD Labels"
-msgstr "Mini-CD-Etiketten"
-
 #. ===================================================================
-#: ../templates/misc-us-templates.xml.h:26
+#: ../templates/misc-us-templates.xml.h:24
 msgid "PRO CD Labels 2-up (CD spine only)"
 msgstr "PRO-CD-Etiketten 2-up (nur CD-Box-Schmalseite)"
 
 #. ===================================================================
-#: ../templates/misc-us-templates.xml.h:28
+#: ../templates/misc-us-templates.xml.h:26
 msgid "PRO CD Labels 2-up (Face only)"
 msgstr "PRO-CD-Etiketten 2-up (nur Vorderseite)"
 
 #. ===================================================================
 #. TODO: Is this the actual part #?
-#: ../templates/misc-us-templates.xml.h:30
-#: ../templates/misc-iso-templates.xml.h:26
+#: ../templates/misc-us-templates.xml.h:28
+#: ../templates/misc-iso-templates.xml.h:28
 msgid "PRO CD Labels 2-up (face only)"
 msgstr "PRO-CD-Etiketten 2-up (nur Vorderseite)"
 
 #. ===================================================================
-#: ../templates/misc-us-templates.xml.h:34
+#: ../templates/misc-us-templates.xml.h:32
 msgid "Slimline CD Case (rightside up)"
 msgstr "Slimline CD-Box (normal)"
 
-#: ../templates/misc-us-templates.xml.h:35
+#: ../templates/misc-us-templates.xml.h:33
 msgid "Slimline CD Case (upside down)"
 msgstr "Slimline CD-Box (umgekehrt)"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:12
+#: ../templates/misc-iso-templates.xml.h:4
+#: ../templates/pearl-iso-templates.xml.h:6
+msgid "Bottle labels"
+msgstr "Flaschenetiketten"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:14
 msgid "EPSON Photo Stickers 16"
 msgstr "EPSON Photo Stickers 16"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:14
+#: ../templates/misc-iso-templates.xml.h:16
 msgid "Etiketten"
 msgstr "Etiketten"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:16
+#: ../templates/misc-iso-templates.xml.h:18
 msgid "Fridge Magnet Stickers"
 msgstr "Aufkleber für Kühlschrankmagnete"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:18
+#: ../templates/misc-iso-templates.xml.h:20
 msgid "General Labels"
 msgstr "Allgemeine Etiketten"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:20
+#: ../templates/misc-iso-templates.xml.h:22
 msgid "Inkjet/Laser Labels 70x37mm"
 msgstr "Inkjet/Laseretiketten 70x37mm"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:30
+#: ../templates/misc-iso-templates.xml.h:32
 #: ../templates/pearl-iso-templates.xml.h:62
 msgid "Self-adhesive labels"
 msgstr "Selbstklebende Etiketten"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:32
+#: ../templates/misc-iso-templates.xml.h:34
 msgid "Universal Labels"
 msgstr "Universelle Etiketten"
 
@@ -3256,11 +3315,6 @@ msgstr "Universelle Etiketten"
 #: ../templates/pearl-iso-templates.xml.h:4
 msgid "Address Labels (STAMPIT)"
 msgstr "Adressaufkleber (STAMPIT)"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:6
-msgid "Bottle labels"
-msgstr "Flaschenetiketten"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:10
@@ -3286,16 +3340,6 @@ msgstr "Visitenkarten gestanzt matt"
 #: ../templates/pearl-iso-templates.xml.h:18
 msgid "Business cards punched glossy"
 msgstr "Visitenkarten gestanzt glänzend"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:20
-msgid "CD inlet (back)"
-msgstr "CD-Einleger (Rückseite)"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:22
-msgid "CD inlet (front)"
-msgstr "CD-Einleger (Vorderseite)"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:30
