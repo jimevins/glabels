@@ -31,6 +31,19 @@
   </Template>
 
   <!-- ******************************************************************** -->
+  <!-- JAC 117 CD labels.			                            -->
+  <!-- ******************************************************************** -->
+  <Template brand="JAC" part="117" size="A4" _description="CD/DVD Labels">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Label-cd id="0" radius="58.5mm" hole="20mm" waste="5mm">
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="1" ny="2" x0="46.5mm" y0="21.5mm" dx="123.35mm" dy="137mm"/>
+    </Label-cd>
+  </Template>
+
+
+  <!-- ******************************************************************** -->
   <!-- JAC 3821 rectangular labels.		                            -->
   <!-- ******************************************************************** -->
 
@@ -431,6 +444,167 @@
       <Markup-margin size="3.175mm"/>
       <Layout nx="2" ny="2" x0="0mm" y0="0mm" dx="105mm" dy="148mm"/>
     </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************* -->
+  <!-- JAC 210297, 210mm x 297mm, 1 per sheet               	           -->
+  <!-- ******************************************************************* -->
+
+  <Template brand="JAC" part="210297" size="A4" _description="Labels A4">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Label-rectangle id="0" width="210mm" height="297mm" round="0mm" x_waste="0mm" y_waste="0mm">
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="1" ny="1" x0="0mm" y0="0mm" dx="210mm" dy="297mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************* -->
+  <!-- JAC F-32 PVC labels, 54 per sheet			           -->
+  <!-- ******************************************************************* -->
+  <Template brand="JAC" part="F-32" size="Other" width="323mm" height="222.25mm" _description="PVC labels">
+    <Meta category="label"/>
+    <Meta category="round-label"/>
+    <Label-round id="0" radius="16mm" waste="1.1mm">
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="9" ny="6" x0="6mm" y0="10mm" dx="34.375mm" dy="34.85mm"/>
+    </Label-round>
+  </Template>
+
+  <!-- ******************************************************************* -->
+  <!-- JAC F-50 PVC labels, 20 per sheet    	           	           -->
+  <!-- ******************************************************************* -->
+  <Template brand="JAC" part="F-50" size="Other" width="323mm" height="222.25mm" _description="PVC labels">
+    <Meta category="label"/>
+    <Meta category="round-label"/>
+    <Label-round id="0" radius="25mm" waste="0.9mm">
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="5" ny="4" x0="6mm" y0="10mm" dx="64.25mm" dy="52.083mm"/>
+    </Label-round>
+  </Template>
+
+  <!-- ******************************************************************* -->
+  <!-- JAC F-67 PVC labels, 12 per sheet 	              	           -->
+  <!-- ******************************************************************* -->
+  <Template brand="JAC" part="F-67" size="Other" width="323mm" height="222.25mm" _description="PVC labels">
+    <Meta category="label"/>
+    <Meta category="round-label"/>
+    <Label-round id="0" radius="33.5mm" waste="2mm">
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="4" ny="3" x0="5.2mm" y0="11.05mm" dx="77mm" dy="71mm"/>
+    </Label-round>
+  </Template>
+
+  <!-- ******************************************************************* -->
+  <!-- JAC F-100 PVC labels, 6 per sheet	               	           -->
+  <!-- ******************************************************************* -->
+  <Template brand="JAC" part="F-100" size="Other" width="323mm" height="222.25mm" _description="PVC labels">
+    <Meta category="label"/>
+    <Meta category="round-label"/>
+    <Label-round id="0" radius="50mm" waste="3mm">
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="3" ny="2" x0="3mm" y0="11.25mm" dx="107mm" dy="107.5mm"/>
+    </Label-round>
+  </Template>
+
+  <!-- ******************************************************************* -->
+  <!-- JAC F-120 PVC labels, 4 per sheet	               	           -->
+  <!-- ******************************************************************* -->
+  <Template brand="JAC" part="F-120" size="Other" width="250mm" height="258mm" _description="PVC labels">
+    <Meta category="label"/>
+    <Meta category="round-label"/>
+    <Label-round id="0" radius="60mm" waste="0mm">
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="2" ny="2" x0="2.5mm" y0="10.5mm" dx="125mm" dy="125mm"/>
+    </Label-round>
+  </Template>
+
+  <!-- ******************************************************************* -->
+  <!-- JAC F-147 PVC labels, 4 per sheet               		           -->
+  <!-- ******************************************************************* -->
+  <Template brand="JAC" part="F-147" size="Other" width="323mm" height="304.8mm" _description="PVC labels">
+    <Meta category="label"/>
+    <Meta category="round-label"/>
+    <Label-round id="0" radius="73.5mm" waste="2.5mm">
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="2" ny="2" x0="3mm" y0="3.5mm" dx="152mm" dy="152mm"/>
+    </Label-round>
+  </Template>
+
+  <!-- ******************************************************************* -->
+  <!-- JAC F-2048 PVC labels, 48 per sheet               	           -->
+  <!-- ******************************************************************* -->
+  <Template brand="JAC" part="F-2048" size="Other" width="323mm" height="222.2mm" _description="PVC labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Label-rectangle id="0" width="20mm" height="48mm" round="2.5mm" x_waste="2.5mm" y_waste="2.5mm">
+      <Markup-margin size="2mm"/>
+      <Layout nx="6" ny="4" x0="2.6mm" y0="12.6mm" dx="25mm" dy="53mm"/>
+      <Layout nx="6" ny="4" x0="164.1mm" y0="12.6mm" dx="25mm" dy="53mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************* -->
+  <!-- JAC F-3070 PVC labels, 24 per sheet               	           -->
+  <!-- ******************************************************************* -->
+  <Template brand="JAC" part="F-3070" size="Other" width="323mm" height="222.25mm" _description="PVC labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Label-rectangle id="0" width="70mm" height="30mm" round="2.5mm" x_waste="2.4mm" y_waste="2.4mm">
+      <Markup-margin size="2mm"/>
+      <Layout nx="2" ny="6" x0="2.4mm" y0="15.1mm" dx="75mm" dy="35mm"/>
+      <Layout nx="2" ny="6" x0="163.9mm" y0="15.1mm" dx="75mm" dy="35mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************* -->
+  <!-- JAC F-3248 PVC labels, 32 per sheet               	           -->
+  <!-- ******************************************************************* -->
+  <Template brand="JAC" part="F-3248" size="Other" width="323mm" height="222.25mm" _description="PVC labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Label-rectangle id="0" width="32mm" height="48mm" round="2.5mm" x_waste="2mm" y_waste="2mm">
+      <Markup-margin size="2mm"/>
+      <Layout nx="4" ny="4" x0="2.3mm" y0="12.7mm" dx="37mm" dy="53mm"/>
+      <Layout nx="4" ny="4" x0="163.8mm" y0="12.7mm" dx="37mm" dy="53mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************* -->
+  <!-- JAC F-32102 PVC labels, 16 per sheet               	           -->
+  <!-- ******************************************************************* -->
+  <Template brand="JAC" part="F-32102" size="Other" width="323mm" height="222.25mm" _description="PVC labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Label-rectangle id="0" width="32mm" height="102mm" round="2.5mm" x_waste="2.5mm" y_waste="2.5mm">
+      <Markup-margin size="2mm"/>
+      <Layout nx="4" ny="2" x0="2.5mm" y0="10.45mm" dx="37mm" dy="107mm"/>
+      <Layout nx="4" ny="2" x0="164mm" y0="10.4mm" dx="37mm" dy="107mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ******************************************************************* -->
+  <!-- JAC F-68102 PVC labels, 8 per sheet               	           -->
+  <!-- ******************************************************************* -->
+  <Template brand="JAC" part="F-68102" size="Other" width="323mm" height="222.25mm" _description="PVC labels">
+    <Meta category="label"/>
+    <Meta category="elliptical-label"/>
+    <Label-ellipse id="0" width="68mm" height="102mm" waste="2.5mm">
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="4" ny="2" x0="5mm" y0="11.05mm" dx="78mm" dy="107mm"/>
+    </Label-ellipse>
+  </Template>
+
+  <!-- ******************************************************************* -->
+  <!-- JAC F-102150 PVC labels, 4 per sheet               	           -->
+  <!-- ******************************************************************* -->
+  <Template brand="JAC" part="F-102150" size="Other" width="323mm" height="222.25mm" _description="PVC labels">
+    <Meta category="label"/>
+    <Meta category="elliptical-label"/>
+    <Label-ellipse id="0" width="150mm" height="102mm" waste="2mm">
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="2" ny="2" x0="3.5mm" y0="10.75mm" dx="160.5mm" dy="107.2mm"/>
+    </Label-ellipse>
   </Template>
 
 </Glabels-templates>
