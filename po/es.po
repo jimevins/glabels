@@ -1,15 +1,15 @@
 # Spanish translation of glabels.
 # sergio rivadero <sergiorivadero@argentina.com>, 2005.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010.
 # Jorge González <jorgegonz@svn.gnome.org>, 2010.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-12-13 20:59+0000\n"
-"PO-Revision-Date: 2010-12-15 22:16+0100\n"
-"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
+"POT-Creation-Date: 2010-12-21 16:58+0000\n"
+"PO-Revision-Date: 2010-12-22 11:15+0100\n"
+"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1163,9 +1163,9 @@ msgid "gLabels Preferences"
 msgstr "Preferencias de gLabels"
 
 #. TODO: Is this the actual part #?
-#: ../src/print-op.c:205 ../src/print-op-dialog.c:217
+#: ../src/print-op.c:205 ../src/print-op-dialog.c:215
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:4
-#: ../templates/misc-iso-templates.xml.h:22
+#: ../templates/misc-iso-templates.xml.h:24
 msgid "Labels"
 msgstr "Etiquetas"
 
@@ -1662,16 +1662,16 @@ msgstr "(modificado)"
 #. Translators: "Other" here means other page size.  Meaning a page size
 #. * other than the standard ones that libglabels knows about such as
 #. * "letter", "A4", etc.
-#: ../libglabels/db.c:267
+#: ../libglabels/lgl-db.c:267
 msgid "Other"
 msgstr "Otros"
 
 #. Create and append a "User defined" entry.
-#: ../libglabels/db.c:276
+#: ../libglabels/lgl-db.c:276
 msgid "User defined"
 msgstr "Definido por el usuario"
 
-#: ../libglabels/db.c:662
+#: ../libglabels/lgl-db.c:663
 msgid ""
 "Unable to locate paper size definitions.  Libglabels may not be installed "
 "correctly!"
@@ -1679,7 +1679,7 @@ msgstr ""
 "No se pudieron ubicar las definiciones del tamaño del papel. Puede que "
 "libglabels no esté instalado correctamente."
 
-#: ../libglabels/db.c:1054
+#: ../libglabels/lgl-db.c:1062
 msgid ""
 "Unable to locate category definitions.  Libglabels may not be installed "
 "correctly!"
@@ -1687,7 +1687,7 @@ msgstr ""
 "No se pudieron ubicar las definiciones de categorías. Puede que libglabels "
 "no esté instalado correctamente."
 
-#: ../libglabels/db.c:1969
+#: ../libglabels/lgl-db.c:1989
 msgid ""
 "Unable to locate any template files.  Libglabels may not be installed "
 "correctly!"
@@ -1695,7 +1695,7 @@ msgstr ""
 "No se pudo ubicar ningún archivo de plantilla. Puede que libglabels no esté "
 "instalado correctamente."
 
-#: ../libglabels/db.c:2036
+#: ../libglabels/lgl-db.c:2056
 #, c-format
 msgid "%s full page label"
 msgstr "Etiqueta a página completa %s"
@@ -1705,19 +1705,19 @@ msgstr "Etiqueta a página completa %s"
 #. *              2nd %d = number of labels down a page,
 #. *              3rd %d = total number of labels on a page (sheet).
 #.
-#: ../libglabels/template.c:665
+#: ../libglabels/lgl-template.c:673
 #, c-format
 msgid "%d × %d (%d per sheet)"
 msgstr "%d x %d  (%d por hoja)"
 
 #. Translators: %d is the total number of labels on a page (sheet).
-#: ../libglabels/template.c:670
+#: ../libglabels/lgl-template.c:678
 #, c-format
 msgid "%d per sheet"
 msgstr "%d por hoja"
 
-#: ../libglabels/template.c:740 ../libglabels/template.c:746
-#: ../libglabels/template.c:756 ../libglabels/template.c:762
+#: ../libglabels/lgl-template.c:759 ../libglabels/lgl-template.c:767
+#: ../libglabels/lgl-template.c:779 ../libglabels/lgl-template.c:787
 msgid "diameter"
 msgstr "diámetro"
 
@@ -1725,29 +1725,29 @@ msgstr "diámetro"
 #. the CSS2 Specification (Section 4.3.2)
 #. This table must be sorted exactly as the enumerations in lglUnits
 #. [LGL_UNITS_POINT]
-#: ../libglabels/units.c:65 ../data/ui/object-editor.ui.h:42
+#: ../libglabels/lgl-units.c:65 ../data/ui/object-editor.ui.h:42
 #: ../data/ui/prefs-dialog.ui.h:22
 msgid "points"
 msgstr "puntos"
 
 #. [LGL_UNITS_INCH]
-#: ../libglabels/units.c:66 ../data/ui/object-editor.ui.h:40
+#: ../libglabels/lgl-units.c:66 ../data/ui/object-editor.ui.h:40
 #: ../data/ui/template-designer.ui.h:66
 msgid "inches"
 msgstr "pulgadas"
 
 #. [LGL_UNITS_MM]
-#: ../libglabels/units.c:67
+#: ../libglabels/lgl-units.c:67
 msgid "mm"
 msgstr "mm"
 
 #. [LGL_UNITS_CM]
-#: ../libglabels/units.c:68
+#: ../libglabels/lgl-units.c:68
 msgid "cm"
 msgstr "cm"
 
 #. [LGL_UNITS_PICA]
-#: ../libglabels/units.c:69
+#: ../libglabels/lgl-units.c:69
 msgid "picas"
 msgstr "picas"
 
@@ -2690,10 +2690,12 @@ msgstr "Productos para correo/envío"
 msgid "Photo products"
 msgstr "Productos para fotos"
 
+#. ===================================================================
 #. ====================================================================
 #. ===================================================================
 #. ********************************************************************
-#: ../templates/categories.xml.h:9 ../templates/hama-iso-templates.xml.h:24
+#: ../templates/categories.xml.h:9 ../templates/ascom-iso-templates.xml.h:6
+#: ../templates/hama-iso-templates.xml.h:29
 #: ../templates/herma-iso-templates.xml.h:18
 #: ../templates/jac-iso-templates.xml.h:4
 msgid "Rectangular labels"
@@ -2701,14 +2703,49 @@ msgstr "Etiquetas rectangulares"
 
 #. ====================================================================
 #. ===================================================================
-#: ../templates/categories.xml.h:10 ../templates/hama-iso-templates.xml.h:26
+#: ../templates/categories.xml.h:10 ../templates/hama-iso-templates.xml.h:31
 #: ../templates/pearl-iso-templates.xml.h:54
 msgid "Round labels"
 msgstr "Etiquetas redondeadas"
 
-#: ../templates/categories.xml.h:11
+#. ====================================================================
+#: ../templates/categories.xml.h:11 ../templates/hama-iso-templates.xml.h:33
 msgid "Square labels"
 msgstr "Etiquetas cuadradas"
+
+#. ===================================================================
+#. ===============================================================
+#: ../templates/ascom-iso-templates.xml.h:2
+#: ../templates/avery-iso-templates.xml.h:12
+#: ../templates/zweckform-iso-templates.xml.h:10
+msgid "CD Inlet"
+msgstr "Interior de CD"
+
+#. TODO: Is this the real part #?
+#. ============================================================
+#. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#. TODO: What is the actual part #?
+#. ===================================================================
+#: ../templates/ascom-iso-templates.xml.h:4
+#: ../templates/avery-iso-templates.xml.h:30
+#: ../templates/databecker-iso-templates.xml.h:10
+#: ../templates/hama-iso-templates.xml.h:27
+#: ../templates/herma-iso-templates.xml.h:16
+#: ../templates/misc-iso-templates.xml.h:30
+#: ../templates/zweckform-iso-templates.xml.h:28
+msgid "Rectangular Labels"
+msgstr "Etiquetas rectangulares"
+
+#. ===================================================================
+#: ../templates/ascom-iso-templates.xml.h:8
+#: ../templates/avery-us-templates.xml.h:46
+#: ../templates/geha-iso-templates.xml.h:29
+#: ../templates/meritline-us-templates.xml.h:18
+#: ../templates/worldlabel-us-templates.xml.h:12
+msgid "Video Tape Spine Labels"
+msgstr "Etiquetas de video (lateral)"
 
 #. ===================================================================
 #. ********************************************************************
@@ -2719,6 +2756,7 @@ msgstr "Etiquetas cuadradas"
 #: ../templates/dymo-other-templates.xml.h:4
 #: ../templates/geha-iso-templates.xml.h:2
 #: ../templates/maco-us-templates.xml.h:2
+#: ../templates/meritline-us-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:1
 #: ../templates/zweckform-iso-templates.xml.h:2
@@ -2733,9 +2771,10 @@ msgstr "Etiquetas de dirección"
 #: ../templates/avery-us-templates.xml.h:4
 #: ../templates/avery-iso-templates.xml.h:8
 #: ../templates/databecker-iso-templates.xml.h:4
+#: ../templates/dataline-iso-templates.xml.h:2
 #: ../templates/decadry-iso-templates.xml.h:2
 #: ../templates/misc-us-templates.xml.h:4
-#: ../templates/misc-iso-templates.xml.h:4
+#: ../templates/misc-iso-templates.xml.h:6
 #: ../templates/zweckform-iso-templates.xml.h:6
 msgid "Business Cards"
 msgstr "Tarjetas de visita"
@@ -2751,7 +2790,7 @@ msgstr "Tarjetas de visita"
 #: ../templates/herma-iso-templates.xml.h:10
 #: ../templates/jac-iso-templates.xml.h:2
 #: ../templates/misc-us-templates.xml.h:8
-#: ../templates/misc-iso-templates.xml.h:8
+#: ../templates/misc-iso-templates.xml.h:10
 #: ../templates/pearl-iso-templates.xml.h:24
 #: ../templates/worldlabel-us-templates.xml.h:2
 #: ../templates/zweckform-iso-templates.xml.h:12
@@ -2771,6 +2810,7 @@ msgstr "Etiquetas de CD/DVD (etiquetas laterales)"
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:12
 #: ../templates/avery-iso-templates.xml.h:16
+#: ../templates/meritline-us-templates.xml.h:4
 #: ../templates/worldlabel-us-templates.xml.h:3
 msgid "Diskette Labels"
 msgstr "Etiquetas de diskettes"
@@ -2795,6 +2835,7 @@ msgstr "Etiquetas para archivado"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:20
+#: ../templates/meritline-us-templates.xml.h:6
 #: ../templates/worldlabel-us-templates.xml.h:6
 msgid "Full Sheet Labels"
 msgstr "Etiquetas de página completa"
@@ -2828,6 +2869,7 @@ msgstr "Postales"
 #. ********************************************************************
 #: ../templates/avery-us-templates.xml.h:32
 #: ../templates/dymo-other-templates.xml.h:12
+#: ../templates/meritline-us-templates.xml.h:10
 #: ../templates/worldlabel-us-templates.xml.h:8
 msgid "Return Address Labels"
 msgstr "Etiquetas de dirección de remitente"
@@ -2835,7 +2877,8 @@ msgstr "Etiquetas de dirección de remitente"
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:34
 #: ../templates/maco-us-templates.xml.h:3
-#: ../templates/misc-us-templates.xml.h:32
+#: ../templates/meritline-us-templates.xml.h:12
+#: ../templates/misc-us-templates.xml.h:30
 #: ../templates/worldlabel-us-templates.xml.h:9
 msgid "Round Labels"
 msgstr "Etiquetas redondeadas"
@@ -2843,6 +2886,7 @@ msgstr "Etiquetas redondeadas"
 #. ===================================================================
 #. ********************************************************************
 #: ../templates/avery-us-templates.xml.h:36
+#: ../templates/meritline-us-templates.xml.h:14
 #: ../templates/uline-us-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Shipping Labels"
@@ -2866,16 +2910,10 @@ msgstr "Tarjetas de visita"
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:44
 #: ../templates/geha-iso-templates.xml.h:27
+#: ../templates/meritline-us-templates.xml.h:16
 #: ../templates/worldlabel-us-templates.xml.h:11
 msgid "Video Tape Face Labels"
 msgstr "Etiquetas de video (frente)"
-
-#. ===================================================================
-#: ../templates/avery-us-templates.xml.h:46
-#: ../templates/geha-iso-templates.xml.h:29
-#: ../templates/worldlabel-us-templates.xml.h:12
-msgid "Video Tape Spine Labels"
-msgstr "Etiquetas de video (lateral)"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:4
@@ -2894,16 +2932,10 @@ msgstr "Etiquetas redondas"
 msgid "CD Booklet"
 msgstr "Tapa de CD"
 
-#. ===============================================================
-#: ../templates/avery-iso-templates.xml.h:12
-#: ../templates/zweckform-iso-templates.xml.h:10
-msgid "CD Inlet"
-msgstr "Interior de CD"
-
 #. ===================================================================
 #. ====================================================================
 #: ../templates/avery-iso-templates.xml.h:18
-#: ../templates/hama-iso-templates.xml.h:12
+#: ../templates/hama-iso-templates.xml.h:17
 msgid "Diskette labels"
 msgstr "Etiquetas de disquette"
 
@@ -2918,7 +2950,7 @@ msgstr "Etiquetas de identificación"
 #: ../templates/decadry-iso-templates.xml.h:4
 #: ../templates/herma-iso-templates.xml.h:14
 #: ../templates/misc-us-templates.xml.h:20
-#: ../templates/misc-iso-templates.xml.h:24
+#: ../templates/misc-iso-templates.xml.h:26
 #: ../templates/zweckform-iso-templates.xml.h:20
 msgid "Mailing Labels"
 msgstr "Etiquetas de correo"
@@ -2938,21 +2970,6 @@ msgstr "Etiquetas de dirección pequeñas"
 #: ../templates/avery-iso-templates.xml.h:28
 msgid "Mini Labels"
 msgstr "Minietiquetas"
-
-#. ============================================================
-#. ===================================================================
-#. ====================================================================
-#. ===================================================================
-#. TODO: What is the actual part #?
-#. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:30
-#: ../templates/databecker-iso-templates.xml.h:10
-#: ../templates/hama-iso-templates.xml.h:22
-#: ../templates/herma-iso-templates.xml.h:16
-#: ../templates/misc-iso-templates.xml.h:28
-#: ../templates/zweckform-iso-templates.xml.h:28
-msgid "Rectangular Labels"
-msgstr "Etiquetas rectangulares"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:32
@@ -2990,7 +3007,7 @@ msgstr "Etiquetas de dirección estándar de 29mm x 90mm"
 
 #. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:6
-#: ../templates/misc-iso-templates.xml.h:6
+#: ../templates/misc-iso-templates.xml.h:8
 msgid "CD Labels"
 msgstr "Etiquetas para CD"
 
@@ -3038,7 +3055,6 @@ msgstr "Etiquetas de dossier"
 # REVISAR
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:6
-#| msgid "Arch File Labels"
 msgid "Arch File inserts"
 msgstr "Separadores de archivadores"
 
@@ -3047,7 +3063,10 @@ msgid "CD/DVD Inlet"
 msgstr "Interior de CD/DVD"
 
 #. ===================================================================
+#. ====================================================================
+#. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:13
+#: ../templates/hama-iso-templates.xml.h:15
 #: ../templates/pearl-iso-templates.xml.h:26
 msgid "DVD inlet"
 msgstr "Interior de DVD"
@@ -3060,7 +3079,7 @@ msgstr "Papel para panfletos"
 #. ===================================================================
 #. ====================================================================
 #: ../templates/geha-iso-templates.xml.h:17
-#: ../templates/hama-iso-templates.xml.h:14
+#: ../templates/hama-iso-templates.xml.h:19
 msgid "Greeting cards"
 msgstr "Tarjetas de felicitación"
 
@@ -3079,7 +3098,7 @@ msgstr "Etiquetas para fotos de pasaporte"
 #. ====================================================================
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:25
-#: ../templates/hama-iso-templates.xml.h:18
+#: ../templates/hama-iso-templates.xml.h:23
 #: ../templates/pearl-iso-templates.xml.h:50
 msgid "Photo labels"
 msgstr "Etiquetas para fotos"
@@ -3095,23 +3114,60 @@ msgstr "Etiquetas de dossier"
 msgid "CD inlet"
 msgstr "Interior de CD"
 
+#. ===================================================================
+#: ../templates/hama-iso-templates.xml.h:9
+#: ../templates/pearl-iso-templates.xml.h:20
+msgid "CD inlet (back)"
+msgstr "Interior de CD (trasera)"
+
 #. ====================================================================
-#: ../templates/hama-iso-templates.xml.h:10
+#. ===================================================================
+#: ../templates/hama-iso-templates.xml.h:11
+#: ../templates/pearl-iso-templates.xml.h:22
+msgid "CD inlet (front)"
+msgstr "Interior de CD (delantera)"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:13
 msgid "CD/DVD labels"
 msgstr "Etiquetas de CD/DVD"
 
 #. ====================================================================
-#: ../templates/hama-iso-templates.xml.h:16
+#: ../templates/hama-iso-templates.xml.h:21
 msgid "Mini Disc labels"
 msgstr "Etiquetas de Minidisc"
 
 #. ====================================================================
-#: ../templates/hama-iso-templates.xml.h:20
+#: ../templates/hama-iso-templates.xml.h:25
 msgid "Printable mousepad"
 msgstr "Alfombrilla de ratón imprimible"
 
 #. ====================================================================
-#: ../templates/hama-iso-templates.xml.h:28
+#: ../templates/hama-iso-templates.xml.h:35
+#| msgid "DVD inlet"
+msgid "VHS inlet"
+msgstr "Interior de VHS"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:37
+#| msgid "CD inlet"
+msgid "VHS-C inlet"
+msgstr "Interior de VHS-C"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:39
+#| msgid "DVD inlet"
+msgid "Video-8 inlet"
+msgstr "Interior de Vídeo-8"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:41
+#| msgid "Zip disc labels"
+msgid "Zip disc inlet"
+msgstr "Interior de disco Zip"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:43
 msgid "Zip disc labels"
 msgstr "Etiquetas de disco Zip"
 
@@ -3145,6 +3201,11 @@ msgid "Video Labels (face only)"
 msgstr "Etiqeutas de video (solo frente)"
 
 #. ===================================================================
+#: ../templates/meritline-us-templates.xml.h:8
+msgid "Mini-CD Labels"
+msgstr "Etiquetas Mini-CD"
+
+#. ===================================================================
 #: ../templates/misc-us-templates.xml.h:2
 msgid "Business Card CD"
 msgstr "CD-tarjeta"
@@ -3163,7 +3224,7 @@ msgstr "Etiquetas CD/DVD (Sólo frente)"
 #. ===================================================================
 #. TODO: Is this the actual part #?
 #: ../templates/misc-us-templates.xml.h:12
-#: ../templates/misc-iso-templates.xml.h:10
+#: ../templates/misc-iso-templates.xml.h:12
 msgid "CD/DVD Labels (face only)"
 msgstr "Etiquetas CD/DVD (sólo frente)"
 
@@ -3187,75 +3248,76 @@ msgstr "Libreto de CD «Jewel»"
 msgid "Microtube labels"
 msgstr "Etiquetas microtubo"
 
-#. TODO: Is this the actual part #?
-#: ../templates/misc-us-templates.xml.h:24
-msgid "Mini-CD Labels"
-msgstr "Etiquetas Mini-CD"
-
 # REVISAR
 #. ===================================================================
-#: ../templates/misc-us-templates.xml.h:26
+#: ../templates/misc-us-templates.xml.h:24
 msgid "PRO CD Labels 2-up (CD spine only)"
 msgstr "Etiquetas para CD (sólo el lateral del CD)"
 
 # REVISAR
 #. ===================================================================
-#: ../templates/misc-us-templates.xml.h:28
+#: ../templates/misc-us-templates.xml.h:26
 msgid "PRO CD Labels 2-up (Face only)"
 msgstr "Etiquetas para CD (sólo carátula)"
 
 # REVISAR
 #. ===================================================================
 #. TODO: Is this the actual part #?
-#: ../templates/misc-us-templates.xml.h:30
-#: ../templates/misc-iso-templates.xml.h:26
+#: ../templates/misc-us-templates.xml.h:28
+#: ../templates/misc-iso-templates.xml.h:28
 msgid "PRO CD Labels 2-up (face only)"
 msgstr "PRO CD Labels 2-up (sólo la cara)"
 
 # REVISAR
 #. ===================================================================
-#: ../templates/misc-us-templates.xml.h:34
+#: ../templates/misc-us-templates.xml.h:32
 msgid "Slimline CD Case (rightside up)"
 msgstr "Caja extraplana de CD (boca arriba)"
 
 # REVISAR
-#: ../templates/misc-us-templates.xml.h:35
+#: ../templates/misc-us-templates.xml.h:33
 msgid "Slimline CD Case (upside down)"
 msgstr "Caja extraplana de CD (boca abajo)"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:12
+#: ../templates/misc-iso-templates.xml.h:4
+#: ../templates/pearl-iso-templates.xml.h:6
+msgid "Bottle labels"
+msgstr "Etiquetas de botella"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:14
 msgid "EPSON Photo Stickers 16"
 msgstr "Pegatinas EPSON Photo Stickers 16"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:14
+#: ../templates/misc-iso-templates.xml.h:16
 msgid "Etiketten"
 msgstr "Etiketten"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:16
+#: ../templates/misc-iso-templates.xml.h:18
 msgid "Fridge Magnet Stickers"
 msgstr "Pegatinas magnéticas para frigorífico"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:18
+#: ../templates/misc-iso-templates.xml.h:20
 msgid "General Labels"
 msgstr "Etiquetas generales"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:20
+#: ../templates/misc-iso-templates.xml.h:22
 msgid "Inkjet/Laser Labels 70x37mm"
 msgstr "Etiquetas para impresora de inyección/láser de 70x37mm"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:30
+#: ../templates/misc-iso-templates.xml.h:32
 #: ../templates/pearl-iso-templates.xml.h:62
 msgid "Self-adhesive labels"
 msgstr "Etiquetas autoadhesivas"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:32
+#: ../templates/misc-iso-templates.xml.h:34
 msgid "Universal Labels"
 msgstr "Etiquetas universales"
 
@@ -3263,11 +3325,6 @@ msgstr "Etiquetas universales"
 #: ../templates/pearl-iso-templates.xml.h:4
 msgid "Address Labels (STAMPIT)"
 msgstr "Etiquetas de dirección (STAMPIT)"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:6
-msgid "Bottle labels"
-msgstr "Etiquetas de botella"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:10
@@ -3293,16 +3350,6 @@ msgstr "Tarjetas de visita perforadas mate"
 #: ../templates/pearl-iso-templates.xml.h:18
 msgid "Business cards punched glossy"
 msgstr "Tarjetas de visita perforadas satinadas"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:20
-msgid "CD inlet (back)"
-msgstr "Interior de CD (trasera)"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:22
-msgid "CD inlet (front)"
-msgstr "Interior de CD (delantera)"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:30
