@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-09 12:28+0000\n"
-"PO-Revision-Date: 2010-12-22 13:24+0100\n"
+"POT-Creation-Date: 2010-12-22 18:33+0000\n"
+"PO-Revision-Date: 2010-12-23 09:47+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1212,7 +1212,7 @@ msgstr "Propiedad"
 #: C/mancreate.page:179(code)
 #, no-wrap
 msgid "brand"
-msgstr "marca"
+msgstr "brand"
 
 #: C/mancreate.page:180(p)
 msgid "Brand or manufacturer of stationery product. E.g. \"Avery\""
@@ -1230,7 +1230,7 @@ msgstr ""
 #: C/mancreate.page:187(code) C/mancreate.page:541(code)
 #, no-wrap
 msgid "size"
-msgstr "tamaño"
+msgstr "size"
 
 #: C/mancreate.page:188(p)
 #, fuzzy
@@ -1243,7 +1243,7 @@ msgstr "Tamaño de la hoja. Ej. «US Letter», «A4», ..."
 #: C/mancreate.page:193(code)
 #, no-wrap
 msgid "description"
-msgstr "descripción"
+msgstr "description"
 
 #: C/mancreate.page:194(p)
 msgid "Description of stationery product. E.g, \"Mailing Labels.\""
@@ -1252,7 +1252,7 @@ msgstr ""
 #: C/mancreate.page:197(code)
 #, no-wrap
 msgid "_description"
-msgstr "_descripción"
+msgstr "_description"
 
 #: C/mancreate.page:198(p)
 msgid ""
@@ -1264,7 +1264,7 @@ msgstr ""
 #: C/mancreate.page:374(code) C/mancreate.page:480(code)
 #, no-wrap
 msgid "width"
-msgstr "anchura"
+msgstr "width"
 
 #: C/mancreate.page:203(p)
 msgid "Page width. Only valid if size=\"Other\""
@@ -1274,7 +1274,7 @@ msgstr "Ancho de la página. Sólo es válido si tamaño=«Otro»"
 #: C/mancreate.page:378(code) C/mancreate.page:485(code)
 #, no-wrap
 msgid "height"
-msgstr "altura"
+msgstr "height"
 
 #: C/mancreate.page:207(p)
 msgid "Page height. Only valid if size=\"Other\""
@@ -1283,7 +1283,7 @@ msgstr ""
 #: C/mancreate.page:210(code)
 #, no-wrap
 msgid "equiv"
-msgstr "equivalente"
+msgstr "equiv"
 
 #: C/mancreate.page:211(p)
 msgid ""
@@ -1312,7 +1312,7 @@ msgstr "Subnodo"
 #: C/mancreate.page:243(code)
 #, no-wrap
 msgid "category"
-msgstr "categoría"
+msgstr "category"
 
 #: C/mancreate.page:244(p)
 msgid ""
@@ -1333,57 +1333,57 @@ msgstr ""
 #: C/mancreate.page:255(code)
 #, no-wrap
 msgid "label"
-msgstr "etiqueta"
+msgstr "label"
 
 #: C/mancreate.page:256(code)
 #, no-wrap
 msgid "round-label"
-msgstr "etiqueta redonda"
+msgstr "round-label"
 
 #: C/mancreate.page:257(code)
 #, no-wrap
 msgid "elliptical-label"
-msgstr ""
+msgstr "elliptical-label"
 
 #: C/mancreate.page:258(code)
 #, no-wrap
 msgid "square-label"
-msgstr ""
+msgstr "square-label"
 
 #: C/mancreate.page:259(code)
 #, no-wrap
 msgid "rectangle-label"
-msgstr ""
+msgstr "rectangle-label"
 
 #: C/mancreate.page:260(code)
 #, no-wrap
 msgid "card"
-msgstr "tarjeta"
+msgstr "card"
 
 #: C/mancreate.page:261(code)
 #, no-wrap
 msgid "business-card"
-msgstr ""
+msgstr "business-card"
 
 #: C/mancreate.page:262(code)
 #, no-wrap
 msgid "media"
-msgstr "soporte"
+msgstr "media"
 
 #: C/mancreate.page:263(code)
 #, no-wrap
 msgid "mail"
-msgstr "correo"
+msgstr "mail"
 
 #: C/mancreate.page:264(code)
 #, no-wrap
 msgid "foldable"
-msgstr "doblable"
+msgstr "foldable"
 
 #: C/mancreate.page:265(code)
 #, no-wrap
 msgid "photo"
-msgstr ""
+msgstr "photo"
 
 #: C/mancreate.page:272(code)
 #, no-wrap
@@ -1440,7 +1440,7 @@ msgstr "Altura de la etiqueta/tarjeta"
 #: C/mancreate.page:319(code)
 #, no-wrap
 msgid "round"
-msgstr "redondo"
+msgstr "round"
 
 #: C/mancreate.page:320(p)
 msgid ""
@@ -1496,7 +1496,7 @@ msgstr "Altura de la elipse"
 #: C/mancreate.page:490(code)
 #, no-wrap
 msgid "waste"
-msgstr "basura"
+msgstr "waste"
 
 #: C/mancreate.page:383(p) C/mancreate.page:430(p) C/mancreate.page:491(p)
 msgid ""
@@ -1523,7 +1523,7 @@ msgstr ""
 #: C/mancreate.page:614(code)
 #, no-wrap
 msgid "radius"
-msgstr "radio"
+msgstr "radius"
 
 #: C/mancreate.page:426(p)
 msgid "Radius (1/2 diameter) of label"
@@ -1546,7 +1546,7 @@ msgstr "Radio exterior de la etiqueta"
 #: C/mancreate.page:476(code)
 #, no-wrap
 msgid "hole"
-msgstr "agujero"
+msgstr "hole"
 
 #: C/mancreate.page:477(p)
 msgid "Radius of concentric hole"
@@ -2680,7 +2680,9 @@ msgstr ""
 #. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
 #: C/index.page:0(None)
 msgid "translator-credits"
-msgstr "Jorge González <jorgegonz@svn.gnome.org>, 2010"
+msgstr ""
+"Daniel Mustieles <daniel.mustieles@gmail.com>, 2010\n"
+"Jorge González <jorgegonz@svn.gnome.org>, 2010"
 
 #~ msgid "Template Node"
 #~ msgstr "Nodo plantilla"
@@ -2699,287 +2701,3 @@ msgstr "Jorge González <jorgegonz@svn.gnome.org>, 2010"
 
 #~ msgid "These controls are selects the default fill color."
 #~ msgstr "Estos controles seleccionan el color de relleno predeterminado."
-
-#~| msgid "<application>gLabels</application> Manual V2.2.6"
-#~ msgid "<application>gLabels</application> Manual V2.2"
-#~ msgstr "Manual de <application>gLabels</application> V2.2"
-
-#~| msgid "2003-2009"
-#~ msgid "2003-2007"
-#~ msgstr "2003-2007"
-
-#~ msgid ""
-#~ "Permission is granted to copy, distribute and/or modify this document "
-#~ "under the terms of the GNU Free Documentation License (GFDL), Version 1.1 "
-#~ "or any later version published by the Free Software Foundation with no "
-#~ "Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. You "
-#~ "can find a copy of the GFDL at this <ulink type=\"help\" url=\"ghelp:fdl"
-#~ "\">link</ulink> or in the file COPYING-DOCS distributed with this manual."
-#~ msgstr ""
-#~ "Se otorga permiso para copiar, distribuir y/o modificar este documento "
-#~ "bajo los términos de la Licencia de Documentación Libre de GNU, Versión "
-#~ "1.1 o cualquier otra versión posterior publicada por la Free Software "
-#~ "Foundation; sin Secciones Invariantes ni Textos de Cubierta Delantera ni "
-#~ "Textos de Cubierta Trasera. Puede encontrar una copia de la licencia GFDL "
-#~ "en este <ulink type=\"help\" url=\"ghelp:fdl\">enlace</ulink> o en el "
-#~ "archivo COPYING-DOCS distribuido con este manual."
-
-#~ msgid ""
-#~ "This manual is part of a collection of GNOME manuals distributed under "
-#~ "the GFDL. If you want to distribute this manual separately from the "
-#~ "collection, you can do so by adding a copy of the license to the manual, "
-#~ "as described in section 6 of the license."
-#~ msgstr ""
-#~ "Este manual es parte de una colección de manuales de GNOME distribuido "
-#~ "bajo la GFDL. Si quiere distribuir este manual por separado de la "
-#~ "colección, puede hacerlo añadiendo una copia de la licencia al manual, "
-#~ "tal como se describe en la sección 6 de la licencia."
-
-#~ msgid ""
-#~ "Many of the names used by companies to distinguish their products and "
-#~ "services are claimed as trademarks. Where those names appear in any GNOME "
-#~ "documentation, and the members of the GNOME Documentation Project are "
-#~ "made aware of those trademarks, then the names are in capital letters or "
-#~ "initial capital letters."
-#~ msgstr ""
-#~ "Muchos de los nombres utilizados por las empresas para distinguir sus "
-#~ "productos y servicios se consideran marcas comerciales. Cuando estos "
-#~ "nombres aparezcan en la documentación de GNOME, y siempre que se haya "
-#~ "informado a los miembros del Proyecto de documentación de GNOME de dichas "
-#~ "marcas comerciales, los nombres aparecerán en mayúsculas o con las "
-#~ "iniciales en mayúsculas."
-
-#~ msgid ""
-#~ "DOCUMENT IS PROVIDED ON AN \"AS IS\" BASIS, WITHOUT WARRANTY OF ANY KIND, "
-#~ "EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES "
-#~ "THAT THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS FREE OF DEFECTS "
-#~ "MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE OR NON-INFRINGING. THE ENTIRE "
-#~ "RISK AS TO THE QUALITY, ACCURACY, AND PERFORMANCE OF THE DOCUMENT OR "
-#~ "MODIFIED VERSION OF THE DOCUMENT IS WITH YOU. SHOULD ANY DOCUMENT OR "
-#~ "MODIFIED VERSION PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL "
-#~ "WRITER, AUTHOR OR ANY CONTRIBUTOR) ASSUME THE COST OF ANY NECESSARY "
-#~ "SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF WARRANTY CONSTITUTES "
-#~ "AN ESSENTIAL PART OF THIS LICENSE. NO USE OF ANY DOCUMENT OR MODIFIED "
-#~ "VERSION OF THE DOCUMENT IS AUTHORIZED HEREUNDER EXCEPT UNDER THIS "
-#~ "DISCLAIMER; AND"
-#~ msgstr ""
-#~ "EL DOCUMENTO SE OFRECE «TAL CUAL», SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O "
-#~ "IMPLÍCITA, INCLUYENDO, PERO SIN LIMITARSE A ELLA, LA GARANTÍA DE QUE EL "
-#~ "DOCUMENTO O LA VERSIÓN MODIFICADA DEL MISMO ESTÉ LIBRE DE DEFECTOS, "
-#~ "GARANTÍA DE COMERCIALIZACIÓN, APTITUD PARA UN USO EN PARTICULAR O "
-#~ "INCUMPLIMIENTO. TODOS LOS RIESGOS RELATIVOS A LA CALIDAD, EXACTITUD O "
-#~ "RENDIMIENTO DEL DOCUMENTO O LA VERSIÓN MODIFICADA DEL MISMO SON ASUMIDOS "
-#~ "POR VD. EN CASO DE QUE EL DOCUMENTO O LA VERSIÓN MODIFICADA SEAN "
-#~ "DEFECTUOSOS, VD. (NO EL ESCRITOR ORIGINAL NI EL AUTOR NI NINGUNO DE LOS "
-#~ "COLABORADORES) ASUMIRÁ EL COSTE DE CUALQUIER MANTENIMIENTO, REPARACIÓN O "
-#~ "CORRECCIÓN QUE SEAN NECESARIOS. ESTA RENUNCIA DE GARANTÍA CONSTITUYE UNA "
-#~ "PARTE ESENCIAL DE ESTA LICENCIA NO SE AUTORIZA EL USO DE NINGÚN DOCUMENTO "
-#~ "NI VERSIÓN MODIFICADA DEL MISMO, SALVO EN LAS CONDICIONES ESPECIFICADAS "
-#~ "EN ESTA RENUNCIA; Y "
-
-#~ msgid ""
-#~ "UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY, WHETHER IN TORT "
-#~ "(INCLUDING NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE AUTHOR, INITIAL "
-#~ "WRITER, ANY CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE DOCUMENT OR MODIFIED "
-#~ "VERSION OF THE DOCUMENT, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE "
-#~ "LIABLE TO ANY PERSON FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR "
-#~ "CONSEQUENTIAL DAMAGES OF ANY CHARACTER INCLUDING, WITHOUT LIMITATION, "
-#~ "DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR "
-#~ "MALFUNCTION, OR ANY AND ALL OTHER DAMAGES OR LOSSES ARISING OUT OF OR "
-#~ "RELATING TO USE OF THE DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT, "
-#~ "EVEN IF SUCH PARTY SHALL HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH "
-#~ "DAMAGES."
-#~ msgstr ""
-#~ "EN NINGUNA CIRCUNSTANCIA NI SEGÚN NINGÚN ARGUMENTO LEGAL, SEA POR MOTIVOS "
-#~ "CULPOSOS (INCLUIDA LA NEGLIGENCIA), CONTRACTUALES O DE OTRO TIPO, NI EL "
-#~ "AUTOR, NI EL REDACTOR INICIAL, NI CUALQUIER COLABORADOR, NI CUALQUIER "
-#~ "DISTRIBUIDOR DEL DOCUMENTO O VERSIÓN MODIFICADA DEL MISMO, NI CUALQUIER "
-#~ "PROVEEDOR DE CUALQUIERA DE DICHAS PARTES, SERÁN RESPONSABLES, ANTE NINGÚN "
-#~ "TERCERO, DE NINGÚN DAÑO O PERJUICIO DIRECTO, INDIRECTO, ESPECIAL, "
-#~ "INCIDENTAL O CONSIGUIENTE DE NINGÚN TIPO, INCLUIDOS, SIN LIMITACIÓN, LOS "
-#~ "DAÑOS POR PÉRDIDA DE FONDO DE COMERCIO, INTERRUPCIÓN DEL TRABAJO, FALLO O "
-#~ "MAL FUNCIONAMIENTO INFORMÁTICO, NI CUALQUIER OTRO DAÑO O PÉRDIDA "
-#~ "DERIVADOS DEL USO DEL DOCUMENTO Y LAS VERSIONES MODIFICADAS DEL MISMO, O "
-#~ "RELACIONADO CON ELLO, INCLUSO SI SE HABÍA COMUNICADO A AQUELLA PARTE LA "
-#~ "POSIBILIDAD DE TALES DAÑOS."
-
-#~ msgid ""
-#~ "DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT ARE PROVIDED UNDER THE "
-#~ "TERMS OF THE GNU FREE DOCUMENTATION LICENSE WITH THE FURTHER "
-#~ "UNDERSTANDING THAT: <placeholder-1/>"
-#~ msgstr ""
-#~ "ESTE DOCUMENTO Y LAS VERSIONES MODIFICADAS DEL MISMO SE PROPORCIONAN "
-#~ "SEGÚN LAS CONDICIONES ESTABLECIDAS EN LA LICENCIA DE DOCUMENTACIÓN LIBRE "
-#~ "DE GNU (GFDL) Y TENIENDO EN CUENTA QUE: <placeholder-1/>"
-
-#~ msgid "Jim"
-#~ msgstr "Jim"
-
-#~ msgid "Evins"
-#~ msgstr "Evins"
-
-#~ msgid "gLabels Manual V2.2"
-#~ msgstr "Manual de gLabels V2.2"
-
-#~ msgid "December 2007"
-#~ msgstr "Diciembre de 2007"
-
-#~ msgid "Jim Evins <email>evins@snaught.com</email>"
-#~ msgstr "Jim Evins <email>evins@snaught.com</email>"
-
-#~| msgid ""
-#~| "This manual describes version 2.2.6 of <application>gLabels</"
-#~| "application>."
-#~ msgid "This manual describes version 2.2 of gLabels."
-#~ msgstr "Este manual describe la versión 2.2 de gLabels."
-
-#~ msgid "Feedback"
-#~ msgstr "Comentarios"
-
-#~ msgid "gLabels"
-#~ msgstr "gLabels"
-
-#~ msgid "Getting Started"
-#~ msgstr "Inicio"
-
-#~ msgid "To Start <application>gLabels</application>"
-#~ msgstr "Para iniciar <application>gLabels</application>"
-
-#, fuzzy
-#~| msgid ""
-#~| "You can start <application>gLabels</application> in the following ways:"
-#~ msgid ""
-#~ "You can start <application><application>gLabels</application></"
-#~ "application> in the following ways:"
-#~ msgstr ""
-#~ "Puede iniciar <application>gLabels</application> de las siguientes "
-#~ "maneras:"
-
-#~ msgid "<guimenu>Applications</guimenu> menu"
-#~ msgstr "Menú <guimenu>Aplicaciones</guimenu>"
-
-#~ msgid "Command line"
-#~ msgstr "Línea de comandos"
-
-#~ msgid "When You Start <application>gLabels</application>"
-#~ msgstr "Cuando inicia <application>gLabels</application>"
-
-#, fuzzy
-#~| msgid ""
-#~| "When you start <application>gLabels</application>, the following window "
-#~| "is displayed."
-#~ msgid ""
-#~ "When you start <application><application>gLabels</application></"
-#~ "application>, the following window is displayed."
-#~ msgstr ""
-#~ "Cuando inicia <application>gLabels</application> se muestra la siguiente "
-#~ "ventana."
-
-#~ msgid "<application>gLabels</application> Start Up Window"
-#~ msgstr "Ventana de inicio de <application>gLabels</application>"
-
-#~ msgid "Menubar."
-#~ msgstr "Barra de menú."
-
-#~ msgid "Main toolbar."
-#~ msgstr "Barra de herramientas principal."
-
-#~ msgid "Drawing toolbar."
-#~ msgstr "Barra de herramientas de dibujo."
-
-#~ msgid "Display area."
-#~ msgstr "Área de visualización."
-
-#, fuzzy
-#~| msgid ""
-#~| "The display area is the main drawing interface to <application>gLabels</"
-#~| "application>."
-#~ msgid ""
-#~ "The display area is the main drawing interface to "
-#~ "<application><application>gLabels</application></application>."
-#~ msgstr ""
-#~ "El área de visualización es el interfaz de dibujo principal de "
-#~ "<application>gLabels</application>."
-
-#~ msgid "Object sidebar."
-#~ msgstr "Barra lateral de objetos."
-
-#~ msgid "Properties toolbar."
-#~ msgstr "Barra de herramientas de propiedades."
-
-#~ msgid "Statusbar."
-#~ msgstr "Barra de estado."
-
-#, fuzzy
-#~| msgid "To Start <application>gLabels</application>"
-#~ msgid ""
-#~ "To Quit <application><application>gLabels</application></application>"
-#~ msgstr "Para iniciar <application>gLabels</application>"
-
-#~ msgid "Ctrl"
-#~ msgstr "Ctrl"
-
-#~ msgid "X"
-#~ msgstr "X"
-
-#~ msgid "Cut"
-#~ msgstr "Cortar"
-
-#~ msgid "C"
-#~ msgstr "C"
-
-#~ msgid "Copy"
-#~ msgstr "Copiar"
-
-#~ msgid "V"
-#~ msgstr "V"
-
-#~ msgid "Paste"
-#~ msgstr "Pegar"
-
-#~ msgid "Delete"
-#~ msgstr "Borrar"
-
-#~ msgid ""
-#~ "@@image: 'figures/merge-ex1-1.png'; md5=55a97963022047cdad6aa198b5ed698e"
-#~ msgstr ""
-#~ "@@image: 'figures/merge-ex1-1.png'; md5=55a97963022047cdad6aa198b5ed698e"
-
-#~ msgid ""
-#~ "@@image: 'figures/merge-ex1-2.png'; md5=d03979f010e20e98532258edb20b1bc0"
-#~ msgstr ""
-#~ "@@image: 'figures/merge-ex1-2.png'; md5=d03979f010e20e98532258edb20b1bc0"
-
-#~ msgid ""
-#~ "@@image: 'figures/merge-ex2-1.png'; md5=4f062158be21bfadc4adfbdcf5d0206f"
-#~ msgstr ""
-#~ "@@image: 'figures/merge-ex2-1.png'; md5=4f062158be21bfadc4adfbdcf5d0206f"
-
-#~ msgid ""
-#~ "@@image: 'figures/merge-ex2-2.png'; md5=f69a7e0ae86f66b0d70d39a7757918fa"
-#~ msgstr ""
-#~ "@@image: 'figures/merge-ex2-2.png'; md5=f69a7e0ae86f66b0d70d39a7757918fa"
-
-#~ msgid ""
-#~ "@@image: 'figures/merge-ex2-4.png'; md5=29a60e970cb026aecf75543203494b00"
-#~ msgstr ""
-#~ "@@image: 'figures/merge-ex2-4.png'; md5=29a60e970cb026aecf75543203494b00"
-
-#~ msgid ""
-#~ "@@image: 'figures/merge-ex3-1.png'; md5=b0c387b5fcfd730b2ae75172895ff5b8"
-#~ msgstr ""
-#~ "@@image: 'figures/merge-ex3-1.png'; md5=b0c387b5fcfd730b2ae75172895ff5b8"
-
-#~ msgid ""
-#~ "@@image: 'figures/merge-ex3-2.png'; md5=09f105e133657345e6e478a464e5b49f"
-#~ msgstr ""
-#~ "@@image: 'figures/merge-ex3-2.png'; md5=09f105e133657345e6e478a464e5b49f"
-
-#~ msgid "gLabels Manual V2.2.6"
-#~ msgstr "Manual de gLabels V2.2.6"
-
-#~ msgid "October 2009"
-#~ msgstr "Octubre de 2009"
-
-#~ msgid "Mario Blättermann <email>mariobl@gnome.org</email>"
-#~ msgstr "Mario Blättermann <email>mariobl@gnome.org</email>"
