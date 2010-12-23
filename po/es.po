@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-12-21 16:58+0000\n"
-"PO-Revision-Date: 2010-12-22 11:15+0100\n"
+"POT-Creation-Date: 2010-12-22 18:32+0000\n"
+"PO-Revision-Date: 2010-12-23 13:04+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -2663,7 +2663,8 @@ msgstr "Cualquier etiqueta"
 #. ===================================================================
 #. ====================================================================
 #. ===================================================================
-#: ../templates/categories.xml.h:3 ../templates/geha-iso-templates.xml.h:8
+#: ../templates/categories.xml.h:3 ../templates/dataline-iso-templates.xml.h:4
+#: ../templates/geha-iso-templates.xml.h:8
 #: ../templates/hama-iso-templates.xml.h:6
 #: ../templates/pearl-iso-templates.xml.h:8
 msgid "Business cards"
@@ -2697,7 +2698,7 @@ msgstr "Productos para fotos"
 #: ../templates/categories.xml.h:9 ../templates/ascom-iso-templates.xml.h:6
 #: ../templates/hama-iso-templates.xml.h:29
 #: ../templates/herma-iso-templates.xml.h:18
-#: ../templates/jac-iso-templates.xml.h:4
+#: ../templates/jac-iso-templates.xml.h:8
 msgid "Rectangular labels"
 msgstr "Etiquetas rectangulares"
 
@@ -2782,7 +2783,7 @@ msgstr "Tarjetas de visita"
 #. ===================================================================
 #. ===============================================================
 #. ===================================================================
-#. ====================================================================
+#. ********************************************************************
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:6
 #: ../templates/avery-iso-templates.xml.h:14
@@ -2886,6 +2887,7 @@ msgstr "Etiquetas redondeadas"
 #. ===================================================================
 #. ********************************************************************
 #: ../templates/avery-us-templates.xml.h:36
+#: ../templates/dataline-iso-templates.xml.h:10
 #: ../templates/meritline-us-templates.xml.h:14
 #: ../templates/uline-us-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:10
@@ -3017,6 +3019,19 @@ msgid "CD/DVD Labels Standard Format (face only)"
 msgstr "Etieuats CD/DVD Formato estándar (sólo frente)"
 
 #. ===================================================================
+#. ====================================================================
+#: ../templates/dataline-iso-templates.xml.h:6
+#: ../templates/hama-iso-templates.xml.h:13
+msgid "CD/DVD labels"
+msgstr "Etiquetas de CD/DVD"
+
+#. ===================================================================
+#: ../templates/dataline-iso-templates.xml.h:8
+#: ../templates/pearl-iso-templates.xml.h:42
+msgid "Membership cards"
+msgstr "Tarjetas de socio"
+
+#. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:2
 msgid "3.5in Diskette"
 msgstr "Disquete de 3.5 pulgadas"
@@ -3128,11 +3143,6 @@ msgid "CD inlet (front)"
 msgstr "Interior de CD (delantera)"
 
 #. ====================================================================
-#: ../templates/hama-iso-templates.xml.h:13
-msgid "CD/DVD labels"
-msgstr "Etiquetas de CD/DVD"
-
-#. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:21
 msgid "Mini Disc labels"
 msgstr "Etiquetas de Minidisc"
@@ -3144,25 +3154,21 @@ msgstr "Alfombrilla de ratón imprimible"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:35
-#| msgid "DVD inlet"
 msgid "VHS inlet"
 msgstr "Interior de VHS"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:37
-#| msgid "CD inlet"
 msgid "VHS-C inlet"
 msgstr "Interior de VHS-C"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:39
-#| msgid "DVD inlet"
 msgid "Video-8 inlet"
 msgstr "Interior de Vídeo-8"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:41
-#| msgid "Zip disc labels"
 msgid "Zip disc inlet"
 msgstr "Interior de disco Zip"
 
@@ -3199,6 +3205,19 @@ msgstr "Etiquetas para disquette (sólo cara)"
 #: ../templates/herma-iso-templates.xml.h:20
 msgid "Video Labels (face only)"
 msgstr "Etiqeutas de video (solo frente)"
+
+#. *******************************************************************
+#. ===================================================================
+#: ../templates/jac-iso-templates.xml.h:4
+#: ../templates/pearl-iso-templates.xml.h:36
+msgid "Labels A4"
+msgstr "Etiquetas A4"
+
+#. *******************************************************************
+#: ../templates/jac-iso-templates.xml.h:6
+#| msgid "CD Labels"
+msgid "PVC labels"
+msgstr "Etiquetas de PVC"
 
 #. ===================================================================
 #: ../templates/meritline-us-templates.xml.h:8
@@ -3367,11 +3386,6 @@ msgid "Foldable business cards glossy/dull"
 msgstr "Etiquetas de visita plegables brillantes/mate"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:36
-msgid "Labels A4"
-msgstr "Etiquetas A4"
-
-#. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:38
 msgid "Labels A5"
 msgstr "Etiquetas A5"
@@ -3380,11 +3394,6 @@ msgstr "Etiquetas A5"
 #: ../templates/pearl-iso-templates.xml.h:40
 msgid "Labels A6"
 msgstr "Etiquetas A6"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:42
-msgid "Membership cards"
-msgstr "Tarjetas de socio"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:44
