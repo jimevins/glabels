@@ -48,6 +48,7 @@ Possible Goals for future branches:
 		generic XML
 		freedb (CDDB) for CD labels
 		ADIF for generating QSL-cards
+		Address books of Thunderbird, Balsa, Claws Mail etc.
 
 	-  Printer calibration tool: a facility for tweaking output
 	   origin and scale.  This should really be part of the
@@ -65,6 +66,15 @@ Possible Goals for future branches:
 
 	-  Ability to select/unselect individual records during a
 	   merge-print.
+
+	-  Merge templates which are now in seperate template definitions
+	   because the product includes more than one unique shape. This could
+	   be done by using tabs in the drawing area.
+
+	-  Ability to define a free-form shape for a label/card. There are some
+	   products which have unusual shapes. This includes free-form markup
+	   objects. For the time being, the ability to concatenate a shape from
+	   other basic shapes could be sufficient here.
 
 	-  See https://sourceforge.net/tracker/?atid=445119&group_id=46122&func=browse
 	   for additional ideas.
