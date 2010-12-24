@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-12-22 18:32+0000\n"
-"PO-Revision-Date: 2010-12-23 13:04+0100\n"
+"POT-Creation-Date: 2010-12-23 19:04+0000\n"
+"PO-Revision-Date: 2010-12-24 13:13+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -573,7 +573,7 @@ msgstr "Archivo no existe"
 #: ../src/file.c:410
 #, c-format
 msgid "Could not open file \"%s\""
-msgstr "No se puede abrir el archivo \"%s\""
+msgstr "No se puede abrir el archivo «%s»"
 
 #: ../src/file.c:413
 msgid "Not a supported file format"
@@ -582,7 +582,7 @@ msgstr "Formato de archivo no soportado"
 #: ../src/file.c:491 ../src/file.c:670
 #, c-format
 msgid "Could not save file \"%s\""
-msgstr "No se puede guardar el archivo \"%s\""
+msgstr "No se puede guardar el archivo «%s»"
 
 #: ../src/file.c:495 ../src/file.c:674
 msgid "Error encountered during save.  The file is still not saved."
@@ -591,7 +591,7 @@ msgstr "Se encontró un error al guardar. El archivo aún no está guardado."
 #: ../src/file.c:535
 #, c-format
 msgid "Save \"%s\" as"
-msgstr "Guardar como \"%s\""
+msgstr "Guardar como «%s»"
 
 #: ../src/file.c:623
 msgid "Please supply a valid file name"
@@ -600,7 +600,7 @@ msgstr "Debe proporcionar un nombre de archivo válido"
 #: ../src/file.c:644
 #, c-format
 msgid "Overwrite file \"%s\"?"
-msgstr "Sobreescribir el archivo \"%s\"?"
+msgstr "¿Sobreescribir el archivo «%s»?"
 
 #: ../src/file.c:648
 msgid "File already exists."
@@ -609,7 +609,7 @@ msgstr "El archivo ya existe."
 #: ../src/file.c:744
 #, c-format
 msgid "Save changes to document \"%s\" before closing?"
-msgstr "Guardar cambios del documento \"%s\" antes de cerrar?"
+msgstr "¿Guardar cambios del documento «%s» antes de cerrar?"
 
 #: ../src/file.c:748
 msgid "Your changes will be lost if you don't save them."
@@ -1317,7 +1317,7 @@ msgstr "Guardar el archivo actual con un nombre diferente"
 
 #: ../src/ui.c:141
 msgid "_Print..."
-msgstr "_Imprimir"
+msgstr "_Imprimir…"
 
 #: ../src/ui.c:143
 msgid "Print the current file"
@@ -1333,7 +1333,7 @@ msgstr "Modificar las propiedades del documento"
 
 #: ../src/ui.c:155
 msgid "Template _Designer..."
-msgstr "_Diseñador de plantillas"
+msgstr "_Diseñador de plantillas…"
 
 #: ../src/ui.c:157
 msgid "Create a custom template"
@@ -3215,7 +3215,6 @@ msgstr "Etiquetas A4"
 
 #. *******************************************************************
 #: ../templates/jac-iso-templates.xml.h:6
-#| msgid "CD Labels"
 msgid "PVC labels"
 msgstr "Etiquetas de PVC"
 
