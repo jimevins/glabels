@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-22 18:33+0000\n"
-"PO-Revision-Date: 2010-12-23 09:47+0100\n"
+"POT-Creation-Date: 2010-12-23 19:04+0000\n"
+"PO-Revision-Date: 2010-12-24 13:25+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -374,6 +374,9 @@ msgid ""
 "Printing can begin on any label on the first sheet. This can be selected "
 "with the <gui>Start on label</gui> spinbutton."
 msgstr ""
+"La impresión puede empezar en cualquier etiqueta de la primera hoja. Ésta se "
+"puede seleccionar con el botón incremental <gui>Comenzar con la etiqueta</"
+"gui>."
 
 #: C/printfile.page:86(p)
 msgid ""
@@ -447,7 +450,7 @@ msgstr ""
 
 #: C/multifile.page:25(title)
 msgid "To open multiple files from the command line"
-msgstr ""
+msgstr "Abrir varios archivos desde la línea de comandos"
 
 #: C/multifile.page:27(p)
 msgid ""
@@ -591,10 +594,14 @@ msgstr "@@image: 'figures/merge-ex3-4.png'; md5=THIS FILE DOESN'T EXIST"
 msgid ""
 "Create address labels from the <app>Evolution</app> address book entries."
 msgstr ""
+"Crear etiquetas de direcciones desde las entradas de la libreta de "
+"direcciones de <app>Evolution</app>."
 
 #: C/merge-ex3.page:25(title)
 msgid "Example 3: Address Labels Using the <app>Evolution</app> Addressbook"
 msgstr ""
+"Ejemplo 3: Etiquetas de dirección usando la libreta de direcciones de "
+"<app>Evolution</app>"
 
 #: C/merge-ex3.page:27(p)
 msgid ""
@@ -623,6 +630,9 @@ msgid ""
 "you may wish to contact the package maintainer or file a bug against the "
 "package to request it."
 msgstr ""
+"Si el paquete <app>gLabels</app> de su distribución carece de este soporte, "
+"puede contactar con el mantenedor del paquete o informar de un error en este "
+"paquete para solicitarlo."
 
 #: C/merge-ex3.page:44(p)
 msgid ""
@@ -995,7 +1005,6 @@ msgstr "Crear plantillas nuevas manualmente"
 
 #. ******************
 #: C/mancreate.page:33(p)
-#, fuzzy
 #| msgid ""
 #| "The format for these files is defined in the DTD: <link href=\"http://"
 #| "glabels.org/xmlns/2.3/glabels-2.3.dtd.txt\">glabels-2.3.dtd</link>. (This "
@@ -1007,15 +1016,19 @@ msgid ""
 "dtd.txt\">glabels-2.3.dtd</link> (this DTD also describes other XML files "
 "used by <app>gLabels</app>)."
 msgstr ""
-"El formato de esos archivos está definido en el DTD: <link href=\"http://"
-"glabels.org/xmlns/2.3/glabels-2.3.dtd.txt\">glabels-2.3.dtd</link>. (Este "
-"DTD también describe otros formatos XML usados por <app>glabels</app>.)"
+"Esta página es una guía de referencia para la creación manual de plantillas "
+"de <app>gLabels</app>. Las plantillas de <app>gLabels</app> se definen en un "
+"archivo XML, tal como se describe en la DTD: <link href=\"http://glabels.org/"
+"xmlns/2.3/glabels-2.3.dtd.txt\">glabels-2.3.dtd</link> (Este DTD también "
+"describe otros formatos XML usados por <app>glabels</app>)."
 
 #: C/mancreate.page:38(p)
 msgid ""
 "Manually created template files should be placed in the <file>${HOME}/."
 "glabels</file> and be named with a <file>.template</file> extension."
 msgstr ""
+"Las plantillas creadas manualmente se guardarán en <file>${HOME}/.glabels</"
+"file> y se nombrarán con extensión <file>.template</file>."
 
 #: C/mancreate.page:42(p)
 msgid ""
@@ -1025,7 +1038,7 @@ msgstr ""
 
 #: C/mancreate.page:45(p)
 msgid "Location"
-msgstr ""
+msgstr "Ubicación"
 
 #: C/mancreate.page:46(p) C/mancreate.page:173(p) C/mancreate.page:237(p)
 #: C/mancreate.page:301(p) C/mancreate.page:364(p) C/mancreate.page:415(p)
@@ -1037,7 +1050,7 @@ msgstr "Descripción"
 
 #: C/mancreate.page:53(file)
 msgid "${prefix}/share/libglabels-3.0/templates"
-msgstr ""
+msgstr "${prefix}/share/libglabels-3.0/templates"
 
 #: C/mancreate.page:54(p)
 msgid "Predefined templates distributed with <app>gLabels</app>."
@@ -1051,7 +1064,7 @@ msgstr ""
 
 #: C/mancreate.page:59(file)
 msgid "${XDG_CONFIG_HOME}/libglabels/templates"
-msgstr ""
+msgstr "${XDG_CONFIG_HOME}/libglabels/templates"
 
 #: C/mancreate.page:60(p)
 msgid ""
@@ -1065,10 +1078,12 @@ msgid ""
 "If <file>${XDG_CONFIG_HOME}</file> is not defined, it defaults to <file>"
 "${HOME}/.config</file>."
 msgstr ""
+"Si <file>${XDG_CONFIG_HOME}</file> no está definido, su valor predeterminado "
+"es <file>${HOME}/.config</file>."
 
 #: C/mancreate.page:66(file)
 msgid "${HOME}/.glabels"
-msgstr ""
+msgstr "${HOME}/.glabels"
 
 #: C/mancreate.page:67(p)
 msgid ""
@@ -1117,7 +1132,7 @@ msgid ""
 msgstr ""
 
 #: C/mancreate.page:123(code)
-#, fuzzy, no-wrap
+#, no-wrap
 #| msgid ""
 #| "\n"
 #| "&lt;?xml version=\"1.0\"?&gt;\n"
@@ -1140,10 +1155,9 @@ msgstr ""
 "&lt;?xml version=\"1.0\"?&gt;\n"
 "&lt;Glabels-templates&gt;\n"
 "\n"
-"   <var>...plantillas...</var>\n"
+"   <var its:translate=\"yes\">...plantillas...</var>\n"
 "\n"
-"&lt;/Glabels-templates&gt;\n"
-"      "
+"&lt;/Glabels-templates&gt;"
 
 #: C/mancreate.page:132(title)
 msgid "Example Template"
@@ -1192,7 +1206,7 @@ msgstr ""
 
 #: C/mancreate.page:163(title)
 msgid "<span translate=\"no\">Template</span> Node"
-msgstr ""
+msgstr "Nodo <span translate=\"no\">Template</span>"
 
 #: C/mancreate.page:165(p)
 msgid ""
@@ -1233,12 +1247,13 @@ msgid "size"
 msgstr "size"
 
 #: C/mancreate.page:188(p)
-#, fuzzy
 #| msgid "Size of sheet. E.g., \"US-Letter,\" \"A4\", ..."
 msgid ""
 "Size of sheet. E.g., \"<code translate=\"no\">US-Letter</code>\", \"<code "
 "translate=\"no\">A4</code>\", ..."
-msgstr "Tamaño de la hoja. Ej. «US Letter», «A4», ..."
+msgstr ""
+"Tamaño de la hoja. Ej. \"<code translate=\"no\">Carta</code>\", \"<code "
+"translate=\"no\">A4</code>\", ...."
 
 #: C/mancreate.page:193(code)
 #, no-wrap
@@ -2151,7 +2166,6 @@ msgid "Changing Stacking Order"
 msgstr "Cambiar el orden de apilamiento"
 
 #: C/editprop.page:169(p)
-#, fuzzy
 msgid ""
 "Stacking order refers to relative position in the z-axis of objects. That is "
 "when objects overlap, which object will appear on top of the other. By "
@@ -2339,7 +2353,7 @@ msgstr ""
 
 #: C/customize.page:64(gui)
 msgid "US Letter"
-msgstr "US Letter"
+msgstr "Carta"
 
 #: C/customize.page:65(p)
 msgid ""
@@ -2356,7 +2370,7 @@ msgstr ""
 
 #: C/customize.page:72(p)
 msgid "Default: <gui>US Letter</gui>."
-msgstr "Predeterminado: <gui>US Letter</gui>."
+msgstr "Predeterminado: <gui>Carta</gui>."
 
 #: C/customize.page:77(title)
 msgid "Object Defaults"
