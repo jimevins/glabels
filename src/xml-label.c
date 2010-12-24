@@ -768,9 +768,17 @@ xml_parse_object_barcode (xmlNodePtr  node,
         style = gl_label_barcode_style_new ();
 	backend_id = lgl_xml_get_prop_string (node, "backend", NULL);
 	id = lgl_xml_get_prop_string (node, "style", NULL);
-        if ( !backend_id )
+        if ( !gl_barcode_backends_is_backend_id_valid (backend_id) )
         {
-                backend_id = g_strdup (gl_barcode_backends_guess_backend_id (id));
+                if ( backend_id == NULL )
+                {
+                        backend_id = g_strdup (gl_barcode_backends_guess_backend_id (id));
+                }
+                else
+                {
+                        g_free (backend_id);
+                        backend_id = g_strdup ("built-in");
+                }
         }
         gl_label_barcode_style_set_backend_id (style, backend_id);
         gl_label_barcode_style_set_style_id (style, id);

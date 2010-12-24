@@ -33,6 +33,7 @@ void             gl_barcode_backends_free_backend_list    (GList          *backe
 const gchar     *gl_barcode_backends_backend_id_to_name   (const gchar    *backend_id);
 const gchar     *gl_barcode_backends_backend_name_to_id   (const gchar    *backend_name);
 
+gboolean         gl_barcode_backends_is_backend_id_valid  (const gchar    *backend_id);
 const gchar     *gl_barcode_backends_guess_backend_id     (const gchar    *id);
 
 GList           *gl_barcode_backends_get_styles_list      (const gchar    *backend_id);

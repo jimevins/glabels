@@ -629,6 +629,31 @@ gl_barcode_backends_backend_name_to_id (const gchar *backend_name)
 
 
 /*****************************************************************************/
+/* Test if backend id is valid.                                              */
+/*****************************************************************************/
+gboolean
+gl_barcode_backends_is_backend_id_valid (const gchar    *backend_id)
+{
+        gint i;
+
+        if (backend_id == NULL)
+        {
+                return FALSE;
+        }
+
+        for (i=0; backends[i].id != NULL; i++)
+        {
+                if (g_ascii_strcasecmp (backend_id, backends[i].id) == 0)
+                {
+                        return TRUE;
+                }
+        }
+
+        return FALSE;
+}
+
+
+/*****************************************************************************/
 /* Guess backend id from style id (for backwards compatability).             */
 /*****************************************************************************/
 const gchar *
