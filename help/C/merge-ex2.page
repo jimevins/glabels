@@ -45,8 +45,8 @@ Kramer,Cosmo,,"Apt 5B","129 W. 81 St.","New York",NY,10024-7207
         <guiseq> <gui>Objects</gui>
         <gui>Merge Properties</gui> </guiseq> menu item to display
         the <gui>merge properties</gui> dialog.  We use this dialog to
-        select the source type (in our case CSV) and the merge source (filename) as
-        shown.</p>
+        select the source type (in our case CSV with keys on line 1) and the merge
+	source (filename) as shown.</p>
 
       <!-- ==== Figure ==== -->
 		<media type="image" src="figures/merge-ex2-1.png" mime="image/png" style="right">
@@ -54,10 +54,9 @@ Kramer,Cosmo,,"Apt 5B","129 W. 81 St.","New York",NY,10024-7207
     		</media>
       <!-- ==== End of Figure ==== -->
 
-      <p>Before applying the merge source, we uncheck the first record since it is only
-        column headers from our original <app>gnumeric</app> spreadsheet
-        and would simply waste our first label.  We also unselect the second record
-        which is empty (an artifact of our original spreadsheet).  We could also unselect
+      <p>Before applying the merge source, we uncheck the first record since it only
+        contains empty fields.  It is an artifact of our original <app>gnumeric</app> spreadsheet
+        and would simply waste our first label.  We could also unselect
         any other records that we didn't want to print a label for.</p>
 
       <p>We can also view each record in more detail by clicking on the appropriate
@@ -75,7 +74,7 @@ Kramer,Cosmo,,"Apt 5B","129 W. 81 St.","New York",NY,10024-7207
 
       <p>In this example we have a single text object.  This text object contains
         all of our merge fields organized on multiple lines as a mailing address.
-        Notice that fields ${4} and ${5} (corresponding to ADDR1 and ADDR2) are each
+        Notice that fields ${ADDR1} and ${ADDR2} are each
         located with no other text on their own lines.  When
         <app>glabels</app> encounters a field as the only text on
         a line, it will not expand the line if the field is empty.</p>

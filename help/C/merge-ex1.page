@@ -43,19 +43,14 @@ Name,Department,SN
         <guiseq> <gui>Objects</gui>
         <gui>Merge Properties</gui> </guiseq> menu item to display
         the <gui>merge properties</gui> dialog.  We use this dialog to
-        select the source type (in our case CSV) and the merge source (filename) as
-        shown.</p>
+        select the source type (in our case CSV with keys on line 1) and the merge
+	source (filename) as shown.</p>
 
       <!-- ==== Figure ==== -->
 		<media type="image" src="figures/merge-ex1-1.png" mime="image/png" style="right">
       		<p>Merge properties dialog</p>
     		</media>
       <!-- ==== End of Figure ==== -->
-
-      <p>Before applying the merge source, we uncheck the first record since it is only
-        column headers from our original <app>gnumeric</app> spreadsheet
-        and would simply waste our first label.  We could also unselect any other records
-        that we didn't want to print a label for.</p>
 
       <p>We can also view each record in more detail by clicking on the appropriate
         expander (the little triangles) as shown.  Once we are satisfied with the
@@ -72,12 +67,12 @@ Name,Department,SN
 
       <p>In this example we have added three text objects and a barcode object.  The
         first text object contains only simple literal text ("Hello, my name is").  The
-        second text object contains a single merge field ("${1}") corresponding to the
+        second text object contains a single merge field ("${Name}") corresponding to the
         first field of a record (first column of a line) which contains the new crew
         member's full name.  The third text field contains both literal text
-        ("Department: ") followed by a single merge field ("${2}") corresponding to
+        ("Department: ") followed by a single merge field ("${Department}") corresponding to
         the second field or the crew member's department.  The barcode object is
-        configured to use field (or key) "3" which contains our crew member's
+        configured to use field (or key) "SN" which contains our crew member's
         starfleet serial number.</p>
 
       <p>Now we can print our name tags by selecting the

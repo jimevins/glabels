@@ -132,7 +132,7 @@
 
 
       <section id="object-editor-shadow">
-	<title>Shadow Tabbed Section (All except image and barcode objects)</title>
+	<title>Shadow Tabbed Section (All except barcode objects)</title>
 
 	<p>This section contains controls to add a shadow to an object.</p>
 
