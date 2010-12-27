@@ -293,34 +293,32 @@ static guint character_table[] = {
 };
 
 
-
-
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
-static gboolean     is_string_valid    (const gchar      *data);
+static gboolean     onecode_is_data_valid (const gchar      *data);
 
-static gchar       *onecode_encode     (const gchar      *data);
+static gchar       *onecode_encode        (const gchar      *data);
 
-static void         int104_mult_uint   (Int104           *x,
-                                        guint             y);
-static void         int104_add_uint    (Int104           *x,
-                                        guint             y);
-static void         int104_add_uint64  (Int104           *x,
-                                        guint64           y);
-static guint        int104_div_uint    (Int104           *x,
-                                        guint             y);
+static lglBarcode  *onecode_vectorize     (const gchar      *code);
+
+static void         int104_mult_uint      (Int104           *x,
+                                           guint             y);
+static void         int104_add_uint       (Int104           *x,
+                                           guint             y);
+static void         int104_add_uint64     (Int104           *x,
+                                           guint64           y);
+static guint        int104_div_uint       (Int104           *x,
+                                           guint             y);
 #ifdef DEBUG
-static void         int104_print       (Int104           *x);
+static void         int104_print          (Int104           *x);
 #endif
 
 static unsigned short   USPS_MSB_Math_CRC11GenerateFrameCheckSequence( unsigned char *ByteArrayPtr );
 
-static lglBarcode  *onecode_vectorize  (const gchar      *code);
-
 
 /****************************************************************************/
-/* Generate list of lines that form the barcode for the given digits.       */
+/* Generate new One Code barcode structure from data.                       */
 /****************************************************************************/
 lglBarcode *
 lgl_barcode_onecode_new (lglBarcodeType  type,
@@ -339,7 +337,14 @@ lgl_barcode_onecode_new (lglBarcodeType  type,
                 return NULL;
         }
 
-        /* First get code string */
+
+        /* Validate data */
+        if ( !onecode_is_data_valid (data) )
+        {
+                return NULL;
+        }
+
+        /* Now get code string */
         code = onecode_encode (data);
         if (code == NULL) {
                 return NULL;
@@ -351,6 +356,46 @@ lgl_barcode_onecode_new (lglBarcodeType  type,
         g_free (code);
 
         return bc;
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* Validate if string is of proper length & contains only valid characters. */
+/*--------------------------------------------------------------------------*/
+static gboolean
+onecode_is_data_valid (const gchar *data)
+{
+        gchar *p;
+        gint   str_length;
+
+        if (!data)
+        {
+                return FALSE;
+        }
+
+        str_length = strlen (data);
+        if ( (str_length != 20) &&
+             (str_length != 25) &&
+             (str_length != 29) &&
+             (str_length != 31) )
+        {
+                return FALSE;
+        }
+
+        for ( p = (gchar *)data; *p != 0; p++ )
+        {
+                if (!g_ascii_isdigit (*p))
+                {
+                        return FALSE;
+                }
+        }
+
+        if (data[1] > '4')
+        {
+                return FALSE; /* Invalid Barcode Identifier. */
+        }
+
+        return TRUE;
 }
 
 
@@ -367,12 +412,6 @@ onecode_encode (const gchar *data)
         guint    character[10];
         gint     d, a;
         GString *code;
-
-        if ( !is_string_valid (data) )
-        {
-                return NULL;
-        }
-
 
         /*-----------------------------------------------------------*/
         /* Step 1 -- Conversion of Data Fields into Binary Data      */
@@ -479,41 +518,54 @@ onecode_encode (const gchar *data)
 
 
 /*--------------------------------------------------------------------------*/
-/* Validate if string is of proper length & contains only valid characters. */
+/* Vectorize encoded data.                                                  */
 /*--------------------------------------------------------------------------*/
-static gboolean
-is_string_valid (const gchar *data)
+static lglBarcode *
+onecode_vectorize (const gchar  *code)
 {
-        gchar *p;
-        gint   str_length;
+        lglBarcode         *bc;
+        gchar              *p;
+        gdouble             x, y, length, width;
 
-        if (!data) {
-                return FALSE;
-        }
+        bc = lgl_barcode_new ();
 
-        str_length = strlen (data);
-        if ( (str_length != 20) &&
-             (str_length != 25) &&
-             (str_length != 29) &&
-             (str_length != 31) )
+        /* Now traverse the code string and create a list of lines */
+        x = ONECODE_HORIZ_MARGIN;
+        for (p = (gchar *)code; *p != 0; p++)
         {
-                return FALSE;
-        }
-
-        for ( p = (gchar *)data; *p != 0; p++ )
-        {
-                if (!g_ascii_isdigit (*p))
+                y = ONECODE_VERT_MARGIN;
+                switch ( *p )
                 {
-                        return FALSE;
+                case 'T':
+                        y      += ONECODE_TRACKER_OFFSET;
+                        length  = ONECODE_TRACKER_HEIGHT;
+                        break;
+                case 'D':
+                        y      += ONECODE_DESCENDER_OFFSET;
+                        length  = ONECODE_DESCENDER_HEIGHT;
+                        break;
+                case 'A':
+                        y      += ONECODE_ASCENDER_OFFSET;
+                        length  = ONECODE_ASCENDER_HEIGHT;
+                        break;
+                case 'F':
+                        y      += ONECODE_FULL_OFFSET;
+                        length  = ONECODE_FULL_HEIGHT;
+                        break;
+                default:
+                        break;
                 }
+                width = ONECODE_BAR_WIDTH;
+
+                lgl_barcode_add_box (bc, x, y, width, length);
+
+                x += ONECODE_BAR_PITCH;
         }
 
-        if (data[1] > '4')
-        {
-                return FALSE; /* Invalid Barcode Identifier. */
-        }
+        bc->width = x + ONECODE_HORIZ_MARGIN;
+        bc->height = ONECODE_FULL_HEIGHT + 2 * ONECODE_VERT_MARGIN;
 
-        return TRUE;
+        return bc;
 }
 
 
@@ -680,58 +732,6 @@ USPS_MSB_Math_CRC11GenerateFrameCheckSequence( unsigned char *ByteArrayPtr )
         }
 
         return FrameCheckSequence;
-}
-
-
-/*--------------------------------------------------------------------------*/
-/* Vectorize encoded data.                                                  */
-/*--------------------------------------------------------------------------*/
-static lglBarcode *
-onecode_vectorize (const gchar  *code)
-{
-        lglBarcode         *bc;
-        gchar              *p;
-        gdouble             x, y, length, width;
-
-        bc = lgl_barcode_new ();
-
-        /* Now traverse the code string and create a list of lines */
-        x = ONECODE_HORIZ_MARGIN;
-        for (p = (gchar *)code; *p != 0; p++)
-        {
-                y = ONECODE_VERT_MARGIN;
-                switch ( *p )
-                {
-                case 'T':
-                        y      += ONECODE_TRACKER_OFFSET;
-                        length  = ONECODE_TRACKER_HEIGHT;
-                        break;
-                case 'D':
-                        y      += ONECODE_DESCENDER_OFFSET;
-                        length  = ONECODE_DESCENDER_HEIGHT;
-                        break;
-                case 'A':
-                        y      += ONECODE_ASCENDER_OFFSET;
-                        length  = ONECODE_ASCENDER_HEIGHT;
-                        break;
-                case 'F':
-                        y      += ONECODE_FULL_OFFSET;
-                        length  = ONECODE_FULL_HEIGHT;
-                        break;
-                default:
-                        break;
-                }
-                width = ONECODE_BAR_WIDTH;
-
-                lgl_barcode_add_box (bc, x, y, width, length);
-
-                x += ONECODE_BAR_PITCH;
-        }
-
-        bc->width = x + ONECODE_HORIZ_MARGIN;
-        bc->height = ONECODE_FULL_HEIGHT + 2 * ONECODE_VERT_MARGIN;
-
-        return bc;
 }
 
 

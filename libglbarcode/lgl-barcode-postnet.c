@@ -67,17 +67,16 @@ static gchar *frame_symbol = "1";
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
-static gchar       *postnet_encode    (const gchar *digits);
+static gint         postnet_validate_data (const gchar *data);
 
-static gboolean     is_length_valid   (const gchar *digits,
-                                       gint         n);
+static gchar       *postnet_encode        (const gchar *digits);
 
-static lglBarcode  *postnet_vectorize (const gchar *code);
+static lglBarcode  *postnet_vectorize     (const gchar *code);
 
 
 
 /****************************************************************************/
-/* Generate list of lines that form the barcode for the given digits.       */
+/* Generate new Postnet barcode structure from data.                        */
 /****************************************************************************/
 lglBarcode *
 lgl_barcode_postnet_new (lglBarcodeType  type,
@@ -87,45 +86,47 @@ lgl_barcode_postnet_new (lglBarcodeType  type,
                          gdouble         h,
                          const gchar    *data)
 {
+        gint                n_digits;
         gchar              *code;
         lglBarcode         *bc;
 
-        /* Validate code length for all subtypes. */
+        /* Validate data and length for all subtypes. */
+        n_digits = postnet_validate_data (data);
         switch (type)
         {
 
         case LGL_BARCODE_TYPE_POSTNET:
-                if (!is_length_valid (data, 5) &&
-                    !is_length_valid (data, 9) &&
-                    !is_length_valid (data, 11))
+                if ( (n_digits !=  5) &&
+                     (n_digits !=  9) &&
+                     (n_digits != 11) )
                 {
                         return NULL;
                 }
                 break;
 
         case LGL_BARCODE_TYPE_POSTNET_5:
-                if (!is_length_valid (data, 5))
+                if ( n_digits != 5 )
                 {
                         return NULL;
                 }
                 break;
 
         case LGL_BARCODE_TYPE_POSTNET_9:
-                if (!is_length_valid (data, 9))
+                if ( n_digits != 9 )
                 {
                         return NULL;
                 }
                 break;
 
         case LGL_BARCODE_TYPE_POSTNET_11:
-                if (!is_length_valid (data, 11))
+                if ( n_digits != 11 )
                 {
                         return NULL;
                 }
                 break;
 
         case LGL_BARCODE_TYPE_CEPNET:
-                if (!is_length_valid (data, 8))
+                if ( n_digits !=  8 )
                 {
                         return NULL;
                 }
@@ -154,6 +155,37 @@ lgl_barcode_postnet_new (lglBarcodeType  type,
 
 
 /*--------------------------------------------------------------------------*/
+/* PRIVATE.  Validate data, returning number of digits if valid.            */
+/*--------------------------------------------------------------------------*/
+static gint
+postnet_validate_data (const gchar *data)
+{
+        gchar *p;
+        gint   i;
+
+        if (!data)
+        {
+                return 0;
+        }
+
+        for ( p = (gchar *)data, i=0; *p != 0; p++ )
+        {
+                if (g_ascii_isdigit (*p))
+                {
+                        i++;
+                }
+                else if ( (*p != '-') && (*p != ' ') )
+                {
+                        /* Only allow digits, dashes, and spaces. */
+                        return 0;
+                }
+        }
+
+        return i;
+}
+
+
+/*--------------------------------------------------------------------------*/
 /* PRIVATE.  Generate string of symbols, representing barcode.              */
 /*--------------------------------------------------------------------------*/
 static gchar *
@@ -168,11 +200,11 @@ postnet_encode (const gchar *data)
         code = g_string_new (frame_symbol);
 
         sum = 0;
-        for (p = (gchar *)data, len = 0; (*p != 0) && (len < 11); p++)
+        for ( p = (gchar *)data, len = 0; (*p != 0) && (len < 11); p++ )
         {
                 if (g_ascii_isdigit (*p))
                 {
-                        /* Only translate valid characters (0-9) */
+                        /* Only translate the digits (0-9) */
                         d = (*p) - '0';
                         sum += d;
                         code = g_string_append (code, symbols[d]);
@@ -192,33 +224,6 @@ postnet_encode (const gchar *data)
 
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Validate specific length of string (for subtypes).             */
-/*--------------------------------------------------------------------------*/
-static gboolean
-is_length_valid (const gchar *data,
-                 gint         n)
-{
-        gchar *p;
-        gint   i;
-
-        if (!data)
-        {
-                return FALSE;
-        }
-
-        for (p = (gchar *)data, i=0; *p != 0; p++)
-        {
-                if (g_ascii_isdigit (*p))
-                {
-                        i++;
-                }
-        }
-
-        return (i == n);
-}
-
-
-/*--------------------------------------------------------------------------*/
 /* PRIVATE.  Vectorize encoded barcode.                                     */
 /*--------------------------------------------------------------------------*/
 static lglBarcode *
@@ -232,7 +237,7 @@ postnet_vectorize (const gchar *code)
 
         /* Now traverse the code string and create a list of lines */
         x = POSTNET_HORIZ_MARGIN;
-        for (p = (gchar *)code; *p != 0; p++)
+        for ( p = (gchar *)code; *p != 0; p++ )
         {
                 y = POSTNET_VERT_MARGIN;
                 switch (*p)

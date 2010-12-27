@@ -49,62 +49,60 @@
 /* Private types.                                         */
 /*========================================================*/
 
-typedef struct {
-        gchar  c;
-        gchar *sym;
-} Code39Symbol;
-
 
 /*===========================================*/
 /* Private globals                           */
 /*===========================================*/
 
-static Code39Symbol symbols[] = {
-        /*      BsBsBsBsB */
-        { '0', "NnNwWnWnN" },
-        { '1', "WnNwNnNnW" },
-        { '2', "NnWwNnNnW" },
-        { '3', "WnWwNnNnN" },
-        { '4', "NnNwWnNnW" },
-        { '5', "WnNwWnNnN" },
-        { '6', "NnWwWnNnN" },
-        { '7', "NnNwNnWnW" },
-        { '8', "WnNwNnWnN" },
-        { '9', "NnWwNnWnN" },
-        { 'A', "WnNnNwNnW" },
-        { 'B', "NnWnNwNnW" },
-        { 'C', "WnWnNwNnN" },
-        { 'D', "NnNnWwNnW" },
-        { 'E', "WnNnWwNnN" },
-        { 'F', "NnWnWwNnN" },
-        { 'G', "NnNnNwWnW" },
-        { 'H', "WnNnNwWnN" },
-        { 'I', "NnWnNwWnN" },
-        { 'J', "NnNnWwWnN" },
-        { 'K', "WnNnNnNwW" },
-        { 'L', "NnWnNnNwW" },
-        { 'M', "WnWnNnNwN" },
-        { 'N', "NnNnWnNwW" },
-        { 'O', "WnNnWnNwN" },
-        { 'P', "NnWnWnNwN" },
-        { 'Q', "NnNnNnWwW" },
-        { 'R', "WnNnNnWwN" },
-        { 'S', "NnWnNnWwN" },
-        { 'T', "NnNnWnWwN" },
-        { 'U', "WwNnNnNnW" },
-        { 'V', "NwWnNnNnW" },
-        { 'W', "WwWnNnNnN" },
-        { 'X', "NwNnWnNnW" },
-        { 'Y', "WwNnWnNnN" },
-        { 'Z', "NwWnWnNnN" },
-        { '-', "NwNnNnWnW" },
-        { '.', "WwNnNnWnN" },
-        { ' ', "NwWnNnWnN" },
-        { '$', "NwNwNwNnN" },
-        { '/', "NwNwNnNwN" },
-        { '+', "NwNnNwNwN" },
-        { '%', "NnNwNwNwN" },
-        { 0, NULL }
+/* Code 39 alphabet. Position indicates value. */
+static gchar *alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-. $/+%";
+
+/* Code 39 symbols. Position must match position in alphabet. */
+static gchar* symbols[43] = {
+        /*        BsBsBsBsB */
+        /* 0 */  "NnNwWnWnN",
+        /* 1 */  "WnNwNnNnW",
+        /* 2 */  "NnWwNnNnW",
+        /* 3 */  "WnWwNnNnN",
+        /* 4 */  "NnNwWnNnW",
+        /* 5 */  "WnNwWnNnN",
+        /* 6 */  "NnWwWnNnN",
+        /* 7 */  "NnNwNnWnW",
+        /* 8 */  "WnNwNnWnN",
+        /* 9 */  "NnWwNnWnN",
+        /* A */  "WnNnNwNnW",
+        /* B */  "NnWnNwNnW",
+        /* C */  "WnWnNwNnN",
+        /* D */  "NnNnWwNnW",
+        /* E */  "WnNnWwNnN",
+        /* F */  "NnWnWwNnN",
+        /* G */  "NnNnNwWnW",
+        /* H */  "WnNnNwWnN",
+        /* I */  "NnWnNwWnN",
+        /* J */  "NnNnWwWnN",
+        /* K */  "WnNnNnNwW",
+        /* L */  "NnWnNnNwW",
+        /* M */  "WnWnNnNwN",
+        /* N */  "NnNnWnNwW",
+        /* O */  "WnNnWnNwN",
+        /* P */  "NnWnWnNwN",
+        /* Q */  "NnNnNnWwW",
+        /* R */  "WnNnNnWwN",
+        /* S */  "NnWnNnWwN",
+        /* T */  "NnNnWnWwN",
+        /* U */  "WwNnNnNnW",
+        /* V */  "NwWnNnNnW",
+        /* W */  "WwWnNnNnN",
+        /* X */  "NwNnWnNnW",
+        /* Y */  "WwNnWnNnN",
+        /* Z */  "NwWnWnNnN",
+        /* - */  "NwNnNnWnW",
+        /* . */  "WwNnNnWnN",
+        /*   */  "NwWnNnWnN",
+        /* $ */  "NwNwNwNnN",
+        /* / */  "NwNwNnNwN",
+        /* + */  "NwNnNwNwN",
+        /* % */  "NnNwNwNwN",
 };
 
 static gchar *frame_symbol = "NwNnWnWnN";
@@ -150,20 +148,23 @@ static gchar *ascii_map[128] =
 /* Local function prototypes                 */
 /*===========================================*/
 
-static gchar      *code39_encode    (const gchar *data,
-                                     gboolean     checksum_flag);
+static gboolean    code39_is_data_valid     (const gchar *data);
+static gboolean    code39_ext_is_data_valid (const gchar *data);
 
-static lglBarcode *code39_vectorize (const gchar *code,
-                                     gdouble      w,
-                                     gdouble      h,
-                                     gboolean     text_flag,
-                                     gboolean     checksum_flag,
-                                     const gchar *data,
-                                     const gchar *string);
+static gchar      *code39_encode            (const gchar *data,
+                                             gboolean     checksum_flag);
+
+static lglBarcode *code39_vectorize         (const gchar *code,
+                                             gdouble      w,
+                                             gdouble      h,
+                                             gboolean     text_flag,
+                                             gboolean     checksum_flag,
+                                             const gchar *data,
+                                             const gchar *string);
 
 
 /****************************************************************************/
-/* Generate list of lines that form the barcode for the given digits.       */
+/* Generate new Code 39 barcode structure from data.                        */
 /****************************************************************************/
 lglBarcode *
 lgl_barcode_code39_new (lglBarcodeType  type,
@@ -186,37 +187,39 @@ lgl_barcode_code39_new (lglBarcodeType  type,
         }
 
 
-        /* Canonicalize data. */
-        if ( data[0] == '\0' )
+        /* Validate data. */
+        if (type == LGL_BARCODE_TYPE_CODE39)
         {
-                return NULL;
-        }
-        if (type == LGL_BARCODE_TYPE_CODE39_EXT)
-        {
-                GString *canon_data_str;
-                GString *display_data_str;
-
-                canon_data_str = g_string_new ("");
-                display_data_str = g_string_new ("");
-                for ( p = (gchar *)data; *p != '\0'; p++ )
+                if ( !code39_is_data_valid (data) )
                 {
-                        canon_data_str = g_string_append (canon_data_str, ascii_map[(*p) & 0x7F]);
-                        display_data_str = g_string_append_c (display_data_str, (*p) & 0x7F);
+                        return NULL;
                 }
-
-                canon_data   = g_string_free (canon_data_str, FALSE);
-                display_data = g_string_free (display_data_str, FALSE);
+                canon_data = g_ascii_strup (data, -1);
+                display_data = g_strdup (canon_data);
         }
         else
         {
-                canon_data = g_ascii_strup (data, -1);
-                g_strcanon (canon_data, "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-. $/+%", ' ');
-                display_data = g_strdup (canon_data);
+                GString *canon_data_str;
+
+                if ( !code39_ext_is_data_valid (data) )
+                {
+                        return NULL;
+                }
+
+                canon_data_str = g_string_new ("");
+                for ( p = (gchar *)data; *p != '\0'; p++ )
+                {
+                        canon_data_str = g_string_append (canon_data_str, ascii_map[(int)*p]);
+                }
+                canon_data   = g_string_free (canon_data_str, FALSE);
+
+                display_data = g_strdup (data);
         }
 
         /* First get code string */
         code = code39_encode (canon_data, checksum_flag);
-        if (code == NULL) {
+        if (code == NULL)
+        {
                 g_free (canon_data);
                 g_free (display_data);
                 return NULL;
@@ -234,6 +237,59 @@ lgl_barcode_code39_new (lglBarcodeType  type,
 
 
 /*--------------------------------------------------------------------------*/
+/* PRIVATE.  Validate data for Code 39.                                     */
+/*--------------------------------------------------------------------------*/
+static gboolean
+code39_is_data_valid (const gchar *data)
+{
+        gchar *p;
+        gchar  c;
+
+        if (!data || (*data == '\0'))
+        {
+                return FALSE;
+        }
+
+        for ( p = (gchar *)data; *p != 0; p++ )
+        {
+                c = g_ascii_toupper (*p);
+
+                if ( strchr(alphabet, c) == NULL )
+                {
+                        return FALSE;
+                }
+        }
+
+        return TRUE;
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Validate data for Extended Code 39.                            */
+/*--------------------------------------------------------------------------*/
+static gboolean
+code39_ext_is_data_valid (const gchar *data)
+{
+        gchar *p;
+
+        if (!data || (*data == '\0'))
+        {
+                return FALSE;
+        }
+
+        for ( p = (gchar *)data; *p != 0; p++ )
+        {
+                if ( (*p < 0) || (*p > 0x7f)  )
+                {
+                        return FALSE;
+                }
+        }
+
+        return TRUE;
+}
+
+
+/*--------------------------------------------------------------------------*/
 /* PRIVATE.  Generate string of symbols, representing barcode.              */
 /*--------------------------------------------------------------------------*/
 static gchar *
@@ -241,7 +297,7 @@ code39_encode (const gchar *data,
                gboolean     checksum_flag)
 {
         gchar         *p, c;
-        gint           i, sum;
+        gint           c_value, sum;
         GString       *code;
 
 
@@ -252,22 +308,17 @@ code39_encode (const gchar *data,
         sum = 0;
         for ( p=(gchar *)data; *p != 0; p++ )
         {
-                c = toupper( *p );
-                for ( i = 0; symbols[i].c != 0; i++ )
-                {
-                        if ( c == symbols[i].c )
-                        {
-                                sum += i;
-                                code = g_string_append (code, symbols[i].sym);
-                                break;
-                        }
-                }
+                c = g_ascii_toupper( *p );
+                c_value = strchr(alphabet, c) - alphabet;
+                code = g_string_append (code, symbols[c_value]);
                 code = g_string_append (code, "i");
+
+                sum += c_value;
         }
 
         if ( checksum_flag )
         {
-                code = g_string_append (code, symbols[sum % 43].sym);
+                code = g_string_append (code, symbols[sum % 43]);
                 code = g_string_append (code, "i");
         }
 
@@ -279,7 +330,7 @@ code39_encode (const gchar *data,
 
 
 /*--------------------------------------------------------------------------*/
-/* Generate list of rectangles that form the barcode for the given digits.  */
+/* PRIVATE.  Vectorize encoded barcode.                                     */
 /*--------------------------------------------------------------------------*/
 static lglBarcode *
 code39_vectorize (const gchar   *code,
