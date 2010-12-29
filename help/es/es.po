@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-23 19:04+0000\n"
-"PO-Revision-Date: 2010-12-24 13:25+0100\n"
+"POT-Creation-Date: 2010-12-24 17:14+0000\n"
+"PO-Revision-Date: 2010-12-28 20:52+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1005,10 +1005,6 @@ msgstr "Crear plantillas nuevas manualmente"
 
 #. ******************
 #: C/mancreate.page:33(p)
-#| msgid ""
-#| "The format for these files is defined in the DTD: <link href=\"http://"
-#| "glabels.org/xmlns/2.3/glabels-2.3.dtd.txt\">glabels-2.3.dtd</link>. (This "
-#| "DTD also describes other XML formats used by <app>glabels</app>.)"
 msgid ""
 "This page is a reference guide to manually creating <app>gLabels</app> "
 "templates. <app>gLabels</app> templates are defined in simple XML files as "
@@ -1061,6 +1057,8 @@ msgid ""
 "<file>${prefix}</file> is usually <file>/usr</file> or <file>/usr/local</"
 "file>, depending on where <app>gLabels</app> was installed."
 msgstr ""
+"<file>${prefix}</file> normalmente es <file>/usr</file> o <file>/usr/local</"
+"file>, dependiendo de dónde se haya instalado <app>gLabels</app>."
 
 #: C/mancreate.page:59(file)
 msgid "${XDG_CONFIG_HOME}/libglabels/templates"
@@ -1133,15 +1131,6 @@ msgstr ""
 
 #: C/mancreate.page:123(code)
 #, no-wrap
-#| msgid ""
-#| "\n"
-#| "&lt;?xml version=\"1.0\"?&gt;\n"
-#| "&lt;Glabels-templates&gt;\n"
-#| "\n"
-#| "   <var>...templates...</var>\n"
-#| "\n"
-#| "&lt;/Glabels-templates&gt;\n"
-#| "      "
 msgid ""
 "\n"
 "&lt;?xml version=\"1.0\"?&gt;\n"
@@ -1247,7 +1236,6 @@ msgid "size"
 msgstr "size"
 
 #: C/mancreate.page:188(p)
-#| msgid "Size of sheet. E.g., \"US-Letter,\" \"A4\", ..."
 msgid ""
 "Size of sheet. E.g., \"<code translate=\"no\">US-Letter</code>\", \"<code "
 "translate=\"no\">A4</code>\", ..."
@@ -1293,7 +1281,7 @@ msgstr "height"
 
 #: C/mancreate.page:207(p)
 msgid "Page height. Only valid if size=\"Other\""
-msgstr ""
+msgstr "Altura de la página. Sólo es válido si tamaño=«Otro»"
 
 #: C/mancreate.page:210(code)
 #, no-wrap
@@ -1311,7 +1299,7 @@ msgstr ""
 
 #: C/mancreate.page:229(title)
 msgid "<span translate=\"no\">Meta</span> Node"
-msgstr ""
+msgstr "Nodo <span translate=\"no\">Meta</span>"
 
 #: C/mancreate.page:231(p)
 msgid ""
@@ -1319,6 +1307,9 @@ msgid ""
 "information about the template. A <code translate=\"no\">Template</code> "
 "node may contain zero or more <code translate=\"no\">Meta</code> nodes."
 msgstr ""
+"un nodo <code translate=\"no\">Meta</code> contiene información adicional "
+"sobre la plantilla. Un nodo <code translate=\"no\">Template</code> puede "
+"contener cero o más nodos <code translate=\"no\">Meta</code>."
 
 #: C/mancreate.page:237(p)
 msgid "Subnode"
@@ -1424,7 +1415,7 @@ msgstr ""
 
 #: C/mancreate.page:293(title)
 msgid "<span translate=\"no\">Label-rectangle</span> Node"
-msgstr ""
+msgstr "Nodo <span translate=\"no\">Label-rectangle</span>"
 
 #: C/mancreate.page:295(p)
 msgid ""
@@ -1442,7 +1433,7 @@ msgstr "id"
 #: C/mancreate.page:308(p) C/mancreate.page:371(p) C/mancreate.page:422(p)
 #: C/mancreate.page:469(p)
 msgid "Reserved for future use. Should always be 0."
-msgstr ""
+msgstr "Reservado para el futuro. Debería ser siempre 0."
 
 #: C/mancreate.page:312(p)
 msgid "Width of label/card"
@@ -1487,11 +1478,11 @@ msgstr ""
 
 #: C/mancreate.page:339(desc) C/mancreate.page:341(p)
 msgid "<span translate=\"no\">Label-rectangle</span> parameters"
-msgstr ""
+msgstr "Parámetros de <span translate=\"no\">Label-rectangle</span>"
 
 #: C/mancreate.page:356(title)
 msgid "<span translate=\"no\">Label-ellipse</span> Node"
-msgstr ""
+msgstr "Nodo <span translate=\"no\">Label-ellipse</span>"
 
 #: C/mancreate.page:358(p)
 msgid ""
@@ -1522,11 +1513,11 @@ msgstr ""
 #: C/mancreate.page:391(desc) C/mancreate.page:393(p)
 #: C/mancreate.page:438(desc) C/mancreate.page:440(p)
 msgid "<span translate=\"no\">Label-ellipse</span> parameters"
-msgstr ""
+msgstr "Parámetros de <span translate=\"no\">Label-ellipse</span>"
 
 #: C/mancreate.page:408(title)
 msgid "<span translate=\"no\">Label-round</span> Node"
-msgstr ""
+msgstr "Nodo <span translate=\"no\">Label-round</span>"
 
 #: C/mancreate.page:410(p)
 msgid ""
@@ -1546,7 +1537,7 @@ msgstr "Radio (1/2 del diámetro) de la etiqueta"
 
 #: C/mancreate.page:455(title)
 msgid "<span translate=\"no\">Label-cd</span> Node"
-msgstr ""
+msgstr "Nodo <span translate=\"no\">Label-cd</span>"
 
 #: C/mancreate.page:457(p)
 msgid ""
@@ -1565,7 +1556,7 @@ msgstr "hole"
 
 #: C/mancreate.page:477(p)
 msgid "Radius of concentric hole"
-msgstr ""
+msgstr "Radio del agujero concéntrico"
 
 #: C/mancreate.page:481(p)
 msgid ""
@@ -1749,11 +1740,11 @@ msgstr ""
 
 #: C/mancreate.page:683(p)
 msgid "x coordinate of upper left corner of ellipse."
-msgstr ""
+msgstr "coordenada «x» de la esquina superior izquierda de la elipse."
 
 #: C/mancreate.page:687(p)
 msgid "y coordinate of upper left corner of ellipse."
-msgstr ""
+msgstr "coordenada «y» de la esquina superior izquierda de la elipse."
 
 #: C/mancreate.page:691(p)
 msgid "Width of ellipse."
@@ -1765,7 +1756,7 @@ msgstr "Altura de la elipse."
 
 #: C/mancreate.page:713(title)
 msgid "<span translate=\"no\">Layout</span> Node"
-msgstr ""
+msgstr "Nodo <span translate=\"no\">Layout</span>"
 
 #: C/mancreate.page:715(p)
 msgid ""
@@ -1830,7 +1821,7 @@ msgstr ""
 
 #: C/mancreate.page:761(desc)
 msgid "<span translate=\"no\">Layout</span> parameters"
-msgstr ""
+msgstr "Parámetros de <span translate=\"no\">Layout</span>"
 
 #: C/mancreate.page:763(p)
 msgid "<span translate=\"no\">Layout</span> Parameters"
@@ -1884,6 +1875,9 @@ msgid ""
 "licensor (but not in any way that suggests that they endorse you or your use "
 "of the work)."
 msgstr ""
+"Debe reconocer los créditos de la obra de la manera especificada por el "
+"autor o el licenciador (pero no de una manera que sugiera que tiene su apoyo "
+"o apoyan el uso que hace de su obra)."
 
 #: C/license.page:46(em)
 msgid "Share Alike"
@@ -1894,6 +1888,9 @@ msgid ""
 "If you alter, transform, or build upon this work, you may distribute the "
 "resulting work only under the same, similar or a compatible license."
 msgstr ""
+"Si altera, transforma o amplía esta obra para crear una obra derivada, sólo "
+"puede distribuir la obra resultante bajo la misma licencia, una similar o "
+"una compatible."
 
 #: C/license.page:53(p)
 msgid ""
@@ -1902,6 +1899,10 @@ msgid ""
 "link>, or read the full <link href=\"http://creativecommons.org/licenses/by-"
 "sa/3.0/\">Commons Deed</link>."
 msgstr ""
+"Para ver el texto completo de la licencia consulte la <link href=\"http://"
+"creativecommons.org/licenses/by-sa/3.0/legalcode/\">página web de Creative "
+"Commons</link> o lea el<link href=\"http://creativecommons.org/licenses/by-"
+"sa/3.0/\">Escrito de Commons</link>."
 
 #: C/labelprop.page:9(desc)
 msgid "How to change the properties of a label or business card."
