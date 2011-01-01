@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
-"POT-Creation-Date: 2010-12-08 03:58+0000\n"
-"PO-Revision-Date: 2010-12-09 10:02+0100\n"
+"POT-Creation-Date: 2010-12-26 22:36+0000\n"
+"PO-Revision-Date: 2011-01-02 00:16+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -324,14 +324,16 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/printfile.page:47(None)
+#, fuzzy
 msgid ""
-"@@image: 'figures/print-copies.png'; md5=45f2eae7cd262a36ed6b20a254b94447"
+"@@image: 'figures/print-copies.png'; md5=1896f693ac50b47ea5abaafb59b5e8cc"
 msgstr "translated"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/printfile.page:70(None)
-msgid "@@image: 'figures/print-merge.png'; md5=df81b305a7e76484df98034c1c035604"
+#, fuzzy
+msgid "@@image: 'figures/print-merge.png'; md5=65a719b5624f88fdb40e2322454819a6"
 msgstr "translated"
 
 #: C/printfile.page:9(desc)
@@ -683,26 +685,30 @@ msgstr "Beispiel 4: Adressetiketten unter Nutzung einer vCard-Datei"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex3.page:53(None)
-msgid "@@image: 'figures/merge-ex3-1.png'; md5=THIS FILE DOESN'T EXIST"
-msgstr "a"
+#, fuzzy
+msgid "@@image: 'figures/merge-ex3-1.png'; md5=fb5bf719857fb0a49517ecb50124384d"
+msgstr "translated"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex3.page:74(None)
-msgid "@@image: 'figures/merge-ex3-2.png'; md5=THIS FILE DOESN'T EXIST"
-msgstr "a"
+#, fuzzy
+msgid "@@image: 'figures/merge-ex3-2.png'; md5=28a15319cea58be75ff789c766dc0717"
+msgstr "translated"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/merge-ex3.page:88(None) C/merge-ex2.page:89(None)
-msgid "@@image: 'figures/merge-ex2-3.png'; md5=59a1dc5ff94656877a6220f73fe25b3c"
+#: C/merge-ex3.page:88(None)
+#, fuzzy
+msgid "@@image: 'figures/merge-ex3-3.png'; md5=443d59a44d8ddf5580087a772d4e3eec"
 msgstr "translated"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex3.page:99(None)
-msgid "@@image: 'figures/merge-ex3-4.png'; md5=THIS FILE DOESN'T EXIST"
-msgstr "a"
+#, fuzzy
+msgid "@@image: 'figures/merge-ex3-4.png'; md5=1995114757cccebda45b686caeb37fa7"
+msgstr "translated"
 
 #: C/merge-ex3.page:9(desc)
 msgid ""
@@ -804,13 +810,13 @@ msgstr ""
 "Dreiecke klicken. Sobald Sie mit der Auswahl zufrieden sind, klicken Sie auf "
 "<gui>OK</gui>, um die Änderungen anzuwenden."
 
-#: C/merge-ex3.page:71(p) C/merge-ex2.page:68(p) C/merge-ex1.page:65(p)
+#: C/merge-ex3.page:71(p) C/merge-ex2.page:67(p) C/merge-ex1.page:60(p)
 msgid "Now we start adding objects to our <app>glabels</app> document as shown."
 msgstr ""
 "Nun beginnen wir mit dem Hinzufügen von Objekten zu unserem <app>gLabels</"
 "app>-Dokument, wie gezeigt."
 
-#: C/merge-ex3.page:75(p) C/merge-ex2.page:72(p) C/merge-ex1.page:69(p)
+#: C/merge-ex3.page:75(p) C/merge-ex2.page:71(p) C/merge-ex1.page:64(p)
 msgid "Adding objects"
 msgstr "Hinzufügen von Objekten"
 
@@ -834,12 +840,12 @@ msgstr ""
 "gui><gui>Drucken</gui></guiseq> wählen. Der unten angezeigte Druckdialog wird "
 "geöffnet."
 
-#: C/merge-ex3.page:89(p) C/merge-ex2.page:90(p)
+#: C/merge-ex3.page:89(p) C/merge-ex2.page:89(p)
 msgid "Printing address labels"
 msgstr "Adressetiketten drucken"
 
 #. ==== End of Figure ====
-#: C/merge-ex3.page:93(p) C/merge-ex2.page:94(p) C/merge-ex1.page:94(p)
+#: C/merge-ex3.page:93(p) C/merge-ex2.page:93(p) C/merge-ex1.page:89(p)
 msgid ""
 "Just to make sure our labels are going to look okay, we select the <gui>Print "
 "outlines</gui> option and click <gui>Print Preview</gui>. This will display a "
@@ -854,7 +860,7 @@ msgid "Addess labels preview"
 msgstr "Adressetiketten-Vorschau"
 
 #. ==== End of Figure ====
-#: C/merge-ex3.page:104(p) C/merge-ex2.page:105(p)
+#: C/merge-ex3.page:104(p) C/merge-ex2.page:104(p)
 msgid ""
 "Everything looks good, so we can now load up our printer with the appropriate "
 "label stock, print our address labels and start mailing our party invitations."
@@ -866,19 +872,29 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex2.page:52(None)
-msgid "@@image: 'figures/merge-ex2-1.png'; md5=d48a99d65408584eae2603a0c07610da"
+#, fuzzy
+msgid "@@image: 'figures/merge-ex2-1.png'; md5=c9db139c5b7188e101470dc74684a118"
 msgstr "translated"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/merge-ex2.page:71(None)
-msgid "@@image: 'figures/merge-ex2-2.png'; md5=2912c145fd9caac56ad7cf8c4437636b"
+#: C/merge-ex2.page:70(None)
+#, fuzzy
+msgid "@@image: 'figures/merge-ex2-2.png'; md5=240b4e4ebaa270e0e8bf84c5bfd7233e"
 msgstr "translated"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/merge-ex2.page:100(None)
-msgid "@@image: 'figures/merge-ex2-4.png'; md5=67391b05421901a36d276736c1f664dd"
+#: C/merge-ex2.page:88(None)
+#, fuzzy
+msgid "@@image: 'figures/merge-ex2-3.png'; md5=c347460091d8eef9f4ec89557fa9f1e2"
+msgstr "translated"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex2.page:99(None)
+#, fuzzy
+msgid "@@image: 'figures/merge-ex2-4.png'; md5=30d12e946a79e27211b835e38742671c"
 msgstr "translated"
 
 #: C/merge-ex2.page:9(desc)
@@ -932,21 +948,22 @@ msgid ""
 "the Avery 5512 \"Address Labels\" template. Next we use the "
 "<guiseq><gui>Objects</gui><gui>Merge Properties</gui></guiseq> menu item to "
 "display the <gui>merge properties</gui> dialog. We use this dialog to select "
-"the source type (in our case CSV) and the merge source (filename) as shown."
+"the source type (in our case CSV with keys on line 1) and the merge source "
+"(filename) as shown."
 msgstr ""
 "In <app>glabels</app> haben Sie ein neues Dokument unter Verwendung der "
 "Dokumentvorlage »Avery 5512 Adressetiketten« erzeugt. Zunächst öffnen Sie "
 "mittels <guiseq><gui>Objekte</gui><gui>Mischeinstellungen</gui></guiseq> den "
 "Dialog <gui>Mischeinstellungen</gui>. In diesem Dialog wählen Sie wie gezeigt "
-"die Datenquelle aus, in diesem Fall CSV, sowie die Mischquelle (Dateiname)."
+"die Datenquelle aus, in diesem Fall »CSV mit Schlüsseln in Zeile 1«, sowie "
+"die Mischquelle (Dateiname)."
 
 #. ==== End of Figure ====
 #: C/merge-ex2.page:57(p)
 msgid ""
-"Before applying the merge source, we uncheck the first record since it is "
-"only column headers from our original <app>gnumeric</app> spreadsheet and "
-"would simply waste our first label. We also unselect the second record which "
-"is empty (an artifact of our original spreadsheet). We could also unselect "
+"Before applying the merge source, we uncheck the first record since it only "
+"contains empty fields. It is an artifact of our original <app>gnumeric</app> "
+"spreadsheet and would simply waste our first label. We could also unselect "
 "any other records that we didn't want to print a label for."
 msgstr ""
 "Bevor Sie eine neue Einmischquelle anwenden, sollten Sie den ersten Datensatz "
@@ -955,7 +972,8 @@ msgstr ""
 "Weiterhin können Sie alle anderen Datensätze entfernen, die Sie nicht für ein "
 "Etikett verwenden wollen."
 
-#: C/merge-ex2.page:63(p) C/merge-ex1.page:60(p)
+#. ==== End of Figure ====
+#: C/merge-ex2.page:62(p) C/merge-ex1.page:55(p)
 msgid ""
 "We can also view each record in more detail by clicking on the appropriate "
 "expander (the little triangles) as shown. Once we are satisfied with the "
@@ -966,23 +984,22 @@ msgstr ""
 "<gui>OK</gui>, um die Änderungen anzuwenden."
 
 #. ==== End of Figure ====
-#: C/merge-ex2.page:76(p)
+#: C/merge-ex2.page:75(p)
 msgid ""
 "In this example we have a single text object. This text object contains all "
 "of our merge fields organized on multiple lines as a mailing address. Notice "
-"that fields ${4} and ${5} (corresponding to ADDR1 and ADDR2) are each located "
-"with no other text on their own lines. When <app>glabels</app> encounters a "
-"field as the only text on a line, it will not expand the line if the field is "
-"empty."
+"that fields ${ADDR1} and ${ADDR2} are each located with no other text on "
+"their own lines. When <app>glabels</app> encounters a field as the only text "
+"on a line, it will not expand the line if the field is empty."
 msgstr ""
 "In diesem Beispiel haben Sie ein einzelnes Textobjekt. Dieses Textobjekt "
 "enthält alle Einmischfelder, angeordnet in mehreren Zeilen wie eine "
-"Versandadresse. Beachten Sie, dass die Felder ${4} und ${5} (korrespondierend "
-"zu ADDR1 und ADDR2) jeweils keinen weiteren Text in deren Zeilen enthalten. "
-"Wenn <app>glabels</app> ein solches Feld als »nur Text« in einer Zeile "
-"erkennt, wird die Zeile nicht expandiert, falls das Feld leer ist."
+"Versandadresse. Beachten Sie, dass die Felder ${ADDR1} und ${ADDR2} jeweils "
+"keinen weiteren Text in deren Zeilen enthalten. Wenn <app>glabels</app> ein "
+"solches Feld als »nur Text« in einer Zeile erkennt, wird die Zeile nicht "
+"expandiert, falls das Feld leer ist."
 
-#: C/merge-ex2.page:83(p)
+#: C/merge-ex2.page:82(p)
 msgid ""
 "Now we can print our address labels by selecting the <guiseq><gui>File</"
 "gui><gui>Print</gui></guiseq> menu item. This will display print dialog as "
@@ -992,32 +1009,36 @@ msgstr ""
 "gui><gui>Drucken</gui></guiseq> wählen. Der unten angezeigte Druckdialog wird "
 "geöffnet."
 
-#: C/merge-ex2.page:101(p)
+#: C/merge-ex2.page:100(p)
 msgid "Address labels preview"
 msgstr "Adressetiketten-Vorschau"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex1.page:50(None)
-msgid "@@image: 'figures/merge-ex1-1.png'; md5=731c7bcd2ff66d18300e87f1c3d9ec0e"
+#, fuzzy
+msgid "@@image: 'figures/merge-ex1-1.png'; md5=6e1cda54b797f875f379b657370d87c8"
 msgstr "translated"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/merge-ex1.page:68(None)
-msgid "@@image: 'figures/merge-ex1-2.png'; md5=27ed61afe77cda96c208fcda51990c89"
+#: C/merge-ex1.page:63(None)
+#, fuzzy
+msgid "@@image: 'figures/merge-ex1-2.png'; md5=2ccad04ae5830f5f4a6a601d9fabed6a"
 msgstr "translated"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/merge-ex1.page:89(None)
-msgid "@@image: 'figures/merge-ex1-3.png'; md5=8f686530b1196b04595be50a9f8d4728"
+#: C/merge-ex1.page:84(None)
+#, fuzzy
+msgid "@@image: 'figures/merge-ex1-3.png'; md5=858855ab1a392db74b70cdb2bdb27ddd"
 msgstr "translated"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/merge-ex1.page:100(None)
-msgid "@@image: 'figures/merge-ex1-4.png'; md5=9cec0c679929cc904f81f435cd3bd060"
+#: C/merge-ex1.page:95(None)
+#, fuzzy
+msgid "@@image: 'figures/merge-ex1-4.png'; md5=8648ff55dd2e531a1a82b797f0430279"
 msgstr "translated"
 
 #: C/merge-ex1.page:9(desc)
@@ -1066,54 +1087,41 @@ msgid ""
 "the Avery 5395 \"Name Badge Labels\" template. Next we use the "
 "<guiseq><gui>Objects</gui><gui>Merge Properties</gui></guiseq> menu item to "
 "display the <gui>merge properties</gui> dialog. We use this dialog to select "
-"the source type (in our case CSV) and the merge source (filename) as shown."
+"the source type (in our case CSV with keys on line 1) and the merge source "
+"(filename) as shown."
 msgstr ""
 "In <app>glabels</app> haben Sie ein neues Dokument unter Verwendung der "
 "Dokumentvorlage »Avery 5395 Namensschild-Etiketten« erzeugt. Zunächst öffnen "
 "Sie mittels <guiseq><gui>Objekte</gui><gui>Mischeinstellungen</gui></guiseq> "
 "den Dialog <gui>Mischeinstellungen</gui>. In diesem Dialog wählen Sie wie "
-"gezeigt die Datenquelle aus, in diesem Fall CSV, sowie die Mischquelle "
-"(Dateiname)."
+"gezeigt die Datenquelle aus, in diesem Fall »CSV mit Schlüsseln in Zeile 1«, "
+"sowie die Mischquelle (Dateiname)."
 
 #. ==== End of Figure ====
-#: C/merge-ex1.page:55(p)
-msgid ""
-"Before applying the merge source, we uncheck the first record since it is "
-"only column headers from our original <app>gnumeric</app> spreadsheet and "
-"would simply waste our first label. We could also unselect any other records "
-"that we didn't want to print a label for."
-msgstr ""
-"Bevor Sie eine neue Einmischquelle anwenden, sollten Sie den ersten Datensatz "
-"deaktivieren, weil dieser nur Spaltenköpfe aus der originalen <app>gnumeric</"
-"app>-Tabelle enthält. Dadurch würde nur das erste Etikett verschwendet. "
-"Weiterhin können Sie alle anderen Datensätze entfernen, die Sie nicht für ein "
-"Etikett verwenden wollen."
-
-#. ==== End of Figure ====
-#: C/merge-ex1.page:73(p)
+#: C/merge-ex1.page:68(p)
 msgid ""
 "In this example we have added three text objects and a barcode object. The "
 "first text object contains only simple literal text (\"Hello, my name is\"). "
-"The second text object contains a single merge field (\"${1}\") corresponding "
-"to the first field of a record (first column of a line) which contains the "
-"new crew member's full name. The third text field contains both literal text "
-"(\"Department: \") followed by a single merge field (\"${2}\") corresponding "
-"to the second field or the crew member's department. The barcode object is "
-"configured to use field (or key) \"3\" which contains our crew member's "
-"starfleet serial number."
+"The second text object contains a single merge field (\"${Name}\") "
+"corresponding to the first field of a record (first column of a line) which "
+"contains the new crew member's full name. The third text field contains both "
+"literal text (\"Department: \") followed by a single merge field "
+"(\"${Department}\") corresponding to the second field or the crew member's "
+"department. The barcode object is configured to use field (or key) \"SN\" "
+"which contains our crew member's starfleet serial number."
 msgstr ""
 "In diesem Beispiel haben Sie drei Textobjekte und ein Strichcodeobjekt "
 "hinzugefügt. Das erste Textobjekt enthält nur einfachen Text (»Hello, my name "
-"is«). Das zweite Textobjekt enthält ein einfaches Mischfeld (»${1}«), welches "
-"zum ersten Feld eines Datensatzes (erste Spalte einer Zeile) korrespondiert, "
-"die den vollen Namen eines Mannschaftsmitglieds enthält. Das dritte Feld "
-"enthält sowohl einfachen Text (»Department:«) als auch ein einzelnes "
-"Mischfeld (»${2}«), welches zum zweiten Feld oder zum Arbeitsgebiet eines "
-"Mannschaftsmitglieds korrespondiert. Das Strichcodefeld ist so eingestellt, "
-"das Feld (oder den Schlüssel) »3« zu verwenden, das die Sternenflotten-"
-"Seriennummer des Mannschaftsmitglieds enthält."
+"is«). Das zweite Textobjekt enthält ein einfaches Mischfeld (»${Name}«), "
+"welches zum ersten Feld eines Datensatzes (erste Spalte einer Zeile) "
+"korrespondiert, die den vollen Namen eines Mannschaftsmitglieds enthält. Das "
+"dritte Feld enthält sowohl einfachen Text (»Department:«) als auch ein "
+"einzelnes Mischfeld (»${Department:}«), welches zum zweiten Feld oder zum "
+"Arbeitsgebiet eines Mannschaftsmitglieds korrespondiert. Das Strichcodefeld "
+"ist so eingestellt, das Feld (oder den Schlüssel) »SN« zu verwenden, das die "
+"Sternenflotten-Seriennummer des Mannschaftsmitglieds enthält."
 
-#: C/merge-ex1.page:83(p)
+#: C/merge-ex1.page:78(p)
 msgid ""
 "Now we can print our name tags by selecting the <guiseq><gui>File</"
 "gui><gui>Print</gui></guiseq> menu item. This will display print dialog as "
@@ -1123,16 +1131,16 @@ msgstr ""
 "gui><gui>Drucken</gui></guiseq> wählen. Der unten angezeigte Druckdialog wird "
 "geöffnet."
 
-#: C/merge-ex1.page:90(p)
+#: C/merge-ex1.page:85(p)
 msgid "Printing name tags"
 msgstr "Drucken der Namensschilder"
 
-#: C/merge-ex1.page:101(p)
+#: C/merge-ex1.page:96(p)
 msgid "Name tags preview"
 msgstr "Vorschau der Namensschilder"
 
 #. ==== End of Figure ====
-#: C/merge-ex1.page:105(p)
+#: C/merge-ex1.page:100(p)
 msgid ""
 "Everything looks good, so we can now load up our printer with the appropriate "
 "label stock, print our name tags and start beaming our guests aboard."
@@ -1142,7 +1150,7 @@ msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/mancreate.page:339(None)
+#: C/mancreate.page:340(None)
 msgid ""
 "@@image: 'figures/glabels-template-rect-label.png'; "
 "md5=9c7ae1c1a888e1c9eefd19655d093971"
@@ -1150,7 +1158,7 @@ msgstr "translated"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/mancreate.page:391(None)
+#: C/mancreate.page:392(None)
 msgid ""
 "@@image: 'figures/glabels-template-ellipse-label.png'; "
 "md5=ba612c86b5fb8fcd2b5384ecc1c331d2"
@@ -1158,7 +1166,7 @@ msgstr "translated"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/mancreate.page:438(None)
+#: C/mancreate.page:439(None)
 msgid ""
 "@@image: 'figures/glabels-template-circle-label.png'; "
 "md5=841e36a1f92aeed01e8fbaacc67758f1"
@@ -1166,7 +1174,7 @@ msgstr "translated"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/mancreate.page:499(None)
+#: C/mancreate.page:500(None)
 msgid ""
 "@@image: 'figures/glabels-template-cd-label.png'; "
 "md5=c7952ac1b26ecbfa53facfbbf6486841"
@@ -1174,7 +1182,7 @@ msgstr "translated"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/mancreate.page:761(None)
+#: C/mancreate.page:762(None)
 msgid ""
 "@@image: 'figures/glabels-template-layout.png'; "
 "md5=fe1c9652d5448b2e0ece086777d3a287"
@@ -1225,10 +1233,10 @@ msgid "Location"
 msgstr "Ort"
 
 #: C/mancreate.page:46(p) C/mancreate.page:173(p) C/mancreate.page:237(p)
-#: C/mancreate.page:300(p) C/mancreate.page:363(p) C/mancreate.page:414(p)
-#: C/mancreate.page:461(p) C/mancreate.page:534(p) C/mancreate.page:561(p)
-#: C/mancreate.page:599(p) C/mancreate.page:633(p) C/mancreate.page:675(p)
-#: C/mancreate.page:725(p)
+#: C/mancreate.page:301(p) C/mancreate.page:364(p) C/mancreate.page:415(p)
+#: C/mancreate.page:462(p) C/mancreate.page:535(p) C/mancreate.page:562(p)
+#: C/mancreate.page:600(p) C/mancreate.page:634(p) C/mancreate.page:676(p)
+#: C/mancreate.page:726(p)
 msgid "Description"
 msgstr "Beschreibung"
 
@@ -1420,10 +1428,10 @@ msgstr ""
 "translate=\"no\">Label-rectangle</code>, <code translate=\"no\">Label-round</"
 "code> oder <code translate=\"no\">Label-cd</code>) enthalten."
 
-#: C/mancreate.page:173(p) C/mancreate.page:300(p) C/mancreate.page:363(p)
-#: C/mancreate.page:414(p) C/mancreate.page:461(p) C/mancreate.page:534(p)
-#: C/mancreate.page:561(p) C/mancreate.page:599(p) C/mancreate.page:633(p)
-#: C/mancreate.page:675(p) C/mancreate.page:725(p)
+#: C/mancreate.page:173(p) C/mancreate.page:301(p) C/mancreate.page:364(p)
+#: C/mancreate.page:415(p) C/mancreate.page:462(p) C/mancreate.page:535(p)
+#: C/mancreate.page:562(p) C/mancreate.page:600(p) C/mancreate.page:634(p)
+#: C/mancreate.page:676(p) C/mancreate.page:726(p)
 msgid "Property"
 msgstr "Eigenschaft"
 
@@ -1445,7 +1453,7 @@ msgstr "part"
 msgid "Part number or name of stationery product. E.g. \"8160\""
 msgstr "Bestellnummer oder Name des Produkts, z.B. »8160«"
 
-#: C/mancreate.page:187(code) C/mancreate.page:540(code)
+#: C/mancreate.page:187(code) C/mancreate.page:541(code)
 #, no-wrap
 msgid "size"
 msgstr "size"
@@ -1480,8 +1488,8 @@ msgstr ""
 "Übersetzbare Beschreibung des Produkts, z.B. »Mailing Labels« (nur sinnvoll "
 "für vordefinierte Vorlagen)"
 
-#: C/mancreate.page:202(code) C/mancreate.page:310(code)
-#: C/mancreate.page:373(code) C/mancreate.page:479(code)
+#: C/mancreate.page:202(code) C/mancreate.page:311(code)
+#: C/mancreate.page:374(code) C/mancreate.page:480(code)
 #, no-wrap
 msgid "width"
 msgstr "width"
@@ -1490,8 +1498,8 @@ msgstr "width"
 msgid "Page width. Only valid if size=\"Other\""
 msgstr "Seitenbreite. Nur gültig, wenn als Größe »Other« festgelegt ist."
 
-#: C/mancreate.page:206(code) C/mancreate.page:314(code)
-#: C/mancreate.page:377(code) C/mancreate.page:484(code)
+#: C/mancreate.page:206(code) C/mancreate.page:315(code)
+#: C/mancreate.page:378(code) C/mancreate.page:485(code)
 #, no-wrap
 msgid "height"
 msgstr "height"
@@ -1622,19 +1630,24 @@ msgstr "mail"
 msgid "foldable"
 msgstr "foldable"
 
-#: C/mancreate.page:271(code)
+#: C/mancreate.page:265(code)
+#, no-wrap
+msgid "photo"
+msgstr "photo"
+
+#: C/mancreate.page:272(code)
 #, no-wrap
 msgid "product_url"
 msgstr "product_url"
 
-#: C/mancreate.page:272(p)
+#: C/mancreate.page:273(p)
 msgid ""
 "A URL pointing to the vendor's webpage for the specific product, if available."
 msgstr ""
 "Diese Adresse leitet auf die Webseite des Anbieters weiter. Idealerweise ist "
 "dies die Adresse genau dieses Produkts, falls diese verfügbar ist."
 
-#: C/mancreate.page:276(p)
+#: C/mancreate.page:277(p)
 msgid ""
 "Suggestions for additional categories can be sent to the <app>gLabels</app> "
 "developer's <link href=\"mailto:glabels-devel@lists.sourceforge.net\">mailing "
@@ -1644,17 +1657,17 @@ msgstr ""
 "an die <link href=\"mailto:glabels-devel@lists.sourceforge.net"
 "\">Mailingliste</link> der <app>gLabels</app>-Entwickler."
 
-#: C/mancreate.page:279(p)
+#: C/mancreate.page:280(p)
 msgid "Product URLs may be of limited use, because they may not be permanent."
 msgstr ""
 "Produktadressen sind oft nur begrenzt gültig, das sich diese auch ändern "
 "können."
 
-#: C/mancreate.page:292(title)
+#: C/mancreate.page:293(title)
 msgid "<span translate=\"no\">Label-rectangle</span> Node"
 msgstr "<span translate=\"no\">Label-rectangle</span>-Knoten"
 
-#: C/mancreate.page:294(p)
+#: C/mancreate.page:295(p)
 msgid ""
 "A <code translate=\"no\">Label-rectangle</code> node describes the dimensions "
 "of a single label or business card that is rectangular in shape (may have "
@@ -1664,31 +1677,31 @@ msgstr ""
 "Abmessungen eines einzelnen Etiketts oder einer einzelnen Karte in "
 "rechteckiger Form, wobei abgerundete Ecken möglich sind."
 
-#: C/mancreate.page:306(code) C/mancreate.page:369(code)
-#: C/mancreate.page:420(code) C/mancreate.page:467(code)
+#: C/mancreate.page:307(code) C/mancreate.page:370(code)
+#: C/mancreate.page:421(code) C/mancreate.page:468(code)
 #, no-wrap
 msgid "id"
 msgstr "id"
 
-#: C/mancreate.page:307(p) C/mancreate.page:370(p) C/mancreate.page:421(p)
-#: C/mancreate.page:468(p)
+#: C/mancreate.page:308(p) C/mancreate.page:371(p) C/mancreate.page:422(p)
+#: C/mancreate.page:469(p)
 msgid "Reserved for future use. Should always be 0."
 msgstr "Für zukünftige Verwendung reserviert. Sollte immer 0 sein."
 
-#: C/mancreate.page:311(p)
+#: C/mancreate.page:312(p)
 msgid "Width of label/card"
 msgstr "Breite des Etiketts oder der Karte"
 
-#: C/mancreate.page:315(p)
+#: C/mancreate.page:316(p)
 msgid "Heigth of label/card"
 msgstr "Höhe des Etiketts oder der Karte"
 
-#: C/mancreate.page:318(code)
+#: C/mancreate.page:319(code)
 #, no-wrap
 msgid "round"
 msgstr "round"
 
-#: C/mancreate.page:319(p)
+#: C/mancreate.page:320(p)
 msgid ""
 "Radius of corners. For items with square edges (business cards), the radius "
 "should be 0."
@@ -1696,12 +1709,12 @@ msgstr ""
 "Radius der Ecken. Für Objekte mit nicht abgerundeten Ecken (Visitenkarten) "
 "sollte der Radius 0 sein."
 
-#: C/mancreate.page:323(code)
+#: C/mancreate.page:324(code)
 #, no-wrap
 msgid "x_waste"
 msgstr "x_waste"
 
-#: C/mancreate.page:324(p)
+#: C/mancreate.page:325(p)
 msgid ""
 "Amount of horizontal waste (over-print) to allow. This is useful for "
 "minimizing alignment problems when using non-white backgrounds (e.g. images)."
@@ -1709,12 +1722,12 @@ msgstr ""
 "Erlaubte Breite des horizontalen Überdruckens. Dies minimiert "
 "Ausrichtungsprobleme auf anderen als weißen Hintergründen (z.B. Bilder)."
 
-#: C/mancreate.page:329(code)
+#: C/mancreate.page:330(code)
 #, no-wrap
 msgid "y_waste"
 msgstr "y_waste"
 
-#: C/mancreate.page:330(p)
+#: C/mancreate.page:331(p)
 msgid ""
 "Amount of vertical waste (over-print) to allow. This is useful for minimizing "
 "alignment problems when using non-white backgrounds (e.g. images)."
@@ -1722,15 +1735,15 @@ msgstr ""
 "Erlaubte Breite des vertikalen Überdruckens. Dies minimiert "
 "Ausrichtungsprobleme auf anderen als weißen Hintergründen (z.B. Bilder)."
 
-#: C/mancreate.page:338(desc) C/mancreate.page:340(p)
+#: C/mancreate.page:339(desc) C/mancreate.page:341(p)
 msgid "<span translate=\"no\">Label-rectangle</span> parameters"
 msgstr "Parameter zu <span translate=\"no\">Label-rectangle</span>"
 
-#: C/mancreate.page:355(title)
+#: C/mancreate.page:356(title)
 msgid "<span translate=\"no\">Label-ellipse</span> Node"
 msgstr "<span translate=\"no\">Label-ellipse</span>-Knoten"
 
-#: C/mancreate.page:357(p)
+#: C/mancreate.page:358(p)
 msgid ""
 "A <code translate=\"no\">Label-ellipse</code> node describes the dimensions "
 "of a single label or business card that is elliptic in shape."
@@ -1739,21 +1752,21 @@ msgstr ""
 "Abmessungen eines einzelnen Etiketts oder einer einzelnen Karte in "
 "elliptischer Form."
 
-#: C/mancreate.page:374(p)
+#: C/mancreate.page:375(p)
 msgid "Width of the ellipse"
 msgstr "Breite der Ellipse"
 
-#: C/mancreate.page:378(p)
+#: C/mancreate.page:379(p)
 msgid "Heigth of the ellipse"
 msgstr "Höhe der Ellipse"
 
-#: C/mancreate.page:381(code) C/mancreate.page:428(code)
-#: C/mancreate.page:489(code)
+#: C/mancreate.page:382(code) C/mancreate.page:429(code)
+#: C/mancreate.page:490(code)
 #, no-wrap
 msgid "waste"
 msgstr "waste"
 
-#: C/mancreate.page:382(p) C/mancreate.page:429(p) C/mancreate.page:490(p)
+#: C/mancreate.page:383(p) C/mancreate.page:430(p) C/mancreate.page:491(p)
 msgid ""
 "Amount of waste (over-print) to allow. This is useful for minimizing "
 "alignment problems when using non-white backgrounds (e.g. images)."
@@ -1761,16 +1774,16 @@ msgstr ""
 "Erlaubte Breite des Überdruckens. Dies minimiert Ausrichtungsprobleme auf "
 "anderen als weißen Hintergründen (z.B. Bilder)."
 
-#: C/mancreate.page:390(desc) C/mancreate.page:392(p)
-#: C/mancreate.page:437(desc) C/mancreate.page:439(p)
+#: C/mancreate.page:391(desc) C/mancreate.page:393(p)
+#: C/mancreate.page:438(desc) C/mancreate.page:440(p)
 msgid "<span translate=\"no\">Label-ellipse</span> parameters"
 msgstr "Parameter zu <span translate=\"no\">Label-ellipse</span>"
 
-#: C/mancreate.page:407(title)
+#: C/mancreate.page:408(title)
 msgid "<span translate=\"no\">Label-round</span> Node"
 msgstr "<span translate=\"no\">Label-round</span>-Knoten"
 
-#: C/mancreate.page:409(p)
+#: C/mancreate.page:410(p)
 msgid ""
 "A <code translate=\"no\">Label-round</code> node describes the dimensions of "
 "a simple round label (not a CD)."
@@ -1778,21 +1791,21 @@ msgstr ""
 "Ein <code translate=\"no\">Label-round</code>-Knoten beschreibt die "
 "Abmessungen eines einfachen Rundetiketts (nicht einer CD)."
 
-#: C/mancreate.page:424(code) C/mancreate.page:471(code)
-#: C/mancreate.page:613(code)
+#: C/mancreate.page:425(code) C/mancreate.page:472(code)
+#: C/mancreate.page:614(code)
 #, no-wrap
 msgid "radius"
 msgstr "radius"
 
-#: C/mancreate.page:425(p)
+#: C/mancreate.page:426(p)
 msgid "Radius (1/2 diameter) of label"
 msgstr "Radius (halber Durchmesser) des Etiketts"
 
-#: C/mancreate.page:454(title)
+#: C/mancreate.page:455(title)
 msgid "<span translate=\"no\">Label-cd</span> Node"
 msgstr "<span translate=\"no\">Label-cd</span>-Knoten"
 
-#: C/mancreate.page:456(p)
+#: C/mancreate.page:457(p)
 msgid ""
 "A <code translate=\"no\">Label-cd</code> node describes the dimensions of a "
 "CD, DVD, or business card CD."
@@ -1800,20 +1813,20 @@ msgstr ""
 "Ein <code translate=\"no\">Label-cd</code>-Knoten beschreibt die Abmessungen "
 "einer CD, DVD oder Visitenkarten-CD."
 
-#: C/mancreate.page:472(p)
+#: C/mancreate.page:473(p)
 msgid "Outer radius of label"
 msgstr "Äußerer Radius des Etiketts"
 
-#: C/mancreate.page:475(code)
+#: C/mancreate.page:476(code)
 #, no-wrap
 msgid "hole"
 msgstr "hole"
 
-#: C/mancreate.page:476(p)
+#: C/mancreate.page:477(p)
 msgid "Radius of concentric hole"
 msgstr "Radius des Mittellochs"
 
-#: C/mancreate.page:480(p)
+#: C/mancreate.page:481(p)
 msgid ""
 "If present, the label is clipped to the given width. (Useful for \"business "
 "card CDs\")."
@@ -1821,7 +1834,7 @@ msgstr ""
 "Falls vorhanden, wird das Etikett auf die angegebene Größe begrenzt (nützlich "
 "für »Visitenkarten-CDs«)"
 
-#: C/mancreate.page:485(p)
+#: C/mancreate.page:486(p)
 msgid ""
 "If present, the label is clipped to the given height. (Useful for \"business "
 "card CDs\")."
@@ -1829,19 +1842,19 @@ msgstr ""
 "Falls vorhanden, wird das Etikett auf die angegebene Höhe begrenzt (nützlich "
 "für »Visitenkarten-CDs«)"
 
-#: C/mancreate.page:498(desc)
+#: C/mancreate.page:499(desc)
 msgid "<span translate=\"no\">Label-cd</span> parameters"
 msgstr "<span translate=\"no\">Label-cd</span>-Parameter"
 
-#: C/mancreate.page:500(p)
+#: C/mancreate.page:501(p)
 msgid "CD label parameters"
 msgstr "CD-Label-Parameter"
 
-#: C/mancreate.page:515(title)
+#: C/mancreate.page:516(title)
 msgid "<span translate=\"no\">Markup</span> Nodes"
 msgstr "<span translate=\"no\">Markup</span>-Knoten"
 
-#: C/mancreate.page:517(p)
+#: C/mancreate.page:518(p)
 msgid ""
 "Templates may contain optional markup nodes. These nodes are used to describe "
 "a simple set of markup lines that are visible in the <app>glabels</app> "
@@ -1856,11 +1869,11 @@ msgstr ""
 "spezielle Bereiche darstellen sowie dem Benutzer einer Vorlage weitere "
 "hilfreiche Hinweise geben."
 
-#: C/mancreate.page:527(title)
+#: C/mancreate.page:528(title)
 msgid "<span translate=\"no\">Markup-margin</span> Node"
 msgstr "<span translate=\"no\">Markup-margin</span>-Knoten"
 
-#: C/mancreate.page:529(p)
+#: C/mancreate.page:530(p)
 msgid ""
 "A <code translate=\"no\">Markup-margin</code> describes a margin along all "
 "edges of a label."
@@ -1868,7 +1881,7 @@ msgstr ""
 "Ein <code translate=\"no\">Markup-margin</code>-Knoten beschreibt die Ränder "
 "entlang der Seiten eines Etiketts."
 
-#: C/mancreate.page:541(p)
+#: C/mancreate.page:542(p)
 msgid ""
 "Size of the margin. I.e. the distance of the margin line from the edge of the "
 "card/label."
@@ -1876,167 +1889,167 @@ msgstr ""
 "Randbreite. Die Breite des Bereichs zwischen der Randlinie und dem Rand des "
 "Etiketts/der Karte."
 
-#: C/mancreate.page:555(title)
+#: C/mancreate.page:556(title)
 msgid "<span translate=\"no\">Markup-line</span> Node"
 msgstr "<span translate=\"no\">Markup-line</span>-Knoten"
 
-#: C/mancreate.page:557(p)
+#: C/mancreate.page:558(p)
 msgid ""
 "A <code translate=\"no\">Markup-line</code> node describes a markup line."
 msgstr ""
 "Ein <code translate=\"no\">Markup-line</code>-Knoten beschreibt eine "
 "Markierungslinie."
 
-#: C/mancreate.page:567(code) C/mancreate.page:639(code)
-#: C/mancreate.page:681(code)
+#: C/mancreate.page:568(code) C/mancreate.page:640(code)
+#: C/mancreate.page:682(code)
 #, no-wrap
 msgid "x1"
 msgstr "x1"
 
-#: C/mancreate.page:568(p)
+#: C/mancreate.page:569(p)
 msgid "x coordinate of 1st endpoint of the line segment."
 msgstr "x-Koordinate des Anfangspunkts des Linienabschnitts."
 
-#: C/mancreate.page:571(code) C/mancreate.page:643(code)
-#: C/mancreate.page:685(code)
+#: C/mancreate.page:572(code) C/mancreate.page:644(code)
+#: C/mancreate.page:686(code)
 #, no-wrap
 msgid "y1"
 msgstr "y1"
 
-#: C/mancreate.page:572(p)
+#: C/mancreate.page:573(p)
 msgid "y coordinate of 1st endpoint of the line segment."
 msgstr "y-Koordinate des Anfangspunkts des Linienabschnitts."
 
-#: C/mancreate.page:575(code)
+#: C/mancreate.page:576(code)
 #, no-wrap
 msgid "x2"
 msgstr "x2"
 
-#: C/mancreate.page:576(p)
+#: C/mancreate.page:577(p)
 msgid "x coordinate of 2st endpoint of the line segment."
 msgstr "x-Koordinate des zweiten Endpunkts des Linienabschnitts."
 
-#: C/mancreate.page:579(code)
+#: C/mancreate.page:580(code)
 #, no-wrap
 msgid "y2"
 msgstr "y2"
 
-#: C/mancreate.page:580(p)
+#: C/mancreate.page:581(p)
 msgid "y coordinate of 2st endpoint of the line segment."
 msgstr "y-Koordinate des zweiten Endpunkts des Linienabschnitts."
 
-#: C/mancreate.page:593(title)
+#: C/mancreate.page:594(title)
 msgid "<span translate=\"no\">Markup-circle</span> Node"
 msgstr "<span translate=\"no\">Markup-circle</span>-Knoten"
 
-#: C/mancreate.page:595(p)
+#: C/mancreate.page:596(p)
 msgid "A <code translate=\"no\">Markup-circle</code> describes a markup circle."
 msgstr ""
 "Ein <code translate=\"no\">Markup-circle</code>-Knoten beschreibt einen "
 "Markierungskreis."
 
-#: C/mancreate.page:605(code) C/mancreate.page:739(code)
+#: C/mancreate.page:606(code) C/mancreate.page:740(code)
 #, no-wrap
 msgid "x0"
 msgstr "x0"
 
-#: C/mancreate.page:606(p)
+#: C/mancreate.page:607(p)
 msgid "x coordinate of circle origin (center)."
 msgstr "x-Koordinate des Kreismittelpunkts."
 
-#: C/mancreate.page:609(code) C/mancreate.page:744(code)
+#: C/mancreate.page:610(code) C/mancreate.page:745(code)
 #, no-wrap
 msgid "y0"
 msgstr "y0"
 
-#: C/mancreate.page:610(p)
+#: C/mancreate.page:611(p)
 msgid "y coordinate of circle origin (center)."
 msgstr "y-Koordinate des Kreismittelpunkts."
 
-#: C/mancreate.page:614(p)
+#: C/mancreate.page:615(p)
 msgid "Radius of circle."
 msgstr "Radius des Kreises."
 
-#: C/mancreate.page:627(title)
+#: C/mancreate.page:628(title)
 msgid "<span translate=\"no\">Markup-rect</span> Node"
 msgstr "<span translate=\"no\">Markup-rect</span>-Knoten"
 
-#: C/mancreate.page:629(p)
+#: C/mancreate.page:630(p)
 msgid ""
 "A <code translate=\"no\">Markup-rect</code> describes a markup rectangle."
 msgstr ""
 "Ein <code translate=\"no\">Markup-rect</code>-Knoten beschreibt ein "
 "Markierungsrechteck."
 
-#: C/mancreate.page:640(p)
+#: C/mancreate.page:641(p)
 msgid "x coordinate of upper left corner of rectangle."
 msgstr "x-Koordinate der oberen linken Ecke des Rechtecks."
 
-#: C/mancreate.page:644(p)
+#: C/mancreate.page:645(p)
 msgid "y coordinate of upper left corner of rectangle."
 msgstr "y-Koordinate der oberen linken Ecke des Rechtecks."
 
-#: C/mancreate.page:647(code) C/mancreate.page:689(code)
+#: C/mancreate.page:648(code) C/mancreate.page:690(code)
 #, no-wrap
 msgid "w"
 msgstr "w"
 
-#: C/mancreate.page:648(p)
+#: C/mancreate.page:649(p)
 msgid "Width of rectangle."
 msgstr "Breite des Rechtecks."
 
-#: C/mancreate.page:651(code) C/mancreate.page:693(code)
+#: C/mancreate.page:652(code) C/mancreate.page:694(code)
 #, no-wrap
 msgid "h"
 msgstr "h"
 
-#: C/mancreate.page:652(p)
+#: C/mancreate.page:653(p)
 msgid "Height of rectangle."
 msgstr "Höhe des Rechtecks."
 
-#: C/mancreate.page:655(code)
+#: C/mancreate.page:656(code)
 #, no-wrap
 msgid "r"
 msgstr "r"
 
-#: C/mancreate.page:656(p)
+#: C/mancreate.page:657(p)
 msgid "Radius of rounded corners of rectangle."
 msgstr "Radius der abgerundeten Ecken des Rechtecks."
 
-#: C/mancreate.page:669(title)
+#: C/mancreate.page:670(title)
 msgid "<span translate=\"no\">Markup-ellipse</span> Node"
 msgstr "<span translate=\"no\">Markup-ellipse</span>-Knoten"
 
-#: C/mancreate.page:671(p)
+#: C/mancreate.page:672(p)
 msgid ""
 "A <code translate=\"no\">Markup-ellipse</code> describes a markup ellipse."
 msgstr ""
 "Ein <code translate=\"no\">Markup-ellipse</code>-Knoten beschreibt eine "
 "Markierungsellipse."
 
-#: C/mancreate.page:682(p)
+#: C/mancreate.page:683(p)
 msgid "x coordinate of upper left corner of ellipse."
 msgstr ""
 "x-Koordinate der oberen linken Ecke des die Ellipse umschließenden Rechtecks."
 
-#: C/mancreate.page:686(p)
+#: C/mancreate.page:687(p)
 msgid "y coordinate of upper left corner of ellipse."
 msgstr ""
 "x-Koordinate der oberen linken Ecke des die Ellipse umschließenden Rechtecks."
 
-#: C/mancreate.page:690(p)
+#: C/mancreate.page:691(p)
 msgid "Width of ellipse."
 msgstr "Die Breite der Ellipse."
 
-#: C/mancreate.page:694(p)
+#: C/mancreate.page:695(p)
 msgid "Height of ellipse."
 msgstr "Die Höhe der Ellipse."
 
-#: C/mancreate.page:712(title)
+#: C/mancreate.page:713(title)
 msgid "<span translate=\"no\">Layout</span> Node"
 msgstr "<span translate=\"no\">Layout</span>-Knoten"
 
-#: C/mancreate.page:714(p)
+#: C/mancreate.page:715(p)
 msgid ""
 "A label node may contain multiple <code translate=\"no\">Layout</code> "
 "children. If labels are arranged in a simple grid pattern, only one layout is "
@@ -2050,31 +2063,31 @@ msgstr ""
 "mehrere <code translate=\"no\">Layout</span></code>-Unterknoten verwendet "
 "werden."
 
-#: C/mancreate.page:720(p)
+#: C/mancreate.page:721(p)
 msgid "A single label can always be treated as a grid of one."
 msgstr ""
 "Beachten Sie, dass ein einzelnes Etikett immer auch als ein Raster aus "
 "Etiketten betrachtet werden kann."
 
-#: C/mancreate.page:731(code)
+#: C/mancreate.page:732(code)
 #, no-wrap
 msgid "nx"
 msgstr "nx"
 
-#: C/mancreate.page:732(p)
+#: C/mancreate.page:733(p)
 msgid "Number of labels/cards across in the grid (horizontal)"
 msgstr "Anzahl der Etiketten/Karten im Raster in horizontaler Richtung"
 
-#: C/mancreate.page:735(code)
+#: C/mancreate.page:736(code)
 #, no-wrap
 msgid "ny"
 msgstr "ny"
 
-#: C/mancreate.page:736(p)
+#: C/mancreate.page:737(p)
 msgid "Number of labels/cards across in the grid (vertical)"
 msgstr "Anzahl der Etiketten/Karten im Raster in vertikaler Richtung"
 
-#: C/mancreate.page:740(p)
+#: C/mancreate.page:741(p)
 msgid ""
 "Distance from left edge of sheet to the left edge of the left column of cards/"
 "labels in the layout."
@@ -2082,7 +2095,7 @@ msgstr ""
 "Abstand von linken Rand des Papiers zum linken Rand der linken Reihe der "
 "Karten/Etiketten im Layout."
 
-#: C/mancreate.page:745(p)
+#: C/mancreate.page:746(p)
 msgid ""
 "Distance from the top edge of sheet to the top edge of the top row of labels/"
 "cards in the layout."
@@ -2090,29 +2103,29 @@ msgstr ""
 "Abstand von oberen Rand des Papiers zum oberen Rand der oberen Reihe der "
 "Karten/Etiketten im Layout."
 
-#: C/mancreate.page:749(code)
+#: C/mancreate.page:750(code)
 #, no-wrap
 msgid "dx"
 msgstr "dx"
 
-#: C/mancreate.page:750(p)
+#: C/mancreate.page:751(p)
 msgid "Horizontal pitch of grid."
 msgstr "Horizontaler Rasterabstand des Zeichengitters."
 
-#: C/mancreate.page:753(code)
+#: C/mancreate.page:754(code)
 #, no-wrap
 msgid "dy"
 msgstr "dy"
 
-#: C/mancreate.page:754(p)
+#: C/mancreate.page:755(p)
 msgid "Vertical pitch of grid."
 msgstr "Vertikaler Rasterabstand des Zeichengitters."
 
-#: C/mancreate.page:760(desc)
+#: C/mancreate.page:761(desc)
 msgid "<span translate=\"no\">Layout</span> parameters"
 msgstr "<span translate=\"no\">Layout</span>-Parameter"
 
-#: C/mancreate.page:762(p)
+#: C/mancreate.page:763(p)
 msgid "<span translate=\"no\">Layout</span> Parameters"
 msgstr "<span translate=\"no\">Layout</span>-Parameter"
 
@@ -2229,10 +2242,11 @@ msgstr "translated"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/index.page:47(None)
+#, fuzzy
 msgid ""
 "@@image: 'figures/introduction-glabels-main-window.png'; "
-"md5=2309c89ac6b5556daaf04adb72c39ffb"
-msgstr ""
+"md5=fceca242699bb062a5ac243a5f962f3b"
+msgstr "translated"
 
 #: C/index.page:7(title) C/index.page:8(title)
 msgid "gLabels label and business card designer"
@@ -2303,9 +2317,10 @@ msgstr "Fortgeschrittene Verwendung"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/editprop.page:35(None)
+#, fuzzy
 msgid ""
 "@@image: 'figures/object-editor-sidebar.png'; "
-"md5=08e152bad535a2b3d1ff7ed73de5b483"
+"md5=828ffc05f69e1914595cc1e3d7401e2f"
 msgstr "translated"
 
 #: C/editprop.page:9(desc)
@@ -2472,8 +2487,8 @@ msgstr ""
 "Objekts."
 
 #: C/editprop.page:135(title)
-msgid "Shadow Tabbed Section (All except image and barcode objects)"
-msgstr "Reiter »Schattierung« (alle außer Bild- und Strichcodeobjekten)"
+msgid "Shadow Tabbed Section (All except barcode objects)"
+msgstr "Reiter »Schattierung« (alle außer Strichcodeobjekten)"
 
 #: C/editprop.page:137(p)
 msgid "This section contains controls to add a shadow to an object."
@@ -3112,6 +3127,44 @@ msgstr ""
 #: C/index.page:0(None)
 msgid "translator-credits"
 msgstr "Mario Blättermann <mariobl@gnome.org>, 2008, 2009, 2010"
+
+#~ msgid "@@image: 'figures/merge-ex3-1.png'; md5=THIS FILE DOESN'T EXIST"
+#~ msgstr "a"
+
+#~ msgid "@@image: 'figures/merge-ex3-2.png'; md5=THIS FILE DOESN'T EXIST"
+#~ msgstr "a"
+
+#~ msgid "@@image: 'figures/merge-ex3-4.png'; md5=THIS FILE DOESN'T EXIST"
+#~ msgstr "a"
+
+#~ msgid ""
+#~ "@@image: 'figures/merge-ex2-4.png'; md5=67391b05421901a36d276736c1f664dd"
+#~ msgstr "translated"
+
+#~ msgid ""
+#~ "Before applying the merge source, we uncheck the first record since it is "
+#~ "only column headers from our original <app>gnumeric</app> spreadsheet and "
+#~ "would simply waste our first label. We also unselect the second record "
+#~ "which is empty (an artifact of our original spreadsheet). We could also "
+#~ "unselect any other records that we didn't want to print a label for."
+#~ msgstr ""
+#~ "Bevor Sie eine neue Einmischquelle anwenden, sollten Sie den ersten "
+#~ "Datensatz deaktivieren, weil dieser nur Spaltenköpfe aus der originalen "
+#~ "<app>gnumeric</app>-Tabelle enthält. Dadurch würde nur das erste Etikett "
+#~ "verschwendet. Weiterhin können Sie alle anderen Datensätze entfernen, die "
+#~ "Sie nicht für ein Etikett verwenden wollen."
+
+#~ msgid ""
+#~ "@@image: 'figures/merge-ex1-1.png'; md5=731c7bcd2ff66d18300e87f1c3d9ec0e"
+#~ msgstr "translated"
+
+#~ msgid ""
+#~ "@@image: 'figures/merge-ex1-2.png'; md5=27ed61afe77cda96c208fcda51990c89"
+#~ msgstr "translated"
+
+#~ msgid ""
+#~ "@@image: 'figures/merge-ex1-4.png'; md5=9cec0c679929cc904f81f435cd3bd060"
+#~ msgstr "translated"
 
 #~ msgid ""
 #~ "Predefined templates are defined by XML files located in either <file>/usr/"
