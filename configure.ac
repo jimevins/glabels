@@ -83,7 +83,7 @@ dnl    increment current, and set revision to 0.
 dnl 5. If any interfaces have been added since the last public release, then increment age.
 dnl 6. If any interfaces have been removed since the last public release, then set age
 dnl    to 0.
-LIBGLABELS_C=7
+LIBGLABELS_C=8
 LIBGLABELS_R=0
 LIBGLABELS_A=0
 
@@ -116,12 +116,12 @@ dnl ---------------------------------------------------------------------------
 dnl - Library dependencies
 dnl ---------------------------------------------------------------------------
 dnl Required dependencies
-GLIB_REQUIRED=2.27.1
-GTK_REQUIRED=2.91.1
+GLIB_REQUIRED=2.27.2
+GTK_REQUIRED=2.91.3
 LIBXML_REQUIRED=2.7.7
-LIBRSVG_REQUIRED=2.26.3
-CAIRO_REQUIRED=1.8.0
-PANGO_REQUIRED=1.28.0
+LIBRSVG_REQUIRED=2.32.0
+CAIRO_REQUIRED=1.10.0
+PANGO_REQUIRED=1.28.1
 
 dnl Optional dependencies
 LIBEBOOK_REQUIRED=2.30.3
