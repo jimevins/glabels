@@ -1,3 +1,35 @@
+* gLabels 2.3.1 (unstable) release.  Release date 2011-01-03
+
+- Migrated to GNOME 3 platform
+  - Ported to Gtk3
+  - Ported from gconf to gsettings
+- Updated manual and ported to Mallard
+- Added text merge backend that uses semicolon delimeters
+- Improve appearance of shadows of boxes and ellipses
+- Added shadow property of image objects
+- Added native support for SVG images
+- Added full-featured barcode backend for libzint (Sam Lown, Robin Stuart)
+- Refactoring of barcode subsystem
+  - Moved core barcode support to its own library (libglbarcode)
+  - Added onecode backend to libglbarcode
+  - Resurrected built-in Code39 backend and added to libglbarcode
+    (from way back in glabels 0.1.x)
+  - Allow selection of barcode backend from UI
+- New logo and theme friendly icons
+- Added support for elliptical templates
+- Added many new templates
+- Updated translations:
+   - Czech (Marek Černocký)
+   - Danish (Joe Hansen)
+   - French (Claude Paroz, Bruno Brouard, Gérard Baylard)
+   - German (Mario Blättermann)
+   - Spanish (Daniel Mustieles)
+   - Slovenian (Andrej Žnidaršič)
+   - Catalan (Valencian) (David Planella)
+   - Swedish (Daniel Nylander)
+   - Brazilian Portuguese (Michel Recondo, Henrique P. Machado, Antonio Fernandes C. Neto)
+
+
 * gLabels 2.3.0 (unstable) release.  Release date 2010-06-06
 
 - Removed use of deprecations in platform:
