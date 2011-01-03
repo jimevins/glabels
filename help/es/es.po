@@ -3,14 +3,14 @@
 # Copyright (C) 2010 glabels's COPYRIGHT HOLDER
 # This file is distributed under the same license as the glabels package.
 # Jorge González <jorgegonz@svn.gnome.org>, 2010.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-24 17:14+0000\n"
-"PO-Revision-Date: 2010-12-28 20:52+0100\n"
+"POT-Creation-Date: 2010-12-29 09:37+0000\n"
+"PO-Revision-Date: 2011-01-03 15:33+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -275,18 +275,22 @@ msgstr "Elimina los objetos seleccionados sin ponerlos en el portapapeles."
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/printfile.page:47(None)
+#| msgid ""
+#| "@@image: 'figures/print-copies.png'; md5=45f2eae7cd262a36ed6b20a254b94447"
 msgid ""
-"@@image: 'figures/print-copies.png'; md5=45f2eae7cd262a36ed6b20a254b94447"
+"@@image: 'figures/print-copies.png'; md5=1896f693ac50b47ea5abaafb59b5e8cc"
 msgstr ""
-"@@image: 'figures/print-copies.png'; md5=45f2eae7cd262a36ed6b20a254b94447"
+"@@image: 'figures/print-copies.png'; md5=1896f693ac50b47ea5abaafb59b5e8cc"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/printfile.page:70(None)
+#| msgid ""
+#| "@@image: 'figures/print-merge.png'; md5=df81b305a7e76484df98034c1c035604"
 msgid ""
-"@@image: 'figures/print-merge.png'; md5=df81b305a7e76484df98034c1c035604"
+"@@image: 'figures/print-merge.png'; md5=65a719b5624f88fdb40e2322454819a6"
 msgstr ""
-"@@image: 'figures/print-merge.png'; md5=df81b305a7e76484df98034c1c035604"
+"@@image: 'figures/print-merge.png'; md5=65a719b5624f88fdb40e2322454819a6"
 
 #: C/printfile.page:9(desc)
 msgid "How to print your labels and cards."
@@ -429,7 +433,7 @@ msgstr ""
 
 #: C/newlabel.page:9(desc)
 msgid "Create a new label or card in <app>gLabels</app>."
-msgstr ""
+msgstr "Crear una etiqueta o tarjeta nuevas en <app>gLabels</app>."
 
 #: C/newlabel.page:25(title)
 msgid "To create a new label or card"
@@ -567,28 +571,42 @@ msgstr "Ejemplo 4: etiquetas de dirección usando un archivo vCard"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex3.page:53(None)
-msgid "@@image: 'figures/merge-ex3-1.png'; md5=THIS FILE DOESN'T EXIST"
-msgstr "@@image: 'figures/merge-ex3-1.png'; md5=THIS FILE DOESN'T EXIST"
+#| msgid ""
+#| "@@image: 'figures/merge-ex1-3.png'; md5=8f686530b1196b04595be50a9f8d4728"
+msgid ""
+"@@image: 'figures/merge-ex3-1.png'; md5=fb5bf719857fb0a49517ecb50124384d"
+msgstr ""
+"@@image: 'figures/merge-ex3-1.png'; md5=fb5bf719857fb0a49517ecb50124384d"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex3.page:74(None)
-msgid "@@image: 'figures/merge-ex3-2.png'; md5=THIS FILE DOESN'T EXIST"
-msgstr "@@image: 'figures/merge-ex3-2.png'; md5=THIS FILE DOESN'T EXIST"
+#| msgid ""
+#| "@@image: 'figures/merge-ex2-2.png'; md5=2912c145fd9caac56ad7cf8c4437636b"
+msgid ""
+"@@image: 'figures/merge-ex3-2.png'; md5=28a15319cea58be75ff789c766dc0717"
+msgstr ""
+"@@image: 'figures/merge-ex3-2.png'; md5=28a15319cea58be75ff789c766dc0717"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/merge-ex3.page:88(None) C/merge-ex2.page:89(None)
+#: C/merge-ex3.page:88(None)
+#| msgid ""
+#| "@@image: 'figures/merge-ex2-3.png'; md5=59a1dc5ff94656877a6220f73fe25b3c"
 msgid ""
-"@@image: 'figures/merge-ex2-3.png'; md5=59a1dc5ff94656877a6220f73fe25b3c"
+"@@image: 'figures/merge-ex3-3.png'; md5=443d59a44d8ddf5580087a772d4e3eec"
 msgstr ""
-"@@image: 'figures/merge-ex2-3.png'; md5=59a1dc5ff94656877a6220f73fe25b3c"
+"@@image: 'figures/merge-ex3-3.png'; md5=443d59a44d8ddf5580087a772d4e3eec"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex3.page:99(None)
-msgid "@@image: 'figures/merge-ex3-4.png'; md5=THIS FILE DOESN'T EXIST"
-msgstr "@@image: 'figures/merge-ex3-4.png'; md5=THIS FILE DOESN'T EXIST"
+#| msgid ""
+#| "@@image: 'figures/merge-ex2-2.png'; md5=2912c145fd9caac56ad7cf8c4437636b"
+msgid ""
+"@@image: 'figures/merge-ex3-4.png'; md5=1995114757cccebda45b686caeb37fa7"
+msgstr ""
+"@@image: 'figures/merge-ex3-4.png'; md5=1995114757cccebda45b686caeb37fa7"
 
 #: C/merge-ex3.page:9(desc)
 msgid ""
@@ -668,14 +686,14 @@ msgid ""
 "the changes."
 msgstr ""
 
-#: C/merge-ex3.page:71(p) C/merge-ex2.page:68(p) C/merge-ex1.page:65(p)
+#: C/merge-ex3.page:71(p) C/merge-ex2.page:67(p) C/merge-ex1.page:60(p)
 msgid ""
 "Now we start adding objects to our <app>glabels</app> document as shown."
 msgstr ""
 "Ahora empezamos a añadir objetos a nuestro documento de<application>gLabels</"
 "application> como se muestra."
 
-#: C/merge-ex3.page:75(p) C/merge-ex2.page:72(p) C/merge-ex1.page:69(p)
+#: C/merge-ex3.page:75(p) C/merge-ex2.page:71(p) C/merge-ex1.page:64(p)
 msgid "Adding objects"
 msgstr "Añadir objetos"
 
@@ -697,12 +715,12 @@ msgstr ""
 "elemento de menú <guiseq><gui>Archivo</gui><gui>Imprimir</gui></guiseq>. "
 "Esto mostrará el diálogo de impresión como se muestra a continuación."
 
-#: C/merge-ex3.page:89(p) C/merge-ex2.page:90(p)
+#: C/merge-ex3.page:89(p) C/merge-ex2.page:89(p)
 msgid "Printing address labels"
 msgstr "Imprimir etiquetas de dirección"
 
 #. ==== End of Figure ====
-#: C/merge-ex3.page:93(p) C/merge-ex2.page:94(p) C/merge-ex1.page:94(p)
+#: C/merge-ex3.page:93(p) C/merge-ex2.page:93(p) C/merge-ex1.page:89(p)
 msgid ""
 "Just to make sure our labels are going to look okay, we select the "
 "<gui>Print outlines</gui> option and click <gui>Print Preview</gui>. This "
@@ -714,7 +732,7 @@ msgid "Addess labels preview"
 msgstr "Vista previa de las etiquetas de dirección"
 
 #. ==== End of Figure ====
-#: C/merge-ex3.page:104(p) C/merge-ex2.page:105(p)
+#: C/merge-ex3.page:104(p) C/merge-ex2.page:104(p)
 msgid ""
 "Everything looks good, so we can now load up our printer with the "
 "appropriate label stock, print our address labels and start mailing our "
@@ -724,26 +742,42 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex2.page:52(None)
+#| msgid ""
+#| "@@image: 'figures/merge-ex2-1.png'; md5=d48a99d65408584eae2603a0c07610da"
 msgid ""
-"@@image: 'figures/merge-ex2-1.png'; md5=d48a99d65408584eae2603a0c07610da"
+"@@image: 'figures/merge-ex2-1.png'; md5=c9db139c5b7188e101470dc74684a118"
 msgstr ""
-"@@image: 'figures/merge-ex2-1.png'; md5=d48a99d65408584eae2603a0c07610da"
+"@@image: 'figures/merge-ex2-1.png'; md5=c9db139c5b7188e101470dc74684a118"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/merge-ex2.page:71(None)
+#: C/merge-ex2.page:70(None)
+#| msgid ""
+#| "@@image: 'figures/merge-ex2-2.png'; md5=2912c145fd9caac56ad7cf8c4437636b"
 msgid ""
-"@@image: 'figures/merge-ex2-2.png'; md5=2912c145fd9caac56ad7cf8c4437636b"
+"@@image: 'figures/merge-ex2-2.png'; md5=240b4e4ebaa270e0e8bf84c5bfd7233e"
 msgstr ""
-"@@image: 'figures/merge-ex2-2.png'; md5=2912c145fd9caac56ad7cf8c4437636b"
+"@@image: 'figures/merge-ex2-2.png'; md5=240b4e4ebaa270e0e8bf84c5bfd7233e"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/merge-ex2.page:100(None)
+#: C/merge-ex2.page:88(None)
+#| msgid ""
+#| "@@image: 'figures/merge-ex2-3.png'; md5=59a1dc5ff94656877a6220f73fe25b3c"
 msgid ""
-"@@image: 'figures/merge-ex2-4.png'; md5=67391b05421901a36d276736c1f664dd"
+"@@image: 'figures/merge-ex2-3.png'; md5=c347460091d8eef9f4ec89557fa9f1e2"
 msgstr ""
-"@@image: 'figures/merge-ex2-4.png'; md5=67391b05421901a36d276736c1f664dd"
+"@@image: 'figures/merge-ex2-3.png'; md5=c347460091d8eef9f4ec89557fa9f1e2"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex2.page:99(None)
+#| msgid ""
+#| "@@image: 'figures/merge-ex2-1.png'; md5=d48a99d65408584eae2603a0c07610da"
+msgid ""
+"@@image: 'figures/merge-ex2-4.png'; md5=30d12e946a79e27211b835e38742671c"
+msgstr ""
+"@@image: 'figures/merge-ex2-4.png'; md5=30d12e946a79e27211b835e38742671c"
 
 #: C/merge-ex2.page:9(desc)
 msgid "Create address labels from a CSV file."
@@ -782,20 +816,21 @@ msgid ""
 "using the Avery 5512 \"Address Labels\" template. Next we use the "
 "<guiseq><gui>Objects</gui><gui>Merge Properties</gui></guiseq> menu item to "
 "display the <gui>merge properties</gui> dialog. We use this dialog to select "
-"the source type (in our case CSV) and the merge source (filename) as shown."
+"the source type (in our case CSV with keys on line 1) and the merge source "
+"(filename) as shown."
 msgstr ""
 
 #. ==== End of Figure ====
 #: C/merge-ex2.page:57(p)
 msgid ""
-"Before applying the merge source, we uncheck the first record since it is "
-"only column headers from our original <app>gnumeric</app> spreadsheet and "
-"would simply waste our first label. We also unselect the second record which "
-"is empty (an artifact of our original spreadsheet). We could also unselect "
+"Before applying the merge source, we uncheck the first record since it only "
+"contains empty fields. It is an artifact of our original <app>gnumeric</app> "
+"spreadsheet and would simply waste our first label. We could also unselect "
 "any other records that we didn't want to print a label for."
 msgstr ""
 
-#: C/merge-ex2.page:63(p) C/merge-ex1.page:60(p)
+#. ==== End of Figure ====
+#: C/merge-ex2.page:62(p) C/merge-ex1.page:55(p)
 msgid ""
 "We can also view each record in more detail by clicking on the appropriate "
 "expander (the little triangles) as shown. Once we are satisfied with the "
@@ -803,17 +838,16 @@ msgid ""
 msgstr ""
 
 #. ==== End of Figure ====
-#: C/merge-ex2.page:76(p)
+#: C/merge-ex2.page:75(p)
 msgid ""
 "In this example we have a single text object. This text object contains all "
 "of our merge fields organized on multiple lines as a mailing address. Notice "
-"that fields ${4} and ${5} (corresponding to ADDR1 and ADDR2) are each "
-"located with no other text on their own lines. When <app>glabels</app> "
-"encounters a field as the only text on a line, it will not expand the line "
-"if the field is empty."
+"that fields ${ADDR1} and ${ADDR2} are each located with no other text on "
+"their own lines. When <app>glabels</app> encounters a field as the only text "
+"on a line, it will not expand the line if the field is empty."
 msgstr ""
 
-#: C/merge-ex2.page:83(p)
+#: C/merge-ex2.page:82(p)
 msgid ""
 "Now we can print our address labels by selecting the <guiseq><gui>File</"
 "gui><gui>Print</gui></guiseq> menu item. This will display print dialog as "
@@ -823,41 +857,49 @@ msgstr ""
 "elemento de menú <guiseq><gui>Archivo</gui><gui>Imprimir</gui></guiseq>. "
 "Esto mostrará el diálogo de impresión como se muestra a continuación."
 
-#: C/merge-ex2.page:101(p)
+#: C/merge-ex2.page:100(p)
 msgid "Address labels preview"
 msgstr "Vista previa de las etiquetas de dirección"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex1.page:50(None)
+#| msgid ""
+#| "@@image: 'figures/merge-ex2-3.png'; md5=59a1dc5ff94656877a6220f73fe25b3c"
 msgid ""
-"@@image: 'figures/merge-ex1-1.png'; md5=731c7bcd2ff66d18300e87f1c3d9ec0e"
+"@@image: 'figures/merge-ex1-1.png'; md5=6e1cda54b797f875f379b657370d87c8"
 msgstr ""
-"@@image: 'figures/merge-ex1-1.png'; md5=731c7bcd2ff66d18300e87f1c3d9ec0e"
+"@@image: 'figures/merge-ex1-1.png'; md5=6e1cda54b797f875f379b657370d87c8"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/merge-ex1.page:68(None)
+#: C/merge-ex1.page:63(None)
+#| msgid ""
+#| "@@image: 'figures/merge-ex2-1.png'; md5=d48a99d65408584eae2603a0c07610da"
 msgid ""
-"@@image: 'figures/merge-ex1-2.png'; md5=27ed61afe77cda96c208fcda51990c89"
+"@@image: 'figures/merge-ex1-2.png'; md5=2ccad04ae5830f5f4a6a601d9fabed6a"
 msgstr ""
-"@@image: 'figures/merge-ex1-2.png'; md5=27ed61afe77cda96c208fcda51990c89"
+"@@image: 'figures/merge-ex1-2.png'; md5=2ccad04ae5830f5f4a6a601d9fabed6a"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/merge-ex1.page:89(None)
+#: C/merge-ex1.page:84(None)
+#| msgid ""
+#| "@@image: 'figures/merge-ex1-3.png'; md5=8f686530b1196b04595be50a9f8d4728"
 msgid ""
-"@@image: 'figures/merge-ex1-3.png'; md5=8f686530b1196b04595be50a9f8d4728"
+"@@image: 'figures/merge-ex1-3.png'; md5=858855ab1a392db74b70cdb2bdb27ddd"
 msgstr ""
-"@@image: 'figures/merge-ex1-3.png'; md5=8f686530b1196b04595be50a9f8d4728"
+"@@image: 'figures/merge-ex1-3.png'; md5=858855ab1a392db74b70cdb2bdb27ddd"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/merge-ex1.page:100(None)
+#: C/merge-ex1.page:95(None)
+#| msgid ""
+#| "@@image: 'figures/merge-ex1-3.png'; md5=8f686530b1196b04595be50a9f8d4728"
 msgid ""
-"@@image: 'figures/merge-ex1-4.png'; md5=9cec0c679929cc904f81f435cd3bd060"
+"@@image: 'figures/merge-ex1-4.png'; md5=8648ff55dd2e531a1a82b797f0430279"
 msgstr ""
-"@@image: 'figures/merge-ex1-4.png'; md5=9cec0c679929cc904f81f435cd3bd060"
+"@@image: 'figures/merge-ex1-4.png'; md5=8648ff55dd2e531a1a82b797f0430279"
 
 #: C/merge-ex1.page:9(desc)
 msgid "Create name tags from a CSV file."
@@ -893,33 +935,25 @@ msgid ""
 "using the Avery 5395 \"Name Badge Labels\" template. Next we use the "
 "<guiseq><gui>Objects</gui><gui>Merge Properties</gui></guiseq> menu item to "
 "display the <gui>merge properties</gui> dialog. We use this dialog to select "
-"the source type (in our case CSV) and the merge source (filename) as shown."
+"the source type (in our case CSV with keys on line 1) and the merge source "
+"(filename) as shown."
 msgstr ""
 
 #. ==== End of Figure ====
-#: C/merge-ex1.page:55(p)
-msgid ""
-"Before applying the merge source, we uncheck the first record since it is "
-"only column headers from our original <app>gnumeric</app> spreadsheet and "
-"would simply waste our first label. We could also unselect any other records "
-"that we didn't want to print a label for."
-msgstr ""
-
-#. ==== End of Figure ====
-#: C/merge-ex1.page:73(p)
+#: C/merge-ex1.page:68(p)
 msgid ""
 "In this example we have added three text objects and a barcode object. The "
 "first text object contains only simple literal text (\"Hello, my name is\"). "
-"The second text object contains a single merge field (\"${1}\") "
+"The second text object contains a single merge field (\"${Name}\") "
 "corresponding to the first field of a record (first column of a line) which "
 "contains the new crew member's full name. The third text field contains both "
-"literal text (\"Department: \") followed by a single merge field (\"${2}\") "
-"corresponding to the second field or the crew member's department. The "
-"barcode object is configured to use field (or key) \"3\" which contains our "
-"crew member's starfleet serial number."
+"literal text (\"Department: \") followed by a single merge field "
+"(\"${Department}\") corresponding to the second field or the crew member's "
+"department. The barcode object is configured to use field (or key) \"SN\" "
+"which contains our crew member's starfleet serial number."
 msgstr ""
 
-#: C/merge-ex1.page:83(p)
+#: C/merge-ex1.page:78(p)
 msgid ""
 "Now we can print our name tags by selecting the <guiseq><gui>File</"
 "gui><gui>Print</gui></guiseq> menu item. This will display print dialog as "
@@ -929,16 +963,16 @@ msgstr ""
 "de menú <guiseq><gui>Archivo</gui><gui>Imprimir</gui></guiseq>. Esto "
 "mostrará el diálogo de impresión como se muestra a continuación."
 
-#: C/merge-ex1.page:90(p)
+#: C/merge-ex1.page:85(p)
 msgid "Printing name tags"
 msgstr "Imprimir etiquetas de nombre"
 
-#: C/merge-ex1.page:101(p)
+#: C/merge-ex1.page:96(p)
 msgid "Name tags preview"
 msgstr "Vista previa de las etiquetas de nombre"
 
 #. ==== End of Figure ====
-#: C/merge-ex1.page:105(p)
+#: C/merge-ex1.page:100(p)
 msgid ""
 "Everything looks good, so we can now load up our printer with the "
 "appropriate label stock, print our name tags and start beaming our guests "
@@ -1580,7 +1614,7 @@ msgstr ""
 
 #: C/mancreate.page:516(title)
 msgid "<span translate=\"no\">Markup</span> Nodes"
-msgstr ""
+msgstr "Nodos <span translate=\"no\">Markup</span>"
 
 #: C/mancreate.page:518(p)
 msgid ""
@@ -1593,7 +1627,7 @@ msgstr ""
 
 #: C/mancreate.page:528(title)
 msgid "<span translate=\"no\">Markup-margin</span> Node"
-msgstr ""
+msgstr "Nodo <span translate=\"no\">Markup-margin</span>"
 
 #: C/mancreate.page:530(p)
 msgid ""
@@ -1609,7 +1643,7 @@ msgstr ""
 
 #: C/mancreate.page:556(title)
 msgid "<span translate=\"no\">Markup-line</span> Node"
-msgstr ""
+msgstr "Nodo <span translate=\"no\">Markup-line</span>"
 
 #: C/mancreate.page:558(p)
 msgid ""
@@ -1687,7 +1721,7 @@ msgstr "Radio del círculo."
 
 #: C/mancreate.page:628(title)
 msgid "<span translate=\"no\">Markup-rect</span> Node"
-msgstr ""
+msgstr "Nodo <span translate=\"no\">Markup-rect</span>"
 
 #: C/mancreate.page:630(p)
 msgid ""
@@ -1731,7 +1765,7 @@ msgstr "Radio de las esquinas redondeadas del rectángulo."
 
 #: C/mancreate.page:670(title)
 msgid "<span translate=\"no\">Markup-ellipse</span> Node"
-msgstr ""
+msgstr "Nodo <span translate=\"no\">Markup-ellipse</span>"
 
 #: C/mancreate.page:672(p)
 msgid ""
@@ -1825,7 +1859,7 @@ msgstr "Parámetros de <span translate=\"no\">Layout</span>"
 
 #: C/mancreate.page:763(p)
 msgid "<span translate=\"no\">Layout</span> Parameters"
-msgstr ""
+msgstr "Parámetros de <span translate=\"no\">Layout</span>"
 
 #: C/license.page:8(desc)
 msgid "Legal information."
@@ -1932,12 +1966,15 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/index.page:47(None)
+#| msgid ""
+#| "@@image: 'figures/introduction-glabels-main-window.png'; "
+#| "md5=2309c89ac6b5556daaf04adb72c39ffb"
 msgid ""
 "@@image: 'figures/introduction-glabels-main-window.png'; "
-"md5=2309c89ac6b5556daaf04adb72c39ffb"
+"md5=fceca242699bb062a5ac243a5f962f3b"
 msgstr ""
 "@@image: 'figures/introduction-glabels-main-window.png'; "
-"md5=2309c89ac6b5556daaf04adb72c39ffb"
+"md5=fceca242699bb062a5ac243a5f962f3b"
 
 #: C/index.page:7(title) C/index.page:8(title)
 msgid "gLabels label and business card designer"
@@ -1993,12 +2030,15 @@ msgstr "Uso avanzado"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/editprop.page:35(None)
+#| msgid ""
+#| "@@image: 'figures/object-editor-sidebar.png'; "
+#| "md5=08e152bad535a2b3d1ff7ed73de5b483"
 msgid ""
 "@@image: 'figures/object-editor-sidebar.png'; "
-"md5=08e152bad535a2b3d1ff7ed73de5b483"
+"md5=828ffc05f69e1914595cc1e3d7401e2f"
 msgstr ""
 "@@image: 'figures/object-editor-sidebar.png'; "
-"md5=08e152bad535a2b3d1ff7ed73de5b483"
+"md5=828ffc05f69e1914595cc1e3d7401e2f"
 
 #: C/editprop.page:9(desc)
 msgid "Change the properties of objects."
@@ -2127,7 +2167,7 @@ msgid "This section contains controls to change the position of an object."
 msgstr "Esta sección contiene controles para cambiar la posición de un objeto."
 
 #: C/editprop.page:135(title)
-msgid "Shadow Tabbed Section (All except image and barcode objects)"
+msgid "Shadow Tabbed Section (All except barcode objects)"
 msgstr ""
 
 #: C/editprop.page:137(p)
@@ -2698,6 +2738,35 @@ msgid "translator-credits"
 msgstr ""
 "Daniel Mustieles <daniel.mustieles@gmail.com>, 2010\n"
 "Jorge González <jorgegonz@svn.gnome.org>, 2010"
+
+#~ msgid "@@image: 'figures/merge-ex3-1.png'; md5=THIS FILE DOESN'T EXIST"
+#~ msgstr "@@image: 'figures/merge-ex3-1.png'; md5=THIS FILE DOESN'T EXIST"
+
+#~ msgid "@@image: 'figures/merge-ex3-2.png'; md5=THIS FILE DOESN'T EXIST"
+#~ msgstr "@@image: 'figures/merge-ex3-2.png'; md5=THIS FILE DOESN'T EXIST"
+
+#~ msgid "@@image: 'figures/merge-ex3-4.png'; md5=THIS FILE DOESN'T EXIST"
+#~ msgstr "@@image: 'figures/merge-ex3-4.png'; md5=THIS FILE DOESN'T EXIST"
+
+#~ msgid ""
+#~ "@@image: 'figures/merge-ex2-4.png'; md5=67391b05421901a36d276736c1f664dd"
+#~ msgstr ""
+#~ "@@image: 'figures/merge-ex2-4.png'; md5=67391b05421901a36d276736c1f664dd"
+
+#~ msgid ""
+#~ "@@image: 'figures/merge-ex1-1.png'; md5=731c7bcd2ff66d18300e87f1c3d9ec0e"
+#~ msgstr ""
+#~ "@@image: 'figures/merge-ex1-1.png'; md5=731c7bcd2ff66d18300e87f1c3d9ec0e"
+
+#~ msgid ""
+#~ "@@image: 'figures/merge-ex1-2.png'; md5=27ed61afe77cda96c208fcda51990c89"
+#~ msgstr ""
+#~ "@@image: 'figures/merge-ex1-2.png'; md5=27ed61afe77cda96c208fcda51990c89"
+
+#~ msgid ""
+#~ "@@image: 'figures/merge-ex1-4.png'; md5=9cec0c679929cc904f81f435cd3bd060"
+#~ msgstr ""
+#~ "@@image: 'figures/merge-ex1-4.png'; md5=9cec0c679929cc904f81f435cd3bd060"
 
 #~ msgid "Template Node"
 #~ msgstr "Nodo plantilla"
