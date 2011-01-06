@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 09:37+0000\n"
-"PO-Revision-Date: 2011-01-03 15:33+0100\n"
+"POT-Creation-Date: 2011-01-03 19:33+0000\n"
+"PO-Revision-Date: 2011-01-04 13:28+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -253,6 +253,8 @@ msgid ""
 "are then available for pasting back into the current document or another "
 "document."
 msgstr ""
+"Copia los objetos seleccionados al portapapeles sin borrarlos. Los objetos "
+"están disponibles para pegarlos en el documento actual o en otro documento."
 
 #: C/select.page:112(title)
 msgid "<gui>Paste</gui> (<keyseq><key>Ctrl</key><key>V</key></keyseq>)"
@@ -275,8 +277,6 @@ msgstr "Elimina los objetos seleccionados sin ponerlos en el portapapeles."
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/printfile.page:47(None)
-#| msgid ""
-#| "@@image: 'figures/print-copies.png'; md5=45f2eae7cd262a36ed6b20a254b94447"
 msgid ""
 "@@image: 'figures/print-copies.png'; md5=1896f693ac50b47ea5abaafb59b5e8cc"
 msgstr ""
@@ -285,8 +285,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/printfile.page:70(None)
-#| msgid ""
-#| "@@image: 'figures/print-merge.png'; md5=df81b305a7e76484df98034c1c035604"
 msgid ""
 "@@image: 'figures/print-merge.png'; md5=65a719b5624f88fdb40e2322454819a6"
 msgstr ""
@@ -372,6 +370,11 @@ msgid ""
 "grouped together) or un-collated (one copy each record is printed before "
 "next copy)."
 msgstr ""
+"El número total de etiquetas o tarjetas imprimidas es el producto del número "
+"de registros en el origen de la combinación y del número de copias "
+"seleccionadas. Si se seleccionan varias copias, éstas pueden ser cotejadas "
+"(copias de un mismo registro agrupados) o sin cotejar (una copia de cada "
+"registro se imprime antes del siguiente copia)."
 
 #: C/printfile.page:82(p)
 msgid ""
@@ -416,6 +419,9 @@ msgid ""
 "clear labels that will be viewed from the reverse side (e.g. in a car "
 "window)."
 msgstr ""
+"Imprime las etiquetas como imágenes espejo. Esta opción es útil para "
+"imprimir en etiquetas que se verán por el reverso (ej. en la ventanilla de "
+"un coche)."
 
 #: C/printfile.page:108(gui)
 msgid "print crop marks"
@@ -447,10 +453,16 @@ msgid ""
 "click <gui>OK</gui>. A new document is displayed in the display area of the "
 "<app>gLabels</app> window."
 msgstr ""
+"Para crear una etiqueta nueva o una tarjeta de visita, "
+"elija<guiseq><gui>Archivo</gui><gui>Nuevo</gui></guiseq> para mostrar el "
+"diálogo <gui>Nueva etiqueta o tarjeta</gui>. Seleccione el tipo de medio y "
+"la orientación para el documento nuevo y pulse <gui>Aceptar</gui>. Se "
+"mostrará un documento nuevo en el área de visualización de la ventana "
+"ventana de <app>gLabels</app>."
 
 #: C/multifile.page:9(desc)
 msgid "How to open multiple files at once by using the command line."
-msgstr ""
+msgstr "Cómo abrir varios archivos a la vez usando la línea de comandos."
 
 #: C/multifile.page:25(title)
 msgid "To open multiple files from the command line"
@@ -484,7 +496,7 @@ msgstr ""
 
 #: C/merge.page:9(desc)
 msgid "Merge a data source to create multiple documents."
-msgstr ""
+msgstr "Combinar un origen de datos para crear múltiples documentos."
 
 #: C/merge.page:25(title)
 msgid "Document merge tutorial"
@@ -536,6 +548,12 @@ msgid ""
 "properties</gui> dialog. This dialog is used to select the exact data file "
 "format and file name (location) of the merge data."
 msgstr ""
+"Una etiqueta debe estar configurada para «apuntar a» este archivo de datos. "
+"Para configurar las propiedades de combinación de un documento, elija el "
+"elemento de menú <guiseq><gui>Objetos</gui><gui>Mezclar propiedades</gui></"
+"guiseq> para mostrar el diálogo <gui>Propiedades de combinación de datos</"
+"gui>. Este diálogo se utiliza para seleccionar el formato de datos exacto "
+"del archivo y nombre de archivo (ubicación) de la combinación de datos."
 
 #: C/mergefeatures.page:51(p)
 msgid ""
@@ -571,8 +589,6 @@ msgstr "Ejemplo 4: etiquetas de dirección usando un archivo vCard"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex3.page:53(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex1-3.png'; md5=8f686530b1196b04595be50a9f8d4728"
 msgid ""
 "@@image: 'figures/merge-ex3-1.png'; md5=fb5bf719857fb0a49517ecb50124384d"
 msgstr ""
@@ -581,8 +597,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex3.page:74(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex2-2.png'; md5=2912c145fd9caac56ad7cf8c4437636b"
 msgid ""
 "@@image: 'figures/merge-ex3-2.png'; md5=28a15319cea58be75ff789c766dc0717"
 msgstr ""
@@ -591,8 +605,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex3.page:88(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex2-3.png'; md5=59a1dc5ff94656877a6220f73fe25b3c"
 msgid ""
 "@@image: 'figures/merge-ex3-3.png'; md5=443d59a44d8ddf5580087a772d4e3eec"
 msgstr ""
@@ -601,8 +613,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex3.page:99(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex2-2.png'; md5=2912c145fd9caac56ad7cf8c4437636b"
 msgid ""
 "@@image: 'figures/merge-ex3-4.png'; md5=1995114757cccebda45b686caeb37fa7"
 msgstr ""
@@ -742,8 +752,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex2.page:52(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex2-1.png'; md5=d48a99d65408584eae2603a0c07610da"
 msgid ""
 "@@image: 'figures/merge-ex2-1.png'; md5=c9db139c5b7188e101470dc74684a118"
 msgstr ""
@@ -752,8 +760,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex2.page:70(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex2-2.png'; md5=2912c145fd9caac56ad7cf8c4437636b"
 msgid ""
 "@@image: 'figures/merge-ex2-2.png'; md5=240b4e4ebaa270e0e8bf84c5bfd7233e"
 msgstr ""
@@ -762,8 +768,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex2.page:88(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex2-3.png'; md5=59a1dc5ff94656877a6220f73fe25b3c"
 msgid ""
 "@@image: 'figures/merge-ex2-3.png'; md5=c347460091d8eef9f4ec89557fa9f1e2"
 msgstr ""
@@ -772,8 +776,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex2.page:99(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex2-1.png'; md5=d48a99d65408584eae2603a0c07610da"
 msgid ""
 "@@image: 'figures/merge-ex2-4.png'; md5=30d12e946a79e27211b835e38742671c"
 msgstr ""
@@ -864,8 +866,6 @@ msgstr "Vista previa de las etiquetas de dirección"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex1.page:50(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex2-3.png'; md5=59a1dc5ff94656877a6220f73fe25b3c"
 msgid ""
 "@@image: 'figures/merge-ex1-1.png'; md5=6e1cda54b797f875f379b657370d87c8"
 msgstr ""
@@ -874,8 +874,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex1.page:63(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex2-1.png'; md5=d48a99d65408584eae2603a0c07610da"
 msgid ""
 "@@image: 'figures/merge-ex1-2.png'; md5=2ccad04ae5830f5f4a6a601d9fabed6a"
 msgstr ""
@@ -884,8 +882,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex1.page:84(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex1-3.png'; md5=8f686530b1196b04595be50a9f8d4728"
 msgid ""
 "@@image: 'figures/merge-ex1-3.png'; md5=858855ab1a392db74b70cdb2bdb27ddd"
 msgstr ""
@@ -894,8 +890,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex1.page:95(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex1-3.png'; md5=8f686530b1196b04595be50a9f8d4728"
 msgid ""
 "@@image: 'figures/merge-ex1-4.png'; md5=8648ff55dd2e531a1a82b797f0430279"
 msgstr ""
@@ -1874,6 +1868,8 @@ msgid ""
 "This work is distributed under a CreativeCommons Attribution-Share Alike 3.0 "
 "Unported license."
 msgstr ""
+"Este trabajo está distribuido bajo una licencia sin soporte CreativeCommons "
+"Compartir-Igual 3.0."
 
 #: C/license.page:20(p)
 msgid "You are free:"
@@ -1966,9 +1962,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/index.page:47(None)
-#| msgid ""
-#| "@@image: 'figures/introduction-glabels-main-window.png'; "
-#| "md5=2309c89ac6b5556daaf04adb72c39ffb"
 msgid ""
 "@@image: 'figures/introduction-glabels-main-window.png'; "
 "md5=fceca242699bb062a5ac243a5f962f3b"
@@ -1995,6 +1988,10 @@ msgid ""
 "to work with various laser/ink-jet peel-off label and business card sheets "
 "that you'll find at most office supply stores."
 msgstr ""
+"La aplicación <app>gLabels</app> es un programa ligero para crear etiquetas "
+"y tarjetas de visita para el entorno de escritorio GNOME. Está diseñado para "
+"trabajar con varias hojas de etiquetas láser/chorro de tinta que encontrará "
+"en la mayoría de las tiendas de suministros de oficina."
 
 #: C/index.page:35(p)
 msgid ""
@@ -2030,9 +2027,6 @@ msgstr "Uso avanzado"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/editprop.page:35(None)
-#| msgid ""
-#| "@@image: 'figures/object-editor-sidebar.png'; "
-#| "md5=08e152bad535a2b3d1ff7ed73de5b483"
 msgid ""
 "@@image: 'figures/object-editor-sidebar.png'; "
 "md5=828ffc05f69e1914595cc1e3d7401e2f"
@@ -2527,6 +2521,10 @@ msgid ""
 "text objects are initialized with the string \"Text.\" To change this text, "
 "or other properties, see <link xref=\"editprop\"/>."
 msgstr ""
+"Pulse en la ubicación que quiera en la esquina superior izquierda del objeto "
+"de texto y arrástrelo. Los objetos de texto nuevos se inicializan con la "
+"cadena «Texto». Para cambiar este texto u otras propiedades, consulte la "
+"<link xref=\"editprop\"/>."
 
 #: C/createnew.page:47(title)
 msgid "Box"
@@ -2539,6 +2537,11 @@ msgid ""
 "in a single location, a square box will be created. To change properties of "
 "the box object, see <link xref=\"editprop\"/>."
 msgstr ""
+"Pulse en la ubicación que quiera en la esquina superior izquierda del objeto "
+"de caja y arrástrelo a la ubicación que quiere en la esquina inferior "
+"derecha. Si simplemente pulsa en una única ubicación, se creará una caja "
+"cuadrada. Para cambiar las propiedades del objeto de caja, consulte la <link "
+"xref=\"editprop\"/>."
 
 #: C/createnew.page:57(p)
 msgid ""
@@ -2547,6 +2550,10 @@ msgid ""
 "a diagonal line will be created. To change properties of the line object, "
 "see <link xref=\"editprop\"/>."
 msgstr ""
+"Pulse en la ubicación que quiera en uno de los extremos del objeto de línea "
+"y arrástrelo a la ubicación que quiere en el otro extremo. Si simplemente "
+"pulsa en una única ubicación, se creará una línea. Para cambiar las "
+"propiedades del objeto de línea, consulte la <link xref=\"editprop\"/>."
 
 #: C/createnew.page:65(title)
 msgid "Ellipse"
@@ -2559,6 +2566,11 @@ msgid ""
 "click in a single location, a circle will be created. To change properties "
 "of the ellipse object, see <link xref=\"editprop\"/>."
 msgstr ""
+"Pulse en la ubicación que quiera en la esquina superior izquierda del objeto "
+"de elipse y arrástrelo a la ubicación que quiere en la esquina inferior "
+"derecha. Si simplemente pulsa en una única ubicación, se creará un círculo. "
+"Para cambiar las propiedades del objeto de elipse, consulte la <link xref="
+"\"editprop\"/>."
 
 #: C/createnew.page:74(title)
 msgid "Image"
@@ -2572,6 +2584,12 @@ msgid ""
 "initialized with a simple checkerboard image. To change this image, or other "
 "properties of the image object, see <link xref=\"editprop\"/>."
 msgstr ""
+"Pulse en la ubicación que quiera en la esquina superior izquierda del objeto "
+"de imagen y arrástrelo a la ubicación que quiere en la esquina inferior "
+"derecha. Si simplemente pulsa en una única ubicación, se creará un cuadrado. "
+"Los objetos de imagen nuevos se inicializan con una imagen cuadriculada. "
+"Para cambiar esta imagen, u otras propiedades del objeto de imagen, consulte "
+"la <link xref=\"editprop\"/>."
 
 #: C/createnew.page:85(title)
 msgid "Barcode"
@@ -2584,6 +2602,11 @@ msgid ""
 "data. To change data and properties of the barcode object, see <link xref="
 "\"editprop\"/>."
 msgstr ""
+"Pulse en la ubicación que quiera en la esquina superior izquierda del objeto "
+"de código de barras. Los objetos de código de barras nuevos se inicializan "
+"con un código de barras POSTNET con datos representativos. Para cambiar los "
+"datos y las propiedades del objeto de código de barras, consulte la <link "
+"xref=\"editprop\"/>."
 
 #: C/basicusage.page:9(desc)
 msgid "Handling files and quit the application."
