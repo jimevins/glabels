@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-03 19:33+0000\n"
-"PO-Revision-Date: 2011-01-04 13:28+0100\n"
+"POT-Creation-Date: 2011-01-06 09:57+0000\n"
+"PO-Revision-Date: 2011-01-13 13:32+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -408,6 +408,8 @@ msgid ""
 "Print outlines of labels. This option is useful for dry-runs, to test "
 "printer alignment."
 msgstr ""
+"Imprimir los contornos de las etiquetas. Esta opción es útil para "
+"ejecuciones en seco, para verificar la alineación de la impresora."
 
 #: C/printfile.page:102(gui)
 msgid "print in reverse"
@@ -748,6 +750,9 @@ msgid ""
 "appropriate label stock, print our address labels and start mailing our "
 "party invitations."
 msgstr ""
+"Todo parece correcto, así que ahora podemos cargar nuestra impresora con las "
+"etiquetas apropiadas, imprimir nuestras etiquetas de dirección y enviar por "
+"correo nuestras invitaciones a la fiesta."
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
@@ -1059,6 +1064,8 @@ msgid ""
 "<app>gLabels</app> searches for templates in several other locations as "
 "defined here:"
 msgstr ""
+"<app>gLabels</app> busca plantillas en varias ubicaciones, como se define "
+"aquí:"
 
 #: C/mancreate.page:45(p)
 msgid "Location"
@@ -1078,7 +1085,7 @@ msgstr "${prefix}/share/libglabels-3.0/templates"
 
 #: C/mancreate.page:54(p)
 msgid "Predefined templates distributed with <app>gLabels</app>."
-msgstr ""
+msgstr "Plantillas predefinidas distribuidas con <app>gLabels</app>."
 
 #: C/mancreate.page:55(p)
 msgid ""
@@ -1146,6 +1153,13 @@ msgid ""
 "translate=\"no\">pt</code>) will be assumed (1 <em>pt</em> = 1/72 <em>in</"
 "em> = 0.352778 <em>mm</em>)."
 msgstr ""
+"Las distancias se pueden expresar en las unidades <code translate=\"no\">pt</"
+"code>, <code translate=\"no\">in</code>, <code translate=\"no\">mm</code>, "
+"<code translate=\"no\">cm</code>, o <code translate=\"no\">pc</code>. Por "
+"ejemplo: «<code translate=\"no\">1.0in</code>» o «<code translate=\"no"
+"\">2.54cm</code>». Si no se especifican la unidade, se asumirá que es puntos "
+"informáticos (<code translate=\"no\">pt</code>), donde 1 <em>pt</em> = 1/72 "
+"<em>in</em> = 0.352778 <em>mm</em>."
 
 #: C/mancreate.page:118(title)
 msgid "Template Files"
@@ -1156,6 +1170,8 @@ msgid ""
 "A template file contains a single <code translate=\"no\">Glabels-templates</"
 "code> top-level node."
 msgstr ""
+"Un archivo de plantilla contiene un único nodo <code translate=\"no"
+"\">Glabels-templates</code> de nivel superior."
 
 #: C/mancreate.page:123(code)
 #, no-wrap
@@ -1185,6 +1201,8 @@ msgid ""
 "Example <app>gLabels</app> template file containing a single <code translate="
 "\"no\">Template</code> node."
 msgstr ""
+"Ejemplo de archivo de plantilla de <app>gLabels</app> con un nodo <code "
+"translate=\"no\">Template</code>."
 
 #: C/mancreate.page:135(code)
 #, no-wrap
@@ -1256,7 +1274,7 @@ msgstr "part"
 
 #: C/mancreate.page:184(p)
 msgid "Part number or name of stationery product. E.g. \"8160\""
-msgstr ""
+msgstr "Número de pieza o nombre de un producto de papelería. Ej «8160»"
 
 #: C/mancreate.page:187(code) C/mancreate.page:541(code)
 #, no-wrap
@@ -1600,11 +1618,11 @@ msgstr ""
 
 #: C/mancreate.page:499(desc)
 msgid "<span translate=\"no\">Label-cd</span> parameters"
-msgstr ""
+msgstr "Parámetros de <span translate=\"no\">Label-cd</span>"
 
 #: C/mancreate.page:501(p)
 msgid "CD label parameters"
-msgstr ""
+msgstr "Parámetros de etiqueta de CD"
 
 #: C/mancreate.page:516(title)
 msgid "<span translate=\"no\">Markup</span> Nodes"
@@ -1652,7 +1670,7 @@ msgstr "x1"
 
 #: C/mancreate.page:569(p)
 msgid "x coordinate of 1st endpoint of the line segment."
-msgstr ""
+msgstr "coordenada X del primero punto final del segmento de línea."
 
 #: C/mancreate.page:572(code) C/mancreate.page:644(code)
 #: C/mancreate.page:686(code)
@@ -1662,7 +1680,7 @@ msgstr "y1"
 
 #: C/mancreate.page:573(p)
 msgid "y coordinate of 1st endpoint of the line segment."
-msgstr ""
+msgstr "coordenada Y del primero punto final del segmento de línea."
 
 #: C/mancreate.page:576(code)
 #, no-wrap
@@ -1671,7 +1689,7 @@ msgstr "x2"
 
 #: C/mancreate.page:577(p)
 msgid "x coordinate of 2st endpoint of the line segment."
-msgstr ""
+msgstr "coordenada X del segundo punto final del segmento de línea."
 
 #: C/mancreate.page:580(code)
 #, no-wrap
@@ -1680,11 +1698,11 @@ msgstr "y2"
 
 #: C/mancreate.page:581(p)
 msgid "y coordinate of 2st endpoint of the line segment."
-msgstr ""
+msgstr "coordenada Y del segundo punto final del segmento de línea."
 
 #: C/mancreate.page:594(title)
 msgid "<span translate=\"no\">Markup-circle</span> Node"
-msgstr ""
+msgstr "Nodo <span translate=\"no\">Markup-circle</span>"
 
 #: C/mancreate.page:596(p)
 msgid ""
@@ -2151,6 +2169,8 @@ msgid ""
 "This section contains controls to select the length and angle of a line "
 "object."
 msgstr ""
+"Esta sección contiene controles para seleccionar la longitud y el ángulo de "
+"un objeto de línea."
 
 #: C/editprop.page:126(title)
 msgid "Position Tabbed Section"
@@ -2292,7 +2312,7 @@ msgstr ""
 
 #: C/customtemplate.page:9(desc)
 msgid "Create your own templates for stationery products."
-msgstr ""
+msgstr "Crear sus propias plantillas para productos de papelería."
 
 #: C/customtemplate.page:25(title)
 msgid "To create a custom template"
