@@ -1,14 +1,14 @@
 # Spanish translation of glabels.
 # sergio rivadero <sergiorivadero@argentina.com>, 2005.
 # Jorge González <jorgegonz@svn.gnome.org>, 2010.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-12-23 19:04+0000\n"
-"PO-Revision-Date: 2010-12-24 13:13+0100\n"
+"POT-Creation-Date: 2010-12-24 17:14+0000\n"
+"PO-Revision-Date: 2011-01-16 19:12+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1142,7 +1142,7 @@ msgstr "Todos los archivos"
 
 #: ../src/object-editor-image-page.c:307
 msgid "All Images"
-msgstr "Imagen"
+msgstr "Todas las imágenes"
 
 #: ../src/object-editor-image-page.c:323
 #, c-format
@@ -1389,7 +1389,7 @@ msgstr "Borrar los objetos seleccionados"
 
 #: ../src/ui.c:220
 msgid "Select All"
-msgstr "_Deseleccionar todo"
+msgstr "Seleccionar todo"
 
 #: ../src/ui.c:222
 msgid "Select all objects"
@@ -1676,7 +1676,7 @@ msgid ""
 "Unable to locate paper size definitions.  Libglabels may not be installed "
 "correctly!"
 msgstr ""
-"No se pudieron ubicar las definiciones del tamaño del papel. Puede que "
+"No se pudieron encontrar las definiciones del tamaño del papel. Puede que "
 "libglabels no esté instalado correctamente."
 
 #: ../libglabels/lgl-db.c:1062
@@ -1684,16 +1684,16 @@ msgid ""
 "Unable to locate category definitions.  Libglabels may not be installed "
 "correctly!"
 msgstr ""
-"No se pudieron ubicar las definiciones de categorías. Puede que libglabels "
-"no esté instalado correctamente."
+"No se pudieron encontrar las definiciones de categorías. Puede que "
+"libglabels no esté instalado correctamente."
 
 #: ../libglabels/lgl-db.c:1989
 msgid ""
 "Unable to locate any template files.  Libglabels may not be installed "
 "correctly!"
 msgstr ""
-"No se pudo ubicar ningún archivo de plantilla. Puede que libglabels no esté "
-"instalado correctamente."
+"No se pudo encontrar ningún archivo de plantilla. Puede que libglabels no "
+"esté instalado correctamente."
 
 #: ../libglabels/lgl-db.c:2056
 #, c-format
