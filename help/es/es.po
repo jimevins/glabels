@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-06 09:57+0000\n"
-"PO-Revision-Date: 2011-01-13 13:32+0100\n"
+"POT-Creation-Date: 2011-01-13 18:35+0000\n"
+"PO-Revision-Date: 2011-01-17 09:52+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -208,6 +208,11 @@ msgid ""
 "existing selection by holding the <key>Ctrl</key> key while performing the "
 "selection."
 msgstr ""
+"Se puede seleccionar varios objetos pulsando en un área vacía y arrastrando "
+"hasta formar un área rectangular. Cuando se suelta, todos los objetos "
+"contenidos en el área formarán una selección agregada. Una selección de área "
+"se puede usar para añadirla a una selección existente manteniendo pulsada la "
+"tecla <key>Ctrl</key> mientras se hace la selección."
 
 #: C/select.page:72(title)
 msgid "Unselecting objects"
@@ -222,6 +227,12 @@ msgid ""
 "empty space in the display area. Once an object is unselected its highlight "
 "is removed."
 msgstr ""
+"Se puede quitar objetos individuales de una selección manteniendo pulsada la "
+"tecla <key>Ctrl</key> mientras se pulsa sobre un objeto seleccionado "
+"anteriormente. Se puede descartar una selección entera usando el elemento de "
+"menú <guiseq><gui>Editar</gui><gui>Deseleccionar todo</gui></guiseq>, o "
+"simplemente pulsando en un espacio vacío en el área de visualización. Una "
+"vez que un objeto no está seleccionado, se quita el resaltado."
 
 #: C/select.page:86(title)
 msgid "Clipboard Commands"
@@ -232,6 +243,9 @@ msgid ""
 "Object selections can be manipulated using the standard clipboard operations "
 "<gui>Cut</gui>, <gui>Copy</gui>, <gui>Paste</gui>, and <gui>Delete</gui>."
 msgstr ""
+"Los objetos se pueden manipular usando las operaciones estándar del "
+"portapapeles <gui>Cortar</gui>, <gui>Copiar</gui>, <gui>Pegar</gui>, y "
+"<gui>Eliminar</gui>."
 
 #: C/select.page:94(title)
 msgid "<gui>Cut</gui> (<keyseq><key>Ctrl</key><key>X</key></keyseq>)"
@@ -242,6 +256,8 @@ msgid ""
 "Moves selected objects to the clipboard. The objects are then available for "
 "pasting back into the current document or another document."
 msgstr ""
+"Mueve objetos al portapapeles. Los objetos están disponibles para pegarlos "
+"de nuevo en el documento actual o en otro documento."
 
 #: C/select.page:103(title)
 msgid "<gui>Copy</gui> (<keyseq><key>Ctrl</key><key>C</key></keyseq>)"
@@ -265,6 +281,8 @@ msgid ""
 "Pastes objects from the clipboard into the current document. <app>gLabels</"
 "app> can only paste objects from another <app>gLabels</app> document."
 msgstr ""
+"Pega objetos del portapapeles en el documento actual. <app>gLabels</app> "
+"sólo puede pegar objetos de otro documento de <app>gLabels</app>."
 
 #: C/select.page:121(title)
 msgid "<gui>Delete</gui> (<key>Del</key>)"
@@ -305,6 +323,12 @@ msgid ""
 "selected, click <gui>Print</gui> to print the labels or cards. To simply "
 "preview the results, click <gui>Print Preview</gui> instead."
 msgstr ""
+"Para imprimir etiquetas o tarjetas, elija <guiseq><gui>Archivo</"
+"gui><gui>Imprimir</gui></guiseq> para mostrar el diálogo <gui>Imprimir</"
+"gui>. Una vez que haya seleccionado las opciones de impresión, pulse en "
+"<gui>Imprimir</gui> para imprimir las etiquetas o las tarjetas. Para sólo "
+"previsualizar el resultado, pulse en <gui>Previsualizar la impresión</gui> "
+"en su lugar."
 
 #: C/printfile.page:34(p)
 msgid ""
@@ -338,6 +362,9 @@ msgid ""
 "The number of copies of the label can be selected by choosing the number of "
 "full sheets to print, or a specific subset of labels on a single sheet."
 msgstr ""
+"El número de copias de la etiqueta se puede seleccionar eligiendo el número "
+"de hojas completas que imprimir, o un subconjunto específico de etiquetas de "
+"una sola hoja."
 
 #: C/printfile.page:56(p)
 msgid ""
@@ -673,6 +700,12 @@ msgid ""
 "the source type (in our case <gui>Data from default Evolution addressbook</"
 "gui>) as shown."
 msgstr ""
+"Hemos creado en <app>glabels</app> un documento de <app>gLabels</app> nuevo "
+"usando la plantilla Avery 5512 «Etiquetas de dirección». hora usamos el "
+"elemento de menú <guiseq><gui>Objetos</gui><gui>Mezclar propiedades</gui></"
+"guiseq> para mostrar el diálogo <gui>Mezclar propiedades</gui>. Usamos este "
+"diálogo para seleccionar el tipo de origen (en nuestro caso, <gui>Datos de "
+"la libreta de direcciones predeterminada de Evolution</gui>) como se muestra."
 
 #: C/merge-ex3.page:54(p) C/merge-ex2.page:53(p) C/merge-ex1.page:51(p)
 msgid "Merge properties dialog"
@@ -689,6 +722,15 @@ msgid ""
 "checkboxes, or we could use the <gui>Select all</gui> and <gui>Unselect all "
 "</gui> buttons to activate or deactivate all entries in the address book."
 msgstr ""
+"Una vez que hemos elegido <gui>Datos de la libreta predeterminada de "
+"Evolution</gui> como nuestro origen de la mezcla, obtendremos una lista "
+"completa de su contenido. Inicialmente, se comprueban todas las entradas. "
+"Asumiendo que estamos planificando una gran fiesta, podemos dejar esta "
+"selección sin tocar (pero vamos a mantener en mente nuestro presupuesto). "
+"Ahora seleccionamos o deseleccionamos ciertas entradas pulsando en las "
+"casillas adecuadas, o podemos usar los botones <gui>Seleccionar todo</gui> y "
+"<gui>Deseleccionar todo</gui> para activar o desactivar todas las entradas "
+"en la libreta de direcciones."
 
 #: C/merge-ex3.page:66(p)
 msgid ""
@@ -716,6 +758,9 @@ msgid ""
 "contains all of our merge fields organized on multiple lines as a mailing "
 "address."
 msgstr ""
+"En este ejemplo tenemos un único objeto de texto otra vez. Este objeto de "
+"texto contiene todos nuestros campos mezclados organizados en varias líneas "
+"como direcciones de correo."
 
 #: C/merge-ex3.page:82(p)
 msgid ""
@@ -1716,7 +1761,7 @@ msgstr "x0"
 
 #: C/mancreate.page:607(p)
 msgid "x coordinate of circle origin (center)."
-msgstr ""
+msgstr "coordenada X del círculo origen (centro)."
 
 #: C/mancreate.page:610(code) C/mancreate.page:745(code)
 #, no-wrap
@@ -1725,7 +1770,7 @@ msgstr "y0"
 
 #: C/mancreate.page:611(p)
 msgid "y coordinate of circle origin (center)."
-msgstr ""
+msgstr "coordenada Y del círculo origen (centro)."
 
 #: C/mancreate.page:615(p)
 msgid "Radius of circle."
@@ -1742,11 +1787,11 @@ msgstr ""
 
 #: C/mancreate.page:641(p)
 msgid "x coordinate of upper left corner of rectangle."
-msgstr ""
+msgstr "coordenada X de la esquina superior izquierda del rectángulo"
 
 #: C/mancreate.page:645(p)
 msgid "y coordinate of upper left corner of rectangle."
-msgstr ""
+msgstr "coordenada Y de la esquina superior izquierda del rectángulo"
 
 #: C/mancreate.page:648(code) C/mancreate.page:690(code)
 #, no-wrap
@@ -1824,7 +1869,7 @@ msgstr "nx"
 
 #: C/mancreate.page:733(p)
 msgid "Number of labels/cards across in the grid (horizontal)"
-msgstr ""
+msgstr "Número de etiquetas/tarjetas en la rejilla (horizontal)"
 
 #: C/mancreate.page:736(code)
 #, no-wrap
@@ -1833,7 +1878,7 @@ msgstr "ny"
 
 #: C/mancreate.page:737(p)
 msgid "Number of labels/cards across in the grid (vertical)"
-msgstr ""
+msgstr "Número de etiquetas/tarjetas en la rejilla (vertical)"
 
 #: C/mancreate.page:741(p)
 msgid ""
@@ -2075,8 +2120,9 @@ msgid ""
 msgstr ""
 
 #: C/editprop.page:44(title)
+#, fuzzy
 msgid "Text Tabbed Section (Text objects)"
-msgstr ""
+msgstr "Sección de texto tabulada (objetos de texto)"
 
 #: C/editprop.page:46(p)
 msgid ""
@@ -2086,8 +2132,9 @@ msgid ""
 msgstr ""
 
 #: C/editprop.page:53(title)
+#, fuzzy
 msgid "Image Tabbed Section (Image objects)"
-msgstr ""
+msgstr "Sección de imagen tabulada (objetos de imagen)"
 
 #: C/editprop.page:55(p)
 msgid ""
@@ -2108,8 +2155,9 @@ msgid ""
 msgstr ""
 
 #: C/editprop.page:72(title)
+#, fuzzy
 msgid "Style Tabbed Section (Text objects)"
-msgstr ""
+msgstr "Sección de estilo tabulada (objetos de texto)"
 
 #: C/editprop.page:74(p)
 msgid ""
@@ -2129,8 +2177,9 @@ msgid ""
 msgstr ""
 
 #: C/editprop.page:90(title)
+#, fuzzy
 msgid "Line Tabbed Section"
-msgstr ""
+msgstr "Sección de línea tabulada"
 
 #: C/editprop.page:92(p)
 msgid ""
