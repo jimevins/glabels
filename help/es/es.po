@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-13 18:35+0000\n"
-"PO-Revision-Date: 2011-01-17 09:52+0100\n"
+"POT-Creation-Date: 2011-01-19 18:35+0000\n"
+"PO-Revision-Date: 2011-01-27 15:07+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -114,6 +114,11 @@ msgid ""
 "feature to work, the field must be completely empty -- any text, including "
 "spaces will defeat this feature.)"
 msgstr ""
+"Esta característica se describe mejor con un ejemplo. En el siguiente "
+"archivo CSV, la columna 5 (ADDR2) contiene la segunda línea de dirección "
+"para cada registro. Este campo está vacío en los registros 1 y 2, pero no en "
+"el 3. (Para que esta característica funcione, el campo no debe contener "
+"ningún texto, ni siquiera espacios.)"
 
 #: C/skipfields.page:33(code)
 #, no-wrap
@@ -1150,6 +1155,9 @@ msgid ""
 "Designer</gui>. <em>Do not put manually created templates in this directory."
 "</em>"
 msgstr ""
+"Plantillas definidas por el usuario creadas con el <gui>Diseñador de "
+"plantillas</gui> de <app>gLabels</app>. <em>No ponga plantillas creadas "
+"manualmente en esta carpeta</em>."
 
 #: C/mancreate.page:62(p)
 msgid ""
@@ -1310,7 +1318,7 @@ msgstr "brand"
 
 #: C/mancreate.page:180(p)
 msgid "Brand or manufacturer of stationery product. E.g. \"Avery\""
-msgstr ""
+msgstr "Marca o fabricante de productos de papelería. Por ejemplo «Avery»."
 
 #: C/mancreate.page:183(code)
 #, no-wrap
@@ -1342,6 +1350,8 @@ msgstr "description"
 #: C/mancreate.page:194(p)
 msgid "Description of stationery product. E.g, \"Mailing Labels.\""
 msgstr ""
+"Descripción de un producto de papelería. Por ejemplo, «Etiquetas de "
+"dirección»."
 
 #: C/mancreate.page:197(code)
 #, no-wrap
@@ -1353,6 +1363,8 @@ msgid ""
 "Translatable description of stationery product. E.g, \"Mailing Labels."
 "\" (Only useful for predefined templates)"
 msgstr ""
+"Descripción traducible para un producto de papelería. Por ejemplo, «Etiquetas "
+"de correo». (Útil sólo para plantillas predefinidas.)"
 
 #: C/mancreate.page:202(code) C/mancreate.page:311(code)
 #: C/mancreate.page:374(code) C/mancreate.page:480(code)
@@ -1492,6 +1504,8 @@ msgid ""
 "A URL pointing to the vendor's webpage for the specific product, if "
 "available."
 msgstr ""
+"Un URL que apunta a la página web del fabricante para un producto "
+"determinado, si está disponible."
 
 #: C/mancreate.page:277(p)
 msgid ""
@@ -1544,6 +1558,8 @@ msgid ""
 "Radius of corners. For items with square edges (business cards), the radius "
 "should be 0."
 msgstr ""
+"Radio de la esquina. Para elementos con bordes cuadrados (tarjetas de "
+"visita), el radio debe ser 0."
 
 #: C/mancreate.page:324(code)
 #, no-wrap
@@ -1615,6 +1631,8 @@ msgid ""
 "A <code translate=\"no\">Label-round</code> node describes the dimensions of "
 "a simple round label (not a CD)."
 msgstr ""
+"Un nodo <code translate=\"no\">Label-round</code> describe las dimensiones "
+"de una sola etiqueta circular (no un CD)."
 
 #: C/mancreate.page:425(code) C/mancreate.page:472(code)
 #: C/mancreate.page:614(code)
@@ -1691,6 +1709,8 @@ msgid ""
 "A <code translate=\"no\">Markup-margin</code> describes a margin along all "
 "edges of a label."
 msgstr ""
+"Un <code translate=\"no\">Markup-margin</code> describe un margen a lo largo "
+"de los bordes de una etiqueta."
 
 #: C/mancreate.page:542(p)
 msgid ""
@@ -1706,6 +1726,8 @@ msgstr "Nodo <span translate=\"no\">Markup-line</span>"
 msgid ""
 "A <code translate=\"no\">Markup-line</code> node describes a markup line."
 msgstr ""
+"Un nodo <code translate=\"no\">Markup-line</code> describe una línea de "
+"marcado."
 
 #: C/mancreate.page:568(code) C/mancreate.page:640(code)
 #: C/mancreate.page:682(code)
@@ -1753,6 +1775,8 @@ msgstr "Nodo <span translate=\"no\">Markup-circle</span>"
 msgid ""
 "A <code translate=\"no\">Markup-circle</code> describes a markup circle."
 msgstr ""
+"Un <code translate=\"no\">Markup-circle</code> describe un círculo de "
+"marcado."
 
 #: C/mancreate.page:606(code) C/mancreate.page:740(code)
 #, no-wrap
@@ -1784,6 +1808,8 @@ msgstr "Nodo <span translate=\"no\">Markup-rect</span>"
 msgid ""
 "A <code translate=\"no\">Markup-rect</code> describes a markup rectangle."
 msgstr ""
+"Un <code translate=\"no\">Markup-rect</code> describe un rectángulo de "
+"marcado."
 
 #: C/mancreate.page:641(p)
 msgid "x coordinate of upper left corner of rectangle."
@@ -2120,9 +2146,8 @@ msgid ""
 msgstr ""
 
 #: C/editprop.page:44(title)
-#, fuzzy
 msgid "Text Tabbed Section (Text objects)"
-msgstr "Sección de texto tabulada (objetos de texto)"
+msgstr "Sección de texto en solapas (objetos de texto)"
 
 #: C/editprop.page:46(p)
 msgid ""
@@ -2132,9 +2157,8 @@ msgid ""
 msgstr ""
 
 #: C/editprop.page:53(title)
-#, fuzzy
 msgid "Image Tabbed Section (Image objects)"
-msgstr "Sección de imagen tabulada (objetos de imagen)"
+msgstr "Sección de imagen en solapas (objetos de imagen)"
 
 #: C/editprop.page:55(p)
 msgid ""
@@ -2155,15 +2179,17 @@ msgid ""
 msgstr ""
 
 #: C/editprop.page:72(title)
-#, fuzzy
 msgid "Style Tabbed Section (Text objects)"
-msgstr "Sección de estilo tabulada (objetos de texto)"
+msgstr "Sección de estilo en solapas (objetos de texto)"
 
 #: C/editprop.page:74(p)
 msgid ""
 "This section contains controls to select text properties, including font "
 "family, font size, font weight, color, and text justification."
 msgstr ""
+"Esta sección contiene controles para seleccionar las propiedades del texto, "
+"incluyendo la familia tipográfica, tamaño, peso, color y justificación del "
+"texto."
 
 #: C/editprop.page:81(title)
 msgid "Style Tabbed Section (Barcode objects)"
@@ -2175,17 +2201,22 @@ msgid ""
 "barcode style, color, whether to print text, and whether to include a "
 "checksum digit."
 msgstr ""
+"Esta sección contiene controles para seleccionar las propiedades del código "
+"de barras, incluyendo su estilo, color, si se debe imprimir texto y si se "
+"debe incluir un dígito de control."
 
 #: C/editprop.page:90(title)
-#, fuzzy
 msgid "Line Tabbed Section"
-msgstr "Sección de línea tabulada"
+msgstr "Sección de línea en solapas"
 
 #: C/editprop.page:92(p)
 msgid ""
 "This section contains controls to select properties of lines and outlines. "
 "These properties include line width and color."
 msgstr ""
+"Esta sección contiene controles para seleccionar las propiedades de las "
+"líneas y de los márgenes. Estas propiedades incluyen el ancho de línea y el "
+"color."
 
 #: C/editprop.page:98(title)
 msgid "Fill Tabbed Section"
@@ -2196,6 +2227,9 @@ msgid ""
 "This section contains controls to select fill properties of box and ellipse "
 "objects. Currently the only fill property is fill color."
 msgstr ""
+"Esta sección contiene controles para seleccionar las propiedades de relleno "
+"de objetos de caja y de elipse. Actualmente, la única propiedad del relleno "
+"es el color."
 
 #: C/editprop.page:107(title)
 msgid "Size Tabbed Section (All except line objects)"
@@ -2336,7 +2370,7 @@ msgstr ""
 "relativo a la línea central de la etiqueta, eligiendo el elemento de menú "
 "apropiado de los submenús <guiseq><gui>Objetos</gui><gui>Alineación "
 "horizontal</gui></guiseq> o <guiseq><gui>Objetos</gui><gui>Alineación "
-"vertical</gui></guiseq>.  Estos elementos de menú también están disponibles "
+"vertical</gui></guiseq>. Estos elementos de menú también están disponibles "
 "pulsando con el botón derecho en el área de visualización cuando no hay una "
 "selección vacía."
 
@@ -2415,6 +2449,8 @@ msgid ""
 "Use this radio button group to specify your preferred units. Select one of "
 "the following options:"
 msgstr ""
+"Use este grupo de botones de radio para especificar sus unidades favoritas. "
+"Seleccione una de las siguientes opciones:"
 
 #: C/customize.page:42(gui)
 msgid "Points"
@@ -2454,6 +2490,9 @@ msgid ""
 "make it quicker for you to locate media types when creating a new label or "
 "card."
 msgstr ""
+"Use este grupo de botones de radio para especificar su tamaño de página "
+"favorito. Esto hará que localice más rápidamente los tipos de medios cuando "
+"crea una etiqueta o una tarjeta nuevas."
 
 #: C/customize.page:64(gui)
 msgid "US Letter"
@@ -2534,6 +2573,8 @@ msgid ""
 "Use these controls to set the default properties of lines and outlines of "
 "new objects. These properties are:"
 msgstr ""
+"Use estos controles para establecer las propiedades predeterminadas de las "
+"líneas y los márgenes de los objetos nuevos. Estas propiedades son:"
 
 #: C/customize.page:106(gui)
 msgid "Width"
@@ -2556,6 +2597,8 @@ msgid ""
 "Use this control to set the default fill property of new objects. This "
 "property is:"
 msgstr ""
+"Use este control para establecer la propiedad predeterminada de relleno de "
+"los objetos nuevos. Esta propiedad es:"
 
 #: C/customize.page:123(p)
 msgid "This control selects the default fill color."
@@ -2583,6 +2626,8 @@ msgstr ""
 #: C/createnew.page:35(p)
 msgid "The following describes the object creation mode for each object type:"
 msgstr ""
+"A continuación se describe el modo de creación de un objeto para cada tipo "
+"de objeto:"
 
 #: C/createnew.page:40(p)
 msgid ""
