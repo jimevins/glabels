@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-12-24 17:14+0000\n"
-"PO-Revision-Date: 2011-01-16 19:12+0100\n"
+"POT-Creation-Date: 2011-01-26 19:02+0000\n"
+"PO-Revision-Date: 2011-01-27 10:28+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -3006,6 +3006,11 @@ msgstr "Etiquetas de envío de 62mm x 100mm"
 #: ../templates/brother-other-templates.xml.h:20
 msgid "Standard Address Labels 29mm x 90mm"
 msgstr "Etiquetas de dirección estándar de 29mm x 90mm"
+
+#: ../templates/brother-other-templates.xml.h:21
+#| msgid "Standard Address Labels 29mm x 90mm"
+msgid "Standard Address Labels 38mm x 90mm"
+msgstr "Etiquetas de dirección estándar de 38mm x 90mm"
 
 #. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:6
