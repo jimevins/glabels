@@ -7,15 +7,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-22 12:34+0100\n"
-"PO-Revision-Date: 2010-12-21 17:58+0100\n"
+"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
+"POT-Creation-Date: 2011-01-26 19:02+0000\n"
+"PO-Revision-Date: 2011-01-29 21:30+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
@@ -568,8 +568,7 @@ msgstr "Auswahl des Dateinamens ist leer"
 
 #: ../src/file.c:322 ../src/file.c:338
 msgid "Please select a file or supply a valid file name"
-msgstr ""
-"Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
+msgstr "Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
 
 #: ../src/file.c:335
 msgid "File does not exist"
@@ -618,8 +617,7 @@ msgstr "Änderungen am Dokument »%s« vor dem Schließen speichern?"
 
 #: ../src/file.c:748
 msgid "Your changes will be lost if you don't save them."
-msgstr ""
-"Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
+msgstr "Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
 
 #: ../src/file.c:751
 msgid "Close without saving"
@@ -1026,8 +1024,7 @@ msgstr "Text: Durch Tabulatoren getrennte Werte (TSV)"
 
 #: ../src/merge-init.c:79
 msgid "Text: Tab Separated Values (TSV) with keys on line 1"
-msgstr ""
-"Text: Durch Tabulatoren getrennte Werte (TSV) mit Schlüsseln in Zeile 1"
+msgstr "Text: Durch Tabulatoren getrennte Werte (TSV) mit Schlüsseln in Zeile 1"
 
 #: ../src/merge-init.c:87
 msgid "Text: Colon separated values"
@@ -1578,8 +1575,7 @@ msgstr "Eigenschaften-Werkzeugleiste"
 #: ../src/ui.c:450
 msgid "Change the visibility of the property toolbar in the current window"
 msgstr ""
-"Die Sichtbarkeit der Werkzeugleiste im aktuellen Fenster ein- oder "
-"ausschalten"
+"Die Sichtbarkeit der Werkzeugleiste im aktuellen Fenster ein- oder ausschalten"
 
 #: ../src/ui.c:456
 msgid "Grid"
@@ -1587,8 +1583,7 @@ msgstr "Raster"
 
 #: ../src/ui.c:458
 msgid "Change the visibility of the grid in the current window"
-msgstr ""
-"Die Sichtbarkeit des Rasters im aktuellen Fenster ein- oder ausschalten"
+msgstr "Die Sichtbarkeit des Rasters im aktuellen Fenster ein- oder ausschalten"
 
 #: ../src/ui.c:464
 msgid "Markup"
@@ -2258,8 +2253,7 @@ msgstr "Bitte geben Sie die folgenden Layout-Informationen ein."
 
 #: ../data/ui/template-designer.ui.h:50
 msgid ""
-"Please enter the following size parameters of a single label in your "
-"template."
+"Please enter the following size parameters of a single label in your template."
 msgstr ""
 "Bitte geben Sie die folgenden Größenwerte des einzelnen Etiketts in Ihrer "
 "Vorlage an."
@@ -2675,7 +2669,8 @@ msgstr "Alle Etiketten"
 #. ===================================================================
 #. ====================================================================
 #. ===================================================================
-#: ../templates/categories.xml.h:3 ../templates/geha-iso-templates.xml.h:8
+#: ../templates/categories.xml.h:3 ../templates/dataline-iso-templates.xml.h:4
+#: ../templates/geha-iso-templates.xml.h:8
 #: ../templates/hama-iso-templates.xml.h:6
 #: ../templates/pearl-iso-templates.xml.h:8
 msgid "Business cards"
@@ -2898,6 +2893,7 @@ msgstr "Runde Etiketten"
 #. ===================================================================
 #. ********************************************************************
 #: ../templates/avery-us-templates.xml.h:36
+#: ../templates/dataline-iso-templates.xml.h:10
 #: ../templates/meritline-us-templates.xml.h:14
 #: ../templates/uline-us-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:10
@@ -3017,6 +3013,10 @@ msgstr "Versandetiketten 62mm x 100mm"
 msgid "Standard Address Labels 29mm x 90mm"
 msgstr "Standard-Adressaufkleber 29mm x 90mm"
 
+#: ../templates/brother-other-templates.xml.h:21
+msgid "Standard Address Labels 38mm x 90mm"
+msgstr "Standard-Adressaufkleber 38mm x 90mm"
+
 #. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:6
 #: ../templates/misc-iso-templates.xml.h:8
@@ -3027,6 +3027,19 @@ msgstr "CD-Aufkleber"
 #: ../templates/databecker-iso-templates.xml.h:8
 msgid "CD/DVD Labels Standard Format (face only)"
 msgstr "CD/DVD-Etiketten im Standardformat (nur Vorderseite)"
+
+#. ===================================================================
+#. ====================================================================
+#: ../templates/dataline-iso-templates.xml.h:6
+#: ../templates/hama-iso-templates.xml.h:13
+msgid "CD/DVD labels"
+msgstr "CD/DVD-Etiketten"
+
+#. ===================================================================
+#: ../templates/dataline-iso-templates.xml.h:8
+#: ../templates/pearl-iso-templates.xml.h:42
+msgid "Membership cards"
+msgstr "Club-Karten"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:2
@@ -3135,11 +3148,6 @@ msgstr "CD-Einleger (Rückseite)"
 #: ../templates/pearl-iso-templates.xml.h:22
 msgid "CD inlet (front)"
 msgstr "CD-Einleger (Vorderseite)"
-
-#. ====================================================================
-#: ../templates/hama-iso-templates.xml.h:13
-msgid "CD/DVD labels"
-msgstr "CD/DVD-Etiketten"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:21
@@ -3383,11 +3391,6 @@ msgstr "Etiketten A5"
 #: ../templates/pearl-iso-templates.xml.h:40
 msgid "Labels A6"
 msgstr "Etiketten A6"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:42
-msgid "Membership cards"
-msgstr "Club-Karten"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:44
