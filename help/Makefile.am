@@ -49,4 +49,4 @@ DOC_PAGES = \
 	select.page		\
 	skipfields.page
 
-DOC_LINGUAS = cs de es fr sl
+DOC_LINGUAS = cs de es fr nl sl
