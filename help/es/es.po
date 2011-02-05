@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-19 18:35+0000\n"
-"PO-Revision-Date: 2011-01-27 15:07+0100\n"
+"POT-Creation-Date: 2011-01-27 20:13+0000\n"
+"PO-Revision-Date: 2011-02-05 13:05+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -203,7 +203,7 @@ msgstr ""
 
 #: C/select.page:60(title)
 msgid "Area selections"
-msgstr ""
+msgstr "Selecciones de área"
 
 #: C/select.page:62(p)
 msgid ""
@@ -1303,6 +1303,10 @@ msgid ""
 "translate=\"no\">Label-rectangle</code>, <code translate=\"no\">Label-round</"
 "code>, or <code translate=\"no\">Label-cd</code>)."
 msgstr ""
+"Un nodo <code translate=\"no\">Template</code> describe un único producto de "
+"papelería. Debe contener una instancia de cada tipo de nodo "
+"«Etiqueta» (<code translate=\"no\">Label-rectangle</code>, <code translate="
+"\"no\">Label-round</code>, o <code translate=\"no\">Label-cd</code>)."
 
 #: C/mancreate.page:173(p) C/mancreate.page:301(p) C/mancreate.page:364(p)
 #: C/mancreate.page:415(p) C/mancreate.page:462(p) C/mancreate.page:535(p)
@@ -1363,8 +1367,8 @@ msgid ""
 "Translatable description of stationery product. E.g, \"Mailing Labels."
 "\" (Only useful for predefined templates)"
 msgstr ""
-"Descripción traducible para un producto de papelería. Por ejemplo, «Etiquetas "
-"de correo». (Útil sólo para plantillas predefinidas.)"
+"Descripción traducible para un producto de papelería. Por ejemplo, "
+"«Etiquetas de correo». (Útil sólo para plantillas predefinidas.)"
 
 #: C/mancreate.page:202(code) C/mancreate.page:311(code)
 #: C/mancreate.page:374(code) C/mancreate.page:480(code)
@@ -1438,6 +1442,9 @@ msgid ""
 "the file <file>${prefix}/libglabels-3.0/templates/categories.xml</file>. "
 "Currently defined category IDs include:"
 msgstr ""
+"El valor de esta categoría debe coincidir con un ID de categoría predefinido "
+"en el archivo <file>${prefix}/libglabels-3.0/templates/categories.xml</"
+"file>. Los ID de categoría definidos actualmente incluyen:"
 
 #: C/mancreate.page:255(code)
 #, no-wrap
@@ -1528,6 +1535,9 @@ msgid ""
 "dimensions of a single label or business card that is rectangular in shape "
 "(may have rounded edges)."
 msgstr ""
+"Un nodo<code translate=\"no\">Label-rectangle</code> describe las "
+"dimensiones de una única etiqueta o tarjeta de visita de forma rectangular "
+"(Puede tener los bordes redondeados."
 
 #: C/mancreate.page:307(code) C/mancreate.page:370(code)
 #: C/mancreate.page:421(code) C/mancreate.page:468(code)
@@ -1596,6 +1606,8 @@ msgid ""
 "A <code translate=\"no\">Label-ellipse</code> node describes the dimensions "
 "of a single label or business card that is elliptic in shape."
 msgstr ""
+"Un nodo <code translate=\"no\">Label-ellipse</code> describe las dimensiones "
+"de una única etiqueta o tarjeta de visita de forma elíptica."
 
 #: C/mancreate.page:375(p)
 msgid "Width of the ellipse"
@@ -1653,6 +1665,8 @@ msgid ""
 "A <code translate=\"no\">Label-cd</code> node describes the dimensions of a "
 "CD, DVD, or business card CD."
 msgstr ""
+"Un nodo <code translate=\"no\">Label-cd</code> describe las dimensiones de "
+"un CD, DVD o un CD de tarjeta de visita."
 
 #: C/mancreate.page:473(p)
 msgid "Outer radius of label"
@@ -1717,6 +1731,8 @@ msgid ""
 "Size of the margin. I.e. the distance of the margin line from the edge of "
 "the card/label."
 msgstr ""
+"Tamaño del margen. Ej. la distancia de la línea del margen desde el borde de "
+"la tarjeta/etiqueta."
 
 #: C/mancreate.page:556(title)
 msgid "<span translate=\"no\">Markup-line</span> Node"
@@ -1854,6 +1870,8 @@ msgstr "Nodo <span translate=\"no\">Markup-ellipse</span>"
 msgid ""
 "A <code translate=\"no\">Markup-ellipse</code> describes a markup ellipse."
 msgstr ""
+"Un <code translate=\"no\">Markup-ellipse</code> describe una elipse de "
+"marcado."
 
 #: C/mancreate.page:683(p)
 msgid "x coordinate of upper left corner of ellipse."
@@ -1925,7 +1943,7 @@ msgstr "dx"
 
 #: C/mancreate.page:751(p)
 msgid "Horizontal pitch of grid."
-msgstr ""
+msgstr "Inclinación horizontal de la rejilla."
 
 #: C/mancreate.page:754(code)
 #, no-wrap
@@ -1934,7 +1952,7 @@ msgstr "dy"
 
 #: C/mancreate.page:755(p)
 msgid "Vertical pitch of grid."
-msgstr ""
+msgstr "Inclinación vertical de la rejilla."
 
 #: C/mancreate.page:761(desc)
 msgid "<span translate=\"no\">Layout</span> parameters"
@@ -2169,7 +2187,7 @@ msgstr ""
 
 #: C/editprop.page:63(title)
 msgid "Data Tabbed Section (Barcode objects)"
-msgstr ""
+msgstr "Sección de datos en solapas (objetos de código de barras)"
 
 #: C/editprop.page:65(p)
 msgid ""
@@ -2193,7 +2211,7 @@ msgstr ""
 
 #: C/editprop.page:81(title)
 msgid "Style Tabbed Section (Barcode objects)"
-msgstr ""
+msgstr "Sección de estilo en solapas (objetos de código de barras)"
 
 #: C/editprop.page:83(p)
 msgid ""
@@ -2220,7 +2238,7 @@ msgstr ""
 
 #: C/editprop.page:98(title)
 msgid "Fill Tabbed Section"
-msgstr ""
+msgstr "Sección de relleno en solapas"
 
 #: C/editprop.page:100(p)
 msgid ""
@@ -2233,7 +2251,7 @@ msgstr ""
 
 #: C/editprop.page:107(title)
 msgid "Size Tabbed Section (All except line objects)"
-msgstr ""
+msgstr "Sección de tamaño en solapas (todos excepto los objetos de línea)"
 
 #: C/editprop.page:109(p)
 msgid ""
@@ -2245,7 +2263,7 @@ msgstr ""
 
 #: C/editprop.page:118(title)
 msgid "Size Tabbed Section (Line objects)"
-msgstr ""
+msgstr "Sección de tamaño en solapas (objetos de línea)"
 
 #: C/editprop.page:120(p)
 msgid ""
@@ -2257,7 +2275,7 @@ msgstr ""
 
 #: C/editprop.page:126(title)
 msgid "Position Tabbed Section"
-msgstr ""
+msgstr "Sección de posición en solapas"
 
 #: C/editprop.page:128(p)
 msgid "This section contains controls to change the position of an object."
@@ -2266,10 +2284,11 @@ msgstr "Esta sección contiene controles para cambiar la posición de un objeto.
 #: C/editprop.page:135(title)
 msgid "Shadow Tabbed Section (All except barcode objects)"
 msgstr ""
+"Sección de sombra en solapas (todos excepto los objetos de código de barras)"
 
 #: C/editprop.page:137(p)
 msgid "This section contains controls to add a shadow to an object."
-msgstr ""
+msgstr "Esta sección contiene controles para añadir sombre a un objeto."
 
 #: C/editprop.page:146(title)
 msgid "Other Manipulations of Objects"
@@ -2510,6 +2529,7 @@ msgstr "ISO A4"
 #: C/customize.page:69(p)
 msgid "Most of your media will be of the ISO A4 page size (210 x 297 mm)."
 msgstr ""
+"La mayoría de sus medios serán del tamaño de página ISO A4 (210 x 297 mm)."
 
 #: C/customize.page:72(p)
 msgid "Default: <gui>US Letter</gui>."
