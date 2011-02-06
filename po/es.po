@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2011-01-26 19:02+0000\n"
-"PO-Revision-Date: 2011-01-27 10:28+0100\n"
+"POT-Creation-Date: 2011-01-27 20:13+0000\n"
+"PO-Revision-Date: 2011-02-06 12:05+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -819,11 +819,11 @@ msgstr "Rotar a la derecha"
 
 #: ../src/label.c:1428 ../src/ui.c:350
 msgid "Flip horizontally"
-msgstr "Reflejar horizontalmente"
+msgstr "Voltear horizontalmente"
 
 #: ../src/label.c:1463 ../src/ui.c:357
 msgid "Flip vertically"
-msgstr "Reflejar verticalmente"
+msgstr "Voltear verticalmente"
 
 #: ../src/label.c:1503 ../src/ui.c:364
 msgid "Align left"
@@ -1264,7 +1264,7 @@ msgstr "Or_den"
 
 #: ../src/ui.c:101
 msgid "_Rotate/Flip"
-msgstr "_Rotar/Reflejar"
+msgstr "_Rotar/Voltear"
 
 #: ../src/ui.c:102
 msgid "Align _Horizontal"
@@ -1503,11 +1503,11 @@ msgstr "Rotar el objeto 90 grados en sentido horario"
 
 #: ../src/ui.c:352
 msgid "Flip object horizontally"
-msgstr "Reflejar objeto horizontalmente"
+msgstr "Voltear objeto horizontalmente"
 
 #: ../src/ui.c:359
 msgid "Flip object vertically"
-msgstr "Reflejar objeto verticalmente"
+msgstr "Voltear objeto verticalmente"
 
 #: ../src/ui.c:366
 msgid "Align objects to left edges"
@@ -3008,7 +3008,6 @@ msgid "Standard Address Labels 29mm x 90mm"
 msgstr "Etiquetas de dirección estándar de 29mm x 90mm"
 
 #: ../templates/brother-other-templates.xml.h:21
-#| msgid "Standard Address Labels 29mm x 90mm"
 msgid "Standard Address Labels 38mm x 90mm"
 msgstr "Etiquetas de dirección estándar de 38mm x 90mm"
 
