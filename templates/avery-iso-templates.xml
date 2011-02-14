@@ -219,6 +219,18 @@
     </Label-cd>
   </Template>
 
+  <!-- =================================================================== -->
+  <!-- Avery J8157: Mailing Labels, 33 per sheet	                   -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="J8157" size="A4" _description="Mailing Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="64mm" height="24.3mm" round="3mm" x_waste="0mm" y_waste="0mm">
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="3" ny="11" x0="6.0mm" y0="14.0mm" dx="66.5mm" dy="24.3mm"/>
+    </Label-rectangle>
+  </Template>
+
 
   <!-- =================================================================== -->
   <!-- Avery 8414 family: Business Cards, 50.8 x 87.0 mm, 10 per sheet     -->
