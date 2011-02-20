@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-05 12:04+0000\n"
-"PO-Revision-Date: 2011-02-07 09:59+0100\n"
+"POT-Creation-Date: 2011-02-07 18:40+0000\n"
+"PO-Revision-Date: 2011-02-20 19:03+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -356,7 +356,7 @@ msgstr ""
 
 #: C/printfile.page:38(title)
 msgid "The Labels Tab of the Print Dialog"
-msgstr "La solapa «etiquetas» del diálogo de impresión"
+msgstr "La pestaña «Etiquetas» del diálogo de impresión"
 
 #: C/printfile.page:41(title)
 msgid "Print control (Simple)"
@@ -1382,9 +1382,9 @@ msgid ""
 "code>, or <code translate=\"no\">Label-cd</code>)."
 msgstr ""
 "Un nodo <code translate=\"no\">Template</code> describe un único producto de "
-"papelería. Debe contener una instancia de cada tipo de nodo «Etiqueta» (<code "
-"translate=\"no\">Label-rectangle</code>, <code translate=\"no\">Label-round</"
-"code>, o <code translate=\"no\">Label-cd</code>)."
+"papelería. Debe contener una instancia de cada tipo de nodo "
+"«Etiqueta» (<code translate=\"no\">Label-rectangle</code>, <code translate="
+"\"no\">Label-round</code>, o <code translate=\"no\">Label-cd</code>)."
 
 #: C/mancreate.page:173(p) C/mancreate.page:301(p) C/mancreate.page:364(p)
 #: C/mancreate.page:415(p) C/mancreate.page:462(p) C/mancreate.page:535(p)
@@ -1445,8 +1445,8 @@ msgid ""
 "Translatable description of stationery product. E.g, \"Mailing Labels."
 "\" (Only useful for predefined templates)"
 msgstr ""
-"Descripción traducible para un producto de papelería. Por ejemplo, «Etiquetas "
-"de correo». (Útil sólo para plantillas predefinidas.)"
+"Descripción traducible para un producto de papelería. Por ejemplo, "
+"«Etiquetas de correo». (Útil sólo para plantillas predefinidas.)"
 
 #: C/mancreate.page:202(code) C/mancreate.page:311(code)
 #: C/mancreate.page:374(code) C/mancreate.page:480(code)
@@ -2243,7 +2243,7 @@ msgstr ""
 
 #: C/editprop.page:44(title)
 msgid "Text Tabbed Section (Text objects)"
-msgstr "Sección de texto en solapas (objetos de texto)"
+msgstr "Sección de texto en pestañas (objetos de texto)"
 
 #: C/editprop.page:46(p)
 msgid ""
@@ -2254,7 +2254,7 @@ msgstr ""
 
 #: C/editprop.page:53(title)
 msgid "Image Tabbed Section (Image objects)"
-msgstr "Sección de imagen en solapas (objetos de imagen)"
+msgstr "Sección de imagen en pestañas (objetos de imagen)"
 
 #: C/editprop.page:55(p)
 msgid ""
@@ -2265,7 +2265,7 @@ msgstr ""
 
 #: C/editprop.page:63(title)
 msgid "Data Tabbed Section (Barcode objects)"
-msgstr "Sección de datos en solapas (objetos de código de barras)"
+msgstr "Sección de datos en pestañas (objetos de código de barras)"
 
 #: C/editprop.page:65(p)
 msgid ""
@@ -2280,7 +2280,7 @@ msgstr ""
 
 #: C/editprop.page:72(title)
 msgid "Style Tabbed Section (Text objects)"
-msgstr "Sección de estilo en solapas (objetos de texto)"
+msgstr "Sección de estilo en pestañas (objetos de texto)"
 
 #: C/editprop.page:74(p)
 msgid ""
@@ -2293,7 +2293,7 @@ msgstr ""
 
 #: C/editprop.page:81(title)
 msgid "Style Tabbed Section (Barcode objects)"
-msgstr "Sección de estilo en solapas (objetos de código de barras)"
+msgstr "Sección de estilo en pestañas (objetos de código de barras)"
 
 #: C/editprop.page:83(p)
 msgid ""
@@ -2307,7 +2307,7 @@ msgstr ""
 
 #: C/editprop.page:90(title)
 msgid "Line Tabbed Section"
-msgstr "Sección de línea en solapas"
+msgstr "Sección de línea en pestañas"
 
 #: C/editprop.page:92(p)
 msgid ""
@@ -2320,7 +2320,7 @@ msgstr ""
 
 #: C/editprop.page:98(title)
 msgid "Fill Tabbed Section"
-msgstr "Sección de relleno en solapas"
+msgstr "Sección de relleno en pestañas"
 
 #: C/editprop.page:100(p)
 msgid ""
@@ -2333,7 +2333,7 @@ msgstr ""
 
 #: C/editprop.page:107(title)
 msgid "Size Tabbed Section (All except line objects)"
-msgstr "Sección de tamaño en solapas (todos excepto los objetos de línea)"
+msgstr "Sección de tamaño en pestañas (todos excepto los objetos de línea)"
 
 #: C/editprop.page:109(p)
 msgid ""
@@ -2345,7 +2345,7 @@ msgstr ""
 
 #: C/editprop.page:118(title)
 msgid "Size Tabbed Section (Line objects)"
-msgstr "Sección de tamaño en solapas (objetos de línea)"
+msgstr "Sección de tamaño en pestañas (objetos de línea)"
 
 #: C/editprop.page:120(p)
 msgid ""
@@ -2357,7 +2357,7 @@ msgstr ""
 
 #: C/editprop.page:126(title)
 msgid "Position Tabbed Section"
-msgstr "Sección de posición en solapas"
+msgstr "Sección de posición en pestañas"
 
 #: C/editprop.page:128(p)
 msgid "This section contains controls to change the position of an object."
@@ -2366,7 +2366,7 @@ msgstr "Esta sección contiene controles para cambiar la posición de un objeto.
 #: C/editprop.page:135(title)
 msgid "Shadow Tabbed Section (All except barcode objects)"
 msgstr ""
-"Sección de sombra en solapas (todos excepto los objetos de código de barras)"
+"Sección de sombra en pestañas (todos excepto los objetos de código de barras)"
 
 #: C/editprop.page:137(p)
 msgid "This section contains controls to add a shadow to an object."
@@ -2547,7 +2547,7 @@ msgid ""
 msgstr ""
 "Para configurar <app>gLabels</app>, elija <guiseq><gui>Configuración</"
 "gui><gui>Preferencias</gui></guiseq>. El diálogo <gui>Preferencias</gui> "
-"contiene las siguientes secciones en solapas:"
+"contiene las siguientes secciones en pestañas:"
 
 #: C/customize.page:35(title)
 msgid "Locale"
