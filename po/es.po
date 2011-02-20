@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2011-01-27 20:13+0000\n"
-"PO-Revision-Date: 2011-02-06 12:05+0100\n"
+"POT-Creation-Date: 2011-02-06 11:12+0000\n"
+"PO-Revision-Date: 2011-02-20 18:55+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -973,7 +973,7 @@ msgstr "No se encontraron plantillas recientes."
 
 #: ../src/media-select.c:992
 msgid "Try selecting a template in the \"Search all\" tab."
-msgstr "Inténtelo seleccionando una plantilla en la solapa «Buscar todo."
+msgstr "Inténtelo seleccionando una plantilla en la pestaña «Buscar todo."
 
 #. Translators: "No match" means that for the given template search criteria, there
 #. * were no matches found.
@@ -995,7 +995,7 @@ msgid ""
 "the \"Search all\" tab."
 msgstr ""
 "Debe crear plantillas nuevas o intentar buscar plantillas predefinidas en la "
-"solapa «Buscar todo»."
+"pestaña «Buscar todo»."
 
 #. Translators: "None" here means that no document-merge source or
 #. * method has been selected.
