@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-02-07 18:40+0000\n"
-"PO-Revision-Date: 2011-02-20 19:03+0100\n"
+"PO-Revision-Date: 2011-02-21 17:45+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -185,6 +185,12 @@ msgid ""
 "gui><gui>Select Mode</gui></guiseq> menu item, or the corresponding command "
 "on the <gui>Drawing Toolbar</gui>."
 msgstr ""
+"Un requisito previo para realizar operaciones en objetos es la selección "
+"individual o en grupo de objetos. El área de visualización debe estar en el "
+"modo de selección de objetos para crear selecciones nuevas, indicado por el "
+"cursor de flecha. El modo de selección de objetos se elije con el elemento "
+"de menú <guiseq><gui>Objetos</gui><gui>Seleccionar modo</gui></guiseq>, o "
+"con el comando correspondiente de la <gui>Barra de dibujo</gui>."
 
 #: C/select.page:38(title)
 msgid "Selecting a single object"
@@ -211,6 +217,14 @@ msgid ""
 "gui><gui>Select All</gui></guiseq> menu item. All objects in an aggregate "
 "object selection will be highlighted."
 msgstr ""
+"Se pueden seleccionar varios objetos seleccionando el primero de ellos y "
+"manteniendo pulsada la tecla <key>Ctrl</key> mientras selecciona los objetos "
+"adicionales. Se puede añadir objetos individuales a la selección existente "
+"en cualquier momento manteniendo pulsada la tecla <key>Ctrl</key> mientras "
+"selecciona los objetos que quiere. También puede seleccionar todos los "
+"objetos usando el elemento de menú <guiseq><gui>Editar</gui><gui>Seleccionar "
+"todo</gui></guiseq>. Todos los objetos de una selección agregada de objetos "
+"se resaltarán."
 
 #: C/select.page:60(title)
 msgid "Area selections"
@@ -356,7 +370,7 @@ msgstr ""
 
 #: C/printfile.page:38(title)
 msgid "The Labels Tab of the Print Dialog"
-msgstr "La pestaña «Etiquetas» del diálogo de impresión"
+msgstr "La pestaña «etiquetas» del diálogo de impresión"
 
 #: C/printfile.page:41(title)
 msgid "Print control (Simple)"
@@ -1255,6 +1269,10 @@ msgid ""
 "this directory. Older versions of the <app>gLabels</app><gui>Template "
 "Designer</gui> (prior to 3.0) would also put templates in this directory."
 msgstr ""
+"Las plantillas definidas por el usuario creadas manualmente se deben poner "
+"en esta carpeta. Las versiones del <gui>Diseñador de plantillas</gui> de "
+"<app>gLabels</app> (anteriores a 3.0) también pondrían plantillas en esta "
+"carpeta."
 
 #: C/mancreate.page:75(p)
 msgid ""
@@ -1262,6 +1280,10 @@ msgid ""
 "<link href=\"mailto:glabels-templates@lists.sourceforge.net\">mailing list</"
 "link> for possible inclusion in future versions of <app>gLabels</app>."
 msgstr ""
+"Los archivos de plantillas completadas se pueden enviar a la <link href="
+"\"mailto:glabels-templates@lists.sourceforge.net\">lista de correo</link> de "
+"plantillas de <app>gLabels</app>, para incluirlas posiblemente en versiones "
+"futuras de <app>gLabels</app>."
 
 #: C/mancreate.page:89(title)
 msgid "Assumptions/caveats"
@@ -1273,6 +1295,9 @@ msgid ""
 "than one size of item, it can be split into multiple templates for multiple "
 "pass printing)"
 msgstr ""
+"Una hoja contiene etiquetas o tarjetas de un sólo tamaño (si una hoja "
+"contiene más de un tamaño por elemento, se puede dividir el varias "
+"plantillas para imprimir en múltiples pasadas)"
 
 #: C/mancreate.page:97(p)
 msgid ""
@@ -1382,9 +1407,9 @@ msgid ""
 "code>, or <code translate=\"no\">Label-cd</code>)."
 msgstr ""
 "Un nodo <code translate=\"no\">Template</code> describe un único producto de "
-"papelería. Debe contener una instancia de cada tipo de nodo "
-"«Etiqueta» (<code translate=\"no\">Label-rectangle</code>, <code translate="
-"\"no\">Label-round</code>, o <code translate=\"no\">Label-cd</code>)."
+"papelería. Debe contener una instancia de cada tipo de nodo «Etiqueta» (<code "
+"translate=\"no\">Label-rectangle</code>, <code translate=\"no\">Label-round</"
+"code>, o <code translate=\"no\">Label-cd</code>)."
 
 #: C/mancreate.page:173(p) C/mancreate.page:301(p) C/mancreate.page:364(p)
 #: C/mancreate.page:415(p) C/mancreate.page:462(p) C/mancreate.page:535(p)
@@ -1445,8 +1470,8 @@ msgid ""
 "Translatable description of stationery product. E.g, \"Mailing Labels."
 "\" (Only useful for predefined templates)"
 msgstr ""
-"Descripción traducible para un producto de papelería. Por ejemplo, "
-"«Etiquetas de correo». (Útil sólo para plantillas predefinidas.)"
+"Descripción traducible para un producto de papelería. Por ejemplo, «Etiquetas "
+"de correo». (Útil sólo para plantillas predefinidas.)"
 
 #: C/mancreate.page:202(code) C/mancreate.page:311(code)
 #: C/mancreate.page:374(code) C/mancreate.page:480(code)
@@ -1513,6 +1538,11 @@ msgid ""
 "used by the <app>gLabels</app><gui>New Label Dialog</gui> to filter the "
 "results of template searches."
 msgstr ""
+"Una categoría para la plantilla. Una plantilla puede pertenecer a varias "
+"categorías simplemente añadiendo múltiples nodos <code translate=\"no"
+"\">Meta</code> al nodo <code translate=\"no\">Template</code> padre. El "
+"<gui>Diálogo de tarjeta nueva</gui> de <app>gLabels</app> usa las categorías "
+"de las plantillas para filtrar los resultados de búsquedas de plantillas."
 
 #: C/mancreate.page:251(p)
 msgid ""
@@ -1598,10 +1628,15 @@ msgid ""
 "developer's <link href=\"mailto:glabels-devel@lists.sourceforge.net"
 "\">mailing list</link>."
 msgstr ""
+"La sugerencias sobre categorías adicionales se pueden enviar a la <link href="
+"\"mailto:glabels-devel@lists.sourceforge.net\">lista de correo</link> de los "
+"desarrolladores de <app>gLabels</app>."
 
 #: C/mancreate.page:280(p)
 msgid "Product URLs may be of limited use, because they may not be permanent."
 msgstr ""
+"Los URL de productos deben ser de uso limitado, ya que pueden no ser "
+"permanentes."
 
 #: C/mancreate.page:293(title)
 msgid "<span translate=\"no\">Label-rectangle</span> Node"
@@ -1659,6 +1694,9 @@ msgid ""
 "Amount of horizontal waste (over-print) to allow. This is useful for "
 "minimizing alignment problems when using non-white backgrounds (e.g. images)."
 msgstr ""
+"Cantidad de residuos horizontales (sobreimpresión) que permitir. Esto es "
+"útil para minimizar problemas de alineación al usar fondos no blancos (ej. "
+"imágenes)."
 
 #: C/mancreate.page:330(code)
 #, no-wrap
@@ -1670,6 +1708,9 @@ msgid ""
 "Amount of vertical waste (over-print) to allow. This is useful for "
 "minimizing alignment problems when using non-white backgrounds (e.g. images)."
 msgstr ""
+"Cantidad de residuos verticales (sobreimpresión) que permitir. Esto es útil "
+"para minimizar problemas de alineación al usar fondos no blancos (ej. "
+"imágenes)."
 
 #: C/mancreate.page:339(desc) C/mancreate.page:341(p)
 msgid "<span translate=\"no\">Label-rectangle</span> parameters"
@@ -1706,6 +1747,8 @@ msgid ""
 "Amount of waste (over-print) to allow. This is useful for minimizing "
 "alignment problems when using non-white backgrounds (e.g. images)."
 msgstr ""
+"Cantidad de residuos (sobreimpresión) que permitir. Esto es útil para "
+"minimizar problemas de alineación al usar fondos no blancos (ej. imágenes)."
 
 #: C/mancreate.page:391(desc) C/mancreate.page:393(p)
 #: C/mancreate.page:438(desc) C/mancreate.page:440(p)
@@ -1764,12 +1807,16 @@ msgid ""
 "If present, the label is clipped to the given width. (Useful for \"business "
 "card CDs\")."
 msgstr ""
+"Si está presente, la etiqueta se recorta a la anchura dada. (Útil para "
+"«tarjetas de visita en CD»)."
 
 #: C/mancreate.page:486(p)
 msgid ""
 "If present, the label is clipped to the given height. (Useful for \"business "
 "card CDs\")."
 msgstr ""
+"Si está presente, la etiqueta se recorta a la altura dada. (Útil para "
+"«tarjetas de visita en CD»)."
 
 #: C/mancreate.page:499(desc)
 msgid "<span translate=\"no\">Label-cd</span> parameters"
@@ -1791,6 +1838,12 @@ msgid ""
 "margins, fold lines, center lines, special areas, or other helpful hints to "
 "the user of a template."
 msgstr ""
+"Las plantillas pueden contener nodos de marcado opcionales. Estos nodos se "
+"usan para describir un conjunto de líneas de marcado que son visibles en la "
+"ventana de dibujo de <app>glabels</app>, pero no son visibles cuando se "
+"imprime. Estas líneas pueden representar márgenes, líneas de plegado o de "
+"centrado, áreas especiales u otros indicios útiles para el usuario de una "
+"plantilla."
 
 #: C/mancreate.page:528(title)
 msgid "<span translate=\"no\">Markup-margin</span> Node"
@@ -1979,6 +2032,11 @@ msgid ""
 "running bond pattern, multiple <code translate=\"no\">Layout</code> tags can "
 "be used."
 msgstr ""
+"Un nodo de etiqueta puede contener varios hijos <code translate=\"no"
+"\">Layout</code>. Si las etiquetas se colocan en un patrón de rejilla, sólo "
+"se necesita un diseño. sin embargo, si las etiquetas se colocan en varias "
+"rejillas, como un patrón de unión, se pueden usar múltiples etiquetas <code "
+"translate=\"no\">Layout</code>."
 
 #: C/mancreate.page:721(p)
 msgid "A single label can always be treated as a grid of one."
@@ -2007,12 +2065,16 @@ msgid ""
 "Distance from left edge of sheet to the left edge of the left column of "
 "cards/labels in the layout."
 msgstr ""
+"Distancia desde el borde izquierdo de la hoja hasta el borde izquierdo de la "
+"columna de la izquierda de las tarjetas/etiquetas en la disposición."
 
 #: C/mancreate.page:746(p)
 msgid ""
 "Distance from the top edge of sheet to the top edge of the top row of labels/"
 "cards in the layout."
 msgstr ""
+"Distancia desde el borde superior de la hoja hasta el borde superior de la "
+"fila de arriba de las tarjetas/etiquetas en la disposición."
 
 #: C/mancreate.page:750(code)
 #, no-wrap
@@ -2188,6 +2250,14 @@ msgid ""
 "from an external data source, such as a CSV file or an <app>Evolution</app> "
 "address book."
 msgstr ""
+"<app>gLabels</app> se puede usar para diseñar etiquetas de dirección, de "
+"nombre, de precio, de CD/DVD o para cualquier otra cosa organizada según un "
+"patrón regular en una hoja de papel. Las etiquetas (o las tarjetas) pueden "
+"contener texto, imágenes, líneas, formas y códigos de barras. <app>gLabels</"
+"app> también incluye la característica de combinar documentos, que le "
+"permite imprimir una etiqueta única por cada registro de una fuente de datos "
+"externa, tal como un archivo CSV o una libreta de direcciones de "
+"<app>Evolution</app>."
 
 #: C/index.page:45(title) C/index.page:46(desc)
 msgid "<app>gLabels</app> main window"
@@ -2240,6 +2310,8 @@ msgid ""
 "The object editor will contain a subset of the following tabbed sections, "
 "depending on object type:"
 msgstr ""
+"El editor de objetos contendrá un subconjunto de las siguientes secciones en "
+"pestañas, dependiendo del tipo de objeto:"
 
 #: C/editprop.page:44(title)
 msgid "Text Tabbed Section (Text objects)"
@@ -2251,6 +2323,9 @@ msgid ""
 "object. It also contains a dropdown menu of available document merge keys, "
 "that can be inserted into text."
 msgstr ""
+"Esta sección contiene un pequeño editor para cambiar el contenido de un "
+"objeto de texto. También contiene un menú desplegable con las claves "
+"combinadas del documento disponibles, que se pueden insertar en el texto."
 
 #: C/editprop.page:53(title)
 msgid "Image Tabbed Section (Image objects)"
