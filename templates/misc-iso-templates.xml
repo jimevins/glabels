@@ -294,6 +294,25 @@
 
   <!-- ************************* -->
   <!--                           -->
+  <!-- Korres                    -->
+  <!--                           -->
+  <!-- ************************* -->
+
+  <!-- =================================================================== -->
+  <!-- Korres KPCV1: Business Cards, 50 x 90 mm, 10 per sheet              -->
+  <!-- =================================================================== -->
+  <Template brand="Korres" part="KPCV1" size="A4" _description="Business Cards">
+    <Meta category="card"/>
+    <Meta category="business-card"/>
+    <Label-rectangle id="0" width="90mm" height="50mm" round="0">
+      <Markup-margin size="1mm"/>
+      <Layout nx="2" ny="5" x0="15mm" y0="24mm" dx="90mm" dy="50mm"/>
+    </Label-rectangle>
+  </Template>
+
+
+  <!-- ************************* -->
+  <!--                           -->
   <!-- LeLabel                   -->
   <!--                           -->
   <!-- ************************* -->
