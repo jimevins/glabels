@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-30 16:16+0000\n"
-"PO-Revision-Date: 2011-03-09 15:35+0100\n"
+"POT-Creation-Date: 2011-03-09 18:46+0000\n"
+"PO-Revision-Date: 2011-03-16 16:36+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -406,6 +406,7 @@ msgstr "Línea de comandos"
 #: C/glabels.xml:178(para)
 msgid "Type <command>glabels</command>, then press <keycap>Return</keycap>:"
 msgstr ""
+"Escriba <command>glabels</command> y después pulse <keycap>Intro</keycap>."
 
 #: C/glabels.xml:186(title)
 msgid "When You Start <application>gLabels</application>"
@@ -416,11 +417,12 @@ msgid ""
 "When you start <application>gLabels</application>, the following window is "
 "displayed."
 msgstr ""
+"Al iniciar <application>gLabels</application>, se muestra la siguiente "
+"ventana."
 
 #: C/glabels.xml:191(title)
-#, fuzzy
 msgid "<application>gLabels</application> Start Up Window"
-msgstr "Ventana principal de <app>gLabels</app>"
+msgstr "Ventana de inicio de <application>gLabels</application>"
 
 #. for example, the items on the menubar and on the toolbar. This section is optional.
 #: C/glabels.xml:205(para)
@@ -428,6 +430,8 @@ msgid ""
 "The <application>gLabels</application> window contains the following "
 "elements:"
 msgstr ""
+"La ventana de <application>gLabels</application> contiene los elementos "
+"siguientes:"
 
 #: C/glabels.xml:209(term)
 msgid "Menubar."
@@ -438,6 +442,9 @@ msgid ""
 "The menus on the menubar contain all of the commands you need to create and "
 "edit labels and business cards in <application>gLabels</application>."
 msgstr ""
+"Los menús de la barra de menús contienen todos los comandos que necesita "
+"para crear y editar etiquetas y tarjetas de presentación en "
+"<application>gLabels</application>."
 
 #: C/glabels.xml:217(term)
 msgid "Main toolbar."
@@ -448,16 +455,21 @@ msgid ""
 "The main toolbar contains a subset of common File and Edit commands that you "
 "can access from the menubar."
 msgstr ""
+"La barra de herramientas principal contiene un subconjunto de los comandos "
+"comunes de «Archivo» y «Editar» a los que puede acceder desde la barra del "
+"menú."
 
 #: C/glabels.xml:224(term)
 msgid "Drawing toolbar."
-msgstr ""
+msgstr "Barra de herramientas de dibujo."
 
 #: C/glabels.xml:226(para)
 msgid ""
 "The drawing toolbar contains a subset of commands for editing the current "
 "<application>gLabels</application> document."
 msgstr ""
+"La barra de herramientas de dibujo contiene un subconjunto de comandos para "
+"editar el documento de <application>gLabels</application> actual."
 
 #: C/glabels.xml:231(term)
 msgid "Display area."
@@ -468,6 +480,8 @@ msgid ""
 "The display area is the main drawing interface to <application>gLabels</"
 "application>."
 msgstr ""
+"El área de visualización es la interfaz de dibujo principal de "
+"<application>gLabels</application>."
 
 #: C/glabels.xml:238(term)
 msgid "Object sidebar."
@@ -478,6 +492,8 @@ msgid ""
 "The object sidebar provides an interface for viewing and editing all "
 "properties of an individual object."
 msgstr ""
+"La barra lateral de objetos proporcionar una interfaz para ver y editar "
+"todas las propiedades de un objeto individual."
 
 #: C/glabels.xml:245(term)
 msgid "Properties toolbar."
@@ -488,6 +504,9 @@ msgid ""
 "The properties toolbar contains a set of tools to manipulate the properties "
 "of selected objects and set default properties for new objects."
 msgstr ""
+"La barra de herramientas de propiedades contiene un conjunto de herramientas "
+"para manipular las propiedades de los objetos seleccionados y establecer las "
+"propiedades de los objetos nuevos."
 
 #: C/glabels.xml:253(term)
 msgid "Statusbar."
@@ -498,6 +517,9 @@ msgid ""
 "The statusbar displays information about current <application>gLabels</"
 "application> activity and contextual information about the menu items."
 msgstr ""
+"La barra de estado muestra información acerca de la actividad actual de "
+"<application>gLabels</application> y también información contextual acerca "
+"de los elementos del menú."
 
 #: C/glabels.xml:271(title)
 msgid "Usage"
@@ -529,6 +551,8 @@ msgid ""
 "If your particular media type is missing from this dialog, see <xref linkend="
 "\"glabels-create-template\"/>"
 msgstr ""
+"Si su tipo de medio no aparece en este diálogo, consulte la <xref linkend="
+"\"glabels-create-template\"/>."
 
 #: C/glabels.xml:293(title)
 msgid "To Open a File"
@@ -2248,6 +2272,16 @@ msgid ""
 "additional <filename>*.template</filename> files in either of these "
 "directories."
 msgstr ""
+"Las plantillas predefinidas se definen en archivos XML ubicados en <filename>"
+"${prefix}/share/glabels/</filename>, donde <filename>${prefix}</filename> es "
+"habitualmente algo como <filename>/usr/local</filename> o <filename>/usr</"
+"filename>, dependiendo de la herramienta de configuración <filename>prefix</"
+"filename>. <application>gLabels</application> usará todos los archivos del "
+"tipo <filename>*-templates.xml</filename> o <filename>*.template</filename> "
+"que encuentre en <filename>${prefix}/share/glabels/</filename> y <filename>"
+"${HOME}/.glabels/</filename>. Se pueden añadir plantillas adicionales "
+"creando archivos <filename>*.template</filename> en cualquiera de estas "
+"carpetas."
 
 #: C/glabels.xml:1566(para)
 #, fuzzy
@@ -2412,11 +2446,8 @@ msgid "description"
 msgstr "description"
 
 #: C/glabels.xml:1668(para)
-#, fuzzy
 msgid "Description of stationary product. E.g, \"Mailing Labels.\""
-msgstr ""
-"Descripción de un producto de papelería. Por ejemplo, «Etiquetas de "
-"dirección»."
+msgstr "Descripción de un producto de papelería. Ej., «Etiquetas de dirección»."
 
 #: C/glabels.xml:1673(para)
 msgid "_description"
@@ -2449,7 +2480,7 @@ msgstr "Altura de la página. Sólo es válido si tamaño=«Otro»"
 
 #: C/glabels.xml:1699(title)
 msgid "Label-rectangle Node"
-msgstr ""
+msgstr "Nodo «Label-rectangle»"
 
 #: C/glabels.xml:1701(para)
 #, fuzzy
@@ -2517,13 +2548,12 @@ msgstr ""
 "imágenes)."
 
 #: C/glabels.xml:1763(title)
-#, fuzzy
 msgid "Label-rectangle Parameters"
-msgstr "Parámetros de la apariencia"
+msgstr "Preferencias de «Label-rectangle»"
 
 #: C/glabels.xml:1777(title)
 msgid "Label-round Node"
-msgstr ""
+msgstr "Nodo «Label-round»"
 
 #: C/glabels.xml:1779(para)
 #, fuzzy
@@ -2556,7 +2586,7 @@ msgstr ""
 
 #: C/glabels.xml:1822(title)
 msgid "Label-cd Node"
-msgstr ""
+msgstr "Nodo «Label-cd»"
 
 #: C/glabels.xml:1824(para)
 #, fuzzy
@@ -2601,7 +2631,7 @@ msgstr "Parámetros de etiqueta de CD"
 
 #: C/glabels.xml:1898(title)
 msgid "Markup-margin Node"
-msgstr ""
+msgstr "Nodo «Markup-margin»"
 
 #: C/glabels.xml:1900(para)
 #, fuzzy
@@ -2622,7 +2652,7 @@ msgstr ""
 
 #: C/glabels.xml:1932(title)
 msgid "Markup-line Node"
-msgstr ""
+msgstr "Nodo «Markup-line»"
 
 #: C/glabels.xml:1934(para)
 #, fuzzy
@@ -2667,7 +2697,7 @@ msgstr "coordenada Y del segundo punto final del segmento de línea."
 
 #: C/glabels.xml:1982(title)
 msgid "Markup-circle Node"
-msgstr ""
+msgstr "Nodo «Markup-circle»"
 
 #: C/glabels.xml:1984(para)
 #, fuzzy
@@ -2697,9 +2727,8 @@ msgid "Radius of circle."
 msgstr "Radio del círculo."
 
 #: C/glabels.xml:2025(title)
-#, fuzzy
 msgid "Markup-rect Node"
-msgstr "Metanodo"
+msgstr "Nodo «Markup-rect»"
 
 #: C/glabels.xml:2027(para)
 #, fuzzy
@@ -2741,9 +2770,8 @@ msgid "Radius of rounded corners of rectangle."
 msgstr "Radio de las esquinas redondeadas del rectángulo."
 
 #: C/glabels.xml:2080(title)
-#, fuzzy
 msgid "Layout Node"
-msgstr "Metanodo"
+msgstr "Nodo «Layout»"
 
 #: C/glabels.xml:2082(para)
 #, fuzzy
@@ -2822,6 +2850,9 @@ msgid ""
 "An <emphasis>Alias</emphasis> node provides the name of a product with the "
 "same size and layout characteristics as the parent template."
 msgstr ""
+"Un nodo <emphasis>Alias</emphasis> proporciona el nombre de un producto con "
+"el mismo tamaño y las mismas características de disposición que la plantilla "
+"padre."
 
 #: C/glabels.xml:2184(para)
 #, fuzzy
