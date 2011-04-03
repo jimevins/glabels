@@ -2,16 +2,16 @@
 # Spanish translation for glabels.
 # Copyright (C) 2010 glabels's COPYRIGHT HOLDER
 # This file is distributed under the same license as the glabels package.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011.
 # Jorge González <jorgegonz@svn.gnome.org>, 2010, 2011.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-22 19:44+0000\n"
-"PO-Revision-Date: 2011-02-27 14:40+0100\n"
-"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
+"POT-Creation-Date: 2011-02-27 13:42+0000\n"
+"PO-Revision-Date: 2011-04-03 16:37+0200\n"
+"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -975,10 +975,10 @@ msgstr ""
 "En <app>glabels</app> se ha creado un documento de <app>glabels</app> nuevo "
 "usando la plantilla «Etiquetas de dirección» Avery 5512.Ahora se usa el "
 "elemento de menú <guiseq><gui>Objetos</gui><gui>Mezclar propiedades</gui></"
-"guiseq> para mostrar el diálogo <gui>propiedades de combinación de "
-"datos<gui>. Se usa este diálogo para seleccionar el tipo de fuente (en este "
-"caso, CSV con claves en la línea 1) y la fuente de combinación (nombre de "
-"archivo) como se muestra."
+"guiseq> para mostrar el diálogo <gui>propiedades de combinación de datos</"
+"gui>. Se usa este diálogo para seleccionar el tipo de fuente (en este caso, "
+"CSV con claves en la línea 1) y la fuente de combinación (nombre de archivo) "
+"como se muestra."
 
 #. ==== End of Figure ====
 #: C/merge-ex2.page:57(p)
@@ -1085,7 +1085,7 @@ msgid ""
 msgstr ""
 "En este ejemplo se está organizando una fiesta de orientación para los "
 "nuevos miembros de la tripulación. Existe una lista de los miembros novatos "
-"de la tripulación que se ha creado en <app>gnumeric</ app> y exportado en el "
+"de la tripulación que se ha creado en <app>gnumeric</app> y exportado en el "
 "siguiente archivo CSV. Se podría haber creado este archivo utilizando un "
 "editor de texto, pero diablos, es el siglo XXIII."
 
@@ -1121,7 +1121,7 @@ msgstr ""
 "usando la plantilla «Etiquetas de nombre de placa» Avery 5395. Ahora se usa "
 "el elemento de menú <guiseq><gui>Objetos</gui><gui>Mezclar propiedades</"
 "gui></guiseq> para mostrar el diálogo <gui>propiedades de combinación de "
-"datos<gui>. Use este diálogo para seleccionar el tipo de fuente (en este "
+"datos</gui>. Use este diálogo para seleccionar el tipo de fuente (en este "
 "caso, CSV con claves en la línea 1) y la fuente de combinación (nombre de "
 "archivo) como se muestra."
 
