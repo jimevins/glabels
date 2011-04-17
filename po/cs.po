@@ -807,7 +807,7 @@ msgstr "Přenést dopředu"
 
 #: ../src/label.c:1284 ../src/ui.c:329
 msgid "Send to back"
-msgstr "Přenést dozadu"
+msgstr "Odsunout dozadu"
 
 #: ../src/label.c:1325
 msgid "Rotate"
