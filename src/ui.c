@@ -99,8 +99,8 @@ static GtkActionEntry entries[] = {
 	{ "ObjectsCreateMenu",       NULL, N_("_Create") },
 	{ "ObjectsOrderMenu",        NULL, N_("_Order") },
 	{ "ObjectsRotateFlipMenu",   NULL, N_("_Rotate/Flip") },
-	{ "ObjectsAlignHorizMenu",   NULL, N_("Align _Horizontal") },
-	{ "ObjectsAlignVertMenu",    NULL, N_("Align _Vertical") },
+	{ "ObjectsAlignMenu",        NULL, N_("_Alignment") },
+	{ "ObjectsCenterMenu",        NULL, N_("C_enter") },
 	{ "HelpMenu",                NULL, N_("_Help") },
 
 	/* Popup entries. */
@@ -366,6 +366,13 @@ static GtkActionEntry entries[] = {
 	  N_("Align objects to left edges"),
 	  G_CALLBACK (gl_ui_cmd_objects_align_left) },
 
+	{ "ObjectsAlignHCenter",
+	  "glabels-align-hcenter",
+	  N_("Align center"),
+	  NULL,
+	  N_("Align objects to horizontal centers"),
+	  G_CALLBACK (gl_ui_cmd_objects_align_hcenter) },
+
 	{ "ObjectsAlignRight",
 	  "glabels-align-right",
 	  N_("Align right"),
@@ -373,33 +380,26 @@ static GtkActionEntry entries[] = {
 	  N_("Align objects to right edges"),
 	  G_CALLBACK (gl_ui_cmd_objects_align_right) },
 
-	{ "ObjectsAlignHCenter",
-	  "glabels-align-hcenter",
-	  N_("Align horizontal center"),
-	  NULL,
-	  N_("Align objects to horizontal centers"),
-	  G_CALLBACK (gl_ui_cmd_objects_align_hcenter) },
-
 	{ "ObjectsAlignTop",
 	  "glabels-align-top",
-	  N_("Align tops"),
+	  N_("Align top"),
 	  NULL,
 	  N_("Align objects to top edges"),
 	  G_CALLBACK (gl_ui_cmd_objects_align_top) },
 
-	{ "ObjectsAlignBottom",
-	  "glabels-align-bottom",
-	  N_("Align bottoms"),
-	  NULL,
-	  N_("Align objects to bottom edges"),
-	  G_CALLBACK (gl_ui_cmd_objects_align_bottom) },
-
 	{ "ObjectsAlignVCenter",
 	  "glabels-align-vcenter",
-	  N_("Align vertical center"),
+	  N_("Align middle"),
 	  NULL,
 	  N_("Align objects to vertical centers"),
 	  G_CALLBACK (gl_ui_cmd_objects_align_vcenter) },
+
+	{ "ObjectsAlignBottom",
+	  "glabels-align-bottom",
+	  N_("Align bottom"),
+	  NULL,
+	  N_("Align objects to bottom edges"),
+	  G_CALLBACK (gl_ui_cmd_objects_align_bottom) },
 
 	{ "ObjectsCenterHorizontal",
 	  "glabels-center-horiz",
@@ -559,16 +559,17 @@ static const gchar *ui_info =
 "				<menuitem action='ObjectsFlipHorizontal' />"
 "				<menuitem action='ObjectsFlipVertical' />"
 "			</menu>"
-"			<menu action='ObjectsAlignHorizMenu'>"
+"			<menu action='ObjectsAlignMenu'>"
 "				<menuitem action='ObjectsAlignLeft' />"
 "				<menuitem action='ObjectsAlignHCenter' />"
 "				<menuitem action='ObjectsAlignRight' />"
-"				<menuitem action='ObjectsCenterHorizontal' />"
-"			</menu>"
-"			<menu action='ObjectsAlignVertMenu'>"
+"			        <separator />"
 "				<menuitem action='ObjectsAlignTop' />"
 "				<menuitem action='ObjectsAlignVCenter' />"
 "				<menuitem action='ObjectsAlignBottom' />"
+"			</menu>"
+"			<menu action='ObjectsCenterMenu'>"
+"				<menuitem action='ObjectsCenterHorizontal' />"
 "				<menuitem action='ObjectsCenterVertical' />"
 "			</menu>"
 "			<separator />"
@@ -621,16 +622,17 @@ static const gchar *ui_info =
 "			<menuitem action='ObjectsFlipHorizontal' />"
 "			<menuitem action='ObjectsFlipVertical' />"
 "		</menu>"
-"		<menu action='ObjectsAlignHorizMenu'>"
+"		<menu action='ObjectsAlignMenu'>"
 "			<menuitem action='ObjectsAlignLeft' />"
 "			<menuitem action='ObjectsAlignHCenter' />"
 "			<menuitem action='ObjectsAlignRight' />"
-"			<menuitem action='ObjectsCenterHorizontal' />"
-"		</menu>"
-"		<menu action='ObjectsAlignVertMenu'>"
+"			<separator />"
 "			<menuitem action='ObjectsAlignTop' />"
 "			<menuitem action='ObjectsAlignVCenter' />"
 "			<menuitem action='ObjectsAlignBottom' />"
+"		</menu>"
+"		<menu action='ObjectsCenterMenu'>"
+"			<menuitem action='ObjectsCenterHorizontal' />"
 "			<menuitem action='ObjectsCenterVertical' />"
 "		</menu>"
 "		<separator />"
@@ -667,26 +669,31 @@ static gchar* doc_verbs [] = {
 	"/ui/MenuBar/ViewMenu/ViewGrid",
 	"/ui/MenuBar/ViewMenu/ViewMarkup",
 	"/ui/MenuBar/ObjectsMenu/ObjectsArrowMode",
+	"/ui/MenuBar/ObjectsMenu/ObjectsCreateMenu",
 	"/ui/MenuBar/ObjectsMenu/ObjectsCreateMenu/ObjectsCreateText",
 	"/ui/MenuBar/ObjectsMenu/ObjectsCreateMenu/ObjectsCreateLine",
 	"/ui/MenuBar/ObjectsMenu/ObjectsCreateMenu/ObjectsCreateBox",
 	"/ui/MenuBar/ObjectsMenu/ObjectsCreateMenu/ObjectsCreateEllipse",
 	"/ui/MenuBar/ObjectsMenu/ObjectsCreateMenu/ObjectsCreateImage",
 	"/ui/MenuBar/ObjectsMenu/ObjectsCreateMenu/ObjectsCreateBarcode",
+	"/ui/MenuBar/ObjectsMenu/ObjectsOrderMenu",
 	"/ui/MenuBar/ObjectsMenu/ObjectsOrderMenu/ObjectsRaise",
 	"/ui/MenuBar/ObjectsMenu/ObjectsOrderMenu/ObjectsLower",
+	"/ui/MenuBar/ObjectsMenu/ObjectsRotateFlipMenu",
 	"/ui/MenuBar/ObjectsMenu/ObjectsRotateFlipMenu/ObjectsRotateLeft",
 	"/ui/MenuBar/ObjectsMenu/ObjectsRotateFlipMenu/ObjectsRotateRight",
 	"/ui/MenuBar/ObjectsMenu/ObjectsRotateFlipMenu/ObjectsFlipHorizontal",
 	"/ui/MenuBar/ObjectsMenu/ObjectsRotateFlipMenu/ObjectsFlipVertical",
-	"/ui/MenuBar/ObjectsMenu/ObjectsAlignHorizMenu/ObjectsAlignLeft",
-	"/ui/MenuBar/ObjectsMenu/ObjectsAlignHorizMenu/ObjectsAlignRight",
-	"/ui/MenuBar/ObjectsMenu/ObjectsAlignHorizMenu/ObjectsAlignHCenter",
-	"/ui/MenuBar/ObjectsMenu/ObjectsAlignHorizMenu/ObjectsCenterHorizontal",
-	"/ui/MenuBar/ObjectsMenu/ObjectsAlignVertMenu/ObjectsAlignTop",
-	"/ui/MenuBar/ObjectsMenu/ObjectsAlignVertMenu/ObjectsAlignBottom",
-	"/ui/MenuBar/ObjectsMenu/ObjectsAlignVertMenu/ObjectsAlignVCenter",
-	"/ui/MenuBar/ObjectsMenu/ObjectsAlignVertMenu/ObjectsCenterVertical",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignMenu",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignMenu/ObjectsAlignLeft",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignMenu/ObjectsAlignRight",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignMenu/ObjectsAlignHCenter",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignMenu/ObjectsAlignTop",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignMenu/ObjectsAlignBottom",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignMenu/ObjectsAlignVCenter",
+	"/ui/MenuBar/ObjectsMenu/ObjectsCenterMenu",
+	"/ui/MenuBar/ObjectsMenu/ObjectsCenterMenu/ObjectsCenterHorizontal",
+	"/ui/MenuBar/ObjectsMenu/ObjectsCenterMenu/ObjectsCenterVertical",
 	"/ui/MenuBar/ObjectsMenu/ObjectsMergeProperties",
 
 	NULL
@@ -709,14 +716,17 @@ static gchar* selection_verbs [] = {
 	"/ui/MenuBar/EditMenu/EditCopy",
 	"/ui/MenuBar/EditMenu/EditDelete",
 	"/ui/MenuBar/EditMenu/EditUnSelectAll",
+	"/ui/MenuBar/ObjectsMenu/ObjectsOrderMenu",
 	"/ui/MenuBar/ObjectsMenu/ObjectsOrderMenu/ObjectsRaise",
 	"/ui/MenuBar/ObjectsMenu/ObjectsOrderMenu/ObjectsLower",
+	"/ui/MenuBar/ObjectsMenu/ObjectsRotateFlipMenu",
 	"/ui/MenuBar/ObjectsMenu/ObjectsRotateFlipMenu/ObjectsRotateLeft",
 	"/ui/MenuBar/ObjectsMenu/ObjectsRotateFlipMenu/ObjectsRotateRight",
 	"/ui/MenuBar/ObjectsMenu/ObjectsRotateFlipMenu/ObjectsFlipHorizontal",
 	"/ui/MenuBar/ObjectsMenu/ObjectsRotateFlipMenu/ObjectsFlipVertical",
-	"/ui/MenuBar/ObjectsMenu/ObjectsAlignHorizMenu/ObjectsCenterHorizontal",
-	"/ui/MenuBar/ObjectsMenu/ObjectsAlignVertMenu/ObjectsCenterVertical",
+	"/ui/MenuBar/ObjectsMenu/ObjectsCenterMenu",
+	"/ui/MenuBar/ObjectsMenu/ObjectsCenterMenu/ObjectsCenterHorizontal",
+	"/ui/MenuBar/ObjectsMenu/ObjectsCenterMenu/ObjectsCenterVertical",
 
 	NULL
 };
@@ -727,12 +737,13 @@ static gchar* atomic_selection_verbs [] = {
 };
 
 static gchar* multi_selection_verbs [] = {
-	"/ui/MenuBar/ObjectsMenu/ObjectsAlignHorizMenu/ObjectsAlignLeft",
-	"/ui/MenuBar/ObjectsMenu/ObjectsAlignHorizMenu/ObjectsAlignRight",
-	"/ui/MenuBar/ObjectsMenu/ObjectsAlignHorizMenu/ObjectsAlignHCenter",
-	"/ui/MenuBar/ObjectsMenu/ObjectsAlignVertMenu/ObjectsAlignTop",
-	"/ui/MenuBar/ObjectsMenu/ObjectsAlignVertMenu/ObjectsAlignBottom",
-	"/ui/MenuBar/ObjectsMenu/ObjectsAlignVertMenu/ObjectsAlignVCenter",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignMenu",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignMenu/ObjectsAlignLeft",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignMenu/ObjectsAlignRight",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignMenu/ObjectsAlignHCenter",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignMenu/ObjectsAlignTop",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignMenu/ObjectsAlignBottom",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignMenu/ObjectsAlignVCenter",
 
 	NULL
 };
@@ -1155,11 +1166,11 @@ set_additional_properties (GtkUIManager *ui)
         menu = gtk_menu_item_get_submenu (GTK_MENU_ITEM (menu_item));
         descend_menu_set_always_show_image (GTK_MENU (menu));
 
-        menu_item = gtk_ui_manager_get_widget (ui, "/ContextMenu/ObjectsAlignHorizMenu/");
+        menu_item = gtk_ui_manager_get_widget (ui, "/ContextMenu/ObjectsAlignMenu/");
         menu = gtk_menu_item_get_submenu (GTK_MENU_ITEM (menu_item));
         descend_menu_set_always_show_image (GTK_MENU (menu));
 
-        menu_item = gtk_ui_manager_get_widget (ui, "/ContextMenu/ObjectsAlignVertMenu/");
+        menu_item = gtk_ui_manager_get_widget (ui, "/ContextMenu/ObjectsCenterMenu/");
         menu = gtk_menu_item_get_submenu (GTK_MENU_ITEM (menu_item));
         descend_menu_set_always_show_image (GTK_MENU (menu));
 }
