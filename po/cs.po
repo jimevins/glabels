@@ -1041,7 +1041,7 @@ msgstr "Text: Středníkem oddělené hodnoty s klíči na 1. řádku"
 
 #: ../src/merge-init.c:119
 msgid "Evolution Addressbook"
-msgstr "Adresáře aplikace Evolution"
+msgstr "Adresář aplikace Evolution"
 
 #: ../src/merge-init.c:125
 msgid "VCards"
