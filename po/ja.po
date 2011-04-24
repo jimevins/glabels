@@ -2,14 +2,15 @@
 # Copyright (C) 2001-2005,2007-2011 glabel's COPYRIGHT HOLDER
 # Takeshi Aihana <takeshi.aihana@gmail.com>, 2001-2005,2007-2010.
 # Takayoshi OKANO <kano@na.rim.or.jp>, 2011.
+# Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2011-04-03 14:39+0000\n"
-"PO-Revision-Date: 2010-05-11 23:01+0900\n"
-"Last-Translator: Takayoshi OKANO <kano@na.rim.or.jp>\n"
+"POT-Creation-Date: 2011-04-22 16:29+0000\n"
+"PO-Revision-Date: 2011-04-14 23:46+0900\n"
+"Last-Translator: Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -580,7 +581,7 @@ msgstr "カスタム色:"
 
 #: ../src/critical-error-handler.c:70
 msgid "gLabels Fatal Error!"
-msgstr "gLabels で致命的なエラーが発生しました！"
+msgstr "gLabels で致命的なエラーが発生しました!"
 
 #: ../src/file.c:84
 msgid "New Label or Card"
@@ -592,7 +593,7 @@ msgstr "ラベルのプロパティ"
 
 #: ../src/file.c:267 ../src/file.c:557
 msgid "All files"
-msgstr "全てのファイル"
+msgstr "すべてのファイル"
 
 #: ../src/file.c:272 ../src/file.c:562
 msgid "gLabels documents"
@@ -604,7 +605,7 @@ msgstr "ファイル名の入力欄が空です"
 
 #: ../src/file.c:322 ../src/file.c:338
 msgid "Please select a file or supply a valid file name"
-msgstr "既存のファイルを選択するか、または正しいファイル名を指定して下さい。"
+msgstr "既存のファイルを選択するか、または正しいファイル名を指定してください。"
 
 #: ../src/file.c:335
 msgid "File does not exist"
@@ -635,12 +636,12 @@ msgstr "\"%s\" に名前を付けて保存"
 
 #: ../src/file.c:623
 msgid "Please supply a valid file name"
-msgstr "正しいファイル名を指定して下さい"
+msgstr "正しいファイル名を指定してください"
 
 #: ../src/file.c:644
 #, c-format
 msgid "Overwrite file \"%s\"?"
-msgstr "ファイル \"%s\" に上書きしますか？"
+msgstr "ファイル \"%s\" に上書きしますか?"
 
 #: ../src/file.c:648
 msgid "File already exists."
@@ -649,7 +650,7 @@ msgstr "ファイルが既に存在します。"
 #: ../src/file.c:744
 #, c-format
 msgid "Save changes to document \"%s\" before closing?"
-msgstr "終了する前にドキュメント \"%s\" に対する変更点を保存しますか？"
+msgstr "終了する前にドキュメント \"%s\" に対する変更点を保存しますか?"
 
 #: ../src/file.c:748
 msgid "Your changes will be lost if you don't save them."
@@ -675,7 +676,7 @@ msgstr ""
 #: ../src/font-combo-menu.c:168
 #, fuzzy
 msgid "All fonts"
-msgstr "全てのファイル"
+msgstr "すべてのファイル"
 
 #.
 #. * Allow text samples to be localized.
@@ -872,23 +873,23 @@ msgstr "垂直方向にフリップする"
 msgid "Align left"
 msgstr "左寄せ"
 
-#: ../src/label.c:1560 ../src/ui.c:371
+#: ../src/label.c:1560 ../src/ui.c:378
 msgid "Align right"
 msgstr "右寄せ"
 
-#: ../src/label.c:1621 ../src/ui.c:378
+#: ../src/label.c:1621
 msgid "Align horizontal center"
 msgstr "中央寄せ (水平方向)"
 
-#: ../src/label.c:1697 ../src/ui.c:385
+#: ../src/label.c:1697
 msgid "Align tops"
 msgstr "上寄せ"
 
-#: ../src/label.c:1754 ../src/ui.c:392
+#: ../src/label.c:1754
 msgid "Align bottoms"
 msgstr "下寄せ"
 
-#: ../src/label.c:1815 ../src/ui.c:399
+#: ../src/label.c:1815
 msgid "Align vertical center"
 msgstr "中央寄せ (垂直方向)"
 
@@ -1032,8 +1033,8 @@ msgstr "最近開いたテンプレートはありません"
 #, fuzzy
 msgid "Try selecting a template in the \"Search all\" tab."
 msgstr ""
-"\"全てのテンプレートから検索する\" のページからテンプレートを一つ選択してみて"
-"下さい。"
+"\"すべてのテンプレートから検索する\" のページからテンプレートを一つ選択してみ"
+"てください。"
 
 #. Translators: "No match" means that for the given template search criteria, there
 #. * were no matches found.
@@ -1043,7 +1044,7 @@ msgstr "見つかりません"
 
 #: ../src/media-select.c:1085
 msgid "Try selecting a different brand, page size or category."
-msgstr "別のブランドや用紙の大きさ、またはカテゴリを指定してみて下さい。"
+msgstr "別のブランドや用紙の大きさ、またはカテゴリを指定してみてください。"
 
 #: ../src/media-select.c:1179
 #, fuzzy
@@ -1200,11 +1201,11 @@ msgstr "塗りつぶさない"
 
 #: ../src/object-editor-image-page.c:302
 msgid "All Files"
-msgstr "全てのファイル"
+msgstr "すべてのファイル"
 
 #: ../src/object-editor-image-page.c:307
 msgid "All Images"
-msgstr "全ての画像"
+msgstr "すべての画像"
 
 #: ../src/object-editor-image-page.c:323
 #, c-format
@@ -1287,7 +1288,7 @@ msgstr "gLabels テンプレート・デザイナ"
 msgid "Brand and part# match an existing template!"
 msgstr ""
 "<span foreground='red' weight='bold'>ブランド/製造元とパーツ番号が既存のテン"
-"プレートと同じです！</span>"
+"プレートと同じです!</span>"
 
 #. Menu entries.
 #: ../src/ui.c:91
@@ -1335,12 +1336,14 @@ msgid "_Rotate/Flip"
 msgstr "回転/フリップ(_R)"
 
 #: ../src/ui.c:102
-msgid "Align _Horizontal"
-msgstr "水平方向に配置(_H)"
+#, fuzzy
+msgid "_Alignment"
+msgstr "位置:"
 
 #: ../src/ui.c:103
-msgid "Align _Vertical"
-msgstr "垂直方向に配置(_V)"
+#, fuzzy
+msgid "C_enter"
+msgstr "中央"
 
 #: ../src/ui.c:104
 msgid "_Help"
@@ -1423,11 +1426,11 @@ msgstr "終了(_Q)"
 msgid "Quit the program"
 msgstr "gLabels を終了します"
 
-#: ../src/ui.c:178 ../src/ui.c:180 ../src/ui.c:965
+#: ../src/ui.c:178 ../src/ui.c:180 ../src/ui.c:976
 msgid "Undo"
 msgstr ""
 
-#: ../src/ui.c:185 ../src/ui.c:187 ../src/ui.c:972
+#: ../src/ui.c:185 ../src/ui.c:187 ../src/ui.c:983
 msgid "Redo"
 msgstr ""
 
@@ -1457,15 +1460,15 @@ msgstr "選択したオブジェクトを削除します"
 
 #: ../src/ui.c:220
 msgid "Select All"
-msgstr "全て選択"
+msgstr "すべて選択"
 
 #: ../src/ui.c:222
 msgid "Select all objects"
-msgstr "全てのオブジェクトを選択します"
+msgstr "すべてのオブジェクトを選択します"
 
 #: ../src/ui.c:227
 msgid "Un-select All"
-msgstr "全て選択解除"
+msgstr "すべて選択解除"
 
 #: ../src/ui.c:229
 msgid "Remove all selections"
@@ -1581,25 +1584,45 @@ msgstr "オブジェクトを垂直方向にひっくり返します"
 msgid "Align objects to left edges"
 msgstr "オブジェクトを左端に配置します"
 
+#: ../src/ui.c:371
+#, fuzzy
+msgid "Align center"
+msgstr "左寄せ"
+
 #: ../src/ui.c:373
+msgid "Align objects to horizontal centers"
+msgstr "オブジェクトを水平方向の中心に配置します"
+
+#: ../src/ui.c:380
 msgid "Align objects to right edges"
 msgstr "オブジェクトを右端に配置します"
 
-#: ../src/ui.c:380
-msgid "Align objects to horizontal centers"
-msgstr "オブジェクトを水平方向の中心に配置します"
+#: ../src/ui.c:385
+#, fuzzy
+msgid "Align top"
+msgstr "上寄せ"
 
 #: ../src/ui.c:387
 msgid "Align objects to top edges"
 msgstr "オブジェクトを上端に配置します"
 
-#: ../src/ui.c:394
-msgid "Align objects to bottom edges"
-msgstr "オブジェクトを下端に配置します"
+#: ../src/ui.c:392
+#, fuzzy
+msgid "Align middle"
+msgstr "左寄せ"
 
-#: ../src/ui.c:401
+#: ../src/ui.c:394
 msgid "Align objects to vertical centers"
 msgstr "オブジェクトを垂直方向の中心に配置します"
+
+#: ../src/ui.c:399
+#, fuzzy
+msgid "Align bottom"
+msgstr "下寄せ"
+
+#: ../src/ui.c:401
+msgid "Align objects to bottom edges"
+msgstr "オブジェクトを下端に配置します"
 
 #: ../src/ui.c:408
 msgid "Center objects to horizontal label center"
@@ -1680,7 +1703,7 @@ msgstr "補足のクレジットについては AUTHORS ファイルをご覧に
 #: ../src/ui-commands.c:1145
 #, fuzzy
 msgid "or visit http://glabels.org/"
-msgstr "または http://glabels.sourceforge.net/ を訪れてみて下さい。"
+msgstr "または http://glabels.sourceforge.net/ を訪れてみてください。"
 
 #: ../src/ui-commands.c:1162
 msgid "A label and business card creation program.\n"
@@ -1712,11 +1735,11 @@ msgstr ""
 "\n"
 "このプログラムが役に立つことを望む中で配布されていますが、完全無保証です。\n"
 "販売目的または商用目的の保証はありません。\n"
-"詳細については GNU 一般公衆使用許諾契約書をご覧下さい。\n"
+"詳細については GNU 一般公衆使用許諾契約書をご覧ください。\n"
 
 #: ../src/warning-handler.c:69
 msgid "gLabels Error!"
-msgstr "gLabels のエラーです！"
+msgstr "gLabels のエラーです!"
 
 #: ../src/window.c:281
 msgid "(none) - gLabels"
@@ -1843,7 +1866,7 @@ msgstr "<b>レコードの選択/プレビュー</b>"
 
 #: ../data/ui/merge-properties-dialog.ui.h:4
 msgid "Select all"
-msgstr "全て選択"
+msgstr "すべて選択"
 
 #: ../data/ui/merge-properties-dialog.ui.h:5
 #, fuzzy
@@ -1852,7 +1875,7 @@ msgstr "<b>ソース</b>"
 
 #: ../data/ui/merge-properties-dialog.ui.h:6
 msgid "Unselect all"
-msgstr "全て選択解除"
+msgstr "すべて選択解除"
 
 #: ../data/ui/media-select.ui.h:1
 msgid "Brand:"
@@ -1879,7 +1902,7 @@ msgstr ""
 #: ../data/ui/media-select.ui.h:6
 #, fuzzy
 msgid "Search all"
-msgstr "全て選択"
+msgstr "すべて選択"
 
 #: ../data/ui/new-label-dialog.ui.h:1
 msgid ""
@@ -2114,11 +2137,11 @@ msgstr "ポイント"
 
 #: ../data/ui/prefs-dialog.ui.h:15
 msgid "Select default properties for new objects."
-msgstr "新規に作成するオブジェクトのデフォルト値を選択して下さい。"
+msgstr "新規に作成するオブジェクトのデフォルト値を選択してください。"
 
 #: ../data/ui/prefs-dialog.ui.h:16
 msgid "Select locale specific behavior."
-msgstr "利用する言語 (ロケール) に依存するパラメータを選択して下さい。"
+msgstr "利用する言語 (ロケール) に依存するパラメータを選択してください。"
 
 #: ../data/ui/prefs-dialog.ui.h:18 ../templates/paper-sizes.xml.h:35
 msgid "US Letter"
@@ -2241,10 +2264,10 @@ msgid ""
 "Otherwise, you may click \"Cancel\" to abandon your design\n"
 "or \"Back\" to continue editing this design."
 msgstr ""
-"おめでとうございます！\n"
+"おめでとうございます!\n"
 "\n"
 "gLabels のテンプレートが完成しました。\n"
-"このデザインを採用し保存する場合は、[適用] をクリックして下さい。\n"
+"このデザインを採用し保存する場合は、[適用] をクリックしてください。\n"
 "\n"
 "[キャンセル] をクリックするとデザインを破棄することができます。\n"
 "または [戻る] をクリックするとやり直すことが可能です。"
@@ -2274,7 +2297,7 @@ msgid ""
 "Most templates only need one layout, as in the first example.\n"
 "The second example illustrates when two layouts are needed."
 msgstr ""
-"何個のラベルをテンプレートの中に作成しますか？\n"
+"何個のラベルをテンプレートの中に作成しますか?\n"
 "\n"
 "レイアウトはラベルまたはカードの集まりで、それらを格子状に配置することができ"
 "ます。\n"
@@ -2312,31 +2335,32 @@ msgstr "レイアウトの数:"
 msgid ""
 "Please enter the following identifying information about the template "
 "stationery."
-msgstr "テンプレートの識別情報を入力して下さい:"
+msgstr "テンプレートの識別情報を入力してください:"
 
 #: ../data/ui/template-designer.ui.h:49
 msgid "Please enter the following layout information."
-msgstr "レイアウト情報を入力して下さい。"
+msgstr "レイアウト情報を入力してください。"
 
 #: ../data/ui/template-designer.ui.h:50
 msgid ""
 "Please enter the following size parameters of a single label in your "
 "template."
-msgstr "テンプレートのラベル単体の大きさをそれぞれ入力して下さい。"
+msgstr "テンプレートのラベル単体の大きさをそれぞれ入力してください。"
 
 #: ../data/ui/template-designer.ui.h:51
 msgid ""
 "Please enter the following size parameters of a single label or card in your "
 "template."
-msgstr "テンプレートのラベルまたはカード単体の大きさをそれぞれ入力して下さい。"
+msgstr ""
+"テンプレートのラベルまたはカード単体の大きさをそれぞれ入力してください。"
 
 #: ../data/ui/template-designer.ui.h:52
 msgid "Please select the basic shape of the labels or cards."
-msgstr "ラベルまたはカードの基本的な形状を選択して下さい。"
+msgstr "ラベルまたはカードの基本的な形状を選択してください。"
 
 #: ../data/ui/template-designer.ui.h:53
 msgid "Please select the page size of the template stationery."
-msgstr "テンプレート用紙の大きさを選択して下さい。"
+msgstr "テンプレート用紙の大きさを選択してください。"
 
 #: ../data/ui/template-designer.ui.h:54
 msgid "Print test sheet"
@@ -2563,52 +2587,52 @@ msgstr "プロパティ・ツールバーにツールチップを表示します
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:30
 #, fuzzy
 msgid "The default color of text for new text objects (0xRRGGBBAA)."
-msgstr "新規に作成するオブジェクトのデフォルト値を選択して下さい。"
+msgstr "新規に作成するオブジェクトのデフォルト値を選択してください。"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:31
 #, fuzzy
 msgid "The default fill color new objects (0xRRGGBBAA)."
-msgstr "新規に作成するオブジェクトのデフォルト値を選択して下さい。"
+msgstr "新規に作成するオブジェクトのデフォルト値を選択してください。"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:32
 #, fuzzy
 msgid "The default font family for new text objects."
-msgstr "新規に作成するオブジェクトのデフォルト値を選択して下さい。"
+msgstr "新規に作成するオブジェクトのデフォルト値を選択してください。"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:33
 #, fuzzy
 msgid "The default font italic state for new text objects."
-msgstr "新規に作成するオブジェクトのデフォルト値を選択して下さい。"
+msgstr "新規に作成するオブジェクトのデフォルト値を選択してください。"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:34
 #, fuzzy
 msgid "The default font size for new text objects."
-msgstr "新規に作成するオブジェクトのデフォルト値を選択して下さい。"
+msgstr "新規に作成するオブジェクトのデフォルト値を選択してください。"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:35
 #, fuzzy
 msgid "The default font weight for new text objects."
-msgstr "新規に作成するオブジェクトのデフォルト値を選択して下さい。"
+msgstr "新規に作成するオブジェクトのデフォルト値を選択してください。"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:36
 #, fuzzy
 msgid "The default line color new objects (0xRRGGBBAA)."
-msgstr "新規に作成するオブジェクトのデフォルト値を選択して下さい。"
+msgstr "新規に作成するオブジェクトのデフォルト値を選択してください。"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:37
 #, fuzzy
 msgid "The default line spacing for new text objects."
-msgstr "新規に作成するオブジェクトのデフォルト値を選択して下さい。"
+msgstr "新規に作成するオブジェクトのデフォルト値を選択してください。"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:38
 #, fuzzy
 msgid "The default line width for new objects."
-msgstr "新規に作成するオブジェクトのデフォルト値を選択して下さい。"
+msgstr "新規に作成するオブジェクトのデフォルト値を選択してください。"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:39
 #, fuzzy
 msgid "The default text alignment for new text objects."
-msgstr "新規に作成するオブジェクトのデフォルト値を選択して下さい。"
+msgstr "新規に作成するオブジェクトのデフォルト値を選択してください。"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:40
 msgid "The default unit of measurement."
@@ -3528,9 +3552,8 @@ msgstr ""
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:46
-#, fuzzy
 msgid "Name plates"
-msgstr "name_page"
+msgstr ""
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:48
@@ -3597,6 +3620,12 @@ msgstr "長方形のコピー機のラベル"
 #: ../templates/zweckform-iso-templates.xml.h:30
 msgid "Video Labels (back)"
 msgstr "ビデオのラベル (裏側)"
+
+#~ msgid "Align _Horizontal"
+#~ msgstr "水平方向に配置(_H)"
+
+#~ msgid "Align _Vertical"
+#~ msgstr "垂直方向に配置(_V)"
 
 #~ msgid "Couldn't construct query"
 #~ msgstr "クエリを構築できませんでした"
@@ -3670,9 +3699,6 @@ msgstr "ビデオのラベル (裏側)"
 #~ msgid "Bottoms"
 #~ msgstr "下部"
 
-#~ msgid "Centers"
-#~ msgstr "中央"
-
 #~ msgid "Label Ce_nter"
 #~ msgstr "ラベルの中心(_N)"
 
@@ -3704,7 +3730,7 @@ msgstr "ビデオのラベル (裏側)"
 #~ msgstr "gLabels 0.4 形式からインポートする"
 
 #~ msgid "Unknown glabels Namespace -- Using %s"
-#~ msgstr "glabels の名前空間が不明です -- %s を利用して下さい"
+#~ msgstr "glabels の名前空間が不明です -- %s を利用してください"
 
 #~ msgid "bad node in Document node =  \"%s\""
 #~ msgstr "Document ノードにおかしな root のノード = \"%s\""
@@ -3735,7 +3761,7 @@ msgstr "ビデオのラベル (裏側)"
 #~ "Missing required \"brand\" or \"part\" attribute, trying deprecated name."
 #~ msgstr ""
 #~ "必須となる \"ブランド名\" や \"パート番号\" といった属性が見つかりません "
-#~ "(廃止した名前を試してみて下さい)"
+#~ "(廃止した名前を試してみてください)"
 
 #~ msgid "Name attribute also missing."
 #~ msgstr "名前も見つかりません"
@@ -3922,7 +3948,7 @@ msgstr "ビデオのラベル (裏側)"
 #~ msgstr "start_page"
 
 #~ msgid "Search all templates"
-#~ msgstr "全てのテンプレートから検索する"
+#~ msgstr "すべてのテンプレートから検索する"
 
 #~ msgid "%s: option `%s' is ambiguous\n"
 #~ msgstr "%s: オプションの `%s` はあいまいです\n"
