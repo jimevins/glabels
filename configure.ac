@@ -4,9 +4,9 @@ dnl Process this file with autoconf to produce a configure script.
 dnl ---------------------------------------------------------------------------
 dnl - GLABELS version
 dnl ---------------------------------------------------------------------------
-m4_define([glabels_major_version], [2])
-m4_define([glabels_minor_version], [3])
-m4_define([glabels_micro_version], [1])
+m4_define([glabels_major_version], [3])
+m4_define([glabels_minor_version], [0])
+m4_define([glabels_micro_version], [0])
 
 m4_define([glabels_version],
           [glabels_major_version.glabels_minor_version.glabels_micro_version])
@@ -376,7 +376,3 @@ Optional barcode backends:
 
 
 "
-
-
-cat ${srcdir}/MESSAGE-OF-DOOM
-

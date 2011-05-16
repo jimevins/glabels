@@ -27,8 +27,7 @@ EXTRA_DIST = \
 	intltool-update.in \
 	gnome-doc-utils.make \
 	glabels.spec.in \
-	glabels.spec \
-	MESSAGE-OF-DOOM
+	glabels.spec
 
 DISTCLEANFILES = gnome-doc-utils.make
 
