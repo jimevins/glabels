@@ -1,7 +1,7 @@
 Copyright
 =========
 
-   Copyright (C) 2001-2009 Jim Evins
+   Copyright (C) 2001-2011 Jim Evins
 
    gLabels contains components copyrighted by others -- see the 'AUTHORS' file
    in this directory.
@@ -22,8 +22,8 @@ cards using a laser or ink-jet printer.
 System Requirements
 ===================
 
-GLIB+-2.18.x
-GTK+-2.14.x
+GLIB+-2.28.x
+GTK+-3.0.x
 LIBXML-2.7.x
 
 All of these libraries are available as part of Gnome 2.16
@@ -39,7 +39,7 @@ Optional Barcode Backends
 GNU Barcode 0.98+ (http://www.gnu.org/software/barcode/barcode.html)
 QREncode 3.1.0+   (http://megaui.net/fukuchi/works/qrencode/index.en.html)
 IEC16022 0.2.4+   (http://datenfreihafen.org/projects/iec16022.html)
-
+LIBZINT  2.4.0+   (http://www.zint.org.uk)
 
 
 Author and Acknowledgments:
