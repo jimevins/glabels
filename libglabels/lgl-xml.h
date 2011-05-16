@@ -26,7 +26,7 @@
 
 #include "lgl-units.h"
 
-#define LGL_XML_NAME_SPACE "http://glabels.org/xmlns/2.3/"
+#define LGL_XML_NAME_SPACE "http://glabels.org/xmlns/3.0/"
 
 G_BEGIN_DECLS
 
