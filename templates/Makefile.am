@@ -3,7 +3,7 @@
 dtddir = $(datadir)/$(LIBGLABELS_BRANCH)/dtd
 
 dtd_DATA = \
-	glabels-2.3.dtd
+	glabels-3.0.dtd
 
 templatesdir = $(datadir)/$(LIBGLABELS_BRANCH)/templates
 
