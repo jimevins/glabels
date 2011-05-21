@@ -3,7 +3,7 @@
 # Olivier Berger <oberger@gnu.org>
 #
 # Florent Morel <florent@taket.org>, 2001, 2004.
-# Claude Paroz <claude@2xlibre.net>, 2007-2011.
+# Claude Paroz <claude@2xlibre.net>, 2007-2010.
 # Bruno Brouard <annoa.b@gmail.com>, 2010.
 # Gérard Baylard <Geodebay@gmail.com>, 2010.
 #
@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2011-04-17 04:00+0000\n"
-"PO-Revision-Date: 2011-05-05 09:10+0200\n"
-"Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
+"POT-Creation-Date: 2010-12-22 13:29+0000\n"
+"PO-Revision-Date: 2011-01-02 21:12+0100\n"
+"Last-Translator: Gérard Baylard <Geodebay@gmail.com>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -837,23 +837,23 @@ msgstr "Retourner verticalement"
 msgid "Align left"
 msgstr "Aligner à gauche"
 
-#: ../src/label.c:1560 ../src/ui.c:378
+#: ../src/label.c:1560 ../src/ui.c:371
 msgid "Align right"
 msgstr "Aligner à droite"
 
-#: ../src/label.c:1621
+#: ../src/label.c:1621 ../src/ui.c:378
 msgid "Align horizontal center"
 msgstr "Aligner horizontalement les centres"
 
-#: ../src/label.c:1697
+#: ../src/label.c:1697 ../src/ui.c:385
 msgid "Align tops"
 msgstr "Aligner les sommets"
 
-#: ../src/label.c:1754
+#: ../src/label.c:1754 ../src/ui.c:392
 msgid "Align bottoms"
 msgstr "Aligner les bases"
 
-#: ../src/label.c:1815
+#: ../src/label.c:1815 ../src/ui.c:399
 msgid "Align vertical center"
 msgstr "Aligner verticalement les centres"
 
@@ -1285,12 +1285,12 @@ msgid "_Rotate/Flip"
 msgstr "_Rotation/Retournement"
 
 #: ../src/ui.c:102
-msgid "_Alignment"
-msgstr "_Alignement"
+msgid "Align _Horizontal"
+msgstr "Aligner _horizontalement"
 
 #: ../src/ui.c:103
-msgid "C_enter"
-msgstr "C_entrer"
+msgid "Align _Vertical"
+msgstr "Aligner _verticalement"
 
 #: ../src/ui.c:104
 msgid "_Help"
@@ -1373,11 +1373,11 @@ msgstr "_Quitter"
 msgid "Quit the program"
 msgstr "Quitte le programme"
 
-#: ../src/ui.c:178 ../src/ui.c:180 ../src/ui.c:976
+#: ../src/ui.c:178 ../src/ui.c:180 ../src/ui.c:965
 msgid "Undo"
 msgstr "Annuler"
 
-#: ../src/ui.c:185 ../src/ui.c:187 ../src/ui.c:983
+#: ../src/ui.c:185 ../src/ui.c:187 ../src/ui.c:972
 msgid "Redo"
 msgstr "Rétablir"
 
@@ -1532,41 +1532,25 @@ msgstr "Retourne l'objet verticalement"
 msgid "Align objects to left edges"
 msgstr "Aligne les côtés gauches des objets"
 
-#: ../src/ui.c:371
-msgid "Align center"
-msgstr "Aligner au centre"
-
 #: ../src/ui.c:373
-msgid "Align objects to horizontal centers"
-msgstr "Aligne horizontalement les centres des objets"
-
-#: ../src/ui.c:380
 msgid "Align objects to right edges"
 msgstr "Aligne les côtés droits des objets"
 
-#: ../src/ui.c:385
-msgid "Align top"
-msgstr "Aligner au sommet"
+#: ../src/ui.c:380
+msgid "Align objects to horizontal centers"
+msgstr "Aligne horizontalement les centres des objets"
 
 #: ../src/ui.c:387
 msgid "Align objects to top edges"
 msgstr "Aligne les sommets des objets"
 
-#: ../src/ui.c:392
-msgid "Align middle"
-msgstr "Aligner au milieu"
-
 #: ../src/ui.c:394
-msgid "Align objects to vertical centers"
-msgstr "Aligne verticalement les centres des objets"
-
-#: ../src/ui.c:399
-msgid "Align bottom"
-msgstr "Aligner à la base"
-
-#: ../src/ui.c:401
 msgid "Align objects to bottom edges"
 msgstr "Aligne les bases des objets"
+
+#: ../src/ui.c:401
+msgid "Align objects to vertical centers"
+msgstr "Aligne verticalement les centres des objets"
 
 #: ../src/ui.c:408
 msgid "Center objects to horizontal label center"
@@ -2833,7 +2817,6 @@ msgstr "Cartes de visite"
 #: ../templates/jac-iso-templates.xml.h:2
 #: ../templates/misc-us-templates.xml.h:8
 #: ../templates/misc-iso-templates.xml.h:10
-#: ../templates/misc-other-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:24
 #: ../templates/worldlabel-us-templates.xml.h:2
 #: ../templates/zweckform-iso-templates.xml.h:12
@@ -3049,10 +3032,6 @@ msgstr "Étiquettes postales 62x100 mm"
 msgid "Standard Address Labels 29mm x 90mm"
 msgstr "Étiquettes d'adresse standard 29x90 mm"
 
-#: ../templates/brother-other-templates.xml.h:21
-msgid "Standard Address Labels 38mm x 90mm"
-msgstr "Étiquettes d'adresse standard 38x90 mm"
-
 #. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:6
 #: ../templates/misc-iso-templates.xml.h:8
@@ -3145,7 +3124,7 @@ msgstr "Cartes de salutations"
 
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:21
-#: ../templates/misc-other-templates.xml.h:4
+#: ../templates/misc-other-templates.xml.h:2
 msgid "Multi-Purpose Labels"
 msgstr "Étiquettes multi-usages"
 
