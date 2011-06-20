@@ -7,6 +7,7 @@
   <info>
     <link type="guide" xref="index#advanced"/>
     <revision pkgversion="3.0" version="0.1" date="2010-05-04" status="incomplete"/>
+    <revision pkgversion="3.0.1" version="0.1" date="2011-06-20" status="incomplete"/>
     <desc>
       Create your templates manually.
     </desc>
@@ -717,6 +718,33 @@
       one layout is needed.  However, if labels are arranged in multiple
       grids, such as a running bond pattern, multiple
       <code its:translate="no">Layout</code> tags can be used. </p>
+    <p>A common example for multiple layouts is a sheet with three
+       CD labels:</p>
+
+    <!-- ==== Figure ==== -->
+    <figure>
+      <desc>CD label sheet</desc>
+      <media type="image" src="figures/layouts-cdlabel.png" mime="image/png" style="right">
+        <p>CD label sheet</p>
+      </media>
+    </figure>
+    <!-- ==== End of Figure ==== -->
+
+    <p>The two labels on the left edge can be assigned to a grid, assuming we
+       can define the coordinates for the top left label and the distance to
+       the second label properly. The distance to the left edge is common to
+       these labels. The third one on the right edge has no common distance
+       values with the other ones, that's why we have to define a second layout,
+       with unique coordinates for the top left corner of that label.</p>
+
+	<note style="tip">
+	<p>You can define multiple layouts only if the labels on the sheet
+        have the same shape. If your sheet contains different shapes, you have
+        to define each shape in another template seperately. Future versions
+        of <app>gLabels</app> will probably be able to concatenate such sheets
+        with different shapes within a single template.</p>
+      </note>
+
 	<note style="tip">
 	<p>A single label can always be treated as a grid of one.</p>
       </note>
