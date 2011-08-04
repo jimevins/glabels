@@ -239,6 +239,7 @@ data/schemas/org.gnome.glabels-3.gschema.xml.in.in
 [type: gettext/xml]templates/jac-iso-templates.xml
 [type: gettext/xml]templates/maco-us-templates.xml
 [type: gettext/xml]templates/meritline-us-templates.xml
+[type: gettext/xml]templates/microapp-templates.xml
 [type: gettext/xml]templates/misc-us-templates.xml
 [type: gettext/xml]templates/misc-iso-templates.xml
 [type: gettext/xml]templates/misc-other-templates.xml
