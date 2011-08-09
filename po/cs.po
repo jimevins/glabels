@@ -8,10 +8,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: glabels\n"
+"Project-Id-Version: glabels 3.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2011-04-17 04:00+0000\n"
-"PO-Revision-Date: 2011-04-17 10:26+0200\n"
+"POT-Creation-Date: 2011-08-04 10:50+0000\n"
+"PO-Revision-Date: 2011-08-09 09:42+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1270,12 +1270,10 @@ msgid "_Rotate/Flip"
 msgstr "_Otočit/Překlopit"
 
 #: ../src/ui.c:102
-#| msgid "Alignment:"
 msgid "_Alignment"
 msgstr "Z_arovnání"
 
 #: ../src/ui.c:103
-#| msgid "Centers"
 msgid "C_enter"
 msgstr "Na stř_ed"
 
@@ -1519,7 +1517,6 @@ msgid "Align objects to left edges"
 msgstr "Zarovnat objekty levou hranou"
 
 #: ../src/ui.c:371
-#| msgid "Align left"
 msgid "Align center"
 msgstr "Zarovnat na střed"
 
@@ -1532,7 +1529,6 @@ msgid "Align objects to right edges"
 msgstr "Zarovnat objekty pravou hranou"
 
 #: ../src/ui.c:385
-#| msgid "Align tops"
 msgid "Align top"
 msgstr "Zarovnat nahoru"
 
@@ -1541,7 +1537,6 @@ msgid "Align objects to top edges"
 msgstr "Zarovnat objekty horní hranou"
 
 #: ../src/ui.c:392
-#| msgid "Align left"
 msgid "Align middle"
 msgstr "Zarovnat doprostřed"
 
@@ -1550,7 +1545,6 @@ msgid "Align objects to vertical centers"
 msgstr "Zarovnat objekty svisle na střed"
 
 #: ../src/ui.c:399
-#| msgid "Align bottoms"
 msgid "Align bottom"
 msgstr "Zarovnat dolů"
 
@@ -3240,6 +3234,12 @@ msgid "Mini-CD Labels"
 msgstr "Etikety na Mini-CD"
 
 #. ===================================================================
+#: ../templates/microapp-templates.xml.h:2
+#| msgid "Rectangular Labels"
+msgid "Standard Labels"
+msgstr "Standardní etikety"
+
+#. ===================================================================
 #: ../templates/misc-us-templates.xml.h:2
 msgid "Business Card CD"
 msgstr "Vizitkové CD"
@@ -3478,159 +3478,3 @@ msgstr "Obdélníkové etikety do kopírky"
 #: ../templates/zweckform-iso-templates.xml.h:30
 msgid "Video Labels (back)"
 msgstr "Video etikety (zadní strana)"
-
-#~ msgid "Align _Horizontal"
-#~ msgstr "Zarovnat _vodorovně"
-
-#~ msgid "Align _Vertical"
-#~ msgstr "Zarovnat _svisle"
-
-#~ msgid "Couldn't construct query"
-#~ msgstr "Nelze sestavit dotaz"
-
-#~ msgid "Couldn't open addressbook."
-#~ msgstr "Nelze otevřít adresář."
-
-#~ msgid "Couldn't list available fields."
-#~ msgstr "Nelze vytvořit seznam dostupných polí."
-
-#~ msgid "Couldn't get contacts."
-#~ msgstr "Nelze získat kontakt."
-
-#~ msgid "Bad root node = \"%s\""
-#~ msgstr "Neplatný kořenový uzel = „%s“"
-
-#~ msgid "bad node =  \"%s\""
-#~ msgstr "neplatný uzel = „%s“"
-
-#~ msgid "xmlParseFile error"
-#~ msgstr "chyba xmlParseFile"
-
-#~ msgid "No document root"
-#~ msgstr "Schází kořen dokumentu"
-
-#~ msgid "Importing from glabels 0.1 format"
-#~ msgstr "Importuje se z formátu glabels verze 0.1"
-
-#~ msgid "Importing from glabels 0.4 format"
-#~ msgstr "Importuje se z formátu glabels verze 0.4"
-
-#~ msgid "Unknown glabels Namespace -- Using %s"
-#~ msgstr "Neznámý jmenný prostor pro gLabels -- použije se %s"
-
-#~ msgid "bad node in Document node =  \"%s\""
-#~ msgstr "neplatný uzel v uzlu Document = „%s“"
-
-#~ msgid "bad node in Data node =  \"%s\""
-#~ msgstr "neplatný uzel v uzlu Data = „%s“"
-
-#~ msgid "Unknown embedded file format: \"%s\""
-#~ msgstr "Neznámý formát vloženého souboru: „%s“"
-
-#~ msgid "Utf8 conversion error."
-#~ msgstr "Chyba při převodu UTF-8"
-
-#~ msgid "Problem saving xml file."
-#~ msgstr "Problém při ukládání do souboru xml."
-
-#~ msgid "Equivalent part (\"%s\") for \"%s\", not previously defined."
-#~ msgstr "Odpovídající část („%s“) pro „%s“ nebyla doposud definována."
-
-#~ msgid "Missing name or brand/part attributes."
-#~ msgstr "Schází atributy název nebo značka/produkt."
-
-#~ msgid "Unknown page size id \"%s\", trying as name"
-#~ msgstr "Neznámé ID velikosti papíru „%s“, zkusí se použít jako název"
-
-#~ msgid "Unknown page size id or name \"%s\""
-#~ msgstr "Neznámé ID nebo název velikosti stránky „%s“"
-
-#~ msgid "Forward references not supported."
-#~ msgstr "Dopředné odkazy nejsou podporovány."
-
-#~ msgid ""
-#~ "Missing required \"brand\" or \"part\" attribute, trying deprecated name."
-#~ msgstr ""
-#~ "Schází vyžadované atributy „značka“ nebo „produkt“, zkouší se použít "
-#~ "nepřípustný název."
-
-#~ msgid "Name attribute also missing."
-#~ msgstr "Schází také název atributu."
-
-#~ msgid "Mailing Labels-2 columns"
-#~ msgstr "Poštovní etikety - 2 sloupce"
-
-#~ msgid "Mailing Labels-3 columns"
-#~ msgstr "Poštovní etikety - 3 sloupce"
-
-#~ msgid "_Select Mode"
-#~ msgstr "Režim _výběru"
-
-#~ msgid "_Text"
-#~ msgstr "_Text"
-
-#~ msgid "_Line"
-#~ msgstr "Čár_a"
-
-#~ msgid "_Box"
-#~ msgstr "O_bdélník"
-
-#~ msgid "_Ellipse"
-#~ msgstr "_Elipsa"
-
-#~ msgid "_Image"
-#~ msgstr "Obrá_zek"
-
-#~ msgid "Bar_code"
-#~ msgstr "Čárový _kód"
-
-#~ msgid "_Merge Properties"
-#~ msgstr "Vlastnosti _slučování"
-
-#~ msgid "Object _Properties"
-#~ msgstr "Vlastnosti _objektu"
-
-#~ msgid "Bring to _Front"
-#~ msgstr "Přenést do_předu"
-
-#~ msgid "Send to _Back"
-#~ msgstr "Přenést do_zadu"
-
-#~ msgid "Rotate _Left"
-#~ msgstr "Otočit do_leva"
-
-#~ msgid "Rotate _Right"
-#~ msgstr "Otočit do_prava"
-
-#~ msgid "Flip _Horizontally"
-#~ msgstr "Překlopit _vodorovně"
-
-#~ msgid "Flip _Vertically"
-#~ msgstr "Překlopit _svisle"
-
-#~ msgid "_Lefts"
-#~ msgstr "Do_leva"
-
-#~ msgid "_Rights"
-#~ msgstr "Dop_rava"
-
-#~ msgid "_Centers"
-#~ msgstr "Na_střed"
-
-#~ msgid "_Tops"
-#~ msgstr "Na_horu"
-
-#~ msgid "Bottoms"
-#~ msgstr "_Dolů"
-
-#~ msgid "Label Ce_nter"
-#~ msgstr "Stře_d etikety"
-
-#~ msgid "Linked"
-#~ msgstr "Svázáno"
-
-#~ msgid "Not Linked"
-#~ msgstr "Nesvázáno"
-
-#~ msgid "glabels"
-#~ msgstr "glabels"
