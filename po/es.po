@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2011-04-17 04:00+0000\n"
-"PO-Revision-Date: 2011-04-29 17:53+0200\n"
+"POT-Creation-Date: 2011-08-04 10:49+0000\n"
+"PO-Revision-Date: 2011-08-13 17:38+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1267,12 +1267,10 @@ msgid "_Rotate/Flip"
 msgstr "_Rotar/Voltear"
 
 #: ../src/ui.c:102
-#| msgid "Alignment:"
 msgid "_Alignment"
 msgstr "_Alineación"
 
 #: ../src/ui.c:103
-#| msgid "Centers"
 msgid "C_enter"
 msgstr "C_entrar"
 
@@ -1516,7 +1514,6 @@ msgid "Align objects to left edges"
 msgstr "Alinear objetos por su lado izquierdo"
 
 #: ../src/ui.c:371
-#| msgid "Align left"
 msgid "Align center"
 msgstr "Alinear al centro"
 
@@ -1529,7 +1526,6 @@ msgid "Align objects to right edges"
 msgstr "Alinear objetos por su lado derecho"
 
 #: ../src/ui.c:385
-#| msgid "Align tops"
 msgid "Align top"
 msgstr "Alinear por parte superior"
 
@@ -1538,7 +1534,6 @@ msgid "Align objects to top edges"
 msgstr "Alinear objetos por su parte superior"
 
 #: ../src/ui.c:392
-#| msgid "Align left"
 msgid "Align middle"
 msgstr "Alinear al medio"
 
@@ -1547,7 +1542,6 @@ msgid "Align objects to vertical centers"
 msgstr "Alinear objetos por su centro vertical"
 
 #: ../src/ui.c:399
-#| msgid "Align bottoms"
 msgid "Align bottom"
 msgstr "Alinear por parte inferior"
 
@@ -3249,6 +3243,12 @@ msgstr "Etiquetas de PVC"
 #: ../templates/meritline-us-templates.xml.h:8
 msgid "Mini-CD Labels"
 msgstr "Etiquetas Mini-CD"
+
+#. ===================================================================
+#: ../templates/microapp-templates.xml.h:2
+#| msgid "Rectangular Labels"
+msgid "Standard Labels"
+msgstr "Etiquetas estándar"
 
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:2
