@@ -1,5 +1,5 @@
 # German translation of glabels.
-# Copyright (C) 2001-2009 Jim Evins <evins@snaught.com>
+# Copyright (C) 2001-2011 Jim Evins <evins@snaught.com>
 # Marcus Bauer <m@7n7.de>, 2001.
 # Christian Neumair <christian-neumair@web.de>, 2002.
 # Mario Blättermann <mariobl@freenet.de>, 2008-2011.
@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2011-04-17 04:00+0000\n"
-"PO-Revision-Date: 2011-04-17 13:05+0100\n"
+"POT-Creation-Date: 2011-08-04 10:50+0000\n"
+"PO-Revision-Date: 2011-08-19 12:27+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@freenet.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -3243,6 +3243,11 @@ msgstr "PVC-Etiketten"
 #: ../templates/meritline-us-templates.xml.h:8
 msgid "Mini-CD Labels"
 msgstr "Mini-CD-Etiketten"
+
+#. ===================================================================
+#: ../templates/microapp-templates.xml.h:2
+msgid "Standard Labels"
+msgstr "Standardetiketten"
 
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:2
