@@ -1,4 +1,4 @@
-# Norwegian Bokmal translation of glabels.
+# Norwegian bokmål translation of glabels.
 # Copyright (C) 2007 Free Software Foundation
 # This file is distributed under the same license as the glabels package.
 #
@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-18 18:48+0200\n"
-"PO-Revision-Date: 2011-07-18 19:14+0200\n"
+"POT-Creation-Date: 2011-08-26 16:06+0200\n"
+"PO-Revision-Date: 2011-08-26 16:18+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: nb\n"
@@ -798,11 +798,11 @@ msgstr "Slett"
 
 #: ../src/label.c:1248 ../src/ui.c:322
 msgid "Bring to front"
-msgstr ""
+msgstr "Hent frem"
 
 #: ../src/label.c:1284 ../src/ui.c:329
 msgid "Send to back"
-msgstr ""
+msgstr "Send til bakgrunnen"
 
 #: ../src/label.c:1325
 msgid "Rotate"
@@ -940,7 +940,7 @@ msgstr "Tekstfarge"
 
 #: ../src/label-text.c:933
 msgid "Auto shrink"
-msgstr ""
+msgstr "Krymp automatisk"
 
 #: ../src/media-select.c:358 ../src/media-select.c:361
 #: ../src/media-select.c:506 ../src/media-select.c:723
@@ -951,7 +951,7 @@ msgstr "Alle"
 #: ../src/media-select.c:365 ../src/media-select.c:893
 msgctxt "Page size"
 msgid "Any"
-msgstr ""
+msgstr "Enhver"
 
 #: ../src/media-select.c:372 ../src/media-select.c:375
 #: ../src/media-select.c:902
@@ -1524,27 +1524,24 @@ msgid "Align objects to right edges"
 msgstr ""
 
 #: ../src/ui.c:385
-#, fuzzy
 msgid "Align top"
-msgstr "Juster til venstre"
+msgstr "Toppjuster"
 
 #: ../src/ui.c:387
 msgid "Align objects to top edges"
 msgstr ""
 
 #: ../src/ui.c:392
-#, fuzzy
 msgid "Align middle"
-msgstr "Juster til venstre"
+msgstr "Midtjuster"
 
 #: ../src/ui.c:394
 msgid "Align objects to vertical centers"
 msgstr ""
 
 #: ../src/ui.c:399
-#, fuzzy
 msgid "Align bottom"
-msgstr "Juster til venstre"
+msgstr "Juster nederst"
 
 #: ../src/ui.c:401
 msgid "Align objects to bottom edges"
@@ -1652,9 +1649,14 @@ msgid ""
 "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
 "GNU General Public License for more details.\n"
 msgstr ""
-"gLabels er fri programvare. Du kan redistribuere og/eller endre programmet under betingelsene gitt i GNU General Public License som utgitt av Free Software Foundation; enten versjon 3 av lisensen, eller (hvis du ønsker det) enhver senere versjon.\n"
+"gLabels er fri programvare. Du kan redistribuere og/eller endre programmet "
+"under betingelsene gitt i GNU General Public License som utgitt av Free "
+"Software Foundation; enten versjon 3 av lisensen, eller (hvis du ønsker det) "
+"enhver senere versjon.\n"
 "\n"
-"gLabels distribueres i håp om at programmet er nyttig, men UTEN NOEN GARANTI, ikke engang implisitt garanti om at det er SALGBART eller PASSER ET BESTEMT FORMÅL. Se GNU General Public License for detaljer.\n"
+"gLabels distribueres i håp om at programmet er nyttig, men UTEN NOEN "
+"GARANTI, ikke engang implisitt garanti om at det er SALGBART eller PASSER ET "
+"BESTEMT FORMÅL. Se GNU General Public License for detaljer.\n"
 
 #: ../src/warning-handler.c:69
 msgid "gLabels Error!"
@@ -2732,9 +2734,8 @@ msgstr ""
 #: ../templates/pearl-iso-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:1
 #: ../templates/zweckform-iso-templates.xml.h:2
-#, fuzzy
 msgid "Address Labels"
-msgstr "Adressebok"
+msgstr "Adresseetiketter"
 
 #. ===================================================================
 #. ============================================================
@@ -3081,9 +3082,8 @@ msgstr ""
 
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:23
-#, fuzzy
 msgid "Passport photo labels"
-msgstr "Om glabels"
+msgstr "Etiketter for passfoto"
 
 #. ===================================================================
 #. ====================================================================
@@ -3091,9 +3091,8 @@ msgstr "Om glabels"
 #: ../templates/geha-iso-templates.xml.h:25
 #: ../templates/hama-iso-templates.xml.h:23
 #: ../templates/pearl-iso-templates.xml.h:50
-#, fuzzy
 msgid "Photo labels"
-msgstr "Om glabels"
+msgstr "Fotoetiketter"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:4
@@ -3200,6 +3199,12 @@ msgid "Mini-CD Labels"
 msgstr ""
 
 #. ===================================================================
+#: ../templates/microapp-templates.xml.h:2
+#, fuzzy
+msgid "Standard Labels"
+msgstr "Rektangulære etiketter"
+
+#. ===================================================================
 #: ../templates/misc-us-templates.xml.h:2
 msgid "Business Card CD"
 msgstr ""
@@ -3270,9 +3275,8 @@ msgstr ""
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:4
 #: ../templates/pearl-iso-templates.xml.h:6
-#, fuzzy
 msgid "Bottle labels"
-msgstr "Om glabels"
+msgstr "Flaskeetiketter"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:14
@@ -3307,9 +3311,8 @@ msgstr ""
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:34
-#, fuzzy
 msgid "Universal Labels"
-msgstr "Adressebok"
+msgstr "Universelle etiketter"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:4
