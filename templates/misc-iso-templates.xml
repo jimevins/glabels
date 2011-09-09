@@ -15,6 +15,17 @@
   <!-- ************************* -->
 
   <!-- =================================================================== -->
+  <!-- Agipa 114036: Rectangulars Labels, 48.5 x 18.5 mm, 16 per A5 sheet  -->
+  <!-- =================================================================== -->
+  <Template brand="Agipa" part="114036" size="A5" _description="Rectangular Labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Label-rectangle id="0" width="18.5mm" height="48.5mm" round="10">
+      <Layout nx="7" ny="4" x0="4mm" y0="2mm" dx="20mm" dy="49mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
   <!-- Agipa 119488: Business Cards, 50 x 90 mm, 10 per sheet              -->
   <!-- =================================================================== -->
   <Template brand="Agipa" part="119488" size="A4" _description="Business Cards">
