@@ -146,7 +146,7 @@ gl_cairo_rect_label_path (cairo_t           *cr,
 
         if ( r == 0.0 )
         {
-                cairo_rectangle (cr, -x_waste, -y_waste, w+x_waste, h+y_waste);
+                cairo_rectangle (cr, -x_waste, -y_waste, w+2*x_waste, h+2*y_waste);
         }
         else
         {
