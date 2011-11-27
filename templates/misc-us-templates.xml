@@ -237,29 +237,6 @@
     </Label-round>
   </Template>
 
-  <!-- ******************************************************************** -->
-  <!-- ******************************************************************** -->
-  <!--                                                                      -->
-  <!-- SheetLabels, Inc.                                                    -->
-  <!--                                                                      -->
-  <!-- ******************************************************************** -->
-  <!-- ******************************************************************** -->
-
-  <!-- =================================================================== -->
-  <!-- SheetLabels: CD/DVD Labels (face only), 3 per sheet         	   -->
-  <!-- =================================================================== -->
-  <Template brand="SheetLabels" part="SL113" size="US-Letter" _description="CD/DVD Labels">
-    <Meta category="label"/>
-    <Meta category="media"/>
-    <Meta product_url="http://www.sheet-labels.com/labels/SL113"/>
-    <Label-cd id="0" radius="166.5pt" hole="58.5pt" waste="9pt">
-      <Markup-margin size="9pt"/>
-      <Layout nx="1" ny="1" x0="0.7cm" y0="0.7cm" dx="0pt" dy="0cm"/>
-      <Layout nx="1" ny="1" x0="9.4cm" y0="8.25cm" dx="0pt" dy="0pt"/>
-      <Layout nx="1" ny="1" x0="0.7cm" y0="15.8cm" dx="0pt" dy="0cm"/>
-    </Label-cd>
-  </Template>
-
 
   <!-- ************************* -->
   <!--                           -->
