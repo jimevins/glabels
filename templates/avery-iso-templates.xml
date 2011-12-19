@@ -42,6 +42,22 @@
   <Template brand="Avery" part="L6145" equiv="L4770"/>
   <Template brand="Avery" part="L7654" equiv="L4770"/>
 
+  <!-- =================================================================== -->
+  <!-- Avery L4785 family: Name Badges, 10 per sheet                       -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="L4785" size="A4" _description="Self-Adhesive Name Badges (Acetate Silk)">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.avery.co.uk/avery/en_gb/Products/Naming/Self-Adhesive-Name-Badges/White-self-adhesive-name-badges_L4785_20.htm"/>
+    <Label-rectangle id="0" width="80mm" height="50mm" round="4mm" x_waste="7.5mm" y_waste="2.5mm">
+      <Markup-margin size="1mm"/>
+      <Layout nx="2" ny="5" x0="18mm" y0="13mm" dx="95mm" dy="55mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <Template brand="Avery" part="L4784" equiv="L4785"/>
+  <Template brand="Avery" part="L4786" equiv="L4785"/>
+  <Template brand="Avery" part="L4787" equiv="L4785"/>
 
   <!-- =================================================================== -->
   <!-- Avery L6015 family: CD/DVD Labels, 2 per sheet                      -->
