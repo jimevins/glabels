@@ -2,15 +2,15 @@
 # Copyright (C) 2001-2011 Jim Evins <evins@snaught.com>
 # Marcus Bauer <m@7n7.de>, 2001.
 # Christian Neumair <christian-neumair@web.de>, 2002.
-# Mario Blättermann <mariobl@freenet.de>, 2008-2011.
+# Mario Blättermann <mario.blaettermann@gmail.com>, 2008-2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2011-08-04 10:50+0000\n"
-"PO-Revision-Date: 2011-08-19 12:27+0100\n"
-"Last-Translator: Mario Blättermann <mariobl@freenet.de>\n"
+"POT-Creation-Date: 2011-12-19 19:27+0000\n"
+"PO-Revision-Date: 2011-12-28 22:01+0100\n"
+"Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1650,7 +1650,7 @@ msgid "translator-credits"
 msgstr ""
 "Marcus Bauer <m@7n7.de>\n"
 "Christian Neumair <christian-neumair@web.de>\n"
-"Mario Blättermann <mariobl@freenet.de>"
+"Mario Blättermann <mario.blaettermann@gmail.com>"
 
 #: ../src/ui-commands.c:1169
 msgid ""
@@ -2781,6 +2781,7 @@ msgstr "Etiketten für Videokassetten (Schmalseite)"
 #: ../templates/maco-us-templates.xml.h:2
 #: ../templates/meritline-us-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:2
+#: ../templates/sheetlabels-us-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:1
 #: ../templates/zweckform-iso-templates.xml.h:2
 msgid "Address Labels"
@@ -2816,6 +2817,7 @@ msgstr "Visitenkarten"
 #: ../templates/misc-iso-templates.xml.h:10
 #: ../templates/misc-other-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:24
+#: ../templates/sheetlabels-us-templates.xml.h:4
 #: ../templates/worldlabel-us-templates.xml.h:2
 #: ../templates/zweckform-iso-templates.xml.h:12
 msgid "CD/DVD Labels"
@@ -2823,6 +2825,7 @@ msgstr "CD/DVD-Etiketten"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:8
+#: ../templates/sheetlabels-us-templates.xml.h:6
 msgid "CD/DVD Labels (Disc Labels)"
 msgstr "CD/DVD-Etiketten (Medienaufkleber)"
 
@@ -2835,6 +2838,7 @@ msgstr "CD/DVD-Etiketten (Spine Labels)"
 #: ../templates/avery-us-templates.xml.h:12
 #: ../templates/avery-iso-templates.xml.h:16
 #: ../templates/meritline-us-templates.xml.h:4
+#: ../templates/sheetlabels-us-templates.xml.h:8
 #: ../templates/worldlabel-us-templates.xml.h:3
 msgid "Diskette Labels"
 msgstr "Diskettenaufkleber"
@@ -2853,6 +2857,7 @@ msgstr "Aktenordner-Etiketten"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:18
+#: ../templates/sheetlabels-us-templates.xml.h:10
 #: ../templates/worldlabel-us-templates.xml.h:5
 msgid "Filing Labels"
 msgstr "Ordneretiketten"
@@ -2894,6 +2899,7 @@ msgstr "Postkarten"
 #: ../templates/avery-us-templates.xml.h:32
 #: ../templates/dymo-other-templates.xml.h:12
 #: ../templates/meritline-us-templates.xml.h:10
+#: ../templates/sheetlabels-us-templates.xml.h:12
 #: ../templates/worldlabel-us-templates.xml.h:8
 msgid "Return Address Labels"
 msgstr "Rückantwort-Adressaufkleber"
@@ -2903,6 +2909,7 @@ msgstr "Rückantwort-Adressaufkleber"
 #: ../templates/maco-us-templates.xml.h:3
 #: ../templates/meritline-us-templates.xml.h:12
 #: ../templates/misc-us-templates.xml.h:30
+#: ../templates/sheetlabels-us-templates.xml.h:14
 #: ../templates/worldlabel-us-templates.xml.h:9
 msgid "Round Labels"
 msgstr "Runde Etiketten"
@@ -2912,6 +2919,7 @@ msgstr "Runde Etiketten"
 #: ../templates/avery-us-templates.xml.h:36
 #: ../templates/dataline-iso-templates.xml.h:10
 #: ../templates/meritline-us-templates.xml.h:14
+#: ../templates/sheetlabels-us-templates.xml.h:16
 #: ../templates/uline-us-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Shipping Labels"
@@ -2936,6 +2944,7 @@ msgstr "Klappkarten"
 #: ../templates/avery-us-templates.xml.h:44
 #: ../templates/geha-iso-templates.xml.h:27
 #: ../templates/meritline-us-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:18
 #: ../templates/worldlabel-us-templates.xml.h:11
 msgid "Video Tape Face Labels"
 msgstr "Etiketten für Videokassetten (Vorderseite)"
@@ -2998,6 +3007,11 @@ msgstr "Mini-Etiketten"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:32
+msgid "Self-Adhesive Name Badges (Acetate Silk)"
+msgstr "Selbstklebende Namensschilder (Acetatseide)"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:34
 msgid "Shipping labels"
 msgstr "Versandaufkleber"
 
