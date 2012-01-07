@@ -4,14 +4,14 @@
 #
 # David Makovský (Yakeen) <yakeen@sannyas-on.net>, 2005.
 # Zbynek Mrkvicka <zbynek@oachot.cz>, 2005.
-# Marek Černocký <marek@manet.cz>, 2009, 2010, 2011.
+# Marek Černocký <marek@manet.cz>, 2009, 2010, 2011, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 3.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2011-08-04 10:50+0000\n"
-"PO-Revision-Date: 2011-08-09 09:42+0200\n"
+"POT-Creation-Date: 2012-01-04 17:44+0000\n"
+"PO-Revision-Date: 2012-01-07 10:20+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -2770,6 +2770,7 @@ msgstr "Etikety na hřbet videokazet"
 #: ../templates/maco-us-templates.xml.h:2
 #: ../templates/meritline-us-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:2
+#: ../templates/sheetlabels-us-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:1
 #: ../templates/zweckform-iso-templates.xml.h:2
 msgid "Address Labels"
@@ -2805,6 +2806,7 @@ msgstr "Vizitky"
 #: ../templates/misc-iso-templates.xml.h:10
 #: ../templates/misc-other-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:24
+#: ../templates/sheetlabels-us-templates.xml.h:4
 #: ../templates/worldlabel-us-templates.xml.h:2
 #: ../templates/zweckform-iso-templates.xml.h:12
 msgid "CD/DVD Labels"
@@ -2812,6 +2814,7 @@ msgstr "Etikety na CD/DVD"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:8
+#: ../templates/sheetlabels-us-templates.xml.h:6
 msgid "CD/DVD Labels (Disc Labels)"
 msgstr "Etikety na CD/DVD (diskové etikety)"
 
@@ -2824,6 +2827,7 @@ msgstr "Etikety na CD/DVD (hřbetní etikety)"
 #: ../templates/avery-us-templates.xml.h:12
 #: ../templates/avery-iso-templates.xml.h:16
 #: ../templates/meritline-us-templates.xml.h:4
+#: ../templates/sheetlabels-us-templates.xml.h:8
 #: ../templates/worldlabel-us-templates.xml.h:3
 msgid "Diskette Labels"
 msgstr "Etikety na diskety"
@@ -2842,6 +2846,7 @@ msgstr "Etikety na složky"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:18
+#: ../templates/sheetlabels-us-templates.xml.h:10
 #: ../templates/worldlabel-us-templates.xml.h:5
 msgid "Filing Labels"
 msgstr "Etikety na kartotéky"
@@ -2883,6 +2888,7 @@ msgstr "Pohlednice"
 #: ../templates/avery-us-templates.xml.h:32
 #: ../templates/dymo-other-templates.xml.h:12
 #: ../templates/meritline-us-templates.xml.h:10
+#: ../templates/sheetlabels-us-templates.xml.h:12
 #: ../templates/worldlabel-us-templates.xml.h:8
 msgid "Return Address Labels"
 msgstr "Zpáteční adresa"
@@ -2892,6 +2898,7 @@ msgstr "Zpáteční adresa"
 #: ../templates/maco-us-templates.xml.h:3
 #: ../templates/meritline-us-templates.xml.h:12
 #: ../templates/misc-us-templates.xml.h:30
+#: ../templates/sheetlabels-us-templates.xml.h:14
 #: ../templates/worldlabel-us-templates.xml.h:9
 msgid "Round Labels"
 msgstr "Kulaté etikety"
@@ -2901,6 +2908,7 @@ msgstr "Kulaté etikety"
 #: ../templates/avery-us-templates.xml.h:36
 #: ../templates/dataline-iso-templates.xml.h:10
 #: ../templates/meritline-us-templates.xml.h:14
+#: ../templates/sheetlabels-us-templates.xml.h:16
 #: ../templates/uline-us-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Shipping Labels"
@@ -2925,6 +2933,7 @@ msgstr "Přáníčka"
 #: ../templates/avery-us-templates.xml.h:44
 #: ../templates/geha-iso-templates.xml.h:27
 #: ../templates/meritline-us-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:18
 #: ../templates/worldlabel-us-templates.xml.h:11
 msgid "Video Tape Face Labels"
 msgstr "Etikety na čelní stranu videokazety"
@@ -2987,6 +2996,11 @@ msgstr "Mini etikety"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:32
+msgid "Self-Adhesive Name Badges (Acetate Silk)"
+msgstr "Samolepicí nášivky na jméno (acetátové hedvábí)"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:34
 msgid "Shipping labels"
 msgstr "Přepravní etikety"
 
@@ -3235,7 +3249,6 @@ msgstr "Etikety na Mini-CD"
 
 #. ===================================================================
 #: ../templates/microapp-templates.xml.h:2
-#| msgid "Rectangular Labels"
 msgid "Standard Labels"
 msgstr "Standardní etikety"
 
