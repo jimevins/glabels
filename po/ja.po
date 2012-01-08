@@ -5,15 +5,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels glabels-3_0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-21 14:31+0900\n"
-"PO-Revision-Date: 2011-05-21 14:30+0900\n"
-"Last-Translator: Takeshi AIHANA <takeshi.aihana@gmail.com>\n"
+"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
+"POT-Creation-Date: 2011-12-28 21:06+0000\n"
+"PO-Revision-Date: 2012-01-01 22:50+0900\n"
+"Last-Translator: Jiro Matsuzawa <jmatsuzawa@src.gnome.org>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
-"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
 
 #: ../src/bc-backends.c:81
 msgid "Built-in"
@@ -1330,7 +1330,7 @@ msgstr "ドキュメントのプロパティを修正します"
 
 #: ../src/ui.c:155
 msgid "Template _Designer..."
-msgstr "テンプレート・デザイナ(_D)..."
+msgstr "テンプレート・デザイナー(_D)..."
 
 #: ../src/ui.c:157
 msgid "Create a custom template"
@@ -2051,7 +2051,7 @@ msgstr "新規に作成するオブジェクトのデフォルト値を選択し
 
 #: ../data/ui/prefs-dialog.ui.h:16
 msgid "Select locale specific behavior."
-msgstr "利用する言語 (ロケール) に依存するパラメータを選択して下さい:"
+msgstr "利用する言語 (ロケール) に依存するパラメーターを選択して下さい:"
 
 #: ../data/ui/prefs-dialog.ui.h:18 ../templates/paper-sizes.xml.h:35
 msgid "US Letter"
@@ -2306,9 +2306,9 @@ msgid ""
 "\n"
 "This dialog will assist you in the creation of a custom gLabels template."
 msgstr ""
-"gLabels のテンプレート・デザイナへようこそ。\n"
+"gLabels のテンプレート・デザイナーへようこそ。\n"
 "\n"
-"このデザイナでは gLabels で利用する\n"
+"このデザイナーでは gLabels で利用する\n"
 "独自テンプレートの作成をお手伝いします。"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:1
@@ -2531,7 +2531,7 @@ msgstr "ラベルや名刺、メディアのジャケットをデザインしま
 
 #: ../data/desktop/glabels-3.0.desktop.in.h:2
 msgid "gLabels Label Designer 3"
-msgstr "gLabels ラベル・デザイナ3"
+msgstr "gLabels ラベル・デザイナー3"
 
 #: ../data/mime/glabels-3.0.xml.in.h:1
 msgid "gLabels Project File"
@@ -2765,6 +2765,7 @@ msgstr "ビデオ・テープの背ラベル"
 #: ../templates/maco-us-templates.xml.h:2
 #: ../templates/meritline-us-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:2
+#: ../templates/sheetlabels-us-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:1
 #: ../templates/zweckform-iso-templates.xml.h:2
 msgid "Address Labels"
@@ -2800,6 +2801,7 @@ msgstr "名刺"
 #: ../templates/misc-iso-templates.xml.h:10
 #: ../templates/misc-other-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:24
+#: ../templates/sheetlabels-us-templates.xml.h:4
 #: ../templates/worldlabel-us-templates.xml.h:2
 #: ../templates/zweckform-iso-templates.xml.h:12
 msgid "CD/DVD Labels"
@@ -2807,6 +2809,7 @@ msgstr "CD/DVD のラベル"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:8
+#: ../templates/sheetlabels-us-templates.xml.h:6
 msgid "CD/DVD Labels (Disc Labels)"
 msgstr "CD/DVD のラベル (ディスクのラベル)"
 
@@ -2819,6 +2822,7 @@ msgstr "CD/DVD のラベル (背ラベル)"
 #: ../templates/avery-us-templates.xml.h:12
 #: ../templates/avery-iso-templates.xml.h:16
 #: ../templates/meritline-us-templates.xml.h:4
+#: ../templates/sheetlabels-us-templates.xml.h:8
 #: ../templates/worldlabel-us-templates.xml.h:3
 msgid "Diskette Labels"
 msgstr "フロッピーのラベル"
@@ -2826,17 +2830,18 @@ msgstr "フロッピーのラベル"
 #. the LSK labels can be torn in half down the center
 #: ../templates/avery-us-templates.xml.h:14
 msgid "Divider Labels"
-msgstr "ドライバのラベル"
+msgstr "ドライバーのラベル"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:16
 #: ../templates/avery-other-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:4
 msgid "File Folder Labels"
-msgstr "ファイル・フォルダのラベル"
+msgstr "ファイル・フォルダーのラベル"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:18
+#: ../templates/sheetlabels-us-templates.xml.h:10
 #: ../templates/worldlabel-us-templates.xml.h:5
 msgid "Filing Labels"
 msgstr "ファイル・バインダーのラベル"
@@ -2878,6 +2883,7 @@ msgstr "はがき"
 #: ../templates/avery-us-templates.xml.h:32
 #: ../templates/dymo-other-templates.xml.h:12
 #: ../templates/meritline-us-templates.xml.h:10
+#: ../templates/sheetlabels-us-templates.xml.h:12
 #: ../templates/worldlabel-us-templates.xml.h:8
 msgid "Return Address Labels"
 msgstr "返信用宛名のラベル"
@@ -2887,6 +2893,7 @@ msgstr "返信用宛名のラベル"
 #: ../templates/maco-us-templates.xml.h:3
 #: ../templates/meritline-us-templates.xml.h:12
 #: ../templates/misc-us-templates.xml.h:30
+#: ../templates/sheetlabels-us-templates.xml.h:14
 #: ../templates/worldlabel-us-templates.xml.h:9
 msgid "Round Labels"
 msgstr "角が丸いラベル"
@@ -2896,6 +2903,7 @@ msgstr "角が丸いラベル"
 #: ../templates/avery-us-templates.xml.h:36
 #: ../templates/dataline-iso-templates.xml.h:10
 #: ../templates/meritline-us-templates.xml.h:14
+#: ../templates/sheetlabels-us-templates.xml.h:16
 #: ../templates/uline-us-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Shipping Labels"
@@ -2920,6 +2928,7 @@ msgstr "テントのカード"
 #: ../templates/avery-us-templates.xml.h:44
 #: ../templates/geha-iso-templates.xml.h:27
 #: ../templates/meritline-us-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:18
 #: ../templates/worldlabel-us-templates.xml.h:11
 msgid "Video Tape Face Labels"
 msgstr "ビデオ・テープの表面ラベル"
@@ -2982,6 +2991,11 @@ msgstr "小さなラベル"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:32
+msgid "Self-Adhesive Name Badges (Acetate Silk)"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:34
 msgid "Shipping labels"
 msgstr "出荷ラベル"
 
@@ -3050,12 +3064,12 @@ msgstr "3.5インチのフロッピーディスク"
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:6
 msgid "File Folder"
-msgstr "ファイルのフォルダ"
+msgstr "ファイルのフォルダー"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:8
 msgid "Hanging Folder"
-msgstr "つり下げ式のフォルダ"
+msgstr "つり下げ式のフォルダー"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:10
@@ -3229,6 +3243,13 @@ msgid "Mini-CD Labels"
 msgstr "ミニ CD のラベル"
 
 #. ===================================================================
+#: ../templates/microapp-templates.xml.h:2
+#, fuzzy
+#| msgid "Rectangular Labels"
+msgid "Standard Labels"
+msgstr "長方形のラベル"
+
+#. ===================================================================
 #: ../templates/misc-us-templates.xml.h:2
 msgid "Business Card CD"
 msgstr "名刺 CD"
@@ -3290,11 +3311,11 @@ msgstr "PRO CD ラベル二枚 (外側のみ)"
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:32
 msgid "Slimline CD Case (rightside up)"
-msgstr "薄い CD フォルダ (右側)"
+msgstr "薄い CD フォルダー (右側)"
 
 #: ../templates/misc-us-templates.xml.h:33
 msgid "Slimline CD Case (upside down)"
-msgstr "薄い CD フォルダ (上側)"
+msgstr "薄い CD フォルダー (上側)"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:4
