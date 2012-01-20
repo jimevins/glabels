@@ -2119,7 +2119,7 @@ msgstr "2. Vnitřní poloměr:"
 
 #: ../data/ui/template-designer.ui.h:9
 msgid "2. Waste (overprint allowed):"
-msgstr "2. Odsazení (umožňuje přetisk):"
+msgstr "2. Přesah (umožňuje přetisk):"
 
 #: ../data/ui/template-designer.ui.h:10
 msgid "3. Clipping width:"
@@ -2135,7 +2135,7 @@ msgstr "3. Zaoblení (poloměr rohu):"
 
 #: ../data/ui/template-designer.ui.h:13
 msgid "3. Waste (overprint allowed):"
-msgstr "3. Odsazení (umožňuje přetisk):"
+msgstr "3. Přesah (umožňuje přetisk):"
 
 #: ../data/ui/template-designer.ui.h:14
 msgid "4. Clipping height:"
@@ -2143,7 +2143,7 @@ msgstr "4. Výška oříznutí:"
 
 #: ../data/ui/template-designer.ui.h:15
 msgid "4. Horiz. waste (overprint allowed):"
-msgstr "4. Vodorovné odsazení (umožňuje přetisk):"
+msgstr "4. Vodorovný přesah (umožňuje přetisk):"
 
 #: ../data/ui/template-designer.ui.h:16
 msgid "4. Margin"
@@ -2151,11 +2151,11 @@ msgstr "4. Okraj"
 
 #: ../data/ui/template-designer.ui.h:17
 msgid "5. Vert. waste (overprint allowed):"
-msgstr "5. Svislé odsazení (umožňuje přetisk):"
+msgstr "5. Svislý přesah (umožňuje přetisk):"
 
 #: ../data/ui/template-designer.ui.h:18
 msgid "5. Waste (overprint allowed):"
-msgstr "5. Odsazení (umožňuje přetisk):"
+msgstr "5. Přesah (umožňuje přetisk):"
 
 #: ../data/ui/template-designer.ui.h:19
 msgid "6. Margin"
