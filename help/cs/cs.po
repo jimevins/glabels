@@ -1599,7 +1599,7 @@ msgstr "label (etiketa)"
 #: C/mancreate.page:257(code)
 #, no-wrap
 msgid "round-label"
-msgstr "round-label (etiketa se zaoblenými rohy)"
+msgstr "round-label (kulatá etiketa)"
 
 #: C/mancreate.page:258(code)
 #, no-wrap
