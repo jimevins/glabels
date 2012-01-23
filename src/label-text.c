@@ -60,6 +60,7 @@ struct _glLabelTextPrivate {
 	PangoWeight      font_weight;
 	gboolean         font_italic_flag;
 	PangoAlignment   align;
+	glValignment     valign;
 	glColorNode     *color_node;
 	gdouble          line_spacing;
 	gboolean         auto_shrink;
@@ -116,6 +117,10 @@ static void set_text_alignment          (glLabelObject    *object,
 					 PangoAlignment    text_alignment,
                                          gboolean          checkpoint);
 
+static void set_text_valignment         (glLabelObject    *object,
+					 glValignment      text_valignment,
+                                         gboolean          checkpoint);
+
 static void set_text_line_spacing       (glLabelObject    *object,
 					 gdouble           text_line_spacing,
                                          gboolean          checkpoint);
@@ -133,6 +138,8 @@ static PangoWeight     get_font_weight             (glLabelObject    *object);
 static gboolean        get_font_italic_flag        (glLabelObject    *object);
 
 static PangoAlignment  get_text_alignment          (glLabelObject    *object);
+
+static glValignment    get_text_valignment         (glLabelObject    *object);
 
 static gdouble         get_text_line_spacing       (glLabelObject    *object);
 
@@ -202,6 +209,7 @@ gl_label_text_class_init (glLabelTextClass *class)
 	label_object_class->set_font_weight       = set_font_weight;
 	label_object_class->set_font_italic_flag  = set_font_italic_flag;
 	label_object_class->set_text_alignment    = set_text_alignment;
+	label_object_class->set_text_valignment   = set_text_valignment;
 	label_object_class->set_text_line_spacing = set_text_line_spacing;
 	label_object_class->set_text_color        = set_text_color;
 	label_object_class->get_font_family       = get_font_family;
@@ -209,6 +217,7 @@ gl_label_text_class_init (glLabelTextClass *class)
 	label_object_class->get_font_weight       = get_font_weight;
 	label_object_class->get_font_italic_flag  = get_font_italic_flag;
 	label_object_class->get_text_alignment    = get_text_alignment;
+	label_object_class->get_text_valignment   = get_text_valignment;
 	label_object_class->get_text_line_spacing = get_text_line_spacing;
 	label_object_class->get_text_color        = get_text_color;
         label_object_class->draw_object           = draw_object;
@@ -290,6 +299,7 @@ gl_label_text_new (glLabel *label,
                 ltext->priv->font_weight      = gl_label_get_default_font_weight (label);
                 ltext->priv->font_italic_flag = gl_label_get_default_font_italic_flag (label);
                 ltext->priv->align            = gl_label_get_default_text_alignment (label);
+                ltext->priv->valign           = gl_label_get_default_text_valignment (label);
 		ltext->priv->color_node       = color_node;	  
                 ltext->priv->line_spacing     = gl_label_get_default_text_line_spacing (label);
 
@@ -328,6 +338,7 @@ copy (glLabelObject *dst_object,
 	new_ltext->priv->font_italic_flag = ltext->priv->font_italic_flag;
 	set_text_color (dst_object, text_color_node, FALSE);
 	new_ltext->priv->align            = ltext->priv->align;
+	new_ltext->priv->valign           = ltext->priv->valign;
 	new_ltext->priv->line_spacing     = ltext->priv->line_spacing;
 	new_ltext->priv->auto_shrink      = ltext->priv->auto_shrink;
 
@@ -734,6 +745,39 @@ set_text_alignment (glLabelObject    *object,
 
 
 /*****************************************************************************/
+/* Set vertical text alignment method.                                       */
+/*****************************************************************************/
+static void
+set_text_valignment (glLabelObject    *object,
+		     glValignment      text_valignment,
+                     gboolean          checkpoint)
+{
+	glLabelText    *ltext = (glLabelText *)object;
+        glLabel        *label;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
+
+	if (ltext->priv->valign != text_valignment)
+        {
+                if ( checkpoint )
+                {
+                        label = gl_label_object_get_parent (GL_LABEL_OBJECT (ltext));
+                        gl_label_checkpoint (label, _("Vertically align text"));
+                }
+
+                ltext->priv->size_changed = TRUE;
+
+		ltext->priv->valign = text_valignment;
+		gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/*****************************************************************************/
 /* Set text line spacing method.                                             */
 /*****************************************************************************/
 static void
@@ -876,6 +920,22 @@ get_text_alignment (glLabelObject    *object)
 	g_return_val_if_fail (ltext && GL_IS_LABEL_TEXT (ltext), GTK_JUSTIFY_LEFT);
 
 	return ltext->priv->align;
+}
+
+
+/*****************************************************************************/
+/* Get vertical text alignment method.                                       */
+/*****************************************************************************/
+static glValignment
+get_text_valignment (glLabelObject    *object)
+{
+	glLabelText    *ltext = (glLabelText *)object;
+
+	gl_debug (DEBUG_LABEL, "");
+
+	g_return_val_if_fail (ltext && GL_IS_LABEL_TEXT (ltext), GTK_JUSTIFY_LEFT);
+
+	return ltext->priv->valign;
 }
 
 
@@ -1025,6 +1085,7 @@ set_text_path (glLabelText      *this,
                gboolean          screen_flag,
                glMergeRecord    *record)
 {
+        gint                  iw, ih, y;
         gdouble               object_w, object_h;
         gdouble               raw_w, raw_h;
         gchar                *text;
@@ -1092,9 +1153,22 @@ set_text_path (glLabelText      *this,
         }
         pango_layout_set_wrap (layout, PANGO_WRAP_WORD);
         pango_layout_set_alignment (layout, this->priv->align);
+        pango_layout_get_pixel_size (layout, &iw, &ih);
 
+        switch (this->priv->valign)
+        {
+        case GL_VALIGN_VCENTER:
+                y = (object_h - ih) / 2;
+                break;
+        case GL_VALIGN_BOTTOM:
+                y = object_h - ih;
+                break;
+        default:
+                y = 0;
+                break;
+        }
 
-        cairo_move_to (cr, GL_LABEL_TEXT_MARGIN, 0);
+        cairo_move_to (cr, GL_LABEL_TEXT_MARGIN, y);
         pango_cairo_layout_path (cr, layout);
 
         g_object_unref (layout);

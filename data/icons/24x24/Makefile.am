@@ -7,6 +7,9 @@ appicons_DATA = \
 	apps/glabels-3.0.png
 
 actionicons_DATA = \
+	actions/glabels-align-text-bottom.png	\
+	actions/glabels-align-text-middle.png	\
+	actions/glabels-align-text-top.png	\
 	actions/glabels-arrow.png		\
 	actions/glabels-barcode.png		\
 	actions/glabels-box.png			\

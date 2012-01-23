@@ -25,6 +25,8 @@
 #include <string.h>
 #include <math.h>
 
+#include "label-object.h"
+
 
 /****************************************************************************/
 /* Utilities to deal with PangoAlignment types.                             */
@@ -57,6 +59,42 @@ gl_str_util_string_to_align (const gchar *string)
 		return PANGO_ALIGN_RIGHT;
 	} else {
 		return PANGO_ALIGN_LEFT;
+	}
+
+}
+
+
+/****************************************************************************/
+/* Utilities to deal with vertical alignment types.                         */
+/****************************************************************************/
+const gchar *
+gl_str_util_valign_to_string (glValignment valign)
+{
+	switch (valign) {
+	case GL_VALIGN_TOP:
+		return "Top";
+	case GL_VALIGN_VCENTER:
+		return "Center";
+	case GL_VALIGN_BOTTOM:
+		return "Bottom";
+	default:
+		return "?";
+	}
+}
+
+
+glValignment
+gl_str_util_string_to_valign (const gchar *string)
+{
+
+	if (g_ascii_strcasecmp (string, "Top") == 0) {
+		return GL_VALIGN_TOP;
+	} else if (g_ascii_strcasecmp (string, "Center") == 0) {
+		return GL_VALIGN_VCENTER;
+	} else if (g_ascii_strcasecmp (string, "Bottom") == 0) {
+		return GL_VALIGN_BOTTOM;
+	} else {
+		return GL_VALIGN_TOP;
 	}
 
 }

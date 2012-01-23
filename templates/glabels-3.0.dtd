@@ -41,6 +41,7 @@
 
 <!-- Text related enumerations/types -->
 <!ENTITY % JUSTIFY_TYPE       "(Left | Right | Center)">
+<!ENTITY % VALIGN_TYPE        "(Top | Bottom | Center)">
 <!ENTITY % FONT_WEIGHT_TYPE   "(Regular | Bold)">
 
 <!-- Barcode related enumerations/types -->
@@ -344,6 +345,7 @@
                  %position_attrs;
                  %size_attrs;
                  justify         %JUSTIFY_TYPE;          #REQUIRED
+                 valign          %VALIGN_TYPE;           #REQUIRED
                  auto_shrink     %BOOLEAN_TYPE;          #IMPLIED
                  %affine_attrs;
                  %shadow_attrs;

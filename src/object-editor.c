@@ -749,6 +749,7 @@ object_changed_cb (glLabelObject  *object,
         gboolean             font_italic_flag;
         glColorNode         *text_color_node;
         PangoAlignment       align;
+        glValignment          valign;
         gdouble              text_line_spacing;
         gboolean             auto_shrink;
         gdouble              image_w, image_h;
@@ -825,6 +826,7 @@ object_changed_cb (glLabelObject  *object,
                 font_italic_flag  = gl_label_object_get_font_italic_flag (object);
                 text_color_node   = gl_label_object_get_text_color (object);
                 align             = gl_label_object_get_text_alignment (object);
+                valign            = gl_label_object_get_text_valignment (object);
                 text_line_spacing = gl_label_object_get_text_line_spacing (object);
                 auto_shrink       = gl_label_text_get_auto_shrink (GL_LABEL_TEXT (object));
 
@@ -835,6 +837,7 @@ object_changed_cb (glLabelObject  *object,
                 gl_object_editor_set_font_italic_flag (editor, font_italic_flag);
                 gl_object_editor_set_text_color (editor, (merge != NULL), text_color_node);
                 gl_object_editor_set_text_alignment (editor, align);
+                gl_object_editor_set_text_valignment (editor, valign);
                 gl_object_editor_set_text_line_spacing (editor, text_line_spacing);
                 gl_object_editor_set_text_auto_shrink (editor, auto_shrink);
 
@@ -913,6 +916,7 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
         gboolean             font_italic_flag;
         glColorNode         *text_color_node;
         PangoAlignment       align;
+        glValignment          valign;
         gdouble              text_line_spacing;
         gboolean             auto_shrink;
         glTextNode          *filename;
@@ -995,6 +999,7 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
                 font_italic_flag  = gl_object_editor_get_font_italic_flag (editor);
                 text_color_node   = gl_object_editor_get_text_color (editor);
                 align             = gl_object_editor_get_text_alignment (editor);
+                valign            = gl_object_editor_get_text_valignment (editor);
                 text_line_spacing = gl_object_editor_get_text_line_spacing (editor);
                 auto_shrink       = gl_object_editor_get_text_auto_shrink (editor);
 
@@ -1004,6 +1009,7 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
                 gl_label_object_set_font_italic_flag (object, font_italic_flag, TRUE);
                 gl_label_object_set_text_color (object, text_color_node, TRUE);
                 gl_label_object_set_text_alignment (object, align, TRUE);
+                gl_label_object_set_text_valignment (object, valign, TRUE);
                 gl_label_object_set_text_line_spacing (object, text_line_spacing, TRUE);
                 gl_label_text_set_auto_shrink (GL_LABEL_TEXT (object), auto_shrink, TRUE);
 

@@ -75,6 +75,7 @@ struct _glLabelPrivate {
 	gboolean           default_font_italic_flag;
 	guint              default_text_color;
 	PangoAlignment     default_text_alignment;
+	glValignment       default_text_valignment;
 	gdouble            default_text_line_spacing;
 
 	/* Default object line properties */
@@ -2164,6 +2165,39 @@ gl_label_set_selection_text_alignment (glLabel        *label,
 
 
 /*****************************************************************************/
+/* Set vertical text alignment for all text contained in selected objects.   */
+/*****************************************************************************/
+void
+gl_label_set_selection_text_valignment (glLabel        *label,
+                                        glValignment    text_valignment)
+{
+        GList         *selection_list;
+	GList         *p;
+	glLabelObject *object;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (label && GL_IS_LABEL (label));
+
+        begin_selection_op (label);
+
+        selection_list = gl_label_get_selection_list (label);
+
+	for (p = selection_list; p != NULL; p = p->next)
+        {
+		object = GL_LABEL_OBJECT (p->data);
+		gl_label_object_set_text_valignment (object, text_valignment, TRUE);
+	}
+
+        g_list_free (selection_list);
+
+        end_selection_op (label);
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/*****************************************************************************/
 /* Set text line spacing for all text contained in selected objects.         */
 /*****************************************************************************/
 void
@@ -2810,6 +2844,22 @@ gl_label_set_default_text_alignment (glLabel        *label,
 
 
 /****************************************************************************/
+/* Set default vertical text alignment.                                     */
+/****************************************************************************/
+void
+gl_label_set_default_text_valignment (glLabel        *label,
+                                      glValignment    text_valignment)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (label && GL_IS_LABEL (label));
+
+	label->priv->default_text_valignment = text_valignment;
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/****************************************************************************/
 /* Set default text line spacing.                                           */
 /****************************************************************************/
 void
@@ -2970,6 +3020,22 @@ gl_label_get_default_text_alignment (glLabel *label)
 	gl_debug (DEBUG_LABEL, "END");
 
 	return label->priv->default_text_alignment;
+}
+
+
+/****************************************************************************/
+/* Get default vertical text alignment.                                     */
+/****************************************************************************/
+glValignment
+gl_label_get_default_text_valignment (glLabel *label)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_val_if_fail (label && GL_IS_LABEL (label), GL_VALIGN_TOP);
+
+	gl_debug (DEBUG_LABEL, "END");
+
+	return label->priv->default_text_valignment;
 }
 
 

@@ -30,6 +30,13 @@ G_BEGIN_DECLS
 
 
 typedef enum {
+	GL_VALIGN_TOP,
+	GL_VALIGN_VCENTER,
+	GL_VALIGN_BOTTOM
+} glValignment;
+
+
+typedef enum {
         GL_LABEL_OBJECT_TEXT,
         GL_LABEL_OBJECT_BOX,
         GL_LABEL_OBJECT_LINE,
@@ -109,6 +116,10 @@ struct _glLabelObjectClass {
                                                    PangoAlignment     text_alignment,
                                                    gboolean           checkpoint);
 
+        void              (*set_text_valignment)  (glLabelObject     *object,
+                                                   glValignment       text_valignment,
+                                                   gboolean           checkpoint);
+
         void              (*set_text_line_spacing)(glLabelObject     *object,
                                                    gdouble            text_line_spacing,
                                                    gboolean           checkpoint);
@@ -142,6 +153,8 @@ struct _glLabelObjectClass {
         gboolean          (*get_font_italic_flag) (glLabelObject     *object);
 
         PangoAlignment    (*get_text_alignment)   (glLabelObject     *object);
+
+        glValignment      (*get_text_valignment)  (glLabelObject     *object);
 
         gdouble           (*get_text_line_spacing) (glLabelObject    *object);
 
@@ -273,6 +286,10 @@ void           gl_label_object_set_text_alignment    (glLabelObject     *object,
                                                       PangoAlignment     text_alignment,
                                                       gboolean           checkpoint);
 
+void           gl_label_object_set_text_valignment   (glLabelObject     *object,
+                                                      glValignment       text_valignment,
+                                                      gboolean           checkpoint);
+
 void           gl_label_object_set_text_color        (glLabelObject     *object,
                                                       glColorNode       *text_color_node,
                                                       gboolean           checkpoint);
@@ -350,6 +367,8 @@ PangoWeight    gl_label_object_get_font_weight       (glLabelObject     *object)
 gboolean       gl_label_object_get_font_italic_flag  (glLabelObject     *object);
 
 PangoAlignment gl_label_object_get_text_alignment    (glLabelObject     *object);
+
+glValignment   gl_label_object_get_text_valignment   (glLabelObject     *object);
 
 gdouble        gl_label_object_get_text_line_spacing (glLabelObject     *object);
 

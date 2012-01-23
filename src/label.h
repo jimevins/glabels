@@ -289,6 +289,9 @@ void       gl_label_set_default_text_color       (glLabel            *label,
 void       gl_label_set_default_text_alignment   (glLabel            *label,
                                                   PangoAlignment     text_alignment);
 
+void       gl_label_set_default_text_valignment  (glLabel            *label,
+                                                  glValignment       text_valignment);
+
 void       gl_label_set_default_line_width       (glLabel            *label,
                                                   gdouble            line_width);
 
@@ -312,6 +315,8 @@ gboolean         gl_label_get_default_font_italic_flag (glLabel            *labe
 guint            gl_label_get_default_text_color       (glLabel            *label);
 
 PangoAlignment   gl_label_get_default_text_alignment   (glLabel            *label);
+
+glValignment     gl_label_get_default_text_valignment  (glLabel            *label);
 
 gdouble          gl_label_get_default_text_line_spacing(glLabel            *label);
 

@@ -114,6 +114,9 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *text_left_toggle;
 	GtkWidget  *text_center_toggle;
 	GtkWidget  *text_right_toggle;
+	GtkWidget  *text_top_toggle;
+	GtkWidget  *text_vcenter_toggle;
+	GtkWidget  *text_bottom_toggle;
 	GtkWidget  *text_line_spacing_spin;
 	GtkWidget  *text_auto_shrink_check;
 
@@ -325,6 +328,11 @@ void        gl_object_editor_set_text_alignment   (glObjectEditor      *editor,
 						   PangoAlignment       text_alignment);
 
 PangoAlignment gl_object_editor_get_text_alignment (glObjectEditor      *editor);
+
+void        gl_object_editor_set_text_valignment  (glObjectEditor      *editor,
+						   glValignment         text_valignment);
+
+glValignment gl_object_editor_get_text_valignment (glObjectEditor       *editor);
 
 void        gl_object_editor_set_text_line_spacing (glObjectEditor      *editor,
 						   gdouble               text_line_spacing);

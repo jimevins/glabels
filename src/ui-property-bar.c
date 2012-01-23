@@ -59,10 +59,15 @@ struct _glUIPropertyBarPrivate {
 	GtkWidget  *font_bold_toggle;
 	GtkWidget  *font_italic_toggle;
 
-	/* Text alignemnt radios */
+	/* Text alignment radios */
 	GtkWidget  *text_align_left_radio;
 	GtkWidget  *text_align_center_radio;
 	GtkWidget  *text_align_right_radio;
+
+	/* Text vertical alignment radios */
+	GtkWidget  *text_valign_top_radio;
+	GtkWidget  *text_valign_vcenter_radio;
+	GtkWidget  *text_valign_bottom_radio;
 
 	/* Color combos */
         GtkWidget  *text_color_eventbox;
@@ -129,6 +134,9 @@ static void     font_italic_toggled_cb           (GtkToggleToolButton  *toggle,
 static void     text_align_toggled_cb            (GtkToggleToolButton  *toggle,
 						  glUIPropertyBar      *this);
 						  
+static void     text_valign_toggled_cb           (GtkToggleToolButton  *toggle,
+						  glUIPropertyBar      *this);
+
 static void     set_doc_items_sensitive          (glUIPropertyBar      *this,
 						  gboolean              state);
 
@@ -251,18 +259,21 @@ gl_ui_property_bar_construct (glUIPropertyBar   *this)
 	}
 
         gl_builder_util_get_widgets (builder,
-                                     "property_toolbar",        &this->priv->tool_bar,
-                                     "font_family_eventbox",    &this->priv->font_family_eventbox,
-                                     "font_size_spin",          &this->priv->font_size_spin,
-                                     "font_bold_toggle",        &this->priv->font_bold_toggle,
-                                     "font_italic_toggle",      &this->priv->font_italic_toggle,
-                                     "text_align_left_radio",   &this->priv->text_align_left_radio,
-                                     "text_align_center_radio", &this->priv->text_align_center_radio,
-                                     "text_align_right_radio",  &this->priv->text_align_right_radio,
-                                     "text_color_eventbox",     &this->priv->text_color_eventbox,
-                                     "fill_color_eventbox",     &this->priv->fill_color_eventbox,
-                                     "line_color_eventbox",     &this->priv->line_color_eventbox,
-                                     "line_width_spin",         &this->priv->line_width_spin,
+                                     "property_toolbar",          &this->priv->tool_bar,
+                                     "font_family_eventbox",      &this->priv->font_family_eventbox,
+                                     "font_size_spin",            &this->priv->font_size_spin,
+                                     "font_bold_toggle",          &this->priv->font_bold_toggle,
+                                     "font_italic_toggle",        &this->priv->font_italic_toggle,
+                                     "text_align_left_radio",     &this->priv->text_align_left_radio,
+                                     "text_align_center_radio",   &this->priv->text_align_center_radio,
+                                     "text_align_right_radio",    &this->priv->text_align_right_radio,
+                                     "text_valign_top_radio",     &this->priv->text_valign_top_radio,
+                                     "text_valign_vcenter_radio", &this->priv->text_valign_vcenter_radio,
+                                     "text_valign_bottom_radio",  &this->priv->text_valign_bottom_radio,
+                                     "text_color_eventbox",       &this->priv->text_color_eventbox,
+                                     "fill_color_eventbox",       &this->priv->fill_color_eventbox,
+                                     "line_color_eventbox",       &this->priv->line_color_eventbox,
+                                     "line_width_spin",           &this->priv->line_width_spin,
                                      NULL);
 
 	gtk_container_add (GTK_CONTAINER (this), this->priv->tool_bar);
@@ -344,6 +355,17 @@ gl_ui_property_bar_construct (glUIPropertyBar   *this)
 	g_signal_connect (G_OBJECT (this->priv->text_align_right_radio),
 			  "toggled", G_CALLBACK (text_align_toggled_cb), this);
 
+	/* Text vertical alignment radio group */
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_valign_top_radio), TRUE);
+	g_signal_connect (G_OBJECT (this->priv->text_valign_top_radio),
+			  "toggled", G_CALLBACK (text_valign_toggled_cb), this);
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_valign_vcenter_radio), FALSE);
+	g_signal_connect (G_OBJECT (this->priv->text_valign_vcenter_radio),
+			  "toggled", G_CALLBACK (text_valign_toggled_cb), this);
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_valign_bottom_radio), FALSE);
+	g_signal_connect (G_OBJECT (this->priv->text_valign_bottom_radio),
+			  "toggled", G_CALLBACK (text_valign_toggled_cb), this);
+
 	/* Text color widget */
 	gl_color_combo_button_set_color (GL_COLOR_COMBO_BUTTON (this->priv->text_color_button),
                                          gl_prefs_model_get_default_text_color (gl_prefs));
@@ -404,6 +426,13 @@ reset_to_default_properties (glLabel         *label,
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_right_radio),
 					   (gl_label_get_default_text_alignment (label) == PANGO_ALIGN_RIGHT));
 
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_valign_top_radio),
+					   (gl_label_get_default_text_valignment (label) == GL_VALIGN_TOP));
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_valign_vcenter_radio),
+					   (gl_label_get_default_text_valignment (label) == GL_VALIGN_VCENTER));
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_valign_bottom_radio),
+					   (gl_label_get_default_text_valignment (label) == GL_VALIGN_BOTTOM));
+
 	gl_color_combo_button_set_color (GL_COLOR_COMBO_BUTTON(this->priv->text_color_button),
                                          gl_label_get_default_text_color (label));
 
@@ -455,7 +484,7 @@ update_text_properties (glLabel         *label,
 	gboolean        can_text, is_first_object;
 	gboolean        is_same_font_family, is_same_font_size;
 	gboolean        is_same_text_color, is_same_is_italic;
-	gboolean        is_same_is_bold, is_same_align;
+	gboolean        is_same_is_bold, is_same_align, is_same_valign;
 	GList          *selection_list;
 	GList          *p;
 	glLabelObject  *object;
@@ -466,6 +495,7 @@ update_text_properties (glLabel         *label,
 	gboolean        selection_is_italic, is_italic;
 	gboolean        selection_is_bold, is_bold;
 	PangoAlignment  selection_align, align;
+	glValignment    selection_valign, valign;
 
 	can_text = gl_label_can_selection_text (label);
 	set_text_items_sensitive (this, can_text);
@@ -476,6 +506,7 @@ update_text_properties (glLabel         *label,
 	is_same_is_italic =
 	is_same_is_bold =
 	is_same_align =
+	is_same_valign =
 	is_same_text_color =
 	is_same_font_size =
 	is_same_font_family = TRUE;
@@ -531,6 +562,7 @@ update_text_properties (glLabel         *label,
 		is_italic = gl_label_object_get_font_italic_flag (object);
 		is_bold = gl_label_object_get_font_weight (object) == PANGO_WEIGHT_BOLD;
 		align = gl_label_object_get_text_alignment (object);
+		valign = gl_label_object_get_text_valignment (object);
 
 		if (is_first_object)
                 {
@@ -539,6 +571,7 @@ update_text_properties (glLabel         *label,
 			selection_is_italic = is_italic;
 			selection_is_bold = is_bold;
 			selection_align = align;
+			selection_valign = valign;
 		}
                 else
                 {
@@ -552,6 +585,8 @@ update_text_properties (glLabel         *label,
 				is_same_is_bold = FALSE;
 			if (align != selection_align)
 				is_same_align = FALSE;
+			if (valign != selection_valign)
+				is_same_valign = FALSE;
 		}
 		is_first_object = FALSE;
 	}
@@ -611,6 +646,18 @@ update_text_properties (glLabel         *label,
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_right_radio),
 					   (selection_align == PANGO_ALIGN_RIGHT) &&
 					   is_same_align);
+
+	if (is_same_valign)
+		gl_debug (DEBUG_PROPERTY_BAR, "same valign");
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_valign_top_radio),
+					   (selection_valign == GL_VALIGN_TOP) &&
+					   is_same_valign);
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_valign_vcenter_radio),
+					   (selection_valign == GL_VALIGN_VCENTER) &&
+					   is_same_valign);
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_valign_bottom_radio),
+					   (selection_valign == GL_VALIGN_BOTTOM) &&
+					   is_same_valign);
 }
 
 
@@ -1171,23 +1218,68 @@ text_align_toggled_cb (GtkToggleToolButton  *toggle,
 
 
 /*---------------------------------------------------------------------------*/
+/* PRIVATE.  Text vertical align toggled callback.                           */
+/*---------------------------------------------------------------------------*/
+static void
+text_valign_toggled_cb (GtkToggleToolButton  *toggle,
+		        glUIPropertyBar      *this)
+{
+	if (this->priv->stop_signals) return;
+	this->priv->stop_signals = TRUE;
+
+	gl_debug (DEBUG_PROPERTY_BAR, "START");
+
+	if (gtk_toggle_tool_button_get_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_valign_top_radio)))
+	{
+		gl_label_set_selection_text_valignment (this->priv->label,
+                                                        GL_VALIGN_TOP);
+		gl_label_set_default_text_valignment   (this->priv->label,
+                                                        GL_VALIGN_TOP);
+	}
+
+	if (gtk_toggle_tool_button_get_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_valign_vcenter_radio)))
+	{
+		gl_label_set_selection_text_valignment (this->priv->label,
+                                                        GL_VALIGN_VCENTER);
+		gl_label_set_default_text_valignment   (this->priv->label,
+                                                        GL_VALIGN_VCENTER);
+	}
+
+	if (gtk_toggle_tool_button_get_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_valign_bottom_radio)))
+	{
+		gl_label_set_selection_text_valignment (this->priv->label,
+                                                        GL_VALIGN_BOTTOM);
+		gl_label_set_default_text_valignment   (this->priv->label,
+                                                        GL_VALIGN_BOTTOM);
+	}
+
+	gl_debug (DEBUG_PROPERTY_BAR, "END");
+
+	this->priv->stop_signals = FALSE;
+}
+
+
+/*---------------------------------------------------------------------------*/
 /* PRIVATE.  Set sensitivity of doc controls.                                */
 /*---------------------------------------------------------------------------*/
 static void
 set_doc_items_sensitive (glUIPropertyBar      *this,
 			 gboolean              state)
 {
-	gtk_widget_set_sensitive (this->priv->font_family_combo,       state);
-	gtk_widget_set_sensitive (this->priv->font_size_spin,          state);
-	gtk_widget_set_sensitive (this->priv->font_bold_toggle,        state);
-	gtk_widget_set_sensitive (this->priv->font_italic_toggle,      state);
-	gtk_widget_set_sensitive (this->priv->text_align_left_radio,   state);
-	gtk_widget_set_sensitive (this->priv->text_align_center_radio, state);
-	gtk_widget_set_sensitive (this->priv->text_align_right_radio,  state);
-	gtk_widget_set_sensitive (this->priv->text_color_button,       state);
-	gtk_widget_set_sensitive (this->priv->fill_color_button,       state);
-	gtk_widget_set_sensitive (this->priv->line_color_button,       state);
-	gtk_widget_set_sensitive (this->priv->line_width_spin,         state);
+	gtk_widget_set_sensitive (this->priv->font_family_combo,         state);
+	gtk_widget_set_sensitive (this->priv->font_size_spin,            state);
+	gtk_widget_set_sensitive (this->priv->font_bold_toggle,          state);
+	gtk_widget_set_sensitive (this->priv->font_italic_toggle,        state);
+	gtk_widget_set_sensitive (this->priv->text_align_left_radio,     state);
+	gtk_widget_set_sensitive (this->priv->text_align_center_radio,   state);
+	gtk_widget_set_sensitive (this->priv->text_align_right_radio,    state);
+	gtk_widget_set_sensitive (this->priv->text_valign_top_radio,     state);
+	gtk_widget_set_sensitive (this->priv->text_valign_vcenter_radio, state);
+	gtk_widget_set_sensitive (this->priv->text_valign_bottom_radio,  state);
+	gtk_widget_set_sensitive (this->priv->text_color_button,         state);
+	gtk_widget_set_sensitive (this->priv->fill_color_button,         state);
+	gtk_widget_set_sensitive (this->priv->line_color_button,         state);
+	gtk_widget_set_sensitive (this->priv->line_width_spin,           state);
 }
 
 
@@ -1198,14 +1290,17 @@ static void
 set_text_items_sensitive (glUIPropertyBar      *this,
 			  gboolean              state)
 {
-	gtk_widget_set_sensitive (this->priv->font_family_combo,       state);
-	gtk_widget_set_sensitive (this->priv->font_size_spin,          state);
-	gtk_widget_set_sensitive (this->priv->font_bold_toggle,        state);
-	gtk_widget_set_sensitive (this->priv->font_italic_toggle,      state);
-	gtk_widget_set_sensitive (this->priv->text_align_left_radio,   state);
-	gtk_widget_set_sensitive (this->priv->text_align_center_radio, state);
-	gtk_widget_set_sensitive (this->priv->text_align_right_radio,  state);
-	gtk_widget_set_sensitive (this->priv->text_color_button,       state);
+	gtk_widget_set_sensitive (this->priv->font_family_combo,         state);
+	gtk_widget_set_sensitive (this->priv->font_size_spin,            state);
+	gtk_widget_set_sensitive (this->priv->font_bold_toggle,          state);
+	gtk_widget_set_sensitive (this->priv->font_italic_toggle,        state);
+	gtk_widget_set_sensitive (this->priv->text_align_left_radio,     state);
+	gtk_widget_set_sensitive (this->priv->text_align_center_radio,   state);
+	gtk_widget_set_sensitive (this->priv->text_align_right_radio,    state);
+	gtk_widget_set_sensitive (this->priv->text_valign_top_radio,     state);
+	gtk_widget_set_sensitive (this->priv->text_valign_vcenter_radio, state);
+	gtk_widget_set_sensitive (this->priv->text_valign_bottom_radio,  state);
+	gtk_widget_set_sensitive (this->priv->text_color_button,         state);
 }
 
 

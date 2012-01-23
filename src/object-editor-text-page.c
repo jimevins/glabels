@@ -60,6 +60,8 @@
 
 static void align_toggle_cb (GtkToggleButton *toggle,
 			     glObjectEditor  *editor);
+static void valign_toggle_cb (GtkToggleButton *toggle,
+			      glObjectEditor  *editor);
 static void text_radio_toggled_cb              (glObjectEditor        *editor);
 
 
@@ -85,6 +87,9 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
                                      "text_left_toggle",       &editor->priv->text_left_toggle,
                                      "text_center_toggle",     &editor->priv->text_center_toggle,
                                      "text_right_toggle",      &editor->priv->text_right_toggle,
+                                     "text_top_toggle",        &editor->priv->text_top_toggle,
+                                     "text_vcenter_toggle",    &editor->priv->text_vcenter_toggle,
+                                     "text_bottom_toggle",     &editor->priv->text_bottom_toggle,
                                      "text_line_spacing_spin", &editor->priv->text_line_spacing_spin,
                                      "text_auto_shrink_check", &editor->priv->text_auto_shrink_check,
                                      NULL);
@@ -162,6 +167,19 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 			  G_CALLBACK (align_toggle_cb),
 			  G_OBJECT (editor));
 
+	g_signal_connect (G_OBJECT (editor->priv->text_top_toggle),
+			  "toggled",
+			  G_CALLBACK (valign_toggle_cb),
+			  G_OBJECT (editor));
+	g_signal_connect (G_OBJECT (editor->priv->text_vcenter_toggle),
+			  "toggled",
+			  G_CALLBACK (valign_toggle_cb),
+			  G_OBJECT (editor));
+	g_signal_connect (G_OBJECT (editor->priv->text_bottom_toggle),
+			  "toggled",
+			  G_CALLBACK (valign_toggle_cb),
+			  G_OBJECT (editor));
+
 	g_signal_connect_swapped (G_OBJECT (editor->priv->text_line_spacing_spin),
 				  "value-changed",
 				  G_CALLBACK (gl_object_editor_changed_cb),
@@ -207,6 +225,46 @@ align_toggle_cb (GtkToggleButton *toggle,
                                                       FALSE);
                         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
                                                       (editor->priv->text_center_toggle),
+                                                      FALSE);
+                }
+
+                gl_object_editor_changed_cb (editor);
+        }
+
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Vertical alignment togglebutton callback.                      */
+/*--------------------------------------------------------------------------*/
+static void
+valign_toggle_cb (GtkToggleButton *toggle,
+		 glObjectEditor  *editor)
+{
+        if (gtk_toggle_button_get_active (toggle)) {
+
+                if (GTK_WIDGET (toggle) == GTK_WIDGET (editor->priv->text_top_toggle)) {
+                        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
+                                                      (editor->priv->text_vcenter_toggle),
+                                                      FALSE);
+                        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
+                                                      (editor->priv->text_bottom_toggle),
+                                                      FALSE);
+                } else if (GTK_WIDGET (toggle) ==
+                           GTK_WIDGET (editor->priv->text_vcenter_toggle)) {
+                        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
+                                                      (editor->priv->text_top_toggle),
+                                                      FALSE);
+                        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
+                                                      (editor->priv->text_bottom_toggle),
+                                                      FALSE);
+                } else if (GTK_WIDGET (toggle) ==
+                           GTK_WIDGET (editor->priv->text_bottom_toggle)) {
+                        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
+                                                      (editor->priv->text_top_toggle),
+                                                      FALSE);
+                        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
+                                                      (editor->priv->text_vcenter_toggle),
                                                       FALSE);
                 }
 
@@ -474,6 +532,69 @@ gl_object_editor_get_text_alignment (glObjectEditor      *editor)
 	gl_debug (DEBUG_EDITOR, "END");
 
 	return align;
+}
+
+
+/*****************************************************************************/
+/* Set vertical text alignment.                                              */
+/*****************************************************************************/
+void
+gl_object_editor_set_text_valignment (glObjectEditor      *editor,
+				      glValignment         valign)
+{
+	gl_debug (DEBUG_EDITOR, "START");
+
+
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->text_top_toggle), valign_toggle_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->text_vcenter_toggle), valign_toggle_cb, editor);
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->text_bottom_toggle), valign_toggle_cb, editor);
+
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->text_top_toggle),
+                                      (valign == GL_VALIGN_TOP));
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->text_vcenter_toggle),
+                                      (valign == GL_VALIGN_VCENTER));
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->text_bottom_toggle),
+                                      (valign == GL_VALIGN_BOTTOM));
+
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->text_top_toggle), valign_toggle_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->text_vcenter_toggle), valign_toggle_cb, editor);
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->text_bottom_toggle), valign_toggle_cb, editor);
+
+
+	gl_debug (DEBUG_EDITOR, "END");
+}
+
+
+/*****************************************************************************/
+/* Query vertical text alignment.                                            */
+/*****************************************************************************/
+glValignment
+gl_object_editor_get_text_valignment (glObjectEditor      *editor)
+{
+	glValignment valign;
+
+	gl_debug (DEBUG_EDITOR, "START");
+
+        if (gtk_toggle_button_get_active
+            (GTK_TOGGLE_BUTTON (editor->priv->text_top_toggle))) {
+                valign = GL_VALIGN_TOP;
+        } else
+            if (gtk_toggle_button_get_active
+                (GTK_TOGGLE_BUTTON (editor->priv->text_bottom_toggle))) {
+                valign = GL_VALIGN_BOTTOM;
+        } else
+            if (gtk_toggle_button_get_active
+                (GTK_TOGGLE_BUTTON (editor->priv->text_vcenter_toggle))) {
+                valign = GL_VALIGN_VCENTER;
+        } else {
+                valign = GL_VALIGN_TOP;       /* Should not happen. */
+        }
+
+	gl_debug (DEBUG_EDITOR, "END");
+
+	return valign;
 }
 
 

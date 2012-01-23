@@ -783,6 +783,28 @@ gl_label_object_set_text_alignment (glLabelObject     *object,
 
 
 /****************************************************************************/
+/* Set vertical text alignment for all text contained in object.            */
+/****************************************************************************/
+void
+gl_label_object_set_text_valignment (glLabelObject     *object,
+				     glValignment       text_valignment,
+                                     gboolean           checkpoint)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_text_valignment != NULL )
+        {
+		/* We have an object specific method, use it */
+		GL_LABEL_OBJECT_GET_CLASS(object)->set_text_valignment (object, text_valignment, checkpoint);
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/****************************************************************************/
 /* Set text line spacing for all text contained in object.                  */
 /****************************************************************************/
 void    
@@ -938,6 +960,30 @@ gl_label_object_get_text_alignment (glLabelObject     *object)
         {
 		/* We have an object specific method, use it */
 		ret = GL_LABEL_OBJECT_GET_CLASS(object)->get_text_alignment (object);
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+
+	return ret;
+}
+
+
+/****************************************************************************/
+/* Get text alignment for all text contained in object.                     */
+/****************************************************************************/
+glValignment
+gl_label_object_get_text_valignment (glLabelObject     *object)
+{
+	glValignment ret = GL_VALIGN_TOP;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), GL_VALIGN_TOP);
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_text_valignment != NULL )
+        {
+		/* We have an object specific method, use it */
+		ret = GL_LABEL_OBJECT_GET_CLASS(object)->get_text_valignment (object);
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
