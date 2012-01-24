@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2011-08-04 10:50+0000\n"
-"PO-Revision-Date: 2011-09-17 16:08+0100\n"
+"POT-Creation-Date: 2012-01-08 04:32+0000\n"
+"PO-Revision-Date: 2012-01-24 22:30+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenščina <gnome-si@googlegroups.com>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n%100==4 ? 3 : 0)\n"
 "X-Poedit-Country: SLOVENIA\n"
 "X-Poedit-Language: Slovenian\n"
@@ -46,7 +46,6 @@ msgid "CEPNET"
 msgstr "CEPNET"
 
 #: ../src/bc-backends.c:116
-#| msgid "USPS One Code"
 msgid "One Code"
 msgstr "Ena koda"
 
@@ -1342,12 +1341,10 @@ msgid "_Rotate/Flip"
 msgstr "_Zavrti/zrcali"
 
 #: ../src/ui.c:102
-#| msgid "Alignment:"
 msgid "_Alignment"
 msgstr "_Poravnava"
 
 #: ../src/ui.c:103
-#| msgid "Centers"
 msgid "C_enter"
 msgstr "Sr_edinsko"
 
@@ -1600,7 +1597,6 @@ msgid "Align objects to left edges"
 msgstr "Poravnava predmetov na levi rob"
 
 #: ../src/ui.c:371
-#| msgid "Align left"
 msgid "Align center"
 msgstr "Poravnaj sredinsko"
 
@@ -1613,7 +1609,6 @@ msgid "Align objects to right edges"
 msgstr "Poravnava predmetov na desni rob"
 
 #: ../src/ui.c:385
-#| msgid "Align tops"
 msgid "Align top"
 msgstr "Poravnaj na vrh"
 
@@ -1622,7 +1617,6 @@ msgid "Align objects to top edges"
 msgstr "Poravnava predmetov na zgornji rob"
 
 #: ../src/ui.c:392
-#| msgid "Align left"
 msgid "Align middle"
 msgstr "Poravnaj na sredino"
 
@@ -1631,7 +1625,6 @@ msgid "Align objects to vertical centers"
 msgstr "Poravnava predmetov na navpično središče"
 
 #: ../src/ui.c:399
-#| msgid "Align bottoms"
 msgid "Align bottom"
 msgstr "Poravnaj spodaj"
 
@@ -2096,7 +2089,6 @@ msgid "format:"
 msgstr "oblika:"
 
 #: ../data/ui/object-editor.ui.h:41
-#| msgid "Key:"
 msgid "key:"
 msgstr "tipka:"
 
@@ -2218,7 +2210,6 @@ msgid "3. Round (radius of corner):"
 msgstr "3. Okroglo (polmer kota):"
 
 #: ../data/ui/template-designer.ui.h:13
-#| msgid "2. Waste (overprint allowed):"
 msgid "3. Waste (overprint allowed):"
 msgstr "3. Odpadek (tisk prek je dovoljen):"
 
@@ -2231,7 +2222,6 @@ msgid "4. Horiz. waste (overprint allowed):"
 msgstr "4. Vodoravni vmesni prostor:"
 
 #: ../data/ui/template-designer.ui.h:16
-#| msgid "3. Margin"
 msgid "4. Margin"
 msgstr "4. Rob"
 
@@ -2282,7 +2272,6 @@ msgid "Distance from top edge (y0):"
 msgstr "Razdalja od zgornjega roba (y0):"
 
 #: ../data/ui/template-designer.ui.h:32
-#| msgid "Flip vertically"
 msgid "Elliptical"
 msgstr "Eliptično"
 
@@ -2439,7 +2428,6 @@ msgid "Controls maximum number of recent files tracked."
 msgstr "Določa največje število zabeleženih nedavnih datotek."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:2
-#| msgid "Change the visibility of the drawing toolbar in the current window"
 msgid "Controls visibility of drawing toolbar."
 msgstr "Nadzira vidnost orodne vrstice risanja."
 
@@ -2448,27 +2436,22 @@ msgid "Controls visibility of grid."
 msgstr "Nadzira vidnost mreže."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:4
-#| msgid "Change the visibility of the main toolbar in the current window"
 msgid "Controls visibility of main toolbar."
 msgstr "Nadzira vidnost glavne orodne vrstice."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:5
-#| msgid "Change the visibility of markup lines in the current window"
 msgid "Controls visibility of markup lines."
 msgstr "Nadzira vidnost črt nalepke."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:6
-#| msgid "Change the visibility of the property toolbar in the current window"
 msgid "Controls visibility of property toolbar."
 msgstr "Nadzira vidnost orodne vrstice lastnosti."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:7
-#| msgid "Default Color"
 msgid "Default fill color."
 msgstr "Privzeta barva polnila."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:8
-#| msgid "Font family"
 msgid "Default font family."
 msgstr "Privzeta družina pisav."
 
@@ -2477,37 +2460,30 @@ msgid "Default font italic flag."
 msgstr "Privzeta zastavica za ležečo pisavo."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:10
-#| msgid "Default page size"
 msgid "Default font size."
 msgstr "Privzeta velikost pisave."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:11
-#| msgid "Font weight"
 msgid "Default font weight."
 msgstr "Privzeta debelina pisave."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:12
-#| msgid "Default Color"
 msgid "Default line color."
 msgstr "Privzeta barva črt."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:13
-#| msgid "Line width"
 msgid "Default line width."
 msgstr "Privzeta širina črt."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:14
-#| msgid "Default page size"
 msgid "Default page size."
 msgstr "Privzeta velikost strani."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:15
-#| msgid "Default page size"
 msgid "Default text alignment."
 msgstr "Privzeta poravnava besedila."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:16
-#| msgid "Default Color"
 msgid "Default text color."
 msgstr "Privzeta barva besedila."
 
@@ -2520,17 +2496,14 @@ msgid "Maximum recent files."
 msgstr "Največ nedavnih datotek."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:19
-#| msgid "Recent fonts"
 msgid "Recent colors."
 msgstr "Nedavne barve."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:20
-#| msgid "Recent fonts"
 msgid "Recent fonts."
 msgstr "Nedavne pisave."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:21
-#| msgid "No recent templates found."
 msgid "Recent templates."
 msgstr "Nedavne predloge."
 
@@ -2539,17 +2512,14 @@ msgid "Recently created custom colors."
 msgstr "Nedavno po meri ustvarjene barve."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:23
-#| msgid "Recent fonts"
 msgid "Recently used font families."
 msgstr "Nedavno uporabljene družine pisav."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:24
-#| msgid "No recent templates found."
 msgid "Recently used templates."
 msgstr "Nedavno uporabljene predloge."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:25
-#| msgid "Drawing toolbar"
 msgid "Show/hide drawing toolbar."
 msgstr "Pokaži/Skrij orodno vrstico risanja."
 
@@ -2558,7 +2528,6 @@ msgid "Show/hide grid."
 msgstr "Pokaži/Skrij mrežo."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:27
-#| msgid "Main toolbar"
 msgid "Show/hide main toolbar."
 msgstr "Pokaži/Skrij glavno orodno vrstico."
 
@@ -2567,57 +2536,46 @@ msgid "Show/hide markup."
 msgstr "Pokaži/Skrij kodne oznake."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:29
-#| msgid "Property toolbar"
 msgid "Show/hide property toolbar."
 msgstr "Pokaži/Skrij orodno vrstico lastnosti."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:30
-#| msgid "Select default properties for new objects."
 msgid "The default color of text for new text objects (0xRRGGBBAA)."
 msgstr "Privzeta barva besedila za nove predmete (0xRRGGBBAA)."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:31
-#| msgid "Select default properties for new objects."
 msgid "The default fill color new objects (0xRRGGBBAA)."
 msgstr "Privzeta barva polnila za nove predmete (0xRRGGBBAA)."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:32
-#| msgid "Select default properties for new objects."
 msgid "The default font family for new text objects."
 msgstr "Privzeta družina pisav za nove besedilne predmete."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:33
-#| msgid "Select default properties for new objects."
 msgid "The default font italic state for new text objects."
 msgstr "Privzeto stanje ležeče pisave za nove besedilne predmete."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:34
-#| msgid "Select default properties for new objects."
 msgid "The default font size for new text objects."
 msgstr "Privzeta velikost pisav za nove besedilne predmete."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:35
-#| msgid "Select default properties for new objects."
 msgid "The default font weight for new text objects."
 msgstr "Privzeta teža pisav za nove besedilne predmete."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:36
-#| msgid "Select default properties for new objects."
 msgid "The default line color new objects (0xRRGGBBAA)."
 msgstr "Privzeta barva črt za nove predmete (0xRRGGBBAA)."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:37
-#| msgid "Select default properties for new objects."
 msgid "The default line spacing for new text objects."
 msgstr "Privzeti razmik med vrsticami za nove besedilne predmete."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:38
-#| msgid "Select default properties for new objects."
 msgid "The default line width for new objects."
 msgstr "Privzeta širina črte za nove predmete."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:39
-#| msgid "Select default properties for new objects."
 msgid "The default text alignment for new text objects."
 msgstr "Privzeta poravnava besedila za nove besedilne predmete."
 
@@ -2630,7 +2588,6 @@ msgid "The preferred page size when searching templates."
 msgstr "Prednostna velikost strani pri iskanju predlog."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:42
-#| msgid "Units"
 msgid "Units."
 msgstr "Enote."
 
@@ -2793,12 +2750,10 @@ msgstr "CD/DVD ali drugi mediji"
 #. ===================================================================
 #: ../templates/categories.xml.h:5
 #: ../templates/pearl-iso-templates.xml.h:28
-#| msgid "Shipping labels"
 msgid "Elliptical labels"
 msgstr "Eliptične nalepke"
 
 #: ../templates/categories.xml.h:6
-#| msgid "Foldable business cards"
 msgid "Foldable cards"
 msgstr "Prepogljive vizitke"
 
@@ -2881,6 +2836,7 @@ msgstr "Nalepke robov video kaset"
 #: ../templates/maco-us-templates.xml.h:2
 #: ../templates/meritline-us-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:2
+#: ../templates/sheetlabels-us-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:1
 #: ../templates/zweckform-iso-templates.xml.h:2
 msgid "Address Labels"
@@ -2916,6 +2872,7 @@ msgstr "Poslovne vizitke"
 #: ../templates/misc-iso-templates.xml.h:10
 #: ../templates/misc-other-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:24
+#: ../templates/sheetlabels-us-templates.xml.h:4
 #: ../templates/worldlabel-us-templates.xml.h:2
 #: ../templates/zweckform-iso-templates.xml.h:12
 msgid "CD/DVD Labels"
@@ -2923,6 +2880,7 @@ msgstr "CD/DVD nalepke"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:8
+#: ../templates/sheetlabels-us-templates.xml.h:6
 msgid "CD/DVD Labels (Disc Labels)"
 msgstr "CD/DVD nalepke (nalepke diska)"
 
@@ -2935,6 +2893,7 @@ msgstr "CD/DVD nalepke (nalepke robov)"
 #: ../templates/avery-us-templates.xml.h:12
 #: ../templates/avery-iso-templates.xml.h:16
 #: ../templates/meritline-us-templates.xml.h:4
+#: ../templates/sheetlabels-us-templates.xml.h:8
 #: ../templates/worldlabel-us-templates.xml.h:3
 msgid "Diskette Labels"
 msgstr "Nalepke disket"
@@ -2953,6 +2912,7 @@ msgstr "Nalepke map z datotekami"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:18
+#: ../templates/sheetlabels-us-templates.xml.h:10
 #: ../templates/worldlabel-us-templates.xml.h:5
 msgid "Filing Labels"
 msgstr "Nalepke kartotek"
@@ -2994,6 +2954,7 @@ msgstr "Razglednice"
 #: ../templates/avery-us-templates.xml.h:32
 #: ../templates/dymo-other-templates.xml.h:12
 #: ../templates/meritline-us-templates.xml.h:10
+#: ../templates/sheetlabels-us-templates.xml.h:12
 #: ../templates/worldlabel-us-templates.xml.h:8
 msgid "Return Address Labels"
 msgstr "Nalepke za naslov vračila"
@@ -3003,6 +2964,7 @@ msgstr "Nalepke za naslov vračila"
 #: ../templates/maco-us-templates.xml.h:3
 #: ../templates/meritline-us-templates.xml.h:12
 #: ../templates/misc-us-templates.xml.h:30
+#: ../templates/sheetlabels-us-templates.xml.h:14
 #: ../templates/worldlabel-us-templates.xml.h:9
 msgid "Round Labels"
 msgstr "Okrogle nalepke"
@@ -3012,6 +2974,7 @@ msgstr "Okrogle nalepke"
 #: ../templates/avery-us-templates.xml.h:36
 #: ../templates/dataline-iso-templates.xml.h:10
 #: ../templates/meritline-us-templates.xml.h:14
+#: ../templates/sheetlabels-us-templates.xml.h:16
 #: ../templates/uline-us-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Shipping Labels"
@@ -3036,6 +2999,7 @@ msgstr "Karte za šotorjenje"
 #: ../templates/avery-us-templates.xml.h:44
 #: ../templates/geha-iso-templates.xml.h:27
 #: ../templates/meritline-us-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:18
 #: ../templates/worldlabel-us-templates.xml.h:11
 msgid "Video Tape Face Labels"
 msgstr "Nalepke ploskev video kaset"
@@ -3098,6 +3062,11 @@ msgstr "Mini nalepke"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:32
+msgid "Self-Adhesive Name Badges (Acetate Silk)"
+msgstr "Lepljive imenske priponke"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:34
 msgid "Shipping labels"
 msgstr "Nalepke pošiljanja"
 
@@ -3131,7 +3100,6 @@ msgid "Standard Address Labels 29mm x 90mm"
 msgstr "Običajne nalepke naslovov 29mm x 90mm"
 
 #: ../templates/brother-other-templates.xml.h:21
-#| msgid "Standard Address Labels 29mm x 90mm"
 msgid "Standard Address Labels 38mm x 90mm"
 msgstr "Običajne nalepke naslovov 38mm x 90mm"
 
@@ -3150,7 +3118,6 @@ msgstr "Običajna oblika CD/DVD nalepk (le ploskev)"
 #. ====================================================================
 #: ../templates/dataline-iso-templates.xml.h:6
 #: ../templates/hama-iso-templates.xml.h:13
-#| msgid "CD/DVD Labels"
 msgid "CD/DVD labels"
 msgstr "Nalepke CD/DVD"
 
@@ -3197,12 +3164,10 @@ msgstr "Nalepke datotek arhiva"
 
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:6
-#| msgid "Arch File Labels"
 msgid "Arch File inserts"
 msgstr "Hrbtni vstavki za fascikle"
 
 #: ../templates/geha-iso-templates.xml.h:9
-#| msgid "CD Inlet"
 msgid "CD/DVD Inlet"
 msgstr "Vstavek za CD/DVD"
 
@@ -3224,7 +3189,6 @@ msgstr "Papir za letake"
 #. ====================================================================
 #: ../templates/geha-iso-templates.xml.h:17
 #: ../templates/hama-iso-templates.xml.h:19
-#| msgid "Membership cards"
 msgid "Greeting cards"
 msgstr "Voščilnice"
 
@@ -3236,7 +3200,6 @@ msgstr "Večnamenske nalepke"
 
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:23
-#| msgid "Passport photo labels glossy"
 msgid "Passport photo labels"
 msgstr "Nalepke fotografij za potni list"
 
@@ -3251,13 +3214,11 @@ msgstr "Nalepke fotografij"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:4
-#| msgid "Arch File Labels"
 msgid "Arch File labels"
 msgstr "Hrbtne nalepke za fascikle"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:8
-#| msgid "CD Inlet"
 msgid "CD inlet"
 msgstr "Vstavek CD"
 
@@ -3276,7 +3237,6 @@ msgstr "Robovi CD (spredaj)"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:21
-#| msgid "Mini Labels"
 msgid "Mini Disc labels"
 msgstr "Nalepke Mini Disc"
 
@@ -3287,19 +3247,16 @@ msgstr "Tisku namenjena podloga za miško"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:35
-#| msgid "DVD inlet"
 msgid "VHS inlet"
 msgstr "Vstavek VHS"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:37
-#| msgid "DVD inlet"
 msgid "VHS-C inlet"
 msgstr "Vstavek VHS-C"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:39
-#| msgid "DVD inlet"
 msgid "Video-8 inlet"
 msgstr "Vstavek Video-8"
 
@@ -3310,7 +3267,6 @@ msgstr "Vstavek za disketo Zip"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:43
-#| msgid "Floppy disk labels"
 msgid "Zip disc labels"
 msgstr "Nalepke disket Zip"
 
@@ -3349,7 +3305,6 @@ msgstr "Nalepke A4"
 
 #. *******************************************************************
 #: ../templates/jac-iso-templates.xml.h:6
-#| msgid "CD Labels"
 msgid "PVC labels"
 msgstr "Nalepke PVC"
 
@@ -3360,7 +3315,6 @@ msgstr "Nalepke mini CD-jev"
 
 #. ===================================================================
 #: ../templates/microapp-templates.xml.h:2
-#| msgid "Rectangular Labels"
 msgid "Standard Labels"
 msgstr "Običajne nalepke"
 
@@ -3603,3 +3557,4 @@ msgstr "Pravokotne kopirne nalepke"
 #: ../templates/zweckform-iso-templates.xml.h:30
 msgid "Video Labels (back)"
 msgstr "Video nalepke (zadnja stran)"
+
