@@ -42,4 +42,16 @@
   <Paper-size id="c6"           _name="C6"               pwg_size="iso_c6"       width="114mm"   height="162mm"/>
   <Paper-size id="dl"           _name="DL"               pwg_size="iso_dl"       width="110mm"   height="220mm"/>
 
+  <!-- ISO 217 -->
+  <Paper-size id="RA0"          _name="RA0"          pwg_size="iso_ra0"		width="860mm" height="1220mm"/>
+  <Paper-size id="RA1"          _name="RA1"          pwg_size="iso_ra1"		width="610mm" height="860mm"/>
+  <Paper-size id="RA2"          _name="RA2"          pwg_size="iso_ra2"		width="430mm" height="610mm"/>
+  <Paper-size id="RA3"          _name="RA3"          pwg_size="iso_ra3"		width="305mm" height="430mm"/>
+  <Paper-size id="RA4"          _name="RA4"          pwg_size="iso_ra4"		width="215mm" height="305mm"/>
+  <Paper-size id="SRA0"         _name="SRA0"         pwg_size="iso_sra0"	width="900mm" height="1280mm"/>
+  <Paper-size id="SRA1"         _name="SRA1"         pwg_size="iso_sra1"	width="640mm" height="900mm"/>
+  <Paper-size id="SRA2"         _name="SRA2"         pwg_size="iso_sra2"	width="450mm" height="640mm"/>
+  <Paper-size id="SRA3"         _name="SRA3"         pwg_size="iso_sra3"	width="320mm" height="450mm"/>
+  <Paper-size id="SRA4"         _name="SRA4"         pwg_size="iso_sra4"	width="225mm" height="320mm"/>
+
 </Glabels-paper-sizes>
