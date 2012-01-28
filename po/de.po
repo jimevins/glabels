@@ -2,14 +2,14 @@
 # Copyright (C) 2001-2011 Jim Evins <evins@snaught.com>
 # Marcus Bauer <m@7n7.de>, 2001.
 # Christian Neumair <christian-neumair@web.de>, 2002.
-# Mario Blättermann <mario.blaettermann@gmail.com>, 2008-2011.
+# Mario Blättermann <mario.blaettermann@gmail.com>, 2008-2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels-3_0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2012-01-28 21:40+0000\n"
-"PO-Revision-Date: 2012-01-28 23:43+0100\n"
+"POT-Creation-Date: 2012-01-28 21:50+0000\n"
+"PO-Revision-Date: 2012-01-29 00:10+0100\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -2738,7 +2738,8 @@ msgid "CD/DVD or other media"
 msgstr "CD/DVD oder andere Medien"
 
 #. ===================================================================
-#: ../templates/categories.xml.h:5 ../templates/pearl-iso-templates.xml.h:28
+#: ../templates/categories.xml.h:5 ../templates/endisch-templates.xml.h:1
+#: ../templates/pearl-iso-templates.xml.h:28
 msgid "Elliptical labels"
 msgstr "Elliptische Etiketten"
 
@@ -2759,6 +2760,7 @@ msgstr "Fotoprodukte"
 #. ===================================================================
 #. ********************************************************************
 #: ../templates/categories.xml.h:9 ../templates/ascom-iso-templates.xml.h:6
+#: ../templates/endisch-templates.xml.h:7
 #: ../templates/hama-iso-templates.xml.h:29
 #: ../templates/herma-iso-templates.xml.h:18
 #: ../templates/jac-iso-templates.xml.h:8
@@ -2767,13 +2769,15 @@ msgstr "Rechteckige Etiketten"
 
 #. ====================================================================
 #. ===================================================================
-#: ../templates/categories.xml.h:10 ../templates/hama-iso-templates.xml.h:31
+#: ../templates/categories.xml.h:10 ../templates/endisch-templates.xml.h:8
+#: ../templates/hama-iso-templates.xml.h:31
 #: ../templates/pearl-iso-templates.xml.h:54
 msgid "Round labels"
 msgstr "Runde Etiketten"
 
 #. ====================================================================
-#: ../templates/categories.xml.h:11 ../templates/hama-iso-templates.xml.h:33
+#: ../templates/categories.xml.h:11 ../templates/endisch-templates.xml.h:9
+#: ../templates/hama-iso-templates.xml.h:33
 msgid "Square labels"
 msgstr "Quadratische Etiketten"
 
@@ -3139,6 +3143,34 @@ msgstr "Große Adressaufkleber"
 msgid "Shipping Address Labels"
 msgstr "Versand-Adressaufkleber"
 
+#: ../templates/endisch-templates.xml.h:2
+msgid "Labels A3"
+msgstr "A3-Etiketten"
+
+#. *******************************************************************
+#. ===================================================================
+#: ../templates/endisch-templates.xml.h:3
+#: ../templates/jac-iso-templates.xml.h:4
+#: ../templates/pearl-iso-templates.xml.h:36
+msgid "Labels A4"
+msgstr "Etiketten A4"
+
+#. ===================================================================
+#: ../templates/endisch-templates.xml.h:4
+#: ../templates/pearl-iso-templates.xml.h:38
+msgid "Labels A5"
+msgstr "Etiketten A5"
+
+#. ===================================================================
+#: ../templates/endisch-templates.xml.h:5
+#: ../templates/pearl-iso-templates.xml.h:40
+msgid "Labels A6"
+msgstr "Etiketten A6"
+
+#: ../templates/endisch-templates.xml.h:6
+msgid "Labels SRA3"
+msgstr "SRA3-Etiketten"
+
 #. ===================================================================
 #. ====================================================================
 #. ===================================================================
@@ -3282,13 +3314,6 @@ msgstr "Diskettenaufkleber (nur Vorderseite)"
 #: ../templates/herma-iso-templates.xml.h:20
 msgid "Video Labels (face only)"
 msgstr "Video-Etiketten (nur Vorderseite)"
-
-#. *******************************************************************
-#. ===================================================================
-#: ../templates/jac-iso-templates.xml.h:4
-#: ../templates/pearl-iso-templates.xml.h:36
-msgid "Labels A4"
-msgstr "Etiketten A4"
 
 #. *******************************************************************
 #: ../templates/jac-iso-templates.xml.h:6
@@ -3459,16 +3484,6 @@ msgstr "Faltbare Visitenkarten"
 #: ../templates/pearl-iso-templates.xml.h:34
 msgid "Foldable business cards glossy/dull"
 msgstr "Faltbare Visitenkarten glänzend/matt"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:38
-msgid "Labels A5"
-msgstr "Etiketten A5"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:40
-msgid "Labels A6"
-msgstr "Etiketten A6"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:44
