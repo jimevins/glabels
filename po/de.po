@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels-3_0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2011-12-19 19:27+0000\n"
-"PO-Revision-Date: 2011-12-28 22:01+0100\n"
+"POT-Creation-Date: 2012-01-28 21:40+0000\n"
+"PO-Revision-Date: 2012-01-28 23:43+0100\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -2068,7 +2068,7 @@ msgstr "Wählen Sie die vorgegebenen Eigenschaften für neue Objekte."
 msgid "Select locale specific behavior."
 msgstr "Wählen Sie hier Einstellungen gemäß Ihrer Sprache/Ihres Landes."
 
-#: ../data/ui/prefs-dialog.ui.h:18 ../templates/paper-sizes.xml.h:35
+#: ../data/ui/prefs-dialog.ui.h:18 ../templates/paper-sizes.xml.h:46
 msgid "US Letter"
 msgstr "US-Letter"
 
@@ -2665,12 +2665,53 @@ msgstr "DIN lang"
 msgid "Monarch Envelope"
 msgstr "Monarch-Briefumschlag"
 
-#: ../templates/paper-sizes.xml.h:32
+#. ISO 217
+#: ../templates/paper-sizes.xml.h:33
+msgid "RA0"
+msgstr "RA0"
+
+#: ../templates/paper-sizes.xml.h:34
+msgid "RA1"
+msgstr "RA1"
+
+#: ../templates/paper-sizes.xml.h:35
+msgid "RA2"
+msgstr "RA2"
+
+#: ../templates/paper-sizes.xml.h:36
+msgid "RA3"
+msgstr "RA3"
+
+#: ../templates/paper-sizes.xml.h:37
+msgid "RA4"
+msgstr "RA4"
+
+#: ../templates/paper-sizes.xml.h:38
+msgid "SRA0"
+msgstr "SRA0"
+
+#: ../templates/paper-sizes.xml.h:39
+msgid "SRA1"
+msgstr "SRA1"
+
+#: ../templates/paper-sizes.xml.h:40
+msgid "SRA2"
+msgstr "SRA2"
+
+#: ../templates/paper-sizes.xml.h:41
+msgid "SRA3"
+msgstr "SRA3"
+
+#: ../templates/paper-sizes.xml.h:42
+msgid "SRA4"
+msgstr "SRA4"
+
+#: ../templates/paper-sizes.xml.h:43
 msgid "US Executive"
 msgstr "US Executive"
 
 #. Other US paper sizes
-#: ../templates/paper-sizes.xml.h:34
+#: ../templates/paper-sizes.xml.h:45
 msgid "US Legal"
 msgstr "US Legal"
 
@@ -2756,7 +2797,7 @@ msgstr "CD-Einleger"
 #: ../templates/databecker-iso-templates.xml.h:10
 #: ../templates/hama-iso-templates.xml.h:27
 #: ../templates/herma-iso-templates.xml.h:16
-#: ../templates/misc-iso-templates.xml.h:30
+#: ../templates/misc-iso-templates.xml.h:32
 #: ../templates/zweckform-iso-templates.xml.h:28
 msgid "Rectangular Labels"
 msgstr "Rechteckige Etiketten"
@@ -3139,6 +3180,7 @@ msgstr "Grußkarten"
 
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:21
+#: ../templates/misc-iso-templates.xml.h:28
 #: ../templates/misc-other-templates.xml.h:4
 msgid "Multi-Purpose Labels"
 msgstr "Mehrzweck-Etiketten"
@@ -3318,7 +3360,7 @@ msgstr "PRO-CD-Etiketten 2-up (nur Vorderseite)"
 #. ===================================================================
 #. TODO: Is this the actual part #?
 #: ../templates/misc-us-templates.xml.h:28
-#: ../templates/misc-iso-templates.xml.h:28
+#: ../templates/misc-iso-templates.xml.h:30
 msgid "PRO CD Labels 2-up (face only)"
 msgstr "PRO-CD-Etiketten 2-up (nur Vorderseite)"
 
@@ -3363,13 +3405,13 @@ msgid "Inkjet/Laser Labels 70x37mm"
 msgstr "Inkjet/Laseretiketten 70x37mm"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:32
+#: ../templates/misc-iso-templates.xml.h:34
 #: ../templates/pearl-iso-templates.xml.h:62
 msgid "Self-adhesive labels"
 msgstr "Selbstklebende Etiketten"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:34
+#: ../templates/misc-iso-templates.xml.h:36
 msgid "Universal Labels"
 msgstr "Universelle Etiketten"
 
