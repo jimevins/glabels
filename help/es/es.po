@@ -3,14 +3,14 @@
 # Copyright (C) 2010 glabels's COPYRIGHT HOLDER
 # This file is distributed under the same license as the glabels package.
 # Jorge González <jorgegonz@svn.gnome.org>, 2010, 2011.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-20 18:28+0000\n"
-"PO-Revision-Date: 2011-06-23 19:10+0200\n"
+"POT-Creation-Date: 2012-01-29 16:36+0000\n"
+"PO-Revision-Date: 2012-01-29 21:08+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -328,18 +328,22 @@ msgstr "Elimina los objetos seleccionados sin ponerlos en el portapapeles."
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/printfile.page:47(None)
+#| msgid ""
+#| "@@image: 'figures/print-copies.png'; md5=1896f693ac50b47ea5abaafb59b5e8cc"
 msgid ""
-"@@image: 'figures/print-copies.png'; md5=1896f693ac50b47ea5abaafb59b5e8cc"
+"@@image: 'figures/print-copies.png'; md5=ee473352947fe25c7adaa9f9a052c3e9"
 msgstr ""
-"@@image: 'figures/print-copies.png'; md5=1896f693ac50b47ea5abaafb59b5e8cc"
+"@@image: 'figures/print-copies.png'; md5=ee473352947fe25c7adaa9f9a052c3e9"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/printfile.page:70(None)
+#| msgid ""
+#| "@@image: 'figures/print-merge.png'; md5=65a719b5624f88fdb40e2322454819a6"
 msgid ""
-"@@image: 'figures/print-merge.png'; md5=65a719b5624f88fdb40e2322454819a6"
+"@@image: 'figures/print-merge.png'; md5=ee70bd2150a6cd46e96ce5c0531eb47b"
 msgstr ""
-"@@image: 'figures/print-merge.png'; md5=65a719b5624f88fdb40e2322454819a6"
+"@@image: 'figures/print-merge.png'; md5=ee70bd2150a6cd46e96ce5c0531eb47b"
 
 #: C/printfile.page:9(desc)
 msgid "How to print your labels and cards."
@@ -699,26 +703,32 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex3.page:74(None)
+#| msgid ""
+#| "@@image: 'figures/merge-ex3-2.png'; md5=28a15319cea58be75ff789c766dc0717"
 msgid ""
-"@@image: 'figures/merge-ex3-2.png'; md5=28a15319cea58be75ff789c766dc0717"
+"@@image: 'figures/merge-ex3-2.png'; md5=51fe322868241d083ec83ae824d927d7"
 msgstr ""
-"@@image: 'figures/merge-ex3-2.png'; md5=28a15319cea58be75ff789c766dc0717"
+"@@image: 'figures/merge-ex3-2.png'; md5=51fe322868241d083ec83ae824d927d7"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex3.page:88(None)
+#| msgid ""
+#| "@@image: 'figures/merge-ex2-4.png'; md5=67391b05421901a36d276736c1f664dd"
 msgid ""
-"@@image: 'figures/merge-ex3-3.png'; md5=443d59a44d8ddf5580087a772d4e3eec"
+"@@image: 'figures/merge-ex3-3.png'; md5=f731f35b38ddd51499e636733bacc7a6"
 msgstr ""
-"@@image: 'figures/merge-ex3-3.png'; md5=443d59a44d8ddf5580087a772d4e3eec"
+"@@image: 'figures/merge-ex3-3.png'; md5=f731f35b38ddd51499e636733bacc7a6"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex3.page:99(None)
+#| msgid ""
+#| "@@image: 'figures/merge-ex3-1.png'; md5=fb5bf719857fb0a49517ecb50124384d"
 msgid ""
-"@@image: 'figures/merge-ex3-4.png'; md5=1995114757cccebda45b686caeb37fa7"
+"@@image: 'figures/merge-ex3-4.png'; md5=4415be9d5b59fb57093077bcaece014a"
 msgstr ""
-"@@image: 'figures/merge-ex3-4.png'; md5=1995114757cccebda45b686caeb37fa7"
+"@@image: 'figures/merge-ex3-4.png'; md5=4415be9d5b59fb57093077bcaece014a"
 
 #: C/merge-ex3.page:9(desc)
 msgid ""
@@ -889,18 +899,22 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex2.page:52(None)
+#| msgid ""
+#| "@@image: 'figures/merge-ex2-1.png'; md5=c9db139c5b7188e101470dc74684a118"
 msgid ""
-"@@image: 'figures/merge-ex2-1.png'; md5=c9db139c5b7188e101470dc74684a118"
+"@@image: 'figures/merge-ex2-1.png'; md5=817abd0c8deb8a0b95acb7881d8ddb85"
 msgstr ""
-"@@image: 'figures/merge-ex2-1.png'; md5=c9db139c5b7188e101470dc74684a118"
+"@@image: 'figures/merge-ex2-1.png'; md5=817abd0c8deb8a0b95acb7881d8ddb85"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex2.page:70(None)
+#| msgid ""
+#| "@@image: 'figures/merge-ex3-2.png'; md5=28a15319cea58be75ff789c766dc0717"
 msgid ""
-"@@image: 'figures/merge-ex2-2.png'; md5=240b4e4ebaa270e0e8bf84c5bfd7233e"
+"@@image: 'figures/merge-ex2-2.png'; md5=2012870be14752300e0cde420471714a"
 msgstr ""
-"@@image: 'figures/merge-ex2-2.png'; md5=240b4e4ebaa270e0e8bf84c5bfd7233e"
+"@@image: 'figures/merge-ex2-2.png'; md5=2012870be14752300e0cde420471714a"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
@@ -1039,34 +1053,42 @@ msgstr "Vista previa de las etiquetas de dirección"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex1.page:50(None)
+#| msgid ""
+#| "@@image: 'figures/merge-ex1-4.png'; md5=8648ff55dd2e531a1a82b797f0430279"
 msgid ""
-"@@image: 'figures/merge-ex1-1.png'; md5=6e1cda54b797f875f379b657370d87c8"
+"@@image: 'figures/merge-ex1-1.png'; md5=c1fe7f5f05a81d9c04f9d03bb7071798"
 msgstr ""
-"@@image: 'figures/merge-ex1-1.png'; md5=6e1cda54b797f875f379b657370d87c8"
+"@@image: 'figures/merge-ex1-1.png'; md5=c1fe7f5f05a81d9c04f9d03bb7071798"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex1.page:63(None)
+#| msgid ""
+#| "@@image: 'figures/merge-ex1-2.png'; md5=2ccad04ae5830f5f4a6a601d9fabed6a"
 msgid ""
-"@@image: 'figures/merge-ex1-2.png'; md5=2ccad04ae5830f5f4a6a601d9fabed6a"
+"@@image: 'figures/merge-ex1-2.png'; md5=45c30ca8de2478387404c7c5f45cf3d0"
 msgstr ""
-"@@image: 'figures/merge-ex1-2.png'; md5=2ccad04ae5830f5f4a6a601d9fabed6a"
+"@@image: 'figures/merge-ex1-2.png'; md5=45c30ca8de2478387404c7c5f45cf3d0"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex1.page:84(None)
+#| msgid ""
+#| "@@image: 'figures/merge-ex3-4.png'; md5=1995114757cccebda45b686caeb37fa7"
 msgid ""
-"@@image: 'figures/merge-ex1-3.png'; md5=858855ab1a392db74b70cdb2bdb27ddd"
+"@@image: 'figures/merge-ex1-3.png'; md5=1c23af6c90e5185cdc9e14d19baeb9f6"
 msgstr ""
-"@@image: 'figures/merge-ex1-3.png'; md5=858855ab1a392db74b70cdb2bdb27ddd"
+"@@image: 'figures/merge-ex1-3.png'; md5=1c23af6c90e5185cdc9e14d19baeb9f6"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex1.page:95(None)
+#| msgid ""
+#| "@@image: 'figures/merge-ex1-2.png'; md5=2ccad04ae5830f5f4a6a601d9fabed6a"
 msgid ""
-"@@image: 'figures/merge-ex1-4.png'; md5=8648ff55dd2e531a1a82b797f0430279"
+"@@image: 'figures/merge-ex1-4.png'; md5=1cc9f9adcb5a6e98ff5068531e6933f0"
 msgstr ""
-"@@image: 'figures/merge-ex1-4.png'; md5=8648ff55dd2e531a1a82b797f0430279"
+"@@image: 'figures/merge-ex1-4.png'; md5=1cc9f9adcb5a6e98ff5068531e6933f0"
 
 #: C/merge-ex1.page:9(desc)
 msgid "Create name tags from a CSV file."
@@ -1222,9 +1244,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/mancreate.page:727(None)
-#| msgid ""
-#| "@@image: 'figures/glabels-template-cd-label.png'; "
-#| "md5=c7952ac1b26ecbfa53facfbbf6486841"
 msgid ""
 "@@image: 'figures/layouts-cdlabel.png'; md5=0c41a95dc82b5a426e934751faf86872"
 msgstr ""
@@ -2118,7 +2137,6 @@ msgid "A common example for multiple layouts is a sheet with three CD labels:"
 msgstr "Un ejemplo común de varios diseños es una hoja con etiquetas para CD:"
 
 #: C/mancreate.page:726(desc) C/mancreate.page:728(p)
-#| msgid "CD label parameters"
 msgid "CD label sheet"
 msgstr "Hoja de etiquetas de CD"
 
@@ -2329,12 +2347,15 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/index.page:47(None)
+#| msgid ""
+#| "@@image: 'figures/introduction-glabels-main-window.png'; "
+#| "md5=fceca242699bb062a5ac243a5f962f3b"
 msgid ""
 "@@image: 'figures/introduction-glabels-main-window.png'; "
-"md5=fceca242699bb062a5ac243a5f962f3b"
+"md5=9ee2b2cc026ee8cba3c881b370a14313"
 msgstr ""
 "@@image: 'figures/introduction-glabels-main-window.png'; "
-"md5=fceca242699bb062a5ac243a5f962f3b"
+"md5=9ee2b2cc026ee8cba3c881b370a14313"
 
 #: C/index.page:7(title) C/index.page:8(title)
 msgid "gLabels label and business card designer"
@@ -2402,12 +2423,15 @@ msgstr "Uso avanzado"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/editprop.page:35(None)
+#| msgid ""
+#| "@@image: 'figures/object-editor-sidebar.png'; "
+#| "md5=828ffc05f69e1914595cc1e3d7401e2f"
 msgid ""
 "@@image: 'figures/object-editor-sidebar.png'; "
-"md5=828ffc05f69e1914595cc1e3d7401e2f"
+"md5=68be18416cc17964992fe0c7e311e0ef"
 msgstr ""
 "@@image: 'figures/object-editor-sidebar.png'; "
-"md5=828ffc05f69e1914595cc1e3d7401e2f"
+"md5=68be18416cc17964992fe0c7e311e0ef"
 
 #: C/editprop.page:9(desc)
 msgid "Change the properties of objects."
@@ -3215,6 +3239,26 @@ msgstr ""
 "Daniel Mustieles <daniel.mustieles@gmail.com>, 2010\n"
 "Jorge González <jorgegonz@svn.gnome.org>, 2010"
 
+#~ msgid ""
+#~ "@@image: 'figures/merge-ex3-3.png'; md5=443d59a44d8ddf5580087a772d4e3eec"
+#~ msgstr ""
+#~ "@@image: 'figures/merge-ex3-3.png'; md5=443d59a44d8ddf5580087a772d4e3eec"
+
+#~ msgid ""
+#~ "@@image: 'figures/merge-ex2-2.png'; md5=240b4e4ebaa270e0e8bf84c5bfd7233e"
+#~ msgstr ""
+#~ "@@image: 'figures/merge-ex2-2.png'; md5=240b4e4ebaa270e0e8bf84c5bfd7233e"
+
+#~ msgid ""
+#~ "@@image: 'figures/merge-ex1-1.png'; md5=6e1cda54b797f875f379b657370d87c8"
+#~ msgstr ""
+#~ "@@image: 'figures/merge-ex1-1.png'; md5=6e1cda54b797f875f379b657370d87c8"
+
+#~ msgid ""
+#~ "@@image: 'figures/merge-ex1-3.png'; md5=858855ab1a392db74b70cdb2bdb27ddd"
+#~ msgstr ""
+#~ "@@image: 'figures/merge-ex1-3.png'; md5=858855ab1a392db74b70cdb2bdb27ddd"
+
 #~ msgid "@@image: 'figures/merge-ex3-1.png'; md5=THIS FILE DOESN'T EXIST"
 #~ msgstr "@@image: 'figures/merge-ex3-1.png'; md5=THIS FILE DOESN'T EXIST"
 
@@ -3223,11 +3267,6 @@ msgstr ""
 
 #~ msgid "@@image: 'figures/merge-ex3-4.png'; md5=THIS FILE DOESN'T EXIST"
 #~ msgstr "@@image: 'figures/merge-ex3-4.png'; md5=THIS FILE DOESN'T EXIST"
-
-#~ msgid ""
-#~ "@@image: 'figures/merge-ex2-4.png'; md5=67391b05421901a36d276736c1f664dd"
-#~ msgstr ""
-#~ "@@image: 'figures/merge-ex2-4.png'; md5=67391b05421901a36d276736c1f664dd"
 
 #~ msgid ""
 #~ "@@image: 'figures/merge-ex1-1.png'; md5=731c7bcd2ff66d18300e87f1c3d9ec0e"
