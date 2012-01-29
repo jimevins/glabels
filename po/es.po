@@ -1,20 +1,20 @@
 # Spanish translation of glabels.
 # sergio rivadero <sergiorivadero@argentina.com>, 2005.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011.
 # Jorge González <jorgegonz@svn.gnome.org>, 2010, 2011.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2011-08-09 07:46+0000\n"
-"PO-Revision-Date: 2011-08-12 15:53+0200\n"
-"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
+"POT-Creation-Date: 2012-01-29 20:08+0000\n"
+"PO-Revision-Date: 2012-01-29 21:31+0100\n"
+"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../src/bc-backends.c:81
 msgid "Built-in"
@@ -2058,7 +2058,7 @@ msgstr "Seleccione las propiedades predeterminadoas para los nuevos objetos."
 msgid "Select locale specific behavior."
 msgstr "Seleccione las propiedades del documento."
 
-#: ../data/ui/prefs-dialog.ui.h:18 ../templates/paper-sizes.xml.h:35
+#: ../data/ui/prefs-dialog.ui.h:18 ../templates/paper-sizes.xml.h:46
 msgid "US Letter"
 msgstr "Carta"
 
@@ -2659,12 +2659,63 @@ msgstr "DL"
 msgid "Monarch Envelope"
 msgstr "Sobre Monarch"
 
-#: ../templates/paper-sizes.xml.h:32
+#. ISO 217
+#: ../templates/paper-sizes.xml.h:33
+#| msgid "A0"
+msgid "RA0"
+msgstr "RA0"
+
+#: ../templates/paper-sizes.xml.h:34
+#| msgid "A1"
+msgid "RA1"
+msgstr "RA1"
+
+#: ../templates/paper-sizes.xml.h:35
+#| msgid "A2"
+msgid "RA2"
+msgstr "RA2"
+
+#: ../templates/paper-sizes.xml.h:36
+#| msgid "A3"
+msgid "RA3"
+msgstr "RA3"
+
+#: ../templates/paper-sizes.xml.h:37
+#| msgid "A4"
+msgid "RA4"
+msgstr "RA4"
+
+#: ../templates/paper-sizes.xml.h:38
+#| msgid "A0"
+msgid "SRA0"
+msgstr "SRA0"
+
+#: ../templates/paper-sizes.xml.h:39
+#| msgid "A1"
+msgid "SRA1"
+msgstr "SRA1"
+
+#: ../templates/paper-sizes.xml.h:40
+#| msgid "A2"
+msgid "SRA2"
+msgstr "SRA2"
+
+#: ../templates/paper-sizes.xml.h:41
+#| msgid "A3"
+msgid "SRA3"
+msgstr "SRA3"
+
+#: ../templates/paper-sizes.xml.h:42
+#| msgid "A4"
+msgid "SRA4"
+msgstr "SRA4"
+
+#: ../templates/paper-sizes.xml.h:43
 msgid "US Executive"
 msgstr "Ejecutivo"
 
 #. Other US paper sizes
-#: ../templates/paper-sizes.xml.h:34
+#: ../templates/paper-sizes.xml.h:45
 msgid "US Legal"
 msgstr "Legal"
 
@@ -2691,7 +2742,8 @@ msgid "CD/DVD or other media"
 msgstr "CD/DVD u otros soportes"
 
 #. ===================================================================
-#: ../templates/categories.xml.h:5 ../templates/pearl-iso-templates.xml.h:28
+#: ../templates/categories.xml.h:5 ../templates/endisch-templates.xml.h:1
+#: ../templates/pearl-iso-templates.xml.h:28
 msgid "Elliptical labels"
 msgstr "Etiquetas elípticas"
 
@@ -2712,6 +2764,7 @@ msgstr "Productos para fotos"
 #. ===================================================================
 #. ********************************************************************
 #: ../templates/categories.xml.h:9 ../templates/ascom-iso-templates.xml.h:6
+#: ../templates/endisch-templates.xml.h:7
 #: ../templates/hama-iso-templates.xml.h:29
 #: ../templates/herma-iso-templates.xml.h:18
 #: ../templates/jac-iso-templates.xml.h:8
@@ -2720,13 +2773,15 @@ msgstr "Etiquetas rectangulares"
 
 #. ====================================================================
 #. ===================================================================
-#: ../templates/categories.xml.h:10 ../templates/hama-iso-templates.xml.h:31
+#: ../templates/categories.xml.h:10 ../templates/endisch-templates.xml.h:8
+#: ../templates/hama-iso-templates.xml.h:31
 #: ../templates/pearl-iso-templates.xml.h:54
 msgid "Round labels"
 msgstr "Etiquetas redondeadas"
 
 #. ====================================================================
-#: ../templates/categories.xml.h:11 ../templates/hama-iso-templates.xml.h:33
+#: ../templates/categories.xml.h:11 ../templates/endisch-templates.xml.h:9
+#: ../templates/hama-iso-templates.xml.h:33
 msgid "Square labels"
 msgstr "Etiquetas cuadradas"
 
@@ -2750,7 +2805,7 @@ msgstr "Interior de CD"
 #: ../templates/databecker-iso-templates.xml.h:10
 #: ../templates/hama-iso-templates.xml.h:27
 #: ../templates/herma-iso-templates.xml.h:16
-#: ../templates/misc-iso-templates.xml.h:30
+#: ../templates/misc-iso-templates.xml.h:32
 #: ../templates/zweckform-iso-templates.xml.h:28
 msgid "Rectangular Labels"
 msgstr "Etiquetas rectangulares"
@@ -2775,6 +2830,7 @@ msgstr "Etiquetas de video (lateral)"
 #: ../templates/maco-us-templates.xml.h:2
 #: ../templates/meritline-us-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:2
+#: ../templates/sheetlabels-us-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:1
 #: ../templates/zweckform-iso-templates.xml.h:2
 msgid "Address Labels"
@@ -2810,6 +2866,7 @@ msgstr "Tarjetas de visita"
 #: ../templates/misc-iso-templates.xml.h:10
 #: ../templates/misc-other-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:24
+#: ../templates/sheetlabels-us-templates.xml.h:4
 #: ../templates/worldlabel-us-templates.xml.h:2
 #: ../templates/zweckform-iso-templates.xml.h:12
 msgid "CD/DVD Labels"
@@ -2817,6 +2874,7 @@ msgstr "Etiquetas de CD/DVD"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:8
+#: ../templates/sheetlabels-us-templates.xml.h:6
 msgid "CD/DVD Labels (Disc Labels)"
 msgstr "Etiquetas de CD/DVD (etiquetas de discos)"
 
@@ -2829,6 +2887,7 @@ msgstr "Etiquetas de CD/DVD (etiquetas laterales)"
 #: ../templates/avery-us-templates.xml.h:12
 #: ../templates/avery-iso-templates.xml.h:16
 #: ../templates/meritline-us-templates.xml.h:4
+#: ../templates/sheetlabels-us-templates.xml.h:8
 #: ../templates/worldlabel-us-templates.xml.h:3
 msgid "Diskette Labels"
 msgstr "Etiquetas de diskettes"
@@ -2847,6 +2906,7 @@ msgstr "Etiquetas de carpetas de archivos"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:18
+#: ../templates/sheetlabels-us-templates.xml.h:10
 #: ../templates/worldlabel-us-templates.xml.h:5
 msgid "Filing Labels"
 msgstr "Etiquetas para archivado"
@@ -2888,6 +2948,7 @@ msgstr "Postales"
 #: ../templates/avery-us-templates.xml.h:32
 #: ../templates/dymo-other-templates.xml.h:12
 #: ../templates/meritline-us-templates.xml.h:10
+#: ../templates/sheetlabels-us-templates.xml.h:12
 #: ../templates/worldlabel-us-templates.xml.h:8
 msgid "Return Address Labels"
 msgstr "Etiquetas de dirección de remitente"
@@ -2897,6 +2958,7 @@ msgstr "Etiquetas de dirección de remitente"
 #: ../templates/maco-us-templates.xml.h:3
 #: ../templates/meritline-us-templates.xml.h:12
 #: ../templates/misc-us-templates.xml.h:30
+#: ../templates/sheetlabels-us-templates.xml.h:14
 #: ../templates/worldlabel-us-templates.xml.h:9
 msgid "Round Labels"
 msgstr "Etiquetas redondeadas"
@@ -2906,6 +2968,7 @@ msgstr "Etiquetas redondeadas"
 #: ../templates/avery-us-templates.xml.h:36
 #: ../templates/dataline-iso-templates.xml.h:10
 #: ../templates/meritline-us-templates.xml.h:14
+#: ../templates/sheetlabels-us-templates.xml.h:16
 #: ../templates/uline-us-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Shipping Labels"
@@ -2930,6 +2993,7 @@ msgstr "Tarjetas de visita"
 #: ../templates/avery-us-templates.xml.h:44
 #: ../templates/geha-iso-templates.xml.h:27
 #: ../templates/meritline-us-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:18
 #: ../templates/worldlabel-us-templates.xml.h:11
 msgid "Video Tape Face Labels"
 msgstr "Etiquetas de video (frente)"
@@ -2992,6 +3056,11 @@ msgstr "Minietiquetas"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:32
+msgid "Self-Adhesive Name Badges (Acetate Silk)"
+msgstr "Distintivos autoadhesivos (acetato de seda)"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:34
 msgid "Shipping labels"
 msgstr "Etiquetas de envío"
 
@@ -3078,6 +3147,36 @@ msgstr "Etiquetas grandes de dirección"
 msgid "Shipping Address Labels"
 msgstr "Etiquetas de dirección para transporte"
 
+#: ../templates/endisch-templates.xml.h:2
+#| msgid "Labels A4"
+msgid "Labels A3"
+msgstr "Etiquetas A3"
+
+#. *******************************************************************
+#. ===================================================================
+#: ../templates/endisch-templates.xml.h:3
+#: ../templates/jac-iso-templates.xml.h:4
+#: ../templates/pearl-iso-templates.xml.h:36
+msgid "Labels A4"
+msgstr "Etiquetas A4"
+
+#. ===================================================================
+#: ../templates/endisch-templates.xml.h:4
+#: ../templates/pearl-iso-templates.xml.h:38
+msgid "Labels A5"
+msgstr "Etiquetas A5"
+
+#. ===================================================================
+#: ../templates/endisch-templates.xml.h:5
+#: ../templates/pearl-iso-templates.xml.h:40
+msgid "Labels A6"
+msgstr "Etiquetas A6"
+
+#: ../templates/endisch-templates.xml.h:6
+#| msgid "Labels A4"
+msgid "Labels SRA3"
+msgstr "Etiquetas SRA3"
+
 # REVISAR
 #. ===================================================================
 #. ====================================================================
@@ -3121,6 +3220,7 @@ msgstr "Tarjetas de felicitación"
 
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:21
+#: ../templates/misc-iso-templates.xml.h:28
 #: ../templates/misc-other-templates.xml.h:4
 msgid "Multi-Purpose Labels"
 msgstr "Etiquetas multipropósito"
@@ -3228,13 +3328,6 @@ msgid "Video Labels (face only)"
 msgstr "Etiqeutas de video (solo frente)"
 
 #. *******************************************************************
-#. ===================================================================
-#: ../templates/jac-iso-templates.xml.h:4
-#: ../templates/pearl-iso-templates.xml.h:36
-msgid "Labels A4"
-msgstr "Etiquetas A4"
-
-#. *******************************************************************
 #: ../templates/jac-iso-templates.xml.h:6
 msgid "PVC labels"
 msgstr "Etiquetas de PVC"
@@ -3308,7 +3401,7 @@ msgstr "Etiquetas para CD (sólo carátula)"
 #. ===================================================================
 #. TODO: Is this the actual part #?
 #: ../templates/misc-us-templates.xml.h:28
-#: ../templates/misc-iso-templates.xml.h:28
+#: ../templates/misc-iso-templates.xml.h:30
 msgid "PRO CD Labels 2-up (face only)"
 msgstr "PRO CD Labels 2-up (sólo la cara)"
 
@@ -3355,13 +3448,13 @@ msgid "Inkjet/Laser Labels 70x37mm"
 msgstr "Etiquetas para impresora de inyección/láser de 70x37mm"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:32
+#: ../templates/misc-iso-templates.xml.h:34
 #: ../templates/pearl-iso-templates.xml.h:62
 msgid "Self-adhesive labels"
 msgstr "Etiquetas autoadhesivas"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:34
+#: ../templates/misc-iso-templates.xml.h:36
 msgid "Universal Labels"
 msgstr "Etiquetas universales"
 
@@ -3409,16 +3502,6 @@ msgstr "Tarjetas de visita plegables"
 #: ../templates/pearl-iso-templates.xml.h:34
 msgid "Foldable business cards glossy/dull"
 msgstr "Etiquetas de visita plegables brillantes/mate"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:38
-msgid "Labels A5"
-msgstr "Etiquetas A5"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:40
-msgid "Labels A6"
-msgstr "Etiquetas A6"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:44
