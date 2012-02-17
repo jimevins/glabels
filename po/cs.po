@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2011-12-28 21:07+0000\n"
-"PO-Revision-Date: 2012-01-07 10:21+0100\n"
+"POT-Creation-Date: 2012-01-29 20:12+0000\n"
+"PO-Revision-Date: 2012-02-17 11:17+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -550,7 +550,7 @@ msgstr "Kritická chyba aplikace gLabels!"
 msgid "New Label or Card"
 msgstr "Nová etiketa či vizitka"
 
-#: ../src/file.c:175 ../src/label.c:601 ../src/label.c:645
+#: ../src/file.c:175 ../src/label.c:602 ../src/label.c:646
 msgid "Label properties"
 msgstr "Vlastnosti etikety"
 
@@ -775,93 +775,93 @@ msgid "Create box object"
 msgstr "Vytvořit obdelník"
 
 #: ../src/label-box.c:230 ../src/label-ellipse.c:232
-#: ../data/ui/property-bar.ui.h:3
+#: ../data/ui/property-bar.ui.h:5
 msgid "Fill color"
 msgstr "Barva výplně"
 
 #: ../src/label-box.c:261 ../src/label-ellipse.c:261 ../src/label-line.c:212
-#: ../data/ui/property-bar.ui.h:8
+#: ../data/ui/property-bar.ui.h:10
 msgid "Line color"
 msgstr "Barva obrysu"
 
 #: ../src/label-box.c:289 ../src/label-ellipse.c:290 ../src/label-line.c:241
-#: ../data/ui/property-bar.ui.h:9
+#: ../data/ui/property-bar.ui.h:11
 msgid "Line width"
 msgstr "Tloušťka obrysu"
 
-#: ../src/label.c:405
+#: ../src/label.c:406
 msgid "Untitled"
 msgstr "Nepojmenovaný"
 
-#: ../src/label.c:719 ../src/ui.c:420
+#: ../src/label.c:720 ../src/ui.c:420
 msgid "Merge properties"
 msgstr "Vlastnosti slučování"
 
-#: ../src/label.c:1215 ../src/ui.c:213
+#: ../src/label.c:1216 ../src/ui.c:213
 msgid "Delete"
 msgstr "Smazat"
 
-#: ../src/label.c:1248 ../src/ui.c:322
+#: ../src/label.c:1249 ../src/ui.c:322
 msgid "Bring to front"
 msgstr "Přenést dopředu"
 
-#: ../src/label.c:1284 ../src/ui.c:329
+#: ../src/label.c:1285 ../src/ui.c:329
 msgid "Send to back"
 msgstr "Odsunout dozadu"
 
-#: ../src/label.c:1325
+#: ../src/label.c:1326
 msgid "Rotate"
 msgstr "Otočit"
 
-#: ../src/label.c:1360 ../src/ui.c:336
+#: ../src/label.c:1361 ../src/ui.c:336
 msgid "Rotate left"
 msgstr "Otočit doleva"
 
-#: ../src/label.c:1393 ../src/ui.c:343
+#: ../src/label.c:1394 ../src/ui.c:343
 msgid "Rotate right"
 msgstr "Otočit doprava"
 
-#: ../src/label.c:1428 ../src/ui.c:350
+#: ../src/label.c:1429 ../src/ui.c:350
 msgid "Flip horizontally"
 msgstr "Překlopit vodorovně"
 
-#: ../src/label.c:1463 ../src/ui.c:357
+#: ../src/label.c:1464 ../src/ui.c:357
 msgid "Flip vertically"
 msgstr "Překlopit svisle"
 
-#: ../src/label.c:1503 ../src/ui.c:364
+#: ../src/label.c:1504 ../src/ui.c:364
 msgid "Align left"
 msgstr "Zarovnat doleva"
 
-#: ../src/label.c:1560 ../src/ui.c:378
+#: ../src/label.c:1561 ../src/ui.c:378
 msgid "Align right"
 msgstr "Zarovnat doprava"
 
-#: ../src/label.c:1621
+#: ../src/label.c:1622
 msgid "Align horizontal center"
 msgstr "Zarovnat vodorovně na střed"
 
-#: ../src/label.c:1697
+#: ../src/label.c:1698
 msgid "Align tops"
 msgstr "Zarovnat nahoru"
 
-#: ../src/label.c:1754
+#: ../src/label.c:1755
 msgid "Align bottoms"
 msgstr "Zarovnat dolů"
 
-#: ../src/label.c:1815
+#: ../src/label.c:1816
 msgid "Align vertical center"
 msgstr "Zarovnat svisle na střed"
 
-#: ../src/label.c:1893 ../src/ui.c:406
+#: ../src/label.c:1894 ../src/ui.c:406
 msgid "Center horizontally"
 msgstr "Vystředit vodorovně"
 
-#: ../src/label.c:1940 ../src/ui.c:413
+#: ../src/label.c:1941 ../src/ui.c:413
 msgid "Center vertically"
 msgstr "Vystředit  svisle"
 
-#: ../src/label.c:2628 ../src/label.c:2670 ../src/label.c:2696 ../src/ui.c:206
+#: ../src/label.c:2662 ../src/label.c:2704 ../src/label.c:2730 ../src/ui.c:206
 msgid "Paste"
 msgstr "Vložit"
 
@@ -889,59 +889,63 @@ msgstr "Přesunout"
 msgid "Resize"
 msgstr "Změnit velikost"
 
-#: ../src/label-object.c:1217
+#: ../src/label-object.c:1263
 msgid "Shadow state"
 msgstr "Stav stínu"
 
-#: ../src/label-object.c:1260
+#: ../src/label-object.c:1306
 msgid "Shadow offset"
 msgstr "Posun stínu"
 
-#: ../src/label-object.c:1308
+#: ../src/label-object.c:1354
 msgid "Shadow color"
 msgstr "Barva stínu"
 
-#: ../src/label-object.c:1351
+#: ../src/label-object.c:1397
 msgid "Shadow opacity"
 msgstr "Krytí stínu"
 
-#: ../src/label-text.c:281 ../src/ui.c:282
+#: ../src/label-text.c:290 ../src/ui.c:282
 msgid "Create text object"
 msgstr "Vytvořit textový objekt"
 
-#: ../src/label-text.c:453
+#: ../src/label-text.c:464
 msgid "Typing"
 msgstr "Psaní"
 
-#: ../src/label-text.c:586 ../data/ui/property-bar.ui.h:4
+#: ../src/label-text.c:597 ../data/ui/property-bar.ui.h:6
 msgid "Font family"
 msgstr "Rodina písma"
 
-#: ../src/label-text.c:624 ../data/ui/property-bar.ui.h:5
+#: ../src/label-text.c:635 ../data/ui/property-bar.ui.h:7
 msgid "Font size"
 msgstr "Velikost písma"
 
-#: ../src/label-text.c:657
+#: ../src/label-text.c:668
 msgid "Font weight"
 msgstr "Tloušťka písma"
 
-#: ../src/label-text.c:690 ../data/ui/property-bar.ui.h:6
+#: ../src/label-text.c:701 ../data/ui/property-bar.ui.h:8
 msgid "Italic"
 msgstr "Kurzíva"
 
-#: ../src/label-text.c:723
+#: ../src/label-text.c:734
 msgid "Align text"
 msgstr "Zarovnat text"
 
-#: ../src/label-text.c:756
+#: ../src/label-text.c:767
+msgid "Vertically align text"
+msgstr "Svisle zarovnaný text"
+
+#: ../src/label-text.c:800
 msgid "Line spacing"
 msgstr "Řádkování"
 
-#: ../src/label-text.c:789 ../data/ui/property-bar.ui.h:11
+#: ../src/label-text.c:833 ../data/ui/property-bar.ui.h:13
 msgid "Text color"
 msgstr "Barva textu"
 
-#: ../src/label-text.c:933
+#: ../src/label-text.c:993
 msgid "Auto shrink"
 msgstr "Automatické zúžení"
 
@@ -1097,8 +1101,8 @@ msgid "Review"
 msgstr "Kontrola"
 
 #: ../src/object-editor-bc-page.c:97 ../src/object-editor-shadow-page.c:93
-#: ../src/object-editor-text-page.c:97 ../src/prefs-dialog.c:335
-#: ../src/ui-property-bar.c:277
+#: ../src/object-editor-text-page.c:102 ../src/prefs-dialog.c:335
+#: ../src/ui-property-bar.c:288
 msgid "Default"
 msgstr "Výchozí"
 
@@ -1135,7 +1139,7 @@ msgid "Insert merge field"
 msgstr "Vložit pole pro slučování"
 
 #: ../src/object-editor-fill-page.c:79 ../src/prefs-dialog.c:341
-#: ../src/ui-property-bar.c:287
+#: ../src/ui-property-bar.c:298
 msgid "No Fill"
 msgstr "Bez výplně"
 
@@ -1153,7 +1157,7 @@ msgid "%s (*.%s)"
 msgstr "%s (*.%s)"
 
 #: ../src/object-editor-line-page.c:79 ../src/prefs-dialog.c:338
-#: ../src/ui-property-bar.c:297
+#: ../src/ui-property-bar.c:308
 msgid "No Line"
 msgstr "Bez obrysu"
 
@@ -1744,13 +1748,13 @@ msgstr "průměr"
 #. the CSS2 Specification (Section 4.3.2)
 #. This table must be sorted exactly as the enumerations in lglUnits
 #. [LGL_UNITS_POINT]
-#: ../libglabels/lgl-units.c:65 ../data/ui/object-editor.ui.h:42
+#: ../libglabels/lgl-units.c:65 ../data/ui/object-editor.ui.h:43
 #: ../data/ui/prefs-dialog.ui.h:22
 msgid "points"
 msgstr "body"
 
 #. [LGL_UNITS_INCH]
-#: ../libglabels/lgl-units.c:66 ../data/ui/object-editor.ui.h:40
+#: ../libglabels/lgl-units.c:66 ../data/ui/object-editor.ui.h:41
 #: ../data/ui/template-designer.ui.h:66
 msgid "inches"
 msgstr "palce"
@@ -1976,44 +1980,48 @@ msgstr "Styl"
 msgid "Style:"
 msgstr "Styl:"
 
-#: ../data/ui/object-editor.ui.h:31 ../data/ui/prefs-dialog.ui.h:20
+#: ../data/ui/object-editor.ui.h:31
+msgid "Vertical alignment:"
+msgstr "Svislé zarovnání:"
+
+#: ../data/ui/object-editor.ui.h:32 ../data/ui/prefs-dialog.ui.h:20
 #: ../data/ui/template-designer.ui.h:65
 msgid "Width:"
 msgstr "Šířka:"
 
-#: ../data/ui/object-editor.ui.h:32
+#: ../data/ui/object-editor.ui.h:33
 msgid "X Offset:"
 msgstr "Posun X:"
 
-#: ../data/ui/object-editor.ui.h:33
+#: ../data/ui/object-editor.ui.h:34
 msgid "X:"
 msgstr "X:"
 
-#: ../data/ui/object-editor.ui.h:34
+#: ../data/ui/object-editor.ui.h:35
 msgid "Y Offset:"
 msgstr "Posun Y:"
 
-#: ../data/ui/object-editor.ui.h:35
+#: ../data/ui/object-editor.ui.h:36
 msgid "Y:"
 msgstr "Y:"
 
-#: ../data/ui/object-editor.ui.h:36
+#: ../data/ui/object-editor.ui.h:37
 msgid "degrees"
 msgstr "stupně"
 
-#: ../data/ui/object-editor.ui.h:37
+#: ../data/ui/object-editor.ui.h:38
 msgid "dialog1"
 msgstr "dialog1"
 
-#: ../data/ui/object-editor.ui.h:38
+#: ../data/ui/object-editor.ui.h:39
 msgid "digits:"
 msgstr "číslic:"
 
-#: ../data/ui/object-editor.ui.h:39
+#: ../data/ui/object-editor.ui.h:40
 msgid "format:"
 msgstr "formát:"
 
-#: ../data/ui/object-editor.ui.h:41
+#: ../data/ui/object-editor.ui.h:42
 msgid "key:"
 msgstr "Klíč:"
 
@@ -2061,7 +2069,7 @@ msgstr "Vyberte výchozí vlastnosti pro nové objekty."
 msgid "Select locale specific behavior."
 msgstr "Vyberte specifické chování pro národní prostředí."
 
-#: ../data/ui/prefs-dialog.ui.h:18 ../templates/paper-sizes.xml.h:35
+#: ../data/ui/prefs-dialog.ui.h:18 ../templates/paper-sizes.xml.h:46
 msgid "US Letter"
 msgstr "US Letter"
 
@@ -2074,16 +2082,28 @@ msgid "Bold"
 msgstr "Tučně"
 
 #: ../data/ui/property-bar.ui.h:2
-msgid "Center align"
-msgstr "Na střed"
+msgid "Bottom vertical align"
+msgstr "Svisle zarovnat dolů"
 
-#: ../data/ui/property-bar.ui.h:7
+#: ../data/ui/property-bar.ui.h:3
+msgid "Center align"
+msgstr "Zarovnat na střed"
+
+#: ../data/ui/property-bar.ui.h:4
+msgid "Center vertical align"
+msgstr "Svisle zarovnat na střed"
+
+#: ../data/ui/property-bar.ui.h:9
 msgid "Left align"
 msgstr "Zarovnání vlevo"
 
-#: ../data/ui/property-bar.ui.h:10
+#: ../data/ui/property-bar.ui.h:12
 msgid "Right align"
 msgstr "Zarovnání vpravo"
+
+#: ../data/ui/property-bar.ui.h:14
+msgid "Top vertical align"
+msgstr "Svisle zarovnat nahoru"
 
 #: ../data/ui/template-designer.ui.h:1
 msgid "(e.g., \"Mailing Labels,\" \"Business Cards,\" ...)"
@@ -2654,12 +2674,53 @@ msgstr "DL"
 msgid "Monarch Envelope"
 msgstr "Monarch Envelope"
 
-#: ../templates/paper-sizes.xml.h:32
+#. ISO 217
+#: ../templates/paper-sizes.xml.h:33
+msgid "RA0"
+msgstr "RA0"
+
+#: ../templates/paper-sizes.xml.h:34
+msgid "RA1"
+msgstr "RA1"
+
+#: ../templates/paper-sizes.xml.h:35
+msgid "RA2"
+msgstr "RA2"
+
+#: ../templates/paper-sizes.xml.h:36
+msgid "RA3"
+msgstr "RA3"
+
+#: ../templates/paper-sizes.xml.h:37
+msgid "RA4"
+msgstr "RA4"
+
+#: ../templates/paper-sizes.xml.h:38
+msgid "SRA0"
+msgstr "SRA0"
+
+#: ../templates/paper-sizes.xml.h:39
+msgid "SRA1"
+msgstr "SRA1"
+
+#: ../templates/paper-sizes.xml.h:40
+msgid "SRA2"
+msgstr "SRA2"
+
+#: ../templates/paper-sizes.xml.h:41
+msgid "SRA3"
+msgstr "SRA3"
+
+#: ../templates/paper-sizes.xml.h:42
+msgid "SRA4"
+msgstr "SRA4"
+
+#: ../templates/paper-sizes.xml.h:43
 msgid "US Executive"
 msgstr "US Executive"
 
 #. Other US paper sizes
-#: ../templates/paper-sizes.xml.h:34
+#: ../templates/paper-sizes.xml.h:45
 msgid "US Legal"
 msgstr "US Legal"
 
@@ -2686,7 +2747,8 @@ msgid "CD/DVD or other media"
 msgstr "CD/DVD nebo jiná média"
 
 #. ===================================================================
-#: ../templates/categories.xml.h:5 ../templates/pearl-iso-templates.xml.h:28
+#: ../templates/categories.xml.h:5 ../templates/endisch-templates.xml.h:1
+#: ../templates/pearl-iso-templates.xml.h:28
 msgid "Elliptical labels"
 msgstr "Oválné etikety"
 
@@ -2707,6 +2769,7 @@ msgstr "Fotografické produkty"
 #. ===================================================================
 #. ********************************************************************
 #: ../templates/categories.xml.h:9 ../templates/ascom-iso-templates.xml.h:6
+#: ../templates/endisch-templates.xml.h:7
 #: ../templates/hama-iso-templates.xml.h:29
 #: ../templates/herma-iso-templates.xml.h:18
 #: ../templates/jac-iso-templates.xml.h:8
@@ -2715,13 +2778,15 @@ msgstr "Obdélníkové etikety"
 
 #. ====================================================================
 #. ===================================================================
-#: ../templates/categories.xml.h:10 ../templates/hama-iso-templates.xml.h:31
+#: ../templates/categories.xml.h:10 ../templates/endisch-templates.xml.h:8
+#: ../templates/hama-iso-templates.xml.h:31
 #: ../templates/pearl-iso-templates.xml.h:54
 msgid "Round labels"
 msgstr "Kulaté etikety"
 
 #. ====================================================================
-#: ../templates/categories.xml.h:11 ../templates/hama-iso-templates.xml.h:33
+#: ../templates/categories.xml.h:11 ../templates/endisch-templates.xml.h:9
+#: ../templates/hama-iso-templates.xml.h:33
 msgid "Square labels"
 msgstr "Čtvercové etikety"
 
@@ -2745,7 +2810,7 @@ msgstr "Přebal CD"
 #: ../templates/databecker-iso-templates.xml.h:10
 #: ../templates/hama-iso-templates.xml.h:27
 #: ../templates/herma-iso-templates.xml.h:16
-#: ../templates/misc-iso-templates.xml.h:30
+#: ../templates/misc-iso-templates.xml.h:32
 #: ../templates/zweckform-iso-templates.xml.h:28
 msgid "Rectangular Labels"
 msgstr "Obdélníkové etikety"
@@ -3087,6 +3152,34 @@ msgstr "Velké adresní etikety"
 msgid "Shipping Address Labels"
 msgstr "Přepravní adresní etikety"
 
+#: ../templates/endisch-templates.xml.h:2
+msgid "Labels A3"
+msgstr "Etikety A3"
+
+#. *******************************************************************
+#. ===================================================================
+#: ../templates/endisch-templates.xml.h:3
+#: ../templates/jac-iso-templates.xml.h:4
+#: ../templates/pearl-iso-templates.xml.h:36
+msgid "Labels A4"
+msgstr "Etikety A4"
+
+#. ===================================================================
+#: ../templates/endisch-templates.xml.h:4
+#: ../templates/pearl-iso-templates.xml.h:38
+msgid "Labels A5"
+msgstr "Etikety A5"
+
+#. ===================================================================
+#: ../templates/endisch-templates.xml.h:5
+#: ../templates/pearl-iso-templates.xml.h:40
+msgid "Labels A6"
+msgstr "Etikety A6"
+
+#: ../templates/endisch-templates.xml.h:6
+msgid "Labels SRA3"
+msgstr "Etikety SRA3"
+
 #. ===================================================================
 #. ====================================================================
 #. ===================================================================
@@ -3128,6 +3221,7 @@ msgstr "Pohlednice"
 
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:21
+#: ../templates/misc-iso-templates.xml.h:28
 #: ../templates/misc-other-templates.xml.h:4
 msgid "Multi-Purpose Labels"
 msgstr "Víceúčelové etikety"
@@ -3231,13 +3325,6 @@ msgid "Video Labels (face only)"
 msgstr "Etikety na videokazety (pouze předek)"
 
 #. *******************************************************************
-#. ===================================================================
-#: ../templates/jac-iso-templates.xml.h:4
-#: ../templates/pearl-iso-templates.xml.h:36
-msgid "Labels A4"
-msgstr "Etikety A4"
-
-#. *******************************************************************
 #: ../templates/jac-iso-templates.xml.h:6
 msgid "PVC labels"
 msgstr "Etikety z PVC"
@@ -3307,7 +3394,7 @@ msgstr "PRO CD Labels 2-up (pouze povrch)"
 #. ===================================================================
 #. TODO: Is this the actual part #?
 #: ../templates/misc-us-templates.xml.h:28
-#: ../templates/misc-iso-templates.xml.h:28
+#: ../templates/misc-iso-templates.xml.h:30
 msgid "PRO CD Labels 2-up (face only)"
 msgstr "PRO CD Labels 2-up (pouze povrch)"
 
@@ -3352,13 +3439,13 @@ msgid "Inkjet/Laser Labels 70x37mm"
 msgstr "Etikety na inkoustový/laserový tisk 70 × 37 mm"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:32
+#: ../templates/misc-iso-templates.xml.h:34
 #: ../templates/pearl-iso-templates.xml.h:62
 msgid "Self-adhesive labels"
 msgstr "Samolepicí etikety"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:34
+#: ../templates/misc-iso-templates.xml.h:36
 msgid "Universal Labels"
 msgstr "Univerzální etikety"
 
@@ -3406,16 +3493,6 @@ msgstr "Skládací vizitky"
 #: ../templates/pearl-iso-templates.xml.h:34
 msgid "Foldable business cards glossy/dull"
 msgstr "Skládací vizitky lesklé/matné"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:38
-msgid "Labels A5"
-msgstr "Etikety A5"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:40
-msgid "Labels A6"
-msgstr "Etikety A6"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:44
