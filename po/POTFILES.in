@@ -232,6 +232,7 @@ data/schemas/org.gnome.glabels-3.gschema.xml.in.in
 [type: gettext/xml]templates/databecker-iso-templates.xml
 [type: gettext/xml]templates/dataline-iso-templates.xml
 [type: gettext/xml]templates/decadry-iso-templates.xml
+[type: gettext/xml]templates/desmat-templates.xml
 [type: gettext/xml]templates/dymo-other-templates.xml
 [type: gettext/xml]templates/endisch-templates.xml
 [type: gettext/xml]templates/geha-iso-templates.xml

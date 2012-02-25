@@ -8,7 +8,8 @@ Acknowledgments
 
 Glabels includes contributions from:
 
-	Mario Blättermann <mariobl@gnome.org> -- Documentation & i18n maintainer
+	Mario Blättermann <mario.blaettermann@gmail.com> -- Documentation &
+							    i18n maintainer
 	Frederic Ruaudel  <grumz@users.sf.net>
 	Emmanuel Pacaud <emmanuel.pacaud@univ-poitiers.fr>
 	Wayne Schuller <k_wayne@linuxpower.org>
@@ -170,5 +171,6 @@ particular products (I apologize if I have missed anybody):
 	Schlomo Schapiro
 	Marek Černocký
 	Gaz Davidson
+	Manoj Kumar Choudhary
 
 And many others for their many helpful suggestions and bug reports -- thanks.
