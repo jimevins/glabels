@@ -163,6 +163,7 @@ dnl - LIBGLABELS more modest prerequisites
 dnl ---------------------------------------------------------------------------
 PKG_CHECK_MODULES(LIBGLABELS, [\
 	glib-2.0 >= $GLIB_REQUIRED \
+	gobject-2.0 >= $GLIB_REQUIRED \
 	libxml-2.0 >= $LIBXML_REQUIRED \
 ])
 
@@ -177,6 +178,7 @@ PKG_CHECK_MODULES(LIBGLBARCODE, [\
 	glib-2.0 >= $GLIB_REQUIRED \
 	cairo >= $CAIRO_REQUIRED \
 	pango >= $PANGO_REQUIRED \
+	pangocairo >= $PANGO_REQUIRED \
 ])
 
 AC_SUBST(LIBGLBARCODE_CFLAGS)
