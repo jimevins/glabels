@@ -3,13 +3,7 @@
 builderdir = $(datadir)/$(GLABELS_BRANCH)/ui/
 
 builder_DATA = \
-	property-bar.ui				\
-	print-op-dialog-custom-widget.ui	\
-	media-select.ui				\
-	new-label-dialog.ui			\
-	merge-properties-dialog.ui		\
-	template-designer.ui			\
-	prefs-dialog.ui				\
-	object-editor.ui
+	new_label_dialog.ui
+
 
 EXTRA_DIST = $(builder_DATA)

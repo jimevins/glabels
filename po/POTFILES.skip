@@ -1,3 +1,0 @@
-# List of source files containing translatable strings that should be ignored.
-
-data/schemas/org.gnome.glabels-3.gschema.xml.in

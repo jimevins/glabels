@@ -17,6 +17,7 @@ glabels-*.tar.gz
 /aclocal.m4
 /autom4te.cache
 /autoscan.log
+/compile
 /config.guess
 /config.h
 /config.h.in
@@ -42,8 +43,18 @@ glabels-*.tar.gz
 /stamp-h1
 /xmldocs.make
 
+/libglabels/*.c
+/libglabels/*.h
+/libglabels/*.vapi
+/libglabels/*.stamp
 /libglabels/libglabels*.pc
+
 /libglbarcode/libglbarcode*.pc
+
+/glabels/*.c
+/glabels/*.stamp
+/glabels/test
+/glabels/glabels
 
 /src/marshal.[ch]
 /src/stock-pixmaps/stockpixbufs.h

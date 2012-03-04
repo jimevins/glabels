@@ -1,66 +1,62 @@
-configdir = $(datadir)/$(LIBGLABELS_BRANCH)
+NULL = 
+
+lib_LTLIBRARIES = libglabels-4.0.la
+
+libglabels_4_0_la_SOURCES = \
+	category.vala \
+	db.vala \
+	mini_preview_pixbuf.vala \
+	paper.vala \
+	str_util.vala \
+	template_coord.vala \
+	template_frame_cd.vala \
+	template_frame_ellipse.vala \
+	template_frame_rect.vala \
+	template_frame_round.vala \
+	template_frame.vala \
+	template_layout.vala \
+	template_markup_circle.vala \
+	template_markup_ellipse.vala \
+	template_markup_line.vala \
+	template_markup_margin.vala \
+	template_markup_rect.vala \
+	template_markup.vala \
+	template.vala \
+	units.vala \
+	vendor.vala \
+	xml_category.vala \
+	xml_paper.vala \
+	xml_template.vala \
+	xml_util.vala \
+	xml_vendor.vala \
+	$(NULL)
 
 INCLUDES = \
-	$(LIBGLABELS_CFLAGS)				\
-	-DLIBGLABELS_CONFIG_DIR=\""$(configdir)"\" \
-	$(DISABLE_DEPRECATED_CFLAGS)
+	-include config.h \
+	$(LIBGLABELS_CFLAGS) \
+	-DLOCALEDIR=\""$(localedir)"\" \
+	-DDATADIR=\""$(datadir)"\" \
+	-DLIBGLABELS_BRANCH=\""$(LIBGLABELS_BRANCH)"\" \
+	$(NULL)
 
-libglabels_3_0_la_LDFLAGS=\
-        -version-info $(LIBGLABELS_API_VERSION) \
-        $(LIBGLABELS_LIBS) \
-        -no-undefined 
+VALAFLAGS = \
+	--vapidir=$(srcdir)/../vapi \
+	--pkg config \
+	--pkg posix \
+	--pkg gobject-2.0 \
+	--pkg libxml-2.0 \
+	--pkg cairo \
+	--pkg gdk-pixbuf-2.0 \
+	--pkg gee-1.0 \
+	--header=libglabels-4.h \
+	--vapi=libglabels-4.vapi \
+	$(NULL)
 
-lib_LTLIBRARIES = libglabels-3.0.la
+EXTRA_DIST = \
+	libglabels-4.h \
+	libglabels-4.vapi \
+	$(NULL)
 
-libglabels_3_0_la_SOURCES =	\
-	libglabels-private.h	\
-	lgl-db.h		\
-	lgl-db.c		\
-	lgl-units.h		\
-	lgl-units.c		\
-	lgl-paper.h		\
-	lgl-paper.c		\
-	lgl-category.h		\
-	lgl-category.c		\
-	lgl-vendor.h		\
-	lgl-vendor.c		\
-	lgl-template.h		\
-	lgl-template.c		\
-	lgl-xml-paper.h		\
-	lgl-xml-paper.c		\
-	lgl-xml-category.h	\
-	lgl-xml-category.c	\
-	lgl-xml-vendor.h	\
-	lgl-xml-vendor.c	\
-	lgl-xml-template.h	\
-	lgl-xml-template.c	\
-	lgl-xml.h		\
-	lgl-xml.c		\
-	lgl-str.h		\
-	lgl-str.c
-
-libglabels_3_0includedir=$(includedir)/$(LIBGLABELS_BRANCH)
-
-libglabels_3_0include_HEADERS = 	\
-	libglabels.h
-
-libglabels_3_0subincludedir=$(includedir)/$(LIBGLABELS_BRANCH)/libglabels
-
-libglabels_3_0subinclude_HEADERS =  \
-	lgl-db.h                \
-	lgl-units.h		\
-	lgl-paper.h		\
-	lgl-category.h		\
-	lgl-template.h		\
-	lgl-xml-paper.h		\
-	lgl-xml-category.h	\
-	lgl-xml-template.h	\
-	lgl-xml.h		\
-	lgl-str.h			
-
-EXTRA_DIST =			\
-	$(LIBGLABELS_BRANCH).pc.in
-
-pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = $(LIBGLABELS_BRANCH).pc
+DISTCLEANFILES = \
+	$(NULL)
 

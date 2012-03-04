@@ -1,32 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="2.20"/>
+  <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkAdjustment" id="adjustment1">
     <property name="lower">1</property>
     <property name="upper">250</property>
-    <property name="value">1</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
-  <object class="GtkAdjustment" id="adjustment10">
-    <property name="upper">100</property>
-    <property name="step_increment">0.01</property>
-    <property name="page_increment">1</property>
-  </object>
-  <object class="GtkAdjustment" id="adjustment11">
-    <property name="upper">100</property>
-    <property name="step_increment">0.01</property>
-    <property name="page_increment">1</property>
-  </object>
-  <object class="GtkAdjustment" id="adjustment12">
-    <property name="upper">100</property>
-    <property name="value">1</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
-  <object class="GtkAdjustment" id="adjustment13">
-    <property name="lower">1</property>
-    <property name="upper">100</property>
     <property name="value">1</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
@@ -78,60 +56,70 @@
     <property name="step_increment">0.01</property>
     <property name="page_increment">1</property>
   </object>
+  <object class="GtkAdjustment" id="adjustment10">
+    <property name="upper">100</property>
+    <property name="step_increment">0.01</property>
+    <property name="page_increment">1</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment11">
+    <property name="upper">100</property>
+    <property name="step_increment">0.01</property>
+    <property name="page_increment">1</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment12">
+    <property name="upper">100</property>
+    <property name="value">1</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment13">
+    <property name="lower">1</property>
+    <property name="upper">100</property>
+    <property name="value">1</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkSizeGroup" id="page_sizegroup">
+    <property name="mode">both</property>
+    <widgets>
+      <widget name="shadow_page_vbox"/>
+      <widget name="lsize_page_vbox"/>
+      <widget name="size_page_vbox"/>
+      <widget name="bc_page_vbox"/>
+      <widget name="data_page_vbox"/>
+      <widget name="img_page_vbox"/>
+      <widget name="fill_page_vbox"/>
+      <widget name="line_page_vbox"/>
+      <widget name="text_page_vbox"/>
+      <widget name="edit_page_vbox"/>
+    </widgets>
+  </object>
+  <object class="GtkSizeGroup" id="width_sizegroup">
+    <widgets>
+      <widget name="notebook"/>
+      <widget name="title_hbox"/>
+    </widgets>
+  </object>
   <object class="GtkDialog" id="dialog">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
     <property name="border_width">6</property>
     <property name="title" translatable="yes">dialog1</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
-      <object class="GtkBox" id="dialog-vbox1">
+      <object class="GtkVBox" id="dialog-vbox1">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="dialog-action_area1">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-            <child>
-              <object class="GtkButton" id="closebutton1">
-                <property name="label">gtk-close</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="can_default">True</property>
-                <property name="receives_default">False</property>
-                <property name="use_action_appearance">False</property>
-                <property name="use_stock">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
         <child>
           <object class="GtkVBox" id="editor_vbox">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
             <property name="border_width">6</property>
             <property name="spacing">12</property>
             <child>
               <object class="GtkHBox" id="title_hbox">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <property name="spacing">12</property>
                 <child>
                   <object class="GtkImage" id="title_image">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -142,7 +130,6 @@
                 <child>
                   <object class="GtkLabel" id="title_label">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="label">&lt;span weight="bold" size="larger"&gt;Xxx object properties&lt;/span&gt;</property>
                     <property name="use_markup">True</property>
                   </object>
@@ -167,13 +154,11 @@
                 <child>
                   <object class="GtkVBox" id="edit_page_vbox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="border_width">12</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkHBox" id="hbox30">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <child>
                           <object class="GtkScrolledWindow" id="scrolledwindow1">
                             <property name="visible">True</property>
@@ -202,12 +187,10 @@
                     <child>
                       <object class="GtkHBox" id="hbox1">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="spacing">12</property>
                         <child>
                           <object class="GtkVBox" id="edit_insert_field_vbox">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <child>
                               <placeholder/>
                             </child>
@@ -233,7 +216,6 @@
                 <child type="tab">
                   <object class="GtkLabel" id="edit_tab_label">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Text</property>
                   </object>
                   <packing>
@@ -243,18 +225,15 @@
                 <child>
                   <object class="GtkVBox" id="text_page_vbox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="border_width">12</property>
                     <property name="spacing">12</property>
                     <child>
                       <object class="GtkHBox" id="hbox65">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="spacing">12</property>
                         <child>
                           <object class="GtkLabel" id="text_family_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Family:</property>
                           </object>
@@ -267,7 +246,6 @@
                         <child>
                           <object class="GtkHBox" id="text_family_hbox">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <child>
                               <placeholder/>
                             </child>
@@ -288,12 +266,10 @@
                     <child>
                       <object class="GtkHBox" id="hbox66">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="spacing">12</property>
                         <child>
                           <object class="GtkLabel" id="text_size_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Size:</property>
                           </object>
@@ -306,7 +282,6 @@
                         <child>
                           <object class="GtkHBox" id="hbox28">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="spacing">12</property>
                             <child>
                               <object class="GtkSpinButton" id="text_size_spin">
@@ -339,12 +314,10 @@
                     <child>
                       <object class="GtkHBox" id="hbox67">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="spacing">12</property>
                         <child>
                           <object class="GtkLabel" id="text_style_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Style:</property>
                           </object>
@@ -357,18 +330,15 @@
                         <child>
                           <object class="GtkHBox" id="hbox29">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="spacing">12</property>
                             <child>
                               <object class="GtkToggleButton" id="text_bold_toggle">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="use_action_appearance">False</property>
                                 <child>
                                   <object class="GtkImage" id="image1">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
                                     <property name="stock">gtk-bold</property>
                                   </object>
                                 </child>
@@ -384,11 +354,9 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="use_action_appearance">False</property>
                                 <child>
                                   <object class="GtkImage" id="image2">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
                                     <property name="stock">gtk-italic</property>
                                   </object>
                                 </child>
@@ -416,12 +384,10 @@
                     <child>
                       <object class="GtkHBox" id="hbox68">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="spacing">12</property>
                         <child>
                           <object class="GtkLabel" id="text_color_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="yalign">0.14000000059604645</property>
                             <property name="label" translatable="yes">Color:</property>
@@ -435,12 +401,10 @@
                         <child>
                           <object class="GtkVBox" id="vbox3">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkHBox" id="hbox42">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkRadioButton" id="text_color_radio">
@@ -448,7 +412,6 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
-                                    <property name="use_action_appearance">False</property>
                                     <property name="use_underline">True</property>
                                     <property name="focus_on_click">False</property>
                                     <property name="draw_indicator">True</property>
@@ -462,7 +425,6 @@
                                 <child>
                                   <object class="GtkHBox" id="text_color_hbox">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
                                     <property name="spacing">12</property>
                                     <child>
                                       <placeholder/>
@@ -484,7 +446,6 @@
                             <child>
                               <object class="GtkHBox" id="hbox44">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkRadioButton" id="text_color_key_radio">
@@ -492,7 +453,6 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
-                                    <property name="use_action_appearance">False</property>
                                     <property name="use_underline">True</property>
                                     <property name="focus_on_click">False</property>
                                     <property name="xalign">0.54000002145767212</property>
@@ -508,7 +468,6 @@
                                 <child>
                                   <object class="GtkHBox" id="text_color_key_hbox">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
                                     <property name="spacing">12</property>
                                     <child>
                                       <placeholder/>
@@ -544,12 +503,10 @@
                     <child>
                       <object class="GtkHBox" id="hbox69">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="spacing">12</property>
                         <child>
                           <object class="GtkLabel" id="text_align_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Alignment:</property>
                           </object>
@@ -562,18 +519,15 @@
                         <child>
                           <object class="GtkHBox" id="hbox4">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="spacing">12</property>
                             <child>
                               <object class="GtkToggleButton" id="text_left_toggle">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="use_action_appearance">False</property>
                                 <child>
                                   <object class="GtkImage" id="image3">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
                                     <property name="stock">gtk-justify-left</property>
                                   </object>
                                 </child>
@@ -589,11 +543,9 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="use_action_appearance">False</property>
                                 <child>
                                   <object class="GtkImage" id="image4">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
                                     <property name="stock">gtk-justify-center</property>
                                   </object>
                                 </child>
@@ -609,11 +561,9 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="use_action_appearance">False</property>
                                 <child>
                                   <object class="GtkImage" id="image5">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
                                     <property name="stock">gtk-justify-right</property>
                                   </object>
                                 </child>
@@ -639,115 +589,12 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkHBox" id="hbox69v">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="spacing">12</property>
-                        <child>
-                          <object class="GtkLabel" id="text_valign_label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Vertical alignment:</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkHBox" id="hbox4v">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="spacing">12</property>
-                            <child>
-                              <object class="GtkToggleButton" id="text_top_toggle">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="use_action_appearance">False</property>
-                                <child>
-                                  <object class="GtkImage" id="image3v">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="pixel_size">22</property>
-                                    <property name="icon_name">glabels-align-text-top</property>
-                                  </object>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkToggleButton" id="text_vcenter_toggle">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="use_action_appearance">False</property>
-                                <property name="xalign">0.47999998927116394</property>
-                                <child>
-                                  <object class="GtkImage" id="image4v">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="pixel_size">22</property>
-                                    <property name="icon_name">glabels-align-text-middle</property>
-                                  </object>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkToggleButton" id="text_bottom_toggle">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="use_action_appearance">False</property>
-                                <child>
-                                  <object class="GtkImage" id="image5v">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="pixel_size">22</property>
-                                    <property name="icon_name">glabels-align-text-bottom</property>
-                                  </object>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">2</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">5</property>
-                      </packing>
-                    </child>
-                    <child>
                       <object class="GtkHBox" id="hbox70">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="spacing">12</property>
                         <child>
                           <object class="GtkLabel" id="text_line_spacing_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Line Spacing:</property>
                           </object>
@@ -760,7 +607,6 @@
                         <child>
                           <object class="GtkHBox" id="hbox31">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="spacing">12</property>
                             <child>
                               <object class="GtkSpinButton" id="text_line_spacing_spin">
@@ -787,7 +633,7 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">False</property>
-                        <property name="position">6</property>
+                        <property name="position">5</property>
                       </packing>
                     </child>
                     <child>
@@ -796,14 +642,13 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="draw_indicator">True</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">False</property>
-                        <property name="position">7</property>
+                        <property name="position">6</property>
                       </packing>
                     </child>
                   </object>
@@ -815,7 +660,6 @@
                 <child type="tab">
                   <object class="GtkLabel" id="text_tab_label">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="xalign">0.46000000834465027</property>
                     <property name="label" translatable="yes">Style</property>
                   </object>
@@ -827,18 +671,15 @@
                 <child>
                   <object class="GtkVBox" id="line_page_vbox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="border_width">12</property>
                     <property name="spacing">12</property>
                     <child>
                       <object class="GtkHBox" id="hbox71">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="spacing">12</property>
                         <child>
                           <object class="GtkLabel" id="line_w_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Width:</property>
                           </object>
@@ -851,7 +692,6 @@
                         <child>
                           <object class="GtkHBox" id="hbox7">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="spacing">12</property>
                             <child>
                               <object class="GtkSpinButton" id="line_width_spin">
@@ -871,7 +711,6 @@
                             <child>
                               <object class="GtkLabel" id="label21">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="label" translatable="yes">points</property>
                               </object>
                               <packing>
@@ -897,12 +736,10 @@
                     <child>
                       <object class="GtkHBox" id="hbox72">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="spacing">12</property>
                         <child>
                           <object class="GtkLabel" id="line_color_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="yalign">0.14000000059604645</property>
                             <property name="label" translatable="yes">Color:</property>
@@ -916,12 +753,11 @@
                         <child>
                           <object class="GtkVBox" id="vbox2">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="spacing">6</property>
+			    <property name="vexpand">False</property>
                             <child>
                               <object class="GtkHBox" id="hbox38">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkRadioButton" id="line_color_radio">
@@ -929,7 +765,6 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="receives_default">False</property>
-                                    <property name="use_action_appearance">False</property>
                                     <property name="use_underline">True</property>
                                     <property name="focus_on_click">False</property>
                                     <property name="draw_indicator">True</property>
@@ -943,7 +778,6 @@
                                 <child>
                                   <object class="GtkHBox" id="line_color_hbox">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
                                     <property name="spacing">12</property>
                                     <child>
                                       <placeholder/>
@@ -965,7 +799,6 @@
                             <child>
                               <object class="GtkHBox" id="hbox40">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkRadioButton" id="line_key_radio">
@@ -973,7 +806,6 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="receives_default">False</property>
-                                    <property name="use_action_appearance">False</property>
                                     <property name="use_underline">True</property>
                                     <property name="focus_on_click">False</property>
                                     <property name="draw_indicator">True</property>
@@ -988,7 +820,6 @@
                                 <child>
                                   <object class="GtkHBox" id="line_key_hbox">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
                                     <property name="spacing">12</property>
                                     <child>
                                       <placeholder/>
@@ -1029,7 +860,6 @@
                 <child type="tab">
                   <object class="GtkLabel" id="line_tab_label">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Line</property>
                   </object>
                   <packing>
@@ -1040,17 +870,15 @@
                 <child>
                   <object class="GtkVBox" id="fill_page_vbox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="border_width">12</property>
                     <child>
                       <object class="GtkHBox" id="hbox73">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="spacing">12</property>
+			<property name="vexpand">False</property>
                         <child>
                           <object class="GtkLabel" id="fill_color_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="yalign">0.14000000059604645</property>
                             <property name="label" translatable="yes">Color:</property>
@@ -1064,12 +892,10 @@
                         <child>
                           <object class="GtkVBox" id="vbox5">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkHBox" id="hbox50">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkRadioButton" id="fill_color_radio">
@@ -1077,7 +903,6 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="receives_default">False</property>
-                                    <property name="use_action_appearance">False</property>
                                     <property name="use_underline">True</property>
                                     <property name="focus_on_click">False</property>
                                     <property name="active">True</property>
@@ -1092,7 +917,6 @@
                                 <child>
                                   <object class="GtkHBox" id="fill_color_hbox">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
                                     <property name="spacing">12</property>
                                     <child>
                                       <placeholder/>
@@ -1114,7 +938,6 @@
                             <child>
                               <object class="GtkHBox" id="hbox52">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkRadioButton" id="fill_key_radio">
@@ -1122,7 +945,6 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="receives_default">False</property>
-                                    <property name="use_action_appearance">False</property>
                                     <property name="use_underline">True</property>
                                     <property name="focus_on_click">False</property>
                                     <property name="draw_indicator">True</property>
@@ -1137,7 +959,6 @@
                                 <child>
                                   <object class="GtkHBox" id="fill_key_hbox">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
                                     <property name="spacing">12</property>
                                     <child>
                                       <placeholder/>
@@ -1178,7 +999,6 @@
                 <child type="tab">
                   <object class="GtkLabel" id="fill_tab_label">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Fill</property>
                   </object>
                   <packing>
@@ -1189,13 +1009,11 @@
                 <child>
                   <object class="GtkVBox" id="img_page_vbox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="border_width">12</property>
                     <property name="spacing">12</property>
                     <child>
                       <object class="GtkHBox" id="hbox74">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="spacing">12</property>
                         <child>
                           <object class="GtkRadioButton" id="img_file_radio">
@@ -1203,7 +1021,6 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="use_underline">True</property>
                             <property name="focus_on_click">False</property>
                             <property name="draw_indicator">True</property>
@@ -1217,7 +1034,6 @@
                         <child>
                           <object class="GtkFileChooserButton" id="img_file_button">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="show_hidden">True</property>
                           </object>
                           <packing>
@@ -1236,7 +1052,6 @@
                     <child>
                       <object class="GtkHBox" id="hbox75">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="spacing">12</property>
                         <child>
                           <object class="GtkRadioButton" id="img_key_radio">
@@ -1245,7 +1060,6 @@
                             <property name="sensitive">False</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="use_underline">True</property>
                             <property name="focus_on_click">False</property>
                             <property name="draw_indicator">True</property>
@@ -1260,7 +1074,6 @@
                         <child>
                           <object class="GtkHBox" id="img_key_hbox">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <child>
                               <placeholder/>
                             </child>
@@ -1286,7 +1099,6 @@
                 <child type="tab">
                   <object class="GtkLabel" id="img_tab_label">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Image</property>
                   </object>
                   <packing>
@@ -1297,13 +1109,11 @@
                 <child>
                   <object class="GtkVBox" id="data_page_vbox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="border_width">12</property>
                     <property name="spacing">12</property>
                     <child>
                       <object class="GtkHBox" id="hbox76">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="spacing">12</property>
                         <child>
                           <object class="GtkRadioButton" id="data_literal_radio">
@@ -1311,7 +1121,6 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="use_underline">True</property>
                             <property name="draw_indicator">True</property>
                           </object>
@@ -1342,7 +1151,6 @@
                     <child>
                       <object class="GtkHBox" id="hbox77">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="spacing">12</property>
                         <child>
                           <object class="GtkRadioButton" id="data_key_radio">
@@ -1350,7 +1158,6 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="use_underline">True</property>
                             <property name="draw_indicator">True</property>
                             <property name="group">data_literal_radio</property>
@@ -1364,7 +1171,6 @@
                         <child>
                           <object class="GtkHBox" id="data_key_hbox">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <child>
                               <placeholder/>
                             </child>
@@ -1385,12 +1191,10 @@
                     <child>
                       <object class="GtkHBox" id="hbox78">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="spacing">12</property>
                         <child>
                           <object class="GtkLabel" id="data_fill_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="label">         </property>
                           </object>
                           <packing>
@@ -1402,7 +1206,6 @@
                         <child>
                           <object class="GtkTable" id="table9">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="n_rows">2</property>
                             <property name="n_columns">2</property>
                             <property name="column_spacing">6</property>
@@ -1410,7 +1213,6 @@
                             <child>
                               <object class="GtkLabel" id="data_format_label">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="xalign">0</property>
                                 <property name="label" translatable="yes">format:</property>
                               </object>
@@ -1422,7 +1224,6 @@
                             <child>
                               <object class="GtkLabel" id="data_ex_label">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="xalign">0</property>
                                 <property name="label">00000000000 00000</property>
                               </object>
@@ -1436,7 +1237,6 @@
                             <child>
                               <object class="GtkLabel" id="data_digits_label">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="xalign">0</property>
                                 <property name="label" translatable="yes">digits:</property>
                               </object>
@@ -1450,7 +1250,6 @@
                             <child>
                               <object class="GtkHBox" id="hbox32">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <child>
                                   <object class="GtkSpinButton" id="data_digits_spin">
                                     <property name="visible">True</property>
@@ -1497,7 +1296,6 @@
                 <child type="tab">
                   <object class="GtkLabel" id="data_tab_label">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Data</property>
                   </object>
                   <packing>
@@ -1508,21 +1306,19 @@
                 <child>
                   <object class="GtkVBox" id="bc_page_vbox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="border_width">12</property>
                     <property name="spacing">12</property>
                     <child>
                       <object class="GtkTable" id="table1">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="n_rows">2</property>
                         <property name="n_columns">2</property>
                         <property name="column_spacing">6</property>
                         <property name="row_spacing">6</property>
+			<property name="vexpand">False</property>
                         <child>
                           <object class="GtkLabel" id="bc_be_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Backend:</property>
                           </object>
@@ -1534,7 +1330,6 @@
                         <child>
                           <object class="GtkLabel" id="bc_style_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Style:</property>
                           </object>
@@ -1548,7 +1343,6 @@
                         <child>
                           <object class="GtkHBox" id="bc_backend_combo_hbox">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <child>
                               <placeholder/>
                             </child>
@@ -1561,7 +1355,6 @@
                         <child>
                           <object class="GtkHBox" id="bc_style_combo_hbox">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <child>
                               <placeholder/>
                             </child>
@@ -1586,7 +1379,6 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="draw_indicator">True</property>
                       </object>
@@ -1602,7 +1394,6 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="draw_indicator">True</property>
                       </object>
@@ -1615,12 +1406,11 @@
                     <child>
                       <object class="GtkHBox" id="hbox80">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="spacing">12</property>
+			<property name="vexpand">False</property>
                         <child>
                           <object class="GtkLabel" id="bc_color_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="yalign">0.14000000059604645</property>
                             <property name="label" translatable="yes">Color:</property>
@@ -1634,12 +1424,10 @@
                         <child>
                           <object class="GtkVBox" id="vbox4">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkHBox" id="hbox46">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkRadioButton" id="bc_color_radio">
@@ -1647,7 +1435,6 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
-                                    <property name="use_action_appearance">False</property>
                                     <property name="use_underline">True</property>
                                     <property name="focus_on_click">False</property>
                                     <property name="active">True</property>
@@ -1662,7 +1449,6 @@
                                 <child>
                                   <object class="GtkHBox" id="bc_color_hbox">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
                                     <property name="spacing">12</property>
                                     <child>
                                       <placeholder/>
@@ -1684,7 +1470,6 @@
                             <child>
                               <object class="GtkHBox" id="hbox48">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkRadioButton" id="bc_key_radio">
@@ -1692,7 +1477,6 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
-                                    <property name="use_action_appearance">False</property>
                                     <property name="use_underline">True</property>
                                     <property name="focus_on_click">False</property>
                                     <property name="draw_indicator">True</property>
@@ -1707,7 +1491,6 @@
                                 <child>
                                   <object class="GtkHBox" id="bc_key_hbox">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
                                     <property name="spacing">12</property>
                                     <child>
                                       <placeholder/>
@@ -1748,7 +1531,6 @@
                 <child type="tab">
                   <object class="GtkLabel" id="bc_tab_label">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Style</property>
                   </object>
                   <packing>
@@ -1759,13 +1541,11 @@
                 <child>
                   <object class="GtkVBox" id="size_page_vbox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="border_width">12</property>
                     <property name="spacing">12</property>
                     <child>
                       <object class="GtkTable" id="table6">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="n_rows">3</property>
                         <property name="n_columns">3</property>
                         <property name="column_spacing">12</property>
@@ -1773,7 +1553,6 @@
                         <child>
                           <object class="GtkLabel" id="size_w_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Width:</property>
                           </object>
@@ -1785,7 +1564,6 @@
                         <child>
                           <object class="GtkLabel" id="size_h_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Height:</property>
                           </object>
@@ -1799,7 +1577,6 @@
                         <child>
                           <object class="GtkHBox" id="hbox11">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="spacing">12</property>
                             <child>
                               <object class="GtkSpinButton" id="size_h_spin">
@@ -1820,7 +1597,6 @@
                             <child>
                               <object class="GtkLabel" id="size_h_units_label">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="label" translatable="yes">inches</property>
                               </object>
                               <packing>
@@ -1842,7 +1618,6 @@
                         <child>
                           <object class="GtkHBox" id="hbox13">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="spacing">12</property>
                             <child>
                               <object class="GtkButton" id="size_reset_image_button">
@@ -1850,7 +1625,6 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
                               </object>
                               <packing>
@@ -1871,7 +1645,6 @@
                         <child>
                           <object class="GtkHBox" id="hbox10">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="spacing">12</property>
                             <child>
                               <object class="GtkSpinButton" id="size_w_spin">
@@ -1892,7 +1665,6 @@
                             <child>
                               <object class="GtkLabel" id="size_w_units_label">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="label" translatable="yes">inches</property>
                               </object>
                               <packing>
@@ -1912,7 +1684,6 @@
                         <child>
                           <object class="GtkVBox" id="size_aspect_vbox">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <child>
                               <placeholder/>
                             </child>
@@ -1943,7 +1714,6 @@
                 <child type="tab">
                   <object class="GtkLabel" id="size_tab_label">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Size</property>
                   </object>
                   <packing>
@@ -1954,13 +1724,11 @@
                 <child>
                   <object class="GtkVBox" id="lsize_page_vbox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="border_width">12</property>
                     <property name="spacing">12</property>
                     <child>
                       <object class="GtkTable" id="table7">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="n_rows">2</property>
                         <property name="n_columns">2</property>
                         <property name="column_spacing">12</property>
@@ -1968,7 +1736,6 @@
                         <child>
                           <object class="GtkLabel" id="lsize_r_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Length:</property>
                           </object>
@@ -1980,7 +1747,6 @@
                         <child>
                           <object class="GtkLabel" id="lsize_theta_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Angle:</property>
                           </object>
@@ -1994,7 +1760,6 @@
                         <child>
                           <object class="GtkHBox" id="hbox25">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="spacing">12</property>
                             <child>
                               <object class="GtkSpinButton" id="lsize_r_spin">
@@ -2015,7 +1780,6 @@
                             <child>
                               <object class="GtkLabel" id="lsize_r_units_label">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="label" translatable="yes">inches</property>
                               </object>
                               <packing>
@@ -2034,7 +1798,6 @@
                         <child>
                           <object class="GtkHBox" id="hbox26">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="spacing">12</property>
                             <child>
                               <object class="GtkSpinButton" id="lsize_theta_spin">
@@ -2055,7 +1818,6 @@
                             <child>
                               <object class="GtkLabel" id="label38">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="label" translatable="yes">degrees</property>
                               </object>
                               <packing>
@@ -2089,7 +1851,6 @@
                 <child type="tab">
                   <object class="GtkLabel" id="lsize_tab_label">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Size</property>
                   </object>
                   <packing>
@@ -2100,13 +1861,11 @@
                 <child>
                   <object class="GtkVBox" id="pos_page_vbox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="border_width">12</property>
                     <property name="spacing">12</property>
                     <child>
                       <object class="GtkTable" id="table8">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="n_rows">2</property>
                         <property name="n_columns">3</property>
                         <property name="column_spacing">12</property>
@@ -2115,7 +1874,6 @@
                           <object class="GtkLabel" id="pos_x_label">
                             <property name="width_request">50</property>
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">X:</property>
                           </object>
@@ -2127,7 +1885,6 @@
                         <child>
                           <object class="GtkLabel" id="pos_y_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Y:</property>
                           </object>
@@ -2141,7 +1898,6 @@
                         <child>
                           <object class="GtkLabel" id="pos_x_units_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">inches</property>
                           </object>
@@ -2155,7 +1911,6 @@
                         <child>
                           <object class="GtkLabel" id="pos_y_units_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">inches</property>
                           </object>
@@ -2219,7 +1974,6 @@
                 <child type="tab">
                   <object class="GtkLabel" id="pos_tab_label">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Position</property>
                   </object>
                   <packing>
@@ -2230,7 +1984,6 @@
                 <child>
                   <object class="GtkVBox" id="shadow_page_vbox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="border_width">12</property>
                     <property name="spacing">12</property>
                     <child>
@@ -2239,7 +1992,6 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="draw_indicator">True</property>
                       </object>
@@ -2252,17 +2004,15 @@
                     <child>
                       <object class="GtkVBox" id="shadow_controls_table">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="spacing">12</property>
+			<property name="vexpand">False</property>
                         <child>
                           <object class="GtkHBox" id="hbox63">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="spacing">12</property>
                             <child>
                               <object class="GtkLabel" id="label40">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="xalign">0</property>
                                 <property name="label" translatable="yes">X Offset:</property>
                               </object>
@@ -2275,7 +2025,6 @@
                             <child>
                               <object class="GtkHBox" id="hbox54">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="spacing">12</property>
                                 <child>
                                   <object class="GtkSpinButton" id="shadow_x_spin">
@@ -2296,7 +2045,6 @@
                                 <child>
                                   <object class="GtkLabel" id="shadow_x_units_label">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">inches</property>
                                   </object>
                                   <packing>
@@ -2322,12 +2070,10 @@
                         <child>
                           <object class="GtkHBox" id="hbox64">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="spacing">12</property>
                             <child>
                               <object class="GtkLabel" id="label41">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="xalign">0</property>
                                 <property name="label" translatable="yes">Y Offset:</property>
                               </object>
@@ -2340,7 +2086,6 @@
                             <child>
                               <object class="GtkHBox" id="hbox55">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="spacing">12</property>
                                 <child>
                                   <object class="GtkSpinButton" id="shadow_y_spin">
@@ -2361,7 +2106,6 @@
                                 <child>
                                   <object class="GtkLabel" id="shadow_y_units_label">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">inches</property>
                                   </object>
                                   <packing>
@@ -2387,12 +2131,10 @@
                         <child>
                           <object class="GtkHBox" id="hbox61">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="spacing">12</property>
                             <child>
                               <object class="GtkLabel" id="label45">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="xalign">0</property>
                                 <property name="yalign">0.14000000059604645</property>
                                 <property name="label" translatable="yes">Color:</property>
@@ -2406,12 +2148,10 @@
                             <child>
                               <object class="GtkVBox" id="vbox7">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkHBox" id="hbox57">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
                                     <property name="spacing">6</property>
                                     <child>
                                       <object class="GtkRadioButton" id="shadow_color_radio">
@@ -2419,7 +2159,6 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
-                                        <property name="use_action_appearance">False</property>
                                         <property name="use_underline">True</property>
                                         <property name="focus_on_click">False</property>
                                         <property name="draw_indicator">True</property>
@@ -2433,7 +2172,6 @@
                                     <child>
                                       <object class="GtkHBox" id="shadow_color_hbox">
                                         <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
                                         <property name="spacing">12</property>
                                         <child>
                                           <placeholder/>
@@ -2455,7 +2193,6 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox59">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
                                     <property name="spacing">6</property>
                                     <child>
                                       <object class="GtkRadioButton" id="shadow_key_radio">
@@ -2463,7 +2200,6 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
-                                        <property name="use_action_appearance">False</property>
                                         <property name="use_underline">True</property>
                                         <property name="focus_on_click">False</property>
                                         <property name="draw_indicator">True</property>
@@ -2478,7 +2214,6 @@
                                     <child>
                                       <object class="GtkHBox" id="shadow_key_hbox">
                                         <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
                                         <property name="spacing">12</property>
                                         <child>
                                           <placeholder/>
@@ -2514,12 +2249,10 @@
                         <child>
                           <object class="GtkHBox" id="hbox62">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="spacing">12</property>
                             <child>
                               <object class="GtkLabel" id="label46">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="xalign">0</property>
                                 <property name="label" translatable="yes">Opacity:</property>
                               </object>
@@ -2532,7 +2265,6 @@
                             <child>
                               <object class="GtkHBox" id="hbox56">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="spacing">12</property>
                                 <child>
                                   <object class="GtkSpinButton" id="shadow_opacity_spin">
@@ -2550,7 +2282,6 @@
                                 <child>
                                   <object class="GtkLabel" id="label47">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">%</property>
                                   </object>
                                   <packing>
@@ -2588,7 +2319,6 @@
                 <child type="tab">
                   <object class="GtkLabel" id="shadow_tab_label">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Shadow</property>
                   </object>
                   <packing>
@@ -2610,31 +2340,37 @@
             <property name="position">2</property>
           </packing>
         </child>
+        <child internal-child="action_area">
+          <object class="GtkHButtonBox" id="dialog-action_area1">
+            <property name="visible">True</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="closebutton1">
+                <property name="label">gtk-close</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="can_default">True</property>
+                <property name="receives_default">False</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
       </object>
     </child>
     <action-widgets>
       <action-widget response="-7">closebutton1</action-widget>
     </action-widgets>
-  </object>
-  <object class="GtkSizeGroup" id="page_sizegroup">
-    <property name="mode">both</property>
-    <widgets>
-      <widget name="shadow_page_vbox"/>
-      <widget name="lsize_page_vbox"/>
-      <widget name="size_page_vbox"/>
-      <widget name="bc_page_vbox"/>
-      <widget name="data_page_vbox"/>
-      <widget name="img_page_vbox"/>
-      <widget name="fill_page_vbox"/>
-      <widget name="line_page_vbox"/>
-      <widget name="text_page_vbox"/>
-      <widget name="edit_page_vbox"/>
-    </widgets>
-  </object>
-  <object class="GtkSizeGroup" id="width_sizegroup">
-    <widgets>
-      <widget name="notebook"/>
-      <widget name="title_hbox"/>
-    </widgets>
   </object>
 </interface>

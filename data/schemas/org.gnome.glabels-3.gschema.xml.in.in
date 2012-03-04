@@ -2,10 +2,10 @@
 
 
   <schema id="org.gnome.glabels-3" path="/apps/glabels-3/" gettext-domain="@GETTEXT_PACKAGE@">
-    <child name="ui" schema="org.gnome.glabels-3.ui"/>
-    <child name="locale" schema="org.gnome.glabels-3.locale"/>
-    <child name="objects" schema="org.gnome.glabels-3.objects"/>
-    <child name="history" schema="org.gnome.glabels-3.history"/>
+    <child name="ui" schema="org.gnome.glabels.ui"/>
+    <child name="locale" schema="org.gnome.glabels.locale"/>
+    <child name="objects" schema="org.gnome.glabels.objects"/>
+    <child name="history" schema="org.gnome.glabels.history"/>
   </schema>
 
 

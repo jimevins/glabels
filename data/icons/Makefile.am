@@ -1,7 +1,7 @@
 
 SUBDIRS = 16x16 22x22 24x24 32x32 48x48
 
-gtk_update_icon_cache = $(GTK_UPDATE_ICON_CACHE) -f -t $(datadir)/icons/hicolor
+gtk_update_icon_cache = $(GTK_UPDATE_ICON_CACHE) -f -t $(datadir)/$(GLABELS_BRANCH)/icons/hicolor
 
 install-data-hook: update-icon-cache
 uninstall-hook: update-icon-cache
