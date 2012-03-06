@@ -31,6 +31,7 @@ AC_PROG_LIBTOOL
 
 GNOME_DOC_INIT
 
+AC_PATH_PROG(GDK_PIXBUF_CSOURCE,      gdk-pixbuf-csource)
 AC_PATH_PROG(GTK_UPDATE_ICON_CACHE,   gtk-update-icon-cache)
 
 dnl ---------------------------------------------------------------------------

@@ -1,5 +1,9 @@
 NULL = 
 
+SUBDIRS = \
+	cursors \
+	$(NULL)
+
 bin_PROGRAMS = glabels-4
 
 glabels_4_SOURCES = \
@@ -12,6 +16,7 @@ glabels_4_SOURCES = \
 	color_menu_item.vala \
 	color_node.vala \
 	color_swatch.vala \
+	cursor.vapi \
 	enum_util.vala \
 	file.vala \
 	file_util.vala \

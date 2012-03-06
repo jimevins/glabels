@@ -43,6 +43,9 @@ namespace glabels
 		private const double OUTLINE_WIDTH_PIXELS     = 1;
 		private const double SELECT_LINE_WIDTH_PIXELS = 3;
 
+		private const int CURSOR_X_HOTSPOT = 7;
+		private const int CURSOR_Y_HOTSPOT = 7;
+
 		private const int ZOOMTOFIT_PAD = 16;
 		private const int SHADOW_OFFSET_PIXELS = ZOOMTOFIT_PAD/4;
 
@@ -94,7 +97,8 @@ namespace glabels
 		/* CREATE_DRAG state */
 		private CreateType   create_object_type;
 		private LabelObject? create_object;
-
+		private double       create_x0;
+		private double       create_y0;
 
 
 		public Label  label        { get; private set; }
@@ -341,6 +345,28 @@ namespace glabels
 
 			in_object_create_mode = false;
 			state = State.IDLE;
+		}
+
+
+		public void create_box_mode()
+		{
+			Gdk.Window window = canvas.get_window();
+
+			try
+			{
+				Gdk.Pixbuf pixbuf = Gdk.Pixbuf.from_pixdata( Cursor.box_pixdata, false );
+				Gdk.Cursor cursor = new Gdk.Cursor.from_pixbuf( Gdk.Display.get_default(),
+				                                                pixbuf, CURSOR_X_HOTSPOT, CURSOR_Y_HOTSPOT );
+				window.set_cursor( cursor );
+			}
+			catch ( Error err )
+			{
+				error( "%s\n", err.message );
+			}
+
+			in_object_create_mode = true;
+			create_object_type    = CreateType.BOX;
+			state                 = State.IDLE;
 		}
 
 
@@ -786,7 +812,9 @@ namespace glabels
 					switch ( create_object_type )
 					{
 					case CreateType.BOX:
-						/* TODO */
+						create_object.set_position( double.min( x, create_x0 ), double.min( y, create_y0 ) );
+						create_object.set_size( double.max( x, create_x0 ) - double.min( x, create_x0 ),
+						                        double.max( y, create_y0 ) - double.min( y, create_y0 ) );
 						break;
 					case CreateType.ELLIPSE:
 						/* TODO */
@@ -907,12 +935,14 @@ namespace glabels
 				else
 				{
 
-					if ( state != State.IDLE )
+					if ( state == State.IDLE )
 					{
+						LabelObject object;
+
 						switch ( create_object_type )
 						{
 						case CreateType.BOX:
-							/* TODO */
+							create_object = new LabelObjectBox() as LabelObject;
 							break;
 						case CreateType.ELLIPSE:
 							/* TODO */
@@ -933,6 +963,13 @@ namespace glabels
 							warning( "Invalid create type." );   /* Should not happen! */
 							break;
 						}
+
+						create_object.set_position( x, y );
+						create_object.set_size( 0, 0 );
+						label.add_object( create_object );
+
+						create_x0 = x;
+						create_y0 = y;
 
 						state = State.CREATE_DRAG;
 
@@ -1018,34 +1055,10 @@ namespace glabels
 				else
 				{
 
-					switch ( create_object_type )
-					{
-					case CreateType.BOX:
-						/* TODO */
-						break;
-					case CreateType.ELLIPSE:
-						/* TODO */
-						break;
-					case CreateType.LINE: 
-						/* TODO */
-						break;
-					case CreateType.IMAGE:
-						/* TODO */
-						break;
-					case CreateType.TEXT:
-						/* TODO */
-						break;
-					case CreateType.BARCODE:
-						/* TODO */
-						break;
-					default:
-						warning( "Invalid create type." );   /* Should not happen! */
-						break;
-					}
-
 					Gdk.Cursor cursor = new Gdk.Cursor( Gdk.CursorType.LEFT_PTR );
 					window.set_cursor( cursor );
 
+					label.unselect_all();
 					label.select_object( create_object );
 
 					in_object_create_mode = false;

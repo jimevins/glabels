@@ -39,7 +39,7 @@ namespace glabels
 		/**
 		 * Parent label
 		 */
-		public Label parent { get; set; }
+		public weak Label parent { get; set; }
 
 
 		/**
@@ -444,7 +444,19 @@ namespace glabels
 			_y0 = 0;
 			_matrix = Cairo.Matrix.identity();
 
-			_line_width = 0;
+			Prefs prefs = new Prefs();
+
+			_font_family             = prefs.default_font_family;
+			_font_size               = prefs.default_font_size;
+			_font_weight             = prefs.default_font_weight;
+			_font_italic_flag        = prefs.default_font_italic_flag;
+			_text_color_node         = ColorNode.from_color( prefs.default_text_color );
+			_text_alignment          = prefs.default_text_alignment;
+			_text_line_spacing       = prefs.default_text_line_spacing;
+
+			_line_width              = prefs.default_line_width;
+			_line_color_node         = ColorNode.from_color( prefs.default_line_color );
+			_fill_color_node         = ColorNode.from_color( prefs.default_fill_color );
 
 			_shadow_state            = false;
 			_shadow_x                = 3.6;

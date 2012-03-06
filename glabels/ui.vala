@@ -1209,12 +1209,7 @@ namespace glabels
 
 		private void on_objects_create_box( Gtk.Action action )
 		{
-			/*
-			if (window->view != NULL) {
-				gl_view_object_create_mode (GL_VIEW(window->view),
-				                            GL_LABEL_OBJECT_BOX);
-			}
-			*/
+			window.view.create_box_mode();
 		}
 
 
