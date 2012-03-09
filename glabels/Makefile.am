@@ -18,6 +18,9 @@ glabels_4_SOURCES = \
 	color_swatch.vala \
 	cursor.vapi \
 	enum_util.vala \
+	field_button.vala \
+	field_button_menu.vala \
+	field_button_menu_item.vala \
 	file.vala \
 	file_util.vala \
 	font_button.vala \

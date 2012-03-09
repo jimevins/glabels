@@ -54,7 +54,8 @@ glabels-*.tar.gz
 /glabels/*.c
 /glabels/*.stamp
 /glabels/test
-/glabels/glabels
+/glabels/glabels-4
+/glabels/cursors/cursor_pixdata.h
 
 /src/marshal.[ch]
 /src/stock-pixmaps/stockpixbufs.h
