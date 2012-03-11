@@ -52,6 +52,8 @@ namespace glabels
 		private Prefs         prefs;
 		private Ui            ui;
 
+		private ObjectEditor  object_editor;
+
 
 		public Window()
 		{
@@ -65,8 +67,16 @@ namespace glabels
 			vbox1.pack_start( ui.get_widget( "/MainToolBar" ), false, false, 0 );
 			vbox1.pack_start( ui.get_widget( "/DrawingToolBar" ), false, false, 0 );
 
+			Gtk.HBox main_hbox = new Gtk.HBox( false, 0 );
+			vbox1.pack_start( main_hbox, true, true, 0 );
+
 			content_hbox = new Gtk.HBox( false, 0 );
-			vbox1.pack_start( content_hbox, true, true, 0 );
+			content_hbox.set_hexpand( true );
+			main_hbox.pack_start( content_hbox, true, true, 0 );
+
+			object_editor = new ObjectEditor();
+			object_editor.set_hexpand( false );
+			main_hbox.pack_end( object_editor, false, false, 0 );
 
 			Gtk.HBox status_hbox = new Gtk.HBox( false, 0 );
 			vbox1.pack_start( status_hbox, false, false, 0 );
