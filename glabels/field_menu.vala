@@ -24,11 +24,11 @@ using GLib;
 namespace glabels
 {
 
-	public class FieldButtonMenu : Gtk.Menu
+	public class FieldMenu : Gtk.Menu
 	{
 		public  signal void key_selected( string key );
 
-		private List<unowned FieldButtonMenuItem> menu_items;
+		private List<unowned FieldMenuItem> menu_items;
 
 		private const int MAX_MENU_ROWS = 25;
 
@@ -36,8 +36,8 @@ namespace glabels
 		public void set_keys( List<string> key_list )
 		{
 			/* Remove old menu items and cleanup list. */
-			unowned List<FieldButtonMenuItem> p;
-			unowned List<FieldButtonMenuItem> p_next = null;
+			unowned List<FieldMenuItem> p;
+			unowned List<FieldMenuItem> p_next = null;
 			for ( p = menu_items; p != null; p = p_next )
 			{
 				remove( p.first().data );
@@ -51,7 +51,7 @@ namespace glabels
 			int i = 0;
 			foreach ( string key in key_list )
 			{
-				FieldButtonMenuItem menu_item = new FieldButtonMenuItem( key );
+				FieldMenuItem menu_item = new FieldMenuItem( key );
 				menu_item.show();
 				menu_item.activate.connect( on_menu_item_activated );
 
@@ -68,8 +68,8 @@ namespace glabels
 
 		private void on_menu_item_activated( Gtk.MenuItem menu_item )
 		{
-			FieldButtonMenuItem fb_menu_item = (FieldButtonMenuItem)menu_item;
-			key_selected( fb_menu_item.key );
+			FieldMenuItem f_menu_item = (FieldMenuItem)menu_item;
+			key_selected( f_menu_item.key );
 		}
 
 

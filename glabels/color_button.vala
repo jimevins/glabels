@@ -27,18 +27,19 @@ namespace glabels
 
 	public class ColorButton : Gtk.ToggleButton
 	{
-		private const int SWATCH_W = 24;
+		private const int SWATCH_W = 100;
 		private const int SWATCH_H = 24;
 
-		public  signal void color_changed( Color color,
-		                                   bool  is_default );
+		public  signal void color_changed( ColorNode color_node,
+		                                   bool      is_default );
 
 		private bool           is_default_flag;
-		private Color          color;
+		private ColorNode      color_node;
 
 		private Color          default_color;
 
 		private ColorSwatch    swatch;
+		private Gtk.Label      label;
 		private ColorMenu      menu;
 
 
@@ -57,40 +58,79 @@ namespace glabels
 			swatch = new ColorSwatch( SWATCH_W, SWATCH_H, color );
 			hbox.pack_start( swatch, true, true, 0 );
 
+			label = new Gtk.Label( "" );
+			label.hide();
+			hbox.pack_start( label, true, true, 0 );
+
 			Gtk.Arrow arrow = new Gtk.Arrow( Gtk.ArrowType.DOWN, Gtk.ShadowType.IN );
 			hbox.pack_end( arrow, false, false, 0 );
 
 			this.default_color = default_color;
-			this.color = color;
+			this.color_node    = ColorNode.from_color( color );
 
-			menu = new ColorMenu( default_label, color );
+			menu = new ColorMenu( default_label, default_color, color );
 			menu.show_all();
 
 			menu.color_changed.connect( on_menu_color_changed );
 			menu.selection_done.connect( on_menu_selection_done );
 
 			this.button_press_event.connect( on_button_press_event );
+			this.show.connect( on_show );
 		}
+
+
+		public void set_color_node( ColorNode color_node )
+		{
+			is_default_flag = false;
+
+			this.color_node = color_node;
+
+			swatch.set_color( color_node.color );
+		}
+
 
 		public void set_color( Color color )
 		{
 			is_default_flag = false;
-			this.color = color;
+
+			this.color_node.field_flag = false;
+			this.color_node.color      = color;
+			this.color_node.key        = null;
+
 			swatch.set_color( color );
 		}
+
 
 		public void set_to_default()
 		{
 			is_default_flag = true;
-			color = default_color;
-			swatch.set_color( color );
+
+			color_node.field_flag = false;
+			color_node.color      = default_color;
+			color_node.key        = null;
+
+			swatch.set_color( default_color );
 		}
 
-		public Color get_color( out bool is_default )
+
+		public ColorNode get_color_node( out bool is_default )
 		{
 			is_default = is_default_flag;
-			return color;
+			return color_node;
 		}
+
+
+		public void set_keys( List<string> key_list )
+		{
+			menu.set_keys( key_list );
+		}
+
+
+		public void clear_keys()
+		{
+			menu.clear_keys();
+		}
+
 
 		private void menu_position_function( Gtk.Menu menu,
 		                                     out int  x,
@@ -135,6 +175,7 @@ namespace glabels
 			push_in = true;
 		}
 
+
 		private bool on_button_press_event( Gdk.EventButton event )
 		{
 			switch (event.button)
@@ -153,23 +194,45 @@ namespace glabels
 			return false;
 		}
 
-		private void on_menu_color_changed( Color color, bool is_default )
-		{
 
-			if (is_default)
+		private void on_show()
+		{
+			base.show();
+
+			if ( color_node.field_flag )
 			{
-				this.color = default_color;
+				swatch.hide();
+				label.show();
 			}
 			else
 			{
-				this.color = color;
+				swatch.show();
+				label.hide();
 			}
+		}
+
+
+		private void on_menu_color_changed( ColorNode color_node, bool is_default )
+		{
+			this.color_node      = color_node;
 			this.is_default_flag = is_default;
 
-			swatch.set_color( color );
+			if ( color_node.field_flag )
+			{
+				swatch.hide();
+				label.show();
+				label.set_label( "$(%s)".printf( color_node.key ) );
+			}
+			else
+			{
+				swatch.show();
+				swatch.set_color( color_node.color );
+				label.hide();
+			}
 
-			color_changed( color, is_default );
+			color_changed( color_node, is_default );
 		}
+
 
 		private void on_menu_selection_done()
 		{

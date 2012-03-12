@@ -28,6 +28,7 @@ namespace glabels
 	{
 		private Color color;
 
+
 		public ColorSwatch( int       w,
 		                    int       h,
 		                    Color     color )
@@ -38,18 +39,17 @@ namespace glabels
 			this.color = color;
 		}
 
+
 		public override bool draw( Cairo.Context cr )
 		{
-			Gtk.Style       style;
-			double          w, h;
-			Color           fill_color, line_color;
+			Color  fill_color, line_color;
 
 			cr.set_antialias( Cairo.Antialias.NONE );
 
-			w = get_allocated_width();
-			h = get_allocated_height();
+			double w = get_allocated_width();
+			double h = get_allocated_height();
 
-			style = this.get_style();
+			Gtk.Style style = this.get_style();
 			if ( this.is_sensitive() )
 			{
 				fill_color = color;
@@ -63,8 +63,11 @@ namespace glabels
 
 			cr.rectangle( 1, 1, w-2, h-2 );
 
-			cr.set_source_rgba( fill_color.r, fill_color.g, fill_color.b, fill_color.a );
-			cr.fill_preserve();
+			if ( fill_color.has_alpha() )
+			{
+				cr.set_source_rgba( fill_color.r, fill_color.g, fill_color.b, fill_color.a );
+				cr.fill_preserve();
+			}
 
 			cr.set_source_rgb( line_color.r, line_color.g, line_color.b );
 			cr.set_line_width( 1.0 );
@@ -73,10 +76,12 @@ namespace glabels
 			return false;
 		}
 
+
 		public override void style_set( Gtk.Style? style )
 		{
 			redraw_canvas();
 		}
+
 
 		public void set_color( Color color )
 		{
@@ -87,18 +92,19 @@ namespace glabels
 			}
 		}
 
+
 		private void redraw_canvas()
 		{
-			var window = get_window ();
+			var window = get_window();
 			if (null == window)
 			{
 				return;
 			}
 
-			unowned Cairo.Region region = window.get_clip_region ();
+			unowned Cairo.Region region = window.get_clip_region();
 			// redraw the cairo canvas completely by exposing it
-			window.invalidate_region (region, true);
-			window.process_updates (true);
+			window.invalidate_region(region, true);
+			window.process_updates(true);
 		}
 
 

@@ -24,11 +24,11 @@ using GLib;
 namespace glabels
 {
 
-	public class FieldButtonMenuItem : Gtk.MenuItem
+	public class FieldMenuItem : Gtk.MenuItem
 	{
 		public string key { get; private set; }
 
-		public FieldButtonMenuItem( string key )
+		public FieldMenuItem( string key )
 		{
 			this.key = key;
 

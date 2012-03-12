@@ -29,8 +29,8 @@ namespace glabels
 		private bool   klabel_is_key;
 		private string key;
 
-		private Gtk.Label       klabel;
-		private FieldButtonMenu menu;
+		private Gtk.Label klabel;
+		private FieldMenu menu;
 
 		public  signal void key_selected( string key );
 		public  signal void changed();

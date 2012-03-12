@@ -55,7 +55,7 @@ namespace glabels
 		/* TODO: aspect lock, and image reset */
 
 		private Gtk.CheckButton shadow_enable_check;
-		private Gtk.Table       shadow_controls_grid;
+		private Gtk.Grid        shadow_controls_grid;
 		private Gtk.SpinButton  shadow_x_spin;
 		private Gtk.SpinButton  shadow_y_spin;
 		private Gtk.Label       shadow_x_units_label;
@@ -79,7 +79,7 @@ namespace glabels
 				                     "size_w_adjustment", "size_h_adjustment",
 				                     "pos_x_adjustment", "pos_y_adjustment",
 				                     "shadow_x_adjustment", "shadow_y_adjustment", "shadow_opacity_adjustment",
-				                     "page_sizegroup", "width_sizegroup",
+				                     "page_sizegroup", "width_sizegroup", "label_sizegroup", "color_box_sizegroup",
 				                     null };
 				builder.add_objects_from_file( file, objects );
 			}
@@ -102,6 +102,40 @@ namespace glabels
 			title_label.set_use_markup( true );
 			title_label.set_sensitive( false );
 
+			/* Line widgets. */
+			line_width_spin = builder.get_object( "line_width_spin" ) as Gtk.SpinButton;
+			line_color_box  = builder.get_object( "line_color_box" )  as Gtk.Box;
+			line_color_button = new ColorButton( _("No line"), Color.none(), Color.black() );
+			line_color_box.pack_start( line_color_button, true, true, 0 );
+
+			/* Fill widgets. */
+			fill_color_box  = builder.get_object( "fill_color_box" )  as Gtk.Box;
+			fill_color_button = new ColorButton( _("No fill"), Color.none(), Color.black() );
+			fill_color_box.pack_start( fill_color_button, true, true, 0 );
+
+			/* Position widgets. */
+			pos_x_spin        = builder.get_object( "pos_x_spin" )        as Gtk.SpinButton;
+			pos_y_spin        = builder.get_object( "pos_y_spin" )        as Gtk.SpinButton;
+			pos_x_units_label = builder.get_object( "pos_x_units_label" ) as Gtk.Label;
+			pos_y_units_label = builder.get_object( "pos_y_units_label" ) as Gtk.Label;
+
+			/* Size widgets. */
+			size_w_spin        = builder.get_object( "size_w_spin" )        as Gtk.SpinButton;
+			size_h_spin        = builder.get_object( "size_h_spin" )        as Gtk.SpinButton;
+			size_w_units_label = builder.get_object( "size_w_units_label" ) as Gtk.Label;
+			size_h_units_label = builder.get_object( "size_h_units_label" ) as Gtk.Label;
+
+			/* Shadow widgets. */
+			shadow_enable_check  = builder.get_object( "shadow_enable_check" )  as Gtk.CheckButton;
+			shadow_controls_grid = builder.get_object( "shadow_controls_grid" ) as Gtk.Grid;
+			shadow_x_spin        = builder.get_object( "shadow_x_spin" )        as Gtk.SpinButton;
+			shadow_y_spin        = builder.get_object( "shadow_y_spin" )        as Gtk.SpinButton;
+			shadow_x_units_label = builder.get_object( "shadow_x_units_label" ) as Gtk.Label;
+			shadow_y_units_label = builder.get_object( "shadow_y_units_label" ) as Gtk.Label;
+			shadow_color_box     = builder.get_object( "shadow_color_box" )  as Gtk.Box;
+			shadow_opacity_spin  = builder.get_object( "shadow_opacity_spin" )  as Gtk.SpinButton;
+			shadow_color_button  = new ColorButton( _("Default"), Color.black(), Color.black() );
+			shadow_color_box.pack_start(shadow_color_button, true, true, 0 );
 
 		}
 

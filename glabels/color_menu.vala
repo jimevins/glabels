@@ -26,11 +26,11 @@ namespace glabels
 
 	public class ColorMenu : Gtk.Menu
 	{
-		public  signal void color_changed( Color color,
-		                                   bool  is_default );
+		public  signal void color_changed( ColorNode color_node,
+		                                   bool      is_default );
 
 		private Color          default_color;
-		private Color          color;
+		private ColorNode      color_node;
 
 		private struct ColorTableEntry {
 			uchar  r;
@@ -98,6 +98,8 @@ namespace glabels
 		private const int      ROW_HISTORY = ROW_SEP_2   + 1;
 		private const int      ROW_SEP_3   = ROW_HISTORY + 1;
 		private const int      ROW_CUSTOM  = ROW_SEP_3   + 1;
+		private const int      ROW_SEP_4   = ROW_CUSTOM  + 1;
+		private const int      ROW_FIELD   = ROW_SEP_4   + 1;
 
 		private	Gtk.MenuItem       default_menu_item;
 
@@ -106,12 +108,18 @@ namespace glabels
 
 		private	Gtk.MenuItem       custom_menu_item;
 
+		private	Gtk.MenuItem       use_merge_field_menu_item;
+		private FieldMenu          merge_field_menu;
+
+
 		public ColorMenu( string default_label,
+		                  Color  default_color,
 		                  Color  color )
 		{
 			Gtk.SeparatorMenuItem separator_menu_item;
 
-			this.default_color = this.color = color;
+			this.default_color = default_color;
+			this.color_node    = ColorNode.from_color( color );
 
 			this.default_menu_item = new Gtk.MenuItem.with_label( default_label );
 			this.attach( this.default_menu_item, 0, PALETTE_COLS, ROW_DEFAULT, ROW_DEFAULT+1 );
@@ -160,33 +168,66 @@ namespace glabels
 
 			this.attach( custom_menu_item, 0, PALETTE_COLS, ROW_CUSTOM, ROW_CUSTOM+1 );
 
+			separator_menu_item = new Gtk.SeparatorMenuItem();
+			this.attach( separator_menu_item, 0, PALETTE_COLS, ROW_SEP_4, ROW_SEP_4+1 );
+
+			use_merge_field_menu_item = new Gtk.MenuItem.with_label( _("Use merge field") );
+			this.attach( use_merge_field_menu_item, 0, PALETTE_COLS, ROW_FIELD, ROW_FIELD+1 );
+			merge_field_menu = new FieldMenu();
+			use_merge_field_menu_item.set_submenu( merge_field_menu );
+			use_merge_field_menu_item.set_sensitive( false );
+
+			merge_field_menu.key_selected.connect( on_merge_field_menu_key_selected );
+
 			custom_color_history = new ColorHistory( PALETTE_COLS );
 			this.map_event.connect( on_map_event );
 		}
 
+
+		public void set_keys( List<string> key_list )
+		{
+			use_merge_field_menu_item.set_sensitive( true );
+			merge_field_menu.set_keys( key_list );
+		}
+
+
+		public void clear_keys()
+		{
+			use_merge_field_menu_item.set_sensitive( false );
+		}
+
+
 		private void on_default_menu_item_activate()
 		{
-			color = default_color;
+			color_node.field_flag = false;
+			color_node.color      = default_color;
+			color_node.key        = null;
 
-			color_changed( color, true );
+			color_changed( color_node, true );
 		}
+
 
 		private void on_palette_menu_item_activated( int id )
 		{
-			color = Color.from_byte_rgb( color_table[id].r,
-			                             color_table[id].g,
-			                             color_table[id].b );
+			color_node.field_flag = false;
+			color_node.color      = Color.from_byte_rgb( color_table[id].r,
+			                                             color_table[id].g,
+			                                             color_table[id].b );
+			color_node.key        = null;
 
-			color_changed( color, false );
+			color_changed( color_node, false );
 		}
+
 
 		private void on_history_menu_item_activated( int id )
 		{
+			color_node.field_flag = false;
+			color_node.color      = custom_color_history.get_color( id );
+			color_node.key        = null;
 
-			color = custom_color_history.get_color( id );
-
-			color_changed( color, false );
+			color_changed( color_node, false );
 		}
+
 
 		private void on_custom_menu_item_activate()
 		{
@@ -195,7 +236,7 @@ namespace glabels
 			Gdk.Color                gdk_color;
 			int                      response;
 
-			gdk_color = color.to_gdk_color();
+			gdk_color = color_node.color.to_gdk_color();
 			colorsel.set_current_color( gdk_color );
 
 			response = dialog.run();
@@ -204,10 +245,13 @@ namespace glabels
 			case Gtk.ResponseType.OK:
 				colorsel.get_current_color( out gdk_color );
 
-				color = Color.from_gdk_color( gdk_color );
-				custom_color_history.add_color( color );
+				color_node.field_flag = false;
+				color_node.color      = Color.from_gdk_color( gdk_color );
+				color_node.key        = null;
 
-				color_changed( color, false );
+				custom_color_history.add_color( color_node.color );
+
+				color_changed( color_node, false );
 
 				dialog.destroy();
 				break;
@@ -218,6 +262,17 @@ namespace glabels
 			}
 			
 		}
+
+
+		private void on_merge_field_menu_key_selected( string key )
+		{
+			color_node.field_flag = true;
+			color_node.color      = Color.none();
+			color_node.key        = key;
+
+			color_changed( color_node, false );
+		}
+
 
 		private void load_custom_color_history()
 		{
@@ -237,6 +292,7 @@ namespace glabels
 			}
 
 		}
+
 
 		private bool on_map_event()
 		{
