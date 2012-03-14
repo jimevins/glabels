@@ -37,14 +37,14 @@ namespace glabels
 			switch (units.id)
 			{
 			case "pt":
-                return 0.1;     /* points */
+				return 0.1;     /* points */
 			case "in":
-                return 0.001;   /* inches */
+				return 0.001;   /* inches */
 			case "mm":
-                return 0.1;     /* mm */
+				return 0.1;     /* mm */
 			default:
-                warning( "Illegal units" );    /* Should not happen */
-                return 1.0;
+				warning( "Illegal units" );    /* Should not happen */
+				return 1.0;
 			}
 		}
 
@@ -58,14 +58,14 @@ namespace glabels
 			switch (units.id)
 			{
 			case "pt":
-                return 1;       /* points */
+				return 1;       /* points */
 			case "in":
-                return 3;       /* inches */
+				return 3;       /* inches */
 			case "mm":
-                return 1;       /* mm */
+				return 1;       /* mm */
 			default:
-                warning( "Illegal units" );    /* Should not happen */
-                return 1;
+				warning( "Illegal units" );    /* Should not happen */
+				return 1;
 			}
 		}
 

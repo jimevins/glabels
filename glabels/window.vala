@@ -161,6 +161,8 @@ namespace glabels
 			content_hbox.pack_start( mini_preview, true, true, 0 );
 */
 
+			object_editor.set_label( label );
+
 			view = new View( label );
 			content_hbox.pack_start( view, true, true, 0 );
 			view.show_all();
