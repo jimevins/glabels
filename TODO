@@ -76,6 +76,11 @@ Possible Goals for future branches:
 	   objects. For the time being, the ability to concatenate a shape from
 	   other basic shapes could be sufficient here.
 
+	-  Migrating the docs creation from gnome-doc-utils to itstool, which would
+	   be fine for translators. Itstool give us the ability to mark strings as
+	   "not" translatable. This includes code examples, strings from the template files
+	   which must not be translated. Itstool shrinks the translatable string count. 
+
 	-  See https://sourceforge.net/tracker/?atid=445119&group_id=46122&func=browse
 	   for additional ideas.
 
