@@ -20,16 +20,21 @@ templates_DATA = \
 	dataline-iso-templates.xml	\
 	decadry-iso-templates.xml \
 	dymo-other-templates.xml \
+	endisch-templates.xml	\
 	geha-iso-templates.xml	\
 	hama-iso-templates.xml	\
 	herma-iso-templates.xml \
+	igepa-templates.xml	\
 	jac-iso-templates.xml \
 	maco-us-templates.xml \
 	meritline-us-templates.xml \
+	microapp-templates.xml	\
 	misc-us-templates.xml \
 	misc-iso-templates.xml \
 	misc-other-templates.xml \
 	pearl-iso-templates.xml \
+	rayfilm-templates.xml	\
+	sheetlabels-us-templates.xml	\
 	uline-us-templates.xml \
 	worldlabel-us-templates.xml \
 	zweckform-iso-templates.xml
