@@ -238,6 +238,7 @@ data/schemas/org.gnome.glabels-3.gschema.xml.in.in
 [type: gettext/xml]templates/geha-iso-templates.xml
 [type: gettext/xml]templates/hama-iso-templates.xml
 [type: gettext/xml]templates/herma-iso-templates.xml
+[type: gettext/xml]templates/igepa-templates.xml
 [type: gettext/xml]templates/jac-iso-templates.xml
 [type: gettext/xml]templates/maco-us-templates.xml
 [type: gettext/xml]templates/meritline-us-templates.xml
@@ -246,6 +247,7 @@ data/schemas/org.gnome.glabels-3.gschema.xml.in.in
 [type: gettext/xml]templates/misc-iso-templates.xml
 [type: gettext/xml]templates/misc-other-templates.xml
 [type: gettext/xml]templates/pearl-iso-templates.xml
+[type: gettext/xml]templates/rayfilm-templates.xml
 [type: gettext/xml]templates/sheetlabels-us-templates.xml
 [type: gettext/xml]templates/uline-us-templates.xml
 [type: gettext/xml]templates/worldlabel-us-templates.xml
