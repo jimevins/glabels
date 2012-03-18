@@ -39,7 +39,7 @@ namespace glabels
 		private Color          default_color;
 
 		private ColorSwatch    swatch;
-		private Gtk.Label      label;
+		private Gtk.Label      key_label;
 		private ColorMenu      menu;
 
 
@@ -58,9 +58,9 @@ namespace glabels
 			swatch = new ColorSwatch( SWATCH_W, SWATCH_H, color );
 			hbox.pack_start( swatch, true, true, 0 );
 
-			label = new Gtk.Label( "" );
-			label.hide();
-			hbox.pack_start( label, true, true, 0 );
+			key_label = new Gtk.Label( "" );
+			key_label.hide();
+			hbox.pack_start( key_label, true, true, 0 );
 
 			Gtk.Arrow arrow = new Gtk.Arrow( Gtk.ArrowType.DOWN, Gtk.ShadowType.IN );
 			hbox.pack_end( arrow, false, false, 0 );
@@ -202,12 +202,12 @@ namespace glabels
 			if ( color_node.field_flag )
 			{
 				swatch.hide();
-				label.show();
+				key_label.show();
 			}
 			else
 			{
 				swatch.show();
-				label.hide();
+				key_label.hide();
 			}
 		}
 
@@ -220,14 +220,14 @@ namespace glabels
 			if ( color_node.field_flag )
 			{
 				swatch.hide();
-				label.show();
-				label.set_label( "$(%s)".printf( color_node.key ) );
+				key_label.show();
+				key_label.set_label( "$(%s)".printf( color_node.key ) );
 			}
 			else
 			{
 				swatch.show();
 				swatch.set_color( color_node.color );
-				label.hide();
+				key_label.hide();
 			}
 
 			color_changed( color_node, is_default );
