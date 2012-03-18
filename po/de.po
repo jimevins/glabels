@@ -7,15 +7,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels-3_0\n"
-"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2012-01-28 21:50+0000\n"
-"PO-Revision-Date: 2012-01-29 00:10+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-03-18 13:52+0100\n"
+"PO-Revision-Date: 2012-03-18 13:53+0100\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
@@ -2740,6 +2740,7 @@ msgstr "CD/DVD oder andere Medien"
 #. ===================================================================
 #: ../templates/categories.xml.h:5 ../templates/endisch-templates.xml.h:1
 #: ../templates/pearl-iso-templates.xml.h:28
+#: ../templates/rayfilm-templates.xml.h:4
 msgid "Elliptical labels"
 msgstr "Elliptische Etiketten"
 
@@ -2763,7 +2764,8 @@ msgstr "Fotoprodukte"
 #: ../templates/endisch-templates.xml.h:7
 #: ../templates/hama-iso-templates.xml.h:29
 #: ../templates/herma-iso-templates.xml.h:18
-#: ../templates/jac-iso-templates.xml.h:8
+#: ../templates/igepa-templates.xml.h:5 ../templates/jac-iso-templates.xml.h:8
+#: ../templates/rayfilm-templates.xml.h:11
 msgid "Rectangular labels"
 msgstr "Rechteckige Etiketten"
 
@@ -2772,12 +2774,14 @@ msgstr "Rechteckige Etiketten"
 #: ../templates/categories.xml.h:10 ../templates/endisch-templates.xml.h:8
 #: ../templates/hama-iso-templates.xml.h:31
 #: ../templates/pearl-iso-templates.xml.h:54
+#: ../templates/rayfilm-templates.xml.h:12
 msgid "Round labels"
 msgstr "Runde Etiketten"
 
 #. ====================================================================
 #: ../templates/categories.xml.h:11 ../templates/endisch-templates.xml.h:9
 #: ../templates/hama-iso-templates.xml.h:33
+#: ../templates/rayfilm-templates.xml.h:13
 msgid "Square labels"
 msgstr "Quadratische Etiketten"
 
@@ -2844,6 +2848,7 @@ msgstr "Adressaufkleber"
 #: ../templates/decadry-iso-templates.xml.h:2
 #: ../templates/misc-us-templates.xml.h:4
 #: ../templates/misc-iso-templates.xml.h:6
+#: ../templates/rayfilm-templates.xml.h:1
 #: ../templates/zweckform-iso-templates.xml.h:6
 msgid "Business Cards"
 msgstr "Visitenkarten"
@@ -2857,11 +2862,12 @@ msgstr "Visitenkarten"
 #: ../templates/avery-iso-templates.xml.h:14
 #: ../templates/geha-iso-templates.xml.h:11
 #: ../templates/herma-iso-templates.xml.h:10
-#: ../templates/jac-iso-templates.xml.h:2
+#: ../templates/igepa-templates.xml.h:1 ../templates/jac-iso-templates.xml.h:2
 #: ../templates/misc-us-templates.xml.h:8
 #: ../templates/misc-iso-templates.xml.h:10
 #: ../templates/misc-other-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:24
+#: ../templates/rayfilm-templates.xml.h:3
 #: ../templates/sheetlabels-us-templates.xml.h:4
 #: ../templates/worldlabel-us-templates.xml.h:2
 #: ../templates/zweckform-iso-templates.xml.h:12
@@ -3094,7 +3100,10 @@ msgid "Standard Address Labels 38mm x 90mm"
 msgstr "Standard-Adressaufkleber 38mm x 90mm"
 
 #. ===================================================================
+#. ============================================================
+#. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:6
+#: ../templates/desmat-templates.xml.h:2
 #: ../templates/misc-iso-templates.xml.h:8
 msgid "CD Labels"
 msgstr "CD-Aufkleber"
@@ -3144,30 +3153,35 @@ msgid "Shipping Address Labels"
 msgstr "Versand-Adressaufkleber"
 
 #: ../templates/endisch-templates.xml.h:2
+#: ../templates/rayfilm-templates.xml.h:5
 msgid "Labels A3"
 msgstr "A3-Etiketten"
 
 #. *******************************************************************
 #. ===================================================================
-#: ../templates/endisch-templates.xml.h:3
+#: ../templates/endisch-templates.xml.h:3 ../templates/igepa-templates.xml.h:3
 #: ../templates/jac-iso-templates.xml.h:4
 #: ../templates/pearl-iso-templates.xml.h:36
+#: ../templates/rayfilm-templates.xml.h:6
 msgid "Labels A4"
 msgstr "Etiketten A4"
 
 #. ===================================================================
 #: ../templates/endisch-templates.xml.h:4
 #: ../templates/pearl-iso-templates.xml.h:38
+#: ../templates/rayfilm-templates.xml.h:7
 msgid "Labels A5"
 msgstr "Etiketten A5"
 
 #. ===================================================================
 #: ../templates/endisch-templates.xml.h:5
 #: ../templates/pearl-iso-templates.xml.h:40
+#: ../templates/rayfilm-templates.xml.h:8
 msgid "Labels A6"
 msgstr "Etiketten A6"
 
 #: ../templates/endisch-templates.xml.h:6
+#: ../templates/rayfilm-templates.xml.h:9
 msgid "Labels SRA3"
 msgstr "SRA3-Etiketten"
 
@@ -3314,6 +3328,18 @@ msgstr "Diskettenaufkleber (nur Vorderseite)"
 #: ../templates/herma-iso-templates.xml.h:20
 msgid "Video Labels (face only)"
 msgstr "Video-Etiketten (nur Vorderseite)"
+
+#. ===================================================================
+#: ../templates/igepa-templates.xml.h:2
+#: ../templates/pearl-iso-templates.xml.h:30
+msgid "Floppy disk labels"
+msgstr "Diskettenaufkleber"
+
+#. ===================================================================
+#: ../templates/igepa-templates.xml.h:4
+#: ../templates/zweckform-iso-templates.xml.h:18
+msgid "Lever Arch File Labels"
+msgstr "Lever-Etiketten für Archivierungsordner"
 
 #. *******************************************************************
 #: ../templates/jac-iso-templates.xml.h:6
@@ -3471,11 +3497,6 @@ msgid "Business cards punched glossy"
 msgstr "Visitenkarten gestanzt glänzend"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:30
-msgid "Floppy disk labels"
-msgstr "Diskettenaufkleber"
-
-#. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:32
 msgid "Foldable business cards"
 msgstr "Faltbare Visitenkarten"
@@ -3525,6 +3546,22 @@ msgstr "Selbstklebende Folie wetterfest"
 msgid "Self-adhesive window film"
 msgstr "Selbstklebende Fensterfolie"
 
+#: ../templates/rayfilm-templates.xml.h:2
+msgid "Business card CD Labels"
+msgstr "Visitenkarten-CD-Etiketten"
+
+#: ../templates/rayfilm-templates.xml.h:10
+msgid "Mini CD Labels"
+msgstr "Mini-CD-Etiketten"
+
+#: ../templates/rayfilm-templates.xml.h:14
+msgid "Trapezoid labels"
+msgstr "Trapezförmige Etiketten"
+
+#: ../templates/rayfilm-templates.xml.h:15
+msgid "Triangular labels"
+msgstr "Dreieckige Etiketten"
+
 #. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:14
 msgid "Correction and Cover-up Labels"
@@ -3534,11 +3571,6 @@ msgstr "Korrektur- und Abdeckaufkleber"
 #: ../templates/zweckform-iso-templates.xml.h:16
 msgid "File Back Labels"
 msgstr "Ordnerrücken"
-
-#. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:18
-msgid "Lever Arch File Labels"
-msgstr "Lever-Etiketten für Archivierungsordner"
 
 #. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:22
