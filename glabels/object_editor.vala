@@ -578,7 +578,7 @@ namespace glabels
 			{
 				bool is_default;
 
-				shadow_color_node = fill_color_button.get_color_node( out is_default );
+				shadow_color_node = shadow_color_button.get_color_node( out is_default );
 				object.shadow_color_node = shadow_color_node;
 			}
 		}
@@ -599,7 +599,7 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				shadow_opacity = shadow_opacity_spin.get_value();
+				shadow_opacity = shadow_opacity_spin.get_value() / 100;
 				object.shadow_opacity = shadow_opacity;
 			}
 		}
@@ -610,7 +610,7 @@ namespace glabels
 			GLib.SignalHandler.block_by_func( (void*)shadow_opacity_spin, (void*)on_shadow_opacity_spin_changed, this );
 
 			shadow_opacity = object.shadow_opacity;
-			shadow_opacity_spin.set_value( shadow_opacity );
+			shadow_opacity_spin.set_value( shadow_opacity * 100 );
 
 			GLib.SignalHandler.unblock_by_func( (void*)shadow_opacity_spin, (void*)on_shadow_opacity_spin_changed, this );
 		}

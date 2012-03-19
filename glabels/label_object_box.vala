@@ -117,6 +117,8 @@ namespace glabels
 
 			shadow_color.set_opacity( shadow_opacity );
 
+			cr.set_source_rgba( shadow_color.r, shadow_color.g, shadow_color.b, shadow_color.a );
+
 			if ( fill_color.has_alpha() )
 			{
 				if ( line_color.has_alpha() )
