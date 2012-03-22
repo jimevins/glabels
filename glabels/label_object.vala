@@ -593,6 +593,34 @@ namespace glabels
 		}
 
 
+		public void set_w_honor_aspect( double w )
+		{
+			double h = w * aspect_ratio;
+
+			if ( ( _w != w ) || ( _h != h ) )
+			{
+				_w = w;
+				_h = h;
+
+				changed();
+			}
+		}
+
+
+		public void set_h_honor_aspect( double h )
+		{
+			double w = h / aspect_ratio;
+
+			if ( ( _w != w ) || ( _h != h ) )
+			{
+				_w = w;
+				_h = h;
+
+				changed();
+			}
+		}
+
+
 		public LabelRegion get_extent()
 		{
 			double xa1 =   - line_width/2;

@@ -267,6 +267,12 @@ namespace glabels
 
 		private void on_selection_changed()
 		{
+			if ( object != null )
+			{
+				object.moved.disconnect( on_object_moved );
+				object.changed.disconnect( on_object_changed );
+			}
+
 			if ( label.is_selection_atomic() )
 			{
 				object = label.get_1st_selected_object();
@@ -305,6 +311,9 @@ namespace glabels
 				title_label.set_sensitive( true );
 					
 				notebook.show();
+
+				object.moved.connect( on_object_moved );
+				object.changed.connect( on_object_changed );
 			}
 			else
 			{
@@ -352,6 +361,20 @@ namespace glabels
 				fill_color_button.set_keys( key_list );
 				shadow_color_button.set_keys( key_list );
 			}
+		}
+
+
+		private void on_object_moved()
+		{
+			load_pos_x_spin();
+			load_pos_y_spin();
+		}
+
+
+		private void on_object_changed()
+		{
+			load_size_w_spin();
+			load_size_h_spin();
 		}
 
 
@@ -469,7 +492,15 @@ namespace glabels
 			if ( object != null )
 			{
 				w = size_w_spin.get_value() * units.points_per_unit;
-				object.w = w;
+
+				if ( size_aspect_check.get_active() )
+				{
+					object.set_w_honor_aspect( w );
+				}
+				else
+				{
+					object.w = w;
+				}
 			}
 		}
 
@@ -490,7 +521,15 @@ namespace glabels
 			if ( object != null )
 			{
 				h = size_h_spin.get_value() * units.points_per_unit;
-				object.h = h;
+
+				if ( size_aspect_check.get_active() )
+				{
+					object.set_h_honor_aspect( h );
+				}
+				else
+				{
+					object.h = h;
+				}
 			}
 		}
 
