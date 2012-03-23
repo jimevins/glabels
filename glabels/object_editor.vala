@@ -34,28 +34,6 @@ namespace glabels
 		private LabelObject?    object;
 
 
-		private double          line_width;
-		private ColorNode       line_color_node;
-
-		private ColorNode       fill_color_node;
-
-		private double          x;
-		private double          y;
-
-		private double          w;
-		private double          h;
-
-		private bool            shadow_enable;
-		private double          shadow_x;
-		private double          shadow_y;
-		private ColorNode       shadow_color_node;
-		private double          shadow_opacity;
-
-
-		private double          w_max;
-		private double          h_max;
-
-
 		private Gtk.Image       title_image;
 		private Gtk.Label       title_label;
 		private Gtk.Notebook    notebook;
@@ -247,21 +225,14 @@ namespace glabels
 			shadow_x_spin.set_increments( step_size, 10*step_size );
 			shadow_y_spin.set_increments( step_size, 10*step_size );
 
-			double wh_max = double.max( w_max*units.units_per_point, h_max*units.units_per_point );
-			pos_x_spin.set_range( 0, 2*wh_max );
-			pos_y_spin.set_range( 0, 2*wh_max );
-			size_w_spin.set_range( 0, 2*wh_max );
-			size_h_spin.set_range( 0, 2*wh_max );
-			shadow_x_spin.set_range( 0, 2*wh_max );
-			shadow_y_spin.set_range( 0, 2*wh_max );
+			on_label_size_changed();
 
-			pos_x_spin.set_value( x * units.units_per_point );
-			pos_y_spin.set_value( y * units.units_per_point );
-			size_w_spin.set_value( w * units.units_per_point );
-			size_h_spin.set_value( h * units.units_per_point );
-			shadow_x_spin.set_value( shadow_x * units.units_per_point );
-			shadow_y_spin.set_value( shadow_y * units.units_per_point );
-
+			load_pos_x_spin();
+			load_pos_y_spin();
+			load_size_w_spin();
+			load_size_h_spin();
+			load_shadow_x_spin();
+			load_shadow_y_spin();
 		}
 
 
@@ -333,16 +304,21 @@ namespace glabels
 
 		private void on_label_size_changed()
 		{
-			label.get_size( out w_max, out h_max );
+			if ( label != null )
+			{
+				double w_max, h_max;
 
-			double wh_max = double.max( w_max*units.units_per_point, h_max*units.units_per_point );
+				label.get_size( out w_max, out h_max );
 
-			pos_x_spin.set_range( 0, 2*wh_max );
-			pos_y_spin.set_range( 0, 2*wh_max );
-			size_w_spin.set_range( 0, 2*wh_max );
-			size_h_spin.set_range( 0, 2*wh_max );
-			shadow_x_spin.set_range( 0, 2*wh_max );
-			shadow_y_spin.set_range( 0, 2*wh_max );
+				double wh_max = double.max( w_max*units.units_per_point, h_max*units.units_per_point );
+
+				pos_x_spin.set_range( -2*wh_max, 2*wh_max );
+				pos_y_spin.set_range( -2*wh_max, 2*wh_max );
+				size_w_spin.set_range( 0, 2*wh_max );
+				size_h_spin.set_range( 0, 2*wh_max );
+				shadow_x_spin.set_range( -wh_max, wh_max );
+				shadow_y_spin.set_range( -wh_max, wh_max );
+			}
 		}
 
 
@@ -382,20 +358,21 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				line_width = line_width_spin.get_value();
-				object.line_width = line_width;
+				object.line_width = line_width_spin.get_value();
 			}
 		}
 
 
 		private void load_line_width_spin()
 		{
-			GLib.SignalHandler.block_by_func( (void*)line_width_spin, (void*)on_line_width_spin_changed, this );
+			if ( object != null )
+			{
+				GLib.SignalHandler.block_by_func( (void*)line_width_spin, (void*)on_line_width_spin_changed, this );
 
-			line_width = object.line_width;
-			line_width_spin.set_value( line_width );
+				line_width_spin.set_value( object.line_width );
 
-			GLib.SignalHandler.unblock_by_func( (void*)line_width_spin, (void*)on_line_width_spin_changed, this );
+				GLib.SignalHandler.unblock_by_func( (void*)line_width_spin, (void*)on_line_width_spin_changed, this );
+			}
 		}
 
 
@@ -405,20 +382,21 @@ namespace glabels
 			{
 				bool is_default;
 
-				line_color_node = line_color_button.get_color_node( out is_default );
-				object.line_color_node = line_color_node;
+				object.line_color_node = line_color_button.get_color_node( out is_default );
 			}
 		}
 
 
 		private void load_line_color_button()
 		{
-			GLib.SignalHandler.block_by_func( (void*)line_color_button, (void*)on_line_color_button_changed, this );
+			if ( object != null )
+			{
+				GLib.SignalHandler.block_by_func( (void*)line_color_button, (void*)on_line_color_button_changed, this );
 
-			line_color_node = object.line_color_node;
-			line_color_button.set_color_node( line_color_node );
+				line_color_button.set_color_node( object.line_color_node );
 
-			GLib.SignalHandler.unblock_by_func( (void*)line_color_button, (void*)on_line_color_button_changed, this );
+				GLib.SignalHandler.unblock_by_func( (void*)line_color_button, (void*)on_line_color_button_changed, this );
+			}
 		}
 
 
@@ -428,20 +406,21 @@ namespace glabels
 			{
 				bool is_default;
 
-				fill_color_node   = fill_color_button.get_color_node( out is_default );
-				object.fill_color_node = fill_color_node;
+				object.fill_color_node = fill_color_button.get_color_node( out is_default );
 			}
 		}
 
 
 		private void load_fill_color_button()
 		{
-			GLib.SignalHandler.block_by_func( (void*)fill_color_button, (void*)on_fill_color_button_changed, this );
+			if ( object != null )
+			{
+				GLib.SignalHandler.block_by_func( (void*)fill_color_button, (void*)on_fill_color_button_changed, this );
 
-			fill_color_node = object.fill_color_node;
-			fill_color_button.set_color_node( fill_color_node );
+				fill_color_button.set_color_node( object.fill_color_node );
 
-			GLib.SignalHandler.unblock_by_func( (void*)fill_color_button, (void*)on_fill_color_button_changed, this );
+				GLib.SignalHandler.unblock_by_func( (void*)fill_color_button, (void*)on_fill_color_button_changed, this );
+			}
 		}
 
 
@@ -449,20 +428,21 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				x = pos_x_spin.get_value() * units.points_per_unit;
-				object.x0 = x;
+				object.x0 = pos_x_spin.get_value() * units.points_per_unit;
 			}
 		}
 
 
 		private void load_pos_x_spin()
 		{
-			GLib.SignalHandler.block_by_func( (void*)pos_x_spin, (void*)on_pos_x_spin_changed, this );
+			if ( object != null )
+			{
+				GLib.SignalHandler.block_by_func( (void*)pos_x_spin, (void*)on_pos_x_spin_changed, this );
 
-			x = object.x0;
-			pos_x_spin.set_value( x * units.units_per_point );
+				pos_x_spin.set_value( object.x0 * units.units_per_point );
 
-			GLib.SignalHandler.unblock_by_func( (void*)pos_x_spin, (void*)on_pos_x_spin_changed, this );
+				GLib.SignalHandler.unblock_by_func( (void*)pos_x_spin, (void*)on_pos_x_spin_changed, this );
+			}
 		}
 
 
@@ -470,20 +450,21 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				y = pos_y_spin.get_value() * units.points_per_unit;
-				object.y0 = y;
+				object.y0 = pos_y_spin.get_value() * units.points_per_unit;
 			}
 		}
 
 
 		private void load_pos_y_spin()
 		{
-			GLib.SignalHandler.block_by_func( (void*)pos_y_spin, (void*)on_pos_y_spin_changed, this );
+			if ( object != null )
+			{
+				GLib.SignalHandler.block_by_func( (void*)pos_y_spin, (void*)on_pos_y_spin_changed, this );
 
-			y = object.y0;
-			pos_y_spin.set_value( y * units.units_per_point );
+				pos_y_spin.set_value( object.y0 * units.units_per_point );
 
-			GLib.SignalHandler.unblock_by_func( (void*)pos_y_spin, (void*)on_pos_y_spin_changed, this );
+				GLib.SignalHandler.unblock_by_func( (void*)pos_y_spin, (void*)on_pos_y_spin_changed, this );
+			}
 		}
 
 
@@ -491,7 +472,7 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				w = size_w_spin.get_value() * units.points_per_unit;
+				double w = size_w_spin.get_value() * units.points_per_unit;
 
 				if ( size_aspect_check.get_active() )
 				{
@@ -507,12 +488,14 @@ namespace glabels
 
 		private void load_size_w_spin()
 		{
-			GLib.SignalHandler.block_by_func( (void*)size_w_spin, (void*)on_size_w_spin_changed, this );
+			if ( object != null )
+			{
+				GLib.SignalHandler.block_by_func( (void*)size_w_spin, (void*)on_size_w_spin_changed, this );
 
-			w = object.w;
-			size_w_spin.set_value( w * units.units_per_point );
+				size_w_spin.set_value( object.w * units.units_per_point );
 
-			GLib.SignalHandler.unblock_by_func( (void*)size_w_spin, (void*)on_size_w_spin_changed, this );
+				GLib.SignalHandler.unblock_by_func( (void*)size_w_spin, (void*)on_size_w_spin_changed, this );
+			}
 		}
 
 
@@ -520,7 +503,7 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				h = size_h_spin.get_value() * units.points_per_unit;
+				double h = size_h_spin.get_value() * units.points_per_unit;
 
 				if ( size_aspect_check.get_active() )
 				{
@@ -536,12 +519,14 @@ namespace glabels
 
 		private void load_size_h_spin()
 		{
-			GLib.SignalHandler.block_by_func( (void*)size_h_spin, (void*)on_size_h_spin_changed, this );
+			if ( object != null )
+			{
+				GLib.SignalHandler.block_by_func( (void*)size_h_spin, (void*)on_size_h_spin_changed, this );
 
-			h = object.h;
-			size_h_spin.set_value( h * units.units_per_point );
+				size_h_spin.set_value( object.h * units.units_per_point );
 
-			GLib.SignalHandler.unblock_by_func( (void*)size_h_spin, (void*)on_size_h_spin_changed, this );
+				GLib.SignalHandler.unblock_by_func( (void*)size_h_spin, (void*)on_size_h_spin_changed, this );
+			}
 		}
 
 
@@ -549,23 +534,23 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				shadow_enable     = shadow_enable_check.get_active();
-				shadow_controls_grid.set_sensitive( shadow_enable );
-
-				object.shadow_state = shadow_enable;
+				object.shadow_state = shadow_enable_check.get_active();
+				shadow_controls_grid.set_sensitive( object.shadow_state );
 			}
 		}
 
 
 		private void load_shadow_enable_check()
 		{
-			GLib.SignalHandler.block_by_func( (void*)shadow_enable_check, (void*)on_shadow_enable_check_changed, this );
+			if ( object != null )
+			{
+				GLib.SignalHandler.block_by_func( (void*)shadow_enable_check, (void*)on_shadow_enable_check_changed, this );
 
-			shadow_enable = object.shadow_state;
-			shadow_enable_check.set_active( shadow_enable );
-			shadow_controls_grid.set_sensitive( shadow_enable );
+				shadow_enable_check.set_active( object.shadow_state );
+				shadow_controls_grid.set_sensitive( object.shadow_state );
 
-			GLib.SignalHandler.unblock_by_func( (void*)shadow_enable_check, (void*)on_shadow_enable_check_changed, this );
+				GLib.SignalHandler.unblock_by_func( (void*)shadow_enable_check, (void*)on_shadow_enable_check_changed, this );
+			}
 		}
 
 
@@ -573,20 +558,21 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				shadow_x  = shadow_x_spin.get_value() * units.points_per_unit;
-				object.shadow_x = shadow_x;
+				object.shadow_x  = shadow_x_spin.get_value() * units.points_per_unit;
 			}
 		}
 
 
 		private void load_shadow_x_spin()
 		{
-			GLib.SignalHandler.block_by_func( (void*)shadow_x_spin, (void*)on_shadow_x_spin_changed, this );
+			if ( object != null )
+			{
+				GLib.SignalHandler.block_by_func( (void*)shadow_x_spin, (void*)on_shadow_x_spin_changed, this );
 
-			shadow_x = object.shadow_x;
-			shadow_x_spin.set_value( shadow_x * units.units_per_point );
+				shadow_x_spin.set_value( object.shadow_x * units.units_per_point );
 
-			GLib.SignalHandler.unblock_by_func( (void*)shadow_x_spin, (void*)on_shadow_x_spin_changed, this );
+				GLib.SignalHandler.unblock_by_func( (void*)shadow_x_spin, (void*)on_shadow_x_spin_changed, this );
+			}
 		}
 
 
@@ -594,20 +580,21 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				shadow_y = shadow_y_spin.get_value() * units.points_per_unit;
-				object.shadow_y = shadow_y;
+				object.shadow_y = shadow_y_spin.get_value() * units.points_per_unit;
 			}
 		}
 
 
 		private void load_shadow_y_spin()
 		{
-			GLib.SignalHandler.block_by_func( (void*)shadow_y_spin, (void*)on_shadow_y_spin_changed, this );
+			if ( object != null )
+			{
+				GLib.SignalHandler.block_by_func( (void*)shadow_y_spin, (void*)on_shadow_y_spin_changed, this );
 
-			shadow_y = object.shadow_y;
-			shadow_y_spin.set_value( shadow_y * units.units_per_point );
+				shadow_y_spin.set_value( object.shadow_y * units.units_per_point );
 
-			GLib.SignalHandler.unblock_by_func( (void*)shadow_y_spin, (void*)on_shadow_y_spin_changed, this );
+				GLib.SignalHandler.unblock_by_func( (void*)shadow_y_spin, (void*)on_shadow_y_spin_changed, this );
+			}
 		}
 
 
@@ -617,20 +604,21 @@ namespace glabels
 			{
 				bool is_default;
 
-				shadow_color_node = shadow_color_button.get_color_node( out is_default );
-				object.shadow_color_node = shadow_color_node;
+				object.shadow_color_node = shadow_color_button.get_color_node( out is_default );
 			}
 		}
 
 
 		private void load_shadow_color_button()
 		{
-			GLib.SignalHandler.block_by_func( (void*)shadow_color_button, (void*)on_shadow_color_button_changed, this );
+			if ( object != null )
+			{
+				GLib.SignalHandler.block_by_func( (void*)shadow_color_button, (void*)on_shadow_color_button_changed, this );
 
-			shadow_color_node = object.shadow_color_node;
-			shadow_color_button.set_color_node( shadow_color_node );
+				shadow_color_button.set_color_node( object.shadow_color_node );
 
-			GLib.SignalHandler.unblock_by_func( (void*)shadow_color_button, (void*)on_shadow_color_button_changed, this );
+				GLib.SignalHandler.unblock_by_func( (void*)shadow_color_button, (void*)on_shadow_color_button_changed, this );
+			}
 		}
 
 
@@ -638,20 +626,21 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				shadow_opacity = shadow_opacity_spin.get_value() / 100;
-				object.shadow_opacity = shadow_opacity;
+				object.shadow_opacity = shadow_opacity_spin.get_value() / 100;
 			}
 		}
 
 
 		private void load_shadow_opacity_spin()
 		{
-			GLib.SignalHandler.block_by_func( (void*)shadow_opacity_spin, (void*)on_shadow_opacity_spin_changed, this );
+			if ( object != null )
+			{
+				GLib.SignalHandler.block_by_func( (void*)shadow_opacity_spin, (void*)on_shadow_opacity_spin_changed, this );
 
-			shadow_opacity = object.shadow_opacity;
-			shadow_opacity_spin.set_value( shadow_opacity * 100 );
+				shadow_opacity_spin.set_value( object.shadow_opacity * 100 );
 
-			GLib.SignalHandler.unblock_by_func( (void*)shadow_opacity_spin, (void*)on_shadow_opacity_spin_changed, this );
+				GLib.SignalHandler.unblock_by_func( (void*)shadow_opacity_spin, (void*)on_shadow_opacity_spin_changed, this );
+			}
 		}
 
 

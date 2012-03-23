@@ -158,9 +158,9 @@ namespace glabels
 /*
 			MiniPreview mini_preview = new MiniPreview( 200, 200 );
 			mini_preview.set_label( label );
+			mini_preview.show_all();
 			content_hbox.pack_start( mini_preview, true, true, 0 );
 */
-
 			object_editor.set_label( label );
 
 			view = new View( label );
