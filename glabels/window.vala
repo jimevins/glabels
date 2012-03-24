@@ -268,8 +268,7 @@ namespace glabels
 		private void on_modified_changed()
 		{
 			set_window_title( view.label );
-
-			/* TODO: update modified verbs. */
+			ui.update_modified_verbs( view.label );
 		}
 
 
