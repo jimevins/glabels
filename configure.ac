@@ -102,6 +102,7 @@ AC_CONFIG_FILES([Makefile
 	vapi/Makefile
 	libglabels/Makefile
 	glabels/Makefile
+	glabels/cursors/Makefile
 	po/Makefile.in
         templates/Makefile
         data/Makefile
