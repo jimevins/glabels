@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels 3.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2012-01-29 20:33+0000\n"
-"PO-Revision-Date: 2012-02-17 11:15+0100\n"
+"POT-Creation-Date: 2012-03-18 19:51+0000\n"
+"PO-Revision-Date: 2012-03-25 13:41+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -702,7 +702,7 @@ msgstr "první etiketa na prvním listu (výchozí=1)"
 msgid "first"
 msgstr "první"
 
-#: ../src/glabels-batch.c:61 ../data/ui/print-op-dialog-custom-widget.ui.h:13
+#: ../src/glabels-batch.c:61 ../data/ui/print-op-dialog-custom-widget.ui.h:11
 msgid "print outlines (to test printer alignment)"
 msgstr "tisk obrysů (test zarovnávání tiskárny)"
 
@@ -710,7 +710,7 @@ msgstr "tisk obrysů (test zarovnávání tiskárny)"
 msgid "print in reverse (i.e. a mirror image)"
 msgstr "obrácený tisk (např. zrcadlený obrázek)"
 
-#: ../src/glabels-batch.c:65 ../data/ui/print-op-dialog-custom-widget.ui.h:11
+#: ../src/glabels-batch.c:65 ../data/ui/print-op-dialog-custom-widget.ui.h:13
 msgid "print crop marks"
 msgstr "tisknout značky pro ořez"
 
@@ -775,17 +775,17 @@ msgid "Create box object"
 msgstr "Vytvořit obdelník"
 
 #: ../src/label-box.c:230 ../src/label-ellipse.c:232
-#: ../data/ui/property-bar.ui.h:3
+#: ../data/ui/property-bar.ui.h:9
 msgid "Fill color"
 msgstr "Barva výplně"
 
 #: ../src/label-box.c:261 ../src/label-ellipse.c:261 ../src/label-line.c:212
-#: ../data/ui/property-bar.ui.h:8
+#: ../data/ui/property-bar.ui.h:10
 msgid "Line color"
 msgstr "Barva obrysu"
 
 #: ../src/label-box.c:289 ../src/label-ellipse.c:290 ../src/label-line.c:241
-#: ../data/ui/property-bar.ui.h:9
+#: ../data/ui/property-bar.ui.h:11
 msgid "Line width"
 msgstr "Tloušťka obrysu"
 
@@ -913,11 +913,11 @@ msgstr "Vytvořit textový objekt"
 msgid "Typing"
 msgstr "Psaní"
 
-#: ../src/label-text.c:586 ../data/ui/property-bar.ui.h:4
+#: ../src/label-text.c:586 ../data/ui/property-bar.ui.h:1
 msgid "Font family"
 msgstr "Rodina písma"
 
-#: ../src/label-text.c:624 ../data/ui/property-bar.ui.h:5
+#: ../src/label-text.c:624 ../data/ui/property-bar.ui.h:2
 msgid "Font size"
 msgstr "Velikost písma"
 
@@ -925,7 +925,7 @@ msgstr "Velikost písma"
 msgid "Font weight"
 msgstr "Tloušťka písma"
 
-#: ../src/label-text.c:690 ../data/ui/property-bar.ui.h:6
+#: ../src/label-text.c:690 ../data/ui/property-bar.ui.h:4
 msgid "Italic"
 msgstr "Kurzíva"
 
@@ -937,7 +937,7 @@ msgstr "Zarovnat text"
 msgid "Line spacing"
 msgstr "Řádkování"
 
-#: ../src/label-text.c:789 ../data/ui/property-bar.ui.h:11
+#: ../src/label-text.c:789 ../data/ui/property-bar.ui.h:8
 msgid "Text color"
 msgstr "Barva textu"
 
@@ -1067,7 +1067,7 @@ msgstr "Výběr"
 msgid "Record/Field"
 msgstr "Záznam/Pole"
 
-#: ../src/merge-properties-dialog.c:356 ../data/ui/object-editor.ui.h:10
+#: ../src/merge-properties-dialog.c:356 ../data/ui/object-editor.ui.h:23
 msgid "Data"
 msgstr "Data"
 
@@ -1161,14 +1161,14 @@ msgstr "Bez obrysu"
 msgid "Lock aspect ratio."
 msgstr "Uzamknout poměr stran."
 
-#: ../src/prefs-dialog.c:168 ../data/ui/prefs-dialog.ui.h:21
+#: ../src/prefs-dialog.c:168 ../data/ui/prefs-dialog.ui.h:1
 msgid "gLabels Preferences"
 msgstr "Předvolby gLabels"
 
 #. TODO: Is this the actual part #?
 #: ../src/print-op.c:205 ../src/print-op-dialog.c:215
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:4
-#: ../templates/misc-iso-templates.xml.h:24
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:2
+#: ../templates/misc-iso-templates.xml.h:26
 msgid "Labels"
 msgstr "Etikety"
 
@@ -1454,7 +1454,7 @@ msgstr "Režim výběru"
 msgid "Select, move and modify objects"
 msgstr "Výběr, přesun a úpravy objektů"
 
-#: ../src/ui.c:280 ../src/view-text.c:94 ../data/ui/object-editor.ui.h:30
+#: ../src/ui.c:280 ../src/view-text.c:94 ../data/ui/object-editor.ui.h:2
 #: ../data/ui/prefs-dialog.ui.h:17
 msgid "Text"
 msgstr "Text"
@@ -1467,8 +1467,8 @@ msgstr "Obdélník"
 msgid "Create box/rectangle object"
 msgstr "Vytvořit čtverec/obdélník"
 
-#: ../src/ui.c:294 ../data/ui/object-editor.ui.h:19
-#: ../data/ui/prefs-dialog.ui.h:9
+#: ../src/ui.c:294 ../data/ui/object-editor.ui.h:16
+#: ../data/ui/prefs-dialog.ui.h:20
 msgid "Line"
 msgstr "Čára"
 
@@ -1480,7 +1480,7 @@ msgstr "Elipsa"
 msgid "Create ellipse/circle object"
 msgstr "Vytvořit elipsu/kruh"
 
-#: ../src/ui.c:308 ../data/ui/object-editor.ui.h:16
+#: ../src/ui.c:308 ../data/ui/object-editor.ui.h:19
 msgid "Image"
 msgstr "Obrázek"
 
@@ -1744,14 +1744,14 @@ msgstr "průměr"
 #. the CSS2 Specification (Section 4.3.2)
 #. This table must be sorted exactly as the enumerations in lglUnits
 #. [LGL_UNITS_POINT]
-#: ../libglabels/lgl-units.c:65 ../data/ui/object-editor.ui.h:42
-#: ../data/ui/prefs-dialog.ui.h:22
+#: ../libglabels/lgl-units.c:65 ../data/ui/object-editor.ui.h:14
+#: ../data/ui/prefs-dialog.ui.h:19
 msgid "points"
 msgstr "body"
 
 #. [LGL_UNITS_INCH]
-#: ../libglabels/lgl-units.c:66 ../data/ui/object-editor.ui.h:40
-#: ../data/ui/template-designer.ui.h:66
+#: ../libglabels/lgl-units.c:66 ../data/ui/object-editor.ui.h:27
+#: ../data/ui/template-designer.ui.h:15
 msgid "inches"
 msgstr "palce"
 
@@ -1787,45 +1787,45 @@ msgid "Location:"
 msgstr "Umístění:"
 
 #: ../data/ui/merge-properties-dialog.ui.h:3
-msgid "Record selection/preview"
-msgstr "Výběr/náhled záznamu"
+msgid "Source"
+msgstr "Zdroj"
 
 #: ../data/ui/merge-properties-dialog.ui.h:4
 msgid "Select all"
 msgstr "Vybrat vše"
 
 #: ../data/ui/merge-properties-dialog.ui.h:5
-msgid "Source"
-msgstr "Zdroj"
-
-#: ../data/ui/merge-properties-dialog.ui.h:6
 msgid "Unselect all"
 msgstr "Zrušit výběr"
 
+#: ../data/ui/merge-properties-dialog.ui.h:6
+msgid "Record selection/preview"
+msgstr "Výběr/náhled záznamu"
+
 #: ../data/ui/media-select.ui.h:1
-msgid "Brand:"
-msgstr "Značka:"
-
-#: ../data/ui/media-select.ui.h:2
-msgid "Category:"
-msgstr "Kategorie:"
-
-#: ../data/ui/media-select.ui.h:3
-msgid "Custom"
-msgstr "Vlastní"
-
-#: ../data/ui/media-select.ui.h:4 ../data/ui/new-label-dialog.ui.h:6
-#: ../data/ui/template-designer.ui.h:46
-msgid "Page size:"
-msgstr "Velikost stránky:"
-
-#: ../data/ui/media-select.ui.h:5
 msgid "Recent"
 msgstr "Nedávné"
 
-#: ../data/ui/media-select.ui.h:6
+#: ../data/ui/media-select.ui.h:2
+msgid "Brand:"
+msgstr "Značka:"
+
+#: ../data/ui/media-select.ui.h:3 ../data/ui/new-label-dialog.ui.h:7
+#: ../data/ui/template-designer.ui.h:12
+msgid "Page size:"
+msgstr "Velikost stránky:"
+
+#: ../data/ui/media-select.ui.h:4
+msgid "Category:"
+msgstr "Kategorie:"
+
+#: ../data/ui/media-select.ui.h:5
 msgid "Search all"
 msgstr "Prohledat vše"
+
+#: ../data/ui/media-select.ui.h:6
+msgid "Custom"
+msgstr "Vlastní"
 
 #: ../data/ui/new-label-dialog.ui.h:1
 msgid ""
@@ -1835,341 +1835,476 @@ msgstr ""
 "Zvolte produkt s etiketami nebo vizitkami ze stovek předdefinovaných šablon "
 "nebo si vytvořte vlastní."
 
-#: ../data/ui/new-label-dialog.ui.h:2 ../data/ui/template-designer.ui.h:29
-msgid "Description:"
-msgstr "Popis:"
-
-#: ../data/ui/new-label-dialog.ui.h:3
-msgid "Label size:"
-msgstr "Velikost etikety:"
-
-#: ../data/ui/new-label-dialog.ui.h:4
-msgid "Layout:"
-msgstr "Rozvržení:"
-
-#: ../data/ui/new-label-dialog.ui.h:5
-msgid "Normal"
-msgstr "Normálně"
-
-#: ../data/ui/new-label-dialog.ui.h:7 ../data/ui/template-designer.ui.h:47
-msgid "Part #:"
-msgstr "Produktové číslo:"
-
-#: ../data/ui/new-label-dialog.ui.h:8
-msgid "Please review and confirm your selection."
-msgstr "Zkontrolujte prosím a potvrďte svůj výběr."
-
-#: ../data/ui/new-label-dialog.ui.h:9
-msgid "Rotated"
-msgstr "Otočené"
-
-#: ../data/ui/new-label-dialog.ui.h:10
+#: ../data/ui/new-label-dialog.ui.h:2
 msgid "Select orientation of label content."
 msgstr "Vyberte otočení obsahu etikety."
 
-#: ../data/ui/new-label-dialog.ui.h:11
+#: ../data/ui/new-label-dialog.ui.h:3
+msgid "Normal"
+msgstr "Normálně"
+
+#: ../data/ui/new-label-dialog.ui.h:4
+msgid "Rotated"
+msgstr "Otočené"
+
+#: ../data/ui/new-label-dialog.ui.h:5
+msgid "Please review and confirm your selection."
+msgstr "Zkontrolujte prosím a potvrďte svůj výběr."
+
+#: ../data/ui/new-label-dialog.ui.h:6 ../data/ui/template-designer.ui.h:9
+msgid "Description:"
+msgstr "Popis:"
+
+#: ../data/ui/new-label-dialog.ui.h:8
+msgid "Label size:"
+msgstr "Velikost etikety:"
+
+#: ../data/ui/new-label-dialog.ui.h:9
+msgid "Layout:"
+msgstr "Rozvržení:"
+
+#: ../data/ui/new-label-dialog.ui.h:10
 msgid "Similar products:"
 msgstr "Podobné produkty:"
+
+#: ../data/ui/new-label-dialog.ui.h:11 ../data/ui/template-designer.ui.h:6
+msgid "Part #:"
+msgstr "Produktové číslo:"
 
 #: ../data/ui/new-label-dialog.ui.h:12
 msgid "Vendor:"
 msgstr "Výrobce:"
 
 #: ../data/ui/object-editor.ui.h:1
-msgid " "
-msgstr " "
+msgid "dialog1"
+msgstr "dialog1"
 
 #: ../data/ui/object-editor.ui.h:3
-#, no-c-format
-msgid "%"
-msgstr "%"
-
-#: ../data/ui/object-editor.ui.h:4 ../data/ui/prefs-dialog.ui.h:2
-msgid "Alignment:"
-msgstr "Zarovnání:"
-
-#: ../data/ui/object-editor.ui.h:5
-msgid "Allow merge to automatically shrink text"
-msgstr "Při slučování povolit automatické zúžení textu"
-
-#: ../data/ui/object-editor.ui.h:6
-msgid "Angle:"
-msgstr "Úhel:"
-
-#: ../data/ui/object-editor.ui.h:7
-msgid "Backend:"
-msgstr "Generátor:"
-
-#: ../data/ui/object-editor.ui.h:8
-msgid "Checksum"
-msgstr "Kontrolní součet"
-
-#: ../data/ui/object-editor.ui.h:9 ../data/ui/prefs-dialog.ui.h:3
-msgid "Color:"
-msgstr "Barva:"
-
-#: ../data/ui/object-editor.ui.h:11
-msgid "Enable shadow"
-msgstr "Zapnout stín"
-
-#: ../data/ui/object-editor.ui.h:12
 msgid "Family:"
 msgstr "Rodina:"
 
-#: ../data/ui/object-editor.ui.h:13
-msgid "File:"
-msgstr "Soubor:"
-
-#: ../data/ui/object-editor.ui.h:14 ../data/ui/prefs-dialog.ui.h:5
-msgid "Fill"
-msgstr "Výplň"
-
-#: ../data/ui/object-editor.ui.h:15 ../data/ui/template-designer.ui.h:33
-msgid "Height:"
-msgstr "Výška:"
-
-#: ../data/ui/object-editor.ui.h:17
-msgid "Key:"
-msgstr "Klíč:"
-
-#: ../data/ui/object-editor.ui.h:18
-msgid "Length:"
-msgstr "Délka:"
-
-#: ../data/ui/object-editor.ui.h:20 ../data/ui/prefs-dialog.ui.h:10
-msgid "Line Spacing:"
-msgstr "Řádkování:"
-
-#: ../data/ui/object-editor.ui.h:21
-msgid "Literal:"
-msgstr "Znaky:"
-
-#: ../data/ui/object-editor.ui.h:22
-msgid "Opacity:"
-msgstr "Krytí:"
-
-#: ../data/ui/object-editor.ui.h:23
-msgid "Position"
-msgstr "Pozice"
-
-#: ../data/ui/object-editor.ui.h:24
-msgid "Reset image size"
-msgstr "Původní velikost obrázku"
-
-#: ../data/ui/object-editor.ui.h:25
-msgid "Shadow"
-msgstr "Stín"
-
-#: ../data/ui/object-editor.ui.h:26
-msgid "Size"
-msgstr "Velikost"
-
-#: ../data/ui/object-editor.ui.h:27
+#: ../data/ui/object-editor.ui.h:4
 msgid "Size:"
 msgstr "Velikost:"
 
-#: ../data/ui/object-editor.ui.h:28
-msgid "Style"
-msgstr "Styl"
-
-#: ../data/ui/object-editor.ui.h:29
+#: ../data/ui/object-editor.ui.h:5
 msgid "Style:"
 msgstr "Styl:"
 
-#: ../data/ui/object-editor.ui.h:31 ../data/ui/prefs-dialog.ui.h:20
-#: ../data/ui/template-designer.ui.h:65
+#: ../data/ui/object-editor.ui.h:6 ../data/ui/prefs-dialog.ui.h:14
+msgid "Color:"
+msgstr "Barva:"
+
+#: ../data/ui/object-editor.ui.h:7
+msgid " "
+msgstr " "
+
+#: ../data/ui/object-editor.ui.h:8
+msgid "key:"
+msgstr "Klíč:"
+
+#: ../data/ui/object-editor.ui.h:9 ../data/ui/prefs-dialog.ui.h:15
+msgid "Alignment:"
+msgstr "Zarovnání:"
+
+#: ../data/ui/object-editor.ui.h:10 ../data/ui/prefs-dialog.ui.h:16
+msgid "Line Spacing:"
+msgstr "Řádkování:"
+
+#: ../data/ui/object-editor.ui.h:11
+msgid "Allow merge to automatically shrink text"
+msgstr "Při slučování povolit automatické zúžení textu"
+
+#: ../data/ui/object-editor.ui.h:12
+msgid "Style"
+msgstr "Styl"
+
+#: ../data/ui/object-editor.ui.h:13 ../data/ui/prefs-dialog.ui.h:18
+#: ../data/ui/template-designer.ui.h:13
 msgid "Width:"
 msgstr "Šířka:"
 
+#: ../data/ui/object-editor.ui.h:15
+msgid "Key:"
+msgstr "Klíč:"
+
+#: ../data/ui/object-editor.ui.h:17 ../data/ui/prefs-dialog.ui.h:21
+msgid "Fill"
+msgstr "Výplň"
+
+#: ../data/ui/object-editor.ui.h:18
+msgid "File:"
+msgstr "Soubor:"
+
+#: ../data/ui/object-editor.ui.h:20
+msgid "Literal:"
+msgstr "Znaky:"
+
+#: ../data/ui/object-editor.ui.h:21
+msgid "format:"
+msgstr "formát:"
+
+#: ../data/ui/object-editor.ui.h:22
+msgid "digits:"
+msgstr "číslic:"
+
+#: ../data/ui/object-editor.ui.h:24
+msgid "Backend:"
+msgstr "Generátor:"
+
+#: ../data/ui/object-editor.ui.h:25
+msgid "Checksum"
+msgstr "Kontrolní součet"
+
+#: ../data/ui/object-editor.ui.h:26 ../data/ui/template-designer.ui.h:14
+msgid "Height:"
+msgstr "Výška:"
+
+#: ../data/ui/object-editor.ui.h:28
+msgid "Reset image size"
+msgstr "Původní velikost obrázku"
+
+#: ../data/ui/object-editor.ui.h:29
+msgid "Size"
+msgstr "Velikost"
+
+#: ../data/ui/object-editor.ui.h:30
+msgid "Length:"
+msgstr "Délka:"
+
+#: ../data/ui/object-editor.ui.h:31
+msgid "Angle:"
+msgstr "Úhel:"
+
 #: ../data/ui/object-editor.ui.h:32
-msgid "X Offset:"
-msgstr "Posun X:"
+msgid "degrees"
+msgstr "stupně"
 
 #: ../data/ui/object-editor.ui.h:33
 msgid "X:"
 msgstr "X:"
 
 #: ../data/ui/object-editor.ui.h:34
-msgid "Y Offset:"
-msgstr "Posun Y:"
-
-#: ../data/ui/object-editor.ui.h:35
 msgid "Y:"
 msgstr "Y:"
 
+#: ../data/ui/object-editor.ui.h:35
+msgid "Position"
+msgstr "Pozice"
+
 #: ../data/ui/object-editor.ui.h:36
-msgid "degrees"
-msgstr "stupně"
+msgid "Enable shadow"
+msgstr "Zapnout stín"
 
 #: ../data/ui/object-editor.ui.h:37
-msgid "dialog1"
-msgstr "dialog1"
+msgid "X Offset:"
+msgstr "Posun X:"
 
 #: ../data/ui/object-editor.ui.h:38
-msgid "digits:"
-msgstr "číslic:"
+msgid "Y Offset:"
+msgstr "Posun Y:"
 
 #: ../data/ui/object-editor.ui.h:39
-msgid "format:"
-msgstr "formát:"
+msgid "Opacity:"
+msgstr "Krytí:"
 
 #: ../data/ui/object-editor.ui.h:41
-msgid "key:"
-msgstr "Klíč:"
+#, no-c-format
+msgid "%"
+msgstr "%"
 
-#: ../data/ui/prefs-dialog.ui.h:1
+#: ../data/ui/object-editor.ui.h:42
+msgid "Shadow"
+msgstr "Stín"
+
+#: ../data/ui/prefs-dialog.ui.h:2
+msgid "Select locale specific behavior."
+msgstr "Vyberte specifické chování pro národní prostředí."
+
+#: ../data/ui/prefs-dialog.ui.h:3
 msgid "   "
 msgstr "   "
 
 #: ../data/ui/prefs-dialog.ui.h:4
-msgid "Default page size"
-msgstr "Výchozí velikost stránky"
+msgid "Points"
+msgstr "Body"
+
+#: ../data/ui/prefs-dialog.ui.h:5
+msgid "Inches"
+msgstr "Palce"
 
 #: ../data/ui/prefs-dialog.ui.h:6
-msgid "Font:"
-msgstr "Písmo:"
+msgid "Millimeters"
+msgstr "Milimetry"
 
 #: ../data/ui/prefs-dialog.ui.h:7
+msgid "Units"
+msgstr "Jednotky"
+
+#: ../data/ui/prefs-dialog.ui.h:8 ../templates/paper-sizes.xml.h:3
+msgid "US Letter"
+msgstr "US Letter"
+
+#: ../data/ui/prefs-dialog.ui.h:9
 msgid "ISO A4"
 msgstr "ISO A4"
 
-#: ../data/ui/prefs-dialog.ui.h:8
-msgid "Inches"
-msgstr "Palce"
+#: ../data/ui/prefs-dialog.ui.h:10
+msgid "Default page size"
+msgstr "Výchozí velikost stránky"
 
 #: ../data/ui/prefs-dialog.ui.h:11
 msgid "Locale"
 msgstr "Národní prostředí"
 
 #: ../data/ui/prefs-dialog.ui.h:12
-msgid "Millimeters"
-msgstr "Milimetry"
-
-#: ../data/ui/prefs-dialog.ui.h:13
-msgid "Object defaults"
-msgstr "Výchozí hodnoty objektu"
-
-#: ../data/ui/prefs-dialog.ui.h:14
-msgid "Points"
-msgstr "Body"
-
-#: ../data/ui/prefs-dialog.ui.h:15
 msgid "Select default properties for new objects."
 msgstr "Vyberte výchozí vlastnosti pro nové objekty."
 
-#: ../data/ui/prefs-dialog.ui.h:16
-msgid "Select locale specific behavior."
-msgstr "Vyberte specifické chování pro národní prostředí."
+#: ../data/ui/prefs-dialog.ui.h:13
+msgid "Font:"
+msgstr "Písmo:"
 
-#: ../data/ui/prefs-dialog.ui.h:18 ../templates/paper-sizes.xml.h:46
-msgid "US Letter"
-msgstr "US Letter"
+#: ../data/ui/prefs-dialog.ui.h:22
+msgid "Object defaults"
+msgstr "Výchozí hodnoty objektu"
 
-#: ../data/ui/prefs-dialog.ui.h:19
-msgid "Units"
-msgstr "Jednotky"
-
-#: ../data/ui/property-bar.ui.h:1
+#: ../data/ui/property-bar.ui.h:3
 msgid "Bold"
 msgstr "Tučně"
 
-#: ../data/ui/property-bar.ui.h:2
+#: ../data/ui/property-bar.ui.h:5
+msgid "Left align"
+msgstr "Zarovnání vlevo"
+
+#: ../data/ui/property-bar.ui.h:6
 msgid "Center align"
 msgstr "Na střed"
 
 #: ../data/ui/property-bar.ui.h:7
-msgid "Left align"
-msgstr "Zarovnání vlevo"
-
-#: ../data/ui/property-bar.ui.h:10
 msgid "Right align"
 msgstr "Zarovnání vpravo"
 
 #: ../data/ui/template-designer.ui.h:1
-msgid "(e.g., \"Mailing Labels,\" \"Business Cards,\" ...)"
-msgstr "(např. „Adresní štítky“, „Vizitky“, …)"
-
-#: ../data/ui/template-designer.ui.h:2
-msgid "(e.g., 8163A)"
-msgstr "(např. 8163A)"
-
-#: ../data/ui/template-designer.ui.h:3
-msgid "(e.g., Avery, Acme, ...)"
-msgstr "(např. Avery, Acme, …)"
+msgid ""
+"Welcome to the gLabels Template Designer.\n"
+"\n"
+"This dialog will assist you in the creation of a custom gLabels template."
+msgstr ""
+"Vítejte v návrháři šablon aplikace gLabels.\n"
+"\n"
+"Tento dialog vám pomůže při vytváření vlastní šablony gLabels."
 
 #: ../data/ui/template-designer.ui.h:4
-msgid "1. Outer radius:"
-msgstr "1. Vnější poloměr:"
+msgid ""
+"Please enter the following identifying information about the template "
+"stationery."
+msgstr ""
+"Vyplňte, prosím, následující identifikační informace o papíru pro šablonu."
 
 #: ../data/ui/template-designer.ui.h:5
-msgid "1. Radius:"
-msgstr "1. Poloměr:"
-
-#: ../data/ui/template-designer.ui.h:6
-msgid "1. Width:"
-msgstr "1. Šířka:"
-
-#: ../data/ui/template-designer.ui.h:7
-msgid "2. Height:"
-msgstr "2. Výška:"
-
-#: ../data/ui/template-designer.ui.h:8
-msgid "2. Inner radius:"
-msgstr "2. Vnitřní poloměr:"
-
-#: ../data/ui/template-designer.ui.h:9
-msgid "2. Waste (overprint allowed):"
-msgstr "2. Odsazení (umožňuje přetisk):"
-
-#: ../data/ui/template-designer.ui.h:10
-msgid "3. Clipping width:"
-msgstr "3. Šířka oříznutí:"
-
-#: ../data/ui/template-designer.ui.h:11
-msgid "3. Margin"
-msgstr "3. Okraj"
-
-#: ../data/ui/template-designer.ui.h:12
-msgid "3. Round (radius of corner):"
-msgstr "3. Zaoblení (poloměr rohu):"
-
-#: ../data/ui/template-designer.ui.h:13
-msgid "3. Waste (overprint allowed):"
-msgstr "3. Odsazení (umožňuje přetisk):"
-
-#: ../data/ui/template-designer.ui.h:14
-msgid "4. Clipping height:"
-msgstr "4. Výška oříznutí:"
-
-#: ../data/ui/template-designer.ui.h:15
-msgid "4. Horiz. waste (overprint allowed):"
-msgstr "4. Vodorovné odsazení (umožňuje přetisk):"
-
-#: ../data/ui/template-designer.ui.h:16
-msgid "4. Margin"
-msgstr "4. Okraj"
-
-#: ../data/ui/template-designer.ui.h:17
-msgid "5. Vert. waste (overprint allowed):"
-msgstr "5. Svislé odsazení (umožňuje přetisk):"
-
-#: ../data/ui/template-designer.ui.h:18
-msgid "5. Waste (overprint allowed):"
-msgstr "5. Odsazení (umožňuje přetisk):"
-
-#: ../data/ui/template-designer.ui.h:19
-msgid "6. Margin"
-msgstr "6. Okraj"
-
-#: ../data/ui/template-designer.ui.h:20
 msgid "Brand/Manufacturer:"
 msgstr "Značka/Výrobce:"
 
-#: ../data/ui/template-designer.ui.h:21
+#: ../data/ui/template-designer.ui.h:7
+msgid "(e.g., 8163A)"
+msgstr "(např. 8163A)"
+
+#: ../data/ui/template-designer.ui.h:8
+msgid "(e.g., Avery, Acme, ...)"
+msgstr "(např. Avery, Acme, …)"
+
+#: ../data/ui/template-designer.ui.h:10
+msgid "(e.g., \"Mailing Labels,\" \"Business Cards,\" ...)"
+msgstr "(např. „Adresní štítky“, „Vizitky“, …)"
+
+#: ../data/ui/template-designer.ui.h:11
+msgid "Please select the page size of the template stationery."
+msgstr "Vyberte, prosím, velikost stránky papíru pro šablonu."
+
+#: ../data/ui/template-designer.ui.h:16
+msgid "Please select the basic shape of the labels or cards."
+msgstr "Vyberte, prosím, základní tvar etiket nebo vizitek."
+
+#: ../data/ui/template-designer.ui.h:17
+msgid "Rectangular or square (can have rounded corners)"
+msgstr "Obdélníkový nebo čtvercový (může mít zaoblené rohy)"
+
+#: ../data/ui/template-designer.ui.h:18
+msgid "Round"
+msgstr "Kulatý"
+
+#: ../data/ui/template-designer.ui.h:19
+msgid "Elliptical"
+msgstr "Oválný"
+
+#: ../data/ui/template-designer.ui.h:20
 msgid "CD/DVD (including credit card CDs)"
 msgstr "CD/DVD (včetně vizitkových CD)"
 
+#: ../data/ui/template-designer.ui.h:21
+msgid ""
+"Please enter the following size parameters of a single label or card in your "
+"template."
+msgstr ""
+"Vyplňte, prosím, následující parametry velikosti jedné etikety nebo vizitky "
+"ve vaší šabloně."
+
 #: ../data/ui/template-designer.ui.h:22
+msgid "1. Width:"
+msgstr "1. Šířka:"
+
+#: ../data/ui/template-designer.ui.h:23
+msgid "2. Height:"
+msgstr "2. Výška:"
+
+#: ../data/ui/template-designer.ui.h:24
+msgid "3. Round (radius of corner):"
+msgstr "3. Zaoblení (poloměr rohu):"
+
+#: ../data/ui/template-designer.ui.h:25
+msgid "4. Horiz. waste (overprint allowed):"
+msgstr "4. Vodorovné odsazení (umožňuje přetisk):"
+
+#: ../data/ui/template-designer.ui.h:26
+msgid "6. Margin"
+msgstr "6. Okraj"
+
+#: ../data/ui/template-designer.ui.h:27
+msgid "5. Vert. waste (overprint allowed):"
+msgstr "5. Svislé odsazení (umožňuje přetisk):"
+
+#: ../data/ui/template-designer.ui.h:28
+msgid "3. Waste (overprint allowed):"
+msgstr "3. Odsazení (umožňuje přetisk):"
+
+#: ../data/ui/template-designer.ui.h:29
+msgid "4. Margin"
+msgstr "4. Okraj"
+
+#: ../data/ui/template-designer.ui.h:30
+msgid ""
+"Please enter the following size parameters of a single label in your "
+"template."
+msgstr ""
+"Vyplňte, prosím, následující parametry velikosti jedné etikety ve vaší "
+"šabloně."
+
+#: ../data/ui/template-designer.ui.h:31
+msgid "1. Radius:"
+msgstr "1. Poloměr:"
+
+#: ../data/ui/template-designer.ui.h:32
+msgid "2. Waste (overprint allowed):"
+msgstr "2. Odsazení (umožňuje přetisk):"
+
+#: ../data/ui/template-designer.ui.h:33
+msgid "3. Margin"
+msgstr "3. Okraj"
+
+#: ../data/ui/template-designer.ui.h:34
+msgid "1. Outer radius:"
+msgstr "1. Vnější poloměr:"
+
+#: ../data/ui/template-designer.ui.h:35
+msgid "2. Inner radius:"
+msgstr "2. Vnitřní poloměr:"
+
+#: ../data/ui/template-designer.ui.h:36
+msgid "3. Clipping width:"
+msgstr "3. Šířka oříznutí:"
+
+#: ../data/ui/template-designer.ui.h:37
+msgid "4. Clipping height:"
+msgstr "4. Výška oříznutí:"
+
+#: ../data/ui/template-designer.ui.h:38
+msgid "5. Waste (overprint allowed):"
+msgstr "5. Odsazení (umožňuje přetisk):"
+
+#: ../data/ui/template-designer.ui.h:39
+msgid ""
+"How many layouts will your template contain? \n"
+"\n"
+"A layout is a set of labels or cards that can be arranged in a simple grid.\n"
+"Most templates only need one layout, as in the first example.\n"
+"The second example illustrates when two layouts are needed."
+msgstr ""
+"Kolik rozvržení obsahuje vaše šablona? \n"
+"\n"
+"Rozvržení je sada etiket nebo vizitek, které mohou být uspořádány na\n"
+"jednoduché mřížce. Většina šablon potřebuje jedno rozvržení jako v\n"
+"prvním příkladu. Druhý příklad ilustruje dvě rozvržení."
+
+#: ../data/ui/template-designer.ui.h:44
+msgid ""
+"Templates needing only\n"
+"one layout."
+msgstr ""
+"Šablony, které potřebují\n"
+"jedno rozvržení."
+
+#: ../data/ui/template-designer.ui.h:46
+msgid ""
+"Templates needing\n"
+"two layouts."
+msgstr ""
+"Šablony, které potřebují\n"
+"dvě rozvržení."
+
+#: ../data/ui/template-designer.ui.h:48
+msgid ""
+"Note: if more than 2 layouts are required, the template must be edited "
+"manually."
+msgstr ""
+"Poznámka: pokud jsou požadována více jak 2 rozvržení, musí se šablona "
+"upravovat ručně."
+
+#: ../data/ui/template-designer.ui.h:49
+msgid "Number of layouts:"
+msgstr "Počet rozvržení:"
+
+#: ../data/ui/template-designer.ui.h:50
+msgid "Please enter the following layout information."
+msgstr "Vyplňte, prosím, následující informaci o rozvržení."
+
+#: ../data/ui/template-designer.ui.h:51
+msgid "Layout #1"
+msgstr "Rozvržení č. 1"
+
+#: ../data/ui/template-designer.ui.h:52
+msgid "Layout #2"
+msgstr "Rozvržení č. 2"
+
+#: ../data/ui/template-designer.ui.h:53
+msgid "Number across (nx):"
+msgstr "Počet napříč (nx):"
+
+#: ../data/ui/template-designer.ui.h:54
+msgid "Number down (ny):"
+msgstr "Počet svisle (ny):"
+
+#: ../data/ui/template-designer.ui.h:55
+msgid "Distance from left edge (x0):"
+msgstr "Vzdálenost od levého okraje (x0):"
+
+#: ../data/ui/template-designer.ui.h:56
+msgid "Distance from top edge (y0):"
+msgstr "Vzdálenost od horního okraje (y0):"
+
+#: ../data/ui/template-designer.ui.h:57
+msgid "Horizontal pitch (dx):"
+msgstr "Vodorovná rozteč (dx):"
+
+#: ../data/ui/template-designer.ui.h:58
+msgid "Vertical pitch (dy):"
+msgstr "Svislá rozteč (dy):"
+
+#: ../data/ui/template-designer.ui.h:59
+msgid "Print test sheet"
+msgstr "Vytisknout testovací stránku"
+
+#: ../data/ui/template-designer.ui.h:60
 msgid ""
 "Congratulations!\n"
 "\n"
@@ -2187,596 +2322,457 @@ msgstr ""
 "V opačném případě klikněte na „Zrušit“ pro zahození návrhu\n"
 "nebo na „Zpět“ pro další úpravy tohoto návrhu."
 
-#: ../data/ui/template-designer.ui.h:30
-msgid "Distance from left edge (x0):"
-msgstr "Vzdálenost od levého okraje (x0):"
-
-#: ../data/ui/template-designer.ui.h:31
-msgid "Distance from top edge (y0):"
-msgstr "Vzdálenost od horního okraje (y0):"
-
-#: ../data/ui/template-designer.ui.h:32
-msgid "Elliptical"
-msgstr "Oválný"
-
-#: ../data/ui/template-designer.ui.h:34
-msgid "Horizontal pitch (dx):"
-msgstr "Vodorovná rozteč (dx):"
-
-#: ../data/ui/template-designer.ui.h:35
-msgid ""
-"How many layouts will your template contain? \n"
-"\n"
-"A layout is a set of labels or cards that can be arranged in a simple grid.\n"
-"Most templates only need one layout, as in the first example.\n"
-"The second example illustrates when two layouts are needed."
-msgstr ""
-"Kolik rozvržení obsahuje vaše šablona? \n"
-"\n"
-"Rozvržení je sada etiket nebo vizitek, které mohou být uspořádány na\n"
-"jednoduché mřížce. Většina šablon potřebuje jedno rozvržení jako v\n"
-"prvním příkladu. Druhý příklad ilustruje dvě rozvržení."
-
-#: ../data/ui/template-designer.ui.h:40
-msgid "Layout #1"
-msgstr "Rozvržení č. 1"
-
-#: ../data/ui/template-designer.ui.h:41
-msgid "Layout #2"
-msgstr "Rozvržení č. 2"
-
-#: ../data/ui/template-designer.ui.h:42
-msgid ""
-"Note: if more than 2 layouts are required, the template must be edited "
-"manually."
-msgstr ""
-"Poznámka: pokud jsou požadována více jak 2 rozvržení, musí se šablona "
-"upravovat ručně."
-
-#: ../data/ui/template-designer.ui.h:43
-msgid "Number across (nx):"
-msgstr "Počet napříč (nx):"
-
-#: ../data/ui/template-designer.ui.h:44
-msgid "Number down (ny):"
-msgstr "Počet svisle (ny):"
-
-#: ../data/ui/template-designer.ui.h:45
-msgid "Number of layouts:"
-msgstr "Počet rozvržení:"
-
-#: ../data/ui/template-designer.ui.h:48
-msgid ""
-"Please enter the following identifying information about the template "
-"stationery."
-msgstr ""
-"Vyplňte, prosím, následující identifikační informace o papíru pro šablonu."
-
-#: ../data/ui/template-designer.ui.h:49
-msgid "Please enter the following layout information."
-msgstr "Vyplňte, prosím, následující informaci o rozvržení."
-
-#: ../data/ui/template-designer.ui.h:50
-msgid ""
-"Please enter the following size parameters of a single label in your "
-"template."
-msgstr ""
-"Vyplňte, prosím, následující parametry velikosti jedné etikety ve vaší "
-"šabloně."
-
-#: ../data/ui/template-designer.ui.h:51
-msgid ""
-"Please enter the following size parameters of a single label or card in your "
-"template."
-msgstr ""
-"Vyplňte, prosím, následující parametry velikosti jedné etikety nebo vizitky "
-"ve vaší šabloně."
-
-#: ../data/ui/template-designer.ui.h:52
-msgid "Please select the basic shape of the labels or cards."
-msgstr "Vyberte, prosím, základní tvar etiket nebo vizitek."
-
-#: ../data/ui/template-designer.ui.h:53
-msgid "Please select the page size of the template stationery."
-msgstr "Vyberte, prosím, velikost stránky papíru pro šablonu."
-
-#: ../data/ui/template-designer.ui.h:54
-msgid "Print test sheet"
-msgstr "Vytisknout testovací stránku"
-
-#: ../data/ui/template-designer.ui.h:55
-msgid "Rectangular or square (can have rounded corners)"
-msgstr "Obdélníkový nebo čtvercový (může mít zaoblené rohy)"
-
-#: ../data/ui/template-designer.ui.h:56
-msgid "Round"
-msgstr "Kulatý"
-
-#: ../data/ui/template-designer.ui.h:57
-msgid ""
-"Templates needing\n"
-"two layouts."
-msgstr ""
-"Šablony, které potřebují\n"
-"dvě rozvržení."
-
-#: ../data/ui/template-designer.ui.h:59
-msgid ""
-"Templates needing only\n"
-"one layout."
-msgstr ""
-"Šablony, které potřebují\n"
-"jedno rozvržení."
-
-#: ../data/ui/template-designer.ui.h:61
-msgid "Vertical pitch (dy):"
-msgstr "Svislá rozteč (dy):"
-
-#: ../data/ui/template-designer.ui.h:62
-msgid ""
-"Welcome to the gLabels Template Designer.\n"
-"\n"
-"This dialog will assist you in the creation of a custom gLabels template."
-msgstr ""
-"Vítejte v návrháři šablon aplikace gLabels.\n"
-"\n"
-"Tento dialog vám pomůže při vytváření vlastní šablony gLabels."
-
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:1
-msgid "Collate"
-msgstr "Seřadit"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:2
-msgid "Copies"
-msgstr "Kopie"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:3
-msgid "Copies:"
-msgstr "Kopie:"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:5
-msgid "Merge Control"
-msgstr "Řízení slučování"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:6
-msgid "Options"
-msgstr "Volby"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:7
 msgid "Sheets:"
 msgstr "Stránky:"
 
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:8
-msgid "Start on label"
-msgstr "Začít na etiketě"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:9
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:3
 msgid "from:"
 msgstr "od:"
 
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:10
-msgid "on 1st sheet"
-msgstr "na první stránce"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:14
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:4
 msgid "to:"
 msgstr "do:"
 
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:5
+msgid "Copies"
+msgstr "Kopie"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:6
+msgid "Start on label"
+msgstr "Začít na etiketě"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:7
+msgid "on 1st sheet"
+msgstr "na první stránce"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:8
+msgid "Copies:"
+msgstr "Kopie:"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:9
+msgid "Collate"
+msgstr "Seřadit"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:10
+msgid "Merge Control"
+msgstr "Řízení slučování"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:14
+msgid "Options"
+msgstr "Volby"
+
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
-msgid "Controls maximum number of recent files tracked."
-msgstr "Řídí maximální počet zaznamenaných nedávných souborů."
+msgid "Show/hide main toolbar."
+msgstr "Zobrazit/skrýt hlavní panel nástrojů."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:2
-msgid "Controls visibility of drawing toolbar."
-msgstr "Řídí viditelnost panelu nástrojů kreslení."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:3
-msgid "Controls visibility of grid."
-msgstr "Řídí viditelnost mřížky."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:4
 msgid "Controls visibility of main toolbar."
 msgstr "Řídí viditelnost hlavního panelu nástrojů."
 
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:3
+msgid "Show/hide drawing toolbar."
+msgstr "Zobrazit/skrýt panel nástrojů kreslení."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:4
+msgid "Controls visibility of drawing toolbar."
+msgstr "Řídí viditelnost panelu nástrojů kreslení."
+
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:5
-msgid "Controls visibility of markup lines."
-msgstr "Řídí viditelnost hraničních čar."
+msgid "Show/hide property toolbar."
+msgstr "Zobrazit/skrýt panel vlastností."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:6
 msgid "Controls visibility of property toolbar."
 msgstr "Řídí viditelnost panelu vlastností."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:7
-msgid "Default fill color."
-msgstr "Výchozí barva výplně."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:8
-msgid "Default font family."
-msgstr "Výchozí rodina písma."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:9
-msgid "Default font italic flag."
-msgstr "Výchozí příznak kurzívy."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:10
-msgid "Default font size."
-msgstr "Výchozí velikost písma."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:11
-msgid "Default font weight."
-msgstr "Výchozí tloušťka písma."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:12
-msgid "Default line color."
-msgstr "Výchozí barva obrysu."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:13
-msgid "Default line width."
-msgstr "Výchozí tloušťka obrysu."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:14
-msgid "Default page size."
-msgstr "Výchozí velikost stránky."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:15
-msgid "Default text alignment."
-msgstr "Výchozí zarovnání textu."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:16
-msgid "Default text color."
-msgstr "Výchozí barva textu."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:17
-msgid "Default text line spacing."
-msgstr "Výchozí řádkování textu."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:18
-msgid "Maximum recent files."
-msgstr "Maximum nedávných souborů."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:19
-msgid "Recent colors."
-msgstr "Nedávné barvy."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:20
-msgid "Recent fonts."
-msgstr "Nedávná písma."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:21
-msgid "Recent templates."
-msgstr "Nedávné šablony."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:22
-msgid "Recently created custom colors."
-msgstr "Nedávno vytvořené vlastní barvy."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:23
-msgid "Recently used font families."
-msgstr "Nedávno použité rodiny písma."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:24
-msgid "Recently used templates."
-msgstr "Nedávno použité šablony."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:25
-msgid "Show/hide drawing toolbar."
-msgstr "Zobrazit/skrýt panel nástrojů kreslení."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:26
 msgid "Show/hide grid."
 msgstr "Zobrazit/skrýt mřížku."
 
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:27
-msgid "Show/hide main toolbar."
-msgstr "Zobrazit/skrýt hlavní panel nástrojů."
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:8
+msgid "Controls visibility of grid."
+msgstr "Řídí viditelnost mřížky."
 
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:28
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:9
 msgid "Show/hide markup."
 msgstr "Zobrazit/skrýt ohraničení."
 
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:29
-msgid "Show/hide property toolbar."
-msgstr "Zobrazit/skrýt panel vlastností."
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:10
+msgid "Controls visibility of markup lines."
+msgstr "Řídí viditelnost hraničních čar."
 
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:30
-msgid "The default color of text for new text objects (0xRRGGBBAA)."
-msgstr "Výchozí barva textu pro nové textové objekty (0xRRGGBBAA)."
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:11
+msgid "Maximum recent files."
+msgstr "Maximum nedávných souborů."
 
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:31
-msgid "The default fill color new objects (0xRRGGBBAA)."
-msgstr "Výchozí barva výplně pro nové objekty (0xRRGGBBAA)."
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:12
+msgid "Controls maximum number of recent files tracked."
+msgstr "Řídí maximální počet zaznamenaných nedávných souborů."
 
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:32
-msgid "The default font family for new text objects."
-msgstr "Výchozí rodina písma pro nové textové objekty."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:33
-msgid "The default font italic state for new text objects."
-msgstr "Výchozí stav kurzívy pro nové textové objekty."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:34
-msgid "The default font size for new text objects."
-msgstr "Výchozí velikost písma pro nové textové objekty."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:35
-msgid "The default font weight for new text objects."
-msgstr "Výchozí tloušťka písma pro nové textové objekty."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:36
-msgid "The default line color new objects (0xRRGGBBAA)."
-msgstr "Výchozí barva obrysu pro nové objekty (0xRRGGBBAA)."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:37
-msgid "The default line spacing for new text objects."
-msgstr "Výchozí řádkování pro nové textové objekty."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:38
-msgid "The default line width for new objects."
-msgstr "Výchozí tloušťka obrysu pro nové objekty."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:39
-msgid "The default text alignment for new text objects."
-msgstr "Výchozí zarovnání textu pro nové textové objekty."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:40
-msgid "The default unit of measurement."
-msgstr "Výchozí měrná jednotka."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:41
-msgid "The preferred page size when searching templates."
-msgstr "Upřednostňovaná velikost stránky při hledání šablon."
-
-#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:42
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:13
 msgid "Units."
 msgstr "Jednotky."
 
-#: ../data/desktop/glabels-3.0.desktop.in.h:1
-msgid "Create labels, business cards and media covers"
-msgstr "Vytvářejte etikety, vizitky a obaly médií"
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:14
+msgid "The default unit of measurement."
+msgstr "Výchozí měrná jednotka."
 
-#: ../data/desktop/glabels-3.0.desktop.in.h:2
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:15
+msgid "Default page size."
+msgstr "Výchozí velikost stránky."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:16
+msgid "The preferred page size when searching templates."
+msgstr "Upřednostňovaná velikost stránky při hledání šablon."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:17
+msgid "Default font family."
+msgstr "Výchozí rodina písma."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:18
+msgid "The default font family for new text objects."
+msgstr "Výchozí rodina písma pro nové textové objekty."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:19
+msgid "Default font size."
+msgstr "Výchozí velikost písma."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:20
+msgid "The default font size for new text objects."
+msgstr "Výchozí velikost písma pro nové textové objekty."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:21
+msgid "Default font weight."
+msgstr "Výchozí tloušťka písma."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:22
+msgid "The default font weight for new text objects."
+msgstr "Výchozí tloušťka písma pro nové textové objekty."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:23
+msgid "Default font italic flag."
+msgstr "Výchozí příznak kurzívy."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:24
+msgid "The default font italic state for new text objects."
+msgstr "Výchozí stav kurzívy pro nové textové objekty."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:25
+msgid "Default text color."
+msgstr "Výchozí barva textu."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:26
+msgid "The default color of text for new text objects (0xRRGGBBAA)."
+msgstr "Výchozí barva textu pro nové textové objekty (0xRRGGBBAA)."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:27
+msgid "Default text alignment."
+msgstr "Výchozí zarovnání textu."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:28
+msgid "The default text alignment for new text objects."
+msgstr "Výchozí zarovnání textu pro nové textové objekty."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:29
+msgid "Default text line spacing."
+msgstr "Výchozí řádkování textu."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:30
+msgid "The default line spacing for new text objects."
+msgstr "Výchozí řádkování pro nové textové objekty."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:31
+msgid "Default line width."
+msgstr "Výchozí tloušťka obrysu."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:32
+msgid "The default line width for new objects."
+msgstr "Výchozí tloušťka obrysu pro nové objekty."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:33
+msgid "Default line color."
+msgstr "Výchozí barva obrysu."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:34
+msgid "The default line color new objects (0xRRGGBBAA)."
+msgstr "Výchozí barva obrysu pro nové objekty (0xRRGGBBAA)."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:35
+msgid "Default fill color."
+msgstr "Výchozí barva výplně."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:36
+msgid "The default fill color new objects (0xRRGGBBAA)."
+msgstr "Výchozí barva výplně pro nové objekty (0xRRGGBBAA)."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:37
+msgid "Recent templates."
+msgstr "Nedávné šablony."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:38
+msgid "Recently used templates."
+msgstr "Nedávno použité šablony."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:39
+msgid "Recent fonts."
+msgstr "Nedávná písma."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:40
+msgid "Recently used font families."
+msgstr "Nedávno použité rodiny písma."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:41
+msgid "Recent colors."
+msgstr "Nedávné barvy."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:42
+msgid "Recently created custom colors."
+msgstr "Nedávno vytvořené vlastní barvy."
+
+#: ../data/desktop/glabels-3.0.desktop.in.h:1
 msgid "gLabels Label Designer 3"
 msgstr "Návrhář etiket gLabels 3"
+
+#: ../data/desktop/glabels-3.0.desktop.in.h:2
+msgid "Create labels, business cards and media covers"
+msgstr "Vytvářejte etikety, vizitky a obaly médií"
 
 #: ../data/mime/glabels-3.0.xml.in.h:1
 msgid "gLabels Project File"
 msgstr "Projektový soubor gLabels"
 
-#. Envelopes
-#: ../templates/paper-sizes.xml.h:2
-msgid "#10 Envelope"
-msgstr "Envelope č. 10"
-
-#. Other ISO A series sizes
-#: ../templates/paper-sizes.xml.h:4
-msgid "A0"
-msgstr "A0"
-
-#: ../templates/paper-sizes.xml.h:5
-msgid "A1"
-msgstr "A1"
-
-#: ../templates/paper-sizes.xml.h:6
-msgid "A10"
-msgstr "A10"
-
-#: ../templates/paper-sizes.xml.h:7
-msgid "A2"
-msgstr "A2"
-
-#: ../templates/paper-sizes.xml.h:8
-msgid "A3"
-msgstr "A3"
-
 #. Most popular (at top of list)
-#: ../templates/paper-sizes.xml.h:10
+#: ../templates/paper-sizes.xml.h:2
 msgid "A4"
 msgstr "A4"
 
-#: ../templates/paper-sizes.xml.h:11
-msgid "A5"
-msgstr "A5"
-
-#: ../templates/paper-sizes.xml.h:12
-msgid "A6"
-msgstr "A6"
-
-#: ../templates/paper-sizes.xml.h:13
-msgid "A7"
-msgstr "A7"
-
-#: ../templates/paper-sizes.xml.h:14
-msgid "A8"
-msgstr "A8"
-
-#: ../templates/paper-sizes.xml.h:15
-msgid "A9"
-msgstr "A9"
-
-#. ISO B series sizes
-#: ../templates/paper-sizes.xml.h:17
-msgid "B0"
-msgstr "B0"
-
-#: ../templates/paper-sizes.xml.h:18
-msgid "B1"
-msgstr "B1"
-
-#: ../templates/paper-sizes.xml.h:19
-msgid "B10"
-msgstr "B10"
-
-#: ../templates/paper-sizes.xml.h:20
-msgid "B2"
-msgstr "B2"
-
-#: ../templates/paper-sizes.xml.h:21
-msgid "B3"
-msgstr "B3"
-
-#: ../templates/paper-sizes.xml.h:22
-msgid "B4"
-msgstr "B4"
-
-#: ../templates/paper-sizes.xml.h:23
-msgid "B5"
-msgstr "B5"
-
-#: ../templates/paper-sizes.xml.h:24
-msgid "B6"
-msgstr "B6"
-
-#: ../templates/paper-sizes.xml.h:25
-msgid "B7"
-msgstr "B7"
-
-#: ../templates/paper-sizes.xml.h:26
-msgid "B8"
-msgstr "B8"
-
-#: ../templates/paper-sizes.xml.h:27
-msgid "B9"
-msgstr "B9"
-
-#: ../templates/paper-sizes.xml.h:28
-msgid "C5"
-msgstr "C5"
-
-#: ../templates/paper-sizes.xml.h:29
-msgid "C6"
-msgstr "C6"
-
-#: ../templates/paper-sizes.xml.h:30
-msgid "DL"
-msgstr "DL"
-
-#: ../templates/paper-sizes.xml.h:31
-msgid "Monarch Envelope"
-msgstr "Monarch Envelope"
-
-#. ISO 217
-#: ../templates/paper-sizes.xml.h:33
-msgid "RA0"
-msgstr "RA0"
-
-#: ../templates/paper-sizes.xml.h:34
-msgid "RA1"
-msgstr "RA1"
-
-#: ../templates/paper-sizes.xml.h:35
-msgid "RA2"
-msgstr "RA2"
-
-#: ../templates/paper-sizes.xml.h:36
-msgid "RA3"
-msgstr "RA3"
-
-#: ../templates/paper-sizes.xml.h:37
-msgid "RA4"
-msgstr "RA4"
-
-#: ../templates/paper-sizes.xml.h:38
-msgid "SRA0"
-msgstr "SRA0"
-
-#: ../templates/paper-sizes.xml.h:39
-msgid "SRA1"
-msgstr "SRA1"
-
-#: ../templates/paper-sizes.xml.h:40
-msgid "SRA2"
-msgstr "SRA2"
-
-#: ../templates/paper-sizes.xml.h:41
-msgid "SRA3"
-msgstr "SRA3"
-
-#: ../templates/paper-sizes.xml.h:42
-msgid "SRA4"
-msgstr "SRA4"
-
-#: ../templates/paper-sizes.xml.h:43
-msgid "US Executive"
-msgstr "US Executive"
-
 #. Other US paper sizes
-#: ../templates/paper-sizes.xml.h:45
+#: ../templates/paper-sizes.xml.h:5
 msgid "US Legal"
 msgstr "US Legal"
 
-#: ../templates/categories.xml.h:1
-msgid "Any card"
-msgstr "Libovolná karta"
+#: ../templates/paper-sizes.xml.h:6
+msgid "US Executive"
+msgstr "US Executive"
 
-#: ../templates/categories.xml.h:2
+#. Other ISO A series sizes
+#: ../templates/paper-sizes.xml.h:8
+msgid "A0"
+msgstr "A0"
+
+#: ../templates/paper-sizes.xml.h:9
+msgid "A1"
+msgstr "A1"
+
+#: ../templates/paper-sizes.xml.h:10
+msgid "A2"
+msgstr "A2"
+
+#: ../templates/paper-sizes.xml.h:11
+msgid "A3"
+msgstr "A3"
+
+#: ../templates/paper-sizes.xml.h:12
+msgid "A5"
+msgstr "A5"
+
+#: ../templates/paper-sizes.xml.h:13
+msgid "A6"
+msgstr "A6"
+
+#: ../templates/paper-sizes.xml.h:14
+msgid "A7"
+msgstr "A7"
+
+#: ../templates/paper-sizes.xml.h:15
+msgid "A8"
+msgstr "A8"
+
+#: ../templates/paper-sizes.xml.h:16
+msgid "A9"
+msgstr "A9"
+
+#: ../templates/paper-sizes.xml.h:17
+msgid "A10"
+msgstr "A10"
+
+#. ISO B series sizes
+#: ../templates/paper-sizes.xml.h:19
+msgid "B0"
+msgstr "B0"
+
+#: ../templates/paper-sizes.xml.h:20
+msgid "B1"
+msgstr "B1"
+
+#: ../templates/paper-sizes.xml.h:21
+msgid "B2"
+msgstr "B2"
+
+#: ../templates/paper-sizes.xml.h:22
+msgid "B3"
+msgstr "B3"
+
+#: ../templates/paper-sizes.xml.h:23
+msgid "B4"
+msgstr "B4"
+
+#: ../templates/paper-sizes.xml.h:24
+msgid "B5"
+msgstr "B5"
+
+#: ../templates/paper-sizes.xml.h:25
+msgid "B6"
+msgstr "B6"
+
+#: ../templates/paper-sizes.xml.h:26
+msgid "B7"
+msgstr "B7"
+
+#: ../templates/paper-sizes.xml.h:27
+msgid "B8"
+msgstr "B8"
+
+#: ../templates/paper-sizes.xml.h:28
+msgid "B9"
+msgstr "B9"
+
+#: ../templates/paper-sizes.xml.h:29
+msgid "B10"
+msgstr "B10"
+
+#. Envelopes
+#: ../templates/paper-sizes.xml.h:31
+msgid "#10 Envelope"
+msgstr "Envelope č. 10"
+
+#: ../templates/paper-sizes.xml.h:32
+msgid "Monarch Envelope"
+msgstr "Monarch Envelope"
+
+#: ../templates/paper-sizes.xml.h:33
+msgid "C5"
+msgstr "C5"
+
+#: ../templates/paper-sizes.xml.h:34
+msgid "C6"
+msgstr "C6"
+
+#: ../templates/paper-sizes.xml.h:35
+msgid "DL"
+msgstr "DL"
+
+#. ISO 217
+#: ../templates/paper-sizes.xml.h:37
+msgid "RA0"
+msgstr "RA0"
+
+#: ../templates/paper-sizes.xml.h:38
+msgid "RA1"
+msgstr "RA1"
+
+#: ../templates/paper-sizes.xml.h:39
+msgid "RA2"
+msgstr "RA2"
+
+#: ../templates/paper-sizes.xml.h:40
+msgid "RA3"
+msgstr "RA3"
+
+#: ../templates/paper-sizes.xml.h:41
+msgid "RA4"
+msgstr "RA4"
+
+#: ../templates/paper-sizes.xml.h:42
+msgid "SRA0"
+msgstr "SRA0"
+
+#: ../templates/paper-sizes.xml.h:43
+msgid "SRA1"
+msgstr "SRA1"
+
+#: ../templates/paper-sizes.xml.h:44
+msgid "SRA2"
+msgstr "SRA2"
+
+#: ../templates/paper-sizes.xml.h:45
+msgid "SRA3"
+msgstr "SRA3"
+
+#: ../templates/paper-sizes.xml.h:46
+msgid "SRA4"
+msgstr "SRA4"
+
+#: ../templates/categories.xml.h:1
 msgid "Any label"
 msgstr "Libovolná etiketa"
 
-#. ===================================================================
 #. ====================================================================
 #. ===================================================================
-#: ../templates/categories.xml.h:3 ../templates/dataline-iso-templates.xml.h:4
-#: ../templates/geha-iso-templates.xml.h:8
-#: ../templates/hama-iso-templates.xml.h:6
-#: ../templates/pearl-iso-templates.xml.h:8
-msgid "Business cards"
-msgstr "Vizitky"
-
-#: ../templates/categories.xml.h:4
-msgid "CD/DVD or other media"
-msgstr "CD/DVD nebo jiná média"
+#: ../templates/categories.xml.h:2 ../templates/endisch-templates.xml.h:1
+#: ../templates/hama-iso-templates.xml.h:4
+#: ../templates/pearl-iso-templates.xml.h:4
+#: ../templates/rayfilm-templates.xml.h:8
+msgid "Round labels"
+msgstr "Kulaté etikety"
 
 #. ===================================================================
-#: ../templates/categories.xml.h:5 ../templates/endisch-templates.xml.h:1
-#: ../templates/pearl-iso-templates.xml.h:28
+#: ../templates/categories.xml.h:3 ../templates/endisch-templates.xml.h:2
+#: ../templates/pearl-iso-templates.xml.h:58
+#: ../templates/rayfilm-templates.xml.h:9
 msgid "Elliptical labels"
 msgstr "Oválné etikety"
 
-#: ../templates/categories.xml.h:6
-msgid "Foldable cards"
-msgstr "Přání"
-
-#: ../templates/categories.xml.h:7
-msgid "Mailing/shipping products"
-msgstr "Poštovní/přepravní produkty"
-
-#: ../templates/categories.xml.h:8
-msgid "Photo products"
-msgstr "Fotografické produkty"
+#. ====================================================================
+#: ../templates/categories.xml.h:4 ../templates/endisch-templates.xml.h:4
+#: ../templates/hama-iso-templates.xml.h:41
+#: ../templates/rayfilm-templates.xml.h:2
+msgid "Square labels"
+msgstr "Čtvercové etikety"
 
 #. ===================================================================
 #. ====================================================================
 #. ===================================================================
 #. ********************************************************************
-#: ../templates/categories.xml.h:9 ../templates/ascom-iso-templates.xml.h:6
-#: ../templates/endisch-templates.xml.h:7
-#: ../templates/hama-iso-templates.xml.h:29
-#: ../templates/herma-iso-templates.xml.h:18
-#: ../templates/jac-iso-templates.xml.h:8
+#: ../templates/categories.xml.h:5 ../templates/ascom-iso-templates.xml.h:4
+#: ../templates/endisch-templates.xml.h:3
+#: ../templates/hama-iso-templates.xml.h:27
+#: ../templates/herma-iso-templates.xml.h:20
+#: ../templates/igepa-templates.xml.h:1 ../templates/jac-iso-templates.xml.h:4
+#: ../templates/rayfilm-templates.xml.h:1
 msgid "Rectangular labels"
 msgstr "Obdélníkové etikety"
 
-#. ====================================================================
-#. ===================================================================
-#: ../templates/categories.xml.h:10 ../templates/endisch-templates.xml.h:8
-#: ../templates/hama-iso-templates.xml.h:31
-#: ../templates/pearl-iso-templates.xml.h:54
-msgid "Round labels"
-msgstr "Kulaté etikety"
-
-#. ====================================================================
-#: ../templates/categories.xml.h:11 ../templates/endisch-templates.xml.h:9
-#: ../templates/hama-iso-templates.xml.h:33
-msgid "Square labels"
-msgstr "Čtvercové etikety"
+#: ../templates/categories.xml.h:6
+msgid "Any card"
+msgstr "Libovolná karta"
 
 #. ===================================================================
-#. ===============================================================
-#: ../templates/ascom-iso-templates.xml.h:2
-#: ../templates/avery-iso-templates.xml.h:12
-#: ../templates/zweckform-iso-templates.xml.h:10
-msgid "CD Inlet"
-msgstr "Přebal CD"
+#. ====================================================================
+#. ===================================================================
+#: ../templates/categories.xml.h:7 ../templates/dataline-iso-templates.xml.h:6
+#: ../templates/geha-iso-templates.xml.h:4
+#: ../templates/hama-iso-templates.xml.h:8
+#: ../templates/pearl-iso-templates.xml.h:38
+msgid "Business cards"
+msgstr "Vizitky"
+
+#: ../templates/categories.xml.h:8
+msgid "CD/DVD or other media"
+msgstr "CD/DVD nebo jiná média"
+
+#: ../templates/categories.xml.h:9
+msgid "Mailing/shipping products"
+msgstr "Poštovní/přepravní produkty"
+
+#: ../templates/categories.xml.h:10
+msgid "Foldable cards"
+msgstr "Přání"
+
+#: ../templates/categories.xml.h:11
+msgid "Photo products"
+msgstr "Fotografické produkty"
 
 #. TODO: Is this the real part #?
 #. ============================================================
@@ -2785,277 +2781,279 @@ msgstr "Přebal CD"
 #. ===================================================================
 #. TODO: What is the actual part #?
 #. ===================================================================
-#: ../templates/ascom-iso-templates.xml.h:4
-#: ../templates/avery-iso-templates.xml.h:30
+#: ../templates/ascom-iso-templates.xml.h:2
+#: ../templates/avery-iso-templates.xml.h:34
 #: ../templates/databecker-iso-templates.xml.h:10
-#: ../templates/hama-iso-templates.xml.h:27
-#: ../templates/herma-iso-templates.xml.h:16
-#: ../templates/misc-iso-templates.xml.h:32
-#: ../templates/zweckform-iso-templates.xml.h:28
+#: ../templates/hama-iso-templates.xml.h:29
+#: ../templates/herma-iso-templates.xml.h:18
+#: ../templates/misc-iso-templates.xml.h:2
+#: ../templates/zweckform-iso-templates.xml.h:6
 msgid "Rectangular Labels"
 msgstr "Obdélníkové etikety"
 
 #. ===================================================================
-#: ../templates/ascom-iso-templates.xml.h:8
-#: ../templates/avery-us-templates.xml.h:46
-#: ../templates/geha-iso-templates.xml.h:29
+#: ../templates/ascom-iso-templates.xml.h:6
+#: ../templates/avery-us-templates.xml.h:40
+#: ../templates/geha-iso-templates.xml.h:15
 #: ../templates/meritline-us-templates.xml.h:18
-#: ../templates/worldlabel-us-templates.xml.h:12
+#: ../templates/worldlabel-us-templates.xml.h:11
 msgid "Video Tape Spine Labels"
 msgstr "Etikety na hřbet videokazet"
 
 #. ===================================================================
-#. ********************************************************************
+#. ===============================================================
+#: ../templates/ascom-iso-templates.xml.h:8
+#: ../templates/avery-iso-templates.xml.h:26
+#: ../templates/zweckform-iso-templates.xml.h:28
+msgid "CD Inlet"
+msgstr "Přebal CD"
+
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:2
-#: ../templates/avery-iso-templates.xml.h:2
-#: ../templates/databecker-iso-templates.xml.h:2
+msgid "Square Labels"
+msgstr "Čtvercové etikety"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:4
+msgid "Small Round Labels"
+msgstr "Malé kulaté etikety"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:6
+msgid "Large Round Labels"
+msgstr "Velké kulaté etikety"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:8
+#: ../templates/avery-other-templates.xml.h:2
+#: ../templates/worldlabel-us-templates.xml.h:5
+msgid "File Folder Labels"
+msgstr "Etikety na složky"
+
+#. ===================================================================
+#. ********************************************************************
+#: ../templates/avery-us-templates.xml.h:10
+#: ../templates/dataline-iso-templates.xml.h:10
+#: ../templates/meritline-us-templates.xml.h:6
+#: ../templates/sheetlabels-us-templates.xml.h:4
+#: ../templates/uline-us-templates.xml.h:2
+#: ../templates/worldlabel-us-templates.xml.h:4
+msgid "Shipping Labels"
+msgstr "Dopravní etikety"
+
+#. ===================================================================
+#. ********************************************************************
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:12
+#: ../templates/avery-iso-templates.xml.h:14
+#: ../templates/databecker-iso-templates.xml.h:6
 #: ../templates/dymo-other-templates.xml.h:4
-#: ../templates/geha-iso-templates.xml.h:2
+#: ../templates/geha-iso-templates.xml.h:25
 #: ../templates/maco-us-templates.xml.h:2
-#: ../templates/meritline-us-templates.xml.h:2
+#: ../templates/meritline-us-templates.xml.h:4
 #: ../templates/pearl-iso-templates.xml.h:2
 #: ../templates/sheetlabels-us-templates.xml.h:2
-#: ../templates/worldlabel-us-templates.xml.h:1
-#: ../templates/zweckform-iso-templates.xml.h:2
+#: ../templates/worldlabel-us-templates.xml.h:3
+#: ../templates/zweckform-iso-templates.xml.h:4
 msgid "Address Labels"
 msgstr "Adresní etikety"
+
+#. ===================================================================
+#. ********************************************************************
+#: ../templates/avery-us-templates.xml.h:14
+#: ../templates/dymo-other-templates.xml.h:6
+#: ../templates/meritline-us-templates.xml.h:8
+#: ../templates/sheetlabels-us-templates.xml.h:6
+#: ../templates/worldlabel-us-templates.xml.h:2
+msgid "Return Address Labels"
+msgstr "Zpáteční adresa"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:16
+#: ../templates/maco-us-templates.xml.h:3
+#: ../templates/meritline-us-templates.xml.h:12
+#: ../templates/misc-us-templates.xml.h:23
+#: ../templates/sheetlabels-us-templates.xml.h:8
+#: ../templates/worldlabel-us-templates.xml.h:9
+msgid "Round Labels"
+msgstr "Kulaté etikety"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:18
+#: ../templates/avery-iso-templates.xml.h:20
+#: ../templates/meritline-us-templates.xml.h:14
+#: ../templates/sheetlabels-us-templates.xml.h:14
+#: ../templates/worldlabel-us-templates.xml.h:8
+msgid "Diskette Labels"
+msgstr "Etikety na diskety"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:20
+msgid "Tent Cards"
+msgstr "Přáníčka"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:22
+#: ../templates/sheetlabels-us-templates.xml.h:10
+#: ../templates/worldlabel-us-templates.xml.h:7
+msgid "Filing Labels"
+msgstr "Etikety na kartotéky"
 
 #. ===================================================================
 #. ============================================================
 #. ===================================================================
 #. TODO: Is this the actual part #?
 #. ============================================================
-#: ../templates/avery-us-templates.xml.h:4
-#: ../templates/avery-iso-templates.xml.h:8
-#: ../templates/databecker-iso-templates.xml.h:4
-#: ../templates/dataline-iso-templates.xml.h:2
-#: ../templates/decadry-iso-templates.xml.h:2
-#: ../templates/misc-us-templates.xml.h:4
-#: ../templates/misc-iso-templates.xml.h:6
-#: ../templates/zweckform-iso-templates.xml.h:6
+#: ../templates/avery-us-templates.xml.h:24
+#: ../templates/avery-iso-templates.xml.h:18
+#: ../templates/databecker-iso-templates.xml.h:2
+#: ../templates/dataline-iso-templates.xml.h:4
+#: ../templates/decadry-iso-templates.xml.h:6
+#: ../templates/misc-us-templates.xml.h:25
+#: ../templates/misc-iso-templates.xml.h:4
+#: ../templates/rayfilm-templates.xml.h:15
+#: ../templates/zweckform-iso-templates.xml.h:30
 msgid "Business Cards"
 msgstr "Vizitky"
 
 #. ===================================================================
-#. ===============================================================
-#. ===================================================================
-#. ********************************************************************
-#. ===================================================================
-#: ../templates/avery-us-templates.xml.h:6
-#: ../templates/avery-iso-templates.xml.h:14
-#: ../templates/geha-iso-templates.xml.h:11
-#: ../templates/herma-iso-templates.xml.h:10
-#: ../templates/jac-iso-templates.xml.h:2
-#: ../templates/misc-us-templates.xml.h:8
-#: ../templates/misc-iso-templates.xml.h:10
-#: ../templates/misc-other-templates.xml.h:2
-#: ../templates/pearl-iso-templates.xml.h:24
-#: ../templates/sheetlabels-us-templates.xml.h:4
-#: ../templates/worldlabel-us-templates.xml.h:2
-#: ../templates/zweckform-iso-templates.xml.h:12
-msgid "CD/DVD Labels"
-msgstr "Etikety na CD/DVD"
-
-#. ===================================================================
-#: ../templates/avery-us-templates.xml.h:8
-#: ../templates/sheetlabels-us-templates.xml.h:6
-msgid "CD/DVD Labels (Disc Labels)"
-msgstr "Etikety na CD/DVD (diskové etikety)"
-
-#. ===================================================================
-#: ../templates/avery-us-templates.xml.h:10
-msgid "CD/DVD Labels (Spine Labels)"
-msgstr "Etikety na CD/DVD (hřbetní etikety)"
-
-#. ===================================================================
-#: ../templates/avery-us-templates.xml.h:12
-#: ../templates/avery-iso-templates.xml.h:16
-#: ../templates/meritline-us-templates.xml.h:4
-#: ../templates/sheetlabels-us-templates.xml.h:8
-#: ../templates/worldlabel-us-templates.xml.h:3
-msgid "Diskette Labels"
-msgstr "Etikety na diskety"
-
-#. the LSK labels can be torn in half down the center
-#: ../templates/avery-us-templates.xml.h:14
-msgid "Divider Labels"
-msgstr "Rozdělovací etikety na karty"
-
-#. ===================================================================
-#: ../templates/avery-us-templates.xml.h:16
-#: ../templates/avery-other-templates.xml.h:2
-#: ../templates/worldlabel-us-templates.xml.h:4
-msgid "File Folder Labels"
-msgstr "Etikety na složky"
-
-#. ===================================================================
-#: ../templates/avery-us-templates.xml.h:18
-#: ../templates/sheetlabels-us-templates.xml.h:10
-#: ../templates/worldlabel-us-templates.xml.h:5
-msgid "Filing Labels"
-msgstr "Etikety na kartotéky"
-
-#. ===================================================================
-#: ../templates/avery-us-templates.xml.h:20
-#: ../templates/meritline-us-templates.xml.h:6
-#: ../templates/worldlabel-us-templates.xml.h:6
-msgid "Full Sheet Labels"
-msgstr "Celostránkové etikety"
-
-#. ===================================================================
-#: ../templates/avery-us-templates.xml.h:22
-msgid "ID Labels"
-msgstr "Identifikační etikety"
-
-#. ===================================================================
-#: ../templates/avery-us-templates.xml.h:24
+#: ../templates/avery-us-templates.xml.h:26
 msgid "Index Cards"
 msgstr "Indexové karty"
 
 #. ===================================================================
-#: ../templates/avery-us-templates.xml.h:26
-msgid "Large Round Labels"
-msgstr "Velké kulaté etikety"
-
-#. ===================================================================
 #: ../templates/avery-us-templates.xml.h:28
-msgid "Name Badge Labels"
-msgstr "Etikety na jmenovky"
-
-#. ===================================================================
-#: ../templates/avery-us-templates.xml.h:30
 msgid "Post cards"
 msgstr "Pohlednice"
 
 #. ===================================================================
+#: ../templates/avery-us-templates.xml.h:30
+msgid "Name Badge Labels"
+msgstr "Etikety na jmenovky"
+
+#. ===================================================================
+#. ===============================================================
+#. ===================================================================
 #. ********************************************************************
+#. ===================================================================
 #: ../templates/avery-us-templates.xml.h:32
-#: ../templates/dymo-other-templates.xml.h:12
-#: ../templates/meritline-us-templates.xml.h:10
+#: ../templates/avery-iso-templates.xml.h:6
+#: ../templates/geha-iso-templates.xml.h:10
+#: ../templates/herma-iso-templates.xml.h:14
+#: ../templates/igepa-templates.xml.h:5 ../templates/jac-iso-templates.xml.h:2
+#: ../templates/misc-us-templates.xml.h:8
+#: ../templates/misc-iso-templates.xml.h:22
+#: ../templates/misc-other-templates.xml.h:2
+#: ../templates/pearl-iso-templates.xml.h:64
+#: ../templates/rayfilm-templates.xml.h:10
 #: ../templates/sheetlabels-us-templates.xml.h:12
-#: ../templates/worldlabel-us-templates.xml.h:8
-msgid "Return Address Labels"
-msgstr "Zpáteční adresa"
+#: ../templates/worldlabel-us-templates.xml.h:12
+#: ../templates/zweckform-iso-templates.xml.h:8
+msgid "CD/DVD Labels"
+msgstr "Etikety na CD/DVD"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:34
-#: ../templates/maco-us-templates.xml.h:3
-#: ../templates/meritline-us-templates.xml.h:12
-#: ../templates/misc-us-templates.xml.h:30
-#: ../templates/sheetlabels-us-templates.xml.h:14
-#: ../templates/worldlabel-us-templates.xml.h:9
-msgid "Round Labels"
-msgstr "Kulaté etikety"
+#: ../templates/sheetlabels-us-templates.xml.h:16
+msgid "CD/DVD Labels (Disc Labels)"
+msgstr "Etikety na CD/DVD (diskové etikety)"
 
 #. ===================================================================
-#. ********************************************************************
 #: ../templates/avery-us-templates.xml.h:36
-#: ../templates/dataline-iso-templates.xml.h:10
-#: ../templates/meritline-us-templates.xml.h:14
-#: ../templates/sheetlabels-us-templates.xml.h:16
-#: ../templates/uline-us-templates.xml.h:2
-#: ../templates/worldlabel-us-templates.xml.h:10
-msgid "Shipping Labels"
-msgstr "Dopravní etikety"
+msgid "CD/DVD Labels (Spine Labels)"
+msgstr "Etikety na CD/DVD (hřbetní etikety)"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:38
-msgid "Small Round Labels"
-msgstr "Malé kulaté etikety"
-
-#. ===================================================================
-#: ../templates/avery-us-templates.xml.h:40
-msgid "Square Labels"
-msgstr "Čtvercové etikety"
-
-#. ===================================================================
-#: ../templates/avery-us-templates.xml.h:42
-msgid "Tent Cards"
-msgstr "Přáníčka"
-
-#. ===================================================================
-#: ../templates/avery-us-templates.xml.h:44
-#: ../templates/geha-iso-templates.xml.h:27
+#: ../templates/geha-iso-templates.xml.h:17
 #: ../templates/meritline-us-templates.xml.h:16
 #: ../templates/sheetlabels-us-templates.xml.h:18
-#: ../templates/worldlabel-us-templates.xml.h:11
+#: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Video Tape Face Labels"
 msgstr "Etikety na čelní stranu videokazety"
 
 #. ===================================================================
+#: ../templates/avery-us-templates.xml.h:42
+msgid "ID Labels"
+msgstr "Identifikační etikety"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:44
+#: ../templates/meritline-us-templates.xml.h:10
+#: ../templates/worldlabel-us-templates.xml.h:6
+msgid "Full Sheet Labels"
+msgstr "Celostránkové etikety"
+
+#. the LSK labels can be torn in half down the center
+#: ../templates/avery-us-templates.xml.h:46
+msgid "Divider Labels"
+msgstr "Rozdělovací etikety na karty"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:2
+msgid "Mini Labels"
+msgstr "Mini etikety"
+
+#. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:4
-#: ../templates/misc-iso-templates.xml.h:2
+msgid "Self-Adhesive Name Badges (Acetate Silk)"
+msgstr "Samolepicí nášivky na jméno (acetátové hedvábí)"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:8
+msgid "Allround labels"
+msgstr "Univerzální etikety"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:10
+#: ../templates/decadry-iso-templates.xml.h:2
+msgid "Mailing labels"
+msgstr "Poštovní etikety"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:12
+#: ../templates/misc-iso-templates.xml.h:12
 msgid "Address labels"
 msgstr "Adresní etikety"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:6
-msgid "Allround labels"
-msgstr "Univerzální etikety"
-
-#. ===============================================================
-#: ../templates/avery-iso-templates.xml.h:10
-#: ../templates/zweckform-iso-templates.xml.h:8
-msgid "CD Booklet"
-msgstr "Brožurka do CD"
-
-#. ===================================================================
-#. ====================================================================
-#: ../templates/avery-iso-templates.xml.h:18
-#: ../templates/hama-iso-templates.xml.h:17
-msgid "Diskette labels"
-msgstr "Etikety na diskety"
-
-#. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:20
-msgid "Identification Labels"
-msgstr "Identifikační etikety"
+#: ../templates/avery-iso-templates.xml.h:16
+msgid "Shipping labels"
+msgstr "Přepravní etikety"
 
 #. ===============================================================
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:22
 #: ../templates/decadry-iso-templates.xml.h:4
-#: ../templates/herma-iso-templates.xml.h:14
-#: ../templates/misc-us-templates.xml.h:20
-#: ../templates/misc-iso-templates.xml.h:26
-#: ../templates/zweckform-iso-templates.xml.h:20
+#: ../templates/herma-iso-templates.xml.h:8
+#: ../templates/misc-us-templates.xml.h:21
+#: ../templates/misc-iso-templates.xml.h:6
+#: ../templates/zweckform-iso-templates.xml.h:10
 msgid "Mailing Labels"
 msgstr "Poštovní etikety"
 
-#. ===================================================================
+#. ===============================================================
 #: ../templates/avery-iso-templates.xml.h:24
-#: ../templates/decadry-iso-templates.xml.h:6
-msgid "Mailing labels"
-msgstr "Poštovní etikety"
+#: ../templates/zweckform-iso-templates.xml.h:26
+msgid "CD Booklet"
+msgstr "Brožurka do CD"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:26
+#: ../templates/avery-iso-templates.xml.h:28
 msgid "Mini Address Labels"
 msgstr "Mini adresní etikety"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:28
-msgid "Mini Labels"
-msgstr "Mini etikety"
+#: ../templates/avery-iso-templates.xml.h:30
+msgid "Identification Labels"
+msgstr "Identifikační etikety"
 
 #. ===================================================================
+#. ====================================================================
 #: ../templates/avery-iso-templates.xml.h:32
-msgid "Self-Adhesive Name Badges (Acetate Silk)"
-msgstr "Samolepicí nášivky na jméno (acetátové hedvábí)"
-
-#. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:34
-msgid "Shipping labels"
-msgstr "Přepravní etikety"
-
-#: ../templates/brother-other-templates.xml.h:1
-msgid "Multi Purpose Labels 17mm x 54mm"
-msgstr "Víceúčelové etikety 17 × 54 mm"
-
-#: ../templates/brother-other-templates.xml.h:2
-msgid "Shipping Labels 62mm x 100mm"
-msgstr "Přepravní etikety 62 × 100 mm"
+#: ../templates/hama-iso-templates.xml.h:31
+msgid "Diskette labels"
+msgstr "Etikety na diskety"
 
 #.
 #. *********************************************************************
@@ -3074,107 +3072,126 @@ msgstr "Přepravní etikety 62 × 100 mm"
 #. *********************************************************************
 #. *********************************************************************
 #.
-#: ../templates/brother-other-templates.xml.h:20
+#: ../templates/brother-other-templates.xml.h:18
 msgid "Standard Address Labels 29mm x 90mm"
 msgstr "Standardní adresní etikety 29 × 90 mm"
+
+#: ../templates/brother-other-templates.xml.h:19
+msgid "Shipping Labels 62mm x 100mm"
+msgstr "Přepravní etikety 62 × 100 mm"
+
+#: ../templates/brother-other-templates.xml.h:20
+msgid "Multi Purpose Labels 17mm x 54mm"
+msgstr "Víceúčelové etikety 17 × 54 mm"
 
 #: ../templates/brother-other-templates.xml.h:21
 msgid "Standard Address Labels 38mm x 90mm"
 msgstr "Standardní adresní etikety 38 × 90 mm"
 
 #. ===================================================================
-#: ../templates/databecker-iso-templates.xml.h:6
-#: ../templates/misc-iso-templates.xml.h:8
-msgid "CD Labels"
-msgstr "Etikety na CD"
-
-#. ===================================================================
-#: ../templates/databecker-iso-templates.xml.h:8
+#: ../templates/databecker-iso-templates.xml.h:4
 msgid "CD/DVD Labels Standard Format (face only)"
 msgstr "Etikety standardního formátu na CD/DVD (pouze předek)"
 
 #. ===================================================================
+#. ============================================================
+#. ===================================================================
+#: ../templates/databecker-iso-templates.xml.h:8
+#: ../templates/desmat-templates.xml.h:2
+#: ../templates/misc-iso-templates.xml.h:20
+msgid "CD Labels"
+msgstr "Etikety na CD"
+
+#. ===================================================================
 #. ====================================================================
-#: ../templates/dataline-iso-templates.xml.h:6
-#: ../templates/hama-iso-templates.xml.h:13
+#: ../templates/dataline-iso-templates.xml.h:2
+#: ../templates/hama-iso-templates.xml.h:35
 msgid "CD/DVD labels"
 msgstr "Etikety na CD/DVD"
 
 #. ===================================================================
 #: ../templates/dataline-iso-templates.xml.h:8
-#: ../templates/pearl-iso-templates.xml.h:42
+#: ../templates/pearl-iso-templates.xml.h:60
 msgid "Membership cards"
 msgstr "Členské karty"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:2
-msgid "3.5in Diskette"
-msgstr "3,5ʺ disketa"
-
-#. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:6
-msgid "File Folder"
-msgstr "Kancelářská složka"
-
-#. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:8
-msgid "Hanging Folder"
-msgstr "Závěsná složka"
-
-#. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:10
-#: ../templates/geha-iso-templates.xml.h:19
+#: ../templates/geha-iso-templates.xml.h:23
 msgid "Large Address Labels"
 msgstr "Velké adresní etikety"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:14
+#: ../templates/dymo-other-templates.xml.h:8
 msgid "Shipping Address Labels"
 msgstr "Přepravní adresní etikety"
 
-#: ../templates/endisch-templates.xml.h:2
-msgid "Labels A3"
-msgstr "Etikety A3"
-
-#. *******************************************************************
 #. ===================================================================
-#: ../templates/endisch-templates.xml.h:3
-#: ../templates/jac-iso-templates.xml.h:4
-#: ../templates/pearl-iso-templates.xml.h:36
-msgid "Labels A4"
-msgstr "Etikety A4"
+#: ../templates/dymo-other-templates.xml.h:10
+msgid "File Folder"
+msgstr "Kancelářská složka"
 
 #. ===================================================================
-#: ../templates/endisch-templates.xml.h:4
-#: ../templates/pearl-iso-templates.xml.h:38
-msgid "Labels A5"
-msgstr "Etikety A5"
+#: ../templates/dymo-other-templates.xml.h:12
+msgid "Hanging Folder"
+msgstr "Závěsná složka"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:14
+msgid "3.5in Diskette"
+msgstr "3,5ʺ disketa"
 
 #. ===================================================================
 #: ../templates/endisch-templates.xml.h:5
-#: ../templates/pearl-iso-templates.xml.h:40
+#: ../templates/pearl-iso-templates.xml.h:20
+#: ../templates/rayfilm-templates.xml.h:3
 msgid "Labels A6"
 msgstr "Etikety A6"
 
+#. ===================================================================
 #: ../templates/endisch-templates.xml.h:6
+#: ../templates/pearl-iso-templates.xml.h:22
+#: ../templates/rayfilm-templates.xml.h:4
+msgid "Labels A5"
+msgstr "Etikety A5"
+
+#. *******************************************************************
+#. ===================================================================
+#: ../templates/endisch-templates.xml.h:7 ../templates/igepa-templates.xml.h:3
+#: ../templates/jac-iso-templates.xml.h:6
+#: ../templates/pearl-iso-templates.xml.h:6
+#: ../templates/rayfilm-templates.xml.h:5
+msgid "Labels A4"
+msgstr "Etikety A4"
+
+#: ../templates/endisch-templates.xml.h:8
+#: ../templates/rayfilm-templates.xml.h:6
+msgid "Labels A3"
+msgstr "Etikety A3"
+
+#: ../templates/endisch-templates.xml.h:9
+#: ../templates/rayfilm-templates.xml.h:7
 msgid "Labels SRA3"
 msgstr "Etikety SRA3"
 
 #. ===================================================================
-#. ====================================================================
-#. ===================================================================
-#: ../templates/geha-iso-templates.xml.h:4
-#: ../templates/hama-iso-templates.xml.h:2
-#: ../templates/herma-iso-templates.xml.h:4
-msgid "Arch File Labels"
-msgstr "Etikety na pořadače"
+#: ../templates/geha-iso-templates.xml.h:2
+msgid "Flyer paper"
+msgstr "Letákový papír"
 
 #. ===================================================================
+#. ====================================================================
 #: ../templates/geha-iso-templates.xml.h:6
+#: ../templates/hama-iso-templates.xml.h:25
+msgid "Greeting cards"
+msgstr "Pohlednice"
+
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:8
 msgid "Arch File inserts"
 msgstr "Vkládací štítky na pořadače"
 
-#: ../templates/geha-iso-templates.xml.h:9
+#: ../templates/geha-iso-templates.xml.h:11
 msgid "CD/DVD Inlet"
 msgstr "Přebal CD/DVD"
 
@@ -3182,137 +3199,146 @@ msgstr "Přebal CD/DVD"
 #. ====================================================================
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:13
-#: ../templates/hama-iso-templates.xml.h:15
-#: ../templates/pearl-iso-templates.xml.h:26
+#: ../templates/hama-iso-templates.xml.h:17
+#: ../templates/pearl-iso-templates.xml.h:32
 msgid "DVD inlet"
 msgstr "Přebal DVD"
 
 #. ===================================================================
-#: ../templates/geha-iso-templates.xml.h:15
-msgid "Flyer paper"
-msgstr "Letákový papír"
-
-#. ===================================================================
 #. ====================================================================
-#: ../templates/geha-iso-templates.xml.h:17
-#: ../templates/hama-iso-templates.xml.h:19
-msgid "Greeting cards"
-msgstr "Pohlednice"
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:19
+#: ../templates/hama-iso-templates.xml.h:6
+#: ../templates/pearl-iso-templates.xml.h:12
+msgid "Photo labels"
+msgstr "Fotografické etikety"
 
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:21
-#: ../templates/misc-iso-templates.xml.h:28
-#: ../templates/misc-other-templates.xml.h:4
-msgid "Multi-Purpose Labels"
-msgstr "Víceúčelové etikety"
-
-#. ===================================================================
-#: ../templates/geha-iso-templates.xml.h:23
 msgid "Passport photo labels"
 msgstr "Fotografické etikety na průkazy"
 
 #. ===================================================================
 #. ====================================================================
 #. ===================================================================
-#: ../templates/geha-iso-templates.xml.h:25
-#: ../templates/hama-iso-templates.xml.h:23
-#: ../templates/pearl-iso-templates.xml.h:50
-msgid "Photo labels"
-msgstr "Fotografické etikety"
-
-#. ====================================================================
-#: ../templates/hama-iso-templates.xml.h:4
-msgid "Arch File labels"
+#: ../templates/geha-iso-templates.xml.h:27
+#: ../templates/hama-iso-templates.xml.h:37
+#: ../templates/herma-iso-templates.xml.h:6
+msgid "Arch File Labels"
 msgstr "Etikety na pořadače"
 
-#. ====================================================================
-#: ../templates/hama-iso-templates.xml.h:8
-msgid "CD inlet"
-msgstr "Přebal CD"
-
 #. ===================================================================
-#: ../templates/hama-iso-templates.xml.h:9
-#: ../templates/pearl-iso-templates.xml.h:20
-msgid "CD inlet (back)"
-msgstr "Přebal CD (zadní)"
+#: ../templates/geha-iso-templates.xml.h:29
+#: ../templates/misc-iso-templates.xml.h:28
+#: ../templates/misc-other-templates.xml.h:4
+msgid "Multi-Purpose Labels"
+msgstr "Víceúčelové etikety"
 
 #. ====================================================================
-#. ===================================================================
-#: ../templates/hama-iso-templates.xml.h:11
-#: ../templates/pearl-iso-templates.xml.h:22
-msgid "CD inlet (front)"
-msgstr "Přebal CD (přední)"
-
-#. ====================================================================
-#: ../templates/hama-iso-templates.xml.h:21
-msgid "Mini Disc labels"
-msgstr "Etikety na Mini disky"
-
-#. ====================================================================
-#: ../templates/hama-iso-templates.xml.h:25
+#: ../templates/hama-iso-templates.xml.h:2
 msgid "Printable mousepad"
 msgstr "Potisknutelná podložka pod myš"
 
 #. ====================================================================
-#: ../templates/hama-iso-templates.xml.h:35
-msgid "VHS inlet"
-msgstr "Přebal kazety VHS"
+#: ../templates/hama-iso-templates.xml.h:10
+msgid "CD inlet"
+msgstr "Přebal CD"
 
 #. ====================================================================
-#: ../templates/hama-iso-templates.xml.h:37
-msgid "VHS-C inlet"
-msgstr "Přebal kazety VHS-C"
+#. ===================================================================
+#: ../templates/hama-iso-templates.xml.h:12
+#: ../templates/pearl-iso-templates.xml.h:34
+msgid "CD inlet (front)"
+msgstr "Přebal CD (přední)"
+
+#. ===================================================================
+#: ../templates/hama-iso-templates.xml.h:13
+#: ../templates/pearl-iso-templates.xml.h:36
+msgid "CD inlet (back)"
+msgstr "Přebal CD (zadní)"
 
 #. ====================================================================
-#: ../templates/hama-iso-templates.xml.h:39
-msgid "Video-8 inlet"
-msgstr "Přebal kazety Video-8"
-
-#. ====================================================================
-#: ../templates/hama-iso-templates.xml.h:41
+#: ../templates/hama-iso-templates.xml.h:15
 msgid "Zip disc inlet"
 msgstr "Přebal diskety ZIP"
 
 #. ====================================================================
-#: ../templates/hama-iso-templates.xml.h:43
+#: ../templates/hama-iso-templates.xml.h:19
+msgid "VHS-C inlet"
+msgstr "Přebal kazety VHS-C"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:21
+msgid "Video-8 inlet"
+msgstr "Přebal kazety Video-8"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:23
+msgid "VHS inlet"
+msgstr "Přebal kazety VHS"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:33
 msgid "Zip disc labels"
 msgstr "Etikety na diskety ZIP"
 
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:39
+msgid "Arch File labels"
+msgstr "Etikety na pořadače"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:43
+msgid "Mini Disc labels"
+msgstr "Etikety na Mini disky"
+
 #. ===================================================================
 #: ../templates/herma-iso-templates.xml.h:2
-#: ../templates/zweckform-iso-templates.xml.h:4
-msgid "Allround Labels"
-msgstr "Univerzální etikety"
-
-#. ===================================================================
-#: ../templates/herma-iso-templates.xml.h:6
-msgid "Arch File Labels (large)"
-msgstr "Etikety na pořadače (velké)"
-
-#. ===================================================================
-#: ../templates/herma-iso-templates.xml.h:8
 msgid "Arch File Labels (small)"
 msgstr "Etikety na pořadače (malé)"
 
 #. ===================================================================
+#: ../templates/herma-iso-templates.xml.h:4
+msgid "Arch File Labels (large)"
+msgstr "Etikety na pořadače (velké)"
+
+#. ===================================================================
+#: ../templates/herma-iso-templates.xml.h:10
+#: ../templates/zweckform-iso-templates.xml.h:20
+msgid "Allround Labels"
+msgstr "Univerzální etikety"
+
+#. ===================================================================
 #: ../templates/herma-iso-templates.xml.h:12
+msgid "Video Labels (face only)"
+msgstr "Etikety na videokazety (pouze předek)"
+
+#. ===================================================================
+#: ../templates/herma-iso-templates.xml.h:16
 msgid "Diskette Labels (face only)"
 msgstr "Etikety na diskety (pouze předek)"
 
 #. ===================================================================
-#: ../templates/herma-iso-templates.xml.h:20
-msgid "Video Labels (face only)"
-msgstr "Etikety na videokazety (pouze předek)"
+#: ../templates/igepa-templates.xml.h:2
+#: ../templates/pearl-iso-templates.xml.h:18
+msgid "Floppy disk labels"
+msgstr "Etikety na diskety"
+
+#. ===================================================================
+#: ../templates/igepa-templates.xml.h:4
+#: ../templates/zweckform-iso-templates.xml.h:2
+msgid "Lever Arch File Labels"
+msgstr "Etikety na pákové pořadače"
 
 #. *******************************************************************
-#: ../templates/jac-iso-templates.xml.h:6
+#: ../templates/jac-iso-templates.xml.h:8
 msgid "PVC labels"
 msgstr "Etikety z PVC"
 
 #. ===================================================================
-#: ../templates/meritline-us-templates.xml.h:8
+#: ../templates/meritline-us-templates.xml.h:2
 msgid "Mini-CD Labels"
-msgstr "Etikety na Mini-CD"
+msgstr "Etikety na mini CD"
 
 #. ===================================================================
 #: ../templates/microapp-templates.xml.h:2
@@ -3320,231 +3346,241 @@ msgid "Standard Labels"
 msgstr "Standardní etikety"
 
 #. ===================================================================
-#: ../templates/misc-us-templates.xml.h:2
-msgid "Business Card CD"
-msgstr "Vizitkové CD"
-
-#. ===================================================================
-#: ../templates/misc-us-templates.xml.h:6
-msgid "CD Template Rectangles"
-msgstr "Obdélníkové šablony na CD"
-
-#. ===================================================================
-#: ../templates/misc-us-templates.xml.h:10
-msgid "CD/DVD Labels (Face Only)"
-msgstr "Etikety na CD/DVD (pouze povrch)"
-
-#. ===================================================================
 #. TODO: Is this the actual part #?
-#: ../templates/misc-us-templates.xml.h:12
-#: ../templates/misc-iso-templates.xml.h:12
+#: ../templates/misc-us-templates.xml.h:2
+#: ../templates/misc-iso-templates.xml.h:24
 msgid "CD/DVD Labels (face only)"
 msgstr "Etikety na CD/DVD (pouze předek)"
 
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:4
+msgid "CD/DVD Labels (Face Only)"
+msgstr "Etikety na CD/DVD (pouze povrch)"
+
 #. TODO: Is this the actual part #?
-#: ../templates/misc-us-templates.xml.h:14
+#: ../templates/misc-us-templates.xml.h:6
 msgid "Cassette Labels"
 msgstr "Etikety na kazety"
 
 #. ===================================================================
-#: ../templates/misc-us-templates.xml.h:16
-msgid "DLT Labels"
-msgstr "Etikety na pásky DLT"
-
-#. ===================================================================
-#: ../templates/misc-us-templates.xml.h:18
-msgid "Jewel Case Booklet"
-msgstr "Přebal do krabičky na CD"
-
-#. ===================================================================
-#: ../templates/misc-us-templates.xml.h:22
-msgid "Microtube labels"
-msgstr "Etikety na zkumavky"
-
-#. ===================================================================
-#: ../templates/misc-us-templates.xml.h:24
-msgid "PRO CD Labels 2-up (CD spine only)"
-msgstr "PRO CD Labels 2-up (pouze hřbet)"
-
-#. ===================================================================
-#: ../templates/misc-us-templates.xml.h:26
-msgid "PRO CD Labels 2-up (Face only)"
-msgstr "PRO CD Labels 2-up (pouze povrch)"
-
-#. ===================================================================
-#. TODO: Is this the actual part #?
-#: ../templates/misc-us-templates.xml.h:28
-#: ../templates/misc-iso-templates.xml.h:30
-msgid "PRO CD Labels 2-up (face only)"
-msgstr "PRO CD Labels 2-up (pouze povrch)"
-
-#. ===================================================================
-#: ../templates/misc-us-templates.xml.h:32
+#: ../templates/misc-us-templates.xml.h:10
 msgid "Slimline CD Case (rightside up)"
 msgstr "Tenká krabička na CD (pravá strana)"
 
-#: ../templates/misc-us-templates.xml.h:33
+#: ../templates/misc-us-templates.xml.h:11
 msgid "Slimline CD Case (upside down)"
 msgstr "Tenká krabička na CD (horní strana)"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:4
-#: ../templates/pearl-iso-templates.xml.h:6
-msgid "Bottle labels"
-msgstr "Etikety na lahve"
+#: ../templates/misc-us-templates.xml.h:13
+msgid "CD Template Rectangles"
+msgstr "Obdélníkové šablony na CD"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:14
-msgid "EPSON Photo Stickers 16"
-msgstr "Samolepky EPSON Photo Stickers 16"
+#: ../templates/misc-us-templates.xml.h:15
+msgid "Business Card CD"
+msgstr "Vizitkové CD"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:16
-msgid "Etiketten"
-msgstr "Etikety"
+#: ../templates/misc-us-templates.xml.h:17
+msgid "Jewel Case Booklet"
+msgstr "Přebal do krabičky na CD"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:18
-msgid "Fridge Magnet Stickers"
-msgstr "Reklamní magnetky na ledničku"
+#: ../templates/misc-us-templates.xml.h:19
+msgid "DLT Labels"
+msgstr "Etikety na pásky DLT"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:20
+#. TODO: Is this the actual part #?
+#: ../templates/misc-us-templates.xml.h:27
+#: ../templates/misc-iso-templates.xml.h:34
+msgid "PRO CD Labels 2-up (face only)"
+msgstr "PRO CD Labels 2-up (pouze povrch)"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:29
+msgid "PRO CD Labels 2-up (Face only)"
+msgstr "PRO CD Labels 2-up (pouze povrch)"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:31
+msgid "PRO CD Labels 2-up (CD spine only)"
+msgstr "PRO CD Labels 2-up (pouze hřbet)"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:33
+msgid "Microtube labels"
+msgstr "Etikety na zkumavky"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:8
 msgid "General Labels"
 msgstr "Obecné etikety"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:22
-msgid "Inkjet/Laser Labels 70x37mm"
-msgstr "Etikety na inkoustový/laserový tisk 70 × 37 mm"
-
-#. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:34
-#: ../templates/pearl-iso-templates.xml.h:62
+#: ../templates/misc-iso-templates.xml.h:10
+#: ../templates/pearl-iso-templates.xml.h:28
 msgid "Self-adhesive labels"
 msgstr "Samolepicí etikety"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:36
+#: ../templates/misc-iso-templates.xml.h:14
+msgid "Fridge Magnet Stickers"
+msgstr "Reklamní magnetky na ledničku"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:16
+msgid "Inkjet/Laser Labels 70x37mm"
+msgstr "Etikety na inkoustový/laserový tisk 70 × 37 mm"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:18
+msgid "EPSON Photo Stickers 16"
+msgstr "Samolepky EPSON Photo Stickers 16"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:30
 msgid "Universal Labels"
 msgstr "Univerzální etikety"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:4
-msgid "Address Labels (STAMPIT)"
-msgstr "Adresní etikety (STAMPIT)"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:10
-msgid "Business cards glossy, both sides printable"
-msgstr "Vizitky lesklé, oboustranně potisknutelné"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:12
-msgid "Business cards high glossy"
-msgstr "Vizitky s vysokým leskem"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:14
-msgid "Business cards punched"
-msgstr "Vizitky perforované"
-
-#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:32
 #: ../templates/pearl-iso-templates.xml.h:16
-msgid "Business cards punched dull"
-msgstr "Vizitky perforované matné"
+msgid "Bottle labels"
+msgstr "Etikety na lahve"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:18
-msgid "Business cards punched glossy"
-msgstr "Vizitky perforované lesklé"
+#: ../templates/misc-iso-templates.xml.h:36
+msgid "Etiketten"
+msgstr "Etikety"
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:30
-msgid "Floppy disk labels"
-msgstr "Etikety na diskety"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:32
-msgid "Foldable business cards"
-msgstr "Skládací vizitky"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:34
-msgid "Foldable business cards glossy/dull"
-msgstr "Skládací vizitky lesklé/matné"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:44
-msgid "Membership cards, both sides printable"
-msgstr "Členské karty, oboustranně potisknutelné"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:46
-msgid "Name plates"
-msgstr "Cedule"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:48
-msgid "Passport photo labels glossy"
-msgstr "Fotografické etikety na průkazy"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:52
-msgid "Photo labels semiglossy"
-msgstr "Fotografické etikety polomatné"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:56
-msgid "SD card labels"
-msgstr "Etikety na karty SD"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:58
-msgid "Self-adhesive film transparent"
-msgstr "Samolepicí průhledná fólie"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:60
+#: ../templates/pearl-iso-templates.xml.h:8
 msgid "Self-adhesive film weatherproof"
 msgstr "Samolepicí vodě odolná fólie "
 
 #. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:64
+#: ../templates/pearl-iso-templates.xml.h:10
+msgid "Self-adhesive film transparent"
+msgstr "Samolepicí průhledná fólie"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:14
 msgid "Self-adhesive window film"
 msgstr "Samolepicí fólie na okno"
 
 #. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:14
-msgid "Correction and Cover-up Labels"
-msgstr "Opravné a přelepovací etikety"
+#: ../templates/pearl-iso-templates.xml.h:24
+msgid "Photo labels semiglossy"
+msgstr "Fotografické etikety polomatné"
 
 #. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:16
-msgid "File Back Labels"
-msgstr "Etikety do diáře"
+#: ../templates/pearl-iso-templates.xml.h:26
+msgid "Address Labels (STAMPIT)"
+msgstr "Adresní etikety (STAMPIT)"
 
 #. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:18
-msgid "Lever Arch File Labels"
-msgstr "Etikety na pákové pořadače"
+#: ../templates/pearl-iso-templates.xml.h:30
+msgid "SD card labels"
+msgstr "Etikety na karty SD"
 
 #. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:22
-msgid "Multi-purpose Stick+Lift Labels"
-msgstr "Víceúčelové odnímatelné etikety"
+#: ../templates/pearl-iso-templates.xml.h:40
+msgid "Passport photo labels glossy"
+msgstr "Fotografické etikety na průkazy"
 
 #. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:24
+#: ../templates/pearl-iso-templates.xml.h:42
+msgid "Business cards punched"
+msgstr "Vizitky perforované"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:44
+msgid "Business cards punched dull"
+msgstr "Vizitky perforované matné"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:46
+msgid "Business cards high glossy"
+msgstr "Vizitky s vysokým leskem"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:48
+msgid "Name plates"
+msgstr "Cedule"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:50
+msgid "Business cards glossy, both sides printable"
+msgstr "Vizitky lesklé, oboustranně potisknutelné"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:52
+msgid "Business cards punched glossy"
+msgstr "Vizitky perforované lesklé"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:54
+msgid "Foldable business cards glossy/dull"
+msgstr "Skládací vizitky lesklé/matné"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:56
+msgid "Foldable business cards"
+msgstr "Skládací vizitky"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:62
+msgid "Membership cards, both sides printable"
+msgstr "Členské karty, oboustranně potisknutelné"
+
+#: ../templates/rayfilm-templates.xml.h:11
+#| msgid "Business Card CD"
+msgid "Business card CD Labels"
+msgstr "Etikety na vizitkové CD"
+
+#: ../templates/rayfilm-templates.xml.h:12
+#| msgid "Mini-CD Labels"
+msgid "Mini CD Labels"
+msgstr "Etikety na mini CD"
+
+#: ../templates/rayfilm-templates.xml.h:13
+#| msgid "Rectangular labels"
+msgid "Triangular labels"
+msgstr "Trojúhelníkové etikety"
+
+#: ../templates/rayfilm-templates.xml.h:14
+#| msgid "Allround labels"
+msgid "Trapezoid labels"
+msgstr "Lichoběžníkové etikety"
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:12
 msgid "QSL-Karten Etiketten 70mm x 50,8mm"
 msgstr "Etikety na QSL karty 70mm × 50,8mm"
 
 #. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:26
+#: ../templates/zweckform-iso-templates.xml.h:14
+msgid "File Back Labels"
+msgstr "Etikety do diáře"
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:16
+msgid "Multi-purpose Stick+Lift Labels"
+msgstr "Víceúčelové odnímatelné etikety"
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:18
+msgid "Video Labels (back)"
+msgstr "Video etikety (zadní strana)"
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:22
 msgid "Rectangular Copier Labels"
 msgstr "Obdélníkové etikety do kopírky"
 
 #. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:30
-msgid "Video Labels (back)"
-msgstr "Video etikety (zadní strana)"
+#: ../templates/zweckform-iso-templates.xml.h:24
+msgid "Correction and Cover-up Labels"
+msgstr "Opravné a přelepovací etikety"
