@@ -346,8 +346,10 @@ namespace glabels
 		                               double        x_pixels,
 		                               double        y_pixels )
 		{
-			foreach ( LabelObject object in object_list )
+			for ( unowned List<LabelObject>? p = object_list.last(); p != null; p = p.prev ) 
 			{
+				LabelObject object = p.data;
+
 				if ( object.is_located_at( cr, x_pixels, y_pixels ) )
 				{
 					return object;
@@ -362,13 +364,18 @@ namespace glabels
 		                          double        x_pixels,
 		                          double        y_pixels )
 		{
-			foreach ( LabelObject object in object_list )
+			for ( unowned List<LabelObject>? p = object_list.last(); p != null; p = p.prev ) 
 			{
-				Handle? handle = object.handle_at( cr, x_pixels, y_pixels );
+				LabelObject object = p.data;
 
-				if ( handle != null )
+				if ( object.is_selected() )
 				{
-					return handle;
+					Handle? handle = object.handle_at( cr, x_pixels, y_pixels );
+
+					if ( handle != null )
+					{
+						return handle;
+					}
 				}
 			}
 

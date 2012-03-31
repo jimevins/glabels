@@ -33,7 +33,7 @@ namespace glabels
 
 	public abstract class Handle
 	{
-		public LabelObject    owner { get; protected set; }
+		public weak LabelObject owner { get; protected set; }
 
 		public abstract void draw( Cairo.Context cr );
 		public abstract void cairo_path( Cairo.Context cr );
