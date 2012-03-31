@@ -90,13 +90,13 @@ namespace glabels
 			case "regular":
 			case "Regular":
 			case "REGULAR":
-                return Pango.Weight.NORMAL;
+				return Pango.Weight.NORMAL;
 			case "bold":
 			case "Bold":
 			case "BOLD":
-                return Pango.Weight.BOLD;
+				return Pango.Weight.BOLD;
 			default:
-                return Pango.Weight.NORMAL;
+				return Pango.Weight.NORMAL;
 			}
 		}
 

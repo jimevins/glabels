@@ -141,7 +141,6 @@ namespace glabels
 		                          double        y,
 		                          MergeRecord?  record )
 		{
-
 			double w, h;
 			label.get_size( out w, out h );
 
@@ -165,8 +164,8 @@ namespace glabels
 			}
 			if ( reverse_flag )
 			{
-                cr.translate( w, 0 );
-                cr.scale( -1, 1 );
+				cr.translate( w, 0 );
+				cr.scale( -1, 1 );
 			}
 
 			label.draw( cr, false, record );
