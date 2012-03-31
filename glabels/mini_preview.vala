@@ -61,8 +61,8 @@ namespace glabels
 
 
 
-		public MiniPreview( int height,
-		                    int width )
+		public MiniPreview( int width,
+		                    int height )
 		{
 			add_events( Gdk.EventMask.BUTTON_PRESS_MASK   |
 			            Gdk.EventMask.BUTTON_RELEASE_MASK |
@@ -85,6 +85,8 @@ namespace glabels
 		{
 			this.label = label;
 			set_template( label.template );
+
+			label.changed.connect( on_label_changed );
 		}
 
 
@@ -207,6 +209,12 @@ namespace glabels
 
 
 		private void on_style_set( Gtk.Style? previous_style )
+		{
+			redraw_canvas();
+		}
+
+
+		private void on_label_changed()
 		{
 			redraw_canvas();
 		}

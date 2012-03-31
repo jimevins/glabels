@@ -1,35 +1,23 @@
 
+Use Cases
+=========
+
+Case #1: one or more sheets of identical labels/cards.  Examples: return address labels,
+         business cards, multiple copies of a CD label.
+
+Case #2: Document merge from external data source. Each label has an identical design
+         but varies in the data that is pulled from the data source.  Each data record
+         produces a unique label.  Examples: address labels from an address list,
+         name tags.
+
+Case #3: A sheet contains multiple sets of identical label/cards.
+
+
 Development plan
-----------------
+================
+
 This development plan sets a specific set of milestones for future versions
 of glabels.
-
-
-Goals for 2.2.x:
-
-	-  Bugfixes
-
-	-  Translations
-
-
-Goals for 2.3.x (current development branch for 3.0):
-
-	-  Migrate to Gnome 3.0 platform
-
-	-  Remove deprecations from Gnome 2.0 platform
-
-	-  New color combo selector widget family
-
-	-  New font selector widget family
-
-	-  Undo, Redo capability
-
-	-  Allow for management of custom templates
-	   (i.e. delete, rename, edit).
-
-	-  Improve documentation and translation maintainance
-
-	-  Code cleanup
 
 
 Possible Goals for future branches:

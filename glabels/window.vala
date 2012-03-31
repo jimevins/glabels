@@ -27,8 +27,8 @@ namespace glabels
 
 	public class Window : Gtk.Window
 	{
-		private const int DEFAULT_WINDOW_WIDTH  = 788;
-		private const int DEFAULT_WINDOW_HEIGHT = 600;
+		private const int DEFAULT_WINDOW_WIDTH  = 1000;
+		private const int DEFAULT_WINDOW_HEIGHT = 700;
 
 		private const int ZOOM_INFO_WIDTH   =  75;
 		private const int CURSOR_INFO_WIDTH = 150;
@@ -37,22 +37,23 @@ namespace glabels
 		public static unowned List<weak Window> window_list { get; private set; }
 
 
-		private Gtk.HBox      content_hbox;
+		private Gtk.HBox       content_hbox;
 
-		public  View?         view { get; private set; }
+		public  View?          view { get; private set; }
 
-		public  Gtk.Statusbar statusbar { get; private set; }
-		private Gtk.Label     zoom_info_label;
-		private Gtk.Label     cursor_info_label;
-		public  uint          menu_tips_context_id { get; private set; }
+		public  Gtk.Statusbar  statusbar { get; private set; }
+		private Gtk.Label      zoom_info_label;
+		private Gtk.Label      cursor_info_label;
+		public  uint           menu_tips_context_id { get; private set; }
 
-		private Gtk.Menu      context_menu;
-		private Gtk.Menu      empty_selection_context_menu;
+		private Gtk.Menu       context_menu;
+		private Gtk.Menu       empty_selection_context_menu;
 
-		private Prefs         prefs;
-		private Ui            ui;
+		private Prefs          prefs;
+		private Ui             ui;
 
-		private ObjectEditor  object_editor;
+		private PagePreview    page_preview;
+		private ObjectEditor   object_editor;
 
 
 		public Window()
@@ -69,6 +70,10 @@ namespace glabels
 
 			Gtk.HBox main_hbox = new Gtk.HBox( false, 0 );
 			vbox1.pack_start( main_hbox, true, true, 0 );
+
+			page_preview = new PagePreview();
+			page_preview.set_hexpand( false );
+			main_hbox.pack_start( page_preview, false, false, 0 );
 
 			content_hbox = new Gtk.HBox( false, 0 );
 			content_hbox.set_hexpand( true );
@@ -155,12 +160,7 @@ namespace glabels
 			label.modified = false;
 			set_window_title( label );
 
-/*
-			MiniPreview mini_preview = new MiniPreview( 200, 200 );
-			mini_preview.set_label( label );
-			mini_preview.show_all();
-			content_hbox.pack_start( mini_preview, true, true, 0 );
-*/
+			page_preview.set_label( label );
 			object_editor.set_label( label );
 
 			view = new View( label );

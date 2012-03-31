@@ -45,6 +45,7 @@ glabels_4_SOURCES = \
 	mini_preview.vala \
 	new_label_dialog.vala \
 	object_editor.vala \
+	page_preview.vala \
 	prefs.vala \
 	print.vala \
 	template_history.vala \
