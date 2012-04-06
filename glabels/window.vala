@@ -52,7 +52,7 @@ namespace glabels
 		private Prefs          prefs;
 		private Ui             ui;
 
-		private PagePreview    page_preview;
+		private PropertyEditor property_editor;
 		private ObjectEditor   object_editor;
 
 
@@ -71,13 +71,17 @@ namespace glabels
 			Gtk.HBox main_hbox = new Gtk.HBox( false, 0 );
 			vbox1.pack_start( main_hbox, true, true, 0 );
 
-			page_preview = new PagePreview();
-			page_preview.set_hexpand( false );
-			main_hbox.pack_start( page_preview, false, false, 0 );
+			property_editor = new PropertyEditor();
+			property_editor.set_hexpand( false );
+			main_hbox.pack_start( property_editor, false, false, 0 );
 
 			content_hbox = new Gtk.HBox( false, 0 );
 			content_hbox.set_hexpand( true );
 			main_hbox.pack_start( content_hbox, true, true, 0 );
+
+			view = new View();
+			content_hbox.pack_start( view, true, true, 0 );
+			view.show_all();
 
 			object_editor = new ObjectEditor();
 			object_editor.set_hexpand( false );
@@ -151,7 +155,7 @@ namespace glabels
 
 		public bool is_empty()
 		{
-			return view == null;
+			return view.label == null;
 		}
 
 
@@ -160,12 +164,9 @@ namespace glabels
 			label.modified = false;
 			set_window_title( label );
 
-			page_preview.set_label( label );
+			property_editor.set_label( label );
+			view.label = label;
 			object_editor.set_label( label );
-
-			view = new View( label );
-			content_hbox.pack_start( view, true, true, 0 );
-			view.show_all();
 
 			view.zoom_to_fit();
 

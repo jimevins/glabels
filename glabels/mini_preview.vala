@@ -253,7 +253,7 @@ namespace glabels
 
 			/* Find offset to center preview. */
 			double offset_x = (w/scale - template.page_width) / 2.0;
-			double offset_y = (h/scale - template.page_height) / 2.0;
+			double offset_y = MARGIN;
 
 			/* Set transformation. */
 			cr.scale( scale, scale );

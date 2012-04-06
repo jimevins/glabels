@@ -25,22 +25,23 @@ using libglabels;
 namespace glabels
 {
 
-	class PagePreview : Gtk.Box
+	class PropertyEditor : Gtk.Box
 	{
 		private Label           label;
 
-		private Gtk.Box         title_box;
+		private Gtk.Notebook    property_editor_notebook;
+
 		private Gtk.Box         layout_preview_box;
 		private MiniPreview     layout_preview;
 
 
-		public PagePreview()
+		public PropertyEditor()
 		{
 			/* Load the user interface. */
 			Gtk.Builder builder = new Gtk.Builder();
 			try
 			{
-				string file = GLib.Path.build_filename( Config.DATADIR, Config.GLABELS_BRANCH, "ui", "page_preview.ui" );
+				string file = GLib.Path.build_filename( Config.DATADIR, Config.GLABELS_BRANCH, "ui", "property_editor.ui" );
 				string[] objects = { "property_editor_vbox",
 				                     null };
 				builder.add_objects_from_file( file, objects );
@@ -53,11 +54,11 @@ namespace glabels
 			Gtk.VBox property_editor_vbox = builder.get_object( "property_editor_vbox" ) as Gtk.VBox;
 			pack_start( property_editor_vbox );
 
-			/* Title widgets. */
-			title_box = builder.get_object( "title_box" ) as Gtk.Box;
-			title_box.set_sensitive( false );
+			/* Notebook. */
+			property_editor_notebook = builder.get_object( "property_editor_notebook" ) as Gtk.Notebook;
+			property_editor_notebook.set_sensitive( false );
 
-			/* Layout widgets. */
+			/* Preview widgets. */
 			layout_preview_box = builder.get_object( "layout_preview_box" ) as Gtk.Box;
 
 			layout_preview = new MiniPreview( 280, 420 );
@@ -70,7 +71,7 @@ namespace glabels
 		{
 			this.label = label;
 
-			title_box.set_sensitive( true );
+			property_editor_notebook.set_sensitive( true );
 			layout_preview.set_label( label );
 		}
 

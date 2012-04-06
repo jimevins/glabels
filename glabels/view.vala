@@ -101,8 +101,6 @@ namespace glabels
 		private double       create_y0;
 
 
-		public Label  label        { get; private set; }
-
 		public double zoom         { get; private set; }
 
 		private bool _markup_visible;
@@ -136,10 +134,38 @@ namespace glabels
 		}
 
 
-		public View( Label label )
+		private Label? _label;
+		public Label? label
 		{
-			this.label = label;
+			get
+			{
+				return _label;
+			}
 
+			set
+			{
+				_label = value;
+				if ( _label != null )
+				{
+					label.changed.connect( on_label_changed );
+					label.selection_changed.connect( on_label_changed );
+					label.size_changed.connect( on_label_size_changed );
+
+					canvas.focus_in_event.connect( on_focus_in_event );
+					canvas.focus_out_event.connect( on_focus_out_event );
+					canvas.enter_notify_event.connect( on_enter_notify_event );
+					canvas.leave_notify_event.connect( on_leave_notify_event );
+					canvas.motion_notify_event.connect( on_motion_notify_event );
+					canvas.button_press_event.connect( on_button_press_event );
+					canvas.button_release_event.connect( on_button_release_event );
+					canvas.key_press_event.connect( on_key_press_event );
+				}
+			}
+		}
+
+
+		public View()
+		{
 			prefs = new Prefs();
 
 			canvas = new Gtk.Layout( null, null );
@@ -170,17 +196,6 @@ namespace glabels
 			canvas.realize.connect( on_realize );
 			canvas.size_allocate.connect( on_size_allocate );
 			canvas.screen_changed.connect( on_screen_changed );
-			canvas.focus_in_event.connect( on_focus_in_event );
-			canvas.focus_out_event.connect( on_focus_out_event );
-			canvas.enter_notify_event.connect( on_enter_notify_event );
-			canvas.leave_notify_event.connect( on_leave_notify_event );
-			canvas.motion_notify_event.connect( on_motion_notify_event );
-			canvas.button_press_event.connect( on_button_press_event );
-			canvas.button_release_event.connect( on_button_release_event );
-			canvas.key_press_event.connect( on_key_press_event );
-			label.changed.connect( on_label_changed );
-			label.selection_changed.connect( on_label_changed );
-			label.size_changed.connect( on_label_size_changed );
 		}
 
 
@@ -417,33 +432,36 @@ namespace glabels
 		private void draw_layers( Gdk.Window    window,
 		                          Cairo.Context cr )
 		{
-			this.scale = zoom * home_scale;
+			if ( label != null )
+			{
+				this.scale = zoom * home_scale;
 
-			double w, h;
-			label.get_size( out w, out h );
+				double w, h;
+				label.get_size( out w, out h );
 
-			canvas.set_size( (int)(w*scale + 8), (int)(h*scale + 8) );
+				canvas.set_size( (int)(w*scale + 8), (int)(h*scale + 8) );
 
-			int canvas_w = window.get_width();
-			int canvas_h = window.get_height();
+				int canvas_w = window.get_width();
+				int canvas_h = window.get_height();
 
-			this.x0 = (canvas_w/scale - w) / 2;
-			this.y0 = (canvas_h/scale - h) / 2;
+				this.x0 = (canvas_w/scale - w) / 2;
+				this.y0 = (canvas_h/scale - h) / 2;
 
-			cr.save();
+				cr.save();
 
-			cr.scale( scale, scale );
-			cr.translate( x0, y0 );
+				cr.scale( scale, scale );
+				cr.translate( x0, y0 );
 
-			draw_bg_layer( cr );
-			draw_grid_layer( cr );
-			draw_markup_layer( cr );
-			draw_objects_layer( cr );
-			draw_fg_layer( cr );
-			draw_highlight_layer( cr );
-			draw_select_region_layer( cr );
+				draw_bg_layer( cr );
+				draw_grid_layer( cr );
+				draw_markup_layer( cr );
+				draw_objects_layer( cr );
+				draw_fg_layer( cr );
+				draw_highlight_layer( cr );
+				draw_select_region_layer( cr );
 
-			cr.restore();
+				cr.restore();
+			}
 		}
 
 
