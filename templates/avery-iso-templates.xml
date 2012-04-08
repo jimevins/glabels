@@ -264,27 +264,16 @@
 
 
   <!-- =============================================================== -->
-  <!-- Avery J8435: CD Inlets Booklet part                             -->
+  <!-- Avery J8435: CD Inlets		                               -->
   <!-- =============================================================== -->
-  <Template brand="Avery" part="8435A" size="A4" _description="CD Booklet">
+  <Template brand="Avery" part="8435" size="A4" _description="CD Booklet and Inlet">
     <Meta category="media"/>
     <Label-rectangle id="0" width="155mm" height="125mm" round="0">
       <Markup-margin size="2mm"/>
       <Markup-line x1="32mm" y1="0mm" x2="32mm" y2="125mm"/>
       <Layout nx="1" ny="1" x0="27.5mm" y0="22mm" dx="155mm" dy="125mm"/>
     </Label-rectangle>
-  </Template>
-
-  <Template brand="Avery" part="J8435A" equiv="8435A"/>
-  <Template brand="Avery" part="32250A" equiv="8435A"/>
-
-
-  <!-- =============================================================== -->
-  <!-- Avery J8435: CD Inlets Inlet part                           -->
-  <!-- =============================================================== -->
-  <Template brand="Avery" part="8435B" size="A4" _description="CD Inlet">
-    <Meta category="media"/>
-    <Label-rectangle id="0" width="155mm" height="122mm" round="0">
+    <Label-rectangle id="1" width="155mm" height="122mm" round="0">
       <Markup-margin size="2mm"/>
       <Markup-line x1="8.5mm" y1="0mm" x2="8.5mm" y2="122mm"/>
       <Markup-line x1="146.5mm" y1="0mm" x2="146.5mm" y2="122mm"/>
@@ -292,8 +281,9 @@
     </Label-rectangle>
   </Template>
 
-  <Template brand="Avery" part="J8435B" equiv="8435B"/>
-  <Template brand="Avery" part="32250B" equiv="8435B"/>
+  <Template brand="Avery" part="J8435" equiv="8435"/>
+  <Template brand="Avery" part="32250" equiv="8435"/>
+
 
 
   <!-- =================================================================== -->
