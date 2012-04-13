@@ -42,6 +42,7 @@ glabels_4_SOURCES = \
 	merge_none.vala \
 	merge_record.vala \
 	merge_text.vala \
+	message_bar.vala \
 	mini_preview.vala \
 	new_label_dialog.vala \
 	object_editor.vala \

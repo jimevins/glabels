@@ -26,17 +26,34 @@ namespace glabels
 
 	class NewLabelDialog : Gtk.Dialog
 	{
-		private Prefs prefs;
+		private Prefs               prefs;
+		private TemplateHistory     template_history;
 
+		private Gtk.Box             recent_box;
+		private Gtk.Box             recent_info_box;
+		private MessageBar          recent_info_bar;
+		private Gtk.IconView        recent_icon_view;
 
-		private Gtk.IconView  icon_view;
-
+		private Gtk.Box             search_box;
+		private Gtk.Box             search_info_box;
+		private MessageBar          search_info_bar;
 		private Gtk.Entry           search_entry;
+		private Gtk.IconView        search_icon_view;
+
+		private Gtk.Box             custom_box;
+		private Gtk.Box             custom_info_box;
+		private MessageBar          custom_info_bar;
+		private Gtk.IconView        custom_icon_view;
+		private Gtk.Button          custom_add_button;
+		private Gtk.Button          custom_edit_button;
+		private Gtk.Button          custom_delete_button;
+
+		private Gtk.ListStore       recent_model;
+
 		private string              search_string = "";
 		private Gtk.TreeModelFilter search_filtered_model;
-
-		private Gtk.ListStore model;
-
+		private bool                search_filtered_model_empty;
+		private Gtk.ListStore       search_model;
 
 		public string? template_name { get; private set; }
 
@@ -56,7 +73,7 @@ namespace glabels
 			try
 			{
 				string file = GLib.Path.build_filename( Config.DATADIR, Config.GLABELS_BRANCH, "ui", "new_label_dialog.ui" );
-				string[] objects = { "main_vbox", null };
+				string[] objects = { "main_box", null };
 				builder.add_objects_from_file( file, objects );
 			}
 			catch ( Error err )
@@ -64,26 +81,152 @@ namespace glabels
 				error( "Error: %s", err.message );
 			}
 
-			Gtk.VBox main_vbox = builder.get_object( "main_vbox" ) as Gtk.VBox;
-			((Gtk.Box)get_content_area()).pack_start( main_vbox );
+			Gtk.Box main_box = builder.get_object( "main_box" ) as Gtk.Box;
+			((Gtk.Box)get_content_area()).pack_start( main_box );
 
-			search_entry = builder.get_object( "search_entry" ) as Gtk.Entry;
-			icon_view    = builder.get_object( "icon_view" )    as Gtk.IconView;
+			/* Recent templates widgets */
+			recent_box           = builder.get_object( "recent_box" )           as Gtk.Box;
+			recent_info_box      = builder.get_object( "recent_info_box" )      as Gtk.Box;
+			recent_icon_view     = builder.get_object( "recent_icon_view" )     as Gtk.IconView;
 
+			/* Search widgets */
+			search_box           = builder.get_object( "search_box" )           as Gtk.Box;
+			search_info_box      = builder.get_object( "search_info_box" )      as Gtk.Box;
+			search_entry         = builder.get_object( "search_entry" )         as Gtk.Entry;
+			search_icon_view     = builder.get_object( "search_icon_view" )     as Gtk.IconView;
+
+			/* Custom templates widgets */
+			custom_box           = builder.get_object( "custom_box" )           as Gtk.Box;
+			custom_info_box      = builder.get_object( "custom_info_box" )      as Gtk.Box;
+			custom_icon_view     = builder.get_object( "custom_icon_view" )     as Gtk.IconView;
+			custom_add_button    = builder.get_object( "custom_add_button" )    as Gtk.Button;
+			custom_edit_button   = builder.get_object( "custom_edit_button" )   as Gtk.Button;
+			custom_delete_button = builder.get_object( "custom_delete_button" ) as Gtk.Button;
+
+
+			/* Recent page preparation */
+			recent_info_bar = new MessageBar( Gtk.MessageType.INFO,
+			                                  Gtk.ButtonsType.NONE,
+			                                  _("No recent templates found.") );
+			recent_info_bar.format_secondary_text( _("Try selecting a template in the \"Search all\" tab.") );
+			recent_info_box.pack_start( recent_info_bar, false, false, 0 );
+			recent_info_bar.show();
+			recent_info_bar.set_no_show_all( true );
+			setup_recent_model();
+
+			/* Search page preparation */
+			search_info_bar = new MessageBar( Gtk.MessageType.INFO,
+			                                  Gtk.ButtonsType.NONE,
+			                                  _("No match.") );
+			search_info_bar.format_secondary_text( _("Try modifying the search") );
+			search_info_box.pack_start( search_info_bar, false, false, 0 );
+			search_info_bar.hide();
+			search_info_bar.set_no_show_all( true );
+			setup_search_model();
+
+			/* Custom page preparation */
+			custom_info_bar = new MessageBar( Gtk.MessageType.INFO,
+			                                  Gtk.ButtonsType.NONE,
+			                                  _("No custom templates found.") );
+			custom_info_bar.format_secondary_text( _("You may create new templates or try searching for pre-defined templates in the \"Search all\" tab.") );
+			custom_info_box.pack_start( custom_info_bar, false, false, 0 );
+			custom_info_bar.show();
+
+			/* Connect signals. */
+			search_entry.changed.connect( on_search_entry_changed );
+			search_entry.icon_release.connect( on_search_entry_clear );
+			recent_icon_view.selection_changed.connect( on_recent_icon_view_selection_changed );
+			recent_icon_view.button_release_event.connect( on_recent_icon_view_button_release_event );
+			search_icon_view.selection_changed.connect( on_search_icon_view_selection_changed );
+			search_icon_view.button_release_event.connect( on_search_icon_view_button_release_event );
+		}
+
+
+		private void setup_recent_model()
+		{
+			template_history = new TemplateHistory( 5 );
 
 			/* Create and set icon view model. */
-			model = new Gtk.ListStore( 3, typeof(string), typeof(Gdk.Pixbuf), typeof(string) );
+			recent_model = new Gtk.ListStore( 3, typeof(string), typeof(Gdk.Pixbuf), typeof(string) );
 
-			search_filtered_model = new Gtk.TreeModelFilter( model, null );
-			search_filtered_model.set_visible_func( search_filter_func );
-
-			icon_view.set_model( search_filtered_model );
-			icon_view.set_text_column( 0 );
-			icon_view.set_pixbuf_column( 1 );
-			icon_view.set_tooltip_column( 2 );
+			recent_icon_view.set_model( recent_model );
+			recent_icon_view.set_text_column( 0 );
+			recent_icon_view.set_pixbuf_column( 1 );
+			recent_icon_view.set_tooltip_column( 2 );
 
 			/* Set "follow-state" property of pixbuf renderer. (pre-light) */
-			List<weak Gtk.CellRenderer> renderer_list = icon_view.cell_area.get_cells();
+			List<weak Gtk.CellRenderer> renderer_list = recent_icon_view.cell_area.get_cells();
+			foreach ( Gtk.CellRenderer renderer in renderer_list )
+			{
+				if ( renderer is Gtk.CellRendererPixbuf )
+				{
+					((Gtk.CellRendererPixbuf)renderer).follow_state = true;
+				}
+			}
+
+			/* Intialize model. */
+			foreach ( string name in template_history.get_template_list() )
+			{
+				libglabels.Template template = libglabels.Db.lookup_template_from_name( name );
+
+				Gtk.TreeIter iter;
+				recent_model.append( out iter );
+
+				string tooltip = build_tooltip( template );
+
+				recent_model.set( iter,
+				                  0, template.name,
+				                  1, template.preview_pixbuf,
+				                  2, tooltip,
+				                  -1);
+
+				recent_info_bar.hide();
+			}
+
+			template_history.changed.connect( on_template_history_changed );
+		}
+
+
+		private void on_template_history_changed()
+		{
+			recent_model.clear();
+
+			/* Re-intialize model. */
+			foreach ( string name in template_history.get_template_list() )
+			{
+				libglabels.Template template = libglabels.Db.lookup_template_from_name( name );
+
+				Gtk.TreeIter iter;
+				recent_model.append( out iter );
+
+				string tooltip = build_tooltip( template );
+
+				recent_model.set( iter,
+				                  0, template.name,
+				                  1, template.preview_pixbuf,
+				                  2, tooltip,
+				                  -1);
+
+				recent_info_bar.hide();
+			}
+		}
+
+
+		private void setup_search_model()
+		{
+			/* Create and set icon view model. */
+			search_model = new Gtk.ListStore( 3, typeof(string), typeof(Gdk.Pixbuf), typeof(string) );
+
+			search_filtered_model = new Gtk.TreeModelFilter( search_model, null );
+			search_filtered_model.set_visible_func( search_filter_func );
+
+			search_icon_view.set_model( search_filtered_model );
+			search_icon_view.set_text_column( 0 );
+			search_icon_view.set_pixbuf_column( 1 );
+			search_icon_view.set_tooltip_column( 2 );
+
+			/* Set "follow-state" property of pixbuf renderer. (pre-light) */
+			List<weak Gtk.CellRenderer> renderer_list = search_icon_view.cell_area.get_cells();
 			foreach ( Gtk.CellRenderer renderer in renderer_list )
 			{
 				if ( renderer is Gtk.CellRendererPixbuf )
@@ -96,22 +239,16 @@ namespace glabels
 			foreach ( libglabels.Template template in libglabels.Db.templates )
 			{
 				Gtk.TreeIter iter;
-				model.append( out iter );
+				search_model.append( out iter );
 
 				string tooltip = build_tooltip( template );
 
-				model.set( iter,
-				           0, template.name,
-				           1, template.preview_pixbuf,
-				           2, tooltip,
-				           -1);
+				search_model.set( iter,
+				                  0, template.name,
+				                  1, template.preview_pixbuf,
+				                  2, tooltip,
+				                  -1);
 			}
-
-			/* Connect signals. */
-			search_entry.changed.connect( on_search_entry_changed );
-			search_entry.icon_release.connect( on_search_entry_clear );
-			icon_view.selection_changed.connect( on_icon_view_selection_changed );
-			icon_view.button_release_event.connect( on_icon_view_button_release_event );
 		}
 
 
@@ -136,6 +273,7 @@ namespace glabels
 		{
 			if ( search_string == "" )
 			{
+				search_filtered_model_empty = false;
 				return true;
 			}
 
@@ -148,6 +286,7 @@ namespace glabels
 
 			if ( needle in haystack )
 			{
+				search_filtered_model_empty = false;
 				return true;
 			}
 
@@ -186,13 +325,46 @@ namespace glabels
 				search_entry.secondary_icon_sensitive   = true;
 			}
 
+			search_filtered_model_empty = true;
 			search_filtered_model.refilter();
+
+			if ( search_filtered_model_empty )
+			{
+				search_info_bar.show();
+			}
+			else
+			{
+				search_info_bar.hide();
+			}
 		}
 
 
-		private void on_icon_view_selection_changed()
+		private void on_recent_icon_view_selection_changed()
 		{
-			List<Gtk.TreePath> list = icon_view.get_selected_items();
+			List<Gtk.TreePath> list = recent_icon_view.get_selected_items();
+
+			Gtk.TreeIter iter;
+			if ( recent_model.get_iter( out iter, list.first().data ) )
+			{
+				Value value;
+				recent_model.get_value( iter, 0, out value );
+
+				template_name = value.get_string();
+			}
+		}
+
+
+		private bool on_recent_icon_view_button_release_event( Gdk.EventButton event )
+		{
+			response( Gtk.ResponseType.OK );
+			template_history.changed.disconnect( on_template_history_changed );
+			return true;
+		}
+
+
+		private void on_search_icon_view_selection_changed()
+		{
+			List<Gtk.TreePath> list = search_icon_view.get_selected_items();
 
 			Gtk.TreeIter iter;
 			if ( search_filtered_model.get_iter( out iter, list.first().data ) )
@@ -205,7 +377,7 @@ namespace glabels
 		}
 
 
-		private bool on_icon_view_button_release_event( Gdk.EventButton event )
+		private bool on_search_icon_view_button_release_event( Gdk.EventButton event )
 		{
 			response( Gtk.ResponseType.OK );
 			return true;

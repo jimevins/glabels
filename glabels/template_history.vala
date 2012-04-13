@@ -48,14 +48,13 @@ namespace glabels
 		{
 			string[] old_templates;
 			string[] new_templates;
-			int      i, j;
 
 			old_templates = history.get_strv( "recent-templates" );
 
 			new_templates = new string[1];
-			new_templates += template_name;
+			new_templates[0] = template_name;
 
-			for ( i = 0, j = 1; (j < (max_n-1)) && (i < old_templates.length); i++ )
+			for ( int i = 0; (i < (max_n-1)) && (i < old_templates.length); i++ )
 			{
 				if ( template_name != old_templates[i] )
 				{
@@ -68,13 +67,11 @@ namespace glabels
 
 		public List<string> get_template_list()
 		{
-			string[]     templates;
 			List<string> template_list = new List<string>();
-			int          i;
 
-			templates = history.get_strv( "recent-templates" );
+			string[] templates = history.get_strv( "recent-templates" );
 
-			for ( i = 0; i < templates.length; i++ )
+			for ( int i = 0; i < templates.length; i++ )
 			{
 				template_list.append( templates[i] );
 			}

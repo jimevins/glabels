@@ -52,14 +52,13 @@ namespace glabels
 		{
 			string[] old_families;
 			string[] new_families;
-			int      i, j;
 
 			old_families = history.get_strv( "recent-fonts" );
 
 			new_families = new string[1];
-			new_families += family;
+			new_families[0] = family;
 
-			for ( i = 0, j = 1; (j < (max_n-1)) && (i < old_families.length); i++ )
+			for ( int i = 0; (i < (max_n-1)) && (i < old_families.length); i++ )
 			{
 				if ( family != old_families[i] )
 				{
@@ -72,13 +71,11 @@ namespace glabels
 
 		public List<string> get_family_list()
 		{
-			string[]     families;
 			List<string> family_list = new List<string>();
-			int          i;
 
-			families = history.get_strv( "recent-fonts" );
+			string[] families = history.get_strv( "recent-fonts" );
 
-			for ( i = 0; i < families.length; i++ )
+			for ( int i = 0; i < families.length; i++ )
 			{
 				if ( font_families.is_family_installed( families[i] ) )
 				{
