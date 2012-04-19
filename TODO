@@ -5,12 +5,15 @@ Use Cases
 Case #1: one or more sheets of identical labels/cards.  Examples: return address labels,
          business cards, multiple copies of a CD label.
 
+         1.A: Only a partial sheet of labels is printed.  E.g. use only labels 5,6,7&8.
+
 Case #2: Document merge from external data source. Each label has an identical design
          but varies in the data that is pulled from the data source.  Each data record
          produces a unique label.  Examples: address labels from an address list,
          name tags.
 
-Case #3: A sheet contains multiple sets of identical label/cards.
+Case #3: A sheet contains multiple sets of identical label/cards.  E.g. labels 1-5 are
+         of one design and labels 6-12 are a second design.
 
 
 Development plan

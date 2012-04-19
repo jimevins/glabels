@@ -411,6 +411,15 @@ namespace glabels
 		}
 
 
+		public void print( Label label, Window window )
+		{
+			PrintOpDialog op = new PrintOpDialog( label );
+
+			op.run( Gtk.PrintOperationAction.PRINT_DIALOG, window );
+			/* TODO: save print settings? */
+		}
+
+
 		private void close( Window window )
 		{
 			bool close_flag = true;

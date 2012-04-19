@@ -1,6 +1,6 @@
 /*  label.vala
  *
- *  Copyright (C) 2011  Jim Evins <evins@snaught.com>
+ *  Copyright (C) 2011-2012  Jim Evins <evins@snaught.com>
  *
  *  This file is part of gLabels.
  *
@@ -66,6 +66,20 @@ namespace glabels
 		private Queue<LabelState?> redo_stack;
 		private bool               cp_cleared_flag;
 		private string             cp_desc;
+
+
+		/* Print Model */
+		private const double OUTLINE_WIDTH =  0.25;
+		private const double TICK_OFFSET   =  2.25;
+		private const double TICK_LENGTH   = 18.0;
+
+		public Label label           { get; private set; }
+
+		public bool  outline_flag    { get; set; }
+		public bool  reverse_flag    { get; set; }
+		public bool  crop_marks_flag { get; set; }
+
+		public int   n_pages         { get; set; default = 1; }
 
 
 		/**
@@ -1469,6 +1483,181 @@ namespace glabels
 		private void stack_clear( Queue<LabelState> stack )
 		{
 			while ( stack.pop_head() != null ) {}
+		}
+
+
+		/*
+		 * Print Model
+		 */
+		public void print_simple_sheet( Cairo.Context cr, int i_page )
+		{
+			if ( crop_marks_flag )
+			{
+				print_crop_marks( cr );
+			}
+
+			TemplateFrame frame = template.frames.first().data;
+			Gee.ArrayList<TemplateCoord?> origins = frame.get_origins();
+
+			foreach ( TemplateCoord origin in origins )
+			{
+				print_label( cr, origin.x, origin.y, null );
+			}
+		}
+
+
+		private void print_crop_marks( Cairo.Context cr )
+		{
+			TemplateFrame frame = template.frames.first().data;
+
+			double w, h;
+			frame.get_size( out w, out h );
+
+			cr.save();
+
+			cr.set_source_rgb( 0, 0, 0 );
+			cr.set_line_width( OUTLINE_WIDTH );
+
+			foreach ( TemplateLayout layout in frame.layouts )
+			{
+
+				double xmin = layout.x0;
+				double ymin = layout.y0;
+				double xmax = layout.x0 + layout.dx*(layout.nx - 1) + w;
+				double ymax = layout.y0 + layout.dy*(layout.ny - 1) + h;
+
+				for ( int ix=0; ix < layout.nx; ix++ )
+				{
+					double x1 = xmin + ix*layout.dx;
+					double x2 = x1 + w;
+
+					double y1 = double.max((ymin - TICK_OFFSET), 0.0);
+					double y2 = double.max((y1 - TICK_LENGTH), 0.0);
+
+					double y3 = double.min((ymax + TICK_OFFSET), template.page_height);
+					double y4 = double.min((y3 + TICK_LENGTH), template.page_height);
+
+					cr.move_to( x1, y1 );
+					cr.line_to( x1, y2 );
+					cr.stroke();
+
+					cr.move_to( x2, y1 );
+					cr.line_to( x2, y2 );
+					cr.stroke();
+
+					cr.move_to( x1, y3 );
+					cr.line_to( x1, y4 );
+					cr.stroke();
+
+					cr.move_to( x2, y3 );
+					cr.line_to( x2, y4 );
+					cr.stroke();
+				}
+
+				for (int iy=0; iy < layout.ny; iy++ )
+				{
+					double y1 = ymin + iy*layout.dy;
+					double y2 = y1 + h;
+
+					double x1 = double.max((xmin - TICK_OFFSET), 0.0);
+					double x2 = double.max((x1 - TICK_LENGTH), 0.0);
+
+					double x3 = double.min((xmax + TICK_OFFSET), template.page_width);
+					double x4 = double.min((x3 + TICK_LENGTH), template.page_width);
+
+					cr.move_to( x1, y1 );
+					cr.line_to( x2, y1 );
+					cr.stroke();
+
+					cr.move_to( x1, y2 );
+					cr.line_to( x2, y2 );
+					cr.stroke();
+
+					cr.move_to( x3, y1 );
+					cr.line_to( x4, y1 );
+					cr.stroke();
+
+					cr.move_to( x3, y2 );
+					cr.line_to( x4, y2 );
+					cr.stroke();
+				}
+
+			}
+
+			cr.restore();
+		}
+
+
+		private void print_label( Cairo.Context cr,
+		                          double        x,
+		                          double        y,
+		                          MergeRecord?  record )
+		{
+			double w, h;
+			get_size( out w, out h );
+
+			cr.save();
+
+			/* Transform coordinate system to be relative to upper corner */
+			/* of the current label */
+			cr.translate( x, y );
+
+			cr.save();
+
+			clip_to_outline( cr );
+
+			cr.save();
+
+			/* Special transformations. */
+			if ( rotate )
+			{
+				cr.rotate( Math.PI/2 );
+				cr.translate( 0, -h );
+			}
+			if ( reverse_flag )
+			{
+				cr.translate( w, 0 );
+				cr.scale( -1, 1 );
+			}
+
+			draw( cr, false, record );
+
+			cr.restore(); /* From special transformations. */
+
+			cr.restore(); /* From clip to outline. */
+
+			if ( outline_flag )
+			{
+				draw_outline( cr );
+			}
+
+			cr.restore(); /* From translation. */
+		}
+
+
+		private void draw_outline( Cairo.Context cr )
+		{
+			cr.save();
+
+			cr.set_source_rgb( 0, 0, 0 );
+			cr.set_line_width( OUTLINE_WIDTH );
+
+			TemplateFrame frame = template.frames.first().data;
+			frame.cairo_path( cr, false );
+
+			cr.stroke();
+
+			cr.restore();
+		}
+
+
+		private void clip_to_outline( Cairo.Context cr )
+		{
+			TemplateFrame frame = template.frames.first().data;
+			frame.cairo_path( cr, true );
+
+			cr.set_fill_rule( Cairo.FillRule.EVEN_ODD );
+			cr.clip();
 		}
 
 

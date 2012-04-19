@@ -993,28 +993,7 @@ namespace glabels
 
 		private void on_file_print( Gtk.Action action )
 		{
-			/*
-			glPrintOpDialog         *op;
-			GtkPrintOperationResult  result;
-
-			op = gl_print_op_dialog_new (GL_VIEW(window->view)->label);
-
-			if (window->print_settings)
-			{
-				gl_print_op_set_settings (GL_PRINT_OP (op), window->print_settings);
-			}
-
-			result = gtk_print_operation_run (GTK_PRINT_OPERATION (op),
-			                                  GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG,
-			                                  GTK_WINDOW (window ),
-			                                  NULL);
-
-			if ( result == GTK_PRINT_OPERATION_RESULT_APPLY )
-			{
-				gl_print_op_free_settings (window->print_settings);
-				window->print_settings = gl_print_op_get_settings (GL_PRINT_OP (op));
-			}
-			*/
+			File.print( window.view.label, window );
 		}
 
 

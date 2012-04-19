@@ -43,7 +43,7 @@ namespace glabels
 
 		private Gtk.DrawingArea canvas;
 
-		private Template?        template;
+		private Template?                     template;
 		private Gee.ArrayList<TemplateCoord?> origins;
 		private Gee.ArrayList<TemplateCoord?> centers;
 
@@ -408,15 +408,8 @@ namespace glabels
 
 		private void draw_rich_preview( Cairo.Context cr )
 		{
-			Print print = new Print();
-
-			print.label = label;
-			print.outline_flag = false;
-			print.reverse_flag = false;
-			print.crop_marks_flag = false;
-
 			/* TODO: test for merge. */
-			print.print_simple_sheet( cr );
+			label.print_simple_sheet( cr, 0 );
 		}
 
 		
