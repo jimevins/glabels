@@ -119,7 +119,7 @@
   <!-- =================================================================== -->
   <!-- Geha Z20.  CD/DVD Labels and inlet.                             	   -->
   <!-- =================================================================== -->
-  <Template brand="Geha" part="Z20-1" size="A4" _description="CD/DVD Labels">
+  <Template brand="Geha" part="Z20" size="A4" _description="CD/DVD Labels">
     <Meta category="label"/>
     <Meta category="media"/>
     <Meta product_url="http://www.geha.de/index.php?id=1047&amp;pid=30200"/>
@@ -127,22 +127,13 @@
       <Markup-margin size="3.175mm"/>
       <Layout nx="1" ny="1" x0="46.5mm" y0="21.5mm" dx="137mm" dy="137mm"/>
     </Label-cd>
-  </Template>
-
-  <Template brand="Geha" part="Z21-1" equiv="Z20-1"/>
-
-  <Template brand="Geha" part="Z20-2" size="A4" _description="CD/DVD Inlet">
-    <Meta category="label"/>
-    <Meta category="media"/>
-    <Meta category="rectangle-label"/>
-    <Meta product_url="http://www.geha.de/index.php?id=1047&amp;pid=30200"/>
-    <Label-rectangle id="0" width="121.5mm" height="117.5mm" round="0mm" x_waste="15mm" y_waste="0mm">
+    <Label-rectangle id="1" width="121.5mm" height="117.5mm" round="0mm" x_waste="15mm" y_waste="0mm">
       <Markup-margin size="3.175mm"/>
       <Layout nx="1" ny="1" x0="44.25mm" y0="164mm" dx="151.5mm" dy="117.5mm"/>
     </Label-rectangle>
   </Template>
 
-  <Template brand="Geha" part="Z21-2" equiv="Z20-2"/>
+  <Template brand="Geha" part="Z21" equiv="Z20"/>
 
   <!-- =================================================================== -->
   <!-- Geha Z22.  CD/DVD Labels.                                     	   -->
