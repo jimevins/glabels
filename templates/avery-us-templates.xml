@@ -545,7 +545,7 @@
       <Markup-line x1="2.3125in" y1="3.125in" x2="2.3125in" y2="4.625in"/>
       <Layout nx="1" ny="2" x0="1.9375in" y0="0.6875in" dx="0" dy="5in"/>
     </Label-cd>
-    <Label-rectangle id="2" width="0.21875in" height="4.6875in" round="0.0625in" waste="0.0625in">
+    <Label-rectangle id="1" width="0.21875in" height="4.6875in" round="0.0625in" waste="0.0625in">
       <Layout nx="2" ny="2" x0="0.5in" y0="0.734375in" dx="0.46875in" dy="4.84375in"/>
     </Label-rectangle>
   </Template>
