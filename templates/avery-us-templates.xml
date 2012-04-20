@@ -530,9 +530,10 @@
 
 
   <!-- =================================================================== -->
-  <!-- Avery 5931 family: CD/DVD Labels (face only), 2 per sheet         x -->
+  <!-- Avery 5931 family: CD/DVD Labels, 2 per sheet			   -->
+  <!-- Spine labels, 4 per sheet		         		   -->
   <!-- =================================================================== -->
-  <Template brand="Avery" part="5931-Disc" size="US-Letter"
+  <Template brand="Avery" part="5931" size="US-Letter"
          _description="CD/DVD Labels (Disc Labels)">
     <Meta category="label"/>
     <Meta category="media"/>
@@ -544,62 +545,31 @@
       <Markup-line x1="2.3125in" y1="3.125in" x2="2.3125in" y2="4.625in"/>
       <Layout nx="1" ny="2" x0="1.9375in" y0="0.6875in" dx="0" dy="5in"/>
     </Label-cd>
-  </Template>
-
-  <Template brand="Avery" part="5691-Disc" equiv="5931-Disc"/>
-  <Template brand="Avery" part="5692-Disc" equiv="5931-Disc"/>
-  <Template brand="Avery" part="5694-Disc" equiv="5931-Disc"/>
-  <Template brand="Avery" part="5698-Disc" equiv="5931-Disc"/>
-  <Template brand="Avery" part="6692-Disc" equiv="5931-Disc"/>
-  <Template brand="Avery" part="8536-Disc" equiv="5931-Disc"/>
-  <Template brand="Avery" part="8691-Disc" equiv="5931-Disc"/>
-  <Template brand="Avery" part="8692-Disc" equiv="5931-Disc"/>
-  <Template brand="Avery" part="8694-Disc" equiv="5931-Disc"/>
-  <Template brand="Avery" part="8695-Disc" equiv="5931-Disc"/>
-  <Template brand="Avery" part="8699-Disc" equiv="5931-Disc"/>
-  <Template brand="Avery" part="8831-Disc" equiv="5931-Disc"/>
-  <Template brand="Avery" part="8832-Disc" equiv="5931-Disc"/>
-  <Template brand="Avery" part="8842-Disc" equiv="5931-Disc"/>
-  <Template brand="Avery" part="8844-Disc" equiv="5931-Disc"/>
-  <Template brand="Avery" part="8846-Disc" equiv="5931-Disc"/>
-  <Template brand="Avery" part="8847-Disc" equiv="5931-Disc"/>
-  <Template brand="Avery" part="8931-Disc" equiv="5931-Disc"/>
-  <Template brand="Avery" part="8941-Disc" equiv="5931-Disc"/>
-  <Template brand="Avery" part="8942-Disc" equiv="5931-Disc"/>
-
-
-  <!-- =================================================================== -->
-  <!-- Avery 5931 family: CD/DVD Labels (spine only), 4 per sheet        x -->
-  <!-- =================================================================== -->
-  <Template brand="Avery" part="5931-Spine" size="US-Letter" 
-         _description="CD/DVD Labels (Spine Labels)">
-    <Meta category="label"/>
-    <Meta category="media"/>
-    <Label-rectangle id="0" width="0.21875in" height="4.6875in" round="0.0625in" waste="0.0625in">
+    <Label-rectangle id="2" width="0.21875in" height="4.6875in" round="0.0625in" waste="0.0625in">
       <Layout nx="2" ny="2" x0="0.5in" y0="0.734375in" dx="0.46875in" dy="4.84375in"/>
     </Label-rectangle>
   </Template>
 
-  <Template brand="Avery" part="5691-Spine" equiv="5931-Spine"/>
-  <Template brand="Avery" part="5692-Spine" equiv="5931-Spine"/>
-  <Template brand="Avery" part="5694-Spine" equiv="5931-Spine"/>
-  <Template brand="Avery" part="5698-Spine" equiv="5931-Spine"/>
-  <Template brand="Avery" part="6692-Spine" equiv="5931-Spine"/>
-  <Template brand="Avery" part="8536-Spine" equiv="5931-Spine"/>
-  <Template brand="Avery" part="8691-Spine" equiv="5931-Spine"/>
-  <Template brand="Avery" part="8692-Spine" equiv="5931-Spine"/>
-  <Template brand="Avery" part="8694-Spine" equiv="5931-Spine"/>
-  <Template brand="Avery" part="8695-Spine" equiv="5931-Spine"/>
-  <Template brand="Avery" part="8699-Spine" equiv="5931-Spine"/>
-  <Template brand="Avery" part="8831-Spine" equiv="5931-Spine"/>
-  <Template brand="Avery" part="8832-Spine" equiv="5931-Spine"/>
-  <Template brand="Avery" part="8842-Spine" equiv="5931-Spine"/>
-  <Template brand="Avery" part="8844-Spine" equiv="5931-Spine"/>
-  <Template brand="Avery" part="8846-Spine" equiv="5931-Spine"/>
-  <Template brand="Avery" part="8847-Spine" equiv="5931-Spine"/>
-  <Template brand="Avery" part="8931-Spine" equiv="5931-Spine"/>
-  <Template brand="Avery" part="8941-Spine" equiv="5931-Spine"/>
-  <Template brand="Avery" part="8942-Spine" equiv="5931-Spine"/>
+  <Template brand="Avery" part="5691" equiv="5931"/>
+  <Template brand="Avery" part="5692" equiv="5931"/>
+  <Template brand="Avery" part="5694" equiv="5931"/>
+  <Template brand="Avery" part="5698" equiv="5931"/>
+  <Template brand="Avery" part="6692" equiv="5931"/>
+  <Template brand="Avery" part="8536" equiv="5931"/>
+  <Template brand="Avery" part="8691" equiv="5931"/>
+  <Template brand="Avery" part="8692" equiv="5931"/>
+  <Template brand="Avery" part="8694" equiv="5931"/>
+  <Template brand="Avery" part="8695" equiv="5931"/>
+  <Template brand="Avery" part="8699" equiv="5931"/>
+  <Template brand="Avery" part="8831" equiv="5931"/>
+  <Template brand="Avery" part="8832" equiv="5931"/>
+  <Template brand="Avery" part="8842" equiv="5931"/>
+  <Template brand="Avery" part="8844" equiv="5931"/>
+  <Template brand="Avery" part="8846" equiv="5931"/>
+  <Template brand="Avery" part="8847" equiv="5931"/>
+  <Template brand="Avery" part="8931" equiv="5931"/>
+  <Template brand="Avery" part="8941" equiv="5931"/>
+  <Template brand="Avery" part="8942" equiv="5931"/>
 
 
   <!-- =================================================================== -->
@@ -834,7 +804,7 @@
 
 
   <!-- ******************************************************************** -->
-  <!-- Avery labels in tech builitin 152 				    -->
+  <!-- Avery labels in tech bulletin 152 				    -->
   <!-- http://www.avery.com/help/tech_bulletin.jsp?tech_bull_code=152       -->
   <!-- ******************************************************************** -->
   <Template brand="Avery" part="LSK-8" size="US-Letter" _description="Divider Labels">
