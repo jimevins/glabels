@@ -108,7 +108,7 @@
   <!-- ==================================================================== -->
   <!-- Hama 50432. CD inlets.				                    -->
   <!-- ==================================================================== -->
-  <Template brand="Hama" part="50432-1" size="A4" _description="CD inlet (front)">
+  <Template brand="Hama" part="50432" size="A4" _description="CD inlet">
     <Meta category="card"/>
     <Meta category="media"/>
     <Label-rectangle id="0" width="151mm" height="121mm" round="0mm" x_waste="0mm" y_waste="0mm">
@@ -116,12 +116,7 @@
       <Markup-line x1="30mm" y1="0mm" x2="30mm" y2="121mm"/>
       <Layout nx="1" ny="1" x0="30mm" y0="29.5mm" dx="151mm" dy="121mm"/>
     </Label-rectangle>
-  </Template>
-
-  <Template brand="Hama" part="50432-2" size="A4" _description="CD inlet (back)">
-    <Meta category="card"/>
-    <Meta category="media"/>
-    <Label-rectangle id="0" width="151mm" height="117.5mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Label-rectangle id="1" width="151mm" height="117.5mm" round="0mm" x_waste="0mm" y_waste="0mm">
       <Markup-margin size="0mm"/>
       <Markup-line x1="6.5mm" y1="0mm" x2="6.5mm" y2="117.5mm"/>
       <Markup-line x1="144.5mm" y1="0mm" x2="144.5mm" y2="117.5mm"/>
