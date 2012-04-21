@@ -1,7 +1,7 @@
 # Danish translation for glabels.
-# Copyright (C) 2010 glabels og nedenstående oversættere.
+# Copyright (C) 2012 glabels og nedenstående oversættere.
 # This file is distributed under the same license as the glabels package.
-# Joe Hansen (joedalton2@yahoo.dk), 2010.
+# Joe Hansen (joedalton2@yahoo.dk), 2010, 2012.
 #
 # https://sourceforge.net/tracker/?func=detail&aid=2955732&group_id=46122&atid=445116
 # ovenstående gav desværre ikke rigtig noget.
@@ -16,10 +16,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-02 10:53+0100\n"
-"PO-Revision-Date: 2010-12-27 14:52+0000\n"
+"POT-Creation-Date: 2012-04-21 17:36+0200\n"
+"PO-Revision-Date: 2012-04-14 14:52+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -846,24 +847,24 @@ msgstr "Vend lodret"
 msgid "Align left"
 msgstr "Juster venstre"
 
-#: ../src/label.c:1560 ../src/ui.c:371
+#: ../src/label.c:1560 ../src/ui.c:378
 msgid "Align right"
 msgstr "Juster højre"
 
-#: ../src/label.c:1621 ../src/ui.c:378
+#: ../src/label.c:1621
 msgid "Align horizontal center"
 msgstr "Juster vandret centrum"
 
-#: ../src/label.c:1697 ../src/ui.c:385
+#: ../src/label.c:1697
 msgid "Align tops"
 msgstr "Juster øverst"
 
-#: ../src/label.c:1754 ../src/ui.c:392
+#: ../src/label.c:1754
 msgid "Align bottoms"
 msgstr "Juster nederste kanter"
 
 # openoffice: juster lodret centreret
-#: ../src/label.c:1815 ../src/ui.c:399
+#: ../src/label.c:1815
 msgid "Align vertical center"
 msgstr "Juster lodret centreret"
 
@@ -1292,12 +1293,12 @@ msgid "_Rotate/Flip"
 msgstr "_Roter/vend"
 
 #: ../src/ui.c:102
-msgid "Align _Horizontal"
-msgstr "Juster _vandret"
+msgid "_Alignment"
+msgstr "_Justering"
 
 #: ../src/ui.c:103
-msgid "Align _Vertical"
-msgstr "Juster _lodret"
+msgid "C_enter"
+msgstr "_Centrum"
 
 #: ../src/ui.c:104
 msgid "_Help"
@@ -1380,11 +1381,11 @@ msgstr "_Afslut"
 msgid "Quit the program"
 msgstr "Afslut programmet"
 
-#: ../src/ui.c:178 ../src/ui.c:180 ../src/ui.c:965
+#: ../src/ui.c:178 ../src/ui.c:180 ../src/ui.c:976
 msgid "Undo"
 msgstr "Fortryd"
 
-#: ../src/ui.c:185 ../src/ui.c:187 ../src/ui.c:972
+#: ../src/ui.c:185 ../src/ui.c:187 ../src/ui.c:983
 msgid "Redo"
 msgstr "Gendan"
 
@@ -1538,25 +1539,41 @@ msgstr "Vend objekt lodret"
 msgid "Align objects to left edges"
 msgstr "Juster objekter til de venstre hjørner"
 
+#: ../src/ui.c:371
+msgid "Align center"
+msgstr "Juster centreret"
+
 #: ../src/ui.c:373
+msgid "Align objects to horizontal centers"
+msgstr "Juster objekter til vandrette centrum"
+
+#: ../src/ui.c:380
 msgid "Align objects to right edges"
 msgstr "Juster objekter til højre hjørner"
 
-#: ../src/ui.c:380
-msgid "Align objects to horizontal centers"
-msgstr "Juster objekter til vandrette centrum"
+#: ../src/ui.c:385
+msgid "Align top"
+msgstr "Juster øverst"
 
 #: ../src/ui.c:387
 msgid "Align objects to top edges"
 msgstr "Juster objekter til øverste hjørner"
 
-#: ../src/ui.c:394
-msgid "Align objects to bottom edges"
-msgstr "Juster objekter til den nederste kants hjørner"
+#: ../src/ui.c:392
+msgid "Align middle"
+msgstr "Juster midterst"
 
-#: ../src/ui.c:401
+#: ../src/ui.c:394
 msgid "Align objects to vertical centers"
 msgstr "Juster objekter til lodret centreret"
+
+#: ../src/ui.c:399
+msgid "Align bottom"
+msgstr "Juster nederst"
+
+#: ../src/ui.c:401
+msgid "Align objects to bottom edges"
+msgstr "Juster objekter til den nederste kants hjørner"
 
 #: ../src/ui.c:408
 msgid "Center objects to horizontal label center"
@@ -1645,7 +1662,7 @@ msgstr "Et program til oprettelse af etiketter og forretningskort.\n"
 #: ../src/ui-commands.c:1166
 msgid "translator-credits"
 msgstr ""
-"Joe Hansen, 2010.\n"
+"Joe Hansen, 2010, 2012.\n"
 "\n"
 "Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
 "Mere info: http://www.dansk-gruppen.dk"
@@ -2069,7 +2086,7 @@ msgstr "Vælg standardegenskaber for nye objekter."
 msgid "Select locale specific behavior."
 msgstr "Vælg opførsel specifikt efter lokalt område."
 
-#: ../data/ui/prefs-dialog.ui.h:18 ../templates/paper-sizes.xml.h:35
+#: ../data/ui/prefs-dialog.ui.h:18 ../templates/paper-sizes.xml.h:46
 msgid "US Letter"
 msgstr "US Letter"
 
@@ -2670,12 +2687,53 @@ msgstr "DL"
 msgid "Monarch Envelope"
 msgstr "Monarkkonvolut"
 
-#: ../templates/paper-sizes.xml.h:32
+#. ISO 217
+#: ../templates/paper-sizes.xml.h:33
+msgid "RA0"
+msgstr "RA0"
+
+#: ../templates/paper-sizes.xml.h:34
+msgid "RA1"
+msgstr "RA1"
+
+#: ../templates/paper-sizes.xml.h:35
+msgid "RA2"
+msgstr "RA2"
+
+#: ../templates/paper-sizes.xml.h:36
+msgid "RA3"
+msgstr "RA3"
+
+#: ../templates/paper-sizes.xml.h:37
+msgid "RA4"
+msgstr "RA4"
+
+#: ../templates/paper-sizes.xml.h:38
+msgid "SRA0"
+msgstr "SRA0"
+
+#: ../templates/paper-sizes.xml.h:39
+msgid "SRA1"
+msgstr "SRA1"
+
+#: ../templates/paper-sizes.xml.h:40
+msgid "SRA2"
+msgstr "SRA2"
+
+#: ../templates/paper-sizes.xml.h:41
+msgid "SRA3"
+msgstr "SRA3"
+
+#: ../templates/paper-sizes.xml.h:42
+msgid "SRA4"
+msgstr "SRA4"
+
+#: ../templates/paper-sizes.xml.h:43
 msgid "US Executive"
 msgstr "US Executive"
 
 #. Other US paper sizes
-#: ../templates/paper-sizes.xml.h:34
+#: ../templates/paper-sizes.xml.h:45
 msgid "US Legal"
 msgstr "US Legal"
 
@@ -2702,7 +2760,9 @@ msgid "CD/DVD or other media"
 msgstr "Cd/dvd eller andet medie"
 
 #. ===================================================================
-#: ../templates/categories.xml.h:5 ../templates/pearl-iso-templates.xml.h:28
+#: ../templates/categories.xml.h:5 ../templates/endisch-templates.xml.h:1
+#: ../templates/pearl-iso-templates.xml.h:28
+#: ../templates/rayfilm-templates.xml.h:4
 msgid "Elliptical labels"
 msgstr "Elliptiske etiketter"
 
@@ -2724,21 +2784,27 @@ msgstr "Billedprodukter"
 #. ===================================================================
 #. ********************************************************************
 #: ../templates/categories.xml.h:9 ../templates/ascom-iso-templates.xml.h:6
+#: ../templates/endisch-templates.xml.h:7
 #: ../templates/hama-iso-templates.xml.h:29
 #: ../templates/herma-iso-templates.xml.h:18
-#: ../templates/jac-iso-templates.xml.h:8
+#: ../templates/igepa-templates.xml.h:5 ../templates/jac-iso-templates.xml.h:8
+#: ../templates/rayfilm-templates.xml.h:11
 msgid "Rectangular labels"
 msgstr "Rektangulære etiketter"
 
 #. ====================================================================
 #. ===================================================================
-#: ../templates/categories.xml.h:10 ../templates/hama-iso-templates.xml.h:31
+#: ../templates/categories.xml.h:10 ../templates/endisch-templates.xml.h:8
+#: ../templates/hama-iso-templates.xml.h:31
 #: ../templates/pearl-iso-templates.xml.h:54
+#: ../templates/rayfilm-templates.xml.h:12
 msgid "Round labels"
 msgstr "Afrundede etiketter"
 
 #. ====================================================================
-#: ../templates/categories.xml.h:11 ../templates/hama-iso-templates.xml.h:33
+#: ../templates/categories.xml.h:11 ../templates/endisch-templates.xml.h:9
+#: ../templates/hama-iso-templates.xml.h:33
+#: ../templates/rayfilm-templates.xml.h:13
 msgid "Square labels"
 msgstr "Firkantede etiketter"
 
@@ -2763,7 +2829,7 @@ msgstr "Cd-inlet"
 #: ../templates/databecker-iso-templates.xml.h:10
 #: ../templates/hama-iso-templates.xml.h:27
 #: ../templates/herma-iso-templates.xml.h:16
-#: ../templates/misc-iso-templates.xml.h:30
+#: ../templates/misc-iso-templates.xml.h:32
 #: ../templates/zweckform-iso-templates.xml.h:28
 msgid "Rectangular Labels"
 msgstr "Rektangulære etiketter"
@@ -2788,6 +2854,7 @@ msgstr "Rygetiketter til videobånd"
 #: ../templates/maco-us-templates.xml.h:2
 #: ../templates/meritline-us-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:2
+#: ../templates/sheetlabels-us-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:1
 #: ../templates/zweckform-iso-templates.xml.h:2
 msgid "Address Labels"
@@ -2805,6 +2872,7 @@ msgstr "Adresseetiketter"
 #: ../templates/decadry-iso-templates.xml.h:2
 #: ../templates/misc-us-templates.xml.h:4
 #: ../templates/misc-iso-templates.xml.h:6
+#: ../templates/rayfilm-templates.xml.h:1
 #: ../templates/zweckform-iso-templates.xml.h:6
 msgid "Business Cards"
 msgstr "Forretningskort"
@@ -2818,10 +2886,13 @@ msgstr "Forretningskort"
 #: ../templates/avery-iso-templates.xml.h:14
 #: ../templates/geha-iso-templates.xml.h:11
 #: ../templates/herma-iso-templates.xml.h:10
-#: ../templates/jac-iso-templates.xml.h:2
+#: ../templates/igepa-templates.xml.h:1 ../templates/jac-iso-templates.xml.h:2
 #: ../templates/misc-us-templates.xml.h:8
 #: ../templates/misc-iso-templates.xml.h:10
+#: ../templates/misc-other-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:24
+#: ../templates/rayfilm-templates.xml.h:3
+#: ../templates/sheetlabels-us-templates.xml.h:4
 #: ../templates/worldlabel-us-templates.xml.h:2
 #: ../templates/zweckform-iso-templates.xml.h:12
 msgid "CD/DVD Labels"
@@ -2829,6 +2900,7 @@ msgstr "Cd-/dvd-etiketter"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:8
+#: ../templates/sheetlabels-us-templates.xml.h:6
 msgid "CD/DVD Labels (Disc Labels)"
 msgstr "Cd-/dvd-etiketter (disketteetiketter)"
 
@@ -2841,6 +2913,7 @@ msgstr "Cd/dvd-etiketter (rygetiketter)"
 #: ../templates/avery-us-templates.xml.h:12
 #: ../templates/avery-iso-templates.xml.h:16
 #: ../templates/meritline-us-templates.xml.h:4
+#: ../templates/sheetlabels-us-templates.xml.h:8
 #: ../templates/worldlabel-us-templates.xml.h:3
 msgid "Diskette Labels"
 msgstr "Disketteetiketter"
@@ -2861,6 +2934,7 @@ msgstr "Filmappeetiketter"
 # som måske også giver lidt mere mening.
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:18
+#: ../templates/sheetlabels-us-templates.xml.h:10
 #: ../templates/worldlabel-us-templates.xml.h:5
 msgid "Filing Labels"
 msgstr "Arkiveringsetiketter"
@@ -2902,6 +2976,7 @@ msgstr "Postkort"
 #: ../templates/avery-us-templates.xml.h:32
 #: ../templates/dymo-other-templates.xml.h:12
 #: ../templates/meritline-us-templates.xml.h:10
+#: ../templates/sheetlabels-us-templates.xml.h:12
 #: ../templates/worldlabel-us-templates.xml.h:8
 msgid "Return Address Labels"
 msgstr "Returadresseetiketter"
@@ -2912,6 +2987,7 @@ msgstr "Returadresseetiketter"
 #: ../templates/maco-us-templates.xml.h:3
 #: ../templates/meritline-us-templates.xml.h:12
 #: ../templates/misc-us-templates.xml.h:30
+#: ../templates/sheetlabels-us-templates.xml.h:14
 #: ../templates/worldlabel-us-templates.xml.h:9
 msgid "Round Labels"
 msgstr "Runde etiketter"
@@ -2921,6 +2997,7 @@ msgstr "Runde etiketter"
 #: ../templates/avery-us-templates.xml.h:36
 #: ../templates/dataline-iso-templates.xml.h:10
 #: ../templates/meritline-us-templates.xml.h:14
+#: ../templates/sheetlabels-us-templates.xml.h:16
 #: ../templates/uline-us-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Shipping Labels"
@@ -2946,6 +3023,7 @@ msgstr "Tent-kort"
 #: ../templates/avery-us-templates.xml.h:44
 #: ../templates/geha-iso-templates.xml.h:27
 #: ../templates/meritline-us-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:18
 #: ../templates/worldlabel-us-templates.xml.h:11
 msgid "Video Tape Face Labels"
 msgstr "Frontetiketter til videobånd"
@@ -3008,6 +3086,11 @@ msgstr "Minietiketter"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:32
+msgid "Self-Adhesive Name Badges (Acetate Silk)"
+msgstr "Selvklæbende navneskilte (silkeacetat)"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:34
 msgid "Shipping labels"
 msgstr "Forsendelsesetiketter"
 
@@ -3040,8 +3123,15 @@ msgstr "Forsendelsesetiketter 62mm x 100mm"
 msgid "Standard Address Labels 29mm x 90mm"
 msgstr "Standardadresseetiketter 29mm x 90mm"
 
+#: ../templates/brother-other-templates.xml.h:21
+msgid "Standard Address Labels 38mm x 90mm"
+msgstr "Standardadresseetiketter 38mm x 90mm"
+
+#. ===================================================================
+#. ============================================================
 #. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:6
+#: ../templates/desmat-templates.xml.h:2
 #: ../templates/misc-iso-templates.xml.h:8
 msgid "CD Labels"
 msgstr "Cd-etiketter"
@@ -3090,6 +3180,39 @@ msgstr "Store adresseetiketter"
 msgid "Shipping Address Labels"
 msgstr "Forsendelsesadresseetiketter"
 
+#: ../templates/endisch-templates.xml.h:2
+#: ../templates/rayfilm-templates.xml.h:5
+msgid "Labels A3"
+msgstr "Etiketter A3"
+
+#. *******************************************************************
+#. ===================================================================
+#: ../templates/endisch-templates.xml.h:3 ../templates/igepa-templates.xml.h:3
+#: ../templates/jac-iso-templates.xml.h:4
+#: ../templates/pearl-iso-templates.xml.h:36
+#: ../templates/rayfilm-templates.xml.h:6
+msgid "Labels A4"
+msgstr "Etiketter A4"
+
+#. ===================================================================
+#: ../templates/endisch-templates.xml.h:4
+#: ../templates/pearl-iso-templates.xml.h:38
+#: ../templates/rayfilm-templates.xml.h:7
+msgid "Labels A5"
+msgstr "Etiketter A5"
+
+#. ===================================================================
+#: ../templates/endisch-templates.xml.h:5
+#: ../templates/pearl-iso-templates.xml.h:40
+#: ../templates/rayfilm-templates.xml.h:8
+msgid "Labels A6"
+msgstr "Etiketter A6"
+
+#: ../templates/endisch-templates.xml.h:6
+#: ../templates/rayfilm-templates.xml.h:9
+msgid "Labels SRA3"
+msgstr "Etiketter SRA3"
+
 # i tvivl om der med arch her menes buet
 #. ===================================================================
 #. ====================================================================
@@ -3134,7 +3257,8 @@ msgstr "Lykønskningskort"
 
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:21
-#: ../templates/misc-other-templates.xml.h:2
+#: ../templates/misc-iso-templates.xml.h:28
+#: ../templates/misc-other-templates.xml.h:4
 msgid "Multi-Purpose Labels"
 msgstr "Etiketter til flere formål"
 
@@ -3243,12 +3367,21 @@ msgstr "Disketteetiketter (kun front)"
 msgid "Video Labels (face only)"
 msgstr "Videoetiketter (kun front)"
 
-#. *******************************************************************
+# msgstr "Floppydisketiketter"
+# Etiketter til disketter
+# eller 'til floppydisk' el. lign.
 #. ===================================================================
-#: ../templates/jac-iso-templates.xml.h:4
-#: ../templates/pearl-iso-templates.xml.h:36
-msgid "Labels A4"
-msgstr "Etiketter A4"
+#: ../templates/igepa-templates.xml.h:2
+#: ../templates/pearl-iso-templates.xml.h:30
+msgid "Floppy disk labels"
+msgstr "Etiketter til disketter"
+
+# ved ikke hvad det her er for en sag!!!
+#. ===================================================================
+#: ../templates/igepa-templates.xml.h:4
+#: ../templates/zweckform-iso-templates.xml.h:18
+msgid "Lever Arch File Labels"
+msgstr "Leverbuetfiletiketter"
 
 #. *******************************************************************
 #: ../templates/jac-iso-templates.xml.h:6
@@ -3259,6 +3392,11 @@ msgstr "PVC-etiketter"
 #: ../templates/meritline-us-templates.xml.h:8
 msgid "Mini-CD Labels"
 msgstr "Mini-cd-etiketter"
+
+#. ===================================================================
+#: ../templates/microapp-templates.xml.h:2
+msgid "Standard Labels"
+msgstr "Standardetiketter"
 
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:2
@@ -3318,7 +3456,7 @@ msgstr "PRO CD-etiketter 2-up (kun front)"
 #. ===================================================================
 #. TODO: Is this the actual part #?
 #: ../templates/misc-us-templates.xml.h:28
-#: ../templates/misc-iso-templates.xml.h:28
+#: ../templates/misc-iso-templates.xml.h:30
 msgid "PRO CD Labels 2-up (face only)"
 msgstr "PRO CD-etiketter 2-up (kun front)"
 
@@ -3363,13 +3501,13 @@ msgid "Inkjet/Laser Labels 70x37mm"
 msgstr "Inkjet-/laseretiketter 70x37mm"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:32
+#: ../templates/misc-iso-templates.xml.h:34
 #: ../templates/pearl-iso-templates.xml.h:62
 msgid "Self-adhesive labels"
 msgstr "Selvklæbende etiketter"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:34
+#: ../templates/misc-iso-templates.xml.h:36
 msgid "Universal Labels"
 msgstr "Universelle etiketter"
 
@@ -3403,14 +3541,6 @@ msgstr "Forretningskort, hullet, mat"
 msgid "Business cards punched glossy"
 msgstr "Forretningskort, hullet, blankt"
 
-# msgstr "Floppydisketiketter"
-# Etiketter til disketter
-# eller 'til floppydisk' el. lign.
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:30
-msgid "Floppy disk labels"
-msgstr "Etiketter til disketter"
-
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:32
 msgid "Foldable business cards"
@@ -3420,16 +3550,6 @@ msgstr "Foldbare forretningskort"
 #: ../templates/pearl-iso-templates.xml.h:34
 msgid "Foldable business cards glossy/dull"
 msgstr "Foldbare forretningskort, blanke/mat"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:38
-msgid "Labels A5"
-msgstr "Etiketter A5"
-
-#. ===================================================================
-#: ../templates/pearl-iso-templates.xml.h:40
-msgid "Labels A6"
-msgstr "Etiketter A6"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:44
@@ -3471,6 +3591,22 @@ msgstr "Selvklæbende vejrbestandig film"
 msgid "Self-adhesive window film"
 msgstr "Selvklæbende vinduesfilm"
 
+#: ../templates/rayfilm-templates.xml.h:2
+msgid "Business card CD Labels"
+msgstr "Etiketter til forretningskort-cd'er"
+
+#: ../templates/rayfilm-templates.xml.h:10
+msgid "Mini CD Labels"
+msgstr "Etiketter til mini-cd'er"
+
+#: ../templates/rayfilm-templates.xml.h:14
+msgid "Trapezoid labels"
+msgstr "Trapezetiketter"
+
+#: ../templates/rayfilm-templates.xml.h:15
+msgid "Triangular labels"
+msgstr "Trekantede etiketter"
+
 #. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:14
 msgid "Correction and Cover-up Labels"
@@ -3481,12 +3617,6 @@ msgstr "Rettelses- og overdækningsetiketter"
 #: ../templates/zweckform-iso-templates.xml.h:16
 msgid "File Back Labels"
 msgstr "Filrygetiketter"
-
-# ved ikke hvad det her er for en sag!!!
-#. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:18
-msgid "Lever Arch File Labels"
-msgstr "Leverbuetfiletiketter"
 
 #. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:22
@@ -3510,6 +3640,12 @@ msgstr "Rektangulær Copieretiketter"
 #: ../templates/zweckform-iso-templates.xml.h:30
 msgid "Video Labels (back)"
 msgstr "Video-etiketter (bagside)"
+
+#~ msgid "Align _Horizontal"
+#~ msgstr "Juster _vandret"
+
+#~ msgid "Align _Vertical"
+#~ msgstr "Juster _lodret"
 
 #~ msgid "Couldn't construct query"
 #~ msgstr "Kunne ikke konstruere forespørgsel"
@@ -3652,9 +3788,6 @@ msgstr "Video-etiketter (bagside)"
 
 #~ msgid "Bottoms"
 #~ msgstr "Nederste kanter"
-
-#~ msgid "Centers"
-#~ msgstr "Centrum"
 
 #~ msgid "Label Ce_nter"
 #~ msgstr "Etiketce_ntrum"
