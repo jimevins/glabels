@@ -11,7 +11,6 @@ DOC_FIGURES = \
 	figures/glabels-template-layout.png		\
 	figures/glabels-template-rect-label.png		\
 	figures/introduction-glabels-main-window.png	\
-	figures/main-window-empty.png			\
 	figures/merge-ex1-1.png				\
 	figures/merge-ex1-2.png				\
 	figures/merge-ex1-3.png				\
