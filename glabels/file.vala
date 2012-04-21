@@ -411,9 +411,9 @@ namespace glabels
 		}
 
 
-		public void print( Label label, Window window )
+		public void print( Model model, Window window )
 		{
-			PrintOpDialog op = new PrintOpDialog( label );
+			PrintOpDialog op = new PrintOpDialog( model );
 
 			op.run( Gtk.PrintOperationAction.PRINT_DIALOG, window );
 			/* TODO: save print settings? */
@@ -426,14 +426,14 @@ namespace glabels
 
 			if ( !window.is_empty() )
 			{
-				if ( window.view.label.modified )
+				if ( window.model.label.modified )
 				{
 					var md = new Gtk.MessageDialog( window,
 					                                Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
 					                                Gtk.MessageType.WARNING,
 					                                Gtk.ButtonsType.NONE,
 					                                _("Save changes to document \"%s\" before closing?"),
-					                                window.view.label.get_short_name() );
+					                                window.model.label.get_short_name() );
 					md.format_secondary_text( _("Your changes will be lost if you don't save them.") );
 
 					md.add_button( _("Close without saving"), Gtk.ResponseType.NO );
@@ -450,7 +450,7 @@ namespace glabels
 					switch (ret)
 					{
 					case Gtk.ResponseType.YES:
-						close_flag = save( window.view.label, window );
+						close_flag = save( window.model.label, window );
 						break;
 					case Gtk.ResponseType.NO:
 						close_flag = true;

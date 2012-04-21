@@ -27,12 +27,12 @@ namespace glabels
 
 	public class PrintOp : Gtk.PrintOperation
 	{
-		public Label     label       { get; private set; }
+		public Model     model       { get; private set; }
 
 
-		public PrintOp( Label label )
+		public PrintOp( Model model )
 		{
-			this.label = label;
+			this.model = model;
 
 			set_page_size();
 
@@ -43,7 +43,7 @@ namespace glabels
 
 		private void set_page_size()
 		{
-			Paper? paper = Db.lookup_paper_from_id( label.template.paper_id );
+			Paper? paper = Db.lookup_paper_from_id( model.label.template.paper_id );
 
 			Gtk.PaperSize psize;
 			if ( paper == null )
@@ -54,7 +54,7 @@ namespace glabels
 			else if ( Db.is_paper_id_other( paper.id ) )
 			{
 				psize = new Gtk.PaperSize.custom( paper.id, paper.name,
-				                                  label.template.page_width, label.template.page_height,
+				                                  model.label.template.page_width, model.label.template.page_height,
 				                                  Gtk.Unit.POINTS );
 			}
 			else
@@ -70,7 +70,7 @@ namespace glabels
 
 		private void on_begin_print( Gtk.PrintContext context )
 		{
-			set_n_pages( label.n_pages );
+			set_n_pages( model.print.n_pages );
 		}
 
 
@@ -78,9 +78,9 @@ namespace glabels
 		{
 			Cairo.Context cr = context.get_cairo_context();
 
-			if ( label.merge is MergeNone )
+			if ( model.label.merge is MergeNone )
 			{
-				label.print_simple_sheet( cr, i_page );
+				model.print.print_simple_sheet( cr, i_page );
 			}
 		}
 

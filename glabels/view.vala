@@ -134,22 +134,22 @@ namespace glabels
 		}
 
 
-		private Label? _label;
-		public Label? label
+		private Model? _model;
+		public Model? model
 		{
 			get
 			{
-				return _label;
+				return _model;
 			}
 
 			set
 			{
-				_label = value;
-				if ( _label != null )
+				_model = value;
+				if ( _model != null )
 				{
-					label.changed.connect( on_label_changed );
-					label.selection_changed.connect( on_label_changed );
-					label.size_changed.connect( on_label_size_changed );
+					model.label.changed.connect( on_label_changed );
+					model.label.selection_changed.connect( on_label_changed );
+					model.label.size_changed.connect( on_label_size_changed );
 
 					canvas.focus_in_event.connect( on_focus_in_event );
 					canvas.focus_out_event.connect( on_focus_out_event );
@@ -305,7 +305,7 @@ namespace glabels
 			int h_view = get_allocated_height();
 
 			double w_label, h_label;
-			label.get_size( out w_label, out h_label );
+			model.label.get_size( out w_label, out h_label );
 
 			/* Calculate best scale */
 			double x_scale = (double)( w_view - ZOOMTOFIT_PAD ) / w_label;
@@ -432,12 +432,12 @@ namespace glabels
 		private void draw_layers( Gdk.Window    window,
 		                          Cairo.Context cr )
 		{
-			if ( label != null )
+			if ( model != null )
 			{
 				this.scale = zoom * home_scale;
 
 				double w, h;
-				label.get_size( out w, out h );
+				model.label.get_size( out w, out h );
 
 				canvas.set_size( (int)(w*scale + 8), (int)(h*scale + 8) );
 
@@ -470,7 +470,7 @@ namespace glabels
 		{
 			cr.save();
 
-			if (label.rotate)
+			if ( model.label.rotate )
 			{
 				double w, h;
 				frame.get_size( out w, out h );
@@ -487,7 +487,7 @@ namespace glabels
 
 		private void draw_bg_layer( Cairo.Context cr )
 		{
-			TemplateFrame frame = label.template.frames.first().data;
+			TemplateFrame frame = model.label.template.frames.first().data;
 
 			double w, h;
 			frame.get_size( out w, out h );
@@ -514,10 +514,10 @@ namespace glabels
 		{
 			if ( grid_visible )
 			{
-				TemplateFrame frame = label.template.frames.first().data;
+				TemplateFrame frame = model.label.template.frames.first().data;
 
 				double w, h;
-				label.get_size( out w, out h );
+				model.label.get_size( out w, out h );
         
 				double x0, y0;
 				if ( frame is TemplateFrameRect )
@@ -564,11 +564,11 @@ namespace glabels
 		{
 			if ( markup_visible )
 			{
-				TemplateFrame frame = label.template.frames.first().data;
+				TemplateFrame frame = model.label.template.frames.first().data;
 
 				cr.save();
 
-				if (label.rotate)
+				if ( model.label.rotate )
 				{
 					double w, h;
 					frame.get_size( out w, out h );
@@ -594,13 +594,13 @@ namespace glabels
 
 		private void draw_objects_layer( Cairo.Context cr )
 		{
-			label.draw( cr, true, null );
+			model.label.draw( cr, true, null );
 		}
 
 
 		private void draw_fg_layer( Cairo.Context cr )
 		{
-			TemplateFrame frame = label.template.frames.first().data;
+			TemplateFrame frame = model.label.template.frames.first().data;
 
 			set_frame_path( cr, frame );
 
@@ -615,7 +615,7 @@ namespace glabels
 			cr.save();
 			cr.set_antialias( Cairo.Antialias.NONE );
 
-			foreach ( LabelObject object in label.object_list )
+			foreach ( LabelObject object in model.label.object_list )
 			{
 				if ( object.is_selected() )
 				{
@@ -782,12 +782,12 @@ namespace glabels
 				case State.IDLE:
 					Gdk.Cursor cursor;
 					Handle? handle;
-					if ( label.is_selection_atomic() &&
-					     (handle = label.handle_at( cr, event.x, event.y )) != null )
+					if ( model.label.is_selection_atomic() &&
+					     (handle = model.label.handle_at( cr, event.x, event.y )) != null )
 					{
 					     cursor = new Gdk.Cursor( Gdk.CursorType.CROSSHAIR );
 					}
-					else if ( label.object_at( cr, event.x, event.y) != null )
+					else if ( model.label.object_at( cr, event.x, event.y) != null )
 					{
 						cursor = new Gdk.Cursor( Gdk.CursorType.FLEUR );
 					}
@@ -805,7 +805,7 @@ namespace glabels
 					break;
 
 				case State.ARROW_MOVE:
-					label.move_selection( (x - move_last_x), (y - move_last_y) );
+					model.label.move_selection( (x - move_last_x), (y - move_last_y) );
 					move_last_x = x;
 					move_last_y = y;
 					break;
@@ -892,8 +892,8 @@ namespace glabels
 				{
 					LabelObject object;
 					Handle? handle = null;
-					if ( label.is_selection_atomic() &&
-					     (handle = label.handle_at( cr, event.x, event.y )) != null )
+					if ( model.label.is_selection_atomic() &&
+					     (handle = model.label.handle_at( cr, event.x, event.y )) != null )
 					{
 						resize_object = handle.owner;
 						resize_handle = handle;
@@ -901,19 +901,19 @@ namespace glabels
 
 						state = State.ARROW_RESIZE;
 					}
-					else if ( (object = label.object_at( cr, event.x, event.y)) != null )
+					else if ( (object = model.label.object_at( cr, event.x, event.y)) != null )
 					{
 						if ( (event.state & Gdk.ModifierType.CONTROL_MASK) != 0 )
 						{
 							if ( object.is_selected() )
 							{
 								/* Un-selecting a selected item */
-								label.unselect_object( object );
+								model.label.unselect_object( object );
 							}
 							else
 							{
 								/* Add to current selection */
-								label.select_object( object );
+								model.label.select_object( object );
 							}
 						}
 						else
@@ -921,9 +921,9 @@ namespace glabels
 							if ( !object.is_selected() )
 							{
 								/* remove any selections before adding */
-								label.unselect_all();
+								model.label.unselect_all();
 								/* Add to current selection */
-								label.select_object( object );
+								model.label.select_object( object );
 							}
 						}
 
@@ -936,7 +936,7 @@ namespace glabels
 					{
 						if ( (event.state & Gdk.ModifierType.CONTROL_MASK) == 0 )
 						{
-							label.unselect_all();
+							model.label.unselect_all();
 						}
 
 						select_region_visible = true;
@@ -955,8 +955,6 @@ namespace glabels
 
 					if ( state == State.IDLE )
 					{
-						LabelObject object;
-
 						switch ( create_object_type )
 						{
 						case CreateType.BOX:
@@ -984,7 +982,7 @@ namespace glabels
 
 						create_object.set_position( x, y );
 						create_object.set_size( 0, 0 );
-						label.add_object( create_object );
+						model.label.add_object( create_object );
 
 						create_x0 = x;
 						create_y0 = y;
@@ -1057,7 +1055,7 @@ namespace glabels
 						select_region_visible = false;
 						select_region.x2 = x;
 						select_region.y2 = y;
-						label.select_region( select_region );
+						model.label.select_region( select_region );
 						update();
 						state = State.IDLE;
 						break;
@@ -1076,8 +1074,8 @@ namespace glabels
 					Gdk.Cursor cursor = new Gdk.Cursor( Gdk.CursorType.LEFT_PTR );
 					window.set_cursor( cursor );
 
-					label.unselect_all();
-					label.select_object( create_object );
+					model.label.unselect_all();
+					model.label.select_object( create_object );
 
 					in_object_create_mode = false;
 					state = State.IDLE;
@@ -1103,27 +1101,27 @@ namespace glabels
 
 				case Gdk.Key.Left:
 				case Gdk.Key.KP_Left:
-					label.move_selection( (-1 / zoom), 0 );
+					model.label.move_selection( (-1 / zoom), 0 );
 					break;
 
 				case Gdk.Key.Up:
 				case Gdk.Key.KP_Up:
-					label.move_selection( 0, (-1 / zoom) );
+					model.label.move_selection( 0, (-1 / zoom) );
 					break;
 
 				case Gdk.Key.Right:
 				case Gdk.Key.KP_Right:
-					label.move_selection( (1 / zoom), 0 );
+					model.label.move_selection( (1 / zoom), 0 );
 					break;
 
 				case Gdk.Key.Down:
 				case Gdk.Key.KP_Down:
-					label.move_selection( 0, (1 / zoom) );
+					model.label.move_selection( 0, (1 / zoom) );
 					break;
 
 				case Gdk.Key.Delete:
 				case Gdk.Key.KP_Delete:
-					label.delete_selection();
+					model.label.delete_selection();
 					Gdk.Window window = canvas.get_window();
 					Gdk.Cursor cursor = new Gdk.Cursor( Gdk.CursorType.LEFT_PTR );
 					window.set_cursor( cursor );

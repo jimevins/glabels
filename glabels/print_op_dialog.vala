@@ -28,9 +28,9 @@ namespace glabels
 	public class PrintOpDialog : PrintOp
 	{
 
-		public PrintOpDialog( Label label )
+		public PrintOpDialog( Model model )
 		{
-			base( label );
+			base( model );
 		}
 
 

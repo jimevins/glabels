@@ -39,6 +39,7 @@ namespace glabels
 
 		private Gtk.HBox       content_hbox;
 
+		public  Model?         model { get; private set; }
 		public  View?          view { get; private set; }
 
 		public  Gtk.Statusbar  statusbar { get; private set; }
@@ -155,18 +156,20 @@ namespace glabels
 
 		public bool is_empty()
 		{
-			return view.label == null;
+			return model == null;
 		}
 
 
 		public void set_label( Label label )
 		{
+			model = new Model( label );
+
 			label.modified = false;
 			set_window_title( label );
 
-			property_editor.set_label( label );
-			view.label = label;
-			object_editor.set_label( label );
+			property_editor.set_model( model );
+			view.model = model;
+			object_editor.set_model( model );
 
 			view.zoom_to_fit();
 
@@ -218,13 +221,13 @@ namespace glabels
 
 		private void on_selection_changed()
 		{
-			ui.update_selection_verbs( view, true );
+			ui.update_selection_verbs( model, true );
 		}
 
 
 		private void on_context_menu_activate( uint button, uint activate_time )
 		{
-			if ( view.label.is_selection_empty() )
+			if ( model.label.is_selection_empty() )
 			{
 				empty_selection_context_menu.popup( null, null, null, button, activate_time );
 			}
@@ -262,14 +265,14 @@ namespace glabels
 
 		private void on_name_changed()
 		{
-			set_window_title( view.label );
+			set_window_title( model.label );
 		}
 
 
 		private void on_modified_changed()
 		{
-			set_window_title( view.label );
-			ui.update_modified_verbs( view.label );
+			set_window_title( model.label );
+			ui.update_modified_verbs( model );
 		}
 
 

@@ -30,7 +30,7 @@ namespace glabels
 		private Prefs           prefs;
 		private Units           units;
 
-		private Label           label;
+		private Model           model;
 		private LabelObject?    object;
 
 
@@ -184,17 +184,17 @@ namespace glabels
 		}
 
 
-		public void set_label( Label label )
+		public void set_model( Model model )
 		{
-			this.label = label;
+			this.model = model;
 
 			on_label_size_changed();
 			on_merge_changed();
 			on_selection_changed();
 
-			label.size_changed.connect( on_label_size_changed );
-			label.merge_changed.connect( on_merge_changed );
-			label.selection_changed.connect( on_selection_changed );
+			model.label.size_changed.connect( on_label_size_changed );
+			model.label.merge_changed.connect( on_merge_changed );
+			model.label.selection_changed.connect( on_selection_changed );
 		}
 
 
@@ -244,9 +244,9 @@ namespace glabels
 				object.changed.disconnect( on_object_changed );
 			}
 
-			if ( label.is_selection_atomic() )
+			if ( model.label.is_selection_atomic() )
 			{
-				object = label.get_1st_selected_object();
+				object = model.label.get_1st_selected_object();
 
 				if ( object is LabelObjectBox  )
 				{
@@ -304,11 +304,11 @@ namespace glabels
 
 		private void on_label_size_changed()
 		{
-			if ( label != null )
+			if ( model != null )
 			{
 				double w_max, h_max;
 
-				label.get_size( out w_max, out h_max );
+				model.label.get_size( out w_max, out h_max );
 
 				double wh_max = double.max( w_max*units.units_per_point, h_max*units.units_per_point );
 
@@ -324,7 +324,7 @@ namespace glabels
 
 		private void on_merge_changed()
 		{
-			if ( label.merge is MergeNone )
+			if ( model.label.merge is MergeNone )
 			{
 				line_color_button.clear_keys();
 				fill_color_button.clear_keys();
@@ -332,7 +332,7 @@ namespace glabels
 			}
 			else
 			{
-				List<string> key_list = label.merge.get_key_list();
+				List<string> key_list = model.label.merge.get_key_list();
 				line_color_button.set_keys( key_list );
 				fill_color_button.set_keys( key_list );
 				shadow_color_button.set_keys( key_list );

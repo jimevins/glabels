@@ -55,33 +55,6 @@ namespace glabels
 		// TODO: SVG cache
 
 
-		/* Clipboard storage. */
-		private string?     clipboard_xml_buffer;
-		private string?     clipboard_text;
-		private Gdk.Pixbuf? clipboard_pixbuf;
-
-
-		/* Undo/Redo state */
-		private Queue<LabelState?> undo_stack;
-		private Queue<LabelState?> redo_stack;
-		private bool               cp_cleared_flag;
-		private string             cp_desc;
-
-
-		/* Print Model */
-		private const double OUTLINE_WIDTH =  0.25;
-		private const double TICK_OFFSET   =  2.25;
-		private const double TICK_LENGTH   = 18.0;
-
-		public Label label           { get; private set; }
-
-		public bool  outline_flag    { get; set; }
-		public bool  reverse_flag    { get; set; }
-		public bool  crop_marks_flag { get; set; }
-
-		public int   n_pages         { get; set; default = 1; }
-
-
 		/**
 		 * Filename
 		 */
@@ -236,9 +209,6 @@ namespace glabels
 			_merge = new MergeNone();
 
 			template_history = new TemplateHistory( 5 );
-
-			undo_stack = new Queue<LabelState?>();
-			redo_stack = new Queue<LabelState?>();
 
 			// TODO: Set default properties from user prefs
 		}
@@ -400,7 +370,6 @@ namespace glabels
 		public void select_object( LabelObject object )
 		{
 			object.select();
-			cp_cleared_flag = true;
 			selection_changed();
 		}
 
@@ -408,7 +377,6 @@ namespace glabels
 		public void unselect_object( LabelObject object )
 		{
 			object.unselect();
-			cp_cleared_flag = true;
 			selection_changed();
 		}
 
@@ -419,7 +387,6 @@ namespace glabels
 			{
 				object.select();
 			}
-			cp_cleared_flag = true;
 			selection_changed();
 		}
 
@@ -430,7 +397,6 @@ namespace glabels
 			{
 				object.unselect();
 			}
-			cp_cleared_flag = true;
 			selection_changed();
 		}
 
@@ -454,7 +420,6 @@ namespace glabels
 					object.select();
 				}
 			}
-			cp_cleared_flag = true;
 			selection_changed();
 		}
 
@@ -646,12 +611,12 @@ namespace glabels
 				object_list.remove( object );
 			}
 
-			/* Move to end of list, representing front most object */
-			foreach ( LabelObject object in object_list )
+			/* Move to front of list, representing rear most object */
+			selection_list.reverse();
+			foreach ( LabelObject object in selection_list )
 			{
-				selection_list.append( object );
+				object_list.prepend( object );
 			}
-			object_list = selection_list;
 
 			changed();
 			modified = true;
@@ -1186,478 +1151,6 @@ namespace glabels
 			}
 
 			end_selection_op();
-		}
-
-
-		public void cut_selection()
-		{
-			copy_selection();
-			delete_selection();
-		}
-
-
-		public void copy_selection()
-		{
-			const Gtk.TargetEntry glabels_targets[] = {
-				{ "application/glabels", 0, 0 },
-				{ "text/xml",            0, 0 }
-			};
-
-			Gtk.Clipboard clipboard = Gtk.Clipboard.get( Gdk.SELECTION_CLIPBOARD );
-
-			List<LabelObject> selection_list = get_selection_list();
-
-			if ( selection_list != null )
-			{
-
-				Gtk.TargetList target_list = new Gtk.TargetList( glabels_targets );
-
-				/*
-				 * Serialize selection by encoding as an XML label document.
-				 */
-				Label label_copy = new Label();
-
-				label_copy.template = template;
-				label_copy.rotate = rotate;
-
-				foreach ( LabelObject object in object_list )
-				{
-					label_copy.add_object( object );
-				}
-
-				// TODO: set clipboard_xml_buffer from label_copy
-
-				/*
-				 * Is it an atomic text selection?  If so, also make available as text.
-				 */
-				if ( is_selection_atomic() /* && TODO: first object is LabelObjectText */ )
-				{
-					target_list.add_text_targets( 1 );
-					// TODO: set clipboard_text from LabelObjectText get_text()
-				}
-
-				/*
-				 * Is it an atomic image selection?  If so, also make available as pixbuf.
-				 */
-				if ( is_selection_atomic() /* && TODO: first object is LabelObjectImage */ )
-				{
-					// TODO: pixbuf = LabelObjectImage get_pixbuf
-					// TODO: if ( pixbuf != null )
-					{
-						target_list.add_image_targets( 2, true );
-						// TODO: set clipboard_pixbuf = pixbuf
-					}
-				}
-
-				Gtk.TargetEntry[] target_table = Gtk.target_table_new_from_list( target_list );
-
-				clipboard.set_with_owner( target_table,
-				                          (Gtk.ClipboardGetFunc)clipboard_get_cb,
-				                          (Gtk.ClipboardClearFunc)clipboard_clear_cb, this );
-
-			}
-
-		}
-
-
-		public void paste()
-		{
-			Gtk.Clipboard clipboard = Gtk.Clipboard.get( Gdk.SELECTION_CLIPBOARD );
-
-			clipboard.request_targets( clipboard_receive_targets_cb );
-		}
-
-
-		public bool can_paste()
-		{
-			Gtk.Clipboard clipboard = Gtk.Clipboard.get( Gdk.SELECTION_CLIPBOARD );
-
-			return ( clipboard.wait_is_target_available( Gdk.Atom.intern("application/glabels", true) ) ||
-			         clipboard.wait_is_text_available()                                                 ||
-			         clipboard.wait_is_image_available() );
-		}
-
-
-		private void clipboard_get_cb( Gtk.Clipboard     clipboard,
-		                               Gtk.SelectionData selection_data,
-		                               uint              info,
-		                               void*             user_data )
-		{
-			switch (info)
-			{
-			case 0:
-				selection_data.set( selection_data.get_target(),
-				                    8,
-				                    (uchar[])clipboard_xml_buffer );
-				break;
-
-			case 1:
-				selection_data.set_text( clipboard_text, -1 );
-				break;
-
-			case 2:
-				selection_data.set_pixbuf( clipboard_pixbuf );
-				break;
-
-			default:
-				assert_not_reached();
-
-			}
-		}
-
-
-		private void clipboard_clear_cb( Gtk.Clipboard clipboard,
-		                                 void*         user_data )
-		{
-			clipboard_xml_buffer = null;
-			clipboard_text       = null;
-			clipboard_pixbuf     = null;
-		}
-
-
-		private void clipboard_receive_targets_cb( Gtk.Clipboard clipboard,
-		                                           Gdk.Atom[]    targets )
-		{
-
-			/*
-			 * Application/glabels
-			 */
-			for ( int i = 0; i < targets.length; i++ )
-			{
-				if ( targets[i].name() == "application/glabels" )
-				{
-					clipboard.request_contents( targets[i], paste_xml_received_cb );
-					return;
-				}
-			}
-
-			/*
-			 * Text
-			 */
-			if ( Gtk.targets_include_text( targets ) )
-			{
-				clipboard.request_text( paste_text_received_cb );
-				return;
-			}
-
-			/*
-			 * Image
-			 */
-			if ( Gtk.targets_include_image( targets, true ) )
-			{
-				clipboard.request_image( paste_image_received_cb );
-				return;
-			}
-
-		}
-
-
-		private void paste_xml_received_cb( Gtk.Clipboard     clipboard,
-		                                    Gtk.SelectionData selection_data )
-		{
-			string xml_buffer = (string)selection_data.get_data();
-
-			/*
-			 * Deserialize XML label document and extract objects.
-			 */
-			// TODO:  label_copy = xml_label_open_buffer( xml_buffer )
-			// unselect all
-			// foreach object in label copy, add to this, select each object as added.
-
-		}
-
-
-		private void paste_text_received_cb( Gtk.Clipboard     clipboard,
-		                                     string?           text )
-		{
-			unselect_all();
-			// TODO:  create new LabelObjectText object from text.  set to a default location, select.
-		}
-
-
-		private void paste_image_received_cb( Gtk.Clipboard     clipboard,
-		                                      Gdk.Pixbuf        pixbuf )
-		{
-			unselect_all();
-			// TODO:  create new LabelObjectImage object from pixbuf.  set to a default location, select.
-		}
-
-
-		public void checkpoint( string description )
-		{
-			/*
-			 * Do not perform consecutive checkpoints that are identical.
-			 * E.g. moving an object by dragging, would produce a large number
-			 * of incremental checkpoints -- what we really want is a single
-			 * checkpoint so that we can undo the entire dragging effort with
-			 * one "undo"
-			 */
-			if ( cp_cleared_flag || (cp_desc == null) || ( description != cp_desc) )
-			{
-
-				/* Sever old redo "thread" */
-				stack_clear(redo_stack);
-
-				/* Save state onto undo stack. */
-				LabelState state = new LabelState( description, this );
-				undo_stack.push_head( state );
-
-				/* Track consecutive checkpoints. */
-				cp_cleared_flag = false;
-				cp_desc         = description;
-			}
-
-		}
-
-
-		public void undo()
-		{
-			LabelState state_old = undo_stack.pop_head();
-			LabelState state_now = new LabelState( state_old.description, this );
-
-			redo_stack.push_head( state_now );
-
-			state_old.restore( this );
-
-			cp_cleared_flag = true;
-
-			selection_changed();
-		}
-
-
-		public void redo()
-		{
-			LabelState state_old = redo_stack.pop_head();
-			LabelState state_now = new LabelState( state_old.description, this );
-
-			undo_stack.push_head( state_now );
-
-			state_old.restore( this );
-
-			cp_cleared_flag = true;
-
-			selection_changed();
-		}
-
-
-		public bool can_undo()
-		{
-			return ( !undo_stack.is_empty() );
-		}
-
-
-		public bool can_redo()
-		{
-			return ( !redo_stack.is_empty() );
-		}
-
-
-		public string get_undo_description()
-		{
-			LabelState state = undo_stack.peek_head();
-			if ( state != null )
-			{
-				return state.description;
-			}
-			else
-			{
-				return "";
-			}
-		}
-
-
-		public string get_redo_description()
-		{
-			LabelState state = redo_stack.peek_head();
-			if ( state != null )
-			{
-				return state.description;
-			}
-			else
-			{
-				return "";
-			}
-		}
-
-
-		private void stack_clear( Queue<LabelState> stack )
-		{
-			while ( stack.pop_head() != null ) {}
-		}
-
-
-		/*
-		 * Print Model
-		 */
-		public void print_simple_sheet( Cairo.Context cr, int i_page )
-		{
-			if ( crop_marks_flag )
-			{
-				print_crop_marks( cr );
-			}
-
-			TemplateFrame frame = template.frames.first().data;
-			Gee.ArrayList<TemplateCoord?> origins = frame.get_origins();
-
-			foreach ( TemplateCoord origin in origins )
-			{
-				print_label( cr, origin.x, origin.y, null );
-			}
-		}
-
-
-		private void print_crop_marks( Cairo.Context cr )
-		{
-			TemplateFrame frame = template.frames.first().data;
-
-			double w, h;
-			frame.get_size( out w, out h );
-
-			cr.save();
-
-			cr.set_source_rgb( 0, 0, 0 );
-			cr.set_line_width( OUTLINE_WIDTH );
-
-			foreach ( TemplateLayout layout in frame.layouts )
-			{
-
-				double xmin = layout.x0;
-				double ymin = layout.y0;
-				double xmax = layout.x0 + layout.dx*(layout.nx - 1) + w;
-				double ymax = layout.y0 + layout.dy*(layout.ny - 1) + h;
-
-				for ( int ix=0; ix < layout.nx; ix++ )
-				{
-					double x1 = xmin + ix*layout.dx;
-					double x2 = x1 + w;
-
-					double y1 = double.max((ymin - TICK_OFFSET), 0.0);
-					double y2 = double.max((y1 - TICK_LENGTH), 0.0);
-
-					double y3 = double.min((ymax + TICK_OFFSET), template.page_height);
-					double y4 = double.min((y3 + TICK_LENGTH), template.page_height);
-
-					cr.move_to( x1, y1 );
-					cr.line_to( x1, y2 );
-					cr.stroke();
-
-					cr.move_to( x2, y1 );
-					cr.line_to( x2, y2 );
-					cr.stroke();
-
-					cr.move_to( x1, y3 );
-					cr.line_to( x1, y4 );
-					cr.stroke();
-
-					cr.move_to( x2, y3 );
-					cr.line_to( x2, y4 );
-					cr.stroke();
-				}
-
-				for (int iy=0; iy < layout.ny; iy++ )
-				{
-					double y1 = ymin + iy*layout.dy;
-					double y2 = y1 + h;
-
-					double x1 = double.max((xmin - TICK_OFFSET), 0.0);
-					double x2 = double.max((x1 - TICK_LENGTH), 0.0);
-
-					double x3 = double.min((xmax + TICK_OFFSET), template.page_width);
-					double x4 = double.min((x3 + TICK_LENGTH), template.page_width);
-
-					cr.move_to( x1, y1 );
-					cr.line_to( x2, y1 );
-					cr.stroke();
-
-					cr.move_to( x1, y2 );
-					cr.line_to( x2, y2 );
-					cr.stroke();
-
-					cr.move_to( x3, y1 );
-					cr.line_to( x4, y1 );
-					cr.stroke();
-
-					cr.move_to( x3, y2 );
-					cr.line_to( x4, y2 );
-					cr.stroke();
-				}
-
-			}
-
-			cr.restore();
-		}
-
-
-		private void print_label( Cairo.Context cr,
-		                          double        x,
-		                          double        y,
-		                          MergeRecord?  record )
-		{
-			double w, h;
-			get_size( out w, out h );
-
-			cr.save();
-
-			/* Transform coordinate system to be relative to upper corner */
-			/* of the current label */
-			cr.translate( x, y );
-
-			cr.save();
-
-			clip_to_outline( cr );
-
-			cr.save();
-
-			/* Special transformations. */
-			if ( rotate )
-			{
-				cr.rotate( Math.PI/2 );
-				cr.translate( 0, -h );
-			}
-			if ( reverse_flag )
-			{
-				cr.translate( w, 0 );
-				cr.scale( -1, 1 );
-			}
-
-			draw( cr, false, record );
-
-			cr.restore(); /* From special transformations. */
-
-			cr.restore(); /* From clip to outline. */
-
-			if ( outline_flag )
-			{
-				draw_outline( cr );
-			}
-
-			cr.restore(); /* From translation. */
-		}
-
-
-		private void draw_outline( Cairo.Context cr )
-		{
-			cr.save();
-
-			cr.set_source_rgb( 0, 0, 0 );
-			cr.set_line_width( OUTLINE_WIDTH );
-
-			TemplateFrame frame = template.frames.first().data;
-			frame.cairo_path( cr, false );
-
-			cr.stroke();
-
-			cr.restore();
-		}
-
-
-		private void clip_to_outline( Cairo.Context cr )
-		{
-			TemplateFrame frame = template.frames.first().data;
-			frame.cairo_path( cr, true );
-
-			cr.set_fill_rule( Cairo.FillRule.EVEN_ODD );
-			cr.clip();
 		}
 
 

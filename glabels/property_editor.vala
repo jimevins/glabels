@@ -27,7 +27,7 @@ namespace glabels
 
 	class PropertyEditor : Gtk.Box
 	{
-		private Label           label;
+		private Model           model;
 
 		private Gtk.Notebook    property_editor_notebook;
 
@@ -67,12 +67,12 @@ namespace glabels
 		}
 
 
-		public void set_label( Label label )
+		public void set_model( Model model )
 		{
-			this.label = label;
+			this.model = model;
 
 			property_editor_notebook.set_sensitive( true );
-			layout_preview.set_label( label );
+			layout_preview.set_model( model );
 		}
 
 

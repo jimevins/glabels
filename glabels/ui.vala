@@ -33,7 +33,6 @@ namespace glabels
 
 			/* Menu entries. */
 			{ "FileMenu",                null, N_("_File") },
-			{ "FileRecentsMenu",         null, N_("Open Recent _Files") },
 			{ "EditMenu",                null, N_("_Edit") },
 			{ "ViewMenu",                null, N_("_View") },
 			{ "ViewMainToolBarMenu",     null, N_("Customize Main Toolbar") },
@@ -437,7 +436,6 @@ namespace glabels
 					<menu action='FileMenu'>
 						<menuitem action='FileNew' />
 						<menuitem action='FileOpen' />
-						<menuitem action='FileRecentsMenu' />
 						<separator />
 						<menuitem action='FileSave' />
 						<menuitem action='FileSaveAs' />
@@ -709,8 +707,6 @@ namespace glabels
 			/* Set view grid and markup visibility according to prefs */
 			set_view_style();
 		
-			/* TODO: add an Open Recents Submenu */
-
 			set_verb_list_sensitive( doc_verbs, false );
 			set_verb_list_sensitive( paste_verbs, false );
 		}
@@ -718,46 +714,45 @@ namespace glabels
 
 		public void update_all( View view )
 		{
-			Label label = view.label;
+			Model model = view.model;
 
 			set_verb_list_sensitive( doc_verbs, true );
 
-			set_verb_sensitive( "/ui/MenuBar/EditMenu/EditUndo", label.can_undo() );
-			set_verb_sensitive( "/ui/MenuBar/EditMenu/EditRedo", label.can_redo() );
+			set_verb_sensitive( "/ui/MenuBar/EditMenu/EditUndo", model.undo_redo.can_undo() );
+			set_verb_sensitive( "/ui/MenuBar/EditMenu/EditRedo", model.undo_redo.can_redo() );
 
-			set_verb_list_sensitive( doc_modified_verbs, label.modified );
+			set_verb_list_sensitive( doc_modified_verbs, model.label.modified );
 
 			set_verb_sensitive( "/ui/MenuBar/ViewMenu/ViewZoomIn", !view.is_zoom_max() );
 			set_verb_sensitive( "/ui/MenuBar/ViewMenu/ViewZoomOut", !view.is_zoom_min() );
 
-			set_verb_list_sensitive( selection_verbs, !label.is_selection_empty() );
+			set_verb_list_sensitive( selection_verbs, !model.label.is_selection_empty() );
 
-			set_verb_list_sensitive( atomic_selection_verbs, label.is_selection_atomic() );
+			set_verb_list_sensitive( atomic_selection_verbs, model.label.is_selection_atomic() );
 
 			set_verb_list_sensitive( multi_selection_verbs,
-			                         !label.is_selection_empty() && !label.is_selection_atomic() );
+			                         !model.label.is_selection_empty() && !model.label.is_selection_atomic() );
 		}
 
 
-		public void update_modified_verbs( Label label )
+		public void update_modified_verbs( Model model )
 		{
-			set_verb_list_sensitive( doc_modified_verbs, label.modified );
+			set_verb_list_sensitive( doc_modified_verbs, model.label.modified );
 		}
 
 
-		public void update_selection_verbs( View view,
-		                                    bool has_focus )
+		public void update_selection_verbs( Model model, bool view_has_focus )
 		{
-			if ( has_focus )
+			if ( view_has_focus )
 			{
-				set_verb_list_sensitive( selection_verbs, !view.label.is_selection_empty() );
+				set_verb_list_sensitive( selection_verbs, !model.label.is_selection_empty() );
 
 				set_verb_list_sensitive( atomic_selection_verbs,
-				                         view.label.is_selection_atomic() );
+				                         model.label.is_selection_atomic() );
 
 				set_verb_list_sensitive( multi_selection_verbs,
-				                         !view.label.is_selection_empty() &&
-				                         !view.label.is_selection_atomic() );
+				                         !model.label.is_selection_empty() &&
+				                         !model.label.is_selection_atomic() );
 			}
 			else
 			{
@@ -781,24 +776,24 @@ namespace glabels
 		}
 
 
-		public void update_undo_redo_verbs( Label label )
+		public void update_undo_redo_verbs( Model model )
 		{
 			Gtk.MenuItem  menu_item;
 			string        description;
 			string        menu_label;
 
 			menu_item = (Gtk.MenuItem)get_widget( "/MenuBar/EditMenu/EditUndo" );
-			description = label.get_undo_description();
+			description = model.undo_redo.get_undo_description();
 			menu_label = "%s: %s".printf( _("Undo"), description );
 			menu_item.set_label( menu_label );
 
 			menu_item = (Gtk.MenuItem)get_widget( "/MenuBar/EditMenu/EditRedo" );
-			description = label.get_redo_description();
+			description = model.undo_redo.get_redo_description();
 			menu_label = "%s: %s".printf( _("Redo"), description );
 			menu_item.set_label( menu_label );
 
-			set_verb_sensitive( "/ui/MenuBar/EditMenu/EditUndo", label.can_undo() );
-			set_verb_sensitive( "/ui/MenuBar/EditMenu/EditRedo", label.can_redo() );
+			set_verb_sensitive( "/ui/MenuBar/EditMenu/EditUndo", model.undo_redo.can_undo() );
+			set_verb_sensitive( "/ui/MenuBar/EditMenu/EditRedo", model.undo_redo.can_redo() );
 		}
 
 
@@ -959,41 +954,21 @@ namespace glabels
 		}
 
 
-		private void on_file_open_recent (Gtk.RecentChooser chooser )
-		{
-			/*
-			GtkRecentInfo *item;
-			gchar         *utf8_filename;
-
-			item = gtk_recent_chooser_get_current_item (chooser);
-			if (!item)
-				return;
-
-			utf8_filename = gl_recent_get_utf8_filename (item);
-
-			gl_debug (DEBUG_COMMANDS, "Selected %s\n", utf8_filename);
-			gl_file_open_recent (utf8_filename, window );
-
-			gtk_recent_info_unref (item);
-			*/
-		}
-
-
 		private void on_file_save( Gtk.Action action )
 		{
-			File.save( window.view.label, window );
+			File.save( window.model.label, window );
 		}
 
 
 		private void on_file_save_as( Gtk.Action action )
 		{
-			File.save_as( window.view.label, window );
+			File.save_as( window.model.label, window );
 		}
 
 
 		private void on_file_print( Gtk.Action action )
 		{
-			File.print( window.view.label, window );
+			File.print( window.model, window );
 		}
 
 
@@ -1047,13 +1022,13 @@ namespace glabels
 
 		private void on_edit_select_all( Gtk.Action action )
 		{
-			window.view.label.select_all();
+			window.model.label.select_all();
 		}
 
 
 		private void on_edit_unselect_all( Gtk.Action action )
 		{
-			window.view.label.unselect_all();
+			window.model.label.unselect_all();
 		}
 
 
@@ -1238,85 +1213,85 @@ namespace glabels
 
 		private void on_objects_raise( Gtk.Action action )
 		{
-			window.view.label.raise_selection_to_top();
+			window.model.label.raise_selection_to_top();
 		}
 
 
 		private void on_objects_lower( Gtk.Action action )
 		{
-			window.view.label.lower_selection_to_bottom();
+			window.model.label.lower_selection_to_bottom();
 		}
 
 
 		private void on_objects_rotate_left( Gtk.Action action )
 		{
-			window.view.label.rotate_selection_left();
+			window.model.label.rotate_selection_left();
 		}
 
 
 		private void on_objects_rotate_right( Gtk.Action action )
 		{
-			window.view.label.rotate_selection_right();
+			window.model.label.rotate_selection_right();
 		}
 
 
 		private void on_objects_flip_horiz( Gtk.Action action )
 		{
-			window.view.label.flip_selection_horiz();
+			window.model.label.flip_selection_horiz();
 		}
 
 
 		private void on_objects_flip_vert( Gtk.Action action )
 		{
-			window.view.label.flip_selection_vert();
+			window.model.label.flip_selection_vert();
 		}
 
 
 		private void on_objects_align_left( Gtk.Action action )
 		{
-			window.view.label.align_selection_left();
+			window.model.label.align_selection_left();
 		}
 
 
 		private void on_objects_align_right( Gtk.Action action )
 		{
-			window.view.label.align_selection_right();
+			window.model.label.align_selection_right();
 		}
 
 
 		private void on_objects_align_hcenter( Gtk.Action action )
 		{
-			window.view.label.align_selection_hcenter();
+			window.model.label.align_selection_hcenter();
 		}
 
 
 		private void on_objects_align_top( Gtk.Action action )
 		{
-			window.view.label.align_selection_top();
+			window.model.label.align_selection_top();
 		}
 
 
 		private void on_objects_align_bottom( Gtk.Action action )
 		{
-			window.view.label.align_selection_bottom();
+			window.model.label.align_selection_bottom();
 		}
 
 
 		private void on_objects_align_vcenter( Gtk.Action action )
 		{
-			window.view.label.align_selection_vcenter();
+			window.model.label.align_selection_vcenter();
 		}
 
 
 		private void on_objects_center_horiz( Gtk.Action action )
 		{
-			window.view.label.center_selection_horiz();
+			window.model.label.center_selection_horiz();
 		}
 
 
 		private void on_objects_center_vert( Gtk.Action action )
 		{
-			window.view.label.center_selection_vert();
+			window.model.label.center_selection_vert();
 		}
 
 

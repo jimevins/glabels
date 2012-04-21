@@ -57,7 +57,7 @@ namespace glabels
 
 		private bool update_scheduled_flag;
 
-		private Label? label;
+		private Model? model;
 
 
 
@@ -81,12 +81,12 @@ namespace glabels
 		}
 
 
-		public void set_label( Label label )
+		public void set_model( Model model )
 		{
-			this.label = label;
-			set_template( label.template );
+			this.model = model;
+			set_template( model.label.template );
 
-			label.changed.connect( on_label_changed );
+			model.label.changed.connect( on_label_changed );
 		}
 
 
@@ -309,7 +309,7 @@ namespace glabels
 
 				draw_labels( cr, 2.0/scale );
 
-				if ( label != null )
+				if ( model != null )
 				{
 					draw_rich_preview( cr );
 				}
@@ -372,7 +372,7 @@ namespace glabels
 			Color highlight_color = Color.from_color_and_opacity( base_color, 0.10 );
 
 			Color outline_color;
-			if ( label != null )
+			if ( model != null )
 			{
 				/* Outlines are more subtle when doing a rich preview. */
 				outline_color = Color.from_color_and_opacity( base_color, 0.25 );
@@ -409,7 +409,7 @@ namespace glabels
 		private void draw_rich_preview( Cairo.Context cr )
 		{
 			/* TODO: test for merge. */
-			label.print_simple_sheet( cr, 0 );
+			model.print.print_simple_sheet( cr, 0 );
 		}
 
 		
