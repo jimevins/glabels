@@ -356,8 +356,11 @@ namespace glabels
 
 		private bool on_recent_icon_view_button_release_event( Gdk.EventButton event )
 		{
-			response( Gtk.ResponseType.OK );
-			template_history.changed.disconnect( on_template_history_changed );
+			if ( template_name != null )
+			{
+				response( Gtk.ResponseType.OK );
+				template_history.changed.disconnect( on_template_history_changed );
+			}
 			return true;
 		}
 
@@ -379,7 +382,10 @@ namespace glabels
 
 		private bool on_search_icon_view_button_release_event( Gdk.EventButton event )
 		{
-			response( Gtk.ResponseType.OK );
+			if ( template_name != null )
+			{
+				response( Gtk.ResponseType.OK );
+			}
 			return true;
 		}
 
