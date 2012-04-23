@@ -29,6 +29,8 @@ namespace glabels
 		private Prefs               prefs;
 		private TemplateHistory     template_history;
 
+		private Gtk.Notebook        notebook;
+
 		private Gtk.Box             recent_box;
 		private Gtk.Box             recent_info_box;
 		private MessageBar          recent_info_bar;
@@ -83,6 +85,8 @@ namespace glabels
 
 			Gtk.Box main_box = builder.get_object( "main_box" ) as Gtk.Box;
 			((Gtk.Box)get_content_area()).pack_start( main_box );
+
+			notebook             = builder.get_object( "notebook" )             as Gtk.Notebook;
 
 			/* Recent templates widgets */
 			recent_box           = builder.get_object( "recent_box" )           as Gtk.Box;
@@ -139,6 +143,16 @@ namespace glabels
 			recent_icon_view.button_release_event.connect( on_recent_icon_view_button_release_event );
 			search_icon_view.selection_changed.connect( on_search_icon_view_selection_changed );
 			search_icon_view.button_release_event.connect( on_search_icon_view_button_release_event );
+
+			/* Set initial page. */
+			if ( template_history.get_template_list().length() == 0 )
+			{
+				notebook.set_current_page( notebook.page_num( search_box ) );
+			}
+			else
+			{
+				notebook.set_current_page( notebook.page_num( recent_box ) );
+			}
 		}
 
 
