@@ -20,6 +20,7 @@
 
 
 using GLib;
+using libglabels;
 
 namespace glabels
 {
@@ -40,6 +41,9 @@ namespace glabels
 		private Gtk.Box             search_info_box;
 		private MessageBar          search_info_bar;
 		private Gtk.Entry           search_entry;
+		private Gtk.RadioButton     search_iso_radio;
+		private Gtk.RadioButton     search_us_radio;
+		private Gtk.RadioButton     search_other_radio;
 		private Gtk.IconView        search_icon_view;
 
 		private Gtk.Box             custom_box;
@@ -75,7 +79,7 @@ namespace glabels
 			try
 			{
 				string file = GLib.Path.build_filename( Config.DATADIR, Config.GLABELS_BRANCH, "ui", "new_label_dialog.ui" );
-				string[] objects = { "main_box", null };
+				string[] objects = { "main_box", "panel_sizegroup", null };
 				builder.add_objects_from_file( file, objects );
 			}
 			catch ( Error err )
@@ -97,6 +101,9 @@ namespace glabels
 			search_box           = builder.get_object( "search_box" )           as Gtk.Box;
 			search_info_box      = builder.get_object( "search_info_box" )      as Gtk.Box;
 			search_entry         = builder.get_object( "search_entry" )         as Gtk.Entry;
+			search_iso_radio     = builder.get_object( "search_iso_radio" )     as Gtk.RadioButton;
+			search_us_radio      = builder.get_object( "search_us_radio" )      as Gtk.RadioButton;
+			search_other_radio   = builder.get_object( "search_other_radio" )   as Gtk.RadioButton;
 			search_icon_view     = builder.get_object( "search_icon_view" )     as Gtk.IconView;
 
 			/* Custom templates widgets */
@@ -139,6 +146,9 @@ namespace glabels
 			/* Connect signals. */
 			search_entry.changed.connect( on_search_entry_changed );
 			search_entry.icon_release.connect( on_search_entry_clear );
+			search_iso_radio.toggled.connect( on_search_radio_toggled );
+			search_us_radio.toggled.connect( on_search_radio_toggled );
+			search_other_radio.toggled.connect( on_search_radio_toggled );
 			recent_icon_view.selection_changed.connect( on_recent_icon_view_selection_changed );
 			recent_icon_view.button_release_event.connect( on_recent_icon_view_button_release_event );
 			search_icon_view.selection_changed.connect( on_search_icon_view_selection_changed );
@@ -285,23 +295,66 @@ namespace glabels
 
 		private bool search_filter_func( Gtk.TreeModel model, Gtk.TreeIter iter )
 		{
-			if ( search_string == "" )
-			{
-				search_filtered_model_empty = false;
-				return true;
-			}
-
 			Value value; 
 			model.get_value( iter, 0, out value );
 			string name = value.get_string();
+
+
+			Template template = Db.lookup_template_from_name( name );
+			Paper    paper    = Db.lookup_paper_from_id( template.paper_id );
+
+			bool is_iso = false;
+			bool is_us  = false;
+
+			if ( paper.pwg_size != null )
+			{
+				is_iso = paper.pwg_size.has_prefix( "iso_" );
+				is_us  = paper.pwg_size.has_prefix( "na_" );
+			}
+
+
+			if ( search_string == "" )
+			{
+				if ( search_iso_radio.get_active() && is_iso )
+				{
+					search_filtered_model_empty = false;
+					return true;
+				}
+				else if ( search_us_radio.get_active() && is_us )
+				{
+					search_filtered_model_empty = false;
+					return true;
+				}
+				else if ( search_other_radio.get_active() && !is_iso && !is_us )
+				{
+					search_filtered_model_empty = false;
+					return true;
+				}
+
+				return false;
+			}
+
 
 			string needle   = search_string.casefold();
 			string haystack = name.casefold();
 
 			if ( needle in haystack )
 			{
-				search_filtered_model_empty = false;
-				return true;
+				if ( search_iso_radio.get_active() && is_iso )
+				{
+					search_filtered_model_empty = false;
+					return true;
+				}
+				else if ( search_us_radio.get_active() && is_us )
+				{
+					search_filtered_model_empty = false;
+					return true;
+				}
+				else if ( search_other_radio.get_active() && !is_iso && !is_us )
+				{
+					search_filtered_model_empty = false;
+					return true;
+				}
 			}
 
 			return false;
@@ -339,6 +392,22 @@ namespace glabels
 				search_entry.secondary_icon_sensitive   = true;
 			}
 
+			search_filtered_model_empty = true;
+			search_filtered_model.refilter();
+
+			if ( search_filtered_model_empty )
+			{
+				search_info_bar.show();
+			}
+			else
+			{
+				search_info_bar.hide();
+			}
+		}
+
+
+		private void on_search_radio_toggled()
+		{
 			search_filtered_model_empty = true;
 			search_filtered_model.refilter();
 
