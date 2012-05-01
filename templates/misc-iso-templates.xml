@@ -544,6 +544,19 @@
   <!-- ************************* -->
 
   <!-- =================================================================== -->
+  <!-- Sigel LA 505: CD/DVD Labels				           -->
+  <!-- =================================================================== -->
+  <Template brand="Sigel" part="LA 505" size="A4" _description="CD/DVD labels">
+    <Meta category="label"/>
+    <Meta category="media"/> 
+    <Label-cd id="0" radius="58.5mm" hole="8.5mm" waste="2mm">
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="1" ny="1" x0="45mm" y0="20mm" dx="123.4mm" dy="123.4mm"/>
+      <Layout nx="1" ny="1" x0="45mm" y0="159mm" dx="123.4mm" dy="123.4mm"/>
+    </Label-cd>
+  </Template>
+
+  <!-- =================================================================== -->
   <!-- Sigel LP 800/LP 801/LP 802: Business Cards, 55.0 x 85.0 mm          -->
   <!-- =================================================================== -->
   <Template brand="Sigel" part="LP 800" size="A4" _description="Business Cards">
