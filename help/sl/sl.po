@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2012-03-25 11:44+0000\n"
-"PO-Revision-Date: 2012-04-08 21:25+0100\n"
-"Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
+"POT-Creation-Date: 2012-04-08 19:56+0000\n"
+"PO-Revision-Date: 2012-05-22 20:37+0100\n"
+"Last-Translator: filmsi\n"
 "Language-Team: Slovenščina <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +36,7 @@ msgstr "@@image: 'figures/skip-fields-output.png'; md5=b64d1a7fdf0d37e9a6d93f0bc
 
 #: C/skipfields.page:9(desc)
 msgid "How to skip blank address lines when doing a document merge."
-msgstr ""
+msgstr "Kako preskočiti prazne vrstice v naslovu pri spajanju dokumentov."
 
 #: C/skipfields.page:13(name)
 #: C/select.page:13(name)
@@ -154,9 +154,8 @@ msgid "Creative Commons Share Alike 3.0"
 msgstr ""
 
 #: C/skipfields.page:25(title)
-#, fuzzy
 msgid "Skipping blank address lines"
-msgstr "Nalepke naslova pošiljanja"
+msgstr "Izpuščanje praznih vrstic naslova"
 
 #: C/skipfields.page:27(p)
 msgid "This feature can be best described by a simple example. In the following CSV file, column 5 (ADDR2) contains the second address line for each record. This field is empty in records 1 and 2, but not in record 3. (For this feature to work, the field must be completely empty -- any text, including spaces will defeat this feature.)"
@@ -187,26 +186,23 @@ msgstr ""
 
 #: C/skipfields.page:54(p)
 msgid "Output"
-msgstr ""
+msgstr "Izhod"
 
 #: C/select.page:9(desc)
-#, fuzzy
 msgid "How to select objects."
-msgstr "Izbriši izbrane predmete"
+msgstr "Kako izberemo predmete."
 
 #: C/select.page:25(title)
-#, fuzzy
 msgid "To select objects"
-msgstr "Izbor vseh predmetov"
+msgstr "Izbiranje predmetov"
 
 #: C/select.page:27(p)
 msgid "A prerequisite for performing operations on objects is the selection of individual objects or groups of objects. The display area must be in the object selection mode to create new selections, as indicated by an arrow cursor. The object selection mode is selected by the <guiseq><gui>Objects</gui><gui>Select Mode</gui></guiseq> menu item, or the corresponding command on the <gui>Drawing Toolbar</gui>."
 msgstr ""
 
 #: C/select.page:38(title)
-#, fuzzy
 msgid "Selecting a single object"
-msgstr "Izbor vseh predmetov"
+msgstr "Izbor posameznega predmeta"
 
 #: C/select.page:39(p)
 msgid "A single object can be selected simply by clicking on the desired object in the display area. Once selected the object will be highlighted with a set of resizing handles."
@@ -230,9 +226,8 @@ msgid "Multiple objects can also be selected by clicking an empty area and dragg
 msgstr ""
 
 #: C/select.page:72(title)
-#, fuzzy
 msgid "Unselecting objects"
-msgstr "Izbor vseh predmetov"
+msgstr "Preklic izbora predmetov"
 
 #: C/select.page:74(p)
 msgid "Individual objects can be removed from an existing selection by holding the <key>Ctrl</key> key while clicking on a previously selected object. An entire selection can be dismissed by using the <guiseq><gui>Edit</gui><gui>Un-select All</gui></guiseq> menu item or by simply clicking any empty space in the display area. Once an object is unselected its highlight is removed."
@@ -252,7 +247,7 @@ msgstr "<gui>Izreži</gui> (<keyseq><key>Ctrl</key><key>X</key></keyseq>)"
 
 #: C/select.page:96(p)
 msgid "Moves selected objects to the clipboard. The objects are then available for pasting back into the current document or another document."
-msgstr ""
+msgstr "Premakne izbrane predmete na odložišče. Predmeti so tako na voljo za lepljenje v trenutni ali drug dokument."
 
 #: C/select.page:103(title)
 msgid "<gui>Copy</gui> (<keyseq><key>Ctrl</key><key>C</key></keyseq>)"
@@ -260,7 +255,7 @@ msgstr "<gui>Kopiraj</gui> (<keyseq><key>Ctrl</key><key>C</key></keyseq>)"
 
 #: C/select.page:105(p)
 msgid "Copies selected objects to the clipboard without deleting them. The objects are then available for pasting back into the current document or another document."
-msgstr ""
+msgstr "Kopira izbrane predmete na odložišče brez brisanja. Predmeti so tako na voljo za lepljenje v trenutni ali drug dokument."
 
 #: C/select.page:112(title)
 msgid "<gui>Paste</gui> (<keyseq><key>Ctrl</key><key>V</key></keyseq>)"
@@ -268,7 +263,7 @@ msgstr "<gui>Prilepi</gui> (<keyseq><key>Ctrl</key><key>V</key></keyseq>)"
 
 #: C/select.page:114(p)
 msgid "Pastes objects from the clipboard into the current document. <app>gLabels</app> can only paste objects from another <app>gLabels</app> document."
-msgstr ""
+msgstr "Prilepi izbrane predmete z odložišča v trenutni dokument.  <app>gLabels</app> lahko lepi le predmete iz drugih dokumentov <app>gLabels</app>."
 
 #: C/select.page:121(title)
 msgid "<gui>Delete</gui> (<key>Del</key>)"
@@ -276,7 +271,7 @@ msgstr "<gui>Izbriši</gui> (<key>Del</key>)"
 
 #: C/select.page:123(p)
 msgid "Deletes selected objects without placing them on the clipboard."
-msgstr ""
+msgstr "Izbriše izbrane predmete, pri čemer jih ne pusti na odložišču."
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
@@ -292,11 +287,11 @@ msgstr "@@image: 'figures/print-merge.png'; md5=ee70bd2150a6cd46e96ce5c0531eb47b
 
 #: C/printfile.page:9(desc)
 msgid "How to print your labels and cards."
-msgstr ""
+msgstr "Kako natisnemo svoje nalepke, kartončke in vizitke."
 
 #: C/printfile.page:25(title)
 msgid "To print labels and cards"
-msgstr ""
+msgstr "Tiskanje nalepk, kartončkov in vizitk"
 
 #: C/printfile.page:27(p)
 msgid "To print labels or cards, choose <guiseq><gui>File</gui><gui>Print</gui></guiseq> to display the <gui>Print</gui> dialog. Once print options have been selected, click <gui>Print</gui> to print the labels or cards. To simply preview the results, click <gui>Print Preview</gui> instead."
@@ -304,15 +299,16 @@ msgstr ""
 
 #: C/printfile.page:34(p)
 msgid "The <gui>Print</gui> dialog allows you to specify the following print options:"
-msgstr ""
+msgstr "Pogovorno okno <gui>Natisni</gui> ponuja določitev naslednjih možnosti tiskanja:"
 
 #: C/printfile.page:38(title)
 msgid "The Labels Tab of the Print Dialog"
-msgstr ""
+msgstr "Zavihek Nalepke pogovornega okna Natisni"
 
 #: C/printfile.page:41(title)
+#, fuzzy
 msgid "Print control (Simple)"
-msgstr ""
+msgstr "Nadzor tiskanja (enostaven)"
 
 #: C/printfile.page:43(p)
 msgid "For simple labels or cards (no document merge), the job tabbed section contains the following copy controls."
@@ -320,8 +316,9 @@ msgstr ""
 
 #: C/printfile.page:48(p)
 #: C/editprop.page:36(p)
+#, fuzzy
 msgid "Print Copy Controls"
-msgstr ""
+msgstr "Nadzor števila kopij pri tiskanju"
 
 #. ==== End of Figure ====
 #: C/printfile.page:52(p)
@@ -352,7 +349,7 @@ msgstr ""
 
 #: C/printfile.page:82(p)
 msgid "Printing can begin on any label on the first sheet. This can be selected with the <gui>Start on label</gui> spinbutton."
-msgstr ""
+msgstr "Tiskanje lahko pričnete pri poljubni nalepki na prvi strani. Slednjo izberete s sukalnim gumbom <gui>Začni z nalepko</gui>."
 
 #: C/printfile.page:86(p)
 msgid "The mini-preview can also be used to graphically select this first label, by clicking on the desired label in the mini-preview."
@@ -364,7 +361,7 @@ msgstr "Možnosti"
 
 #: C/printfile.page:94(p)
 msgid "The following options can also be selected."
-msgstr ""
+msgstr "Izberete lahko tudi naslednje možnosti."
 
 #: C/printfile.page:97(gui)
 msgid "print outlines"
@@ -381,7 +378,7 @@ msgstr ""
 
 #: C/printfile.page:103(p)
 msgid "Prints the labels as mirror images. This option is useful for printing on clear labels that will be viewed from the reverse side (e.g. in a car window)."
-msgstr ""
+msgstr "Natisne nalepke zrcalno. To je uporabno pri tiskanju prosojnih nalepk, ki bodo vidne z druge strani (npr. na vetrobranskem steklu)."
 
 #: C/printfile.page:108(gui)
 msgid "print crop marks"
@@ -389,16 +386,15 @@ msgstr "natisni oznake obrezave"
 
 #: C/printfile.page:109(p)
 msgid "Prints crop marks along the edge of the sheet. This option is useful for printing on blank stock, to be cut after printing. This option does not work well with all templates."
-msgstr ""
+msgstr "Natisne oznake za obrezavo na robu lista. Uporabno za tiskanje na prazen papir, ki ga je potrebno po tiskanju obrezati. Ta možnost ni enako primerna za vse predloge."
 
 #: C/newlabel.page:9(desc)
 msgid "Create a new label or card in <app>gLabels</app>."
-msgstr ""
+msgstr "Ustvarite novo nalepko, kartonček ali vizitko v <app>gLabels</app>."
 
 #: C/newlabel.page:25(title)
-#, fuzzy
 msgid "To create a new label or card"
-msgstr "Nova nalepka ali vizitka"
+msgstr "Ustvarjanje nove nalepke ali vizitke"
 
 #: C/newlabel.page:27(p)
 msgid "To create a new label or business card, choose <guiseq><gui>File</gui><gui>New</gui></guiseq> to display the <gui>New Label or Card</gui> dialog. Select the media type and orientation for the new document, then click <gui>OK</gui>. A new document is displayed in the display area of the <app>gLabels</app> window."
@@ -406,11 +402,11 @@ msgstr ""
 
 #: C/multifile.page:9(desc)
 msgid "How to open multiple files at once by using the command line."
-msgstr ""
+msgstr "Kako odpremo več datotek naenkrat iz ukazne vrstice."
 
 #: C/multifile.page:25(title)
 msgid "To open multiple files from the command line"
-msgstr ""
+msgstr "Kako odpremo več datotek iz ukazne vrstice"
 
 #: C/multifile.page:27(p)
 msgid "You can run <app>gLabels</app> from a command line and open a single file or multiple files. To open multiple files from a command line, type the following command, then press <key>Return</key>:"
@@ -418,11 +414,11 @@ msgstr ""
 
 #: C/multifile.page:33(var)
 msgid "file1.glabels file2.glabels file3.glabels"
-msgstr ""
+msgstr "datoteka1.glabels datoteka2.glabels datoteka3.glabels"
 
 #: C/multifile.page:32(cmd)
 msgid "glabels <placeholder-1/>"
-msgstr ""
+msgstr "glabels <placeholder-1/>"
 
 #: C/multifile.page:36(p)
 msgid "When the application starts, the files that you specify are displayed in separate <app>gLabels</app> windows."
@@ -434,7 +430,7 @@ msgstr ""
 
 #: C/merge.page:25(title)
 msgid "Document merge tutorial"
-msgstr ""
+msgstr "Vodnik za spajanje dokumentov"
 
 #: C/merge.page:27(p)
 msgid "Document Merge (sometimes called \"Mail Merge\") is a powerful feature that allows a unique label or card to be printed for each record in an external data source. It is however, the most mis-understood feature of <app>glabels</app>. The following examples will step through a couple of common tasks using the document merge feature."
@@ -476,11 +472,11 @@ msgstr ""
 
 #: C/merge-ex4.page:9(desc)
 msgid "Create address labels from a vCard file."
-msgstr ""
+msgstr "Ustvari nalepke za naslove iz datotek vCard."
 
 #: C/merge-ex4.page:25(title)
 msgid "Example 4: Address Labels Using a vCard file"
-msgstr ""
+msgstr "Primer 4: Nalepke za naslove iz datotek vCard"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
@@ -508,11 +504,11 @@ msgstr "@@image: 'figures/merge-ex3-4.png'; md5=4415be9d5b59fb57093077bcaece014a
 
 #: C/merge-ex3.page:9(desc)
 msgid "Create address labels from the <app>Evolution</app> address book entries."
-msgstr ""
+msgstr "Ustvarite nalepke z naslovi iz adresarja programa <app>Evolution</app>."
 
 #: C/merge-ex3.page:25(title)
 msgid "Example 3: Address Labels Using the <app>Evolution</app> Addressbook"
-msgstr ""
+msgstr "Primer 3: Nalepke z naslovi iz adresarja programa <app>Evolution</app>"
 
 #: C/merge-ex3.page:27(p)
 msgid "Our last party was a great success, and now we need to print mailing address labels for the invitations to a new one. To simplify this, we can use the <app>Evolution</app> addressbook, because the address data of all our friends is stored there."
@@ -729,7 +725,6 @@ msgid "Now we can print our name tags by selecting the <guiseq><gui>File</gui><g
 msgstr ""
 
 #: C/merge-ex1.page:85(p)
-#, fuzzy
 msgid "Printing name tags"
 msgstr "Tiskanje imenskih značk"
 
@@ -779,13 +774,12 @@ msgid "@@image: 'figures/glabels-template-layout.png'; md5=fe1c9652d5448b2e0ece0
 msgstr "@@image: 'figures/glabels-template-layout.png'; md5=fe1c9652d5448b2e0ece086777d3a287"
 
 #: C/mancreate.page:11(desc)
-#, fuzzy
 msgid "Create your templates manually."
-msgstr "Ustvari predlogo po meri"
+msgstr "Ustvarite predloge ročno."
 
 #: C/mancreate.page:27(title)
 msgid "Manually creating new templates"
-msgstr ""
+msgstr "Ročna izdelava novih predlog"
 
 #. ******************
 #: C/mancreate.page:34(p)
@@ -822,12 +816,11 @@ msgstr "Opis"
 
 #: C/mancreate.page:54(file)
 msgid "${prefix}/share/libglabels-3.0/templates"
-msgstr ""
+msgstr "${prefix}/share/libglabels-3.0/templates"
 
 #: C/mancreate.page:55(p)
-#, fuzzy
 msgid "Predefined templates distributed with <app>gLabels</app>."
-msgstr "Tiskanje datotek ustvarjenih z gLables."
+msgstr "Vnaprej določene predloge, vključene v <app>gLabels</app>."
 
 #: C/mancreate.page:56(p)
 msgid "<file>${prefix}</file> is usually <file>/usr</file> or <file>/usr/local</file>, depending on where <app>gLabels</app> was installed."
@@ -835,7 +828,7 @@ msgstr ""
 
 #: C/mancreate.page:60(file)
 msgid "${XDG_CONFIG_HOME}/libglabels/templates"
-msgstr ""
+msgstr "${XDG_CONFIG_HOME}/libglabels/templates"
 
 #: C/mancreate.page:61(p)
 msgid "User defined templates created with the <app>gLabels</app><gui>Template Designer</gui>. <em>Do not put manually created templates in this directory.</em>"
@@ -847,7 +840,7 @@ msgstr ""
 
 #: C/mancreate.page:67(file)
 msgid "${HOME}/.glabels"
-msgstr ""
+msgstr "${HOME}/.glabels"
 
 #: C/mancreate.page:68(p)
 msgid "User defined templates that have been created manually should be placed in this directory. Older versions of the <app>gLabels</app><gui>Template Designer</gui> (prior to 3.0) would also put templates in this directory."
@@ -995,7 +988,7 @@ msgstr "Širina"
 
 #: C/mancreate.page:204(p)
 msgid "Page width. Only valid if size=\"Other\""
-msgstr ""
+msgstr "Širina strani. Veljavno le, če je velikost=\"Drugo\""
 
 #: C/mancreate.page:207(code)
 #: C/mancreate.page:316(code)
@@ -1007,7 +1000,7 @@ msgstr "Višina"
 
 #: C/mancreate.page:208(p)
 msgid "Page height. Only valid if size=\"Other\""
-msgstr ""
+msgstr "Višina strani. Veljavno le, če je velikost=\"Drugo\""
 
 #: C/mancreate.page:211(code)
 #, no-wrap
@@ -1044,39 +1037,39 @@ msgid "The value of this category must match a predefined category ID defined in
 msgstr ""
 
 #: C/mancreate.page:256(code)
-#, fuzzy, no-wrap
+#, no-wrap
 msgid "label"
 msgstr "Nalepke"
 
 #: C/mancreate.page:257(code)
-#, fuzzy, no-wrap
+#, no-wrap
 msgid "round-label"
 msgstr "Okrogle nalepke"
 
 #: C/mancreate.page:258(code)
-#, fuzzy, no-wrap
+#, no-wrap
 msgid "elliptical-label"
 msgstr "Eliptične nalepke"
 
 #: C/mancreate.page:259(code)
-#, fuzzy, no-wrap
+#, no-wrap
 msgid "square-label"
 msgstr "Kvadratne nalepke"
 
 #: C/mancreate.page:260(code)
-#, fuzzy, no-wrap
+#, no-wrap
 msgid "rectangle-label"
 msgstr "Pravokotne nalepke"
 
 #: C/mancreate.page:261(code)
-#, fuzzy, no-wrap
+#, no-wrap
 msgid "card"
-msgstr "Katerakoli vizitka"
+msgstr "Kartončki"
 
 #: C/mancreate.page:262(code)
-#, fuzzy, no-wrap
+#, no-wrap
 msgid "business-card"
-msgstr "Poslovne nalepke"
+msgstr "Vizitke"
 
 #: C/mancreate.page:263(code)
 #, no-wrap
@@ -1084,19 +1077,19 @@ msgid "media"
 msgstr ""
 
 #: C/mancreate.page:264(code)
-#, fuzzy, no-wrap
+#, no-wrap
 msgid "mail"
-msgstr "Običajna"
+msgstr "Pošta"
 
 #: C/mancreate.page:265(code)
-#, fuzzy, no-wrap
+#, no-wrap
 msgid "foldable"
-msgstr "Prepogljive vizitke"
+msgstr "Zloženka"
 
 #: C/mancreate.page:266(code)
 #, no-wrap
 msgid "photo"
-msgstr ""
+msgstr "Fotografija"
 
 #: C/mancreate.page:273(code)
 #, no-wrap
@@ -1136,15 +1129,15 @@ msgstr "Mreža"
 #: C/mancreate.page:423(p)
 #: C/mancreate.page:470(p)
 msgid "Reserved for future use. Should always be 0."
-msgstr ""
+msgstr "Rezervirano za kasnejšo uporabo. Naj bo vedno 0."
 
 #: C/mancreate.page:313(p)
 msgid "Width of label/card"
-msgstr ""
+msgstr "Širina nalepke/kartončka/vizitke"
 
 #: C/mancreate.page:317(p)
 msgid "Heigth of label/card"
-msgstr ""
+msgstr "Višina nalepke/kartončka/vizitke"
 
 #: C/mancreate.page:320(code)
 #, fuzzy, no-wrap
@@ -1153,21 +1146,21 @@ msgstr "Krog"
 
 #: C/mancreate.page:321(p)
 msgid "Radius of corners. For items with square edges (business cards), the radius should be 0."
-msgstr ""
+msgstr "Polmer kotov. Pri elementih s pravimi koti (vizitke) mora biti polmer 0."
 
 #: C/mancreate.page:325(code)
-#, fuzzy, no-wrap
+#, no-wrap
 msgid "x_waste"
-msgstr "Prilepi"
+msgstr "Odpadek x"
 
 #: C/mancreate.page:326(p)
 msgid "Amount of horizontal waste (over-print) to allow. This is useful for minimizing alignment problems when using non-white backgrounds (e.g. images)."
 msgstr ""
 
 #: C/mancreate.page:331(code)
-#, fuzzy, no-wrap
+#, no-wrap
 msgid "y_waste"
-msgstr "Prilepi"
+msgstr "Odpadek y"
 
 #: C/mancreate.page:332(p)
 msgid "Amount of vertical waste (over-print) to allow. This is useful for minimizing alignment problems when using non-white backgrounds (e.g. images)."
@@ -1197,9 +1190,9 @@ msgstr "Višina elipse"
 #: C/mancreate.page:383(code)
 #: C/mancreate.page:430(code)
 #: C/mancreate.page:491(code)
-#, fuzzy, no-wrap
+#, no-wrap
 msgid "waste"
-msgstr "Prilepi"
+msgstr "Odpadek"
 
 #: C/mancreate.page:384(p)
 #: C/mancreate.page:431(p)
@@ -1225,13 +1218,13 @@ msgstr ""
 #: C/mancreate.page:426(code)
 #: C/mancreate.page:473(code)
 #: C/mancreate.page:615(code)
-#, fuzzy, no-wrap
+#, no-wrap
 msgid "radius"
-msgstr "1. Polmer:"
+msgstr "Polmer"
 
 #: C/mancreate.page:427(p)
 msgid "Radius (1/2 diameter) of label"
-msgstr ""
+msgstr "Polmer (polovica premera) nalepke"
 
 #: C/mancreate.page:456(title)
 msgid "<span translate=\"no\">Label-cd</span> Node"
@@ -1242,18 +1235,17 @@ msgid "A <code translate=\"no\">Label-cd</code> node describes the dimensions of
 msgstr ""
 
 #: C/mancreate.page:474(p)
-#, fuzzy
 msgid "Outer radius of label"
-msgstr "1. Zunanji polmer:"
+msgstr "Zunanji polmer nalepke"
 
 #: C/mancreate.page:477(code)
-#, fuzzy, no-wrap
+#, no-wrap
 msgid "hole"
-msgstr "Vijolična"
+msgstr "Luknja"
 
 #: C/mancreate.page:478(p)
 msgid "Radius of concentric hole"
-msgstr ""
+msgstr "Polmer koncentrične luknje"
 
 #: C/mancreate.page:482(p)
 msgid "If present, the label is clipped to the given width. (Useful for \"business card CDs\")."
@@ -1268,9 +1260,8 @@ msgid "<span translate=\"no\">Label-cd</span> parameters"
 msgstr ""
 
 #: C/mancreate.page:502(p)
-#, fuzzy
 msgid "CD label parameters"
-msgstr "Lastnosti nalepke"
+msgstr "Lastnosti nalepke za zgoščenko"
 
 #: C/mancreate.page:517(title)
 msgid "<span translate=\"no\">Markup</span> Nodes"
@@ -1309,7 +1300,7 @@ msgstr "x1"
 
 #: C/mancreate.page:570(p)
 msgid "x coordinate of 1st endpoint of the line segment."
-msgstr ""
+msgstr "Koordinata x prve končne točke odseka črte."
 
 #: C/mancreate.page:573(code)
 #: C/mancreate.page:645(code)
@@ -1320,7 +1311,7 @@ msgstr "y1"
 
 #: C/mancreate.page:574(p)
 msgid "y coordinate of 1st endpoint of the line segment."
-msgstr ""
+msgstr "Koordinata y prve končne točke odseka črte."
 
 #: C/mancreate.page:577(code)
 #, no-wrap
@@ -1329,7 +1320,7 @@ msgstr "x2"
 
 #: C/mancreate.page:578(p)
 msgid "x coordinate of 2st endpoint of the line segment."
-msgstr ""
+msgstr "Koordinata x druge končne točke odseka črte."
 
 #: C/mancreate.page:581(code)
 #, no-wrap
@@ -1338,7 +1329,7 @@ msgstr "y2"
 
 #: C/mancreate.page:582(p)
 msgid "y coordinate of 2st endpoint of the line segment."
-msgstr ""
+msgstr "Koordinata y druge končne točke odseka črte."
 
 #: C/mancreate.page:595(title)
 msgid "<span translate=\"no\">Markup-circle</span> Node"
@@ -1356,7 +1347,7 @@ msgstr "x0"
 
 #: C/mancreate.page:608(p)
 msgid "x coordinate of circle origin (center)."
-msgstr ""
+msgstr "Koordinata x središča kroga."
 
 #: C/mancreate.page:611(code)
 #: C/mancreate.page:773(code)
@@ -1366,7 +1357,7 @@ msgstr "y0"
 
 #: C/mancreate.page:612(p)
 msgid "y coordinate of circle origin (center)."
-msgstr ""
+msgstr "Koordinata y središča kroga."
 
 #: C/mancreate.page:616(p)
 msgid "Radius of circle."
@@ -1382,11 +1373,11 @@ msgstr ""
 
 #: C/mancreate.page:642(p)
 msgid "x coordinate of upper left corner of rectangle."
-msgstr ""
+msgstr "Koordinata x levega zgornjega kota pravokotnika."
 
 #: C/mancreate.page:646(p)
 msgid "y coordinate of upper left corner of rectangle."
-msgstr ""
+msgstr "Koordinata y levega zgornjega kota pravokotnika."
 
 #: C/mancreate.page:649(code)
 #: C/mancreate.page:691(code)
@@ -1427,11 +1418,11 @@ msgstr ""
 
 #: C/mancreate.page:684(p)
 msgid "x coordinate of upper left corner of ellipse."
-msgstr ""
+msgstr "Koordinata x levega zgornjega kota elipse."
 
 #: C/mancreate.page:688(p)
 msgid "y coordinate of upper left corner of ellipse."
-msgstr ""
+msgstr "Koordinata y levega zgornjega kota elipse."
 
 #: C/mancreate.page:692(p)
 msgid "Width of ellipse."
@@ -1455,9 +1446,8 @@ msgstr ""
 
 #: C/mancreate.page:726(desc)
 #: C/mancreate.page:728(p)
-#, fuzzy
 msgid "CD label sheet"
-msgstr "CD nalepke"
+msgstr "List nalepk za zgoščenko"
 
 #. ==== End of Figure ====
 #: C/mancreate.page:733(p)
@@ -1479,7 +1469,7 @@ msgstr ""
 
 #: C/mancreate.page:761(p)
 msgid "Number of labels/cards across in the grid (horizontal)"
-msgstr ""
+msgstr "Število nalepk/kartončkov/vizitk v vrsti (vodoravno)"
 
 #: C/mancreate.page:764(code)
 #, fuzzy, no-wrap
@@ -1488,7 +1478,7 @@ msgstr "Vse"
 
 #: C/mancreate.page:765(p)
 msgid "Number of labels/cards across in the grid (vertical)"
-msgstr ""
+msgstr "Število nalepk/kartončkov/vizitk v vrsti (navpično)"
 
 #: C/mancreate.page:769(p)
 msgid "Distance from left edge of sheet to the left edge of the left column of cards/labels in the layout."
@@ -1504,9 +1494,8 @@ msgid "dx"
 msgstr "dx"
 
 #: C/mancreate.page:779(p)
-#, fuzzy
 msgid "Horizontal pitch of grid."
-msgstr "Vodoravna razdalja (dx):"
+msgstr "Vodoravna razdalja mreže"
 
 #: C/mancreate.page:782(code)
 #, no-wrap
@@ -1514,9 +1503,8 @@ msgid "dy"
 msgstr "dy"
 
 #: C/mancreate.page:783(p)
-#, fuzzy
 msgid "Vertical pitch of grid."
-msgstr "Navpična razdalja (dy):"
+msgstr "Navpična razdalja mreže"
 
 #: C/mancreate.page:789(desc)
 msgid "<span translate=\"no\">Layout</span> parameters"
@@ -1528,12 +1516,11 @@ msgstr ""
 
 #: C/license.page:8(desc)
 msgid "Legal information."
-msgstr ""
+msgstr "Pravne informacije."
 
 #: C/license.page:11(title)
-#, fuzzy
 msgid "License"
-msgstr "Črta"
+msgstr "Dovoljenje"
 
 #: C/license.page:12(p)
 msgid "This work is distributed under a CreativeCommons Attribution-Share Alike 3.0 Unported license."
@@ -1560,9 +1547,8 @@ msgid "To adapt the work."
 msgstr ""
 
 #: C/license.page:33(p)
-#, fuzzy
 msgid "Under the following conditions:"
-msgstr "Vnesite naslednje podrobnosti razporeditve."
+msgstr "Pod naslednjimi pogoji:"
 
 #: C/license.page:38(em)
 msgid "Attribution"
@@ -1586,12 +1572,11 @@ msgstr ""
 
 #: C/labelprop.page:9(desc)
 msgid "How to change the properties of a label or business card."
-msgstr ""
+msgstr "Kako spremenite lastnosti nalepke, kartončka ali vizitke."
 
 #: C/labelprop.page:25(title)
-#, fuzzy
 msgid "To change label properties"
-msgstr "Lastnosti nalepke"
+msgstr "Sprememba lastnosti nalepke"
 
 #: C/labelprop.page:27(p)
 msgid "To change the media type and/or orientation of a label, choose <guiseq><gui>File</gui><gui>Properties</gui></guiseq> to display the <gui>Label properties</gui> dialog. Select the new media type and orientation for the document, then click <gui>OK</gui>."
@@ -1611,9 +1596,8 @@ msgstr "@@image: 'figures/introduction-glabels-main-window.png'; md5=9ee2b2cc026
 
 #: C/index.page:7(title)
 #: C/index.page:8(title)
-#, fuzzy
 msgid "gLabels label and business card designer"
-msgstr "Zagon snovalnika nalepk in poslovnih vizitk gLabels. "
+msgstr "Snovalnik nalepk in poslovnih vizitk gLabels"
 
 #: C/index.page:23(title)
 msgid "<media type=\"image\" mime=\"image/png\" src=\"figures/glabels-logo.png\">gLabels logo</media> gLabels Manual"
@@ -1757,7 +1741,7 @@ msgstr ""
 
 #: C/editprop.page:137(p)
 msgid "This section contains controls to add a shadow to an object."
-msgstr ""
+msgstr "Ta odsek vsebuje kontrolnike za dodajanje senc predmetov."
 
 #: C/editprop.page:146(title)
 msgid "Other Manipulations of Objects"
@@ -1769,7 +1753,7 @@ msgstr ""
 
 #: C/editprop.page:151(title)
 msgid "Moving and Resizing Objects"
-msgstr ""
+msgstr "Premikanje predmetov in spreminjanje njihove velikosti"
 
 #: C/editprop.page:153(p)
 msgid "Objects can be moved by simply clicking on a selected object and dragging the object to its new location. If the object is part of an aggregate selection, all objects in the selection will move with the object being dragged, maintaining their relative positions to one another. If no object is selected, clicking on an object will create a new selection containing that object. See <link xref=\"select\"/>."
@@ -1789,7 +1773,7 @@ msgstr ""
 
 #: C/editprop.page:187(title)
 msgid "Rotating and Flipping Objects"
-msgstr ""
+msgstr "Sukanje in zrcaljenje predmetov"
 
 #: C/editprop.page:189(p)
 msgid "Objects can be rotated 90 degrees in either direction, or flipped horizontally or vertically, by choosing the appropriate menuitem in the <guiseq><gui>Objects</gui><gui>Rotate/Flip</gui></guiseq> sub-menu. These menuitems are also available by right-clicking the display area when there is a non-empty selection."
@@ -1809,7 +1793,7 @@ msgstr ""
 
 #: C/editprop.page:223(title)
 msgid "Using the Property Bar"
-msgstr ""
+msgstr "Uporaba vrstice Lastnosti"
 
 #: C/editprop.page:225(p)
 msgid "The property bar can be used to change some common properties of objects en-masse. These properties include font family, font size, font weight, text alignment, text color, fill color, line or outline color, and line width. The property bar also controls the defaults for these properties for any newly created objects."
@@ -1817,7 +1801,7 @@ msgstr ""
 
 #: C/customtemplate.page:9(desc)
 msgid "Create your own templates for stationery products."
-msgstr ""
+msgstr "Ustvarite lastne predloge za tiskovine."
 
 #: C/customtemplate.page:25(title)
 msgid "To create a custom template"
@@ -1833,7 +1817,7 @@ msgstr ""
 
 #: C/customize.page:9(desc)
 msgid "Customize <app>gLabels</app> to match your needs."
-msgstr ""
+msgstr "Prilagodite <app>gLabels</app>, da bo ustrezal vašim potrebam."
 
 #. Use this section to describe how to customize the application.
 #: C/customize.page:25(title)
@@ -1862,7 +1846,7 @@ msgstr "Točke"
 
 #: C/customize.page:43(p)
 msgid "Use points (1 point = 1/72 in = 0.352778 mm)."
-msgstr ""
+msgstr "Uporabi slik. točke (1 slik. točka = 1/72 palca = 0,352778 mm)."
 
 #: C/customize.page:46(gui)
 msgid "Inches"
@@ -1899,7 +1883,7 @@ msgstr "Ameriško pismo"
 
 #: C/customize.page:65(p)
 msgid "Most of your media will be of the US Letter page size (8.5 x 11 inches)."
-msgstr ""
+msgstr "Večinoma boste uporabljali strani velikosti US Letter (8,5 x 11 palcev)."
 
 #: C/customize.page:68(gui)
 msgid "ISO A4"
@@ -1907,7 +1891,7 @@ msgstr "ISO A4"
 
 #: C/customize.page:69(p)
 msgid "Most of your media will be of the ISO A4 page size (210 x 297 mm)."
-msgstr ""
+msgstr "Večinoma boste uporabljali strani velikosti ISO A4 (210 x 297 mm)."
 
 #: C/customize.page:72(p)
 msgid "Default: <gui>US Letter</gui>."
@@ -1942,7 +1926,7 @@ msgstr "Barva"
 
 #: C/customize.page:91(p)
 msgid "This control selects the default text color."
-msgstr ""
+msgstr "Ta kontrolnik določa privzeto barvo besedila."
 
 #: C/customize.page:94(gui)
 msgid "Alignment"
@@ -1967,11 +1951,11 @@ msgstr "Širina"
 
 #: C/customize.page:107(p)
 msgid "This control selects the default line width."
-msgstr ""
+msgstr "Ta kontrolnik določa privzeto širino črt."
 
 #: C/customize.page:111(p)
 msgid "This control selects the default line color."
-msgstr ""
+msgstr "Ta kontrolnik določa privzeto barvo črt."
 
 #: C/customize.page:117(title)
 msgid "Fill"
@@ -1983,11 +1967,11 @@ msgstr ""
 
 #: C/customize.page:123(p)
 msgid "This control selects the default fill color."
-msgstr ""
+msgstr "Ta kontrolnik določa privzeto barvo polnila."
 
 #: C/createnew.page:9(desc)
 msgid "Create new objects within your document."
-msgstr ""
+msgstr "Ustvarite nove predmete v svojem dokumentu."
 
 #: C/createnew.page:25(title)
 msgid "To create new objects"
@@ -1999,7 +1983,7 @@ msgstr ""
 
 #: C/createnew.page:35(p)
 msgid "The following describes the object creation mode for each object type:"
-msgstr ""
+msgstr "Naslednje opisuje način ustvarjanja predmetov za vsako vrsto predmetov posebej:"
 
 #: C/createnew.page:40(p)
 msgid "Click the desired location of the upper left corner of the text object. New text objects are initialized with the string \"Text.\" To change this text, or other properties, see <link xref=\"editprop\"/>."
@@ -2080,7 +2064,7 @@ msgstr "Kako shranimo datoteko"
 
 #: C/basicusage.page:62(p)
 msgid "You can save files in the following ways:"
-msgstr ""
+msgstr "Datoteke lahko shranjujete na sledeče načine:"
 
 #: C/basicusage.page:66(p)
 msgid "To save changes to an existing file, choose <guiseq><gui>File</gui><gui>Save</gui></guiseq>."
@@ -2092,7 +2076,7 @@ msgstr ""
 
 #: C/basicusage.page:84(title)
 msgid "To quit <app>gLabels</app>"
-msgstr ""
+msgstr "Izhod iz <app>gLabels</app>"
 
 #: C/basicusage.page:86(p)
 msgid "To quit <app>gLabels</app>, choose <guiseq><gui>File</gui><gui>Quit</gui></guiseq>. This is equivalent to closing all open windows. See <link xref=\"basicusage#closefile\"/>."
@@ -2100,7 +2084,7 @@ msgstr ""
 
 #: C/about.page:9(desc)
 msgid "Information about <app>gLabels</app>."
-msgstr ""
+msgstr "Podatki o <app>gLabels</app>."
 
 #: C/about.page:25(title)
 msgid "About <app>gLabels</app>"
