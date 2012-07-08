@@ -1050,13 +1050,13 @@ set_text_path (glLabelText      *this,
 
         style = this->priv->font_italic_flag ? PANGO_STYLE_ITALIC : PANGO_STYLE_NORMAL;
 
-        font_size   = this->priv->font_size;
+        font_size   = this->priv->font_size * FONT_SCALE;
         auto_shrink = gl_label_text_get_auto_shrink (this);
         if (!screen_flag && record && auto_shrink && (raw_w != 0.0))
         {
                 font_size = auto_shrink_font_size (cr,
                                                    this->priv->font_family,
-                                                   this->priv->font_size * FONT_SCALE,
+                                                   font_size,
                                                    this->priv->font_weight,
                                                    style,
                                                    text,
@@ -1075,7 +1075,7 @@ set_text_path (glLabelText      *this,
         desc = pango_font_description_new ();
         pango_font_description_set_family (desc, this->priv->font_family);
         pango_font_description_set_weight (desc, this->priv->font_weight);
-        pango_font_description_set_size   (desc, font_size * FONT_SCALE * PANGO_SCALE);
+        pango_font_description_set_size   (desc, font_size * PANGO_SCALE);
         pango_font_description_set_style  (desc, style);
         pango_layout_set_font_description (layout, desc);
         pango_font_description_free       (desc);
