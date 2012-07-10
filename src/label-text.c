@@ -172,7 +172,8 @@ static gdouble         auto_shrink_font_size       (cairo_t          *cr,
                                                     PangoWeight       weight,
                                                     PangoStyle        style,
                                                     gchar            *text,
-                                                    gdouble           width);
+                                                    gdouble           width,
+                                                    gdouble           height);
 
 static gboolean        object_at                   (glLabelObject    *object,
                                                     cairo_t          *cr,
@@ -1025,13 +1026,14 @@ auto_shrink_font_size (cairo_t     *cr,
                        PangoWeight  weight,
                        PangoStyle   style,
                        gchar       *text,
-                       gdouble      width)
+                       gdouble      width,
+                       gdouble      height)
 {
         PangoLayout          *layout;
         PangoFontDescription *desc;
         gint                  iw, ih;
-        gdouble               layout_width;
-        gdouble               new_size;
+        gdouble               layout_width, layout_height;
+        gdouble               new_wsize, new_hsize;
 
         layout = pango_cairo_create_layout (cr);
 
@@ -1048,31 +1050,45 @@ auto_shrink_font_size (cairo_t     *cr,
         pango_layout_set_width (layout, -1);
         pango_layout_get_size (layout, &iw, &ih);
         layout_width = (gdouble)iw / (gdouble)PANGO_SCALE;
+        layout_height = (gdouble)ih / (gdouble)PANGO_SCALE;
 
         g_object_unref (layout);
 
         g_print ("Object w = %g, layout w = %g\n", width, layout_width);
+        g_print ("Object h = %g, layout h = %g\n", height, layout_height);
 
+        new_wsize = new_hsize = size;
         if ( layout_width > width )
         {
                 /* Scale down. */
-                new_size = size * (width-2*GL_LABEL_TEXT_MARGIN)/layout_width;
+                new_wsize = size * (width-2*GL_LABEL_TEXT_MARGIN) / layout_width;
 
                 /* Round down to nearest 1/2 point */
-                new_size = (int)(new_size*2.0) / 2.0;
+                new_wsize = (int)(new_wsize*2.0) / 2.0;
 
                 /* don't get ridiculously small. */
-                if (new_size < 1.0)
+                if (new_wsize < 1.0)
                 {
-                        new_size = 1.0;
+                        new_wsize = 1.0;
                 }
         }
-        else
+
+        if ( layout_height > height )
         {
-                new_size = size;
+                /* Scale down. */
+                new_hsize = size * height / layout_height;
+
+                /* Round down to nearest 1/2 point */
+                new_hsize = (int)(new_hsize*2.0) / 2.0;
+
+                /* don't get ridiculously small. */
+                if (new_hsize < 1.0)
+                {
+                        new_hsize = 1.0;
+                }
         }
 
-        return new_size;
+        return (new_wsize < new_hsize ? new_wsize : new_hsize);
 }
 
 
@@ -1121,7 +1137,8 @@ set_text_path (glLabelText      *this,
                                                    this->priv->font_weight,
                                                    style,
                                                    text,
-                                                   object_w);
+                                                   object_w,
+                                                   object_h);
         }
 
 
