@@ -220,6 +220,7 @@ gl_text_node_lines_expand (GList               *lines,
 	GList      *p_line, *p_node;
 	glTextNode *text_node;
 	gchar       *text, *old_text, *expanded_node;
+        gboolean   first_line = TRUE;
 
 	text = g_strdup ("");	/* prime pointer for concatenation */
 	for (p_line = lines; p_line != NULL; p_line = p_line->next) {
@@ -234,6 +235,15 @@ gl_text_node_lines_expand (GList               *lines,
 			}
 		}
 
+		/* prepend newline if it's not the first line */
+                if (!first_line) {
+			old_text = text;
+			text = g_strconcat (text, "\n", NULL);
+			g_free (old_text);
+		} else {
+			first_line = FALSE;
+                }
+
 		/* expand each node */
 		for (p_node = (GList *) p_line->data; p_node != NULL;
 		     p_node = p_node->next) {
@@ -243,13 +253,6 @@ gl_text_node_lines_expand (GList               *lines,
 			text = g_strconcat (text, expanded_node, NULL);
 			g_free (old_text);
 			g_free (expanded_node);
-		}
-
-		/* append newline to each line, except last. */
-		if ( p_line->next != NULL ) {
-			old_text = text;
-			text = g_strconcat (text, "\n", NULL);
-			g_free (old_text);
 		}
 	}
 
