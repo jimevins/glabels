@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels glabels-3_0\n"
 "POT-Creation-Date: 2012-05-01 20:03+0000\n"
-"PO-Revision-Date: 2012-07-12 14:22+0200\n"
+"PO-Revision-Date: 2012-07-12 15:35+0200\n"
 "Last-Translator: Tom Tryfonidis <tomtryf@gmail.com>\n"
 "Language-Team: Greek Translation Team\n"
 "MIME-Version: 1.0\n"
@@ -341,9 +341,8 @@ msgstr "Εκτύπωση εγγράφων στοιχεία ελέγχου συγ
 
 #. ==== End of Figure ====
 #: C/printfile.page:75(p)
-#, fuzzy
 msgid "The total number of labels or cards printed is the product of the number of records in the merge source and the number of copies selected. If multiple copies are selected, these can be either collated (copies of the same record grouped together) or un-collated (one copy each record is printed before next copy)."
-msgstr "Ο συνολικός αριθμός των τυπωμένων ετικετών ή καρτών είναι το γινόμενο του αριθμού εγγραφών στην πηγή συγχώνευσης και τον αριθμό των αντιγράφων που επιλέξατε. Εάν έχουν επιλεγεί πολλαπλά αντίγραφα, αυτά μπορεί να είναι είτε με σελιδοποίηση (αντίγραφα της ίδιας εγγραφής ομαδοποιούνται) ή μη-σελιδοποίηση (ένα αντίγραφο κάθε εγγραφής έχει τυπωθεί πριν από το επόμενο αντίγραφο)."
+msgstr "Ο συνολικός αριθμός των τυπωμένων ετικετών ή καρτών είναι το γινόμενο του αριθμού εγγραφών στην πηγή συγχώνευσης και τον αριθμό των αντιγράφων που επιλέξατε. Εάν έχουν επιλεγεί πολλαπλά αντίγραφα, αυτά μπορεί να είναι είτε ταξινομημένα (αντίγραφα της ίδιας εγγραφής ομαδοποιούνται) ή μη-ταξινομημένα (ένα αντίγραφο κάθε εγγραφής έχει τυπωθεί πριν από το επόμενο αντίγραφο)."
 
 #: C/printfile.page:82(p)
 msgid "Printing can begin on any label on the first sheet. This can be selected with the <gui>Start on label</gui> spinbutton."
@@ -446,13 +445,12 @@ msgid "Document Merge (sometimes called \"Mail Merge\") is a powerful feature th
 msgstr "Η Συγχώνευση εγγράφου (μερικές φορές ονομάζεται \"Συγχώνευση αλληλογραφίας\") είναι ένα ισχυρό χαρακτηριστικό που επιτρέπει μια μοναδική ετικέτα ή κάρτα να εκτυπωθεί για κάθε εγγραφή σε μία εξωτερική πηγή δεδομένων."
 
 #: C/mergefeatures.page:31(p)
-#, fuzzy
 msgid ""
 "The first step to performing a document merge is to prepare a source document that contains your merge data. This data could be mailing addresses or any other data that you wish to create unique labels or cards for. Currently back-ends only exist for text files and the evolution data server -- others are planned. The currently supported text-file format is very simple: each line is a record; fields are delimited by commas (CSV), tabs, or colons; and newlines can be embedded into fields by using the \"\\n"
 "\" entity. This file could be created using any text editor or could be created by another program or script. A common way of creating CSV files is to export them from a spreadsheet program."
 msgstr ""
-"Το πρώτο βήμα για την εκτέλεση της συγχώνευσης του εγγράφου είναι να προετοιμάσει ένα έγγραφο που περιέχει πηγή συγχώνευσης δεδομένων σας. Αυτά τα δεδομένα μπορεί να είναι ταχυδρομικές διευθύνσεις ή οποιαδήποτε άλλα δεδομένα που θέλετε να δημιουργήσετε μοναδικές ετικέτες ή κάρτες. Σήμερα τελειώνει πίσω-υπάρχουν μόνο για αρχεία κειμένου και του διακομιστή δεδομένων evolution -- έχουν προγραμματιστεί κι άλλα. Η παρόν υποστήριξη κειμένου-μορφή αρχείου είναι πολύ απλή: κάθε γραμμή είναι ένα αρχείο, τα πεδία είναι οριοθετημένα με κόμματα (CSV​​), στηλοθέτες, ή άνω κάτω τελείες, και νέες γραμμές μπορούν να ενσωματωθούν σε τομείς, χρησιμοποιώντας την \"\\n"
-"\" οντότητας. Αυτό το αρχείο μπορεί να δημιουργηθεί χρησιμοποιώντας οποιοδήποτε πρόγραμμα επεξεργασίας κειμένου ή θα μπορούσε να δημιουργηθεί από κάποιο άλλο πρόγραμμα ή δέσμη ενεργειών. Ένας συνήθης τρόπος για τη δημιουργία αρχείων CSV είναι για την εξαγωγή τους από ένα πρόγραμμα υπολογιστικών φύλλων."
+"Το πρώτο βήμα για την εκτέλεση της συγχώνευσης του εγγράφου είναι να προετοιμάσει ένα έγγραφο που περιέχει μια πηγή συγχώνευσης των δεδομένων σας. Αυτά τα δεδομένα μπορεί να είναι ταχυδρομικές διευθύνσεις ή οποιαδήποτε άλλα δεδομένα που θέλετε να δημιουργήσετε μοναδικές ετικέτες ή κάρτες. Τα back-ends υπάρχουν μόνο για αρχεία κειμένου και του διακομιστή δεδομένων evolution -- έχουν προγραμματιστεί κι άλλα. Η παρούσα υποστήριξη κειμένου-μορφή αρχείου είναι πολύ απλή: κάθε γραμμή είναι ένα αρχείο, τα πεδία είναι οριοθετημένα με κόμματα (CSV​​), στηλοθέτες, ή ερωτηματικά, και νέες γραμμές μπορούν να ενσωματωθούν σε πεδία, χρησιμοποιώντας την \"\\n"
+"\" οντότητας. Αυτό το αρχείο μπορεί να δημιουργηθεί χρησιμοποιώντας οποιοδήποτε πρόγραμμα επεξεργασίας κειμένου ή θα μπορούσε να δημιουργηθεί από κάποιο άλλο πρόγραμμα ή δέσμη ενεργειών. Ένας συνήθης τρόπος για τη δημιουργία αρχείων CSV είναι η εξαγωγή τους από ένα πρόγραμμα υπολογιστικών φύλλων."
 
 #: C/mergefeatures.page:43(p)
 msgid "A label must then be configured to \"point at\" this data file. To configure the merge properties of a document, choose <guiseq><gui>Objects</gui><gui>Merge Properties</gui></guiseq> menu item to display the <gui>merge properties</gui> dialog. This dialog is used to select the exact data file format and file name (location) of the merge data."
@@ -1066,9 +1064,8 @@ msgid "category"
 msgstr "κατηγορία"
 
 #: C/mancreate.page:245(p)
-#, fuzzy
 msgid "A category for the template. A template can belong to multiple categories by simply adding multiple <code translate=\"no\">Meta</code> nodes to the parent <code translate=\"no\">Template</code> node. Template categories are used by the <app>gLabels</app><gui>New Label Dialog</gui> to filter the results of template searches."
-msgstr "Η κατηγορία του προτύπου. Ενα πρότυπο μπορεί να ανήκει σε πολλές κατηγορίες απλά προσθέτοντας πολλαπλούς <code translate=\"no\">Meta</code> κόμβους στο μητρικό <code translate=\"no\">Template</code> κόμβο. Οι κατηγορίες προτύπων χρησιμοποιούνται από το <app>gLabels</app><gui>New Label Dialog</gui> να φιλτράρετε τα αποτελέσματα των αναζητήσεων προτύπου."
+msgstr "Η κατηγορία του προτύπου. Ενα πρότυπο μπορεί να ανήκει σε πολλές κατηγορίες απλά προσθέτοντας πολλαπλούς <code translate=\"no\">Meta</code> κόμβους στο μητρικό <code translate=\"no\">Template</code> κόμβο. Οι κατηγορίες προτύπων χρησιμοποιούνται από το <gui>Νέο διάλογο ετικέτας</gui> του <app>gLabels</app> για να φιλτράρονται τα αποτελέσματα των αναζητήσεων προτύπου."
 
 #: C/mancreate.page:252(p)
 msgid "The value of this category must match a predefined category ID defined in the file <file>${prefix}/libglabels-3.0/templates/categories.xml</file>. Currently defined category IDs include:"
@@ -1806,9 +1803,8 @@ msgid "Changing Stacking Order"
 msgstr "Αλλαγή σειράς στοίβαξης"
 
 #: C/editprop.page:169(p)
-#, fuzzy
 msgid "Stacking order refers to relative position in the z-axis of objects. That is when objects overlap, which object will appear on top of the other. By default, newer objects will appear above older objects. To change this order, select one or more objects and choose <guiseq><gui>Objects</gui><gui>Order</gui><gui>Bring to Front</gui></guiseq> to raise the selection to the top of the stacking order, or choose <guiseq><gui>Objects</gui><gui>Order</gui><gui>Send to Back</gui></guiseq> to lower the selection to the bottom of the stacking order. These menuitems are also available by right-clicking the display area when there is a non-empty selection."
-msgstr "Η σειρά στοίβαξης αναφέρεται σε σχετική θέση του άξονα z των αντικειμένων. Αυτό ρυθμίζει όταν τα αντικείμενα επικαλύπτονται, ποιο αντικείμενο θα εμφανιστεί στην κορυφή του άλλου. Από προεπιλογή, νεότερα αντικείμενα θα εμφανίζονται πάνω από παλαιότερα αντικείμενα. Για να αλλάξετε αυτή τη σειρά, επιλέξτε ένα ή περισσότερα αντικείμενα και επιλέξτε <guiseq><gui>Αντικείμενα</gui><gui>Διάταξη</gui><gui>Σε πρώτο πλάνο</gui></guiseq> για να ανεβάσετε την επιλογή στην κορυφή της σειράς στοίβαξης, ή επιλέξτε <guiseq><gui>Αντικείμενα</gui><gui>Διάταξη</gui><gui>Μεταφορά στο φόντο</gui></guiseq> για να κατεβάσετε την επιλογή στο κάτω μέρος της σειράς στοίβαξης. Αυτά τα στοιχεία μενού είναι επίσης διαθέσιμα κάνοντας δεξί κλικ στην περιοχή οθόνης που υπάρχει μια μη-κενή επιλογή."
+msgstr "Η σειρά στοίβαξης αναφέρεται σε σχετική θέση του άξονα z των αντικειμένων. Αυτό γίνεται όταν τα αντικείμενα επικαλύπτονται, πιο αντικείμενο θα εμφανιστεί στην κορυφή του άλλου. Από προεπιλογή, τα νεότερα αντικείμενα θα εμφανίζονται πάνω από παλαιότερα αντικείμενα. Για να αλλάξετε αυτή τη σειρά, επιλέξτε ένα ή περισσότερα αντικείμενα και επιλέξτε <guiseq><gui>Αντικείμενα</gui><gui>Διάταξη</gui><gui>Σε πρώτο πλάνο</gui></guiseq> για να ανεβάσετε την επιλογή στην κορυφή της σειράς στοίβαξης, ή επιλέξτε <guiseq><gui>Αντικείμενα</gui><gui>Διάταξη</gui><gui>Μεταφορά στο φόντο</gui></guiseq> για να κατεβάσετε την επιλογή στο κάτω μέρος της σειράς στοίβαξης. Αυτά τα στοιχεία του μενού είναι επίσης διαθέσιμα κάνοντας δεξί κλικ στην περιοχή οθόνης που υπάρχει μια μη-κενή επιλογή."
 
 #: C/editprop.page:187(title)
 msgid "Rotating and Flipping Objects"
