@@ -171,6 +171,7 @@ static gdouble         auto_shrink_font_size       (cairo_t          *cr,
                                                     gdouble           size,
                                                     PangoWeight       weight,
                                                     PangoStyle        style,
+                                                    gdouble           line_spacing,
                                                     gchar            *text,
                                                     gdouble           width,
                                                     gdouble           height);
@@ -1017,7 +1018,7 @@ gl_label_text_get_auto_shrink (glLabelText      *ltext)
 
 
 /*****************************************************************************/
-/* Automatically shrink text size to fit within horizontal width.            */
+/* Automatically shrink text size to fit within bounding box.                */
 /*****************************************************************************/
 static gdouble
 auto_shrink_font_size (cairo_t     *cr,
@@ -1025,6 +1026,7 @@ auto_shrink_font_size (cairo_t     *cr,
                        gdouble      size,
                        PangoWeight  weight,
                        PangoStyle   style,
+                       gdouble      line_spacing,
                        gchar       *text,
                        gdouble      width,
                        gdouble      height)
@@ -1046,8 +1048,9 @@ auto_shrink_font_size (cairo_t     *cr,
         pango_layout_set_font_description (layout, desc);
         pango_font_description_free       (desc);
 
-        pango_layout_set_text (layout, text, -1);
+        pango_layout_set_spacing (layout, size * (line_spacing-1) * PANGO_SCALE);
         pango_layout_set_width (layout, -1);
+        pango_layout_set_text (layout, text, -1);
         pango_layout_get_size (layout, &iw, &ih);
         layout_width = (gdouble)iw / (gdouble)PANGO_SCALE;
         layout_height = (gdouble)ih / (gdouble)PANGO_SCALE;
@@ -1136,6 +1139,7 @@ set_text_path (glLabelText      *this,
                                                    font_size,
                                                    this->priv->font_weight,
                                                    style,
+                                                   this->priv->line_spacing,
                                                    text,
                                                    object_w,
                                                    object_h);
