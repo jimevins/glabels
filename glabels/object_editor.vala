@@ -27,49 +27,69 @@ namespace glabels
 
 	class ObjectEditor : Gtk.Box
 	{
-		private Prefs           prefs;
-		private Units           units;
+		private Prefs            prefs;
+		private Units            units;
 
-		private Model           model;
-		private LabelObject?    object;
+		private Model            model;
+		private LabelObject?     object;
 
 
-		private Gtk.Image       title_image;
-		private Gtk.Label       title_label;
-		private Gtk.Notebook    notebook;
+		private Gtk.Image        title_image;
+		private Gtk.Label        title_label;
+		private Gtk.Notebook     notebook;
 
-		private Gtk.Box         line_fill_page_box;
-		private Gtk.Box         pos_size_page_box;
-		private Gtk.Box         shadow_page_box;
+		private Gtk.Box          text_page_box;
+		private Gtk.Box          line_fill_page_box;
+		private Gtk.Box          pos_size_page_box;
+		private Gtk.Box          shadow_page_box;
 
-		private Gtk.SpinButton  line_width_spin;
-		private Gtk.Box         line_color_box;
-		private ColorButton     line_color_button;
+		private Gtk.Box          text_font_family_box;
+		private FontButton       text_font_family_button;
+		private Gtk.SpinButton   text_font_size_spin;
+		private Gtk.ToggleButton text_font_bold_toggle;
+		private Gtk.ToggleButton text_font_italic_toggle;
+		private Gtk.ToggleButton text_font_underline_toggle;
+		private Gtk.Box          text_color_box;
+		private ColorButton      text_color_button;
+		private Gtk.ToggleButton text_align_left_toggle;
+		private Gtk.ToggleButton text_align_center_toggle;
+		private Gtk.ToggleButton text_align_right_toggle;
+		private Gtk.ToggleButton text_align_top_toggle;
+		private Gtk.ToggleButton text_align_middle_toggle;
+		private Gtk.ToggleButton text_align_bottom_toggle;
+		private Gtk.SpinButton   text_line_spacing_spin;
+		private Gtk.TextView     text_text_view;
+		private Gtk.Box          text_insert_field_box;
+		private FieldButton      text_insert_field_button;
 
-		private Gtk.Box         fill_color_box;
-		private ColorButton     fill_color_button;
+		private Gtk.SpinButton   line_width_spin;
+		private Gtk.Box          line_color_box;
+		private ColorButton      line_color_button;
 
-		private Gtk.SpinButton  pos_x_spin;
-		private Gtk.SpinButton  pos_y_spin;
-		private Gtk.Label       pos_x_units_label;
-		private Gtk.Label       pos_y_units_label;
+		private Gtk.Box          fill_color_box;
+		private ColorButton      fill_color_button;
 
-		private Gtk.SpinButton  size_w_spin;
-		private Gtk.SpinButton  size_h_spin;
-		private Gtk.Label       size_w_units_label;
-		private Gtk.Label       size_h_units_label;
-		private Gtk.CheckButton size_aspect_check;
-		private Gtk.Button      size_reset_image_button;
+		private Gtk.SpinButton   pos_x_spin;
+		private Gtk.SpinButton   pos_y_spin;
+		private Gtk.Label        pos_x_units_label;
+		private Gtk.Label        pos_y_units_label;
 
-		private Gtk.CheckButton shadow_enable_check;
-		private Gtk.Grid        shadow_controls_grid;
-		private Gtk.SpinButton  shadow_x_spin;
-		private Gtk.SpinButton  shadow_y_spin;
-		private Gtk.Label       shadow_x_units_label;
-		private Gtk.Label       shadow_y_units_label;
-		private Gtk.Box         shadow_color_box;
-		private ColorButton     shadow_color_button;
-		private Gtk.SpinButton  shadow_opacity_spin;
+		private Gtk.SpinButton   size_w_spin;
+		private Gtk.SpinButton   size_h_spin;
+		private Gtk.Label        size_w_units_label;
+		private Gtk.Label        size_h_units_label;
+		private Gtk.CheckButton  size_aspect_check;
+		private Gtk.Button       size_reset_image_button;
+
+		private Gtk.CheckButton  shadow_enable_check;
+		private Gtk.Grid         shadow_controls_grid;
+		private Gtk.SpinButton   shadow_x_spin;
+		private Gtk.SpinButton   shadow_y_spin;
+		private Gtk.Label        shadow_x_units_label;
+		private Gtk.Label        shadow_y_units_label;
+		private Gtk.Box          shadow_color_box;
+		private ColorButton      shadow_color_button;
+		private Gtk.SpinButton   shadow_opacity_spin;
 
 
 		public ObjectEditor()
@@ -108,10 +128,43 @@ namespace glabels
 			title_label.set_sensitive( false );
 
 			/* Notebook pages. */
+			text_page_box      = builder.get_object( "text_page_box" )      as Gtk.Box;
 			line_fill_page_box = builder.get_object( "line_fill_page_box" ) as Gtk.Box;
 			pos_size_page_box  = builder.get_object( "pos_size_page_box" )  as Gtk.Box;
 			shadow_page_box    = builder.get_object( "shadow_page_box" )    as Gtk.Box;
 
+
+			/* Text widgets. */
+			text_font_family_box       = builder.get_object( "text_font_family_box" )       as Gtk.Box;
+			text_font_size_spin        = builder.get_object( "text_font_size_spin" )        as Gtk.SpinButton;
+			text_font_bold_toggle      = builder.get_object( "text_font_bold_toggle" )      as Gtk.ToggleButton;
+			text_font_italic_toggle    = builder.get_object( "text_font_italic_toggle" )    as Gtk.ToggleButton;
+			text_font_underline_toggle = builder.get_object( "text_font_underline_toggle" ) as Gtk.ToggleButton;
+			text_color_box             = builder.get_object( "text_color_box" )             as Gtk.Box;
+			text_align_left_toggle     = builder.get_object( "text_align_left_toggle" )     as Gtk.ToggleButton;
+			text_align_center_toggle   = builder.get_object( "text_align_center_toggle" )   as Gtk.ToggleButton;
+			text_align_right_toggle    = builder.get_object( "text_align_right_toggle" )    as Gtk.ToggleButton;
+			text_align_top_toggle      = builder.get_object( "text_align_top_toggle" )      as Gtk.ToggleButton;
+			text_align_middle_toggle   = builder.get_object( "text_align_middle_toggle" )   as Gtk.ToggleButton;
+			text_align_bottom_toggle   = builder.get_object( "text_align_bottom_toggle" )   as Gtk.ToggleButton;
+			text_line_spacing_spin     = builder.get_object( "text_line_spacing_spin" )     as Gtk.SpinButton;
+			text_text_view             = builder.get_object( "text_text_view" )             as Gtk.TextView;
+			text_insert_field_box      = builder.get_object( "text_insert_field_box" )      as Gtk.Box;
+
+			text_font_family_button = new FontButton( null );
+			text_font_family_box.pack_start( text_font_family_button, false, false, 0 );
+
+			text_color_button = new ColorButton( _("Default"), Color.black(), Color.black() );
+			text_color_box.pack_start( text_color_button, true, true, 0 );
+
+			text_insert_field_button = new FieldButton( null );
+			text_insert_field_box.pack_start( text_insert_field_button, true, true, 0 );
+/*
+			text_font_family_button.changed.connect( on_text_font_family_button_changed );
+			text_font_size_spin.value_changed.connect( on_text_font_size_spin_changed );
+			text_color_button.color_changed.connect( on_text_color_button_changed );
+			text_insert_field_button.changed.connect( on_text_field_button_changed );
+*/
 
 			/* Line widgets. */
 			line_width_spin         = builder.get_object( "line_width_spin" )         as Gtk.SpinButton;
@@ -248,11 +301,28 @@ namespace glabels
 			{
 				object = model.label.get_1st_selected_object();
 
-				if ( object is LabelObjectBox  )
+				if ( object is LabelObjectText  )
+				{
+					LabelObjectText tobject = object as LabelObjectText;
+
+					title_image.set_from_icon_name( "glabels-box", Gtk.IconSize.LARGE_TOOLBAR );
+					title_label.set_text( "<b>%s</b>".printf( _("Text object properties") ) );
+
+					text_text_view.set_buffer( tobject.buffer );
+
+					text_page_box.show_all();
+					line_fill_page_box.hide();
+					pos_size_page_box.show_all();
+					shadow_page_box.show_all();
+
+					size_reset_image_button.hide();
+				}
+				else if ( object is LabelObjectBox  )
 				{
 					title_image.set_from_icon_name( "glabels-box", Gtk.IconSize.LARGE_TOOLBAR );
 					title_label.set_text( "<b>%s</b>".printf( _("Box object properties") ) );
 
+					text_page_box.hide();
 					line_fill_page_box.show_all();
 					pos_size_page_box.show_all();
 					shadow_page_box.show_all();

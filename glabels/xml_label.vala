@@ -186,7 +186,7 @@ namespace glabels
 				{
 
 				case "Object-text":
-					/* TODO. */
+					parse_object_text_node( child, label );
 					break;
 
 				case "Object-box":
@@ -258,6 +258,32 @@ namespace glabels
 
 			/* shadow attrs */
 			parse_shadow_attrs( node, object );
+
+			label.add_object( object );
+		}
+
+
+		private void parse_object_text_node( Xml.Node node,
+		                                     Label    label )
+		{
+			LabelObjectText object = new LabelObjectText();
+
+		
+			/* position attrs */
+			object.x0 = XmlUtil.get_prop_length( node, "x", 0.0 );
+			object.y0 = XmlUtil.get_prop_length( node, "y", 0.0 );
+
+			/* size attrs */
+			object.w = XmlUtil.get_prop_length( node, "w", 0 );
+			object.h = XmlUtil.get_prop_length( node, "h", 0 );
+
+			/* affine attrs */
+			parse_affine_attrs( node, object );
+
+			/* shadow attrs */
+			parse_shadow_attrs( node, object );
+
+			// TODO: parse contents.
 
 			label.add_object( object );
 		}
@@ -389,6 +415,10 @@ namespace glabels
 				{
 					create_object_box_node( node, ns, (LabelObjectBox)object );
 				}
+				else if ( object is LabelObjectText )
+				{
+					create_object_text_node( node, ns, (LabelObjectText)object );
+				}
 				else /* TODO: other object types. */
 				{
 					message( "Unknown label object." );
@@ -437,6 +467,30 @@ namespace glabels
 
 			/* shadow attrs */
 			create_shadow_attrs( node, object );
+		}
+
+
+		private void create_object_text_node( Xml.Node        parent,
+		                                      Xml.Ns          ns,
+		                                      LabelObjectText object )
+		{
+			unowned Xml.Node *node = parent.new_child( ns, "Object-text" );
+
+			/* position attrs */
+			XmlUtil.set_prop_length( node, "x", object.x0 );
+			XmlUtil.set_prop_length( node, "y", object.y0 );
+
+			/* size attrs */
+			XmlUtil.set_prop_length( node, "w", object.w );
+			XmlUtil.set_prop_length( node, "h", object.h );
+
+			/* affine attrs */
+			create_affine_attrs( node, object );
+
+			/* shadow attrs */
+			create_shadow_attrs( node, object );
+
+			// TODO: create contents.
 		}
 
 

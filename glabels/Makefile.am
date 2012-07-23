@@ -8,7 +8,6 @@ bin_PROGRAMS = glabels-4
 
 glabels_4_SOURCES = \
 	glabels.vala \
-	TMP_gdk_key.vala \
 	color.vala \
 	color_button.vala \
 	color_history.vala \
@@ -34,6 +33,7 @@ glabels_4_SOURCES = \
 	label.vala \
 	label_object.vala \
 	label_object_box.vala \
+	label_object_text.vala \
 	label_region.vala \
 	label_state.vala \
 	merge.vala \
@@ -50,13 +50,18 @@ glabels_4_SOURCES = \
 	mini_preview.vala \
 	new_label_dialog.vala \
 	object_editor.vala \
+	outline.vala \
 	prefs.vala \
 	print_op.vala \
 	print_op_dialog.vala \
 	property_editor.vala \
 	template_history.vala \
+	text_line.vala \
+	text_lines.vala \
+	text_node.vala \
 	ui.vala \
 	units_util.vala \
+	valign_type.vala \
 	view.vala \
 	window.vala \
 	xml_label.vala \

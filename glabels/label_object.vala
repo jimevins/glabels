@@ -32,8 +32,10 @@ namespace glabels
 
 		private   bool         selected;
 		protected List<Handle> handles;
+		protected Outline?     outline;
 
 		private   double       aspect_ratio;
+
 
 
 		/**
@@ -254,6 +256,25 @@ namespace glabels
 
 
 		/**
+		 * Text vertical alignment
+		 */
+		public ValignType text_valignment
+		{
+			get { return _text_valignment; }
+
+			set
+			{
+				if ( _text_valignment != value )
+				{
+					_text_valignment = value;
+					changed();
+				}
+			}
+		}
+		private ValignType _text_valignment;
+
+
+		/**
 		 * Text line spacing
 		 */
 		public double text_line_spacing
@@ -452,6 +473,7 @@ namespace glabels
 			_font_italic_flag        = prefs.default_font_italic_flag;
 			_text_color_node         = ColorNode.from_color( prefs.default_text_color );
 			_text_alignment          = prefs.default_text_alignment;
+			_text_valignment         = ValignType.TOP;
 			_text_line_spacing       = prefs.default_text_line_spacing;
 
 			_line_width              = prefs.default_line_width;
@@ -700,6 +722,11 @@ namespace glabels
 			cr.translate( x0, y0 );
 			cr.transform( matrix );
 
+			if ( outline != null )
+			{
+				outline.draw( cr );
+			}
+
 			foreach( Handle handle in handles )
 			{
 				handle.draw( cr );
@@ -722,6 +749,14 @@ namespace glabels
 			cr.device_to_user( ref x, ref y );
 
 			bool ret_val = is_object_located_at( cr, x, y );
+
+			if ( (outline != null) && is_selected() )
+			{
+				if ( outline.in_stroke( cr, x, y ) )
+				{
+					ret_val = true;
+				}
+			}
 
 			cr.restore();
 

@@ -232,7 +232,7 @@ namespace glabels
 			{
 				update_scheduled_flag = true;
 
-				unowned Cairo.Region region = window.get_clip_region ();
+				Cairo.Region region = window.get_clip_region ();
 				// redraw the cairo canvas completely by exposing it
 				window.invalidate_region (region, true);
 			}

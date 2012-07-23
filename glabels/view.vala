@@ -385,6 +385,28 @@ namespace glabels
 		}
 
 
+		public void create_text_mode()
+		{
+			Gdk.Window window = canvas.get_window();
+
+			try
+			{
+				Gdk.Pixbuf pixbuf = Gdk.Pixbuf.from_pixdata( Cursor.text_pixdata, false );
+				Gdk.Cursor cursor = new Gdk.Cursor.from_pixbuf( Gdk.Display.get_default(),
+				                                                pixbuf, CURSOR_X_HOTSPOT, CURSOR_Y_HOTSPOT );
+				window.set_cursor( cursor );
+			}
+			catch ( Error err )
+			{
+				error( "%s\n", err.message );
+			}
+
+			in_object_create_mode = true;
+			create_object_type    = CreateType.TEXT;
+			state                 = State.IDLE;
+		}
+
+
 		private void on_prefs_changed()
 		{
 			grid_spacing = UnitsUtil.get_grid_size( prefs.units );
@@ -844,7 +866,9 @@ namespace glabels
 						/* TODO */
 						break;
 					case CreateType.TEXT:
-						/* TODO */
+						create_object.set_position( double.min( x, create_x0 ), double.min( y, create_y0 ) );
+						create_object.set_size( double.max( x, create_x0 ) - double.min( x, create_x0 ),
+						                        double.max( y, create_y0 ) - double.min( y, create_y0 ) );
 						break;
 					case CreateType.BARCODE:
 						/* TODO */
@@ -970,7 +994,7 @@ namespace glabels
 							/* TODO */
 							break;
 						case CreateType.TEXT:
-							/* TODO */
+							create_object = new LabelObjectText() as LabelObject;
 							break;
 						case CreateType.BARCODE:
 							/* TODO */

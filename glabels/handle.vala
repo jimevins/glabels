@@ -1,4 +1,4 @@
-/*  label_object_box.vala
+/*  handle.vala
  *
  *  Copyright (C) 2011  Jim Evins <evins@snaught.com>
  *
