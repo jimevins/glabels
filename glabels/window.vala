@@ -37,7 +37,7 @@ namespace glabels
 		public static unowned List<weak Window> window_list { get; private set; }
 
 
-		private Gtk.HBox       content_hbox;
+		private Gtk.Box        content_hbox;
 
 		public  Model?         model { get; private set; }
 		public  View?          view { get; private set; }
@@ -61,7 +61,7 @@ namespace glabels
 		{
 			prefs = new Prefs();
 
-			Gtk.VBox vbox1 = new Gtk.VBox( false, 0 );
+			Gtk.Box vbox1 = new Gtk.Box( Gtk.Orientation.VERTICAL, 0 );
 			add( vbox1 );
 
 			ui = new Ui( this );
@@ -69,14 +69,14 @@ namespace glabels
 			vbox1.pack_start( ui.get_widget( "/MainToolBar" ), false, false, 0 );
 			vbox1.pack_start( ui.get_widget( "/DrawingToolBar" ), false, false, 0 );
 
-			Gtk.HBox main_hbox = new Gtk.HBox( false, 0 );
+			Gtk.Box main_hbox = new Gtk.Box( Gtk.Orientation.HORIZONTAL, 0 );
 			vbox1.pack_start( main_hbox, true, true, 0 );
 
 			property_editor = new PropertyEditor();
 			property_editor.set_hexpand( false );
 			main_hbox.pack_start( property_editor, false, false, 0 );
 
-			content_hbox = new Gtk.HBox( false, 0 );
+			content_hbox = new Gtk.Box( Gtk.Orientation.HORIZONTAL, 0 );
 			content_hbox.set_hexpand( true );
 			main_hbox.pack_start( content_hbox, true, true, 0 );
 
@@ -88,7 +88,7 @@ namespace glabels
 			object_editor.set_hexpand( false );
 			main_hbox.pack_end( object_editor, false, false, 0 );
 
-			Gtk.HBox status_hbox = new Gtk.HBox( false, 0 );
+			Gtk.Box status_hbox = new Gtk.Box( Gtk.Orientation.HORIZONTAL, 0 );
 			vbox1.pack_start( status_hbox, false, false, 0 );
 
 			statusbar = new Gtk.Statusbar();

@@ -52,7 +52,7 @@ namespace glabels
 				default_label = _("Default color");
 			}
 
-			Gtk.HBox hbox = new Gtk.HBox( false, 3 );
+			Gtk.Box hbox = new Gtk.Box( Gtk.Orientation.HORIZONTAL, 3 );
 			this.add( hbox );
 
 			swatch = new ColorSwatch( SWATCH_W, SWATCH_H, color );

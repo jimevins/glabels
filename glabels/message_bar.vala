@@ -64,7 +64,7 @@ namespace glabels
 			label = new Gtk.Label( primary_text );
 
 			Gtk.Container container = get_content_area() as Gtk.Container;
-			Gtk.HBox hbox = new Gtk.HBox( false, 6 );
+			Gtk.Box hbox = new Gtk.Box( Gtk.Orientation.HORIZONTAL, 6 );
 			container.add( hbox );
 
 			hbox.pack_start( image, false, false, 0 );

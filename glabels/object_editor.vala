@@ -51,14 +51,14 @@ namespace glabels
 		private Gtk.ToggleButton text_font_underline_toggle;
 		private Gtk.Box          text_color_box;
 		private ColorButton      text_color_button;
-		private Gtk.ToggleButton text_align_left_toggle;
-		private Gtk.ToggleButton text_align_center_toggle;
-		private Gtk.ToggleButton text_align_right_toggle;
-		private Gtk.ToggleButton text_align_top_toggle;
-		private Gtk.ToggleButton text_align_middle_toggle;
-		private Gtk.ToggleButton text_align_bottom_toggle;
+		private Gtk.ToggleButton text_halign_left_toggle;
+		private Gtk.ToggleButton text_halign_center_toggle;
+		private Gtk.ToggleButton text_halign_right_toggle;
+		private Gtk.ToggleButton text_valign_top_toggle;
+		private Gtk.ToggleButton text_valign_middle_toggle;
+		private Gtk.ToggleButton text_valign_bottom_toggle;
 		private Gtk.SpinButton   text_line_spacing_spin;
-		private Gtk.TextView     text_text_view;
+		private Gtk.TextView     text_textview;
 		private Gtk.Box          text_insert_field_box;
 		private FieldButton      text_insert_field_button;
 
@@ -100,6 +100,7 @@ namespace glabels
 			{
 				string file = GLib.Path.build_filename( Config.DATADIR, Config.GLABELS_BRANCH, "ui", "object_editor.ui" );
 				string[] objects = { "object_editor_vbox",
+				                     "font_size_adjustment", "line_spacing_adjustment",
 				                     "line_width_adjustment",
 				                     "size_w_adjustment", "size_h_adjustment",
 				                     "pos_x_adjustment", "pos_y_adjustment",
@@ -141,14 +142,14 @@ namespace glabels
 			text_font_italic_toggle    = builder.get_object( "text_font_italic_toggle" )    as Gtk.ToggleButton;
 			text_font_underline_toggle = builder.get_object( "text_font_underline_toggle" ) as Gtk.ToggleButton;
 			text_color_box             = builder.get_object( "text_color_box" )             as Gtk.Box;
-			text_align_left_toggle     = builder.get_object( "text_align_left_toggle" )     as Gtk.ToggleButton;
-			text_align_center_toggle   = builder.get_object( "text_align_center_toggle" )   as Gtk.ToggleButton;
-			text_align_right_toggle    = builder.get_object( "text_align_right_toggle" )    as Gtk.ToggleButton;
-			text_align_top_toggle      = builder.get_object( "text_align_top_toggle" )      as Gtk.ToggleButton;
-			text_align_middle_toggle   = builder.get_object( "text_align_middle_toggle" )   as Gtk.ToggleButton;
-			text_align_bottom_toggle   = builder.get_object( "text_align_bottom_toggle" )   as Gtk.ToggleButton;
+			text_halign_left_toggle    = builder.get_object( "text_halign_left_toggle" )    as Gtk.ToggleButton;
+			text_halign_center_toggle  = builder.get_object( "text_halign_center_toggle" )  as Gtk.ToggleButton;
+			text_halign_right_toggle   = builder.get_object( "text_halign_right_toggle" )   as Gtk.ToggleButton;
+			text_valign_top_toggle     = builder.get_object( "text_valign_top_toggle" )     as Gtk.ToggleButton;
+			text_valign_middle_toggle  = builder.get_object( "text_valign_middle_toggle" )  as Gtk.ToggleButton;
+			text_valign_bottom_toggle  = builder.get_object( "text_valign_bottom_toggle" )  as Gtk.ToggleButton;
 			text_line_spacing_spin     = builder.get_object( "text_line_spacing_spin" )     as Gtk.SpinButton;
-			text_text_view             = builder.get_object( "text_text_view" )             as Gtk.TextView;
+			text_textview              = builder.get_object( "text_textview" )              as Gtk.TextView;
 			text_insert_field_box      = builder.get_object( "text_insert_field_box" )      as Gtk.Box;
 
 			text_font_family_button = new FontButton( null );
@@ -157,14 +158,24 @@ namespace glabels
 			text_color_button = new ColorButton( _("Default"), Color.black(), Color.black() );
 			text_color_box.pack_start( text_color_button, true, true, 0 );
 
-			text_insert_field_button = new FieldButton( null );
+			text_insert_field_button = new FieldButton( _("Insert merge field") );
 			text_insert_field_box.pack_start( text_insert_field_button, true, true, 0 );
-/*
+
 			text_font_family_button.changed.connect( on_text_font_family_button_changed );
 			text_font_size_spin.value_changed.connect( on_text_font_size_spin_changed );
+			text_font_bold_toggle.toggled.connect( on_text_font_bold_toggle_toggled );
+			text_font_italic_toggle.toggled.connect( on_text_font_italic_toggle_toggled );
+			text_font_underline_toggle.toggled.connect( on_text_font_underline_toggle_toggled );
 			text_color_button.color_changed.connect( on_text_color_button_changed );
-			text_insert_field_button.changed.connect( on_text_field_button_changed );
-*/
+			text_halign_left_toggle.toggled.connect( on_text_halign_left_toggle_toggled );
+			text_halign_center_toggle.toggled.connect( on_text_halign_center_toggle_toggled );
+			text_halign_right_toggle.toggled.connect( on_text_halign_right_toggle_toggled );
+			text_valign_top_toggle.toggled.connect( on_text_valign_top_toggle_toggled );
+			text_valign_middle_toggle.toggled.connect( on_text_valign_middle_toggle_toggled );
+			text_valign_bottom_toggle.toggled.connect( on_text_valign_bottom_toggle_toggled );
+			text_line_spacing_spin.value_changed.connect( on_text_line_spacing_spin_changed );
+			text_insert_field_button.key_selected.connect( on_text_insert_field_button_key_selected );
+
 
 			/* Line widgets. */
 			line_width_spin         = builder.get_object( "line_width_spin" )         as Gtk.SpinButton;
@@ -303,12 +314,8 @@ namespace glabels
 
 				if ( object is LabelObjectText  )
 				{
-					LabelObjectText tobject = object as LabelObjectText;
-
 					title_image.set_from_icon_name( "glabels-box", Gtk.IconSize.LARGE_TOOLBAR );
 					title_label.set_text( "<b>%s</b>".printf( _("Text object properties") ) );
-
-					text_text_view.set_buffer( tobject.buffer );
 
 					text_page_box.show_all();
 					line_fill_page_box.hide();
@@ -334,6 +341,16 @@ namespace glabels
 					assert_not_reached();
 				}
 
+				load_text_font_family_button();
+				load_text_font_size_spin();
+				load_text_font_bold_toggle();
+				load_text_font_italic_toggle();
+				load_text_font_underline_toggle();
+				load_text_color_button();
+				load_text_halign_toggles();
+				load_text_valign_toggles();
+				load_text_line_spacing_spin();
+				load_text_textview();
 				load_line_width_spin();
 				load_line_color_button();
 				load_fill_color_button();
@@ -396,6 +413,8 @@ namespace glabels
 		{
 			if ( model.label.merge is MergeNone )
 			{
+				text_color_button.clear_keys();
+				text_insert_field_button.clear_keys();
 				line_color_button.clear_keys();
 				fill_color_button.clear_keys();
 				shadow_color_button.clear_keys();
@@ -403,6 +422,8 @@ namespace glabels
 			else
 			{
 				List<string> key_list = model.label.merge.get_key_list();
+				text_color_button.set_keys( key_list );
+				text_insert_field_button.set_keys( key_list );
 				line_color_button.set_keys( key_list );
 				fill_color_button.set_keys( key_list );
 				shadow_color_button.set_keys( key_list );
@@ -424,6 +445,387 @@ namespace glabels
 		}
 
 
+		/***************************
+		 * text_font_family_button
+		 ***************************/
+		private void on_text_font_family_button_changed()
+		{
+			if ( object != null )
+			{
+				object.font_family = text_font_family_button.get_family();
+			}
+		}
+
+
+		private void load_text_font_family_button()
+		{
+			if ( (object != null) && object.can_text() )
+			{
+				GLib.SignalHandler.block_by_func( (void*)text_font_family_button, (void*)on_text_font_family_button_changed, this );
+
+				text_font_family_button.set_family( object.font_family );
+
+				GLib.SignalHandler.unblock_by_func( (void*)text_font_family_button, (void*)on_text_font_family_button_changed, this );
+			}
+		}
+
+
+		/***************************
+		 * text_font_size_spin
+		 ***************************/
+		private void on_text_font_size_spin_changed()
+		{
+			if ( object != null )
+			{
+				object.font_size = text_font_size_spin.get_value();
+			}
+		}
+
+
+		private void load_text_font_size_spin()
+		{
+			if ( object != null )
+			{
+				GLib.SignalHandler.block_by_func( (void*)text_font_size_spin, (void*)on_text_font_size_spin_changed, this );
+
+				text_font_size_spin.set_value( object.font_size );
+
+				GLib.SignalHandler.unblock_by_func( (void*)text_font_size_spin, (void*)on_text_font_size_spin_changed, this );
+			}
+		}
+
+
+		/***************************
+		 * text_font_bold_toggle
+		 ***************************/
+		private void on_text_font_bold_toggle_toggled()
+		{
+			if ( object != null )
+			{
+				object.font_weight = text_font_bold_toggle.get_active() ? Pango.Weight.BOLD : Pango.Weight.NORMAL;
+			}
+		}
+
+
+		private void load_text_font_bold_toggle()
+		{
+			if ( object != null )
+			{
+				GLib.SignalHandler.block_by_func( (void*)text_font_bold_toggle, (void*)on_text_font_bold_toggle_toggled, this );
+
+				text_font_bold_toggle.set_active( object.font_weight == Pango.Weight.BOLD );
+
+				GLib.SignalHandler.unblock_by_func( (void*)text_font_bold_toggle, (void*)on_text_font_bold_toggle_toggled, this );
+			}
+		}
+
+
+		/***************************
+		 * text_font_italic_toggle
+		 ***************************/
+		private void on_text_font_italic_toggle_toggled()
+		{
+			if ( object != null )
+			{
+				object.font_italic_flag = text_font_italic_toggle.get_active();
+			}
+		}
+
+
+		private void load_text_font_italic_toggle()
+		{
+			if ( object != null )
+			{
+				GLib.SignalHandler.block_by_func( (void*)text_font_italic_toggle, (void*)on_text_font_italic_toggle_toggled, this );
+
+				text_font_italic_toggle.set_active( object.font_italic_flag );
+
+				GLib.SignalHandler.unblock_by_func( (void*)text_font_italic_toggle, (void*)on_text_font_italic_toggle_toggled, this );
+			}
+		}
+
+
+		/******************************
+		 * text_font_underline_toggle
+		 ******************************/
+		private void on_text_font_underline_toggle_toggled()
+		{
+			if ( object != null )
+			{
+				object.font_underline_flag = text_font_underline_toggle.get_active();
+			}
+		}
+
+
+		private void load_text_font_underline_toggle()
+		{
+			if ( object != null )
+			{
+				GLib.SignalHandler.block_by_func( (void*)text_font_underline_toggle, (void*)on_text_font_underline_toggle_toggled, this );
+
+				text_font_underline_toggle.set_active( object.font_underline_flag );
+
+				GLib.SignalHandler.unblock_by_func( (void*)text_font_underline_toggle, (void*)on_text_font_underline_toggle_toggled, this );
+			}
+		}
+
+
+		/******************************
+		 * text_color_button
+		 ******************************/
+		private void on_text_color_button_changed()
+		{
+			if ( object != null )
+			{
+				bool is_default;
+
+				object.text_color_node = text_color_button.get_color_node( out is_default );
+			}
+		}
+
+
+		private void load_text_color_button()
+		{
+			if ( object != null )
+			{
+				GLib.SignalHandler.block_by_func( (void*)text_color_button, (void*)on_text_color_button_changed, this );
+
+				text_color_button.set_color_node( object.text_color_node );
+
+				GLib.SignalHandler.unblock_by_func( (void*)text_color_button, (void*)on_text_color_button_changed, this );
+			}
+		}
+
+
+		/******************************
+		 * text_halign_*_toggle
+		 ******************************/
+		private void on_text_halign_left_toggle_toggled()
+		{
+			if ( object != null )
+			{
+				if ( text_halign_left_toggle.get_active() )
+				{
+					object.text_alignment = Pango.Alignment.LEFT;
+
+					text_halign_center_toggle.set_active( false );
+					text_halign_right_toggle.set_active( false );
+				}
+			}
+		}
+
+
+		private void on_text_halign_center_toggle_toggled()
+		{
+			if ( object != null )
+			{
+				if ( text_halign_center_toggle.get_active() )
+				{
+					object.text_alignment = Pango.Alignment.CENTER;
+
+					text_halign_left_toggle.set_active( false );
+					text_halign_right_toggle.set_active( false );
+				}
+			}
+		}
+
+
+		private void on_text_halign_right_toggle_toggled()
+		{
+			if ( object != null )
+			{
+				if ( text_halign_right_toggle.get_active() )
+				{
+					object.text_alignment = Pango.Alignment.RIGHT;
+
+					text_halign_left_toggle.set_active( false );
+					text_halign_center_toggle.set_active( false );
+				}
+			}
+		}
+
+
+		private void load_text_halign_toggles()
+		{
+			if ( object != null )
+			{
+				GLib.SignalHandler.block_by_func( (void*)text_halign_left_toggle, (void*)on_text_halign_left_toggle_toggled, this );
+				GLib.SignalHandler.block_by_func( (void*)text_halign_center_toggle, (void*)on_text_halign_center_toggle_toggled, this );
+				GLib.SignalHandler.block_by_func( (void*)text_halign_right_toggle, (void*)on_text_halign_right_toggle_toggled, this );
+
+				switch ( object.text_alignment )
+				{
+				case Pango.Alignment.LEFT:
+					text_halign_left_toggle.set_active( true );
+					text_halign_center_toggle.set_active( false );
+					text_halign_right_toggle.set_active( false );
+					break;
+				case Pango.Alignment.CENTER:
+					text_halign_left_toggle.set_active( false );
+					text_halign_center_toggle.set_active( true );
+					text_halign_right_toggle.set_active( false );
+					break;
+				case Pango.Alignment.RIGHT:
+					text_halign_left_toggle.set_active( false );
+					text_halign_center_toggle.set_active( false );
+					text_halign_right_toggle.set_active( true );
+					break;
+				default:
+					assert_not_reached();
+				}
+
+				GLib.SignalHandler.unblock_by_func( (void*)text_halign_left_toggle, (void*)on_text_halign_left_toggle_toggled, this );
+				GLib.SignalHandler.unblock_by_func( (void*)text_halign_center_toggle, (void*)on_text_halign_center_toggle_toggled, this );
+				GLib.SignalHandler.unblock_by_func( (void*)text_halign_right_toggle, (void*)on_text_halign_right_toggle_toggled, this );
+			}
+		}
+
+
+		/******************************
+		 * text_valign_*_toggle
+		 ******************************/
+		private void on_text_valign_top_toggle_toggled()
+		{
+			if ( object != null )
+			{
+				if ( text_valign_top_toggle.get_active() )
+				{
+					object.text_valignment = ValignType.TOP;
+
+					text_valign_middle_toggle.set_active( false );
+					text_valign_bottom_toggle.set_active( false );
+				}
+			}
+		}
+
+
+		private void on_text_valign_middle_toggle_toggled()
+		{
+			if ( object != null )
+			{
+				if ( text_valign_middle_toggle.get_active() )
+				{
+					object.text_valignment = ValignType.CENTER;
+
+					text_valign_top_toggle.set_active( false );
+					text_valign_bottom_toggle.set_active( false );
+				}
+			}
+		}
+
+
+		private void on_text_valign_bottom_toggle_toggled()
+		{
+			if ( object != null )
+			{
+				if ( text_valign_bottom_toggle.get_active() )
+				{
+					object.text_valignment = ValignType.BOTTOM;
+
+					text_valign_top_toggle.set_active( false );
+					text_valign_middle_toggle.set_active( false );
+				}
+			}
+		}
+
+
+		private void load_text_valign_toggles()
+		{
+			if ( object != null )
+			{
+				GLib.SignalHandler.block_by_func( (void*)text_valign_top_toggle, (void*)on_text_valign_top_toggle_toggled, this );
+				GLib.SignalHandler.block_by_func( (void*)text_valign_middle_toggle, (void*)on_text_valign_middle_toggle_toggled, this );
+				GLib.SignalHandler.block_by_func( (void*)text_valign_bottom_toggle, (void*)on_text_valign_bottom_toggle_toggled, this );
+
+				switch ( object.text_valignment )
+				{
+				case ValignType.TOP:
+					text_valign_top_toggle.set_active( true );
+					text_valign_middle_toggle.set_active( false );
+					text_valign_bottom_toggle.set_active( false );
+					break;
+				case ValignType.CENTER:
+					text_valign_top_toggle.set_active( false );
+					text_valign_middle_toggle.set_active( true );
+					text_valign_bottom_toggle.set_active( false );
+					break;
+				case ValignType.BOTTOM:
+					text_valign_top_toggle.set_active( false );
+					text_valign_middle_toggle.set_active( false );
+					text_valign_bottom_toggle.set_active( true );
+					break;
+				default:
+					assert_not_reached();
+				}
+
+				GLib.SignalHandler.unblock_by_func( (void*)text_valign_top_toggle, (void*)on_text_valign_top_toggle_toggled, this );
+				GLib.SignalHandler.unblock_by_func( (void*)text_valign_middle_toggle, (void*)on_text_valign_middle_toggle_toggled, this );
+				GLib.SignalHandler.unblock_by_func( (void*)text_valign_bottom_toggle, (void*)on_text_valign_bottom_toggle_toggled, this );
+			}
+		}
+
+
+		/***************************
+		 * text_line_spacing_spin
+		 ***************************/
+		private void on_text_line_spacing_spin_changed()
+		{
+			if ( object != null )
+			{
+				object.text_line_spacing = text_line_spacing_spin.get_value();
+			}
+		}
+
+
+		private void load_text_line_spacing_spin()
+		{
+			if ( object != null )
+			{
+				GLib.SignalHandler.block_by_func( (void*)text_line_spacing_spin, (void*)on_text_line_spacing_spin_changed, this );
+
+				text_line_spacing_spin.set_value( object.text_line_spacing );
+
+				GLib.SignalHandler.unblock_by_func( (void*)text_line_spacing_spin, (void*)on_text_line_spacing_spin_changed, this );
+			}
+		}
+
+
+		/***************************
+		 * text_textview
+		 ***************************/
+		private void load_text_textview()
+		{
+			if ( object != null )
+			{
+				if ( object is LabelObjectText  )
+				{
+					LabelObjectText tobject = object as LabelObjectText;
+
+					text_textview.set_buffer( tobject.buffer );
+				}
+			}
+		}
+
+
+		/***************************
+		 * text_insert_field_button
+		 ***************************/
+		private void on_text_insert_field_button_key_selected( string key )
+		{
+			if ( object != null )
+			{
+				if ( object is LabelObjectText  )
+				{
+					string field_string = "${%s}".printf( key );
+					text_textview.get_buffer().insert_at_cursor( field_string, -1 );
+				}
+			}
+		}
+
+
+		/******************************
+		 * line_width_spin
+		 ******************************/
 		private void on_line_width_spin_changed()
 		{
 			if ( object != null )
@@ -446,6 +848,9 @@ namespace glabels
 		}
 
 
+		/******************************
+		 * line_color_button
+		 ******************************/
 		private void on_line_color_button_changed()
 		{
 			if ( object != null )
@@ -470,6 +875,9 @@ namespace glabels
 		}
 
 
+		/******************************
+		 * fill_color_button
+		 ******************************/
 		private void on_fill_color_button_changed()
 		{
 			if ( object != null )
@@ -494,6 +902,9 @@ namespace glabels
 		}
 
 
+		/******************************
+		 * pos_x_spin
+		 ******************************/
 		private void on_pos_x_spin_changed()
 		{
 			if ( object != null )
@@ -516,6 +927,9 @@ namespace glabels
 		}
 
 
+		/******************************
+		 * pos_y_spin
+		 ******************************/
 		private void on_pos_y_spin_changed()
 		{
 			if ( object != null )
@@ -538,6 +952,9 @@ namespace glabels
 		}
 
 
+		/******************************
+		 * size_w_spin
+		 ******************************/
 		private void on_size_w_spin_changed()
 		{
 			if ( object != null )
@@ -569,6 +986,9 @@ namespace glabels
 		}
 
 
+		/******************************
+		 * size_h_spin
+		 ******************************/
 		private void on_size_h_spin_changed()
 		{
 			if ( object != null )
@@ -600,6 +1020,9 @@ namespace glabels
 		}
 
 
+		/******************************
+		 * shadow_enable_check
+		 ******************************/
 		private void on_shadow_enable_check_changed()
 		{
 			if ( object != null )
@@ -624,6 +1047,9 @@ namespace glabels
 		}
 
 
+		/******************************
+		 * shadow_x_spin
+		 ******************************/
 		private void on_shadow_x_spin_changed()
 		{
 			if ( object != null )
@@ -646,6 +1072,9 @@ namespace glabels
 		}
 
 
+		/******************************
+		 * shadow_y_spin
+		 ******************************/
 		private void on_shadow_y_spin_changed()
 		{
 			if ( object != null )
@@ -668,6 +1097,9 @@ namespace glabels
 		}
 
 
+		/******************************
+		 * shadow_color_button
+		 ******************************/
 		private void on_shadow_color_button_changed()
 		{
 			if ( object != null )
@@ -692,6 +1124,9 @@ namespace glabels
 		}
 
 
+		/******************************
+		 * shadow_opacity_spin
+		 ******************************/
 		private void on_shadow_opacity_spin_changed()
 		{
 			if ( object != null )

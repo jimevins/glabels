@@ -39,7 +39,7 @@ namespace glabels
 		{
 			this.font_family = font_family;
 
-			Gtk.HBox hbox = new Gtk.HBox( false, 3 );
+			Gtk.Box hbox = new Gtk.Box( Gtk.Orientation.HORIZONTAL, 3 );
 			this.add( hbox );
 
 			font_label = new Gtk.Label( font_family );

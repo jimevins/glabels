@@ -38,7 +38,7 @@ namespace glabels
 
 		public FieldButton( string? name )
 		{
-			Gtk.HBox hbox = new Gtk.HBox( false, 3 );
+			Gtk.Box hbox = new Gtk.Box( Gtk.Orientation.HORIZONTAL, 3 );
 			this.add( hbox );
 
 			klabel = new Gtk.Label( "" );
@@ -58,6 +58,8 @@ namespace glabels
 				klabel_is_key = true;
 			}
 
+			set_sensitive( false );
+
 			button_press_event.connect( on_button_press_event );
 			menu.key_selected.connect( on_menu_key_selected );
 			menu.selection_done.connect( on_menu_selection_done );
@@ -74,6 +76,14 @@ namespace glabels
 			}
 
 			menu.show_all();
+
+			set_sensitive( true );
+		}
+
+
+		public void clear_keys()
+		{
+			set_sensitive( false );
 		}
 
 

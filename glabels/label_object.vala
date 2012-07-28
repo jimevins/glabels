@@ -218,6 +218,25 @@ namespace glabels
 
 
 		/**
+		 * Font underline flag
+		 */
+		public bool font_underline_flag
+		{
+			get { return _font_underline_flag; }
+
+			set
+			{
+				if ( _font_underline_flag != value )
+				{
+					_font_underline_flag = value;
+					changed();
+				}
+			}
+		}
+		private bool _font_underline_flag;
+
+
+		/**
 		 * Text color node
 		 */
 		public ColorNode text_color_node
@@ -471,6 +490,7 @@ namespace glabels
 			_font_size               = prefs.default_font_size;
 			_font_weight             = prefs.default_font_weight;
 			_font_italic_flag        = prefs.default_font_italic_flag;
+			_font_underline_flag     = false;
 			_text_color_node         = ColorNode.from_color( prefs.default_text_color );
 			_text_alignment          = prefs.default_text_alignment;
 			_text_valignment         = ValignType.TOP;

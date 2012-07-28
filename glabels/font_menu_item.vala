@@ -46,7 +46,7 @@ namespace glabels
 		{
 			this.font_family = font_family;
 
-			Gtk.HBox hbox = new Gtk.HBox( false, 6 );
+			Gtk.Box hbox = new Gtk.Box( Gtk.Orientation.HORIZONTAL, 6 );
 			this.add( hbox );
 
 			FontSample sample = new FontSample( SAMPLE_W, SAMPLE_H, short_sample_text, font_family );

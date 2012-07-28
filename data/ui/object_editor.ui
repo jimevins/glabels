@@ -203,7 +203,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToggleButton" id="togglebutton1">
+                                  <object class="GtkToggleButton" id="text_font_italic_toggle">
                                     <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
@@ -227,7 +227,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToggleButton" id="togglebutton2">
+                                  <object class="GtkToggleButton" id="text_font_underline_toggle">
                                     <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
@@ -313,7 +313,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="spacing">3</property>
                                 <child>
-                                  <object class="GtkToggleButton" id="text_align_left_toggle">
+                                  <object class="GtkToggleButton" id="text_halign_left_toggle">
                                     <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
@@ -334,7 +334,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToggleButton" id="text_align_center_toggle">
+                                  <object class="GtkToggleButton" id="text_halign_center_toggle">
                                     <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
@@ -355,7 +355,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToggleButton" id="text_align_right_toggle">
+                                  <object class="GtkToggleButton" id="text_halign_right_toggle">
                                     <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
@@ -388,7 +388,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="spacing">3</property>
                                 <child>
-                                  <object class="GtkToggleButton" id="text_align_top_toggle">
+                                  <object class="GtkToggleButton" id="text_valign_top_toggle">
                                     <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
@@ -409,7 +409,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToggleButton" id="text_align_middle_toggle">
+                                  <object class="GtkToggleButton" id="text_valign_middle_toggle">
                                     <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
@@ -430,7 +430,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToggleButton" id="text_align_bottom_toggle">
+                                  <object class="GtkToggleButton" id="text_valign_bottom_toggle">
                                     <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
@@ -555,7 +555,7 @@
                                 <property name="vexpand">True</property>
                                 <property name="shadow_type">in</property>
                                 <child>
-                                  <object class="GtkTextView" id="text_text_view">
+                                  <object class="GtkTextView" id="text_textview">
                                     <property name="width_request">232</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
