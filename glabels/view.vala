@@ -1008,6 +1008,9 @@ namespace glabels
 						create_object.set_size( 0, 0 );
 						model.label.add_object( create_object );
 
+						model.label.unselect_all();
+						model.label.select_object( create_object );
+
 						create_x0 = x;
 						create_y0 = y;
 
@@ -1098,8 +1101,10 @@ namespace glabels
 					Gdk.Cursor cursor = new Gdk.Cursor( Gdk.CursorType.LEFT_PTR );
 					window.set_cursor( cursor );
 
-					model.label.unselect_all();
-					model.label.select_object( create_object );
+					if ( (create_object.w < 2) && (create_object.h < 2) )
+					{
+						create_object.set_size( 72, 72 );
+					}
 
 					in_object_create_mode = false;
 					state = State.IDLE;

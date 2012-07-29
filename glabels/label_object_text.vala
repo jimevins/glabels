@@ -35,6 +35,8 @@ namespace glabels
 		private const double SELECTION_SLOP_PIXELS = 4.0;
 		private const double TEXT_MARGIN = 3.0;
 
+		private const Color  EMPTY_TEXT_COLOR = { 0.5, 0.5, 0.5, 0.5 };
+
 		public bool auto_shrink { get; set; default = false; }
 
 
@@ -78,14 +80,21 @@ namespace glabels
 
 		public override void draw_object( Cairo.Context cr, bool in_editor, MergeRecord? record )
 		{
-			Color text_color = text_color_node.expand( record );
-
-			if ( in_editor && text_color_node.field_flag )
+			if ( in_editor && (buffer.get_char_count() == 0) )
 			{
-				text_color = Color.from_rgba( 0, 0, 0, 0.5 );
+				draw_empty_text( cr );
 			}
+			else
+			{
+				Color text_color = text_color_node.expand( record );
 
-			draw_text_real( cr, in_editor, record, text_color );
+				if ( in_editor && text_color_node.field_flag )
+				{
+					text_color = Color.from_rgba( 0, 0, 0, 0.5 );
+				}
+
+				draw_text_real( cr, in_editor, record, text_color );
+			}
 		}
 
 
@@ -104,9 +113,18 @@ namespace glabels
 		}
 
 
+		private void draw_empty_text( Cairo.Context cr )
+		{
+			set_empty_text_path( cr );
+
+			cr.set_source_rgba( EMPTY_TEXT_COLOR.r, EMPTY_TEXT_COLOR.g, EMPTY_TEXT_COLOR.b, EMPTY_TEXT_COLOR.a );
+			cr.fill();
+		}
+
+
 		private void draw_text_real( Cairo.Context cr, bool in_editor, MergeRecord? record, Color color )
 		{
-			set_text_path( cr, in_editor, record);
+			set_text_path( cr, in_editor, record );
 
 			cr.set_source_rgba( color.r, color.g, color.b, color.a );
 			cr.fill();
@@ -118,7 +136,14 @@ namespace glabels
 			if ( (x >= 0) && (x <= w) && (y >=0) && (y <= h) )
 			{
 				cr.new_path();
-				set_text_path( cr, true, null);
+				if ( buffer.get_char_count() == 0 )
+				{
+					set_empty_text_path( cr );
+				}
+				else
+				{
+					set_text_path( cr, true, null);
+				}
 				if ( cr.in_fill( x, y ) )
 				{
 					return true;
@@ -195,6 +220,33 @@ namespace glabels
 			}
 
 			cr.move_to( TEXT_MARGIN, y );
+			Pango.cairo_layout_path( cr, layout );
+
+			cr.restore();
+		}
+
+
+		private void set_empty_text_path( Cairo.Context cr )
+		{
+			cr.save();
+
+			Pango.Layout layout = Pango.cairo_create_layout( cr );
+
+			Cairo.FontOptions font_options = new Cairo.FontOptions();
+			font_options.set_hint_metrics( Cairo.HintMetrics.OFF );
+			Pango.Context context = layout.get_context();
+			Pango.cairo_context_set_font_options( context, font_options );
+
+			Pango.FontDescription desc = new Pango.FontDescription();
+			desc.set_family( "Sans" );
+			desc.set_weight( Pango.Weight.NORMAL );
+			desc.set_size( (int)(12 * FONT_SCALE * Pango.SCALE) );
+			desc.set_style( Pango.Style.NORMAL );
+			layout.set_font_description( desc );
+
+			layout.set_text( _("Text"), -1 );
+
+			cr.move_to( TEXT_MARGIN, 0 );
 			Pango.cairo_layout_path( cr, layout );
 
 			cr.restore();

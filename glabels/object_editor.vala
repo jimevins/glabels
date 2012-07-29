@@ -314,7 +314,7 @@ namespace glabels
 
 				if ( object is LabelObjectText  )
 				{
-					title_image.set_from_icon_name( "glabels-box", Gtk.IconSize.LARGE_TOOLBAR );
+					title_image.set_from_icon_name( "glabels-text", Gtk.IconSize.LARGE_TOOLBAR );
 					title_label.set_text( "<b>%s</b>".printf( _("Text object properties") ) );
 
 					text_page_box.show_all();
