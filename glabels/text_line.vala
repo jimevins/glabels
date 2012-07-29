@@ -29,8 +29,15 @@ namespace glabels
 		public unowned List<TextNode> nodes { get; private set; }
 
 
-		public TextLine( string text, int i_start, out int i_next )
+		public TextLine()
 		{
+		}
+
+
+		public TextLine.parse( string text, int i_start, out int i_next )
+		{
+			this();
+
 			i_next = i_start;
 
 			for ( int i = i_start; text[i] != 0; i = i_next )
@@ -46,6 +53,18 @@ namespace glabels
 					break;
 				}
 			}
+		}
+
+
+		public void append( TextNode node )
+		{
+			nodes.append( node );
+		}
+
+
+		public bool empty()
+		{
+			return nodes.first() == null;
 		}
 
 

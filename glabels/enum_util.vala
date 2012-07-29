@@ -68,6 +68,46 @@ namespace glabels
 
 
 		/****************************************************************************/
+		/* Utilities to deal with ValignType.                                       */
+		/****************************************************************************/
+
+		public string valign_to_string( ValignType valign )
+		{
+			switch (valign) {
+			case ValignType.TOP:
+				return "top";
+			case ValignType.CENTER:
+				return "center";
+			case ValignType.BOTTOM:
+				return "bottom";
+			default:
+				return "?";
+			}
+		}
+
+		public ValignType string_to_valign( string align_string )
+		{
+			switch (align_string)
+			{
+			case "top":
+			case "Top":
+			case "TOP":
+				return ValignType.TOP;
+			case "center":
+			case "Center":
+			case "CENTER":
+				return ValignType.CENTER;
+			case "bottom":
+			case "Bottom":
+			case "BOTTOM":
+				return ValignType.BOTTOM;
+			default:
+				return ValignType.TOP;
+			}
+		}
+
+
+		/****************************************************************************/
 		/* Utilities to deal with PangoWeight types                                 */
 		/****************************************************************************/
 

@@ -45,6 +45,18 @@ namespace glabels
 		}
 
 
+		public ColorNode.from_legacy_color( uint32 color )
+		{
+			this( false, Color.from_legacy_color( color ), null );
+		}
+
+
+		public ColorNode.from_key( string key )
+		{
+			this( true, Color.none(), key );
+		}
+
+
 		public bool equal( ColorNode cn )
 		{
 			return ( (this.field_flag == cn.field_flag) && this.color.equal( cn.color ) && (this.key == cn.key) );

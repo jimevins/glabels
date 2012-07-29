@@ -277,15 +277,116 @@ namespace glabels
 			object.w = XmlUtil.get_prop_length( node, "w", 0 );
 			object.h = XmlUtil.get_prop_length( node, "h", 0 );
 
+			/* align attr */
+			object.text_alignment = EnumUtil.string_to_align( XmlUtil.get_prop_string( node, "align", "left" ) );
+
+			/* valign attr */
+			object.text_valignment = EnumUtil.string_to_valign( XmlUtil.get_prop_string( node, "valign", "top" ) );
+
+			/* auto_shrink attr */
+			object.auto_shrink = XmlUtil.get_prop_bool( node, "auto_shrink", false );
+
 			/* affine attrs */
 			parse_affine_attrs( node, object );
 
 			/* shadow attrs */
 			parse_shadow_attrs( node, object );
 
-			// TODO: parse contents.
+			for ( unowned Xml.Node* child = node.children; child != null; child = child->next )
+			{
+				switch (child->name)
+				{
+				case "Span":
+					parse_toplevel_span_node( child, object );
+					break;
+
+				default:
+					if ( child->is_text() == 0 )
+					{
+						message( "Unexpected %s child: \"%s\"", node.name, child->name );
+					}
+					break;
+				}
+			}
 
 			label.add_object( object );
+		}
+
+
+		private void parse_toplevel_span_node( Xml.Node        node,
+		                                       LabelObjectText object )
+		{
+			stdout.printf( "Span\n" );
+			/* font_family attr */
+			object.font_family = XmlUtil.get_prop_string( node, "font_family", "Sans" );
+
+			/* font_size attr */
+			object.font_size = XmlUtil.get_prop_double( node, "font_size", 12.0 );
+
+			/* font_weight attr */
+			object.font_weight = EnumUtil.string_to_weight( XmlUtil.get_prop_string( node, "font_weight", "normal" ) );
+
+			/* font_italic attr */
+			object.font_italic_flag = XmlUtil.get_prop_bool( node, "font_italic", false );
+
+			/* color attrs */
+			string color_field_string = XmlUtil.get_prop_string( node, "color_field", null );
+			if ( color_field_string != null )
+			{
+				object.text_color_node = ColorNode.from_key( color_field_string );
+			}
+			else
+			{
+				object.text_color_node = ColorNode.from_legacy_color( XmlUtil.get_prop_uint( node, "color", 0 ) );
+			}
+
+			/* line_spacing attr */
+			object.text_line_spacing = XmlUtil.get_prop_double( node, "line_spacing", 1 );
+
+			/* Now descend children and build lines of text nodes */
+			TextLines lines = new TextLines();
+			TextLine  line  = new TextLine();
+			Regex strip_regex = new Regex( "\\A\\n\\s*|\\n\\s*\\Z" );
+			for ( unowned Xml.Node* child = node.children; child != null; child = child->next )
+			{
+				switch (child->name)
+				{
+				case "Span":
+					message( "Unexpected rich text (not supported, yet!)" );
+					break;
+
+				case "Field":
+					stdout.printf( "Field\n" );
+					line.append( new TextNode( true, XmlUtil.get_prop_string( child, "name", null ) ) );
+					break;
+
+				case "NL":
+					stdout.printf( "NL\n" );
+					lines.append( line );
+					line = new TextLine();
+					break;
+
+				default:
+					if ( child->is_text() != 0 )
+					{
+						/* Literal text. */
+						string raw_data = child->get_content();
+						string data = strip_regex.replace( raw_data, -1, 0, "" );
+						stdout.printf( "Literal = \"%s\"\n", data );
+						line.append( new TextNode( false, data ) );
+					}
+					else
+					{
+						message( "Unexpected %s child: \"%s\"", node.name, child->name );
+					}
+					break;
+				}
+			}
+			if ( !line.empty() )
+			{
+				lines.append( line );
+			}
+			object.set_lines( lines );
 		}
 
 

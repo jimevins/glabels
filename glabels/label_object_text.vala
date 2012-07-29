@@ -329,15 +329,21 @@ namespace glabels
 		}
 
 
-		private TextLines get_lines()
+		public TextLines get_lines()
 		{
 			Gtk.TextIter start, end;
 
 			buffer.get_bounds( out start, out end );
 			string text = buffer.get_text( start, end, false );
-			TextLines lines = new TextLines( text );
+			TextLines lines = new TextLines.parse( text );
 
 			return lines;
+		}
+
+
+		public void set_lines( TextLines lines )
+		{
+			buffer.set_text( lines.expand( null ) );
 		}
 
 	}

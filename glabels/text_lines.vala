@@ -29,16 +29,29 @@ namespace glabels
 		public unowned List<TextLine> lines { get; private set; }
 
 
-		public TextLines( string text )
+		public TextLines()
 		{
+		}
+
+
+		public TextLines.parse( string text )
+		{
+			this();
+
 			int i_next  = 0;
 
 			for ( int i = 0; text[i] != 0; i = i_next )
 			{
 				stderr.printf( "Text[%d] = %c, ", i, text[i] ); 
-				lines.append( new TextLine( text, i, out i_next ) );
+				lines.append( new TextLine.parse( text, i, out i_next ) );
 				stderr.printf( "i_next =%d\n", i_next ); 
 			}
+		}
+
+
+		public void append( TextLine line )
+		{
+			lines.append( line );
 		}
 
 
