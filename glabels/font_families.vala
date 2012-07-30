@@ -34,14 +34,12 @@ namespace glabels
 
 		static construct
 		{
-			Pango.FontMap       fontmap;
 			Pango.Context       context;
 			Pango.FontFamily[]  families;
 			int                 i;
 			string              name;
 
-			fontmap = Pango.CairoFontMap.new();
-			context = fontmap.create_context();
+			context = Gdk.pango_context_get();
 
 			context.list_families( out families );
 

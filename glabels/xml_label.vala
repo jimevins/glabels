@@ -316,7 +316,6 @@ namespace glabels
 		private void parse_toplevel_span_node( Xml.Node        node,
 		                                       LabelObjectText object )
 		{
-			stdout.printf( "Span\n" );
 			/* font_family attr */
 			object.font_family = XmlUtil.get_prop_string( node, "font_family", "Sans" );
 
@@ -356,12 +355,10 @@ namespace glabels
 					break;
 
 				case "Field":
-					stdout.printf( "Field\n" );
 					line.append( new TextNode( true, XmlUtil.get_prop_string( child, "name", null ) ) );
 					break;
 
 				case "NL":
-					stdout.printf( "NL\n" );
 					lines.append( line );
 					line = new TextLine();
 					break;
@@ -372,7 +369,6 @@ namespace glabels
 						/* Literal text. */
 						string raw_data = child->get_content();
 						string data = strip_regex.replace( raw_data, -1, 0, "" );
-						stdout.printf( "Literal = \"%s\"\n", data );
 						line.append( new TextNode( false, data ) );
 					}
 					else

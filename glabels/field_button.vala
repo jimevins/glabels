@@ -60,6 +60,8 @@ namespace glabels
 
 			set_sensitive( false );
 
+			menu = new FieldMenu();
+
 			button_press_event.connect( on_button_press_event );
 			menu.key_selected.connect( on_menu_key_selected );
 			menu.selection_done.connect( on_menu_selection_done );
