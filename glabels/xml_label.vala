@@ -185,10 +185,6 @@ namespace glabels
 				switch (child->name)
 				{
 
-				case "Object-text":
-					parse_object_text_node( child, label );
-					break;
-
 				case "Object-box":
 					parse_object_box_node( child, label );
 					break;
@@ -207,6 +203,10 @@ namespace glabels
 
 				case "Object-barcode":
 					/* TODO. */
+					break;
+
+				case "Object-text":
+					parse_object_text_node( child, label );
 					break;
 
 				default:
@@ -581,13 +581,83 @@ namespace glabels
 			XmlUtil.set_prop_length( node, "w", object.w );
 			XmlUtil.set_prop_length( node, "h", object.h );
 
+			/* align attr */
+			XmlUtil.set_prop_string( node, "align", EnumUtil.align_to_string( object.text_alignment ) );
+
+			/* valign attr */
+			XmlUtil.set_prop_string( node, "valign", EnumUtil.valign_to_string( object.text_valignment ) );
+
+			/* auto_shrink attr */
+			XmlUtil.set_prop_bool( node, "auto_shrink", object.auto_shrink );
+
 			/* affine attrs */
 			create_affine_attrs( node, object );
 
 			/* shadow attrs */
 			create_shadow_attrs( node, object );
 
-			// TODO: create contents.
+			/* Add children */
+			create_toplevel_span_node( node, ns, object );
+		}
+
+
+		private void create_toplevel_span_node( Xml.Node        parent,
+		                                        Xml.Ns          ns,
+		                                        LabelObjectText object )
+		{
+			unowned Xml.Node *node = parent.new_child( ns, "Span" );
+
+			/* font_family attr */
+			XmlUtil.set_prop_string( node, "font_family", object.font_family );
+
+			/* font_size attr */
+			XmlUtil.set_prop_double( node, "font_size", object.font_size );
+
+			/* font_weight attr */
+			XmlUtil.set_prop_string( node, "font_weight", EnumUtil.weight_to_string( object.font_weight ) );
+
+			/* font_italic attr */
+			XmlUtil.set_prop_bool( node, "font_italic", object.font_italic_flag );
+
+			/* color attrs */
+			if ( object.text_color_node.field_flag )
+			{
+				XmlUtil.set_prop_string( node, "color_field", object.text_color_node.key );
+			}
+			else
+			{
+				XmlUtil.set_prop_uint_hex( node, "color", object.text_color_node.color.to_legacy_color() );
+			}
+
+			/* line_spacing attr */
+			XmlUtil.set_prop_double( node, "line_spacing", object.text_line_spacing );
+
+			/* Build children */
+			TextLines lines = object.get_lines();
+			bool first_line = true;
+			foreach (TextLine line in lines.lines)
+			{
+				if ( !first_line )
+				{
+					node->new_child( ns, "NL" );
+				}
+
+				foreach (TextNode text_node in line.nodes)
+				{
+					if ( text_node.field_flag )
+					{
+						unowned Xml.Node *child = node->new_child( ns, "Field" );
+						XmlUtil.set_prop_string( child, "name", text_node.data );
+					}
+					else
+					{
+						node->add_content( text_node.data );
+					}
+				}
+
+				first_line = false;
+			}
+			
 		}
 
 
