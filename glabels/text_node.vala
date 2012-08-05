@@ -37,12 +37,6 @@ namespace glabels
 		}
 
 
-		public TextNode.dup( TextNode node )
-		{
-			this( node.field_flag, node.data );
-		}
-
-
 		private enum State { START,
 		                     LITERAL, LITERAL_DOLLAR,
 		                     START_DOLLAR, FIELD,
@@ -201,6 +195,14 @@ namespace glabels
 			this( field_flag, data );
 
 			i_next = i;
+		}
+
+
+		public TextNode dup()
+		{
+			TextNode copy = new TextNode( field_flag, data );
+
+			return copy;
 		}
 
 
