@@ -85,7 +85,7 @@ namespace glabels
 		/**
 		 * Width of bounding box
 		 */
-		public double w
+		public virtual double w
 		{
 			get { return _w; }
 
@@ -105,7 +105,7 @@ namespace glabels
 		/**
 		 * Height of bounding box
 		 */
-		public double h
+		public virtual double h
 		{
 			get { return _h; }
 
@@ -142,174 +142,17 @@ namespace glabels
 
 
 		/**
-		 * Font family
+		 * Text parameters interface
 		 */
-		public string font_family
-		{
-			get { return _font_family; }
-
-			set
-			{
-				if ( _font_family != value )
-				{
-					_font_family = value;
-					changed();
-				}
-			}
-		}
-		private string _font_family;
-
-
-		/**
-		 * Font size
-		 */
-		public double font_size
-		{
-			get { return _font_size; }
-
-			set
-			{
-				if ( _font_size != value )
-				{
-					_font_size = value;
-					changed();
-				}
-			}
-		}
-		private double _font_size;
-
-
-		/**
-		 * Font weight
-		 */
-		public Pango.Weight font_weight
-		{
-			get { return _font_weight; }
-
-			set
-			{
-				if ( _font_weight != value )
-				{
-					_font_weight = value;
-					changed();
-				}
-			}
-		}
-		private Pango.Weight _font_weight = Pango.Weight.NORMAL;
-
-
-		/**
-		 * Font italic flag
-		 */
-		public bool font_italic_flag
-		{
-			get { return _font_italic_flag; }
-
-			set
-			{
-				if ( _font_italic_flag != value )
-				{
-					_font_italic_flag = value;
-					changed();
-				}
-			}
-		}
-		private bool _font_italic_flag;
-
-
-		/**
-		 * Font underline flag
-		 */
-		public bool font_underline_flag
-		{
-			get { return _font_underline_flag; }
-
-			set
-			{
-				if ( _font_underline_flag != value )
-				{
-					_font_underline_flag = value;
-					changed();
-				}
-			}
-		}
-		private bool _font_underline_flag;
-
-
-		/**
-		 * Text color node
-		 */
-		public ColorNode text_color_node
-		{
-			get { return _text_color_node; }
-
-			set
-			{
-				if ( _text_color_node != value )
-				{
-					_text_color_node = value;
-					changed();
-				}
-			}
-		}
-		private ColorNode _text_color_node;
-
-
-		/**
-		 * Text alignment
-		 */
-		public Pango.Alignment text_alignment
-		{
-			get { return _text_alignment; }
-
-			set
-			{
-				if ( _text_alignment != value )
-				{
-					_text_alignment = value;
-					changed();
-				}
-			}
-		}
-		private Pango.Alignment _text_alignment;
-
-
-		/**
-		 * Text vertical alignment
-		 */
-		public ValignType text_valignment
-		{
-			get { return _text_valignment; }
-
-			set
-			{
-				if ( _text_valignment != value )
-				{
-					_text_valignment = value;
-					changed();
-				}
-			}
-		}
-		private ValignType _text_valignment;
-
-
-		/**
-		 * Text line spacing
-		 */
-		public double text_line_spacing
-		{
-			get { return _text_line_spacing; }
-
-			set
-			{
-				if ( _text_line_spacing != value )
-				{
-					_text_line_spacing = value;
-					changed();
-				}
-			}
-		}
-		private double _text_line_spacing;
+		public virtual string          font_family         { get; set; }
+		public virtual double          font_size           { get; set; }
+		public virtual Pango.Weight    font_weight         { get; set; }
+		public virtual bool            font_italic_flag    { get; set; }
+		public virtual bool            font_underline_flag { get; set; }
+		public virtual ColorNode       text_color_node     { get; set; }
+		public virtual Pango.Alignment text_alignment      { get; set; }
+		public virtual ValignType      text_valignment     { get; set; }
+		public virtual double          text_line_spacing   { get; set; }
 
 
 		/**
@@ -486,16 +329,6 @@ namespace glabels
 
 			Prefs prefs = new Prefs();
 
-			_font_family             = prefs.default_font_family;
-			_font_size               = prefs.default_font_size;
-			_font_weight             = prefs.default_font_weight;
-			_font_italic_flag        = prefs.default_font_italic_flag;
-			_font_underline_flag     = false;
-			_text_color_node         = ColorNode.from_color( prefs.default_text_color );
-			_text_alignment          = prefs.default_text_alignment;
-			_text_valignment         = ValignType.TOP;
-			_text_line_spacing       = prefs.default_text_line_spacing;
-
 			_line_width              = prefs.default_line_width;
 			_line_color_node         = ColorNode.from_color( prefs.default_line_color );
 			_fill_color_node         = ColorNode.from_color( prefs.default_fill_color );
@@ -601,15 +434,10 @@ namespace glabels
 		public void set_size( double w,
 		                      double h )
 		{
-			if ( ( _w != w ) || ( _h != h ) )
-			{
-				_w = w;
-				_h = h;
+			this.w = w;
+			this.h = h;
 
-				aspect_ratio = _h / _w;
-
-				changed();
-			}
+			aspect_ratio = h / w;
 		}
 
 

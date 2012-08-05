@@ -1101,9 +1101,16 @@ namespace glabels
 					Gdk.Cursor cursor = new Gdk.Cursor( Gdk.CursorType.LEFT_PTR );
 					window.set_cursor( cursor );
 
-					if ( (create_object.w < 2) && (create_object.h < 2) )
+					if ( (create_object.w < 4) && (create_object.h < 4) )
 					{
-						create_object.set_size( 72, 72 );
+						if ( create_object is LabelObjectText )
+						{
+							create_object.set_size( 0, 0 );
+						}
+						else
+						{
+							create_object.set_size( 72, 72 );
+						}
 					}
 
 					in_object_create_mode = false;

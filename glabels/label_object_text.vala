@@ -40,6 +40,258 @@ namespace glabels
 		public bool auto_shrink { get; set; default = false; }
 
 
+		/**
+		 * Raw width of bounding box
+		 */
+		public double w_raw
+		{
+			get { return _w_raw; }
+		}
+		private double _w_raw;
+
+
+		/**
+		 * Raw height of bounding box
+		 */
+		public double h_raw
+		{
+			get { return _h_raw; }
+		}
+		private double _h_raw;
+
+
+		/**
+		 * Width of bounding box
+		 */
+		public override double w
+		{
+			get
+			{
+				if (size_changed)
+				{
+					recalculate_size();
+				}
+				return _w;
+			}
+
+			set
+			{
+				if ( _w_raw != value )
+				{
+					_w_raw = value;
+					size_changed = true;
+					changed();
+				}
+			}
+		}
+		private double _w;
+
+
+		/**
+		 * Height of bounding box
+		 */
+		public override double h
+		{
+			get
+			{
+				if (size_changed)
+				{
+					recalculate_size();
+				}
+				return _h;
+			}
+
+			set
+			{
+				if ( _h_raw != value )
+				{
+					_h_raw = value;
+					size_changed = true;
+					changed();
+				}
+			}
+		}
+		private double _h;
+
+
+		/**
+		 * Font family
+		 */
+		public override string font_family
+		{
+			get { return _font_family; }
+
+			set
+			{
+				if ( _font_family != value )
+				{
+					_font_family = value;
+					size_changed = true;
+					changed();
+				}
+			}
+		}
+		private string _font_family;
+
+
+		/**
+		 * Font size
+		 */
+		public override double font_size
+		{
+			get { return _font_size; }
+
+			set
+			{
+				if ( _font_size != value )
+				{
+					_font_size = value;
+					size_changed = true;
+					changed();
+				}
+			}
+		}
+		private double _font_size;
+
+
+		/**
+		 * Font weight
+		 */
+		public override Pango.Weight font_weight
+		{
+			get { return _font_weight; }
+
+			set
+			{
+				if ( _font_weight != value )
+				{
+					_font_weight = value;
+					size_changed = true;
+					changed();
+				}
+			}
+		}
+		private Pango.Weight _font_weight = Pango.Weight.NORMAL;
+
+
+		/**
+		 * Font italic flag
+		 */
+		public override bool font_italic_flag
+		{
+			get { return _font_italic_flag; }
+
+			set
+			{
+				if ( _font_italic_flag != value )
+				{
+					_font_italic_flag = value;
+					size_changed = true;
+					changed();
+				}
+			}
+		}
+		private bool _font_italic_flag;
+
+
+		/**
+		 * Font underline flag
+		 */
+		public override bool font_underline_flag
+		{
+			get { return _font_underline_flag; }
+
+			set
+			{
+				if ( _font_underline_flag != value )
+				{
+					_font_underline_flag = value;
+					size_changed = true;
+					changed();
+				}
+			}
+		}
+		private bool _font_underline_flag;
+
+
+		/**
+		 * Text color node
+		 */
+		public override ColorNode text_color_node
+		{
+			get { return _text_color_node; }
+
+			set
+			{
+				if ( _text_color_node != value )
+				{
+					_text_color_node = value;
+					changed();
+				}
+			}
+		}
+		private ColorNode _text_color_node;
+
+
+		/**
+		 * Text alignment
+		 */
+		public override Pango.Alignment text_alignment
+		{
+			get { return _text_alignment; }
+
+			set
+			{
+				if ( _text_alignment != value )
+				{
+					_text_alignment = value;
+					changed();
+				}
+			}
+		}
+		private Pango.Alignment _text_alignment;
+
+
+		/**
+		 * Text vertical alignment
+		 */
+		public override ValignType text_valignment
+		{
+			get { return _text_valignment; }
+
+			set
+			{
+				if ( _text_valignment != value )
+				{
+					_text_valignment = value;
+					changed();
+				}
+			}
+		}
+		private ValignType _text_valignment;
+
+
+		/**
+		 * Text line spacing
+		 */
+		public override double text_line_spacing
+		{
+			get { return _text_line_spacing; }
+
+			set
+			{
+				if ( _text_line_spacing != value )
+				{
+					_text_line_spacing = value;
+					size_changed = true;
+					changed();
+				}
+			}
+		}
+		private double _text_line_spacing;
+
+
+
 		public LabelObjectText()
 		{
 			handles.append( new HandleSouthEast( this ) );
@@ -52,6 +304,18 @@ namespace glabels
 			handles.append( new HandleNorth( this ) );
 
 			outline = new Outline( this );
+
+			Prefs prefs = new Prefs();
+
+			_font_family             = prefs.default_font_family;
+			_font_size               = prefs.default_font_size;
+			_font_weight             = prefs.default_font_weight;
+			_font_italic_flag        = prefs.default_font_italic_flag;
+			_font_underline_flag     = false;
+			_text_color_node         = ColorNode.from_color( prefs.default_text_color );
+			_text_alignment          = prefs.default_text_alignment;
+			_text_valignment         = ValignType.TOP;
+			_text_line_spacing       = prefs.default_text_line_spacing;
 
 			tag_table    = new Gtk.TextTagTable();
 			buffer       = new Gtk.TextBuffer( tag_table );
@@ -313,6 +577,71 @@ namespace glabels
 			}
 
 			return (new_wsize < new_hsize ? new_wsize : new_hsize);
+		}
+
+
+		private void recalculate_size()
+		{
+			Pango.Context context = Gdk.pango_context_get();
+			Cairo.FontOptions font_options = new Cairo.FontOptions();
+			font_options.set_hint_metrics( Cairo.HintMetrics.OFF );
+			Pango.cairo_context_set_font_options( context, font_options );
+
+			Pango.Layout layout = new Pango.Layout( context );
+			Pango.FontDescription desc = new Pango.FontDescription();
+
+			if ( buffer.get_char_count() != 0 )
+			{
+				desc.set_family( font_family );
+				desc.set_weight( font_weight );
+				desc.set_style( font_italic_flag ? Pango.Style.ITALIC : Pango.Style.NORMAL );
+				desc.set_size( (int)(font_size * FONT_SCALE * Pango.SCALE + 0.5) );
+				layout.set_font_description( desc );
+				layout.set_spacing( (int)(font_size * FONT_SCALE * (text_line_spacing-1) * Pango.SCALE + 0.5) );
+				layout.set_text( get_lines().expand( null ), -1 );
+			}
+			else
+			{
+				desc.set_family( "Sans" );
+				desc.set_weight( Pango.Weight.NORMAL );
+				desc.set_style( Pango.Style.NORMAL );
+				desc.set_size( (int)(12 * FONT_SCALE * Pango.SCALE + 0.5) );
+				layout.set_font_description( desc );
+				layout.set_text( _("Text"), -1 );
+			}
+
+			if ( _w_raw == 0 )
+			{
+				layout.set_width( -1 );
+			}
+			else
+			{
+				layout.set_width( (int)(_w_raw * Pango.SCALE + 0.5) );
+			}
+
+			int iw, ih;
+			layout.get_size( out iw, out ih );
+
+			if ( _w_raw != 0.0 )
+			{
+				_w = _w_raw;
+			}
+			else
+			{
+				_w = iw / Pango.SCALE + 2*TEXT_MARGIN;
+			}
+
+			double h_temp = ih / Pango.SCALE;
+			if ( h_temp < _h_raw )
+			{
+				_h = h_raw;
+			}
+			else
+			{
+				_h = h_temp;
+			}
+
+			size_changed = false;
 		}
 
 

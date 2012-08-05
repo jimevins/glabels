@@ -578,8 +578,8 @@ namespace glabels
 			XmlUtil.set_prop_length( node, "y", object.y0 );
 
 			/* size attrs */
-			XmlUtil.set_prop_length( node, "w", object.w );
-			XmlUtil.set_prop_length( node, "h", object.h );
+			XmlUtil.set_prop_length( node, "w", object.w_raw );
+			XmlUtil.set_prop_length( node, "h", object.h_raw );
 
 			/* align attr */
 			XmlUtil.set_prop_string( node, "align", EnumUtil.align_to_string( object.text_alignment ) );

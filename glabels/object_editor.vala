@@ -34,6 +34,7 @@ namespace glabels
 		private LabelObject?     object;
 
 
+		/* Widgets */
 		private Gtk.Image        title_image;
 		private Gtk.Label        title_label;
 		private Gtk.Notebook     notebook;
@@ -90,6 +91,41 @@ namespace glabels
 		private Gtk.Box          shadow_color_box;
 		private ColorButton      shadow_color_button;
 		private Gtk.SpinButton   shadow_opacity_spin;
+
+
+		/* Signal IDs */
+		private ulong sigid_text_font_family_button_changed;
+		private ulong sigid_text_font_size_spin_changed;
+		private ulong sigid_text_font_bold_toggle_toggled;
+		private ulong sigid_text_font_italic_toggle_toggled;
+		private ulong sigid_text_font_underline_toggle_toggled;
+		private ulong sigid_text_color_button_changed;
+		private ulong sigid_text_halign_left_toggle_toggled;
+		private ulong sigid_text_halign_center_toggle_toggled;
+		private ulong sigid_text_halign_right_toggle_toggled;
+		private ulong sigid_text_valign_top_toggle_toggled;
+		private ulong sigid_text_valign_middle_toggle_toggled;
+		private ulong sigid_text_valign_bottom_toggle_toggled;
+		private ulong sigid_text_line_spacing_spin_changed;
+		private ulong sigid_text_insert_field_button_key_selected;
+
+		private ulong sigid_line_width_spin_changed;
+		private ulong sigid_line_color_button_changed;
+
+		private ulong sigid_fill_color_button_changed;
+
+		private ulong sigid_pos_x_spin_changed;
+		private ulong sigid_pos_y_spin_changed;
+
+		private ulong sigid_size_w_spin_changed;
+		private ulong sigid_size_h_spin_changed;
+
+		private ulong sigid_shadow_enable_check_changed;
+		private ulong sigid_shadow_x_spin_changed;
+		private ulong sigid_shadow_y_spin_changed;
+		private ulong sigid_shadow_color_button_changed;
+		private ulong sigid_shadow_opacity_spin_changed;
+
 
 
 		public ObjectEditor()
@@ -161,20 +197,34 @@ namespace glabels
 			text_insert_field_button = new FieldButton( _("Insert merge field") );
 			text_insert_field_box.pack_start( text_insert_field_button, true, true, 0 );
 
-			text_font_family_button.changed.connect( on_text_font_family_button_changed );
-			text_font_size_spin.value_changed.connect( on_text_font_size_spin_changed );
-			text_font_bold_toggle.toggled.connect( on_text_font_bold_toggle_toggled );
-			text_font_italic_toggle.toggled.connect( on_text_font_italic_toggle_toggled );
-			text_font_underline_toggle.toggled.connect( on_text_font_underline_toggle_toggled );
-			text_color_button.color_changed.connect( on_text_color_button_changed );
-			text_halign_left_toggle.toggled.connect( on_text_halign_left_toggle_toggled );
-			text_halign_center_toggle.toggled.connect( on_text_halign_center_toggle_toggled );
-			text_halign_right_toggle.toggled.connect( on_text_halign_right_toggle_toggled );
-			text_valign_top_toggle.toggled.connect( on_text_valign_top_toggle_toggled );
-			text_valign_middle_toggle.toggled.connect( on_text_valign_middle_toggle_toggled );
-			text_valign_bottom_toggle.toggled.connect( on_text_valign_bottom_toggle_toggled );
-			text_line_spacing_spin.value_changed.connect( on_text_line_spacing_spin_changed );
-			text_insert_field_button.key_selected.connect( on_text_insert_field_button_key_selected );
+			sigid_text_font_family_button_changed =
+				text_font_family_button.changed.connect( on_text_font_family_button_changed );
+			sigid_text_font_size_spin_changed =
+				text_font_size_spin.value_changed.connect( on_text_font_size_spin_changed );
+			sigid_text_font_bold_toggle_toggled =
+				text_font_bold_toggle.toggled.connect( on_text_font_bold_toggle_toggled );
+			sigid_text_font_italic_toggle_toggled =
+				text_font_italic_toggle.toggled.connect( on_text_font_italic_toggle_toggled );
+			sigid_text_font_underline_toggle_toggled =
+				text_font_underline_toggle.toggled.connect( on_text_font_underline_toggle_toggled );
+			sigid_text_color_button_changed =
+				text_color_button.color_changed.connect( on_text_color_button_changed );
+			sigid_text_halign_left_toggle_toggled =
+				text_halign_left_toggle.toggled.connect( on_text_halign_left_toggle_toggled );
+			sigid_text_halign_center_toggle_toggled =
+				text_halign_center_toggle.toggled.connect( on_text_halign_center_toggle_toggled );
+			sigid_text_halign_right_toggle_toggled =
+				text_halign_right_toggle.toggled.connect( on_text_halign_right_toggle_toggled );
+			sigid_text_valign_top_toggle_toggled =
+				text_valign_top_toggle.toggled.connect( on_text_valign_top_toggle_toggled );
+			sigid_text_valign_middle_toggle_toggled =
+				text_valign_middle_toggle.toggled.connect( on_text_valign_middle_toggle_toggled );
+			sigid_text_valign_bottom_toggle_toggled =
+				text_valign_bottom_toggle.toggled.connect( on_text_valign_bottom_toggle_toggled );
+			sigid_text_line_spacing_spin_changed =
+				text_line_spacing_spin.value_changed.connect( on_text_line_spacing_spin_changed );
+			sigid_text_insert_field_button_key_selected =
+				text_insert_field_button.key_selected.connect( on_text_insert_field_button_key_selected );
 
 
 			/* Line widgets. */
@@ -184,8 +234,10 @@ namespace glabels
 			line_color_button = new ColorButton( _("No line"), Color.none(), Color.black() );
 			line_color_box.pack_start( line_color_button, true, true, 0 );
 
-			line_width_spin.value_changed.connect( on_line_width_spin_changed );
-			line_color_button.color_changed.connect( on_line_color_button_changed );
+			sigid_line_width_spin_changed =
+			    line_width_spin.value_changed.connect( on_line_width_spin_changed );
+			sigid_line_color_button_changed =
+			    line_color_button.color_changed.connect( on_line_color_button_changed );
 
 
 			/* Fill widgets. */
@@ -194,7 +246,8 @@ namespace glabels
 			fill_color_button       = new ColorButton( _("No fill"), Color.none(), Color.black() );
 			fill_color_box.pack_start( fill_color_button, true, true, 0 );
 
-			fill_color_button.color_changed.connect( on_fill_color_button_changed );
+			sigid_fill_color_button_changed =
+			    fill_color_button.color_changed.connect( on_fill_color_button_changed );
 
 
 			/* Position widgets. */
@@ -203,8 +256,8 @@ namespace glabels
 			pos_x_units_label       = builder.get_object( "pos_x_units_label" )       as Gtk.Label;
 			pos_y_units_label       = builder.get_object( "pos_y_units_label" )       as Gtk.Label;
 
-			pos_x_spin.value_changed.connect( on_pos_x_spin_changed );
-			pos_y_spin.value_changed.connect( on_pos_y_spin_changed );
+			sigid_pos_x_spin_changed = pos_x_spin.value_changed.connect( on_pos_x_spin_changed );
+			sigid_pos_y_spin_changed = pos_y_spin.value_changed.connect( on_pos_y_spin_changed );
 
 
 			/* Size widgets. */
@@ -215,8 +268,8 @@ namespace glabels
 			size_aspect_check       = builder.get_object( "size_aspect_check" )       as Gtk.CheckButton;
 			size_reset_image_button = builder.get_object( "size_reset_image_button" ) as Gtk.Button;
 
-			size_w_spin.value_changed.connect( on_size_w_spin_changed );
-			size_h_spin.value_changed.connect( on_size_h_spin_changed );
+			sigid_size_w_spin_changed = size_w_spin.value_changed.connect( on_size_w_spin_changed );
+			sigid_size_h_spin_changed = size_h_spin.value_changed.connect( on_size_h_spin_changed );
 
 
 			/* Shadow widgets. */
@@ -232,11 +285,16 @@ namespace glabels
 			shadow_color_button = new ColorButton( _("Default"), Color.black(), Color.black() );
 			shadow_color_box.pack_start(shadow_color_button, true, true, 0 );
 
-			shadow_enable_check.toggled.connect( on_shadow_enable_check_changed );
-			shadow_x_spin.value_changed.connect( on_shadow_x_spin_changed );
-			shadow_y_spin.value_changed.connect( on_shadow_y_spin_changed );
-			shadow_color_button.color_changed.connect( on_shadow_color_button_changed );
-			shadow_opacity_spin.value_changed.connect( on_shadow_opacity_spin_changed );
+			sigid_shadow_enable_check_changed =
+				shadow_enable_check.toggled.connect( on_shadow_enable_check_changed );
+			sigid_shadow_x_spin_changed =
+				shadow_x_spin.value_changed.connect( on_shadow_x_spin_changed );
+			sigid_shadow_y_spin_changed =
+				shadow_y_spin.value_changed.connect( on_shadow_y_spin_changed );
+			sigid_shadow_color_button_changed =
+				shadow_color_button.color_changed.connect( on_shadow_color_button_changed );
+			sigid_shadow_opacity_spin_changed =
+				shadow_opacity_spin.value_changed.connect( on_shadow_opacity_spin_changed );
 
 
 			notebook.hide();
@@ -461,11 +519,11 @@ namespace glabels
 		{
 			if ( (object != null) && object.can_text() )
 			{
-				GLib.SignalHandler.block_by_func( (void*)text_font_family_button, (void*)on_text_font_family_button_changed, this );
+				GLib.SignalHandler.block( (void*)text_font_family_button, sigid_text_font_family_button_changed );
 
 				text_font_family_button.set_family( object.font_family );
 
-				GLib.SignalHandler.unblock_by_func( (void*)text_font_family_button, (void*)on_text_font_family_button_changed, this );
+				GLib.SignalHandler.unblock( (void*)text_font_family_button, sigid_text_font_family_button_changed );
 			}
 		}
 
@@ -486,11 +544,11 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				GLib.SignalHandler.block_by_func( (void*)text_font_size_spin, (void*)on_text_font_size_spin_changed, this );
+				GLib.SignalHandler.block( (void*)text_font_size_spin, sigid_text_font_size_spin_changed );
 
 				text_font_size_spin.set_value( object.font_size );
 
-				GLib.SignalHandler.unblock_by_func( (void*)text_font_size_spin, (void*)on_text_font_size_spin_changed, this );
+				GLib.SignalHandler.unblock( (void*)text_font_size_spin, sigid_text_font_size_spin_changed );
 			}
 		}
 
@@ -511,11 +569,11 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				GLib.SignalHandler.block_by_func( (void*)text_font_bold_toggle, (void*)on_text_font_bold_toggle_toggled, this );
+				GLib.SignalHandler.block( (void*)text_font_bold_toggle, sigid_text_font_bold_toggle_toggled );
 
 				text_font_bold_toggle.set_active( object.font_weight == Pango.Weight.BOLD );
 
-				GLib.SignalHandler.unblock_by_func( (void*)text_font_bold_toggle, (void*)on_text_font_bold_toggle_toggled, this );
+				GLib.SignalHandler.unblock( (void*)text_font_bold_toggle, sigid_text_font_bold_toggle_toggled );
 			}
 		}
 
@@ -536,11 +594,11 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				GLib.SignalHandler.block_by_func( (void*)text_font_italic_toggle, (void*)on_text_font_italic_toggle_toggled, this );
+				GLib.SignalHandler.block( (void*)text_font_italic_toggle, sigid_text_font_italic_toggle_toggled );
 
 				text_font_italic_toggle.set_active( object.font_italic_flag );
 
-				GLib.SignalHandler.unblock_by_func( (void*)text_font_italic_toggle, (void*)on_text_font_italic_toggle_toggled, this );
+				GLib.SignalHandler.unblock( (void*)text_font_italic_toggle, sigid_text_font_italic_toggle_toggled );
 			}
 		}
 
@@ -561,11 +619,11 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				GLib.SignalHandler.block_by_func( (void*)text_font_underline_toggle, (void*)on_text_font_underline_toggle_toggled, this );
+				GLib.SignalHandler.block( (void*)text_font_underline_toggle, sigid_text_font_underline_toggle_toggled );
 
 				text_font_underline_toggle.set_active( object.font_underline_flag );
 
-				GLib.SignalHandler.unblock_by_func( (void*)text_font_underline_toggle, (void*)on_text_font_underline_toggle_toggled, this );
+				GLib.SignalHandler.unblock( (void*)text_font_underline_toggle, sigid_text_font_underline_toggle_toggled );
 			}
 		}
 
@@ -588,11 +646,11 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				GLib.SignalHandler.block_by_func( (void*)text_color_button, (void*)on_text_color_button_changed, this );
+				GLib.SignalHandler.block( (void*)text_color_button, sigid_text_color_button_changed );
 
 				text_color_button.set_color_node( object.text_color_node );
 
-				GLib.SignalHandler.unblock_by_func( (void*)text_color_button, (void*)on_text_color_button_changed, this );
+				GLib.SignalHandler.unblock( (void*)text_color_button, sigid_text_color_button_changed );
 			}
 		}
 
@@ -649,9 +707,9 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				GLib.SignalHandler.block_by_func( (void*)text_halign_left_toggle, (void*)on_text_halign_left_toggle_toggled, this );
-				GLib.SignalHandler.block_by_func( (void*)text_halign_center_toggle, (void*)on_text_halign_center_toggle_toggled, this );
-				GLib.SignalHandler.block_by_func( (void*)text_halign_right_toggle, (void*)on_text_halign_right_toggle_toggled, this );
+				GLib.SignalHandler.block( (void*)text_halign_left_toggle, sigid_text_halign_left_toggle_toggled );
+				GLib.SignalHandler.block( (void*)text_halign_center_toggle, sigid_text_halign_center_toggle_toggled );
+				GLib.SignalHandler.block( (void*)text_halign_right_toggle, sigid_text_halign_right_toggle_toggled );
 
 				switch ( object.text_alignment )
 				{
@@ -674,9 +732,9 @@ namespace glabels
 					assert_not_reached();
 				}
 
-				GLib.SignalHandler.unblock_by_func( (void*)text_halign_left_toggle, (void*)on_text_halign_left_toggle_toggled, this );
-				GLib.SignalHandler.unblock_by_func( (void*)text_halign_center_toggle, (void*)on_text_halign_center_toggle_toggled, this );
-				GLib.SignalHandler.unblock_by_func( (void*)text_halign_right_toggle, (void*)on_text_halign_right_toggle_toggled, this );
+				GLib.SignalHandler.unblock( (void*)text_halign_left_toggle, sigid_text_halign_left_toggle_toggled );
+				GLib.SignalHandler.unblock( (void*)text_halign_center_toggle, sigid_text_halign_center_toggle_toggled );
+				GLib.SignalHandler.unblock( (void*)text_halign_right_toggle, sigid_text_halign_right_toggle_toggled );
 			}
 		}
 
@@ -733,9 +791,9 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				GLib.SignalHandler.block_by_func( (void*)text_valign_top_toggle, (void*)on_text_valign_top_toggle_toggled, this );
-				GLib.SignalHandler.block_by_func( (void*)text_valign_middle_toggle, (void*)on_text_valign_middle_toggle_toggled, this );
-				GLib.SignalHandler.block_by_func( (void*)text_valign_bottom_toggle, (void*)on_text_valign_bottom_toggle_toggled, this );
+				GLib.SignalHandler.block( (void*)text_valign_top_toggle, sigid_text_valign_top_toggle_toggled );
+				GLib.SignalHandler.block( (void*)text_valign_middle_toggle, sigid_text_valign_middle_toggle_toggled );
+				GLib.SignalHandler.block( (void*)text_valign_bottom_toggle, sigid_text_valign_bottom_toggle_toggled );
 
 				switch ( object.text_valignment )
 				{
@@ -758,9 +816,9 @@ namespace glabels
 					assert_not_reached();
 				}
 
-				GLib.SignalHandler.unblock_by_func( (void*)text_valign_top_toggle, (void*)on_text_valign_top_toggle_toggled, this );
-				GLib.SignalHandler.unblock_by_func( (void*)text_valign_middle_toggle, (void*)on_text_valign_middle_toggle_toggled, this );
-				GLib.SignalHandler.unblock_by_func( (void*)text_valign_bottom_toggle, (void*)on_text_valign_bottom_toggle_toggled, this );
+				GLib.SignalHandler.unblock( (void*)text_valign_top_toggle, sigid_text_valign_top_toggle_toggled );
+				GLib.SignalHandler.unblock( (void*)text_valign_middle_toggle, sigid_text_valign_middle_toggle_toggled );
+				GLib.SignalHandler.unblock( (void*)text_valign_bottom_toggle, sigid_text_valign_bottom_toggle_toggled );
 			}
 		}
 
@@ -781,11 +839,11 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				GLib.SignalHandler.block_by_func( (void*)text_line_spacing_spin, (void*)on_text_line_spacing_spin_changed, this );
+				GLib.SignalHandler.block( (void*)text_line_spacing_spin, sigid_text_line_spacing_spin_changed );
 
 				text_line_spacing_spin.set_value( object.text_line_spacing );
 
-				GLib.SignalHandler.unblock_by_func( (void*)text_line_spacing_spin, (void*)on_text_line_spacing_spin_changed, this );
+				GLib.SignalHandler.unblock( (void*)text_line_spacing_spin, sigid_text_line_spacing_spin_changed );
 			}
 		}
 
@@ -839,11 +897,11 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				GLib.SignalHandler.block_by_func( (void*)line_width_spin, (void*)on_line_width_spin_changed, this );
+				GLib.SignalHandler.block( (void*)line_width_spin, sigid_line_width_spin_changed );
 
 				line_width_spin.set_value( object.line_width );
 
-				GLib.SignalHandler.unblock_by_func( (void*)line_width_spin, (void*)on_line_width_spin_changed, this );
+				GLib.SignalHandler.unblock( (void*)line_width_spin, sigid_line_width_spin_changed );
 			}
 		}
 
@@ -866,11 +924,11 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				GLib.SignalHandler.block_by_func( (void*)line_color_button, (void*)on_line_color_button_changed, this );
+				GLib.SignalHandler.block( (void*)line_color_button, sigid_line_color_button_changed );
 
 				line_color_button.set_color_node( object.line_color_node );
 
-				GLib.SignalHandler.unblock_by_func( (void*)line_color_button, (void*)on_line_color_button_changed, this );
+				GLib.SignalHandler.unblock( (void*)line_color_button, sigid_line_color_button_changed );
 			}
 		}
 
@@ -893,11 +951,11 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				GLib.SignalHandler.block_by_func( (void*)fill_color_button, (void*)on_fill_color_button_changed, this );
+				GLib.SignalHandler.block( (void*)fill_color_button, sigid_fill_color_button_changed );
 
 				fill_color_button.set_color_node( object.fill_color_node );
 
-				GLib.SignalHandler.unblock_by_func( (void*)fill_color_button, (void*)on_fill_color_button_changed, this );
+				GLib.SignalHandler.unblock( (void*)fill_color_button, sigid_fill_color_button_changed );
 			}
 		}
 
@@ -918,11 +976,11 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				GLib.SignalHandler.block_by_func( (void*)pos_x_spin, (void*)on_pos_x_spin_changed, this );
+				GLib.SignalHandler.block( (void*)pos_x_spin, sigid_pos_x_spin_changed );
 
 				pos_x_spin.set_value( object.x0 * units.units_per_point );
 
-				GLib.SignalHandler.unblock_by_func( (void*)pos_x_spin, (void*)on_pos_x_spin_changed, this );
+				GLib.SignalHandler.unblock( (void*)pos_x_spin, sigid_pos_x_spin_changed );
 			}
 		}
 
@@ -943,11 +1001,11 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				GLib.SignalHandler.block_by_func( (void*)pos_y_spin, (void*)on_pos_y_spin_changed, this );
+				GLib.SignalHandler.block( (void*)pos_y_spin, sigid_pos_y_spin_changed );
 
 				pos_y_spin.set_value( object.y0 * units.units_per_point );
 
-				GLib.SignalHandler.unblock_by_func( (void*)pos_y_spin, (void*)on_pos_y_spin_changed, this );
+				GLib.SignalHandler.unblock( (void*)pos_y_spin, sigid_pos_y_spin_changed );
 			}
 		}
 
@@ -977,11 +1035,11 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				GLib.SignalHandler.block_by_func( (void*)size_w_spin, (void*)on_size_w_spin_changed, this );
+				GLib.SignalHandler.block( (void*)size_w_spin, sigid_size_w_spin_changed );
 
 				size_w_spin.set_value( object.w * units.units_per_point );
 
-				GLib.SignalHandler.unblock_by_func( (void*)size_w_spin, (void*)on_size_w_spin_changed, this );
+				GLib.SignalHandler.unblock( (void*)size_w_spin, sigid_size_w_spin_changed );
 			}
 		}
 
@@ -1011,11 +1069,11 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				GLib.SignalHandler.block_by_func( (void*)size_h_spin, (void*)on_size_h_spin_changed, this );
+				GLib.SignalHandler.block( (void*)size_h_spin, sigid_size_h_spin_changed );
 
 				size_h_spin.set_value( object.h * units.units_per_point );
 
-				GLib.SignalHandler.unblock_by_func( (void*)size_h_spin, (void*)on_size_h_spin_changed, this );
+				GLib.SignalHandler.unblock( (void*)size_h_spin, sigid_size_h_spin_changed );
 			}
 		}
 
@@ -1037,12 +1095,12 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				GLib.SignalHandler.block_by_func( (void*)shadow_enable_check, (void*)on_shadow_enable_check_changed, this );
+				GLib.SignalHandler.block( (void*)shadow_enable_check, sigid_shadow_enable_check_changed );
 
 				shadow_enable_check.set_active( object.shadow_state );
 				shadow_controls_grid.set_sensitive( object.shadow_state );
 
-				GLib.SignalHandler.unblock_by_func( (void*)shadow_enable_check, (void*)on_shadow_enable_check_changed, this );
+				GLib.SignalHandler.unblock( (void*)shadow_enable_check, sigid_shadow_enable_check_changed );
 			}
 		}
 
@@ -1063,11 +1121,11 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				GLib.SignalHandler.block_by_func( (void*)shadow_x_spin, (void*)on_shadow_x_spin_changed, this );
+				GLib.SignalHandler.block( (void*)shadow_x_spin, sigid_shadow_x_spin_changed );
 
 				shadow_x_spin.set_value( object.shadow_x * units.units_per_point );
 
-				GLib.SignalHandler.unblock_by_func( (void*)shadow_x_spin, (void*)on_shadow_x_spin_changed, this );
+				GLib.SignalHandler.unblock( (void*)shadow_x_spin, sigid_shadow_x_spin_changed );
 			}
 		}
 
@@ -1088,11 +1146,11 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				GLib.SignalHandler.block_by_func( (void*)shadow_y_spin, (void*)on_shadow_y_spin_changed, this );
+				GLib.SignalHandler.block( (void*)shadow_y_spin, sigid_shadow_y_spin_changed );
 
 				shadow_y_spin.set_value( object.shadow_y * units.units_per_point );
 
-				GLib.SignalHandler.unblock_by_func( (void*)shadow_y_spin, (void*)on_shadow_y_spin_changed, this );
+				GLib.SignalHandler.unblock( (void*)shadow_y_spin, sigid_shadow_y_spin_changed );
 			}
 		}
 
@@ -1115,11 +1173,11 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				GLib.SignalHandler.block_by_func( (void*)shadow_color_button, (void*)on_shadow_color_button_changed, this );
+				GLib.SignalHandler.block( (void*)shadow_color_button, sigid_shadow_color_button_changed );
 
 				shadow_color_button.set_color_node( object.shadow_color_node );
 
-				GLib.SignalHandler.unblock_by_func( (void*)shadow_color_button, (void*)on_shadow_color_button_changed, this );
+				GLib.SignalHandler.unblock( (void*)shadow_color_button, sigid_shadow_color_button_changed );
 			}
 		}
 
@@ -1140,11 +1198,11 @@ namespace glabels
 		{
 			if ( object != null )
 			{
-				GLib.SignalHandler.block_by_func( (void*)shadow_opacity_spin, (void*)on_shadow_opacity_spin_changed, this );
+				GLib.SignalHandler.block( (void*)shadow_opacity_spin, sigid_shadow_opacity_spin_changed );
 
 				shadow_opacity_spin.set_value( object.shadow_opacity * 100 );
 
-				GLib.SignalHandler.unblock_by_func( (void*)shadow_opacity_spin, (void*)on_shadow_opacity_spin_changed, this );
+				GLib.SignalHandler.unblock( (void*)shadow_opacity_spin, sigid_shadow_opacity_spin_changed );
 			}
 		}
 
