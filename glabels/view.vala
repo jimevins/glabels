@@ -385,6 +385,28 @@ namespace glabels
 		}
 
 
+		public void create_ellipse_mode()
+		{
+			Gdk.Window window = canvas.get_window();
+
+			try
+			{
+				Gdk.Pixbuf pixbuf = Gdk.Pixbuf.from_pixdata( Cursor.ellipse_pixdata, false );
+				Gdk.Cursor cursor = new Gdk.Cursor.from_pixbuf( Gdk.Display.get_default(),
+				                                                pixbuf, CURSOR_X_HOTSPOT, CURSOR_Y_HOTSPOT );
+				window.set_cursor( cursor );
+			}
+			catch ( Error err )
+			{
+				error( "%s\n", err.message );
+			}
+
+			in_object_create_mode = true;
+			create_object_type    = CreateType.ELLIPSE;
+			state                 = State.IDLE;
+		}
+
+
 		public void create_text_mode()
 		{
 			Gdk.Window window = canvas.get_window();
@@ -857,7 +879,9 @@ namespace glabels
 						                        double.max( y, create_y0 ) - double.min( y, create_y0 ) );
 						break;
 					case CreateType.ELLIPSE:
-						/* TODO */
+						create_object.set_position( double.min( x, create_x0 ), double.min( y, create_y0 ) );
+						create_object.set_size( double.max( x, create_x0 ) - double.min( x, create_x0 ),
+						                        double.max( y, create_y0 ) - double.min( y, create_y0 ) );
 						break;
 					case CreateType.LINE: 
 						/* TODO */
@@ -985,7 +1009,7 @@ namespace glabels
 							create_object = new LabelObjectBox() as LabelObject;
 							break;
 						case CreateType.ELLIPSE:
-							/* TODO */
+							create_object = new LabelObjectEllipse() as LabelObject;
 							break;
 						case CreateType.LINE: 
 							/* TODO */

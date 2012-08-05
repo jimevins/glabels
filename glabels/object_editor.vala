@@ -394,6 +394,18 @@ namespace glabels
 
 					size_reset_image_button.hide();
 				}
+				else if ( object is LabelObjectEllipse  )
+				{
+					title_image.set_from_icon_name( "glabels-ellipse", Gtk.IconSize.LARGE_TOOLBAR );
+					title_label.set_text( "<b>%s</b>".printf( _("Ellipse object properties") ) );
+
+					text_page_box.hide();
+					line_fill_page_box.show_all();
+					pos_size_page_box.show_all();
+					shadow_page_box.show_all();
+
+					size_reset_image_button.hide();
+				}
 				else
 				{
 					assert_not_reached();

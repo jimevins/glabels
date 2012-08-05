@@ -24,38 +24,10 @@ using GLib;
 namespace glabels
 {
 
-	public class LabelObjectEllipse : LabelObject
+	public class LabelObjectEllipse : LabelObjectShape
 	{
+
 		private const int ARC_FINE = 2;
-
-
-		public LabelObjectEllipse()
-		{
-			handles.append( new HandleSouthEast( this ) );
-			handles.append( new HandleSouthWest( this ) );
-			handles.append( new HandleNorthEast( this ) );
-			handles.append( new HandleNorthWest( this ) );
-			handles.append( new HandleEast( this ) );
-			handles.append( new HandleSouth( this ) );
-			handles.append( new HandleWest( this ) );
-			handles.append( new HandleNorth( this ) );
-		}
-
-
-		public override bool can_fill()
-		{
-			return true;
-		}
-
-		public override bool can_line_color()
-		{
-			return true;
-		}
-
-		public override bool can_line_width()
-		{
-			return true;
-		}
 
 
 		public override LabelObject dup()
@@ -195,9 +167,6 @@ namespace glabels
 
 			cr.restore();
 		}
-
-
-		// TODO: get_handle_at method.
 
 
 	}

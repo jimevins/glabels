@@ -1175,12 +1175,7 @@ namespace glabels
 
 		private void on_objects_create_ellipse( Gtk.Action action )
 		{
-			/*
-			if (window->view != NULL) {
-				gl_view_object_create_mode (GL_VIEW(window->view),
-				                            GL_LABEL_OBJECT_ELLIPSE);
-			}
-			*/
+			window.view.create_ellipse_mode();
 		}
 
 

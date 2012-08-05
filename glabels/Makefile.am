@@ -33,6 +33,8 @@ glabels_4_SOURCES = \
 	label.vala \
 	label_object.vala \
 	label_object_box.vala \
+	label_object_ellipse.vala \
+	label_object_shape.vala \
 	label_object_text.vala \
 	label_region.vala \
 	label_state.vala \

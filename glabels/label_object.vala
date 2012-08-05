@@ -156,60 +156,11 @@ namespace glabels
 
 
 		/**
-		 * Line width
+		 * Shape parameters interface
 		 */
-		public double line_width
-		{
-			get { return _line_width; }
-
-			set
-			{
-				if ( _line_width != value )
-				{
-					_line_width = value;
-					changed();
-				}
-			}
-		}
-		private double _line_width;
-
-
-		/**
-		 * Line color node
-		 */
-		public ColorNode line_color_node
-		{
-			get { return _line_color_node; }
-
-			set
-			{
-				if ( _line_color_node != value )
-				{
-					_line_color_node = value;
-					changed();
-				}
-			}
-		}
-		private ColorNode _line_color_node;
-
-
-		/**
-		 * Fill color node
-		 */
-		public ColorNode fill_color_node
-		{
-			get { return _fill_color_node; }
-
-			set
-			{
-				if ( _fill_color_node != value )
-				{
-					_fill_color_node = value;
-					changed();
-				}
-			}
-		}
-		private ColorNode _fill_color_node;
+		public virtual double          line_width          { get; set; }
+		public virtual ColorNode       line_color_node     { get; set; }
+		public virtual ColorNode       fill_color_node     { get; set; }
 
 
 		/**
@@ -326,12 +277,6 @@ namespace glabels
 			_x0 = 0;
 			_y0 = 0;
 			_matrix = Cairo.Matrix.identity();
-
-			Prefs prefs = new Prefs();
-
-			_line_width              = prefs.default_line_width;
-			_line_color_node         = ColorNode.from_color( prefs.default_line_color );
-			_fill_color_node         = ColorNode.from_color( prefs.default_fill_color );
 
 			_shadow_state            = false;
 			_shadow_x                = 3.6;

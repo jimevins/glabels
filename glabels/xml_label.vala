@@ -190,7 +190,7 @@ namespace glabels
 					break;
 
 				case "Object-ellipse":
-					/* TODO. */
+					parse_object_ellipse_node( child, label );
 					break;
 
 				case "Object-line":
@@ -225,6 +225,48 @@ namespace glabels
 		                                    Label    label )
 		{
 			LabelObjectBox object = new LabelObjectBox();
+
+		
+			/* position attrs */
+			object.x0 = XmlUtil.get_prop_length( node, "x", 0.0 );
+			object.y0 = XmlUtil.get_prop_length( node, "y", 0.0 );
+
+			/* size attrs */
+			object.w = XmlUtil.get_prop_length( node, "w", 0 );
+			object.h = XmlUtil.get_prop_length( node, "h", 0 );
+
+			/* line attrs */
+			object.line_width = XmlUtil.get_prop_length( node, "line_width", 1.0 );
+	
+			{
+				string key        = XmlUtil.get_prop_string( node, "line_color_field", null );
+				bool   field_flag = key != null;
+				Color  color      = Color.from_legacy_color( XmlUtil.get_prop_uint( node, "line_color", 0 ) );
+				object.line_color_node = ColorNode( field_flag, color, key );
+			}
+
+			/* fill attrs */
+			{
+				string key        = XmlUtil.get_prop_string( node, "fill_color_field", null );
+				bool   field_flag = key != null;
+				Color  color      = Color.from_legacy_color( XmlUtil.get_prop_uint( node, "fill_color", 0 ) );
+				object.fill_color_node = ColorNode( field_flag, color, key );
+			}
+	
+			/* affine attrs */
+			parse_affine_attrs( node, object );
+
+			/* shadow attrs */
+			parse_shadow_attrs( node, object );
+
+			label.add_object( object );
+		}
+
+
+		private void parse_object_ellipse_node( Xml.Node node,
+		                                        Label    label )
+		{
+			LabelObjectEllipse object = new LabelObjectEllipse();
 
 		
 			/* position attrs */
@@ -512,6 +554,10 @@ namespace glabels
 				{
 					create_object_box_node( node, ns, (LabelObjectBox)object );
 				}
+				else if ( object is LabelObjectEllipse )
+				{
+					create_object_ellipse_node( node, ns, (LabelObjectEllipse)object );
+				}
 				else if ( object is LabelObjectText )
 				{
 					create_object_text_node( node, ns, (LabelObjectText)object );
@@ -529,6 +575,49 @@ namespace glabels
 		                                     LabelObjectBox object )
 		{
 			unowned Xml.Node *node = parent.new_child( ns, "Object-box" );
+
+			/* position attrs */
+			XmlUtil.set_prop_length( node, "x", object.x0 );
+			XmlUtil.set_prop_length( node, "y", object.y0 );
+
+			/* size attrs */
+			XmlUtil.set_prop_length( node, "w", object.w );
+			XmlUtil.set_prop_length( node, "h", object.h );
+
+			/* line attrs */
+			XmlUtil.set_prop_length( node, "line_width", object.line_width );
+			if ( object.line_color_node.field_flag )
+			{
+				XmlUtil.set_prop_string( node, "line_color_field", object.line_color_node.key );
+			}
+			else
+			{
+				XmlUtil.set_prop_uint_hex( node, "line_color", object.line_color_node.color.to_legacy_color() );
+			}
+
+			/* fill attrs */
+			if ( object.fill_color_node.field_flag )
+			{
+				XmlUtil.set_prop_string( node, "fill_color_field", object.fill_color_node.key );
+			}
+			else
+			{
+				XmlUtil.set_prop_uint_hex( node, "fill_color", object.fill_color_node.color.to_legacy_color() );
+			}
+
+			/* affine attrs */
+			create_affine_attrs( node, object );
+
+			/* shadow attrs */
+			create_shadow_attrs( node, object );
+		}
+
+
+		private void create_object_ellipse_node( Xml.Node           parent,
+		                                         Xml.Ns             ns,
+		                                         LabelObjectEllipse object )
+		{
+			unowned Xml.Node *node = parent.new_child( ns, "Object-ellipse" );
 
 			/* position attrs */
 			XmlUtil.set_prop_length( node, "x", object.x0 );

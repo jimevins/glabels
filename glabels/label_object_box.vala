@@ -1,6 +1,6 @@
 /*  label_object_box.vala
  *
- *  Copyright (C) 2011  Jim Evins <evins@snaught.com>
+ *  Copyright (C) 2012  Jim Evins <evins@snaught.com>
  *
  *  This file is part of gLabels.
  *
@@ -24,37 +24,8 @@ using GLib;
 namespace glabels
 {
 
-	public class LabelObjectBox : LabelObject
+	public class LabelObjectBox : LabelObjectShape
 	{
-
-		public LabelObjectBox()
-		{
-			handles.append( new HandleSouthEast( this ) );
-			handles.append( new HandleSouthWest( this ) );
-			handles.append( new HandleNorthEast( this ) );
-			handles.append( new HandleNorthWest( this ) );
-			handles.append( new HandleEast( this ) );
-			handles.append( new HandleSouth( this ) );
-			handles.append( new HandleWest( this ) );
-			handles.append( new HandleNorth( this ) );
-		}
-
-
-		public override bool can_fill()
-		{
-			return true;
-		}
-
-		public override bool can_line_color()
-		{
-			return true;
-		}
-
-		public override bool can_line_width()
-		{
-			return true;
-		}
-
 
 		public override LabelObject dup()
 		{
@@ -168,9 +139,6 @@ namespace glabels
 
 			return false;
 		}
-
-
-		// TODO: get_handle_at method.
 
 
 	}
