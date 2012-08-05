@@ -293,6 +293,8 @@ namespace glabels
 
 		public void delete_object( LabelObject object )
 		{
+			unselect_object( object );
+
 			object_list.remove( object );
 
 			object.changed.disconnect( on_object_changed );
