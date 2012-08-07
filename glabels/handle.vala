@@ -239,5 +239,43 @@ namespace glabels
 	}
 
 
+	public class HandleP1 : Handle
+	{
+		public HandleP1( LabelObject owner )
+		{
+			this.owner = owner;
+		}
+
+		public override void draw( Cairo.Context cr )
+		{
+			draw_at( cr, 0, 0 );
+		}
+
+		public override void cairo_path( Cairo.Context cr )
+		{
+			cairo_path_at( cr, 0, 0 );
+		}
+	}
+
+
+	public class HandleP2 : Handle
+	{
+		public HandleP2( LabelObject owner )
+		{
+			this.owner = owner;
+		}
+
+		public override void draw( Cairo.Context cr )
+		{
+			draw_at( cr, owner.w, owner.h );
+		}
+
+		public override void cairo_path( Cairo.Context cr )
+		{
+			cairo_path_at( cr, owner.w, owner.h );
+		}
+	}
+
+
 }
 

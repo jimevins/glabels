@@ -407,6 +407,28 @@ namespace glabels
 		}
 
 
+		public void create_line_mode()
+		{
+			Gdk.Window window = canvas.get_window();
+
+			try
+			{
+				Gdk.Pixbuf pixbuf = Gdk.Pixbuf.from_pixdata( Cursor.line_pixdata, false );
+				Gdk.Cursor cursor = new Gdk.Cursor.from_pixbuf( Gdk.Display.get_default(),
+				                                                pixbuf, CURSOR_X_HOTSPOT, CURSOR_Y_HOTSPOT );
+				window.set_cursor( cursor );
+			}
+			catch ( Error err )
+			{
+				error( "%s\n", err.message );
+			}
+
+			in_object_create_mode = true;
+			create_object_type    = CreateType.LINE;
+			state                 = State.IDLE;
+		}
+
+
 		public void create_text_mode()
 		{
 			Gdk.Window window = canvas.get_window();
@@ -884,7 +906,7 @@ namespace glabels
 						                        double.max( y, create_y0 ) - double.min( y, create_y0 ) );
 						break;
 					case CreateType.LINE: 
-						/* TODO */
+						create_object.set_size( x - create_x0, y - create_y0 );
 						break;
 					case CreateType.IMAGE:
 						/* TODO */
@@ -1006,19 +1028,19 @@ namespace glabels
 						switch ( create_object_type )
 						{
 						case CreateType.BOX:
-							create_object = new LabelObjectBox() as LabelObject;
+							create_object = new LabelObjectBox()     as LabelObject;
 							break;
 						case CreateType.ELLIPSE:
 							create_object = new LabelObjectEllipse() as LabelObject;
 							break;
 						case CreateType.LINE: 
-							/* TODO */
+							create_object = new LabelObjectLine()    as LabelObject;
 							break;
 						case CreateType.IMAGE:
 							/* TODO */
 							break;
 						case CreateType.TEXT:
-							create_object = new LabelObjectText() as LabelObject;
+							create_object = new LabelObjectText()    as LabelObject;
 							break;
 						case CreateType.BARCODE:
 							/* TODO */
@@ -1125,11 +1147,15 @@ namespace glabels
 					Gdk.Cursor cursor = new Gdk.Cursor( Gdk.CursorType.LEFT_PTR );
 					window.set_cursor( cursor );
 
-					if ( (create_object.w < 4) && (create_object.h < 4) )
+					if ( (Math.fabs(create_object.w) < 4) && (Math.fabs(create_object.h) < 4) )
 					{
 						if ( create_object is LabelObjectText )
 						{
 							create_object.set_size( 0, 0 );
+						}
+						else if ( create_object is LabelObjectLine )
+						{
+							create_object.set_size( 72, 0 );
 						}
 						else
 						{
@@ -1272,6 +1298,22 @@ namespace glabels
 				w = double.max( x2 - x, 0 );
 				h = y2 - y1;
 			}
+			else if ( resize_handle is HandleP1 )
+			{
+				x1 = x;
+				y1 = y;
+				w  = x2 - x;
+				h  = y2 - y;
+				x0 = x0 + x1;
+				y0 = y0 + y1;
+			}
+			else if ( resize_handle is HandleP2 )
+			{
+				w  = x - x1;
+				h  = y - y1;
+				x0 = x0 + x1;
+				y0 = y0 + y1;
+			}
 			else
 			{
 				assert_not_reached();
@@ -1280,30 +1322,37 @@ namespace glabels
 			/*
 			 * Set size
 			 */
-			if ( resize_honor_aspect )
+			if ( !(resize_handle is HandleP1) && !(resize_handle is HandleP2) )
 			{
-				resize_object.set_size_honor_aspect( w, h );
+				if ( resize_honor_aspect )
+				{
+					resize_object.set_size_honor_aspect( w, h );
+				}
+				else
+				{
+					resize_object.set_size( w, h );
+				}
+
+				/*
+				 * Adjust origin, if needed.
+				 */
+				if ( resize_handle is HandleNorthWest )
+				{
+					x0 += x2 - resize_object.w;
+					y0 += y2 - resize_object.h;
+				}
+				else if ( (resize_handle is HandleNorth) || (resize_handle is HandleNorthEast) )
+				{
+					y0 += y2 - resize_object.h;
+				}
+				else if ( (resize_handle is HandleWest) || (resize_handle is HandleSouthWest) )
+				{
+					x0 += x2 - resize_object.w;
+				}
 			}
 			else
 			{
 				resize_object.set_size( w, h );
-			}
-
-			/*
-			 * Adjust origin, if needed.
-			 */
-			if ( resize_handle is HandleNorthWest )
-			{
-				x0 += x2 - resize_object.w;
-				y0 += y2 - resize_object.h;
-			}
-			else if ( (resize_handle is HandleNorth) || (resize_handle is HandleNorthEast) )
-			{
-				y0 += y2 - resize_object.h;
-			}
-			else if ( (resize_handle is HandleWest) || (resize_handle is HandleSouthWest) )
-			{
-				x0 += x2 - resize_object.w;
 			}
 
 			/*

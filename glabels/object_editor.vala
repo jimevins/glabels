@@ -67,6 +67,7 @@ namespace glabels
 		private Gtk.Box          line_color_box;
 		private ColorButton      line_color_button;
 
+		private Gtk.Frame        fill_frame;
 		private Gtk.Box          fill_color_box;
 		private ColorButton      fill_color_button;
 
@@ -75,12 +76,18 @@ namespace glabels
 		private Gtk.Label        pos_x_units_label;
 		private Gtk.Label        pos_y_units_label;
 
+		private Gtk.Frame        rect_size_frame;
 		private Gtk.SpinButton   size_w_spin;
 		private Gtk.SpinButton   size_h_spin;
 		private Gtk.Label        size_w_units_label;
 		private Gtk.Label        size_h_units_label;
 		private Gtk.CheckButton  size_aspect_check;
 		private Gtk.Button       size_reset_image_button;
+
+		private Gtk.Frame        line_size_frame;
+		private Gtk.SpinButton   line_length_spin;
+		private Gtk.SpinButton   line_angle_spin;
+		private Gtk.Label        line_length_units_label;
 
 		private Gtk.CheckButton  shadow_enable_check;
 		private Gtk.Grid         shadow_controls_grid;
@@ -120,6 +127,9 @@ namespace glabels
 		private ulong sigid_size_w_spin_changed;
 		private ulong sigid_size_h_spin_changed;
 
+		private ulong sigid_line_length_spin_changed;
+		private ulong sigid_line_angle_spin_changed;
+
 		private ulong sigid_shadow_enable_check_changed;
 		private ulong sigid_shadow_x_spin_changed;
 		private ulong sigid_shadow_y_spin_changed;
@@ -139,6 +149,7 @@ namespace glabels
 				                     "font_size_adjustment", "line_spacing_adjustment",
 				                     "line_width_adjustment",
 				                     "size_w_adjustment", "size_h_adjustment",
+				                     "line_length_adjustment", "line_angle_adjustment",
 				                     "pos_x_adjustment", "pos_y_adjustment",
 				                     "shadow_x_adjustment", "shadow_y_adjustment", "shadow_opacity_adjustment",
 				                     "page_sizegroup", "width_sizegroup", "label_sizegroup", "color_box_sizegroup",
@@ -241,6 +252,7 @@ namespace glabels
 
 
 			/* Fill widgets. */
+			fill_frame              = builder.get_object( "fill_frame" )              as Gtk.Frame;
 			fill_color_box          = builder.get_object( "fill_color_box" )          as Gtk.Box;
 
 			fill_color_button       = new ColorButton( _("No fill"), Color.none(), Color.black() );
@@ -260,7 +272,8 @@ namespace glabels
 			sigid_pos_y_spin_changed = pos_y_spin.value_changed.connect( on_pos_y_spin_changed );
 
 
-			/* Size widgets. */
+			/* Rectangle size widgets. */
+			rect_size_frame         = builder.get_object( "rect_size_frame" )         as Gtk.Frame;
 			size_w_spin             = builder.get_object( "size_w_spin" )             as Gtk.SpinButton;
 			size_h_spin             = builder.get_object( "size_h_spin" )             as Gtk.SpinButton;
 			size_w_units_label      = builder.get_object( "size_w_units_label" )      as Gtk.Label;
@@ -270,6 +283,16 @@ namespace glabels
 
 			sigid_size_w_spin_changed = size_w_spin.value_changed.connect( on_size_w_spin_changed );
 			sigid_size_h_spin_changed = size_h_spin.value_changed.connect( on_size_h_spin_changed );
+
+
+			/* Line size widgets. */
+			line_size_frame         = builder.get_object( "line_size_frame" )         as Gtk.Frame;
+			line_length_spin        = builder.get_object( "line_length_spin" )        as Gtk.SpinButton;
+			line_angle_spin         = builder.get_object( "line_angle_spin" )         as Gtk.SpinButton;
+			line_length_units_label = builder.get_object( "line_length_units_label" ) as Gtk.Label;
+
+			sigid_line_length_spin_changed = line_length_spin.value_changed.connect( on_line_length_spin_changed );
+			sigid_line_angle_spin_changed  = line_angle_spin.value_changed.connect( on_line_angle_spin_changed );
 
 
 			/* Shadow widgets. */
@@ -328,6 +351,7 @@ namespace glabels
 			pos_y_units_label.set_text( units.name );
 			size_w_units_label.set_text( units.name );
 			size_h_units_label.set_text( units.name );
+			line_length_units_label.set_text( units.name );
 			shadow_x_units_label.set_text( units.name );
 			shadow_y_units_label.set_text( units.name );
 
@@ -336,6 +360,7 @@ namespace glabels
 			pos_y_spin.set_digits( precision );
 			size_w_spin.set_digits( precision );
 			size_h_spin.set_digits( precision );
+			line_length_spin.set_digits( precision );
 			shadow_x_spin.set_digits( precision );
 			shadow_y_spin.set_digits( precision );
 
@@ -344,6 +369,7 @@ namespace glabels
 			pos_y_spin.set_increments( step_size, 10*step_size );
 			size_w_spin.set_increments( step_size, 10*step_size );
 			size_h_spin.set_increments( step_size, 10*step_size );
+			line_length_spin.set_increments( step_size, 10*step_size );
 			shadow_x_spin.set_increments( step_size, 10*step_size );
 			shadow_y_spin.set_increments( step_size, 10*step_size );
 
@@ -353,6 +379,7 @@ namespace glabels
 			load_pos_y_spin();
 			load_size_w_spin();
 			load_size_h_spin();
+			load_line_length_spin();
 			load_shadow_x_spin();
 			load_shadow_y_spin();
 		}
@@ -370,7 +397,7 @@ namespace glabels
 			{
 				object = model.label.get_1st_selected_object();
 
-				if ( object is LabelObjectText  )
+				if ( object is LabelObjectText )
 				{
 					title_image.set_from_icon_name( "glabels-text", Gtk.IconSize.LARGE_TOOLBAR );
 					title_label.set_text( "<b>%s</b>".printf( _("Text object properties") ) );
@@ -380,9 +407,10 @@ namespace glabels
 					pos_size_page_box.show_all();
 					shadow_page_box.show_all();
 
+					line_size_frame.hide();
 					size_reset_image_button.hide();
 				}
-				else if ( object is LabelObjectBox  )
+				else if ( object is LabelObjectBox )
 				{
 					title_image.set_from_icon_name( "glabels-box", Gtk.IconSize.LARGE_TOOLBAR );
 					title_label.set_text( "<b>%s</b>".printf( _("Box object properties") ) );
@@ -392,9 +420,10 @@ namespace glabels
 					pos_size_page_box.show_all();
 					shadow_page_box.show_all();
 
+					line_size_frame.hide();
 					size_reset_image_button.hide();
 				}
-				else if ( object is LabelObjectEllipse  )
+				else if ( object is LabelObjectEllipse )
 				{
 					title_image.set_from_icon_name( "glabels-ellipse", Gtk.IconSize.LARGE_TOOLBAR );
 					title_label.set_text( "<b>%s</b>".printf( _("Ellipse object properties") ) );
@@ -404,6 +433,21 @@ namespace glabels
 					pos_size_page_box.show_all();
 					shadow_page_box.show_all();
 
+					line_size_frame.hide();
+					size_reset_image_button.hide();
+				}
+				else if ( object is LabelObjectLine )
+				{
+					title_image.set_from_icon_name( "glabels-line", Gtk.IconSize.LARGE_TOOLBAR );
+					title_label.set_text( "<b>%s</b>".printf( _("Line object properties") ) );
+
+					text_page_box.hide();
+					line_fill_page_box.show_all();
+					pos_size_page_box.show_all();
+					shadow_page_box.show_all();
+
+					fill_frame.hide();
+					rect_size_frame.hide();
 					size_reset_image_button.hide();
 				}
 				else
@@ -428,6 +472,8 @@ namespace glabels
 				load_pos_y_spin();
 				load_size_w_spin();
 				load_size_h_spin();
+				load_line_length_spin();
+				load_line_angle_spin();
 				load_shadow_enable_check();
 				load_shadow_x_spin();
 				load_shadow_y_spin();
@@ -510,8 +556,16 @@ namespace glabels
 
 		private void on_object_changed()
 		{
-			load_size_w_spin();
-			load_size_h_spin();
+			if ( object is LabelObjectLine )
+			{
+				load_line_length_spin();
+				load_line_angle_spin();
+			}
+			else
+			{
+				load_size_w_spin();
+				load_size_h_spin();
+			}
 		}
 
 
@@ -1045,7 +1099,7 @@ namespace glabels
 
 		private void load_size_w_spin()
 		{
-			if ( object != null )
+			if ( (object != null) && !(object is LabelObjectLine) )
 			{
 				GLib.SignalHandler.block( (void*)size_w_spin, sigid_size_w_spin_changed );
 
@@ -1079,13 +1133,75 @@ namespace glabels
 
 		private void load_size_h_spin()
 		{
-			if ( object != null )
+			if ( (object != null) && !(object is LabelObjectLine) )
 			{
 				GLib.SignalHandler.block( (void*)size_h_spin, sigid_size_h_spin_changed );
 
 				size_h_spin.set_value( object.h * units.units_per_point );
 
 				GLib.SignalHandler.unblock( (void*)size_h_spin, sigid_size_h_spin_changed );
+			}
+		}
+
+
+		/******************************
+		 * line_length_spin
+		 ******************************/
+		private void on_line_length_spin_changed()
+		{
+			if ( object != null )
+			{
+				double length = line_length_spin.get_value() * units.points_per_unit;
+				double angle  = line_angle_spin.get_value() * Math.PI/180;
+
+				object.w = length * Math.cos( -angle );
+				object.h = length * Math.sin( -angle );
+			}
+		}
+
+
+		private void load_line_length_spin()
+		{
+			if ( (object != null) && object is LabelObjectLine )
+			{
+				GLib.SignalHandler.block( (void*)line_length_spin, sigid_line_length_spin_changed );
+
+				double length = Math.sqrt( object.w*object.w + object.h*object.h );
+
+				line_length_spin.set_value( length * units.units_per_point );
+
+				GLib.SignalHandler.unblock( (void*)line_length_spin, sigid_line_length_spin_changed );
+			}
+		}
+
+
+		/******************************
+		 * line_angle_spin
+		 ******************************/
+		private void on_line_angle_spin_changed()
+		{
+			if ( object != null )
+			{
+				double length = line_length_spin.get_value() * units.points_per_unit;
+				double angle  = line_angle_spin.get_value() * Math.PI/180;
+
+				object.w = length * Math.cos( angle );
+				object.h = length * Math.sin( angle );
+			}
+		}
+
+
+		private void load_line_angle_spin()
+		{
+			if ( (object != null) && object is LabelObjectLine )
+			{
+				GLib.SignalHandler.block( (void*)line_angle_spin, sigid_line_angle_spin_changed );
+
+				double angle = Math.atan2( object.h, object.w );
+
+				line_angle_spin.set_value( angle * 180/Math.PI );
+
+				GLib.SignalHandler.unblock( (void*)line_angle_spin, sigid_line_angle_spin_changed );
 			}
 		}
 
