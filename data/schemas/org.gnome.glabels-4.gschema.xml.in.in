@@ -1,15 +1,15 @@
 <schemalist>
 
 
-  <schema id="org.gnome.glabels-3" path="/apps/glabels-3/" gettext-domain="@GETTEXT_PACKAGE@">
-    <child name="ui" schema="org.gnome.glabels.ui"/>
-    <child name="locale" schema="org.gnome.glabels.locale"/>
-    <child name="objects" schema="org.gnome.glabels.objects"/>
-    <child name="history" schema="org.gnome.glabels.history"/>
+  <schema id="org.gnome.glabels-4" path="/apps/glabels-4/" gettext-domain="@GETTEXT_PACKAGE@">
+    <child name="ui" schema="org.gnome.glabels-4.ui"/>
+    <child name="locale" schema="org.gnome.glabels-4.locale"/>
+    <child name="objects" schema="org.gnome.glabels-4.objects"/>
+    <child name="history" schema="org.gnome.glabels-4.history"/>
   </schema>
 
 
-  <schema id="org.gnome.glabels-3.ui" path="/apps/glabels-3/ui/" gettext-domain="@GETTEXT_PACKAGE@">
+  <schema id="org.gnome.glabels-4.ui" path="/apps/glabels-4/ui/" gettext-domain="@GETTEXT_PACKAGE@">
 
     <key name="main-toolbar-visible" type="b">
       <default>true</default>
@@ -50,7 +50,7 @@
   </schema>
 
 
-  <schema id="org.gnome.glabels-3.locale" path="/apps/glabels-3/locale/" gettext-domain="@GETTEXT_PACKAGE@">
+  <schema id="org.gnome.glabels-4.locale" path="/apps/glabels-4/locale/" gettext-domain="@GETTEXT_PACKAGE@">
 
     <key name="units" type="s">
       <choices>
@@ -78,7 +78,7 @@
   </schema>
 
 
-  <schema id="org.gnome.glabels-3.objects" path="/apps/glabels-3/objects/" gettext-domain="@GETTEXT_PACKAGE@">
+  <schema id="org.gnome.glabels-4.objects" path="/apps/glabels-4/objects/" gettext-domain="@GETTEXT_PACKAGE@">
     <key name="default-font-family" type="s">
       <default>'Sans'</default>
       <_summary>Default font family.</_summary>
@@ -154,7 +154,7 @@
   </schema>
 
 
-  <schema id="org.gnome.glabels-3.history" path="/apps/glabels-3/history/" gettext-domain="@GETTEXT_PACKAGE@">
+  <schema id="org.gnome.glabels-4.history" path="/apps/glabels-4/history/" gettext-domain="@GETTEXT_PACKAGE@">
 
     <key name="recent-templates" type="as">
       <default>[]</default>

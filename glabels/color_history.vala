@@ -34,7 +34,7 @@ namespace glabels
 
 		static construct
 		{
-			history = new GLib.Settings( "org.gnome.glabels-3.history" );
+			history = new GLib.Settings( "org.gnome.glabels-4.history" );
 		}
 
 		public ColorHistory( int n )

@@ -44,9 +44,9 @@ namespace glabels
 
 		static construct
 		{
-			locale  = new GLib.Settings( "org.gnome.glabels-3.locale" );
-			objects = new GLib.Settings( "org.gnome.glabels-3.objects" );
-			ui      = new GLib.Settings( "org.gnome.glabels-3.ui" );
+			locale  = new GLib.Settings( "org.gnome.glabels-4.locale" );
+			objects = new GLib.Settings( "org.gnome.glabels-4.objects" );
+			ui      = new GLib.Settings( "org.gnome.glabels-4.ui" );
 		}
 
 		public Prefs()

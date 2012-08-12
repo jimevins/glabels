@@ -1,6 +1,6 @@
 
 gsettings_files = \
-	org.gnome.glabels-3.gschema.xml.in
+	org.gnome.glabels-4.gschema.xml.in
 
 gsettings_SCHEMAS = $(gsettings_files:.xml.in=.xml)
 

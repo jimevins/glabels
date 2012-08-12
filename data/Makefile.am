@@ -3,11 +3,11 @@
 SUBDIRS = \
 	icons \
 	pixmaps \
+	schemas \
 	ui
 
 #	desktop \
 #	man \
-#	mime \
-#	schemas
+#	mime
 
 

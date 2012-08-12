@@ -31,6 +31,8 @@ AC_PROG_LIBTOOL
 
 GNOME_DOC_INIT
 
+GLIB_GSETTINGS
+
 AC_PATH_PROG(GDK_PIXBUF_CSOURCE,      gdk-pixbuf-csource)
 AC_PATH_PROG(GTK_UPDATE_ICON_CACHE,   gtk-update-icon-cache)
 
@@ -113,6 +115,8 @@ AC_CONFIG_FILES([Makefile
         data/icons/32x32/Makefile
         data/icons/48x48/Makefile
         data/pixmaps/Makefile
+        data/schemas/Makefile
+        data/schemas/org.gnome.glabels-4.gschema.xml.in
         data/ui/Makefile
         help/Makefile])
 
