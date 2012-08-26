@@ -156,6 +156,12 @@ namespace glabels
 
 
 		/**
+		 * Image parameters interface
+		 */
+		public virtual TextNode        filename_node       { get; set; }
+
+
+		/**
 		 * Shape parameters interface
 		 */
 		public virtual double          line_width          { get; set; }

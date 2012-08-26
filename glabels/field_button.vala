@@ -55,6 +55,7 @@ namespace glabels
 			}
 			else
 			{
+				klabel.set_text( _("(None)") );
 				klabel_is_key = true;
 			}
 

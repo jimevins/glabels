@@ -40,6 +40,13 @@ namespace glabels
 		public bool auto_shrink { get; set; default = false; }
 
 
+		public LabelObjectText.with_parent( Label parent )
+		{
+			this();
+			parent.add_object( this );
+		}
+
+
 		/**
 		 * Raw width of bounding box
 		 */

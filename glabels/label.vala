@@ -41,18 +41,8 @@ namespace glabels
 
 		public unowned List<LabelObject>  object_list { get; private set; }
 
-
-		private TemplateHistory    template_history;
-
-		private static int         untitled_count;
-		private int                untitled_instance;
-
-		private bool               selection_op_flag;
-		private bool               delayed_change_flag;
-
-
-		// TODO: Pixbuf cache
-		// TODO: SVG cache
+		public PixbufCache        pixbuf_cache { get; private set; }
+		public SvgCache           svg_cache    { get; private set; }
 
 
 		/**
@@ -203,12 +193,23 @@ namespace glabels
 		public Color              default_fill_color        { get; set; }
 
 
+		private TemplateHistory    template_history;
+
+		private static int         untitled_count;
+		private int                untitled_instance;
+
+		private bool               selection_op_flag;
+		private bool               delayed_change_flag;
+
 
 		public Label()
 		{
 			_merge = new MergeNone();
 
 			template_history = new TemplateHistory( 5 );
+
+			pixbuf_cache = new PixbufCache();
+			svg_cache    = new SvgCache();
 
 			// TODO: Set default properties from user prefs
 		}

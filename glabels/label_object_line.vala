@@ -29,6 +29,13 @@ namespace glabels
 
 		private const double SELECTION_SLOP_PIXELS = 4.0;
 
+		public LabelObjectLine.with_parent( Label parent )
+		{
+			this();
+			parent.add_object( this );
+		}
+
+
 		/**
 		 * Line width
 		 */

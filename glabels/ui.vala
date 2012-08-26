@@ -1150,21 +1150,9 @@ namespace glabels
 		}
 
 
-		private void on_objects_create_text( Gtk.Action action )
-		{
-			window.view.create_text_mode();
-		}
-
-
 		private void on_objects_create_box( Gtk.Action action )
 		{
 			window.view.create_box_mode();
-		}
-
-
-		private void on_objects_create_line( Gtk.Action action )
-		{
-			window.view.create_line_mode();
 		}
 
 
@@ -1174,14 +1162,21 @@ namespace glabels
 		}
 
 
+		private void on_objects_create_line( Gtk.Action action )
+		{
+			window.view.create_line_mode();
+		}
+
+
 		private void on_objects_create_image( Gtk.Action action )
 		{
-			/*
-			if (window->view != NULL) {
-				gl_view_object_create_mode (GL_VIEW(window->view),
-				                            GL_LABEL_OBJECT_IMAGE);
-			}
-			*/
+			window.view.create_image_mode();
+		}
+
+
+		private void on_objects_create_text( Gtk.Action action )
+		{
+			window.view.create_text_mode();
 		}
 
 

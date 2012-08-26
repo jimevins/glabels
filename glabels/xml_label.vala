@@ -131,7 +131,7 @@ namespace glabels
 			{
 				if ( child->name == "Data" )
 				{
-					/* TODO: xml_parse_data (child_node, label); */
+					parse_data_node( child, label );
 				}
 			}
 
@@ -194,11 +194,11 @@ namespace glabels
 					break;
 
 				case "Object-line":
-					/* TODO. */
+					parse_object_line_node( child, label );
 					break;
 
 				case "Object-image":
-					/* TODO. */
+					parse_object_image_node( child, label );
 					break;
 
 				case "Object-barcode":
@@ -224,7 +224,7 @@ namespace glabels
 		private void parse_object_box_node( Xml.Node node,
 		                                    Label    label )
 		{
-			LabelObjectBox object = new LabelObjectBox();
+			LabelObjectBox object = new LabelObjectBox.with_parent( label );
 
 		
 			/* position attrs */
@@ -258,15 +258,13 @@ namespace glabels
 
 			/* shadow attrs */
 			parse_shadow_attrs( node, object );
-
-			label.add_object( object );
 		}
 
 
 		private void parse_object_ellipse_node( Xml.Node node,
 		                                        Label    label )
 		{
-			LabelObjectEllipse object = new LabelObjectEllipse();
+			LabelObjectEllipse object = new LabelObjectEllipse.with_parent( label );
 
 		
 			/* position attrs */
@@ -300,15 +298,86 @@ namespace glabels
 
 			/* shadow attrs */
 			parse_shadow_attrs( node, object );
+		}
 
-			label.add_object( object );
+
+		private void parse_object_line_node( Xml.Node node,
+		                                     Label    label )
+		{
+			LabelObjectLine object = new LabelObjectLine.with_parent( label );
+
+		
+			/* position attrs */
+			object.x0 = XmlUtil.get_prop_length( node, "x", 0.0 );
+			object.y0 = XmlUtil.get_prop_length( node, "y", 0.0 );
+
+			/* size attrs */
+			object.w = XmlUtil.get_prop_length( node, "dx", 0 );
+			object.h = XmlUtil.get_prop_length( node, "dy", 0 );
+
+			/* line attrs */
+			object.line_width = XmlUtil.get_prop_length( node, "line_width", 1.0 );
+	
+			{
+				string key        = XmlUtil.get_prop_string( node, "line_color_field", null );
+				bool   field_flag = key != null;
+				Color  color      = Color.from_legacy_color( XmlUtil.get_prop_uint( node, "line_color", 0 ) );
+				object.line_color_node = ColorNode( field_flag, color, key );
+			}
+
+			/* affine attrs */
+			parse_affine_attrs( node, object );
+
+			/* shadow attrs */
+			parse_shadow_attrs( node, object );
+		}
+
+
+		private void parse_object_image_node( Xml.Node node,
+		                                      Label    label )
+		{
+			LabelObjectImage object = new LabelObjectImage.with_parent( label );
+
+		
+			/* position attrs */
+			object.x0 = XmlUtil.get_prop_length( node, "x", 0.0 );
+			object.y0 = XmlUtil.get_prop_length( node, "y", 0.0 );
+
+			/* src or field attrs */
+			string src = XmlUtil.get_prop_string( node, "src", null );
+			if ( src != null )
+			{
+				object.filename_node = new TextNode( false, src );
+			}
+			else
+			{
+				string field = XmlUtil.get_prop_string( node, "field", null );
+				if ( field != null )
+				{
+					object.filename_node = new TextNode( true, field );
+				}
+				else
+				{
+					message( "Missing Object-image src or field attr" );
+				}
+			}
+					
+			/* size attrs, must be set after filename because setting filename may adjust these. */
+			object.w = XmlUtil.get_prop_length( node, "w", 0 );
+			object.h = XmlUtil.get_prop_length( node, "h", 0 );
+
+			/* affine attrs */
+			parse_affine_attrs( node, object );
+
+			/* shadow attrs */
+			parse_shadow_attrs( node, object );
 		}
 
 
 		private void parse_object_text_node( Xml.Node node,
 		                                     Label    label )
 		{
-			LabelObjectText object = new LabelObjectText();
+			LabelObjectText object = new LabelObjectText.with_parent( label );
 
 		
 			/* position attrs */
@@ -350,8 +419,6 @@ namespace glabels
 					break;
 				}
 			}
-
-			label.add_object( object );
 		}
 
 
@@ -475,6 +542,70 @@ namespace glabels
 		}
 
 
+		private void parse_data_node( Xml.Node  node,
+		                              Label     label )
+		{
+
+			for ( unowned Xml.Node* child = node.children; child != null; child = child->next )
+			{
+				switch (child->name)
+				{
+
+				case "Pixdata":
+					parse_pixdata_node( child, label );
+					break;
+
+				case "File":
+					parse_file_node( child, label );
+					break;
+
+				default:
+					if ( child->is_text() == 0 )
+					{
+						message( "Unexpected %s child: \"%s\"", node.name, child->name );
+					}
+					break;
+
+				}
+			}
+
+		}
+
+
+		private void parse_pixdata_node( Xml.Node  node,
+		                                 Label     label )
+		{
+			string name = XmlUtil.get_prop_string( node, "name", null );
+			string base64 = node.get_content();
+
+			uchar[] stream = Base64.decode( base64 );
+			Gdk.Pixdata pixdata = Gdk.Pixdata();
+			if ( pixdata.deserialize( stream ) )
+			{
+				Gdk.Pixbuf pixbuf = Gdk.Pixbuf.from_pixdata( pixdata, true );
+				label.pixbuf_cache.add_pixbuf( name, pixbuf );
+			}
+		}
+
+
+		private void parse_file_node( Xml.Node  node,
+		                              Label     label )
+		{
+			string name   = XmlUtil.get_prop_string( node, "name",   null );
+			string format = XmlUtil.get_prop_string( node, "format", null );
+
+			if ( (format == "SVG") || (format == "Svg") || (format == "svg") )
+			{
+				string content = node.get_content();
+				label.svg_cache.add_svg( name, content );
+			}
+			else
+			{
+				message( "Unknown embedded file format: \"%s\"", format );
+			}
+		}
+
+
 		public void save_file( Label label,
 		                       string utf8_filename ) throws XmlError
 		{
@@ -552,15 +683,23 @@ namespace glabels
 			{
 				if ( object is LabelObjectBox )
 				{
-					create_object_box_node( node, ns, (LabelObjectBox)object );
+					create_object_box_node( node, ns, object as LabelObjectBox );
 				}
 				else if ( object is LabelObjectEllipse )
 				{
-					create_object_ellipse_node( node, ns, (LabelObjectEllipse)object );
+					create_object_ellipse_node( node, ns, object as LabelObjectEllipse );
+				}
+				else if ( object is LabelObjectLine )
+				{
+					create_object_line_node( node, ns, object as LabelObjectLine );
+				}
+				else if ( object is LabelObjectImage )
+				{
+					create_object_image_node( node, ns, object as LabelObjectImage );
 				}
 				else if ( object is LabelObjectText )
 				{
-					create_object_text_node( node, ns, (LabelObjectText)object );
+					create_object_text_node( node, ns, object as LabelObjectText );
 				}
 				else /* TODO: other object types. */
 				{
@@ -646,6 +785,71 @@ namespace glabels
 			else
 			{
 				XmlUtil.set_prop_uint_hex( node, "fill_color", object.fill_color_node.color.to_legacy_color() );
+			}
+
+			/* affine attrs */
+			create_affine_attrs( node, object );
+
+			/* shadow attrs */
+			create_shadow_attrs( node, object );
+		}
+
+
+		private void create_object_line_node( Xml.Node        parent,
+		                                      Xml.Ns          ns,
+		                                      LabelObjectLine object )
+		{
+			unowned Xml.Node *node = parent.new_child( ns, "Object-line" );
+
+			/* position attrs */
+			XmlUtil.set_prop_length( node, "x", object.x0 );
+			XmlUtil.set_prop_length( node, "y", object.y0 );
+
+			/* size attrs */
+			XmlUtil.set_prop_length( node, "dx", object.w );
+			XmlUtil.set_prop_length( node, "dy", object.h );
+
+			/* line attrs */
+			XmlUtil.set_prop_length( node, "line_width", object.line_width );
+			if ( object.line_color_node.field_flag )
+			{
+				XmlUtil.set_prop_string( node, "line_color_field", object.line_color_node.key );
+			}
+			else
+			{
+				XmlUtil.set_prop_uint_hex( node, "line_color", object.line_color_node.color.to_legacy_color() );
+			}
+
+			/* affine attrs */
+			create_affine_attrs( node, object );
+
+			/* shadow attrs */
+			create_shadow_attrs( node, object );
+		}
+
+
+		private void create_object_image_node( Xml.Node         parent,
+		                                       Xml.Ns           ns,
+		                                       LabelObjectImage object )
+		{
+			unowned Xml.Node *node = parent.new_child( ns, "Object-image" );
+
+			/* position attrs */
+			XmlUtil.set_prop_length( node, "x", object.x0 );
+			XmlUtil.set_prop_length( node, "y", object.y0 );
+
+			/* size attrs */
+			XmlUtil.set_prop_length( node, "w", object.w );
+			XmlUtil.set_prop_length( node, "h", object.h );
+
+			/* src or field attr */
+			if ( object.filename_node.field_flag )
+			{
+				XmlUtil.set_prop_string( node, "field", object.filename_node.data );
+			}
+			else
+			{
+				XmlUtil.set_prop_string( node, "src", object.filename_node.data );
 			}
 
 			/* affine attrs */
@@ -805,7 +1009,54 @@ namespace glabels
 		{
 			unowned Xml.Node *node = root.new_child( ns, "Data" );
 
-			/* TODO */
+			foreach ( string name in label.pixbuf_cache.get_name_list() )
+			{
+				create_pixdata_node( node, ns, label, name );
+			}
+
+			foreach ( string name in label.svg_cache.get_name_list() )
+			{
+				create_file_svg_node( doc, node, ns, label, name );
+			}
+		}
+
+
+		private void create_pixdata_node( Xml.Node root,
+		                                  Xml.Ns   ns,
+		                                  Label    label,
+		                                  string   name )
+		{
+			Gdk.Pixbuf pixbuf = label.pixbuf_cache.get_pixbuf( name );
+			if ( pixbuf != null )
+			{
+				Gdk.Pixdata pixdata = Gdk.Pixdata();
+				Gdk.pixdata_from_pixbuf( out pixdata, pixbuf, false );
+				uint8[] stream = pixdata.serialize();
+				string base64 = GLib.Base64.encode( stream );
+				
+				unowned Xml.Node *node = root.new_child( ns, "Pixdata", base64 );
+				XmlUtil.set_prop_string( node, "name", name );
+				XmlUtil.set_prop_string( node, "encoding", "Base64" );
+			}
+		}
+
+
+		private void create_file_svg_node( Xml.Doc  doc,
+		                                   Xml.Node root,
+		                                   Xml.Ns   ns,
+		                                   Label    label,
+		                                   string   name )
+		{
+			string? svg_data = label.svg_cache.get_svg( name );
+			if ( svg_data != null )
+			{
+				unowned Xml.Node *node = root.new_child( ns, "File" );
+				XmlUtil.set_prop_string( node, "name", name );
+				XmlUtil.set_prop_string( node, "format", "SVG" );
+
+				unowned Xml.Node *cdata_section_node = doc.new_cdata_block( svg_data, svg_data.length );
+				node->add_child( cdata_section_node );
+			}
 		}
 
 	}

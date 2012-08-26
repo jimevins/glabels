@@ -30,6 +30,13 @@ namespace glabels
 		private const int ARC_FINE = 2;
 
 
+		public LabelObjectEllipse.with_parent( Label parent )
+		{
+			this();
+			parent.add_object( this );
+		}
+
+
 		public override LabelObject dup()
 		{
 			LabelObjectEllipse copy = new LabelObjectEllipse();

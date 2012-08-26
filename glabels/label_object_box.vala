@@ -27,6 +27,13 @@ namespace glabels
 	public class LabelObjectBox : LabelObjectShape
 	{
 
+		public LabelObjectBox.with_parent( Label parent )
+		{
+			this();
+			parent.add_object( this );
+		}
+
+
 		public override LabelObject dup()
 		{
 			LabelObjectBox copy = new LabelObjectBox();

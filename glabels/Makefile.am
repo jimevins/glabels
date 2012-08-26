@@ -7,6 +7,7 @@ SUBDIRS = \
 bin_PROGRAMS = glabels-4
 
 glabels_4_SOURCES = \
+	TMP_gdk_pixdata.vapi \
 	glabels.vala \
 	color.vala \
 	color_button.vala \
@@ -34,6 +35,7 @@ glabels_4_SOURCES = \
 	label_object.vala \
 	label_object_box.vala \
 	label_object_ellipse.vala \
+	label_object_image.vala \
 	label_object_line.vala \
 	label_object_shape.vala \
 	label_object_text.vala \
@@ -54,10 +56,13 @@ glabels_4_SOURCES = \
 	new_label_dialog.vala \
 	object_editor.vala \
 	outline.vala \
+	pixbuf_cache.vala \
+	pixmaps.vapi \
 	prefs.vala \
 	print_op.vala \
 	print_op_dialog.vala \
 	property_editor.vala \
+	svg_cache.vala \
 	template_history.vala \
 	text_line.vala \
 	text_lines.vala \
@@ -88,6 +93,7 @@ VALAFLAGS = \
 	--pkg gtk+-3.0 \
 	--pkg libxml-2.0 \
 	--pkg gee-1.0 \
+	--pkg librsvg-2.0 \
 	--pkg libglabels-4 \
 	$(NULL)
 

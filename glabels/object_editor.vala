@@ -40,6 +40,7 @@ namespace glabels
 		private Gtk.Notebook     notebook;
 
 		private Gtk.Box          text_page_box;
+		private Gtk.Box          image_page_box;
 		private Gtk.Box          line_fill_page_box;
 		private Gtk.Box          pos_size_page_box;
 		private Gtk.Box          shadow_page_box;
@@ -62,6 +63,12 @@ namespace glabels
 		private Gtk.TextView     text_textview;
 		private Gtk.Box          text_insert_field_box;
 		private FieldButton      text_insert_field_button;
+
+		private Gtk.RadioButton  image_file_radio;
+		private Gtk.RadioButton  image_key_radio;
+		private Gtk.FileChooserButton   image_filebutton;
+		private Gtk.Box          image_key_box;
+		private FieldButton      image_key_button;
 
 		private Gtk.SpinButton   line_width_spin;
 		private Gtk.Box          line_color_box;
@@ -115,6 +122,9 @@ namespace glabels
 		private ulong sigid_text_valign_bottom_toggle_toggled;
 		private ulong sigid_text_line_spacing_spin_changed;
 		private ulong sigid_text_insert_field_button_key_selected;
+
+		private ulong sigid_image_filebutton_selection_changed;
+		private ulong sigid_image_key_button_changed;
 
 		private ulong sigid_line_width_spin_changed;
 		private ulong sigid_line_color_button_changed;
@@ -177,6 +187,7 @@ namespace glabels
 
 			/* Notebook pages. */
 			text_page_box      = builder.get_object( "text_page_box" )      as Gtk.Box;
+			image_page_box     = builder.get_object( "image_page_box" )      as Gtk.Box;
 			line_fill_page_box = builder.get_object( "line_fill_page_box" ) as Gtk.Box;
 			pos_size_page_box  = builder.get_object( "pos_size_page_box" )  as Gtk.Box;
 			shadow_page_box    = builder.get_object( "shadow_page_box" )    as Gtk.Box;
@@ -236,6 +247,20 @@ namespace glabels
 				text_line_spacing_spin.value_changed.connect( on_text_line_spacing_spin_changed );
 			sigid_text_insert_field_button_key_selected =
 				text_insert_field_button.key_selected.connect( on_text_insert_field_button_key_selected );
+
+
+			/* Image widgets. */
+			image_file_radio        = builder.get_object( "image_file_radio" )        as Gtk.RadioButton;
+			image_key_radio         = builder.get_object( "image_key_radio" )         as Gtk.RadioButton;
+			image_filebutton        = builder.get_object( "image_filebutton" )        as Gtk.FileChooserButton;
+			image_key_box           = builder.get_object( "image_key_box" )           as Gtk.Box;
+
+			image_key_button = new FieldButton( null );
+			image_key_box.pack_start( image_key_button, true, true, 0 );
+
+			sigid_image_filebutton_selection_changed =
+				image_filebutton.selection_changed.connect( on_image_filebutton_selection_changed );
+			sigid_image_key_button_changed = image_key_button.changed.connect( on_image_key_button_changed );
 
 
 			/* Line widgets. */
@@ -403,6 +428,7 @@ namespace glabels
 					title_label.set_text( "<b>%s</b>".printf( _("Text object properties") ) );
 
 					text_page_box.show_all();
+					image_page_box.hide();
 					line_fill_page_box.hide();
 					pos_size_page_box.show_all();
 					shadow_page_box.show_all();
@@ -416,6 +442,7 @@ namespace glabels
 					title_label.set_text( "<b>%s</b>".printf( _("Box object properties") ) );
 
 					text_page_box.hide();
+					image_page_box.hide();
 					line_fill_page_box.show_all();
 					pos_size_page_box.show_all();
 					shadow_page_box.show_all();
@@ -429,6 +456,7 @@ namespace glabels
 					title_label.set_text( "<b>%s</b>".printf( _("Ellipse object properties") ) );
 
 					text_page_box.hide();
+					image_page_box.hide();
 					line_fill_page_box.show_all();
 					pos_size_page_box.show_all();
 					shadow_page_box.show_all();
@@ -442,12 +470,27 @@ namespace glabels
 					title_label.set_text( "<b>%s</b>".printf( _("Line object properties") ) );
 
 					text_page_box.hide();
+					image_page_box.hide();
 					line_fill_page_box.show_all();
 					pos_size_page_box.show_all();
 					shadow_page_box.show_all();
 
 					fill_frame.hide();
 					rect_size_frame.hide();
+					size_reset_image_button.hide();
+				}
+				else if ( object is LabelObjectImage )
+				{
+					title_image.set_from_icon_name( "glabels-image", Gtk.IconSize.LARGE_TOOLBAR );
+					title_label.set_text( "<b>%s</b>".printf( _("Image object properties") ) );
+
+					text_page_box.hide();
+					image_page_box.show_all();
+					line_fill_page_box.hide();
+					pos_size_page_box.show_all();
+					shadow_page_box.show_all();
+
+					line_size_frame.hide();
 					size_reset_image_button.hide();
 				}
 				else
@@ -465,6 +508,8 @@ namespace glabels
 				load_text_valign_toggles();
 				load_text_line_spacing_spin();
 				load_text_textview();
+				load_image_filebutton();
+				load_image_key_button();
 				load_line_width_spin();
 				load_line_color_button();
 				load_fill_color_button();
@@ -531,18 +576,25 @@ namespace glabels
 			{
 				text_color_button.clear_keys();
 				text_insert_field_button.clear_keys();
+				image_key_button.clear_keys();
 				line_color_button.clear_keys();
 				fill_color_button.clear_keys();
 				shadow_color_button.clear_keys();
+
+				image_file_radio.set_active( true );
+				image_key_radio.set_sensitive( false );
 			}
 			else
 			{
 				List<string> key_list = model.label.merge.get_key_list();
 				text_color_button.set_keys( key_list );
 				text_insert_field_button.set_keys( key_list );
+				image_key_button.set_keys( key_list );
 				line_color_button.set_keys( key_list );
 				fill_color_button.set_keys( key_list );
 				shadow_color_button.set_keys( key_list );
+
+				image_key_radio.set_sensitive( true );
 			}
 		}
 
@@ -946,6 +998,74 @@ namespace glabels
 			}
 		}
 
+
+		/******************************
+		 * image_filebutton
+		 ******************************/
+		private void on_image_filebutton_selection_changed()
+		{
+			if ( object != null )
+			{
+				string filename = image_filebutton.get_filename();
+				if ( filename != null )
+				{
+					object.filename_node = new TextNode( false, filename );
+				}
+			}
+		}
+
+		private void load_image_filebutton()
+		{
+			if ( (object != null) && (object.filename_node != null) )
+			{
+				if ( !object.filename_node.field_flag )
+				{
+					image_file_radio.set_active( true );
+
+					GLib.SignalHandler.block( (void*)image_filebutton, sigid_image_filebutton_selection_changed );
+
+					if ( object.filename_node.data != null )
+					{
+						image_filebutton.set_filename( object.filename_node.data );
+					}
+					else
+					{
+						image_filebutton.unselect_all();
+					}
+
+					GLib.SignalHandler.unblock( (void*)image_filebutton, sigid_image_filebutton_selection_changed );
+				}
+			}
+		}
+
+
+		/******************************
+		 * image_key_button
+		 ******************************/
+		private void on_image_key_button_changed()
+		{
+			if ( object != null )
+			{
+				object.filename_node = new TextNode( true, image_key_button.get_key() );
+			}
+		}
+
+		private void load_image_key_button()
+		{
+			if ( (object != null) && (object.filename_node != null) )
+			{
+				if ( object.filename_node.field_flag )
+				{
+					image_key_radio.set_active( true );
+
+					GLib.SignalHandler.block( (void*)image_key_button, sigid_image_key_button_changed );
+
+					image_key_button.set_key( object.filename_node.data );
+
+					GLib.SignalHandler.unblock( (void*)image_key_button, sigid_image_key_button_changed );
+				}
+			}
+		}
 
 		/******************************
 		 * line_width_spin
