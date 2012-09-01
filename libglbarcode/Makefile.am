@@ -1,51 +1,44 @@
-configdir = $(datadir)/$(LIBGLBARCODE_BRANCH)
+NULL = 
+
+lib_LTLIBRARIES = libglbarcode-4.0.la
+
+libglbarcode_4_0_la_SOURCES = \
+	factory.vala \
+	barcode.vala \
+	barcode_code39.vala \
+	barcode_code39_extended.vala \
+	barcode_onecode.vala \
+	barcode_postnet.vala \
+	shape.vala \
+	renderer.vala \
+	cairo_renderer.vala \
+	constants.vala \
+	$(NULL)
 
 INCLUDES = \
-	$(LIBGLBARCODE_CFLAGS)				\
-	-DLIBGLBARCODE_CONFIG_DIR=\""$(configdir)"\" \
-	$(DISABLE_DEPRECATED_CFLAGS)
+	-include config.h \
+	$(LIBGLBARCODE_CFLAGS) \
+	-DLOCALEDIR=\""$(localedir)"\" \
+	-DDATADIR=\""$(datadir)"\" \
+	-DLIBGLBARCODE_BRANCH=\""$(LIBGLBARCODE_BRANCH)"\" \
+	$(NULL)
 
-libglbarcode_3_0_la_LDFLAGS=\
-        -version-info $(LIBGLBARCODE_API_VERSION) \
-        $(LIBGLBARCODE_LIBS) \
-        -no-undefined 
+VALAFLAGS = \
+	--vapidir=$(srcdir)/../vapi \
+	--pkg config \
+	--pkg posix \
+	--pkg gobject-2.0 \
+	--pkg cairo \
+	--pkg pangocairo \
+	--header=libglbarcode-4.h \
+	--vapi=libglbarcode-4.vapi \
+	$(NULL)
 
-lib_LTLIBRARIES = libglbarcode-3.0.la
+EXTRA_DIST = \
+	libglbarcode-4.h \
+	libglbarcode-4.vapi \
+	$(NULL)
 
-libglbarcode_3_0_la_SOURCES =		\
-	lgl-barcode.c			\
-	lgl-barcode.h			\
-	lgl-barcode-create.c		\
-	lgl-barcode-create.h		\
-	lgl-barcode-render-to-cairo.c	\
-	lgl-barcode-render-to-cairo.h	\
-	lgl-barcode-type.h		\
-	lgl-barcode-onecode.c		\
-	lgl-barcode-onecode.h		\
-	lgl-barcode-postnet.c		\
-	lgl-barcode-postnet.h		\
-	lgl-barcode-code39.c		\
-	lgl-barcode-code39.h
-
-libglbarcode_3_0includedir=$(includedir)/$(LIBGLBARCODE_BRANCH)
-
-libglbarcode_3_0include_HEADERS = 	\
-	libglbarcode.h
-
-libglbarcode_3_0subincludedir=$(includedir)/$(LIBGLBARCODE_BRANCH)/libglbarcode
-
-libglbarcode_3_0subinclude_HEADERS = 	\
-	lgl-barcode.h			\
-	lgl-barcode-create.h		\
-	lgl-barcode-render-to-cairo.h	\
-	lgl-barcode-type.h		\
-	lgl-barcode-onecode.h		\
-	lgl-barcode-postnet.h		\
-	lgl-barcode-code39.h
-
-EXTRA_DIST =			\
-	$(LIBGLBARCODE_BRANCH).pc.in
-
-pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = $(LIBGLBARCODE_BRANCH).pc
+DISTCLEANFILES = \
+	$(NULL)
 

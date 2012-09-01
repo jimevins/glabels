@@ -76,6 +76,7 @@ GEE_REQUIRED=0.6.2.1
 CAIRO_REQUIRED=1.10.2
 GDK_PIXBUF_REQUIRED=2.24.0
 LIBRSVG_REQUIRED=2.36.0
+PANGOCAIRO_REQUIRED=1.30.0
 
 PKG_CHECK_MODULES(GLABELS, [\
 			   glib-2.0 >= $GLIB_REQUIRED \
@@ -101,10 +102,22 @@ PKG_CHECK_MODULES(LIBGLABELS, [\
 AC_SUBST(LIBGLABELS_CFLAGS)
 AC_SUBST(LIBGLABELS_LIBS)
 
+PKG_CHECK_MODULES(LIBGLBARCODE, [\
+                                glib-2.0 >= $GLIB_REQUIRED \
+                                gobject-2.0 >= $GLIB_REQUIRED \
+                                cairo >= $CAIRO_REQUIRED \
+                                pangocairo >= $PANGOCAIRO_REQUIRED \
+])
+
+AC_SUBST(LIBGLBARCODE_CFLAGS)
+AC_SUBST(LIBGLBARCODE_LIBS)
+
 
 AC_CONFIG_FILES([Makefile
 	vapi/Makefile
 	libglabels/Makefile
+	libglbarcode/Makefile
+	libglbarcode/demo/Makefile
 	glabels/Makefile
 	glabels/cursors/Makefile
 	po/Makefile.in

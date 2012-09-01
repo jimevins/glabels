@@ -4,6 +4,7 @@ NULL =
 
 SUBDIRS = \
 	libglabels \
+	libglbarcode \
 	glabels \
 	po \
 	templates \

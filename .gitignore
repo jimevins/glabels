@@ -49,7 +49,15 @@ glabels-*.tar.gz
 /libglabels/*.stamp
 /libglabels/libglabels*.pc
 
+/libglbarcode/*.c
+/libglbarcode/*.h
+/libglbarcode/*.vapi
+/libglbarcode/*.stamp
 /libglbarcode/libglbarcode*.pc
+
+/libglbarcode/demo/*.c
+/libglbarcode/demo/*.h
+/libglbarcode/demo/glbarcode
 
 /glabels/*.c
 /glabels/*.stamp
