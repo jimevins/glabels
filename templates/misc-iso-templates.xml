@@ -82,6 +82,19 @@
   </Template>
 
 
+  <!-- =================================================================== -->
+  <!-- APLI 01271:  General Labels.                                        -->
+  <!-- =================================================================== -->
+  <Template brand="Apli" part="1271" size="A4" _description="Rectangular Labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Label-rectangle id="0" width="70mm" height="30mm" round="0mm" x_waste="0mm" y_waste="0mm">
+      <Markup-margin size="0mm"/>
+      <Layout nx="3" ny="9" x0="0mm" y0="13.5mm" dx="70mm" dy="30mm"/>
+    </Label-rectangle>
+  </Template>
+
+
   <!-- ************************* -->
   <!--                           -->
   <!-- Best Office               -->
