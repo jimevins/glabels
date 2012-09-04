@@ -1157,7 +1157,7 @@ gl_ui_cmd_help_about (GtkAction *action,
                 NULL
         };
 
-        const gchar *copy_text = "Copyright \xc2\xa9 2001-2010 Jim Evins";
+        const gchar *copy_text = "Copyright \xc2\xa9 2001-2012 Jim Evins";
 
         const gchar *about_text = _("A label and business card creation program.\n");
 
