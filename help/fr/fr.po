@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels glabels_2_2\n"
-"POT-Creation-Date: 2011-10-04 17:58+0000\n"
-"PO-Revision-Date: 2010-11-20 22:18+0100\n"
+"POT-Creation-Date: 2012-01-29 16:35+0000\n"
+"PO-Revision-Date: 2012-09-04 08:55+0200\n"
 "Last-Translator: Gérard Baylard <Geodebay@gmail.com>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -338,17 +338,17 @@ msgstr ""
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/printfile.page:47(None)
 msgid ""
-"@@image: 'figures/print-copies.png'; md5=1896f693ac50b47ea5abaafb59b5e8cc"
+"@@image: 'figures/print-copies.png'; md5=ee473352947fe25c7adaa9f9a052c3e9"
 msgstr ""
-"@@image: 'figures/print-copies.png'; md5=1896f693ac50b47ea5abaafb59b5e8cc"
+"@@image: 'figures/print-copies.png'; md5=ee473352947fe25c7adaa9f9a052c3e9"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/printfile.page:70(None)
 msgid ""
-"@@image: 'figures/print-merge.png'; md5=65a719b5624f88fdb40e2322454819a6"
+"@@image: 'figures/print-merge.png'; md5=ee70bd2150a6cd46e96ce5c0531eb47b"
 msgstr ""
-"@@image: 'figures/print-merge.png'; md5=65a719b5624f88fdb40e2322454819a6"
+"@@image: 'figures/print-merge.png'; md5=ee70bd2150a6cd46e96ce5c0531eb47b"
 
 #: C/printfile.page:9(desc)
 msgid "How to print your labels and cards."
@@ -715,25 +715,25 @@ msgstr ""
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex3.page:74(None)
 msgid ""
-"@@image: 'figures/merge-ex3-2.png'; md5=28a15319cea58be75ff789c766dc0717"
+"@@image: 'figures/merge-ex3-2.png'; md5=51fe322868241d083ec83ae824d927d7"
 msgstr ""
-"@@image: 'figures/merge-ex3-2.png'; md5=28a15319cea58be75ff789c766dc0717"
+"@@image: 'figures/merge-ex3-2.png'; md5=51fe322868241d083ec83ae824d927d7"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex3.page:88(None)
 msgid ""
-"@@image: 'figures/merge-ex3-3.png'; md5=443d59a44d8ddf5580087a772d4e3eec"
+"@@image: 'figures/merge-ex3-3.png'; md5=f731f35b38ddd51499e636733bacc7a6"
 msgstr ""
-"@@image: 'figures/merge-ex3-3.png'; md5=443d59a44d8ddf5580087a772d4e3eec"
+"@@image: 'figures/merge-ex3-3.png'; md5=f731f35b38ddd51499e636733bacc7a6"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex3.page:99(None)
 msgid ""
-"@@image: 'figures/merge-ex3-4.png'; md5=1995114757cccebda45b686caeb37fa7"
+"@@image: 'figures/merge-ex3-4.png'; md5=4415be9d5b59fb57093077bcaece014a"
 msgstr ""
-"@@image: 'figures/merge-ex3-4.png'; md5=1995114757cccebda45b686caeb37fa7"
+"@@image: 'figures/merge-ex3-4.png'; md5=4415be9d5b59fb57093077bcaece014a"
 
 #: C/merge-ex3.page:9(desc)
 msgid ""
@@ -908,17 +908,17 @@ msgstr ""
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex2.page:52(None)
 msgid ""
-"@@image: 'figures/merge-ex2-1.png'; md5=c9db139c5b7188e101470dc74684a118"
+"@@image: 'figures/merge-ex2-1.png'; md5=817abd0c8deb8a0b95acb7881d8ddb85"
 msgstr ""
-"@@image: 'figures/merge-ex2-1.png'; md5=c9db139c5b7188e101470dc74684a118"
+"@@image: 'figures/merge-ex2-1.png'; md5=817abd0c8deb8a0b95acb7881d8ddb85"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex2.page:70(None)
 msgid ""
-"@@image: 'figures/merge-ex2-2.png'; md5=240b4e4ebaa270e0e8bf84c5bfd7233e"
+"@@image: 'figures/merge-ex2-2.png'; md5=2012870be14752300e0cde420471714a"
 msgstr ""
-"@@image: 'figures/merge-ex2-2.png'; md5=240b4e4ebaa270e0e8bf84c5bfd7233e"
+"@@image: 'figures/merge-ex2-2.png'; md5=2012870be14752300e0cde420471714a"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
@@ -1059,33 +1059,33 @@ msgstr "Aperçu des étiquettes d'adresses"
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex1.page:50(None)
 msgid ""
-"@@image: 'figures/merge-ex1-1.png'; md5=6e1cda54b797f875f379b657370d87c8"
+"@@image: 'figures/merge-ex1-1.png'; md5=c1fe7f5f05a81d9c04f9d03bb7071798"
 msgstr ""
-"@@image: 'figures/merge-ex1-1.png'; md5=6e1cda54b797f875f379b657370d87c8"
+"@@image: 'figures/merge-ex1-1.png'; md5=c1fe7f5f05a81d9c04f9d03bb7071798"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex1.page:63(None)
 msgid ""
-"@@image: 'figures/merge-ex1-2.png'; md5=2ccad04ae5830f5f4a6a601d9fabed6a"
+"@@image: 'figures/merge-ex1-2.png'; md5=45c30ca8de2478387404c7c5f45cf3d0"
 msgstr ""
-"@@image: 'figures/merge-ex1-2.png'; md5=2ccad04ae5830f5f4a6a601d9fabed6a"
+"@@image: 'figures/merge-ex1-2.png'; md5=45c30ca8de2478387404c7c5f45cf3d0"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex1.page:84(None)
 msgid ""
-"@@image: 'figures/merge-ex1-3.png'; md5=858855ab1a392db74b70cdb2bdb27ddd"
+"@@image: 'figures/merge-ex1-3.png'; md5=1c23af6c90e5185cdc9e14d19baeb9f6"
 msgstr ""
-"@@image: 'figures/merge-ex1-3.png'; md5=858855ab1a392db74b70cdb2bdb27ddd"
+"@@image: 'figures/merge-ex1-3.png'; md5=1c23af6c90e5185cdc9e14d19baeb9f6"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex1.page:95(None)
 msgid ""
-"@@image: 'figures/merge-ex1-4.png'; md5=8648ff55dd2e531a1a82b797f0430279"
+"@@image: 'figures/merge-ex1-4.png'; md5=1cc9f9adcb5a6e98ff5068531e6933f0"
 msgstr ""
-"@@image: 'figures/merge-ex1-4.png'; md5=8648ff55dd2e531a1a82b797f0430279"
+"@@image: 'figures/merge-ex1-4.png'; md5=1cc9f9adcb5a6e98ff5068531e6933f0"
 
 #: C/merge-ex1.page:9(desc)
 msgid "Create name tags from a CSV file."
@@ -2144,7 +2144,9 @@ msgstr ""
 
 #: C/mancreate.page:721(p)
 msgid "A common example for multiple layouts is a sheet with three CD labels:"
-msgstr "Un exemple courant d'agencement multiple est une feuille contenant trois étiquettes de CD :"
+msgstr ""
+"Un exemple courant d'agencement multiple est une feuille contenant trois "
+"étiquettes de CD :"
 
 #: C/mancreate.page:726(desc) C/mancreate.page:728(p)
 msgid "CD label sheet"
@@ -2160,12 +2162,13 @@ msgid ""
 "ones, that's why we have to define a second layout, with unique coordinates "
 "for the top left corner of that label."
 msgstr ""
-"Il est possible d'attribuer les deux étiquettes de gauche à une grille en supposant "
-"qu'il est possible de définir correctement les coordonnées de l'étiquette supérieure gauche et la "
-"distance à la deuxième étiquette. La distance par rapport au bord gauche est commune aux "
-"deux étiquettes. La troisième sur le côté droite n'a aucune distance en commun "
-"avec les autres, c'est pourquoi il faut définir un deuxième agencement avec "
-"des coordonnées spécifiques pour le coin supérieur gauche de cette étiquette."
+"Il est possible d'attribuer les deux étiquettes de gauche à une grille en "
+"supposant qu'il est possible de définir correctement les coordonnées de "
+"l'étiquette supérieure gauche et la distance à la deuxième étiquette. La "
+"distance par rapport au bord gauche est commune aux deux étiquettes. La "
+"troisième sur le côté droite n'a aucune distance en commun avec les autres, "
+"c'est pourquoi il faut définir un deuxième agencement avec des coordonnées "
+"spécifiques pour le coin supérieur gauche de cette étiquette."
 
 #: C/mancreate.page:741(p)
 msgid ""
@@ -2175,11 +2178,12 @@ msgid ""
 "will probably be able to concatenate such sheets with different shapes "
 "within a single template."
 msgstr ""
-"Vous pouvez définir plusieurs agencements uniquement si les étiquettes sur la feuille "
-"ont la même forme. Si votre feuille contient des formes différentes, vous devez "
-"définir chaque forme séparément dans un autre modèle. Les versions futures de "
-"<app>gLabels</app> seront probablement capables de concaténer de telles feuilles "
-"contenant des formes différentes dans un seul modèle."
+"Vous pouvez définir plusieurs agencements uniquement si les étiquettes sur "
+"la feuille ont la même forme. Si votre feuille contient des formes "
+"différentes, vous devez définir chaque forme séparément dans un autre "
+"modèle. Les versions futures de <app>gLabels</app> seront probablement "
+"capables de concaténer de telles feuilles contenant des formes différentes "
+"dans un seul modèle."
 
 #: C/mancreate.page:749(p)
 msgid "A single label can always be treated as a grid of one."
@@ -2362,10 +2366,10 @@ msgstr ""
 #: C/index.page:47(None)
 msgid ""
 "@@image: 'figures/introduction-glabels-main-window.png'; "
-"md5=fceca242699bb062a5ac243a5f962f3b"
+"md5=9ee2b2cc026ee8cba3c881b370a14313"
 msgstr ""
 "@@image: 'figures/introduction-glabels-main-window.png'; "
-"md5=fceca242699bb062a5ac243a5f962f3b"
+"md5=9ee2b2cc026ee8cba3c881b370a14313"
 
 #: C/index.page:7(title) C/index.page:8(title)
 msgid "gLabels label and business card designer"
@@ -2438,10 +2442,10 @@ msgstr "Utilisation avancée"
 #: C/editprop.page:35(None)
 msgid ""
 "@@image: 'figures/object-editor-sidebar.png'; "
-"md5=828ffc05f69e1914595cc1e3d7401e2f"
+"md5=68be18416cc17964992fe0c7e311e0ef"
 msgstr ""
 "@@image: 'figures/object-editor-sidebar.png'; "
-"md5=828ffc05f69e1914595cc1e3d7401e2f"
+"md5=68be18416cc17964992fe0c7e311e0ef"
 
 #: C/editprop.page:9(desc)
 msgid "Change the properties of objects."
