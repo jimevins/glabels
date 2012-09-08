@@ -478,7 +478,11 @@ custom_widget_apply_cb (GtkPrintOperation *operation,
                 gl_print_op_set_collate_flag (GL_PRINT_OP (op), collate_flag);
 
                 n_records = gl_merge_get_record_count (merge);
-                n_sheets = ceil (first - 1 + (n_copies * n_records)/(double)op->priv->labels_per_sheet);
+                n_sheets = ceil ((first - 1 + n_copies*n_records)/(double)op->priv->labels_per_sheet);
+                if ( n_sheets < 1 )
+                {
+	                n_sheets = 1;
+                }
                 gl_print_op_set_n_sheets     (GL_PRINT_OP (op), n_sheets);
 
                 g_object_unref (G_OBJECT(merge));
