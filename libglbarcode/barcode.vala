@@ -63,7 +63,8 @@ namespace glbarcode
 		{
 			if ( (data == null) || (data == "") )
 			{
-				is_empty = true;
+				is_empty      = true;
+				is_data_valid = false;
 			}
 			else
 			{

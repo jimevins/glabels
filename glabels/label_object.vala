@@ -170,6 +170,18 @@ namespace glabels
 
 
 		/**
+		 * Barcode parameters interface
+		 */
+		public virtual TextNode        bc_data_node        { get; set; }
+		public virtual string          bc_type             { get; set; }
+		public virtual bool            bc_text_flag        { get; set; }
+		public virtual bool            bc_checksum_flag    { get; set; }
+		public virtual int             bc_format_digits    { get; set; }
+		public virtual ColorNode       bc_color_node       { get; set; }
+		public virtual BarcodeStyle    bc_style            { get; set; }
+
+
+		/**
 		 * Shadow state
 		 */
 		public bool shadow_state

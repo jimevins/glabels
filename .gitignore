@@ -57,6 +57,7 @@ glabels-*.tar.gz
 
 /libglbarcode/demo/*.c
 /libglbarcode/demo/*.h
+/libglbarcode/demo/*.stamp
 /libglbarcode/demo/glbarcode
 
 /glabels/*.c
@@ -136,3 +137,5 @@ glabels-*.tar.gz
 *.orig
 *.rej
 gmon.out
+core
+*.safe

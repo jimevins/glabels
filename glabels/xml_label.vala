@@ -202,7 +202,7 @@ namespace glabels
 					break;
 
 				case "Object-barcode":
-					/* TODO. */
+					parse_object_barcode_node( child, label );
 					break;
 
 				case "Object-text":
@@ -371,6 +371,67 @@ namespace glabels
 
 			/* shadow attrs */
 			parse_shadow_attrs( node, object );
+		}
+
+
+		private void parse_object_barcode_node( Xml.Node node,
+		                                        Label    label )
+		{
+			LabelObjectBarcode object = new LabelObjectBarcode.with_parent( label );
+
+		
+			/* position attrs */
+			object.x0 = XmlUtil.get_prop_length( node, "x", 0.0 );
+			object.y0 = XmlUtil.get_prop_length( node, "y", 0.0 );
+
+			/* size attrs */
+			object.w = XmlUtil.get_prop_length( node, "w", 0 );
+			object.h = XmlUtil.get_prop_length( node, "h", 0 );
+
+			/* style attrs */
+			string backend_id = XmlUtil.get_prop_string( node, "backend", null );
+			string style_id   = XmlUtil.get_prop_string( node, "style", "Code39" );
+			if ( (backend_id != null) && (backend_id != "built-in") )
+			{
+				object.bc_type = "%s:%s".printf( backend_id, style_id );
+			}
+			else
+			{
+				object.bc_type = style_id;
+			}
+			object.bc_text_flag     = XmlUtil.get_prop_bool( node, "text", false );
+			object.bc_checksum_flag = XmlUtil.get_prop_bool( node, "checksum", true );
+			object.bc_format_digits = XmlUtil.get_prop_int(  node, "format", 10 );
+					
+			/* color attrs */
+			{
+				string key        = XmlUtil.get_prop_string( node, "color_field", null );
+				bool   field_flag = key != null;
+				Color  color      = Color.from_legacy_color( XmlUtil.get_prop_uint( node, "color", 0 ) );
+				object.bc_color_node = ColorNode( field_flag, color, key );
+			}
+
+			/* data attrs */
+			string data = XmlUtil.get_prop_string( node, "data", null );
+			if ( data != null )
+			{
+				object.bc_data_node = new TextNode( false, data );
+			}
+			else
+			{
+				string field = XmlUtil.get_prop_string( node, "field", null );
+				if ( field != null )
+				{
+					object.bc_data_node = new TextNode( true, field );
+				}
+				else
+				{
+					message( "Missing Object-barcode data or field attr." );
+				}
+			}
+	
+			/* affine attrs */
+			parse_affine_attrs( node, object );
 		}
 
 
@@ -697,11 +758,15 @@ namespace glabels
 				{
 					create_object_image_node( node, ns, object as LabelObjectImage );
 				}
+				else if ( object is LabelObjectBarcode )
+				{
+					create_object_barcode_node( node, ns, object as LabelObjectBarcode );
+				}
 				else if ( object is LabelObjectText )
 				{
 					create_object_text_node( node, ns, object as LabelObjectText );
 				}
-				else /* TODO: other object types. */
+				else
 				{
 					message( "Unknown label object." );
 				}
@@ -850,6 +915,64 @@ namespace glabels
 			else
 			{
 				XmlUtil.set_prop_string( node, "src", object.filename_node.data );
+			}
+
+			/* affine attrs */
+			create_affine_attrs( node, object );
+
+			/* shadow attrs */
+			create_shadow_attrs( node, object );
+		}
+
+
+		private void create_object_barcode_node( Xml.Node        parent,
+		                                         Xml.Ns          ns,
+		                                         LabelObjectBarcode object )
+		{
+			unowned Xml.Node *node = parent.new_child( ns, "Object-barcode" );
+
+			/* position attrs */
+			XmlUtil.set_prop_length( node, "x", object.x0 );
+			XmlUtil.set_prop_length( node, "y", object.y0 );
+
+			/* size attrs */
+			XmlUtil.set_prop_length( node, "w", object.w );
+			XmlUtil.set_prop_length( node, "h", object.h );
+
+			/* style attrs */
+			if ( object.bc_type.contains( ":" ) )
+			{
+				string[] token = object.bc_type.split( ":", 2 );
+				XmlUtil.set_prop_string( node, "backend", token[0] );
+				XmlUtil.set_prop_string( node, "style",   token[1] );
+			}
+			else
+			{
+				XmlUtil.set_prop_string( node, "backend", "built-in" );
+				XmlUtil.set_prop_string( node, "style",   object.bc_type );
+			}
+			XmlUtil.set_prop_bool( node, "text",     object.bc_text_flag );
+			XmlUtil.set_prop_bool( node, "checksum", object.bc_text_flag );
+
+			/* data attrs */
+			if ( object.bc_data_node.field_flag )
+			{
+				XmlUtil.set_prop_string( node, "field",  object.bc_data_node.data );
+				XmlUtil.set_prop_int(    node, "format", object.bc_format_digits );
+			}
+			else
+			{
+				XmlUtil.set_prop_string( node, "data",  object.bc_data_node.data );
+			}
+
+			/* color attrs */
+			if ( object.bc_color_node.field_flag )
+			{
+				XmlUtil.set_prop_string( node, "color_field", object.bc_color_node.key );
+			}
+			else
+			{
+				XmlUtil.set_prop_uint_hex( node, "color", object.bc_color_node.color.to_legacy_color() );
 			}
 
 			/* affine attrs */

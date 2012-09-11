@@ -41,6 +41,7 @@ namespace glabels
 
 		private Gtk.Box          text_page_box;
 		private Gtk.Box          image_page_box;
+		private Gtk.Box          bc_page_box;
 		private Gtk.Box          line_fill_page_box;
 		private Gtk.Box          pos_size_page_box;
 		private Gtk.Box          shadow_page_box;
@@ -69,6 +70,21 @@ namespace glabels
 		private Gtk.FileChooserButton   image_filebutton;
 		private Gtk.Box          image_key_box;
 		private FieldButton      image_key_button;
+
+		private Gtk.ComboBoxText bc_type_combo;
+		private Gtk.CheckButton  bc_show_text_check;
+		private Gtk.CheckButton  bc_checksum_check;
+		private Gtk.Box          bc_color_box;
+		private ColorButton      bc_color_button;
+		private Gtk.RadioButton  bc_literal_radio;
+		private Gtk.RadioButton  bc_key_radio;
+		private Gtk.TextView     bc_data_textview;
+		private Gtk.TextBuffer   bc_data_textbuffer;
+		private Gtk.Box          bc_key_box;
+		private FieldButton      bc_key_button;
+		private Gtk.Grid         bc_key_grid;
+		private Gtk.Label        bc_format_label;
+		private Gtk.SpinButton   bc_digits_spin;
 
 		private Gtk.SpinButton   line_width_spin;
 		private Gtk.Box          line_color_box;
@@ -126,6 +142,14 @@ namespace glabels
 		private ulong sigid_image_filebutton_selection_changed;
 		private ulong sigid_image_key_button_changed;
 
+		private ulong sigid_bc_type_combo_changed;
+		private ulong sigid_bc_show_text_check_toggled;
+		private ulong sigid_bc_checksum_check_toggled;
+		private ulong sigid_bc_color_button_changed;
+		private ulong sigid_bc_data_textbuffer_changed;
+		private ulong sigid_bc_key_button_changed;
+		private ulong sigid_bc_digits_spin_changed;
+
 		private ulong sigid_line_width_spin_changed;
 		private ulong sigid_line_color_button_changed;
 
@@ -158,6 +182,7 @@ namespace glabels
 				string[] objects = { "object_editor_vbox",
 				                     "font_size_adjustment", "line_spacing_adjustment",
 				                     "line_width_adjustment",
+				                     "bc_digits_adjustment",
 				                     "size_w_adjustment", "size_h_adjustment",
 				                     "line_length_adjustment", "line_angle_adjustment",
 				                     "pos_x_adjustment", "pos_y_adjustment",
@@ -187,7 +212,8 @@ namespace glabels
 
 			/* Notebook pages. */
 			text_page_box      = builder.get_object( "text_page_box" )      as Gtk.Box;
-			image_page_box     = builder.get_object( "image_page_box" )      as Gtk.Box;
+			image_page_box     = builder.get_object( "image_page_box" )     as Gtk.Box;
+			bc_page_box        = builder.get_object( "bc_page_box" )        as Gtk.Box;
 			line_fill_page_box = builder.get_object( "line_fill_page_box" ) as Gtk.Box;
 			pos_size_page_box  = builder.get_object( "pos_size_page_box" )  as Gtk.Box;
 			shadow_page_box    = builder.get_object( "shadow_page_box" )    as Gtk.Box;
@@ -261,6 +287,41 @@ namespace glabels
 			sigid_image_filebutton_selection_changed =
 				image_filebutton.selection_changed.connect( on_image_filebutton_selection_changed );
 			sigid_image_key_button_changed = image_key_button.changed.connect( on_image_key_button_changed );
+
+
+			/* Barcode widgets. */
+			bc_type_combo           = builder.get_object( "bc_type_combo" )           as Gtk.ComboBoxText;
+			bc_show_text_check      = builder.get_object( "bc_show_text_check" )      as Gtk.CheckButton;
+			bc_checksum_check       = builder.get_object( "bc_checksum_check" )       as Gtk.CheckButton;
+			bc_color_box            = builder.get_object( "bc_color_box" )            as Gtk.Box;
+			bc_literal_radio        = builder.get_object( "bc_literal_radio" )        as Gtk.RadioButton;
+			bc_key_radio            = builder.get_object( "bc_key_radio" )            as Gtk.RadioButton;
+			bc_data_textview        = builder.get_object( "bc_data_textview" )        as Gtk.TextView;
+			bc_key_box              = builder.get_object( "bc_key_box" )              as Gtk.Box;
+			bc_key_grid             = builder.get_object( "bc_key_grid" )             as Gtk.Grid;
+			bc_format_label         = builder.get_object( "bc_format_label" )         as Gtk.Label;
+			bc_digits_spin          = builder.get_object( "bc_digits_spin" )          as Gtk.SpinButton;
+
+			bc_color_button = new ColorButton( _("Default"), Color.black(), Color.black() );
+			bc_color_box.pack_start( bc_color_button, true, true, 0 );
+
+			bc_data_textbuffer = new Gtk.TextBuffer( null );
+			bc_data_textview.set_buffer( bc_data_textbuffer );
+
+			bc_key_button = new FieldButton( null );
+			bc_key_box.pack_start( bc_key_button, true, true, 0 );
+
+			ComboUtil.load_strings( bc_type_combo, BarcodeBackends.get_name_list() );
+
+			sigid_bc_type_combo_changed = bc_type_combo.changed.connect( on_bc_type_combo_changed );
+			sigid_bc_show_text_check_toggled =
+				bc_show_text_check.toggled.connect( on_bc_show_text_check_toggled );
+			sigid_bc_checksum_check_toggled =
+				bc_checksum_check.toggled.connect( on_bc_checksum_check_toggled );
+			sigid_bc_color_button_changed = bc_color_button.color_changed.connect( on_bc_color_button_changed );
+			sigid_bc_data_textbuffer_changed = bc_data_textbuffer.changed.connect( on_bc_data_textbuffer_changed );
+			sigid_bc_key_button_changed = bc_key_button.changed.connect( on_bc_key_button_changed );
+			sigid_bc_digits_spin_changed = bc_digits_spin.value_changed.connect( on_bc_digits_spin_changed );
 
 
 			/* Line widgets. */
@@ -429,6 +490,7 @@ namespace glabels
 
 					text_page_box.show_all();
 					image_page_box.hide();
+					bc_page_box.hide();
 					line_fill_page_box.hide();
 					pos_size_page_box.show_all();
 					shadow_page_box.show_all();
@@ -443,6 +505,7 @@ namespace glabels
 
 					text_page_box.hide();
 					image_page_box.hide();
+					bc_page_box.hide();
 					line_fill_page_box.show_all();
 					pos_size_page_box.show_all();
 					shadow_page_box.show_all();
@@ -457,6 +520,7 @@ namespace glabels
 
 					text_page_box.hide();
 					image_page_box.hide();
+					bc_page_box.hide();
 					line_fill_page_box.show_all();
 					pos_size_page_box.show_all();
 					shadow_page_box.show_all();
@@ -471,6 +535,7 @@ namespace glabels
 
 					text_page_box.hide();
 					image_page_box.hide();
+					bc_page_box.hide();
 					line_fill_page_box.show_all();
 					pos_size_page_box.show_all();
 					shadow_page_box.show_all();
@@ -486,11 +551,28 @@ namespace glabels
 
 					text_page_box.hide();
 					image_page_box.show_all();
+					bc_page_box.hide();
 					line_fill_page_box.hide();
 					pos_size_page_box.show_all();
 					shadow_page_box.show_all();
 
 					line_size_frame.hide();
+					size_reset_image_button.hide();
+				}
+				else if ( object is LabelObjectBarcode )
+				{
+					title_image.set_from_icon_name( "glabels-barcode", Gtk.IconSize.LARGE_TOOLBAR );
+					title_label.set_text( "<b>%s</b>".printf( _("Barcode object properties") ) );
+
+					text_page_box.hide();
+					image_page_box.hide();
+					bc_page_box.show_all();
+					line_fill_page_box.hide();
+					pos_size_page_box.show_all();
+					shadow_page_box.hide();
+
+					line_size_frame.hide();
+					size_aspect_check.hide();
 					size_reset_image_button.hide();
 				}
 				else
@@ -510,6 +592,13 @@ namespace glabels
 				load_text_textview();
 				load_image_filebutton();
 				load_image_key_button();
+				load_bc_type_combo();
+				load_bc_show_text_check();
+				load_bc_checksum_check();
+				load_bc_color_button();
+				load_bc_data_textbuffer();
+				load_bc_key_button();
+				load_bc_digits_spin();
 				load_line_width_spin();
 				load_line_color_button();
 				load_fill_color_button();
@@ -577,12 +666,17 @@ namespace glabels
 				text_color_button.clear_keys();
 				text_insert_field_button.clear_keys();
 				image_key_button.clear_keys();
+				bc_key_button.clear_keys();
 				line_color_button.clear_keys();
 				fill_color_button.clear_keys();
 				shadow_color_button.clear_keys();
 
 				image_file_radio.set_active( true );
 				image_key_radio.set_sensitive( false );
+
+				bc_literal_radio.set_active( true );
+				bc_key_radio.set_sensitive( false );
+				bc_key_grid.set_sensitive( false );
 			}
 			else
 			{
@@ -595,6 +689,8 @@ namespace glabels
 				shadow_color_button.set_keys( key_list );
 
 				image_key_radio.set_sensitive( true );
+				bc_key_radio.set_sensitive( true );
+				bc_key_grid.set_sensitive( true );
 			}
 		}
 
@@ -617,6 +713,13 @@ namespace glabels
 			{
 				load_size_w_spin();
 				load_size_h_spin();
+
+				if ( object is LabelObjectBarcode )
+				{
+					load_bc_show_text_check();
+					load_bc_checksum_check();
+					load_bc_digits_spin();
+				}
 			}
 		}
 
@@ -1066,6 +1169,201 @@ namespace glabels
 				}
 			}
 		}
+
+
+		/******************************
+		 * bc_type_combo
+		 ******************************/
+		private void on_bc_type_combo_changed()
+		{
+			if ( object != null )
+			{
+				object.bc_type = BarcodeBackends.name_to_id( bc_type_combo.get_active_text() );
+			}
+		}
+
+		private void load_bc_type_combo()
+		{
+			if ( (object != null) && object is LabelObjectBarcode )
+			{
+				GLib.SignalHandler.block( (void*)bc_type_combo, sigid_bc_type_combo_changed );
+
+				ComboUtil.set_active_text( bc_type_combo,
+				                           BarcodeBackends.id_to_name( object.bc_type ) );
+
+				GLib.SignalHandler.unblock( (void*)bc_type_combo, sigid_bc_type_combo_changed );
+			}
+		}
+
+
+		/******************************
+		 * bc_show_text_check
+		 ******************************/
+		private void on_bc_show_text_check_toggled()
+		{
+			if ( object != null )
+			{
+				object.bc_text_flag = bc_show_text_check.get_active();
+			}
+		}
+
+		private void load_bc_show_text_check()
+		{
+			if ( (object != null) && object is LabelObjectBarcode )
+			{
+				GLib.SignalHandler.block( (void*)bc_show_text_check, sigid_bc_show_text_check_toggled );
+
+				bc_show_text_check.set_sensitive( object.bc_style.text_optional );
+				bc_show_text_check.set_active( object.bc_text_flag );
+
+				GLib.SignalHandler.unblock( (void*)bc_show_text_check, sigid_bc_show_text_check_toggled );
+			}
+		}
+
+
+		/******************************
+		 * bc_checksum_check
+		 ******************************/
+		private void on_bc_checksum_check_toggled()
+		{
+			if ( object != null )
+			{
+				object.bc_checksum_flag = bc_checksum_check.get_active();
+			}
+		}
+
+		private void load_bc_checksum_check()
+		{
+			if ( (object != null) && object is LabelObjectBarcode )
+			{
+				GLib.SignalHandler.block( (void*)bc_checksum_check, sigid_bc_checksum_check_toggled );
+
+				bc_checksum_check.set_sensitive( object.bc_style.checksum_optional );
+				bc_checksum_check.set_active( object.bc_checksum_flag );
+
+				GLib.SignalHandler.unblock( (void*)bc_checksum_check, sigid_bc_checksum_check_toggled );
+			}
+		}
+
+
+		/******************************
+		 * bc_color_button
+		 ******************************/
+		private void on_bc_color_button_changed()
+		{
+			if ( object != null )
+			{
+				bool is_default;
+
+				object.bc_color_node = bc_color_button.get_color_node( out is_default );
+			}
+		}
+
+
+		private void load_bc_color_button()
+		{
+			if ( (object != null) && object is LabelObjectBarcode )
+			{
+				GLib.SignalHandler.block( (void*)bc_color_button, sigid_bc_color_button_changed );
+
+				bc_color_button.set_color_node( object.bc_color_node );
+
+				GLib.SignalHandler.unblock( (void*)bc_color_button, sigid_bc_color_button_changed );
+			}
+		}
+
+
+		/******************************
+		 * bc_data_textbuffer
+		 ******************************/
+		private void on_bc_data_textbuffer_changed()
+		{
+			if ( object != null )
+			{
+				Gtk.TextIter start, end;
+
+				bc_data_textbuffer.get_bounds( out start, out end );
+
+				object.bc_data_node = new TextNode( false, bc_data_textbuffer.get_text( start, end, false ) );
+			}
+		}
+
+
+		private void load_bc_data_textbuffer()
+		{
+			if ( (object != null) && object is LabelObjectBarcode )
+			{
+				if ( !object.bc_data_node.field_flag )
+				{
+					bc_literal_radio.set_active( true );
+
+					GLib.SignalHandler.block( (void*)bc_data_textbuffer, sigid_bc_data_textbuffer_changed );
+
+					bc_data_textbuffer.set_text( object.bc_data_node.data );
+
+					GLib.SignalHandler.unblock( (void*)bc_data_textbuffer, sigid_bc_data_textbuffer_changed );
+				}
+			}
+		}
+
+
+		/******************************
+		 * bc_key_button
+		 ******************************/
+		private void on_bc_key_button_changed()
+		{
+			if ( object != null )
+			{
+				object.bc_data_node = new TextNode( true, bc_key_button.get_key() );
+			}
+		}
+
+		private void load_bc_key_button()
+		{
+			if ( (object != null) && object is LabelObjectBarcode )
+			{
+				if ( object.bc_data_node.field_flag )
+				{
+					bc_key_radio.set_active( true );
+
+					GLib.SignalHandler.block( (void*)bc_key_button, sigid_bc_key_button_changed );
+
+					bc_key_button.set_key( object.bc_data_node.data );
+
+					GLib.SignalHandler.unblock( (void*)bc_key_button, sigid_bc_key_button_changed );
+				}
+			}
+		}
+
+
+		/******************************
+		 * bc_digits_spin
+		 ******************************/
+		private void on_bc_digits_spin_changed()
+		{
+			if ( object != null )
+			{
+				object.bc_format_digits = bc_digits_spin.get_value_as_int();
+
+				/* TODO: load format label. */
+			}
+		}
+
+
+		private void load_bc_digits_spin()
+		{
+			if ( (object != null) && object is LabelObjectBarcode )
+			{
+				GLib.SignalHandler.block( (void*)bc_digits_spin, sigid_bc_digits_spin_changed );
+
+				bc_digits_spin.set_value( object.bc_format_digits );
+
+				/* TODO: load format label. */
+
+				GLib.SignalHandler.unblock( (void*)bc_digits_spin, sigid_bc_digits_spin_changed );
+			}
+		}
+
 
 		/******************************
 		 * line_width_spin

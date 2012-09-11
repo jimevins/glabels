@@ -9,6 +9,8 @@ bin_PROGRAMS = glabels-4
 glabels_4_SOURCES = \
 	TMP_gdk_pixdata.vapi \
 	glabels.vala \
+	barcode_backends.vala \
+	barcode_style.vala \
 	color.vala \
 	color_button.vala \
 	color_history.vala \
@@ -16,6 +18,7 @@ glabels_4_SOURCES = \
 	color_menu_item.vala \
 	color_node.vala \
 	color_swatch.vala \
+	combo_util.vala \
 	cursor.vapi \
 	enum_util.vala \
 	field_button.vala \
@@ -33,6 +36,7 @@ glabels_4_SOURCES = \
 	handle.vala \
 	label.vala \
 	label_object.vala \
+	label_object_barcode.vala \
 	label_object_box.vala \
 	label_object_ellipse.vala \
 	label_object_image.vala \
@@ -80,6 +84,7 @@ INCLUDES = \
 	-include config.h \
 	$(GLABELS_CFLAGS) \
 	-I../libglabels \
+	-I../libglbarcode \
 	-DLOCALEDIR=\""$(localedir)"\" \
 	-DDATADIR=\""$(datadir)"\" \
 	-DGLABELS_BRANCH=\""$(GLABELS_BRANCH)"\" \
@@ -88,6 +93,7 @@ INCLUDES = \
 VALAFLAGS = \
 	--vapidir=$(srcdir)/../vapi \
 	--vapidir=$(srcdir)/../libglabels \
+	--vapidir=$(srcdir)/../libglbarcode \
 	--pkg config \
 	--pkg posix \
 	--pkg gtk+-3.0 \
@@ -95,11 +101,13 @@ VALAFLAGS = \
 	--pkg gee-1.0 \
 	--pkg librsvg-2.0 \
 	--pkg libglabels-4 \
+	--pkg libglbarcode-4 \
 	$(NULL)
 
 
 glabels_4_LDADD = \
 	-L../libglabels -lglabels-4.0 \
+	-L../libglbarcode -lglbarcode-4.0 \
 	$(GLABELS_LIBS) \
 	$(NULL)
 
