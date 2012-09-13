@@ -59,7 +59,7 @@ namespace glbarcode
 			  "Barcode data",
 			  "DATA"
 			},
-			{ "resolution", 'r', 0, OptionArg.STRING, ref ppi,
+			{ "resolution", 'r', 0, OptionArg.DOUBLE, ref ppi,
 			  "Resolution (Pixels per Inch)",
 			  "PPI"
 			},

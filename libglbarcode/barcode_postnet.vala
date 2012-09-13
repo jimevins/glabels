@@ -101,14 +101,14 @@ namespace glbarcode
 			for ( int i = 0; i < data.length; i++ )
 			{
 				if ( data[i].isdigit() )
-                {
-                        n_digits++;
-                }
-                else if ( (data[i] != '-') && (data[i] != ' ') )
-                {
-                        /* Only allow digits, dashes, and spaces. */
-                        return false;
-                }
+				{
+					n_digits++;
+				}
+				else if ( (data[i] != '-') && (data[i] != ' ') )
+				{
+					/* Only allow digits, dashes, and spaces. */
+					return false;
+				}
 			}
 
 			return validate_digits( n_digits );
@@ -132,7 +132,7 @@ namespace glbarcode
 					int d = data[i] - '0';
 					code.append( symbols[d] );
 					sum += d;
-                }
+				}
 			}
 
 			/* Create mandatory correction character */

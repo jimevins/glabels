@@ -28,7 +28,7 @@ namespace glbarcode
 	{
 
 		private const double FONT_SCALE  = 72.0/96;
-		private const string FONT_FAMILY = "Sans";
+		private const string FONT_FAMILY = "Monospace";
 
 
 		private Cairo.Context cr;

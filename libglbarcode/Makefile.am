@@ -9,6 +9,7 @@ libglbarcode_4_0_la_SOURCES = \
 	barcode_code39_extended.vala \
 	barcode_onecode.vala \
 	barcode_postnet.vala \
+	barcode_upc.vala \
 	shape.vala \
 	renderer.vala \
 	cairo_renderer.vala \

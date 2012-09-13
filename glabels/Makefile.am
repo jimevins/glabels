@@ -119,7 +119,10 @@ DISTCLEANFILES = \
 	$(NULL)
 
 
-$(bin_PROGRAMS): libglabels
+$(bin_PROGRAMS): libglabels libglbarcode
 
 libglabels:
 	cd ../libglabels; $(MAKE)
+
+libglbarcode:
+	cd ../libglbarcode; $(MAKE)

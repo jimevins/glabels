@@ -181,7 +181,7 @@ namespace glbarcode
 			/* determine horizontal quiet zone */
 			double x_quiet = double.max( (10 * scale * MIN_X), MIN_QUIET );
 
-			/* Now traverse the code string and each bar */
+			/* Now traverse the code string and draw each bar */
 			double x1 = x_quiet;
 			for ( int i=0; i < coded_data.length; i++ )
 			{
