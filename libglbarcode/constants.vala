@@ -31,6 +31,8 @@ namespace glbarcode
 		public const double PTS_PER_MM   =  2.83464566929;
 		public const double PTS_PER_CM   = 10*PTS_PER_MM;
 
+		public const double INK_BLEED   = ( 0.00325 * PTS_PER_INCH );
+
 	}
 
 }

@@ -34,10 +34,8 @@ namespace glbarcode
 		private const double MIN_HEIGHT  = ( 0.25 *  PTS_PER_INCH );
 		private const double MIN_QUIET   = ( 0.10 *  PTS_PER_INCH );
 
-		private const double INK_BLEED   = ( 0.00325 * PTS_PER_INCH );
-
-		private const double TEXT_AREA_HEIGHT = 14.0;
-		private const double TEXT_SIZE        = 10.0;
+		private const double MIN_TEXT_AREA_HEIGHT = 14.0;
+		private const double MIN_TEXT_SIZE        = 10.0;
 
 
 		/* Code 39 alphabet. Position indicates value. */
@@ -174,8 +172,12 @@ namespace glbarcode
 			}
 			double width = min_l * scale;
 
+			/* determine text parameters */
+			double h_text_area = scale * MIN_TEXT_AREA_HEIGHT;
+			double text_size   = scale * MIN_TEXT_SIZE;
+
 			/* determine height of barcode */
-			double height = text_flag ? h - TEXT_AREA_HEIGHT : h;
+			double height = text_flag ? h - h_text_area : h;
 			height = double.max( height, double.max( 0.15*width, MIN_HEIGHT ) );
 
 			/* determine horizontal quiet zone */
@@ -224,11 +226,11 @@ namespace glbarcode
 			if ( text_flag )
 			{
 				string starred_text = "*%s*".printf( text );
-				add_string( x_quiet + width/2, height + (TEXT_AREA_HEIGHT-TEXT_SIZE)/2, TEXT_SIZE, starred_text );
+				add_string( x_quiet + width/2, height + (h_text_area-text_size)/2, text_size, starred_text );
 			}
 
 			this.w = width + 2*x_quiet;
-			this.h = text_flag ? height + TEXT_AREA_HEIGHT : height;
+			this.h = text_flag ? height + h_text_area : height;
 		}
 
 

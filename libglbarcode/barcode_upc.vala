@@ -28,10 +28,11 @@ namespace glbarcode
 	public class BarcodeUPCA : Barcode
 	{
 
-		private const double MODULE0 = ( 0.01 *  PTS_PER_INCH );
 		private const int    QUIET_MODULES   = 9;
 
-		private const double INK_BLEED   = ( 0.00325 * PTS_PER_INCH );
+		private const double BASE_MODULE_SIZE      = ( 0.01 *  PTS_PER_INCH );
+		private const double BASE_FONT_SIZE        = 7.2;
+		private const double BASE_TEXT_AREA_HEIGHT = 11;
 
 
 		private const string[] symbols = {
@@ -176,28 +177,28 @@ namespace glbarcode
 			}
 			else
 			{
-				scale = w / ((n_modules + 2*QUIET_MODULES) * MODULE0);
+				scale = w / ((n_modules + 2*QUIET_MODULES) * BASE_MODULE_SIZE);
 
 				if ( scale < 1.0 )
 				{
 					scale = 1.0;
 				}
 			}
-			double width = (n_modules + 2*QUIET_MODULES) * scale * MODULE0;
+			double width = (n_modules + 2*QUIET_MODULES) * scale * BASE_MODULE_SIZE;
 
 			/* determine text parameters */
-			double h_text_area = 14 * scale * MODULE0;
-			double text_size1 = 10 * scale * MODULE0;
-			double text_size2 = 0.75*text_size1;
-			double text_c1 = (QUIET_MODULES + 5 + n_modules/4) * scale * MODULE0;
-			double text_c2 = (QUIET_MODULES - 4 + 3*n_modules/4) * scale * MODULE0;
+			double h_text_area = scale * BASE_TEXT_AREA_HEIGHT;
+			double text_size1  = scale * BASE_FONT_SIZE;
+			double text_size2  = 0.75*text_size1;
+			double text_c1 = (QUIET_MODULES + 5 + n_modules/4) * scale * BASE_MODULE_SIZE;
+			double text_c2 = (QUIET_MODULES - 4 + 3*n_modules/4) * scale * BASE_MODULE_SIZE;
 
 			/* determine bar height */
 			double h_bar1 = double.max( (h - h_text_area), width/2 );
 			double h_bar2 = h_bar1 + h_text_area/2;
 
 			/* determine horizontal quiet zone */
-			double x_quiet = QUIET_MODULES * scale * MODULE0;
+			double x_quiet = QUIET_MODULES * scale * BASE_MODULE_SIZE;
 
 			/* now traverse the code string and draw each bar */
 			double x1 = x_quiet;
@@ -218,13 +219,13 @@ namespace glbarcode
 				/* Bar */
 				int bar_w = coded_data[i].digit_value();
 
-				add_box( x1, 0.0, (bar_w*scale*MODULE0 - INK_BLEED), h_bar );
-				x1 += bar_w * scale * MODULE0;
+				add_box( x1, 0.0, (bar_w*scale*BASE_MODULE_SIZE - INK_BLEED), h_bar );
+				x1 += bar_w * scale * BASE_MODULE_SIZE;
 
 				/* Space */
 				int space_w = coded_data[i+1].digit_value();
 
-				x1 += space_w * scale * MODULE0;
+				x1 += space_w * scale * BASE_MODULE_SIZE;
 			}
 
 			/* draw text */
