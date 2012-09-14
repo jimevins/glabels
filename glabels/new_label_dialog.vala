@@ -223,18 +223,21 @@ namespace glabels
 			{
 				libglabels.Template template = libglabels.Db.lookup_template_from_name( name );
 
-				Gtk.TreeIter iter;
-				recent_model.append( out iter );
+				if ( template != null )
+				{
+					Gtk.TreeIter iter;
+					recent_model.append( out iter );
 
-				string tooltip = build_tooltip( template );
+					string tooltip = build_tooltip( template );
 
-				recent_model.set( iter,
-				                  0, template.name,
-				                  1, template.preview_pixbuf,
-				                  2, tooltip,
-				                  -1);
+					recent_model.set( iter,
+					                  0, template.name,
+					                  1, template.preview_pixbuf,
+					                  2, tooltip,
+					                  -1);
 
-				recent_info_bar.hide();
+					recent_info_bar.hide();
+				}
 			}
 		}
 
