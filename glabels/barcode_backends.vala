@@ -67,6 +67,9 @@ namespace glabels
 			register( "UPC-A", _("UPC - A"),
 			          true, false, true, false, "12345678901", false, 11 );
 
+			register( "EAN-13", _("EAN - 13"),
+			          true, false, true, false, "123456789012", false, 12 );
+
 #if HAVE_LIBBARCODE
 
 			register( "gnu-barcode:EAN", _("GNU-Barcode : EAN (any)"),

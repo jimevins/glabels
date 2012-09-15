@@ -25,9 +25,15 @@ using glbarcode.Constants;
 namespace glbarcode
 {
 
+	/**
+	 * Code39 Barcode
+	 */
 	public class BarcodeCode39 : Barcode
 	{
 
+		/*
+		 * Constants
+		 */
 		private const double MIN_X       = ( 0.01 *  PTS_PER_INCH );
 		private const double N           = 2.5;
 		private const double MIN_I       = MIN_X;
@@ -92,6 +98,9 @@ namespace glbarcode
 		private const string frame_symbol = "NwNnWnWnN";
 
 
+		/**
+		 * Code39 data validation method
+		 */
 		protected override bool validate( string data )
 		{
 			for ( int i = 0; i < data.length; i++ )
@@ -108,7 +117,10 @@ namespace glbarcode
 		}
 
 
-		protected override string encode( string canon_data, bool checksum_flag )
+		/**
+		 * Code39 data encoding method
+		 */
+		protected override string encode( string canon_data )
 		{
 			StringBuilder code = new StringBuilder();
 
@@ -140,10 +152,10 @@ namespace glbarcode
 		}
 
 
-		protected override void vectorize( string coded_data,
-		                                   bool text_flag, bool checksum_flag,
-		                                   double w, double h,
-		                                   string data, string text )
+		/**
+		 * Code39 vectorize method
+		 */
+		protected override void vectorize( string coded_data, string data, string text )
 		{
 			/* determine width and establish horizontal scale */
 			double min_l;
@@ -229,10 +241,10 @@ namespace glbarcode
 				add_string( x_quiet + width/2, height + (h_text_area-text_size)/2, text_size, starred_text );
 			}
 
-			this.w = width + 2*x_quiet;
-			this.h = text_flag ? height + h_text_area : height;
+			/* Overwrite requested size with actual size. */
+			w = width + 2*x_quiet;
+			h = text_flag ? height + h_text_area : height;
 		}
-
 
 	}
 

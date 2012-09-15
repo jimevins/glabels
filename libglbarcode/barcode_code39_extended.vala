@@ -24,6 +24,9 @@ using GLib;
 namespace glbarcode
 {
 
+	/**
+	 * Extended Code39 Barcode
+	 */
 	public class BarcodeCode39Extended : BarcodeCode39
 	{
 
@@ -64,6 +67,9 @@ namespace glbarcode
 		};
 
 
+		/**
+		 * Extended Code39 data validation method.
+		 */
 		protected override bool validate( string data )
 		{
 			for ( int i=0; i < data.length; i++ )
@@ -78,6 +84,9 @@ namespace glbarcode
 		}
 
 
+		/**
+		 * Extended Code39 preprocess data method.
+		 */
 		protected override string preprocess( string data )
 		{
 			StringBuilder extended_data = new StringBuilder("");

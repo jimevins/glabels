@@ -24,41 +24,72 @@ using GLib;
 namespace glbarcode
 {
 
+	/**
+	 * Base class for all barcode types
+	 */
 	public abstract class Barcode : Object
 	{
 
+		/*
+		 * Construction parameters
+		 */
 		public string? data          { get; construct; }
 		public bool    text_flag     { get; construct; }
 		public bool    checksum_flag { get; construct; }
 		public double  w             { get; construct set; }
 		public double  h             { get; construct set; }
 
+		/*
+		 * Status parameters
+		 */
 		public bool    is_empty      { get; private set; }
 		public bool    is_data_valid { get; private set; }
 
+		/*
+		 * List of vectorized drawing primitives
+		 */
 		private List<Shape>   shapes;
 
 
+		/**
+		 * Validate data method.
+		 */
 		protected abstract bool   validate( string data );
-		protected abstract string encode( string canon_data, bool checksum_flag );
-		protected abstract void   vectorize( string coded_data,
-		                                     bool text_flag, bool checksum_flag,
-		                                     double w, double h,
-		                                     string data, string text );
 
 
-		protected virtual string to_text( string data )
-		{
-			return data;
-		}
-
-
+		/**
+		 * Pre-process data method.
+		 */
 		protected virtual string preprocess( string data )
 		{
 			return data;
 		}
 
 
+		/**
+		 * Encode data method.
+		 */
+		protected abstract string encode( string canon_data );
+
+
+		/**
+		 * Vectorize encoded data method.
+		 */
+		protected abstract void   vectorize( string coded_data, string cooked_data, string display_text );
+
+
+		/**
+		 * Prepare data for display as text part of barcode.
+		 */
+		protected virtual string prepare_text( string data )
+		{
+			return data;
+		}
+
+
+		/**
+		 * Construction.
+		 */
 		construct
 		{
 			if ( (data == null) || (data == "") )
@@ -74,11 +105,12 @@ namespace glbarcode
 				{
 					is_data_valid = true;
 
-					string display_text = to_text( data );
 					string cooked_data  = preprocess( data );
-					string coded_data   = encode( cooked_data, checksum_flag );
+					string coded_data   = encode( cooked_data );
 
-					vectorize( coded_data, text_flag, checksum_flag, w, h, cooked_data, display_text );
+					string display_text = prepare_text( data );
+
+					vectorize( coded_data, cooked_data, display_text );
 				}
 				else
 				{
@@ -88,6 +120,9 @@ namespace glbarcode
 		}
 
 
+		/**
+		 * Add box.  Used by vectorize method.
+		 */
 		protected void add_box( double x, double y, double w, double h )
 		{
 			ShapeBox box = new ShapeBox( x, y, w, h );
@@ -95,6 +130,9 @@ namespace glbarcode
 		}
 
 
+		/**
+		 * Add string.  Used by vectorize method.
+		 */
 		protected void add_string(  double x, double y, double fsize, string s )
 		{
 			ShapeText text = new ShapeText( x, y, fsize, s );
@@ -102,6 +140,9 @@ namespace glbarcode
 		}
 
 
+		/**
+		 * Add ring.  Used by vectorize method.
+		 */
 		protected void add_ring(    double x, double y, double r, double line_width )
 		{
 			ShapeRing ring = new ShapeRing( x, y, r, line_width );
@@ -109,6 +150,9 @@ namespace glbarcode
 		}
 
 
+		/**
+		 * Add hexagon.  Used by vectorize method.
+		 */
 		protected void add_hexagon( double x, double y, double h )
 		{
 			ShapeHexagon hexagon = new ShapeHexagon( x, y, h );
@@ -116,6 +160,9 @@ namespace glbarcode
 		}
 
 
+		/**
+		 * Render barcode using supplied renderer.
+		 */
 		public void render( Renderer renderer )
 		{
 			renderer.render( w, h, shapes );

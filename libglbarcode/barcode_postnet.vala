@@ -25,6 +25,9 @@ using glbarcode.Constants;
 namespace glbarcode
 {
 
+	/**
+	 * 5 Digit POSTNET Barcode (ZIP only)
+	 */
 	public class BarcodePostnet5 : BarcodePostnet
 	{
 		protected override bool validate_digits( int n_digits )
@@ -34,6 +37,9 @@ namespace glbarcode
 	}
 
 
+	/**
+	 * 9 Digit POSTNET Barcode (ZIP+4)
+	 */
 	public class BarcodePostnet9 : BarcodePostnet
 	{
 		protected override bool validate_digits( int n_digits )
@@ -43,6 +49,9 @@ namespace glbarcode
 	}
 
 
+	/**
+	 * 11 Digit POSTNET Barcode (ZIP + 4 + Delivery Point)
+	 */
 	public class BarcodePostnet11 : BarcodePostnet
 	{
 		protected override bool validate_digits( int n_digits )
@@ -52,6 +61,9 @@ namespace glbarcode
 	}
 
 
+	/**
+	 * 8 Digit CEPNET Barcode (Brazillian, based on POSTNET)
+	 */
 	public class BarcodeCepnet : BarcodePostnet
 	{
 		protected override bool validate_digits( int n_digits )
@@ -61,9 +73,15 @@ namespace glbarcode
 	}
 
 
+	/**
+	 * POSTNET Barcode (Any USPS Length)
+	 */
 	public class BarcodePostnet : Barcode
 	{
 
+		/*
+		 * Constants
+		 */
 		private const double POSTNET_BAR_WIDTH      = ( 0.02    * PTS_PER_INCH );
 		private const double POSTNET_FULLBAR_HEIGHT = ( 0.125   * PTS_PER_INCH );
 		private const double POSTNET_HALFBAR_HEIGHT = ( 0.05    * PTS_PER_INCH );
@@ -71,6 +89,10 @@ namespace glbarcode
 		private const double POSTNET_HORIZ_MARGIN   = ( 0.125   * PTS_PER_INCH );
 		private const double POSTNET_VERT_MARGIN    = ( 0.04    * PTS_PER_INCH );
 
+
+		/*
+		 * Encoding symbology
+		 */
 		private const string[] symbols = {
 			/* 0 */ "11000",
 			/* 1 */ "00011",
@@ -86,14 +108,20 @@ namespace glbarcode
 
 		private const string frame_symbol = "1";
 
-
+		
+		/**
+		 * POSTNET general validate length method
+		 */
 		protected virtual bool validate_digits( int n_digits )
 		{
-			/* Accept any valid POSTNET length for general Postnet type. */
+			/* Accept any valid POSTNET length. */
 			return (n_digits == 5) || (n_digits == 9) || (n_digits ==11);
 		}
 
 
+		/**
+		 * POSTNET data validation method
+		 */
 		protected override bool validate( string data )
 		{
 
@@ -115,7 +143,10 @@ namespace glbarcode
 		}
 
 
-		protected override string encode( string data, bool checksum_flag )
+		/**
+		 * POSTNET data encoding method
+		 */
+		protected override string encode( string data )
 		{
 			StringBuilder code = new StringBuilder();
 
@@ -145,10 +176,10 @@ namespace glbarcode
 		}
 
 
-		protected override void vectorize( string coded_data,
-		                                   bool text_flag, bool checksum_flag,
-		                                   double w, double h,
-		                                   string data, string text )
+		/**
+		 * POSTNET vectorization method
+		 */
+		protected override void vectorize( string coded_data, string data, string text )
 		{
 			double x = POSTNET_HORIZ_MARGIN;
 			for ( int i=0; i < coded_data.length; i++ )
@@ -176,8 +207,9 @@ namespace glbarcode
 				x += POSTNET_BAR_PITCH;
 			}
 
-			this.w = x + POSTNET_HORIZ_MARGIN;
-			this.h = POSTNET_FULLBAR_HEIGHT + 2 * POSTNET_VERT_MARGIN;
+			/* Overwrite requested size with actual size. */
+			w = x + POSTNET_HORIZ_MARGIN;
+			h = POSTNET_FULLBAR_HEIGHT + 2 * POSTNET_VERT_MARGIN;
 		}
 
 

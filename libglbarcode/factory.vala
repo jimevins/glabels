@@ -65,6 +65,7 @@ namespace glbarcode
 			register_type( "POSTNET-11",      typeof(BarcodePostnet11) );
 			register_type( "CEPNET",          typeof(BarcodeCepnet) );
 			register_type( "UPC-A",           typeof(BarcodeUPCA) );
+			register_type( "EAN-13",          typeof(BarcodeEAN13) );
 
 			initialized = true;
 		}

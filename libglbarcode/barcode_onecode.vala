@@ -25,9 +25,15 @@ using glbarcode.Constants;
 namespace glbarcode
 {
 
+	/**
+	 * ONE CODE (USPS Intelligent Mail) Barcode
+	 */
 	public class BarcodeOneCode : Barcode
 	{
 
+		/*
+		 * Constants
+		 */
 		private const double ONECODE_BAR_WIDTH        = ( 0.02   * PTS_PER_INCH );
 		private const double ONECODE_FULL_HEIGHT      = ( 0.145  * PTS_PER_INCH );
 		private const double ONECODE_ASCENDER_HEIGHT  = ( 0.0965 * PTS_PER_INCH );
@@ -42,6 +48,9 @@ namespace glbarcode
 		private const double ONECODE_VERT_MARGIN      = ( 0.028  * PTS_PER_INCH );
 
 
+		/**
+		 * 104-bit Integer Representation
+		 */
 		private struct Int104
 		{
 			public uint8[] byte;
@@ -91,6 +100,9 @@ namespace glbarcode
 		}
 
 
+		/*
+		 * Encoding tables
+		 */
 		private enum Char
 		{
 			A = 0,
@@ -328,6 +340,9 @@ namespace glbarcode
 		};
 
 
+		/**
+		 * ONE CODE data validation method.
+		 */
 		protected override bool validate( string data )
 		{
 			if ( (data.length != 20) &&
@@ -355,7 +370,10 @@ namespace glbarcode
 		}
 
 
-		protected override string encode( string data, bool checksum_flag )
+		/**
+		 * ONE CODE data encoding method.
+		 */
+		protected override string encode( string data )
 		{
 			Int104 value = Int104();
 
@@ -465,10 +483,10 @@ namespace glbarcode
 		}
 
 
-		protected override void vectorize( string coded_data,
-		                                   bool text_flag, bool checksum_flag,
-		                                   double w, double h,
-		                                   string data, string text )
+		/**
+		 * ONE CODE vectorization method.
+		 */
+		protected override void vectorize( string coded_data, string data, string text )
 		{
 			double x = ONECODE_HORIZ_MARGIN;
 			for ( int i = 0; i < coded_data.length; i++ )
@@ -504,8 +522,9 @@ namespace glbarcode
 				x += ONECODE_BAR_PITCH;
 			}
 
-			this.w = x + ONECODE_HORIZ_MARGIN;
-			this.h = ONECODE_FULL_HEIGHT + 2 * ONECODE_VERT_MARGIN;
+			/* Overwrite requested size with actual size. */
+			w = x + ONECODE_HORIZ_MARGIN;
+			h = ONECODE_FULL_HEIGHT + 2 * ONECODE_VERT_MARGIN;
 		}
 
 
