@@ -19,6 +19,7 @@ templates_DATA = \
 	databecker-iso-templates.xml \
 	dataline-iso-templates.xml	\
 	decadry-iso-templates.xml \
+	desmat-templates.xml \
 	dymo-other-templates.xml \
 	endisch-templates.xml	\
 	geha-iso-templates.xml	\

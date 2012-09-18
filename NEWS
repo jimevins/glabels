@@ -1,3 +1,29 @@
+* gLabels 3.0.1 (stable) release.  Release date 2012-09-17
+
+- Fixed bug causing extra pages to be printed when doing a document merge
+- Fixed font scaling problems when doing a document merge
+- Added missing dependencies to libglabels and libglbarcode pkg-config files
+- Fixed invalid gsettings schema file
+- Fixed incorrect clip region for rectangular labels
+- Numerous new templates and fixes
+- Updated and new translations:
+  - Japanese (Takeshi AIHANA, Jiro Matsuzawa)
+  - German (Mario Blättermann)
+  - Spanish (Daniel Mustieles, Jorge González)
+  - Serbian (Мирослав Николић)
+  - Finnish (Jiri Grönroos)
+  - British English (Bruce Cowan)
+  - French (Claud Paroz, Bruno Brouard)
+  - Norwegian bokmål (Kjartan Maraas)
+  - Indonesian (Andika Triwidada)
+  - Greek (Efstathios Iosifidis, Konstantinos Chortis)
+  - Slovenian (Andrej Žnidaršič, Matej Urbančič, Martin Srebotnjak)
+  - Czech (Marek Černocký)
+  - Russian (Александр Прокудин, Yuri Myasoedov)
+  - Esperanto (Kristjan SCHMIDT)
+  - Arabic (Hatim Ali)
+
+
 * gLabels 3.0.0 (stable) release.  Release date 2011-05-16
 
 - Reorganization of alignment menus
