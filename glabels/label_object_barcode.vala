@@ -43,23 +43,43 @@ namespace glabels
 
 
 		/**
+		 * Raw width of bounding box
+		 */
+		public double w_raw
+		{
+			get { return _w_raw; }
+		}
+		private double _w_raw;
+
+
+		/**
+		 * Raw height of bounding box
+		 */
+		public double h_raw
+		{
+			get { return _h_raw; }
+		}
+		private double _h_raw;
+
+
+		/**
 		 * Width of bounding box
 		 */
 		public override double w
 		{
-			get { return _w; }
+			get { return _w_actual; }
 
 			set
 			{
-				if ( _w != value )
+				if ( _w_raw != value )
 				{
-					_w = value;
+					_w_raw = value;
 					update_cached_barcode();
 					changed();
 				}
 			}
 		}
-		private double _w;
+		private double _w_actual;
 
 
 		/**
@@ -67,19 +87,19 @@ namespace glabels
 		 */
 		public override double h
 		{
-			get { return _h; }
+			get { return _h_actual; }
 
 			set
 			{
-				if ( _h != value )
+				if ( _h_raw != value )
 				{
-					_h = value;
+					_h_raw = value;
 					update_cached_barcode();
 					changed();
 				}
 			}
 		}
-		private double _h;
+		private double _h_actual;
 
 
 		/**
@@ -397,32 +417,32 @@ namespace glabels
 				data = bc_data_node.expand( null );
 			}
 
-			cached_bc = glbarcode.Factory.create_barcode( bc_type, bc_text_flag, bc_checksum_flag, w, h, data );
+			cached_bc = glbarcode.Factory.create_barcode( bc_type, bc_text_flag, bc_checksum_flag, _w_raw, _h_raw, data );
 
 			if ( (cached_bc == null) || !cached_bc.is_data_valid )
 			{
 				/* Try again with default digits, but don't save -- just extract size. */
 				data = _bc_style.get_example_digits( bc_format_digits );
 
-				glbarcode.Barcode bc = glbarcode.Factory.create_barcode( bc_type, bc_text_flag, bc_checksum_flag, w, h, data );
+				glbarcode.Barcode bc = glbarcode.Factory.create_barcode( bc_type, bc_text_flag, bc_checksum_flag, _w_raw, _h_raw, data );
 
 				if ( bc != null )
 				{
-					w = bc.w;
-					h = bc.h;
+					_w_actual = bc.w;
+					_h_actual = bc.h;
 				}
 				else
 				{
 					/* If we still can't render, just set a default size. */
-					w = 144;
-					h = 72;
+					_w_actual = 144;
+					_h_actual = 72;
 				}
 
 			}
 			else
 			{
-				w = cached_bc.w;
-				h = cached_bc.h;
+				_w_actual = cached_bc.w;
+				_h_actual = cached_bc.h;
 			}
 
 			if ( !_bc_style.can_text )
