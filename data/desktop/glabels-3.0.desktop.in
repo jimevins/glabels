@@ -1,9 +1,8 @@
 [Desktop Entry]
-Encoding=UTF-8
 _Name=gLabels Label Designer 3
 _Comment=Create labels, business cards and media covers
 Exec=glabels-3 %F
-Icon=glabels-3.0.png
+Icon=glabels-3.0
 Terminal=false
 Type=Application
 Categories=GTK;Office;
