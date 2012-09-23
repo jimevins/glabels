@@ -1277,7 +1277,7 @@
     </Label-cd>
   </Template>
 
-  <Template brand="Rayfilm" part="CD13 (medium)" size="A4" _description="CD/DVD Labels">
+  <Template brand="Rayfilm" part="CD13" size="A4" _description="CD/DVD Labels">
     <Meta category="label"/>
     <Meta category="media"/>
     <Meta product_url="http://www.rayfilm.cz/e-shop/index2.php?detail_search=4&amp;skupina=-10&amp;9amp6803amp1=CD13&amp;vzhled=1"/>
@@ -1285,18 +1285,10 @@
       <Layout nx="1" ny="1" x0="83mm" y0="25mm" dx="116mm" dy="116mm"/>
       <Layout nx="1" ny="1" x0="11mm" y0="156mm" dx="116mm" dy="116mm"/>
     </Label-cd>
-  </Template>
-  <Template brand="Rayfilm" part="CD13 (box1)" size="A4" _description="CD/DVD Labels">
-    <Meta category="label"/>
-    <Meta category="media"/>
     <Label-rectangle id="0" width="45mm" height="116mm" round="3.45mm" x_waste="1mm" y_waste="1mm">
       <Layout nx="1" ny="1" x0="11mm" y0="25mm" dx="45mm" dy="116mm"/>
       <Layout nx="1" ny="1" x0="154mm" y0="156mm" dx="45mm" dy="116mm"/>
     </Label-rectangle>
-  </Template>
-  <Template brand="Rayfilm" part="CD13 (box2)" size="A4" _description="CD/DVD Labels">
-    <Meta category="label"/>
-    <Meta category="media"/>
     <Label-rectangle id="0" width="6mm" height="116mm" round="0mm" x_waste="1mm" y_waste="1mm">
       <Layout nx="1" ny="1" x0="67mm" y0="25mm" dx="6mm" dy="116mm"/>
       <Layout nx="1" ny="1" x0="137mm" y0="156mm" dx="6mm" dy="116mm"/>
@@ -1312,7 +1304,7 @@
     </Label-cd>
   </Template>
 
-  <Template brand="Rayfilm" part="CD03 (medium)" size="A4" _description="CD/DVD Labels">
+  <Template brand="Rayfilm" part="CD03" size="A4" _description="CD/DVD Labels">
     <Meta category="label"/>
     <Meta category="media"/>
     <Meta product_url="http://www.rayfilm.cz/e-shop/index2.php?detail_search=4&amp;skupina=-10&amp;9amp6803amp1=CD03&amp;vzhled=1"/>
@@ -1320,35 +1312,23 @@
       <Layout nx="1" ny="1" x0="10.5mm" y0="24mm" dx="118mm" dy="118mm"/>
       <Layout nx="1" ny="1" x0="81.5mm" y0="155mm" dx="118mm" dy="118mm"/>
     </Label-cd>
-  </Template>
-  <Template brand="Rayfilm" part="CD03 (box1)" size="A4" _description="CD/DVD Labels">
-    <Meta category="label"/>
-    <Meta category="media"/>
     <Label-rectangle id="0" width="45mm" height="116mm" round="0mm" x_waste="0mm" y_waste="0mm">
       <Layout nx="1" ny="1" x0="154mm" y0="24mm" dx="45mm" dy="116mm"/>
       <Layout nx="1" ny="1" x0="10.5mm" y0="155mm" dx="45mm" dy="116mm"/>
     </Label-rectangle>
-  </Template>
-  <Template brand="Rayfilm" part="CD03 (box2)" size="A4" _description="CD/DVD Labels">
-    <Meta category="label"/>
-    <Meta category="media"/>
     <Label-rectangle id="0" width="6mm" height="116mm" round="0mm" x_waste="0mm" y_waste="0mm">
       <Layout nx="1" ny="1" x0="138.5mm" y0="24mm" dx="6mm" dy="116mm"/>
       <Layout nx="1" ny="1" x0="65.5mm" y0="155mm" dx="6mm" dy="116mm"/>
     </Label-rectangle>
   </Template>
 
-  <Template brand="Rayfilm" part="CD04 (medium)" size="A4" _description="CD/DVD Labels">
+  <Template brand="Rayfilm" part="CD04" size="A4" _description="CD/DVD Labels">
     <Meta category="label"/>
     <Meta category="media"/>
     <Meta product_url="http://www.rayfilm.cz/e-shop/index2.php?detail_search=4&amp;skupina=-10&amp;9amp6803amp1=CD04&amp;vzhled=1"/>
     <Label-cd id="0" radius="59mm" hole="20.5mm" waste="2mm">
       <Layout nx="1" ny="2" x0="46.5mm" y0="25mm" dx="118mm" dy="127mm"/>
     </Label-cd>
-  </Template>
-  <Template brand="Rayfilm" part="CD04 (box)" size="A4" _description="CD/DVD Labels">
-    <Meta category="label"/>
-    <Meta category="media"/>
     <Label-rectangle id="0" width="25mm" height="80mm" round="0mm" x_waste="1mm" y_waste="1mm">
       <Layout nx="2" ny="1" x0="15mm" y0="108.5mm" dx="155mm" dy="80mm"/>
     </Label-rectangle>
@@ -1363,17 +1343,13 @@
     </Label-cd>
   </Template>
 
-  <Template brand="Rayfilm" part="CD06 (medium)" size="A4" _description="CD/DVD Labels">
+  <Template brand="Rayfilm" part="CD06" size="A4" _description="CD/DVD Labels">
     <Meta category="label"/>
     <Meta category="media"/>
     <Meta product_url="http://www.rayfilm.cz/e-shop/index2.php?detail_search=4&amp;skupina=-10&amp;9amp6803amp1=CD06&amp;vzhled=1"/>
     <Label-cd id="0" radius="58.5mm" hole="20.5mm" waste="1mm">
       <Layout nx="1" ny="2" x0="46.5mm" y0="16mm" dx="148mm" dy="127mm"/>
     </Label-cd>
-  </Template>
-  <Template brand="Rayfilm" part="CD06 (box)" size="A4" _description="CD/DVD Labels">
-    <Meta category="label"/>
-    <Meta category="media"/>
     <Label-rectangle id="0" width="7mm" height="119mm" round="0mm" x_waste="0mm" y_waste="0mm">
       <Layout nx="3" ny="1" x0="15.5mm" y0="15mm" dx="7mm" dy="119mm"/>
       <Layout nx="3" ny="1" x0="173.5mm" y0="15mm" dx="7mm" dy="119mm"/>
