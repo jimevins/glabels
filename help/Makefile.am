@@ -1,9 +1,7 @@
-include $(top_srcdir)/gnome-doc-utils.make
+@YELP_HELP_RULES@
 
-dist-hook: doc-dist-hook
-
-DOC_ID = $(GLABELS_BRANCH)
-DOC_FIGURES = \
+HELP_ID = $(GLABELS_BRANCH)
+HELP_MEDIA = \
 	figures/glabels-logo.png			\
 	figures/glabels-template-cd-label.png      	\
 	figures/glabels-template-circle-label.png      	\
@@ -25,7 +23,7 @@ DOC_FIGURES = \
 	figures/skip-fields-output.png			\
 	figures/skip-fields-screenshot.png
 
-DOC_PAGES = \
+HELP_FILES = \
 	about.page		\
 	basicusage.page		\
 	createnew.page		\
@@ -48,4 +46,4 @@ DOC_PAGES = \
 	select.page		\
 	skipfields.page
 
-DOC_LINGUAS = cs de el es fr id nl ru sl
+HELP_LINGUAS = cs de el es fr id nl ru sl

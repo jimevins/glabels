@@ -25,11 +25,10 @@ EXTRA_DIST = \
 	intltool-extract.in \
 	intltool-merge.in \
 	intltool-update.in \
-	gnome-doc-utils.make \
 	glabels.spec.in \
 	glabels.spec
 
-DISTCLEANFILES = gnome-doc-utils.make
+DISTCLEANFILES = 
 
 DISTCHECK_CONFIGURE_FLAGS = \
 	--disable-scrollkeeper	\
