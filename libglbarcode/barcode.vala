@@ -42,8 +42,8 @@ namespace glbarcode
 		/*
 		 * Status parameters
 		 */
-		public bool    is_empty      { get; private set; }
-		public bool    is_data_valid { get; private set; }
+		public bool    is_empty      { get; protected set; }
+		public bool    is_data_valid { get; protected set; }
 
 		/*
 		 * List of vectorized drawing primitives

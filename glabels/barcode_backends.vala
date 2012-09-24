@@ -72,6 +72,32 @@ namespace glabels
 
 #if HAVE_LIBBARCODE
 
+			glbarcode.Factory.register_type( "gnu-barcode:EAN",      typeof(BackendGnuBarcode.Ean)      );
+			glbarcode.Factory.register_type( "gnu-barcode:EAN-8",    typeof(BackendGnuBarcode.Ean8)     );
+			glbarcode.Factory.register_type( "gnu-barcode:EAN-8+2",  typeof(BackendGnuBarcode.Ean8_2)   );
+			glbarcode.Factory.register_type( "gnu-barcode:EAN-8+5",  typeof(BackendGnuBarcode.Ean8_5)   );
+			glbarcode.Factory.register_type( "gnu-barcode:EAN-13",   typeof(BackendGnuBarcode.Ean13)    );
+			glbarcode.Factory.register_type( "gnu-barcode:EAN-13+2", typeof(BackendGnuBarcode.Ean13_2)  );
+			glbarcode.Factory.register_type( "gnu-barcode:EAN-13+5", typeof(BackendGnuBarcode.Ean13_5)  );
+			glbarcode.Factory.register_type( "gnu-barcode:UPC",      typeof(BackendGnuBarcode.Upc)      );
+			glbarcode.Factory.register_type( "gnu-barcode:UPC-A",    typeof(BackendGnuBarcode.UpcA)     );
+			glbarcode.Factory.register_type( "gnu-barcode:UPC-A+2",  typeof(BackendGnuBarcode.UpcA_2)   );
+			glbarcode.Factory.register_type( "gnu-barcode:UPC-A+5",  typeof(BackendGnuBarcode.UpcA_5)   );
+			glbarcode.Factory.register_type( "gnu-barcode:UPC-E",    typeof(BackendGnuBarcode.UpcE)     );
+			glbarcode.Factory.register_type( "gnu-barcode:UPC-E+2",  typeof(BackendGnuBarcode.UpcE_2)   );
+			glbarcode.Factory.register_type( "gnu-barcode:UPC-E+5",  typeof(BackendGnuBarcode.UpcE_5)   );
+			glbarcode.Factory.register_type( "gnu-barcode:ISBN",     typeof(BackendGnuBarcode.Isbn)     );
+			glbarcode.Factory.register_type( "gnu-barcode:ISBN+5",   typeof(BackendGnuBarcode.Isbn_5)   );
+			glbarcode.Factory.register_type( "gnu-barcode:Code39",   typeof(BackendGnuBarcode.Code39)   );
+			glbarcode.Factory.register_type( "gnu-barcode:Code128",  typeof(BackendGnuBarcode.Code128)  );
+			glbarcode.Factory.register_type( "gnu-barcode:Code128C", typeof(BackendGnuBarcode.Code128C) );
+			glbarcode.Factory.register_type( "gnu-barcode:Code128B", typeof(BackendGnuBarcode.Code128B) );
+			glbarcode.Factory.register_type( "gnu-barcode:I25",      typeof(BackendGnuBarcode.I25)      );
+			glbarcode.Factory.register_type( "gnu-barcode:CBR",      typeof(BackendGnuBarcode.Cbr)      );
+			glbarcode.Factory.register_type( "gnu-barcode:MSI",      typeof(BackendGnuBarcode.Msi)      );
+			glbarcode.Factory.register_type( "gnu-barcode:PLS",      typeof(BackendGnuBarcode.Pls)      );
+			glbarcode.Factory.register_type( "gnu-barcode:Code93",   typeof(BackendGnuBarcode.Code93)   );
+
 			register( "gnu-barcode:EAN", _("GNU-Barcode : EAN (any)"),
 			          true, true, true, false, "000000000000 00000", false, 17 );
 

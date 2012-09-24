@@ -113,6 +113,29 @@ AC_SUBST(LIBGLBARCODE_CFLAGS)
 AC_SUBST(LIBGLBARCODE_LIBS)
 
 
+dnl ---------------------------------------------------------------------------
+dnl - Check for optional GNU Barcode backend
+dnl ---------------------------------------------------------------------------
+AC_ARG_WITH(libbarcode,
+	    [AS_HELP_STRING([--without-libbarcode],[build without GNU Barcode support])])
+have_libbarcode=no
+if test "x$with_libbarcode" != xno; then
+   AC_CHECK_LIB(barcode, Barcode_Create,
+		[have_libbarcode=yes], [have_libbarcode=no])
+fi
+
+if test "x$have_libbarcode" = "xyes"; then
+	LIBBARCODE_VALAFLAGS="-D HAVE_LIBBARCODE"
+	LIBBARCODE_CFLAGS=""
+	LIBBARCODE_LIBS="-lbarcode"
+	AC_SUBST(LIBBARCODE_VALAFLAGS)
+	AC_SUBST(LIBBARCODE_CFLAGS)
+	AC_SUBST(LIBBARCODE_LIBS)
+else
+	help_libbarcode="(See http://www.gnu.org/software/barcode/barcode.html)"
+fi
+
+
 AC_CONFIG_FILES([Makefile
 	vapi/Makefile
 	libglabels/Makefile
@@ -136,3 +159,24 @@ AC_CONFIG_FILES([Makefile
         help/Makefile])
 
 AC_OUTPUT
+
+
+dnl ---------------------------------------------------------------------------
+dnl - Print configuration information
+dnl ---------------------------------------------------------------------------
+echo "
+
+Configuration:
+
+        Package ................. ${PACKAGE}-${VERSION}
+        Installation prefix ..... ${prefix}
+        Source code location .... ${srcdir}
+        C Compiler .............. ${CC} 
+        VALA Compiler ........... ${VALAC} 
+
+
+Optional barcode backends:
+
+        GNU Barcode ............. ${have_libbarcode} ${help_libbarcode}
+
+"

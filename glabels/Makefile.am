@@ -10,6 +10,8 @@ glabels_4_SOURCES = \
 	TMP_gdk_pixdata.vapi \
 	glabels.vala \
 	barcode_backends.vala \
+	barcode_backends/gnu_barcode.vala \
+	barcode_backends/libbarcode.vapi \
 	barcode_style.vala \
 	color.vala \
 	color_button.vala \
@@ -88,6 +90,7 @@ INCLUDES = \
 	-DLOCALEDIR=\""$(localedir)"\" \
 	-DDATADIR=\""$(datadir)"\" \
 	-DGLABELS_BRANCH=\""$(GLABELS_BRANCH)"\" \
+	$(LIBBARCODE_CFLAGS) \
 	$(NULL)
 
 VALAFLAGS = \
@@ -102,6 +105,7 @@ VALAFLAGS = \
 	--pkg librsvg-2.0 \
 	--pkg libglabels-4 \
 	--pkg libglbarcode-4 \
+	$(LIBBARCODE_VALAFLAGS) \
 	$(NULL)
 
 
@@ -109,6 +113,7 @@ glabels_4_LDADD = \
 	-L../libglabels -lglabels-4.0 \
 	-L../libglbarcode -lglbarcode-4.0 \
 	$(GLABELS_LIBS) \
+	$(LIBBARCODE_LIBS) \
 	$(NULL)
 
 
