@@ -393,11 +393,11 @@ namespace glabels
 			string style_id   = XmlUtil.get_prop_string( node, "style", "Code39" );
 			if ( (backend_id != null) && (backend_id != "built-in") )
 			{
-				object.bc_type = "%s:%s".printf( backend_id, style_id );
+				object.bc_style = BarcodeBackends.lookup_style_from_id( "%s:%s".printf( backend_id, style_id ) );
 			}
 			else
 			{
-				object.bc_type = style_id;
+				object.bc_style = BarcodeBackends.lookup_style_from_id( style_id );
 			}
 			object.bc_text_flag     = XmlUtil.get_prop_bool( node, "text", false );
 			object.bc_checksum_flag = XmlUtil.get_prop_bool( node, "checksum", true );
@@ -940,16 +940,16 @@ namespace glabels
 			XmlUtil.set_prop_length( node, "h", object.h_raw );
 
 			/* style attrs */
-			if ( object.bc_type.contains( ":" ) )
+			if ( object.bc_style.backend_id != "" )
 			{
-				string[] token = object.bc_type.split( ":", 2 );
+				string[] token = object.bc_style.id.split( ":", 2 );
 				XmlUtil.set_prop_string( node, "backend", token[0] );
 				XmlUtil.set_prop_string( node, "style",   token[1] );
 			}
 			else
 			{
 				XmlUtil.set_prop_string( node, "backend", "built-in" );
-				XmlUtil.set_prop_string( node, "style",   object.bc_type );
+				XmlUtil.set_prop_string( node, "style",   object.bc_style.id );
 			}
 			XmlUtil.set_prop_bool( node, "text",     object.bc_text_flag );
 			XmlUtil.set_prop_bool( node, "checksum", object.bc_text_flag );

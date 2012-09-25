@@ -12,6 +12,9 @@ glabels_4_SOURCES = \
 	barcode_backends.vala \
 	barcode_backends/gnu_barcode.vala \
 	barcode_backends/libbarcode.vapi \
+	barcode_menu.vala \
+	barcode_menu_button.vala \
+	barcode_menu_item.vala \
 	barcode_style.vala \
 	color.vala \
 	color_button.vala \

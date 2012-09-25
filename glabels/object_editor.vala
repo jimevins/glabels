@@ -65,26 +65,27 @@ namespace glabels
 		private Gtk.Box          text_insert_field_box;
 		private FieldButton      text_insert_field_button;
 
-		private Gtk.RadioButton  image_file_radio;
-		private Gtk.RadioButton  image_key_radio;
-		private Gtk.FileChooserButton   image_filebutton;
-		private Gtk.Box          image_key_box;
-		private FieldButton      image_key_button;
+		private Gtk.RadioButton       image_file_radio;
+		private Gtk.RadioButton       image_key_radio;
+		private Gtk.FileChooserButton image_filebutton;
+		private Gtk.Box               image_key_box;
+		private FieldButton           image_key_button;
 
-		private Gtk.ComboBoxText bc_type_combo;
-		private Gtk.CheckButton  bc_show_text_check;
-		private Gtk.CheckButton  bc_checksum_check;
-		private Gtk.Box          bc_color_box;
-		private ColorButton      bc_color_button;
-		private Gtk.RadioButton  bc_literal_radio;
-		private Gtk.RadioButton  bc_key_radio;
-		private Gtk.TextView     bc_data_textview;
-		private Gtk.TextBuffer   bc_data_textbuffer;
-		private Gtk.Box          bc_key_box;
-		private FieldButton      bc_key_button;
-		private Gtk.Grid         bc_key_grid;
-		private Gtk.Label        bc_format_label;
-		private Gtk.SpinButton   bc_digits_spin;
+		private Gtk.Box           bc_menu_box;
+		private BarcodeMenuButton bc_menu_button;
+		private Gtk.CheckButton   bc_show_text_check;
+		private Gtk.CheckButton   bc_checksum_check;
+		private Gtk.Box           bc_color_box;
+		private ColorButton       bc_color_button;
+		private Gtk.RadioButton   bc_literal_radio;
+		private Gtk.RadioButton   bc_key_radio;
+		private Gtk.TextView      bc_data_textview;
+		private Gtk.TextBuffer    bc_data_textbuffer;
+		private Gtk.Box           bc_key_box;
+		private FieldButton       bc_key_button;
+		private Gtk.Grid          bc_key_grid;
+		private Gtk.Label         bc_format_label;
+		private Gtk.SpinButton    bc_digits_spin;
 
 		private Gtk.SpinButton   line_width_spin;
 		private Gtk.Box          line_color_box;
@@ -142,7 +143,7 @@ namespace glabels
 		private ulong sigid_image_filebutton_selection_changed;
 		private ulong sigid_image_key_button_changed;
 
-		private ulong sigid_bc_type_combo_changed;
+		private ulong sigid_bc_menu_button_style_changed;
 		private ulong sigid_bc_show_text_check_toggled;
 		private ulong sigid_bc_checksum_check_toggled;
 		private ulong sigid_bc_color_button_changed;
@@ -290,7 +291,7 @@ namespace glabels
 
 
 			/* Barcode widgets. */
-			bc_type_combo           = builder.get_object( "bc_type_combo" )           as Gtk.ComboBoxText;
+			bc_menu_box             = builder.get_object( "bc_menu_box" )             as Gtk.Box;
 			bc_show_text_check      = builder.get_object( "bc_show_text_check" )      as Gtk.CheckButton;
 			bc_checksum_check       = builder.get_object( "bc_checksum_check" )       as Gtk.CheckButton;
 			bc_color_box            = builder.get_object( "bc_color_box" )            as Gtk.Box;
@@ -302,6 +303,9 @@ namespace glabels
 			bc_format_label         = builder.get_object( "bc_format_label" )         as Gtk.Label;
 			bc_digits_spin          = builder.get_object( "bc_digits_spin" )          as Gtk.SpinButton;
 
+			bc_menu_button = new BarcodeMenuButton();
+			bc_menu_box.pack_start( bc_menu_button, true, true, 0 );
+
 			bc_color_button = new ColorButton( _("Default"), Color.black(), Color.black() );
 			bc_color_box.pack_start( bc_color_button, true, true, 0 );
 
@@ -311,9 +315,8 @@ namespace glabels
 			bc_key_button = new FieldButton( null );
 			bc_key_box.pack_start( bc_key_button, true, true, 0 );
 
-			ComboUtil.load_strings( bc_type_combo, BarcodeBackends.get_name_list() );
-
-			sigid_bc_type_combo_changed = bc_type_combo.changed.connect( on_bc_type_combo_changed );
+			sigid_bc_menu_button_style_changed =
+				bc_menu_button.style_changed.connect( on_bc_menu_button_style_changed );
 			sigid_bc_show_text_check_toggled =
 				bc_show_text_check.toggled.connect( on_bc_show_text_check_toggled );
 			sigid_bc_checksum_check_toggled =
@@ -592,7 +595,7 @@ namespace glabels
 				load_text_textview();
 				load_image_filebutton();
 				load_image_key_button();
-				load_bc_type_combo();
+				load_bc_menu_button();
 				load_bc_show_text_check();
 				load_bc_checksum_check();
 				load_bc_color_button();
@@ -1172,26 +1175,25 @@ namespace glabels
 
 
 		/******************************
-		 * bc_type_combo
+		 * bc_menu_button
 		 ******************************/
-		private void on_bc_type_combo_changed()
+		private void on_bc_menu_button_style_changed()
 		{
 			if ( object != null )
 			{
-				object.bc_type = BarcodeBackends.name_to_id( bc_type_combo.get_active_text() );
+				object.bc_style = bc_menu_button.bc_style;
 			}
 		}
 
-		private void load_bc_type_combo()
+		private void load_bc_menu_button()
 		{
 			if ( (object != null) && object is LabelObjectBarcode )
 			{
-				GLib.SignalHandler.block( (void*)bc_type_combo, sigid_bc_type_combo_changed );
+				GLib.SignalHandler.block( (void*)bc_menu_button, sigid_bc_menu_button_style_changed );
 
-				ComboUtil.set_active_text( bc_type_combo,
-				                           BarcodeBackends.id_to_name( object.bc_type ) );
+				bc_menu_button.bc_style = object.bc_style;
 
-				GLib.SignalHandler.unblock( (void*)bc_type_combo, sigid_bc_type_combo_changed );
+				GLib.SignalHandler.unblock( (void*)bc_menu_button, sigid_bc_menu_button_style_changed );
 			}
 		}
 

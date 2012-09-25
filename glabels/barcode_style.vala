@@ -28,6 +28,7 @@ namespace glabels
 	{
 
 		public string id                { get; private set; }
+		public string backend_id        { get; private set; }
 		public string name              { get; private set; }
 		public bool   can_text          { get; private set; }
 		public bool   text_optional     { get; private set; }
@@ -39,6 +40,7 @@ namespace glabels
 
 
 		public BarcodeStyle ( string id,
+		                      string backend_id,
 		                      string name,
 		                      bool   can_text,
 		                      bool   text_optional,
@@ -49,6 +51,7 @@ namespace glabels
 		                      int    prefered_n )
 		{
 			this.id                = id;
+			this.backend_id        = backend_id;
 			this.name              = name;
 			this.can_text          = can_text;
 			this.text_optional     = text_optional;

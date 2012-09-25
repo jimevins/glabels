@@ -123,24 +123,20 @@ namespace glabels
 
 
 		/**
-		 * Barcode type
+		 * Style information
 		 */
-		public override string bc_type
+		public override BarcodeStyle bc_style
 		{
-			get { return _bc_type; }
+			get { return _bc_style; }
 
 			set
 			{
-				if ( _bc_type != value )
-				{
-					_bc_type = value;
-					update_cached_barcode();
-					changed();
-				}
+				_bc_style = value;
+				update_cached_barcode();
+				changed();
 			}
-
 		}
-		private string _bc_type;
+		private BarcodeStyle _bc_style;
 
 
 		/**
@@ -223,12 +219,6 @@ namespace glabels
 		private ColorNode _bc_color_node;
 
 
-		/**
-		 * Style information
-		 */
-		public override BarcodeStyle bc_style { get; private set; }
-
-
 		public LabelObjectBarcode()
 		{
 			handles.append( new HandleSouthEast( this ) );
@@ -245,7 +235,6 @@ namespace glabels
 			Prefs prefs = new Prefs();
 
 			_bc_style              = BarcodeBackends.lookup_style_from_id( "Code39" );
-			_bc_type               = _bc_style.id;
 			_bc_text_flag          = _bc_style.can_text;
 			_bc_checksum_flag      = _bc_style.can_checksum;
 			_bc_format_digits      = _bc_style.prefered_n;
@@ -283,7 +272,7 @@ namespace glabels
 			{
 
 				string text = bc_data_node.expand( record );
-				glbarcode.Barcode bc = glbarcode.Factory.create_barcode( bc_type, bc_text_flag, bc_checksum_flag, w, h, text );
+				glbarcode.Barcode bc = glbarcode.Factory.create_barcode( bc_style.id, bc_text_flag, bc_checksum_flag, w, h, text );
 
 				if ( bc != null )
 				{
@@ -406,8 +395,6 @@ namespace glabels
 		{
 			string data;
 
-			_bc_style = BarcodeBackends.lookup_style_from_id( bc_type );
-
 			if ( bc_data_node.field_flag )
 			{
 				data = _bc_style.get_example_digits( bc_format_digits );
@@ -417,14 +404,14 @@ namespace glabels
 				data = bc_data_node.expand( null );
 			}
 
-			cached_bc = glbarcode.Factory.create_barcode( bc_type, bc_text_flag, bc_checksum_flag, _w_raw, _h_raw, data );
+			cached_bc = glbarcode.Factory.create_barcode( bc_style.id, bc_text_flag, bc_checksum_flag, _w_raw, _h_raw, data );
 
 			if ( (cached_bc == null) || !cached_bc.is_data_valid )
 			{
 				/* Try again with default digits, but don't save -- just extract size. */
 				data = _bc_style.get_example_digits( bc_format_digits );
 
-				glbarcode.Barcode bc = glbarcode.Factory.create_barcode( bc_type, bc_text_flag, bc_checksum_flag, _w_raw, _h_raw, data );
+				glbarcode.Barcode bc = glbarcode.Factory.create_barcode( bc_style.id, bc_text_flag, bc_checksum_flag, _w_raw, _h_raw, data );
 
 				if ( bc != null )
 				{

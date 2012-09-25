@@ -842,18 +842,15 @@
                                 <property name="can_focus">False</property>
                                 <property name="spacing">3</property>
                                 <child>
-                                  <object class="GtkComboBoxText" id="bc_type_combo">
+                                  <object class="GtkBox" id="bc_menu_box">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="entry_text_column">0</property>
-                                    <property name="id_column">1</property>
-                                    <items>
-                                      <item translatable="yes">Code 39</item>
-                                    </items>
+                                    <child>
+                                      <placeholder/>
+                                    </child>
                                   </object>
                                   <packing>
-                                    <property name="expand">False</property>
+                                    <property name="expand">True</property>
                                     <property name="fill">True</property>
                                     <property name="position">0</property>
                                   </packing>
@@ -1053,9 +1050,6 @@
                               </packing>
                             </child>
                             <child>
-                              <placeholder/>
-                            </child>
-                            <child>
                               <object class="GtkGrid" id="bc_key_grid">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
@@ -1124,6 +1118,9 @@
                                 <property name="width">1</property>
                                 <property name="height">1</property>
                               </packing>
+                            </child>
+                            <child>
+                              <placeholder/>
                             </child>
                           </object>
                         </child>
