@@ -24,36 +24,18 @@ using GLib;
 namespace glbarcode
 {
 
-	private uint str_case_hash( string s )
-	{
-		uint h = 5381;
-
-		for ( int i = 0; i < s.length; i++ )
-		{
-			h = (h << 5) + h + s[i].tolower();
-		}
-		return h;
-	}
-
-
-	private bool str_case_equal( string a, string b )
-	{
-		return a.ascii_casecmp( b ) == 0;
-	}
-
-
 	/**
 	 * Barcode factory.
 	 */
 	public class Factory
 	{
 		private static bool initialized = false;
-		private static HashTable<string,Type> mappings;
+		private static Gee.HashMap<string,Type> mappings;
 
 
 		static construct
 		{
-			mappings = new HashTable<string, Type>( str_case_hash, str_case_equal );
+			mappings = new Gee.HashMap<string, Type>();
 
 			/* Register built-in types. */
 			register_type( "Code39",          typeof(BarcodeCode39) );
@@ -100,7 +82,7 @@ namespace glbarcode
 		{
 			if ( type.is_a( typeof(Barcode) ) )
 			{
-				mappings.insert( name, type );
+				mappings.set( name.casefold(), type );
 			}
 			else
 			{
@@ -128,10 +110,12 @@ namespace glbarcode
 		{
 			Barcode? barcode = null;
 
-			Type type = mappings.lookup( name );
+			string name_casefold = name.casefold();
 
-			if ( mappings.contains( name ) )
+			if ( mappings.has_key( name_casefold ) )
 			{
+				Type type = mappings.get( name_casefold );
+
 				barcode = Object.new( type,
 				                      text_flag     : text_flag,
 				                      checksum_flag : checksum_flag,

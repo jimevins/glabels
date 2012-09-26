@@ -31,20 +31,22 @@ namespace glabels
 		private const string DEFAULT_NAME = _("Code 39");
 
 
-		private static HashTable<string,string> backend_map;
+		private static Gee.HashMap<string,string> backend_id_map;
+		private static Gee.HashMap<string,string> backend_name_map;
 
-		private static HashTable<string,BarcodeStyle> id_map;
-		private static HashTable<string,BarcodeStyle> name_map;
+		private static Gee.HashMap<string,BarcodeStyle> id_map;
+		private static Gee.HashMap<string,BarcodeStyle> name_map;
 
 		private static bool initialized = false;
 
 
 		static construct
 		{
-			backend_map = new HashTable<string,string>( str_hash, str_equal );
+			backend_id_map   = new Gee.HashMap<string,string>();
+			backend_name_map = new Gee.HashMap<string,string>();
 
-			id_map   = new HashTable<string,BarcodeStyle>( str_hash, str_equal );
-			name_map = new HashTable<string,BarcodeStyle>( str_hash, str_equal );
+			id_map   = new Gee.HashMap<string,BarcodeStyle>();
+			name_map = new Gee.HashMap<string,BarcodeStyle>();
 
 			register_style( "POSTNET", "", _("POSTNET (any)"),
 			                false, false, true, false, "12345-6789-12", false, 11 );
@@ -428,7 +430,8 @@ namespace glabels
 
 		private static void register_backend( string id, string name )
 		{
-			backend_map.insert( id, name );
+			backend_id_map.set( id, name );
+			backend_name_map.set( name, id );
 		}
 
 
@@ -447,16 +450,16 @@ namespace glabels
 			                                       can_text, text_optional, can_checksum, checksum_optional,
 			                                       default_digits, can_freeform, prefered_n );
 
-			id_map.insert( id, style );
-			name_map.insert( name, style );
+			id_map.set( id, style );
+			name_map.set( "%s.%s".printf(backend_id, name), style ); /* Name may not be unique w/o backend */
 		}
 
 
 		public static string backend_id_to_name( string id )
 		{
-			if ( backend_map.contains( id ) )
+			if ( backend_id_map.has_key( id ) )
 			{
-				return backend_map.lookup( id );
+				return backend_id_map.get( id );
 			}
 			else
 			{
@@ -465,82 +468,72 @@ namespace glabels
 		}
 
 
-		public static BarcodeStyle? lookup_style_from_name( string name )
+		public static string backend_name_to_id( string name )
 		{
-			if ( name_map.contains( name ) )
+			if ( backend_name_map.has_key( name ) )
 			{
-				return name_map.lookup( name );
+				return backend_name_map.get( name );
 			}
 			else
 			{
-				return id_map.lookup( DEFAULT_ID );
+				return ""; /* Built-in backend. */
 			}
+		}
+
+
+		public static List<string> get_backend_name_list()
+		{
+			List<string> list = null;
+
+			foreach ( string backend_name in backend_id_map.values )
+			{
+				list.insert_sorted( backend_name, strcmp );
+			}
+
+			return list;
 		}
 
 
 		public static BarcodeStyle? lookup_style_from_id( string id )
 		{
-			if ( id_map.contains( id ) )
+			if ( id_map.has_key( id ) )
 			{
-				return id_map.lookup( id );
+				return id_map.get( id );
 			}
 			else
 			{
-				return id_map.lookup( DEFAULT_ID );
+				return id_map.get( DEFAULT_ID );
 			}
 		}
 
 
-		public static string id_to_name( string id )
+		public static BarcodeStyle? lookup_style_from_name( string backend_id, string name )
 		{
-			BarcodeStyle? style = lookup_style_from_id( id );
+			string query_string = "%s.%s".printf(backend_id, name);
 
-			if ( style != null )
+			if ( name_map.has_key( query_string ) )
 			{
-				return style.name;
+				return name_map.get( query_string );
 			}
 			else
 			{
-				return DEFAULT_NAME;
+				return id_map.get( DEFAULT_ID );
 			}
 		}
 
 
-		public static string name_to_id( string name )
+		public static List<string> get_name_list( string backend_id )
 		{
-			BarcodeStyle? style = lookup_style_from_name( name );
+			List<string> list = null;
 
-			if ( style != null )
+			foreach ( BarcodeStyle bc_style in id_map.values )
 			{
-				return style.id;
+				if ( bc_style.backend_id == backend_id )
+				{
+					list.insert_sorted( bc_style.name, strcmp );
+				}
 			}
-			else
-			{
-				return DEFAULT_ID;
-			}
-		}
 
-
-		public static List<weak string> get_name_list()
-		{
-			List<weak string> list = name_map.get_keys();
-			list.sort( strcmp );
-			return list;
-		}
-
-
-		public static List<weak string> get_id_list()
-		{
-			List<weak string> list = id_map.get_keys();
-			list.sort( strcmp );
-			return list;
-		}
-
-
-		public static List<weak string> get_backend_id_list()
-		{
-			List<weak string> list = backend_map.get_keys();
-			list.sort( strcmp );
 			return list;
 		}
 

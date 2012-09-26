@@ -105,6 +105,7 @@ AC_SUBST(LIBGLABELS_LIBS)
 PKG_CHECK_MODULES(LIBGLBARCODE, [\
                                 glib-2.0 >= $GLIB_REQUIRED \
                                 gobject-2.0 >= $GLIB_REQUIRED \
+                                gee-1.0 >= $GEE_REQUIRED \
                                 cairo >= $CAIRO_REQUIRED \
                                 pangocairo >= $PANGOCAIRO_REQUIRED \
 ])
