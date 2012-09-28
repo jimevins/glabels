@@ -396,6 +396,8 @@ namespace glabels
 
 			register_backend( "iec16022", _("IEC16022") );
 
+			glbarcode.Factory.register_type( "iec16022:IEC16022", typeof(BackendIec16022.Datamatrix) );
+
 			register_style( "iec16022:IEC16022", "iec16022", _("DataMatrix"),
 			                false, false, true, false, "12345678", true, 8 );
 

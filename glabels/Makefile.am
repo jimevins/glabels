@@ -11,7 +11,9 @@ glabels_4_SOURCES = \
 	glabels.vala \
 	barcode_backends.vala \
 	barcode_backends/gnu_barcode.vala \
+	barcode_backends/iec16022.vala \
 	barcode_backends/libbarcode.vapi \
+	barcode_backends/libiec16022.vapi \
 	barcode_menu.vala \
 	barcode_menu_button.vala \
 	barcode_menu_item.vala \
@@ -94,6 +96,7 @@ INCLUDES = \
 	-DDATADIR=\""$(datadir)"\" \
 	-DGLABELS_BRANCH=\""$(GLABELS_BRANCH)"\" \
 	$(LIBBARCODE_CFLAGS) \
+	$(LIBIEC16022_CFLAGS) \
 	$(NULL)
 
 VALAFLAGS = \
@@ -109,6 +112,7 @@ VALAFLAGS = \
 	--pkg libglabels-4 \
 	--pkg libglbarcode-4 \
 	$(LIBBARCODE_VALAFLAGS) \
+	$(LIBIEC16022_VALAFLAGS) \
 	$(NULL)
 
 
@@ -117,6 +121,7 @@ glabels_4_LDADD = \
 	-L../libglbarcode -lglbarcode-4.0 \
 	$(GLABELS_LIBS) \
 	$(LIBBARCODE_LIBS) \
+	$(LIBIEC16022_LIBS) \
 	$(NULL)
 
 

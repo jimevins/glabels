@@ -69,6 +69,7 @@ AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)
 AC_SUBST(LDFLAGS)
 
+dnl Required dependencies
 GLIB_REQUIRED=2.28.0
 GTK_REQUIRED=3.0.9
 LIBXML_REQUIRED=2.7.8
@@ -77,6 +78,31 @@ CAIRO_REQUIRED=1.10.2
 GDK_PIXBUF_REQUIRED=2.24.0
 LIBRSVG_REQUIRED=2.36.0
 PANGOCAIRO_REQUIRED=1.30.0
+
+dnl Optional dependencies
+LIBEBOOK_REQUIRED=2.30.3
+LIBBARCODE_REQUIRED=0.98
+LIBQRENCODE_REQUIRED=3.1.0
+LIBIEC16022_REQUIRED=0.2.4
+LIBZINT_REQUIRED=2.4.0
+
+dnl Make above strings available for packaging files (e.g. rpm spec files)
+AC_SUBST(GLIB_REQUIRED)
+AC_SUBST(GTK_REQUIRED)
+AC_SUBST(LIBXML_REQUIRED)
+AC_SUBST(GEE_REQUIRED)
+AC_SUBST(LIBRSVG_REQUIRED)
+AC_SUBST(CAIRO_REQUIRED)
+AC_SUBST(PANGO_REQUIRED)
+AC_SUBST(GDK_PIXBUF_REQUIRED)
+AC_SUBST(LIBRSVG_REQUIRED)
+AC_SUBST(PANGOCAIRO_REQUIRED)
+AC_SUBST(LIBEBOOK_REQUIRED)
+AC_SUBST(LIBBARCODE_REQUIRED)
+AC_SUBST(LIBQRENCODE_REQUIRED)
+AC_SUBST(LIBIEC16022_REQUIRED)
+AC_SUBST(LIBZINT_REQUIRED)
+
 
 PKG_CHECK_MODULES(GLABELS, [\
 			   glib-2.0 >= $GLIB_REQUIRED \
@@ -137,6 +163,28 @@ else
 fi
 
 
+dnl ---------------------------------------------------------------------------
+dnl - Check for IEC16022 Barcode backend
+dnl ---------------------------------------------------------------------------
+AC_ARG_WITH(libiec16022,
+	    [AS_HELP_STRING([--without-libiec16022],[build without IEC 16022 support])])
+have_libiec16022=no
+if test "x$with_libiec16022" != xno; then
+	PKG_CHECK_MODULES(LIBIEC16022, libiec16022 >= $LIBIEC16022_REQUIRED,
+			  [have_libiec16022=yes], [have_libiec16022=no])
+fi
+
+if test "x$have_libiec16022" = "xyes"; then
+	AC_DEFINE(HAVE_LIBIEC16022,1,[Define to 1 for IEC 16022 support])
+	LIBIEC16022_VALAFLAGS="-D HAVE_LIBIEC16022"
+	AC_SUBST(LIBIEC16022_VALAFLAGS)
+	AC_SUBST(LIBIEC16022_CFLAGS)
+	AC_SUBST(LIBIEC16022_LIBS)
+else
+	help_libiec16022="(See http://datenfreihafen.org/projects/iec16022.html)"
+fi
+
+
 AC_CONFIG_FILES([Makefile
 	vapi/Makefile
 	libglabels/Makefile
@@ -179,5 +227,6 @@ Configuration:
 Optional barcode backends:
 
         GNU Barcode ............. ${have_libbarcode} ${help_libbarcode}
+        IEC 16022 ............... ${have_libiec16022} ${help_libiec16022}
 
 "
