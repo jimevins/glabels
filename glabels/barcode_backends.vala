@@ -407,6 +407,8 @@ namespace glabels
 
 			register_backend( "qrencode", _("QREncode") );
 
+			glbarcode.Factory.register_type( "qrencode:IEC18004", typeof(BackendQrencode.QRcode) );
+
 			register_style( "qrencode:IEC18004", "qrencode", _("IEC18004 (QRCode)"),
 			                false, false, true, false, "12345678", true, 8 );
 

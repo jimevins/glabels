@@ -164,6 +164,28 @@ fi
 
 
 dnl ---------------------------------------------------------------------------
+dnl - Check for optional QRencode Barcode backend
+dnl ---------------------------------------------------------------------------
+AC_ARG_WITH(libqrencode,
+	    [AS_HELP_STRING([--without-libqrencode],[build without QR code support])])
+have_libqrencode=no
+if test "x$with_libqrencode" != xno; then
+	PKG_CHECK_MODULES(LIBQRENCODE, libqrencode >= $LIBQRENCODE_REQUIRED,
+			  [have_libqrencode=yes], [have_libqrencode=no])
+fi
+
+if test "x$have_libqrencode" = "xyes"; then
+	AC_DEFINE(HAVE_LIBQRENCODE,1,[Define to 1 for QR code support])
+	LIBQRENCODE_VALAFLAGS="-D HAVE_LIBQRENCODE"
+	AC_SUBST(LIBQRENCODE_VALAFLAGS)
+	AC_SUBST(LIBQRENCODE_CFLAGS)
+	AC_SUBST(LIBQRENCODE_LIBS)
+else
+	help_libqrencode="(See http://megaui.net/fukuchi/works/qrencode/index.en.html)"
+fi
+
+
+dnl ---------------------------------------------------------------------------
 dnl - Check for IEC16022 Barcode backend
 dnl ---------------------------------------------------------------------------
 AC_ARG_WITH(libiec16022,
@@ -227,6 +249,7 @@ Configuration:
 Optional barcode backends:
 
         GNU Barcode ............. ${have_libbarcode} ${help_libbarcode}
+        QR Code ................. ${have_libqrencode} ${help_libqrencode}
         IEC 16022 ............... ${have_libiec16022} ${help_libiec16022}
 
 "
