@@ -15,7 +15,9 @@ glabels_4_SOURCES = \
 	barcode_backends/libbarcode.vapi \
 	barcode_backends/libiec16022.vapi \
 	barcode_backends/libqrencode.vapi \
+	barcode_backends/libzint.vapi \
 	barcode_backends/qrencode.vala \
+	barcode_backends/zint.vala \
 	barcode_menu.vala \
 	barcode_menu_button.vala \
 	barcode_menu_item.vala \
@@ -100,6 +102,7 @@ INCLUDES = \
 	$(LIBBARCODE_CFLAGS) \
 	$(LIBIEC16022_CFLAGS) \
 	$(LIBQRENCODE_CFLAGS) \
+	$(LIBZINT_CFLAGS) \
 	$(NULL)
 
 VALAFLAGS = \
@@ -117,6 +120,7 @@ VALAFLAGS = \
 	$(LIBBARCODE_VALAFLAGS) \
 	$(LIBIEC16022_VALAFLAGS) \
 	$(LIBQRENCODE_VALAFLAGS) \
+	$(LIBZINT_VALAFLAGS) \
 	$(NULL)
 
 
@@ -127,6 +131,7 @@ glabels_4_LDADD = \
 	$(LIBBARCODE_LIBS) \
 	$(LIBIEC16022_LIBS) \
 	$(LIBQRENCODE_LIBS) \
+	$(LIBZINT_LIBS) \
 	$(NULL)
 
 

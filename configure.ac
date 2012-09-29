@@ -207,6 +207,30 @@ else
 fi
 
 
+dnl ---------------------------------------------------------------------------
+dnl - Check for optional Zint backend
+dnl ---------------------------------------------------------------------------
+AC_ARG_WITH(libzint,
+	    [AS_HELP_STRING([--without-libzint],[build without Zint Barcode support])])
+have_libzint=no
+if test "x$with_libzint" != xno; then
+   AC_CHECK_LIB(zint, ZBarcode_Render,
+		[have_libzint=yes], [have_libzint=no])
+fi
+
+if test "x$have_libzint" = "xyes"; then
+	AC_DEFINE(HAVE_LIBZINT,1,[Define to 1 for Zint Barcode support])
+	LIBZINT_VALAFLAGS="-D HAVE_LIBZINT"
+	LIBZINT_CFLAGS=""
+	LIBZINT_LIBS="-lzint"
+	AC_SUBST(LIBZINT_VALAFLAGS)
+	AC_SUBST(LIBZINT_CFLAGS)
+	AC_SUBST(LIBZINT_LIBS)
+else
+	help_libzint="(See http://www.zint.org.uk)"
+fi
+
+
 AC_CONFIG_FILES([Makefile
 	vapi/Makefile
 	libglabels/Makefile
@@ -251,5 +275,6 @@ Optional barcode backends:
         GNU Barcode ............. ${have_libbarcode} ${help_libbarcode}
         QR Code ................. ${have_libqrencode} ${help_libqrencode}
         IEC 16022 ............... ${have_libiec16022} ${help_libiec16022}
+        Zint .................... ${have_libzint} ${help_libzint}
 
 "

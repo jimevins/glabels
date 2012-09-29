@@ -189,6 +189,74 @@ namespace glabels
 
 			register_backend( "zint", _("Zint") );
 
+			glbarcode.Factory.register_type( "zint:AUSP",     typeof(BackendZint.AusP)     );
+			glbarcode.Factory.register_type( "zint:AUSRP",    typeof(BackendZint.AusRP)    );
+			glbarcode.Factory.register_type( "zint:AUSRT",    typeof(BackendZint.AusRT)    );
+			glbarcode.Factory.register_type( "zint:AUSRD",    typeof(BackendZint.AusRD)    );
+			glbarcode.Factory.register_type( "zint:AZTEC",    typeof(BackendZint.Aztec)    );
+			glbarcode.Factory.register_type( "zint:AZRUN",    typeof(BackendZint.Azrun)    );
+			glbarcode.Factory.register_type( "zint:CBR",      typeof(BackendZint.Cbr)      );
+			glbarcode.Factory.register_type( "zint:Code1",    typeof(BackendZint.Code1)    );
+			glbarcode.Factory.register_type( "zint:Code11",   typeof(BackendZint.Code11)   );
+			glbarcode.Factory.register_type( "zint:C16K",     typeof(BackendZint.C16k)     );
+			glbarcode.Factory.register_type( "zint:C25M",     typeof(BackendZint.C25m)     );
+			glbarcode.Factory.register_type( "zint:C25I",     typeof(BackendZint.C25i)     );
+			glbarcode.Factory.register_type( "zint:C25DL",    typeof(BackendZint.C25dl)    );
+			glbarcode.Factory.register_type( "zint:Code32",   typeof(BackendZint.Code32)   );
+			glbarcode.Factory.register_type( "zint:Code39",   typeof(BackendZint.Code39)   );
+			glbarcode.Factory.register_type( "zint:Code39E",  typeof(BackendZint.Code39e)  );
+			glbarcode.Factory.register_type( "zint:Code49",   typeof(BackendZint.Code49)   );
+			glbarcode.Factory.register_type( "zint:Code93",   typeof(BackendZint.Code93)   );
+			glbarcode.Factory.register_type( "zint:Code128",  typeof(BackendZint.Code128)  );
+			glbarcode.Factory.register_type( "zint:Code128B", typeof(BackendZint.Code128b) );
+			glbarcode.Factory.register_type( "zint:DAFT",     typeof(BackendZint.Daft)     );
+			glbarcode.Factory.register_type( "zint:DMTX",     typeof(BackendZint.Dmtx)     );
+			glbarcode.Factory.register_type( "zint:DPL",      typeof(BackendZint.Dpl)      );
+			glbarcode.Factory.register_type( "zint:DPI",      typeof(BackendZint.Dpi)      );
+			glbarcode.Factory.register_type( "zint:KIX",      typeof(BackendZint.Kix)      );
+			glbarcode.Factory.register_type( "zint:EAN",      typeof(BackendZint.Ean)      );
+			glbarcode.Factory.register_type( "zint:GMTX",     typeof(BackendZint.Gmtx)     );
+			glbarcode.Factory.register_type( "zint:GS1128",   typeof(BackendZint.Gs1128)   );
+			glbarcode.Factory.register_type( "zint:RSS14",    typeof(BackendZint.Rss14)    );
+			glbarcode.Factory.register_type( "zint:RSSLTD",   typeof(BackendZint.Rssltd)   );
+			glbarcode.Factory.register_type( "zint:RSSEXP",   typeof(BackendZint.Rssexp)   );
+			glbarcode.Factory.register_type( "zint:RSSS",     typeof(BackendZint.Rsss)     );
+			glbarcode.Factory.register_type( "zint:RSSSO",    typeof(BackendZint.Rssso)    );
+			glbarcode.Factory.register_type( "zint:RSSSE",    typeof(BackendZint.Rssse)    );
+			glbarcode.Factory.register_type( "zint:HIBC128",  typeof(BackendZint.Hibc128)  );
+			glbarcode.Factory.register_type( "zint:HIBC39",   typeof(BackendZint.Hibc39)   );
+			glbarcode.Factory.register_type( "zint:HIBCDM",   typeof(BackendZint.Hibcdm)   );
+			glbarcode.Factory.register_type( "zint:HIBCQR",   typeof(BackendZint.Hibcqr)   );
+			glbarcode.Factory.register_type( "zint:HIBCPDF",  typeof(BackendZint.Hibcpdf)  );
+			glbarcode.Factory.register_type( "zint:HIBCMPDF", typeof(BackendZint.Hibcmpdf) );
+			glbarcode.Factory.register_type( "zint:HIBCAZ",   typeof(BackendZint.Hibcaz)   );
+			glbarcode.Factory.register_type( "zint:I25",      typeof(BackendZint.I25)      );
+			glbarcode.Factory.register_type( "zint:ISBN",     typeof(BackendZint.Isbn)     );
+			glbarcode.Factory.register_type( "zint:ITF14",    typeof(BackendZint.Itf14)    );
+			glbarcode.Factory.register_type( "zint:JAPAN",    typeof(BackendZint.Japan)    );
+			glbarcode.Factory.register_type( "zint:KOREA",    typeof(BackendZint.Korea)    );
+			glbarcode.Factory.register_type( "zint:LOGM",     typeof(BackendZint.Logm)     );
+			glbarcode.Factory.register_type( "zint:MAXI",     typeof(BackendZint.Maxi)     );
+			glbarcode.Factory.register_type( "zint:MPDF",     typeof(BackendZint.Mpdf)     );
+			glbarcode.Factory.register_type( "zint:MQR",      typeof(BackendZint.Mqr)      );
+			glbarcode.Factory.register_type( "zint:MSI",      typeof(BackendZint.Msi)      );
+			glbarcode.Factory.register_type( "zint:NVE",      typeof(BackendZint.Nve)      );
+			glbarcode.Factory.register_type( "zint:PDF",      typeof(BackendZint.Pdf)      );
+			glbarcode.Factory.register_type( "zint:PDFT",     typeof(BackendZint.Pdft)     );
+			glbarcode.Factory.register_type( "zint:PLAN",     typeof(BackendZint.Plan)     );
+			glbarcode.Factory.register_type( "zint:POSTNET",  typeof(BackendZint.Postnet)  );
+			glbarcode.Factory.register_type( "zint:PHARMA",   typeof(BackendZint.Pharma)   );
+			glbarcode.Factory.register_type( "zint:PHARMA2",  typeof(BackendZint.Pharma2)  );
+			glbarcode.Factory.register_type( "zint:PZN",      typeof(BackendZint.Pzn)      );
+			glbarcode.Factory.register_type( "zint:QR",       typeof(BackendZint.Qr)       );
+			glbarcode.Factory.register_type( "zint:RM4",      typeof(BackendZint.Rm4)      );
+			glbarcode.Factory.register_type( "zint:TELE",     typeof(BackendZint.Tele)     );
+			glbarcode.Factory.register_type( "zint:TELEX",    typeof(BackendZint.Telex)    );
+			glbarcode.Factory.register_type( "zint:UPC-A",    typeof(BackendZint.UpcA)     );
+			glbarcode.Factory.register_type( "zint:UPC-E",    typeof(BackendZint.UpcE)     );
+			glbarcode.Factory.register_type( "zint:USPS",     typeof(BackendZint.Usps)     );
+			glbarcode.Factory.register_type( "zint:PLS",      typeof(BackendZint.Pls)      );
+
 			register_style( "zint:AUSP", "zint", _("Australia Post Standard"),
 			                false, false, true, false, "12345678901234567890123", true, 23 );
 
@@ -201,8 +269,11 @@ namespace glabels
 			register_style( "zint:AUSRD", "zint", _("Australia Post Redirect"),
 			                false, false, true, false, "12345678", true, 8 );
 
+#if FIXME
+			/* TODO: fix crash, zint-2.4.2 */
 			register_style( "zint:AZTEC", "zint", _("Aztec Code"),
 			                false, false, true, false, "1234567890", true, 10 );
+#endif
           
 			register_style( "zint:AZRUN", "zint", _("Aztec Rune"),
 			                false, false, true, false, "255", true, 3 );
@@ -210,8 +281,11 @@ namespace glabels
 			register_style( "zint:CBR", "zint", _("Codabar"),
 			                true, true, true, false, "ABCDABCDAB", true, 10 );
 
+#if FIXME
+			/* TODO: fix crash, zint-2.4.2 */
 			register_style( "zint:Code1", "zint", _("Code One"), 
 			                false, false, true, false, "0000000000", true, 10 );
+#endif
 
 			register_style( "zint:Code11", "zint", _("Code 11"),
 			                true, true, true, false, "0000000000", true, 10 );
@@ -276,10 +350,10 @@ namespace glabels
 			register_style( "zint:RSS14", "zint", _("GS1 DataBar-14"),
 			                true, true, true, false, "1234567890123", true, 13 );
           
-			register_style( "zint:RSSLTD", "GS1 DataBar-14 Limited", 
+			register_style( "zint:RSSLTD", "zint", "GS1 DataBar-14 Limited", 
 			                true, true, true, false, "1234567890123", true, 13 );
           
-			register_style( "zint:RSSEXP", "GS1 DataBar Extended", 
+			register_style( "zint:RSSEXP", "zint", "GS1 DataBar Extended", 
 			                true, true, true, false, "[01]12345678901234", false, 18 );
           
 			register_style( "zint:RSSS", "zint", _("GS1 DataBar-14 Stacked"),
