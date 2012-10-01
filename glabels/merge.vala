@@ -24,13 +24,10 @@ using GLib;
 namespace glabels
 {
 
-	public enum MergeSrcType { NONE, FIXED, FILE }
-
 	public abstract class Merge : Object
 	{
-		public string       name        { get; construct; }
-		public string       description { get; construct; }
-		public MergeSrcType src_type    { get; protected set; }
+
+		public MergeInfo info { get; construct; }
 
 
 		public unowned List<MergeRecord> record_list
@@ -80,8 +77,6 @@ namespace glabels
 		protected abstract MergeRecord?  get_record();
 		public    abstract Merge         dup();
 
-
-		
 	}
 
 }

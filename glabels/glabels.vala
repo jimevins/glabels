@@ -58,6 +58,7 @@ namespace glabels
 			libglabels.XmlUtil.default_units = libglabels.Units.inch();
 			glbarcode.Factory.init();
 			BarcodeBackends.init();
+			MergeBackends.init();
 
 			Gtk.IconTheme icon_theme = Gtk.IconTheme.get_default();
 			icon_theme.append_search_path( Path.build_filename( Config.DATADIR, Config.GLABELS_BRANCH, "icons", null ) );

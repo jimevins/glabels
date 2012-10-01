@@ -27,12 +27,6 @@ namespace glabels
 	public class MergeNone : Merge
 	{
 
-		public MergeNone()
-		{
-			src_type = MergeSrcType.NONE;
-		}
-
-
 		public override List<string> get_key_list()
 		{
 			return new List<string>();
@@ -63,7 +57,7 @@ namespace glabels
 
 		public override Merge dup()
 		{
-			MergeNone copy = new MergeNone();
+			MergeNone copy = Object.new( get_type(), info: info ) as MergeNone;
 			return copy;
 		}
 		

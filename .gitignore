@@ -66,6 +66,7 @@ glabels-*.tar.gz
 /glabels/glabels-4
 /glabels/barcode_backends/*.c
 /glabels/cursors/cursor_pixdata.h
+/glabels/merge_backends/*.c
 
 /src/marshal.[ch]
 /src/stock-pixmaps/stockpixbufs.h

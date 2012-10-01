@@ -24,10 +24,90 @@ using GLib;
 namespace glabels
 {
 
-	public class MergeText : Merge
+	public class MergeTextCsv : MergeText
 	{
-		public int    delim          { get; construct; default=','; }
-		public bool   line1_has_keys { get; construct; default=false; }
+		static construct
+		{
+			delim          = ',';
+			line1_has_keys = false;
+		}
+	}
+
+
+	public class MergeTextCsvKeys : MergeText
+	{
+		static construct
+		{
+			delim          = ',';
+			line1_has_keys = true;
+		}
+	}
+
+
+	public class MergeTextTsv : MergeText
+	{
+		static construct
+		{
+			delim          = '\t';
+			line1_has_keys = false;
+		}
+	}
+
+
+	public class MergeTextTsvKeys : MergeText
+	{
+		static construct
+		{
+			delim          = '\t';
+			line1_has_keys = true;
+		}
+	}
+
+
+	public class MergeTextColon : MergeText
+	{
+		static construct
+		{
+			delim          = ':';
+			line1_has_keys = false;
+		}
+	}
+
+
+	public class MergeTextColonKeys : MergeText
+	{
+		static construct
+		{
+			delim          = ':';
+			line1_has_keys = true;
+		}
+	}
+
+
+	public class MergeTextSemicolon : MergeText
+	{
+		static construct
+		{
+			delim          = ';';
+			line1_has_keys = false;
+		}
+	}
+
+
+	public class MergeTextSemicolonKeys : MergeText
+	{
+		static construct
+		{
+			delim          = ';';
+			line1_has_keys = true;
+		}
+	}
+
+
+	public abstract class MergeText : Merge
+	{
+		protected static int    delim;
+		protected static bool   line1_has_keys;
 
 
 		private FileStream fp;
@@ -35,17 +115,6 @@ namespace glabels
 		private string[] keys;
 		private int      n_fields_max;
 		
-
-		public MergeText( string name           = "text/csv",
-		                  string description    = "",
-		                  int    delim          = ',',
-		                  bool   line1_has_keys = false )
-		{
-			Object( name:name, description:description, delim:delim, line1_has_keys:line1_has_keys );
-
-			src_type = MergeSrcType.FILE;
-		}
-
 
 		public override List<string> get_key_list()
 		{
@@ -155,7 +224,8 @@ namespace glabels
 
 		public override Merge dup()
 		{
-			MergeText copy = new MergeText();
+			MergeText copy = Object.new( get_type(), info : info ) as MergeText;
+			copy.src = src;
 			return copy;
 		}
 

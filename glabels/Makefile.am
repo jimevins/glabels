@@ -57,11 +57,12 @@ glabels_4_SOURCES = \
 	label_region.vala \
 	label_state.vala \
 	merge.vala \
-	merge_factory.vala \
+	merge_backends.vala \
+	merge_backends/merge_none.vala \
+	merge_backends/merge_text.vala \
 	merge_field.vala \
-	merge_none.vala \
+	merge_info.vala \
 	merge_record.vala \
-	merge_text.vala \
 	message_bar.vala \
 	model.vala \
 	model_clipboard.vala \

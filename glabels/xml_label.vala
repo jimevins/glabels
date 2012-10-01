@@ -595,7 +595,7 @@ namespace glabels
 		private void parse_merge_node( Xml.Node  node,
 		                               Label     label )
 		{
-			Merge merge = MergeFactory.create_merge( XmlUtil.get_prop_string( node, "type", null ) );
+			Merge merge = MergeBackends.create_merge( XmlUtil.get_prop_string( node, "type", null ) );
 
 			merge.src  = XmlUtil.get_prop_string( node, "src", null );
 
@@ -1120,8 +1120,8 @@ namespace glabels
 		{
 			unowned Xml.Node *node = root.new_child( ns, "Merge" );
 
-			XmlUtil.set_prop_string( node, "type", label.merge.name );
-			XmlUtil.set_prop_string( node, "src", label.merge.src );
+			XmlUtil.set_prop_string( node, "type", label.merge.info.id );
+			XmlUtil.set_prop_string( node, "src",  label.merge.src );
 		}
 
 
