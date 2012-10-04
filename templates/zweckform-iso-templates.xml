@@ -212,7 +212,7 @@
       <Markup-line x1="32mm" y1="0mm" x2="32mm" y2="125mm"/>
       <Layout nx="1" ny="1" x0="27.5mm" y0="22mm" dx="155mm" dy="125mm"/>
     </Label-rectangle>
-    <Label-rectangle id="0" width="155mm" height="122mm" round="0">
+    <Label-rectangle id="1" width="155mm" height="122mm" round="0">
       <Markup-margin size="2mm"/>
       <Markup-line x1="8.5mm" y1="0mm" x2="8.5mm" y2="122mm"/>
       <Markup-line x1="146.5mm" y1="0mm" x2="146.5mm" y2="122mm"/>
