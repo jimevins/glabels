@@ -29,7 +29,6 @@ Glabels includes contributions from:
 	Samual Lown <sam.lown@gmail.com>
 	Robin Stuart <robin@zint.org.uk>
 
-
 Glabels includes a modified version of the gimpchainbutton widget from the
 gimp, as well as several stock icons from the gimp's default theme.
 These are copyright:
@@ -172,5 +171,6 @@ particular products (I apologize if I have missed anybody):
 	Marek Černocký
 	Gaz Davidson
 	Manoj Kumar Choudhary
+	Gorden Tabibi
 
 And many others for their many helpful suggestions and bug reports -- thanks.
