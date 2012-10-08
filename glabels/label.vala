@@ -167,6 +167,7 @@ namespace glabels
 				if ( _merge != value )
 				{
 					_merge = value;
+					_merge.changed.connect( on_merge_changed );
 					changed();
 					merge_changed();
 					modified = true;
@@ -204,7 +205,7 @@ namespace glabels
 
 		public Label()
 		{
-			_merge = new MergeNone();
+			_merge = MergeBackends.create_merge( "None" );
 
 			template_history = new TemplateHistory( 5 );
 
@@ -315,6 +316,13 @@ namespace glabels
 		private void on_object_moved()
 		{
 			schedule_or_emit_changed_signal();
+		}
+
+
+		private void on_merge_changed()
+		{
+			changed();
+			merge_changed();
 		}
 
 

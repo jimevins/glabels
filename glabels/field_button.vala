@@ -72,15 +72,22 @@ namespace glabels
 		public void set_keys( List<string> key_list )
 		{
 			menu.set_keys( key_list );
-			key = key_list.first().data;
-			if ( klabel_is_key )
+			if ( key_list.length() > 0 )
 			{
-				klabel.set_text( key );
+				key = key_list.first().data;
+				if ( klabel_is_key )
+				{
+					klabel.set_text( key );
+				}
+
+				menu.show_all();
+
+				set_sensitive( true );
 			}
-
-			menu.show_all();
-
-			set_sensitive( true );
+			else
+			{
+				set_sensitive( false );
+			}
 		}
 
 

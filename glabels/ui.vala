@@ -358,13 +358,6 @@ namespace glabels
 			  N_("Center objects to vertical label center"),
 			  on_objects_center_vert },
 
-			{ "ObjectsMergeProperties",
-			  "glabels-merge",
-			  N_("Merge properties"),
-			  null,
-			  N_("Edit merge properties"),
-			  on_objects_merge_properties },
-
 
 			/* Help actions entries. */
 			{ "HelpContents",
@@ -509,8 +502,6 @@ namespace glabels
 							<menuitem action='ObjectsCenterHorizontal' always-show-image='true' />
 							<menuitem action='ObjectsCenterVertical' always-show-image='true' />
 						</menu>
-						<separator />
-						<menuitem action='ObjectsMergeProperties' />
 					</menu>
 					<menu action='HelpMenu'>
 						<menuitem action='HelpContents' />
@@ -524,10 +515,6 @@ namespace glabels
 					<toolitem action='FileSave' />
 					<separator />
 					<toolitem action='FilePrint' />
-					<separator />
-					<toolitem action='EditCut' />
-					<toolitem action='EditCopy' />
-					<toolitem action='EditPaste' />
 				</toolbar>
 			
 				<toolbar name='DrawingToolBar'>
@@ -545,7 +532,9 @@ namespace glabels
 					<toolitem action='ViewZoom1to1' />
 					<toolitem action='ViewZoomToFit' />
 					<separator />
-					<toolitem action='ObjectsMergeProperties' />
+					<toolitem action='EditCut' />
+					<toolitem action='EditCopy' />
+					<toolitem action='EditPaste' />
 				</toolbar>
 			
 				<popup action='ContextMenu'>
@@ -631,8 +620,7 @@ namespace glabels
 			"/ui/MenuBar/ObjectsMenu/ObjectsAlignMenu/ObjectsAlignVCenter",
 			"/ui/MenuBar/ObjectsMenu/ObjectsCenterMenu",
 			"/ui/MenuBar/ObjectsMenu/ObjectsCenterMenu/ObjectsCenterHorizontal",
-			"/ui/MenuBar/ObjectsMenu/ObjectsCenterMenu/ObjectsCenterVertical",
-			"/ui/MenuBar/ObjectsMenu/ObjectsMergeProperties"
+			"/ui/MenuBar/ObjectsMenu/ObjectsCenterMenu/ObjectsCenterVertical"
 		};
 
 		static string[] doc_modified_verbs = {
@@ -1267,33 +1255,6 @@ namespace glabels
 		private void on_objects_center_vert( Gtk.Action action )
 		{
 			window.model.label.center_selection_vert();
-		}
-
-
-		private void on_objects_merge_properties( Gtk.Action action )
-		{
-			/*
-			if (window->merge_dialog) {
-
-				gtk_window_present (GTK_WINDOW(window->merge_dialog));
-				gtk_window_set_transient_for (GTK_WINDOW (window->merge_dialog),
-				                              GTK_WINDOW (window ));
-
-			} else {
-
-				window->merge_dialog =
-					g_object_ref (
-						gl_merge_properties_dialog_new (GL_VIEW(window->view)->label,
-						                                GTK_WINDOW(window )) );
-
-				g_signal_connect (G_OBJECT(window->merge_dialog), "destroy",
-				                  G_CALLBACK (gtk_widget_destroyed),
-				                  &window->merge_dialog);
-
-				gtk_widget_show (GTK_WIDGET (window->merge_dialog));
-
-			}
-			*/
 		}
 
 

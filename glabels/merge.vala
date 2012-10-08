@@ -27,6 +27,9 @@ namespace glabels
 	public abstract class Merge : Object
 	{
 
+		public signal void changed();
+
+
 		public MergeInfo info { get; construct; }
 
 
@@ -62,6 +65,8 @@ namespace glabels
 						_record_list.append( record );
 					}
 					this.close();
+
+					changed();
 				}
 
 			}

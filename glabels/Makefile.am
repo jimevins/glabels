@@ -62,6 +62,7 @@ glabels_4_SOURCES = \
 	merge_backends/merge_text.vala \
 	merge_field.vala \
 	merge_info.vala \
+	merge_property_editor.vala \
 	merge_record.vala \
 	message_bar.vala \
 	model.vala \
@@ -77,7 +78,6 @@ glabels_4_SOURCES = \
 	prefs.vala \
 	print_op.vala \
 	print_op_dialog.vala \
-	property_editor.vala \
 	svg_cache.vala \
 	template_history.vala \
 	text_line.vala \
