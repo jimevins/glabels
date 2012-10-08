@@ -36,25 +36,30 @@ namespace glabels
 
 		public static unowned List<weak Window> window_list { get; private set; }
 
-		private Gtk.Notebook   notebook;
-
-		public  Model?              model                 { get; private set; }
-		public  View                view                  { get; private set; }
-		public  MergePropertyEditor merge_property_editor { get; private set; }
-		public  MiniPreview         preview               { get; private set; }
-
-		public  Gtk.Statusbar       statusbar             { get; private set; }
-		private Gtk.Label           zoom_info_label;
-		private Gtk.Label           cursor_info_label;
-		public  uint                menu_tips_context_id  { get; private set; }
-
-		private Gtk.Menu            context_menu;
-		private Gtk.Menu            empty_selection_context_menu;
 
 		private Prefs               prefs;
 		private Ui                  ui;
 
+		public  Model?              model                 { get; private set; }
+
+		private Gtk.Notebook        notebook;
+
+		private Gtk.Box             editor_page_box;
+		private Gtk.Box             merge_property_page_box;
+		private Gtk.Box             preview_page_box;
+
+		public  View                view                  { get; private set; }
 		private ObjectEditor        object_editor;
+
+		public  Gtk.Statusbar       statusbar;
+		private Gtk.Label           zoom_info_label;
+		private Gtk.Label           cursor_info_label;
+
+		private Gtk.Menu            context_menu;
+		private Gtk.Menu            empty_selection_context_menu;
+
+		private MergePropertyEditor merge_property_editor;
+		private MiniPreview         preview;
 
 
 		public Window()
@@ -69,28 +74,26 @@ namespace glabels
 			vbox1.pack_start( ui.get_widget( "/MainToolBar" ), false, false, 0 );
 
 			notebook = new Gtk.Notebook();
-			notebook.set_sensitive( false );
 			vbox1.pack_start( notebook );
 
 
-			Gtk.Box editor_page = new Gtk.Box( Gtk.Orientation.VERTICAL, 0 );
-			notebook.append_page( editor_page, new Gtk.Label( _("Editor") ) );
+			editor_page_box = new Gtk.Box( Gtk.Orientation.VERTICAL, 0 );
+			notebook.append_page( editor_page_box, new Gtk.Label( _("Editor") ) );
 
-			editor_page.pack_start( ui.get_widget( "/DrawingToolBar" ), false, false, 0 );
+			editor_page_box.pack_start( ui.get_widget( "/DrawingToolBar" ), false, false, 0 );
 			Gtk.Box hbox1 = new Gtk.Box( Gtk.Orientation.HORIZONTAL, 0 );
 			hbox1.set_hexpand( true );
-			editor_page.pack_start( hbox1, true, true, 0 );
+			editor_page_box.pack_start( hbox1, true, true, 0 );
 
 			view = new View();
 			hbox1.pack_start( view, true, true, 0 );
-			view.show_all();
 
 			object_editor = new ObjectEditor();
 			object_editor.set_hexpand( false );
 			hbox1.pack_end( object_editor, false, false, 0 );
 
 			Gtk.Box status_hbox = new Gtk.Box( Gtk.Orientation.HORIZONTAL, 0 );
-			editor_page.pack_start( status_hbox, false, false, 0 );
+			editor_page_box.pack_start( status_hbox, false, false, 0 );
 
 			statusbar = new Gtk.Statusbar();
 			status_hbox.pack_start( statusbar, true, true, 0 );
@@ -101,7 +104,6 @@ namespace glabels
 			Gtk.Frame zoom_info_frame = new Gtk.Frame( null );
 			zoom_info_frame.set_shadow_type( Gtk.ShadowType.IN );
 			zoom_info_frame.add( zoom_info_label );
-			zoom_info_frame.show_all();
 			status_hbox.pack_end( zoom_info_frame, false, false, 0 );
 
 			cursor_info_label = new Gtk.Label( null );
@@ -110,33 +112,33 @@ namespace glabels
 			Gtk.Frame cursor_info_frame = new Gtk.Frame( null );
 			cursor_info_frame.set_shadow_type( Gtk.ShadowType.IN );
 			cursor_info_frame.add( cursor_info_label );
-			cursor_info_frame.show_all();
 			status_hbox.pack_end( cursor_info_frame, false, false, 0 );
 
 			this.set_default_size( DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT );
 
 			this.delete_event.connect( on_delete_event );
 
-			menu_tips_context_id = statusbar.get_context_id( "menu_tips" );
-
 			context_menu = (Gtk.Menu)ui.get_widget( "/ContextMenu" );
 			empty_selection_context_menu = (Gtk.Menu)ui.get_widget( "/EmptySelectionContextMenu" );
 
 
-			Gtk.Box merge_property_page = new Gtk.Box( Gtk.Orientation.VERTICAL, 0 );
-			notebook.append_page( merge_property_page, new Gtk.Label( _("Merge") ) );
+			merge_property_page_box = new Gtk.Box( Gtk.Orientation.VERTICAL, 0 );
+			notebook.append_page( merge_property_page_box, new Gtk.Label( _("Merge") ) );
 
 			merge_property_editor = new MergePropertyEditor();
-			merge_property_page.pack_start( merge_property_editor, true, true, 0 );
+			merge_property_page_box.pack_start( merge_property_editor, true, true, 0 );
 			
 
-			Gtk.Box preview_page = new Gtk.Box( Gtk.Orientation.VERTICAL, 0 );
-			notebook.append_page( preview_page, new Gtk.Label( _("Preview") ) );
+			preview_page_box = new Gtk.Box( Gtk.Orientation.VERTICAL, 0 );
+			notebook.append_page( preview_page_box, new Gtk.Label( _("Preview") ) );
 
 			preview = new MiniPreview( 280, 420 );
-			preview.show_all();
-			preview_page.pack_start( preview, true, true, 0 );
-			
+			preview_page_box.pack_start( preview, true, true, 0 );
+
+
+			notebook.no_show_all = true;
+			notebook.hide();
+
 
 			window_list.append( this );
 		}
@@ -209,7 +211,10 @@ namespace glabels
 			view.pointer_exit.connect( on_pointer_exit );
 			this.set_focus.connect( on_set_focus );
 
-			notebook.set_sensitive( true );
+			notebook.show();
+			editor_page_box.show_all();
+			merge_property_page_box.show_all();
+			preview_page_box.show_all();
 
 			/* TODO: clipboard changed. */
 			/* TODO: set copy/paste sensitivity. */

@@ -858,18 +858,11 @@ namespace glabels
 		{
 			Gtk.Action? action = proxy.get_data( "gtk-action" );
 			return_if_fail( action != null );
-	
-			string? message = action.get_data( "tooltip" );
-			if ( message != null )
-			{
-				window.statusbar.push( window.menu_tips_context_id, message );
-			}
 		}
 
 
 		private void on_menu_item_deselect( Gtk.MenuItem proxy )
 		{
-			window.statusbar.pop( window.menu_tips_context_id );
 		}
 
 
