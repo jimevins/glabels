@@ -40,6 +40,9 @@ namespace glabels
 
 		private ColorSwatch    swatch;
 		private Gtk.Label      key_label;
+
+		private Gtk.SizeGroup  size_group;
+
 		private ColorMenu      menu;
 
 
@@ -56,11 +59,19 @@ namespace glabels
 			this.add( hbox );
 
 			swatch = new ColorSwatch( SWATCH_W, SWATCH_H, color );
+			swatch.no_show_all = true;
 			hbox.pack_start( swatch, true, true, 0 );
 
 			key_label = new Gtk.Label( "" );
+			key_label.no_show_all = true;
 			key_label.hide();
 			hbox.pack_start( key_label, true, true, 0 );
+
+			/* Lock height of swatch and key_label together. */
+			size_group = new SizeGroup( SizeGroupMode.VERTICAL );
+			size_group.ignore_hidden = false;
+			size_group.add_widget( swatch );
+			size_group.add_widget( key_label );
 
 			Gtk.Arrow arrow = new Gtk.Arrow( Gtk.ArrowType.DOWN, Gtk.ShadowType.IN );
 			hbox.pack_end( arrow, false, false, 0 );
