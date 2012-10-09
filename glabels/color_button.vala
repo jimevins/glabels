@@ -96,6 +96,17 @@ namespace glabels
 
 			this.color_node = color_node;
 
+			if ( color_node.field_flag )
+			{
+				swatch.hide();
+				key_label.show();
+			}
+			else
+			{
+				swatch.show();
+				key_label.hide();
+			}
+
 			swatch.set_color( color_node.color );
 		}
 
@@ -104,9 +115,12 @@ namespace glabels
 		{
 			is_default_flag = false;
 
-			this.color_node.field_flag = false;
-			this.color_node.color      = color;
-			this.color_node.key        = null;
+			color_node.field_flag = false;
+			color_node.color      = color;
+			color_node.key        = null;
+
+			swatch.show();
+			key_label.hide();
 
 			swatch.set_color( color );
 		}
@@ -119,6 +133,9 @@ namespace glabels
 			color_node.field_flag = false;
 			color_node.color      = default_color;
 			color_node.key        = null;
+
+			swatch.show();
+			key_label.hide();
 
 			swatch.set_color( default_color );
 		}
