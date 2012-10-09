@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkSizeGroup" id="source_sizegroup">
+    <property name="mode">vertical</property>
+    <widgets>
+      <widget name="type_combo"/>
+      <widget name="location_na_label"/>
+      <widget name="location_fixed_label"/>
+      <widget name="location_file_button"/>
+    </widgets>
+  </object>
   <object class="GtkWindow" id="window1">
     <property name="can_focus">False</property>
     <child>
@@ -174,6 +183,7 @@
                             <property name="can_focus">True</property>
                             <property name="vexpand">True</property>
                             <property name="rules_hint">True</property>
+                            <property name="enable_grid_lines">both</property>
                             <child internal-child="selection">
                               <object class="GtkTreeSelection" id="treeview-selection1">
                                 <property name="mode">none</property>

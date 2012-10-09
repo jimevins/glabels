@@ -27,10 +27,10 @@ namespace glabels
 	public class MergePropertyEditor : Gtk.Box
 	{
 		private const int SELECT_COLUMN       = 0;
-		private const int RECORD_FIELD_COLUMN = 1;
-		private const int VALUE_COLUMN        = 2;
-		private const int IS_RECORD_COLUMN    = 3;
-		private const int DATA_COLUMN         = 4;
+		private const int DATA_COLUMN         = 1;
+		private const int FIRST_FIELD_COLUMN  = 2;
+
+		private Gee.HashMap<string,int> column_map;
 
 
 		private Model model;
@@ -46,7 +46,7 @@ namespace glabels
 		private Gtk.Button            unselect_all_button;
 
 		/* Treeview Model */
-		private Gtk.TreeStore         tree_store;
+		private Gtk.ListStore         list_store;
 
 
 		/* Signal IDs */
@@ -56,6 +56,8 @@ namespace glabels
 
 		public MergePropertyEditor()
 		{
+			column_map = new Gee.HashMap<string,int>();
+
 			/* Load the user interface. */
 			Gtk.Builder builder = new Gtk.Builder();
 			try
@@ -63,6 +65,7 @@ namespace glabels
 				string file = GLib.Path.build_filename( Config.DATADIR, Config.GLABELS_BRANCH,
 				                                        "ui", "merge_property_editor.ui" );
 				string[] objects = { "merge_property_editor_box",
+				                     "source_sizegroup",
 				                     null };
 				builder.add_objects_from_file( file, objects );
 			}
@@ -87,45 +90,10 @@ namespace glabels
 				type_combo.append_text( name );
 			}
 
-			tree_store   = new Gtk.TreeStore( 5,
-			                                  /* 0 : SELECT_COLUMN */       typeof(bool),
-			                                  /* 1 : RECORD_FIELD_COLUMN */ typeof(string),
-			                                  /* 2 : VALUE_COLUMN */        typeof(string),
-			                                  /* 3 : IS_RECORD_COLUMN */    typeof(bool),
-			                                  /* 4 : DATA_COLUMN */         typeof(void*) );
-			records_treeview.set_model( tree_store );
-
-			Gtk.CellRendererToggle record_select_renderer = new Gtk.CellRendererToggle();
-			Gtk.TreeViewColumn     record_select_column   = new Gtk.TreeViewColumn.with_attributes( _("Select"),
-				                  record_select_renderer,
-				                  "active", 0, "visible", 3, null );
-			records_treeview.append_column( record_select_column );
-
-			Gtk.CellRendererText   record_field_renderer = new Gtk.CellRendererText();
-			Gtk.TreeViewColumn     record_field_column   = new Gtk.TreeViewColumn.with_attributes( _("Record/Field"),
-				                 record_field_renderer,
-				                 "text", 1, null );
-			records_treeview.append_column( record_field_column );
-
-			Gtk.CellRendererText   field_value_renderer = new Gtk.CellRendererText();
-			Gtk.TreeViewColumn     field_value_column   = new Gtk.TreeViewColumn.with_attributes( _("Value"),
-				                field_value_renderer,
-				                "text", 2, null );
-			records_treeview.append_column( field_value_column );
-
-			record_field_renderer.yalign = 0;
-			field_value_renderer.yalign  = 0;
-
-			record_field_column.set_sizing( Gtk.TreeViewColumnSizing.AUTOSIZE );
-			field_value_column.set_sizing( Gtk.TreeViewColumnSizing.AUTOSIZE );
-
-			records_treeview.set_expander_column( record_field_column );
-
 			sigid_type_combo_changed =
 				type_combo.changed.connect( on_type_combo_changed );
 			sigid_location_file_button_selection_changed =
 				location_file_button.file_set.connect( on_location_file_button_selection_changed );
-			record_select_renderer.toggled.connect( on_record_select_toggled );
 			select_all_button.clicked.connect( on_select_all_button_clicked );
 			unselect_all_button.clicked.connect( on_unselect_all_button_clicked );
 		}
@@ -163,50 +131,120 @@ namespace glabels
 				location_fixed_label.hide();
 				location_file_button.show();
 
+				GLib.SignalHandler.block( (void *)location_file_button, sigid_location_file_button_selection_changed );
 				if ( model.label.merge.src != null )
 				{
-					GLib.SignalHandler.block( (void *)location_file_button, sigid_location_file_button_selection_changed );
 					location_file_button.set_filename( model.label.merge.src );
-					GLib.SignalHandler.unblock( (void *)location_file_button, sigid_location_file_button_selection_changed );
 				}
+				else
+				{
+					location_file_button.unselect_all();
+				}
+				GLib.SignalHandler.unblock( (void *)location_file_button, sigid_location_file_button_selection_changed );
 				break;
 			default:
 				assert_not_reached();
 			}
 
-			load_tree( tree_store, model.label.merge );
+			load_new_column_set( model.label.merge );
+			load_tree( model.label.merge );
 		}
 
 
-		private void load_tree( Gtk.TreeStore store, Merge merge )
+		private void load_new_column_set( Merge merge )
 		{
-			store.clear();
-
-			string primary_key = merge.get_primary_key();
-
-			foreach ( MergeRecord record in merge.record_list )
+			/* Remove old columns from view. */
+			foreach ( Gtk.TreeViewColumn column in records_treeview.get_columns() )
 			{
-				string primary_value = record.eval_key( primary_key );
+				records_treeview.remove_column( column );
+			}
 
-				Gtk.TreeIter iter1;
-				store.append( out iter1, null );
-				store.set( iter1,
-				           SELECT_COLUMN,       record.selected,
-				           RECORD_FIELD_COLUMN, primary_value,
-				           IS_RECORD_COLUMN,    true,
-				           DATA_COLUMN,         record );
+			/* Initialize types array with fixed column types */
+			Type[] types = { typeof(bool), typeof(void*) };
 
-				foreach ( MergeField field in record.field_list )
+
+			/* Append field column types.  Build key to column map. */
+			column_map.clear();
+			int key_index = FIRST_FIELD_COLUMN;
+
+			/* Make primary key first field column */
+			string primary_key = merge.get_primary_key();
+			types += typeof(string);
+			column_map.set( primary_key, key_index++ );
+
+			/* Now the rest. */
+			foreach ( string key in merge.get_key_list() )
+			{
+				if ( key != primary_key )
 				{
-					Gtk.TreeIter iter2;
-					store.append( out iter2, iter1 );
-					store.set( iter2,
-					           RECORD_FIELD_COLUMN, field.key,
-					           VALUE_COLUMN,        field.value,
-					           IS_RECORD_COLUMN,    false );
+					types += typeof(string);
+					column_map.set( key, key_index++ );
 				}
 			}
 
+
+			/* Create new model for these types. */
+			list_store = new Gtk.ListStore.newv( types );
+			records_treeview.set_model( list_store );
+
+
+			/* Add Select column to view. */
+			Gtk.CellRendererToggle record_select_renderer = new Gtk.CellRendererToggle();
+			Gtk.TreeViewColumn     record_select_column   = new Gtk.TreeViewColumn.with_attributes( "",
+				                  record_select_renderer,
+				                  "active", 0, null );
+			records_treeview.append_column( record_select_column );
+
+			record_select_renderer.toggled.connect( on_record_select_toggled );
+
+
+			/* Add Field value columns to view. */
+			foreach ( string key in merge.get_key_list() )
+			{
+				Gtk.CellRendererText field_value_renderer = new Gtk.CellRendererText();
+				field_value_renderer.yalign  = 0;
+				Gtk.TreeViewColumn field_value_column = new Gtk.TreeViewColumn.with_attributes( "${%s}".printf(key),
+					          field_value_renderer,
+					          "text", column_map.get(key), null );
+				field_value_column.set_sizing( Gtk.TreeViewColumnSizing.AUTOSIZE );
+				field_value_column.set_alignment( 0.5f );
+
+				records_treeview.append_column( field_value_column );
+			}
+
+			/* Add an empty column to view. (Bounds last column for a better visual appearance.) */
+			Gtk.TreeViewColumn empty_column = new Gtk.TreeViewColumn();
+			records_treeview.append_column( empty_column );
+
+		}
+
+
+		private void load_tree( Merge merge )
+		{
+			list_store.clear();
+
+			bool empty_record_list = true;
+
+			foreach ( MergeRecord record in merge.record_list )
+			{
+				empty_record_list = false;
+
+				Gtk.TreeIter iter;
+				list_store.append( out iter );
+
+				list_store.set( iter,
+				                SELECT_COLUMN, record.selected,
+				                DATA_COLUMN,   record );
+
+				foreach ( MergeField field in record.field_list )
+				{
+					list_store.set( iter,
+					                column_map.get(field.key), field.value );
+				}
+			}
+
+			select_all_button.set_sensitive( !empty_record_list );
+			unselect_all_button.set_sensitive( !empty_record_list );
 		}
 
 
@@ -230,17 +268,17 @@ namespace glabels
 			/* get toggled iter */
 			Gtk.TreePath path = new Gtk.TreePath.from_string( path_str );
 			Gtk.TreeIter iter;
-			tree_store.get_iter( out iter, path );
+			list_store.get_iter( out iter, path );
 
 			/* get current data */
 			unowned MergeRecord record;
-			tree_store.get( iter, DATA_COLUMN, out record );
+			list_store.get( iter, DATA_COLUMN, out record );
 
 			/* toggle the select flag within the record */
 			record.selected = !record.selected;
 
 			/* set new value in store */
-			tree_store.set( iter, SELECT_COLUMN, record.selected );
+			list_store.set( iter, SELECT_COLUMN, record.selected );
 		}
 
 
@@ -248,19 +286,19 @@ namespace glabels
 		{
 			Gtk.TreeIter iter;
 
-			for ( bool good = tree_store.get_iter_first( out iter );
+			for ( bool good = list_store.get_iter_first( out iter );
 			      good;
-			      good = tree_store.iter_next( ref iter ) )
+			      good = list_store.iter_next( ref iter ) )
 			{
 				/* get current data */
 				unowned MergeRecord record;
-				tree_store.get( iter, DATA_COLUMN, out record );
+				list_store.get( iter, DATA_COLUMN, out record );
 
 				/* set select flag within the record */
 				record.selected = true;
 
 				/* set new value in store */
-				tree_store.set( iter, SELECT_COLUMN, record.selected );
+				list_store.set( iter, SELECT_COLUMN, record.selected );
 			}
 		}
 
@@ -269,19 +307,19 @@ namespace glabels
 		{
 			Gtk.TreeIter iter;
 
-			for ( bool good = tree_store.get_iter_first( out iter );
+			for ( bool good = list_store.get_iter_first( out iter );
 			      good;
-			      good = tree_store.iter_next( ref iter ) )
+			      good = list_store.iter_next( ref iter ) )
 			{
 				/* get current data */
 				unowned MergeRecord record;
-				tree_store.get( iter, DATA_COLUMN, out record );
+				list_store.get( iter, DATA_COLUMN, out record );
 
 				/* clear select flag within the record */
 				record.selected = false;
 
 				/* set new value in store */
-				tree_store.set( iter, SELECT_COLUMN, record.selected );
+				list_store.set( iter, SELECT_COLUMN, record.selected );
 			}
 		}
 
