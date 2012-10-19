@@ -140,6 +140,8 @@ namespace glabels
 		private ulong sigid_text_line_spacing_spin_changed;
 		private ulong sigid_text_insert_field_button_key_selected;
 
+		private ulong sigid_image_file_radio_toggled;
+		private ulong sigid_image_key_radio_toggled;
 		private ulong sigid_image_filebutton_selection_changed;
 		private ulong sigid_image_key_button_changed;
 
@@ -147,6 +149,8 @@ namespace glabels
 		private ulong sigid_bc_show_text_check_toggled;
 		private ulong sigid_bc_checksum_check_toggled;
 		private ulong sigid_bc_color_button_changed;
+		private ulong sigid_bc_literal_radio_toggled;
+		private ulong sigid_bc_key_radio_toggled;
 		private ulong sigid_bc_data_textbuffer_changed;
 		private ulong sigid_bc_key_button_changed;
 		private ulong sigid_bc_digits_spin_changed;
@@ -285,6 +289,8 @@ namespace glabels
 			image_key_button = new FieldButton( null );
 			image_key_box.pack_start( image_key_button, true, true, 0 );
 
+			sigid_image_file_radio_toggled = image_file_radio.toggled.connect( on_image_file_radio_toggled );
+			sigid_image_key_radio_toggled = image_key_radio.toggled.connect( on_image_key_radio_toggled );
 			sigid_image_filebutton_selection_changed =
 				image_filebutton.selection_changed.connect( on_image_filebutton_selection_changed );
 			sigid_image_key_button_changed = image_key_button.changed.connect( on_image_key_button_changed );
@@ -322,6 +328,8 @@ namespace glabels
 			sigid_bc_checksum_check_toggled =
 				bc_checksum_check.toggled.connect( on_bc_checksum_check_toggled );
 			sigid_bc_color_button_changed = bc_color_button.color_changed.connect( on_bc_color_button_changed );
+			sigid_bc_literal_radio_toggled = bc_literal_radio.toggled.connect( on_bc_literal_radio_toggled );
+			sigid_bc_key_radio_toggled = bc_key_radio.toggled.connect( on_bc_key_radio_toggled );
 			sigid_bc_data_textbuffer_changed = bc_data_textbuffer.changed.connect( on_bc_data_textbuffer_changed );
 			sigid_bc_key_button_changed = bc_key_button.changed.connect( on_bc_key_button_changed );
 			sigid_bc_digits_spin_changed = bc_digits_spin.value_changed.connect( on_bc_digits_spin_changed );
@@ -489,7 +497,7 @@ namespace glabels
 				if ( object is LabelObjectText )
 				{
 					title_image.set_from_icon_name( "glabels-text", Gtk.IconSize.LARGE_TOOLBAR );
-					title_label.set_text( "<b>%s</b>".printf( _("Text object properties") ) );
+					title_label.set_markup( "<b>%s</b>".printf( _("Text object properties") ) );
 
 					text_page_box.show_all();
 					image_page_box.hide();
@@ -504,7 +512,7 @@ namespace glabels
 				else if ( object is LabelObjectBox )
 				{
 					title_image.set_from_icon_name( "glabels-box", Gtk.IconSize.LARGE_TOOLBAR );
-					title_label.set_text( "<b>%s</b>".printf( _("Box object properties") ) );
+					title_label.set_markup( "<b>%s</b>".printf( _("Box object properties") ) );
 
 					text_page_box.hide();
 					image_page_box.hide();
@@ -519,7 +527,7 @@ namespace glabels
 				else if ( object is LabelObjectEllipse )
 				{
 					title_image.set_from_icon_name( "glabels-ellipse", Gtk.IconSize.LARGE_TOOLBAR );
-					title_label.set_text( "<b>%s</b>".printf( _("Ellipse object properties") ) );
+					title_label.set_markup( "<b>%s</b>".printf( _("Ellipse object properties") ) );
 
 					text_page_box.hide();
 					image_page_box.hide();
@@ -534,7 +542,7 @@ namespace glabels
 				else if ( object is LabelObjectLine )
 				{
 					title_image.set_from_icon_name( "glabels-line", Gtk.IconSize.LARGE_TOOLBAR );
-					title_label.set_text( "<b>%s</b>".printf( _("Line object properties") ) );
+					title_label.set_markup( "<b>%s</b>".printf( _("Line object properties") ) );
 
 					text_page_box.hide();
 					image_page_box.hide();
@@ -550,7 +558,7 @@ namespace glabels
 				else if ( object is LabelObjectImage )
 				{
 					title_image.set_from_icon_name( "glabels-image", Gtk.IconSize.LARGE_TOOLBAR );
-					title_label.set_text( "<b>%s</b>".printf( _("Image object properties") ) );
+					title_label.set_markup( "<b>%s</b>".printf( _("Image object properties") ) );
 
 					text_page_box.hide();
 					image_page_box.show_all();
@@ -565,7 +573,7 @@ namespace glabels
 				else if ( object is LabelObjectBarcode )
 				{
 					title_image.set_from_icon_name( "glabels-barcode", Gtk.IconSize.LARGE_TOOLBAR );
-					title_label.set_text( "<b>%s</b>".printf( _("Barcode object properties") ) );
+					title_label.set_markup( "<b>%s</b>".printf( _("Barcode object properties") ) );
 
 					text_page_box.hide();
 					image_page_box.hide();
@@ -593,14 +601,13 @@ namespace glabels
 				load_text_valign_toggles();
 				load_text_line_spacing_spin();
 				load_text_textview();
-				load_image_filebutton();
-				load_image_key_button();
+				load_image_file_widgets();
 				load_bc_menu_button();
 				load_bc_show_text_check();
 				load_bc_checksum_check();
 				load_bc_color_button();
-				load_bc_data_textbuffer();
-				load_bc_key_button();
+				load_bc_data_widgets();
+				load_bc_format_label();
 				load_bc_digits_spin();
 				load_line_width_spin();
 				load_line_color_button();
@@ -618,7 +625,6 @@ namespace glabels
 				load_shadow_opacity_spin();
 
 				title_image.set_sensitive( true );
-				title_label.set_use_markup( true );
 				title_label.set_sensitive( true );
 					
 				notebook.show();
@@ -631,10 +637,9 @@ namespace glabels
 				object = null;
 
 				title_image.set_from_icon_name( "glabels-object-properties", Gtk.IconSize.LARGE_TOOLBAR );
-				title_image.set_sensitive( false );
+				title_label.set_markup( "<b>%s</b>".printf( _("Object properties") ) );
 
-				title_label.set_text( "<b>%s</b>".printf( _("Object properties") ) );
-				title_label.set_use_markup( true );
+				title_image.set_sensitive( false );
 				title_label.set_sensitive( false );
 
 				notebook.hide();
@@ -669,17 +674,11 @@ namespace glabels
 				text_color_button.clear_keys();
 				text_insert_field_button.clear_keys();
 				image_key_button.clear_keys();
+				bc_color_button.clear_keys();
 				bc_key_button.clear_keys();
 				line_color_button.clear_keys();
 				fill_color_button.clear_keys();
 				shadow_color_button.clear_keys();
-
-				image_file_radio.set_active( true );
-				image_key_radio.set_sensitive( false );
-
-				bc_literal_radio.set_active( true );
-				bc_key_radio.set_sensitive( false );
-				bc_key_grid.set_sensitive( false );
 			}
 			else
 			{
@@ -687,14 +686,15 @@ namespace glabels
 				text_color_button.set_keys( key_list );
 				text_insert_field_button.set_keys( key_list );
 				image_key_button.set_keys( key_list );
+				bc_color_button.set_keys( key_list );
+				bc_key_button.set_keys( key_list );
 				line_color_button.set_keys( key_list );
 				fill_color_button.set_keys( key_list );
 				shadow_color_button.set_keys( key_list );
-
-				image_key_radio.set_sensitive( true );
-				bc_key_radio.set_sensitive( true );
-				bc_key_grid.set_sensitive( true );
 			}
+
+			load_bc_data_widgets();
+			load_image_file_widgets();
 		}
 
 
@@ -716,13 +716,20 @@ namespace glabels
 			{
 				load_size_w_spin();
 				load_size_h_spin();
+			}
 
-				if ( object is LabelObjectBarcode )
-				{
-					load_bc_show_text_check();
-					load_bc_checksum_check();
-					load_bc_digits_spin();
-				}
+			if ( object is LabelObjectBarcode )
+			{
+				load_bc_show_text_check();
+				load_bc_checksum_check();
+				load_bc_data_widgets();
+				load_bc_format_label();
+				load_bc_digits_spin();
+			}
+
+			if ( object is LabelObjectImage )
+			{
+				load_image_file_widgets();
 			}
 		}
 
@@ -1106,8 +1113,27 @@ namespace glabels
 
 
 		/******************************
-		 * image_filebutton
+		 * image_* file widgets
 		 ******************************/
+		private void on_image_file_radio_toggled()
+		{
+			if ( image_file_radio.get_active() && (object != null) )
+			{
+				string filename = image_filebutton.get_filename();
+				object.filename_node = new TextNode( false, filename );
+			}
+		}
+
+
+		private void on_image_key_radio_toggled()
+		{
+			if ( image_key_radio.get_active() && (object != null) )
+			{
+				object.filename_node = new TextNode( true, image_key_button.get_key() );
+			}
+		}
+
+
 		private void on_image_filebutton_selection_changed()
 		{
 			if ( object != null )
@@ -1120,34 +1146,7 @@ namespace glabels
 			}
 		}
 
-		private void load_image_filebutton()
-		{
-			if ( (object != null) && (object.filename_node != null) )
-			{
-				if ( !object.filename_node.field_flag )
-				{
-					image_file_radio.set_active( true );
 
-					GLib.SignalHandler.block( (void*)image_filebutton, sigid_image_filebutton_selection_changed );
-
-					if ( object.filename_node.data != null )
-					{
-						image_filebutton.set_filename( object.filename_node.data );
-					}
-					else
-					{
-						image_filebutton.unselect_all();
-					}
-
-					GLib.SignalHandler.unblock( (void*)image_filebutton, sigid_image_filebutton_selection_changed );
-				}
-			}
-		}
-
-
-		/******************************
-		 * image_key_button
-		 ******************************/
 		private void on_image_key_button_changed()
 		{
 			if ( object != null )
@@ -1156,19 +1155,59 @@ namespace glabels
 			}
 		}
 
-		private void load_image_key_button()
+
+		private void load_image_file_widgets()
 		{
-			if ( (object != null) && (object.filename_node != null) )
+			if ( (object != null) && object is LabelObjectImage )
 			{
-				if ( object.filename_node.field_flag )
+				image_key_radio.set_sensitive( !(object.parent.merge is MergeNone) );
+
+				if ( object.filename_node == null )
 				{
-					image_key_radio.set_active( true );
+					image_filebutton.set_sensitive( true );
+					image_key_button.set_sensitive( false );
+					image_file_radio.set_active( true );
+				}
+				else
+				{
 
-					GLib.SignalHandler.block( (void*)image_key_button, sigid_image_key_button_changed );
+					image_filebutton.set_sensitive( !object.filename_node.field_flag );
+					image_key_button.set_sensitive( !(object.parent.merge is MergeNone) && object.filename_node.field_flag );
 
-					image_key_button.set_key( object.filename_node.data );
+					if ( object.filename_node.field_flag )
+					{
+						GLib.SignalHandler.block( (void*)image_file_radio, sigid_image_file_radio_toggled );
+						GLib.SignalHandler.block( (void*)image_key_radio, sigid_image_key_radio_toggled );
+						image_key_radio.set_active( true );
+						GLib.SignalHandler.unblock( (void*)image_file_radio, sigid_image_file_radio_toggled );
+						GLib.SignalHandler.unblock( (void*)image_key_radio, sigid_image_key_radio_toggled );
 
-					GLib.SignalHandler.unblock( (void*)image_key_button, sigid_image_key_button_changed );
+						GLib.SignalHandler.block( (void*)image_key_button, sigid_image_key_button_changed );
+						image_key_button.set_key( object.filename_node.data );
+						GLib.SignalHandler.unblock( (void*)image_key_button, sigid_image_key_button_changed );
+					}
+					else
+					{
+						GLib.SignalHandler.block( (void*)image_file_radio, sigid_image_file_radio_toggled );
+						GLib.SignalHandler.block( (void*)image_key_radio, sigid_image_key_radio_toggled );
+						image_file_radio.set_active( true );
+						GLib.SignalHandler.unblock( (void*)image_file_radio, sigid_image_file_radio_toggled );
+						GLib.SignalHandler.unblock( (void*)image_key_radio, sigid_image_key_radio_toggled );
+
+						GLib.SignalHandler.block( (void*)image_filebutton, sigid_image_filebutton_selection_changed );
+
+						if ( object.filename_node.data != null )
+						{
+							image_filebutton.set_filename( object.filename_node.data );
+						}
+						else
+						{
+							image_filebutton.unselect_all();
+						}
+
+						GLib.SignalHandler.unblock( (void*)image_filebutton, sigid_image_filebutton_selection_changed );
+					}
+
 				}
 			}
 		}
@@ -1276,8 +1315,30 @@ namespace glabels
 
 
 		/******************************
-		 * bc_data_textbuffer
+		 * bc_* data widgets
 		 ******************************/
+		private void on_bc_literal_radio_toggled()
+		{
+			if ( bc_literal_radio.get_active() && (object != null) )
+			{
+				Gtk.TextIter start, end;
+
+				bc_data_textbuffer.get_bounds( out start, out end );
+
+				object.bc_data_node = new TextNode( false, bc_data_textbuffer.get_text( start, end, false ) );
+			}
+		}
+
+
+		private void on_bc_key_radio_toggled()
+		{
+			if ( bc_key_radio.get_active() && (object != null) )
+			{
+				object.bc_data_node = new TextNode( true, bc_key_button.get_key() );
+			}
+		}
+
+
 		private void on_bc_data_textbuffer_changed()
 		{
 			if ( object != null )
@@ -1291,27 +1352,6 @@ namespace glabels
 		}
 
 
-		private void load_bc_data_textbuffer()
-		{
-			if ( (object != null) && object is LabelObjectBarcode )
-			{
-				if ( !object.bc_data_node.field_flag )
-				{
-					bc_literal_radio.set_active( true );
-
-					GLib.SignalHandler.block( (void*)bc_data_textbuffer, sigid_bc_data_textbuffer_changed );
-
-					bc_data_textbuffer.set_text( object.bc_data_node.data );
-
-					GLib.SignalHandler.unblock( (void*)bc_data_textbuffer, sigid_bc_data_textbuffer_changed );
-				}
-			}
-		}
-
-
-		/******************************
-		 * bc_key_button
-		 ******************************/
 		private void on_bc_key_button_changed()
 		{
 			if ( object != null )
@@ -1320,20 +1360,53 @@ namespace glabels
 			}
 		}
 
-		private void load_bc_key_button()
+
+		private void load_bc_data_widgets()
 		{
 			if ( (object != null) && object is LabelObjectBarcode )
 			{
+				bc_data_textview.set_sensitive( !object.bc_data_node.field_flag );
+				bc_key_button.set_sensitive( !(object.parent.merge is MergeNone) && object.bc_data_node.field_flag );
+				bc_key_grid.set_sensitive( !(object.parent.merge is MergeNone) && object.bc_data_node.field_flag );
+
+				bc_key_radio.set_sensitive( !(object.parent.merge is MergeNone) );
+
 				if ( object.bc_data_node.field_flag )
 				{
+					GLib.SignalHandler.block( (void*)bc_literal_radio, sigid_bc_literal_radio_toggled );
+					GLib.SignalHandler.block( (void*)bc_key_radio, sigid_bc_key_radio_toggled );
 					bc_key_radio.set_active( true );
+					GLib.SignalHandler.unblock( (void*)bc_literal_radio, sigid_bc_literal_radio_toggled );
+					GLib.SignalHandler.unblock( (void*)bc_key_radio, sigid_bc_key_radio_toggled );
 
 					GLib.SignalHandler.block( (void*)bc_key_button, sigid_bc_key_button_changed );
-
 					bc_key_button.set_key( object.bc_data_node.data );
-
 					GLib.SignalHandler.unblock( (void*)bc_key_button, sigid_bc_key_button_changed );
 				}
+				else
+				{
+					GLib.SignalHandler.block( (void*)bc_literal_radio, sigid_bc_literal_radio_toggled );
+					GLib.SignalHandler.block( (void*)bc_key_radio, sigid_bc_key_radio_toggled );
+					bc_literal_radio.set_active( true );
+					GLib.SignalHandler.unblock( (void*)bc_literal_radio, sigid_bc_literal_radio_toggled );
+					GLib.SignalHandler.unblock( (void*)bc_key_radio, sigid_bc_key_radio_toggled );
+
+					GLib.SignalHandler.block( (void*)bc_data_textbuffer, sigid_bc_data_textbuffer_changed );
+					bc_data_textbuffer.set_text( object.bc_data_node.data );
+					GLib.SignalHandler.unblock( (void*)bc_data_textbuffer, sigid_bc_data_textbuffer_changed );
+				}
+			}
+		}
+
+
+		/******************************
+		 * bc_format_label
+		 ******************************/
+		private void load_bc_format_label()
+		{
+			if ( (object != null) && object is LabelObjectBarcode )
+			{
+				bc_format_label.set_label( object.bc_style.get_example_digits( object.bc_format_digits ) );
 			}
 		}
 
@@ -1346,8 +1419,6 @@ namespace glabels
 			if ( object != null )
 			{
 				object.bc_format_digits = bc_digits_spin.get_value_as_int();
-
-				/* TODO: load format label. */
 			}
 		}
 
@@ -1356,12 +1427,10 @@ namespace glabels
 		{
 			if ( (object != null) && object is LabelObjectBarcode )
 			{
+				bc_digits_spin.set_sensitive( object.bc_style.can_freeform );
+
 				GLib.SignalHandler.block( (void*)bc_digits_spin, sigid_bc_digits_spin_changed );
-
 				bc_digits_spin.set_value( object.bc_format_digits );
-
-				/* TODO: load format label. */
-
 				GLib.SignalHandler.unblock( (void*)bc_digits_spin, sigid_bc_digits_spin_changed );
 			}
 		}

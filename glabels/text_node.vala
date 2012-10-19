@@ -26,11 +26,11 @@ namespace glabels
 
 	public class TextNode
 	{
-		public  bool   field_flag { get; private set; }
-		public  string data       { get; private set; }
+		public  bool    field_flag { get; private set; }
+		public  string? data       { get; private set; }
 
 
-		public TextNode( bool field_flag, string data )
+		public TextNode( bool field_flag, string? data )
 		{
 			this.field_flag = field_flag;
 			this.data       = data;
