@@ -148,6 +148,22 @@ namespace glabels
 
 			load_new_column_set( model.label.merge );
 			load_tree( model.label.merge );
+
+			model.label.merge.source_changed.connect( on_merge_source_changed );
+			model.label.merge.selection_changed.connect( on_merge_selection_changed );
+		}
+
+
+		private void on_merge_source_changed()
+		{
+			load_new_column_set( model.label.merge );
+			load_tree( model.label.merge );
+		}
+
+
+		private void on_merge_selection_changed()
+		{
+			load_selected_column();
 		}
 
 
@@ -248,6 +264,23 @@ namespace glabels
 		}
 
 
+		private void load_selected_column()
+		{
+			Gtk.TreeIter iter;
+
+			for ( bool good = list_store.get_iter_first( out iter );
+			      good;
+			      good = list_store.iter_next( ref iter ) )
+			{
+				/* get record */
+				unowned MergeRecord record;
+				list_store.get( iter, DATA_COLUMN, out record );
+
+				/* set selected value in store accordingly */
+				list_store.set( iter, SELECT_COLUMN, record.selected );
+			}
+		}
+
 
 		private void on_type_combo_changed()
 		{
@@ -275,52 +308,26 @@ namespace glabels
 			list_store.get( iter, DATA_COLUMN, out record );
 
 			/* toggle the select flag within the record */
-			record.selected = !record.selected;
-
-			/* set new value in store */
-			list_store.set( iter, SELECT_COLUMN, record.selected );
+			if ( record.selected )
+			{
+				model.label.merge.unselect( record );
+			}
+			else
+			{
+				model.label.merge.select( record );
+			}
 		}
 
 
 		private void on_select_all_button_clicked()
 		{
-			Gtk.TreeIter iter;
-
-			for ( bool good = list_store.get_iter_first( out iter );
-			      good;
-			      good = list_store.iter_next( ref iter ) )
-			{
-				/* get current data */
-				unowned MergeRecord record;
-				list_store.get( iter, DATA_COLUMN, out record );
-
-				/* set select flag within the record */
-				record.selected = true;
-
-				/* set new value in store */
-				list_store.set( iter, SELECT_COLUMN, record.selected );
-			}
+			model.label.merge.select_all();
 		}
 
 
 		private void on_unselect_all_button_clicked()
 		{
-			Gtk.TreeIter iter;
-
-			for ( bool good = list_store.get_iter_first( out iter );
-			      good;
-			      good = list_store.iter_next( ref iter ) )
-			{
-				/* get current data */
-				unowned MergeRecord record;
-				list_store.get( iter, DATA_COLUMN, out record );
-
-				/* clear select flag within the record */
-				record.selected = false;
-
-				/* set new value in store */
-				list_store.set( iter, SELECT_COLUMN, record.selected );
-			}
+			model.label.merge.unselect_all();
 		}
 
 

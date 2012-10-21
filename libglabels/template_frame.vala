@@ -99,7 +99,7 @@ namespace libglabels
 				}
 			}
 
-			origins.sort();
+			origins.sort( (CompareFunc<TemplateCoord>)TemplateCoord.compare_to );
 
 			return origins;
 		}

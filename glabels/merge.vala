@@ -27,7 +27,8 @@ namespace glabels
 	public abstract class Merge : Object
 	{
 
-		public signal void changed();
+		public signal void source_changed();
+		public signal void selection_changed();
 
 
 		public MergeInfo info { get; construct; }
@@ -66,13 +67,63 @@ namespace glabels
 					}
 					this.close();
 
-					changed();
+					source_changed();
 				}
 
 			}
 
 		}
 		private string? _src;
+
+
+		public void select( MergeRecord record )
+		{
+			record.selected = true;
+			selection_changed();
+		}
+
+
+		public void unselect( MergeRecord record )
+		{
+			record.selected = false;
+			selection_changed();
+		}
+
+
+		public void select_all()
+		{
+			foreach ( MergeRecord record in _record_list )
+			{
+				record.selected = true;
+			}
+			selection_changed();
+		}
+
+
+		public void unselect_all()
+		{
+			foreach ( MergeRecord record in _record_list )
+			{
+				record.selected = false;
+			}
+			selection_changed();
+		}
+
+
+		public Gee.ArrayList<MergeRecord> get_selected_records()
+		{
+			Gee.ArrayList<MergeRecord> list = new Gee.ArrayList<MergeRecord>();
+
+			foreach ( MergeRecord record in _record_list )
+			{
+				if ( record.selected )
+				{
+					list.add( record );
+				}
+			}
+
+			return list;
+		}
 
 
 		public    abstract List<string>  get_key_list();

@@ -408,8 +408,7 @@ namespace glabels
 
 		private void draw_rich_preview( Cairo.Context cr )
 		{
-			/* TODO: test for merge. */
-			model.print.print_simple_sheet( cr, 0 );
+			model.print.print_sheet( cr, 0 );
 		}
 
 		

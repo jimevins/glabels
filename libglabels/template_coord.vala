@@ -36,7 +36,8 @@ namespace libglabels
 			this.y = y;
 		}
 
-		public int compare( TemplateCoord b )
+
+		public int compare_to( TemplateCoord b )
 		{
 			if ( this.y < b.y )
 			{
@@ -58,11 +59,10 @@ namespace libglabels
 				}
 				else
 				{
-					return 0; /* hopefull 2 label frames won't have the same origin. */
+					return 0; /* hopefully 2 label frames won't have the same origin. */
 				}
 			}
 		}
-
 
 	}
 

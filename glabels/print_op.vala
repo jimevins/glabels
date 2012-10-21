@@ -38,6 +38,7 @@ namespace glabels
 
 			begin_print.connect( on_begin_print );
 			draw_page.connect( on_draw_page );
+			end_print.connect( on_end_print );
 		}
 
 
@@ -78,10 +79,12 @@ namespace glabels
 		{
 			Cairo.Context cr = context.get_cairo_context();
 
-			if ( model.label.merge is MergeNone )
-			{
-				model.print.print_simple_sheet( cr, i_page );
-			}
+			model.print.print_sheet( cr, i_page );
+		}
+
+
+		private void on_end_print( Gtk.PrintContext context )
+		{
 		}
 
 

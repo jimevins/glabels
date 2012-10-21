@@ -27,6 +27,7 @@ namespace glabels
 
 	public class ModelPrint
 	{
+
 		private Label label;
 
 		private const double OUTLINE_WIDTH =  0.25;
@@ -37,16 +38,70 @@ namespace glabels
 		public bool  reverse_flag    { get; set; }
 		public bool  crop_marks_flag { get; set; }
 
-		public int   n_pages         { get; set; default = 1; }
+		public int   n_pages         { get; set; }
+
+
+		private Gee.ArrayList<MergeRecord> record_list;
 
 
 		public ModelPrint( Label label )
 		{
 			this.label = label;
+
+			on_merge_changed();
+
+			label.merge_changed.connect( on_merge_changed );
 		}
 
 
-		public void print_simple_sheet( Cairo.Context cr, int i_page )
+		private void on_merge_changed()
+		{
+			on_merge_selection_changed();
+
+			label.merge.source_changed.connect( on_merge_selection_changed );
+			label.merge.selection_changed.connect( on_merge_selection_changed );
+		}
+
+
+		private void on_merge_selection_changed()
+		{
+			record_list = label.merge.get_selected_records();
+
+			if ( label.merge is MergeNone )
+			{
+				n_pages = 1;
+			}
+			else
+			{
+				TemplateFrame frame = label.template.frames.first().data;
+				n_pages = record_list.size / frame.get_n_labels();
+				if ( (record_list.size % frame.get_n_labels()) != 0 )
+				{
+					n_pages++;
+				}
+
+				if ( n_pages == 0 )
+				{
+					n_pages = 1;
+				}
+			}
+		}
+
+
+		public void print_sheet( Cairo.Context cr, int i_page )
+		{
+			if ( label.merge is MergeNone )
+			{
+				print_simple_sheet( cr, i_page );
+			}
+			else
+			{
+				print_merge_sheet( cr, i_page );
+			}
+		}
+
+
+		private void print_simple_sheet( Cairo.Context cr, int i_page )
 		{
 			if ( crop_marks_flag )
 			{
@@ -59,6 +114,32 @@ namespace glabels
 			foreach ( TemplateCoord origin in origins )
 			{
 				print_label( cr, origin.x, origin.y, null );
+			}
+		}
+
+
+		private void print_merge_sheet( Cairo.Context cr, int i_page )
+		{
+			if ( crop_marks_flag )
+			{
+				print_crop_marks( cr );
+			}
+
+			TemplateFrame frame = label.template.frames.first().data;
+			Gee.ArrayList<TemplateCoord?> origins = frame.get_origins();
+
+			int i = i_page * frame.get_n_labels();
+
+			foreach ( TemplateCoord origin in origins )
+			{
+				if ( i >= record_list.size )
+				{
+					break;
+				}
+
+				print_label( cr, origin.x, origin.y, record_list.get(i) );
+
+				i++;
 			}
 		}
 

@@ -167,7 +167,7 @@ namespace glabels
 				if ( _merge != value )
 				{
 					_merge = value;
-					_merge.changed.connect( on_merge_changed );
+					_merge.source_changed.connect( on_merge_source_changed );
 					changed();
 					merge_changed();
 					modified = true;
@@ -319,10 +319,9 @@ namespace glabels
 		}
 
 
-		private void on_merge_changed()
+		private void on_merge_source_changed()
 		{
 			changed();
-			merge_changed();
 		}
 
 

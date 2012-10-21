@@ -669,6 +669,14 @@ namespace glabels
 
 		private void on_merge_changed()
 		{
+			on_merge_source_changed();
+
+			model.label.merge.source_changed.connect( on_merge_source_changed );
+		}
+
+
+		private void on_merge_source_changed()
+		{
 			if ( model.label.merge is MergeNone )
 			{
 				text_color_button.clear_keys();
