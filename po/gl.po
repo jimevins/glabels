@@ -1,0 +1,3980 @@
+# Galician translation for glabels.
+# Copyright (C) 2012 glabels's COPYRIGHT HOLDER
+# This file is distributed under the same license as the glabels package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: glabels master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-11-01 13:40+0100\n"
+"PO-Revision-Date: 2012-09-27 18:14+0100\n"
+"Last-Translator: Leandro Regueiro <leandro.regueiro@gmail.com>\n"
+"Language-Team: Galician <gnome-gl-list@gnome.org>\n"
+"Language: gl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/bc-backends.c:81
+#, fuzzy
+msgid "Built-in"
+msgstr "Integrado"
+
+#: ../src/bc-backends.c:101
+#, fuzzy
+msgid "POSTNET (any)"
+msgstr "Calquera campo"
+
+#: ../src/bc-backends.c:104
+#, fuzzy
+msgid "POSTNET-5 (ZIP only)"
+msgstr "Só conexións cifradas"
+
+#: ../src/bc-backends.c:107
+#, fuzzy
+msgid "POSTNET-9 (ZIP+4)"
+msgstr "Unidade Zip"
+
+#: ../src/bc-backends.c:110
+#, fuzzy
+msgid "POSTNET-11 (DPBC)"
+msgstr "802.11 WiFi (%s)"
+
+#: ../src/bc-backends.c:113
+msgid "CEPNET"
+msgstr ""
+
+#: ../src/bc-backends.c:116
+#, fuzzy
+msgid "One Code"
+msgstr "Fragmentos de código"
+
+#: ../src/bc-backends.c:119 ../src/bc-backends.c:175 ../src/bc-backends.c:248
+#, fuzzy
+msgid "Code 39"
+msgstr "Fragmentos de código"
+
+#: ../src/bc-backends.c:122 ../src/bc-backends.c:251
+#, fuzzy
+msgid "Code 39 Extended"
+msgstr "Uso estendido da chave"
+
+#: ../src/bc-backends.c:127
+#, fuzzy
+msgid "EAN (any)"
+msgstr "Calquera campo"
+
+#: ../src/bc-backends.c:130
+msgid "EAN-8"
+msgstr ""
+
+#: ../src/bc-backends.c:133
+msgid "EAN-8 +2"
+msgstr ""
+
+#: ../src/bc-backends.c:136
+msgid "EAN-8 +5"
+msgstr ""
+
+#: ../src/bc-backends.c:139
+msgid "EAN-13"
+msgstr "EAN-13"
+
+#: ../src/bc-backends.c:142
+msgid "EAN-13 +2"
+msgstr "EAN-13 +2"
+
+#: ../src/bc-backends.c:145
+msgid "EAN-13 +5"
+msgstr "EAN-13 +5"
+
+#: ../src/bc-backends.c:148
+#, fuzzy
+msgid "UPC (UPC-A or UPC-E)"
+msgstr "Or_ganizador:"
+
+#: ../src/bc-backends.c:151 ../src/bc-backends.c:395
+msgid "UPC-A"
+msgstr ""
+
+#: ../src/bc-backends.c:154
+msgid "UPC-A +2"
+msgstr ""
+
+#: ../src/bc-backends.c:157
+msgid "UPC-A +5"
+msgstr ""
+
+#: ../src/bc-backends.c:160 ../src/bc-backends.c:398
+msgid "UPC-E"
+msgstr ""
+
+#: ../src/bc-backends.c:163
+msgid "UPC-E +2"
+msgstr ""
+
+#: ../src/bc-backends.c:166
+msgid "UPC-E +5"
+msgstr ""
+
+#: ../src/bc-backends.c:169 ../src/bc-backends.c:332
+msgid "ISBN"
+msgstr ""
+
+#: ../src/bc-backends.c:172
+msgid "ISBN +5"
+msgstr ""
+
+#: ../src/bc-backends.c:178 ../src/bc-backends.c:260
+#, fuzzy
+msgid "Code 128"
+msgstr "Fragmentos de código"
+
+#: ../src/bc-backends.c:181
+#, fuzzy
+msgid "Code 128C"
+msgstr "Fragmentos de código"
+
+#: ../src/bc-backends.c:184
+#, fuzzy
+msgid "Code 128B"
+msgstr "Fragmentos de código"
+
+#: ../src/bc-backends.c:187 ../src/bc-backends.c:329
+msgid "Interleaved 2 of 5"
+msgstr ""
+
+#: ../src/bc-backends.c:190 ../src/bc-backends.c:224
+msgid "Codabar"
+msgstr ""
+
+#: ../src/bc-backends.c:193
+msgid "MSI"
+msgstr ""
+
+#: ../src/bc-backends.c:196
+msgid "Plessey"
+msgstr ""
+
+#: ../src/bc-backends.c:199 ../src/bc-backends.c:257
+#, fuzzy
+msgid "Code 93"
+msgstr "Fragmentos de código"
+
+#: ../src/bc-backends.c:206
+#, fuzzy
+msgid "Australia Post Standard"
+msgstr "Porto LDAP estándar"
+
+#: ../src/bc-backends.c:209
+msgid "Australia Post Reply Paid"
+msgstr ""
+
+#: ../src/bc-backends.c:212
+msgid "Australia Post Route Code"
+msgstr ""
+
+#: ../src/bc-backends.c:215
+#, fuzzy
+msgid "Australia Post Redirect"
+msgstr "Redirixir a xanela automaticamente"
+
+#: ../src/bc-backends.c:218
+#, fuzzy
+msgid "Aztec Code"
+msgstr "Fragmentos de código"
+
+#: ../src/bc-backends.c:221
+msgid "Aztec Rune"
+msgstr ""
+
+#: ../src/bc-backends.c:227
+#, fuzzy
+msgid "Code One"
+msgstr "Un pau"
+
+#: ../src/bc-backends.c:230
+#, fuzzy
+msgid "Code 11"
+msgstr "Sobre #11"
+
+#: ../src/bc-backends.c:233
+#, fuzzy
+msgid "Code 16K"
+msgstr "prc 16k"
+
+#: ../src/bc-backends.c:236
+#, fuzzy
+msgid "Code 2 of 5 Matrix"
+msgstr "Matriz de transformación"
+
+#: ../src/bc-backends.c:239
+#, fuzzy
+msgid "Code 2 of 5 IATA"
+msgstr "Fragmentos de código"
+
+#: ../src/bc-backends.c:242
+#, fuzzy
+msgid "Code 2 of 5 Data Logic"
+msgstr "Engadir os datos de obtención"
+
+#: ../src/bc-backends.c:245
+msgid "Code 32 (Italian Pharmacode)"
+msgstr ""
+
+#: ../src/bc-backends.c:254
+#, fuzzy
+msgid "Code 49"
+msgstr "Fragmentos de código"
+
+#: ../src/bc-backends.c:263
+msgid "Code 128 (Mode C supression)"
+msgstr ""
+
+#: ../src/bc-backends.c:266
+#, fuzzy
+msgid "DAFT Code"
+msgstr "Fragmentos de código"
+
+#: ../src/bc-backends.c:269
+#, fuzzy
+msgid "Data Matrix"
+msgstr "Matriz de transformación"
+
+#: ../src/bc-backends.c:272
+#, fuzzy
+msgid "Deutsche Post Leitcode"
+msgstr "_Publicar unha mensaxe na lista"
+
+#: ../src/bc-backends.c:275
+#, fuzzy
+msgid "Deutsche Post Identcode"
+msgstr "_Publicar unha mensaxe na lista"
+
+#: ../src/bc-backends.c:278
+msgid "Dutch Post KIX Code"
+msgstr ""
+
+#: ../src/bc-backends.c:281
+msgid "EAN"
+msgstr ""
+
+#: ../src/bc-backends.c:284
+#, fuzzy
+msgid "Grid Matrix"
+msgstr "Matriz de transformación"
+
+#: ../src/bc-backends.c:287
+#, fuzzy
+msgid "GS1-128"
+msgstr "Tamaño da miniaturizar (predeterminado: 128)"
+
+#: ../src/bc-backends.c:290
+#, fuzzy
+msgid "GS1 DataBar-14"
+msgstr "_Celta (ISO-8859-14)"
+
+#: ../src/bc-backends.c:299
+msgid "GS1 DataBar-14 Stacked"
+msgstr ""
+
+#: ../src/bc-backends.c:302
+msgid "GS1 DataBar-14 Stacked Omni."
+msgstr ""
+
+#: ../src/bc-backends.c:305
+msgid "GS1 DataBar Extended Stacked"
+msgstr ""
+
+#: ../src/bc-backends.c:308
+#, fuzzy
+msgid "HIBC Code 128"
+msgstr "Seleccionar bloque de _código"
+
+#: ../src/bc-backends.c:311
+#, fuzzy
+msgid "HIBC Code 39"
+msgstr "Seleccionar bloque de _código"
+
+#: ../src/bc-backends.c:314
+#, fuzzy
+msgid "HIBC Data Matrix"
+msgstr "Matriz de transformación do fillo"
+
+#: ../src/bc-backends.c:317
+#, fuzzy
+msgid "HIBC QR Code"
+msgstr "Seleccionar bloque de _código"
+
+#: ../src/bc-backends.c:320
+msgid "HIBC PDF417"
+msgstr ""
+
+#: ../src/bc-backends.c:323
+msgid "HIBC Micro PDF417"
+msgstr ""
+
+#: ../src/bc-backends.c:326
+#, fuzzy
+msgid "HIBC Aztec Code"
+msgstr "Seleccionar bloque de _código"
+
+#: ../src/bc-backends.c:335
+#, fuzzy
+msgid "ITF-14"
+msgstr "Sobre #14"
+
+#: ../src/bc-backends.c:338
+#, fuzzy
+msgid "Japanese Postal"
+msgstr "Código postal:"
+
+#: ../src/bc-backends.c:341
+#, fuzzy
+msgid "Korean Postal"
+msgstr "Código postal:"
+
+#: ../src/bc-backends.c:344
+msgid "LOGMARS"
+msgstr ""
+
+#: ../src/bc-backends.c:347
+msgid "Maxicode"
+msgstr ""
+
+#: ../src/bc-backends.c:350
+msgid "Micro PDF417"
+msgstr ""
+
+#: ../src/bc-backends.c:353
+#, fuzzy
+msgid "Micro QR Code"
+msgstr "Seleccionar bloque de _código"
+
+#: ../src/bc-backends.c:356
+msgid "MSI Plessey"
+msgstr ""
+
+#: ../src/bc-backends.c:359
+#, fuzzy
+msgid "NVE-18"
+msgstr "Só 18 pasos"
+
+#: ../src/bc-backends.c:362
+msgid "PDF417"
+msgstr ""
+
+#: ../src/bc-backends.c:365
+msgid "PDF417 Truncated"
+msgstr ""
+
+#: ../src/bc-backends.c:368
+msgid "PLANET"
+msgstr ""
+
+#: ../src/bc-backends.c:371
+msgid "PostNet"
+msgstr ""
+
+#: ../src/bc-backends.c:374
+msgid "Pharmacode"
+msgstr ""
+
+#: ../src/bc-backends.c:377
+#, fuzzy
+msgid "Pharmacode 2-track"
+msgstr "Título da pista"
+
+#: ../src/bc-backends.c:380
+msgid "Pharmazentral Nummer (PZN)"
+msgstr ""
+
+#: ../src/bc-backends.c:383
+#, fuzzy
+msgid "QR Code"
+msgstr "Fragmentos de código"
+
+#: ../src/bc-backends.c:386
+#, fuzzy
+msgid "Royal Mail 4-State"
+msgstr "Estado actual do reprodutor"
+
+#: ../src/bc-backends.c:389
+msgid "Telepen"
+msgstr ""
+
+#: ../src/bc-backends.c:392
+#, fuzzy
+msgid "Telepen Numeric"
+msgstr "Base numérica"
+
+#: ../src/bc-backends.c:401
+#, fuzzy
+msgid "USPS One Code"
+msgstr "Seleccionar bloque de _código"
+
+#: ../src/bc-backends.c:404
+msgid "UK Plessey"
+msgstr ""
+
+#: ../src/bc-backends.c:411
+msgid "IEC16022 (DataMatrix)"
+msgstr ""
+
+#: ../src/bc-backends.c:418
+msgid "IEC18004 (QRCode)"
+msgstr ""
+
+#: ../src/color-combo-button.c:198 ../src/color-combo.c:178
+#, fuzzy
+msgid "Default Color"
+msgstr "Cor predeterminada da gráfica de memoria"
+
+#: ../src/color-combo-menu.c:83
+#, fuzzy
+msgid "Dark Red"
+msgstr "Vermello escarlata escuro"
+
+#: ../src/color-combo-menu.c:84
+msgid "Brown"
+msgstr ""
+
+#: ../src/color-combo-menu.c:85
+#, fuzzy
+msgid "Dark Goldenrod"
+msgstr "Negras:"
+
+#: ../src/color-combo-menu.c:86
+#, fuzzy
+msgid "Dark Green"
+msgstr "Terra verde"
+
+#: ../src/color-combo-menu.c:87
+#, fuzzy
+msgid "Dark Cyan"
+msgstr "Negras:"
+
+#: ../src/color-combo-menu.c:88
+#, fuzzy
+msgid "Navy Blue"
+msgstr "Bola azul"
+
+#: ../src/color-combo-menu.c:89
+#, fuzzy
+msgid "Dark Violet"
+msgstr "Negras:"
+
+#: ../src/color-combo-menu.c:91
+msgid "Red"
+msgstr "Vermello"
+
+#: ../src/color-combo-menu.c:92
+msgid "Orange"
+msgstr "Laranxa"
+
+#: ../src/color-combo-menu.c:93
+#, fuzzy
+msgid "Dark Yellow"
+msgstr "Negras:"
+
+#: ../src/color-combo-menu.c:94
+#, fuzzy
+msgid "Medium green"
+msgstr "Terra verde"
+
+#: ../src/color-combo-menu.c:95
+msgid "Turquoise"
+msgstr ""
+
+#: ../src/color-combo-menu.c:96
+msgid "Blue"
+msgstr "Azul"
+
+#: ../src/color-combo-menu.c:97
+#, fuzzy
+msgid "Purple"
+msgstr "Violeta"
+
+#: ../src/color-combo-menu.c:99
+#, fuzzy
+msgid "Salmon"
+msgstr "Salmon"
+
+#: ../src/color-combo-menu.c:100
+#, fuzzy
+msgid "Gold"
+msgstr "Mina de ouro"
+
+#: ../src/color-combo-menu.c:101
+msgid "Yellow"
+msgstr "Amarelo"
+
+#: ../src/color-combo-menu.c:102
+msgid "Green"
+msgstr "Verde"
+
+#: ../src/color-combo-menu.c:103
+#, fuzzy
+msgid "Cyan"
+msgstr "Cian"
+
+#: ../src/color-combo-menu.c:104
+msgid "SkyBlue"
+msgstr ""
+
+#: ../src/color-combo-menu.c:105
+msgid "Violet"
+msgstr "Violeta"
+
+#: ../src/color-combo-menu.c:107
+msgid "Pink"
+msgstr "Rosa"
+
+#: ../src/color-combo-menu.c:108
+msgid "Khaki"
+msgstr ""
+
+#: ../src/color-combo-menu.c:109
+#, fuzzy
+msgid "Light Yellow"
+msgstr "Negro sobre amarelo claro"
+
+#: ../src/color-combo-menu.c:110
+#, fuzzy
+msgid "Light Green"
+msgstr "Terra verde"
+
+#: ../src/color-combo-menu.c:111
+#, fuzzy
+msgid "Light Cyan"
+msgstr "Anos luz"
+
+#: ../src/color-combo-menu.c:112
+#, fuzzy
+msgid "Slate Gray"
+msgstr "Gris predeterminado"
+
+#: ../src/color-combo-menu.c:113
+msgid "Thistle"
+msgstr ""
+
+#: ../src/color-combo-menu.c:115
+msgid "White"
+msgstr "Branco"
+
+#: ../src/color-combo-menu.c:117
+#, fuzzy, no-c-format
+msgid "10% Gray"
+msgstr "Gris predeterminado"
+
+#: ../src/color-combo-menu.c:119
+#, fuzzy, no-c-format
+msgid "25% Gray"
+msgstr "Gris predeterminado"
+
+#: ../src/color-combo-menu.c:121
+#, fuzzy, no-c-format
+msgid "40% Gray"
+msgstr "Gris predeterminado"
+
+#: ../src/color-combo-menu.c:123
+#, fuzzy, no-c-format
+msgid "50% Gray"
+msgstr "Gris predeterminado"
+
+#: ../src/color-combo-menu.c:125
+#, fuzzy, no-c-format
+msgid "60% Gray"
+msgstr "Gris predeterminado"
+
+#: ../src/color-combo-menu.c:126
+msgid "Black"
+msgstr "Negro"
+
+#: ../src/color-combo-menu.c:254 ../src/color-combo-menu.c:373
+msgid "Custom Color"
+msgstr "Cor personalizada"
+
+#: ../src/color-combo-menu.c:319
+#, c-format
+msgid "Custom Color #%u"
+msgstr "Cor personalizada #%u"
+
+#: ../src/critical-error-handler.c:70
+#, fuzzy
+msgid "gLabels Fatal Error!"
+msgstr "Banshee encontrou un erro fatal {0} "
+
+#: ../src/file.c:84
+#, fuzzy
+msgid "New Label or Card"
+msgstr "falta o nome ou a etiqueta de %s"
+
+#: ../src/file.c:175 ../src/label.c:602 ../src/label.c:646
+msgid "Label properties"
+msgstr "Propiedades da etiqueta"
+
+#: ../src/file.c:267 ../src/file.c:557
+msgid "All files"
+msgstr "Todos os ficheiros"
+
+#: ../src/file.c:272 ../src/file.c:562
+msgid "gLabels documents"
+msgstr "Documentos de gLabels"
+
+#: ../src/file.c:319 ../src/file.c:620
+#, fuzzy
+msgid "Empty file name selection"
+msgstr "Mostrar o diálogo de selección de ficheiros"
+
+#: ../src/file.c:322 ../src/file.c:338
+msgid "Please select a file or supply a valid file name"
+msgstr ""
+
+#: ../src/file.c:335
+msgid "File does not exist"
+msgstr "O ficheiro non existe"
+
+#: ../src/file.c:410
+#, fuzzy, c-format
+msgid "Could not open file \"%s\""
+msgstr "Non foi posíbel abrir o ficheiro «%s»: %s"
+
+#: ../src/file.c:413
+#, fuzzy
+msgid "Not a supported file format"
+msgstr "O formato de ficheiro non foi recoñecido"
+
+#: ../src/file.c:491 ../src/file.c:670
+#, fuzzy, c-format
+msgid "Could not save file \"%s\""
+msgstr "Non foi posíbel gardar o ficheiro %s."
+
+#: ../src/file.c:495 ../src/file.c:674
+msgid "Error encountered during save.  The file is still not saved."
+msgstr ""
+
+#: ../src/file.c:535
+#, fuzzy, c-format
+msgid "Save \"%s\" as"
+msgstr "Gardar \"%s\" como"
+
+#: ../src/file.c:623
+#, fuzzy
+msgid "Please supply a valid file name"
+msgstr "Seleccione un ficheiro de respaldo válido que restaurar."
+
+#: ../src/file.c:644
+#, fuzzy, c-format
+msgid "Overwrite file \"%s\"?"
+msgstr "Non é posíbel sobrescribir o ficheiro"
+
+#: ../src/file.c:648
+msgid "File already exists."
+msgstr "O ficheiro xa existe."
+
+#: ../src/file.c:744
+#, fuzzy, c-format
+msgid "Save changes to document \"%s\" before closing?"
+msgstr "Quere gardar os cambios do documento \"%s\" antes de pechar?"
+
+#: ../src/file.c:748
+msgid "Your changes will be lost if you don't save them."
+msgstr "Os cambios perderanse se non os garda."
+
+#: ../src/file.c:751
+msgid "Close without saving"
+msgstr "Pechar sen gardar"
+
+#: ../src/font-combo-menu.c:137
+#, fuzzy
+msgid "Recent fonts"
+msgstr "Tipos de fonte e estilo"
+
+#: ../src/font-combo-menu.c:152
+#, fuzzy
+msgid "Proportional fonts"
+msgstr "Tipos de fonte e estilo"
+
+#: ../src/font-combo-menu.c:160
+#, fuzzy
+msgid "Fixed-width fonts"
+msgstr "Anchura fixa de emerxente"
+
+#: ../src/font-combo-menu.c:168
+msgid "All fonts"
+msgstr "Todos os tipos de letra"
+
+#.
+#. * Allow text samples to be localized.
+#. *
+#. * FIXME: if we could extract enough meta information from the fonts
+#. * themselves, perhaps rather than setting these globally for the
+#. * current locale, they could be unique to each font family.
+#.
+#: ../src/font-combo-menu-item.c:132
+msgctxt "Short sample text"
+msgid "Aa"
+msgstr ""
+
+#: ../src/font-combo-menu-item.c:134
+msgctxt "Lower case sample text"
+msgid "abcdefghijklmnopqrstuvwxyz"
+msgstr ""
+
+#: ../src/font-combo-menu-item.c:136
+msgctxt "Upper case sample text"
+msgid "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+msgstr ""
+
+#: ../src/font-combo-menu-item.c:138
+msgctxt "Numbers and special characters sample text"
+msgid "0123456789 .:,;(*!?)"
+msgstr ""
+
+#: ../src/font-combo-menu-item.c:157
+#, fuzzy
+msgid "Sample text"
+msgstr "Texto de axuda"
+
+#: ../src/glabels-batch.c:53
+msgid "set output filename (default=\"output.pdf\")"
+msgstr ""
+
+#: ../src/glabels-batch.c:53 ../src/glabels-batch.c:67
+msgid "filename"
+msgstr "nome-de-ficheiro"
+
+#: ../src/glabels-batch.c:55
+#, fuzzy
+msgid "number of sheets (default=1)"
+msgstr "Número de columnas predeterminado"
+
+#: ../src/glabels-batch.c:55
+msgid "sheets"
+msgstr "follas"
+
+#: ../src/glabels-batch.c:57
+#, fuzzy
+msgid "number of copies (default=1)"
+msgstr "Número de columnas predeterminado"
+
+#: ../src/glabels-batch.c:57
+msgid "copies"
+msgstr "copias"
+
+#: ../src/glabels-batch.c:59
+msgid "first label on first sheet (default=1)"
+msgstr ""
+
+#: ../src/glabels-batch.c:59
+#, fuzzy
+msgid "first"
+msgstr "primeiro"
+
+#: ../src/glabels-batch.c:61 ../data/ui/print-op-dialog-custom-widget.ui.h:11
+msgid "print outlines (to test printer alignment)"
+msgstr ""
+
+#: ../src/glabels-batch.c:63 ../data/ui/print-op-dialog-custom-widget.ui.h:12
+msgid "print in reverse (i.e. a mirror image)"
+msgstr ""
+
+#: ../src/glabels-batch.c:65 ../data/ui/print-op-dialog-custom-widget.ui.h:13
+#, fuzzy
+msgid "print crop marks"
+msgstr "Mostrar as marcas de liña"
+
+#: ../src/glabels-batch.c:67
+#, fuzzy
+msgid "input file for merging"
+msgstr "O ficheiro de icona para o engadido"
+
+#: ../src/glabels-batch.c:69 ../src/glabels.c:63
+msgid "[FILE...]"
+msgstr "[FICHEIRO…]"
+
+#: ../src/glabels-batch.c:99
+msgid "Print files created with gLabels."
+msgstr ""
+
+#: ../src/glabels-batch.c:107 ../src/glabels.c:87
+#, fuzzy, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"Execute '%s --help' para ver unha lista completa das opcións de liña de "
+"ordes dispoñíbeis.\n"
+
+#: ../src/glabels-batch.c:151
+#, c-format
+msgid "cannot perform document merge with glabels file %s\n"
+msgstr ""
+
+#: ../src/glabels-batch.c:186
+#, fuzzy, c-format
+msgid "cannot open glabels file %s\n"
+msgstr "Non foi posíbel abrir o ficheiro «%s»: %s"
+
+#: ../src/glabels.c:79
+msgid "Launch gLabels label and business card designer."
+msgstr ""
+
+#: ../src/label-barcode.c:183 ../src/ui.c:317
+#, fuzzy
+msgid "Create barcode object"
+msgstr "Non é posíbel crear o obxecto"
+
+#: ../src/label-barcode.c:259 ../src/label-barcode.c:461
+#, fuzzy
+msgid "Barcode data"
+msgstr "Outros datos"
+
+#: ../src/label-barcode.c:290
+#, fuzzy
+msgid "Barcode property"
+msgstr "Nome da propiedade"
+
+#: ../src/label-barcode.c:684
+#, fuzzy
+msgid "Barcode data empty"
+msgstr "Datos de JSON baleiros"
+
+#: ../src/label-barcode.c:688
+#, fuzzy
+msgid "Invalid barcode data"
+msgstr "Datos comprimidos incorrectos"
+
+#: ../src/label-box.c:156
+#, fuzzy
+msgid "Create box object"
+msgstr "Non é posíbel crear o obxecto"
+
+#: ../src/label-box.c:230 ../src/label-ellipse.c:232
+#: ../data/ui/property-bar.ui.h:12
+msgid "Fill color"
+msgstr "Cor de recheo"
+
+#: ../src/label-box.c:261 ../src/label-ellipse.c:261 ../src/label-line.c:212
+#: ../data/ui/property-bar.ui.h:13
+msgid "Line color"
+msgstr "Cor da liña"
+
+#: ../src/label-box.c:289 ../src/label-ellipse.c:290 ../src/label-line.c:241
+#: ../data/ui/property-bar.ui.h:14
+msgid "Line width"
+msgstr "Largura da liña"
+
+#: ../src/label.c:406
+msgid "Untitled"
+msgstr "Sen título"
+
+#: ../src/label.c:720 ../src/ui.c:420
+#, fuzzy
+msgid "Merge properties"
+msgstr "Propiedades da orixe"
+
+#: ../src/label.c:1216 ../src/ui.c:213
+msgid "Delete"
+msgstr "Eliminar"
+
+#: ../src/label.c:1249 ../src/ui.c:322
+#, fuzzy
+msgid "Bring to front"
+msgstr "Saltar á posición"
+
+#: ../src/label.c:1285 ../src/ui.c:329
+msgid "Send to back"
+msgstr "Enviar ao fondo"
+
+#: ../src/label.c:1326
+msgid "Rotate"
+msgstr "Rotar"
+
+#: ../src/label.c:1361 ../src/ui.c:336
+msgid "Rotate left"
+msgstr "Rotar á esquerda"
+
+#: ../src/label.c:1394 ../src/ui.c:343
+msgid "Rotate right"
+msgstr "Rotar á dereita"
+
+#: ../src/label.c:1429 ../src/ui.c:350
+#, fuzzy
+msgid "Flip horizontally"
+msgstr "maximizada horizontalmente"
+
+#: ../src/label.c:1464 ../src/ui.c:357
+#, fuzzy
+msgid "Flip vertically"
+msgstr "maximizada verticalmente"
+
+#: ../src/label.c:1504 ../src/ui.c:364
+msgid "Align left"
+msgstr "Aliñar á esquerda"
+
+#: ../src/label.c:1561 ../src/ui.c:378
+msgid "Align right"
+msgstr "Aliñar á dereita"
+
+#: ../src/label.c:1622
+#, fuzzy
+msgid "Align horizontal center"
+msgstr "Centro na escala horizontal"
+
+#: ../src/label.c:1698
+#, fuzzy
+msgid "Align tops"
+msgstr "Aliñar á dereita"
+
+#: ../src/label.c:1755
+#, fuzzy
+msgid "Align bottoms"
+msgstr "Aliñar á dereita"
+
+#: ../src/label.c:1816
+#, fuzzy
+msgid "Align vertical center"
+msgstr "Centro na escala vertical"
+
+#: ../src/label.c:1894 ../src/ui.c:406
+#, fuzzy
+msgid "Center horizontally"
+msgstr "maximizada horizontalmente"
+
+#: ../src/label.c:1941 ../src/ui.c:413
+#, fuzzy
+msgid "Center vertically"
+msgstr "maximizada verticalmente"
+
+#: ../src/label.c:2662 ../src/label.c:2704 ../src/label.c:2730 ../src/ui.c:206
+msgid "Paste"
+msgstr "Pegar"
+
+#: ../src/label-ellipse.c:160
+#, fuzzy
+msgid "Create ellipse object"
+msgstr "Non é posíbel crear o obxecto"
+
+#: ../src/label-image.c:200 ../src/ui.c:310
+#, fuzzy
+msgid "Create image object"
+msgstr "Non é posíbel crear o obxecto"
+
+#: ../src/label-image.c:333 ../src/label-image.c:474
+#, fuzzy
+msgid "Set image"
+msgstr "Definir o tamaño da imaxe"
+
+#: ../src/label-line.c:147 ../src/ui.c:296
+#, fuzzy
+msgid "Create line object"
+msgstr "Non é posíbel crear o obxecto"
+
+#: ../src/label-object.c:394 ../src/label-object.c:428
+msgid "Move"
+msgstr "Mover"
+
+#: ../src/label-object.c:479
+msgid "Resize"
+msgstr "Redimensionar"
+
+#: ../src/label-object.c:1263
+#, fuzzy
+msgid "Shadow state"
+msgstr "Provincia/Autonomía:"
+
+#: ../src/label-object.c:1306
+#, fuzzy
+msgid "Shadow offset"
+msgstr "desplazamento erróneo"
+
+#: ../src/label-object.c:1354
+#, fuzzy
+msgid "Shadow color"
+msgstr "Cor do bordo:"
+
+#: ../src/label-object.c:1397
+#, fuzzy
+msgid "Shadow opacity"
+msgstr "Opacidade dun actor"
+
+#: ../src/label-text.c:292 ../src/ui.c:282
+#, fuzzy
+msgid "Create text object"
+msgstr "Non é posíbel crear o obxecto"
+
+#: ../src/label-text.c:466
+#, fuzzy
+msgid "Typing"
+msgstr "Escritura"
+
+#: ../src/label-text.c:600 ../data/ui/property-bar.ui.h:1
+msgid "Font family"
+msgstr "Familia do tipo de letra"
+
+#: ../src/label-text.c:638 ../data/ui/property-bar.ui.h:2
+msgid "Font size"
+msgstr "Tamaño do tipo de letra"
+
+#: ../src/label-text.c:671
+msgid "Font weight"
+msgstr "Grosor do tipo de letra"
+
+#: ../src/label-text.c:704 ../data/ui/property-bar.ui.h:4
+msgid "Italic"
+msgstr "Cursiva"
+
+#: ../src/label-text.c:737
+#, fuzzy
+msgid "Align text"
+msgstr "Texto de axuda"
+
+#: ../src/label-text.c:770
+#, fuzzy
+msgid "Vertically align text"
+msgstr "Texto para renderizar"
+
+#: ../src/label-text.c:803
+#, fuzzy
+msgid "Line spacing"
+msgstr "Espazamento de columnas"
+
+#: ../src/label-text.c:836 ../data/ui/property-bar.ui.h:11
+msgid "Text color"
+msgstr "Cor do texto"
+
+#: ../src/label-text.c:996
+#, fuzzy
+msgid "Auto shrink"
+msgstr "Reduce a imaxe"
+
+#: ../src/media-select.c:358 ../src/media-select.c:361
+#: ../src/media-select.c:506 ../src/media-select.c:723
+#, fuzzy
+msgctxt "Brand"
+msgid "Any"
+msgstr "Calquera"
+
+#: ../src/media-select.c:365 ../src/media-select.c:893
+#, fuzzy
+msgctxt "Page size"
+msgid "Any"
+msgstr "Calquera"
+
+#: ../src/media-select.c:372 ../src/media-select.c:375
+#: ../src/media-select.c:902
+#, fuzzy
+msgctxt "Category"
+msgid "Any"
+msgstr "Calquera"
+
+#: ../src/media-select.c:648
+#, fuzzy, c-format
+msgid "Delete template \"%s\"?"
+msgstr "Modelo de clase:"
+
+#: ../src/media-select.c:650
+msgid "This action will permanently delete this template."
+msgstr ""
+
+#: ../src/media-select.c:990
+#, fuzzy
+msgid "No recent templates found."
+msgstr "Non se encontraron artistas similares"
+
+#: ../src/media-select.c:992
+msgid "Try selecting a template in the \"Search all\" tab."
+msgstr ""
+
+#. Translators: "No match" means that for the given template search criteria, there
+#. * were no matches found.
+#: ../src/media-select.c:1083
+#, fuzzy
+msgid "No match."
+msgstr "Non se atopou ningunha coincidencia."
+
+#: ../src/media-select.c:1085
+msgid "Try selecting a different brand, page size or category."
+msgstr ""
+
+#: ../src/media-select.c:1179
+#, fuzzy
+msgid "No custom templates found."
+msgstr "Non se encontraron artistas similares"
+
+#: ../src/media-select.c:1181
+msgid ""
+"You may create new templates or try searching for pre-defined templates in "
+"the \"Search all\" tab."
+msgstr ""
+
+#. Translators: "None" here means that no document-merge source or
+#. * method has been selected.
+#: ../src/merge.c:171 ../src/merge.c:212 ../src/merge.c:376 ../src/merge.c:379
+msgid "None"
+msgstr "Ningún"
+
+#: ../src/merge-init.c:57
+msgid "Text: Comma Separated Values (CSV)"
+msgstr ""
+
+#: ../src/merge-init.c:64
+msgid "Text: Comma Separated Values (CSV) with keys on line 1"
+msgstr ""
+
+#: ../src/merge-init.c:72
+msgid "Text: Tab Separated Values (TSV)"
+msgstr ""
+
+#: ../src/merge-init.c:79
+msgid "Text: Tab Separated Values (TSV) with keys on line 1"
+msgstr ""
+
+#: ../src/merge-init.c:87
+#, fuzzy
+msgid "Text: Colon separated values"
+msgstr "Valores separados por comas (.csv)"
+
+#: ../src/merge-init.c:94
+msgid "Text: Colon separated values with keys on line 1"
+msgstr ""
+
+#: ../src/merge-init.c:102
+#, fuzzy
+msgid "Text: Semicolon separated values"
+msgstr "Valores separados por comas (.csv)"
+
+#: ../src/merge-init.c:109
+msgid "Text: Semicolon separated values with keys on line 1"
+msgstr ""
+
+#: ../src/merge-init.c:119
+#, fuzzy
+msgid "Evolution Addressbook"
+msgstr "Contacto da axenda de enderezos"
+
+#: ../src/merge-init.c:125
+msgid "VCards"
+msgstr "VCards"
+
+#: ../src/merge-properties-dialog.c:280
+#, fuzzy
+msgid "Merge Properties"
+msgstr "Propiedades da orixe"
+
+#: ../src/merge-properties-dialog.c:304 ../src/merge-properties-dialog.c:420
+#, fuzzy
+msgid "Select merge-database source"
+msgstr "A base de datos predeterminada para esta orixe de dicionarios"
+
+#: ../src/merge-properties-dialog.c:315 ../src/merge-properties-dialog.c:446
+msgid "N/A"
+msgstr "N/D"
+
+#: ../src/merge-properties-dialog.c:341
+msgid "Select"
+msgstr "Seleccionar"
+
+#: ../src/merge-properties-dialog.c:348
+#, fuzzy
+msgid "Record/Field"
+msgstr "Calquera campo"
+
+#: ../src/merge-properties-dialog.c:356 ../data/ui/object-editor.ui.h:24
+msgid "Data"
+msgstr "Datos"
+
+#. Translators: "Fixed" here means that for the given document-merge method, there are
+#. * no further choices to further define the source of data.  E.g. if you select the
+#. * evolution-data-server, there are no further choices -- the source is "Fixed."
+#.
+#: ../src/merge-properties-dialog.c:439
+msgid "Fixed"
+msgstr "Fixado"
+
+#. Translators: "Up" refers to the direction towards the top of a label.
+#: ../src/mini-preview.c:1054
+msgid "Up"
+msgstr "Arriba"
+
+#: ../src/new-label-dialog.c:203
+#, fuzzy
+msgid "Select Product"
+msgstr "Chave de produto"
+
+#: ../src/new-label-dialog.c:215
+#, fuzzy
+msgid "Choose Orientation"
+msgstr "A orientación do deseño"
+
+#: ../src/new-label-dialog.c:229
+#, fuzzy
+msgid "Review"
+msgstr "Revisar"
+
+#: ../src/object-editor-bc-page.c:97 ../src/object-editor-shadow-page.c:93
+#: ../src/object-editor-text-page.c:102 ../src/prefs-dialog.c:335
+#: ../src/ui-property-bar.c:288
+msgid "Default"
+msgstr "Predeterminado"
+
+#: ../src/object-editor.c:161 ../src/object-editor.c:470
+msgid "Object properties"
+msgstr "Propiedades do obxecto"
+
+#: ../src/object-editor.c:314
+#, fuzzy
+msgid "Box object properties"
+msgstr "Propiedades xerais da clase"
+
+#: ../src/object-editor.c:333
+#, fuzzy
+msgid "Ellipse object properties"
+msgstr "Propiedades xerais da clase"
+
+#: ../src/object-editor.c:352
+#, fuzzy
+msgid "Line object properties"
+msgstr "Propiedades xerais da clase"
+
+#: ../src/object-editor.c:369
+#, fuzzy
+msgid "Image object properties"
+msgstr "Propiedades xerais da clase"
+
+#: ../src/object-editor.c:386
+#, fuzzy
+msgid "Text object properties"
+msgstr "Propiedades xerais da clase"
+
+#: ../src/object-editor.c:408
+#, fuzzy
+msgid "Barcode object properties"
+msgstr "Propiedades xerais da clase"
+
+#: ../src/object-editor-edit-page.c:76
+#, fuzzy
+msgid "Insert merge field"
+msgstr "Complete o campo: %s"
+
+#: ../src/object-editor-fill-page.c:79 ../src/prefs-dialog.c:341
+#: ../src/ui-property-bar.c:298
+#, fuzzy
+msgid "No Fill"
+msgstr "Cor de recheo:"
+
+#: ../src/object-editor-image-page.c:302
+msgid "All Files"
+msgstr "Todos os ficheiros"
+
+#: ../src/object-editor-image-page.c:307
+#, fuzzy
+msgid "All Images"
+msgstr "Imaxes en movemento"
+
+#: ../src/object-editor-image-page.c:323
+#, c-format
+msgid "%s (*.%s)"
+msgstr "%s (*.%s)"
+
+#: ../src/object-editor-line-page.c:79 ../src/prefs-dialog.c:338
+#: ../src/ui-property-bar.c:308
+#, fuzzy
+msgid "No Line"
+msgstr "Número de _liña…"
+
+#: ../src/object-editor-size-page.c:89
+#, fuzzy
+msgid "Lock aspect ratio."
+msgstr "Manter a relación de aspecto"
+
+#: ../src/prefs-dialog.c:168 ../data/ui/prefs-dialog.ui.h:1
+msgid "gLabels Preferences"
+msgstr "Preferencias de gLabels"
+
+#. TODO: Is this the actual part #?
+#: ../src/print-op.c:205 ../src/print-op-dialog.c:215
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:2
+#: ../templates/misc-iso-templates.xml.h:26
+msgid "Labels"
+msgstr "Etiquetas"
+
+#: ../src/template-designer.c:429
+#, fuzzy
+msgid "New gLabels Template"
+msgstr "Crear un novo ficheiro «%s» desde o modelo "
+
+#: ../src/template-designer.c:487
+msgid "Welcome"
+msgstr "Benvido/a"
+
+#: ../src/template-designer.c:526
+msgid "Name and Description"
+msgstr "Nome e descrición"
+
+#: ../src/template-designer.c:575
+msgid "Page Size"
+msgstr "Tamaño de páxina"
+
+#: ../src/template-designer.c:642
+#, fuzzy
+msgid "Label or Card Shape"
+msgstr "falta o nome ou a etiqueta de %s"
+
+#: ../src/template-designer.c:689 ../src/template-designer.c:790
+#, fuzzy
+msgid "Label or Card Size"
+msgstr "Usar o tamaño na etiqueta"
+
+#: ../src/template-designer.c:873
+#, fuzzy
+msgid "Label Size (round)"
+msgstr "Usar o tamaño na etiqueta"
+
+#: ../src/template-designer.c:954
+#, fuzzy
+msgid "Label Size (CD/DVD)"
+msgstr "%.1f x (BD) %.1f x (DVD) %.1f x (CD)"
+
+#: ../src/template-designer.c:1045
+#, fuzzy
+msgid "Number of Layouts"
+msgstr "Disposición dos botóns"
+
+#: ../src/template-designer.c:1113
+#, fuzzy
+msgid "Layout(s)"
+msgstr "Disposición"
+
+#: ../src/template-designer.c:1218
+#, fuzzy
+msgid "Design Completed"
+msgstr "Non rematou correctamente\n"
+
+#: ../src/template-designer.c:1246
+#, fuzzy
+msgid "Edit gLabels Template"
+msgstr "Gardar como un _modelo"
+
+#: ../src/template-designer.c:1549
+msgid "Brand and part# match an existing template!"
+msgstr ""
+
+#. Menu entries.
+#: ../src/ui.c:91
+msgid "_File"
+msgstr "_Ficheiro"
+
+#: ../src/ui.c:92
+msgid "Open Recent _Files"
+msgstr "Abrir _ficheiros recentes"
+
+#: ../src/ui.c:93
+msgid "_Edit"
+msgstr "_Editar"
+
+#: ../src/ui.c:94
+msgid "_View"
+msgstr "_Ver"
+
+#: ../src/ui.c:95
+#, fuzzy
+msgid "Customize Main Toolbar"
+msgstr "Ver a barra de ferramentas principal"
+
+#: ../src/ui.c:96
+#, fuzzy
+msgid "Customize Drawing Toolbar"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#: ../src/ui.c:97
+#, fuzzy
+msgid "Customize Properties Toolbar"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#: ../src/ui.c:98
+msgid "_Objects"
+msgstr "_Obxectos"
+
+#: ../src/ui.c:99
+msgid "_Create"
+msgstr "_Crear"
+
+#: ../src/ui.c:100
+#, fuzzy
+msgid "_Order"
+msgstr "Ordenación Z de MDI"
+
+#: ../src/ui.c:101
+#, fuzzy
+msgid "_Rotate/Flip"
+msgstr "Voltear _horizontalmente"
+
+#: ../src/ui.c:102
+#, fuzzy
+msgid "_Alignment"
+msgstr "Aliñamento X"
+
+#: ../src/ui.c:103
+#, fuzzy
+msgid "C_enter"
+msgstr "C_entrado:"
+
+#: ../src/ui.c:104
+msgid "_Help"
+msgstr "_Axuda"
+
+#. Popup entries.
+#: ../src/ui.c:107 ../src/ui.c:108
+#, fuzzy
+msgid "Context Menu"
+msgstr "abrir o panel contextual"
+
+#: ../src/ui.c:113
+msgid "_New"
+msgstr "_Novo"
+
+#: ../src/ui.c:115
+msgid "Create a new file"
+msgstr "Crear un novo ficheiro"
+
+#: ../src/ui.c:120
+msgid "_Open..."
+msgstr "_Abrir…"
+
+#: ../src/ui.c:122
+msgid "Open a file"
+msgstr "Abrir un ficheiro"
+
+#: ../src/ui.c:127
+msgid "_Save"
+msgstr "_Gardar"
+
+#: ../src/ui.c:129
+msgid "Save current file"
+msgstr "Gardar o ficheiro actual"
+
+#: ../src/ui.c:134
+msgid "Save _As..."
+msgstr "Gardar _como…"
+
+#: ../src/ui.c:136
+msgid "Save the current file to a different name"
+msgstr "Gardar o ficheiro actual cun nome diferente"
+
+#: ../src/ui.c:141
+msgid "_Print..."
+msgstr "_Imprimir…"
+
+#: ../src/ui.c:143
+msgid "Print the current file"
+msgstr "Imprimir o ficheiro actual"
+
+#: ../src/ui.c:148
+msgid "Properties..."
+msgstr "Propiedades..."
+
+#: ../src/ui.c:150
+#, fuzzy
+msgid "Modify document properties"
+msgstr "Opcións para modificar as propiedades dunha xanela"
+
+#: ../src/ui.c:155
+#, fuzzy
+msgid "Template _Designer..."
+msgstr "Deseñador de interfaces"
+
+#: ../src/ui.c:157
+#, fuzzy
+msgid "Create a custom template"
+msgstr "Crear cor personalizado"
+
+#: ../src/ui.c:162
+msgid "_Close"
+msgstr "_Pechar"
+
+#: ../src/ui.c:164
+msgid "Close the current file"
+msgstr "Pechar o ficheiro actual"
+
+#: ../src/ui.c:169
+msgid "_Quit"
+msgstr "_Saír"
+
+#: ../src/ui.c:171
+msgid "Quit the program"
+msgstr "Saír do programa"
+
+#: ../src/ui.c:178 ../src/ui.c:180 ../src/ui.c:976
+msgid "Undo"
+msgstr "Desfacer"
+
+#: ../src/ui.c:185 ../src/ui.c:187 ../src/ui.c:983
+msgid "Redo"
+msgstr "Refacer"
+
+#: ../src/ui.c:192
+msgid "Cut"
+msgstr "Cortar"
+
+#: ../src/ui.c:194
+msgid "Cut the selection"
+msgstr "Cortar a selección"
+
+#: ../src/ui.c:199
+msgid "Copy"
+msgstr "Copiar"
+
+#: ../src/ui.c:201
+msgid "Copy the selection"
+msgstr "Copiar a selección"
+
+#: ../src/ui.c:208
+msgid "Paste the clipboard"
+msgstr "Pegar o contido do portapapeis"
+
+#: ../src/ui.c:215
+#, fuzzy
+msgid "Delete the selected objects"
+msgstr "Eliminando os obxectos seleccionados"
+
+#: ../src/ui.c:220
+msgid "Select All"
+msgstr "Seleccionar todo"
+
+#: ../src/ui.c:222
+#, fuzzy
+msgid "Select all objects"
+msgstr "Seleccionar todas as pistas"
+
+#: ../src/ui.c:227
+#, fuzzy
+msgid "Un-select All"
+msgstr "Seleccionar todas as pistas"
+
+#: ../src/ui.c:229
+#, fuzzy
+msgid "Remove all selections"
+msgstr "Retirar todos os puntos de interrupción"
+
+#: ../src/ui.c:234
+msgid "Preferences"
+msgstr "Preferencias"
+
+#: ../src/ui.c:236
+msgid "Configure the application"
+msgstr "Configurar o aplicativo"
+
+#: ../src/ui.c:243
+msgid "Zoom in"
+msgstr "Ampliar"
+
+#: ../src/ui.c:245
+#, fuzzy
+msgid "Increase magnification"
+msgstr "Filtro de ampliación"
+
+#: ../src/ui.c:250
+msgid "Zoom out"
+msgstr "Afastar"
+
+#: ../src/ui.c:252
+#, fuzzy
+msgid "Decrease magnification"
+msgstr "Filtro de ampliación"
+
+#: ../src/ui.c:257
+#, fuzzy
+msgid "Zoom 1 to 1"
+msgstr "Restrinxe o ampliación a un eixo"
+
+#: ../src/ui.c:259
+#, fuzzy
+msgid "Restore scale to 100%"
+msgstr "Produciuse un erro ao restaurar «%s» desde «%s»: %s"
+
+#: ../src/ui.c:264
+#, fuzzy
+msgid "Zoom to fit"
+msgstr "Ampliar até encaixar a páxina completa"
+
+#: ../src/ui.c:266
+#, fuzzy
+msgid "Set scale to fit window"
+msgstr "Estabelecer a xanela pai para facelo modal"
+
+#: ../src/ui.c:273
+#, fuzzy
+msgid "Select Mode"
+msgstr "Modo mini"
+
+#: ../src/ui.c:275
+msgid "Select, move and modify objects"
+msgstr ""
+
+#: ../src/ui.c:280 ../src/view-text.c:94 ../data/ui/object-editor.ui.h:2
+#: ../data/ui/prefs-dialog.ui.h:17
+msgid "Text"
+msgstr "Texto"
+
+#: ../src/ui.c:287
+msgid "Box"
+msgstr "Caixa"
+
+#: ../src/ui.c:289
+#, fuzzy
+msgid "Create box/rectangle object"
+msgstr "Non é posíbel crear o obxecto do calendario: "
+
+#: ../src/ui.c:294 ../data/ui/object-editor.ui.h:17
+#: ../data/ui/prefs-dialog.ui.h:20
+msgid "Line"
+msgstr "Liña"
+
+#: ../src/ui.c:301
+msgid "Ellipse"
+msgstr "Elipse"
+
+#: ../src/ui.c:303
+#, fuzzy
+msgid "Create ellipse/circle object"
+msgstr "Non é posíbel crear o obxecto do calendario: "
+
+#: ../src/ui.c:308 ../data/ui/object-editor.ui.h:20
+msgid "Image"
+msgstr "Imaxe"
+
+#: ../src/ui.c:315
+msgid "Barcode"
+msgstr ""
+
+#: ../src/ui.c:324
+#, fuzzy
+msgid "Raise object to top"
+msgstr "Vai ao principio do ficheiro."
+
+#: ../src/ui.c:331
+#, fuzzy
+msgid "Lower object to bottom"
+msgstr "Vai ao final do ficheiro."
+
+#: ../src/ui.c:338
+msgid "Rotate object 90 degrees counter-clockwise"
+msgstr ""
+
+#: ../src/ui.c:345
+#, fuzzy
+msgid "Rotate object 90 degrees clockwise"
+msgstr "Rotar a imaxe 90 graos á dereita"
+
+#: ../src/ui.c:352
+#, fuzzy
+msgid "Flip object horizontally"
+msgstr "Reflicte a imaxe horizontalmente"
+
+#: ../src/ui.c:359
+#, fuzzy
+msgid "Flip object vertically"
+msgstr "Reflicte a imaxe verticalmente"
+
+#: ../src/ui.c:366
+msgid "Align objects to left edges"
+msgstr ""
+
+#: ../src/ui.c:371
+#, fuzzy
+msgid "Align center"
+msgstr "Centro da escala Z"
+
+#: ../src/ui.c:373
+msgid "Align objects to horizontal centers"
+msgstr ""
+
+#: ../src/ui.c:380
+msgid "Align objects to right edges"
+msgstr ""
+
+#: ../src/ui.c:385
+#, fuzzy
+msgid "Align top"
+msgstr "Panel superior"
+
+#: ../src/ui.c:387
+msgid "Align objects to top edges"
+msgstr ""
+
+#: ../src/ui.c:392
+#, fuzzy
+msgid "Align middle"
+msgstr "Oriente Medio"
+
+#: ../src/ui.c:394
+msgid "Align objects to vertical centers"
+msgstr ""
+
+#: ../src/ui.c:399
+#, fuzzy
+msgid "Align bottom"
+msgstr "Panel inferior"
+
+#: ../src/ui.c:401
+msgid "Align objects to bottom edges"
+msgstr ""
+
+#: ../src/ui.c:408
+msgid "Center objects to horizontal label center"
+msgstr ""
+
+#: ../src/ui.c:415
+msgid "Center objects to vertical label center"
+msgstr ""
+
+#: ../src/ui.c:422
+#, fuzzy
+msgid "Edit merge properties"
+msgstr "Editar as propiedades do punto de interrupción"
+
+#: ../src/ui.c:429
+#, fuzzy
+msgid "Contents"
+msgstr "Contidos"
+
+#: ../src/ui.c:431
+msgid "Open glabels manual"
+msgstr "Abrir o manual de gLabels"
+
+#: ../src/ui.c:436
+msgid "About..."
+msgstr "_Sobre..."
+
+#: ../src/ui.c:438 ../src/ui-commands.c:1198
+msgid "About glabels"
+msgstr "Sobre o gLabels"
+
+#: ../src/ui.c:448
+#, fuzzy
+msgid "Property toolbar"
+msgstr "E_liminar a barra de ferramentas"
+
+#: ../src/ui.c:450
+msgid "Change the visibility of the property toolbar in the current window"
+msgstr ""
+
+#: ../src/ui.c:456
+msgid "Grid"
+msgstr "Grade"
+
+#: ../src/ui.c:458
+#, fuzzy
+msgid "Change the visibility of the grid in the current window"
+msgstr "Cambia a visibilidade da barra de ferramentas na xanela actual"
+
+#: ../src/ui.c:464
+#, fuzzy
+msgid "Markup"
+msgstr "Marcación"
+
+#: ../src/ui.c:466
+msgid "Change the visibility of markup lines in the current window"
+msgstr ""
+
+#: ../src/ui.c:477
+#, fuzzy
+msgid "Main toolbar"
+msgstr "Ver a barra de ferramentas principal"
+
+#: ../src/ui.c:479
+msgid "Change the visibility of the main toolbar in the current window"
+msgstr ""
+
+#: ../src/ui.c:485
+#, fuzzy
+msgid "Drawing toolbar"
+msgstr "E_liminar a barra de ferramentas"
+
+#: ../src/ui.c:487
+msgid "Change the visibility of the drawing toolbar in the current window"
+msgstr ""
+
+#: ../src/ui-commands.c:1135
+msgid "Glabels includes contributions from:"
+msgstr ""
+
+#: ../src/ui-commands.c:1144
+msgid "See the file AUTHORS for additional credits,"
+msgstr ""
+
+#: ../src/ui-commands.c:1145
+msgid "or visit http://glabels.org/"
+msgstr ""
+
+#: ../src/ui-commands.c:1162
+msgid "A label and business card creation program.\n"
+msgstr ""
+
+#: ../src/ui-commands.c:1166
+msgid "translator-credits"
+msgstr ""
+"Leandro Regueiro <leandro.regueiro@gmail.com>, 2012.\n"
+"Proxecto Trasno - Tradución de software libre ao galego <proxecto@trasno."
+"net>, 1999-2012"
+
+#: ../src/ui-commands.c:1169
+msgid ""
+"gLabels is free software: you can redistribute it and/or modify\n"
+"it under the terms of the GNU General Public License as published by\n"
+"the Free Software Foundation, either version 3 of the License, or\n"
+"(at your option) any later version.\n"
+"\n"
+"gLabels is distributed in the hope that it will be useful,\n"
+"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"GNU General Public License for more details.\n"
+msgstr ""
+
+#: ../src/warning-handler.c:69
+#, fuzzy
+msgid "gLabels Error!"
+msgstr "Erro descoñecido"
+
+#: ../src/window.c:281
+#, fuzzy
+msgid "(none) - gLabels"
+msgstr "_Non seleccionar nada"
+
+#: ../src/window.c:482
+#, fuzzy
+msgid "(modified)"
+msgstr "Modificado"
+
+#. Create and append an "Other" entry.
+#. Translators: "Other" here means other page size.  Meaning a page size
+#. * other than the standard ones that libglabels knows about such as
+#. * "letter", "A4", etc.
+#: ../libglabels/lgl-db.c:267
+msgid "Other"
+msgstr "Outro"
+
+#. Create and append a "User defined" entry.
+#: ../libglabels/lgl-db.c:276
+msgid "User defined"
+msgstr "Definido polo usuario"
+
+#: ../libglabels/lgl-db.c:663
+msgid ""
+"Unable to locate paper size definitions.  Libglabels may not be installed "
+"correctly!"
+msgstr ""
+
+#: ../libglabels/lgl-db.c:1062
+msgid ""
+"Unable to locate category definitions.  Libglabels may not be installed "
+"correctly!"
+msgstr ""
+
+#: ../libglabels/lgl-db.c:1989
+msgid ""
+"Unable to locate any template files.  Libglabels may not be installed "
+"correctly!"
+msgstr ""
+
+#: ../libglabels/lgl-db.c:2056
+#, fuzzy, c-format
+msgid "%s full page label"
+msgstr "Usar a páxina completa"
+
+#.
+#. * Translators: 1st %d = number of labels across a page,
+#. *              2nd %d = number of labels down a page,
+#. *              3rd %d = total number of labels on a page (sheet).
+#.
+#: ../libglabels/lgl-template.c:673
+#, fuzzy, c-format
+msgid "%d × %d (%d per sheet)"
+msgstr "Páxinas por folla"
+
+#. Translators: %d is the total number of labels on a page (sheet).
+#: ../libglabels/lgl-template.c:678
+#, fuzzy, c-format
+msgid "%d per sheet"
+msgstr "Páxinas por folla"
+
+#: ../libglabels/lgl-template.c:759 ../libglabels/lgl-template.c:767
+#: ../libglabels/lgl-template.c:779 ../libglabels/lgl-template.c:787
+msgid "diameter"
+msgstr ""
+
+#. The ids are identical to the absolute length units supported in
+#. the CSS2 Specification (Section 4.3.2)
+#. This table must be sorted exactly as the enumerations in lglUnits
+#. [LGL_UNITS_POINT]
+#: ../libglabels/lgl-units.c:65 ../data/ui/object-editor.ui.h:15
+#: ../data/ui/prefs-dialog.ui.h:19
+msgid "points"
+msgstr "puntos"
+
+#. [LGL_UNITS_INCH]
+#: ../libglabels/lgl-units.c:66 ../data/ui/object-editor.ui.h:28
+#: ../data/ui/template-designer.ui.h:15
+msgid "inches"
+msgstr "polgadas"
+
+#. [LGL_UNITS_MM]
+#: ../libglabels/lgl-units.c:67
+msgid "mm"
+msgstr "mm"
+
+#. [LGL_UNITS_CM]
+#: ../libglabels/lgl-units.c:68
+msgid "cm"
+msgstr "cm"
+
+#. [LGL_UNITS_PICA]
+#: ../libglabels/lgl-units.c:69
+msgid "picas"
+msgstr ""
+
+#.
+#. * Local Variables:       -- emacs
+#. * mode: C                -- emacs
+#. * c-basic-offset: 8      -- emacs
+#. * tab-width: 8           -- emacs
+#. * indent-tabs-mode: nil  -- emacs
+#. * End:                   -- emacs
+#.
+#: ../data/ui/merge-properties-dialog.ui.h:1
+msgid "Format:"
+msgstr "Formato:"
+
+#: ../data/ui/merge-properties-dialog.ui.h:2
+msgid "Location:"
+msgstr "Localización:"
+
+#: ../data/ui/merge-properties-dialog.ui.h:3
+#, fuzzy
+msgid "Source"
+msgstr "Fonte"
+
+#: ../data/ui/merge-properties-dialog.ui.h:4
+msgid "Select all"
+msgstr "Seleccionar todo"
+
+#: ../data/ui/merge-properties-dialog.ui.h:5
+#, fuzzy
+msgid "Unselect all"
+msgstr "Deseleccionar todas"
+
+#: ../data/ui/merge-properties-dialog.ui.h:6
+#, fuzzy
+msgid "Record selection/preview"
+msgstr "Activar a previsualización de ficheiros"
+
+#: ../data/ui/media-select.ui.h:1
+#, fuzzy
+msgid "Recent"
+msgstr "Recentes"
+
+#: ../data/ui/media-select.ui.h:2
+#, fuzzy
+msgid "Brand:"
+msgstr "Marca da cámara"
+
+#: ../data/ui/media-select.ui.h:3 ../data/ui/new-label-dialog.ui.h:7
+#: ../data/ui/template-designer.ui.h:12
+msgid "Page size:"
+msgstr "Tamaño de páxina:"
+
+#: ../data/ui/media-select.ui.h:4
+msgid "Category:"
+msgstr "Categoría:"
+
+#: ../data/ui/media-select.ui.h:5
+#, fuzzy
+msgid "Search all"
+msgstr "Buscar en todas as contas"
+
+#: ../data/ui/media-select.ui.h:6
+#, fuzzy
+msgid "Custom"
+msgstr "Personalizada"
+
+#: ../data/ui/new-label-dialog.ui.h:1
+msgid ""
+"Choose label or card product from hundreds of predefined templates or define "
+"your own."
+msgstr ""
+
+#: ../data/ui/new-label-dialog.ui.h:2
+msgid "Select orientation of label content."
+msgstr ""
+
+#: ../data/ui/new-label-dialog.ui.h:3
+msgid "Normal"
+msgstr "Normal"
+
+#: ../data/ui/new-label-dialog.ui.h:4
+msgid "Rotated"
+msgstr ""
+
+#: ../data/ui/new-label-dialog.ui.h:5
+msgid "Please review and confirm your selection."
+msgstr ""
+
+#: ../data/ui/new-label-dialog.ui.h:6 ../data/ui/template-designer.ui.h:9
+msgid "Description:"
+msgstr "Descrición:"
+
+#: ../data/ui/new-label-dialog.ui.h:8
+#, fuzzy
+msgid "Label size:"
+msgstr "Usar o tamaño na etiqueta"
+
+#: ../data/ui/new-label-dialog.ui.h:9
+#, fuzzy
+msgid "Layout:"
+msgstr "Disposición:"
+
+#: ../data/ui/new-label-dialog.ui.h:10
+#, fuzzy
+msgid "Similar products:"
+msgstr "Similares a"
+
+#: ../data/ui/new-label-dialog.ui.h:11 ../data/ui/template-designer.ui.h:6
+#, fuzzy
+msgid "Part #:"
+msgstr "Parte da pantalla:"
+
+#: ../data/ui/new-label-dialog.ui.h:12
+msgid "Vendor:"
+msgstr "Fabricante:"
+
+#: ../data/ui/object-editor.ui.h:1
+msgid "dialog1"
+msgstr ""
+
+#: ../data/ui/object-editor.ui.h:3
+#, fuzzy
+msgid "Family:"
+msgstr "Familia"
+
+#: ../data/ui/object-editor.ui.h:4
+msgid "Size:"
+msgstr "Tamaño:"
+
+#: ../data/ui/object-editor.ui.h:5
+msgid "Style:"
+msgstr "Estilo:"
+
+#: ../data/ui/object-editor.ui.h:6 ../data/ui/prefs-dialog.ui.h:14
+msgid "Color:"
+msgstr "Cor:"
+
+#: ../data/ui/object-editor.ui.h:7
+msgid " "
+msgstr " "
+
+#: ../data/ui/object-editor.ui.h:8
+#, fuzzy
+msgid "key:"
+msgstr "Tecla"
+
+#: ../data/ui/object-editor.ui.h:9 ../data/ui/prefs-dialog.ui.h:15
+#, fuzzy
+msgid "Alignment:"
+msgstr "Aliñamento X"
+
+#: ../data/ui/object-editor.ui.h:10
+#, fuzzy
+msgid "Vertical alignment:"
+msgstr "Aliñamento vertical"
+
+#: ../data/ui/object-editor.ui.h:11 ../data/ui/prefs-dialog.ui.h:16
+#, fuzzy
+msgid "Line Spacing:"
+msgstr "Espazamento de columnas"
+
+#: ../data/ui/object-editor.ui.h:12
+msgid "Allow merge to automatically shrink text"
+msgstr ""
+
+#: ../data/ui/object-editor.ui.h:13
+msgid "Style"
+msgstr "Estilo"
+
+#: ../data/ui/object-editor.ui.h:14 ../data/ui/prefs-dialog.ui.h:18
+#: ../data/ui/template-designer.ui.h:13
+msgid "Width:"
+msgstr "Largura:"
+
+#: ../data/ui/object-editor.ui.h:16
+#, fuzzy
+msgid "Key:"
+msgstr "Tecla"
+
+#: ../data/ui/object-editor.ui.h:18 ../data/ui/prefs-dialog.ui.h:21
+#, fuzzy
+msgid "Fill"
+msgstr "Encher"
+
+#: ../data/ui/object-editor.ui.h:19
+msgid "File:"
+msgstr "Ficheiro:"
+
+#: ../data/ui/object-editor.ui.h:21
+#, fuzzy
+msgid "Literal:"
+msgstr "Literal"
+
+#: ../data/ui/object-editor.ui.h:22
+msgid "format:"
+msgstr "formato:"
+
+#: ../data/ui/object-editor.ui.h:23
+msgid "digits:"
+msgstr "díxitos:"
+
+#: ../data/ui/object-editor.ui.h:25
+#, fuzzy
+msgid "Backend:"
+msgstr "Infraestrutura"
+
+#: ../data/ui/object-editor.ui.h:26
+#, fuzzy
+msgid "Checksum"
+msgstr "Creando a suma de comprobación"
+
+#: ../data/ui/object-editor.ui.h:27 ../data/ui/template-designer.ui.h:14
+msgid "Height:"
+msgstr "Altura:"
+
+#: ../data/ui/object-editor.ui.h:29
+#, fuzzy
+msgid "Reset image size"
+msgstr "O tamaño da imaxe non é válido"
+
+#: ../data/ui/object-editor.ui.h:30
+msgid "Size"
+msgstr "Tamaño"
+
+#: ../data/ui/object-editor.ui.h:31
+msgid "Length:"
+msgstr "Lonxitude:"
+
+#: ../data/ui/object-editor.ui.h:32
+msgid "Angle:"
+msgstr "Ángulo:"
+
+#: ../data/ui/object-editor.ui.h:33
+msgid "degrees"
+msgstr "graos"
+
+#: ../data/ui/object-editor.ui.h:34
+msgid "X:"
+msgstr "X:"
+
+#: ../data/ui/object-editor.ui.h:35
+msgid "Y:"
+msgstr "Y:"
+
+#: ../data/ui/object-editor.ui.h:36
+msgid "Position"
+msgstr "Posición"
+
+#: ../data/ui/object-editor.ui.h:37
+#, fuzzy
+msgid "Enable shadow"
+msgstr "Eliminar sombra"
+
+#: ../data/ui/object-editor.ui.h:38
+#, fuzzy
+msgid "X Offset:"
+msgstr "Desprazamento"
+
+#: ../data/ui/object-editor.ui.h:39
+#, fuzzy
+msgid "Y Offset:"
+msgstr "Desprazamento"
+
+#: ../data/ui/object-editor.ui.h:40
+msgid "Opacity:"
+msgstr "Opacidade:"
+
+#: ../data/ui/object-editor.ui.h:42
+#, no-c-format
+msgid "%"
+msgstr "%"
+
+#: ../data/ui/object-editor.ui.h:43
+msgid "Shadow"
+msgstr "Sombra"
+
+#: ../data/ui/prefs-dialog.ui.h:2
+msgid "Select locale specific behavior."
+msgstr ""
+
+#: ../data/ui/prefs-dialog.ui.h:3
+msgid "   "
+msgstr "   "
+
+#: ../data/ui/prefs-dialog.ui.h:4
+msgid "Points"
+msgstr "Puntos"
+
+#: ../data/ui/prefs-dialog.ui.h:5
+msgid "Inches"
+msgstr "Polgadas"
+
+#: ../data/ui/prefs-dialog.ui.h:6
+msgid "Millimeters"
+msgstr "Milímetros"
+
+#: ../data/ui/prefs-dialog.ui.h:7
+#, fuzzy
+msgid "Units"
+msgstr "Unidades"
+
+#: ../data/ui/prefs-dialog.ui.h:8 ../templates/paper-sizes.xml.h:3
+#, fuzzy
+msgid "US Letter"
+msgstr "Carta de US"
+
+#: ../data/ui/prefs-dialog.ui.h:9
+#, fuzzy
+msgid "ISO A4"
+msgstr "A4 Extra"
+
+#: ../data/ui/prefs-dialog.ui.h:10
+#, fuzzy
+msgid "Default page size"
+msgstr "O tamaño de páxina do axuste"
+
+#: ../data/ui/prefs-dialog.ui.h:11
+#, fuzzy
+msgid "Locale"
+msgstr "Configuración rexional"
+
+#: ../data/ui/prefs-dialog.ui.h:12
+msgid "Select default properties for new objects."
+msgstr ""
+
+#: ../data/ui/prefs-dialog.ui.h:13
+msgid "Font:"
+msgstr "Tipo de letra:"
+
+#: ../data/ui/prefs-dialog.ui.h:22
+#, fuzzy
+msgid "Object defaults"
+msgstr "Incluír predeterminados"
+
+#: ../data/ui/property-bar.ui.h:3
+#, fuzzy
+msgid "Bold"
+msgstr "Negriña"
+
+#: ../data/ui/property-bar.ui.h:5
+#, fuzzy
+msgid "Left align"
+msgstr "Aliñar á esquerda"
+
+#: ../data/ui/property-bar.ui.h:6
+#, fuzzy
+msgid "Center align"
+msgstr "Aliñar á dereita"
+
+#: ../data/ui/property-bar.ui.h:7
+#, fuzzy
+msgid "Right align"
+msgstr "Aliñar á dereita"
+
+#: ../data/ui/property-bar.ui.h:8
+#, fuzzy
+msgid "Top vertical align"
+msgstr "Definir unha disposición vertical"
+
+#: ../data/ui/property-bar.ui.h:9
+#, fuzzy
+msgid "Center vertical align"
+msgstr "Centro na escala vertical"
+
+#: ../data/ui/property-bar.ui.h:10
+#, fuzzy
+msgid "Bottom vertical align"
+msgstr "Definir unha disposición vertical"
+
+#: ../data/ui/template-designer.ui.h:1
+msgid ""
+"Welcome to the gLabels Template Designer.\n"
+"\n"
+"This dialog will assist you in the creation of a custom gLabels template."
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:4
+msgid ""
+"Please enter the following identifying information about the template "
+"stationery."
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:5
+#, fuzzy
+msgid "Brand/Manufacturer:"
+msgstr "Fabricante do dispositivo"
+
+#: ../data/ui/template-designer.ui.h:7
+msgid "(e.g., 8163A)"
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:8
+msgid "(e.g., Avery, Acme, ...)"
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:10
+msgid "(e.g., \"Mailing Labels,\" \"Business Cards,\" ...)"
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:11
+msgid "Please select the page size of the template stationery."
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:16
+msgid "Please select the basic shape of the labels or cards."
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:17
+msgid "Rectangular or square (can have rounded corners)"
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:18
+#, fuzzy
+msgid "Round"
+msgstr "Redondear"
+
+#: ../data/ui/template-designer.ui.h:19
+msgid "Elliptical"
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:20
+msgid "CD/DVD (including credit card CDs)"
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:21
+msgid ""
+"Please enter the following size parameters of a single label or card in your "
+"template."
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:22
+#, fuzzy
+msgid "1. Width:"
+msgstr "Largura"
+
+#: ../data/ui/template-designer.ui.h:23
+#, fuzzy
+msgid "2. Height:"
+msgstr "Altura"
+
+#: ../data/ui/template-designer.ui.h:24
+#, fuzzy
+msgid "3. Round (radius of corner):"
+msgstr "Repartir outra rolda"
+
+#: ../data/ui/template-designer.ui.h:25
+msgid "4. Horiz. waste (overprint allowed):"
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:26
+#, fuzzy
+msgid "6. Margin"
+msgstr "_Marxe:"
+
+#: ../data/ui/template-designer.ui.h:27
+msgid "5. Vert. waste (overprint allowed):"
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:28
+#, fuzzy
+msgid "3. Waste (overprint allowed):"
+msgstr "Non se permite a publicación"
+
+#: ../data/ui/template-designer.ui.h:29
+#, fuzzy
+msgid "4. Margin"
+msgstr "_Marxe:"
+
+#: ../data/ui/template-designer.ui.h:30
+msgid ""
+"Please enter the following size parameters of a single label in your "
+"template."
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:31
+msgid "1. Radius:"
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:32
+#, fuzzy
+msgid "2. Waste (overprint allowed):"
+msgstr "Non se permite a publicación"
+
+#: ../data/ui/template-designer.ui.h:33
+#, fuzzy
+msgid "3. Margin"
+msgstr "_Marxe:"
+
+#: ../data/ui/template-designer.ui.h:34
+msgid "1. Outer radius:"
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:35
+#, fuzzy
+msgid "2. Inner radius:"
+msgstr "Bordo interior"
+
+#: ../data/ui/template-designer.ui.h:36
+#, fuzzy
+msgid "3. Clipping width:"
+msgstr "Anchura da xanela"
+
+#: ../data/ui/template-designer.ui.h:37
+#, fuzzy
+msgid "4. Clipping height:"
+msgstr "Altura da xanela"
+
+#: ../data/ui/template-designer.ui.h:38
+#, fuzzy
+msgid "5. Waste (overprint allowed):"
+msgstr "Non se permite a publicación"
+
+#: ../data/ui/template-designer.ui.h:39
+msgid ""
+"How many layouts will your template contain? \n"
+"\n"
+"A layout is a set of labels or cards that can be arranged in a simple grid.\n"
+"Most templates only need one layout, as in the first example.\n"
+"The second example illustrates when two layouts are needed."
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:44
+msgid ""
+"Templates needing only\n"
+"one layout."
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:46
+msgid ""
+"Templates needing\n"
+"two layouts."
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:48
+msgid ""
+"Note: if more than 2 layouts are required, the template must be edited "
+"manually."
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:49
+#, fuzzy
+msgid "Number of layouts:"
+msgstr "Disposición dos botóns"
+
+#: ../data/ui/template-designer.ui.h:50
+#, fuzzy
+msgid "Please enter the following layout information."
+msgstr "Insira o seguinte PIN en «%s»:"
+
+#: ../data/ui/template-designer.ui.h:51
+#, fuzzy
+msgid "Layout #1"
+msgstr "Disposición"
+
+#: ../data/ui/template-designer.ui.h:52
+#, fuzzy
+msgid "Layout #2"
+msgstr "Disposición"
+
+#: ../data/ui/template-designer.ui.h:53
+#, fuzzy
+msgid "Number across (nx):"
+msgstr "Atopouse o número do punto de interrupción %s\n"
+
+#: ../data/ui/template-designer.ui.h:54
+#, fuzzy
+msgid "Number down (ny):"
+msgstr "carta cara abaixo"
+
+#: ../data/ui/template-designer.ui.h:55
+msgid "Distance from left edge (x0):"
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:56
+msgid "Distance from top edge (y0):"
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:57
+#, fuzzy
+msgid "Horizontal pitch (dx):"
+msgstr "Diminúe o ton da voz."
+
+#: ../data/ui/template-designer.ui.h:58
+#, fuzzy
+msgid "Vertical pitch (dy):"
+msgstr "Diminúe o ton da voz."
+
+#: ../data/ui/template-designer.ui.h:59
+#, fuzzy
+msgid "Print test sheet"
+msgstr "I_mprimir páxina de proba"
+
+#: ../data/ui/template-designer.ui.h:60
+msgid ""
+"Congratulations!\n"
+"\n"
+"You have completed the gLabels Template Designer.\n"
+"If you wish to accept and save your design, click \"Apply.\"\n"
+"\n"
+"Otherwise, you may click \"Cancel\" to abandon your design\n"
+"or \"Back\" to continue editing this design."
+msgstr ""
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:1
+#, fuzzy
+msgid "Sheets:"
+msgstr "Todas as follas"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:3
+#, fuzzy
+msgid "from:"
+msgstr "de"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:4
+#, fuzzy
+msgid "to:"
+msgstr "Para"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:5
+#, fuzzy
+msgid "Copies"
+msgstr "Copias"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:6
+#, fuzzy
+msgid "Start on label"
+msgstr "Nivel no que vai comezar"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:7
+#, fuzzy
+msgid "on 1st sheet"
+msgstr "Gravando a folla CUE"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:8
+#, fuzzy
+msgid "Copies:"
+msgstr "Copias"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:9
+#, fuzzy
+msgid "Collate"
+msgstr "Cotexar"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:10
+#, fuzzy
+msgid "Merge Control"
+msgstr "Tecla de control"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:14
+#, fuzzy
+msgid "Options"
+msgstr "Opcións"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
+#, fuzzy
+msgid "Show/hide main toolbar."
+msgstr "Mostrar ou agochar a barra de ferramentas"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:2
+#, fuzzy
+msgid "Controls visibility of main toolbar."
+msgstr "Cambia a visibilidade da barra de ferramentas na xanela actual"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:3
+#, fuzzy
+msgid "Show/hide drawing toolbar."
+msgstr "Mostrar ou agochar a barra de ferramentas"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:4
+#, fuzzy
+msgid "Controls visibility of drawing toolbar."
+msgstr "Cambia a visibilidade da barra de ferramentas na xanela actual"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:5
+#, fuzzy
+msgid "Show/hide property toolbar."
+msgstr "Mostrar ou agochar a barra de ferramentas"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:6
+#, fuzzy
+msgid "Controls visibility of property toolbar."
+msgstr "Cambia a visibilidade da barra de ferramentas na xanela actual"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:7
+#, fuzzy
+msgid "Show/hide grid."
+msgstr "Mostrar os _botóns de ocultación"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:8
+#, fuzzy
+msgid "Controls visibility of grid."
+msgstr "Desactivar a grella do álbume"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:9
+#, fuzzy
+msgid "Show/hide markup."
+msgstr "Mostrar os _botóns de ocultación"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:10
+msgid "Controls visibility of markup lines."
+msgstr ""
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:11
+#, fuzzy
+msgid "Maximum recent files."
+msgstr "Máximo de ficheiros recentes"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:12
+msgid "Controls maximum number of recent files tracked."
+msgstr ""
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:13
+#, fuzzy
+msgid "Units."
+msgstr "Unidades"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:14
+#, fuzzy
+msgid "The default unit of measurement."
+msgstr "Unidade organizativa (UO)"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:15
+#, fuzzy
+msgid "Default page size."
+msgstr "O tamaño de páxina do axuste"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:16
+msgid "The preferred page size when searching templates."
+msgstr ""
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:17
+#, fuzzy
+msgid "Default font family."
+msgstr "Definición da familia do tipo de letra"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:18
+msgid "The default font family for new text objects."
+msgstr ""
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:19
+#, fuzzy
+msgid "Default font size."
+msgstr "Tamaño mínimo do tipo de letra"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:20
+msgid "The default font size for new text objects."
+msgstr ""
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:21
+#, fuzzy
+msgid "Default font weight."
+msgstr "Definición do grosor do tipo de letra"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:22
+msgid "The default font weight for new text objects."
+msgstr ""
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:23
+#, fuzzy
+msgid "Default font italic flag."
+msgstr "As opcións predeterminadas do tipo de letra para a pantalla"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:24
+msgid "The default font italic state for new text objects."
+msgstr ""
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:25
+#, fuzzy
+msgid "Default text color."
+msgstr "Cor predeterminada do texto no terminal"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:26
+msgid "The default color of text for new text objects (0xRRGGBBAA)."
+msgstr ""
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:27
+#, fuzzy
+msgid "Default text alignment."
+msgstr "Texto predeterminado do widget"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:28
+msgid "The default text alignment for new text objects."
+msgstr ""
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:29
+#, fuzzy
+msgid "Default text line spacing."
+msgstr "Texto para miniaturizar (predeterminado: Aa)"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:30
+msgid "The default line spacing for new text objects."
+msgstr ""
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:31
+#, fuzzy
+msgid "Default line width."
+msgstr "Largura da liña da grella"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:32
+msgid "The default line width for new objects."
+msgstr ""
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:33
+#, fuzzy
+msgid "Default line color."
+msgstr "Cor de fondo da liña"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:34
+msgid "The default line color new objects (0xRRGGBBAA)."
+msgstr ""
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:35
+#, fuzzy
+msgid "Default fill color."
+msgstr "Cor de recheo do realce"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:36
+msgid "The default fill color new objects (0xRRGGBBAA)."
+msgstr ""
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:37
+#, fuzzy
+msgid "Recent templates."
+msgstr "Favoritos recentes"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:38
+#, fuzzy
+msgid "Recently used templates."
+msgstr "Non hai proxectos usados recentemente"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:39
+#, fuzzy
+msgid "Recent fonts."
+msgstr "Tipos de fonte e estilo"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:40
+#, fuzzy
+msgid "Recently used font families."
+msgstr "Non hai proxectos usados recentemente"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:41
+#, fuzzy
+msgid "Recent colors."
+msgstr "Cores alternativos"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:42
+msgid "Recently created custom colors."
+msgstr ""
+
+#: ../data/desktop/glabels-3.0.desktop.in.h:1
+#, fuzzy
+msgid "gLabels Label Designer 3"
+msgstr "Deseñador da interface Glade"
+
+#: ../data/desktop/glabels-3.0.desktop.in.h:2
+msgid "Create labels, business cards and media covers"
+msgstr ""
+
+#: ../data/mime/glabels-3.0.xml.in.h:1
+#, fuzzy
+msgid "gLabels Project File"
+msgstr "Ficheiro de proxecto do Brasero"
+
+#. Most popular (at top of list)
+#: ../templates/paper-sizes.xml.h:2
+#, fuzzy
+msgid "A4"
+msgstr "A4"
+
+#. Other US paper sizes
+#: ../templates/paper-sizes.xml.h:5
+#, fuzzy
+msgid "US Legal"
+msgstr "Legal de US"
+
+#: ../templates/paper-sizes.xml.h:6
+#, fuzzy
+msgid "US Executive"
+msgstr "Esta_do:"
+
+#. Other ISO A series sizes
+#: ../templates/paper-sizes.xml.h:8
+#, fuzzy
+msgid "A0"
+msgstr "A0"
+
+#: ../templates/paper-sizes.xml.h:9
+#, fuzzy
+msgid "A1"
+msgstr "A1"
+
+#: ../templates/paper-sizes.xml.h:10
+#, fuzzy
+msgid "A2"
+msgstr "A2"
+
+#: ../templates/paper-sizes.xml.h:11
+#, fuzzy
+msgid "A3"
+msgstr "A3"
+
+#: ../templates/paper-sizes.xml.h:12
+#, fuzzy
+msgid "A5"
+msgstr "A5"
+
+#: ../templates/paper-sizes.xml.h:13
+#, fuzzy
+msgid "A6"
+msgstr "A6"
+
+#: ../templates/paper-sizes.xml.h:14
+#, fuzzy
+msgid "A7"
+msgstr "A7"
+
+#: ../templates/paper-sizes.xml.h:15
+#, fuzzy
+msgid "A8"
+msgstr "A8"
+
+#: ../templates/paper-sizes.xml.h:16
+#, fuzzy
+msgid "A9"
+msgstr "A9"
+
+#: ../templates/paper-sizes.xml.h:17
+#, fuzzy
+msgid "A10"
+msgstr "A10"
+
+#. ISO B series sizes
+#: ../templates/paper-sizes.xml.h:19
+#, fuzzy
+msgid "B0"
+msgstr "B0"
+
+#: ../templates/paper-sizes.xml.h:20
+#, fuzzy
+msgid "B1"
+msgstr "B1"
+
+#: ../templates/paper-sizes.xml.h:21
+#, fuzzy
+msgid "B2"
+msgstr "B2"
+
+#: ../templates/paper-sizes.xml.h:22
+#, fuzzy
+msgid "B3"
+msgstr "B3"
+
+#: ../templates/paper-sizes.xml.h:23
+#, fuzzy
+msgid "B4"
+msgstr "B4"
+
+#: ../templates/paper-sizes.xml.h:24
+#, fuzzy
+msgid "B5"
+msgstr "B5"
+
+#: ../templates/paper-sizes.xml.h:25
+#, fuzzy
+msgid "B6"
+msgstr "B6"
+
+#: ../templates/paper-sizes.xml.h:26
+#, fuzzy
+msgid "B7"
+msgstr "B7"
+
+#: ../templates/paper-sizes.xml.h:27
+#, fuzzy
+msgid "B8"
+msgstr "B8"
+
+#: ../templates/paper-sizes.xml.h:28
+#, fuzzy
+msgid "B9"
+msgstr "B9"
+
+#: ../templates/paper-sizes.xml.h:29
+#, fuzzy
+msgid "B10"
+msgstr "B10"
+
+#. Envelopes
+#: ../templates/paper-sizes.xml.h:31
+#, fuzzy
+msgid "#10 Envelope"
+msgstr "Sobre #10"
+
+#: ../templates/paper-sizes.xml.h:32
+#, fuzzy
+msgid "Monarch Envelope"
+msgstr "Sobre monarch"
+
+#: ../templates/paper-sizes.xml.h:33
+#, fuzzy
+msgid "C5"
+msgstr "C5"
+
+#: ../templates/paper-sizes.xml.h:34
+#, fuzzy
+msgid "C6"
+msgstr "C6"
+
+#: ../templates/paper-sizes.xml.h:35
+#, fuzzy
+msgid "DL"
+msgstr "Sobre DL"
+
+#. ISO 217
+#: ../templates/paper-sizes.xml.h:37
+#, fuzzy
+msgid "RA0"
+msgstr "RA0"
+
+#: ../templates/paper-sizes.xml.h:38
+#, fuzzy
+msgid "RA1"
+msgstr "RA1"
+
+#: ../templates/paper-sizes.xml.h:39
+#, fuzzy
+msgid "RA2"
+msgstr "RA2"
+
+#: ../templates/paper-sizes.xml.h:40
+msgid "RA3"
+msgstr ""
+
+#: ../templates/paper-sizes.xml.h:41
+msgid "RA4"
+msgstr ""
+
+#: ../templates/paper-sizes.xml.h:42
+#, fuzzy
+msgid "SRA0"
+msgstr "SRA0"
+
+#: ../templates/paper-sizes.xml.h:43
+#, fuzzy
+msgid "SRA1"
+msgstr "SRA1"
+
+#: ../templates/paper-sizes.xml.h:44
+#, fuzzy
+msgid "SRA2"
+msgstr "SRA2"
+
+#: ../templates/paper-sizes.xml.h:45
+msgid "SRA3"
+msgstr ""
+
+#: ../templates/paper-sizes.xml.h:46
+msgid "SRA4"
+msgstr ""
+
+#: ../templates/categories.xml.h:1
+#, fuzzy
+msgid "Any label"
+msgstr "etiqueta de tecla rápida"
+
+#. ====================================================================
+#. ===================================================================
+#: ../templates/categories.xml.h:2 ../templates/endisch-templates.xml.h:1
+#: ../templates/hama-iso-templates.xml.h:4
+#: ../templates/pearl-iso-templates.xml.h:4
+#: ../templates/rayfilm-templates.xml.h:8
+#, fuzzy
+msgid "Round labels"
+msgstr "Díxitos"
+
+#. ===================================================================
+#: ../templates/categories.xml.h:3 ../templates/endisch-templates.xml.h:2
+#: ../templates/pearl-iso-templates.xml.h:58
+#: ../templates/rayfilm-templates.xml.h:9
+#, fuzzy
+msgid "Elliptical labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ====================================================================
+#: ../templates/categories.xml.h:4 ../templates/endisch-templates.xml.h:4
+#: ../templates/hama-iso-templates.xml.h:41
+#: ../templates/rayfilm-templates.xml.h:2
+#, fuzzy
+msgid "Square labels"
+msgstr "Union Square"
+
+#. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#. ********************************************************************
+#: ../templates/categories.xml.h:5 ../templates/ascom-iso-templates.xml.h:4
+#: ../templates/endisch-templates.xml.h:3
+#: ../templates/hama-iso-templates.xml.h:27
+#: ../templates/herma-iso-templates.xml.h:20
+#: ../templates/igepa-templates.xml.h:1 ../templates/jac-iso-templates.xml.h:4
+#: ../templates/rayfilm-templates.xml.h:1
+#, fuzzy
+msgid "Rectangular labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#: ../templates/categories.xml.h:6
+#, fuzzy
+msgid "Any card"
+msgstr "Xogos de cartas:"
+
+#. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#: ../templates/categories.xml.h:7 ../templates/dataline-iso-templates.xml.h:6
+#: ../templates/geha-iso-templates.xml.h:4
+#: ../templates/hama-iso-templates.xml.h:8
+#: ../templates/pearl-iso-templates.xml.h:38
+#, fuzzy
+msgid "Business cards"
+msgstr "Cartas restantes: ~a"
+
+#: ../templates/categories.xml.h:8
+#, fuzzy
+msgid "CD/DVD or other media"
+msgstr "Borra este disco de CD ou DVD"
+
+#: ../templates/categories.xml.h:9
+#, fuzzy
+msgid "Mailing/shipping products"
+msgstr "Accións da lista de correo"
+
+#: ../templates/categories.xml.h:10
+#, fuzzy
+msgid "Foldable cards"
+msgstr "Cartas restantes: ~a"
+
+#: ../templates/categories.xml.h:11
+#, fuzzy
+msgid "Photo products"
+msgstr "Modo de foto"
+
+#. TODO: Is this the real part #?
+#. ============================================================
+#. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#. TODO: What is the actual part #?
+#. ===================================================================
+#: ../templates/ascom-iso-templates.xml.h:2
+#: ../templates/avery-iso-templates.xml.h:34
+#: ../templates/databecker-iso-templates.xml.h:10
+#: ../templates/hama-iso-templates.xml.h:29
+#: ../templates/herma-iso-templates.xml.h:18
+#: ../templates/misc-iso-templates.xml.h:2
+#: ../templates/zweckform-iso-templates.xml.h:6
+#, fuzzy
+msgid "Rectangular Labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/ascom-iso-templates.xml.h:6
+#: ../templates/avery-us-templates.xml.h:40
+#: ../templates/geha-iso-templates.xml.h:15
+#: ../templates/meritline-us-templates.xml.h:18
+#: ../templates/worldlabel-us-templates.xml.h:11
+msgid "Video Tape Spine Labels"
+msgstr ""
+
+#. ===================================================================
+#. ===============================================================
+#: ../templates/ascom-iso-templates.xml.h:8
+#: ../templates/avery-iso-templates.xml.h:26
+#: ../templates/zweckform-iso-templates.xml.h:28
+#, fuzzy
+msgid "CD Inlet"
+msgstr "Chesterfield Inlet"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:2
+#, fuzzy
+msgid "Square Labels"
+msgstr "Union Square"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:4
+#, fuzzy
+msgid "Small Round Labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:6
+#, fuzzy
+msgid "Large Round Labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:8
+#: ../templates/avery-other-templates.xml.h:2
+#: ../templates/worldlabel-us-templates.xml.h:5
+#, fuzzy
+msgid "File Folder Labels"
+msgstr "Cartafol inicial do seleccionador de ficheiros"
+
+#. ===================================================================
+#. ********************************************************************
+#: ../templates/avery-us-templates.xml.h:10
+#: ../templates/dataline-iso-templates.xml.h:10
+#: ../templates/meritline-us-templates.xml.h:6
+#: ../templates/sheetlabels-us-templates.xml.h:4
+#: ../templates/uline-us-templates.xml.h:2
+#: ../templates/worldlabel-us-templates.xml.h:4
+#, fuzzy
+msgid "Shipping Labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#. ********************************************************************
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:12
+#: ../templates/avery-iso-templates.xml.h:14
+#: ../templates/databecker-iso-templates.xml.h:6
+#: ../templates/dymo-other-templates.xml.h:4
+#: ../templates/geha-iso-templates.xml.h:25
+#: ../templates/maco-us-templates.xml.h:2
+#: ../templates/meritline-us-templates.xml.h:4
+#: ../templates/pearl-iso-templates.xml.h:2
+#: ../templates/sheetlabels-us-templates.xml.h:2
+#: ../templates/worldlabel-us-templates.xml.h:3
+#: ../templates/zweckform-iso-templates.xml.h:4
+#, fuzzy
+msgid "Address Labels"
+msgstr "Enderezo de correo electrónico:"
+
+#. ===================================================================
+#. ********************************************************************
+#: ../templates/avery-us-templates.xml.h:14
+#: ../templates/dymo-other-templates.xml.h:6
+#: ../templates/meritline-us-templates.xml.h:8
+#: ../templates/sheetlabels-us-templates.xml.h:6
+#: ../templates/worldlabel-us-templates.xml.h:2
+#, fuzzy
+msgid "Return Address Labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:16
+#: ../templates/maco-us-templates.xml.h:3
+#: ../templates/meritline-us-templates.xml.h:12
+#: ../templates/misc-us-templates.xml.h:23
+#: ../templates/sheetlabels-us-templates.xml.h:8
+#: ../templates/worldlabel-us-templates.xml.h:9
+#, fuzzy
+msgid "Round Labels"
+msgstr "Díxitos"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:18
+#: ../templates/avery-iso-templates.xml.h:20
+#: ../templates/meritline-us-templates.xml.h:14
+#: ../templates/sheetlabels-us-templates.xml.h:14
+#: ../templates/worldlabel-us-templates.xml.h:8
+#, fuzzy
+msgid "Diskette Labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:20
+#, fuzzy
+msgid "Tent Cards"
+msgstr "Cartas restantes: ~a"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:22
+#: ../templates/sheetlabels-us-templates.xml.h:10
+#: ../templates/worldlabel-us-templates.xml.h:7
+#, fuzzy
+msgid "Filing Labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#. ============================================================
+#. ===================================================================
+#. TODO: Is this the actual part #?
+#. ============================================================
+#: ../templates/avery-us-templates.xml.h:24
+#: ../templates/avery-iso-templates.xml.h:18
+#: ../templates/databecker-iso-templates.xml.h:2
+#: ../templates/dataline-iso-templates.xml.h:4
+#: ../templates/decadry-iso-templates.xml.h:6
+#: ../templates/misc-us-templates.xml.h:25
+#: ../templates/misc-iso-templates.xml.h:4
+#: ../templates/rayfilm-templates.xml.h:15
+#: ../templates/zweckform-iso-templates.xml.h:30
+#, fuzzy
+msgid "Business Cards"
+msgstr "Cartas restantes: ~a"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:26
+#, fuzzy
+msgid "Index Cards"
+msgstr "Cartas restantes: ~a"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:28
+#, fuzzy
+msgid "Post cards"
+msgstr "Cartas restantes: ~a"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:30
+#, fuzzy
+msgid "Name Badge Labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#. ===============================================================
+#. ===================================================================
+#. ********************************************************************
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:32
+#: ../templates/avery-iso-templates.xml.h:6
+#: ../templates/geha-iso-templates.xml.h:10
+#: ../templates/herma-iso-templates.xml.h:14
+#: ../templates/igepa-templates.xml.h:5 ../templates/jac-iso-templates.xml.h:2
+#: ../templates/misc-us-templates.xml.h:8
+#: ../templates/misc-iso-templates.xml.h:22
+#: ../templates/misc-other-templates.xml.h:2
+#: ../templates/pearl-iso-templates.xml.h:64
+#: ../templates/rayfilm-templates.xml.h:10
+#: ../templates/sheetlabels-us-templates.xml.h:12
+#: ../templates/worldlabel-us-templates.xml.h:12
+#: ../templates/zweckform-iso-templates.xml.h:8
+#, fuzzy
+msgid "CD/DVD Labels"
+msgstr "Gravando o CD/DVD"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:34
+#: ../templates/sheetlabels-us-templates.xml.h:16
+#, fuzzy
+msgid "CD/DVD Labels (Disc Labels)"
+msgstr "disco HD DVD virxe"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:36
+#, fuzzy
+msgid "CD/DVD Labels (Spine Labels)"
+msgstr "%.1f x (BD) %.1f x (DVD) %.1f x (CD)"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:38
+#: ../templates/geha-iso-templates.xml.h:17
+#: ../templates/meritline-us-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:18
+#: ../templates/worldlabel-us-templates.xml.h:10
+msgid "Video Tape Face Labels"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:42
+#, fuzzy
+msgid "ID Labels"
+msgstr "ID de _Jabber"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:44
+#: ../templates/meritline-us-templates.xml.h:10
+#: ../templates/worldlabel-us-templates.xml.h:6
+#, fuzzy
+msgid "Full Sheet Labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. the LSK labels can be torn in half down the center
+#: ../templates/avery-us-templates.xml.h:46
+#, fuzzy
+msgid "Divider Labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:2
+#, fuzzy
+msgid "Mini Labels"
+msgstr "Modo mini"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:4
+msgid "Self-Adhesive Name Badges (Acetate Silk)"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:8
+#, fuzzy
+msgid "Allround labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:10
+#: ../templates/decadry-iso-templates.xml.h:2
+#, fuzzy
+msgid "Mailing labels"
+msgstr "Enderezo de correo"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:12
+#: ../templates/misc-iso-templates.xml.h:12
+#, fuzzy
+msgid "Address labels"
+msgstr "Enderezo de correo electrónico:"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:16
+#, fuzzy
+msgid "Shipping labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===============================================================
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:22
+#: ../templates/decadry-iso-templates.xml.h:4
+#: ../templates/herma-iso-templates.xml.h:8
+#: ../templates/misc-us-templates.xml.h:21
+#: ../templates/misc-iso-templates.xml.h:6
+#: ../templates/zweckform-iso-templates.xml.h:10
+#, fuzzy
+msgid "Mailing Labels"
+msgstr "Enderezo de correo"
+
+#. ===============================================================
+#: ../templates/avery-iso-templates.xml.h:24
+#: ../templates/zweckform-iso-templates.xml.h:26
+#, fuzzy
+msgid "CD Booklet"
+msgstr "Gravar CD..."
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:28
+#, fuzzy
+msgid "Mini Address Labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:30
+#, fuzzy
+msgid "Identification Labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#. ====================================================================
+#: ../templates/avery-iso-templates.xml.h:32
+#: ../templates/hama-iso-templates.xml.h:31
+#, fuzzy
+msgid "Diskette labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#.
+#. *********************************************************************
+#. *********************************************************************
+#. Labels for the Brother QL-500/550/650 PC Label Printers
+#.
+#. These templates work with the Brother Linux Printer CUPS Driver.  It
+#. is unknown if these work correctly with the foomatic print driver for
+#. these printers.
+#.
+#. One difference from typical templates is that the template size is
+#. not the actual media size - it is the size of the printable area,
+#. which is smaller than the media size.  This is because (at least with
+#. the Brother driver) coordinates are relative the corner of this area.
+#.
+#. *********************************************************************
+#. *********************************************************************
+#.
+#: ../templates/brother-other-templates.xml.h:18
+msgid "Standard Address Labels 29mm x 90mm"
+msgstr ""
+
+#: ../templates/brother-other-templates.xml.h:19
+msgid "Shipping Labels 62mm x 100mm"
+msgstr ""
+
+#: ../templates/brother-other-templates.xml.h:20
+msgid "Multi Purpose Labels 17mm x 54mm"
+msgstr ""
+
+#: ../templates/brother-other-templates.xml.h:21
+msgid "Standard Address Labels 38mm x 90mm"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/databecker-iso-templates.xml.h:4
+msgid "CD/DVD Labels Standard Format (face only)"
+msgstr ""
+
+#. ===================================================================
+#. ============================================================
+#. ===================================================================
+#: ../templates/databecker-iso-templates.xml.h:8
+#: ../templates/desmat-templates.xml.h:2
+#: ../templates/misc-iso-templates.xml.h:20
+#, fuzzy
+msgid "CD Labels"
+msgstr "Gravar CD..."
+
+#. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#: ../templates/dataline-iso-templates.xml.h:2
+#: ../templates/hama-iso-templates.xml.h:35
+#: ../templates/misc-iso-templates.xml.h:32
+#, fuzzy
+msgid "CD/DVD labels"
+msgstr "Gravando o CD/DVD"
+
+#. ===================================================================
+#: ../templates/dataline-iso-templates.xml.h:8
+#: ../templates/pearl-iso-templates.xml.h:60
+#, fuzzy
+msgid "Membership cards"
+msgstr "Cartas restantes: ~a"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:2
+#: ../templates/geha-iso-templates.xml.h:23
+#, fuzzy
+msgid "Large Address Labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:8
+#, fuzzy
+msgid "Shipping Address Labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:10
+#, fuzzy
+msgid "File Folder"
+msgstr "Cartafol inicial do seleccionador de ficheiros"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:12
+#, fuzzy
+msgid "Hanging Folder"
+msgstr "Cartafol de música"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:14
+msgid "3.5in Diskette"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/endisch-templates.xml.h:5
+#: ../templates/pearl-iso-templates.xml.h:20
+#: ../templates/rayfilm-templates.xml.h:3
+#, fuzzy
+msgid "Labels A6"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/endisch-templates.xml.h:6
+#: ../templates/pearl-iso-templates.xml.h:22
+#: ../templates/rayfilm-templates.xml.h:4
+#, fuzzy
+msgid "Labels A5"
+msgstr "A5 Extra"
+
+#. *******************************************************************
+#. ===================================================================
+#: ../templates/endisch-templates.xml.h:7 ../templates/igepa-templates.xml.h:3
+#: ../templates/jac-iso-templates.xml.h:6
+#: ../templates/pearl-iso-templates.xml.h:6
+#: ../templates/rayfilm-templates.xml.h:5
+#, fuzzy
+msgid "Labels A4"
+msgstr "A4 Extra"
+
+#: ../templates/endisch-templates.xml.h:8
+#: ../templates/rayfilm-templates.xml.h:6
+#, fuzzy
+msgid "Labels A3"
+msgstr "A3 Extra"
+
+#: ../templates/endisch-templates.xml.h:9
+#: ../templates/rayfilm-templates.xml.h:7
+#, fuzzy
+msgid "Labels SRA3"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:2
+#, fuzzy
+msgid "Flyer paper"
+msgstr "Tamaño do papel:"
+
+#. ===================================================================
+#. ====================================================================
+#: ../templates/geha-iso-templates.xml.h:6
+#: ../templates/hama-iso-templates.xml.h:25
+#, fuzzy
+msgid "Greeting cards"
+msgstr "Cartas restantes: ~a"
+
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:8
+#, fuzzy
+msgid "Arch File inserts"
+msgstr "Non se encontrou o ficheiro"
+
+#: ../templates/geha-iso-templates.xml.h:11
+#, fuzzy
+msgid "CD/DVD Inlet"
+msgstr "Gravando o CD/DVD"
+
+#. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:13
+#: ../templates/hama-iso-templates.xml.h:17
+#: ../templates/pearl-iso-templates.xml.h:32
+#, fuzzy
+msgid "DVD inlet"
+msgstr "Chesterfield Inlet"
+
+#. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:19
+#: ../templates/hama-iso-templates.xml.h:6
+#: ../templates/pearl-iso-templates.xml.h:12
+#, fuzzy
+msgid "Photo labels"
+msgstr "Modo de foto"
+
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:21
+#, fuzzy
+msgid "Passport photo labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:27
+#: ../templates/hama-iso-templates.xml.h:37
+#: ../templates/herma-iso-templates.xml.h:6
+#, fuzzy
+msgid "Arch File Labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:29
+#: ../templates/misc-iso-templates.xml.h:28
+#: ../templates/misc-other-templates.xml.h:4
+#, fuzzy
+msgid "Multi-Purpose Labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:2
+#, fuzzy
+msgid "Printable mousepad"
+msgstr "[non é un carácter imprimíbel]"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:10
+#, fuzzy
+msgid "CD inlet"
+msgstr "Chesterfield Inlet"
+
+#. ====================================================================
+#. ===================================================================
+#: ../templates/hama-iso-templates.xml.h:12
+#: ../templates/pearl-iso-templates.xml.h:34
+#, fuzzy
+msgid "CD inlet (front)"
+msgstr "América/Rankin_Inlet"
+
+#. ===================================================================
+#: ../templates/hama-iso-templates.xml.h:13
+#: ../templates/pearl-iso-templates.xml.h:36
+#, fuzzy
+msgid "CD inlet (back)"
+msgstr "Copia de seguranza completada"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:15
+#, fuzzy
+msgid "Zip disc inlet"
+msgstr "América/Rankin_Inlet"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:19
+#, fuzzy
+msgid "VHS-C inlet"
+msgstr "Chesterfield Inlet"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:21
+#, fuzzy
+msgid "Video-8 inlet"
+msgstr "Chesterfield Inlet"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:23
+#, fuzzy
+msgid "VHS inlet"
+msgstr "Chesterfield Inlet"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:33
+#, fuzzy
+msgid "Zip disc labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:39
+#, fuzzy
+msgid "Arch File labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:43
+#, fuzzy
+msgid "Mini Disc labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/herma-iso-templates.xml.h:2
+msgid "Arch File Labels (small)"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/herma-iso-templates.xml.h:4
+#, fuzzy
+msgid "Arch File Labels (large)"
+msgstr "O ficheiro «%s» é demasiado grande"
+
+#. ===================================================================
+#: ../templates/herma-iso-templates.xml.h:10
+#: ../templates/zweckform-iso-templates.xml.h:20
+#, fuzzy
+msgid "Allround Labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/herma-iso-templates.xml.h:12
+msgid "Video Labels (face only)"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/herma-iso-templates.xml.h:16
+msgid "Diskette Labels (face only)"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/igepa-templates.xml.h:2
+#: ../templates/pearl-iso-templates.xml.h:18
+#, fuzzy
+msgid "Floppy disk labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/igepa-templates.xml.h:4
+#: ../templates/zweckform-iso-templates.xml.h:2
+msgid "Lever Arch File Labels"
+msgstr ""
+
+#. *******************************************************************
+#: ../templates/jac-iso-templates.xml.h:8
+#, fuzzy
+msgid "PVC labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/meritline-us-templates.xml.h:2
+#, fuzzy
+msgid "Mini-CD Labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/microapp-templates.xml.h:2
+#, fuzzy
+msgid "Standard Labels"
+msgstr "Diferencial estándar"
+
+#. ===================================================================
+#. TODO: Is this the actual part #?
+#: ../templates/misc-us-templates.xml.h:2
+#: ../templates/misc-iso-templates.xml.h:24
+msgid "CD/DVD Labels (face only)"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:4
+msgid "CD/DVD Labels (Face Only)"
+msgstr ""
+
+#. TODO: Is this the actual part #?
+#: ../templates/misc-us-templates.xml.h:6
+#, fuzzy
+msgid "Cassette Labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:10
+msgid "Slimline CD Case (rightside up)"
+msgstr ""
+
+#: ../templates/misc-us-templates.xml.h:11
+msgid "Slimline CD Case (upside down)"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:13
+#, fuzzy
+msgid "CD Template Rectangles"
+msgstr "Gardar como un _modelo"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:15
+#, fuzzy
+msgid "Business Card CD"
+msgstr "Importando CD de son"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:17
+#, fuzzy
+msgid "Jewel Case Booklet"
+msgstr "_Coincidir con capitalización"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:19
+#, fuzzy
+msgid "DLT Labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#. TODO: Is this the actual part #?
+#: ../templates/misc-us-templates.xml.h:27
+#: ../templates/misc-iso-templates.xml.h:36
+msgid "PRO CD Labels 2-up (face only)"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:29
+msgid "PRO CD Labels 2-up (Face only)"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:31
+msgid "PRO CD Labels 2-up (CD spine only)"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:33
+#, fuzzy
+msgid "Microtube labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:8
+#, fuzzy
+msgid "General Labels"
+msgstr "A paciencia do xeneral"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:10
+#: ../templates/pearl-iso-templates.xml.h:28
+#, fuzzy
+msgid "Self-adhesive labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:14
+msgid "Fridge Magnet Stickers"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:16
+msgid "Inkjet/Laser Labels 70x37mm"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:18
+msgid "EPSON Photo Stickers 16"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:30
+#, fuzzy
+msgid "Universal Labels"
+msgstr "Biblioteca universal"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:34
+#: ../templates/pearl-iso-templates.xml.h:16
+#, fuzzy
+msgid "Bottle labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:38
+msgid "Etiketten"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:8
+msgid "Self-adhesive film weatherproof"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:10
+msgid "Self-adhesive film transparent"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:14
+msgid "Self-adhesive window film"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:24
+#, fuzzy
+msgid "Photo labels semiglossy"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:26
+#, fuzzy
+msgid "Address Labels (STAMPIT)"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:30
+#, fuzzy
+msgid "SD card labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:40
+msgid "Passport photo labels glossy"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:42
+#, fuzzy
+msgid "Business cards punched"
+msgstr "Repartir máis cartas"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:44
+msgid "Business cards punched dull"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:46
+msgid "Business cards high glossy"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:48
+#, fuzzy
+msgid "Name plates"
+msgstr "Nome do artista"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:50
+msgid "Business cards glossy, both sides printable"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:52
+msgid "Business cards punched glossy"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:54
+msgid "Foldable business cards glossy/dull"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:56
+#, fuzzy
+msgid "Foldable business cards"
+msgstr "Repartir máis cartas"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:62
+msgid "Membership cards, both sides printable"
+msgstr ""
+
+#: ../templates/rayfilm-templates.xml.h:11
+msgid "Business card CD Labels"
+msgstr ""
+
+#: ../templates/rayfilm-templates.xml.h:12
+#, fuzzy
+msgid "Mini CD Labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#: ../templates/rayfilm-templates.xml.h:13
+#, fuzzy
+msgid "Triangular labels"
+msgstr "signo de viñeta triangular"
+
+#: ../templates/rayfilm-templates.xml.h:14
+#, fuzzy
+msgid "Trapezoid labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:12
+msgid "QSL-Karten Etiketten 70mm x 50,8mm"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:14
+#, fuzzy
+msgid "File Back Labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:16
+msgid "Multi-purpose Stick+Lift Labels"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:18
+#, fuzzy
+msgid "Video Labels (back)"
+msgstr "Copia de seguranza completada"
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:22
+#, fuzzy
+msgid "Rectangular Copier Labels"
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:24
+msgid "Correction and Cover-up Labels"
+msgstr ""
