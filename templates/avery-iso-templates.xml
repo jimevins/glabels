@@ -392,6 +392,19 @@
 
   <Template brand="Avery" part="DL33" equiv="38931"/>
   <Template brand="Avery" part="CR33" equiv="38931"/>
+  
+  
+  <!-- ============================================================ -->
+  <!-- Avery C32011-10: Business Cards		                    -->
+  <!-- ============================================================ -->
+  <Template brand="Avery" part="C32011-10" size="A4" _description="Business Cards">
+    <Meta category="card"/>
+    <Meta category="business-card"/>
+    <Label-rectangle id="0" width="85mm" height="54mm" round="0mm" x_waste="0mm" y_waste="0mm">
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="2" ny="5" x0="15mm" y0="13.5mm" dx="95mm" dy="54mm"/>
+    </Label-rectangle>
+  </Template>
 
 
 </Glabels-templates>
