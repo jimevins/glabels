@@ -1,4 +1,4 @@
-# Traditional Chinese Translation for glabels
+# Chinese (Hong Kong) Translation for glabels
 # Copyright (C) 2002 Free Software Foundation, Inc.
 # Shell Hung <shell@debian.org>, 2002
 # Walter Cheuk <wwycheuk@gmail.com>, 2012.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: glabels 0.4.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-06 08:32+0800\n"
-"PO-Revision-Date: 2012-12-25 18:30+0800\n"
+"PO-Revision-Date: 2013-01-06 08:32+0800\n"
 "Last-Translator: Walter Cheuk <wwycheuk@gmail.com>\n"
-"Language-Team: zh-l10n <zh-l10n@linux.org.tw>\n"
+"Language-Team: Chinese (Hong Kong) <community@linuxhall.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -531,12 +531,12 @@ msgstr "黑色"
 
 #: ../src/color-combo-menu.c:254 ../src/color-combo-menu.c:373
 msgid "Custom Color"
-msgstr "自訂顏色"
+msgstr "自選顏色"
 
 #: ../src/color-combo-menu.c:319
 #, c-format
 msgid "Custom Color #%u"
-msgstr "自訂顏色 #%u"
+msgstr "自選顏色 #%u"
 
 #: ../src/critical-error-handler.c:70
 msgid "gLabels Fatal Error!"
@@ -609,11 +609,11 @@ msgstr "已有該檔案。"
 #: ../src/file.c:744
 #, c-format
 msgid "Save changes to document \"%s\" before closing?"
-msgstr "是否在關閉前將變更儲存至「%s」文件？"
+msgstr "是否在關閉前將更改儲存至「%s」文件？"
 
 #: ../src/file.c:748
 msgid "Your changes will be lost if you don't save them."
-msgstr "如不儲存，所作之變更會丟失。"
+msgstr "如不儲存，所作之更改會丟失。"
 
 #: ../src/file.c:751
 msgid "Close without saving"
@@ -700,7 +700,7 @@ msgstr "首個"
 
 #: ../src/glabels-batch.c:61 ../data/ui/print-op-dialog-custom-widget.ui.h:11
 msgid "print outlines (to test printer alignment)"
-msgstr "印出外邊 (測試印表機是否正確對齊)"
+msgstr "印出外邊 (測試打印機是否正確對齊)"
 
 #: ../src/glabels-batch.c:63 ../data/ui/print-op-dialog-custom-widget.ui.h:12
 msgid "print in reverse (i.e. a mirror image)"
@@ -743,7 +743,7 @@ msgstr "無法開啟「%s」glabels 檔案\n"
 
 #: ../src/glabels.c:79
 msgid "Launch gLabels label and business card designer."
-msgstr "啟動 gLabels 標籤及名片設計師"
+msgstr "啟動 gLabels 標籤及卡片設計師"
 
 #: ../src/label-barcode.c:183 ../src/ui.c:317
 msgid "Create barcode object"
@@ -782,7 +782,7 @@ msgstr "線條顏色"
 #: ../src/label-box.c:289 ../src/label-ellipse.c:290 ../src/label-line.c:241
 #: ../data/ui/property-bar.ui.h:11
 msgid "Line width"
-msgstr "線條寬度"
+msgstr "線條闊度"
 
 #: ../src/label.c:405
 msgid "Untitled"
@@ -986,7 +986,7 @@ msgstr "試試選擇不同的品牌、頁面尺寸或分類。"
 
 #: ../src/media-select.c:1179
 msgid "No custom templates found."
-msgstr "找不到自訂範本。"
+msgstr "找不到自選範本。"
 
 #: ../src/media-select.c:1181
 msgid ""
@@ -1236,15 +1236,15 @@ msgstr "檢視 (_V)"
 
 #: ../src/ui.c:95
 msgid "Customize Main Toolbar"
-msgstr "自訂主工具列"
+msgstr "自選主工具列"
 
 #: ../src/ui.c:96
 msgid "Customize Drawing Toolbar"
-msgstr "自訂繪圖工具列"
+msgstr "自選繪圖工具列"
 
 #: ../src/ui.c:97
 msgid "Customize Properties Toolbar"
-msgstr "自訂特性工具列"
+msgstr "自選特性工具列"
 
 #: ../src/ui.c:98
 msgid "_Objects"
@@ -1333,7 +1333,7 @@ msgstr "範本設計師 (_D)..."
 
 #: ../src/ui.c:157
 msgid "Create a custom template"
-msgstr "建立自訂範本"
+msgstr "建立自選範本"
 
 #: ../src/ui.c:162
 msgid "_Close"
@@ -1627,7 +1627,7 @@ msgstr "或參訪 http://glabels.org/"
 
 #: ../src/ui-commands.c:1162
 msgid "A label and business card creation program.\n"
-msgstr "標籤及名片製作程式。\n"
+msgstr "標籤及卡片製作程式。\n"
 
 #: ../src/ui-commands.c:1166
 msgid "translator-credits"
@@ -1802,7 +1802,7 @@ msgstr "全部搜尋"
 
 #: ../data/ui/media-select.ui.h:6
 msgid "Custom"
-msgstr "自訂"
+msgstr "自選"
 
 #: ../data/ui/new-label-dialog.ui.h:1
 msgid ""
@@ -1897,7 +1897,7 @@ msgstr "樣式"
 #: ../data/ui/object-editor.ui.h:13 ../data/ui/prefs-dialog.ui.h:18
 #: ../data/ui/template-designer.ui.h:13
 msgid "Width:"
-msgstr "寬度："
+msgstr "闊度："
 
 #: ../data/ui/object-editor.ui.h:15
 msgid "Key:"
@@ -2068,7 +2068,7 @@ msgid ""
 msgstr ""
 "歡迎使用 gLabels 範本設計師。\n"
 "\n"
-"本對話視窗會協助您製作自訂的 gLabels 範本。"
+"本對話視窗會協助你製作自選的 gLabels 範本。"
 
 #: ../data/ui/template-designer.ui.h:4
 msgid ""
@@ -2090,7 +2090,7 @@ msgstr "(例如 Avery、Acme 等等...)"
 
 #: ../data/ui/template-designer.ui.h:10
 msgid "(e.g., \"Mailing Labels,\" \"Business Cards,\" ...)"
-msgstr "(例如「郵遞標籤」、「名片」等等...)"
+msgstr "(例如「郵遞標籤」、「卡片」等等...)"
 
 #: ../data/ui/template-designer.ui.h:11
 msgid "Please select the page size of the template stationery."
@@ -2120,11 +2120,11 @@ msgstr "CD/DVD (包括信用卡 CD)"
 msgid ""
 "Please enter the following size parameters of a single label or card in your "
 "template."
-msgstr "請在下面輸入閣下範本單一標籤或名片的尺寸參數。"
+msgstr "請在下面輸入閣下範本單一標籤或卡片的尺寸參數。"
 
 #: ../data/ui/template-designer.ui.h:22
 msgid "1. Width:"
-msgstr "1. 寬度："
+msgstr "1. 闊度："
 
 #: ../data/ui/template-designer.ui.h:23
 msgid "2. Height:"
@@ -2182,7 +2182,7 @@ msgstr "2. 內半徑："
 
 #: ../data/ui/template-designer.ui.h:36
 msgid "3. Clipping width:"
-msgstr "3. 夾寬度："
+msgstr "3. 夾闊度："
 
 #: ../data/ui/template-designer.ui.h:37
 msgid "4. Clipping height:"
@@ -2448,11 +2448,11 @@ msgstr "新文字物件預設的行距"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:31
 msgid "Default line width."
-msgstr "預設線條寬度"
+msgstr "預設線條闊度"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:32
 msgid "The default line width for new objects."
-msgstr "新物件預設的線條寬度"
+msgstr "新物件預設的線條闊度"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:33
 msgid "Default line color."
@@ -2492,7 +2492,7 @@ msgstr "最近使用的顏色"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:42
 msgid "Recently created custom colors."
-msgstr "最近建立的自訂顏色"
+msgstr "最近建立的自選顏色"
 
 #: ../data/desktop/glabels-3.0.desktop.in.h:1
 msgid "gLabels Label Designer 3"
@@ -2500,7 +2500,7 @@ msgstr "gLabels 標籤設計師 3"
 
 #: ../data/desktop/glabels-3.0.desktop.in.h:2
 msgid "Create labels, business cards and media covers"
-msgstr "製作標籤、名片以及媒體封面"
+msgstr "製作標籤、卡片以及媒體封面"
 
 #: ../data/mime/glabels-3.0.xml.in.h:1
 msgid "gLabels Project File"
@@ -2720,7 +2720,7 @@ msgstr "任何卡片"
 #: ../templates/hama-iso-templates.xml.h:8
 #: ../templates/pearl-iso-templates.xml.h:38
 msgid "Business cards"
-msgstr "名片"
+msgstr "卡片"
 
 #: ../templates/categories.xml.h:8
 msgid "CD/DVD or other media"
@@ -2878,7 +2878,7 @@ msgstr "檔案標籤"
 #: ../templates/rayfilm-templates.xml.h:15
 #: ../templates/zweckform-iso-templates.xml.h:30
 msgid "Business Cards"
-msgstr "名片"
+msgstr "卡片"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:26
@@ -3345,7 +3345,7 @@ msgstr "CD 範本 (長方形)"
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:15
 msgid "Business Card CD"
-msgstr "名片式 CD"
+msgstr "卡片式 CD"
 
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:17
@@ -3459,17 +3459,17 @@ msgstr "護照相片標籤 (光面)"
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:42
 msgid "Business cards punched"
-msgstr "名片 (打孔)"
+msgstr "卡片 (打孔)"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:44
 msgid "Business cards punched dull"
-msgstr "名片 (打孔、啞面)"
+msgstr "卡片 (打孔、啞面)"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:46
 msgid "Business cards high glossy"
-msgstr "名片 (高光面)"
+msgstr "卡片 (高光面)"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:48
@@ -3479,22 +3479,22 @@ msgstr "名牌"
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:50
 msgid "Business cards glossy, both sides printable"
-msgstr "名片 (光面、雙面可印)"
+msgstr "卡片 (光面、雙面可印)"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:52
 msgid "Business cards punched glossy"
-msgstr "名片 (打孔、光面)"
+msgstr "卡片 (打孔、光面)"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:54
 msgid "Foldable business cards glossy/dull"
-msgstr "摺疊式名片 (光面/啞面)"
+msgstr "摺疊式卡片 (光面/啞面)"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:56
 msgid "Foldable business cards"
-msgstr "摺疊式名片"
+msgstr "摺疊式卡片"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:62
@@ -3503,7 +3503,7 @@ msgstr "會員卡 (雙面可印)"
 
 #: ../templates/rayfilm-templates.xml.h:11
 msgid "Business card CD Labels"
-msgstr "名片式 CD 標籤"
+msgstr "卡片式 CD 標籤"
 
 #: ../templates/rayfilm-templates.xml.h:12
 msgid "Mini CD Labels"
