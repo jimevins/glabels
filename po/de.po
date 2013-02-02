@@ -2,14 +2,14 @@
 # Copyright (C) 2001-2011 Jim Evins <evins@snaught.com>
 # Marcus Bauer <m@7n7.de>, 2001.
 # Christian Neumair <christian-neumair@web.de>, 2002.
-# Mario Blättermann <mario.blaettermann@gmail.com>, 2008-2012.
+# Mario Blättermann <mario.blaettermann@gmail.com>, 2008-2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-17 21:01+0200\n"
-"PO-Revision-Date: 2012-10-17 21:02+0100\n"
+"PO-Revision-Date: 2013-02-02 21:30+0100\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -2325,7 +2325,7 @@ msgstr "Abstand vom linken Rand (x0):"
 
 #: ../data/ui/template-designer.ui.h:56
 msgid "Distance from top edge (y0):"
-msgstr "Abstand vom oberen Rand (x0):"
+msgstr "Abstand vom oberen Rand (y0):"
 
 #: ../data/ui/template-designer.ui.h:57
 msgid "Horizontal pitch (dx):"
