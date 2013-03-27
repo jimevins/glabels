@@ -1,0 +1,3557 @@
+# Turkish translation for glabels.
+# Copyright (C) 2011 glabels's COPYRIGHT HOLDER
+# This file is distributed under the same license as the glabels package.
+# Yusuf Bolu <yusufbolu@gmail.com>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: glabels glabels-3_0\n"
+"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
+"POT-Creation-Date: 2013-02-19 09:45+0000\n"
+"PO-Revision-Date: 2013-02-19 09:45+0000\n"
+"Last-Translator: Yusuf Bolu <yusufbolu@gmail.com>\n"
+"Language-Team: Turkish <gnome-turk@gnome.org>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../src/bc-backends.c:81
+msgid "Built-in"
+msgstr ""
+
+#: ../src/bc-backends.c:101
+msgid "POSTNET (any)"
+msgstr "POSTNET (any)"
+
+#: ../src/bc-backends.c:104
+msgid "POSTNET-5 (ZIP only)"
+msgstr "POSTNET-5 (ZIP only)"
+
+#: ../src/bc-backends.c:107
+msgid "POSTNET-9 (ZIP+4)"
+msgstr "POSTNET-9 (ZIP+4)"
+
+#: ../src/bc-backends.c:110
+msgid "POSTNET-11 (DPBC)"
+msgstr "POSTNET-11 (DPBC)"
+
+#: ../src/bc-backends.c:113
+msgid "CEPNET"
+msgstr "CEPNET"
+
+#: ../src/bc-backends.c:116
+msgid "One Code"
+msgstr "One Code"
+
+#: ../src/bc-backends.c:119 ../src/bc-backends.c:175 ../src/bc-backends.c:248
+msgid "Code 39"
+msgstr "Code 39"
+
+#: ../src/bc-backends.c:122 ../src/bc-backends.c:251
+msgid "Code 39 Extended"
+msgstr "Code 39 Extended"
+
+#: ../src/bc-backends.c:127
+msgid "EAN (any)"
+msgstr "EAN (any)"
+
+#: ../src/bc-backends.c:130
+msgid "EAN-8"
+msgstr "EAN-8"
+
+#: ../src/bc-backends.c:133
+msgid "EAN-8 +2"
+msgstr "EAN-8 +2"
+
+#: ../src/bc-backends.c:136
+msgid "EAN-8 +5"
+msgstr "EAN-8 +5"
+
+#: ../src/bc-backends.c:139
+msgid "EAN-13"
+msgstr "EAN-13"
+
+#: ../src/bc-backends.c:142
+msgid "EAN-13 +2"
+msgstr "EAN-13 +2"
+
+#: ../src/bc-backends.c:145
+msgid "EAN-13 +5"
+msgstr "EAN-13 +5"
+
+#: ../src/bc-backends.c:148
+msgid "UPC (UPC-A or UPC-E)"
+msgstr "UPC (UPC-A veya UPC-E)"
+
+#: ../src/bc-backends.c:151 ../src/bc-backends.c:395
+msgid "UPC-A"
+msgstr "UPC-A"
+
+#: ../src/bc-backends.c:154
+msgid "UPC-A +2"
+msgstr "UPC-A +2"
+
+#: ../src/bc-backends.c:157
+msgid "UPC-A +5"
+msgstr "UPC-A +5"
+
+#: ../src/bc-backends.c:160 ../src/bc-backends.c:398
+msgid "UPC-E"
+msgstr "UPC-E"
+
+#: ../src/bc-backends.c:163
+msgid "UPC-E +2"
+msgstr "UPC-E +2"
+
+#: ../src/bc-backends.c:166
+msgid "UPC-E +5"
+msgstr "UPC-E +5"
+
+#: ../src/bc-backends.c:169 ../src/bc-backends.c:332
+msgid "ISBN"
+msgstr "ISBN"
+
+#: ../src/bc-backends.c:172
+msgid "ISBN +5"
+msgstr "ISBN +5"
+
+#: ../src/bc-backends.c:178 ../src/bc-backends.c:260
+msgid "Code 128"
+msgstr "Code 128"
+
+#: ../src/bc-backends.c:181
+msgid "Code 128C"
+msgstr "Code 128C"
+
+#: ../src/bc-backends.c:184
+msgid "Code 128B"
+msgstr "Code 128B"
+
+#: ../src/bc-backends.c:187 ../src/bc-backends.c:329
+msgid "Interleaved 2 of 5"
+msgstr "Interleaved 2 of 5"
+
+#: ../src/bc-backends.c:190 ../src/bc-backends.c:224
+msgid "Codabar"
+msgstr "Codabar"
+
+#: ../src/bc-backends.c:193
+msgid "MSI"
+msgstr "MSI"
+
+#: ../src/bc-backends.c:196
+msgid "Plessey"
+msgstr "Plessey"
+
+#: ../src/bc-backends.c:199 ../src/bc-backends.c:257
+msgid "Code 93"
+msgstr "Code 93"
+
+#: ../src/bc-backends.c:206
+msgid "Australia Post Standard"
+msgstr "Australia Post Standard"
+
+#: ../src/bc-backends.c:209
+msgid "Australia Post Reply Paid"
+msgstr "Australia Post Reply Paid"
+
+#: ../src/bc-backends.c:212
+msgid "Australia Post Route Code"
+msgstr "Australia Post Route Code"
+
+#: ../src/bc-backends.c:215
+msgid "Australia Post Redirect"
+msgstr "Australia Post Redirect"
+
+#: ../src/bc-backends.c:218
+msgid "Aztec Code"
+msgstr "Aztec Code"
+
+#: ../src/bc-backends.c:221
+msgid "Aztec Rune"
+msgstr "Aztec Rune"
+
+#: ../src/bc-backends.c:227
+msgid "Code One"
+msgstr "Code One"
+
+#: ../src/bc-backends.c:230
+msgid "Code 11"
+msgstr "Code 11"
+
+#: ../src/bc-backends.c:233
+msgid "Code 16K"
+msgstr "Code 16K"
+
+#: ../src/bc-backends.c:236
+msgid "Code 2 of 5 Matrix"
+msgstr "Code 2 of 5 Matrix"
+
+#: ../src/bc-backends.c:239
+msgid "Code 2 of 5 IATA"
+msgstr "Code 2 of 5 IATA"
+
+#: ../src/bc-backends.c:242
+msgid "Code 2 of 5 Data Logic"
+msgstr "Code 2 of 5 Data Logic"
+
+#: ../src/bc-backends.c:245
+msgid "Code 32 (Italian Pharmacode)"
+msgstr "Code 32 (Italian Pharmacode)"
+
+#: ../src/bc-backends.c:254
+msgid "Code 49"
+msgstr "Code 49"
+
+#: ../src/bc-backends.c:263
+msgid "Code 128 (Mode C supression)"
+msgstr "Code 128 (Mode C supression)"
+
+#: ../src/bc-backends.c:266
+msgid "DAFT Code"
+msgstr "DAFT Code"
+
+#: ../src/bc-backends.c:269
+msgid "Data Matrix"
+msgstr "Data Matrix"
+
+#: ../src/bc-backends.c:272
+msgid "Deutsche Post Leitcode"
+msgstr "Deutsche Post Leitcode"
+
+#: ../src/bc-backends.c:275
+msgid "Deutsche Post Identcode"
+msgstr "Deutsche Post Identcode"
+
+#: ../src/bc-backends.c:278
+msgid "Dutch Post KIX Code"
+msgstr "Dutch Post KIX Code"
+
+#: ../src/bc-backends.c:281
+msgid "EAN"
+msgstr "EAN"
+
+#: ../src/bc-backends.c:284
+msgid "Grid Matrix"
+msgstr "Grid Matrix"
+
+#: ../src/bc-backends.c:287
+msgid "GS1-128"
+msgstr "GS1-128"
+
+#: ../src/bc-backends.c:290
+msgid "GS1 DataBar-14"
+msgstr "GS1 DataBar-14"
+
+#: ../src/bc-backends.c:299
+msgid "GS1 DataBar-14 Stacked"
+msgstr "GS1 DataBar-14 Stacked"
+
+#: ../src/bc-backends.c:302
+msgid "GS1 DataBar-14 Stacked Omni."
+msgstr "GS1 DataBar-14 Stacked Omni."
+
+#: ../src/bc-backends.c:305
+msgid "GS1 DataBar Extended Stacked"
+msgstr "GS1 DataBar Extended Stacked"
+
+#: ../src/bc-backends.c:308
+msgid "HIBC Code 128"
+msgstr "HIBC Code 128"
+
+#: ../src/bc-backends.c:311
+msgid "HIBC Code 39"
+msgstr "HIBC Code 39"
+
+#: ../src/bc-backends.c:314
+msgid "HIBC Data Matrix"
+msgstr "HIBC Data Matrix"
+
+#: ../src/bc-backends.c:317
+msgid "HIBC QR Code"
+msgstr "HIBC QR Code"
+
+#: ../src/bc-backends.c:320
+msgid "HIBC PDF417"
+msgstr "HIBC PDF417"
+
+#: ../src/bc-backends.c:323
+msgid "HIBC Micro PDF417"
+msgstr "HIBC Micro PDF417"
+
+#: ../src/bc-backends.c:326
+msgid "HIBC Aztec Code"
+msgstr "HIBC Aztec Code"
+
+#: ../src/bc-backends.c:335
+msgid "ITF-14"
+msgstr "ITF-14"
+
+#: ../src/bc-backends.c:338
+msgid "Japanese Postal"
+msgstr "Japanese Postal"
+
+#: ../src/bc-backends.c:341
+msgid "Korean Postal"
+msgstr "Korean Postal"
+
+#: ../src/bc-backends.c:344
+msgid "LOGMARS"
+msgstr "LOGMARS"
+
+#: ../src/bc-backends.c:347
+msgid "Maxicode"
+msgstr "Maxicode"
+
+#: ../src/bc-backends.c:350
+msgid "Micro PDF417"
+msgstr "Micro PDF417"
+
+#: ../src/bc-backends.c:353
+msgid "Micro QR Code"
+msgstr "Micro QR Code"
+
+#: ../src/bc-backends.c:356
+msgid "MSI Plessey"
+msgstr "MSI Plessey"
+
+#: ../src/bc-backends.c:359
+msgid "NVE-18"
+msgstr "NVE-18"
+
+#: ../src/bc-backends.c:362
+msgid "PDF417"
+msgstr "PDF417"
+
+#: ../src/bc-backends.c:365
+msgid "PDF417 Truncated"
+msgstr "PDF417 Truncated"
+
+#: ../src/bc-backends.c:368
+msgid "PLANET"
+msgstr "PLANET"
+
+#: ../src/bc-backends.c:371
+msgid "PostNet"
+msgstr "PostNet"
+
+#: ../src/bc-backends.c:374
+msgid "Pharmacode"
+msgstr "Pharmacode"
+
+#: ../src/bc-backends.c:377
+msgid "Pharmacode 2-track"
+msgstr "Pharmacode 2-track"
+
+#: ../src/bc-backends.c:380
+msgid "Pharmazentral Nummer (PZN)"
+msgstr "Pharmazentral Nummer (PZN)"
+
+#: ../src/bc-backends.c:383
+msgid "QR Code"
+msgstr "QR Code"
+
+#: ../src/bc-backends.c:386
+msgid "Royal Mail 4-State"
+msgstr "Royal Mail 4-State"
+
+#: ../src/bc-backends.c:389
+msgid "Telepen"
+msgstr "Telepen"
+
+#: ../src/bc-backends.c:392
+msgid "Telepen Numeric"
+msgstr "Telepen Numeric"
+
+#: ../src/bc-backends.c:401
+msgid "USPS One Code"
+msgstr "USPS One Code"
+
+#: ../src/bc-backends.c:404
+msgid "UK Plessey"
+msgstr "UK Plessey"
+
+#: ../src/bc-backends.c:411
+msgid "IEC16022 (DataMatrix)"
+msgstr "IEC16022 (DataMatrix)"
+
+#: ../src/bc-backends.c:418
+msgid "IEC18004 (QRCode)"
+msgstr "IEC18004 (QRCode)"
+
+#: ../src/color-combo-button.c:198 ../src/color-combo.c:178
+msgid "Default Color"
+msgstr "Varsayılan renk"
+
+#: ../src/color-combo-menu.c:83
+msgid "Dark Red"
+msgstr "Koyu kırmızı"
+
+#: ../src/color-combo-menu.c:84
+msgid "Brown"
+msgstr "Kahverengi"
+
+#: ../src/color-combo-menu.c:85
+msgid "Dark Goldenrod"
+msgstr "Koyu altın sarısı"
+
+#: ../src/color-combo-menu.c:86
+msgid "Dark Green"
+msgstr "Koyu yeşil"
+
+#: ../src/color-combo-menu.c:87
+msgid "Dark Cyan"
+msgstr "Koyu cam göbeği"
+
+#: ../src/color-combo-menu.c:88
+msgid "Navy Blue"
+msgstr "Deniz mavisi"
+
+#: ../src/color-combo-menu.c:89
+msgid "Dark Violet"
+msgstr "Koyu menekşe"
+
+#: ../src/color-combo-menu.c:91
+msgid "Red"
+msgstr "Kırmızı"
+
+#: ../src/color-combo-menu.c:92
+msgid "Orange"
+msgstr "Turuncu"
+
+#: ../src/color-combo-menu.c:93
+msgid "Dark Yellow"
+msgstr "Koyu sarı"
+
+#: ../src/color-combo-menu.c:94
+msgid "Medium green"
+msgstr "Orta yeşil"
+
+#: ../src/color-combo-menu.c:95
+msgid "Turquoise"
+msgstr "Turkuaz"
+
+#: ../src/color-combo-menu.c:96
+msgid "Blue"
+msgstr "Mavi"
+
+#: ../src/color-combo-menu.c:97
+msgid "Purple"
+msgstr "Mor"
+
+#: ../src/color-combo-menu.c:99
+msgid "Salmon"
+msgstr "Somon"
+
+#: ../src/color-combo-menu.c:100
+msgid "Gold"
+msgstr "Altın"
+
+#: ../src/color-combo-menu.c:101
+msgid "Yellow"
+msgstr "Sarı"
+
+#: ../src/color-combo-menu.c:102
+msgid "Green"
+msgstr "Yeşil"
+
+#: ../src/color-combo-menu.c:103
+msgid "Cyan"
+msgstr "Cam göbeği"
+
+#: ../src/color-combo-menu.c:104
+msgid "SkyBlue"
+msgstr "Gök mavisi"
+
+#: ../src/color-combo-menu.c:105
+msgid "Violet"
+msgstr "Menekşe"
+
+#: ../src/color-combo-menu.c:107
+msgid "Pink"
+msgstr "Pembe"
+
+#: ../src/color-combo-menu.c:108
+msgid "Khaki"
+msgstr "Haki"
+
+#: ../src/color-combo-menu.c:109
+msgid "Light Yellow"
+msgstr "Açık sarı"
+
+#: ../src/color-combo-menu.c:110
+msgid "Light Green"
+msgstr "Açık yeşil"
+
+#: ../src/color-combo-menu.c:111
+msgid "Light Cyan"
+msgstr "Açık cam göbeği"
+
+#: ../src/color-combo-menu.c:112
+msgid "Slate Gray"
+msgstr "Gri"
+
+#: ../src/color-combo-menu.c:113
+msgid "Thistle"
+msgstr "Thistle"
+
+#: ../src/color-combo-menu.c:115
+msgid "White"
+msgstr "Beyaz"
+
+#: ../src/color-combo-menu.c:117
+#, no-c-format
+msgid "10% Gray"
+msgstr "%10 gri"
+
+#: ../src/color-combo-menu.c:119
+#, no-c-format
+msgid "25% Gray"
+msgstr "%25 gri"
+
+#: ../src/color-combo-menu.c:121
+#, no-c-format
+msgid "40% Gray"
+msgstr "%40 gri"
+
+#: ../src/color-combo-menu.c:123
+#, no-c-format
+msgid "50% Gray"
+msgstr "%50 gri"
+
+#: ../src/color-combo-menu.c:125
+#, no-c-format
+msgid "60% Gray"
+msgstr "%60 gri"
+
+#: ../src/color-combo-menu.c:126
+msgid "Black"
+msgstr "Siyah"
+
+#: ../src/color-combo-menu.c:254 ../src/color-combo-menu.c:373
+msgid "Custom Color"
+msgstr "Özel renk"
+
+#: ../src/color-combo-menu.c:319
+#, c-format
+msgid "Custom Color #%u"
+msgstr "Özel Renk #%u"
+
+#: ../src/critical-error-handler.c:70
+msgid "gLabels Fatal Error!"
+msgstr "gLabels Önemli Hata!"
+
+#: ../src/file.c:84
+msgid "New Label or Card"
+msgstr "Yeni etiket veya kart"
+
+#: ../src/file.c:175 ../src/label.c:601 ../src/label.c:645
+msgid "Label properties"
+msgstr "Etiket özellikleri"
+
+#: ../src/file.c:267 ../src/file.c:557
+msgid "All files"
+msgstr "Tüm dosyalar"
+
+#: ../src/file.c:272 ../src/file.c:562
+msgid "gLabels documents"
+msgstr "gLabels dokümanları"
+
+#: ../src/file.c:319 ../src/file.c:620
+msgid "Empty file name selection"
+msgstr "Boş dosya ismi seçildi"
+
+#: ../src/file.c:322 ../src/file.c:338
+msgid "Please select a file or supply a valid file name"
+msgstr "Lütfen bir dosya seçin veya geçerli bir dosya adı girin"
+
+#: ../src/file.c:335
+msgid "File does not exist"
+msgstr "Dosya yok"
+
+#: ../src/file.c:410
+#, c-format
+msgid "Could not open file \"%s\""
+msgstr "Dosya açılamıyor \"%s\""
+
+#: ../src/file.c:413
+msgid "Not a supported file format"
+msgstr "Desteklenen bir dosya formatı değil"
+
+#: ../src/file.c:491 ../src/file.c:670
+#, c-format
+msgid "Could not save file \"%s\""
+msgstr "Dosya kaydedilemiyor \"%s\""
+
+#: ../src/file.c:495 ../src/file.c:674
+msgid "Error encountered during save.  The file is still not saved."
+msgstr "Kaydederken bir hata oldu. Dosya halen kaydedilmemiş."
+
+#: ../src/file.c:535
+#, c-format
+msgid "Save \"%s\" as"
+msgstr "Farklı kaydet \"%s\""
+
+#: ../src/file.c:623
+msgid "Please supply a valid file name"
+msgstr "Lütfen geçerli bir dosya adı verin."
+
+#: ../src/file.c:644
+#, c-format
+msgid "Overwrite file \"%s\"?"
+msgstr "Üzerine yazılsın mı \"%s\"?"
+
+#: ../src/file.c:648
+msgid "File already exists."
+msgstr "Dosya zaten var."
+
+#: ../src/file.c:744
+#, c-format
+msgid "Save changes to document \"%s\" before closing?"
+msgstr "Kapatmadan önce değişiklikler kaydedilsin mi \"%s\"?"
+
+#: ../src/file.c:748
+msgid "Your changes will be lost if you don't save them."
+msgstr "Kaydetmezseniz değişiklikleri kaybedeceksiniz."
+
+#: ../src/file.c:751
+msgid "Close without saving"
+msgstr "Kaydetmeden kapat"
+
+#: ../src/font-combo-menu.c:137
+msgid "Recent fonts"
+msgstr "Son kullanılan yazı tipleri"
+
+#: ../src/font-combo-menu.c:152
+msgid "Proportional fonts"
+msgstr "Orantılı yazı tipleri"
+
+#: ../src/font-combo-menu.c:160
+msgid "Fixed-width fonts"
+msgstr "Sabit genişlik yazı tipleri"
+
+#: ../src/font-combo-menu.c:168
+msgid "All fonts"
+msgstr "Tüm yazı tipleri"
+
+#.
+#. * Allow text samples to be localized.
+#. *
+#. * FIXME: if we could extract enough meta information from the fonts
+#. * themselves, perhaps rather than setting these globally for the
+#. * current locale, they could be unique to each font family.
+#.
+#: ../src/font-combo-menu-item.c:132
+msgctxt "Short sample text"
+msgid "Aa"
+msgstr "Aa"
+
+#: ../src/font-combo-menu-item.c:134
+msgctxt "Lower case sample text"
+msgid "abcdefghijklmnopqrstuvwxyz"
+msgstr "abcdefghijklmnopqrstuvwxyz"
+
+#: ../src/font-combo-menu-item.c:136
+msgctxt "Upper case sample text"
+msgid "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+msgstr "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+#: ../src/font-combo-menu-item.c:138
+msgctxt "Numbers and special characters sample text"
+msgid "0123456789 .:,;(*!?)"
+msgstr "0123456789 .:,;(*!?)"
+
+#: ../src/font-combo-menu-item.c:157
+msgid "Sample text"
+msgstr "Örnek yazı"
+
+#: ../src/glabels-batch.c:53
+msgid "set output filename (default=\"output.pdf\")"
+msgstr "Kaydedilecek dosyanın ismi (varsayılan=\"output.pdf\")"
+
+#: ../src/glabels-batch.c:53 ../src/glabels-batch.c:67
+msgid "filename"
+msgstr "Dosya adı"
+
+#: ../src/glabels-batch.c:55
+msgid "number of sheets (default=1)"
+msgstr "Sayfa sayısı (varsayılan=1)"
+
+#: ../src/glabels-batch.c:55
+msgid "sheets"
+msgstr "Sayfalar"
+
+#: ../src/glabels-batch.c:57
+msgid "number of copies (default=1)"
+msgstr "Kopya sayısı (varsayılan=1)"
+
+#: ../src/glabels-batch.c:57
+msgid "copies"
+msgstr "Kopyalar"
+
+#: ../src/glabels-batch.c:59
+msgid "first label on first sheet (default=1)"
+msgstr "İlk sayfadaki ilk etiket (varsayılan=1)"
+
+#: ../src/glabels-batch.c:59
+msgid "first"
+msgstr "ilk"
+
+#: ../src/glabels-batch.c:61 ../data/ui/print-op-dialog-custom-widget.ui.h:11
+msgid "print outlines (to test printer alignment)"
+msgstr "Yazdırma sınırları (yazıcı düzenini test etmek için)"
+
+#: ../src/glabels-batch.c:63 ../data/ui/print-op-dialog-custom-widget.ui.h:12
+msgid "print in reverse (i.e. a mirror image)"
+msgstr "Ters yazdır (yani, ayna görüntüsü)"
+
+#: ../src/glabels-batch.c:65 ../data/ui/print-op-dialog-custom-widget.ui.h:13
+msgid "print crop marks"
+msgstr "Kırpa izlerini yazdır"
+
+#: ../src/glabels-batch.c:67
+msgid "input file for merging"
+msgstr "Birleştirme için girdi dosyası"
+
+#: ../src/glabels-batch.c:69 ../src/glabels.c:63
+msgid "[FILE...]"
+msgstr "[DOSYA...]"
+
+#: ../src/glabels-batch.c:99
+msgid "Print files created with gLabels."
+msgstr "gLabels ile oluşturulan dosyaları yazdır."
+
+#: ../src/glabels-batch.c:107 ../src/glabels.c:87
+#, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+
+#: ../src/glabels-batch.c:151
+#, c-format
+msgid "cannot perform document merge with glabels file %s\n"
+msgstr "doküman birleştirmesi glabels dosyası ile yapılamıyor %s\n"
+
+#: ../src/glabels-batch.c:186
+#, c-format
+msgid "cannot open glabels file %s\n"
+msgstr "glabels dosyası açılamıyor %s\n"
+
+#: ../src/glabels.c:79
+msgid "Launch gLabels label and business card designer."
+msgstr "gLabels etiket ve kart vizit tasarlayıcısını aç."
+
+#: ../src/label-barcode.c:183 ../src/ui.c:317
+msgid "Create barcode object"
+msgstr "Barkod nesnesi oluştur"
+
+#: ../src/label-barcode.c:259 ../src/label-barcode.c:461
+msgid "Barcode data"
+msgstr "Barkod verisi"
+
+#: ../src/label-barcode.c:290
+msgid "Barcode property"
+msgstr "Barkod özelliği"
+
+#: ../src/label-barcode.c:684
+msgid "Barcode data empty"
+msgstr "Barkod verisi boş"
+
+#: ../src/label-barcode.c:688
+msgid "Invalid barcode data"
+msgstr "Geçersiz barkod verisi"
+
+#: ../src/label-box.c:156
+msgid "Create box object"
+msgstr "Kutu nesnesi oluştur"
+
+#: ../src/label-box.c:230 ../src/label-ellipse.c:232
+#: ../data/ui/property-bar.ui.h:9
+msgid "Fill color"
+msgstr "Dolgu rengi"
+
+#: ../src/label-box.c:261 ../src/label-ellipse.c:261 ../src/label-line.c:212
+#: ../data/ui/property-bar.ui.h:10
+msgid "Line color"
+msgstr "Çizgi rengi"
+
+#: ../src/label-box.c:289 ../src/label-ellipse.c:290 ../src/label-line.c:241
+#: ../data/ui/property-bar.ui.h:11
+msgid "Line width"
+msgstr "Çizgi kalınlığı"
+
+#: ../src/label.c:405
+msgid "Untitled"
+msgstr "İsimsiz"
+
+#: ../src/label.c:719 ../src/ui.c:420
+msgid "Merge properties"
+msgstr "Birleştirme özellikleri"
+
+#: ../src/label.c:1215 ../src/ui.c:213
+msgid "Delete"
+msgstr "Sil"
+
+#: ../src/label.c:1248 ../src/ui.c:322
+msgid "Bring to front"
+msgstr "Öne getir"
+
+#: ../src/label.c:1284 ../src/ui.c:329
+msgid "Send to back"
+msgstr "Arkaya gönder"
+
+#: ../src/label.c:1325
+msgid "Rotate"
+msgstr "Döndür"
+
+#: ../src/label.c:1360 ../src/ui.c:336
+msgid "Rotate left"
+msgstr "Sola döndür"
+
+#: ../src/label.c:1393 ../src/ui.c:343
+msgid "Rotate right"
+msgstr "Sağa döndür"
+
+#: ../src/label.c:1428 ../src/ui.c:350
+msgid "Flip horizontally"
+msgstr "Yatay çevir"
+
+#: ../src/label.c:1463 ../src/ui.c:357
+msgid "Flip vertically"
+msgstr "dikey çevir"
+
+#: ../src/label.c:1503 ../src/ui.c:364
+msgid "Align left"
+msgstr "Sola hizala"
+
+#: ../src/label.c:1560 ../src/ui.c:378
+msgid "Align right"
+msgstr "Sağa hizala"
+
+#: ../src/label.c:1621
+msgid "Align horizontal center"
+msgstr "Yatay merkeze hizala"
+
+#: ../src/label.c:1697
+msgid "Align tops"
+msgstr "Üstleri hizala"
+
+#: ../src/label.c:1754
+msgid "Align bottoms"
+msgstr "Altları hizala"
+
+#: ../src/label.c:1815
+msgid "Align vertical center"
+msgstr "Dikey merkeze hizala"
+
+#: ../src/label.c:1893 ../src/ui.c:406
+msgid "Center horizontally"
+msgstr "Yatay ortala"
+
+#: ../src/label.c:1940 ../src/ui.c:413
+msgid "Center vertically"
+msgstr "Dİkey ortala"
+
+#: ../src/label.c:2628 ../src/label.c:2670 ../src/label.c:2696 ../src/ui.c:206
+msgid "Paste"
+msgstr "Yapıştır"
+
+#: ../src/label-ellipse.c:160
+msgid "Create ellipse object"
+msgstr "Elips nesnesi oluştur"
+
+#: ../src/label-image.c:200 ../src/ui.c:310
+msgid "Create image object"
+msgstr "Resim nesnesi oluştur"
+
+#: ../src/label-image.c:333 ../src/label-image.c:474
+msgid "Set image"
+msgstr "Resim ata"
+
+#: ../src/label-line.c:147 ../src/ui.c:296
+msgid "Create line object"
+msgstr "Çizgi nesnesi oluştur"
+
+#: ../src/label-object.c:394 ../src/label-object.c:428
+msgid "Move"
+msgstr "Taşı"
+
+#: ../src/label-object.c:479
+msgid "Resize"
+msgstr "Yeniden boyutlandır"
+
+#: ../src/label-object.c:1217
+msgid "Shadow state"
+msgstr "Gölge durumu"
+
+#: ../src/label-object.c:1260
+msgid "Shadow offset"
+msgstr "Gölge ofseti"
+
+#: ../src/label-object.c:1308
+msgid "Shadow color"
+msgstr "Gölge rengi"
+
+#: ../src/label-object.c:1351
+msgid "Shadow opacity"
+msgstr "Gölge opaklığı"
+
+#: ../src/label-text.c:281 ../src/ui.c:282
+msgid "Create text object"
+msgstr "Yazı nesnesi oluştur"
+
+#: ../src/label-text.c:453
+msgid "Typing"
+msgstr "Yazma"
+
+#: ../src/label-text.c:587 ../data/ui/property-bar.ui.h:1
+msgid "Font family"
+msgstr "Yazı tipi ailesi"
+
+#: ../src/label-text.c:625 ../data/ui/property-bar.ui.h:2
+msgid "Font size"
+msgstr "Yazı tipi boyutu"
+
+#: ../src/label-text.c:658
+msgid "Font weight"
+msgstr "Yazı tipi ağırlığı"
+
+#: ../src/label-text.c:691 ../data/ui/property-bar.ui.h:4
+msgid "Italic"
+msgstr "Yatık"
+
+#: ../src/label-text.c:724
+msgid "Align text"
+msgstr "Yazıyı hizala"
+
+#: ../src/label-text.c:757
+msgid "Line spacing"
+msgstr "Satır aralığı"
+
+#: ../src/label-text.c:790 ../data/ui/property-bar.ui.h:8
+msgid "Text color"
+msgstr "Yazı rengi"
+
+#: ../src/label-text.c:934
+msgid "Auto shrink"
+msgstr "Otomatik küçült"
+
+#: ../src/media-select.c:358 ../src/media-select.c:361
+#: ../src/media-select.c:506 ../src/media-select.c:723
+msgctxt "Brand"
+msgid "Any"
+msgstr "Any"
+
+#: ../src/media-select.c:365 ../src/media-select.c:893
+msgctxt "Page size"
+msgid "Any"
+msgstr "Any"
+
+#: ../src/media-select.c:372 ../src/media-select.c:375
+#: ../src/media-select.c:902
+msgctxt "Category"
+msgid "Any"
+msgstr "Any"
+
+#: ../src/media-select.c:648
+#, c-format
+msgid "Delete template \"%s\"?"
+msgstr "Şablon silinsi mi \"%s\"?"
+
+#: ../src/media-select.c:650
+msgid "This action will permanently delete this template."
+msgstr "Bu eylem bu şablonu kalıcı olarak silecektir."
+
+#: ../src/media-select.c:990
+msgid "No recent templates found."
+msgstr "Son kullanılan şablon bulunamadı."
+
+#: ../src/media-select.c:992
+msgid "Try selecting a template in the \"Search all\" tab."
+msgstr ""
+
+#. Translators: "No match" means that for the given template search criteria, there
+#. * were no matches found.
+#: ../src/media-select.c:1083
+msgid "No match."
+msgstr "Uyum yok."
+
+#: ../src/media-select.c:1085
+msgid "Try selecting a different brand, page size or category."
+msgstr "Başka bir marka, sayfa boyu veya kategori seçmeyi deneyin."
+
+#: ../src/media-select.c:1179
+msgid "No custom templates found."
+msgstr "Özel şablon bulunamadı."
+
+#: ../src/media-select.c:1181
+msgid ""
+"You may create new templates or try searching for pre-defined templates in "
+"the \"Search all\" tab."
+msgstr ""
+
+#. Translators: "None" here means that no document-merge source or
+#. * method has been selected.
+#: ../src/merge.c:171 ../src/merge.c:212 ../src/merge.c:376 ../src/merge.c:379
+msgid "None"
+msgstr "Hiçbiri"
+
+#: ../src/merge-init.c:57
+msgid "Text: Comma Separated Values (CSV)"
+msgstr "Text: Comma Separated Values (CSV)"
+
+#: ../src/merge-init.c:64
+msgid "Text: Comma Separated Values (CSV) with keys on line 1"
+msgstr "Text: Comma Separated Values (CSV) with keys on line 1"
+
+#: ../src/merge-init.c:72
+msgid "Text: Tab Separated Values (TSV)"
+msgstr "Text: Tab Separated Values (TSV)"
+
+#: ../src/merge-init.c:79
+msgid "Text: Tab Separated Values (TSV) with keys on line 1"
+msgstr "Text: Tab Separated Values (TSV) with keys on line 1"
+
+#: ../src/merge-init.c:87
+msgid "Text: Colon separated values"
+msgstr "Text: Colon separated values"
+
+#: ../src/merge-init.c:94
+msgid "Text: Colon separated values with keys on line 1"
+msgstr "Text: Colon separated values with keys on line 1"
+
+#: ../src/merge-init.c:102
+msgid "Text: Semicolon separated values"
+msgstr "Text: Semicolon separated values"
+
+#: ../src/merge-init.c:109
+msgid "Text: Semicolon separated values with keys on line 1"
+msgstr "Text: Semicolon separated values with keys on line 1"
+
+#: ../src/merge-init.c:119
+msgid "Evolution Addressbook"
+msgstr "Evolution Addressbook"
+
+#: ../src/merge-init.c:125
+msgid "VCards"
+msgstr "VCards"
+
+#: ../src/merge-properties-dialog.c:280
+msgid "Merge Properties"
+msgstr "Özellikleri birleştir"
+
+#: ../src/merge-properties-dialog.c:304 ../src/merge-properties-dialog.c:420
+msgid "Select merge-database source"
+msgstr "birleştirme-veritabanı kaynağı seçimi"
+
+#: ../src/merge-properties-dialog.c:315 ../src/merge-properties-dialog.c:446
+msgid "N/A"
+msgstr "N/A"
+
+#: ../src/merge-properties-dialog.c:341
+msgid "Select"
+msgstr "Seç"
+
+#: ../src/merge-properties-dialog.c:348
+msgid "Record/Field"
+msgstr "Kayıt/Alan"
+
+#: ../src/merge-properties-dialog.c:356 ../data/ui/object-editor.ui.h:23
+msgid "Data"
+msgstr "Veri"
+
+#. Translators: "Fixed" here means that for the given document-merge method, there are
+#. * no further choices to further define the source of data.  E.g. if you select the
+#. * evolution-data-server, there are no further choices -- the source is "Fixed."
+#.
+#: ../src/merge-properties-dialog.c:439
+msgid "Fixed"
+msgstr "Sabit"
+
+#. Translators: "Up" refers to the direction towards the top of a label.
+#: ../src/mini-preview.c:1054
+msgid "Up"
+msgstr "Yukarı"
+
+#: ../src/new-label-dialog.c:203
+msgid "Select Product"
+msgstr "ürün seç"
+
+#: ../src/new-label-dialog.c:215
+msgid "Choose Orientation"
+msgstr "Oryantasyon seç"
+
+#: ../src/new-label-dialog.c:229
+msgid "Review"
+msgstr "Gözden geçir"
+
+#: ../src/object-editor-bc-page.c:97 ../src/object-editor-shadow-page.c:93
+#: ../src/object-editor-text-page.c:97 ../src/prefs-dialog.c:335
+#: ../src/ui-property-bar.c:277
+msgid "Default"
+msgstr "Varsayılan"
+
+#: ../src/object-editor.c:161 ../src/object-editor.c:470
+msgid "Object properties"
+msgstr "Nesne özellikleri"
+
+#: ../src/object-editor.c:314
+msgid "Box object properties"
+msgstr "Kutu nesnesi özellikleri"
+
+#: ../src/object-editor.c:333
+msgid "Ellipse object properties"
+msgstr "Elips nesnesi özellikleri"
+
+#: ../src/object-editor.c:352
+msgid "Line object properties"
+msgstr "Çizgi nesnesi özellikleri"
+
+#: ../src/object-editor.c:369
+msgid "Image object properties"
+msgstr "Resim nesnesi özellikleri"
+
+#: ../src/object-editor.c:386
+msgid "Text object properties"
+msgstr "Yazı nesnesi özellikleri"
+
+#: ../src/object-editor.c:408
+msgid "Barcode object properties"
+msgstr "Barkod nesnesi özellikleri"
+
+#: ../src/object-editor-edit-page.c:76
+msgid "Insert merge field"
+msgstr "Birleştirme alanı girişi"
+
+#: ../src/object-editor-fill-page.c:79 ../src/prefs-dialog.c:341
+#: ../src/ui-property-bar.c:287
+msgid "No Fill"
+msgstr "Dolgu yok"
+
+#: ../src/object-editor-image-page.c:302
+msgid "All Files"
+msgstr "Tüm dosyalar"
+
+#: ../src/object-editor-image-page.c:307
+msgid "All Images"
+msgstr "Tüm resimler"
+
+#: ../src/object-editor-image-page.c:323
+#, c-format
+msgid "%s (*.%s)"
+msgstr ""
+
+#: ../src/object-editor-line-page.c:79 ../src/prefs-dialog.c:338
+#: ../src/ui-property-bar.c:297
+msgid "No Line"
+msgstr "Çizgi yok"
+
+#: ../src/object-editor-size-page.c:89
+msgid "Lock aspect ratio."
+msgstr "Görüntü boyutu sabitleme."
+
+#: ../src/prefs-dialog.c:168 ../data/ui/prefs-dialog.ui.h:1
+msgid "gLabels Preferences"
+msgstr "gLabels Tercihleri"
+
+#. TODO: Is this the actual part #?
+#: ../src/print-op.c:205 ../src/print-op-dialog.c:215
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:2
+#: ../templates/misc-iso-templates.xml.h:26
+msgid "Labels"
+msgstr "Etiketler"
+
+#: ../src/template-designer.c:429
+msgid "New gLabels Template"
+msgstr "Yeni gLabels Şablonu"
+
+#: ../src/template-designer.c:487
+msgid "Welcome"
+msgstr "Merhaba"
+
+#: ../src/template-designer.c:526
+msgid "Name and Description"
+msgstr "İsim ve Tanım"
+
+#: ../src/template-designer.c:575
+msgid "Page Size"
+msgstr "Sayfa boyutu"
+
+#: ../src/template-designer.c:642
+msgid "Label or Card Shape"
+msgstr "Etiket veya kart şekli"
+
+#: ../src/template-designer.c:689 ../src/template-designer.c:790
+msgid "Label or Card Size"
+msgstr "Etiket veya kart boyutu"
+
+#: ../src/template-designer.c:873
+msgid "Label Size (round)"
+msgstr "Etiket boyutu (yuvarlak)"
+
+#: ../src/template-designer.c:954
+msgid "Label Size (CD/DVD)"
+msgstr "Etiket boyutu (CD/DVD)"
+
+#: ../src/template-designer.c:1045
+msgid "Number of Layouts"
+msgstr "Düzenleme adeti"
+
+#: ../src/template-designer.c:1113
+msgid "Layout(s)"
+msgstr "Düzenleme(ler)"
+
+#: ../src/template-designer.c:1218
+msgid "Design Completed"
+msgstr "Tasarım tamamlandı"
+
+#: ../src/template-designer.c:1246
+msgid "Edit gLabels Template"
+msgstr "gLabels Şablonunu düzenle"
+
+#: ../src/template-designer.c:1549
+msgid "Brand and part# match an existing template!"
+msgstr "Marka ve parça# varolan bir şablonla aynı"
+
+#. Menu entries.
+#: ../src/ui.c:91
+msgid "_File"
+msgstr "_Dosya"
+
+#: ../src/ui.c:92
+msgid "Open Recent _Files"
+msgstr "Son kullanılan _dosyaları aç"
+
+#: ../src/ui.c:93
+msgid "_Edit"
+msgstr "Düz_enle"
+
+#: ../src/ui.c:94
+msgid "_View"
+msgstr "_Görünüm"
+
+#: ../src/ui.c:95
+msgid "Customize Main Toolbar"
+msgstr "Ana araç çubuğunu özelleştir"
+
+#: ../src/ui.c:96
+msgid "Customize Drawing Toolbar"
+msgstr "Çizim araç çubuğunu özelleştir"
+
+#: ../src/ui.c:97
+msgid "Customize Properties Toolbar"
+msgstr "Özellikler araç çubuğunu özelleştir"
+
+#: ../src/ui.c:98
+msgid "_Objects"
+msgstr "_Nesneler"
+
+#: ../src/ui.c:99
+msgid "_Create"
+msgstr "_Oluştur"
+
+#: ../src/ui.c:100
+msgid "_Order"
+msgstr "_Sırala"
+
+#: ../src/ui.c:101
+msgid "_Rotate/Flip"
+msgstr "_Döndür/Çevir"
+
+#: ../src/ui.c:102
+msgid "_Alignment"
+msgstr "Hiz_alama"
+
+#: ../src/ui.c:103
+msgid "C_enter"
+msgstr "O_rtala"
+
+#: ../src/ui.c:104
+msgid "_Help"
+msgstr "_Yardım"
+
+#. Popup entries.
+#: ../src/ui.c:107 ../src/ui.c:108
+msgid "Context Menu"
+msgstr "Konteks menü"
+
+#: ../src/ui.c:113
+msgid "_New"
+msgstr "_Yeni"
+
+#: ../src/ui.c:115
+msgid "Create a new file"
+msgstr "Yeni dosya oluştur"
+
+#: ../src/ui.c:120
+msgid "_Open..."
+msgstr "_Aç..."
+
+#: ../src/ui.c:122
+msgid "Open a file"
+msgstr "Bir dosyayı aç"
+
+#: ../src/ui.c:127
+msgid "_Save"
+msgstr "_Kaydet"
+
+#: ../src/ui.c:129
+msgid "Save current file"
+msgstr "Geçerli dosyayı kaydet"
+
+#: ../src/ui.c:134
+msgid "Save _As..."
+msgstr "_Farklı Kaydet..."
+
+#: ../src/ui.c:136
+msgid "Save the current file to a different name"
+msgstr "Geçerli dosyayı başka bir isimle kaydet"
+
+#: ../src/ui.c:141
+msgid "_Print..."
+msgstr "_Yazdır..."
+
+#: ../src/ui.c:143
+msgid "Print the current file"
+msgstr "Geçerli dosyayı yazdır"
+
+#: ../src/ui.c:148
+msgid "Properties..."
+msgstr "Özellikler..."
+
+#: ../src/ui.c:150
+msgid "Modify document properties"
+msgstr "Doküman özellliklerini değiştir"
+
+#: ../src/ui.c:155
+msgid "Template _Designer..."
+msgstr "Şablon _Tasarlayıcı..."
+
+#: ../src/ui.c:157
+msgid "Create a custom template"
+msgstr "Özel şablon oluştur"
+
+#: ../src/ui.c:162
+msgid "_Close"
+msgstr "_Kapat"
+
+#: ../src/ui.c:164
+msgid "Close the current file"
+msgstr "Geçerli dosyayı kapat"
+
+#: ../src/ui.c:169
+msgid "_Quit"
+msgstr "_Çıkış"
+
+#: ../src/ui.c:171
+msgid "Quit the program"
+msgstr "Programdan çık"
+
+#: ../src/ui.c:178 ../src/ui.c:180 ../src/ui.c:976
+msgid "Undo"
+msgstr "Geri al"
+
+#: ../src/ui.c:185 ../src/ui.c:187 ../src/ui.c:983
+msgid "Redo"
+msgstr "Tekrar yap"
+
+#: ../src/ui.c:192
+msgid "Cut"
+msgstr "Kes"
+
+#: ../src/ui.c:194
+msgid "Cut the selection"
+msgstr "Seçimi kes"
+
+#: ../src/ui.c:199
+msgid "Copy"
+msgstr "Kopayala"
+
+#: ../src/ui.c:201
+msgid "Copy the selection"
+msgstr "Seçimi kopyala"
+
+#: ../src/ui.c:208
+msgid "Paste the clipboard"
+msgstr "Panodakini yapıştır"
+
+#: ../src/ui.c:215
+msgid "Delete the selected objects"
+msgstr "Seçilen nesneleri sil"
+
+#: ../src/ui.c:220
+msgid "Select All"
+msgstr "Tümünü seç"
+
+#: ../src/ui.c:222
+msgid "Select all objects"
+msgstr "Tüm nesneleri seç"
+
+#: ../src/ui.c:227
+msgid "Un-select All"
+msgstr "Hiç birini seçme"
+
+#: ../src/ui.c:229
+msgid "Remove all selections"
+msgstr "Tüm seçimleri bırak"
+
+#: ../src/ui.c:234
+msgid "Preferences"
+msgstr "Tercihler"
+
+#: ../src/ui.c:236
+msgid "Configure the application"
+msgstr "Uygulamayı ayarla"
+
+#: ../src/ui.c:243
+msgid "Zoom in"
+msgstr "Yakınlaş"
+
+#: ../src/ui.c:245
+msgid "Increase magnification"
+msgstr "Büyütme oranını arttır"
+
+#: ../src/ui.c:250
+msgid "Zoom out"
+msgstr "Uzaklaş"
+
+#: ../src/ui.c:252
+msgid "Decrease magnification"
+msgstr "Büyütme oranını azalt"
+
+#: ../src/ui.c:257
+msgid "Zoom 1 to 1"
+msgstr "1:1 oranında yakınlaş"
+
+#: ../src/ui.c:259
+msgid "Restore scale to 100%"
+msgstr "Ölçüyü %100'e getir"
+
+#: ../src/ui.c:264
+msgid "Zoom to fit"
+msgstr "Sığacak şekilde yakınlaş"
+
+#: ../src/ui.c:266
+msgid "Set scale to fit window"
+msgstr "Pencereye sığacak şekilde ölçülendir"
+
+#: ../src/ui.c:273
+msgid "Select Mode"
+msgstr "Seçim modu"
+
+#: ../src/ui.c:275
+msgid "Select, move and modify objects"
+msgstr "Nesneleri seç, hareket ettir veya düzenle"
+
+#: ../src/ui.c:280 ../src/view-text.c:94 ../data/ui/object-editor.ui.h:2
+#: ../data/ui/prefs-dialog.ui.h:17
+msgid "Text"
+msgstr "Yazı"
+
+#: ../src/ui.c:287
+msgid "Box"
+msgstr "Kutu"
+
+#: ../src/ui.c:289
+msgid "Create box/rectangle object"
+msgstr "Kutu/dikdörtgen nesne oluştur"
+
+#: ../src/ui.c:294 ../data/ui/object-editor.ui.h:16
+#: ../data/ui/prefs-dialog.ui.h:20
+msgid "Line"
+msgstr "Çizgi"
+
+#: ../src/ui.c:301
+msgid "Ellipse"
+msgstr "Elips"
+
+#: ../src/ui.c:303
+msgid "Create ellipse/circle object"
+msgstr "Elips/daire şekilnde nesne oluştur"
+
+#: ../src/ui.c:308 ../data/ui/object-editor.ui.h:19
+msgid "Image"
+msgstr "Resim"
+
+#: ../src/ui.c:315
+msgid "Barcode"
+msgstr "Barkod"
+
+#: ../src/ui.c:324
+msgid "Raise object to top"
+msgstr "Nesneyi üste getir"
+
+#: ../src/ui.c:331
+msgid "Lower object to bottom"
+msgstr "Nesneyi alta gönder"
+
+#: ../src/ui.c:338
+msgid "Rotate object 90 degrees counter-clockwise"
+msgstr "Nesneyi saatin tersi yönde 90 derece döndür"
+
+#: ../src/ui.c:345
+msgid "Rotate object 90 degrees clockwise"
+msgstr "Nesneyi saat yönünde 90 derece döndür"
+
+#: ../src/ui.c:352
+msgid "Flip object horizontally"
+msgstr "Nesneyi yatay olarak çevir"
+
+#: ../src/ui.c:359
+msgid "Flip object vertically"
+msgstr "Nesneyi dikey olarak çevir"
+
+#: ../src/ui.c:366
+msgid "Align objects to left edges"
+msgstr "Nesnelerin sol kenarlarını hizala"
+
+#: ../src/ui.c:371
+msgid "Align center"
+msgstr "Merkezde hizala"
+
+#: ../src/ui.c:373
+msgid "Align objects to horizontal centers"
+msgstr "Nesnelerin yatay merkezlerini hizala"
+
+#: ../src/ui.c:380
+msgid "Align objects to right edges"
+msgstr "Nesnelerin sağ kenarlarını hizala"
+
+#: ../src/ui.c:385
+msgid "Align top"
+msgstr "Üste hizala"
+
+#: ../src/ui.c:387
+msgid "Align objects to top edges"
+msgstr "Nesnelerin üst kenarlarını hizala"
+
+#: ../src/ui.c:392
+msgid "Align middle"
+msgstr "Ortaya hizala"
+
+#: ../src/ui.c:394
+msgid "Align objects to vertical centers"
+msgstr "Nesneleri dikey merkezlerine hizala"
+
+#: ../src/ui.c:399
+msgid "Align bottom"
+msgstr "Alta hizala"
+
+#: ../src/ui.c:401
+msgid "Align objects to bottom edges"
+msgstr "Nesnelerin alt kenarlarını hizala"
+
+#: ../src/ui.c:408
+msgid "Center objects to horizontal label center"
+msgstr "Nesneleri etiket yatay merkezinde ortala"
+
+#: ../src/ui.c:415
+msgid "Center objects to vertical label center"
+msgstr "Nesneleri etiket dikey merkezinde ortala"
+
+#: ../src/ui.c:422
+msgid "Edit merge properties"
+msgstr "Birleştirme özelliklerini düzenle"
+
+#: ../src/ui.c:429
+msgid "Contents"
+msgstr "İçindekiler"
+
+#: ../src/ui.c:431
+msgid "Open glabels manual"
+msgstr "Glabels kullanım kılavuzunu aç"
+
+#: ../src/ui.c:436
+msgid "About..."
+msgstr "Hakkında..."
+
+#: ../src/ui.c:438 ../src/ui-commands.c:1198
+msgid "About glabels"
+msgstr "Glabels hakkında"
+
+#: ../src/ui.c:448
+msgid "Property toolbar"
+msgstr "Özellikler ara çubuğu"
+
+#: ../src/ui.c:450
+msgid "Change the visibility of the property toolbar in the current window"
+msgstr "Geçerli pencerede özellikler araç çubuğunun görünürlüğünü değiştir"
+
+#: ../src/ui.c:456
+msgid "Grid"
+msgstr "Kılavuz çizgiler"
+
+#: ../src/ui.c:458
+msgid "Change the visibility of the grid in the current window"
+msgstr "Geçerli pencerede kılavuz çizgilerin görünürlüğünü değiştir"
+
+#: ../src/ui.c:464
+msgid "Markup"
+msgstr ""
+
+#: ../src/ui.c:466
+msgid "Change the visibility of markup lines in the current window"
+msgstr ""
+
+#: ../src/ui.c:477
+msgid "Main toolbar"
+msgstr "Ana araç çubuğu"
+
+#: ../src/ui.c:479
+msgid "Change the visibility of the main toolbar in the current window"
+msgstr "Geçerli pencerede ana araç çubuğunun görünürlüğünü değiştir"
+
+#: ../src/ui.c:485
+msgid "Drawing toolbar"
+msgstr "Çizim araç çubuğu"
+
+#: ../src/ui.c:487
+msgid "Change the visibility of the drawing toolbar in the current window"
+msgstr "Geçerli pencerede çizim araç çubuğunun görünürlüğünü değiştir"
+
+#: ../src/ui-commands.c:1135
+msgid "Glabels includes contributions from:"
+msgstr "Glabels'a destek verenler:"
+
+#: ../src/ui-commands.c:1144
+msgid "See the file AUTHORS for additional credits,"
+msgstr "Diğer katkıda bulunanlar için AUTHORS dosyasına bakınız,"
+
+#: ../src/ui-commands.c:1145
+msgid "or visit http://glabels.org/"
+msgstr "veya http://glabels.org/ adresini ziyaret ediniz."
+
+#: ../src/ui-commands.c:1162
+msgid "A label and business card creation program.\n"
+msgstr "Etiket ve kartvizit oluşturma programı \n"
+
+#: ../src/ui-commands.c:1166
+msgid "translator-credits"
+msgstr "Çeviriye katkıda bulunanlar"
+
+#: ../src/ui-commands.c:1169
+msgid ""
+"gLabels is free software: you can redistribute it and/or modify\n"
+"it under the terms of the GNU General Public License as published by\n"
+"the Free Software Foundation, either version 3 of the License, or\n"
+"(at your option) any later version.\n"
+"\n"
+"gLabels is distributed in the hope that it will be useful,\n"
+"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"GNU General Public License for more details.\n"
+msgstr ""
+"gLabels ücretsiz bir yazılımdır: dağıtabilir ve/veya modifiye edebilirsiniz\n"
+
+#: ../src/warning-handler.c:69
+msgid "gLabels Error!"
+msgstr "gLabels Hatası!"
+
+#: ../src/window.c:281
+msgid "(none) - gLabels"
+msgstr "(yok) - gLabels"
+
+#: ../src/window.c:482
+msgid "(modified)"
+msgstr "(değiştirilmiş)"
+
+#. Create and append an "Other" entry.
+#. Translators: "Other" here means other page size.  Meaning a page size
+#. * other than the standard ones that libglabels knows about such as
+#. * "letter", "A4", etc.
+#: ../libglabels/lgl-db.c:267
+msgid "Other"
+msgstr "Diğer"
+
+#. Create and append a "User defined" entry.
+#: ../libglabels/lgl-db.c:276
+msgid "User defined"
+msgstr "Kullanıcı tanımlı"
+
+#: ../libglabels/lgl-db.c:663
+msgid ""
+"Unable to locate paper size definitions.  Libglabels may not be installed "
+"correctly!"
+msgstr ""
+"Sayfa boyu tanımları bulunamıyor. Libglables doğru kurulmamış olabilir!"
+
+#: ../libglabels/lgl-db.c:1062
+msgid ""
+"Unable to locate category definitions.  Libglabels may not be installed "
+"correctly!"
+msgstr "Kategori tanımları bulunamıyor. Libglabels doğru kurulmamış olabilir!"
+
+#: ../libglabels/lgl-db.c:1989
+msgid ""
+"Unable to locate any template files.  Libglabels may not be installed "
+"correctly!"
+msgstr "Şablon dosyaları bulunamıyor. Libglabels doğru kurulmamış olabilir!"
+
+#: ../libglabels/lgl-db.c:2056
+#, c-format
+msgid "%s full page label"
+msgstr "%s tam sayfa etiket"
+
+#.
+#. * Translators: 1st %d = number of labels across a page,
+#. *              2nd %d = number of labels down a page,
+#. *              3rd %d = total number of labels on a page (sheet).
+#.
+#: ../libglabels/lgl-template.c:673
+#, c-format
+msgid "%d × %d (%d per sheet)"
+msgstr ""
+
+#. Translators: %d is the total number of labels on a page (sheet).
+#: ../libglabels/lgl-template.c:678
+#, c-format
+msgid "%d per sheet"
+msgstr ""
+
+#: ../libglabels/lgl-template.c:759 ../libglabels/lgl-template.c:767
+#: ../libglabels/lgl-template.c:779 ../libglabels/lgl-template.c:787
+msgid "diameter"
+msgstr "çap"
+
+#. The ids are identical to the absolute length units supported in
+#. the CSS2 Specification (Section 4.3.2)
+#. This table must be sorted exactly as the enumerations in lglUnits
+#. [LGL_UNITS_POINT]
+#: ../libglabels/lgl-units.c:65 ../data/ui/object-editor.ui.h:14
+#: ../data/ui/prefs-dialog.ui.h:19
+msgid "points"
+msgstr "nokta"
+
+#. [LGL_UNITS_INCH]
+#: ../libglabels/lgl-units.c:66 ../data/ui/object-editor.ui.h:27
+#: ../data/ui/template-designer.ui.h:15
+msgid "inches"
+msgstr "inç"
+
+#. [LGL_UNITS_MM]
+#: ../libglabels/lgl-units.c:67
+msgid "mm"
+msgstr "mm"
+
+#. [LGL_UNITS_CM]
+#: ../libglabels/lgl-units.c:68
+msgid "cm"
+msgstr "cm"
+
+#. [LGL_UNITS_PICA]
+#: ../libglabels/lgl-units.c:69
+msgid "picas"
+msgstr ""
+
+#.
+#. * Local Variables:       -- emacs
+#. * mode: C                -- emacs
+#. * c-basic-offset: 8      -- emacs
+#. * tab-width: 8           -- emacs
+#. * indent-tabs-mode: nil  -- emacs
+#. * End:                   -- emacs
+#.
+#: ../data/ui/merge-properties-dialog.ui.h:1
+msgid "Format:"
+msgstr "Format:"
+
+#: ../data/ui/merge-properties-dialog.ui.h:2
+msgid "Location:"
+msgstr "Konum:"
+
+#: ../data/ui/merge-properties-dialog.ui.h:3
+msgid "Source"
+msgstr "Kaynak"
+
+#: ../data/ui/merge-properties-dialog.ui.h:4
+msgid "Select all"
+msgstr "Tümünü seç"
+
+#: ../data/ui/merge-properties-dialog.ui.h:5
+msgid "Unselect all"
+msgstr "Hiçbirini seçme"
+
+#: ../data/ui/merge-properties-dialog.ui.h:6
+msgid "Record selection/preview"
+msgstr "Seçimi/önizlemeyi kaydet"
+
+#: ../data/ui/media-select.ui.h:1
+msgid "Recent"
+msgstr "Son kullanılan"
+
+#: ../data/ui/media-select.ui.h:2
+msgid "Brand:"
+msgstr "Marka:"
+
+#: ../data/ui/media-select.ui.h:3 ../data/ui/new-label-dialog.ui.h:7
+#: ../data/ui/template-designer.ui.h:12
+msgid "Page size:"
+msgstr "Sayfa boyutu:"
+
+#: ../data/ui/media-select.ui.h:4
+msgid "Category:"
+msgstr "Kategori:"
+
+#: ../data/ui/media-select.ui.h:5
+msgid "Search all"
+msgstr "Tümünü ara"
+
+#: ../data/ui/media-select.ui.h:6
+msgid "Custom"
+msgstr "Özel"
+
+#: ../data/ui/new-label-dialog.ui.h:1
+msgid ""
+"Choose label or card product from hundreds of predefined templates or define "
+"your own."
+msgstr ""
+"Yüzlerde hazır şablondan bir etiket veya kart seçin veya kendi şablonunuzu "
+"oluşturun."
+
+#: ../data/ui/new-label-dialog.ui.h:2
+msgid "Select orientation of label content."
+msgstr "Etiket içeriğinin oryantasyonunu seçin"
+
+#: ../data/ui/new-label-dialog.ui.h:3
+msgid "Normal"
+msgstr "Normal"
+
+#: ../data/ui/new-label-dialog.ui.h:4
+msgid "Rotated"
+msgstr "Döndürülmüş"
+
+#: ../data/ui/new-label-dialog.ui.h:5
+msgid "Please review and confirm your selection."
+msgstr "Seçimizi inceleyip onaylayın"
+
+#: ../data/ui/new-label-dialog.ui.h:6 ../data/ui/template-designer.ui.h:9
+msgid "Description:"
+msgstr "Tanım:"
+
+#: ../data/ui/new-label-dialog.ui.h:8
+msgid "Label size:"
+msgstr "Etiket boyu:"
+
+#: ../data/ui/new-label-dialog.ui.h:9
+msgid "Layout:"
+msgstr "Plan:"
+
+#: ../data/ui/new-label-dialog.ui.h:10
+msgid "Similar products:"
+msgstr "Benzer ürünler:"
+
+#: ../data/ui/new-label-dialog.ui.h:11 ../data/ui/template-designer.ui.h:6
+msgid "Part #:"
+msgstr "Parça #:"
+
+#: ../data/ui/new-label-dialog.ui.h:12
+msgid "Vendor:"
+msgstr "Üretici:"
+
+#: ../data/ui/object-editor.ui.h:1
+msgid "dialog1"
+msgstr ""
+
+#: ../data/ui/object-editor.ui.h:3
+msgid "Family:"
+msgstr "Aile:"
+
+#: ../data/ui/object-editor.ui.h:4
+msgid "Size:"
+msgstr "Boyut:"
+
+#: ../data/ui/object-editor.ui.h:5
+msgid "Style:"
+msgstr "Sitil:"
+
+#: ../data/ui/object-editor.ui.h:6 ../data/ui/prefs-dialog.ui.h:14
+msgid "Color:"
+msgstr "Renk:"
+
+#: ../data/ui/object-editor.ui.h:7
+msgid " "
+msgstr ""
+
+#: ../data/ui/object-editor.ui.h:8
+msgid "key:"
+msgstr "anahtar:"
+
+#: ../data/ui/object-editor.ui.h:9 ../data/ui/prefs-dialog.ui.h:15
+msgid "Alignment:"
+msgstr "Hizalanma:"
+
+#: ../data/ui/object-editor.ui.h:10 ../data/ui/prefs-dialog.ui.h:16
+msgid "Line Spacing:"
+msgstr "Satır aralığı:"
+
+#: ../data/ui/object-editor.ui.h:11
+msgid "Allow merge to automatically shrink text"
+msgstr ""
+
+#: ../data/ui/object-editor.ui.h:12
+msgid "Style"
+msgstr "Sitil"
+
+#: ../data/ui/object-editor.ui.h:13 ../data/ui/prefs-dialog.ui.h:18
+#: ../data/ui/template-designer.ui.h:13
+msgid "Width:"
+msgstr "Genişlik:"
+
+#: ../data/ui/object-editor.ui.h:15
+msgid "Key:"
+msgstr "Anahtar:"
+
+#: ../data/ui/object-editor.ui.h:17 ../data/ui/prefs-dialog.ui.h:21
+msgid "Fill"
+msgstr "Dolgu"
+
+#: ../data/ui/object-editor.ui.h:18
+msgid "File:"
+msgstr "Dosya:"
+
+#: ../data/ui/object-editor.ui.h:20
+msgid "Literal:"
+msgstr "Literal:"
+
+#: ../data/ui/object-editor.ui.h:21
+msgid "format:"
+msgstr "format:"
+
+#: ../data/ui/object-editor.ui.h:22
+msgid "digits:"
+msgstr ""
+
+#: ../data/ui/object-editor.ui.h:24
+msgid "Backend:"
+msgstr ""
+
+#: ../data/ui/object-editor.ui.h:25
+msgid "Checksum"
+msgstr ""
+
+#: ../data/ui/object-editor.ui.h:26 ../data/ui/template-designer.ui.h:14
+msgid "Height:"
+msgstr "Yükseklik:"
+
+#: ../data/ui/object-editor.ui.h:28
+msgid "Reset image size"
+msgstr "Resmi orijinal boyutuna getir"
+
+#: ../data/ui/object-editor.ui.h:29
+msgid "Size"
+msgstr "Boyut"
+
+#: ../data/ui/object-editor.ui.h:30
+msgid "Length:"
+msgstr "Uzunluk:"
+
+#: ../data/ui/object-editor.ui.h:31
+msgid "Angle:"
+msgstr "Açı:"
+
+#: ../data/ui/object-editor.ui.h:32
+msgid "degrees"
+msgstr "derece"
+
+#: ../data/ui/object-editor.ui.h:33
+msgid "X:"
+msgstr "X:"
+
+#: ../data/ui/object-editor.ui.h:34
+msgid "Y:"
+msgstr "Y:"
+
+#: ../data/ui/object-editor.ui.h:35
+msgid "Position"
+msgstr "Pozisyon"
+
+#: ../data/ui/object-editor.ui.h:36
+msgid "Enable shadow"
+msgstr "Gölge ver"
+
+#: ../data/ui/object-editor.ui.h:37
+msgid "X Offset:"
+msgstr "X Offset:"
+
+#: ../data/ui/object-editor.ui.h:38
+msgid "Y Offset:"
+msgstr "Y Offset:"
+
+#: ../data/ui/object-editor.ui.h:39
+msgid "Opacity:"
+msgstr "Opaklık:"
+
+#: ../data/ui/object-editor.ui.h:41
+#, no-c-format
+msgid "%"
+msgstr ""
+
+#: ../data/ui/object-editor.ui.h:42
+msgid "Shadow"
+msgstr "Gölge"
+
+#: ../data/ui/prefs-dialog.ui.h:2
+msgid "Select locale specific behavior."
+msgstr "Yerele özel davranışı seç"
+
+#: ../data/ui/prefs-dialog.ui.h:3
+msgid "   "
+msgstr ""
+
+#: ../data/ui/prefs-dialog.ui.h:4
+msgid "Points"
+msgstr "Nokta"
+
+#: ../data/ui/prefs-dialog.ui.h:5
+msgid "Inches"
+msgstr "İnç"
+
+#: ../data/ui/prefs-dialog.ui.h:6
+msgid "Millimeters"
+msgstr "Milimetre"
+
+#: ../data/ui/prefs-dialog.ui.h:7
+msgid "Units"
+msgstr "Birim"
+
+#: ../data/ui/prefs-dialog.ui.h:8 ../templates/paper-sizes.xml.h:3
+msgid "US Letter"
+msgstr "US Letter"
+
+#: ../data/ui/prefs-dialog.ui.h:9
+msgid "ISO A4"
+msgstr "ISO A4"
+
+#: ../data/ui/prefs-dialog.ui.h:10
+msgid "Default page size"
+msgstr "Varsayılan sayfa boyutu"
+
+#: ../data/ui/prefs-dialog.ui.h:11
+msgid "Locale"
+msgstr "Yerel"
+
+#: ../data/ui/prefs-dialog.ui.h:12
+msgid "Select default properties for new objects."
+msgstr "Yeni nesneler için varsayılan özellikleri seç"
+
+#: ../data/ui/prefs-dialog.ui.h:13
+msgid "Font:"
+msgstr "Yazı tipi:"
+
+#: ../data/ui/prefs-dialog.ui.h:22
+msgid "Object defaults"
+msgstr "Nesne varsayılanları"
+
+#: ../data/ui/property-bar.ui.h:3
+msgid "Bold"
+msgstr "Kalın"
+
+#: ../data/ui/property-bar.ui.h:5
+msgid "Left align"
+msgstr "Sola hizalı"
+
+#: ../data/ui/property-bar.ui.h:6
+msgid "Center align"
+msgstr "Ortaya hizalı"
+
+#: ../data/ui/property-bar.ui.h:7
+msgid "Right align"
+msgstr "Sağa hizalı"
+
+#: ../data/ui/template-designer.ui.h:1
+msgid ""
+"Welcome to the gLabels Template Designer.\n"
+"\n"
+"This dialog will assist you in the creation of a custom gLabels template."
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:4
+msgid ""
+"Please enter the following identifying information about the template "
+"stationery."
+msgstr "Şablon galerisi için tanımlayıcı bilgiyi girin."
+
+#: ../data/ui/template-designer.ui.h:5
+msgid "Brand/Manufacturer:"
+msgstr "Marka/Üretici:"
+
+#: ../data/ui/template-designer.ui.h:7
+msgid "(e.g., 8163A)"
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:8
+msgid "(e.g., Avery, Acme, ...)"
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:10
+msgid "(e.g., \"Mailing Labels,\" \"Business Cards,\" ...)"
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:11
+msgid "Please select the page size of the template stationery."
+msgstr "Şablon galerisinin sayfa boyunu seçin."
+
+#: ../data/ui/template-designer.ui.h:16
+msgid "Please select the basic shape of the labels or cards."
+msgstr "Etiketlerin veya kartların temel şekillerini girin."
+
+#: ../data/ui/template-designer.ui.h:17
+msgid "Rectangular or square (can have rounded corners)"
+msgstr "Dikdörtgen veya kare (köşeleri yuvarlak olabilir)"
+
+#: ../data/ui/template-designer.ui.h:18
+msgid "Round"
+msgstr "Yuvarlak"
+
+#: ../data/ui/template-designer.ui.h:19
+msgid "Elliptical"
+msgstr "Elips şeklinde"
+
+#: ../data/ui/template-designer.ui.h:20
+msgid "CD/DVD (including credit card CDs)"
+msgstr "CD/DVD (kredi kartı CD'leri dahil)"
+
+#: ../data/ui/template-designer.ui.h:21
+msgid ""
+"Please enter the following size parameters of a single label or card in your "
+"template."
+msgstr ""
+"Şablonunuzdaki tek bir etiket veya kart için boyut parametrelerini girin."
+
+#: ../data/ui/template-designer.ui.h:22
+msgid "1. Width:"
+msgstr "1. Genişlik:"
+
+#: ../data/ui/template-designer.ui.h:23
+msgid "2. Height:"
+msgstr "2. Yükseklik:"
+
+#: ../data/ui/template-designer.ui.h:24
+msgid "3. Round (radius of corner):"
+msgstr "3. Yuvarlak (köşenin yarıçapı):"
+
+#: ../data/ui/template-designer.ui.h:25
+msgid "4. Horiz. waste (overprint allowed):"
+msgstr "4. Yatay taşma (dışa yazdırılabilir):"
+
+#: ../data/ui/template-designer.ui.h:26
+msgid "6. Margin"
+msgstr "6. Sınır"
+
+#: ../data/ui/template-designer.ui.h:27
+msgid "5. Vert. waste (overprint allowed):"
+msgstr "5. Dikey taşma (dışa yazdırılabilir):"
+
+#: ../data/ui/template-designer.ui.h:28
+msgid "3. Waste (overprint allowed):"
+msgstr "3. Taşma (dışa yazdırılabilir):"
+
+#: ../data/ui/template-designer.ui.h:29
+msgid "4. Margin"
+msgstr "4. Sınır"
+
+#: ../data/ui/template-designer.ui.h:30
+msgid ""
+"Please enter the following size parameters of a single label in your "
+"template."
+msgstr "Şablonunuzdaki tek bir etiket için boyut parametrelerini girin."
+
+#: ../data/ui/template-designer.ui.h:31
+msgid "1. Radius:"
+msgstr "1. Yarıçap:"
+
+#: ../data/ui/template-designer.ui.h:32
+msgid "2. Waste (overprint allowed):"
+msgstr "2. Taşma (dışa yazdırılabilir):"
+
+#: ../data/ui/template-designer.ui.h:33
+msgid "3. Margin"
+msgstr "3. Sınır"
+
+#: ../data/ui/template-designer.ui.h:34
+msgid "1. Outer radius:"
+msgstr "1. Dış yarıçap:"
+
+#: ../data/ui/template-designer.ui.h:35
+msgid "2. Inner radius:"
+msgstr "2. İç yarıçap:"
+
+#: ../data/ui/template-designer.ui.h:36
+msgid "3. Clipping width:"
+msgstr "3. Kırpma genişliği:"
+
+#: ../data/ui/template-designer.ui.h:37
+msgid "4. Clipping height:"
+msgstr "4. Kırpma yüksekliği:"
+
+#: ../data/ui/template-designer.ui.h:38
+msgid "5. Waste (overprint allowed):"
+msgstr "5. Taşma (dışa yazdırlabilir):"
+
+#: ../data/ui/template-designer.ui.h:39
+msgid ""
+"How many layouts will your template contain? \n"
+"\n"
+"A layout is a set of labels or cards that can be arranged in a simple grid.\n"
+"Most templates only need one layout, as in the first example.\n"
+"The second example illustrates when two layouts are needed."
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:44
+msgid ""
+"Templates needing only\n"
+"one layout."
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:46
+msgid ""
+"Templates needing\n"
+"two layouts."
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:48
+msgid ""
+"Note: if more than 2 layouts are required, the template must be edited "
+"manually."
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:49
+msgid "Number of layouts:"
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:50
+msgid "Please enter the following layout information."
+msgstr "Düzen bilgisini girin."
+
+#: ../data/ui/template-designer.ui.h:51
+msgid "Layout #1"
+msgstr "Layout #1"
+
+#: ../data/ui/template-designer.ui.h:52
+msgid "Layout #2"
+msgstr "Layout #2"
+
+#: ../data/ui/template-designer.ui.h:53
+msgid "Number across (nx):"
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:54
+msgid "Number down (ny):"
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:55
+msgid "Distance from left edge (x0):"
+msgstr "Sol kenardan uzaklık (x0):"
+
+#: ../data/ui/template-designer.ui.h:56
+msgid "Distance from top edge (y0):"
+msgstr "Üst kenardan uzaklık (y0):"
+
+#: ../data/ui/template-designer.ui.h:57
+msgid "Horizontal pitch (dx):"
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:58
+msgid "Vertical pitch (dy):"
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:59
+msgid "Print test sheet"
+msgstr "Deneme çıktısı al"
+
+#: ../data/ui/template-designer.ui.h:60
+msgid ""
+"Congratulations!\n"
+"\n"
+"You have completed the gLabels Template Designer.\n"
+"If you wish to accept and save your design, click \"Apply.\"\n"
+"\n"
+"Otherwise, you may click \"Cancel\" to abandon your design\n"
+"or \"Back\" to continue editing this design."
+msgstr ""
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:1
+msgid "Sheets:"
+msgstr "Sayfalar:"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:3
+msgid "from:"
+msgstr "Şuradan:"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:4
+msgid "to:"
+msgstr "Şuraya:"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:5
+msgid "Copies"
+msgstr "Kopya"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:6
+msgid "Start on label"
+msgstr "Etikete başla"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:7
+msgid "on 1st sheet"
+msgstr "1. sayfada"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:8
+msgid "Copies:"
+msgstr "Kopya:"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:9
+msgid "Collate"
+msgstr "Harmanla"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:10
+msgid "Merge Control"
+msgstr "Birleştirme kontrolü"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:14
+msgid "Options"
+msgstr "Seçenekler"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
+msgid "Show/hide main toolbar."
+msgstr "Ana araç çubuğunu göster/gizle"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:2
+msgid "Controls visibility of main toolbar."
+msgstr "Ana araç çubuğunun görünürlüğünü kontrol eder."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:3
+msgid "Show/hide drawing toolbar."
+msgstr "Çizim araç çubuğunu göster/gizle"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:4
+msgid "Controls visibility of drawing toolbar."
+msgstr "Çizim araç çubuğunun görünürlüğünü kontrol eder."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:5
+msgid "Show/hide property toolbar."
+msgstr "Özellikler araç çubuğunu göster/gizle"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:6
+msgid "Controls visibility of property toolbar."
+msgstr "Özellikler araç çubuğunun görünürlüğünü kontrol eder."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:7
+msgid "Show/hide grid."
+msgstr "Kılavuz çizgileri göster/gizle"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:8
+msgid "Controls visibility of grid."
+msgstr "Kılavuz çizgilerin görünürlüğünü kontrol eder."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:9
+msgid "Show/hide markup."
+msgstr ""
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:10
+msgid "Controls visibility of markup lines."
+msgstr ""
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:11
+msgid "Maximum recent files."
+msgstr "Son kullanılan dosya sayısı"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:12
+msgid "Controls maximum number of recent files tracked."
+msgstr "Takip edilen son kullanılan dosyaların maksimum sayısını kontrol eder."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:13
+msgid "Units."
+msgstr "Birim."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:14
+msgid "The default unit of measurement."
+msgstr "Varsayılan ölçü birimi."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:15
+msgid "Default page size."
+msgstr "Varsayılan sayfa boyutu"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:16
+msgid "The preferred page size when searching templates."
+msgstr "Şablonları ararken tercih edilen sayfa boyutu."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:17
+msgid "Default font family."
+msgstr "Varsayılan yazı tipi ailesi"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:18
+msgid "The default font family for new text objects."
+msgstr "Yeni yazı nesneleri için varsayılan yazı tipi ailesi."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:19
+msgid "Default font size."
+msgstr "Varsayılan yazı tipi boyutu"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:20
+msgid "The default font size for new text objects."
+msgstr "Yeni yazı nesneleri için varsayılan yazı tipi boyutu."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:21
+msgid "Default font weight."
+msgstr "Varsayılan yazı tipi kalınlığı"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:22
+msgid "The default font weight for new text objects."
+msgstr "Yeni yazı nesneleri için varsayılan yazı tipi kalınlığı."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:23
+msgid "Default font italic flag."
+msgstr "Varsayılan yazı tipi yatık."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:24
+msgid "The default font italic state for new text objects."
+msgstr "Yeni yazı nesneleri için varsayılan yazı tipi italik durumu."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:25
+msgid "Default text color."
+msgstr "Varsayılan yazı rengi"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:26
+msgid "The default color of text for new text objects (0xRRGGBBAA)."
+msgstr "Yeni nesneler için varsayılan yazı rengi (0xRRGGBBAA)."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:27
+msgid "Default text alignment."
+msgstr "Varsayılan yazı hizalama"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:28
+msgid "The default text alignment for new text objects."
+msgstr "Yeni yazı nesneleri için varsayılan yazı hizalama."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:29
+msgid "Default text line spacing."
+msgstr "Varsayılan yazı satır aralığı"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:30
+msgid "The default line spacing for new text objects."
+msgstr "Yeni yazı nesneleri için varsayılan satır aralığı"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:31
+msgid "Default line width."
+msgstr "Varsayılan çizgi kalınlığı"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:32
+msgid "The default line width for new objects."
+msgstr "Yeni nesneler için varsayılan çizgi genişliği."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:33
+msgid "Default line color."
+msgstr "Varsayılan çizgi rengi"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:34
+msgid "The default line color new objects (0xRRGGBBAA)."
+msgstr "Yeni nesneler için varsayılan çerçeve çizgisi rengi (0xRRGGBBAA)"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:35
+msgid "Default fill color."
+msgstr "Varsayılan dolgu rengi"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:36
+msgid "The default fill color new objects (0xRRGGBBAA)."
+msgstr "Yeni nesneler için varsayılan iç renk (0xRRGGBBAA)"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:37
+msgid "Recent templates."
+msgstr "Son kullanılan şablonlar"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:38
+msgid "Recently used templates."
+msgstr "Son kullanılan şablonlar"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:39
+msgid "Recent fonts."
+msgstr "Son kullanılan fontlar"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:40
+msgid "Recently used font families."
+msgstr "Son kullanılan yazı tipi aileleri"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:41
+msgid "Recent colors."
+msgstr "Son kullanılan renkler"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:42
+msgid "Recently created custom colors."
+msgstr "Son oluşturulan özel renkler"
+
+#: ../data/desktop/glabels-3.0.desktop.in.h:1
+msgid "gLabels Label Designer 3"
+msgstr "gLabels Label Designer 3"
+
+#: ../data/desktop/glabels-3.0.desktop.in.h:2
+msgid "Create labels, business cards and media covers"
+msgstr "Etiketler, kart vizitler ve medya kapakları oluşturun."
+
+#: ../data/mime/glabels-3.0.xml.in.h:1
+msgid "gLabels Project File"
+msgstr "gLabels proje dosyası"
+
+#. Most popular (at top of list)
+#: ../templates/paper-sizes.xml.h:2
+msgid "A4"
+msgstr "A4"
+
+#. Other US paper sizes
+#: ../templates/paper-sizes.xml.h:5
+msgid "US Legal"
+msgstr "US Legal"
+
+#: ../templates/paper-sizes.xml.h:6
+msgid "US Executive"
+msgstr "US Executive"
+
+#. Other ISO A series sizes
+#: ../templates/paper-sizes.xml.h:8
+msgid "A0"
+msgstr "A0"
+
+#: ../templates/paper-sizes.xml.h:9
+msgid "A1"
+msgstr "A1"
+
+#: ../templates/paper-sizes.xml.h:10
+msgid "A2"
+msgstr "A2"
+
+#: ../templates/paper-sizes.xml.h:11
+msgid "A3"
+msgstr "A3"
+
+#: ../templates/paper-sizes.xml.h:12
+msgid "A5"
+msgstr "A5"
+
+#: ../templates/paper-sizes.xml.h:13
+msgid "A6"
+msgstr "A6"
+
+#: ../templates/paper-sizes.xml.h:14
+msgid "A7"
+msgstr "A7"
+
+#: ../templates/paper-sizes.xml.h:15
+msgid "A8"
+msgstr "A8"
+
+#: ../templates/paper-sizes.xml.h:16
+msgid "A9"
+msgstr "A9"
+
+#: ../templates/paper-sizes.xml.h:17
+msgid "A10"
+msgstr "A10"
+
+#. ISO B series sizes
+#: ../templates/paper-sizes.xml.h:19
+msgid "B0"
+msgstr "B0"
+
+#: ../templates/paper-sizes.xml.h:20
+msgid "B1"
+msgstr "B1"
+
+#: ../templates/paper-sizes.xml.h:21
+msgid "B2"
+msgstr "B2"
+
+#: ../templates/paper-sizes.xml.h:22
+msgid "B3"
+msgstr "B3"
+
+#: ../templates/paper-sizes.xml.h:23
+msgid "B4"
+msgstr "B4"
+
+#: ../templates/paper-sizes.xml.h:24
+msgid "B5"
+msgstr "B5"
+
+#: ../templates/paper-sizes.xml.h:25
+msgid "B6"
+msgstr "B6"
+
+#: ../templates/paper-sizes.xml.h:26
+msgid "B7"
+msgstr "B7"
+
+#: ../templates/paper-sizes.xml.h:27
+msgid "B8"
+msgstr "B8"
+
+#: ../templates/paper-sizes.xml.h:28
+msgid "B9"
+msgstr "B9"
+
+#: ../templates/paper-sizes.xml.h:29
+msgid "B10"
+msgstr "B10"
+
+#. Envelopes
+#: ../templates/paper-sizes.xml.h:31
+msgid "#10 Envelope"
+msgstr "#10 Envelope"
+
+#: ../templates/paper-sizes.xml.h:32
+msgid "Monarch Envelope"
+msgstr "Monarch Envelope"
+
+#: ../templates/paper-sizes.xml.h:33
+msgid "C5"
+msgstr "C5"
+
+#: ../templates/paper-sizes.xml.h:34
+msgid "C6"
+msgstr "C6"
+
+#: ../templates/paper-sizes.xml.h:35
+msgid "DL"
+msgstr "DL"
+
+#. ISO 217
+#: ../templates/paper-sizes.xml.h:37
+#, fuzzy
+#| msgid "A0"
+msgid "RA0"
+msgstr "A0"
+
+#: ../templates/paper-sizes.xml.h:38
+#, fuzzy
+#| msgid "A1"
+msgid "RA1"
+msgstr "A1"
+
+#: ../templates/paper-sizes.xml.h:39
+#, fuzzy
+#| msgid "A2"
+msgid "RA2"
+msgstr "A2"
+
+#: ../templates/paper-sizes.xml.h:40
+#, fuzzy
+#| msgid "A3"
+msgid "RA3"
+msgstr "A3"
+
+#: ../templates/paper-sizes.xml.h:41
+#, fuzzy
+#| msgid "A4"
+msgid "RA4"
+msgstr "A4"
+
+#: ../templates/paper-sizes.xml.h:42
+msgid "SRA0"
+msgstr ""
+
+#: ../templates/paper-sizes.xml.h:43
+msgid "SRA1"
+msgstr ""
+
+#: ../templates/paper-sizes.xml.h:44
+msgid "SRA2"
+msgstr ""
+
+#: ../templates/paper-sizes.xml.h:45
+msgid "SRA3"
+msgstr ""
+
+#: ../templates/paper-sizes.xml.h:46
+msgid "SRA4"
+msgstr ""
+
+#: ../templates/categories.xml.h:1
+msgid "Any label"
+msgstr "Herhangi bir etiket"
+
+#. ====================================================================
+#. ===================================================================
+#: ../templates/categories.xml.h:2 ../templates/endisch-templates.xml.h:1
+#: ../templates/hama-iso-templates.xml.h:4
+#: ../templates/pearl-iso-templates.xml.h:4
+#: ../templates/rayfilm-templates.xml.h:8
+msgid "Round labels"
+msgstr "yuvarlak etiketler"
+
+#. ===================================================================
+#: ../templates/categories.xml.h:3 ../templates/endisch-templates.xml.h:2
+#: ../templates/pearl-iso-templates.xml.h:58
+#: ../templates/rayfilm-templates.xml.h:9
+msgid "Elliptical labels"
+msgstr "Elips etiketler"
+
+#. ====================================================================
+#: ../templates/categories.xml.h:4 ../templates/endisch-templates.xml.h:4
+#: ../templates/hama-iso-templates.xml.h:41
+#: ../templates/rayfilm-templates.xml.h:2
+msgid "Square labels"
+msgstr "Kare etiketler"
+
+#. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#. ********************************************************************
+#: ../templates/categories.xml.h:5 ../templates/ascom-iso-templates.xml.h:4
+#: ../templates/endisch-templates.xml.h:3
+#: ../templates/hama-iso-templates.xml.h:27
+#: ../templates/herma-iso-templates.xml.h:20
+#: ../templates/igepa-templates.xml.h:1 ../templates/jac-iso-templates.xml.h:4
+#: ../templates/rayfilm-templates.xml.h:1
+msgid "Rectangular labels"
+msgstr "Dikdörtgen etiketler"
+
+#: ../templates/categories.xml.h:6
+msgid "Any card"
+msgstr "Herhangi bir kart"
+
+#. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#: ../templates/categories.xml.h:7 ../templates/dataline-iso-templates.xml.h:6
+#: ../templates/geha-iso-templates.xml.h:4
+#: ../templates/hama-iso-templates.xml.h:8
+#: ../templates/pearl-iso-templates.xml.h:38
+msgid "Business cards"
+msgstr "Kart vizitler"
+
+#: ../templates/categories.xml.h:8
+msgid "CD/DVD or other media"
+msgstr "CD/DVD veya başka medya"
+
+#: ../templates/categories.xml.h:9
+msgid "Mailing/shipping products"
+msgstr "Post/gönderi ürünleri"
+
+#: ../templates/categories.xml.h:10
+msgid "Foldable cards"
+msgstr "Katlanabilir kartlar"
+
+#: ../templates/categories.xml.h:11
+msgid "Photo products"
+msgstr "Fotoğraf ürünleri"
+
+#. TODO: Is this the real part #?
+#. ============================================================
+#. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#. TODO: What is the actual part #?
+#. ===================================================================
+#: ../templates/ascom-iso-templates.xml.h:2
+#: ../templates/avery-iso-templates.xml.h:34
+#: ../templates/databecker-iso-templates.xml.h:10
+#: ../templates/hama-iso-templates.xml.h:29
+#: ../templates/herma-iso-templates.xml.h:18
+#: ../templates/misc-iso-templates.xml.h:2
+#: ../templates/zweckform-iso-templates.xml.h:6
+msgid "Rectangular Labels"
+msgstr "Dikdötgen etiketler"
+
+#. ===================================================================
+#: ../templates/ascom-iso-templates.xml.h:6
+#: ../templates/avery-us-templates.xml.h:40
+#: ../templates/geha-iso-templates.xml.h:15
+#: ../templates/meritline-us-templates.xml.h:18
+#: ../templates/worldlabel-us-templates.xml.h:11
+msgid "Video Tape Spine Labels"
+msgstr "Video Kaset yan etiketleri"
+
+#. ===================================================================
+#. ===============================================================
+#: ../templates/ascom-iso-templates.xml.h:8
+#: ../templates/avery-iso-templates.xml.h:26
+#: ../templates/zweckform-iso-templates.xml.h:28
+msgid "CD Inlet"
+msgstr "CD kitapçığı"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:2
+msgid "Square Labels"
+msgstr "Kare etiketler"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:4
+msgid "Small Round Labels"
+msgstr "küçük yuvarlak etiketler"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:6
+msgid "Large Round Labels"
+msgstr "Büyük yuvarlak etiketler"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:8
+#: ../templates/avery-other-templates.xml.h:2
+#: ../templates/worldlabel-us-templates.xml.h:5
+msgid "File Folder Labels"
+msgstr "Dosya Klasörü etiketleri"
+
+#. ===================================================================
+#. ********************************************************************
+#: ../templates/avery-us-templates.xml.h:10
+#: ../templates/dataline-iso-templates.xml.h:10
+#: ../templates/meritline-us-templates.xml.h:6
+#: ../templates/sheetlabels-us-templates.xml.h:4
+#: ../templates/uline-us-templates.xml.h:2
+#: ../templates/worldlabel-us-templates.xml.h:4
+msgid "Shipping Labels"
+msgstr "Gönderi etiketleri"
+
+#. ===================================================================
+#. ********************************************************************
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:12
+#: ../templates/avery-iso-templates.xml.h:14
+#: ../templates/databecker-iso-templates.xml.h:6
+#: ../templates/dymo-other-templates.xml.h:4
+#: ../templates/geha-iso-templates.xml.h:25
+#: ../templates/maco-us-templates.xml.h:2
+#: ../templates/meritline-us-templates.xml.h:4
+#: ../templates/pearl-iso-templates.xml.h:2
+#: ../templates/sheetlabels-us-templates.xml.h:2
+#: ../templates/worldlabel-us-templates.xml.h:3
+#: ../templates/zweckform-iso-templates.xml.h:4
+msgid "Address Labels"
+msgstr "Adres etiketleri"
+
+#. ===================================================================
+#. ********************************************************************
+#: ../templates/avery-us-templates.xml.h:14
+#: ../templates/dymo-other-templates.xml.h:6
+#: ../templates/meritline-us-templates.xml.h:8
+#: ../templates/sheetlabels-us-templates.xml.h:6
+#: ../templates/worldlabel-us-templates.xml.h:2
+msgid "Return Address Labels"
+msgstr "İade adresi etiketleri"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:16
+#: ../templates/maco-us-templates.xml.h:3
+#: ../templates/meritline-us-templates.xml.h:12
+#: ../templates/misc-us-templates.xml.h:23
+#: ../templates/sheetlabels-us-templates.xml.h:8
+#: ../templates/worldlabel-us-templates.xml.h:9
+msgid "Round Labels"
+msgstr "Yuvarlak etiketler"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:18
+#: ../templates/avery-iso-templates.xml.h:20
+#: ../templates/meritline-us-templates.xml.h:14
+#: ../templates/sheetlabels-us-templates.xml.h:14
+#: ../templates/worldlabel-us-templates.xml.h:8
+msgid "Diskette Labels"
+msgstr "Disket etiketleri"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:20
+msgid "Tent Cards"
+msgstr "Çadır Kartlar"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:22
+#: ../templates/sheetlabels-us-templates.xml.h:10
+#: ../templates/worldlabel-us-templates.xml.h:7
+msgid "Filing Labels"
+msgstr "Dosylama etiketleri"
+
+#. ===================================================================
+#. ============================================================
+#. ===================================================================
+#. TODO: Is this the actual part #?
+#. ============================================================
+#: ../templates/avery-us-templates.xml.h:24
+#: ../templates/avery-iso-templates.xml.h:18
+#: ../templates/databecker-iso-templates.xml.h:2
+#: ../templates/dataline-iso-templates.xml.h:4
+#: ../templates/decadry-iso-templates.xml.h:6
+#: ../templates/misc-us-templates.xml.h:25
+#: ../templates/misc-iso-templates.xml.h:4
+#: ../templates/rayfilm-templates.xml.h:15
+#: ../templates/zweckform-iso-templates.xml.h:30
+msgid "Business Cards"
+msgstr "Kart vizitler"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:26
+msgid "Index Cards"
+msgstr "İndeks kartları"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:28
+msgid "Post cards"
+msgstr "Posta kartları"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:30
+msgid "Name Badge Labels"
+msgstr "İsimlik etiketleri"
+
+#. ===================================================================
+#. ===============================================================
+#. ===================================================================
+#. ********************************************************************
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:32
+#: ../templates/avery-iso-templates.xml.h:6
+#: ../templates/geha-iso-templates.xml.h:10
+#: ../templates/herma-iso-templates.xml.h:14
+#: ../templates/igepa-templates.xml.h:5 ../templates/jac-iso-templates.xml.h:2
+#: ../templates/misc-us-templates.xml.h:8
+#: ../templates/misc-iso-templates.xml.h:22
+#: ../templates/misc-other-templates.xml.h:2
+#: ../templates/pearl-iso-templates.xml.h:64
+#: ../templates/rayfilm-templates.xml.h:10
+#: ../templates/sheetlabels-us-templates.xml.h:12
+#: ../templates/worldlabel-us-templates.xml.h:12
+#: ../templates/zweckform-iso-templates.xml.h:8
+msgid "CD/DVD Labels"
+msgstr "CD/DVD etiketleri"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:34
+#: ../templates/sheetlabels-us-templates.xml.h:16
+msgid "CD/DVD Labels (Disc Labels)"
+msgstr "CD/DVD etiketleri (disk etiketleri)"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:36
+msgid "CD/DVD Labels (Spine Labels)"
+msgstr "CD/DVD etiketleri (Yan etiketler)"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:38
+#: ../templates/geha-iso-templates.xml.h:17
+#: ../templates/meritline-us-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:18
+#: ../templates/worldlabel-us-templates.xml.h:10
+msgid "Video Tape Face Labels"
+msgstr "Video kaset yüzey etiketleri"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:42
+msgid "ID Labels"
+msgstr "Kimlik Etiketleri"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:44
+#: ../templates/meritline-us-templates.xml.h:10
+#: ../templates/worldlabel-us-templates.xml.h:6
+msgid "Full Sheet Labels"
+msgstr "Tam sayfa etiketler"
+
+#. the LSK labels can be torn in half down the center
+#: ../templates/avery-us-templates.xml.h:46
+msgid "Divider Labels"
+msgstr "Ayraç etiketleri"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:2
+msgid "Mini Labels"
+msgstr "Mini etiketler"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:4
+msgid "Self-Adhesive Name Badges (Acetate Silk)"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:8
+msgid "Allround labels"
+msgstr "Yuvarlak etiketler"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:10
+#: ../templates/decadry-iso-templates.xml.h:2
+msgid "Mailing labels"
+msgstr "Posta  etiketleri"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:12
+#: ../templates/misc-iso-templates.xml.h:12
+msgid "Address labels"
+msgstr "Adres etiketleri"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:16
+msgid "Shipping labels"
+msgstr "Gönderi etiketleri"
+
+#. ===============================================================
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:22
+#: ../templates/decadry-iso-templates.xml.h:4
+#: ../templates/herma-iso-templates.xml.h:8
+#: ../templates/misc-us-templates.xml.h:21
+#: ../templates/misc-iso-templates.xml.h:6
+#: ../templates/zweckform-iso-templates.xml.h:10
+msgid "Mailing Labels"
+msgstr "Posta etiketleri"
+
+#. ===============================================================
+#: ../templates/avery-iso-templates.xml.h:24
+#: ../templates/zweckform-iso-templates.xml.h:26
+msgid "CD Booklet"
+msgstr "CD Kitapçığı"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:28
+msgid "Mini Address Labels"
+msgstr "Mini adres etiketleri"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:30
+msgid "Identification Labels"
+msgstr "Tanımlama etiketleri"
+
+#. ===================================================================
+#. ====================================================================
+#: ../templates/avery-iso-templates.xml.h:32
+#: ../templates/hama-iso-templates.xml.h:31
+msgid "Diskette labels"
+msgstr "Disket etiketleri"
+
+#.
+#. *********************************************************************
+#. *********************************************************************
+#. Labels for the Brother QL-500/550/650 PC Label Printers
+#.
+#. These templates work with the Brother Linux Printer CUPS Driver.  It
+#. is unknown if these work correctly with the foomatic print driver for
+#. these printers.
+#.
+#. One difference from typical templates is that the template size is
+#. not the actual media size - it is the size of the printable area,
+#. which is smaller than the media size.  This is because (at least with
+#. the Brother driver) coordinates are relative the corner of this area.
+#.
+#. *********************************************************************
+#. *********************************************************************
+#.
+#: ../templates/brother-other-templates.xml.h:18
+msgid "Standard Address Labels 29mm x 90mm"
+msgstr "Standart adres etiketleri 29mm x 90mm"
+
+#: ../templates/brother-other-templates.xml.h:19
+msgid "Shipping Labels 62mm x 100mm"
+msgstr "Gönderi etiketleri 62mm x 100mm"
+
+#: ../templates/brother-other-templates.xml.h:20
+msgid "Multi Purpose Labels 17mm x 54mm"
+msgstr "Çok amaçlı etiketler 17mm x 54mm"
+
+#: ../templates/brother-other-templates.xml.h:21
+msgid "Standard Address Labels 38mm x 90mm"
+msgstr "Standart adres etiketleri 38mm x 90mm"
+
+#. ===================================================================
+#: ../templates/databecker-iso-templates.xml.h:4
+msgid "CD/DVD Labels Standard Format (face only)"
+msgstr "CD/DVD Etiketleri Standart Format (yalnızca yüzey)"
+
+#. ===================================================================
+#. ============================================================
+#. ===================================================================
+#: ../templates/databecker-iso-templates.xml.h:8
+#: ../templates/desmat-templates.xml.h:2
+#: ../templates/misc-iso-templates.xml.h:20
+msgid "CD Labels"
+msgstr "CD etiketleri"
+
+#. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#: ../templates/dataline-iso-templates.xml.h:2
+#: ../templates/hama-iso-templates.xml.h:35
+#: ../templates/misc-iso-templates.xml.h:32
+msgid "CD/DVD labels"
+msgstr "CD/DVD etiketleri"
+
+#. ===================================================================
+#: ../templates/dataline-iso-templates.xml.h:8
+#: ../templates/pearl-iso-templates.xml.h:60
+msgid "Membership cards"
+msgstr "Üyelik kartları"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:2
+#: ../templates/geha-iso-templates.xml.h:23
+msgid "Large Address Labels"
+msgstr "Uzun adres etiketleri"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:8
+msgid "Shipping Address Labels"
+msgstr "Gönderi adresi etiketleri"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:10
+msgid "File Folder"
+msgstr "Dosya Klasörü"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:12
+msgid "Hanging Folder"
+msgstr "Asılan Klasör"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:14
+msgid "3.5in Diskette"
+msgstr "3.5 inç disket"
+
+#. ===================================================================
+#: ../templates/endisch-templates.xml.h:5
+#: ../templates/pearl-iso-templates.xml.h:20
+#: ../templates/rayfilm-templates.xml.h:3
+msgid "Labels A6"
+msgstr "A6 etiketler"
+
+#. ===================================================================
+#: ../templates/endisch-templates.xml.h:6
+#: ../templates/pearl-iso-templates.xml.h:22
+#: ../templates/rayfilm-templates.xml.h:4
+msgid "Labels A5"
+msgstr "A5 etiketler"
+
+#. *******************************************************************
+#. ===================================================================
+#: ../templates/endisch-templates.xml.h:7 ../templates/igepa-templates.xml.h:3
+#: ../templates/jac-iso-templates.xml.h:6
+#: ../templates/pearl-iso-templates.xml.h:6
+#: ../templates/rayfilm-templates.xml.h:5
+msgid "Labels A4"
+msgstr "A4 etiketler"
+
+#: ../templates/endisch-templates.xml.h:8
+#: ../templates/rayfilm-templates.xml.h:6
+#, fuzzy
+#| msgid "Labels A4"
+msgid "Labels A3"
+msgstr "A4 etiketler"
+
+#: ../templates/endisch-templates.xml.h:9
+#: ../templates/rayfilm-templates.xml.h:7
+#, fuzzy
+#| msgid "Labels A4"
+msgid "Labels SRA3"
+msgstr "A4 etiketler"
+
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:2
+msgid "Flyer paper"
+msgstr "El broşürü"
+
+#. ===================================================================
+#. ====================================================================
+#: ../templates/geha-iso-templates.xml.h:6
+#: ../templates/hama-iso-templates.xml.h:25
+msgid "Greeting cards"
+msgstr "Tebrik kartı"
+
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:8
+msgid "Arch File inserts"
+msgstr "Arşiv Dosyası Kitapçıkları"
+
+#: ../templates/geha-iso-templates.xml.h:11
+msgid "CD/DVD Inlet"
+msgstr "CD/DVD Kitapçığı"
+
+#. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:13
+#: ../templates/hama-iso-templates.xml.h:17
+#: ../templates/pearl-iso-templates.xml.h:32
+msgid "DVD inlet"
+msgstr "DVD kitapçığı"
+
+#. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:19
+#: ../templates/hama-iso-templates.xml.h:6
+#: ../templates/pearl-iso-templates.xml.h:12
+msgid "Photo labels"
+msgstr "Fotoğraf etiketleri"
+
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:21
+msgid "Passport photo labels"
+msgstr "Pasaport fotoğrafı etiketleri"
+
+#. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:27
+#: ../templates/hama-iso-templates.xml.h:37
+#: ../templates/herma-iso-templates.xml.h:6
+msgid "Arch File Labels"
+msgstr "Arşiv Dosyası Etiketleri"
+
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:29
+#: ../templates/misc-iso-templates.xml.h:28
+#: ../templates/misc-other-templates.xml.h:4
+msgid "Multi-Purpose Labels"
+msgstr "Çok Amaçlı Etiketler"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:2
+msgid "Printable mousepad"
+msgstr "Yazdırılabilir mousepad"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:10
+msgid "CD inlet"
+msgstr "CD kitapçığı"
+
+#. ====================================================================
+#. ===================================================================
+#: ../templates/hama-iso-templates.xml.h:12
+#: ../templates/pearl-iso-templates.xml.h:34
+msgid "CD inlet (front)"
+msgstr "CD kitapçığı (ön)"
+
+#. ===================================================================
+#: ../templates/hama-iso-templates.xml.h:13
+#: ../templates/pearl-iso-templates.xml.h:36
+msgid "CD inlet (back)"
+msgstr "CD kitapçığı (arka)"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:15
+msgid "Zip disc inlet"
+msgstr "Zip Disk kitapçığı"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:19
+msgid "VHS-C inlet"
+msgstr "VHS-C kitapçığı"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:21
+msgid "Video-8 inlet"
+msgstr "Video-8 kitapçığı"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:23
+msgid "VHS inlet"
+msgstr "VHS kitapçığı"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:33
+msgid "Zip disc labels"
+msgstr "Zip Disk etiketleri"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:39
+msgid "Arch File labels"
+msgstr "Arşiv dosyası etiketleri"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:43
+msgid "Mini Disc labels"
+msgstr "Mini Disk etiketleri"
+
+#. ===================================================================
+#: ../templates/herma-iso-templates.xml.h:2
+msgid "Arch File Labels (small)"
+msgstr "Arşiv Dosyası Etiketleri (küçük)"
+
+#. ===================================================================
+#: ../templates/herma-iso-templates.xml.h:4
+msgid "Arch File Labels (large)"
+msgstr "Arşiv Dosyası Etiketleri (geniş)"
+
+#. ===================================================================
+#: ../templates/herma-iso-templates.xml.h:10
+#: ../templates/zweckform-iso-templates.xml.h:20
+msgid "Allround Labels"
+msgstr "Yuvarlak etiketler"
+
+#. ===================================================================
+#: ../templates/herma-iso-templates.xml.h:12
+msgid "Video Labels (face only)"
+msgstr "Video Etiketleri (yalnızca yüzey)"
+
+#. ===================================================================
+#: ../templates/herma-iso-templates.xml.h:16
+msgid "Diskette Labels (face only)"
+msgstr "Disket Etiketleri (yalnızca yüzey)"
+
+#. ===================================================================
+#: ../templates/igepa-templates.xml.h:2
+#: ../templates/pearl-iso-templates.xml.h:18
+msgid "Floppy disk labels"
+msgstr "Floppy disk etiketleri"
+
+#. ===================================================================
+#: ../templates/igepa-templates.xml.h:4
+#: ../templates/zweckform-iso-templates.xml.h:2
+msgid "Lever Arch File Labels"
+msgstr "Kollu arşiv dosyası etiketleri"
+
+#. *******************************************************************
+#: ../templates/jac-iso-templates.xml.h:8
+msgid "PVC labels"
+msgstr "PVC etiketler"
+
+#. ===================================================================
+#: ../templates/meritline-us-templates.xml.h:2
+msgid "Mini-CD Labels"
+msgstr "Mini-CD Etiketleri"
+
+#. ===================================================================
+#: ../templates/microapp-templates.xml.h:2
+msgid "Standard Labels"
+msgstr "Standart Etiketler"
+
+#. ===================================================================
+#. TODO: Is this the actual part #?
+#: ../templates/misc-us-templates.xml.h:2
+#: ../templates/misc-iso-templates.xml.h:24
+msgid "CD/DVD Labels (face only)"
+msgstr "CD/DVD Etiketleri (yalnızca yüzey)"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:4
+msgid "CD/DVD Labels (Face Only)"
+msgstr "CD/DVD Etiketleri (yalnızca yüzey)"
+
+#. TODO: Is this the actual part #?
+#: ../templates/misc-us-templates.xml.h:6
+msgid "Cassette Labels"
+msgstr "Kaset Etiketleri"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:10
+msgid "Slimline CD Case (rightside up)"
+msgstr ""
+
+#: ../templates/misc-us-templates.xml.h:11
+msgid "Slimline CD Case (upside down)"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:13
+msgid "CD Template Rectangles"
+msgstr "CD Şablon Dikdörtgenler"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:15
+msgid "Business Card CD"
+msgstr "Kart Vizit CD"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:17
+msgid "Jewel Case Booklet"
+msgstr "Mücevher Kutusu Kitapçığı"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:19
+msgid "DLT Labels"
+msgstr "DLT Etiketler"
+
+#. ===================================================================
+#. TODO: Is this the actual part #?
+#: ../templates/misc-us-templates.xml.h:27
+#: ../templates/misc-iso-templates.xml.h:36
+msgid "PRO CD Labels 2-up (face only)"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:29
+msgid "PRO CD Labels 2-up (Face only)"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:31
+msgid "PRO CD Labels 2-up (CD spine only)"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:33
+msgid "Microtube labels"
+msgstr "Mikrotüp etiketleri"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:8
+msgid "General Labels"
+msgstr "Genel etiketler"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:10
+#: ../templates/pearl-iso-templates.xml.h:28
+msgid "Self-adhesive labels"
+msgstr "Kendinden yapışkanlı etiketler"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:14
+msgid "Fridge Magnet Stickers"
+msgstr "Buzdolabu mıknatısı stikırları"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:16
+msgid "Inkjet/Laser Labels 70x37mm"
+msgstr "Inkjet/Laser etiketleri 70x37 mm"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:18
+msgid "EPSON Photo Stickers 16"
+msgstr "EPSON Foto Stikırları 16"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:30
+msgid "Universal Labels"
+msgstr "Üniversal etiketler"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:34
+#: ../templates/pearl-iso-templates.xml.h:16
+msgid "Bottle labels"
+msgstr "Şişe etiketleri"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:38
+msgid "Etiketten"
+msgstr "Etiketten"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:8
+msgid "Self-adhesive film weatherproof"
+msgstr "Su geçirmez kendinden yapışkanlı filmler"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:10
+msgid "Self-adhesive film transparent"
+msgstr "Şeffaf kendinden yapışkanlı filmler"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:14
+msgid "Self-adhesive window film"
+msgstr "Kendinden yapışkanlı pencere filmi"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:24
+msgid "Photo labels semiglossy"
+msgstr "Yarı parlak fotoğraf etiketleri"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:26
+msgid "Address Labels (STAMPIT)"
+msgstr "Adres Etiketleri (STMPIT)"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:30
+msgid "SD card labels"
+msgstr "SD kart etiketleri"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:40
+msgid "Passport photo labels glossy"
+msgstr "Parlak pasaport fotoğrafı etiketleri"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:42
+msgid "Business cards punched"
+msgstr "Delikli kart vizitler"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:44
+msgid "Business cards punched dull"
+msgstr "Mat delikli kart vizitler"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:46
+msgid "Business cards high glossy"
+msgstr "Çok parlak kart vizitler"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:48
+msgid "Name plates"
+msgstr "İsim levhaları"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:50
+msgid "Business cards glossy, both sides printable"
+msgstr "Parlak Kart vizitler, iki yüzü yazdırılabilir"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:52
+msgid "Business cards punched glossy"
+msgstr "Parlak delikli kart vizitler"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:54
+msgid "Foldable business cards glossy/dull"
+msgstr "Parlak/mat Katlanabilir kart vizitler"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:56
+msgid "Foldable business cards"
+msgstr "Katlanabilir kart vizitler"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:62
+msgid "Membership cards, both sides printable"
+msgstr "Üyelik kartları, her iki yüzüne yazılabilir"
+
+#: ../templates/rayfilm-templates.xml.h:11
+#, fuzzy
+#| msgid "Business Card CD"
+msgid "Business card CD Labels"
+msgstr "Kart Vizit CD"
+
+#: ../templates/rayfilm-templates.xml.h:12
+#, fuzzy
+#| msgid "Mini-CD Labels"
+msgid "Mini CD Labels"
+msgstr "Mini-CD Etiketleri"
+
+#: ../templates/rayfilm-templates.xml.h:13
+#, fuzzy
+#| msgid "Rectangular labels"
+msgid "Triangular labels"
+msgstr "Dikdörtgen etiketler"
+
+#: ../templates/rayfilm-templates.xml.h:14
+#, fuzzy
+#| msgid "Allround labels"
+msgid "Trapezoid labels"
+msgstr "Yuvarlak etiketler"
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:12
+msgid "QSL-Karten Etiketten 70mm x 50,8mm"
+msgstr "QSL-Karten Etiketten 70mm x 50,8mm"
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:14
+msgid "File Back Labels"
+msgstr "Dosya sırtı etiketleri"
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:16
+msgid "Multi-purpose Stick+Lift Labels"
+msgstr "Çok amaçlı yapıştır+kaldır etiketler"
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:18
+msgid "Video Labels (back)"
+msgstr "Video etiketleri (arka)"
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:22
+msgid "Rectangular Copier Labels"
+msgstr "Dikdörtgen kopya etiketleri"
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:24
+msgid "Correction and Cover-up Labels"
+msgstr "Düzeltme ve kapatma etiketleri"
