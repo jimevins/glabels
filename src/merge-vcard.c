@@ -27,7 +27,7 @@
 
 #include "merge-vcard.h"
 
-#include <libebook/e-contact.h>
+#include <libebook/libebook.h>
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
