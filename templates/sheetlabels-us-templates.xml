@@ -7,6 +7,33 @@
   <!-- ******************************************************************** -->
   <!-- Sheetlabels products.	                                            -->
   <!-- ******************************************************************** -->
+  
+  <!-- =================================================================== -->
+  <!-- SheetLabels: Rectangular Labels, 4 per sheet	         	   -->
+  <!-- =================================================================== -->
+  <Template brand="SheetLabels" part="SL1" size="US-Letter" _description="Rectangular labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.sheet-labels.com/labels/SL1"/>
+    <Label-rectangle id="0" width="5.5in" height="2.25in" round="0.2in" x_waste="1in" y_waste="0.125in">
+      <Markup-margin size="0.125in"/>
+      <Layout nx="1" ny="4" x0="1.5in" y0="0.625in" dx="7.5in" dy="2.5in"/>
+    </Label-rectangle>
+  </Template>
+  
+  
+  <!-- =================================================================== -->
+  <!-- SheetLabels: Rectangular Labels, 4 per sheet	         	   -->
+  <!-- =================================================================== -->
+  <Template brand="SheetLabels" part="SL10" size="US-Letter" _description="Rectangular labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.sheet-labels.com/labels/SL10"/>
+    <Label-rectangle id="0" width="109.5mm" height="50.8mm" round="5mm" x_waste="9mm" y_waste="9mm">
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="1" ny="4" x0="53.2mm" y0="12.7mm" dx="127.5mm" dy="68.8mm"/>
+    </Label-rectangle>
+  </Template>
 
   <!-- =================================================================== -->
   <!-- SheetLabels: Address Labels, 20 per sheet	         	   -->
@@ -169,6 +196,48 @@
       <Markup-line x1="2.3125in" y1="3.125in" x2="2.3125in" y2="4.625in"/>
       <Layout nx="1" ny="2" x0="1.9375in" y0="0.6875in" dx="0" dy="5in"/>
     </Label-cd>
+  </Template>
+  
+  
+  <!-- =================================================================== -->
+  <!-- SheetLabels: Round Labels, 20 per sheet		         	   -->
+  <!-- =================================================================== -->
+  <Template brand="SheetLabels" part="SL123" size="US-Letter" _description="Round Labels">
+    <Meta category="label"/>
+    <Meta category="round-label"/>
+    <Meta product_url="http://www.sheet-labels.com/labels/SL123"/>
+    <Label-round id="0" radius="1in" waste="0.03in">
+      <Markup-margin size="0.125in"/>
+      <Layout nx="4" ny="5" x0="0.156in" y0="0.375in" dx="2.062in" dy="2.062in"/>
+    </Label-round>
+  </Template>
+  
+  
+  <!-- =================================================================== -->
+  <!-- SheetLabels: Round Labels, 6 per sheet		         	   -->
+  <!-- =================================================================== -->
+  <Template brand="SheetLabels" part="SL128" size="US-Letter" _description="Round Labels">
+    <Meta category="label"/>
+    <Meta category="round-label"/>
+    <Meta product_url="http://www.sheet-labels.com/labels/SL128"/>
+    <Label-round id="0" radius="1.75in" waste="0in">
+      <Markup-margin size="0.125in"/>
+      <Layout nx="2" ny="3" x0="0.5in" y0="0.2in" dx="4in" dy="3.55in"/>
+    </Label-round>
+  </Template>
+  
+  
+  <!-- =================================================================== -->
+  <!-- SheetLabels: Round Labels, 1 per sheet				   -->
+  <!-- =================================================================== -->
+  <Template brand="SheetLabels" part="SL129" size="US-Letter" _description="Round Labels">
+    <Meta category="label"/>
+    <Meta category="round-label"/>
+    <Meta product_url="http://www.sheet-labels.com/labels/SL129"/>
+    <Label-round id="0" radius="2.75in" waste="1.5in">
+      <Markup-margin size="0.125in"/>
+      <Layout nx="1" ny="1" x0="1.5in" y0="2.75in" dx="8.5in" dy="5.5in"/>
+    </Label-round>
   </Template>
 
   <!-- =================================================================== -->
