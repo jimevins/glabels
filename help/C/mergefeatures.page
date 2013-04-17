@@ -38,7 +38,43 @@
         can be embedded into fields by using the "\n" entity.  This file
         could be created using any text editor or could be created by
         another program or script.  A common way of creating CSV files is
-	to export them from a spreadsheet program.</p>
+	to export them from a spreadsheet program or from address book
+	applications.</p>
+	
+	<note style="advanced">
+         <p>
+         To export a CSV file from <app>kaddressbook</app>, first select the
+	 contacts you wish to export. Click on the first contact, then press and
+	 hold <key>Ctrl</key> and click on the other desired contacts to select them.
+	 Then choose <guiseq><gui>File</gui><gui>Export</gui>
+	 <gui>Export CSV File</gui></guiseq>.</p>
+	 
+	 <p>
+	 In the <gui>Select Contacts</gui>
+	 window, enable the button <gui>Selected contacts</gui> (which should be
+	 enabled by default anyway). Then click on <gui>OK</gui>.
+	 In the <gui>Save As</gui> dialog, choose the desired folder and a name
+	 for the file and click on <gui>Save</gui>.
+         </p>
+        </note>
+	
+	<note style="advanced">
+         <p>
+	 To export a CSV file from <app>Thunderbird</app>, click on the
+	 <gui>Address Book</gui> toolbar button or choose <guiseq><gui>Tools
+	 </gui><gui>Address Book</gui></guiseq> from the menu.
+	 Then select the contacts you wish to export. Click on the first contact,
+	 then press and hold <key>Ctrl</key> and click on the other desired contacts
+	 to select them. Then choose <guiseq><gui>Tools</gui><gui>Export</gui>
+	 </guiseq>.</p>
+	 
+	 <p>
+	 In the file chooser window, choose the desired folder and a name
+	 for the file and change the value of the drop-down button in the
+	 right bottom corner to <gui>Comma Separated</gui>. Finally, click on
+	 <gui>Save</gui>.
+         </p>
+        </note>
 
       <p>A label must then be configured to "point at" this data file.
         To configure the merge properties of a document, choose
