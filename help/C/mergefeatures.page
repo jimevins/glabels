@@ -38,7 +38,8 @@
         can be embedded into fields by using the "\n" entity.  This file
         could be created using any text editor or could be created by
         another program or script.  A common way of creating CSV files is
-	to export them from a spreadsheet program.</p>
+	to export them from a spreadsheet program or from address book
+	applications.</p>
 	
 	<note style="advanced">
          <p>
