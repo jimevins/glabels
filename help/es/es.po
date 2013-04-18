@@ -3,21 +3,21 @@
 # Copyright (C) 2010 glabels's COPYRIGHT HOLDER
 # This file is distributed under the same license as the glabels package.
 # Jorge González <jorgegonz@svn.gnome.org>, 2010, 2011.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011, 2012.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011, 2012, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-29 16:35+0000\n"
-"PO-Revision-Date: 2012-01-29 21:03+0100\n"
+"POT-Creation-Date: 2013-04-17 11:32+0000\n"
+"PO-Revision-Date: 2013-04-18 11:48+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: KBabel 1.11.4\n"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -328,8 +328,6 @@ msgstr "Elimina los objetos seleccionados sin ponerlos en el portapapeles."
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/printfile.page:47(None)
-#| msgid ""
-#| "@@image: 'figures/print-copies.png'; md5=1896f693ac50b47ea5abaafb59b5e8cc"
 msgid ""
 "@@image: 'figures/print-copies.png'; md5=ee473352947fe25c7adaa9f9a052c3e9"
 msgstr ""
@@ -338,8 +336,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/printfile.page:70(None)
-#| msgid ""
-#| "@@image: 'figures/print-merge.png'; md5=65a719b5624f88fdb40e2322454819a6"
 msgid ""
 "@@image: 'figures/print-merge.png'; md5=ee70bd2150a6cd46e96ce5c0531eb47b"
 msgstr ""
@@ -426,9 +422,9 @@ msgid ""
 "instead of copy controls."
 msgstr ""
 "Para etiquetas o tarjetas que usan la capacidad de combinación de documentos "
-"(también llamada «combinación de correo»), la sección de trabajos en "
-"pestañas contiene los siguientes controles de combinación en vez de los "
-"controles de copia."
+"(también llamada «combinación de correo»), la sección de trabajos en pestañas "
+"contiene los siguientes controles de combinación en vez de los controles de "
+"copia."
 
 #: C/printfile.page:71(p)
 msgid "Print Document Merge Controls"
@@ -613,6 +609,17 @@ msgstr ""
 "se impriman por cada registro de una fuente de datos externa."
 
 #: C/mergefeatures.page:31(p)
+#| msgid ""
+#| "The first step to performing a document merge is to prepare a source "
+#| "document that contains your merge data. This data could be mailing "
+#| "addresses or any other data that you wish to create unique labels or "
+#| "cards for. Currently back-ends only exist for text files and the "
+#| "evolution data server -- others are planned. The currently supported text-"
+#| "file format is very simple: each line is a record; fields are delimited "
+#| "by commas (CSV), tabs, or colons; and newlines can be embedded into "
+#| "fields by using the \"\\n\" entity. This file could be created using any "
+#| "text editor or could be created by another program or script. A common "
+#| "way of creating CSV files is to export them from a spreadsheet program."
 msgid ""
 "The first step to performing a document merge is to prepare a source "
 "document that contains your merge data. This data could be mailing addresses "
@@ -623,21 +630,76 @@ msgid ""
 "or colons; and newlines can be embedded into fields by using the \"\\n\" "
 "entity. This file could be created using any text editor or could be created "
 "by another program or script. A common way of creating CSV files is to "
-"export them from a spreadsheet program."
+"export them from a spreadsheet program or from address book applications."
 msgstr ""
 "El primer paso para combinar un documento es preparar un documento fuente "
 "que contenga su datos combinados. Estos datos pueden ser direcciones de "
 "correo o cualquier otro dato que quiera para crear etiquetas o tarjetas "
-"únicas. Los «back-end» actuales sólo existen para archivos de texto y el "
+"únicas. Los «backend» actuales sólo existen para archivos de texto y el "
 "servidor de datos de Evolution (hay otros planificados). El formato de texto "
 "soportado actualmente es muy sencillo: cada línea es un registro; lo campos "
 "se delimitan por comas (CSV), tabuladores o dos puntos; y las líneas nuevas "
 "se pueden incrustar usando la entidad «\\n». Este archivo se puede crear "
 "usando cualquier editor de texto u otro programa o script. Una manera "
 "habitual de crear archivos CSV es exportarlos desde un programa de hojas de "
-"cálculo."
+"cálculo o desde aplicaciones de libretas de direcciones."
 
-#: C/mergefeatures.page:43(p)
+#: C/mergefeatures.page:45(p)
+msgid ""
+"To export a CSV file from <app>kaddressbook</app>, first select the contacts "
+"you wish to export. Click on the first contact, then press and hold "
+"<key>Ctrl</key> and click on the other desired contacts to select them. Then "
+"choose <guiseq><gui>File</gui><gui>Export</gui><gui>Export CSV File</gui></"
+"guiseq>."
+msgstr ""
+"Para exportar un archivo CSV desde <app>kaddressbook</app>, primero "
+"seleccione los contactos que quiere exportar. Pulse sobre el primer contacto "
+"y mantenga pulsada la tecla <key>Ctrl</key> mientras pulsa sobre los otros "
+"contactos para seleccionarlos. Luego elija <guiseq><gui>Archivo</"
+"gui><gui>Exportar</gui><gui>Exportar archivo CSV</gui></guiseq>."
+
+#: C/mergefeatures.page:52(p)
+msgid ""
+"In the <gui>Select Contacts</gui> window, enable the button <gui>Selected "
+"contacts</gui> (which should be enabled by default anyway). Then click on "
+"<gui>OK</gui>. In the <gui>Save As</gui> dialog, choose the desired folder "
+"and a name for the file and click on <gui>Save</gui>."
+msgstr ""
+"En la ventana <gui>Seleccionar contactos</gui>, active el botón "
+"<gui>Contactos seleccionados</gui> (que debería estar activa de manera "
+"predeterminada). Luego pulse en <gui>Aceptar</gui>. En el diálogo "
+"<gui>Guardar como</gui>, elija la carpeta que quiere y un nombre para el "
+"archivo y pulse en <gui>Guardar</gui>."
+
+#: C/mergefeatures.page:62(p)
+msgid ""
+"To export a CSV file from <app>Thunderbird</app>, click on the <gui>Address "
+"Book</gui> toolbar button or choose <guiseq><gui>Tools </gui><gui>Address "
+"Book</gui></guiseq> from the menu. Then select the contacts you wish to "
+"export. Click on the first contact, then press and hold <key>Ctrl</key> and "
+"click on the other desired contacts to select them. Then choose "
+"<guiseq><gui>Tools</gui><gui>Export</gui></guiseq>."
+msgstr ""
+"Para exportar un archivo CSV desde <app>Thunderbird</app>, pulse en el botón "
+"de <gui>Libreta de direcciones</gui> de la barra de herramientas o elija "
+"<guiseq><gui>Herramientas </gui><gui>Libreta de direcciones</gui></guiseq>. "
+"Luego, seleccione los contactos que quiere exportar. Pulse sobre el primer "
+"contacto y mantenga pulsada la tecla <key>Ctrl</key> mientras pulsa sobre "
+"los otros contactos para seleccionarlos. Luego elija "
+"<guiseq><gui>Herramientas</gui><gui>Exportar</gui></guiseq>."
+
+#: C/mergefeatures.page:71(p)
+msgid ""
+"In the file chooser window, choose the desired folder and a name for the "
+"file and change the value of the drop-down button in the right bottom corner "
+"to <gui>Comma Separated</gui>. Finally, click on <gui>Save</gui>."
+msgstr ""
+"En la ventana del selector de archivos, elija el nombre de la carpeta que "
+"quiere y un nombre para el archivo y cambie el valor en la lista desplegable "
+"en la esquina inferior derecha a <gui>Separador por comas</gui>. Por último, "
+"pulse en <gui>Guardar</gui>."
+
+#: C/mergefeatures.page:79(p)
 msgid ""
 "A label must then be configured to \"point at\" this data file. To configure "
 "the merge properties of a document, choose <guiseq><gui>Objects</"
@@ -652,7 +714,7 @@ msgstr ""
 "gui>. Este diálogo se utiliza para seleccionar el formato de datos exacto "
 "del archivo y nombre de archivo (ubicación) de la combinación de datos."
 
-#: C/mergefeatures.page:51(p)
+#: C/mergefeatures.page:87(p)
 msgid ""
 "Finally, once the label has been configured for a data file, field keys can "
 "be inserted into text objects and used as source or data for barcode objects "
@@ -665,7 +727,7 @@ msgstr ""
 "imágenes para objetos de imagen. Consulte la <link xref=\"editprop\"/> para "
 "obtener más información sobre cómo combinar datos para este tipo de objetos."
 
-#: C/mergefeatures.page:57(p)
+#: C/mergefeatures.page:93(p)
 msgid ""
 "Now that your label is configured, <app>gLabels</app> will print a unique "
 "label for each record in your source document -- substituting fields from "
@@ -676,7 +738,7 @@ msgstr ""
 "campos de cada registro por los campos clave en todo el texto, código de "
 "barras y objetos de imagen."
 
-#: C/mergefeatures.page:62(p)
+#: C/mergefeatures.page:98(p)
 msgid ""
 "See <link xref=\"merge\"/> for a detailed tutorial on the document merge "
 "feature."
@@ -703,8 +765,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex3.page:74(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex3-2.png'; md5=28a15319cea58be75ff789c766dc0717"
 msgid ""
 "@@image: 'figures/merge-ex3-2.png'; md5=51fe322868241d083ec83ae824d927d7"
 msgstr ""
@@ -713,8 +773,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex3.page:88(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex2-4.png'; md5=67391b05421901a36d276736c1f664dd"
 msgid ""
 "@@image: 'figures/merge-ex3-3.png'; md5=f731f35b38ddd51499e636733bacc7a6"
 msgstr ""
@@ -723,8 +781,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex3.page:99(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex3-1.png'; md5=fb5bf719857fb0a49517ecb50124384d"
 msgid ""
 "@@image: 'figures/merge-ex3-4.png'; md5=4415be9d5b59fb57093077bcaece014a"
 msgstr ""
@@ -899,8 +955,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex2.page:52(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex2-1.png'; md5=c9db139c5b7188e101470dc74684a118"
 msgid ""
 "@@image: 'figures/merge-ex2-1.png'; md5=817abd0c8deb8a0b95acb7881d8ddb85"
 msgstr ""
@@ -909,8 +963,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex2.page:70(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex3-2.png'; md5=28a15319cea58be75ff789c766dc0717"
 msgid ""
 "@@image: 'figures/merge-ex2-2.png'; md5=2012870be14752300e0cde420471714a"
 msgstr ""
@@ -1053,8 +1105,6 @@ msgstr "Vista previa de las etiquetas de dirección"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex1.page:50(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex1-4.png'; md5=8648ff55dd2e531a1a82b797f0430279"
 msgid ""
 "@@image: 'figures/merge-ex1-1.png'; md5=c1fe7f5f05a81d9c04f9d03bb7071798"
 msgstr ""
@@ -1063,8 +1113,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex1.page:63(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex1-2.png'; md5=2ccad04ae5830f5f4a6a601d9fabed6a"
 msgid ""
 "@@image: 'figures/merge-ex1-2.png'; md5=45c30ca8de2478387404c7c5f45cf3d0"
 msgstr ""
@@ -1073,8 +1121,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex1.page:84(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex3-4.png'; md5=1995114757cccebda45b686caeb37fa7"
 msgid ""
 "@@image: 'figures/merge-ex1-3.png'; md5=1c23af6c90e5185cdc9e14d19baeb9f6"
 msgstr ""
@@ -1083,8 +1129,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex1.page:95(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex1-2.png'; md5=2ccad04ae5830f5f4a6a601d9fabed6a"
 msgid ""
 "@@image: 'figures/merge-ex1-4.png'; md5=1cc9f9adcb5a6e98ff5068531e6933f0"
 msgstr ""
@@ -1496,9 +1540,9 @@ msgid ""
 "code>, or <code translate=\"no\">Label-cd</code>)."
 msgstr ""
 "Un nodo <code translate=\"no\">Template</code> describe un único producto de "
-"papelería. Debe contener una instancia de cada tipo de nodo "
-"«Etiqueta» (<code translate=\"no\">Label-rectangle</code>, <code translate="
-"\"no\">Label-round</code>, o <code translate=\"no\">Label-cd</code>)."
+"papelería. Debe contener una instancia de cada tipo de nodo «Etiqueta» (<code "
+"translate=\"no\">Label-rectangle</code>, <code translate=\"no\">Label-round</"
+"code>, o <code translate=\"no\">Label-cd</code>)."
 
 #: C/mancreate.page:174(p) C/mancreate.page:302(p) C/mancreate.page:365(p)
 #: C/mancreate.page:416(p) C/mancreate.page:463(p) C/mancreate.page:536(p)
@@ -1559,8 +1603,8 @@ msgid ""
 "Translatable description of stationery product. E.g, \"Mailing Labels."
 "\" (Only useful for predefined templates)"
 msgstr ""
-"Descripción traducible para un producto de papelería. Por ejemplo, "
-"«Etiquetas de correo». (Útil sólo para plantillas predefinidas.)"
+"Descripción traducible para un producto de papelería. Por ejemplo, «Etiquetas "
+"de correo». (Útil sólo para plantillas predefinidas.)"
 
 #: C/mancreate.page:203(code) C/mancreate.page:312(code)
 #: C/mancreate.page:375(code) C/mancreate.page:481(code)
@@ -2347,9 +2391,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/index.page:47(None)
-#| msgid ""
-#| "@@image: 'figures/introduction-glabels-main-window.png'; "
-#| "md5=fceca242699bb062a5ac243a5f962f3b"
 msgid ""
 "@@image: 'figures/introduction-glabels-main-window.png'; "
 "md5=9ee2b2cc026ee8cba3c881b370a14313"
@@ -2423,9 +2464,6 @@ msgstr "Uso avanzado"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/editprop.page:35(None)
-#| msgid ""
-#| "@@image: 'figures/object-editor-sidebar.png'; "
-#| "md5=828ffc05f69e1914595cc1e3d7401e2f"
 msgid ""
 "@@image: 'figures/object-editor-sidebar.png'; "
 "md5=68be18416cc17964992fe0c7e311e0ef"
