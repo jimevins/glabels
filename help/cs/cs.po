@@ -1,13 +1,14 @@
 # Czech translation for glabels help.
 # Copyright (C) 2010 glabels's COPYRIGHT HOLDER
 # This file is distributed under the same license as the glabels help.
+#
 # Marek Černocký <marek@manet.cz>, 2010, 2011, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels\n"
-"POT-Creation-Date: 2013-01-06 00:34+0000\n"
-"PO-Revision-Date: 2013-02-19 10:46+0100\n"
+"POT-Creation-Date: 2013-04-18 11:17+0000\n"
+"PO-Revision-Date: 2013-04-26 14:29+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -194,8 +195,8 @@ msgid ""
 msgstr ""
 "Pokud chcete oznámit chybu nebo navrhnout vylepšení vztahující se k této "
 "aplikaci nebo této příručce, postupujte dle instrukcí na <link href=\"http://"
-"glabels.org/contact/\" type=\"http\">kontaktní stránce <app>gLabels</app>"
-"</link>."
+"glabels.org/contact/\" type=\"http\">kontaktní stránce <app>gLabels</app></"
+"link>."
 
 #: C/about.page:37(page/p)
 msgid ""
@@ -2280,6 +2281,17 @@ msgstr ""
 "jednotlivých záznamů v externím zdroji dat."
 
 #: C/mergefeatures.page:31(page/p)
+#| msgid ""
+#| "The first step to performing a document merge is to prepare a source "
+#| "document that contains your merge data. This data could be mailing "
+#| "addresses or any other data that you wish to create unique labels or "
+#| "cards for. Currently back-ends only exist for text files and the "
+#| "evolution data server -- others are planned. The currently supported text-"
+#| "file format is very simple: each line is a record; fields are delimited "
+#| "by commas (CSV), tabs, or colons; and newlines can be embedded into "
+#| "fields by using the \"\\n\" entity. This file could be created using any "
+#| "text editor or could be created by another program or script. A common "
+#| "way of creating CSV files is to export them from a spreadsheet program."
 msgid ""
 "The first step to performing a document merge is to prepare a source "
 "document that contains your merge data. This data could be mailing addresses "
@@ -2290,7 +2302,7 @@ msgid ""
 "or colons; and newlines can be embedded into fields by using the \"\\n\" "
 "entity. This file could be created using any text editor or could be created "
 "by another program or script. A common way of creating CSV files is to "
-"export them from a spreadsheet program."
+"export them from a spreadsheet program or from address book applications."
 msgstr ""
 "Prvním krokem při slučování dokumentů je příprava zdrojového dokumentu, "
 "který má obsahovat slučovaná data. Tato data mohou být poštovní adresy nebo "
@@ -2301,9 +2313,64 @@ msgstr ""
 "oddělená čárkami (CSV), tabulátory nebo dvojtečkami; řádky jsou zakončené "
 "pomocí znaku „\\n“. Takovýto soubor jde vytvořit v libovolném textovém "
 "editoru nebo jiným programem nebo skriptem. Obvyklým způsobem vytváření "
-"souborů CSV je jejich export z tabulkového kalkulátoru."
+"souborů CSV je jejich export z tabulkového kalkulátoru nebo z aplikace s "
+"adresářem."
 
-#: C/mergefeatures.page:43(page/p)
+#: C/mergefeatures.page:45(note/p)
+msgid ""
+"To export a CSV file from <app>kaddressbook</app>, first select the contacts "
+"you wish to export. Click on the first contact, then press and hold "
+"<key>Ctrl</key> and click on the other desired contacts to select them. Then "
+"choose <guiseq><gui>File</gui><gui>Export</gui> <gui>Export CSV File</gui></"
+"guiseq>."
+msgstr ""
+"Jestli chcete exportovat soubor CSV z aplikace <app>kaddressbook</app>, "
+"nejprve vyberte kontakty, které si přejete exportovat. Klikněte na první "
+"kontakt, po té zmáčkněte a držte <key>Ctrl</key> a klikejte na další "
+"požadované kontakty, které se tímto vyberou. Nakonec zvolte "
+"<guiseq><gui>Soubor</gui><gui>Export</gui> <gui>Export do souboru CSV</gui></"
+"guiseq>."
+
+#: C/mergefeatures.page:52(note/p)
+msgid ""
+"In the <gui>Select Contacts</gui> window, enable the button <gui>Selected "
+"contacts</gui> (which should be enabled by default anyway). Then click on "
+"<gui>OK</gui>. In the <gui>Save As</gui> dialog, choose the desired folder "
+"and a name for the file and click on <gui>Save</gui>."
+msgstr ""
+"V okně <gui>Výběr kontaktů</gui> zapněte tlačítko <gui>Vybrané kontakty</"
+"gui> (které by stejně mělo být standardně zapnuté). Pak klikněte na <gui>OK</"
+"gui>. V dialogovém okně <gui>Uložit jako</gui> zvolte požadovnanou složku a "
+"název pro soubor a klikněte na <gui>Uložit</gui>."
+
+#: C/mergefeatures.page:62(note/p)
+msgid ""
+"To export a CSV file from <app>Thunderbird</app>, click on the <gui>Address "
+"Book</gui> toolbar button or choose <guiseq><gui>Tools </gui><gui>Address "
+"Book</gui></guiseq> from the menu. Then select the contacts you wish to "
+"export. Click on the first contact, then press and hold <key>Ctrl</key> and "
+"click on the other desired contacts to select them. Then choose "
+"<guiseq><gui>Tools</gui><gui>Export</gui> </guiseq>."
+msgstr ""
+"Jestli chcete exportovat soubor CSV z aplikace <app>Thunderbird</app>, "
+"klikněte na tlačítko <gui>Adresář</gui> na liště nástrojů nebo zvolte "
+"<guiseq><gui>Nástroje</gui><gui>Adresář</gui></guiseq> z nabídky. Po té "
+"vyberte kontakty, které si přejete exportovat. Klikněte na první kontakt, "
+"zmáčkněte a držte <key>Ctrl</key> a klikejte na ostatní kontakty, které "
+"chcete vybrat. Nakonec zvolte <guiseq><gui>Nástroje</gui><gui>Exportovat</"
+"gui></guiseq>."
+
+#: C/mergefeatures.page:71(note/p)
+msgid ""
+"In the file chooser window, choose the desired folder and a name for the "
+"file and change the value of the drop-down button in the right bottom corner "
+"to <gui>Comma Separated</gui>. Finally, click on <gui>Save</gui>."
+msgstr ""
+"V okně pro výběr souboru zvolte požadovanou složku a název pro soubor a v "
+"rozbalovacím seznamu v pravém dolním rohu změňte hodnotu na <gui>Oddělený "
+"čárkou</gui>. Nakonec klikněte na <gui>Uložit</gui>."
+
+#: C/mergefeatures.page:79(page/p)
 msgid ""
 "A label must then be configured to \"point at\" this data file. To configure "
 "the merge properties of a document, choose <guiseq><gui>Objects</gui> "
@@ -2318,7 +2385,7 @@ msgstr ""
 "okno slouží k výběru přesného formátu datového souboru a názvu (umístění) "
 "souboru se slučovanými daty."
 
-#: C/mergefeatures.page:51(page/p)
+#: C/mergefeatures.page:87(page/p)
 msgid ""
 "Finally, once the label has been configured for a data file, field keys can "
 "be inserted into text objects and used as source or data for barcode objects "
@@ -2331,7 +2398,7 @@ msgstr ""
 "informací o použití slučovaných dat pro tyto typy objektů viz <link xref="
 "\"editprop\"/>."
 
-#: C/mergefeatures.page:57(page/p)
+#: C/mergefeatures.page:93(page/p)
 msgid ""
 "Now that your label is configured, <app>gLabels</app> will print a unique "
 "label for each record in your source document -- substituting fields from "
@@ -2342,7 +2409,7 @@ msgstr ""
 "dokumentu – do klíčů polí se ve všech textech budou dosazovat pole z "
 "jednotlivých záznamů."
 
-#: C/mergefeatures.page:62(page/p)
+#: C/mergefeatures.page:98(page/p)
 msgid ""
 "See <link xref=\"merge\"/> for a detailed tutorial on the document merge "
 "feature."
