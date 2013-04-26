@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 3.0\n"
-"POT-Creation-Date: 2013-02-02 20:36+0000\n"
-"PO-Revision-Date: 2013-02-19 09:51+0100\n"
+"POT-Creation-Date: 2013-04-18 11:23+0000\n"
+"PO-Revision-Date: 2013-04-26 12:15+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -322,8 +322,6 @@ msgstr "Smaže vybrané objekty, aniž by byly umístěny do schránky."
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/printfile.page:47(None)
-#| msgid ""
-#| "@@image: 'figures/print-copies.png'; md5=1896f693ac50b47ea5abaafb59b5e8cc"
 msgid ""
 "@@image: 'figures/print-copies.png'; md5=ee473352947fe25c7adaa9f9a052c3e9"
 msgstr ""
@@ -332,8 +330,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/printfile.page:70(None)
-#| msgid ""
-#| "@@image: 'figures/print-merge.png'; md5=65a719b5624f88fdb40e2322454819a6"
 msgid ""
 "@@image: 'figures/print-merge.png'; md5=ee70bd2150a6cd46e96ce5c0531eb47b"
 msgstr ""
@@ -608,7 +604,7 @@ msgid ""
 "or colons; and newlines can be embedded into fields by using the \"\\n\" "
 "entity. This file could be created using any text editor or could be created "
 "by another program or script. A common way of creating CSV files is to "
-"export them from a spreadsheet program."
+"export them from a spreadsheet program or from address book applications."
 msgstr ""
 "Prvním krokem při slučování dokumentů je příprava zdrojového dokumentu, "
 "který má obsahovat slučovaná data. Tato data mohou být poštovní adresy nebo "
@@ -619,9 +615,62 @@ msgstr ""
 "oddělená čárkami (CSV), tabulátory nebo dvojtečkami; řádky jsou zakončené "
 "pomocí znaku „\\n“. Takovýto soubor jde vytvořit v libovolném textovém "
 "editoru nebo jiným programem nebo skriptem. Obvyklým způsobem vytváření "
-"souborů CSV je jejich export z tabulkového kalkulátoru."
+"souborů CSV je jejich export z tabulkového kalkulátoru nebo z aplikace s "
+"adresářem."
 
-#: C/mergefeatures.page:43(p)
+#: C/mergefeatures.page:45(p)
+msgid ""
+"To export a CSV file from <app>kaddressbook</app>, first select the contacts "
+"you wish to export. Click on the first contact, then press and hold "
+"<key>Ctrl</key> and click on the other desired contacts to select them. Then "
+"choose <guiseq><gui>File</gui><gui>Export</gui><gui>Export CSV File</gui></"
+"guiseq>."
+msgstr ""
+"Jestli chcete exportovat soubor CSV z aplikace <app>kaddressbook</app>, "
+"nejprve vyberte kontakty, které si přejete exportovat. Klikněte na první "
+"kontakt, po té zmáčkněte a držte <key>Ctrl</key> a klikejte na další "
+"požadované kontakty, které se tímto vyberou. Nakonec zvolte <guiseq><gui>"
+"Soubor</gui><gui>Export</gui><gui>Export do souboru CSV</gui></guiseq>."
+
+#: C/mergefeatures.page:52(p)
+msgid ""
+"In the <gui>Select Contacts</gui> window, enable the button <gui>Selected "
+"contacts</gui> (which should be enabled by default anyway). Then click on "
+"<gui>OK</gui>. In the <gui>Save As</gui> dialog, choose the desired folder "
+"and a name for the file and click on <gui>Save</gui>."
+msgstr ""
+"V okně <gui>Výběr kontaktů</gui> zapněte tlačítko <gui>Vybrané kontakty</gui> "
+"(které by stejně mělo být standardně zapnuté). Pak klikněte na <gui>OK</gui>. "
+"V dialogovém okně <gui>Uložit jako</gui> zvolte požadovnanou složku a název "
+"pro soubor a klikněte na <gui>Uložit</gui>."
+
+#: C/mergefeatures.page:62(p)
+msgid ""
+"To export a CSV file from <app>Thunderbird</app>, click on the <gui>Address "
+"Book</gui> toolbar button or choose <guiseq><gui>Tools </gui><gui>Address "
+"Book</gui></guiseq> from the menu. Then select the contacts you wish to "
+"export. Click on the first contact, then press and hold <key>Ctrl</key> and "
+"click on the other desired contacts to select them. Then choose "
+"<guiseq><gui>Tools</gui><gui>Export</gui></guiseq>."
+msgstr ""
+"Jestli chcete exportovat soubor CSV z aplikace <app>Thunderbird</app>, "
+"klikněte na tlačítko <gui>Adresář</gui> na liště nástrojů nebo zvolte <guiseq>"
+"<gui>Nástroje</gui><gui>Adresář</gui></guiseq> z nabídky. Po té vyberte "
+"kontakty, které si přejete exportovat. Klikněte na první kontakt, zmáčkněte a "
+"držte <key>Ctrl</key> a klikejte na ostatní kontakty, které chcete vybrat. "
+"Nakonec zvolte <guiseq><gui>Nástroje</gui><gui>Exportovat</gui></guiseq>."
+
+#: C/mergefeatures.page:71(p)
+msgid ""
+"In the file chooser window, choose the desired folder and a name for the "
+"file and change the value of the drop-down button in the right bottom corner "
+"to <gui>Comma Separated</gui>. Finally, click on <gui>Save</gui>."
+msgstr ""
+"V okně pro výběr souboru zvolte požadovanou složku a název pro soubor a v "
+"rozbalovacím seznamu v pravém dolním rohu změňte hodnotu na <gui>Oddělený "
+"čárkou</gui>. Nakonec klikněte na <gui>Uložit</gui>."
+
+#: C/mergefeatures.page:79(p)
 msgid ""
 "A label must then be configured to \"point at\" this data file. To configure "
 "the merge properties of a document, choose <guiseq><gui>Objects</"
@@ -636,7 +685,7 @@ msgstr ""
 "slouží k výběru přesného formátu datového souboru a názvu (umístění) souboru "
 "se slučovanými daty."
 
-#: C/mergefeatures.page:51(p)
+#: C/mergefeatures.page:87(p)
 msgid ""
 "Finally, once the label has been configured for a data file, field keys can "
 "be inserted into text objects and used as source or data for barcode objects "
@@ -649,7 +698,7 @@ msgstr ""
 "informací o použití slučovaných dat pro tyto typy objektů viz <link xref="
 "\"editprop\"/>."
 
-#: C/mergefeatures.page:57(p)
+#: C/mergefeatures.page:93(p)
 msgid ""
 "Now that your label is configured, <app>gLabels</app> will print a unique "
 "label for each record in your source document -- substituting fields from "
@@ -660,7 +709,7 @@ msgstr ""
 "dokumentu – do klíčů polí se ve všech textech budou dosazovat pole z "
 "jednotlivých záznamů."
 
-#: C/mergefeatures.page:62(p)
+#: C/mergefeatures.page:98(p)
 msgid ""
 "See <link xref=\"merge\"/> for a detailed tutorial on the document merge "
 "feature."
@@ -685,8 +734,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex3.page:74(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex3-2.png'; md5=28a15319cea58be75ff789c766dc0717"
 msgid ""
 "@@image: 'figures/merge-ex3-2.png'; md5=51fe322868241d083ec83ae824d927d7"
 msgstr ""
@@ -695,8 +742,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex3.page:88(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex3-3.png'; md5=443d59a44d8ddf5580087a772d4e3eec"
 msgid ""
 "@@image: 'figures/merge-ex3-3.png'; md5=f731f35b38ddd51499e636733bacc7a6"
 msgstr ""
@@ -705,8 +750,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex3.page:99(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex3-1.png'; md5=fb5bf719857fb0a49517ecb50124384d"
 msgid ""
 "@@image: 'figures/merge-ex3-4.png'; md5=4415be9d5b59fb57093077bcaece014a"
 msgstr ""
@@ -873,8 +916,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex2.page:52(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex2-1.png'; md5=c9db139c5b7188e101470dc74684a118"
 msgid ""
 "@@image: 'figures/merge-ex2-1.png'; md5=817abd0c8deb8a0b95acb7881d8ddb85"
 msgstr ""
@@ -883,8 +924,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex2.page:70(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex2-2.png'; md5=240b4e4ebaa270e0e8bf84c5bfd7233e"
 msgid ""
 "@@image: 'figures/merge-ex2-2.png'; md5=2012870be14752300e0cde420471714a"
 msgstr ""
@@ -1025,8 +1064,6 @@ msgstr "Náhled etiket s adresami"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex1.page:50(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex1-4.png'; md5=8648ff55dd2e531a1a82b797f0430279"
 msgid ""
 "@@image: 'figures/merge-ex1-1.png'; md5=c1fe7f5f05a81d9c04f9d03bb7071798"
 msgstr ""
@@ -1035,8 +1072,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex1.page:63(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex1-2.png'; md5=2ccad04ae5830f5f4a6a601d9fabed6a"
 msgid ""
 "@@image: 'figures/merge-ex1-2.png'; md5=45c30ca8de2478387404c7c5f45cf3d0"
 msgstr ""
@@ -1045,8 +1080,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex1.page:84(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex1-2.png'; md5=2ccad04ae5830f5f4a6a601d9fabed6a"
 msgid ""
 "@@image: 'figures/merge-ex1-3.png'; md5=1c23af6c90e5185cdc9e14d19baeb9f6"
 msgstr ""
@@ -1055,8 +1088,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/merge-ex1.page:95(None)
-#| msgid ""
-#| "@@image: 'figures/merge-ex1-2.png'; md5=2ccad04ae5830f5f4a6a601d9fabed6a"
 msgid ""
 "@@image: 'figures/merge-ex1-4.png'; md5=1cc9f9adcb5a6e98ff5068531e6933f0"
 msgstr ""
@@ -2307,9 +2338,6 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/index.page:47(None)
-#| msgid ""
-#| "@@image: 'figures/introduction-glabels-main-window.png'; "
-#| "md5=fceca242699bb062a5ac243a5f962f3b"
 msgid ""
 "@@image: 'figures/introduction-glabels-main-window.png'; "
 "md5=9ee2b2cc026ee8cba3c881b370a14313"
@@ -2383,9 +2411,6 @@ msgstr "Pokročilé používání"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/editprop.page:35(None)
-#| msgid ""
-#| "@@image: 'figures/object-editor-sidebar.png'; "
-#| "md5=828ffc05f69e1914595cc1e3d7401e2f"
 msgid ""
 "@@image: 'figures/object-editor-sidebar.png'; "
 "md5=68be18416cc17964992fe0c7e311e0ef"
@@ -3167,4 +3192,4 @@ msgstr ""
 #. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
 #: C/index.page:0(None)
 msgid "translator-credits"
-msgstr "Marek Černocký <marek@manet.cz>, 2010 – 2011"
+msgstr "Marek Černocký <marek@manet.cz>, 2010 – 2013"
