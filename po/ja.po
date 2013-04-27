@@ -2039,7 +2039,7 @@ msgstr "デフォルトのページ・サイズ"
 
 #: ../data/ui/prefs-dialog.ui.h:11
 msgid "Locale"
-msgstr "ローケル"
+msgstr "ロケール"
 
 #: ../data/ui/prefs-dialog.ui.h:12
 msgid "Select default properties for new objects."
@@ -3431,7 +3431,7 @@ msgstr "粘着型のラベル"
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:14
 msgid "Fridge Magnet Stickers"
-msgstr "冷蔵庫に貼る磁気ステッカ"
+msgstr "冷蔵庫に貼る磁気ステッカー"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:16
