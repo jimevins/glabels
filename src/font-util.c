@@ -46,7 +46,7 @@ gl_font_util_get_all_families (void)
         if ( !list )
         {
                 fontmap = pango_cairo_font_map_new ();
-                context = pango_cairo_font_map_create_context (PANGO_CAIRO_FONT_MAP (fontmap));
+                context = pango_font_map_create_context (PANGO_FONT_MAP (fontmap));
 
                 pango_context_list_families (context, &families, &n);
 
@@ -84,7 +84,7 @@ gl_font_util_get_proportional_families (void)
         if ( !list )
         {
                 fontmap = pango_cairo_font_map_new ();
-                context = pango_cairo_font_map_create_context (PANGO_CAIRO_FONT_MAP (fontmap));
+                context = pango_font_map_create_context (PANGO_FONT_MAP (fontmap));
 
                 pango_context_list_families (context, &families, &n);
 
@@ -125,7 +125,7 @@ gl_font_util_get_fixed_width_families (void)
         if ( !list )
         {
                 fontmap = pango_cairo_font_map_new ();
-                context = pango_cairo_font_map_create_context (PANGO_CAIRO_FONT_MAP (fontmap));
+                context = pango_font_map_create_context (PANGO_FONT_MAP (fontmap));
 
                 pango_context_list_families (context, &families, &n);
 

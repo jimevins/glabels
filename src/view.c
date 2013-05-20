@@ -597,8 +597,8 @@ size_allocate_cb (glView         *view,
 
 	gl_debug (DEBUG_VIEW, "START");
 
-        hadjustment = gtk_layout_get_hadjustment(GTK_LAYOUT (view->canvas));
-        vadjustment = gtk_layout_get_vadjustment(GTK_LAYOUT (view->canvas));
+        hadjustment = gtk_scrollable_get_hadjustment(GTK_SCROLLABLE (view->canvas));
+        vadjustment = gtk_scrollable_get_vadjustment(GTK_SCROLLABLE (view->canvas));
 
         gtk_adjustment_set_page_size( hadjustment, allocation->width);
         gtk_adjustment_set_page_increment( hadjustment, allocation->width / 2);
@@ -669,8 +669,8 @@ label_resized_cb (glView  *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-        hadjustment = gtk_layout_get_hadjustment(GTK_LAYOUT (view->canvas));
-        vadjustment = gtk_layout_get_vadjustment(GTK_LAYOUT (view->canvas));
+        hadjustment = gtk_scrollable_get_hadjustment(GTK_SCROLLABLE (view->canvas));
+        vadjustment = gtk_scrollable_get_vadjustment(GTK_SCROLLABLE (view->canvas));
 
         g_signal_emit_by_name (hadjustment, "changed");
         g_signal_emit_by_name (vadjustment, "changed");
@@ -1062,7 +1062,7 @@ gl_view_arrow_mode (glView *view)
 
         cursor = gdk_cursor_new (GDK_LEFT_PTR);
 	gdk_window_set_cursor (window, cursor);
-        gdk_cursor_unref (cursor);
+        g_object_unref (G_OBJECT (cursor));
 
 	view->mode = GL_VIEW_MODE_ARROW;
         view->state = GL_VIEW_IDLE;
@@ -1113,7 +1113,7 @@ gl_view_object_create_mode (glView            *view,
 	}
 
 	gdk_window_set_cursor (window, cursor);
-        gdk_cursor_unref (cursor);
+        g_object_unref (G_OBJECT (cursor));
 
 	view->mode = GL_VIEW_MODE_OBJECT_CREATE;
         view->state = GL_VIEW_IDLE;
@@ -1437,7 +1437,7 @@ motion_notify_event_cb (glView            *view,
                                 cursor = gdk_cursor_new (GDK_LEFT_PTR);
                         }
                         gdk_window_set_cursor (window, cursor);
-                        gdk_cursor_unref (cursor);
+                        g_object_unref (G_OBJECT (cursor));
                         break;
 
                 case GL_VIEW_ARROW_SELECT_REGION:
@@ -1788,7 +1788,7 @@ button_release_event_cb (glView            *view,
                         view->state = GL_VIEW_IDLE;
                         cursor = gdk_cursor_new (GDK_LEFT_PTR);
                         gdk_window_set_cursor (window, cursor);
-                        gdk_cursor_unref (cursor);
+                        g_object_unref (G_OBJECT (cursor));
 
                         gl_label_select_object (view->label, view->create_object);
                         break;
@@ -1846,7 +1846,7 @@ key_press_event_cb (glView            *view,
                         gl_label_delete_selection (view->label);
                         cursor = gdk_cursor_new (GDK_LEFT_PTR);
                         gdk_window_set_cursor (window, cursor);
-                        gdk_cursor_unref (cursor);
+                        g_object_unref (G_OBJECT (cursor));
                         break;
                 default:
                         return FALSE;

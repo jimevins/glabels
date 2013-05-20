@@ -26,6 +26,7 @@
 #include <gtk/gtk.h>
 #include <string.h>
 
+#include "label.h"
 #include "builder-util.h"
 #include "font-combo.h"
 #include "color-combo-button.h"

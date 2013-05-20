@@ -632,7 +632,6 @@ button_press_event_cb (GtkWidget      *widget,
         glMiniPreview     *this = GL_MINI_PREVIEW (widget);
         GdkWindow         *window;
         cairo_t           *cr;
-        gdouble            scale;
         gdouble            x, y;
         gint               i;
 
@@ -645,7 +644,7 @@ button_press_event_cb (GtkWidget      *widget,
 
                 cr = gdk_cairo_create (window);
 
-                scale = set_transform_and_get_scale (this, cr);
+                set_transform_and_get_scale (this, cr);
 
                 x = event->x;
                 y = event->y;
@@ -684,7 +683,6 @@ motion_notify_event_cb (GtkWidget      *widget,
         glMiniPreview *this = GL_MINI_PREVIEW (widget);
         GdkWindow     *window;
         cairo_t       *cr;
-        gdouble        scale;
         gdouble        x, y;
         gint           i;
 
@@ -696,7 +694,7 @@ motion_notify_event_cb (GtkWidget      *widget,
 
                 cr = gdk_cairo_create (window);
 
-                scale = set_transform_and_get_scale (this, cr);
+                set_transform_and_get_scale (this, cr);
 
                 x = event->x;
                 y = event->y;
@@ -979,7 +977,7 @@ draw_labels (glMiniPreview *this,
         lglTemplateOrigin         *origins;
         GtkStyle                  *style;
         guint                      base_color;
-        guint                      highlight_color, paper_color, outline_color;
+        guint                      highlight_color, outline_color;
 
         gl_debug (DEBUG_MINI_PREVIEW, "START");
 
@@ -991,7 +989,6 @@ draw_labels (glMiniPreview *this,
         style = gtk_widget_get_style (GTK_WIDGET(this));
         base_color      = gl_color_from_gdk_color (&style->base[GTK_STATE_SELECTED]);
 
-        paper_color     = gl_color_from_gdk_color (&style->light[GTK_STATE_NORMAL]);
         highlight_color = gl_color_set_opacity (base_color, 0.10);
         if (this->priv->label)
         {

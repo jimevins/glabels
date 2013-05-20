@@ -90,7 +90,6 @@ static void           gl_merge_text_copy            (glMerge          *dst_merge
 
 static GList         *parse_line                    (FILE             *fp,
 						     gchar             delim);
-static gchar         *parse_field                   (gchar            *raw_field);
 static void           free_fields                   (GList           **fields);
 
 
@@ -189,7 +188,7 @@ gl_merge_text_set_property (GObject      *object,
 	switch (param_id) {
 
 	case ARG_DELIM:
-		merge_text->priv->delim = g_value_get_char (value);
+		merge_text->priv->delim = g_value_get_schar (value);
 		gl_debug (DEBUG_MERGE, "ARG \"delim\" = \"%c\"",
 			  merge_text->priv->delim);
 		break;
@@ -225,7 +224,7 @@ gl_merge_text_get_property (GObject     *object,
 	switch (param_id) {
 
 	case ARG_DELIM:
-		g_value_set_char (value, merge_text->priv->delim);
+		g_value_set_schar (value, merge_text->priv->delim);
 		break;
 
         case ARG_LINE1_HAS_KEYS:

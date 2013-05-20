@@ -140,7 +140,7 @@ gl_window_init (glWindow *window)
 
 	gl_debug (DEBUG_WINDOW, "START");
 
-	vbox1 = gtk_vbox_new (FALSE, 0);
+	vbox1 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 	gtk_container_add (GTK_CONTAINER (window), vbox1);
 
 	window->ui = ui = gl_ui_new (window);
@@ -154,7 +154,7 @@ gl_window_init (glWindow *window)
 			    gtk_ui_manager_get_widget (ui, "/DrawingToolBar"),
 			    FALSE, FALSE, 0);
 
-	window->hbox = gtk_hbox_new (FALSE, 0);
+	window->hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
 	gtk_box_pack_start (GTK_BOX (vbox1), window->hbox, TRUE, TRUE, 0);
 
 	window->sidebar = GL_UI_SIDEBAR (gl_ui_sidebar_new ());
@@ -163,7 +163,7 @@ gl_window_init (glWindow *window)
 	window->property_bar = GL_UI_PROPERTY_BAR (gl_ui_property_bar_new ());
 	gtk_box_pack_start (GTK_BOX (vbox1), GTK_WIDGET (window->property_bar), FALSE, FALSE, 0);
 
-	status_hbox = gtk_hbox_new (FALSE, 0);
+	status_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
 	gtk_box_pack_start (GTK_BOX (vbox1), status_hbox, FALSE, FALSE, 0);
 
 	window->status_bar = gtk_statusbar_new ();

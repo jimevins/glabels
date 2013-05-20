@@ -531,7 +531,7 @@ get_size (glLabelObject *object,
 
 	
 	fontmap = pango_cairo_font_map_new ();
-	context = pango_cairo_font_map_create_context (PANGO_CAIRO_FONT_MAP (fontmap));
+	context = pango_font_map_create_context (PANGO_FONT_MAP (fontmap));
 	options = cairo_font_options_create ();
         cairo_font_options_set_hint_style (options, CAIRO_HINT_STYLE_NONE);
         cairo_font_options_set_hint_metrics (options, CAIRO_HINT_METRICS_OFF);

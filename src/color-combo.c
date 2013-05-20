@@ -129,7 +129,7 @@ gl_color_combo_init (glColorCombo *this)
 
         this->priv = g_new0 (glColorComboPrivate, 1);
 
-        hbox = gtk_hbox_new (FALSE, 3);
+        hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3);
         gtk_container_add (GTK_CONTAINER (this), hbox);
         
         this->priv->swatch = gl_color_swatch_new (IMAGE_W, IMAGE_H, GL_COLOR_NONE);
@@ -277,7 +277,7 @@ menu_position_function (GtkMenu       *menu,
         /*
          * Size of menu.
          */
-        gtk_widget_size_request (this->priv->menu, &menu_requisition);
+        gtk_widget_get_preferred_size (this->priv->menu, NULL, &menu_requisition);
         h_menu = menu_requisition.height;
         w_menu = menu_requisition.width;
 

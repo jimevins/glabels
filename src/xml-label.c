@@ -1842,7 +1842,6 @@ xml_create_toplevel_span (xmlNodePtr        parent,
 	PangoWeight       font_weight;
 	gboolean          font_italic_flag;
 	glColorNode      *color_node;
-	PangoAlignment    align;
 	gdouble           text_line_spacing;
 	GList            *lines, *p_line, *p_node;
 	glTextNode       *text_node;
@@ -1868,7 +1867,6 @@ xml_create_toplevel_span (xmlNodePtr        parent,
 	}
 	gl_color_node_free (&color_node);
 	
-	align = gl_label_object_get_text_alignment (GL_LABEL_OBJECT(object_text));
 	lgl_xml_set_prop_string (node, "font_family", font_family);
 	lgl_xml_set_prop_double (node, "font_size", font_size);
 	lgl_xml_set_prop_string (node, "font_weight", gl_str_util_weight_to_string (font_weight));

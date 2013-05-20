@@ -381,8 +381,6 @@ gl_label_object_set_position (glLabelObject *object,
 			      gdouble        y,
                               gboolean       checkpoint)
 {
-	gdouble  dx, dy;
-
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
@@ -393,9 +391,6 @@ gl_label_object_set_position (glLabelObject *object,
                 {
                         gl_label_checkpoint (object->priv->parent, _("Move"));
                 }
-
-		dx = x - object->priv->x;
-		dy = y - object->priv->y;
 
 		object->priv->x = x;
 		object->priv->y = y;

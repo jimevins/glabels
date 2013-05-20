@@ -129,7 +129,7 @@ gl_field_button_init (glFieldButton *this)
 
         this->priv = g_new0 (glFieldButtonPrivate, 1);
 
-        hbox = gtk_hbox_new (FALSE, 3);
+        hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3);
         gtk_container_add (GTK_CONTAINER (this), hbox);
         
         this->priv->label = gtk_label_new ("");
@@ -283,7 +283,7 @@ menu_position_function (GtkMenu       *menu,
         /*
          * Size of menu.
          */
-        gtk_widget_size_request (this->priv->menu, &menu_requisition);
+        gtk_widget_get_preferred_size (this->priv->menu, NULL, &menu_requisition);
         h_menu = menu_requisition.height;
         w_menu = menu_requisition.width;
 

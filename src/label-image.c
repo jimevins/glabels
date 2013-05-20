@@ -26,7 +26,6 @@
 #include <glib.h>
 #include <gdk/gdk.h>
 #include <librsvg/rsvg.h>
-#include <librsvg/rsvg-cairo.h>
 
 #include "pixbuf-util.h"
 #include "file-util.h"

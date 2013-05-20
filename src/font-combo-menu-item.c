@@ -142,7 +142,7 @@ gl_font_combo_menu_item_new (gchar *font_family)
 
         this->priv->font_family = g_strdup (font_family);
 
-        hbox = gtk_hbox_new (FALSE, 6);
+        hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
         gtk_container_add (GTK_CONTAINER (this), hbox);
 
         sample = gl_font_sample_new (SAMPLE_W, SAMPLE_H, short_sample_text, font_family);

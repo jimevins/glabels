@@ -240,6 +240,9 @@ void          gl_label_set_selection_font_italic_flag (glLabel   *label,
 void          gl_label_set_selection_text_alignment (glLabel        *label,
                                                      PangoAlignment  text_alignment);
 
+void          gl_label_set_selection_text_valignment (glLabel        *label,
+                                                      glValignment    text_valignment);
+
 void          gl_label_set_selection_text_line_spacing (glLabel  *label,
                                                         gdouble   text_line_spacing);
 

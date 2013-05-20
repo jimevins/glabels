@@ -24,10 +24,15 @@
 #include <glib.h>
 #include <pango/pango.h>
 
+#include "label-object.h"
+
 G_BEGIN_DECLS
 
 const gchar        *gl_str_util_align_to_string       (PangoAlignment     align);
 PangoAlignment      gl_str_util_string_to_align       (const gchar       *string);
+
+const gchar        *gl_str_util_valign_to_string      (glValignment       valign);
+glValignment        gl_str_util_string_to_valign      (const gchar       *string);
 
 const gchar        *gl_str_util_weight_to_string      (PangoWeight        weight);
 PangoWeight         gl_str_util_string_to_weight      (const gchar       *string);
