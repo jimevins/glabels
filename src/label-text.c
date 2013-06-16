@@ -1115,13 +1115,24 @@ set_text_path (glLabelText      *this,
         PangoLayout          *layout;
         PangoStyle            style;
         PangoFontDescription *desc;
+        gdouble               scale_x, scale_y;
         cairo_font_options_t *font_options;
         PangoContext         *context;
 
 
         gl_debug (DEBUG_LABEL, "START");
 
+        /*
+         * Workaround for pango Bug#700592, which is a regression of Bug#341481.
+         * Render font at device scale and scale font size accordingly.
+         */
+        scale_x = 1.0;
+        scale_y = 1.0;
+        cairo_device_to_user_distance (cr, &scale_x, &scale_y);
+        scale_x = fabs (scale_x);
+        scale_y = fabs (scale_y);
         cairo_save (cr);
+        cairo_scale (cr, scale_x, scale_y);
 
         gl_label_object_get_size (GL_LABEL_OBJECT (this), &object_w, &object_h);
         gl_label_object_get_raw_size (GL_LABEL_OBJECT (this), &raw_w, &raw_h);
@@ -1159,20 +1170,20 @@ set_text_path (glLabelText      *this,
         desc = pango_font_description_new ();
         pango_font_description_set_family (desc, this->priv->font_family);
         pango_font_description_set_weight (desc, this->priv->font_weight);
-        pango_font_description_set_size   (desc, font_size * PANGO_SCALE);
+        pango_font_description_set_size   (desc, font_size * PANGO_SCALE / scale_x);
         pango_font_description_set_style  (desc, style);
         pango_layout_set_font_description (layout, desc);
         pango_font_description_free       (desc);
 
         pango_layout_set_text (layout, text, -1);
-        pango_layout_set_spacing (layout, font_size * (this->priv->line_spacing-1) * PANGO_SCALE);
+        pango_layout_set_spacing (layout, font_size * (this->priv->line_spacing-1) * PANGO_SCALE / scale_x);
         if (raw_w == 0.0)
         {
                 pango_layout_set_width (layout, -1);
         }
         else
         {
-                pango_layout_set_width (layout, object_w * PANGO_SCALE);
+                pango_layout_set_width (layout, object_w * PANGO_SCALE / scale_x);
         }
         pango_layout_set_wrap (layout, PANGO_WRAP_WORD);
         pango_layout_set_alignment (layout, this->priv->align);
@@ -1181,17 +1192,17 @@ set_text_path (glLabelText      *this,
         switch (this->priv->valign)
         {
         case GL_VALIGN_VCENTER:
-                y = (object_h - ih) / 2;
+                y = (object_h/scale_x - ih) / 2;
                 break;
         case GL_VALIGN_BOTTOM:
-                y = object_h - ih;
+                y = object_h/scale_x - ih;
                 break;
         default:
                 y = 0;
                 break;
         }
 
-        cairo_move_to (cr, GL_LABEL_TEXT_MARGIN, y);
+        cairo_move_to (cr, GL_LABEL_TEXT_MARGIN/scale_x, y);
         pango_cairo_layout_path (cr, layout);
 
         g_object_unref (layout);
