@@ -152,6 +152,9 @@ gl_new_label_dialog_class_init (glNewLabelDialogClass *class)
 static void
 gl_new_label_dialog_init (glNewLabelDialog *this)
 {
+        GdkRGBA       banner_color = { 0, 0.5, 1.0, 1.0 };
+        GtkWidget    *page_1_banner_eventbox, *page_2_banner_eventbox, *page_3_banner_eventbox;
+        GtkWidget    *page_1_image, *page_2_image, *page_3_image;
         gchar        *logo_filename;
         GdkPixbuf    *logo;
         GtkBuilder   *builder;
@@ -179,6 +182,12 @@ gl_new_label_dialog_init (glNewLabelDialog *this)
         }
 
         gl_builder_util_get_widgets (builder,
+                                     "page_1_banner_eventbox", &page_1_banner_eventbox,
+                                     "page_2_banner_eventbox", &page_2_banner_eventbox,
+                                     "page_3_banner_eventbox", &page_3_banner_eventbox,
+                                     "page_1_image",           &page_1_image,
+                                     "page_2_image",           &page_2_image,
+                                     "page_3_image",           &page_3_image,
                                      "template_page_vbox",     &this->priv->template_page_vbox,
                                      "combo_hbox",             &this->priv->combo_hbox,
                                      "rotate_page_vbox",       &this->priv->rotate_page_vbox,
@@ -202,9 +211,10 @@ gl_new_label_dialog_init (glNewLabelDialog *this)
         gtk_assistant_append_page (GTK_ASSISTANT (this), this->priv->template_page_vbox);
         gtk_assistant_set_page_title (GTK_ASSISTANT (this), this->priv->template_page_vbox, _("Select Product"));
         gtk_assistant_set_page_type (GTK_ASSISTANT (this), this->priv->template_page_vbox, GTK_ASSISTANT_PAGE_INTRO);
+        gtk_widget_override_background_color (page_1_banner_eventbox, GTK_STATE_NORMAL, &banner_color);
         logo_filename = g_build_filename (GLABELS_DATA_DIR, "pixmaps", "new-select.png", NULL);
         logo = gdk_pixbuf_new_from_file (logo_filename, NULL);
-        gtk_assistant_set_page_header_image (GTK_ASSISTANT (this), this->priv->template_page_vbox, logo);
+        gtk_image_set_from_pixbuf (GTK_IMAGE (page_1_image), logo);
         g_free (logo_filename);
         g_object_unref (logo);
 
@@ -214,9 +224,10 @@ gl_new_label_dialog_init (glNewLabelDialog *this)
         gtk_assistant_append_page (GTK_ASSISTANT (this), this->priv->rotate_page_vbox);
         gtk_assistant_set_page_title (GTK_ASSISTANT (this), this->priv->rotate_page_vbox, _("Choose Orientation"));
         gtk_assistant_set_page_complete (GTK_ASSISTANT (this), this->priv->rotate_page_vbox, TRUE);
+        gtk_widget_override_background_color (page_2_banner_eventbox, GTK_STATE_NORMAL, &banner_color);
         logo_filename = g_build_filename (GLABELS_DATA_DIR, "pixmaps", "new-rotate.png", NULL);
         logo = gdk_pixbuf_new_from_file (logo_filename, NULL);
-        gtk_assistant_set_page_header_image (GTK_ASSISTANT (this), this->priv->rotate_page_vbox, logo);
+        gtk_image_set_from_pixbuf (GTK_IMAGE (page_2_image), logo);
         g_free (logo_filename);
         g_object_unref (logo);
 
@@ -229,9 +240,10 @@ gl_new_label_dialog_init (glNewLabelDialog *this)
         gtk_assistant_set_page_title (GTK_ASSISTANT (this), this->priv->confirm_page_vbox, _("Review"));
         gtk_assistant_set_page_type (GTK_ASSISTANT (this), this->priv->confirm_page_vbox, GTK_ASSISTANT_PAGE_CONFIRM);
         gtk_assistant_set_page_complete (GTK_ASSISTANT (this), this->priv->confirm_page_vbox, TRUE);
+        gtk_widget_override_background_color (page_3_banner_eventbox, GTK_STATE_NORMAL, &banner_color);
         logo_filename = g_build_filename (GLABELS_DATA_DIR, "pixmaps", "new-confirm.png", NULL);
         logo = gdk_pixbuf_new_from_file (logo_filename, NULL);
-        gtk_assistant_set_page_header_image (GTK_ASSISTANT (this), this->priv->confirm_page_vbox, logo);
+        gtk_image_set_from_pixbuf (GTK_IMAGE (page_3_image), logo);
         g_free (logo_filename);
         g_object_unref (logo);
 
