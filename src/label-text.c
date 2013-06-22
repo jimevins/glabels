@@ -145,10 +145,11 @@ static gdouble         get_text_line_spacing       (glLabelObject    *object);
 
 static glColorNode*    get_text_color              (glLabelObject    *object);
 
-static void            set_text_path               (glLabelText      *this,
+static void            layout_text                 (glLabelText      *this,
                                                     cairo_t          *cr,
                                                     gboolean          screen_flag,
-                                                    glMergeRecord    *record);
+                                                    glMergeRecord    *record,
+                                                    gboolean          path_only_flag);
 
 static void            draw_object                 (glLabelObject    *object,
                                                     cairo_t          *cr,
@@ -1100,10 +1101,11 @@ auto_shrink_font_size (cairo_t     *cr,
 /* Update pango layout.                                                      */
 /*****************************************************************************/
 static void
-set_text_path (glLabelText      *this,
-               cairo_t          *cr,
-               gboolean          screen_flag,
-               glMergeRecord    *record)
+layout_text (glLabelText      *this,
+             cairo_t          *cr,
+             gboolean          screen_flag,
+             glMergeRecord    *record,
+             gboolean          path_only_flag)
 {
         gint                  iw, ih, y;
         gdouble               object_w, object_h;
@@ -1203,7 +1205,14 @@ set_text_path (glLabelText      *this,
         }
 
         cairo_move_to (cr, GL_LABEL_TEXT_MARGIN/scale_x, y);
-        pango_cairo_layout_path (cr, layout);
+        if ( path_only_flag )
+        {
+                pango_cairo_layout_path (cr, layout);
+        }
+        else
+        {
+                pango_cairo_show_layout (cr, layout);
+        }
 
         g_object_unref (layout);
         gl_text_node_lines_free (&lines);
@@ -1294,10 +1303,8 @@ draw_text_real (glLabelObject *object,
 {
         gl_debug (DEBUG_LABEL, "START");
 
-        set_text_path (GL_LABEL_TEXT (object), cr, screen_flag, record);
-
         cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (color));
-        cairo_fill (cr);
+        layout_text (GL_LABEL_TEXT (object), cr, screen_flag, record, FALSE);
 
         gl_debug (DEBUG_LABEL, "END");
 }
@@ -1320,7 +1327,7 @@ object_at (glLabelObject *object,
         if ( (x >= 0) && (x <= w) && (y >= 0) && (y <= h) )
         {
                 cairo_new_path (cr);
-                set_text_path (GL_LABEL_TEXT (object), cr, TRUE, NULL);
+                layout_text (GL_LABEL_TEXT (object), cr, TRUE, NULL, TRUE);
                 if (cairo_in_fill (cr, x, y))
                 {
                         return TRUE;
