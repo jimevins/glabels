@@ -1230,6 +1230,8 @@ gl_label_delete_selection (glLabel       *label)
 
         end_selection_op (label);
 
+	g_signal_emit (G_OBJECT(label), signals[SELECTION_CHANGED], 0);
+
 	gl_debug (DEBUG_LABEL, "END");
 }
 
