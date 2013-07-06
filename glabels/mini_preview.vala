@@ -87,6 +87,7 @@ namespace glabels
 			set_template( model.label.template );
 
 			model.label.changed.connect( on_label_changed );
+			model.print.changed.connect( on_label_changed );
 		}
 
 

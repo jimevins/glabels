@@ -78,6 +78,7 @@ glabels_4_SOURCES = \
 	prefs.vala \
 	print_op.vala \
 	print_op_dialog.vala \
+	print_setup_editor.vala \
 	svg_cache.vala \
 	template_history.vala \
 	text_line.vala \

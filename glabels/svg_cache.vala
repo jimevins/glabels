@@ -45,7 +45,7 @@ namespace glabels
 				Rsvg.Handle? handle;
 
 				try {
-					handle = new Rsvg.Handle.from_data( svg.data, svg.length );
+					handle = new Rsvg.Handle.from_data( svg.data );
 				}
 				catch ( Error e )
 				{
@@ -63,7 +63,7 @@ namespace glabels
 
 				try {
 					FileUtils.get_contents( file_name, out svg );
-					handle = new Rsvg.Handle.from_data( svg.data, svg.length );
+					handle = new Rsvg.Handle.from_data( svg.data );
 				}
 				catch ( Error e )
 				{

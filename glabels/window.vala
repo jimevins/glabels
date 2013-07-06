@@ -46,7 +46,7 @@ namespace glabels
 
 		private Gtk.Box             editor_page_box;
 		private Gtk.Box             merge_property_page_box;
-		private Gtk.Box             preview_page_box;
+		private Gtk.Box             print_setup_page_box;
 
 		public  View                view                  { get; private set; }
 		private ObjectEditor        object_editor;
@@ -59,7 +59,7 @@ namespace glabels
 		private Gtk.Menu            empty_selection_context_menu;
 
 		private MergePropertyEditor merge_property_editor;
-		private MiniPreview         preview;
+		private PrintSetupEditor    print_setup_editor;
 
 
 		public Window()
@@ -129,11 +129,11 @@ namespace glabels
 			merge_property_page_box.pack_start( merge_property_editor, true, true, 0 );
 			
 
-			preview_page_box = new Gtk.Box( Gtk.Orientation.VERTICAL, 0 );
-			notebook.append_page( preview_page_box, new Gtk.Label( _("Preview") ) );
+			print_setup_page_box = new Gtk.Box( Gtk.Orientation.VERTICAL, 0 );
+			notebook.append_page( print_setup_page_box, new Gtk.Label( _("Print setup") ) );
 
-			preview = new MiniPreview( 280, 420 );
-			preview_page_box.pack_start( preview, true, true, 0 );
+			print_setup_editor = new PrintSetupEditor();
+			print_setup_page_box.pack_start( print_setup_editor, true, true, 0 );
 
 
 			notebook.no_show_all = true;
@@ -189,7 +189,7 @@ namespace glabels
 			view.model = model;
 			object_editor.set_model( model );
 			merge_property_editor.set_model( model );
-			preview.set_model( model );
+			print_setup_editor.set_model( model );
 
 			view.zoom_to_fit();
 
@@ -214,7 +214,7 @@ namespace glabels
 			notebook.show();
 			editor_page_box.show_all();
 			merge_property_page_box.show_all();
-			preview_page_box.show_all();
+			print_setup_page_box.show_all();
 
 			/* TODO: clipboard changed. */
 			/* TODO: set copy/paste sensitivity. */

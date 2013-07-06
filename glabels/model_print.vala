@@ -28,15 +28,127 @@ namespace glabels
 	public class ModelPrint
 	{
 
-		private Label label;
-
 		private const double OUTLINE_WIDTH =  0.25;
 		private const double TICK_OFFSET   =  2.25;
 		private const double TICK_LENGTH   = 18.0;
 
-		public bool  outline_flag    { get; set; }
-		public bool  reverse_flag    { get; set; }
-		public bool  crop_marks_flag { get; set; }
+
+		public signal void changed();
+
+
+		private Label label;
+
+
+		/**
+		 * Simple N Sheets
+		 */
+		public int simple_n_sheets
+		{
+			get { return _simple_n_sheets; }
+
+			set
+			{
+				if ( _simple_n_sheets != value )
+				{
+					_simple_n_sheets = value;
+					changed();
+				}
+			}
+		}
+		private int _simple_n_sheets;
+
+
+		/**
+		 * Simple Start
+		 */
+		public int simple_start
+		{
+			get { return _simple_start; }
+
+			set
+			{
+				if ( _simple_start != value )
+				{
+					_simple_start = value;
+					changed();
+				}
+			}
+		}
+		private int _simple_start;
+
+
+		/**
+		 * Simple End
+		 */
+		public int simple_end
+		{
+			get { return _simple_end; }
+
+			set
+			{
+				if ( _simple_end != value )
+				{
+					_simple_end = value;
+					changed();
+				}
+			}
+		}
+		private int _simple_end;
+
+
+		/**
+		 * Print Outline Flag
+		 */
+		public bool outline_flag
+		{
+			get { return _outline_flag; }
+
+			set
+			{
+				if ( _outline_flag != value )
+				{
+					_outline_flag = value;
+					changed();
+				}
+			}
+		}
+		private bool _outline_flag;
+
+		/**
+		 * Print in Reverse Flag
+		 */
+		public bool reverse_flag
+		{
+			get { return _reverse_flag; }
+
+			set
+			{
+				if ( _reverse_flag != value )
+				{
+					_reverse_flag = value;
+					changed();
+				}
+			}
+		}
+		private bool _reverse_flag;
+
+		/**
+		 * Print Crop Marks Flag
+		 */
+		public bool crop_marks_flag
+		{
+			get { return _crop_marks_flag; }
+
+			set
+			{
+				if ( _crop_marks_flag != value )
+				{
+					_crop_marks_flag = value;
+					changed();
+				}
+			}
+		}
+		private bool _crop_marks_flag;
 
 		public int   n_pages         { get; set; }
 

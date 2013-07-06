@@ -8,6 +8,7 @@ builder_DATA = \
 	merge_property_editor.ui \
 	new_label_dialog.ui \
 	object_editor.ui \
+	print_setup_editor.ui \
 	$(NULL)
 
 
