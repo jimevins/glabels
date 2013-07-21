@@ -1023,7 +1023,7 @@ msgid ""
 "of the work)."
 msgstr ""
 "Musíte dílo označit v souladu s požadavky autora nebo licence (ale ne žádným "
-"způsobem, který předpokládá, že schvalují vás nebo vaše použití díla)."
+"způsobem, který předpokládá, že podporují vás nebo vaše použití díla)."
 
 #: C/license.page:46(item/title)
 msgid "<em>Share Alike</em>"
