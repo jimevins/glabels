@@ -1,0 +1,3141 @@
+# Wylmer Wang <wantinghard@gmail.com>, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: gLabels 3.0\n"
+"POT-Creation-Date: 2013-04-17 11:32+0000\n"
+"PO-Revision-Date: 2013-08-04 15:50+0800\n"
+"Last-Translator: Wylmer Wang <wantinghard@gmail.com>\n"
+"Language-Team: Chinese Simplified <kde-i18n-doc@kde.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: CHINA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 1.5\n"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/skipfields.page:45(None)
+msgid ""
+"@@image: 'figures/skip-fields-screenshot.png'; "
+"md5=eef4a81f48546bd7d3753656a3df9cb7"
+msgstr ""
+"@@image: 'figures/skip-fields-screenshot.png'; "
+"md5=eef4a81f48546bd7d3753656a3df9cb7"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/skipfields.page:53(None)
+msgid ""
+"@@image: 'figures/skip-fields-output.png'; "
+"md5=b64d1a7fdf0d37e9a6d93f0bc2f9fa0d"
+msgstr ""
+"@@image: 'figures/skip-fields-output.png'; "
+"md5=b64d1a7fdf0d37e9a6d93f0bc2f9fa0d"
+
+#: C/skipfields.page:9(desc)
+msgid "How to skip blank address lines when doing a document merge."
+msgstr "怎样在合并文档时跳过空地址行。"
+
+# 英文人名，尚不知本组统一的译称。固而保留。
+#: C/skipfields.page:13(name) C/select.page:13(name) C/printfile.page:13(name)
+#: C/newlabel.page:13(name) C/multifile.page:13(name) C/merge.page:13(name)
+#: C/mergefeatures.page:13(name) C/merge-ex4.page:13(name)
+#: C/merge-ex3.page:13(name) C/merge-ex2.page:13(name)
+#: C/merge-ex1.page:13(name) C/mancreate.page:15(name)
+#: C/labelprop.page:13(name) C/index.page:11(name) C/editprop.page:13(name)
+#: C/customtemplate.page:13(name) C/customize.page:11(name)
+#: C/createnew.page:13(name) C/basicusage.page:13(name) C/about.page:13(name)
+msgid "Jim Evins"
+msgstr "Jim Evins"
+
+# 不需要翻译的直接复制，但不知妥否。以下皆同。
+#: C/skipfields.page:14(email) C/select.page:14(email)
+#: C/printfile.page:14(email) C/newlabel.page:14(email)
+#: C/multifile.page:14(email) C/merge.page:14(email)
+#: C/mergefeatures.page:14(email) C/merge-ex4.page:14(email)
+#: C/merge-ex3.page:14(email) C/merge-ex2.page:14(email)
+#: C/merge-ex1.page:14(email) C/mancreate.page:16(email)
+#: C/labelprop.page:14(email) C/index.page:12(email) C/editprop.page:14(email)
+#: C/customtemplate.page:14(email) C/customize.page:12(email)
+#: C/createnew.page:14(email) C/basicusage.page:14(email)
+#: C/about.page:14(email)
+msgid "evins@snaught.com"
+msgstr "evins@snaught.com"
+
+#: C/skipfields.page:17(name) C/select.page:17(name) C/printfile.page:17(name)
+#: C/newlabel.page:17(name) C/multifile.page:17(name) C/merge.page:17(name)
+#: C/mergefeatures.page:17(name) C/merge-ex4.page:17(name)
+#: C/merge-ex3.page:17(name) C/merge-ex2.page:17(name)
+#: C/merge-ex1.page:17(name) C/mancreate.page:19(name)
+#: C/labelprop.page:17(name) C/index.page:15(name) C/editprop.page:17(name)
+#: C/customtemplate.page:17(name) C/customize.page:15(name)
+#: C/createnew.page:17(name) C/basicusage.page:17(name) C/about.page:17(name)
+msgid "Mario Blättermann"
+msgstr "Mario Blättermann"
+
+#: C/skipfields.page:18(email) C/select.page:18(email)
+#: C/printfile.page:18(email) C/newlabel.page:18(email)
+#: C/multifile.page:18(email) C/merge.page:18(email)
+#: C/mergefeatures.page:18(email) C/merge-ex4.page:18(email)
+#: C/merge-ex3.page:18(email) C/merge-ex2.page:18(email)
+#: C/merge-ex1.page:18(email) C/mancreate.page:20(email)
+#: C/labelprop.page:18(email) C/index.page:16(email) C/editprop.page:18(email)
+#: C/customtemplate.page:18(email) C/customize.page:16(email)
+#: C/createnew.page:18(email) C/basicusage.page:18(email)
+#: C/about.page:18(email)
+msgid "mariobl@gnome.org"
+msgstr "mariobl@gnome.org"
+
+#: C/skipfields.page:21(p) C/select.page:21(p) C/printfile.page:21(p)
+#: C/newlabel.page:21(p) C/multifile.page:21(p) C/merge.page:21(p)
+#: C/mergefeatures.page:21(p) C/merge-ex4.page:21(p) C/merge-ex3.page:21(p)
+#: C/merge-ex2.page:21(p) C/merge-ex1.page:21(p) C/mancreate.page:23(p)
+#: C/labelprop.page:21(p) C/index.page:19(p) C/editprop.page:21(p)
+#: C/customtemplate.page:21(p) C/customize.page:19(p) C/createnew.page:21(p)
+#: C/basicusage.page:21(p) C/about.page:21(p)
+msgid "Creative Commons Share Alike 3.0"
+msgstr "Creative Commons Share Alike 3.0"
+
+#: C/skipfields.page:25(title)
+msgid "Skipping blank address lines"
+msgstr "跳过空白地址行。"
+
+#: C/skipfields.page:27(p)
+msgid ""
+"This feature can be best described by a simple example. In the following CSV "
+"file, column 5 (ADDR2) contains the second address line for each record. "
+"This field is empty in records 1 and 2, but not in record 3. (For this "
+"feature to work, the field must be completely empty -- any text, including "
+"spaces will defeat this feature.)"
+msgstr ""
+"这个特性可以用一个简单的例子来描述。在下面的 CSV 文件中，第5列(ADDR2) "
+"包含每一项记录的第二个地址行。这个字段在 记录1 与 记录2 中是空的，但在 记录3 "
+"则不是。（要使这个功能起作用，相应的字段必须完全为空——任何文本，包括空格都会"
+"使它失效。）"
+
+#: C/skipfields.page:33(code)
+#, no-wrap
+msgid ""
+"\n"
+"  LAST,FIRST,MI,ADDR1,ADDR2,CITY,STATE,ZIP\n"
+"  Summers,Joyce,,\"1630 Revello Dr\",,Sunnydale,CA,95037\n"
+"  McGarret,Steve,O,\"404 Piikoi Street\",,Honolulu,HI,96813\n"
+"  Kramer,Cosmo,,\"Apt 5B\",\"129 W. 81 St.\",\"New York\",NY,10024-7207\n"
+"  "
+msgstr ""
+"\n"
+"  LAST,FIRST,MI,ADDR1,ADDR2,CITY,STATE,ZIP\n"
+"  Summers,Joyce,,\"1630 Revello Dr\",,Sunnydale,CA,95037\n"
+"  McGarret,Steve,O,\"404 Piikoi Street\",,Honolulu,HI,96813\n"
+"  Kramer,Cosmo,,\"Apt 5B\",\"129 W. 81 St.\",\"New York\",NY,10024-7207\n"
+"  "
+
+#: C/skipfields.page:40(p)
+msgid ""
+"In the following screenshot, a single multiline text object has been created "
+"to format these addresses. Notice that ${ADDR2} representing the second "
+"address line is on a line by itself. (Any additional text on this line, "
+"including spaces would defeat this feature.)"
+msgstr ""
+"在下列屏幕截图中，创建了一个简单的多行文本对象来格式化这些地址。注意： "
+"${ADDR2}表示第二个地址行独占一行。（在此行的任何多余文本，包括空格都"
+"会使这个功能失效。）"
+
+#: C/skipfields.page:46(p)
+msgid "Multi-line address"
+msgstr "多行地址"
+
+#: C/skipfields.page:49(p)
+msgid ""
+"Printing this label results in the following output. Notice that the line "
+"containing the ${ADDR2} field is completely skipped for the first two "
+"records, without printing a blank line."
+msgstr ""
+"打印这个标签会产生如下输出。注意：前两项记录中包含 ${ADDR2} 字段的行已"
+"经完全跳过，连空行也未打印。"
+
+#: C/skipfields.page:54(p)
+msgid "Output"
+msgstr "输出"
+
+#: C/select.page:9(desc)
+msgid "How to select objects."
+msgstr "怎样选择对象。"
+
+#: C/select.page:25(title)
+msgid "To select objects"
+msgstr "选择对象。"
+
+#: C/select.page:27(p)
+msgid ""
+"A prerequisite for performing operations on objects is the selection of "
+"individual objects or groups of objects. The display area must be in the "
+"object selection mode to create new selections, as indicated by an arrow "
+"cursor. The object selection mode is selected by the <guiseq><gui>Objects</"
+"gui><gui>Select Mode</gui></guiseq> menu item, or the corresponding command "
+"on the <gui>Drawing Toolbar</gui>."
+msgstr ""
+"为对象执行操作的前提是选择单个对象或者一组对象。显示区域必需处于对象选择模式来建"
+"立新的选择，由箭头形的光标指示。对象选择模式可通过<guiseq><gui>对象</gui><gui>选择模"
+"式</gui></guiseq> 菜单项,或 <gui>绘制工具条</gui>中相应的命令选择."
+
+#: C/select.page:38(title)
+msgid "Selecting a single object"
+msgstr "选择单个对象"
+
+#: C/select.page:39(p)
+#, fuzzy
+msgid ""
+"A single object can be selected simply by clicking on the desired object in "
+"the display area. Once selected the object will be highlighted with a set of "
+"resizing handles."
+msgstr ""
+"选择单个对象，只须在显示区域内点击所需对象即可。一旦选定，对象由"
+"一排恢复尺寸的光栅高亮显示。"
+
+#: C/select.page:46(title)
+#, fuzzy
+msgid "Aggregate object selections"
+msgstr "总体对象选择"
+
+#: C/select.page:47(p)
+#, fuzzy
+msgid ""
+"Multiple objects can be selected by first selecting the first object as "
+"above and then by holding the <key>Ctrl</key> key while selecting additional "
+"objects. Individual objects can be added to an existing selection at any "
+"time by holding the <key>Ctrl</key> key while selecting the desired objects. "
+"All objects can also be selected by using the <guiseq><gui>Edit</"
+"gui><gui>Select All</gui></guiseq> menu item. All objects in an aggregate "
+"object selection will be highlighted."
+msgstr ""
+"多个对象的选择可以在选择第一个对象后按住 <key>Ctrl</key>键选择额外的对象。个"
+"体对象可以在您按住<key>Ctrl</key>键选择所需对象的任何时候，加入已有的选择。全"
+"部对象也可以用 <guiseq><gui>编辑</gui><gui>选择全部</gui></guiseq>菜单项完"
+"成。所有在总体对象中选择的对象都会高亮显示。"
+
+#: C/select.page:60(title)
+msgid "Area selections"
+msgstr "区域选择"
+
+#: C/select.page:62(p)
+#, fuzzy
+msgid ""
+"Multiple objects can also be selected by clicking an empty area and dragging "
+"to form a rectangular area. When released, all objects contained in the area "
+"will form an aggregate selection. An area selection can be used to add to an "
+"existing selection by holding the <key>Ctrl</key> key while performing the "
+"selection."
+msgstr ""
+"多个对象的选择也可以点击空白区域拖动后松开，形成一个合适的区域，包含其中的所"
+"有对象形成总体选择。区域选择在操作选择时按住<key>Ctrl</key>键往已有的选择里加"
+"入。"
+
+#: C/select.page:72(title)
+msgid "Unselecting objects"
+msgstr "剔除对象"
+
+#: C/select.page:74(p)
+msgid ""
+"Individual objects can be removed from an existing selection by holding the "
+"<key>Ctrl</key> key while clicking on a previously selected object. An "
+"entire selection can be dismissed by using the <guiseq><gui>Edit</"
+"gui><gui>Un-select All</gui></guiseq> menu item or by simply clicking any "
+"empty space in the display area. Once an object is unselected its highlight "
+"is removed."
+msgstr "按住<key>Ctrl</key>键单击个体对象，可以在事先已选的对象中将其剔除。"
+
+#: C/select.page:86(title)
+msgid "Clipboard Commands"
+msgstr "剪贴板命令"
+
+#: C/select.page:88(p)
+#, fuzzy
+msgid ""
+"Object selections can be manipulated using the standard clipboard operations "
+"<gui>Cut</gui>, <gui>Copy</gui>, <gui>Paste</gui>, and <gui>Delete</gui>."
+msgstr ""
+"对象的选择可以在剪贴板中用标准剪贴板选项<gui>剪切</gui>, <gui>复制</gui>, "
+"<gui>粘贴</gui>, 以及 <gui>删除</gui>.来操作。"
+
+#: C/select.page:94(title)
+msgid "<gui>Cut</gui> (<keyseq><key>Ctrl</key><key>X</key></keyseq>)"
+msgstr "<gui>剪切</gui> (<keyseq><key>Ctrl</key><key>X</key></keyseq>)"
+
+#: C/select.page:96(p)
+msgid ""
+"Moves selected objects to the clipboard. The objects are then available for "
+"pasting back into the current document or another document."
+msgstr "把选定的对象移到剪贴板。之后这些对象可以粘贴到当前文档或另一个文档中去。"
+
+#: C/select.page:103(title)
+msgid "<gui>Copy</gui> (<keyseq><key>Ctrl</key><key>C</key></keyseq>)"
+msgstr "<gui>复制</gui> (<keyseq><key>Ctrl</key><key>C</key></keyseq>)"
+
+#: C/select.page:105(p)
+msgid ""
+"Copies selected objects to the clipboard without deleting them. The objects "
+"are then available for pasting back into the current document or another "
+"document."
+msgstr ""
+"把选定的对象复制到剪贴板中但不删除它。之后这些对象可以粘贴到当前文档或另一个"
+"文档中去。"
+
+#: C/select.page:112(title)
+msgid "<gui>Paste</gui> (<keyseq><key>Ctrl</key><key>V</key></keyseq>)"
+msgstr "<gui>粘贴</gui> (<keyseq><key>Ctrl</key><key>V</key></keyseq>)"
+
+#: C/select.page:114(p)
+msgid ""
+"Pastes objects from the clipboard into the current document. <app>gLabels</"
+"app> can only paste objects from another <app>gLabels</app> document."
+msgstr ""
+"把剪贴板中的对象粘贴到当前的文档中去。<app>gLabels</app> 只能将对象粘贴到另一"
+"个 <app>gLabels</app> 文档中去。"
+
+#: C/select.page:121(title)
+msgid "<gui>Delete</gui> (<key>Del</key>)"
+msgstr "<gui>删除</gui> (<key>Del</key>)"
+
+#: C/select.page:123(p)
+msgid "Deletes selected objects without placing them on the clipboard."
+msgstr "直接删除选定的对象而不将其放入剪贴板。"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/printfile.page:47(None)
+msgid ""
+"@@image: 'figures/print-copies.png'; md5=ee473352947fe25c7adaa9f9a052c3e9"
+msgstr ""
+"@@image: 'figures/print-copies.png'; md5=ee473352947fe25c7adaa9f9a052c3e9"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/printfile.page:70(None)
+msgid ""
+"@@image: 'figures/print-merge.png'; md5=ee70bd2150a6cd46e96ce5c0531eb47b"
+msgstr ""
+"@@image: 'figures/print-merge.png'; md5=ee70bd2150a6cd46e96ce5c0531eb47b"
+
+#: C/printfile.page:9(desc)
+msgid "How to print your labels and cards."
+msgstr "怎样打印您的卡片和标签。"
+
+#: C/printfile.page:25(title)
+msgid "To print labels and cards"
+msgstr "要打印您的卡片和标签"
+
+#: C/printfile.page:27(p)
+msgid ""
+"To print labels or cards, choose <guiseq><gui>File</gui><gui>Print</gui></"
+"guiseq> to display the <gui>Print</gui> dialog. Once print options have been "
+"selected, click <gui>Print</gui> to print the labels or cards. To simply "
+"preview the results, click <gui>Print Preview</gui> instead."
+msgstr ""
+"要打印您的卡片和标签，请选择 <guiseq><gui>文件</gui><gui>打印</gui></guiseq> "
+"以显示 <gui>打印</gui> 对话框。一旦选定打印选项, 点击 <gui>打印</gui> 以打印"
+"标签或卡片. 若只想预览结果, 点击 <gui>打印预览</gui> 即可。"
+
+#: C/printfile.page:34(p)
+msgid ""
+"The <gui>Print</gui> dialog allows you to specify the following print "
+"options:"
+msgstr "<gui>打印</gui> 对话框允许您指定下列打印选项："
+
+#: C/printfile.page:38(title)
+#, fuzzy
+msgid "The Labels Tab of the Print Dialog"
+msgstr "打印对话框中的标签列表"
+
+#: C/printfile.page:41(title)
+msgid "Print control (Simple)"
+msgstr "打印控制（简单）"
+
+#: C/printfile.page:43(p)
+#, fuzzy
+msgid ""
+"For simple labels or cards (no document merge), the job tabbed section "
+"contains the following copy controls."
+msgstr "对于简单的标签或卡片（非文档合并），任务队列包含了下列复印控制。"
+
+#: C/printfile.page:48(p) C/editprop.page:36(p)
+#, fuzzy
+msgid "Print Copy Controls"
+msgstr "复件打印控制"
+
+#. ==== End of Figure ====
+#: C/printfile.page:52(p)
+#, fuzzy
+msgid ""
+"The number of copies of the label can be selected by choosing the number of "
+"full sheets to print, or a specific subset of labels on a single sheet."
+msgstr "标签复件的数目可在选择打印全表单中选择，或在单个表中指定的标签子集中选择。"
+
+#: C/printfile.page:56(p)
+#, fuzzy
+msgid ""
+"The mini-preview can also be used to graphically select the subset of labels "
+"by clicking the first label on the mini-preview and dragging to the last "
+"label."
+msgstr "缩影中可以用图像方式选择标签子集：点击第一个标签后拖动至最后一个。"
+
+#: C/printfile.page:63(title)
+msgid "Print control (Merge)"
+msgstr "打印控制（合并）"
+
+#: C/printfile.page:65(p)
+#, fuzzy
+msgid ""
+"For labels or cards using the document merge (also known as \"mail merge\") "
+"capability, the job tabbed section contains the following merge controls "
+"instead of copy controls."
+msgstr ""
+"对标签或卡片使用文档合并（又称为\"邮件合并\"）功能。任务队列包含了下列合并控"
+"制来代替复印控制。"
+
+#: C/printfile.page:71(p)
+msgid "Print Document Merge Controls"
+msgstr "打印文档合并控制"
+
+#. ==== End of Figure ====
+#: C/printfile.page:75(p)
+#, fuzzy
+msgid ""
+"The total number of labels or cards printed is the product of the number of "
+"records in the merge source and the number of copies selected. If multiple "
+"copies are selected, these can be either collated (copies of the same record "
+"grouped together) or un-collated (one copy each record is printed before "
+"next copy)."
+msgstr ""
+"打印的标签或卡片总数：就是合并源中的记录数目与复件数目的产品. 如果选择了多个"
+"复件,这些复件可能会经过整理(同一记录的复件集合在一起) 或 未经整理 (在打印下一"
+"份复件前复制一份)。"
+
+#: C/printfile.page:82(p)
+#, fuzzy
+msgid ""
+"Printing can begin on any label on the first sheet. This can be selected "
+"with the <gui>Start on label</gui> spinbutton."
+msgstr ""
+"打印工作会从第一份表单的第一个标签开始。这项可以用<gui>从标签开始打印</gui>调"
+"节键来选择。"
+
+#: C/printfile.page:86(p)
+#, fuzzy
+msgid ""
+"The mini-preview can also be used to graphically select this first label, by "
+"clicking on the desired label in the mini-preview."
+msgstr "缩影图也可以点击所需标签的图像方式选择第一个标签。"
+
+#: C/printfile.page:93(title)
+msgid "Options"
+msgstr "选项"
+
+#: C/printfile.page:94(p)
+msgid "The following options can also be selected."
+msgstr "下列选项也可以选择。"
+
+#: C/printfile.page:97(gui)
+#, fuzzy
+msgid "print outlines"
+msgstr "边界打印"
+
+#: C/printfile.page:98(p)
+#, fuzzy
+msgid ""
+"Print outlines of labels. This option is useful for dry-runs, to test "
+"printer alignment."
+msgstr "打印标签的边界，这个选项对打印演示有用，用于测试打印对齐。"
+
+#: C/printfile.page:102(gui)
+#, fuzzy
+msgid "print in reverse"
+msgstr "打印为镜像"
+
+#: C/printfile.page:103(p)
+#, fuzzy
+msgid ""
+"Prints the labels as mirror images. This option is useful for printing on "
+"clear labels that will be viewed from the reverse side (e.g. in a car "
+"window)."
+msgstr "将标签打印为镜像，这个选项用于反向观看清晰的标签（例如：车窗）。"
+
+#: C/printfile.page:108(gui)
+#, fuzzy
+msgid "print crop marks"
+msgstr "打印剪辑"
+
+#: C/printfile.page:109(p)
+#, fuzzy
+msgid ""
+"Prints crop marks along the edge of the sheet. This option is useful for "
+"printing on blank stock, to be cut after printing. This option does not work "
+"well with all templates."
+msgstr ""
+"打印表单边缘的剪辑。这个选项对空白股票打印有用，打印后要裁剪。这个选项并非与"
+"所有的模板都能良好地配合。"
+
+#: C/newlabel.page:9(desc)
+msgid "Create a new label or card in <app>gLabels</app>."
+msgstr "在<app>gLabels</app>里创建新的标签或卡片。"
+
+#: C/newlabel.page:25(title)
+msgid "To create a new label or card"
+msgstr "创建一个新标签或卡片"
+
+#: C/newlabel.page:27(p)
+#, fuzzy
+msgid ""
+"To create a new label or business card, choose <guiseq><gui>File</"
+"gui><gui>New</gui></guiseq> to display the <gui>New Label or Card</gui> "
+"dialog. Select the media type and orientation for the new document, then "
+"click <gui>OK</gui>. A new document is displayed in the display area of the "
+"<app>gLabels</app> window."
+msgstr ""
+"创建一个新标签或商业卡片，请选择<guiseq><gui>文件</gui><gui>新建</gui></"
+"guiseq> 后显示 <gui>新建标签或卡片</gui> 对话框. 为新文档选择媒介类型与定位, "
+"然后点击<gui>确定</gui>. 一个新的文档就会在 <app>gLabels</app> 的显示区域中出"
+"现."
+
+#: C/multifile.page:9(desc)
+msgid "How to open multiple files at once by using the command line."
+msgstr "怎样用命令行一次打开多个文件。"
+
+#: C/multifile.page:25(title)
+msgid "To open multiple files from the command line"
+msgstr "要在命令行中打开多个文件"
+
+#: C/multifile.page:27(p)
+#, fuzzy
+msgid ""
+"You can run <app>gLabels</app> from a command line and open a single file or "
+"multiple files. To open multiple files from a command line, type the "
+"following command, then press <key>Return</key>:"
+msgstr ""
+"您可在<app>gLabels</app>的命令行打开一个或多个文件。在命令行中键入以下命令按 "
+"<key>Return</key>键可打开多个文件："
+
+#: C/multifile.page:33(var)
+msgid "file1.glabels file2.glabels file3.glabels"
+msgstr "file1.glabels file2.glabels file3.glabels"
+
+#: C/multifile.page:32(cmd)
+msgid "glabels <placeholder-1/>"
+msgstr "glabels <placeholder-1/>"
+
+#: C/multifile.page:36(p)
+msgid ""
+"When the application starts, the files that you specify are displayed in "
+"separate <app>gLabels</app> windows."
+msgstr "程序运行时，您指定的文件会在 <app>gLabels</app>的各自独立的窗口中显示。"
+
+#: C/merge.page:9(desc)
+msgid "Merge a data source to create multiple documents."
+msgstr "合并一个数据源以创建多个文档。"
+
+#: C/merge.page:25(title)
+msgid "Document merge tutorial"
+msgstr "合并文档教程"
+
+#: C/merge.page:27(p)
+#, fuzzy
+msgid ""
+"Document Merge (sometimes called \"Mail Merge\") is a powerful feature that "
+"allows a unique label or card to be printed for each record in an external "
+"data source. It is however, the most mis-understood feature of <app>glabels</"
+"app>. The following examples will step through a couple of common tasks "
+"using the document merge feature."
+msgstr ""
+"文档合并（有时也称 \"邮件合并\"）是一项强大的功能，它允许打印外部数据源中的每"
+"一项记录中的唯一标签或卡片。"
+
+#: C/mergefeatures.page:9(desc)
+#, fuzzy
+msgid "What you may expect from a document merge."
+msgstr "期待文档合并为您做些什么。"
+
+#: C/mergefeatures.page:25(title)
+msgid "Performing a document merge"
+msgstr "进行文档合并"
+
+#: C/mergefeatures.page:27(p)
+#, fuzzy
+msgid ""
+"Document Merge (sometimes called \"Mail Merge\") is a powerful feature that "
+"allows a unique label or card to be printed for each record in an external "
+"data source."
+msgstr ""
+"文档合并（有时也称 \"邮件合并\"）是一项强大的功能，它允许打印外部数据源中的每"
+"一项记录中的唯一标签或卡片。"
+
+#: C/mergefeatures.page:31(p)
+#, fuzzy
+#| msgid ""
+#| "The first step to performing a document merge is to prepare a source "
+#| "document that contains your merge data. This data could be mailing "
+#| "addresses or any other data that you wish to create unique labels or "
+#| "cards for. Currently back-ends only exist for text files and the "
+#| "evolution data server -- others are planned. The currently supported text-"
+#| "file format is very simple: each line is a record; fields are delimited "
+#| "by commas (CSV), tabs, or colons; and newlines can be embedded into "
+#| "fields by using the \"\\n\" entity. This file could be created using any "
+#| "text editor or could be created by another program or script. A common "
+#| "way of creating CSV files is to export them from a spreadsheet program."
+msgid ""
+"The first step to performing a document merge is to prepare a source "
+"document that contains your merge data. This data could be mailing addresses "
+"or any other data that you wish to create unique labels or cards for. "
+"Currently back-ends only exist for text files and the evolution data server "
+"-- others are planned. The currently supported text-file format is very "
+"simple: each line is a record; fields are delimited by commas (CSV), tabs, "
+"or colons; and newlines can be embedded into fields by using the \"\\n\" "
+"entity. This file could be created using any text editor or could be created "
+"by another program or script. A common way of creating CSV files is to "
+"export them from a spreadsheet program or from address book applications."
+msgstr ""
+"进行文档合并的第一步是准备包含有您要合并之数据的源文档。这项数据可以是邮件地"
+"址或任何您要创建的唯一的标签或卡片所需的数据。当前的后端仅有文本和数值服务——"
+"其它的正在部署。当前支持的文本格式十分简单：每行只包含一个记录；字段以逗号，"
+"制表符（tab）或冒号结尾；换行符可以用 \"\\n\"实体植入字段中。这种文件可以用任"
+"何文本强加器或程序或脚本来创建。一个创建CSV文件的常用方法是从一个制表程序中导"
+"出。 "
+
+#: C/mergefeatures.page:45(p)
+msgid ""
+"To export a CSV file from <app>kaddressbook</app>, first select the contacts "
+"you wish to export. Click on the first contact, then press and hold "
+"<key>Ctrl</key> and click on the other desired contacts to select them. Then "
+"choose <guiseq><gui>File</gui><gui>Export</gui><gui>Export CSV File</gui></"
+"guiseq>."
+msgstr ""
+
+#: C/mergefeatures.page:52(p)
+msgid ""
+"In the <gui>Select Contacts</gui> window, enable the button <gui>Selected "
+"contacts</gui> (which should be enabled by default anyway). Then click on "
+"<gui>OK</gui>. In the <gui>Save As</gui> dialog, choose the desired folder "
+"and a name for the file and click on <gui>Save</gui>."
+msgstr ""
+
+#: C/mergefeatures.page:62(p)
+msgid ""
+"To export a CSV file from <app>Thunderbird</app>, click on the <gui>Address "
+"Book</gui> toolbar button or choose <guiseq><gui>Tools </gui><gui>Address "
+"Book</gui></guiseq> from the menu. Then select the contacts you wish to "
+"export. Click on the first contact, then press and hold <key>Ctrl</key> and "
+"click on the other desired contacts to select them. Then choose "
+"<guiseq><gui>Tools</gui><gui>Export</gui></guiseq>."
+msgstr ""
+
+#: C/mergefeatures.page:71(p)
+msgid ""
+"In the file chooser window, choose the desired folder and a name for the "
+"file and change the value of the drop-down button in the right bottom corner "
+"to <gui>Comma Separated</gui>. Finally, click on <gui>Save</gui>."
+msgstr ""
+
+#: C/mergefeatures.page:79(p)
+#, fuzzy
+msgid ""
+"A label must then be configured to \"point at\" this data file. To configure "
+"the merge properties of a document, choose <guiseq><gui>Objects</"
+"gui><gui>Merge Properties</gui></guiseq> menu item to display the <gui>merge "
+"properties</gui> dialog. This dialog is used to select the exact data file "
+"format and file name (location) of the merge data."
+msgstr ""
+"一个文件会配置为 \"指向\"这个数据文件。要配置文档的合并属性，请选择"
+"<guiseq><gui>对象</gui><gui>合并属性</gui></guiseq> 菜单项显示 <gui>合并属性"
+"</gui> 对话框。 该对话框用于选择合并数据时所选文件的确切格式与文件名（位"
+"置）。."
+
+#: C/mergefeatures.page:87(p)
+#, fuzzy
+msgid ""
+"Finally, once the label has been configured for a data file, field keys can "
+"be inserted into text objects and used as source or data for barcode objects "
+"and image filenames for image objects. See <link xref=\"editprop\"/> for "
+"more information on using merge data for these object types."
+msgstr ""
+"最后，如果你的文件已经配置完毕，字段键能够插入文本对象,作为图像对象的条形码和"
+"图像文件名数据了。更多关于为这些对象类型合并数据的介绍，请看：<link xref="
+"\"editprop\"/>"
+
+#: C/mergefeatures.page:93(p)
+#, fuzzy
+msgid ""
+"Now that your label is configured, <app>gLabels</app> will print a unique "
+"label for each record in your source document -- substituting fields from "
+"each record for field keys in the all text, barcode, and image objects."
+msgstr ""
+"现在您的文件已经配置完毕，<app>gLabels</app>将会打印您的源文档中每项记录中唯"
+"一的标签——替换在所有文本，条形码，和图像对象中的每项记录的字段。"
+
+#: C/mergefeatures.page:98(p)
+msgid ""
+"See <link xref=\"merge\"/> for a detailed tutorial on the document merge "
+"feature."
+msgstr "关于文档合并的详细教程请参看 <link xref=\"merge\"/> 。"
+
+#: C/merge-ex4.page:9(desc)
+msgid "Create address labels from a vCard file."
+msgstr "用vCard 文件创建地址标签。"
+
+#: C/merge-ex4.page:25(title)
+msgid "Example 4: Address Labels Using a vCard file"
+msgstr "实例 4：使用vCard文件的地址标签"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex3.page:53(None)
+msgid ""
+"@@image: 'figures/merge-ex3-1.png'; md5=fb5bf719857fb0a49517ecb50124384d"
+msgstr ""
+"@@image: 'figures/merge-ex3-1.png'; md5=fb5bf719857fb0a49517ecb50124384d"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex3.page:74(None)
+msgid ""
+"@@image: 'figures/merge-ex3-2.png'; md5=51fe322868241d083ec83ae824d927d7"
+msgstr ""
+"@@image: 'figures/merge-ex3-2.png'; md5=51fe322868241d083ec83ae824d927d7"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex3.page:88(None)
+msgid ""
+"@@image: 'figures/merge-ex3-3.png'; md5=f731f35b38ddd51499e636733bacc7a6"
+msgstr ""
+"@@image: 'figures/merge-ex3-3.png'; md5=f731f35b38ddd51499e636733bacc7a6"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex3.page:99(None)
+msgid ""
+"@@image: 'figures/merge-ex3-4.png'; md5=4415be9d5b59fb57093077bcaece014a"
+msgstr ""
+"@@image: 'figures/merge-ex3-4.png'; md5=4415be9d5b59fb57093077bcaece014a"
+
+#: C/merge-ex3.page:9(desc)
+msgid ""
+"Create address labels from the <app>Evolution</app> address book entries."
+msgstr "用<app>Evolution</app> 的地址簿记录创建地址标签。"
+
+#: C/merge-ex3.page:25(title)
+msgid "Example 3: Address Labels Using the <app>Evolution</app> Addressbook"
+msgstr "实例 3：用 <app>Evolution</app>地址簿创建地址标签"
+
+#: C/merge-ex3.page:27(p)
+#, fuzzy
+msgid ""
+"Our last party was a great success, and now we need to print mailing address "
+"labels for the invitations to a new one. To simplify this, we can use the "
+"<app>Evolution</app> addressbook, because the address data of all our "
+"friends is stored there."
+msgstr ""
+"上次我们的聚会非常成功，现在我们要打印一份新的与会者的邮件地址标签。简而言"
+"之，我们能够用<app>Evolution</app>地址簿，因为我们的朋友的地址数据全都存储在"
+"这里。"
+
+#: C/merge-ex3.page:33(p)
+#, fuzzy
+msgid ""
+"Depending on how your copy of <app>gLabels</app> was packaged, this option "
+"could be unavailable. Support for the <app>Evolution</app> addressbook will "
+"only be available if the <app>evolution-data-server</app> and its "
+"development files were present when <app>gLabels</app> was built. Please "
+"keep this in mind if you build <app>gLabels</app> directly from source."
+msgstr ""
+"取决于您的<app>gLabels</app>副本怎样打包，可能不提供这个选项。"
+"<app>Evolution</app> 地址簿支持仅在<app>evolution-data-server</app>及其开发文"
+"件在<app>gLabels</app>构建的时候提供时才提供。如果您直接用源代码构建"
+"<app>gLabels</app>请务必牢记这一点。"
+
+#: C/merge-ex3.page:39(p)
+#, fuzzy
+msgid ""
+"If the <app>gLabels</app> package from your distribution lacks this support, "
+"you may wish to contact the package maintainer or file a bug against the "
+"package to request it."
+msgstr ""
+"如果您的发行版中遗漏了<app>gLabels</app>包的这项支持，您可以向包的维护人报告"
+"一个错误来获取它。"
+
+#: C/merge-ex3.page:44(p)
+#, fuzzy
+msgid ""
+"In <app>glabels</app> we have created a new <app>gLabels</app> document "
+"using the Avery 5512 \"Address Labels\" template. Next we use the "
+"<guiseq><gui>Objects</gui><gui>Merge Properties</gui></guiseq> menu item to "
+"display the <gui>Merge properties</gui> dialog. We use this dialog to select "
+"the source type (in our case <gui>Data from default Evolution addressbook</"
+"gui>) as shown."
+msgstr ""
+"在 <app>glabels</app> 中我们用Avery 5512 \"地址标签\" 模板创建一个新的"
+"<app>gLabels</app>文档。下一步我们用<guiseq><gui>对象</gui><gui>合并属性</"
+"gui></guiseq> 菜单项来显示<gui>合并属性</gui>对话框。我们从对话框中选择已经展"
+"示的数据源类型（在我们的例子中是<gui>来自默认的 Evolution 地址簿数据</"
+"gui>）。"
+
+#: C/merge-ex3.page:54(p) C/merge-ex2.page:53(p) C/merge-ex1.page:51(p)
+msgid "Merge properties dialog"
+msgstr "合并属性对话框"
+
+#. ==== End of Figure ====
+#: C/merge-ex3.page:58(p)
+#, fuzzy
+msgid ""
+"Once we have chosen <gui>Data from default Evolution addressbook </gui> as "
+"our merge source, we will get a full list of its content. Initially, all "
+"entries are checked. Assuming we were planning a really big party, we could "
+"leave this selection untouched (but let's keep our budget in mind). We will "
+"now select or unselect certain entries by clicking on the appropriate "
+"checkboxes, or we could use the <gui>Select all</gui> and <gui>Unselect all "
+"</gui> buttons to activate or deactivate all entries in the address book."
+msgstr ""
+"一旦我们选择了<gui>来自默认的 Evolution 地址簿数据 </gui>作为合并源，我们将获"
+"得关于其内容的全部清单。在初始状态下，所有的实体都会经过检查。我们要让这个选"
+"择没有变动(但是要让我们保持清醒的头脑)以确保我们的确在计划一场盛大的聚会。现"
+"在我们要用点击相应的复选框的方式剔除某些实体，或者我们可以用<gui>全部选择</"
+"gui> 与 <gui>全部剔除 </gui>按钮来激活或灭活地址簿中的所有实体。"
+
+#: C/merge-ex3.page:66(p)
+#, fuzzy
+msgid ""
+"We can also view each entry in more detail by clicking on the appropriate "
+"expander (the little triangles) as shown. Once we are satisfied with the "
+"selections in this dialog, we will click the <gui>OK</gui> button to accept "
+"the changes."
+msgstr ""
+"我们也可以用点击相应的放大器的方法来查看每个实体的更多细节。一旦对这个对话框"
+"中的选择感到满意了，我们就点击<gui>确定</gui>按钮来完成更改。"
+
+#: C/merge-ex3.page:71(p) C/merge-ex2.page:67(p) C/merge-ex1.page:60(p)
+#, fuzzy
+msgid ""
+"Now we start adding objects to our <app>glabels</app> document as shown."
+msgstr "现在我们开始在<app>glabels</app>文档中添加对象，就像展示的那样。"
+
+#: C/merge-ex3.page:75(p) C/merge-ex2.page:71(p) C/merge-ex1.page:64(p)
+msgid "Adding objects"
+msgstr "添加对象"
+
+#. ==== End of Figure ====
+#: C/merge-ex3.page:79(p)
+#, fuzzy
+msgid ""
+"In this example we have a single text object again. This text object "
+"contains all of our merge fields organized on multiple lines as a mailing "
+"address."
+msgstr ""
+"在这个实例中我们又有一个新的文本对象。这个文本对象包含了组织在多行的，我们合"
+"并的全部字段作为邮件地址。"
+
+#: C/merge-ex3.page:82(p)
+#, fuzzy
+msgid ""
+"Now we can print our address labels by selecting the <guiseq><gui>File</"
+"gui><gui>Print</gui></guiseq> menu item. This will display the print dialog "
+"as shown below."
+msgstr ""
+"现在我们可以用选择 <guiseq><gui>文件</gui><gui>打印</gui></guiseq> 菜单项的方"
+"式来打印自己的地址标签。这将显示下面展示的打印对话框。"
+
+#: C/merge-ex3.page:89(p) C/merge-ex2.page:89(p)
+msgid "Printing address labels"
+msgstr "打印地址标签"
+
+#. ==== End of Figure ====
+#: C/merge-ex3.page:93(p) C/merge-ex2.page:93(p) C/merge-ex1.page:89(p)
+#, fuzzy
+msgid ""
+"Just to make sure our labels are going to look okay, we select the "
+"<gui>Print outlines</gui> option and click <gui>Print Preview</gui>. This "
+"will display a print preview dialog as shown below."
+msgstr ""
+"只须保证我们的标签看起来完好，就可以选择<gui>边界打印</gui> 选项并点击 <gui>"
+"打印预览</gui>。 这将显示如下面展示的打印预览对话框。"
+
+#: C/merge-ex3.page:100(p)
+msgid "Addess labels preview"
+msgstr "地址标签预览"
+
+#. ==== End of Figure ====
+#: C/merge-ex3.page:104(p) C/merge-ex2.page:104(p)
+#, fuzzy
+msgid ""
+"Everything looks good, so we can now load up our printer with the "
+"appropriate label stock, print our address labels and start mailing our "
+"party invitations."
+msgstr ""
+"万事俱备了，现在我们可以在打印机中加入合适的空白标签，打印我们的地址标签并邮"
+"寄我们的聚会请帖了。"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex2.page:52(None)
+msgid ""
+"@@image: 'figures/merge-ex2-1.png'; md5=817abd0c8deb8a0b95acb7881d8ddb85"
+msgstr ""
+"@@image: 'figures/merge-ex2-1.png'; md5=817abd0c8deb8a0b95acb7881d8ddb85"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex2.page:70(None)
+msgid ""
+"@@image: 'figures/merge-ex2-2.png'; md5=2012870be14752300e0cde420471714a"
+msgstr ""
+"@@image: 'figures/merge-ex2-2.png'; md5=2012870be14752300e0cde420471714a"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex2.page:88(None)
+msgid ""
+"@@image: 'figures/merge-ex2-3.png'; md5=c347460091d8eef9f4ec89557fa9f1e2"
+msgstr ""
+"@@image: 'figures/merge-ex2-3.png'; md5=c347460091d8eef9f4ec89557fa9f1e2"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex2.page:99(None)
+msgid ""
+"@@image: 'figures/merge-ex2-4.png'; md5=30d12e946a79e27211b835e38742671c"
+msgstr ""
+"@@image: 'figures/merge-ex2-4.png'; md5=30d12e946a79e27211b835e38742671c"
+
+#: C/merge-ex2.page:9(desc)
+msgid "Create address labels from a CSV file."
+msgstr "从一个CSV文件创建地址标签。"
+
+#: C/merge-ex2.page:25(title)
+msgid "Example 2: Address labels"
+msgstr "实例 2：地址标签"
+
+#: C/merge-ex2.page:27(p)
+#, fuzzy
+msgid ""
+"In this example we are going to throw a party and need to print mailing "
+"address labels for our invitations. We have a list of our closest friends "
+"that we created in <app>gnumeric</app> and exported as the following CSV "
+"file. It should be noted that not everyone has a middle initial or a two "
+"line address."
+msgstr ""
+"在这个实例中我们打算开个聚会，而且要为我们的请帖打印地址标签。我们有许多亲密"
+"无间的朋友，在<app>gnumeric</app>中创建且导出为下面的CSV文件。"
+
+#: C/merge-ex2.page:33(code)
+#, no-wrap
+msgid ""
+"\n"
+"LAST,FIRST,MI,ADDR1,ADDR2,CITY,STATE,ZIP\n"
+",,,,,,,\n"
+"Critter,Ess,S,\"123 Faux St.\",,Alexandria,VA,22310\n"
+"Doe,John,,\"Apt 1X\",\"451 Mystery St.\",Trenton,NJ,08601\n"
+"Summers,Joyce,,\"1630 Revello Dr\",,Sunnydale,CA,95037\n"
+"McGarret,Steve,O,\"404 Piikoi Street\",,Honolulu,HI,96813\n"
+"Kramer,Cosmo,,\"Apt 5B\",\"129 W. 81 St.\",\"New York\",NY,10024-7207\n"
+"      "
+msgstr ""
+"\n"
+"LAST,FIRST,MI,ADDR1,ADDR2,CITY,STATE,ZIP\n"
+",,,,,,,\n"
+"Critter,Ess,S,\"123 Faux St.\",,Alexandria,VA,22310\n"
+"Doe,John,,\"Apt 1X\",\"451 Mystery St.\",Trenton,NJ,08601\n"
+"Summers,Joyce,,\"1630 Revello Dr\",,Sunnydale,CA,95037\n"
+"McGarret,Steve,O,\"404 Piikoi Street\",,Honolulu,HI,96813\n"
+"Kramer,Cosmo,,\"Apt 5B\",\"129 W. 81 St.\",\"New York\",NY,10024-7207\n"
+"      "
+
+#: C/merge-ex2.page:43(p)
+#, fuzzy
+msgid ""
+"In <app>glabels</app> we have created a new <app>glabels</app> document "
+"using the Avery 5512 \"Address Labels\" template. Next we use the "
+"<guiseq><gui>Objects</gui><gui>Merge Properties</gui></guiseq> menu item to "
+"display the <gui>merge properties</gui> dialog. We use this dialog to select "
+"the source type (in our case CSV with keys on line 1) and the merge source "
+"(filename) as shown."
+msgstr ""
+"在 <app>glabels</app>中我们用 Avery 5512 \"地址标签\" 模板创建了新文档。下一"
+"步我们用 <guiseq><gui>对象</gui><gui>合并属性</gui></guiseq> 菜单项来显示"
+"<gui>合并属性</gui> 对话框。我们用这个对话框来选择源类型（在本例中为带首行键"
+"的CSV文件）与合并源（文件名）。如同展示的那样。"
+
+#. ==== End of Figure ====
+#: C/merge-ex2.page:57(p)
+#, fuzzy
+msgid ""
+"Before applying the merge source, we uncheck the first record since it only "
+"contains empty fields. It is an artifact of our original <app>gnumeric</app> "
+"spreadsheet and would simply waste our first label. We could also unselect "
+"any other records that we didn't want to print a label for."
+msgstr ""
+"在应用合并源之前，我们不检查仅含有一些空字段的第一个记录。我们原著的"
+"<app>gnumeric</app> 表单是件艺术品而且只是简单地浪费了第一个标签。我们也可以"
+"剔除其它不想打印的记录。"
+
+#. ==== End of Figure ====
+#: C/merge-ex2.page:62(p) C/merge-ex1.page:55(p)
+#, fuzzy
+msgid ""
+"We can also view each record in more detail by clicking on the appropriate "
+"expander (the little triangles) as shown. Once we are satisfied with the "
+"selections in this dialog we click <gui>OK</gui> to accept the changes."
+msgstr ""
+"我们也可以用点击相应的放大器的方法来查看每一个记录的更多细节，就像展示的那"
+"样。一旦对这个对话框中的选择感到满意了我们就可以点击 <gui>确定</gui> 来完成更"
+"改。"
+
+#. ==== End of Figure ====
+#: C/merge-ex2.page:75(p)
+#, fuzzy
+msgid ""
+"In this example we have a single text object. This text object contains all "
+"of our merge fields organized on multiple lines as a mailing address. Notice "
+"that fields ${ADDR1} and ${ADDR2} are each located with no other text on "
+"their own lines. When <app>glabels</app> encounters a field as the only text "
+"on a line, it will not expand the line if the field is empty."
+msgstr ""
+"在这个实例中我们又有一个简单的文本对象。这个文本对象包含了组织在多行的，我们"
+"合并的全部字段作为邮件地址。注意${ADDR1}与${ADDR2}定位为其自身行没有其它文本"
+"的字段。当 <app>glabels</app> 找到一个字段为当前行中仅有的文本项时，如果本字"
+"段为空的话它不会扩充该行。"
+
+#: C/merge-ex2.page:82(p)
+#, fuzzy
+msgid ""
+"Now we can print our address labels by selecting the <guiseq><gui>File</"
+"gui><gui>Print</gui></guiseq> menu item. This will display print dialog as "
+"shown below."
+msgstr ""
+"现在我们可以用选择<guiseq><gui>文件</gui><gui>打印</gui></guiseq> 菜单项的方"
+"式来打印地址标签了。这将显示如下展示的打印对话框。"
+
+#: C/merge-ex2.page:100(p)
+msgid "Address labels preview"
+msgstr "地址标签预览"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex1.page:50(None)
+msgid ""
+"@@image: 'figures/merge-ex1-1.png'; md5=c1fe7f5f05a81d9c04f9d03bb7071798"
+msgstr ""
+"@@image: 'figures/merge-ex1-1.png'; md5=c1fe7f5f05a81d9c04f9d03bb7071798"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex1.page:63(None)
+msgid ""
+"@@image: 'figures/merge-ex1-2.png'; md5=45c30ca8de2478387404c7c5f45cf3d0"
+msgstr ""
+"@@image: 'figures/merge-ex1-2.png'; md5=45c30ca8de2478387404c7c5f45cf3d0"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex1.page:84(None)
+msgid ""
+"@@image: 'figures/merge-ex1-3.png'; md5=1c23af6c90e5185cdc9e14d19baeb9f6"
+msgstr ""
+"@@image: 'figures/merge-ex1-3.png'; md5=1c23af6c90e5185cdc9e14d19baeb9f6"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex1.page:95(None)
+msgid ""
+"@@image: 'figures/merge-ex1-4.png'; md5=1cc9f9adcb5a6e98ff5068531e6933f0"
+msgstr ""
+"@@image: 'figures/merge-ex1-4.png'; md5=1cc9f9adcb5a6e98ff5068531e6933f0"
+
+#: C/merge-ex1.page:9(desc)
+#, fuzzy
+msgid "Create name tags from a CSV file."
+msgstr "用CSV文件创建一个名字标识。"
+
+#: C/merge-ex1.page:25(title)
+#, fuzzy
+msgid "Example 1: Name Tags"
+msgstr "实例 1：名字标识"
+
+#: C/merge-ex1.page:27(p)
+#, fuzzy
+msgid ""
+"In this example we are organizing an orientation party for the new crew "
+"members of our ship. We have a list of freshman crew members that we created "
+"in <app>gnumeric</app> and exported as the following CSV file. We could have "
+"created this file by using a text editor, but heck it is the 23rd century."
+msgstr ""
+"在本实例中我们正在为新的船员们组织一场原创聚会。我们有用<app>gnumeric</app> "
+"创建并且导出为下面 CSV 文件的集体成员清单。我们可以用一个文本编辑器创建这个文"
+"件, 在23世纪销毁它。."
+
+#: C/merge-ex1.page:33(code)
+#, no-wrap
+msgid ""
+"\n"
+"Name,Department,SN\n"
+"\"Jim Kirk\",Management,\"SC937-0176 CEC\"\n"
+"\"Mr. Spock\",Sciences,S179-276SP\n"
+"\"Leonard McCoy\",Medicine,unknown\n"
+"\"Montgomery Scott\",Engineering,SE-197-54T\n"
+"      "
+msgstr ""
+"\n"
+"Name,Department,SN\n"
+"\"Jim Kirk\",Management,\"SC937-0176 CEC\"\n"
+"\"Mr. Spock\",Sciences,S179-276SP\n"
+"\"Leonard McCoy\",Medicine,unknown\n"
+"\"Montgomery Scott\",Engineering,SE-197-54T\n"
+"      "
+
+#: C/merge-ex1.page:41(p)
+#, fuzzy
+msgid ""
+"In <app>gLabels</app> we have created a new <app>glabels</app> document "
+"using the Avery 5395 \"Name Badge Labels\" template. Next we use the "
+"<guiseq><gui>Objects</gui><gui>Merge Properties</gui></guiseq> menu item to "
+"display the <gui>merge properties</gui> dialog. We use this dialog to select "
+"the source type (in our case CSV with keys on line 1) and the merge source "
+"(filename) as shown."
+msgstr ""
+"在<app>gLabels</app>中，我们用Avery 5395 \"名字徽章\" 模板创建了一份新的"
+"<app>glabels</app> 文档。下一步我们用<guiseq><gui>对象</gui><gui>合并属性</"
+"gui></guiseq> 菜单项来显示<gui>合并属性</gui> 对话框。我们用这个对话框来选择"
+"源类型（在本例中为首行带键的CSV文件）与合并源（文件名）。就像展示的一样。"
+
+#. ==== End of Figure ====
+#: C/merge-ex1.page:68(p)
+#, fuzzy
+msgid ""
+"In this example we have added three text objects and a barcode object. The "
+"first text object contains only simple literal text (\"Hello, my name is\"). "
+"The second text object contains a single merge field (\"${Name}\") "
+"corresponding to the first field of a record (first column of a line) which "
+"contains the new crew member's full name. The third text field contains both "
+"literal text (\"Department: \") followed by a single merge field "
+"(\"${Department}\") corresponding to the second field or the crew member's "
+"department. The barcode object is configured to use field (or key) \"SN\" "
+"which contains our crew member's starfleet serial number."
+msgstr ""
+"在这个实例中我们加入三个文本对象和一个条形码对象。第一个文本对象只包含简单的"
+"字面文字(\"Hello, my name is\")。第二个文本对象包含单一的合并字段 "
+"(\"${Name}\")对应包含有新集体成员全名的第一字段的第一记录。第三年文本对象包含"
+"的字面文本(\"Department: \")紧跟着一个简单的合并字段(\"${Department}\")对应于"
+"第二个字段或者集体成员所在部门。条形码对象已配置为使用包含我们集体成员所在学"
+"部序列号的字段（或键值） \"SN\"。"
+
+#: C/merge-ex1.page:78(p)
+#, fuzzy
+msgid ""
+"Now we can print our name tags by selecting the <guiseq><gui>File</"
+"gui><gui>Print</gui></guiseq> menu item. This will display print dialog as "
+"shown below."
+msgstr ""
+"现在我们可以选择 <guiseq><gui>文件</gui><gui>打印</gui></guiseq> 菜单项来打印"
+"我们的名字标识了。这将下面显示的打印对话框。"
+
+#: C/merge-ex1.page:85(p)
+#, fuzzy
+msgid "Printing name tags"
+msgstr "打印名字标识"
+
+#: C/merge-ex1.page:96(p)
+#, fuzzy
+msgid "Name tags preview"
+msgstr "名字标识预览"
+
+#. ==== End of Figure ====
+#: C/merge-ex1.page:100(p)
+#, fuzzy
+msgid ""
+"Everything looks good, so we can now load up our printer with the "
+"appropriate label stock, print our name tags and start beaming our guests "
+"aboard."
+msgstr ""
+"所有的东西都备齐了，那么我们可以把合适的标签卡装入打印机，打印名字标识并且邀"
+"请我们的客人登船了。"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/mancreate.page:341(None)
+msgid ""
+"@@image: 'figures/glabels-template-rect-label.png'; "
+"md5=9c7ae1c1a888e1c9eefd19655d093971"
+msgstr ""
+"@@image: 'figures/glabels-template-rect-label.png'; "
+"md5=9c7ae1c1a888e1c9eefd19655d093971"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/mancreate.page:393(None)
+msgid ""
+"@@image: 'figures/glabels-template-ellipse-label.png'; "
+"md5=ba612c86b5fb8fcd2b5384ecc1c331d2"
+msgstr ""
+"@@image: 'figures/glabels-template-ellipse-label.png'; "
+"md5=ba612c86b5fb8fcd2b5384ecc1c331d2"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/mancreate.page:440(None)
+msgid ""
+"@@image: 'figures/glabels-template-circle-label.png'; "
+"md5=841e36a1f92aeed01e8fbaacc67758f1"
+msgstr ""
+"@@image: 'figures/glabels-template-circle-label.png'; "
+"md5=841e36a1f92aeed01e8fbaacc67758f1"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/mancreate.page:501(None)
+msgid ""
+"@@image: 'figures/glabels-template-cd-label.png'; "
+"md5=c7952ac1b26ecbfa53facfbbf6486841"
+msgstr ""
+"@@image: 'figures/glabels-template-cd-label.png'; "
+"md5=c7952ac1b26ecbfa53facfbbf6486841"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/mancreate.page:727(None)
+msgid ""
+"@@image: 'figures/layouts-cdlabel.png'; md5=0c41a95dc82b5a426e934751faf86872"
+msgstr ""
+"@@image: 'figures/layouts-cdlabel.png'; md5=0c41a95dc82b5a426e934751faf86872"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/mancreate.page:790(None)
+msgid ""
+"@@image: 'figures/glabels-template-layout.png'; "
+"md5=fe1c9652d5448b2e0ece086777d3a287"
+msgstr ""
+"@@image: 'figures/glabels-template-layout.png'; "
+"md5=fe1c9652d5448b2e0ece086777d3a287"
+
+#: C/mancreate.page:11(desc)
+msgid "Create your templates manually."
+msgstr "手动创建您的模板。"
+
+#: C/mancreate.page:27(title)
+msgid "Manually creating new templates"
+msgstr "手动创建新的模板"
+
+#. ******************
+#: C/mancreate.page:34(p)
+#, fuzzy
+msgid ""
+"This page is a reference guide to manually creating <app>gLabels</app> "
+"templates. <app>gLabels</app> templates are defined in simple XML files as "
+"described in the DTD: <link href=\"http://glabels.org/xmlns/2.3/glabels-2.3."
+"dtd.txt\">glabels-2.3.dtd</link> (this DTD also describes other XML files "
+"used by <app>gLabels</app>)."
+msgstr ""
+"本节介绍怎样手动创建 <app>gLabels</app> 模板。 <app>gLabels</app> 模板定义为"
+"简单的XML文件格式：在DTD中有描述：<link href=\"http://glabels.org/xmlns/2.3/"
+"glabels-2.3.dtd.txt\">glabels-2.3.dtd</link> (这个 DTD 在<app>gLabels</app>使"
+"用的其它XML文件中也有描述)."
+
+#: C/mancreate.page:39(p)
+#, fuzzy
+msgid ""
+"Manually created template files should be placed in the <file>${HOME}/."
+"glabels</file> and be named with a <file>.template</file> extension."
+msgstr ""
+"手动创建的模板存放在<file>${HOME}/.glabels</file>目录且以 <file>.template</"
+"file> 扩展名命名。"
+
+#: C/mancreate.page:43(p)
+#, fuzzy
+msgid ""
+"<app>gLabels</app> searches for templates in several other locations as "
+"defined here:"
+msgstr "<app>gLabels</app>在几个这里定义的其它位置搜索模板。"
+
+#: C/mancreate.page:46(p)
+msgid "Location"
+msgstr "位置"
+
+#: C/mancreate.page:47(p) C/mancreate.page:174(p) C/mancreate.page:238(p)
+#: C/mancreate.page:302(p) C/mancreate.page:365(p) C/mancreate.page:416(p)
+#: C/mancreate.page:463(p) C/mancreate.page:536(p) C/mancreate.page:563(p)
+#: C/mancreate.page:601(p) C/mancreate.page:635(p) C/mancreate.page:677(p)
+#: C/mancreate.page:754(p)
+msgid "Description"
+msgstr "描述"
+
+#: C/mancreate.page:54(file)
+msgid "${prefix}/share/libglabels-3.0/templates"
+msgstr "${prefix}/share/libglabels-3.0/templates"
+
+#: C/mancreate.page:55(p)
+#, fuzzy
+msgid "Predefined templates distributed with <app>gLabels</app>."
+msgstr "随同<app>gLabels</app>一齐发行的已定义模板。"
+
+#: C/mancreate.page:56(p)
+#, fuzzy
+msgid ""
+"<file>${prefix}</file> is usually <file>/usr</file> or <file>/usr/local</"
+"file>, depending on where <app>gLabels</app> was installed."
+msgstr ""
+"<file>${prefix}</file>通常是 <file>/usr</file> 或者是 <file>/usr/local</"
+"file>，取决于<app>gLabels</app>的安装位置。"
+
+#: C/mancreate.page:60(file)
+msgid "${XDG_CONFIG_HOME}/libglabels/templates"
+msgstr "${XDG_CONFIG_HOME}/libglabels/templates"
+
+#: C/mancreate.page:61(p)
+#, fuzzy
+msgid ""
+"User defined templates created with the <app>gLabels</app><gui>Template "
+"Designer</gui>. <em>Do not put manually created templates in this directory."
+"</em>"
+msgstr ""
+"用户使用 <app>gLabels</app><gui>模板设计师</gui>定义的模板。<em>请勿将自定义"
+"模板存放在本目录中.</em>"
+
+#: C/mancreate.page:63(p)
+#, fuzzy
+msgid ""
+"If <file>${XDG_CONFIG_HOME}</file> is not defined, it defaults to <file>"
+"${HOME}/.config</file>."
+msgstr ""
+"如果 <file>${XDG_CONFIG_HOME}</file> 目录未定义, 它默认为 <file>${HOME}/."
+"config</file>."
+
+#: C/mancreate.page:67(file)
+msgid "${HOME}/.glabels"
+msgstr "${HOME}/.glabels"
+
+#: C/mancreate.page:68(p)
+#, fuzzy
+msgid ""
+"User defined templates that have been created manually should be placed in "
+"this directory. Older versions of the <app>gLabels</app><gui>Template "
+"Designer</gui> (prior to 3.0) would also put templates in this directory."
+msgstr ""
+"用户自定义的模板已经创建并且要存放在这个目录中。早期版本的<app>gLabels</"
+"app><gui>模板设计师</gui>(prior to 3.0)同样也将模板存放在本目录中。"
+
+#: C/mancreate.page:76(p)
+#, fuzzy
+msgid ""
+"Completed template files can be sent to the <app>gLabels</app> template "
+"<link href=\"mailto:glabels-templates@lists.sourceforge.net\">mailing list</"
+"link> for possible inclusion in future versions of <app>gLabels</app>."
+msgstr ""
+"为未来可能版本的<app>gLabels</app>写作的模板文件可以发送至<app>gLabels</app> "
+"模板 <link href=\"mailto:glabels-templates@lists.sourceforge.net\">邮件列表</"
+"link> ."
+
+#: C/mancreate.page:90(title)
+#, fuzzy
+msgid "Assumptions/caveats"
+msgstr "假设/警告"
+
+#: C/mancreate.page:93(p)
+#, fuzzy
+msgid ""
+"A sheet contains only one size of label or card (if a sheet contains more "
+"than one size of item, it can be split into multiple templates for multiple "
+"pass printing)"
+msgstr ""
+"一张表单的尺寸仅能够容纳一张标签或卡片（假如一张表单由多个项组成，它将分为多"
+"个模板以便于多张通行证的打印）。"
+
+#: C/mancreate.page:98(p)
+#, fuzzy
+msgid ""
+"Distances can be expressed in units of <code translate=\"no\">pt</code>, "
+"<code translate=\"no\">in</code>, <code translate=\"no\">mm</code>, <code "
+"translate=\"no\">cm</code>, or <code translate=\"no\">pc</code>. For "
+"example: \"<code translate=\"no\">1.0in</code>\" or \"<code translate=\"no"
+"\">2.54cm</code>\". If no units are specified, computer points (<code "
+"translate=\"no\">pt</code>) will be assumed (1 <em>pt</em> = 1/72 <em>in</"
+"em> = 0.352778 <em>mm</em>)."
+msgstr ""
+"间距可以用以下单位来表达：<code translate=\"no\">pt</code>, <code translate="
+"\"no\">in</code>, <code translate=\"no\">mm</code>, <code translate=\"no"
+"\">cm</code>, or <code translate=\"no\">pc</code>. For example: \"<code "
+"translate=\"no\">1.0in</code>\" or \"<code translate=\"no\">2.54cm</code>\". "
+"如果没有指定单位, 计算机像素点 (<code translate=\"no\">pt</code>) 将会取而代"
+"之(1 <em>pt</em> = 1/72 <em>in</em> = 0.352778 <em>mm</em>)."
+
+#: C/mancreate.page:119(title)
+msgid "Template Files"
+msgstr "模板文件"
+
+#: C/mancreate.page:121(p)
+#, fuzzy
+msgid ""
+"A template file contains a single <code translate=\"no\">Glabels-templates</"
+"code> top-level node."
+msgstr ""
+"一个模板包含一个单一的<code translate=\"no\">Glabels-templates</code>高级节"
+"点。"
+
+#: C/mancreate.page:124(code)
+#, no-wrap
+msgid ""
+"\n"
+"&lt;?xml version=\"1.0\"?&gt;\n"
+"&lt;Glabels-templates&gt;\n"
+"\n"
+"   <var its:translate=\"yes\">...templates...</var>\n"
+"\n"
+"&lt;/Glabels-templates&gt;"
+msgstr ""
+"\n"
+"&lt;?xml version=\"1.0\"?&gt;\n"
+"&lt;Glabels-templates&gt;\n"
+"\n"
+"   <var its:translate=\"yes\">...templates...</var>\n"
+"\n"
+"&lt;/Glabels-templates&gt;"
+
+#: C/mancreate.page:133(title)
+msgid "Example Template"
+msgstr "示例模板"
+
+#: C/mancreate.page:134(desc)
+#, fuzzy
+msgid ""
+"Example <app>gLabels</app> template file containing a single <code translate="
+"\"no\">Template</code> node."
+msgstr ""
+"<app>gLabels</app>示例模板包含一个单一<code translate=\"no\">Template</code> "
+"节点."
+
+#: C/mancreate.page:136(code)
+#, no-wrap
+msgid ""
+"\n"
+"&lt;?xml version=\"1.0\"?&gt;\n"
+"&lt;Glabels-templates&gt;\n"
+"\n"
+"  &lt;Template brand=\"Avery\" part=\"8160\" size=\"US-Letter\" "
+"description=\"Mailing Labels\"&gt;\n"
+"    &lt;Meta category=\"label\"/&gt;\n"
+"    &lt;Meta category=\"mail\"/&gt;\n"
+"    &lt;Meta product_url=\"http://www.avery.com/avery/en_us/\"/&gt;\n"
+"    &lt;Label-rectangle id=\"0\" width=\"189pt\" height=\"72pt\" "
+"round=\"5pt\"&gt;\n"
+"      &lt;Markup-margin size=\"5pt\"/&gt;\n"
+"      &lt;Layout nx=\"3\" ny=\"10\" x0=\"11.25pt\" y0=\"36pt\" dx=\"200pt\" "
+"dy=\"72pt\"/&gt;\n"
+"    &lt;/Label-rectangle&gt;\n"
+"  &lt;/Template&gt;\n"
+"\n"
+"&lt;/Glabels-templates&gt;"
+msgstr ""
+"\n"
+"&lt;?xml version=\"1.0\"?&gt;\n"
+"&lt;Glabels-templates&gt;\n"
+"\n"
+"  &lt;Template brand=\"Avery\" part=\"8160\" size=\"US-Letter\" "
+"description=\"Mailing Labels\"&gt;\n"
+"    &lt;Meta category=\"label\"/&gt;\n"
+"    &lt;Meta category=\"mail\"/&gt;\n"
+"    &lt;Meta product_url=\"http://www.avery.com/avery/en_us/\"/&gt;\n"
+"    &lt;Label-rectangle id=\"0\" width=\"189pt\" height=\"72pt\" "
+"round=\"5pt\"&gt;\n"
+"      &lt;Markup-margin size=\"5pt\"/&gt;\n"
+"      &lt;Layout nx=\"3\" ny=\"10\" x0=\"11.25pt\" y0=\"36pt\" dx=\"200pt\" "
+"dy=\"72pt\"/&gt;\n"
+"    &lt;/Label-rectangle&gt;\n"
+"  &lt;/Template&gt;\n"
+"\n"
+"&lt;/Glabels-templates&gt;"
+
+#: C/mancreate.page:164(title)
+msgid "<span translate=\"no\">Template</span> Node"
+msgstr "<span translate=\"no\">Template</span> 节点"
+
+#: C/mancreate.page:166(p)
+msgid ""
+"A <code translate=\"no\">Template</code> node describes a single stationery "
+"product. It must contain one instance of any type of Label node (<code "
+"translate=\"no\">Label-rectangle</code>, <code translate=\"no\">Label-round</"
+"code>, or <code translate=\"no\">Label-cd</code>)."
+msgstr ""
+"<code translate=\"no\">Template</code> 节点描述了一件简单的办公产品. 它必须含"
+"有任意一类的标签节点实例。 (<code translate=\"no\">Label-rectangle</code>, "
+"<code translate=\"no\">Label-round</code>, or <code translate=\"no\">Label-"
+"cd</code>)."
+
+#: C/mancreate.page:174(p) C/mancreate.page:302(p) C/mancreate.page:365(p)
+#: C/mancreate.page:416(p) C/mancreate.page:463(p) C/mancreate.page:536(p)
+#: C/mancreate.page:563(p) C/mancreate.page:601(p) C/mancreate.page:635(p)
+#: C/mancreate.page:677(p) C/mancreate.page:754(p)
+msgid "Property"
+msgstr "属性"
+
+#: C/mancreate.page:180(code)
+#, no-wrap
+msgid "brand"
+msgstr "商标"
+
+#: C/mancreate.page:181(p)
+msgid "Brand or manufacturer of stationery product. E.g. \"Avery\""
+msgstr "办公产品的商标或制造商。例如：\"Avery\""
+
+#: C/mancreate.page:184(code)
+#, no-wrap
+msgid "part"
+msgstr "零件"
+
+#: C/mancreate.page:185(p)
+msgid "Part number or name of stationery product. E.g. \"8160\""
+msgstr "办公产品的零件号或名称。例如： \"8160\""
+
+#: C/mancreate.page:188(code) C/mancreate.page:542(code)
+#, no-wrap
+msgid "size"
+msgstr "尺寸"
+
+#: C/mancreate.page:189(p)
+msgid ""
+"Size of sheet. E.g., \"<code translate=\"no\">US-Letter</code>\", \"<code "
+"translate=\"no\">A4</code>\", ..."
+msgstr ""
+"表单纸的尺寸。例如： \"<code translate=\"no\">US-Letter</code>\", \"<code "
+"translate=\"no\">A4</code>\", ..."
+
+#: C/mancreate.page:194(code)
+#, no-wrap
+msgid "description"
+msgstr "描述"
+
+#: C/mancreate.page:195(p)
+msgid "Description of stationery product. E.g, \"Mailing Labels.\""
+msgstr "办公产品的描述。例如： \"邮件标签.\""
+
+# 这可能是一个内部变量，不能翻译。
+#: C/mancreate.page:198(code)
+#, no-wrap
+msgid "_description"
+msgstr "描述(_d)"
+
+#: C/mancreate.page:199(p)
+#, fuzzy
+msgid ""
+"Translatable description of stationery product. E.g, \"Mailing Labels."
+"\" (Only useful for predefined templates)"
+msgstr "办公产品的变更描述。例如： \"邮件标签.\" (仅对预定义的模板有效)"
+
+#: C/mancreate.page:203(code) C/mancreate.page:312(code)
+#: C/mancreate.page:375(code) C/mancreate.page:481(code)
+#, no-wrap
+msgid "width"
+msgstr "宽度"
+
+#: C/mancreate.page:204(p)
+#, fuzzy
+msgid "Page width. Only valid if size=\"Other\""
+msgstr "页面宽度。仅当尺寸=\"其它\"时出现"
+
+#: C/mancreate.page:207(code) C/mancreate.page:316(code)
+#: C/mancreate.page:379(code) C/mancreate.page:486(code)
+#, no-wrap
+msgid "height"
+msgstr "高度"
+
+#: C/mancreate.page:208(p)
+#, fuzzy
+msgid "Page height. Only valid if size=\"Other\""
+msgstr "页面高度。仅当尺寸=\"其它\"时出现"
+
+#: C/mancreate.page:211(code)
+#, no-wrap
+msgid "equiv"
+msgstr "等效的"
+
+#: C/mancreate.page:212(p)
+msgid ""
+"Equivalent part number. If this property is present, the template is a clone "
+"of another template of the same brand. The template will inherit all "
+"properties, except brand and name from the other template. This equiv "
+"property must refer to a previously defined template - <app>gLabels</app> "
+"does not currently support forward references."
+msgstr ""
+"等效的零件号。如果出现这项属性，此模板就是另一个相同商标模板的复制品。此模板"
+"将继承前者所有属性，除了商标本身及其模板名称。这个等效的属性必须指向另一个预"
+"定义模板 - <app>gLabels</app> 目前不支持无定义的引用。"
+
+#: C/mancreate.page:230(title)
+msgid "<span translate=\"no\">Meta</span> Node"
+msgstr "<span translate=\"no\">Meta</span> 节点"
+
+#: C/mancreate.page:232(p)
+msgid ""
+"A <code translate=\"no\">Meta</code> node contains some additional "
+"information about the template. A <code translate=\"no\">Template</code> "
+"node may contain zero or more <code translate=\"no\">Meta</code> nodes."
+msgstr ""
+"一个 <code translate=\"no\">Meta</code> 节点包含一些有关于该模板的额外信息. "
+"一个 <code translate=\"no\">template</code> 节点可能有零个或多个 <code "
+"translate=\"no\">Template</code> 节点."
+
+#: C/mancreate.page:238(p)
+msgid "Subnode"
+msgstr "子节点"
+
+#: C/mancreate.page:244(code)
+#, no-wrap
+msgid "category"
+msgstr "类型"
+
+#: C/mancreate.page:245(p)
+msgid ""
+"A category for the template. A template can belong to multiple categories by "
+"simply adding multiple <code translate=\"no\">Meta</code> nodes to the "
+"parent <code translate=\"no\">Template</code> node. Template categories are "
+"used by the <app>gLabels</app><gui>New Label Dialog</gui> to filter the "
+"results of template searches."
+msgstr ""
+"模板的类型。当简单地往父模板<code translate=\"no\">template</code>节点中加入"
+"多个<code translate=\"no\">Meta</code> 节点时，一个模板可能属于多种类型。 模"
+"板类型用于<app>gLabels</app><gui>新建标签对话框</gui>中过滤模板搜索结果。"
+
+#: C/mancreate.page:252(p)
+#, fuzzy
+msgid ""
+"The value of this category must match a predefined category ID defined in "
+"the file <file>${prefix}/libglabels-3.0/templates/categories.xml</file>. "
+"Currently defined category IDs include:"
+msgstr ""
+"这个类型必须匹配一个预定义的在文件<file>${prefix}/libglabels-3.0/templates/"
+"categories.xml</file>定义的类型ID.目前已定义的类型ID包括："
+
+#: C/mancreate.page:256(code)
+#, no-wrap
+msgid "label"
+msgstr "标签"
+
+#: C/mancreate.page:257(code)
+#, no-wrap
+msgid "round-label"
+msgstr "圆形标签"
+
+#: C/mancreate.page:258(code)
+#, no-wrap
+msgid "elliptical-label"
+msgstr "椭圆形标签"
+
+#: C/mancreate.page:259(code)
+#, no-wrap
+msgid "square-label"
+msgstr "正方形标签"
+
+#: C/mancreate.page:260(code)
+#, no-wrap
+msgid "rectangle-label"
+msgstr "矩形标签"
+
+#: C/mancreate.page:261(code)
+#, no-wrap
+msgid "card"
+msgstr "卡片"
+
+#: C/mancreate.page:262(code)
+#, no-wrap
+msgid "business-card"
+msgstr "商业名片"
+
+#: C/mancreate.page:263(code)
+#, fuzzy, no-wrap
+msgid "media"
+msgstr "介质"
+
+#: C/mancreate.page:264(code)
+#, no-wrap
+msgid "mail"
+msgstr "邮件"
+
+#: C/mancreate.page:265(code)
+#, fuzzy, no-wrap
+msgid "foldable"
+msgstr "折叠文具"
+
+#: C/mancreate.page:266(code)
+#, no-wrap
+msgid "photo"
+msgstr "照片"
+
+#: C/mancreate.page:273(code)
+#, no-wrap
+msgid "product_url"
+msgstr "产品链接"
+
+#: C/mancreate.page:274(p)
+#, fuzzy
+msgid ""
+"A URL pointing to the vendor's webpage for the specific product, if "
+"available."
+msgstr "一个指向指定产品供应商主面的URL,如果有的话。"
+
+#: C/mancreate.page:278(p)
+#, fuzzy
+msgid ""
+"Suggestions for additional categories can be sent to the <app>gLabels</app> "
+"developer's <link href=\"mailto:glabels-devel@lists.sourceforge.net"
+"\">mailing list</link>."
+msgstr ""
+"建议您把额外的类型发送给<app>gLabels</app> 开发者的<link href=\"mailto:"
+"glabels-devel@lists.sourceforge.net\">邮件列表</link>。"
+
+#: C/mancreate.page:281(p)
+#, fuzzy
+msgid "Product URLs may be of limited use, because they may not be permanent."
+msgstr "产品的URL可能用处有限，因为它们可能不是永久的。"
+
+#: C/mancreate.page:294(title)
+msgid "<span translate=\"no\">Label-rectangle</span> Node"
+msgstr "<span translate=\"no\">Label-rectangle</span> 节点"
+
+#: C/mancreate.page:296(p)
+#, fuzzy
+msgid ""
+"A <code translate=\"no\">Label-rectangle</code> node describes the "
+"dimensions of a single label or business card that is rectangular in shape "
+"(may have rounded edges)."
+msgstr ""
+"<code translate=\"no\">Label-rectangle</code> 节点描述了一个简单的标签或者商"
+"业名片的尺寸规格为长方形的外形 (可能是圆边的)."
+
+#: C/mancreate.page:308(code) C/mancreate.page:371(code)
+#: C/mancreate.page:422(code) C/mancreate.page:469(code)
+#, fuzzy, no-wrap
+msgid "id"
+msgstr "编号"
+
+#: C/mancreate.page:309(p) C/mancreate.page:372(p) C/mancreate.page:423(p)
+#, fuzzy
+#: C/mancreate.page:470(p)
+msgid "Reserved for future use. Should always be 0."
+msgstr "保留为将来的用途。其值常为 0."
+
+#: C/mancreate.page:313(p)
+msgid "Width of label/card"
+msgstr "标签/卡片的宽度"
+
+#: C/mancreate.page:317(p)
+msgid "Heigth of label/card"
+msgstr "标签/卡片的高度"
+
+#: C/mancreate.page:320(code)
+#, fuzzy, no-wrap
+msgid "round"
+msgstr "圆边"
+
+#: C/mancreate.page:321(p)
+#, fuzzy
+msgid ""
+"Radius of corners. For items with square edges (business cards), the radius "
+"should be 0."
+msgstr "边角的圆边半径。为正方形边缘项目（商业名片），半径应当为0."
+
+#: C/mancreate.page:325(code)
+#, no-wrap
+msgid "x_waste"
+msgstr "x_waste"
+
+#: C/mancreate.page:326(p)
+#, fuzzy
+msgid ""
+"Amount of horizontal waste (over-print) to allow. This is useful for "
+"minimizing alignment problems when using non-white backgrounds (e.g. images)."
+msgstr ""
+"水平方向允许空余的部分（打印起始线上方）。这为使用非空白背景卡片（例如：图"
+"像）打印时，减少对齐问题是有用的。"
+
+#: C/mancreate.page:331(code)
+#, no-wrap
+msgid "y_waste"
+msgstr "y_waste"
+
+#: C/mancreate.page:332(p)
+#, fuzzy
+msgid ""
+"Amount of vertical waste (over-print) to allow. This is useful for "
+"minimizing alignment problems when using non-white backgrounds (e.g. images)."
+msgstr ""
+"垂直方向允许空余的部分（打印起始线上方）。这为使用非空白背景卡片（例如：图"
+"像）打印时，减少对齐问题是有用的。"
+
+#: C/mancreate.page:340(desc) C/mancreate.page:342(p)
+msgid "<span translate=\"no\">Label-rectangle</span> parameters"
+msgstr "<span translate=\"no\">Label-rectangle</span> 参数"
+
+#: C/mancreate.page:357(title)
+msgid "<span translate=\"no\">Label-ellipse</span> Node"
+msgstr "<span translate=\"no\">Label-ellipse</span> 节点"
+
+#: C/mancreate.page:359(p)
+#, fuzzy
+msgid ""
+"A <code translate=\"no\">Label-ellipse</code> node describes the dimensions "
+"of a single label or business card that is elliptic in shape."
+msgstr ""
+"<code translate=\"no\">Label-ellipse</code> 节点描述了一个单一的标签或者商业"
+"名片的尺寸规格为椭圆形的外形。"
+
+#: C/mancreate.page:376(p)
+msgid "Width of the ellipse"
+msgstr "椭圆的宽度"
+
+#: C/mancreate.page:380(p)
+msgid "Heigth of the ellipse"
+msgstr "椭圆的高度"
+
+#: C/mancreate.page:383(code) C/mancreate.page:430(code)
+#: C/mancreate.page:491(code)
+#, no-wrap
+msgid "waste"
+msgstr "空余"
+
+#: C/mancreate.page:384(p) C/mancreate.page:431(p) C/mancreate.page:492(p)
+#, fuzzy
+msgid ""
+"Amount of waste (over-print) to allow. This is useful for minimizing "
+"alignment problems when using non-white backgrounds (e.g. images)."
+msgstr ""
+"允许空余部分的总数。这为使用非空白背景卡片（例如：图像）打印时，减少对齐问题"
+"是有用的。"
+
+#: C/mancreate.page:392(desc) C/mancreate.page:394(p)
+#: C/mancreate.page:439(desc) C/mancreate.page:441(p)
+msgid "<span translate=\"no\">Label-ellipse</span> parameters"
+msgstr "<span translate=\"no\">Label-ellipse</span> 参数"
+
+#: C/mancreate.page:409(title)
+msgid "<span translate=\"no\">Label-round</span> Node"
+msgstr "<span translate=\"no\">Label-round</span> 节点"
+
+#: C/mancreate.page:411(p)
+#, fuzzy
+msgid ""
+"A <code translate=\"no\">Label-round</code> node describes the dimensions of "
+"a simple round label (not a CD)."
+msgstr ""
+" <code translate=\"no\">Label-round</code>节点描述了单一的圆形标签的尺寸规格"
+"（不是CD）。"
+
+#: C/mancreate.page:426(code) C/mancreate.page:473(code)
+#: C/mancreate.page:615(code)
+#, no-wrap
+msgid "radius"
+msgstr "半径"
+
+#: C/mancreate.page:427(p)
+msgid "Radius (1/2 diameter) of label"
+msgstr "标签的半径（1/2 直径）"
+
+#: C/mancreate.page:456(title)
+msgid "<span translate=\"no\">Label-cd</span> Node"
+msgstr "<span translate=\"no\">Label-cd</span> 节点"
+
+#: C/mancreate.page:458(p)
+#, fuzzy
+msgid ""
+"A <code translate=\"no\">Label-cd</code> node describes the dimensions of a "
+"CD, DVD, or business card CD."
+msgstr ""
+"<code translate=\"no\">Label-cd</code> 节点描述了 CD, DVD, or 商业名片 CD的尺"
+"寸规格."
+
+#: C/mancreate.page:474(p)
+msgid "Outer radius of label"
+msgstr "标签的外半径"
+
+#: C/mancreate.page:477(code)
+#, no-wrap
+msgid "hole"
+msgstr "孔"
+
+#: C/mancreate.page:478(p)
+msgid "Radius of concentric hole"
+msgstr "同心孔半径"
+
+#: C/mancreate.page:482(p)
+#, fuzzy
+msgid ""
+"If present, the label is clipped to the given width. (Useful for \"business "
+"card CDs\")."
+msgstr "如果存在，标签将按照给定的宽度裁剪。（对\"business card CDs\"有用）。"
+
+#: C/mancreate.page:487(p)
+#, fuzzy
+msgid ""
+"If present, the label is clipped to the given height. (Useful for \"business "
+"card CDs\")."
+msgstr "如果存在，标签将按照给定的高度裁剪。（对\"business card CDs\"有用）。"
+
+#: C/mancreate.page:500(desc)
+msgid "<span translate=\"no\">Label-cd</span> parameters"
+msgstr "<span translate=\"no\">Label-cd</span> 参数"
+
+#: C/mancreate.page:502(p)
+msgid "CD label parameters"
+msgstr "CD 标签参数"
+
+#: C/mancreate.page:517(title)
+msgid "<span translate=\"no\">Markup</span> Nodes"
+msgstr "<span translate=\"no\">Markup</span> 节点"
+
+#: C/mancreate.page:519(p)
+#, fuzzy
+msgid ""
+"Templates may contain optional markup nodes. These nodes are used to "
+"describe a simple set of markup lines that are visible in the <app>glabels</"
+"app> drawing canvas, but not visible when printed. These lines can represent "
+"margins, fold lines, center lines, special areas, or other helpful hints to "
+"the user of a template."
+msgstr ""
+"模板可能包含有可选的注释节点。这些节点用于描述<app>glabels</app> 画布中可见的"
+"一套注释行，但在打印时并不可见。这些行可以代表空白栏，中心栏，特别区域或者其"
+"它对模板用户有帮助的提示。"
+
+#: C/mancreate.page:529(title)
+msgid "<span translate=\"no\">Markup-margin</span> Node"
+msgstr "<span translate=\"no\">Markup-margin</span> 节点"
+
+#: C/mancreate.page:531(p)
+#, fuzzy
+msgid ""
+"A <code translate=\"no\">Markup-margin</code> describes a margin along all "
+"edges of a label."
+msgstr "<code translate=\"no\">Markup-margin</code> 描述标签全部边缘的空白栏。"
+
+#: C/mancreate.page:543(p)
+#, fuzzy
+msgid ""
+"Size of the margin. I.e. the distance of the margin line from the edge of "
+"the card/label."
+msgstr "空白栏的尺寸。即：栏线到卡片/标签边缘之间的距离。"
+
+#: C/mancreate.page:557(title)
+msgid "<span translate=\"no\">Markup-line</span> Node"
+msgstr "<span translate=\"no\">Markup-line</span> 节点"
+
+#: C/mancreate.page:559(p)
+#, fuzzy
+msgid ""
+"A <code translate=\"no\">Markup-line</code> node describes a markup line."
+msgstr " <code translate=\"no\">Markup-line</code> 节点描述一个注释行."
+
+#: C/mancreate.page:569(code) C/mancreate.page:641(code)
+#: C/mancreate.page:683(code)
+#, no-wrap
+msgid "x1"
+msgstr "x1"
+
+#: C/mancreate.page:570(p)
+msgid "x coordinate of 1st endpoint of the line segment."
+msgstr "线段第一个端点的 X 坐标。"
+
+#: C/mancreate.page:573(code) C/mancreate.page:645(code)
+#: C/mancreate.page:687(code)
+#, no-wrap
+msgid "y1"
+msgstr "y1"
+
+#: C/mancreate.page:574(p)
+msgid "y coordinate of 1st endpoint of the line segment."
+msgstr "线段第一个端点的 Y 坐标。"
+
+#: C/mancreate.page:577(code)
+#, no-wrap
+msgid "x2"
+msgstr "x2"
+
+#: C/mancreate.page:578(p)
+msgid "x coordinate of 2st endpoint of the line segment."
+msgstr "线段第二个端点的 X 坐标。"
+
+#: C/mancreate.page:581(code)
+#, no-wrap
+msgid "y2"
+msgstr "y2"
+
+#: C/mancreate.page:582(p)
+msgid "y coordinate of 2st endpoint of the line segment."
+msgstr "线段第二个端点的 Y 坐标。"
+
+#: C/mancreate.page:595(title)
+msgid "<span translate=\"no\">Markup-circle</span> Node"
+msgstr "<span translate=\"no\">Markup-circle</span> 节点"
+
+#: C/mancreate.page:597(p)
+#, fuzzy
+msgid ""
+"A <code translate=\"no\">Markup-circle</code> describes a markup circle."
+msgstr "A <code translate=\"no\">Markup-circle</code> 描述了一个圆形注释框."
+
+#: C/mancreate.page:607(code) C/mancreate.page:768(code)
+#, no-wrap
+msgid "x0"
+msgstr "x0"
+
+#: C/mancreate.page:608(p)
+msgid "x coordinate of circle origin (center)."
+msgstr "圆的原点的 X 坐标（中心）。"
+
+#: C/mancreate.page:611(code) C/mancreate.page:773(code)
+#, no-wrap
+msgid "y0"
+msgstr "y0"
+
+#: C/mancreate.page:612(p)
+msgid "y coordinate of circle origin (center)."
+msgstr "圆的原点的 Y 坐标（中心）。"
+
+#: C/mancreate.page:616(p)
+msgid "Radius of circle."
+msgstr "圆的半径。"
+
+#: C/mancreate.page:629(title)
+msgid "<span translate=\"no\">Markup-rect</span> Node"
+msgstr "<span translate=\"no\">Markup-rect</span> 节点"
+
+#: C/mancreate.page:631(p)
+#, fuzzy
+msgid ""
+"A <code translate=\"no\">Markup-rect</code> describes a markup rectangle."
+msgstr "<code translate=\"no\">Markup-rect</code> 描述了一个矩形注释框."
+
+#: C/mancreate.page:642(p)
+msgid "x coordinate of upper left corner of rectangle."
+msgstr "矩形左上角的 X 坐标。"
+
+#: C/mancreate.page:646(p)
+msgid "y coordinate of upper left corner of rectangle."
+msgstr "矩形左上角的 Y 坐标。"
+
+#: C/mancreate.page:649(code) C/mancreate.page:691(code)
+#, no-wrap
+msgid "w"
+msgstr "w"
+
+#: C/mancreate.page:650(p)
+msgid "Width of rectangle."
+msgstr "矩形的宽度。"
+
+#: C/mancreate.page:653(code) C/mancreate.page:695(code)
+#, no-wrap
+msgid "h"
+msgstr "h"
+
+#: C/mancreate.page:654(p)
+msgid "Height of rectangle."
+msgstr "矩形的高度。"
+
+#: C/mancreate.page:657(code)
+#, no-wrap
+msgid "r"
+msgstr "r"
+
+#: C/mancreate.page:658(p)
+msgid "Radius of rounded corners of rectangle."
+msgstr "矩形的圆角的半径."
+
+#: C/mancreate.page:671(title)
+msgid "<span translate=\"no\">Markup-ellipse</span> Node"
+msgstr "<span translate=\"no\">Markup-ellipse</span> 节点"
+
+#: C/mancreate.page:673(p)
+#, fuzzy
+msgid ""
+"A <code translate=\"no\">Markup-ellipse</code> describes a markup ellipse."
+msgstr "<code translate=\"no\">Markup-ellipse</code> 描述了一个椭圆形注释框。"
+
+#: C/mancreate.page:684(p)
+msgid "x coordinate of upper left corner of ellipse."
+msgstr "椭圆左上角的 X 坐标。"
+
+#: C/mancreate.page:688(p)
+msgid "y coordinate of upper left corner of ellipse."
+msgstr "椭圆左上角的 Y 坐标。"
+
+#: C/mancreate.page:692(p)
+msgid "Width of ellipse."
+msgstr "椭圆的宽度。"
+
+#: C/mancreate.page:696(p)
+msgid "Height of ellipse."
+msgstr "椭圆的高度。"
+
+#: C/mancreate.page:714(title)
+msgid "<span translate=\"no\">Layout</span> Node"
+msgstr "<span translate=\"no\">Layout</span> 节点"
+
+#: C/mancreate.page:716(p)
+#, fuzzy
+msgid ""
+"A label node may contain multiple <code translate=\"no\">Layout</code> "
+"children. If labels are arranged in a simple grid pattern, only one layout "
+"is needed. However, if labels are arranged in multiple grids, such as a "
+"running bond pattern, multiple <code translate=\"no\">Layout</code> tags can "
+"be used."
+msgstr ""
+"一个标签节点可以包含 <code translate=\"no\">Layout</code> 子节点. 如果标签安"
+"排为单一的网格状样板, 只须保留其布局. 然而, 如果标签安排为多样的网格样板, 比"
+"如跑道样板, 就可以使用多个 <code translate=\"no\">Layout</code> 标识。"
+
+#: C/mancreate.page:721(p)
+#, fuzzy
+msgid "A common example for multiple layouts is a sheet with three CD labels:"
+msgstr "一个简单的多样布局就是带有三张CD标签的表单："
+
+#: C/mancreate.page:726(desc) C/mancreate.page:728(p)
+#, fuzzy
+msgid "CD label sheet"
+msgstr "CD 标签表单"
+
+#. ==== End of Figure ====
+#: C/mancreate.page:733(p)
+#, fuzzy
+msgid ""
+"The two labels on the left edge can be assigned to a grid, assuming we can "
+"define the coordinates for the top left label and the distance to the second "
+"label properly. The distance to the left edge is common to these labels. The "
+"third one on the right edge has no common distance values with the other "
+"ones, that's why we have to define a second layout, with unique coordinates "
+"for the top left corner of that label."
+msgstr ""
+"在保证我们可以正确地定义标签的左上角坐标以及它到第二张标签的距离的情况下，左"
+"部边缘的两张标签可以分配到网格中。在边缘的第三张标签到其它标签的距离是个普通"
+"的数值，这也是我们为要那标签定义第二种为带有唯一左上角坐标的布局的原因。"
+
+#: C/mancreate.page:741(p)
+#, fuzzy
+msgid ""
+"You can define multiple layouts only if the labels on the sheet have the "
+"same shape. If your sheet contains different shapes, you have to define each "
+"shape in another template seperately. Future versions of <app>gLabels</app> "
+"will probably be able to concatenate such sheets with different shapes "
+"within a single template."
+msgstr ""
+"仅当表单中的标签都是同一形状时，您可以定义多种布局。如果你的表单包含许多不同"
+"形状的标签时，您将不得不为每一种形状的标签定义一个模板。未来版本的"
+"<app>gLabels</app>有可能会在表单中整合拥有不同形状标签的单一模板。"
+
+#: C/mancreate.page:749(p)
+#, fuzzy
+msgid "A single label can always be treated as a grid of one."
+msgstr "一张单一的标签可以视为只有一个模板的网格。"
+
+#: C/mancreate.page:760(code)
+#, no-wrap
+msgid "nx"
+msgstr "nx"
+
+#: C/mancreate.page:761(p)
+#, fuzzy
+msgid "Number of labels/cards across in the grid (horizontal)"
+msgstr "网格中标签/卡片的十字线（水平）的数目"
+
+#: C/mancreate.page:764(code)
+#, no-wrap
+msgid "ny"
+msgstr "ny"
+
+#: C/mancreate.page:765(p)
+#, fuzzy
+msgid "Number of labels/cards across in the grid (vertical)"
+msgstr "网格中标签/卡片的十字线（水平）的数目"
+
+#: C/mancreate.page:769(p)
+#, fuzzy
+msgid ""
+"Distance from left edge of sheet to the left edge of the left column of "
+"cards/labels in the layout."
+msgstr "在布局中从表单左边缘到左列标签/卡片的左边缘之间的距离。"
+
+#: C/mancreate.page:774(p)
+#, fuzzy
+msgid ""
+"Distance from the top edge of sheet to the top edge of the top row of labels/"
+"cards in the layout."
+msgstr "在布局中从表单上边缘到上行标签/卡片的上边缘之间的距离。"
+
+#: C/mancreate.page:778(code)
+#, no-wrap
+msgid "dx"
+msgstr "dx"
+
+#: C/mancreate.page:779(p)
+#, fuzzy
+msgid "Horizontal pitch of grid."
+msgstr "网格的水平准线。"
+
+#: C/mancreate.page:782(code)
+#, no-wrap
+msgid "dy"
+msgstr "dy"
+
+#: C/mancreate.page:783(p)
+#, fuzzy
+msgid "Vertical pitch of grid."
+msgstr "网格的垂直准线。"
+
+#: C/mancreate.page:789(desc)
+msgid "<span translate=\"no\">Layout</span> parameters"
+msgstr "<span translate=\"no\">Layout</span> 参数"
+
+#: C/mancreate.page:791(p)
+msgid "<span translate=\"no\">Layout</span> Parameters"
+msgstr "<span translate=\"no\">Layout</span> 参数"
+
+#: C/license.page:8(desc)
+msgid "Legal information."
+msgstr "法律信息。"
+
+#: C/license.page:11(title)
+msgid "License"
+msgstr "许可证"
+
+#: C/license.page:12(p)
+msgid ""
+"This work is distributed under a CreativeCommons Attribution-Share Alike 3.0 "
+"Unported license."
+msgstr ""
+"本作品在 CreativeCommons Attribution-Share Alike 3.0 Unported license的许可下"
+"发行。"
+
+#: C/license.page:20(p)
+msgid "You are free:"
+msgstr "你可以自由地："
+
+#: C/license.page:25(em)
+msgid "To share"
+msgstr "分享"
+
+#: C/license.page:26(p)
+msgid "To copy, distribute and transmit the work."
+msgstr "复制，发行与传播本作品。"
+
+#: C/license.page:29(em)
+msgid "To remix"
+msgstr "重排"
+
+#: C/license.page:30(p)
+msgid "To adapt the work."
+msgstr "改写这本作品"
+
+#: C/license.page:33(p)
+msgid "Under the following conditions:"
+msgstr "在以下情况下："
+
+#: C/license.page:38(em)
+msgid "Attribution"
+msgstr "贡献"
+
+#: C/license.page:39(p)
+msgid ""
+"You must attribute the work in the manner specified by the author or "
+"licensor (but not in any way that suggests that they endorse you or your use "
+"of the work)."
+msgstr "您必须在著作人或许可证的许可下为本作品做贡献。"
+
+#: C/license.page:46(em)
+msgid "Share Alike"
+msgstr "相同方式分享"
+
+#: C/license.page:47(p)
+msgid ""
+"If you alter, transform, or build upon this work, you may distribute the "
+"resulting work only under the same, similar or a compatible license."
+msgstr ""
+"如果您修改，传播，或者扩展本作品，您只能在相同，相似或兼容的许可证的许可下传"
+"播。"
+
+#: C/license.page:53(p)
+msgid ""
+"For the full text of the license, see the <link href=\"http://"
+"creativecommons.org/licenses/by-sa/3.0/legalcode\">CreativeCommons website</"
+"link>, or read the full <link href=\"http://creativecommons.org/licenses/by-"
+"sa/3.0/\">Commons Deed</link>."
+msgstr ""
+"访问 <link href=\"http://creativecommons.org/licenses/by-sa/3.0/legalcode"
+"\">CreativeCommons website</link>，可获取许可证书的全部文本，或者在此<link "
+"href=\"http://creativecommons.org/licenses/by-sa/3.0/\">Commons Deed</link>."
+"查阅。"
+
+#: C/labelprop.page:9(desc)
+msgid "How to change the properties of a label or business card."
+msgstr "怎样修改标签或商业名片的属性。"
+
+#: C/labelprop.page:25(title)
+msgid "To change label properties"
+msgstr "修改标签的属性。"
+
+#: C/labelprop.page:27(p)
+#, fuzzy
+msgid ""
+"To change the media type and/or orientation of a label, choose "
+"<guiseq><gui>File</gui><gui>Properties</gui></guiseq> to display the "
+"<gui>Label properties</gui> dialog. Select the new media type and "
+"orientation for the document, then click <gui>OK</gui>."
+msgstr ""
+"修改标签的介质类型或者定位，请选择<guiseq><gui>文件</gui><gui>属性</gui></"
+"guiseq> 来显示 <gui>标签属性</gui> 对话框。为文档选择新的介质类型与定位，然后"
+"点击<gui>确定</gui>。"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/index.page:24(None)
+msgid ""
+"@@image: 'figures/glabels-logo.png'; md5=0c1e32afcbae0d2fc6976020c24a0a43"
+msgstr ""
+"@@image: 'figures/glabels-logo.png'; md5=0c1e32afcbae0d2fc6976020c24a0a43"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/index.page:47(None)
+msgid ""
+"@@image: 'figures/introduction-glabels-main-window.png'; "
+"md5=9ee2b2cc026ee8cba3c881b370a14313"
+msgstr ""
+"@@image: 'figures/introduction-glabels-main-window.png'; "
+"md5=9ee2b2cc026ee8cba3c881b370a14313"
+
+#: C/index.page:7(title) C/index.page:8(title)
+msgid "gLabels label and business card designer"
+msgstr "gLabels 标签与商业名片设计师"
+
+#: C/index.page:23(title)
+msgid ""
+"<media type=\"image\" mime=\"image/png\" src=\"figures/glabels-logo.png"
+"\">gLabels logo</media> gLabels Manual"
+msgstr ""
+"<media type=\"image\" mime=\"image/png\" src=\"figures/glabels-logo.png"
+"\">gLabels logo</media> gLabels 手册"
+
+#: C/index.page:28(p)
+#, fuzzy
+msgid ""
+"The <app>gLabels</app> application is a lightweight program for creating "
+"labels and business cards for the GNOME desktop environment. It is designed "
+"to work with various laser/ink-jet peel-off label and business card sheets "
+"that you'll find at most office supply stores."
+msgstr ""
+"<app>gLabels</app> 是一种为 GNOME 桌面环境设计的轻量级标签与商业名片设计程"
+"序。它用于设计您在大多数办公场所可见的，用各种激光/喷墨打印机批量打印标签与商"
+"业名片的表单。"
+
+#: C/index.page:35(p)
+#, fuzzy
+msgid ""
+"<app>gLabels</app> can be used to design address labels, name tags, price "
+"tags, cd/dvd labels, or just about anything else that is organized in a "
+"regular pattern on a sheet of paper. Labels (or cards) can contain text, "
+"images, lines, shapes, and barcodes. <app>gLabels</app> also includes a "
+"document-merge feature which lets you print a unique label for each record "
+"from an external data source, such as a CSV file or an <app>Evolution</app> "
+"address book."
+msgstr ""
+"<app>gLabels</app>可以用于设计地址标签，名字标识，价格标识，cd/dvd 标签，或者"
+"其它任何在一张表单或纸张上的有规则的图案。"
+
+#: C/index.page:45(title) C/index.page:46(desc)
+msgid "<app>gLabels</app> main window"
+msgstr "<app>gLabels</app> 主窗口"
+
+#: C/index.page:48(p)
+msgid "<app>gLabels</app> main window."
+msgstr "<app>gLabels</app> 主窗口。"
+
+#: C/index.page:53(title)
+msgid "Usage"
+msgstr "用途"
+
+#: C/index.page:57(title)
+msgid "Document Merging"
+msgstr "文档合并"
+
+#: C/index.page:61(title)
+msgid "Advanced usage"
+msgstr "高级用途"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/editprop.page:35(None)
+msgid ""
+"@@image: 'figures/object-editor-sidebar.png'; "
+"md5=68be18416cc17964992fe0c7e311e0ef"
+msgstr ""
+"@@image: 'figures/object-editor-sidebar.png'; "
+"md5=68be18416cc17964992fe0c7e311e0ef"
+
+#: C/editprop.page:9(desc)
+msgid "Change the properties of objects."
+msgstr "修改对象的属性。"
+
+#: C/editprop.page:25(title)
+msgid "To edit object properties"
+msgstr "编辑对象的属性"
+
+#: C/editprop.page:29(p)
+#, fuzzy
+msgid ""
+"Most object properties can be modified through the object editor sidebar, "
+"illustrated below. To use the object editor, a single object must first be "
+"selected. See <link xref=\"select\"/>."
+msgstr ""
+"多数对象的属性可以通过侧栏的对象编辑器来修改，如下阐述。要使用对象编辑器，必"
+"须选择一个单一的对象。请看<link xref=\"select\"/>。"
+
+#. ==== End of Figure ====
+#: C/editprop.page:40(p)
+#, fuzzy
+msgid ""
+"The object editor will contain a subset of the following tabbed sections, "
+"depending on object type:"
+msgstr "对象编辑器包含下面一系列的选项卡区,取决于对象的类型:"
+
+#: C/editprop.page:44(title)
+#, fuzzy
+msgid "Text Tabbed Section (Text objects)"
+msgstr "文本选项卡区 (文本对象)"
+
+#: C/editprop.page:46(p)
+#, fuzzy
+msgid ""
+"This section contains a small editor for changing the content of a text "
+"object. It also contains a dropdown menu of available document merge keys, "
+"that can be inserted into text."
+msgstr ""
+"这个区包含一个修改文本对象内容的小型编辑器。它也包含一个含有文档合并键的下拉"
+"菜单，可以用于插入文本。"
+
+#: C/editprop.page:53(title)
+#, fuzzy
+msgid "Image Tabbed Section (Image objects)"
+msgstr "图像选项卡区"
+
+#: C/editprop.page:55(p)
+#, fuzzy
+msgid ""
+"This section contains a file entry with preview to select image files. The "
+"browse button can be used to easily locate image files. Alternatively, a "
+"document merge key can be used instead to provide a filename at print time."
+msgstr ""
+"这个区域包含一个文件实体预览，用于选择图像文件。浏览按钮可以用于轻松地定位图"
+"形文件。或许，文档合并键可以使用以替代在打印时提供一个文件名。"
+
+#: C/editprop.page:63(title)
+#, fuzzy
+msgid "Data Tabbed Section (Barcode objects)"
+msgstr "数据选项卡区 (条形码对象)"
+
+#: C/editprop.page:65(p)
+#, fuzzy
+msgid ""
+"This section contains a text entry to enter literal barcode data. "
+"Alternatively, a document merge key can be used to provide this data at "
+"print time."
+msgstr ""
+"本区域留念一个用于输入文字条形码的文本实体。或许文档合并键可以在打印时提供这"
+"项数据。"
+
+#: C/editprop.page:72(title)
+#, fuzzy
+msgid "Style Tabbed Section (Text objects)"
+msgstr "风格标签卡区（文本对象）"
+
+#: C/editprop.page:74(p)
+#, fuzzy
+msgid ""
+"This section contains controls to select text properties, including font "
+"family, font size, font weight, color, and text justification."
+msgstr ""
+"本区域包含了选择文本属性的控件，包括字体家族，字体大小，字体宽度，颜色和文本"
+"调整。"
+
+#: C/editprop.page:81(title)
+#, fuzzy
+msgid "Style Tabbed Section (Barcode objects)"
+msgstr "风格选项卡区（条形码对象）"
+
+#: C/editprop.page:83(p)
+#, fuzzy
+msgid ""
+"This section contains controls to select barcode properties, including "
+"barcode style, color, whether to print text, and whether to include a "
+"checksum digit."
+msgstr ""
+"本区域包含了选择条形码属性的控件，包括：条形码风格，颜色，是否打印文本，以及"
+"是否包含一个校验和数字。"
+
+#: C/editprop.page:90(title)
+#, fuzzy
+msgid "Line Tabbed Section"
+msgstr "行选项卡区"
+
+#: C/editprop.page:92(p)
+#, fuzzy
+msgid ""
+"This section contains controls to select properties of lines and outlines. "
+"These properties include line width and color."
+msgstr "本区域包含了选择行与外行属性的控件。这些属性包括行宽与颜色。"
+
+#: C/editprop.page:98(title)
+#, fuzzy
+msgid "Fill Tabbed Section"
+msgstr "填充选项卡区"
+
+#: C/editprop.page:100(p)
+#, fuzzy
+msgid ""
+"This section contains controls to select fill properties of box and ellipse "
+"objects. Currently the only fill property is fill color."
+msgstr "本区包含了框和椭圆对象的填充属性选择控件。当前工作公有的填充属性是颜色。"
+
+#: C/editprop.page:107(title)
+#, fuzzy
+msgid "Size Tabbed Section (All except line objects)"
+msgstr "大小选项卡区（除了行对象以外的所有对象）"
+
+#: C/editprop.page:109(p)
+#, fuzzy
+msgid ""
+"This section contains controls to select the width and height of an object. "
+"A checkbox is provided, so that the current aspect ratio can be locked while "
+"manipulating the width and height controls. Image objects also provide a "
+"button to reset the size to the image's natural size (Assumes 72DPI)."
+msgstr ""
+"本区域包含选择对象的宽度与高度的控件。提供一个复选框，以便操作高宽控件时能够"
+"锁定当前的高宽比。 图像对象也提供一个按钮来把图像的尺寸回复到自然的尺寸。(确"
+"保为:72DPI)。"
+
+#: C/editprop.page:118(title)
+#, fuzzy
+msgid "Size Tabbed Section (Line objects)"
+msgstr "大小标签卡项（行对象）"
+
+#: C/editprop.page:120(p)
+#, fuzzy
+msgid ""
+"This section contains controls to select the length and angle of a line "
+"object."
+msgstr "本区域包含选择行对象的长度与角度的控件。"
+
+#: C/editprop.page:126(title)
+#, fuzzy
+msgid "Position Tabbed Section"
+msgstr "位置标签卡项"
+
+#: C/editprop.page:128(p)
+msgid "This section contains controls to change the position of an object."
+msgstr "本区域包含修改对象位置的控件。"
+
+#: C/editprop.page:135(title)
+#, fuzzy
+msgid "Shadow Tabbed Section (All except barcode objects)"
+msgstr "阴影选项卡区（除条形码外的所有对象）"
+
+#: C/editprop.page:137(p)
+#, fuzzy
+msgid "This section contains controls to add a shadow to an object."
+msgstr "本区域包含为一个对象加入阴影的控件。"
+
+#: C/editprop.page:146(title)
+msgid "Other Manipulations of Objects"
+msgstr "其它关于对象的操作"
+
+#: C/editprop.page:148(p)
+msgid "Objects can also be manipulated in the following ways."
+msgstr "对象也可以运用以下方法操作。"
+
+#: C/editprop.page:151(title)
+msgid "Moving and Resizing Objects"
+msgstr "移动与缩放对象"
+
+#: C/editprop.page:153(p)
+#, fuzzy
+msgid ""
+"Objects can be moved by simply clicking on a selected object and dragging "
+"the object to its new location. If the object is part of an aggregate "
+"selection, all objects in the selection will move with the object being "
+"dragged, maintaining their relative positions to one another. If no object "
+"is selected, clicking on an object will create a new selection containing "
+"that object. See <link xref=\"select\"/>."
+msgstr ""
+"对象可以用点击一个已选对象并拖放到它的新位置。如果此对象是选择集合的成员，在"
+"选择中的所有对象都会经拖放，操作它们相关的位置到另一个。如果没有选择对象，点"
+"击此对象会创建一个包含它新选择。参看<link xref=\"select\"/>。"
+
+#: C/editprop.page:161(p)
+#, fuzzy
+msgid ""
+"A selected object can be resized by clicking one of its resize handle and "
+"dragging it to obtain the new size."
+msgstr "已选对象可以用点击它的一个缩放手柄并且拖放来获得新的尺寸的方法来缩放它。"
+
+#: C/editprop.page:167(title)
+msgid "Changing Stacking Order"
+msgstr "改变堆放顺序"
+
+#: C/editprop.page:169(p)
+#, fuzzy
+msgid ""
+"Stacking order refers to relative position in the z-axis of objects. That is "
+"when objects overlap, which object will appear on top of the other. By "
+"default, newer objects will appear above older objects. To change this "
+"order, select one or more objects and choose <guiseq><gui>Objects</"
+"gui><gui>Order</gui><gui>Bring to Front</gui></guiseq> to raise the "
+"selection to the top of the stacking order, or choose <guiseq><gui>Objects</"
+"gui><gui>Order</gui><gui>Send to Back</gui></guiseq> to lower the selection "
+"to the bottom of the stacking order. These menuitems are also available by "
+"right-clicking the display area when there is a non-empty selection."
+msgstr ""
+"堆放顺序指的是对象在 Z 轴的相应位置。就是当对象重叠时哪一个对象显现于另一个的"
+"上方。在默认的状态下，新的对象会出现在旧对象的上方。要改变这个顺序，选择一个"
+"或者更多的对象然后选择<guiseq><gui>对象</gui><gui>顺序</gui><gui>移到前端</"
+"gui></guiseq>来把此选择提高到堆放顺序的顶部，或者选择<guiseq><gui>对象</"
+"gui><gui>顺序</gui><gui>送到后方</gui></guiseq>来把此选择降低到堆放顺序的底"
+"部。当它是一个非空选择时，这个菜单项也会出现在你显示区域的右键菜单中。"
+
+#: C/editprop.page:187(title)
+msgid "Rotating and Flipping Objects"
+msgstr "旋转与翻转对象"
+
+#: C/editprop.page:189(p)
+#, fuzzy
+msgid ""
+"Objects can be rotated 90 degrees in either direction, or flipped "
+"horizontally or vertically, by choosing the appropriate menuitem in the "
+"<guiseq><gui>Objects</gui><gui>Rotate/Flip</gui></guiseq> sub-menu. These "
+"menuitems are also available by right-clicking the display area when there "
+"is a non-empty selection."
+msgstr ""
+"在<guiseq><gui>对象</gui><gui>旋转/翻转</gui></guiseq>的子菜单中选择合适的菜"
+"单项后，对象可以在任意方向旋转90度，或者水平或垂直翻转。当它是一个非空选择"
+"时，这个菜单项也会出现在你显示区域的右键菜单中。"
+
+#: C/editprop.page:197(p)
+#, fuzzy
+msgid ""
+"This feature could be useful when you are designing CD box inlays. For the "
+"spine caption, you need vertical aligned text. After you have created a "
+"basic text box, choose <guiseq><gui>Objects</gui><gui>Rotate/Flip</gui></"
+"guiseq> to rotate the text box according to your needs."
+msgstr ""
+"这个特性在您设计CD盒内的标签卡时能派上用场。在专辑介绍中，你需要垂直对齐文"
+"字。在您创建了一个基本的文本框后，选择 <guiseq><gui>对象</gui><gui>旋转/翻转"
+"</gui></guiseq>来按照您的需要来旋转文字."
+
+#: C/editprop.page:208(title)
+msgid "Aligning Objects"
+msgstr "对齐对象"
+
+#: C/editprop.page:210(p)
+#, fuzzy
+msgid ""
+"Objects can be aligned horizontally or vertically, relative to one another, "
+"or relative to the center line of the label, by choosing the appropriate "
+"menuitem from the <guiseq><gui>Objects</gui><gui>Align Horizontal</gui></"
+"guiseq> or <guiseq><gui>Objects</gui><gui>Align Vertical</gui></guiseq> sub-"
+"menus. These menuitems are also available by right-clicking the display area "
+"when there is a non-empty selection."
+msgstr ""
+"从<guiseq><gui>对象</gui><gui>水平对齐</gui></guiseq> 或者 <guiseq><gui>对象"
+"</gui><gui>垂直对齐</gui></guiseq> 子菜单中选择合适的菜单项后，对象可以水平对"
+"齐或者垂直对齐，建立关联，或者与与中心行的标签建立关联。当它是一个非空选择"
+"时，这个菜单项也会出现在你显示区域的右键菜单中。"
+
+#: C/editprop.page:223(title)
+msgid "Using the Property Bar"
+msgstr "使用属性工具条"
+
+#: C/editprop.page:225(p)
+#, fuzzy
+msgid ""
+"The property bar can be used to change some common properties of objects en-"
+"masse. These properties include font family, font size, font weight, text "
+"alignment, text color, fill color, line or outline color, and line width. "
+"The property bar also controls the defaults for these properties for any "
+"newly created objects."
+msgstr ""
+"属性工具条可以用于修改全体对象的共同属性。这些属性包括字体家族，字体尺寸，字"
+"体粗细，文字对齐，文字颜色，填充颜色，行或外行颜色，以及行宽。工具条也控制新"
+"建对象的上述属性的默认值。"
+
+#: C/customtemplate.page:9(desc)
+msgid "Create your own templates for stationery products."
+msgstr "为办公产品建立您自己的模板。"
+
+#: C/customtemplate.page:25(title)
+msgid "To create a custom template"
+msgstr "建立自定义模板"
+
+#: C/customtemplate.page:27(p)
+#, fuzzy
+msgid ""
+"To create a new custom template, choose <guiseq><gui>File</gui><gui>Template "
+"Designer ...</gui></guiseq> to display the <gui>Template Designer</gui> "
+"dialog. This dialog will assist you in creating a custom template for most "
+"types of label or card stationery that you may encounter."
+msgstr ""
+"新建一个自定义模板，选择<guiseq><gui>文件</gui><gui>模板设计师 ...</gui></"
+"guiseq> 以显示 <gui>模板设计师</gui> 对话框。此对话框将协助您为能够碰到的大多"
+"数类型的标签或卡片办公产品创建自定义模板。"
+
+#: C/customtemplate.page:34(p)
+#, fuzzy
+msgid ""
+"If you prefer, you can create your templates manually. For this option see "
+"<link xref=\"mancreate\"/>"
+msgstr ""
+"如果需要，您可以手工创建自己的模板。关于这个选项请看： <link xref=\"mancreate"
+"\"/>"
+
+#: C/customize.page:9(desc)
+#, fuzzy
+msgid "Customize <app>gLabels</app> to match your needs."
+msgstr "自定义 <app>gLabels</app> 以满足您的需求."
+
+#. Use this section to describe how to customize the application.
+#: C/customize.page:25(title)
+msgid "Settings"
+msgstr "设置"
+
+#: C/customize.page:26(p)
+#, fuzzy
+msgid ""
+"To configure <app>gLabels</app>, choose <guiseq><gui>Settings</"
+"gui><gui>Preferences</gui></guiseq>. The <gui>Preferences</gui> dialog "
+"contains the following tabbed sections:"
+msgstr ""
+"配置 <app>gLabels</app>, 请选择 <guiseq><gui>设置</gui><gui>参数</gui></"
+"guiseq>.  <gui>参数</gui> 对话框包含下列标签卡区:"
+
+#: C/customize.page:35(title)
+msgid "Locale"
+msgstr "区域"
+
+#: C/customize.page:37(title)
+msgid "Units"
+msgstr "单位"
+
+#: C/customize.page:38(p)
+#, fuzzy
+msgid ""
+"Use this radio button group to specify your preferred units. Select one of "
+"the following options:"
+msgstr "用这个单选框组来指定您选定的单位。选择下列选项："
+
+#: C/customize.page:42(gui)
+#, fuzzy
+msgid "Points"
+msgstr "点距"
+
+#: C/customize.page:43(p)
+#, fuzzy
+msgid "Use points (1 point = 1/72 in = 0.352778 mm)."
+msgstr "使用点距(1 点 = 1/72 in = 0.352778 mm)."
+
+#: C/customize.page:46(gui)
+msgid "Inches"
+msgstr "英寸"
+
+#: C/customize.page:47(p)
+msgid "Use Inches."
+msgstr "使用英寸"
+
+#: C/customize.page:50(gui)
+msgid "Millimeters"
+msgstr "毫米"
+
+#: C/customize.page:51(p)
+msgid "Use Millimeters."
+msgstr "使用毫米。"
+
+#: C/customize.page:54(p)
+msgid "Default: <gui>Inches</gui>."
+msgstr "默认：<gui>英寸</gui>。"
+
+#: C/customize.page:58(title)
+msgid "Default page size"
+msgstr "默认页面尺寸"
+
+#: C/customize.page:59(p)
+msgid ""
+"Use this radio button group to specify your prefered page size. This will "
+"make it quicker for you to locate media types when creating a new label or "
+"card."
+msgstr ""
+"用这个单选框组指定您选定的页面尺寸。在创建新的标签或卡片时这会帮助您更快地定"
+"位新的介质类型。"
+
+#: C/customize.page:64(gui)
+msgid "US Letter"
+msgstr "US Letter"
+
+#: C/customize.page:65(p)
+msgid ""
+"Most of your media will be of the US Letter page size (8.5 x 11 inches)."
+msgstr "您多数的介质类型是US Letter页面尺寸(8.5 x 11 英寸)."
+
+#: C/customize.page:68(gui)
+msgid "ISO A4"
+msgstr "ISO A4"
+
+#: C/customize.page:69(p)
+msgid "Most of your media will be of the ISO A4 page size (210 x 297 mm)."
+msgstr "您多数的介质类型是 ISO A4页面尺寸(210 x 297 mm)."
+
+#: C/customize.page:72(p)
+msgid "Default: <gui>US Letter</gui>."
+msgstr "默认: <gui>US Letter</gui>."
+
+#: C/customize.page:77(title)
+msgid "Object Defaults"
+msgstr "对象默认值"
+
+#: C/customize.page:80(title) C/createnew.page:39(title)
+msgid "Text"
+msgstr "文本"
+
+#: C/customize.page:81(p)
+msgid ""
+"Use these controls to set the default properties of new text objects. These "
+"properties are:"
+msgstr "使用这些控件来设置新文本对象的默认属性。这些属性是："
+
+#: C/customize.page:85(gui)
+msgid "Font"
+msgstr "字体"
+
+#: C/customize.page:86(p)
+msgid ""
+"These controls are used to select font family and font size, and whether the "
+"font should bold or in italics."
+msgstr "这些控件用于选择字体家族与字体尺寸，且不论它是粗体或斜体。"
+
+#: C/customize.page:90(gui) C/customize.page:110(gui)
+#: C/customize.page:122(gui)
+msgid "Color"
+msgstr "颜色"
+
+#: C/customize.page:91(p)
+msgid "This control selects the default text color."
+msgstr "本控件选择默认文本颜色"
+
+#: C/customize.page:94(gui)
+msgid "Alignment"
+msgstr "对齐"
+
+#: C/customize.page:95(p)
+msgid ""
+"These controls are used to select the default text alignment (left, center "
+"or right)."
+msgstr "这些控件用于选择默认的文本对齐（左，中或者右）"
+
+#: C/customize.page:101(title) C/createnew.page:56(title)
+msgid "Line"
+msgstr "线"
+
+#: C/customize.page:102(p)
+#, fuzzy
+msgid ""
+"Use these controls to set the default properties of lines and outlines of "
+"new objects. These properties are:"
+msgstr "使用这些控件来设置新对象的线或外线默认属性。这些属性是："
+
+#: C/customize.page:106(gui)
+msgid "Width"
+msgstr "宽度"
+
+#: C/customize.page:107(p)
+msgid "This control selects the default line width."
+msgstr "这个控件选择默认的宽度。"
+
+#: C/customize.page:111(p)
+#, fuzzy
+msgid "This control selects the default line color."
+msgstr "这个控件选择默认行颜色。"
+
+#: C/customize.page:117(title)
+msgid "Fill"
+msgstr "填充"
+
+#: C/customize.page:118(p)
+#, fuzzy
+msgid ""
+"Use this control to set the default fill property of new objects. This "
+"property is:"
+msgstr "用这个控件来设置新对象的默认填充属性。这个属性是："
+
+#: C/customize.page:123(p)
+msgid "This control selects the default fill color."
+msgstr "这个控件选择默认的填充颜色。"
+
+#: C/createnew.page:9(desc)
+msgid "Create new objects within your document."
+msgstr "在您的文档中创建新的对象。"
+
+#: C/createnew.page:25(title)
+msgid "To create new objects"
+msgstr "创建新对象"
+
+#: C/createnew.page:27(p)
+#, fuzzy
+msgid ""
+"Objects are created by choosing the appropriate selection under the "
+"<guiseq><gui>Objects</gui><gui>Create Object</gui></guiseq> submenu or the "
+"<gui>Drawing Toolbar</gui>. This will place the display area into object "
+"creation mode as indicated by its cursor. To return to the default object "
+"selection mode without creating an object, choose <guiseq><gui>Objects</"
+"gui><gui>Select Mode</gui></guiseq>. This will return the display area's "
+"cursor to the default selection arrow."
+msgstr ""
+"在<guiseq><gui>对象</gui><gui>创建对象</gui></guiseq> 下选择合适的子菜单或选"
+"择 <gui>画笔工具条</gui>，可以创建对象。这将置显示区域于对象创建模式，如指针"
+"指示的那样。要回到默认的对象选择模式而不创建对象，选择<guiseq><gui>对象</"
+"gui><gui>选择模式</gui></guiseq>。这将把显示区域的光标回到默认的选择箭头。"
+
+#: C/createnew.page:35(p)
+#, fuzzy
+msgid "The following describes the object creation mode for each object type:"
+msgstr "下面描述了每种对象类型的创建模式："
+
+#: C/createnew.page:40(p)
+#, fuzzy
+msgid ""
+"Click the desired location of the upper left corner of the text object. New "
+"text objects are initialized with the string \"Text.\" To change this text, "
+"or other properties, see <link xref=\"editprop\"/>."
+msgstr ""
+"点击左上角文本对象的所需位置。用字串\"Text.\"初始化文本对象，要改变文本或其它"
+"属性, 请看： <link xref=\"editprop\"/>."
+
+#: C/createnew.page:47(title)
+msgid "Box"
+msgstr "文本框"
+
+#: C/createnew.page:48(p)
+#, fuzzy
+msgid ""
+"Click the desired location of the upper left corner of the box object and "
+"drag to the desired location of the lower right corner. If you simply click "
+"in a single location, a square box will be created. To change properties of "
+"the box object, see <link xref=\"editprop\"/>."
+msgstr ""
+"点击文本框对象的左上角所需位置并拖到右下方的位置。如果你简单地点击一个单一的"
+"位置，将创建一个正方形文本框。要心迹文本框对象的属性，请看：<link xref="
+"\"editprop\"/>."
+
+#: C/createnew.page:57(p)
+#, fuzzy
+msgid ""
+"Click the desired location of one end of the line object and drag to the "
+"desired location of the other end. If you simply click in a single location, "
+"a diagonal line will be created. To change properties of the line object, "
+"see <link xref=\"editprop\"/>."
+msgstr ""
+"点击线形对象所需的一端并拖至另一端的所需位置。如果你只点击一个简单的位置，会"
+"创建一条斜线。要修改线对象的属性，请看： <link xref=\"editprop\"/>。"
+
+#: C/createnew.page:65(title)
+msgid "Ellipse"
+msgstr "椭圆框"
+
+#: C/createnew.page:66(p)
+#, fuzzy
+msgid ""
+"Click the desired location of the upper left corner of the ellipse object "
+"and drag to the desired location of the lower right corner. If you simply "
+"click in a single location, a circle will be created. To change properties "
+"of the ellipse object, see <link xref=\"editprop\"/>."
+msgstr ""
+"点击椭圆对象左上角所需的位置拖至右下角所需的位置。如果你简单地点击一个位置，"
+"将创建一个圆。要修改椭圆对象的属性，请看<link xref=\"editprop\"/>。"
+
+#: C/createnew.page:74(title)
+#, fuzzy
+msgid "Image"
+msgstr "图像框"
+
+#: C/createnew.page:75(p)
+#, fuzzy
+msgid ""
+"Click the desired location of the upper left corner of the image object and "
+"drag to the desired location of the lower right corner. If you simply click "
+"in a single location, a square will be created. New image objects are "
+"initialized with a simple checkerboard image. To change this image, or other "
+"properties of the image object, see <link xref=\"editprop\"/>."
+msgstr ""
+"点击图像框对象所需的左上角拖至所需位置的右下角。如果你简单地只点击一个位置，"
+"将创建一个正方形框。新的图像对象用简单的棋盘格图像初始化。要修改这个图像框，"
+"或者图像框的其它属性，请看：<link xref=\"editprop\"/>."
+
+#: C/createnew.page:85(title)
+msgid "Barcode"
+msgstr "条形码"
+
+#: C/createnew.page:86(p)
+#, fuzzy
+msgid ""
+"Click the desired location of the upper left corner of the barcode object. "
+"New barcode objects are initialized to a POSTNET barcode with representative "
+"data. To change data and properties of the barcode object, see <link xref="
+"\"editprop\"/>."
+msgstr ""
+"点击条形码对象所需位置的左上角。新的条形码对象初始化为带有典型数据的 POSTNET "
+"条形码。要修改条形码对象的数据与属性，请看：<link xref=\"editprop\"/>."
+
+#: C/basicusage.page:9(desc)
+msgid "Handling files and quit the application."
+msgstr "管理文件与退出应用程序"
+
+#: C/basicusage.page:25(title)
+msgid "Basic usage"
+msgstr "基本用法"
+
+#: C/basicusage.page:28(title)
+msgid "To open a file"
+msgstr "要打开文件"
+
+#: C/basicusage.page:30(p)
+msgid ""
+"To open a file, choose <guiseq><gui>File</gui><gui>Open</gui></guiseq> to "
+"display the <gui>Open File</gui> dialog. Select the file that you want to "
+"open, then click <gui>OK</gui>. The file is displayed in the display area of "
+"the <app>gLabels</app> window."
+msgstr ""
+"打开文件, 请选择 <guiseq><gui>文件</gui><gui>打开</gui></guiseq> 来显示 <gui>"
+"打开文件</gui> 对话框。 选择您要打开的文件, 然后点击 <gui>确定</gui>. 文件会"
+"显示在 <app>gLabels</app> 窗口的显示区中."
+
+#: C/basicusage.page:37(p)
+msgid ""
+"You can also open multiple files in <app>gLabels</app>. The application "
+"creates a separate application window for each open file."
+msgstr ""
+"您也可以在 <app>gLabels</app>中打开多个文件。程序为各个文件建立相互独立的窗"
+"口。"
+
+#: C/basicusage.page:41(p)
+msgid ""
+"The application records the paths and filenames of the most recent files "
+"that you have edited and displays the files as menu items on the "
+"<guiseq><gui>File</gui><gui>Recent Files</gui></guiseq> menu."
+msgstr ""
+"应用程序记录最近您编辑的文件的文件名与路径，并在菜单：<guiseq><gui>文件</"
+"gui><gui>最近的文件</gui></guiseq> 中显示。"
+
+#: C/basicusage.page:48(title)
+msgid "To close a file"
+msgstr "关闭文件"
+
+#: C/basicusage.page:50(p)
+#, fuzzy
+msgid ""
+"To close the current document, choose <guiseq><gui>File</gui><gui>Close</"
+"gui></guiseq> to close the application window. If the current document is "
+"modified, a confirmation dialog will be presented, allowing you to save the "
+"document or cancel the command. If the window being closed is the only open "
+"window, <app>gLabels</app> will exit."
+msgstr ""
+"关闭当前的文档，请选择<guiseq><gui>文件</gui><gui>关闭</gui></guiseq>来关闭程"
+"序窗口。如果当前文档已经修改，一个弹出的确认对话框会出现，它会允许您保存文档"
+"或取消命令。如果您关闭的是唯一运行的窗口，<app>gLabels</app> 将会退出。"
+
+#: C/basicusage.page:60(title)
+msgid "To save a file"
+msgstr "保存文件"
+
+#: C/basicusage.page:62(p)
+msgid "You can save files in the following ways:"
+msgstr "您可以通过以下方法保存文件："
+
+#: C/basicusage.page:66(p)
+#, fuzzy
+msgid ""
+"To save changes to an existing file, choose <guiseq><gui>File</"
+"gui><gui>Save</gui></guiseq>."
+msgstr "为已有的文件保留变更，请选择<guiseq><gui>文件</gui><gui>保存</gui></guiseq>。"
+
+#: C/basicusage.page:73(p)
+#, fuzzy
+msgid ""
+"To save a new file or to save an existing file under a new filename, choose "
+"<guiseq><gui>File</gui><gui>Save As</gui></guiseq>. Enter a name for the "
+"file in the <gui>Save As</gui> dialog box, then click <gui>OK</gui>."
+msgstr ""
+"保存一个新文件或为已有的文件更名保存，请选择<guiseq><gui>文件</gui><gui>另存"
+"为</gui></guiseq>. 在 <gui>另存为</gui>对话框中填写新的文件名, 再点击 <gui>确"
+"定</gui>按钮。"
+
+#: C/basicusage.page:84(title)
+msgid "To quit <app>gLabels</app>"
+msgstr "退出 <app>gLabels</app>"
+
+#: C/basicusage.page:86(p)
+#, fuzzy
+msgid ""
+"To quit <app>gLabels</app>, choose <guiseq><gui>File</gui><gui>Quit</gui></"
+"guiseq>. This is equivalent to closing all open windows. See <link xref="
+"\"basicusage#closefile\"/>."
+msgstr ""
+"退出 <app>gLabels</app>，请选择<guiseq><gui>文件</gui><gui>退出</gui></"
+"guiseq>。这等同于关闭全部已打开的窗口。参看<link xref=\"基本用法#关闭文件\"/"
+">.。"
+
+#: C/about.page:9(desc)
+msgid "Information about <app>gLabels</app>."
+msgstr "关于<app>gLabels</app>的信息。"
+
+#: C/about.page:25(title)
+msgid "About <app>gLabels</app>"
+msgstr "关于<app>gLabels</app>"
+
+#: C/about.page:27(p)
+#, fuzzy
+msgid ""
+"<app>gLabels</app> was written by <link href=\"mailto:evins@snaught.com"
+"\">Jim Evins</link>. To find more information about <app>gLabels</app>, "
+"please visit the <link href=\"http://glabels.org\" type=\"http"
+"\"><app>gLabels</app> Web page</link>."
+msgstr ""
+"<app>gLabels</app>程序由<link href=\"mailto:evins@snaught.com\">Jim Evins写作"
+"</link>.要获得更多关于<app>gLabels</app>的信息, 请访问网页：<link href="
+"\"http://glabels.org\" type=\"http\"><app>gLabels</app> </link>."
+
+#: C/about.page:31(p)
+#, fuzzy
+msgid ""
+"To report a bug or make a suggestion regarding this application or this "
+"manual, follow the directions at the <link href=\"http://glabels.org/contact/"
+"\" type=\"http\"><app>gLabels</app> Contact Page</link>."
+msgstr ""
+"欢迎您向我们报告软件的错误或为本程序或手册提建议，请点击链接：<link href="
+"\"http://glabels.org/contact/\" type=\"http\"><app>gLabels</app> Contact "
+"Page</link>."
+
+#: C/about.page:37(p)
+#, fuzzy
+msgid ""
+"This program is distributed under the terms of the GNU General Public "
+"license as published by the Free Software Foundation; either version 3 of "
+"the License, or (at your option) any later version. A copy of this license "
+"can be found at this <link href=\"ghelp:gpl\" type=\"help\">link</link>, or "
+"in the file COPYING included with the source code of this program."
+msgstr ""
+"本程序在由自由软件基金会出版的 GNU公共许可证书的许可下传播。不论是3.0版本或更"
+"近的版本（视您的情况而定）。许可证书的副本可以在此<link href=\"ghelp:gpl\" "
+"type=\"help\">link</link>或本程序的源程序中包含的版权声明部分获得。"
+
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
+#: C/index.page:0(None)
+msgid "translator-credits"
+msgstr "黄世海<rochester_h@163.com>"
+
