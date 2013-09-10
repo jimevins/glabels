@@ -3162,7 +3162,7 @@ msgstr ""
 "Aplikaci <app>gLabels</app> napsal <link href=\"mailto:evins@snaught.com"
 "\">Jim Evins</link>. Pokud o ní chcete najít více informací, navštivte "
 "prosím <link href=\"http://glabels.org\" type=\"http\">webovou stránku "
-"<app>gLabels</app></ulink>."
+"<app>gLabels</app></link>."
 
 #: C/about.page:31(p)
 msgid ""
@@ -3173,7 +3173,7 @@ msgstr ""
 "Pokud chcete oznámit chybu nebo navrhnout vylepšení vztahující se k této "
 "aplikaci nebo této příručce, postupujte dle instrukcí na <link href=\"http://"
 "glabels.org/contact/\" type=\"http\">kontaktní stránce <app>gLabels</app></"
-"ulink>."
+"link>."
 
 #: C/about.page:37(p)
 msgid ""
