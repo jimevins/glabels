@@ -1700,7 +1700,7 @@ msgstr ""
 "Ein Label-Knoten kann mehrere <code>Layout</code>-Unterknoten enthalten. Wenn "
 "die Etiketten in einem einfachen rechteckigen Raster angeordnet sind, dann "
 "wird nur ein Layout benötigt. Falls die Etiketten jedoch in komplizierteren "
-"Rasteranordnungen vorliegen, können mehrere <code>Layout</span></code>-"
+"Rasteranordnungen vorliegen, können mehrere <code>Layout</code>-"
 "Unterknoten verwendet werden."
 
 #: C/mancreate.page:720(section/p)
