@@ -2067,7 +2067,7 @@ msgstr ""
 "Unterknoten enthalten. Wenn die Etiketten in einem einfachen rechteckigen "
 "Raster angeordnet sind, dann wird nur ein Layout benötigt. Falls die "
 "Etiketten jedoch in komplizierteren Rasteranordnungen vorliegen, können "
-"mehrere <code translate=\"no\">Layout</span></code>-Unterknoten verwendet "
+"mehrere <code translate=\"no\">Layout</code>-Unterknoten verwendet "
 "werden."
 
 #: C/mancreate.page:721(p)
