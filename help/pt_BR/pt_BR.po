@@ -1,0 +1,2099 @@
+# Brazilian Portuguese translation for glabels.
+# Copyright (C) 2013 glabels's COPYRIGHT HOLDER
+# This file is distributed under the same license as the glabels package.
+# Enrico Nicoletto <liverig@gmail.com>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: glabels glabels-3_0\n"
+"POT-Creation-Date: 2013-02-02 20:36+0000\n"
+"PO-Revision-Date: 2013-09-20 15:35-0300\n"
+"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
+"Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/skipfields.page:45(None)
+msgid "@@image: 'figures/skip-fields-screenshot.png'; md5=eef4a81f48546bd7d3753656a3df9cb7"
+msgstr "@@image: 'figures/skip-fields-screenshot.png'; md5=eef4a81f48546bd7d3753656a3df9cb7"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/skipfields.page:53(None)
+msgid "@@image: 'figures/skip-fields-output.png'; md5=b64d1a7fdf0d37e9a6d93f0bc2f9fa0d"
+msgstr "@@image: 'figures/skip-fields-output.png'; md5=b64d1a7fdf0d37e9a6d93f0bc2f9fa0d"
+
+#: C/skipfields.page:9(desc)
+msgid "How to skip blank address lines when doing a document merge."
+msgstr ""
+
+#: C/skipfields.page:13(name)
+#: C/select.page:13(name)
+#: C/printfile.page:13(name)
+#: C/newlabel.page:13(name)
+#: C/multifile.page:13(name)
+#: C/merge.page:13(name)
+#: C/mergefeatures.page:13(name)
+#: C/merge-ex4.page:13(name)
+#: C/merge-ex3.page:13(name)
+#: C/merge-ex2.page:13(name)
+#: C/merge-ex1.page:13(name)
+#: C/mancreate.page:15(name)
+#: C/labelprop.page:13(name)
+#: C/index.page:11(name)
+#: C/editprop.page:13(name)
+#: C/customtemplate.page:13(name)
+#: C/customize.page:11(name)
+#: C/createnew.page:13(name)
+#: C/basicusage.page:13(name)
+#: C/about.page:13(name)
+msgid "Jim Evins"
+msgstr "Jim Evins"
+
+#: C/skipfields.page:14(email)
+#: C/select.page:14(email)
+#: C/printfile.page:14(email)
+#: C/newlabel.page:14(email)
+#: C/multifile.page:14(email)
+#: C/merge.page:14(email)
+#: C/mergefeatures.page:14(email)
+#: C/merge-ex4.page:14(email)
+#: C/merge-ex3.page:14(email)
+#: C/merge-ex2.page:14(email)
+#: C/merge-ex1.page:14(email)
+#: C/mancreate.page:16(email)
+#: C/labelprop.page:14(email)
+#: C/index.page:12(email)
+#: C/editprop.page:14(email)
+#: C/customtemplate.page:14(email)
+#: C/customize.page:12(email)
+#: C/createnew.page:14(email)
+#: C/basicusage.page:14(email)
+#: C/about.page:14(email)
+msgid "evins@snaught.com"
+msgstr "evins@snaught.com"
+
+#: C/skipfields.page:17(name)
+#: C/select.page:17(name)
+#: C/printfile.page:17(name)
+#: C/newlabel.page:17(name)
+#: C/multifile.page:17(name)
+#: C/merge.page:17(name)
+#: C/mergefeatures.page:17(name)
+#: C/merge-ex4.page:17(name)
+#: C/merge-ex3.page:17(name)
+#: C/merge-ex2.page:17(name)
+#: C/merge-ex1.page:17(name)
+#: C/mancreate.page:19(name)
+#: C/labelprop.page:17(name)
+#: C/index.page:15(name)
+#: C/editprop.page:17(name)
+#: C/customtemplate.page:17(name)
+#: C/customize.page:15(name)
+#: C/createnew.page:17(name)
+#: C/basicusage.page:17(name)
+#: C/about.page:17(name)
+msgid "Mario Blättermann"
+msgstr "Mario Blättermann"
+
+#: C/skipfields.page:18(email)
+#: C/select.page:18(email)
+#: C/printfile.page:18(email)
+#: C/newlabel.page:18(email)
+#: C/multifile.page:18(email)
+#: C/merge.page:18(email)
+#: C/mergefeatures.page:18(email)
+#: C/merge-ex4.page:18(email)
+#: C/merge-ex3.page:18(email)
+#: C/merge-ex2.page:18(email)
+#: C/merge-ex1.page:18(email)
+#: C/mancreate.page:20(email)
+#: C/labelprop.page:18(email)
+#: C/index.page:16(email)
+#: C/editprop.page:18(email)
+#: C/customtemplate.page:18(email)
+#: C/customize.page:16(email)
+#: C/createnew.page:18(email)
+#: C/basicusage.page:18(email)
+#: C/about.page:18(email)
+msgid "mariobl@gnome.org"
+msgstr "mariobl@gnome.org"
+
+#: C/skipfields.page:21(p)
+#: C/select.page:21(p)
+#: C/printfile.page:21(p)
+#: C/newlabel.page:21(p)
+#: C/multifile.page:21(p)
+#: C/merge.page:21(p)
+#: C/mergefeatures.page:21(p)
+#: C/merge-ex4.page:21(p)
+#: C/merge-ex3.page:21(p)
+#: C/merge-ex2.page:21(p)
+#: C/merge-ex1.page:21(p)
+#: C/mancreate.page:23(p)
+#: C/labelprop.page:21(p)
+#: C/index.page:19(p)
+#: C/editprop.page:21(p)
+#: C/customtemplate.page:21(p)
+#: C/customize.page:19(p)
+#: C/createnew.page:21(p)
+#: C/basicusage.page:21(p)
+#: C/about.page:21(p)
+msgid "Creative Commons Share Alike 3.0"
+msgstr ""
+
+#: C/skipfields.page:25(title)
+msgid "Skipping blank address lines"
+msgstr ""
+
+#: C/skipfields.page:27(p)
+msgid "This feature can be best described by a simple example. In the following CSV file, column 5 (ADDR2) contains the second address line for each record. This field is empty in records 1 and 2, but not in record 3. (For this feature to work, the field must be completely empty -- any text, including spaces will defeat this feature.)"
+msgstr ""
+
+# \n
+#   PRIMEIRO,ÚLTIMO,MI,ENDER1,ENDER2,CIDADE,ESTADO,CEP\n
+# --> Arrumar para o formato Brasileiro
+#: C/skipfields.page:33(code)
+#, fuzzy, no-wrap
+msgid ""
+"\n"
+"  LAST,FIRST,MI,ADDR1,ADDR2,CITY,STATE,ZIP\n"
+"  Summers,Joyce,,\"1630 Revello Dr\",,Sunnydale,CA,95037\n"
+"  McGarret,Steve,O,\"404 Piikoi Street\",,Honolulu,HI,96813\n"
+"  Kramer,Cosmo,,\"Apt 5B\",\"129 W. 81 St.\",\"New York\",NY,10024-7207\n"
+"  "
+msgstr "  "
+
+#: C/skipfields.page:40(p)
+msgid "In the following screenshot, a single multiline text object has been created to format these addresses. Notice that ${ADDR2} representing the second address line is on a line by itself. (Any additional text on this line, including spaces would defeat this feature.)"
+msgstr ""
+
+#: C/skipfields.page:46(p)
+msgid "Multi-line address"
+msgstr ""
+
+#: C/skipfields.page:49(p)
+msgid "Printing this label results in the following output. Notice that the line containing the ${ADDR2} field is completely skipped for the first two records, without printing a blank line."
+msgstr ""
+
+#: C/skipfields.page:54(p)
+msgid "Output"
+msgstr "Saída"
+
+#: C/select.page:9(desc)
+msgid "How to select objects."
+msgstr ""
+
+#: C/select.page:25(title)
+msgid "To select objects"
+msgstr ""
+
+#: C/select.page:27(p)
+msgid "A prerequisite for performing operations on objects is the selection of individual objects or groups of objects. The display area must be in the object selection mode to create new selections, as indicated by an arrow cursor. The object selection mode is selected by the <guiseq><gui>Objects</gui><gui>Select Mode</gui></guiseq> menu item, or the corresponding command on the <gui>Drawing Toolbar</gui>."
+msgstr ""
+
+#: C/select.page:38(title)
+msgid "Selecting a single object"
+msgstr ""
+
+#: C/select.page:39(p)
+msgid "A single object can be selected simply by clicking on the desired object in the display area. Once selected the object will be highlighted with a set of resizing handles."
+msgstr ""
+
+#: C/select.page:46(title)
+msgid "Aggregate object selections"
+msgstr ""
+
+#: C/select.page:47(p)
+msgid "Multiple objects can be selected by first selecting the first object as above and then by holding the <key>Ctrl</key> key while selecting additional objects. Individual objects can be added to an existing selection at any time by holding the <key>Ctrl</key> key while selecting the desired objects. All objects can also be selected by using the <guiseq><gui>Edit</gui><gui>Select All</gui></guiseq> menu item. All objects in an aggregate object selection will be highlighted."
+msgstr ""
+
+#: C/select.page:60(title)
+msgid "Area selections"
+msgstr ""
+
+#: C/select.page:62(p)
+msgid "Multiple objects can also be selected by clicking an empty area and dragging to form a rectangular area. When released, all objects contained in the area will form an aggregate selection. An area selection can be used to add to an existing selection by holding the <key>Ctrl</key> key while performing the selection."
+msgstr ""
+
+#: C/select.page:72(title)
+msgid "Unselecting objects"
+msgstr ""
+
+#: C/select.page:74(p)
+msgid "Individual objects can be removed from an existing selection by holding the <key>Ctrl</key> key while clicking on a previously selected object. An entire selection can be dismissed by using the <guiseq><gui>Edit</gui><gui>Un-select All</gui></guiseq> menu item or by simply clicking any empty space in the display area. Once an object is unselected its highlight is removed."
+msgstr ""
+
+#: C/select.page:86(title)
+msgid "Clipboard Commands"
+msgstr ""
+
+#: C/select.page:88(p)
+msgid "Object selections can be manipulated using the standard clipboard operations <gui>Cut</gui>, <gui>Copy</gui>, <gui>Paste</gui>, and <gui>Delete</gui>."
+msgstr ""
+
+#: C/select.page:94(title)
+msgid "<gui>Cut</gui> (<keyseq><key>Ctrl</key><key>X</key></keyseq>)"
+msgstr ""
+
+#: C/select.page:96(p)
+msgid "Moves selected objects to the clipboard. The objects are then available for pasting back into the current document or another document."
+msgstr ""
+
+#: C/select.page:103(title)
+msgid "<gui>Copy</gui> (<keyseq><key>Ctrl</key><key>C</key></keyseq>)"
+msgstr ""
+
+#: C/select.page:105(p)
+msgid "Copies selected objects to the clipboard without deleting them. The objects are then available for pasting back into the current document or another document."
+msgstr ""
+
+#: C/select.page:112(title)
+msgid "<gui>Paste</gui> (<keyseq><key>Ctrl</key><key>V</key></keyseq>)"
+msgstr ""
+
+#: C/select.page:114(p)
+msgid "Pastes objects from the clipboard into the current document. <app>gLabels</app> can only paste objects from another <app>gLabels</app> document."
+msgstr ""
+
+#: C/select.page:121(title)
+msgid "<gui>Delete</gui> (<key>Del</key>)"
+msgstr ""
+
+#: C/select.page:123(p)
+msgid "Deletes selected objects without placing them on the clipboard."
+msgstr ""
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/printfile.page:47(None)
+msgid "@@image: 'figures/print-copies.png'; md5=ee473352947fe25c7adaa9f9a052c3e9"
+msgstr ""
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/printfile.page:70(None)
+msgid "@@image: 'figures/print-merge.png'; md5=ee70bd2150a6cd46e96ce5c0531eb47b"
+msgstr ""
+
+#: C/printfile.page:9(desc)
+msgid "How to print your labels and cards."
+msgstr ""
+
+#: C/printfile.page:25(title)
+msgid "To print labels and cards"
+msgstr ""
+
+#: C/printfile.page:27(p)
+msgid "To print labels or cards, choose <guiseq><gui>File</gui><gui>Print</gui></guiseq> to display the <gui>Print</gui> dialog. Once print options have been selected, click <gui>Print</gui> to print the labels or cards. To simply preview the results, click <gui>Print Preview</gui> instead."
+msgstr ""
+
+#: C/printfile.page:34(p)
+msgid "The <gui>Print</gui> dialog allows you to specify the following print options:"
+msgstr ""
+
+#: C/printfile.page:38(title)
+msgid "The Labels Tab of the Print Dialog"
+msgstr ""
+
+#: C/printfile.page:41(title)
+msgid "Print control (Simple)"
+msgstr ""
+
+#: C/printfile.page:43(p)
+msgid "For simple labels or cards (no document merge), the job tabbed section contains the following copy controls."
+msgstr ""
+
+#: C/printfile.page:48(p)
+#: C/editprop.page:36(p)
+msgid "Print Copy Controls"
+msgstr ""
+
+#. ==== End of Figure ====
+#: C/printfile.page:52(p)
+msgid "The number of copies of the label can be selected by choosing the number of full sheets to print, or a specific subset of labels on a single sheet."
+msgstr ""
+
+#: C/printfile.page:56(p)
+msgid "The mini-preview can also be used to graphically select the subset of labels by clicking the first label on the mini-preview and dragging to the last label."
+msgstr ""
+
+#: C/printfile.page:63(title)
+msgid "Print control (Merge)"
+msgstr ""
+
+#: C/printfile.page:65(p)
+msgid "For labels or cards using the document merge (also known as \"mail merge\") capability, the job tabbed section contains the following merge controls instead of copy controls."
+msgstr ""
+
+#: C/printfile.page:71(p)
+msgid "Print Document Merge Controls"
+msgstr ""
+
+#. ==== End of Figure ====
+#: C/printfile.page:75(p)
+msgid "The total number of labels or cards printed is the product of the number of records in the merge source and the number of copies selected. If multiple copies are selected, these can be either collated (copies of the same record grouped together) or un-collated (one copy each record is printed before next copy)."
+msgstr ""
+
+#: C/printfile.page:82(p)
+msgid "Printing can begin on any label on the first sheet. This can be selected with the <gui>Start on label</gui> spinbutton."
+msgstr ""
+
+#: C/printfile.page:86(p)
+msgid "The mini-preview can also be used to graphically select this first label, by clicking on the desired label in the mini-preview."
+msgstr ""
+
+#: C/printfile.page:93(title)
+msgid "Options"
+msgstr ""
+
+#: C/printfile.page:94(p)
+msgid "The following options can also be selected."
+msgstr ""
+
+#: C/printfile.page:97(gui)
+msgid "print outlines"
+msgstr ""
+
+#: C/printfile.page:98(p)
+msgid "Print outlines of labels. This option is useful for dry-runs, to test printer alignment."
+msgstr ""
+
+#: C/printfile.page:102(gui)
+msgid "print in reverse"
+msgstr ""
+
+#: C/printfile.page:103(p)
+msgid "Prints the labels as mirror images. This option is useful for printing on clear labels that will be viewed from the reverse side (e.g. in a car window)."
+msgstr ""
+
+#: C/printfile.page:108(gui)
+msgid "print crop marks"
+msgstr ""
+
+#: C/printfile.page:109(p)
+msgid "Prints crop marks along the edge of the sheet. This option is useful for printing on blank stock, to be cut after printing. This option does not work well with all templates."
+msgstr ""
+
+#: C/newlabel.page:9(desc)
+msgid "Create a new label or card in <app>gLabels</app>."
+msgstr ""
+
+#: C/newlabel.page:25(title)
+msgid "To create a new label or card"
+msgstr ""
+
+#: C/newlabel.page:27(p)
+msgid "To create a new label or business card, choose <guiseq><gui>File</gui><gui>New</gui></guiseq> to display the <gui>New Label or Card</gui> dialog. Select the media type and orientation for the new document, then click <gui>OK</gui>. A new document is displayed in the display area of the <app>gLabels</app> window."
+msgstr ""
+
+#: C/multifile.page:9(desc)
+msgid "How to open multiple files at once by using the command line."
+msgstr ""
+
+#: C/multifile.page:25(title)
+msgid "To open multiple files from the command line"
+msgstr ""
+
+#: C/multifile.page:27(p)
+msgid "You can run <app>gLabels</app> from a command line and open a single file or multiple files. To open multiple files from a command line, type the following command, then press <key>Return</key>:"
+msgstr ""
+
+#: C/multifile.page:33(var)
+msgid "file1.glabels file2.glabels file3.glabels"
+msgstr ""
+
+#: C/multifile.page:32(cmd)
+msgid "glabels <placeholder-1/>"
+msgstr ""
+
+#: C/multifile.page:36(p)
+msgid "When the application starts, the files that you specify are displayed in separate <app>gLabels</app> windows."
+msgstr ""
+
+#: C/merge.page:9(desc)
+msgid "Merge a data source to create multiple documents."
+msgstr ""
+
+#: C/merge.page:25(title)
+msgid "Document merge tutorial"
+msgstr ""
+
+#: C/merge.page:27(p)
+msgid "Document Merge (sometimes called \"Mail Merge\") is a powerful feature that allows a unique label or card to be printed for each record in an external data source. It is however, the most mis-understood feature of <app>glabels</app>. The following examples will step through a couple of common tasks using the document merge feature."
+msgstr ""
+
+#: C/mergefeatures.page:9(desc)
+msgid "What you may expect from a document merge."
+msgstr ""
+
+#: C/mergefeatures.page:25(title)
+msgid "Performing a document merge"
+msgstr ""
+
+#: C/mergefeatures.page:27(p)
+msgid "Document Merge (sometimes called \"Mail Merge\") is a powerful feature that allows a unique label or card to be printed for each record in an external data source."
+msgstr ""
+
+#: C/mergefeatures.page:31(p)
+msgid ""
+"The first step to performing a document merge is to prepare a source document that contains your merge data. This data could be mailing addresses or any other data that you wish to create unique labels or cards for. Currently back-ends only exist for text files and the evolution data server -- others are planned. The currently supported text-file format is very simple: each line is a record; fields are delimited by commas (CSV), tabs, or colons; and newlines can be embedded into fields by using the \"\\n"
+"\" entity. This file could be created using any text editor or could be created by another program or script. A common way of creating CSV files is to export them from a spreadsheet program."
+msgstr ""
+
+#: C/mergefeatures.page:43(p)
+msgid "A label must then be configured to \"point at\" this data file. To configure the merge properties of a document, choose <guiseq><gui>Objects</gui><gui>Merge Properties</gui></guiseq> menu item to display the <gui>merge properties</gui> dialog. This dialog is used to select the exact data file format and file name (location) of the merge data."
+msgstr ""
+
+#: C/mergefeatures.page:51(p)
+msgid "Finally, once the label has been configured for a data file, field keys can be inserted into text objects and used as source or data for barcode objects and image filenames for image objects. See <link xref=\"editprop\"/> for more information on using merge data for these object types."
+msgstr ""
+
+#: C/mergefeatures.page:57(p)
+msgid "Now that your label is configured, <app>gLabels</app> will print a unique label for each record in your source document -- substituting fields from each record for field keys in the all text, barcode, and image objects."
+msgstr ""
+
+#: C/mergefeatures.page:62(p)
+msgid "See <link xref=\"merge\"/> for a detailed tutorial on the document merge feature."
+msgstr ""
+
+#: C/merge-ex4.page:9(desc)
+msgid "Create address labels from a vCard file."
+msgstr "Crie etiquetas de endereçamento a partir de um arquivo vCard."
+
+#: C/merge-ex4.page:25(title)
+msgid "Example 4: Address Labels Using a vCard file"
+msgstr "Exemplo 4: Etiquetas de endereçamento utilizando um arquivo vCard"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex3.page:53(None)
+msgid "@@image: 'figures/merge-ex3-1.png'; md5=fb5bf719857fb0a49517ecb50124384d"
+msgstr "@@image: 'figures/merge-ex3-1.png'; md5=fb5bf719857fb0a49517ecb50124384d"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex3.page:74(None)
+msgid "@@image: 'figures/merge-ex3-2.png'; md5=51fe322868241d083ec83ae824d927d7"
+msgstr "@@image: 'figures/merge-ex3-2.png'; md5=51fe322868241d083ec83ae824d927d7"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex3.page:88(None)
+msgid "@@image: 'figures/merge-ex3-3.png'; md5=f731f35b38ddd51499e636733bacc7a6"
+msgstr "@@image: 'figures/merge-ex3-3.png'; md5=f731f35b38ddd51499e636733bacc7a6"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex3.page:99(None)
+msgid "@@image: 'figures/merge-ex3-4.png'; md5=4415be9d5b59fb57093077bcaece014a"
+msgstr "@@image: 'figures/merge-ex3-4.png'; md5=4415be9d5b59fb57093077bcaece014a"
+
+#: C/merge-ex3.page:9(desc)
+msgid "Create address labels from the <app>Evolution</app> address book entries."
+msgstr ""
+
+#: C/merge-ex3.page:25(title)
+msgid "Example 3: Address Labels Using the <app>Evolution</app> Addressbook"
+msgstr ""
+
+#: C/merge-ex3.page:27(p)
+msgid "Our last party was a great success, and now we need to print mailing address labels for the invitations to a new one. To simplify this, we can use the <app>Evolution</app> addressbook, because the address data of all our friends is stored there."
+msgstr ""
+
+#: C/merge-ex3.page:33(p)
+msgid "Depending on how your copy of <app>gLabels</app> was packaged, this option could be unavailable. Support for the <app>Evolution</app> addressbook will only be available if the <app>evolution-data-server</app> and its development files were present when <app>gLabels</app> was built. Please keep this in mind if you build <app>gLabels</app> directly from source."
+msgstr ""
+
+#: C/merge-ex3.page:39(p)
+msgid "If the <app>gLabels</app> package from your distribution lacks this support, you may wish to contact the package maintainer or file a bug against the package to request it."
+msgstr ""
+
+#: C/merge-ex3.page:44(p)
+msgid "In <app>glabels</app> we have created a new <app>gLabels</app> document using the Avery 5512 \"Address Labels\" template. Next we use the <guiseq><gui>Objects</gui><gui>Merge Properties</gui></guiseq> menu item to display the <gui>Merge properties</gui> dialog. We use this dialog to select the source type (in our case <gui>Data from default Evolution addressbook</gui>) as shown."
+msgstr ""
+
+#: C/merge-ex3.page:54(p)
+#: C/merge-ex2.page:53(p)
+#: C/merge-ex1.page:51(p)
+msgid "Merge properties dialog"
+msgstr ""
+
+#. ==== End of Figure ====
+#: C/merge-ex3.page:58(p)
+msgid "Once we have chosen <gui>Data from default Evolution addressbook </gui> as our merge source, we will get a full list of its content. Initially, all entries are checked. Assuming we were planning a really big party, we could leave this selection untouched (but let's keep our budget in mind). We will now select or unselect certain entries by clicking on the appropriate checkboxes, or we could use the <gui>Select all</gui> and <gui>Unselect all </gui> buttons to activate or deactivate all entries in the address book."
+msgstr ""
+
+#: C/merge-ex3.page:66(p)
+msgid "We can also view each entry in more detail by clicking on the appropriate expander (the little triangles) as shown. Once we are satisfied with the selections in this dialog, we will click the <gui>OK</gui> button to accept the changes."
+msgstr ""
+
+#: C/merge-ex3.page:71(p)
+#: C/merge-ex2.page:67(p)
+#: C/merge-ex1.page:60(p)
+msgid "Now we start adding objects to our <app>glabels</app> document as shown."
+msgstr ""
+
+#: C/merge-ex3.page:75(p)
+#: C/merge-ex2.page:71(p)
+#: C/merge-ex1.page:64(p)
+msgid "Adding objects"
+msgstr "Adicionando objetos"
+
+#. ==== End of Figure ====
+#: C/merge-ex3.page:79(p)
+msgid "In this example we have a single text object again. This text object contains all of our merge fields organized on multiple lines as a mailing address."
+msgstr ""
+
+#: C/merge-ex3.page:82(p)
+msgid "Now we can print our address labels by selecting the <guiseq><gui>File</gui><gui>Print</gui></guiseq> menu item. This will display the print dialog as shown below."
+msgstr ""
+
+#: C/merge-ex3.page:89(p)
+#: C/merge-ex2.page:89(p)
+msgid "Printing address labels"
+msgstr ""
+
+#. ==== End of Figure ====
+#: C/merge-ex3.page:93(p)
+#: C/merge-ex2.page:93(p)
+#: C/merge-ex1.page:89(p)
+msgid "Just to make sure our labels are going to look okay, we select the <gui>Print outlines</gui> option and click <gui>Print Preview</gui>. This will display a print preview dialog as shown below."
+msgstr ""
+
+#: C/merge-ex3.page:100(p)
+msgid "Addess labels preview"
+msgstr ""
+
+#. ==== End of Figure ====
+#: C/merge-ex3.page:104(p)
+#: C/merge-ex2.page:104(p)
+msgid "Everything looks good, so we can now load up our printer with the appropriate label stock, print our address labels and start mailing our party invitations."
+msgstr ""
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex2.page:52(None)
+msgid "@@image: 'figures/merge-ex2-1.png'; md5=817abd0c8deb8a0b95acb7881d8ddb85"
+msgstr ""
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex2.page:70(None)
+msgid "@@image: 'figures/merge-ex2-2.png'; md5=2012870be14752300e0cde420471714a"
+msgstr ""
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex2.page:88(None)
+msgid "@@image: 'figures/merge-ex2-3.png'; md5=c347460091d8eef9f4ec89557fa9f1e2"
+msgstr ""
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex2.page:99(None)
+msgid "@@image: 'figures/merge-ex2-4.png'; md5=30d12e946a79e27211b835e38742671c"
+msgstr ""
+
+#: C/merge-ex2.page:9(desc)
+msgid "Create address labels from a CSV file."
+msgstr ""
+
+#: C/merge-ex2.page:25(title)
+msgid "Example 2: Address labels"
+msgstr ""
+
+#: C/merge-ex2.page:27(p)
+msgid "In this example we are going to throw a party and need to print mailing address labels for our invitations. We have a list of our closest friends that we created in <app>gnumeric</app> and exported as the following CSV file. It should be noted that not everyone has a middle initial or a two line address."
+msgstr ""
+
+#: C/merge-ex2.page:33(code)
+#, no-wrap
+msgid ""
+"\n"
+"LAST,FIRST,MI,ADDR1,ADDR2,CITY,STATE,ZIP\n"
+",,,,,,,\n"
+"Critter,Ess,S,\"123 Faux St.\",,Alexandria,VA,22310\n"
+"Doe,John,,\"Apt 1X\",\"451 Mystery St.\",Trenton,NJ,08601\n"
+"Summers,Joyce,,\"1630 Revello Dr\",,Sunnydale,CA,95037\n"
+"McGarret,Steve,O,\"404 Piikoi Street\",,Honolulu,HI,96813\n"
+"Kramer,Cosmo,,\"Apt 5B\",\"129 W. 81 St.\",\"New York\",NY,10024-7207\n"
+"      "
+msgstr ""
+
+#: C/merge-ex2.page:43(p)
+msgid "In <app>glabels</app> we have created a new <app>glabels</app> document using the Avery 5512 \"Address Labels\" template. Next we use the <guiseq><gui>Objects</gui><gui>Merge Properties</gui></guiseq> menu item to display the <gui>merge properties</gui> dialog. We use this dialog to select the source type (in our case CSV with keys on line 1) and the merge source (filename) as shown."
+msgstr ""
+
+#. ==== End of Figure ====
+#: C/merge-ex2.page:57(p)
+msgid "Before applying the merge source, we uncheck the first record since it only contains empty fields. It is an artifact of our original <app>gnumeric</app> spreadsheet and would simply waste our first label. We could also unselect any other records that we didn't want to print a label for."
+msgstr ""
+
+#. ==== End of Figure ====
+#: C/merge-ex2.page:62(p)
+#: C/merge-ex1.page:55(p)
+msgid "We can also view each record in more detail by clicking on the appropriate expander (the little triangles) as shown. Once we are satisfied with the selections in this dialog we click <gui>OK</gui> to accept the changes."
+msgstr ""
+
+#. ==== End of Figure ====
+#: C/merge-ex2.page:75(p)
+msgid "In this example we have a single text object. This text object contains all of our merge fields organized on multiple lines as a mailing address. Notice that fields ${ADDR1} and ${ADDR2} are each located with no other text on their own lines. When <app>glabels</app> encounters a field as the only text on a line, it will not expand the line if the field is empty."
+msgstr ""
+
+#: C/merge-ex2.page:82(p)
+msgid "Now we can print our address labels by selecting the <guiseq><gui>File</gui><gui>Print</gui></guiseq> menu item. This will display print dialog as shown below."
+msgstr ""
+
+#: C/merge-ex2.page:100(p)
+msgid "Address labels preview"
+msgstr ""
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex1.page:50(None)
+msgid "@@image: 'figures/merge-ex1-1.png'; md5=c1fe7f5f05a81d9c04f9d03bb7071798"
+msgstr "@@image: 'figures/merge-ex1-1.png'; md5=c1fe7f5f05a81d9c04f9d03bb7071798"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex1.page:63(None)
+msgid "@@image: 'figures/merge-ex1-2.png'; md5=45c30ca8de2478387404c7c5f45cf3d0"
+msgstr "@@image: 'figures/merge-ex1-2.png'; md5=45c30ca8de2478387404c7c5f45cf3d0"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex1.page:84(None)
+msgid "@@image: 'figures/merge-ex1-3.png'; md5=1c23af6c90e5185cdc9e14d19baeb9f6"
+msgstr "@@image: 'figures/merge-ex1-3.png'; md5=1c23af6c90e5185cdc9e14d19baeb9f6"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/merge-ex1.page:95(None)
+msgid "@@image: 'figures/merge-ex1-4.png'; md5=1cc9f9adcb5a6e98ff5068531e6933f0"
+msgstr "@@image: 'figures/merge-ex1-4.png'; md5=1cc9f9adcb5a6e98ff5068531e6933f0"
+
+#: C/merge-ex1.page:9(desc)
+msgid "Create name tags from a CSV file."
+msgstr ""
+
+#: C/merge-ex1.page:25(title)
+msgid "Example 1: Name Tags"
+msgstr ""
+
+#: C/merge-ex1.page:27(p)
+msgid "In this example we are organizing an orientation party for the new crew members of our ship. We have a list of freshman crew members that we created in <app>gnumeric</app> and exported as the following CSV file. We could have created this file by using a text editor, but heck it is the 23rd century."
+msgstr ""
+
+#: C/merge-ex1.page:33(code)
+#, no-wrap
+msgid ""
+"\n"
+"Name,Department,SN\n"
+"\"Jim Kirk\",Management,\"SC937-0176 CEC\"\n"
+"\"Mr. Spock\",Sciences,S179-276SP\n"
+"\"Leonard McCoy\",Medicine,unknown\n"
+"\"Montgomery Scott\",Engineering,SE-197-54T\n"
+"      "
+msgstr ""
+
+#: C/merge-ex1.page:41(p)
+msgid "In <app>gLabels</app> we have created a new <app>glabels</app> document using the Avery 5395 \"Name Badge Labels\" template. Next we use the <guiseq><gui>Objects</gui><gui>Merge Properties</gui></guiseq> menu item to display the <gui>merge properties</gui> dialog. We use this dialog to select the source type (in our case CSV with keys on line 1) and the merge source (filename) as shown."
+msgstr ""
+
+#. ==== End of Figure ====
+#: C/merge-ex1.page:68(p)
+msgid "In this example we have added three text objects and a barcode object. The first text object contains only simple literal text (\"Hello, my name is\"). The second text object contains a single merge field (\"${Name}\") corresponding to the first field of a record (first column of a line) which contains the new crew member's full name. The third text field contains both literal text (\"Department: \") followed by a single merge field (\"${Department}\") corresponding to the second field or the crew member's department. The barcode object is configured to use field (or key) \"SN\" which contains our crew member's starfleet serial number."
+msgstr ""
+
+#: C/merge-ex1.page:78(p)
+msgid "Now we can print our name tags by selecting the <guiseq><gui>File</gui><gui>Print</gui></guiseq> menu item. This will display print dialog as shown below."
+msgstr ""
+
+#: C/merge-ex1.page:85(p)
+msgid "Printing name tags"
+msgstr ""
+
+#: C/merge-ex1.page:96(p)
+msgid "Name tags preview"
+msgstr ""
+
+#. ==== End of Figure ====
+#: C/merge-ex1.page:100(p)
+msgid "Everything looks good, so we can now load up our printer with the appropriate label stock, print our name tags and start beaming our guests aboard."
+msgstr ""
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/mancreate.page:341(None)
+msgid "@@image: 'figures/glabels-template-rect-label.png'; md5=9c7ae1c1a888e1c9eefd19655d093971"
+msgstr "@@image: 'figures/glabels-template-rect-label.png'; md5=9c7ae1c1a888e1c9eefd19655d093971"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/mancreate.page:393(None)
+msgid "@@image: 'figures/glabels-template-ellipse-label.png'; md5=ba612c86b5fb8fcd2b5384ecc1c331d2"
+msgstr "@@image: 'figures/glabels-template-ellipse-label.png'; md5=ba612c86b5fb8fcd2b5384ecc1c331d2"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/mancreate.page:440(None)
+msgid "@@image: 'figures/glabels-template-circle-label.png'; md5=841e36a1f92aeed01e8fbaacc67758f1"
+msgstr "@@image: 'figures/glabels-template-circle-label.png'; md5=841e36a1f92aeed01e8fbaacc67758f1"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/mancreate.page:501(None)
+msgid "@@image: 'figures/glabels-template-cd-label.png'; md5=c7952ac1b26ecbfa53facfbbf6486841"
+msgstr "@@image: 'figures/glabels-template-cd-label.png'; md5=c7952ac1b26ecbfa53facfbbf6486841"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/mancreate.page:727(None)
+msgid "@@image: 'figures/layouts-cdlabel.png'; md5=0c41a95dc82b5a426e934751faf86872"
+msgstr "@@image: 'figures/layouts-cdlabel.png'; md5=0c41a95dc82b5a426e934751faf86872"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/mancreate.page:790(None)
+msgid "@@image: 'figures/glabels-template-layout.png'; md5=fe1c9652d5448b2e0ece086777d3a287"
+msgstr "@@image: 'figures/glabels-template-layout.png'; md5=fe1c9652d5448b2e0ece086777d3a287"
+
+#: C/mancreate.page:11(desc)
+msgid "Create your templates manually."
+msgstr ""
+
+#: C/mancreate.page:27(title)
+msgid "Manually creating new templates"
+msgstr ""
+
+#. ******************
+#: C/mancreate.page:34(p)
+msgid "This page is a reference guide to manually creating <app>gLabels</app> templates. <app>gLabels</app> templates are defined in simple XML files as described in the DTD: <link href=\"http://glabels.org/xmlns/2.3/glabels-2.3.dtd.txt\">glabels-2.3.dtd</link> (this DTD also describes other XML files used by <app>gLabels</app>)."
+msgstr ""
+
+#: C/mancreate.page:39(p)
+msgid "Manually created template files should be placed in the <file>${HOME}/.glabels</file> and be named with a <file>.template</file> extension."
+msgstr ""
+
+#: C/mancreate.page:43(p)
+msgid "<app>gLabels</app> searches for templates in several other locations as defined here:"
+msgstr ""
+
+#: C/mancreate.page:46(p)
+msgid "Location"
+msgstr ""
+
+#: C/mancreate.page:47(p)
+#: C/mancreate.page:174(p)
+#: C/mancreate.page:238(p)
+#: C/mancreate.page:302(p)
+#: C/mancreate.page:365(p)
+#: C/mancreate.page:416(p)
+#: C/mancreate.page:463(p)
+#: C/mancreate.page:536(p)
+#: C/mancreate.page:563(p)
+#: C/mancreate.page:601(p)
+#: C/mancreate.page:635(p)
+#: C/mancreate.page:677(p)
+#: C/mancreate.page:754(p)
+msgid "Description"
+msgstr ""
+
+#: C/mancreate.page:54(file)
+msgid "${prefix}/share/libglabels-3.0/templates"
+msgstr ""
+
+#: C/mancreate.page:55(p)
+msgid "Predefined templates distributed with <app>gLabels</app>."
+msgstr ""
+
+#: C/mancreate.page:56(p)
+msgid "<file>${prefix}</file> is usually <file>/usr</file> or <file>/usr/local</file>, depending on where <app>gLabels</app> was installed."
+msgstr ""
+
+#: C/mancreate.page:60(file)
+msgid "${XDG_CONFIG_HOME}/libglabels/templates"
+msgstr ""
+
+#: C/mancreate.page:61(p)
+msgid "User defined templates created with the <app>gLabels</app><gui>Template Designer</gui>. <em>Do not put manually created templates in this directory.</em>"
+msgstr ""
+
+#: C/mancreate.page:63(p)
+msgid "If <file>${XDG_CONFIG_HOME}</file> is not defined, it defaults to <file>${HOME}/.config</file>."
+msgstr ""
+
+#: C/mancreate.page:67(file)
+msgid "${HOME}/.glabels"
+msgstr ""
+
+#: C/mancreate.page:68(p)
+msgid "User defined templates that have been created manually should be placed in this directory. Older versions of the <app>gLabels</app><gui>Template Designer</gui> (prior to 3.0) would also put templates in this directory."
+msgstr ""
+
+#: C/mancreate.page:76(p)
+msgid "Completed template files can be sent to the <app>gLabels</app> template <link href=\"mailto:glabels-templates@lists.sourceforge.net\">mailing list</link> for possible inclusion in future versions of <app>gLabels</app>."
+msgstr ""
+
+#: C/mancreate.page:90(title)
+msgid "Assumptions/caveats"
+msgstr ""
+
+#: C/mancreate.page:93(p)
+msgid "A sheet contains only one size of label or card (if a sheet contains more than one size of item, it can be split into multiple templates for multiple pass printing)"
+msgstr ""
+
+#: C/mancreate.page:98(p)
+msgid "Distances can be expressed in units of <code translate=\"no\">pt</code>, <code translate=\"no\">in</code>, <code translate=\"no\">mm</code>, <code translate=\"no\">cm</code>, or <code translate=\"no\">pc</code>. For example: \"<code translate=\"no\">1.0in</code>\" or \"<code translate=\"no\">2.54cm</code>\". If no units are specified, computer points (<code translate=\"no\">pt</code>) will be assumed (1 <em>pt</em> = 1/72 <em>in</em> = 0.352778 <em>mm</em>)."
+msgstr ""
+
+#: C/mancreate.page:119(title)
+msgid "Template Files"
+msgstr ""
+
+#: C/mancreate.page:121(p)
+msgid "A template file contains a single <code translate=\"no\">Glabels-templates</code> top-level node."
+msgstr ""
+
+#: C/mancreate.page:124(code)
+#, no-wrap
+msgid ""
+"\n"
+"&lt;?xml version=\"1.0\"?&gt;\n"
+"&lt;Glabels-templates&gt;\n"
+"\n"
+"   <var its:translate=\"yes\">...templates...</var>\n"
+"\n"
+"&lt;/Glabels-templates&gt;"
+msgstr ""
+
+#: C/mancreate.page:133(title)
+msgid "Example Template"
+msgstr ""
+
+#: C/mancreate.page:134(desc)
+msgid "Example <app>gLabels</app> template file containing a single <code translate=\"no\">Template</code> node."
+msgstr ""
+
+#: C/mancreate.page:136(code)
+#, no-wrap
+msgid ""
+"\n"
+"&lt;?xml version=\"1.0\"?&gt;\n"
+"&lt;Glabels-templates&gt;\n"
+"\n"
+"  &lt;Template brand=\"Avery\" part=\"8160\" size=\"US-Letter\" description=\"Mailing Labels\"&gt;\n"
+"    &lt;Meta category=\"label\"/&gt;\n"
+"    &lt;Meta category=\"mail\"/&gt;\n"
+"    &lt;Meta product_url=\"http://www.avery.com/avery/en_us/\"/&gt;\n"
+"    &lt;Label-rectangle id=\"0\" width=\"189pt\" height=\"72pt\" round=\"5pt\"&gt;\n"
+"      &lt;Markup-margin size=\"5pt\"/&gt;\n"
+"      &lt;Layout nx=\"3\" ny=\"10\" x0=\"11.25pt\" y0=\"36pt\" dx=\"200pt\" dy=\"72pt\"/&gt;\n"
+"    &lt;/Label-rectangle&gt;\n"
+"  &lt;/Template&gt;\n"
+"\n"
+"&lt;/Glabels-templates&gt;"
+msgstr ""
+
+#: C/mancreate.page:164(title)
+msgid "<span translate=\"no\">Template</span> Node"
+msgstr ""
+
+#: C/mancreate.page:166(p)
+msgid "A <code translate=\"no\">Template</code> node describes a single stationery product. It must contain one instance of any type of Label node (<code translate=\"no\">Label-rectangle</code>, <code translate=\"no\">Label-round</code>, or <code translate=\"no\">Label-cd</code>)."
+msgstr ""
+
+#: C/mancreate.page:174(p)
+#: C/mancreate.page:302(p)
+#: C/mancreate.page:365(p)
+#: C/mancreate.page:416(p)
+#: C/mancreate.page:463(p)
+#: C/mancreate.page:536(p)
+#: C/mancreate.page:563(p)
+#: C/mancreate.page:601(p)
+#: C/mancreate.page:635(p)
+#: C/mancreate.page:677(p)
+#: C/mancreate.page:754(p)
+msgid "Property"
+msgstr ""
+
+#: C/mancreate.page:180(code)
+#, no-wrap
+msgid "brand"
+msgstr ""
+
+#: C/mancreate.page:181(p)
+msgid "Brand or manufacturer of stationery product. E.g. \"Avery\""
+msgstr ""
+
+#: C/mancreate.page:184(code)
+#, no-wrap
+msgid "part"
+msgstr ""
+
+#: C/mancreate.page:185(p)
+msgid "Part number or name of stationery product. E.g. \"8160\""
+msgstr ""
+
+#: C/mancreate.page:188(code)
+#: C/mancreate.page:542(code)
+#, no-wrap
+msgid "size"
+msgstr ""
+
+#: C/mancreate.page:189(p)
+msgid "Size of sheet. E.g., \"<code translate=\"no\">US-Letter</code>\", \"<code translate=\"no\">A4</code>\", ..."
+msgstr ""
+
+#: C/mancreate.page:194(code)
+#, no-wrap
+msgid "description"
+msgstr ""
+
+#: C/mancreate.page:195(p)
+msgid "Description of stationery product. E.g, \"Mailing Labels.\""
+msgstr ""
+
+#: C/mancreate.page:198(code)
+#, no-wrap
+msgid "_description"
+msgstr ""
+
+#: C/mancreate.page:199(p)
+msgid "Translatable description of stationery product. E.g, \"Mailing Labels.\" (Only useful for predefined templates)"
+msgstr ""
+
+#: C/mancreate.page:203(code)
+#: C/mancreate.page:312(code)
+#: C/mancreate.page:375(code)
+#: C/mancreate.page:481(code)
+#, no-wrap
+msgid "width"
+msgstr ""
+
+#: C/mancreate.page:204(p)
+msgid "Page width. Only valid if size=\"Other\""
+msgstr ""
+
+#: C/mancreate.page:207(code)
+#: C/mancreate.page:316(code)
+#: C/mancreate.page:379(code)
+#: C/mancreate.page:486(code)
+#, no-wrap
+msgid "height"
+msgstr ""
+
+#: C/mancreate.page:208(p)
+msgid "Page height. Only valid if size=\"Other\""
+msgstr ""
+
+#: C/mancreate.page:211(code)
+#, no-wrap
+msgid "equiv"
+msgstr ""
+
+#: C/mancreate.page:212(p)
+msgid "Equivalent part number. If this property is present, the template is a clone of another template of the same brand. The template will inherit all properties, except brand and name from the other template. This equiv property must refer to a previously defined template - <app>gLabels</app> does not currently support forward references."
+msgstr ""
+
+#: C/mancreate.page:230(title)
+msgid "<span translate=\"no\">Meta</span> Node"
+msgstr ""
+
+#: C/mancreate.page:232(p)
+msgid "A <code translate=\"no\">Meta</code> node contains some additional information about the template. A <code translate=\"no\">Template</code> node may contain zero or more <code translate=\"no\">Meta</code> nodes."
+msgstr ""
+
+#: C/mancreate.page:238(p)
+msgid "Subnode"
+msgstr ""
+
+#: C/mancreate.page:244(code)
+#, no-wrap
+msgid "category"
+msgstr ""
+
+#: C/mancreate.page:245(p)
+msgid "A category for the template. A template can belong to multiple categories by simply adding multiple <code translate=\"no\">Meta</code> nodes to the parent <code translate=\"no\">Template</code> node. Template categories are used by the <app>gLabels</app><gui>New Label Dialog</gui> to filter the results of template searches."
+msgstr ""
+
+#: C/mancreate.page:252(p)
+msgid "The value of this category must match a predefined category ID defined in the file <file>${prefix}/libglabels-3.0/templates/categories.xml</file>. Currently defined category IDs include:"
+msgstr ""
+
+#: C/mancreate.page:256(code)
+#, no-wrap
+msgid "label"
+msgstr ""
+
+#: C/mancreate.page:257(code)
+#, no-wrap
+msgid "round-label"
+msgstr ""
+
+#: C/mancreate.page:258(code)
+#, no-wrap
+msgid "elliptical-label"
+msgstr ""
+
+#: C/mancreate.page:259(code)
+#, no-wrap
+msgid "square-label"
+msgstr ""
+
+#: C/mancreate.page:260(code)
+#, no-wrap
+msgid "rectangle-label"
+msgstr ""
+
+#: C/mancreate.page:261(code)
+#, no-wrap
+msgid "card"
+msgstr ""
+
+#: C/mancreate.page:262(code)
+#, no-wrap
+msgid "business-card"
+msgstr ""
+
+#: C/mancreate.page:263(code)
+#, no-wrap
+msgid "media"
+msgstr ""
+
+#: C/mancreate.page:264(code)
+#, no-wrap
+msgid "mail"
+msgstr ""
+
+#: C/mancreate.page:265(code)
+#, no-wrap
+msgid "foldable"
+msgstr ""
+
+#: C/mancreate.page:266(code)
+#, no-wrap
+msgid "photo"
+msgstr ""
+
+#: C/mancreate.page:273(code)
+#, no-wrap
+msgid "product_url"
+msgstr ""
+
+#: C/mancreate.page:274(p)
+msgid "A URL pointing to the vendor's webpage for the specific product, if available."
+msgstr ""
+
+#: C/mancreate.page:278(p)
+msgid "Suggestions for additional categories can be sent to the <app>gLabels</app> developer's <link href=\"mailto:glabels-devel@lists.sourceforge.net\">mailing list</link>."
+msgstr ""
+
+#: C/mancreate.page:281(p)
+msgid "Product URLs may be of limited use, because they may not be permanent."
+msgstr ""
+
+#: C/mancreate.page:294(title)
+msgid "<span translate=\"no\">Label-rectangle</span> Node"
+msgstr ""
+
+#: C/mancreate.page:296(p)
+msgid "A <code translate=\"no\">Label-rectangle</code> node describes the dimensions of a single label or business card that is rectangular in shape (may have rounded edges)."
+msgstr ""
+
+#: C/mancreate.page:308(code)
+#: C/mancreate.page:371(code)
+#: C/mancreate.page:422(code)
+#: C/mancreate.page:469(code)
+#, no-wrap
+msgid "id"
+msgstr ""
+
+#: C/mancreate.page:309(p)
+#: C/mancreate.page:372(p)
+#: C/mancreate.page:423(p)
+#: C/mancreate.page:470(p)
+msgid "Reserved for future use. Should always be 0."
+msgstr ""
+
+#: C/mancreate.page:313(p)
+msgid "Width of label/card"
+msgstr ""
+
+#: C/mancreate.page:317(p)
+msgid "Heigth of label/card"
+msgstr ""
+
+#: C/mancreate.page:320(code)
+#, no-wrap
+msgid "round"
+msgstr ""
+
+#: C/mancreate.page:321(p)
+msgid "Radius of corners. For items with square edges (business cards), the radius should be 0."
+msgstr ""
+
+#: C/mancreate.page:325(code)
+#, no-wrap
+msgid "x_waste"
+msgstr ""
+
+#: C/mancreate.page:326(p)
+msgid "Amount of horizontal waste (over-print) to allow. This is useful for minimizing alignment problems when using non-white backgrounds (e.g. images)."
+msgstr ""
+
+#: C/mancreate.page:331(code)
+#, no-wrap
+msgid "y_waste"
+msgstr ""
+
+#: C/mancreate.page:332(p)
+msgid "Amount of vertical waste (over-print) to allow. This is useful for minimizing alignment problems when using non-white backgrounds (e.g. images)."
+msgstr ""
+
+#: C/mancreate.page:340(desc)
+#: C/mancreate.page:342(p)
+msgid "<span translate=\"no\">Label-rectangle</span> parameters"
+msgstr ""
+
+#: C/mancreate.page:357(title)
+msgid "<span translate=\"no\">Label-ellipse</span> Node"
+msgstr ""
+
+#: C/mancreate.page:359(p)
+msgid "A <code translate=\"no\">Label-ellipse</code> node describes the dimensions of a single label or business card that is elliptic in shape."
+msgstr ""
+
+#: C/mancreate.page:376(p)
+msgid "Width of the ellipse"
+msgstr ""
+
+#: C/mancreate.page:380(p)
+msgid "Heigth of the ellipse"
+msgstr ""
+
+#: C/mancreate.page:383(code)
+#: C/mancreate.page:430(code)
+#: C/mancreate.page:491(code)
+#, no-wrap
+msgid "waste"
+msgstr ""
+
+#: C/mancreate.page:384(p)
+#: C/mancreate.page:431(p)
+#: C/mancreate.page:492(p)
+msgid "Amount of waste (over-print) to allow. This is useful for minimizing alignment problems when using non-white backgrounds (e.g. images)."
+msgstr ""
+
+#: C/mancreate.page:392(desc)
+#: C/mancreate.page:394(p)
+#: C/mancreate.page:439(desc)
+#: C/mancreate.page:441(p)
+msgid "<span translate=\"no\">Label-ellipse</span> parameters"
+msgstr ""
+
+#: C/mancreate.page:409(title)
+msgid "<span translate=\"no\">Label-round</span> Node"
+msgstr ""
+
+#: C/mancreate.page:411(p)
+msgid "A <code translate=\"no\">Label-round</code> node describes the dimensions of a simple round label (not a CD)."
+msgstr ""
+
+#: C/mancreate.page:426(code)
+#: C/mancreate.page:473(code)
+#: C/mancreate.page:615(code)
+#, no-wrap
+msgid "radius"
+msgstr ""
+
+#: C/mancreate.page:427(p)
+msgid "Radius (1/2 diameter) of label"
+msgstr ""
+
+#: C/mancreate.page:456(title)
+msgid "<span translate=\"no\">Label-cd</span> Node"
+msgstr ""
+
+#: C/mancreate.page:458(p)
+msgid "A <code translate=\"no\">Label-cd</code> node describes the dimensions of a CD, DVD, or business card CD."
+msgstr ""
+
+#: C/mancreate.page:474(p)
+msgid "Outer radius of label"
+msgstr ""
+
+#: C/mancreate.page:477(code)
+#, no-wrap
+msgid "hole"
+msgstr ""
+
+#: C/mancreate.page:478(p)
+msgid "Radius of concentric hole"
+msgstr ""
+
+#: C/mancreate.page:482(p)
+msgid "If present, the label is clipped to the given width. (Useful for \"business card CDs\")."
+msgstr ""
+
+#: C/mancreate.page:487(p)
+msgid "If present, the label is clipped to the given height. (Useful for \"business card CDs\")."
+msgstr ""
+
+#: C/mancreate.page:500(desc)
+msgid "<span translate=\"no\">Label-cd</span> parameters"
+msgstr ""
+
+#: C/mancreate.page:502(p)
+msgid "CD label parameters"
+msgstr ""
+
+#: C/mancreate.page:517(title)
+msgid "<span translate=\"no\">Markup</span> Nodes"
+msgstr ""
+
+#: C/mancreate.page:519(p)
+msgid "Templates may contain optional markup nodes. These nodes are used to describe a simple set of markup lines that are visible in the <app>glabels</app> drawing canvas, but not visible when printed. These lines can represent margins, fold lines, center lines, special areas, or other helpful hints to the user of a template."
+msgstr ""
+
+#: C/mancreate.page:529(title)
+msgid "<span translate=\"no\">Markup-margin</span> Node"
+msgstr ""
+
+#: C/mancreate.page:531(p)
+msgid "A <code translate=\"no\">Markup-margin</code> describes a margin along all edges of a label."
+msgstr ""
+
+#: C/mancreate.page:543(p)
+msgid "Size of the margin. I.e. the distance of the margin line from the edge of the card/label."
+msgstr ""
+
+#: C/mancreate.page:557(title)
+msgid "<span translate=\"no\">Markup-line</span> Node"
+msgstr ""
+
+#: C/mancreate.page:559(p)
+msgid "A <code translate=\"no\">Markup-line</code> node describes a markup line."
+msgstr ""
+
+#: C/mancreate.page:569(code)
+#: C/mancreate.page:641(code)
+#: C/mancreate.page:683(code)
+#, no-wrap
+msgid "x1"
+msgstr "x1"
+
+#: C/mancreate.page:570(p)
+msgid "x coordinate of 1st endpoint of the line segment."
+msgstr ""
+
+#: C/mancreate.page:573(code)
+#: C/mancreate.page:645(code)
+#: C/mancreate.page:687(code)
+#, no-wrap
+msgid "y1"
+msgstr "y1"
+
+#: C/mancreate.page:574(p)
+msgid "y coordinate of 1st endpoint of the line segment."
+msgstr ""
+
+#: C/mancreate.page:577(code)
+#, no-wrap
+msgid "x2"
+msgstr "x2"
+
+#: C/mancreate.page:578(p)
+msgid "x coordinate of 2st endpoint of the line segment."
+msgstr ""
+
+#: C/mancreate.page:581(code)
+#, no-wrap
+msgid "y2"
+msgstr "y2"
+
+#: C/mancreate.page:582(p)
+msgid "y coordinate of 2st endpoint of the line segment."
+msgstr ""
+
+#: C/mancreate.page:595(title)
+msgid "<span translate=\"no\">Markup-circle</span> Node"
+msgstr ""
+
+#: C/mancreate.page:597(p)
+msgid "A <code translate=\"no\">Markup-circle</code> describes a markup circle."
+msgstr ""
+
+#: C/mancreate.page:607(code)
+#: C/mancreate.page:768(code)
+#, no-wrap
+msgid "x0"
+msgstr "x0"
+
+#: C/mancreate.page:608(p)
+msgid "x coordinate of circle origin (center)."
+msgstr ""
+
+#: C/mancreate.page:611(code)
+#: C/mancreate.page:773(code)
+#, no-wrap
+msgid "y0"
+msgstr "y0"
+
+#: C/mancreate.page:612(p)
+msgid "y coordinate of circle origin (center)."
+msgstr ""
+
+#: C/mancreate.page:616(p)
+msgid "Radius of circle."
+msgstr ""
+
+#: C/mancreate.page:629(title)
+msgid "<span translate=\"no\">Markup-rect</span> Node"
+msgstr ""
+
+#: C/mancreate.page:631(p)
+msgid "A <code translate=\"no\">Markup-rect</code> describes a markup rectangle."
+msgstr ""
+
+#: C/mancreate.page:642(p)
+msgid "x coordinate of upper left corner of rectangle."
+msgstr ""
+
+#: C/mancreate.page:646(p)
+msgid "y coordinate of upper left corner of rectangle."
+msgstr ""
+
+#: C/mancreate.page:649(code)
+#: C/mancreate.page:691(code)
+#, no-wrap
+msgid "w"
+msgstr "w"
+
+#: C/mancreate.page:650(p)
+msgid "Width of rectangle."
+msgstr "Largura do retãngulo"
+
+#: C/mancreate.page:653(code)
+#: C/mancreate.page:695(code)
+#, no-wrap
+msgid "h"
+msgstr "h"
+
+#: C/mancreate.page:654(p)
+msgid "Height of rectangle."
+msgstr "Altura do retãngulo"
+
+#: C/mancreate.page:657(code)
+#, no-wrap
+msgid "r"
+msgstr ""
+
+#: C/mancreate.page:658(p)
+msgid "Radius of rounded corners of rectangle."
+msgstr ""
+
+#: C/mancreate.page:671(title)
+msgid "<span translate=\"no\">Markup-ellipse</span> Node"
+msgstr ""
+
+#: C/mancreate.page:673(p)
+msgid "A <code translate=\"no\">Markup-ellipse</code> describes a markup ellipse."
+msgstr ""
+
+#: C/mancreate.page:684(p)
+msgid "x coordinate of upper left corner of ellipse."
+msgstr ""
+
+#: C/mancreate.page:688(p)
+msgid "y coordinate of upper left corner of ellipse."
+msgstr ""
+
+#: C/mancreate.page:692(p)
+msgid "Width of ellipse."
+msgstr ""
+
+#: C/mancreate.page:696(p)
+msgid "Height of ellipse."
+msgstr ""
+
+#: C/mancreate.page:714(title)
+msgid "<span translate=\"no\">Layout</span> Node"
+msgstr ""
+
+#: C/mancreate.page:716(p)
+msgid "A label node may contain multiple <code translate=\"no\">Layout</code> children. If labels are arranged in a simple grid pattern, only one layout is needed. However, if labels are arranged in multiple grids, such as a running bond pattern, multiple <code translate=\"no\">Layout</code> tags can be used."
+msgstr ""
+
+#: C/mancreate.page:721(p)
+msgid "A common example for multiple layouts is a sheet with three CD labels:"
+msgstr ""
+
+#: C/mancreate.page:726(desc)
+#: C/mancreate.page:728(p)
+msgid "CD label sheet"
+msgstr ""
+
+#. ==== End of Figure ====
+#: C/mancreate.page:733(p)
+msgid "The two labels on the left edge can be assigned to a grid, assuming we can define the coordinates for the top left label and the distance to the second label properly. The distance to the left edge is common to these labels. The third one on the right edge has no common distance values with the other ones, that's why we have to define a second layout, with unique coordinates for the top left corner of that label."
+msgstr ""
+
+#: C/mancreate.page:741(p)
+msgid "You can define multiple layouts only if the labels on the sheet have the same shape. If your sheet contains different shapes, you have to define each shape in another template seperately. Future versions of <app>gLabels</app> will probably be able to concatenate such sheets with different shapes within a single template."
+msgstr ""
+
+#: C/mancreate.page:749(p)
+msgid "A single label can always be treated as a grid of one."
+msgstr ""
+
+#: C/mancreate.page:760(code)
+#, no-wrap
+msgid "nx"
+msgstr "nx"
+
+#: C/mancreate.page:761(p)
+msgid "Number of labels/cards across in the grid (horizontal)"
+msgstr ""
+
+#: C/mancreate.page:764(code)
+#, no-wrap
+msgid "ny"
+msgstr "ny"
+
+#: C/mancreate.page:765(p)
+msgid "Number of labels/cards across in the grid (vertical)"
+msgstr ""
+
+#: C/mancreate.page:769(p)
+msgid "Distance from left edge of sheet to the left edge of the left column of cards/labels in the layout."
+msgstr ""
+
+#: C/mancreate.page:774(p)
+msgid "Distance from the top edge of sheet to the top edge of the top row of labels/cards in the layout."
+msgstr ""
+
+#: C/mancreate.page:778(code)
+#, no-wrap
+msgid "dx"
+msgstr "dx"
+
+#: C/mancreate.page:779(p)
+msgid "Horizontal pitch of grid."
+msgstr ""
+
+#: C/mancreate.page:782(code)
+#, no-wrap
+msgid "dy"
+msgstr "dy"
+
+#: C/mancreate.page:783(p)
+msgid "Vertical pitch of grid."
+msgstr ""
+
+#: C/mancreate.page:789(desc)
+msgid "<span translate=\"no\">Layout</span> parameters"
+msgstr ""
+
+#: C/mancreate.page:791(p)
+msgid "<span translate=\"no\">Layout</span> Parameters"
+msgstr ""
+
+#: C/license.page:8(desc)
+msgid "Legal information."
+msgstr ""
+
+#: C/license.page:11(title)
+msgid "License"
+msgstr "Licença"
+
+#: C/license.page:12(p)
+msgid "This work is distributed under a CreativeCommons Attribution-Share Alike 3.0 Unported license."
+msgstr ""
+
+#: C/license.page:20(p)
+msgid "You are free:"
+msgstr ""
+
+#: C/license.page:25(em)
+msgid "To share"
+msgstr ""
+
+#: C/license.page:26(p)
+msgid "To copy, distribute and transmit the work."
+msgstr ""
+
+#: C/license.page:29(em)
+msgid "To remix"
+msgstr ""
+
+#: C/license.page:30(p)
+msgid "To adapt the work."
+msgstr ""
+
+#: C/license.page:33(p)
+msgid "Under the following conditions:"
+msgstr ""
+
+#: C/license.page:38(em)
+msgid "Attribution"
+msgstr ""
+
+#: C/license.page:39(p)
+msgid "You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work)."
+msgstr ""
+
+#: C/license.page:46(em)
+msgid "Share Alike"
+msgstr ""
+
+#: C/license.page:47(p)
+msgid "If you alter, transform, or build upon this work, you may distribute the resulting work only under the same, similar or a compatible license."
+msgstr ""
+
+#: C/license.page:53(p)
+msgid "For the full text of the license, see the <link href=\"http://creativecommons.org/licenses/by-sa/3.0/legalcode\">CreativeCommons website</link>, or read the full <link href=\"http://creativecommons.org/licenses/by-sa/3.0/\">Commons Deed</link>."
+msgstr ""
+
+#: C/labelprop.page:9(desc)
+msgid "How to change the properties of a label or business card."
+msgstr ""
+
+#: C/labelprop.page:25(title)
+msgid "To change label properties"
+msgstr ""
+
+#: C/labelprop.page:27(p)
+msgid "To change the media type and/or orientation of a label, choose <guiseq><gui>File</gui><gui>Properties</gui></guiseq> to display the <gui>Label properties</gui> dialog. Select the new media type and orientation for the document, then click <gui>OK</gui>."
+msgstr ""
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/index.page:24(None)
+msgid "@@image: 'figures/glabels-logo.png'; md5=0c1e32afcbae0d2fc6976020c24a0a43"
+msgstr "@@image: 'figures/glabels-logo.png'; md5=0c1e32afcbae0d2fc6976020c24a0a43"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/index.page:47(None)
+msgid "@@image: 'figures/introduction-glabels-main-window.png'; md5=9ee2b2cc026ee8cba3c881b370a14313"
+msgstr "@@image: 'figures/introduction-glabels-main-window.png'; md5=9ee2b2cc026ee8cba3c881b370a14313"
+
+#: C/index.page:7(title)
+#: C/index.page:8(title)
+msgid "gLabels label and business card designer"
+msgstr ""
+
+#: C/index.page:23(title)
+msgid "<media type=\"image\" mime=\"image/png\" src=\"figures/glabels-logo.png\">gLabels logo</media> gLabels Manual"
+msgstr ""
+
+#: C/index.page:28(p)
+msgid "The <app>gLabels</app> application is a lightweight program for creating labels and business cards for the GNOME desktop environment. It is designed to work with various laser/ink-jet peel-off label and business card sheets that you'll find at most office supply stores."
+msgstr ""
+
+#: C/index.page:35(p)
+msgid "<app>gLabels</app> can be used to design address labels, name tags, price tags, cd/dvd labels, or just about anything else that is organized in a regular pattern on a sheet of paper. Labels (or cards) can contain text, images, lines, shapes, and barcodes. <app>gLabels</app> also includes a document-merge feature which lets you print a unique label for each record from an external data source, such as a CSV file or an <app>Evolution</app> address book."
+msgstr ""
+
+#: C/index.page:45(title)
+#: C/index.page:46(desc)
+msgid "<app>gLabels</app> main window"
+msgstr ""
+
+#: C/index.page:48(p)
+msgid "<app>gLabels</app> main window."
+msgstr ""
+
+#: C/index.page:53(title)
+msgid "Usage"
+msgstr ""
+
+#: C/index.page:57(title)
+msgid "Document Merging"
+msgstr ""
+
+#: C/index.page:61(title)
+msgid "Advanced usage"
+msgstr ""
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/editprop.page:35(None)
+msgid "@@image: 'figures/object-editor-sidebar.png'; md5=68be18416cc17964992fe0c7e311e0ef"
+msgstr "@@image: 'figures/object-editor-sidebar.png'; md5=68be18416cc17964992fe0c7e311e0ef"
+
+#: C/editprop.page:9(desc)
+msgid "Change the properties of objects."
+msgstr ""
+
+#: C/editprop.page:25(title)
+msgid "To edit object properties"
+msgstr ""
+
+#: C/editprop.page:29(p)
+msgid "Most object properties can be modified through the object editor sidebar, illustrated below. To use the object editor, a single object must first be selected. See <link xref=\"select\"/>."
+msgstr ""
+
+#. ==== End of Figure ====
+#: C/editprop.page:40(p)
+msgid "The object editor will contain a subset of the following tabbed sections, depending on object type:"
+msgstr ""
+
+#: C/editprop.page:44(title)
+msgid "Text Tabbed Section (Text objects)"
+msgstr ""
+
+#: C/editprop.page:46(p)
+msgid "This section contains a small editor for changing the content of a text object. It also contains a dropdown menu of available document merge keys, that can be inserted into text."
+msgstr ""
+
+#: C/editprop.page:53(title)
+msgid "Image Tabbed Section (Image objects)"
+msgstr ""
+
+#: C/editprop.page:55(p)
+msgid "This section contains a file entry with preview to select image files. The browse button can be used to easily locate image files. Alternatively, a document merge key can be used instead to provide a filename at print time."
+msgstr ""
+
+#: C/editprop.page:63(title)
+msgid "Data Tabbed Section (Barcode objects)"
+msgstr ""
+
+#: C/editprop.page:65(p)
+msgid "This section contains a text entry to enter literal barcode data. Alternatively, a document merge key can be used to provide this data at print time."
+msgstr ""
+
+#: C/editprop.page:72(title)
+msgid "Style Tabbed Section (Text objects)"
+msgstr ""
+
+#: C/editprop.page:74(p)
+msgid "This section contains controls to select text properties, including font family, font size, font weight, color, and text justification."
+msgstr ""
+
+#: C/editprop.page:81(title)
+msgid "Style Tabbed Section (Barcode objects)"
+msgstr ""
+
+#: C/editprop.page:83(p)
+msgid "This section contains controls to select barcode properties, including barcode style, color, whether to print text, and whether to include a checksum digit."
+msgstr ""
+
+#: C/editprop.page:90(title)
+msgid "Line Tabbed Section"
+msgstr ""
+
+#: C/editprop.page:92(p)
+msgid "This section contains controls to select properties of lines and outlines. These properties include line width and color."
+msgstr ""
+
+#: C/editprop.page:98(title)
+msgid "Fill Tabbed Section"
+msgstr ""
+
+#: C/editprop.page:100(p)
+msgid "This section contains controls to select fill properties of box and ellipse objects. Currently the only fill property is fill color."
+msgstr ""
+
+#: C/editprop.page:107(title)
+msgid "Size Tabbed Section (All except line objects)"
+msgstr ""
+
+#: C/editprop.page:109(p)
+msgid "This section contains controls to select the width and height of an object. A checkbox is provided, so that the current aspect ratio can be locked while manipulating the width and height controls. Image objects also provide a button to reset the size to the image's natural size (Assumes 72DPI)."
+msgstr ""
+
+#: C/editprop.page:118(title)
+msgid "Size Tabbed Section (Line objects)"
+msgstr ""
+
+#: C/editprop.page:120(p)
+msgid "This section contains controls to select the length and angle of a line object."
+msgstr ""
+
+#: C/editprop.page:126(title)
+msgid "Position Tabbed Section"
+msgstr ""
+
+#: C/editprop.page:128(p)
+msgid "This section contains controls to change the position of an object."
+msgstr ""
+
+#: C/editprop.page:135(title)
+msgid "Shadow Tabbed Section (All except barcode objects)"
+msgstr ""
+
+#: C/editprop.page:137(p)
+msgid "This section contains controls to add a shadow to an object."
+msgstr ""
+
+#: C/editprop.page:146(title)
+msgid "Other Manipulations of Objects"
+msgstr ""
+
+#: C/editprop.page:148(p)
+msgid "Objects can also be manipulated in the following ways."
+msgstr ""
+
+#: C/editprop.page:151(title)
+msgid "Moving and Resizing Objects"
+msgstr ""
+
+#: C/editprop.page:153(p)
+msgid "Objects can be moved by simply clicking on a selected object and dragging the object to its new location. If the object is part of an aggregate selection, all objects in the selection will move with the object being dragged, maintaining their relative positions to one another. If no object is selected, clicking on an object will create a new selection containing that object. See <link xref=\"select\"/>."
+msgstr ""
+
+#: C/editprop.page:161(p)
+msgid "A selected object can be resized by clicking one of its resize handle and dragging it to obtain the new size."
+msgstr ""
+
+#: C/editprop.page:167(title)
+msgid "Changing Stacking Order"
+msgstr ""
+
+#: C/editprop.page:169(p)
+msgid "Stacking order refers to relative position in the z-axis of objects. That is when objects overlap, which object will appear on top of the other. By default, newer objects will appear above older objects. To change this order, select one or more objects and choose <guiseq><gui>Objects</gui><gui>Order</gui><gui>Bring to Front</gui></guiseq> to raise the selection to the top of the stacking order, or choose <guiseq><gui>Objects</gui><gui>Order</gui><gui>Send to Back</gui></guiseq> to lower the selection to the bottom of the stacking order. These menuitems are also available by right-clicking the display area when there is a non-empty selection."
+msgstr ""
+
+#: C/editprop.page:187(title)
+msgid "Rotating and Flipping Objects"
+msgstr ""
+
+#: C/editprop.page:189(p)
+msgid "Objects can be rotated 90 degrees in either direction, or flipped horizontally or vertically, by choosing the appropriate menuitem in the <guiseq><gui>Objects</gui><gui>Rotate/Flip</gui></guiseq> sub-menu. These menuitems are also available by right-clicking the display area when there is a non-empty selection."
+msgstr ""
+
+#: C/editprop.page:197(p)
+msgid "This feature could be useful when you are designing CD box inlays. For the spine caption, you need vertical aligned text. After you have created a basic text box, choose <guiseq><gui>Objects</gui><gui>Rotate/Flip</gui></guiseq> to rotate the text box according to your needs."
+msgstr ""
+
+#: C/editprop.page:208(title)
+msgid "Aligning Objects"
+msgstr ""
+
+#: C/editprop.page:210(p)
+msgid "Objects can be aligned horizontally or vertically, relative to one another, or relative to the center line of the label, by choosing the appropriate menuitem from the <guiseq><gui>Objects</gui><gui>Align Horizontal</gui></guiseq> or <guiseq><gui>Objects</gui><gui>Align Vertical</gui></guiseq> sub-menus. These menuitems are also available by right-clicking the display area when there is a non-empty selection."
+msgstr ""
+
+#: C/editprop.page:223(title)
+msgid "Using the Property Bar"
+msgstr ""
+
+#: C/editprop.page:225(p)
+msgid "The property bar can be used to change some common properties of objects en-masse. These properties include font family, font size, font weight, text alignment, text color, fill color, line or outline color, and line width. The property bar also controls the defaults for these properties for any newly created objects."
+msgstr ""
+
+#: C/customtemplate.page:9(desc)
+msgid "Create your own templates for stationery products."
+msgstr ""
+
+#: C/customtemplate.page:25(title)
+msgid "To create a custom template"
+msgstr ""
+
+#: C/customtemplate.page:27(p)
+msgid "To create a new custom template, choose <guiseq><gui>File</gui><gui>Template Designer ...</gui></guiseq> to display the <gui>Template Designer</gui> dialog. This dialog will assist you in creating a custom template for most types of label or card stationery that you may encounter."
+msgstr ""
+
+#: C/customtemplate.page:34(p)
+msgid "If you prefer, you can create your templates manually. For this option see <link xref=\"mancreate\"/>"
+msgstr ""
+
+#: C/customize.page:9(desc)
+msgid "Customize <app>gLabels</app> to match your needs."
+msgstr ""
+
+#. Use this section to describe how to customize the application.
+#: C/customize.page:25(title)
+msgid "Settings"
+msgstr ""
+
+#: C/customize.page:26(p)
+msgid "To configure <app>gLabels</app>, choose <guiseq><gui>Settings</gui><gui>Preferences</gui></guiseq>. The <gui>Preferences</gui> dialog contains the following tabbed sections:"
+msgstr ""
+
+#: C/customize.page:35(title)
+msgid "Locale"
+msgstr ""
+
+#: C/customize.page:37(title)
+msgid "Units"
+msgstr ""
+
+#: C/customize.page:38(p)
+msgid "Use this radio button group to specify your preferred units. Select one of the following options:"
+msgstr ""
+
+#: C/customize.page:42(gui)
+msgid "Points"
+msgstr ""
+
+#: C/customize.page:43(p)
+msgid "Use points (1 point = 1/72 in = 0.352778 mm)."
+msgstr ""
+
+#: C/customize.page:46(gui)
+msgid "Inches"
+msgstr ""
+
+#: C/customize.page:47(p)
+msgid "Use Inches."
+msgstr ""
+
+#: C/customize.page:50(gui)
+msgid "Millimeters"
+msgstr ""
+
+#: C/customize.page:51(p)
+msgid "Use Millimeters."
+msgstr ""
+
+#: C/customize.page:54(p)
+msgid "Default: <gui>Inches</gui>."
+msgstr ""
+
+#: C/customize.page:58(title)
+msgid "Default page size"
+msgstr ""
+
+#: C/customize.page:59(p)
+msgid "Use this radio button group to specify your prefered page size. This will make it quicker for you to locate media types when creating a new label or card."
+msgstr ""
+
+#: C/customize.page:64(gui)
+msgid "US Letter"
+msgstr ""
+
+#: C/customize.page:65(p)
+msgid "Most of your media will be of the US Letter page size (8.5 x 11 inches)."
+msgstr ""
+
+#: C/customize.page:68(gui)
+msgid "ISO A4"
+msgstr ""
+
+#: C/customize.page:69(p)
+msgid "Most of your media will be of the ISO A4 page size (210 x 297 mm)."
+msgstr ""
+
+#: C/customize.page:72(p)
+msgid "Default: <gui>US Letter</gui>."
+msgstr ""
+
+#: C/customize.page:77(title)
+msgid "Object Defaults"
+msgstr ""
+
+#: C/customize.page:80(title)
+#: C/createnew.page:39(title)
+msgid "Text"
+msgstr ""
+
+#: C/customize.page:81(p)
+msgid "Use these controls to set the default properties of new text objects. These properties are:"
+msgstr ""
+
+#: C/customize.page:85(gui)
+msgid "Font"
+msgstr ""
+
+#: C/customize.page:86(p)
+msgid "These controls are used to select font family and font size, and whether the font should bold or in italics."
+msgstr ""
+
+#: C/customize.page:90(gui)
+#: C/customize.page:110(gui)
+#: C/customize.page:122(gui)
+msgid "Color"
+msgstr ""
+
+#: C/customize.page:91(p)
+msgid "This control selects the default text color."
+msgstr ""
+
+#: C/customize.page:94(gui)
+msgid "Alignment"
+msgstr ""
+
+#: C/customize.page:95(p)
+msgid "These controls are used to select the default text alignment (left, center or right)."
+msgstr ""
+
+#: C/customize.page:101(title)
+#: C/createnew.page:56(title)
+msgid "Line"
+msgstr ""
+
+#: C/customize.page:102(p)
+msgid "Use these controls to set the default properties of lines and outlines of new objects. These properties are:"
+msgstr ""
+
+#: C/customize.page:106(gui)
+msgid "Width"
+msgstr ""
+
+#: C/customize.page:107(p)
+msgid "This control selects the default line width."
+msgstr ""
+
+#: C/customize.page:111(p)
+msgid "This control selects the default line color."
+msgstr ""
+
+#: C/customize.page:117(title)
+msgid "Fill"
+msgstr ""
+
+#: C/customize.page:118(p)
+msgid "Use this control to set the default fill property of new objects. This property is:"
+msgstr ""
+
+#: C/customize.page:123(p)
+msgid "This control selects the default fill color."
+msgstr ""
+
+#: C/createnew.page:9(desc)
+msgid "Create new objects within your document."
+msgstr ""
+
+#: C/createnew.page:25(title)
+msgid "To create new objects"
+msgstr ""
+
+#: C/createnew.page:27(p)
+msgid "Objects are created by choosing the appropriate selection under the <guiseq><gui>Objects</gui><gui>Create Object</gui></guiseq> submenu or the <gui>Drawing Toolbar</gui>. This will place the display area into object creation mode as indicated by its cursor. To return to the default object selection mode without creating an object, choose <guiseq><gui>Objects</gui><gui>Select Mode</gui></guiseq>. This will return the display area's cursor to the default selection arrow."
+msgstr ""
+
+#: C/createnew.page:35(p)
+msgid "The following describes the object creation mode for each object type:"
+msgstr ""
+
+#: C/createnew.page:40(p)
+msgid "Click the desired location of the upper left corner of the text object. New text objects are initialized with the string \"Text.\" To change this text, or other properties, see <link xref=\"editprop\"/>."
+msgstr ""
+
+#: C/createnew.page:47(title)
+msgid "Box"
+msgstr ""
+
+#: C/createnew.page:48(p)
+msgid "Click the desired location of the upper left corner of the box object and drag to the desired location of the lower right corner. If you simply click in a single location, a square box will be created. To change properties of the box object, see <link xref=\"editprop\"/>."
+msgstr ""
+
+#: C/createnew.page:57(p)
+msgid "Click the desired location of one end of the line object and drag to the desired location of the other end. If you simply click in a single location, a diagonal line will be created. To change properties of the line object, see <link xref=\"editprop\"/>."
+msgstr ""
+
+#: C/createnew.page:65(title)
+msgid "Ellipse"
+msgstr ""
+
+#: C/createnew.page:66(p)
+msgid "Click the desired location of the upper left corner of the ellipse object and drag to the desired location of the lower right corner. If you simply click in a single location, a circle will be created. To change properties of the ellipse object, see <link xref=\"editprop\"/>."
+msgstr ""
+
+#: C/createnew.page:74(title)
+msgid "Image"
+msgstr ""
+
+#: C/createnew.page:75(p)
+msgid "Click the desired location of the upper left corner of the image object and drag to the desired location of the lower right corner. If you simply click in a single location, a square will be created. New image objects are initialized with a simple checkerboard image. To change this image, or other properties of the image object, see <link xref=\"editprop\"/>."
+msgstr ""
+
+#: C/createnew.page:85(title)
+msgid "Barcode"
+msgstr ""
+
+#: C/createnew.page:86(p)
+msgid "Click the desired location of the upper left corner of the barcode object. New barcode objects are initialized to a POSTNET barcode with representative data. To change data and properties of the barcode object, see <link xref=\"editprop\"/>."
+msgstr ""
+
+#: C/basicusage.page:9(desc)
+msgid "Handling files and quit the application."
+msgstr ""
+
+#: C/basicusage.page:25(title)
+msgid "Basic usage"
+msgstr ""
+
+#: C/basicusage.page:28(title)
+msgid "To open a file"
+msgstr ""
+
+#: C/basicusage.page:30(p)
+msgid "To open a file, choose <guiseq><gui>File</gui><gui>Open</gui></guiseq> to display the <gui>Open File</gui> dialog. Select the file that you want to open, then click <gui>OK</gui>. The file is displayed in the display area of the <app>gLabels</app> window."
+msgstr ""
+
+#: C/basicusage.page:37(p)
+msgid "You can also open multiple files in <app>gLabels</app>. The application creates a separate application window for each open file."
+msgstr ""
+
+#: C/basicusage.page:41(p)
+msgid "The application records the paths and filenames of the most recent files that you have edited and displays the files as menu items on the <guiseq><gui>File</gui><gui>Recent Files</gui></guiseq> menu."
+msgstr ""
+
+#: C/basicusage.page:48(title)
+msgid "To close a file"
+msgstr ""
+
+#: C/basicusage.page:50(p)
+msgid "To close the current document, choose <guiseq><gui>File</gui><gui>Close</gui></guiseq> to close the application window. If the current document is modified, a confirmation dialog will be presented, allowing you to save the document or cancel the command. If the window being closed is the only open window, <app>gLabels</app> will exit."
+msgstr ""
+
+#: C/basicusage.page:60(title)
+msgid "To save a file"
+msgstr ""
+
+#: C/basicusage.page:62(p)
+msgid "You can save files in the following ways:"
+msgstr ""
+
+#: C/basicusage.page:66(p)
+msgid "To save changes to an existing file, choose <guiseq><gui>File</gui><gui>Save</gui></guiseq>."
+msgstr ""
+
+#: C/basicusage.page:73(p)
+msgid "To save a new file or to save an existing file under a new filename, choose <guiseq><gui>File</gui><gui>Save As</gui></guiseq>. Enter a name for the file in the <gui>Save As</gui> dialog box, then click <gui>OK</gui>."
+msgstr ""
+
+#: C/basicusage.page:84(title)
+msgid "To quit <app>gLabels</app>"
+msgstr ""
+
+#: C/basicusage.page:86(p)
+msgid "To quit <app>gLabels</app>, choose <guiseq><gui>File</gui><gui>Quit</gui></guiseq>. This is equivalent to closing all open windows. See <link xref=\"basicusage#closefile\"/>."
+msgstr ""
+
+#: C/about.page:9(desc)
+msgid "Information about <app>gLabels</app>."
+msgstr ""
+
+#: C/about.page:25(title)
+msgid "About <app>gLabels</app>"
+msgstr ""
+
+#: C/about.page:27(p)
+msgid "<app>gLabels</app> was written by <link href=\"mailto:evins@snaught.com\">Jim Evins</link>. To find more information about <app>gLabels</app>, please visit the <link href=\"http://glabels.org\" type=\"http\"><app>gLabels</app> Web page</link>."
+msgstr ""
+
+#: C/about.page:31(p)
+msgid "To report a bug or make a suggestion regarding this application or this manual, follow the directions at the <link href=\"http://glabels.org/contact/\" type=\"http\"><app>gLabels</app> Contact Page</link>."
+msgstr ""
+
+#: C/about.page:37(p)
+msgid "This program is distributed under the terms of the GNU General Public license as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version. A copy of this license can be found at this <link href=\"ghelp:gpl\" type=\"help\">link</link>, or in the file COPYING included with the source code of this program."
+msgstr ""
+
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
+#: C/index.page:0(None)
+msgid "translator-credits"
+msgstr ""
+

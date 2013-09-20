@@ -46,4 +46,4 @@ HELP_FILES = \
 	select.page		\
 	skipfields.page
 
-HELP_LINGUAS = cs de el es fr id nl ru sl
+HELP_LINGUAS = cs de el es fr id nl pt_BR ru sl
