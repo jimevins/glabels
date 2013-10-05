@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2013 Jim Evins <evins@snaught.com> -->
+<application>
+  <id type="desktop">glabels-3.0.desktop</id>
+  <licence>CC0</licence>
+  <description>
+    <_p>
+      gLabels is a program for creating labels and business cards. It is
+      designed to work with various laser/ink-jet peel-off label and
+      business card sheets that you'll find at most office supply stores.
+    </_p>
+    <_p>
+      gLabels can be used to design address labels, name tags, price tags,
+      cd/dvd labels, or just about anything else that is organized in a
+      regular pattern on a sheet of paper. Labels (or cards) can contain
+      text, images, lines, shapes, and barcodes. gLabels also includes a
+      document-merge feature which lets you print a unique label for each
+      record from an external data source, such as a CSV file or an
+      Evolution address book. 
+    </_p>
+  </description>
+  <screenshots>
+    <screenshot type="default" width="881" height="640">http://glabels.org/screenshots/320-screenshot-main.png</screenshot>
+  </screenshots>
+  <url type="homepage">http://glabels.org/</url>
+  <updatecontact>evins_at_snaught.com</updatecontact>
+</application>

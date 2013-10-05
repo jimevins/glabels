@@ -216,6 +216,8 @@ libglabels/libglabels-private.h
 [type: gettext/glade]data/ui/template-designer.ui
 [type: gettext/glade]data/ui/print-op-dialog-custom-widget.ui
 
+data/appdata/glabels-3.appdata.xml.in
+
 data/schemas/org.gnome.glabels-3.gschema.xml.in.in
 
 [type: gettext/ini]data/desktop/glabels-3.0.desktop.in

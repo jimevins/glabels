@@ -327,6 +327,7 @@ src/Makefile
 src/cursors/Makefile
 src/pixmaps/Makefile
 data/Makefile
+data/appdata/Makefile
 data/desktop/Makefile
 data/icons/Makefile
 data/icons/16x16/Makefile
