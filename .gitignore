@@ -53,6 +53,8 @@ glabels-*.tar.gz
 /src/glabels-batch
 /src/glabels-3-batch
 
+/data/appdata/glabels-3.appdata.xml
+
 /data/desktop/glabels*.desktop
 
 /data/mime/glabels*.xml
@@ -74,6 +76,7 @@ glabels-*.tar.gz
 !/help/C/glabels*.xml
 /help/*/*.page
 !/help/C/*.page
+/help/*/*.stamp
 
 /docs/libglabels/*.stamp
 /docs/libglabels/xml/
