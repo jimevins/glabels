@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: glabels master\n"
+"Project-Id-Version: glabels glabels-3_2\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2013-06-23 10:23+0000\n"
-"PO-Revision-Date: 2013-06-26 11:47+0100\n"
+"POT-Creation-Date: 2013-10-11 18:32+0000\n"
+"PO-Revision-Date: 2013-10-12 18:35+0100\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -801,67 +801,67 @@ msgstr "Mischeinstellungen"
 msgid "Delete"
 msgstr "Löschen"
 
-#: ../src/label.c:1249 ../src/ui.c:322
+#: ../src/label.c:1251 ../src/ui.c:322
 msgid "Bring to front"
 msgstr "Ganz nach vorn"
 
-#: ../src/label.c:1285 ../src/ui.c:329
+#: ../src/label.c:1287 ../src/ui.c:329
 msgid "Send to back"
 msgstr "Ganz nach hinten"
 
-#: ../src/label.c:1326
+#: ../src/label.c:1328
 msgid "Rotate"
 msgstr "Drehen"
 
-#: ../src/label.c:1361 ../src/ui.c:336
+#: ../src/label.c:1363 ../src/ui.c:336
 msgid "Rotate left"
 msgstr "Links drehen"
 
-#: ../src/label.c:1394 ../src/ui.c:343
+#: ../src/label.c:1396 ../src/ui.c:343
 msgid "Rotate right"
 msgstr "Rechts drehen"
 
-#: ../src/label.c:1429 ../src/ui.c:350
+#: ../src/label.c:1431 ../src/ui.c:350
 msgid "Flip horizontally"
 msgstr "Horizontal spiegeln"
 
-#: ../src/label.c:1464 ../src/ui.c:357
+#: ../src/label.c:1466 ../src/ui.c:357
 msgid "Flip vertically"
 msgstr "Vertikal spiegeln"
 
-#: ../src/label.c:1504 ../src/ui.c:364
+#: ../src/label.c:1506 ../src/ui.c:364
 msgid "Align left"
 msgstr "Linksbündig"
 
-#: ../src/label.c:1561 ../src/ui.c:378
+#: ../src/label.c:1563 ../src/ui.c:378
 msgid "Align right"
 msgstr "Rechtsbündig"
 
-#: ../src/label.c:1622
+#: ../src/label.c:1624
 msgid "Align horizontal center"
 msgstr "Horizontal mittig anordnen"
 
-#: ../src/label.c:1698
+#: ../src/label.c:1700
 msgid "Align tops"
 msgstr "Oben bündig"
 
-#: ../src/label.c:1755
+#: ../src/label.c:1757
 msgid "Align bottoms"
 msgstr "Unten bündig"
 
-#: ../src/label.c:1816
+#: ../src/label.c:1818
 msgid "Align vertical center"
 msgstr "Vertikal mittig anordnen"
 
-#: ../src/label.c:1894 ../src/ui.c:406
+#: ../src/label.c:1896 ../src/ui.c:406
 msgid "Center horizontally"
 msgstr "Horizontal zentrieren"
 
-#: ../src/label.c:1941 ../src/ui.c:413
+#: ../src/label.c:1943 ../src/ui.c:413
 msgid "Center vertically"
 msgstr "Vertikal zentrieren"
 
-#: ../src/label.c:2662 ../src/label.c:2704 ../src/label.c:2730 ../src/ui.c:206
+#: ../src/label.c:2664 ../src/label.c:2706 ../src/label.c:2732 ../src/ui.c:206
 msgid "Paste"
 msgstr "Einfügen"
 
@@ -2395,6 +2395,36 @@ msgstr "Mischsteuerung"
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:14
 msgid "Options"
 msgstr "Optionen"
+
+#: ../data/appdata/glabels-3.appdata.xml.in.h:1
+msgid ""
+"gLabels is a program for creating labels and business cards. It is designed "
+"to work with various laser/ink-jet peel-off label and business card sheets "
+"that you'll find at most office supply stores."
+msgstr ""
+"gLabels ist ein Programm zum Entwerfen von Etiketten und Visitenkarten. Es "
+"wurde für die verschiedensten mit Laser- oder Tintenstrahldruckern "
+"bedruckbaren selbstklebenden) Etiketten sowie Visitenkarten entworfen, so wie "
+"Sie sie bei den meisten Anbietern für Bürozubehör finden."
+
+#: ../data/appdata/glabels-3.appdata.xml.in.h:2
+msgid ""
+"gLabels can be used to design address labels, name tags, price tags, cd/dvd "
+"labels, or just about anything else that is organized in a regular pattern on "
+"a sheet of paper. Labels (or cards) can contain text, images, lines, shapes, "
+"and barcodes. gLabels also includes a document-merge feature which lets you "
+"print a unique label for each record from an external data source, such as a "
+"CSV file or an Evolution address book."
+msgstr ""
+"gLabels kann zum Enwerfen von Adressaufklebern, Namens- und Preisschildern, "
+"Etiketten CDs und DVDs oder für alles Andere verwendet werden, was mit dem "
+"Bedrucken von Papieren zu tun hat, die Etiketten oder Karten in einer "
+"regulären Anordnung enthalten. Die Etiketten oder Karten können Text, Bilder, "
+"Linien, Formen oder Strichcodes enthalten. gLabels verfügt auch über ein "
+"Funktionsmerkmal zur Dokumentmischung. Das bedeutet, dass Sie eine externe "
+"Datenquelle dazu verwenden können, ein Etikett für jeden Datensatz zu "
+"drucken. Als Datenquelle kann dabei beispielsweise eine CSV-Datei oder das "
+"Adressbuch von Evolution genutzt werden."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
 msgid "Show/hide main toolbar."
