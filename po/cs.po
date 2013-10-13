@@ -4,21 +4,22 @@
 #
 # David Makovský (Yakeen) <yakeen@sannyas-on.net>, 2005.
 # Zbynek Mrkvicka <zbynek@oachot.cz>, 2005.
-# Marek Černocký <marek@manet.cz>, 2009, 2010, 2011, 2012.
+# Marek Černocký <marek@manet.cz>, 2009, 2010, 2011, 2012, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2012-03-22 16:50+0000\n"
-"PO-Revision-Date: 2012-03-25 13:42+0200\n"
+"POT-Creation-Date: 2013-10-12 17:48+0000\n"
+"PO-Revision-Date: 2013-10-13 16:05+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: cs\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Gtranslator 2.91.6\n"
 
 #: ../src/bc-backends.c:81
 msgid "Built-in"
@@ -801,67 +802,67 @@ msgstr "Vlastnosti slučování"
 msgid "Delete"
 msgstr "Smazat"
 
-#: ../src/label.c:1249 ../src/ui.c:322
+#: ../src/label.c:1251 ../src/ui.c:322
 msgid "Bring to front"
 msgstr "Přenést dopředu"
 
-#: ../src/label.c:1285 ../src/ui.c:329
+#: ../src/label.c:1287 ../src/ui.c:329
 msgid "Send to back"
 msgstr "Odsunout dozadu"
 
-#: ../src/label.c:1326
+#: ../src/label.c:1328
 msgid "Rotate"
 msgstr "Otočit"
 
-#: ../src/label.c:1361 ../src/ui.c:336
+#: ../src/label.c:1363 ../src/ui.c:336
 msgid "Rotate left"
 msgstr "Otočit doleva"
 
-#: ../src/label.c:1394 ../src/ui.c:343
+#: ../src/label.c:1396 ../src/ui.c:343
 msgid "Rotate right"
 msgstr "Otočit doprava"
 
-#: ../src/label.c:1429 ../src/ui.c:350
+#: ../src/label.c:1431 ../src/ui.c:350
 msgid "Flip horizontally"
 msgstr "Překlopit vodorovně"
 
-#: ../src/label.c:1464 ../src/ui.c:357
+#: ../src/label.c:1466 ../src/ui.c:357
 msgid "Flip vertically"
 msgstr "Překlopit svisle"
 
-#: ../src/label.c:1504 ../src/ui.c:364
+#: ../src/label.c:1506 ../src/ui.c:364
 msgid "Align left"
 msgstr "Zarovnat doleva"
 
-#: ../src/label.c:1561 ../src/ui.c:378
+#: ../src/label.c:1563 ../src/ui.c:378
 msgid "Align right"
 msgstr "Zarovnat doprava"
 
-#: ../src/label.c:1622
+#: ../src/label.c:1624
 msgid "Align horizontal center"
 msgstr "Zarovnat vodorovně na střed"
 
-#: ../src/label.c:1698
+#: ../src/label.c:1700
 msgid "Align tops"
 msgstr "Zarovnat nahoru"
 
-#: ../src/label.c:1755
+#: ../src/label.c:1757
 msgid "Align bottoms"
 msgstr "Zarovnat dolů"
 
-#: ../src/label.c:1816
+#: ../src/label.c:1818
 msgid "Align vertical center"
 msgstr "Zarovnat svisle na střed"
 
-#: ../src/label.c:1894 ../src/ui.c:406
+#: ../src/label.c:1896 ../src/ui.c:406
 msgid "Center horizontally"
 msgstr "Vystředit vodorovně"
 
-#: ../src/label.c:1941 ../src/ui.c:413
+#: ../src/label.c:1943 ../src/ui.c:413
 msgid "Center vertically"
 msgstr "Vystředit  svisle"
 
-#: ../src/label.c:2662 ../src/label.c:2704 ../src/label.c:2730 ../src/ui.c:206
+#: ../src/label.c:2664 ../src/label.c:2706 ../src/label.c:2732 ../src/ui.c:206
 msgid "Paste"
 msgstr "Vložit"
 
@@ -869,11 +870,11 @@ msgstr "Vložit"
 msgid "Create ellipse object"
 msgstr "Vytvořit elipsu"
 
-#: ../src/label-image.c:200 ../src/ui.c:310
+#: ../src/label-image.c:199 ../src/ui.c:310
 msgid "Create image object"
 msgstr "Vytvořit objekt s obrázkem"
 
-#: ../src/label-image.c:333 ../src/label-image.c:474
+#: ../src/label-image.c:332 ../src/label-image.c:473
 msgid "Set image"
 msgstr "Nastavit obrázek"
 
@@ -881,71 +882,71 @@ msgstr "Nastavit obrázek"
 msgid "Create line object"
 msgstr "Vytvořit čáru"
 
-#: ../src/label-object.c:394 ../src/label-object.c:428
+#: ../src/label-object.c:392 ../src/label-object.c:423
 msgid "Move"
 msgstr "Přesunout"
 
-#: ../src/label-object.c:479
+#: ../src/label-object.c:474
 msgid "Resize"
 msgstr "Změnit velikost"
 
-#: ../src/label-object.c:1263
+#: ../src/label-object.c:1258
 msgid "Shadow state"
 msgstr "Stav stínu"
 
-#: ../src/label-object.c:1306
+#: ../src/label-object.c:1301
 msgid "Shadow offset"
 msgstr "Posun stínu"
 
-#: ../src/label-object.c:1354
+#: ../src/label-object.c:1349
 msgid "Shadow color"
 msgstr "Barva stínu"
 
-#: ../src/label-object.c:1397
+#: ../src/label-object.c:1392
 msgid "Shadow opacity"
 msgstr "Krytí stínu"
 
-#: ../src/label-text.c:290 ../src/ui.c:282
+#: ../src/label-text.c:293 ../src/ui.c:282
 msgid "Create text object"
 msgstr "Vytvořit textový objekt"
 
-#: ../src/label-text.c:464
+#: ../src/label-text.c:467
 msgid "Typing"
 msgstr "Psaní"
 
-#: ../src/label-text.c:597 ../data/ui/property-bar.ui.h:1
+#: ../src/label-text.c:601 ../data/ui/property-bar.ui.h:1
 msgid "Font family"
 msgstr "Rodina písma"
 
-#: ../src/label-text.c:635 ../data/ui/property-bar.ui.h:2
+#: ../src/label-text.c:639 ../data/ui/property-bar.ui.h:2
 msgid "Font size"
 msgstr "Velikost písma"
 
-#: ../src/label-text.c:668
+#: ../src/label-text.c:672
 msgid "Font weight"
 msgstr "Tloušťka písma"
 
-#: ../src/label-text.c:701 ../data/ui/property-bar.ui.h:4
+#: ../src/label-text.c:705 ../data/ui/property-bar.ui.h:4
 msgid "Italic"
 msgstr "Kurzíva"
 
-#: ../src/label-text.c:734
+#: ../src/label-text.c:738
 msgid "Align text"
 msgstr "Zarovnat text"
 
-#: ../src/label-text.c:767
+#: ../src/label-text.c:771
 msgid "Vertically align text"
 msgstr "Svisle zarovnaný text"
 
-#: ../src/label-text.c:800
+#: ../src/label-text.c:804
 msgid "Line spacing"
 msgstr "Řádkování"
 
-#: ../src/label-text.c:833 ../data/ui/property-bar.ui.h:11
+#: ../src/label-text.c:837 ../data/ui/property-bar.ui.h:11
 msgid "Text color"
 msgstr "Barva textu"
 
-#: ../src/label-text.c:993
+#: ../src/label-text.c:997
 msgid "Auto shrink"
 msgstr "Automatické zúžení"
 
@@ -1084,25 +1085,25 @@ msgid "Fixed"
 msgstr "Napevno"
 
 #. Translators: "Up" refers to the direction towards the top of a label.
-#: ../src/mini-preview.c:1054
+#: ../src/mini-preview.c:1051
 msgid "Up"
 msgstr "Nahoru"
 
-#: ../src/new-label-dialog.c:203
+#: ../src/new-label-dialog.c:212 ../data/ui/new-label-dialog.ui.h:1
 msgid "Select Product"
 msgstr "Výběr produktu"
 
-#: ../src/new-label-dialog.c:215
+#: ../src/new-label-dialog.c:225 ../data/ui/new-label-dialog.ui.h:3
 msgid "Choose Orientation"
 msgstr "Volba otočení"
 
-#: ../src/new-label-dialog.c:229
+#: ../src/new-label-dialog.c:240
 msgid "Review"
 msgstr "Kontrola"
 
 #: ../src/object-editor-bc-page.c:97 ../src/object-editor-shadow-page.c:93
 #: ../src/object-editor-text-page.c:102 ../src/prefs-dialog.c:335
-#: ../src/ui-property-bar.c:288
+#: ../src/ui-property-bar.c:289
 msgid "Default"
 msgstr "Výchozí"
 
@@ -1139,7 +1140,7 @@ msgid "Insert merge field"
 msgstr "Vložit pole pro slučování"
 
 #: ../src/object-editor-fill-page.c:79 ../src/prefs-dialog.c:341
-#: ../src/ui-property-bar.c:298
+#: ../src/ui-property-bar.c:299
 msgid "No Fill"
 msgstr "Bez výplně"
 
@@ -1157,7 +1158,7 @@ msgid "%s (*.%s)"
 msgstr "%s (*.%s)"
 
 #: ../src/object-editor-line-page.c:79 ../src/prefs-dialog.c:338
-#: ../src/ui-property-bar.c:308
+#: ../src/ui-property-bar.c:309
 msgid "No Line"
 msgstr "Bez obrysu"
 
@@ -1814,7 +1815,7 @@ msgstr "Nedávné"
 msgid "Brand:"
 msgstr "Značka:"
 
-#: ../data/ui/media-select.ui.h:3 ../data/ui/new-label-dialog.ui.h:7
+#: ../data/ui/media-select.ui.h:3 ../data/ui/new-label-dialog.ui.h:10
 #: ../data/ui/template-designer.ui.h:12
 msgid "Page size:"
 msgstr "Velikost stránky:"
@@ -1831,7 +1832,7 @@ msgstr "Prohledat vše"
 msgid "Custom"
 msgstr "Vlastní"
 
-#: ../data/ui/new-label-dialog.ui.h:1
+#: ../data/ui/new-label-dialog.ui.h:2
 msgid ""
 "Choose label or card product from hundreds of predefined templates or define "
 "your own."
@@ -1839,43 +1840,47 @@ msgstr ""
 "Zvolte produkt s etiketami nebo vizitkami ze stovek předdefinovaných šablon "
 "nebo si vytvořte vlastní."
 
-#: ../data/ui/new-label-dialog.ui.h:2
+#: ../data/ui/new-label-dialog.ui.h:4
 msgid "Select orientation of label content."
 msgstr "Vyberte otočení obsahu etikety."
 
-#: ../data/ui/new-label-dialog.ui.h:3
+#: ../data/ui/new-label-dialog.ui.h:5
 msgid "Normal"
 msgstr "Normálně"
 
-#: ../data/ui/new-label-dialog.ui.h:4
+#: ../data/ui/new-label-dialog.ui.h:6
 msgid "Rotated"
 msgstr "Otočené"
 
-#: ../data/ui/new-label-dialog.ui.h:5
+#: ../data/ui/new-label-dialog.ui.h:7
+msgid "Review Selection"
+msgstr "Kontrola výběru"
+
+#: ../data/ui/new-label-dialog.ui.h:8
 msgid "Please review and confirm your selection."
 msgstr "Zkontrolujte prosím a potvrďte svůj výběr."
 
-#: ../data/ui/new-label-dialog.ui.h:6 ../data/ui/template-designer.ui.h:9
+#: ../data/ui/new-label-dialog.ui.h:9 ../data/ui/template-designer.ui.h:9
 msgid "Description:"
 msgstr "Popis:"
 
-#: ../data/ui/new-label-dialog.ui.h:8
+#: ../data/ui/new-label-dialog.ui.h:11
 msgid "Label size:"
 msgstr "Velikost etikety:"
 
-#: ../data/ui/new-label-dialog.ui.h:9
+#: ../data/ui/new-label-dialog.ui.h:12
 msgid "Layout:"
 msgstr "Rozvržení:"
 
-#: ../data/ui/new-label-dialog.ui.h:10
+#: ../data/ui/new-label-dialog.ui.h:13
 msgid "Similar products:"
 msgstr "Podobné produkty:"
 
-#: ../data/ui/new-label-dialog.ui.h:11 ../data/ui/template-designer.ui.h:6
+#: ../data/ui/new-label-dialog.ui.h:14 ../data/ui/template-designer.ui.h:6
 msgid "Part #:"
 msgstr "Produktové číslo:"
 
-#: ../data/ui/new-label-dialog.ui.h:12
+#: ../data/ui/new-label-dialog.ui.h:15
 msgid "Vendor:"
 msgstr "Výrobce:"
 
@@ -2382,6 +2387,34 @@ msgstr "Řízení slučování"
 msgid "Options"
 msgstr "Volby"
 
+#: ../data/appdata/glabels-3.appdata.xml.in.h:1
+msgid ""
+"gLabels is a program for creating labels and business cards. It is designed "
+"to work with various laser/ink-jet peel-off label and business card sheets "
+"that you'll find at most office supply stores."
+msgstr ""
+"gLabels je aplikace pro vytváření etiket a vizitek. Je nevržena tak, aby "
+"uměla pracovat se všemi možnými druhy štítků a kartiček na arších, které "
+"seženete v obchodech s kancelářskými potřebami, a to jak do laserových, tak "
+"inkoustových tiskáren."
+
+#: ../data/appdata/glabels-3.appdata.xml.in.h:2
+msgid ""
+"gLabels can be used to design address labels, name tags, price tags, cd/dvd "
+"labels, or just about anything else that is organized in a regular pattern "
+"on a sheet of paper. Labels (or cards) can contain text, images, lines, "
+"shapes, and barcodes. gLabels also includes a document-merge feature which "
+"lets you print a unique label for each record from an external data source, "
+"such as a CSV file or an Evolution address book."
+msgstr ""
+"gLabels můžete používat k navrhování adresních štítků, štítků se jmény, "
+"cenových vysaček, obalů a polepek na CD/DVD nebo prostě čehokoliv jiného, co "
+"je na archu papíru pravidelně uspořádáno. Etikety (a kartičky) mohou "
+"obsahovat text, obrázky, čáry, různé obrazce a čárové kódy. gLabels rovněž "
+"podporuje funkci slučování dokumentů, takže můžete tisknout jedinečné "
+"etikety podle dat z externích zdrojů, jako jsou soubory CSV nebo adresář "
+"Evolution."
+
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
 msgid "Show/hide main toolbar."
 msgstr "Zobrazit/skrýt hlavní panel nástrojů."
@@ -2755,12 +2788,14 @@ msgstr "Čtvercové etikety"
 #. ====================================================================
 #. ===================================================================
 #. ********************************************************************
+#. ===================================================================
 #: ../templates/categories.xml.h:5 ../templates/ascom-iso-templates.xml.h:4
 #: ../templates/endisch-templates.xml.h:3
 #: ../templates/hama-iso-templates.xml.h:27
 #: ../templates/herma-iso-templates.xml.h:20
 #: ../templates/igepa-templates.xml.h:1 ../templates/jac-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:1
+#: ../templates/sheetlabels-us-templates.xml.h:2
 msgid "Rectangular labels"
 msgstr "Obdélníkové etikety"
 
@@ -2855,7 +2890,7 @@ msgstr "Etikety na složky"
 #: ../templates/avery-us-templates.xml.h:10
 #: ../templates/dataline-iso-templates.xml.h:10
 #: ../templates/meritline-us-templates.xml.h:6
-#: ../templates/sheetlabels-us-templates.xml.h:4
+#: ../templates/sheetlabels-us-templates.xml.h:6
 #: ../templates/uline-us-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:4
 msgid "Shipping Labels"
@@ -2872,7 +2907,7 @@ msgstr "Dopravní etikety"
 #: ../templates/maco-us-templates.xml.h:2
 #: ../templates/meritline-us-templates.xml.h:4
 #: ../templates/pearl-iso-templates.xml.h:2
-#: ../templates/sheetlabels-us-templates.xml.h:2
+#: ../templates/sheetlabels-us-templates.xml.h:4
 #: ../templates/worldlabel-us-templates.xml.h:3
 #: ../templates/zweckform-iso-templates.xml.h:4
 msgid "Address Labels"
@@ -2883,7 +2918,7 @@ msgstr "Adresní etikety"
 #: ../templates/avery-us-templates.xml.h:14
 #: ../templates/dymo-other-templates.xml.h:6
 #: ../templates/meritline-us-templates.xml.h:8
-#: ../templates/sheetlabels-us-templates.xml.h:6
+#: ../templates/sheetlabels-us-templates.xml.h:8
 #: ../templates/worldlabel-us-templates.xml.h:2
 msgid "Return Address Labels"
 msgstr "Zpáteční adresa"
@@ -2893,7 +2928,7 @@ msgstr "Zpáteční adresa"
 #: ../templates/maco-us-templates.xml.h:3
 #: ../templates/meritline-us-templates.xml.h:12
 #: ../templates/misc-us-templates.xml.h:23
-#: ../templates/sheetlabels-us-templates.xml.h:8
+#: ../templates/sheetlabels-us-templates.xml.h:10
 #: ../templates/worldlabel-us-templates.xml.h:9
 msgid "Round Labels"
 msgstr "Kulaté etikety"
@@ -2902,7 +2937,7 @@ msgstr "Kulaté etikety"
 #: ../templates/avery-us-templates.xml.h:18
 #: ../templates/avery-iso-templates.xml.h:20
 #: ../templates/meritline-us-templates.xml.h:14
-#: ../templates/sheetlabels-us-templates.xml.h:14
+#: ../templates/sheetlabels-us-templates.xml.h:16
 #: ../templates/worldlabel-us-templates.xml.h:8
 msgid "Diskette Labels"
 msgstr "Etikety na diskety"
@@ -2914,7 +2949,7 @@ msgstr "Přáníčka"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:22
-#: ../templates/sheetlabels-us-templates.xml.h:10
+#: ../templates/sheetlabels-us-templates.xml.h:12
 #: ../templates/worldlabel-us-templates.xml.h:7
 msgid "Filing Labels"
 msgstr "Etikety na kartotéky"
@@ -2966,7 +3001,7 @@ msgstr "Etikety na jmenovky"
 #: ../templates/misc-other-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:64
 #: ../templates/rayfilm-templates.xml.h:10
-#: ../templates/sheetlabels-us-templates.xml.h:12
+#: ../templates/sheetlabels-us-templates.xml.h:14
 #: ../templates/worldlabel-us-templates.xml.h:12
 #: ../templates/zweckform-iso-templates.xml.h:8
 msgid "CD/DVD Labels"
@@ -2974,7 +3009,7 @@ msgstr "Etikety na CD/DVD"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:34
-#: ../templates/sheetlabels-us-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:18
 msgid "CD/DVD Labels (Disc Labels)"
 msgstr "Etikety na CD/DVD (diskové etikety)"
 
@@ -2987,7 +3022,7 @@ msgstr "Etikety na CD/DVD (hřbetní etikety)"
 #: ../templates/avery-us-templates.xml.h:38
 #: ../templates/geha-iso-templates.xml.h:17
 #: ../templates/meritline-us-templates.xml.h:16
-#: ../templates/sheetlabels-us-templates.xml.h:18
+#: ../templates/sheetlabels-us-templates.xml.h:20
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Video Tape Face Labels"
 msgstr "Etikety na čelní stranu videokazety"
@@ -3124,8 +3159,10 @@ msgstr "Etikety na CD"
 
 #. ===================================================================
 #. ====================================================================
+#. ===================================================================
 #: ../templates/dataline-iso-templates.xml.h:2
 #: ../templates/hama-iso-templates.xml.h:35
+#: ../templates/misc-iso-templates.xml.h:32
 msgid "CD/DVD labels"
 msgstr "Etikety na CD/DVD"
 
@@ -3414,7 +3451,7 @@ msgstr "Etikety na pásky DLT"
 #. ===================================================================
 #. TODO: Is this the actual part #?
 #: ../templates/misc-us-templates.xml.h:27
-#: ../templates/misc-iso-templates.xml.h:34
+#: ../templates/misc-iso-templates.xml.h:36
 msgid "PRO CD Labels 2-up (face only)"
 msgstr "PRO CD Labels 2-up (pouze povrch)"
 
@@ -3465,13 +3502,13 @@ msgid "Universal Labels"
 msgstr "Univerzální etikety"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:32
+#: ../templates/misc-iso-templates.xml.h:34
 #: ../templates/pearl-iso-templates.xml.h:16
 msgid "Bottle labels"
 msgstr "Etikety na lahve"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:36
+#: ../templates/misc-iso-templates.xml.h:38
 msgid "Etiketten"
 msgstr "Etikety"
 
@@ -3556,22 +3593,18 @@ msgid "Membership cards, both sides printable"
 msgstr "Členské karty, oboustranně potisknutelné"
 
 #: ../templates/rayfilm-templates.xml.h:11
-#| msgid "Business Card CD"
 msgid "Business card CD Labels"
 msgstr "Etikety na vizitkové CD"
 
 #: ../templates/rayfilm-templates.xml.h:12
-#| msgid "Mini-CD Labels"
 msgid "Mini CD Labels"
 msgstr "Etikety na mini CD"
 
 #: ../templates/rayfilm-templates.xml.h:13
-#| msgid "Rectangular labels"
 msgid "Triangular labels"
 msgstr "Trojúhelníkové etikety"
 
 #: ../templates/rayfilm-templates.xml.h:14
-#| msgid "Allround labels"
 msgid "Trapezoid labels"
 msgstr "Lichoběžníkové etikety"
 
