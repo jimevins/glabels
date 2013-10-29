@@ -1,3 +1,16 @@
+* gLabels 3.2.0 (stable) release.  Release date 2013-10-28
+
+- Fixed bug causing object editor to remain active after object deleted.
+- Embed text directly to printsrteam rather than outline.
+- Added workaround for pango kerning bug: pango-cairo bug #700592.
+- Fixed many gtk+ deprecations.
+- Document updates.
+- Additional templates and fixes.
+- Updated to workaround evolution-data-server API breakage.
+- Fixed desktop file validation problems.
+- Updated and new translations.
+
+
 * gLabels 3.0.1 (stable) release.  Release date 2012-09-17
 
 - Fixed bug causing extra pages to be printed when doing a document merge
