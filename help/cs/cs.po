@@ -1,14 +1,13 @@
 # Czech translation for glabels help.
 # Copyright (C) 2010 glabels's COPYRIGHT HOLDER
 # This file is distributed under the same license as the glabels help.
-#
 # Marek Černocký <marek@manet.cz>, 2010, 2011, 2013.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: glabels\n"
-"POT-Creation-Date: 2013-04-18 11:17+0000\n"
-"PO-Revision-Date: 2013-04-26 14:29+0200\n"
+"Project-Id-Version: glabels glabels-3.2\n"
+"POT-Creation-Date: 2013-12-18 19:25+0000\n"
+"PO-Revision-Date: 2013-12-27 06:18+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -1053,6 +1052,23 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
+#: C/mancreate.page:340(media)
+#| msgctxt "_"
+#| msgid ""
+#| "external ref='figures/glabels-template-ellipse-label.png' "
+#| "md5='ba612c86b5fb8fcd2b5384ecc1c331d2'"
+msgctxt "_"
+msgid ""
+"external ref='figures/glabels-template-rect-label.png' "
+"md5='9c7ae1c1a888e1c9eefd19655d093971'"
+msgstr ""
+"external ref='figures/glabels-template-rect-label.png' "
+"md5='9c7ae1c1a888e1c9eefd19655d093971'"
+
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
 #: C/mancreate.page:392(media)
 msgctxt "_"
 msgid ""
@@ -1061,6 +1077,74 @@ msgid ""
 msgstr ""
 "external ref='figures/glabels-template-ellipse-label.png' "
 "md5='ba612c86b5fb8fcd2b5384ecc1c331d2'"
+
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/mancreate.page:439(media)
+#| msgctxt "_"
+#| msgid ""
+#| "external ref='figures/glabels-template-ellipse-label.png' "
+#| "md5='ba612c86b5fb8fcd2b5384ecc1c331d2'"
+msgctxt "_"
+msgid ""
+"external ref='figures/glabels-template-circle-label.png' "
+"md5='841e36a1f92aeed01e8fbaacc67758f1'"
+msgstr ""
+"external ref='figures/glabels-template-circle-label.png' "
+"md5='841e36a1f92aeed01e8fbaacc67758f1'"
+
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/mancreate.page:500(media)
+#| msgctxt "_"
+#| msgid ""
+#| "external ref='figures/glabels-template-ellipse-label.png' "
+#| "md5='ba612c86b5fb8fcd2b5384ecc1c331d2'"
+msgctxt "_"
+msgid ""
+"external ref='figures/glabels-template-cd-label.png' "
+"md5='c7952ac1b26ecbfa53facfbbf6486841'"
+msgstr ""
+"external ref='figures/glabels-template-cd-label.png' "
+"md5='c7952ac1b26ecbfa53facfbbf6486841'"
+
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/mancreate.page:726(media)
+#| msgctxt "_"
+#| msgid ""
+#| "external ref='figures/glabels-logo.png' "
+#| "md5='0c1e32afcbae0d2fc6976020c24a0a43'"
+msgctxt "_"
+msgid ""
+"external ref='figures/layouts-cdlabel.png' "
+"md5='0c41a95dc82b5a426e934751faf86872'"
+msgstr ""
+"external ref='figures/layouts-cdlabel.png' "
+"md5='0c41a95dc82b5a426e934751faf86872'"
+
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/mancreate.page:789(media)
+#| msgctxt "_"
+#| msgid ""
+#| "external ref='figures/glabels-template-ellipse-label.png' "
+#| "md5='ba612c86b5fb8fcd2b5384ecc1c331d2'"
+msgctxt "_"
+msgid ""
+"external ref='figures/glabels-template-layout.png' "
+"md5='fe1c9652d5448b2e0ece086777d3a287'"
+msgstr ""
+"external ref='figures/glabels-template-layout.png' "
+"md5='fe1c9652d5448b2e0ece086777d3a287'"
 
 #: C/mancreate.page:11(info/desc)
 msgid "Create your templates manually."
@@ -2281,17 +2365,6 @@ msgstr ""
 "jednotlivých záznamů v externím zdroji dat."
 
 #: C/mergefeatures.page:31(page/p)
-#| msgid ""
-#| "The first step to performing a document merge is to prepare a source "
-#| "document that contains your merge data. This data could be mailing "
-#| "addresses or any other data that you wish to create unique labels or "
-#| "cards for. Currently back-ends only exist for text files and the "
-#| "evolution data server -- others are planned. The currently supported text-"
-#| "file format is very simple: each line is a record; fields are delimited "
-#| "by commas (CSV), tabs, or colons; and newlines can be embedded into "
-#| "fields by using the \"\\n\" entity. This file could be created using any "
-#| "text editor or could be created by another program or script. A common "
-#| "way of creating CSV files is to export them from a spreadsheet program."
 msgid ""
 "The first step to performing a document merge is to prepare a source "
 "document that contains your merge data. This data could be mailing addresses "
