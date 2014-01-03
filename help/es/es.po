@@ -3,14 +3,14 @@
 # Copyright (C) 2010 glabels's COPYRIGHT HOLDER
 # This file is distributed under the same license as the glabels package.
 # Jorge González <jorgegonz@svn.gnome.org>, 2010, 2011.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011, 2012.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011, 2012, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-17 19:04+0000\n"
-"PO-Revision-Date: 2012-10-19 12:22+0200\n"
+"POT-Creation-Date: 2013-12-27 05:21+0000\n"
+"PO-Revision-Date: 2014-01-03 17:40+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -18,14 +18,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Gtranslator 2.91.5\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
-#| msgid "translator-credits"
 msgctxt "_"
 msgid "translator-credits"
 msgstr ""
-"Daniel Mustieles <daniel.mustieles@gmail.com>, 2010-2012\n"
+"Daniel Mustieles <daniel.mustieles@gmail.com>, 2010-2014\n"
 "Jorge González <jorgegonz@svn.gnome.org>, 2010"
 
 #. This is a reference to an external file such as an image or video. When
@@ -38,8 +37,6 @@ msgstr ""
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
 #: C/index.page:24(media)
-#| msgid ""
-#| "@@image: 'figures/glabels-logo.png'; md5=0c1e32afcbae0d2fc6976020c24a0a43"
 msgctxt "_"
 msgid ""
 "external ref='figures/glabels-logo.png' "
@@ -58,9 +55,6 @@ msgstr ""
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
 #: C/index.page:47(media)
-#| msgid ""
-#| "@@image: 'figures/introduction-glabels-main-window.png'; "
-#| "md5=9ee2b2cc026ee8cba3c881b370a14313"
 msgctxt "_"
 msgid ""
 "external ref='figures/introduction-glabels-main-window.png' "
@@ -70,13 +64,11 @@ msgstr ""
 "md5='9ee2b2cc026ee8cba3c881b370a14313'"
 
 #: C/index.page:7(info/title)
-#| msgid "gLabels label and business card designer"
 msgctxt "link"
 msgid "gLabels label and business card designer"
 msgstr "Diseñador de etiquetas y de tarjetas de visita gLabels"
 
 #: C/index.page:8(info/title)
-#| msgid "gLabels label and business card designer"
 msgctxt "text"
 msgid "gLabels label and business card designer"
 msgstr "Diseñador de etiquetas y de tarjetas de visita gLabels"
@@ -210,13 +202,6 @@ msgstr ""
 "contact/\" type=\"http\">página de contacto de <app>gLabels</app></link>."
 
 #: C/about.page:37(page/p)
-#| msgid ""
-#| "This program is distributed under the terms of the GNU General Public "
-#| "license as published by the Free Software Foundation; either version 3 of "
-#| "the License, or (at your option) any later version. A copy of this "
-#| "license can be found at this <link href=\"ghelp:gpl\" type=\"help\">link</"
-#| "link>, or in the file COPYING included with the source code of this "
-#| "program."
 msgid ""
 "This program is distributed under the terms of the GNU General Public "
 "license as published by the Free Software Foundation; either version 3 of "
@@ -244,11 +229,6 @@ msgid "To open a file"
 msgstr "Abrir un archivo"
 
 #: C/basicusage.page:30(section/p)
-#| msgid ""
-#| "To open a file, choose <guiseq><gui>File</gui><gui>Open</gui></guiseq> to "
-#| "display the <gui>Open File</gui> dialog. Select the file that you want to "
-#| "open, then click <gui>OK</gui>. The file is displayed in the display area "
-#| "of the <app>gLabels</app> window."
 msgid ""
 "To open a file, choose <guiseq><gui>File</gui><gui>Open</gui> </guiseq> to "
 "display the <gui>Open File</gui> dialog. Select the file that you want to "
@@ -269,10 +249,6 @@ msgstr ""
 "ventana de aplicación separada para cada archivo abierto."
 
 #: C/basicusage.page:41(section/p)
-#| msgid ""
-#| "The application records the paths and filenames of the most recent files "
-#| "that you have edited and displays the files as menu items on the "
-#| "<guiseq><gui>File</gui><gui>Recent Files</gui></guiseq> menu."
 msgid ""
 "The application records the paths and filenames of the most recent files "
 "that you have edited and displays the files as menu items on the "
@@ -287,12 +263,6 @@ msgid "To close a file"
 msgstr "Cerrar un archivo"
 
 #: C/basicusage.page:50(section/p)
-#| msgid ""
-#| "To close the current document, choose <guiseq><gui>File</gui><gui>Close</"
-#| "gui></guiseq> to close the application window. If the current document is "
-#| "modified, a confirmation dialog will be presented, allowing you to save "
-#| "the document or cancel the command. If the window being closed is the "
-#| "only open window, <app>gLabels</app> will exit."
 msgid ""
 "To close the current document, choose <guiseq><gui>File</gui> <gui>Close</"
 "gui></guiseq> to close the application window. If the current document is "
@@ -316,9 +286,6 @@ msgid "You can save files in the following ways:"
 msgstr "Puede guardar archivos de cualquiera de estas maneras:"
 
 #: C/basicusage.page:66(item/p)
-#| msgid ""
-#| "To save changes to an existing file, choose <guiseq><gui>File</"
-#| "gui><gui>Save</gui></guiseq>."
 msgid ""
 "To save changes to an existing file, choose <guiseq><gui>File</gui> "
 "<gui>Save</gui></guiseq>."
@@ -327,11 +294,6 @@ msgstr ""
 "gui><gui>Guardar</gui></guiseq>."
 
 #: C/basicusage.page:73(item/p)
-#| msgid ""
-#| "To save a new file or to save an existing file under a new filename, "
-#| "choose <guiseq><gui>File</gui><gui>Save As</gui></guiseq>. Enter a name "
-#| "for the file in the <gui>Save As</gui> dialog box, then click <gui>OK</"
-#| "gui>."
 msgid ""
 "To save a new file or to save an existing file under a new filename, choose "
 "<guiseq><gui>File</gui> <gui>Save As</gui></guiseq>. Enter a name for the "
@@ -347,10 +309,6 @@ msgid "To quit <app>gLabels</app>"
 msgstr "Salir de <application>gLabels</application>"
 
 #: C/basicusage.page:86(section/p)
-#| msgid ""
-#| "To quit <app>gLabels</app>, choose <guiseq><gui>File</gui><gui>Quit</"
-#| "gui></guiseq>. This is equivalent to closing all open windows. See <link "
-#| "xref=\"basicusage#closefile\"/>."
 msgid ""
 "To quit <app>gLabels</app>, choose <guiseq><gui>File</gui> <gui>Quit</gui></"
 "guiseq>. This is equivalent to closing all open windows. See <link xref="
@@ -503,10 +461,6 @@ msgid "Settings"
 msgstr "Configuración"
 
 #: C/customize.page:26(page/p)
-#| msgid ""
-#| "To configure <app>gLabels</app>, choose <guiseq><gui>Settings</"
-#| "gui><gui>Preferences</gui></guiseq>. The <gui>Preferences</gui> dialog "
-#| "contains the following tabbed sections:"
 msgid ""
 "To configure <app>gLabels</app>, choose <guiseq> <gui>Settings</gui> "
 "<gui>Preferences</gui> </guiseq>. The <gui>Preferences</gui> dialog contains "
@@ -541,7 +495,6 @@ msgid "Use points (1 point = 1/72 in = 0.352778 mm)."
 msgstr "Usar puntos (1 punto = 1/72 pulgadas = 0.352778 mm)."
 
 #: C/customize.page:46(item/p)
-#| msgid "Default: <gui>Inches</gui>."
 msgid "<gui>Inches</gui>"
 msgstr "<gui>Pulgadas</gui>"
 
@@ -550,7 +503,6 @@ msgid "Use Inches."
 msgstr "Usar pulgadas."
 
 #: C/customize.page:50(item/p)
-#| msgid "Millimeters"
 msgid "<gui>Millimeters</gui>"
 msgstr "<gui>Milímetros</gui>"
 
@@ -577,7 +529,6 @@ msgstr ""
 "crea una etiqueta o una tarjeta nuevas."
 
 #: C/customize.page:64(item/p)
-#| msgid "Default: <gui>US Letter</gui>."
 msgid "<gui>US Letter</gui>"
 msgstr "<gui>Carta</gui>"
 
@@ -635,7 +586,6 @@ msgid "This control selects the default text color."
 msgstr "Este control selecciona el color predeterminado del texto."
 
 #: C/customize.page:94(item/p)
-#| msgid "Alignment"
 msgid "<gui>Alignment</gui>"
 msgstr "<gui>Alineación</gui>"
 
@@ -692,12 +642,6 @@ msgid "To create a custom template"
 msgstr "Crear una plantilla personalizada"
 
 #: C/customtemplate.page:27(page/p)
-#| msgid ""
-#| "To create a new custom template, choose <guiseq><gui>File</"
-#| "gui><gui>Template Designer ...</gui></guiseq> to display the "
-#| "<gui>Template Designer</gui> dialog. This dialog will assist you in "
-#| "creating a custom template for most types of label or card stationery "
-#| "that you may encounter."
 msgid ""
 "To create a new custom template, choose <guiseq><gui>File</gui> "
 "<gui>Template Designer ...</gui></guiseq> to display the <gui>Template "
@@ -723,9 +667,6 @@ msgstr ""
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
 #: C/editprop.page:35(media)
-#| msgid ""
-#| "@@image: 'figures/object-editor-sidebar.png'; "
-#| "md5=68be18416cc17964992fe0c7e311e0ef"
 msgctxt "_"
 msgid ""
 "external ref='figures/object-editor-sidebar.png' "
@@ -950,17 +891,6 @@ msgid "Changing Stacking Order"
 msgstr "Cambiar el orden de apilamiento"
 
 #: C/editprop.page:169(section/p)
-#| msgid ""
-#| "Stacking order refers to relative position in the z-axis of objects. That "
-#| "is when objects overlap, which object will appear on top of the other. By "
-#| "default, newer objects will appear above older objects. To change this "
-#| "order, select one or more objects and choose <guiseq><gui>Objects</"
-#| "gui><gui>Order</gui><gui>Bring to Front</gui></guiseq> to raise the "
-#| "selection to the top of the stacking order, or choose "
-#| "<guiseq><gui>Objects</gui><gui>Order</gui><gui>Send to Back</gui></"
-#| "guiseq> to lower the selection to the bottom of the stacking order. These "
-#| "menuitems are also available by right-clicking the display area when "
-#| "there is a non-empty selection."
 msgid ""
 "Stacking order refers to relative position in the z-axis of objects. That is "
 "when objects overlap, which object will appear on top of the other. By "
@@ -989,12 +919,6 @@ msgid "Rotating and Flipping Objects"
 msgstr "Rotar y voltear objetos"
 
 #: C/editprop.page:189(section/p)
-#| msgid ""
-#| "Objects can be rotated 90 degrees in either direction, or flipped "
-#| "horizontally or vertically, by choosing the appropriate menuitem in the "
-#| "<guiseq><gui>Objects</gui><gui>Rotate/Flip</gui></guiseq> sub-menu. These "
-#| "menuitems are also available by right-clicking the display area when "
-#| "there is a non-empty selection."
 msgid ""
 "Objects can be rotated 90 degrees in either direction, or flipped "
 "horizontally or vertically, by choosing the appropriate menuitem in the "
@@ -1009,11 +933,6 @@ msgstr ""
 "el área de visualización cuando no hay una selección vacía."
 
 #: C/editprop.page:197(note/p)
-#| msgid ""
-#| "This feature could be useful when you are designing CD box inlays. For "
-#| "the spine caption, you need vertical aligned text. After you have created "
-#| "a basic text box, choose <guiseq><gui>Objects</gui><gui>Rotate/Flip</"
-#| "gui></guiseq> to rotate the text box according to your needs."
 msgid ""
 "This feature could be useful when you are designing CD box inlays. For the "
 "spine caption, you need vertical aligned text. After you have created a "
@@ -1031,13 +950,6 @@ msgid "Aligning Objects"
 msgstr "Alinear objetos"
 
 #: C/editprop.page:210(section/p)
-#| msgid ""
-#| "Objects can be aligned horizontally or vertically, relative to one "
-#| "another, or relative to the center line of the label, by choosing the "
-#| "appropriate menuitem from the <guiseq><gui>Objects</gui><gui>Align "
-#| "Horizontal</gui></guiseq> or <guiseq><gui>Objects</gui><gui>Align "
-#| "Vertical</gui></guiseq> sub-menus. These menuitems are also available by "
-#| "right-clicking the display area when there is a non-empty selection."
 msgid ""
 "Objects can be aligned horizontally or vertically, relative to one another, "
 "or relative to the center line of the label, by choosing the appropriate "
@@ -1083,11 +995,6 @@ msgid "To change label properties"
 msgstr "Cambiar las propiedades de la etiqueta"
 
 #: C/labelprop.page:27(page/p)
-#| msgid ""
-#| "To change the media type and/or orientation of a label, choose "
-#| "<guiseq><gui>File</gui><gui>Properties</gui></guiseq> to display the "
-#| "<gui>Label properties</gui> dialog. Select the new media type and "
-#| "orientation for the document, then click <gui>OK</gui>."
 msgid ""
 "To change the media type and/or orientation of a label, choose "
 "<guiseq><gui>File</gui> <gui>Properties</gui></guiseq> to display the "
@@ -1120,7 +1027,6 @@ msgid "You are free:"
 msgstr "Es libre de:"
 
 #: C/license.page:25(item/title)
-#| msgid "To share"
 msgid "<em>To share</em>"
 msgstr "<em>Compartir</em>"
 
@@ -1129,7 +1035,6 @@ msgid "To copy, distribute and transmit the work."
 msgstr "Copiar, distribuir y transmitir el trabajo."
 
 #: C/license.page:29(item/title)
-#| msgid "To remix"
 msgid "<em>To remix</em>"
 msgstr "<em>Hacer obras derivadas</em>"
 
@@ -1142,7 +1047,6 @@ msgid "Under the following conditions:"
 msgstr "Bajo las siguientes condiciones:"
 
 #: C/license.page:38(item/title)
-#| msgid "Attribution"
 msgid "<em>Attribution</em>"
 msgstr "<em>Atribución</em>"
 
@@ -1157,7 +1061,6 @@ msgstr ""
 "o apoyan el uso que hace de su obra)."
 
 #: C/license.page:46(item/title)
-#| msgid "Share Alike"
 msgid "<em>Share Alike</em>"
 msgstr "<em>Compartir igual</em>"
 
@@ -1186,10 +1089,23 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/mancreate.page:392(media)
+#: C/mancreate.page:340(media)
 #| msgid ""
-#| "@@image: 'figures/glabels-template-ellipse-label.png'; "
-#| "md5=ba612c86b5fb8fcd2b5384ecc1c331d2"
+#| "@@image: 'figures/glabels-template-rect-label.png'; "
+#| "md5=9c7ae1c1a888e1c9eefd19655d093971"
+msgctxt "_"
+msgid ""
+"external ref='figures/glabels-template-rect-label.png' "
+"md5='9c7ae1c1a888e1c9eefd19655d093971'"
+msgstr ""
+"external ref='figures/glabels-template-rect-label.png' "
+"md5='9c7ae1c1a888e1c9eefd19655d093971'"
+
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/mancreate.page:392(media)
 msgctxt "_"
 msgid ""
 "external ref='figures/glabels-template-ellipse-label.png' "
@@ -1197,6 +1113,70 @@ msgid ""
 msgstr ""
 "external ref='figures/glabels-template-ellipse-label.png' "
 "md5='ba612c86b5fb8fcd2b5384ecc1c331d2'"
+
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/mancreate.page:439(media)
+#| msgid ""
+#| "@@image: 'figures/glabels-template-circle-label.png'; "
+#| "md5=841e36a1f92aeed01e8fbaacc67758f1"
+msgctxt "_"
+msgid ""
+"external ref='figures/glabels-template-circle-label.png' "
+"md5='841e36a1f92aeed01e8fbaacc67758f1'"
+msgstr ""
+"external ref='figures/glabels-template-circle-label.png' "
+"md5='841e36a1f92aeed01e8fbaacc67758f1'"
+
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/mancreate.page:500(media)
+#| msgid ""
+#| "@@image: 'figures/glabels-template-cd-label.png'; "
+#| "md5=c7952ac1b26ecbfa53facfbbf6486841"
+msgctxt "_"
+msgid ""
+"external ref='figures/glabels-template-cd-label.png' "
+"md5='c7952ac1b26ecbfa53facfbbf6486841'"
+msgstr ""
+"external ref='figures/glabels-template-cd-label.png' "
+"md5='c7952ac1b26ecbfa53facfbbf6486841'"
+
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/mancreate.page:726(media)
+#| msgid ""
+#| "@@image: 'figures/layouts-cdlabel.png'; "
+#| "md5=0c41a95dc82b5a426e934751faf86872"
+msgctxt "_"
+msgid ""
+"external ref='figures/layouts-cdlabel.png' "
+"md5='0c41a95dc82b5a426e934751faf86872'"
+msgstr ""
+"external ref='figures/layouts-cdlabel.png' "
+"md5='0c41a95dc82b5a426e934751faf86872'"
+
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/mancreate.page:789(media)
+#| msgid ""
+#| "@@image: 'figures/glabels-template-layout.png'; "
+#| "md5=fe1c9652d5448b2e0ece086777d3a287"
+msgctxt "_"
+msgid ""
+"external ref='figures/glabels-template-layout.png' "
+"md5='fe1c9652d5448b2e0ece086777d3a287'"
+msgstr ""
+"external ref='figures/glabels-template-layout.png' "
+"md5='fe1c9652d5448b2e0ece086777d3a287'"
 
 #: C/mancreate.page:11(info/desc)
 msgid "Create your templates manually."
@@ -1263,10 +1243,6 @@ msgstr ""
 "file>, dependiendo de dónde se haya instalado <app>gLabels</app>."
 
 #: C/mancreate.page:61(td/p)
-#| msgid ""
-#| "User defined templates created with the <app>gLabels</app><gui>Template "
-#| "Designer</gui>. <em>Do not put manually created templates in this "
-#| "directory.</em>"
 msgid ""
 "User defined templates created with the <app>gLabels</app> <gui>Template "
 "Designer</gui>. <em>Do not put manually created templates in this directory."
@@ -1285,10 +1261,6 @@ msgstr ""
 "es <file>${HOME}/.config</file>."
 
 #: C/mancreate.page:68(td/p)
-#| msgid ""
-#| "User defined templates that have been created manually should be placed "
-#| "in this directory. Older versions of the <app>gLabels</app><gui>Template "
-#| "Designer</gui> (prior to 3.0) would also put templates in this directory."
 msgid ""
 "User defined templates that have been created manually should be placed in "
 "this directory. Older versions of the <app>gLabels</app> <gui>Template "
@@ -1325,14 +1297,6 @@ msgstr ""
 "plantillas para imprimir en múltiples pasadas)"
 
 #: C/mancreate.page:98(item/p)
-#| msgid ""
-#| "Distances can be expressed in units of <code translate=\"no\">pt</code>, "
-#| "<code translate=\"no\">in</code>, <code translate=\"no\">mm</code>, <code "
-#| "translate=\"no\">cm</code>, or <code translate=\"no\">pc</code>. For "
-#| "example: \"<code translate=\"no\">1.0in</code>\" or \"<code translate=\"no"
-#| "\">2.54cm</code>\". If no units are specified, computer points (<code "
-#| "translate=\"no\">pt</code>) will be assumed (1 <em>pt</em> = 1/72 <em>in</"
-#| "em> = 0.352778 <em>mm</em>)."
 msgid ""
 "Distances can be expressed in units of <code>pt</code>, <code>in</code>, "
 "<code>mm</code>, <code>cm</code>, or <code>pc</code>. For example: "
@@ -1351,9 +1315,6 @@ msgid "Template Files"
 msgstr "Archivos de plantillas"
 
 #: C/mancreate.page:120(section/p)
-#| msgid ""
-#| "A template file contains a single <code translate=\"no\">Glabels-"
-#| "templates</code> top-level node."
 msgid ""
 "A template file contains a single <code>Glabels-templates</code> top-level "
 "node."
@@ -1363,14 +1324,6 @@ msgstr ""
 
 #: C/mancreate.page:123(section/code)
 #, no-wrap
-#| msgid ""
-#| "\n"
-#| "&lt;?xml version=\"1.0\"?&gt;\n"
-#| "&lt;Glabels-templates&gt;\n"
-#| "\n"
-#| "   <var its:translate=\"yes\">...templates...</var>\n"
-#| "\n"
-#| "&lt;/Glabels-templates&gt;"
 msgid ""
 "\n"
 "&lt;?xml version=\"1.0\"?&gt;\n"
@@ -1393,9 +1346,6 @@ msgid "Example Template"
 msgstr "Plantilla de ejemplo"
 
 #: C/mancreate.page:133(listing/desc)
-#| msgid ""
-#| "Example <app>gLabels</app> template file containing a single <code "
-#| "translate=\"no\">Template</code> node."
 msgid ""
 "Example <app>gLabels</app> template file containing a single <code>Template</"
 "code> node."
@@ -1404,16 +1354,10 @@ msgstr ""
 "<code>Template</code>."
 
 #: C/mancreate.page:163(section/title)
-#| msgid "Template Node"
 msgid "<code>Template</code> Node"
 msgstr "Nodo <code>Plantilla</code>"
 
 #: C/mancreate.page:165(section/p)
-#| msgid ""
-#| "A <code translate=\"no\">Template</code> node describes a single "
-#| "stationery product. It must contain one instance of any type of Label "
-#| "node (<code translate=\"no\">Label-rectangle</code>, <code translate=\"no"
-#| "\">Label-round</code>, or <code translate=\"no\">Label-cd</code>)."
 msgid ""
 "A <code>Template</code> node describes a single stationery product. It must "
 "contain one instance of any type of Label node (<code>Label-rectangle</"
@@ -1441,9 +1385,6 @@ msgid "Part number or name of stationery product. E.g. \"8160\""
 msgstr "Número de pieza o nombre de un producto de papelería. Ej «8160»"
 
 #: C/mancreate.page:188(td/p)
-#| msgid ""
-#| "Size of sheet. E.g., \"<code translate=\"no\">US-Letter</code>\", \"<code "
-#| "translate=\"no\">A4</code>\", ..."
 msgid ""
 "Size of sheet. E.g., \"<code>US-Letter</code>\", \"<code>A4</code>\", ..."
 msgstr ""
@@ -1460,8 +1401,8 @@ msgid ""
 "Translatable description of stationery product. E.g, \"Mailing Labels."
 "\" (Only useful for predefined templates)"
 msgstr ""
-"Descripción traducible para un producto de papelería. Por ejemplo, «Etiquetas "
-"de correo». (Útil sólo para plantillas predefinidas.)"
+"Descripción traducible para un producto de papelería. Por ejemplo, "
+"«Etiquetas de correo». (Útil sólo para plantillas predefinidas.)"
 
 #: C/mancreate.page:203(td/p)
 msgid "Page width. Only valid if size=\"Other\""
@@ -1490,10 +1431,6 @@ msgid "<code>Meta</code> Node"
 msgstr "Nodo <code>Meta</code>"
 
 #: C/mancreate.page:231(section/p)
-#| msgid ""
-#| "A <code translate=\"no\">Meta</code> node contains some additional "
-#| "information about the template. A <code translate=\"no\">Template</code> "
-#| "node may contain zero or more <code translate=\"no\">Meta</code> nodes."
 msgid ""
 "A <code>Meta</code> node contains some additional information about the "
 "template. A <code>Template</code> node may contain zero or more <code>Meta</"
@@ -1508,12 +1445,6 @@ msgid "Subnode"
 msgstr "Subnodo"
 
 #: C/mancreate.page:244(td/p)
-#| msgid ""
-#| "A category for the template. A template can belong to multiple categories "
-#| "by simply adding multiple <code translate=\"no\">Meta</code> nodes to the "
-#| "parent <code translate=\"no\">Template</code> node. Template categories "
-#| "are used by the <app>gLabels</app><gui>New Label Dialog</gui> to filter "
-#| "the results of template searches."
 msgid ""
 "A category for the template. A template can belong to multiple categories by "
 "simply adding multiple <code>Meta</code> nodes to the parent <code>Template</"
@@ -1561,15 +1492,10 @@ msgstr ""
 "permanentes."
 
 #: C/mancreate.page:293(section/title)
-#| msgid "<span translate=\"no\">Label-rectangle</span> Node"
 msgid "<code>Label-rectangle</code> Node"
 msgstr "Nodo <code>Label-rectangle</code>"
 
 #: C/mancreate.page:295(section/p)
-#| msgid ""
-#| "A <code translate=\"no\">Label-rectangle</code> node describes the "
-#| "dimensions of a single label or business card that is rectangular in "
-#| "shape (may have rounded edges)."
 msgid ""
 "A <code>Label-rectangle</code> node describes the dimensions of a single "
 "label or business card that is rectangular in shape (may have rounded edges)."
@@ -1618,19 +1544,14 @@ msgstr ""
 "imágenes)."
 
 #: C/mancreate.page:339(figure/desc)
-#| msgid "<span translate=\"no\">Label-rectangle</span> parameters"
 msgid "<code>Label-rectangle</code> parameters"
 msgstr "Parámetros de <code>Label-rectangle</code>"
 
 #: C/mancreate.page:356(section/title)
-#| msgid "<span translate=\"no\">Label-ellipse</span> Node"
 msgid "<code>Label-ellipse</code> Node"
 msgstr "Nodo <code>Label-ellipse</code>"
 
 #: C/mancreate.page:358(section/p)
-#| msgid ""
-#| "A <code translate=\"no\">Label-ellipse</code> node describes the "
-#| "dimensions of a single label or business card that is elliptic in shape."
 msgid ""
 "A <code>Label-ellipse</code> node describes the dimensions of a single label "
 "or business card that is elliptic in shape."
@@ -1656,24 +1577,18 @@ msgstr ""
 "minimizar problemas de alineación al usar fondos no blancos (ej. imágenes)."
 
 #: C/mancreate.page:391(figure/desc)
-#| msgid "<span translate=\"no\">Label-ellipse</span> parameters"
 msgid "<span>Label-ellipse</span> parameters"
 msgstr "Parámetros de <span>Label-ellipse</span>"
 
 #: C/mancreate.page:393(media/p) C/mancreate.page:438(figure/desc)
-#| msgid "<span translate=\"no\">Label-ellipse</span> parameters"
 msgid "<code>Label-ellipse</code> parameters"
 msgstr "Parámetros de <code>Label-ellipse</code>"
 
 #: C/mancreate.page:408(section/title)
-#| msgid "<span translate=\"no\">Label-round</span> Node"
 msgid "<code>Label-round</code> Node"
 msgstr "Nodo <code>Label-round</code>"
 
 #: C/mancreate.page:410(section/p)
-#| msgid ""
-#| "A <code translate=\"no\">Label-round</code> node describes the dimensions "
-#| "of a simple round label (not a CD)."
 msgid ""
 "A <code>Label-round</code> node describes the dimensions of a simple round "
 "label (not a CD)."
@@ -1690,9 +1605,6 @@ msgid "<code>Label-cd</code> Node"
 msgstr "Nodo <code>Label-cd</code>"
 
 #: C/mancreate.page:457(section/p)
-#| msgid ""
-#| "A <code translate=\"no\">Label-cd</code> node describes the dimensions of "
-#| "a CD, DVD, or business card CD."
 msgid ""
 "A <code>Label-cd</code> node describes the dimensions of a CD, DVD, or "
 "business card CD."
@@ -1725,7 +1637,6 @@ msgstr ""
 "«tarjetas de visita en CD»)."
 
 #: C/mancreate.page:499(figure/desc)
-#| msgid "<span translate=\"no\">Label-cd</span> parameters"
 msgid "<code>Label-cd</code> parameters"
 msgstr "Parámetros de <code>Label-cd</code>"
 
@@ -1749,14 +1660,10 @@ msgstr ""
 "plantilla."
 
 #: C/mancreate.page:528(section/title)
-#| msgid "<span translate=\"no\">Markup-margin</span> Node"
 msgid "<code>Markup-margin</code> Node"
 msgstr "Nodo <code>Markup-margin</code>"
 
 #: C/mancreate.page:530(section/p)
-#| msgid ""
-#| "A <code translate=\"no\">Markup-margin</code> describes a margin along "
-#| "all edges of a label."
 msgid ""
 "A <code>Markup-margin</code> describes a margin along all edges of a label."
 msgstr ""
@@ -1772,13 +1679,10 @@ msgstr ""
 "la tarjeta/etiqueta."
 
 #: C/mancreate.page:556(section/title)
-#| msgid "<span translate=\"no\">Markup-line</span> Node"
 msgid "<code>Markup-line</code> Node"
 msgstr "Nodo <code>Markup-line</code>"
 
 #: C/mancreate.page:558(section/p)
-#| msgid ""
-#| "A <code translate=\"no\">Markup-line</code> node describes a markup line."
 msgid "A <code>Markup-line</code> node describes a markup line."
 msgstr "Un nodo <code >Markup-line</code> describe una línea de marcado."
 
@@ -1799,13 +1703,10 @@ msgid "y coordinate of 2st endpoint of the line segment."
 msgstr "coordenada Y del segundo punto final del segmento de línea."
 
 #: C/mancreate.page:594(section/title)
-#| msgid "<span translate=\"no\">Markup-circle</span> Node"
 msgid "<code>Markup-circle</code> Node"
 msgstr "Nodo <code>Markup-circle</code>"
 
 #: C/mancreate.page:596(section/p)
-#| msgid ""
-#| "A <code translate=\"no\">Markup-circle</code> describes a markup circle."
 msgid "A <code>Markup-circle</code> describes a markup circle."
 msgstr "Un <code>Markup-circle</code> describe un círculo de marcado."
 
@@ -1822,13 +1723,10 @@ msgid "Radius of circle."
 msgstr "Radio del círculo."
 
 #: C/mancreate.page:628(section/title)
-#| msgid "<span translate=\"no\">Markup-rect</span> Node"
 msgid "<code>Markup-rect</code> Node"
 msgstr "Nodo <code>Markup-rect</code>"
 
 #: C/mancreate.page:630(section/p)
-#| msgid ""
-#| "A <code translate=\"no\">Markup-rect</code> describes a markup rectangle."
 msgid "A <code>Markup-rect</code> describes a markup rectangle."
 msgstr "Un <code>Markup-rect</code> describe un rectángulo de marcado."
 
@@ -1853,13 +1751,10 @@ msgid "Radius of rounded corners of rectangle."
 msgstr "Radio de las esquinas redondeadas del rectángulo."
 
 #: C/mancreate.page:670(section/title)
-#| msgid "<span translate=\"no\">Markup-ellipse</span> Node"
 msgid "<code>Markup-ellipse</code> Node"
 msgstr "Nodo <code>Markup-ellipse</code>"
 
 #: C/mancreate.page:672(section/p)
-#| msgid ""
-#| "A <code translate=\"no\">Markup-ellipse</code> describes a markup ellipse."
 msgid "A <code>Markup-ellipse</code> describes a markup ellipse."
 msgstr "Un <code>Markup-ellipse</code> describe una elipse de marcado."
 
@@ -1884,12 +1779,6 @@ msgid "<code>Layout</code> Node"
 msgstr "Nodo <code>Layout</code>"
 
 #: C/mancreate.page:715(section/p)
-#| msgid ""
-#| "A label node may contain multiple <code translate=\"no\">Layout</code> "
-#| "children. If labels are arranged in a simple grid pattern, only one "
-#| "layout is needed. However, if labels are arranged in multiple grids, such "
-#| "as a running bond pattern, multiple <code translate=\"no\">Layout</code> "
-#| "tags can be used."
 msgid ""
 "A label node may contain multiple <code>Layout</code> children. If labels "
 "are arranged in a simple grid pattern, only one layout is needed. However, "
@@ -1977,7 +1866,6 @@ msgid "Vertical pitch of grid."
 msgstr "Inclinación vertical de la rejilla."
 
 #: C/mancreate.page:788(figure/desc)
-#| msgid "Layout parameters"
 msgid "<code>Layout</code> parameters"
 msgstr "Parámetros de <code>Layout</code>"
 
@@ -1986,8 +1874,6 @@ msgstr "Parámetros de <code>Layout</code>"
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
 #: C/merge-ex1.page:50(media)
-#| msgid ""
-#| "@@image: 'figures/merge-ex1-1.png'; md5=c1fe7f5f05a81d9c04f9d03bb7071798"
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex1-1.png' md5='c1fe7f5f05a81d9c04f9d03bb7071798'"
@@ -1999,8 +1885,6 @@ msgstr ""
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
 #: C/merge-ex1.page:63(media)
-#| msgid ""
-#| "@@image: 'figures/merge-ex1-2.png'; md5=45c30ca8de2478387404c7c5f45cf3d0"
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex1-2.png' md5='45c30ca8de2478387404c7c5f45cf3d0'"
@@ -2012,8 +1896,6 @@ msgstr ""
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
 #: C/merge-ex1.page:84(media)
-#| msgid ""
-#| "@@image: 'figures/merge-ex1-3.png'; md5=1c23af6c90e5185cdc9e14d19baeb9f6"
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex1-3.png' md5='1c23af6c90e5185cdc9e14d19baeb9f6'"
@@ -2025,8 +1907,6 @@ msgstr ""
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
 #: C/merge-ex1.page:95(media)
-#| msgid ""
-#| "@@image: 'figures/merge-ex1-4.png'; md5=1cc9f9adcb5a6e98ff5068531e6933f0"
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex1-4.png' md5='1cc9f9adcb5a6e98ff5068531e6933f0'"
@@ -2074,13 +1954,6 @@ msgstr ""
 "      "
 
 #: C/merge-ex1.page:41(page/p)
-#| msgid ""
-#| "In <app>gLabels</app> we have created a new <app>glabels</app> document "
-#| "using the Avery 5395 \"Name Badge Labels\" template. Next we use the "
-#| "<guiseq><gui>Objects</gui><gui>Merge Properties</gui></guiseq> menu item "
-#| "to display the <gui>merge properties</gui> dialog. We use this dialog to "
-#| "select the source type (in our case CSV with keys on line 1) and the "
-#| "merge source (filename) as shown."
 msgid ""
 "In <app>gLabels</app> we have created a new <app>glabels</app> document "
 "using the Avery 5395 \"Name Badge Labels\" template. Next we use the "
@@ -2151,10 +2024,6 @@ msgstr ""
 "estelar de los miembros de la tripulación."
 
 #: C/merge-ex1.page:78(page/p)
-#| msgid ""
-#| "Now we can print our name tags by selecting the <guiseq><gui>File</"
-#| "gui><gui>Print</gui></guiseq> menu item. This will display print dialog "
-#| "as shown below."
 msgid ""
 "Now we can print our name tags by selecting the <guiseq> <gui>File</gui> "
 "<gui>Print</gui> </guiseq> menu item. This will display print dialog as "
@@ -2199,8 +2068,6 @@ msgstr ""
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
 #: C/merge-ex2.page:52(media)
-#| msgid ""
-#| "@@image: 'figures/merge-ex2-1.png'; md5=817abd0c8deb8a0b95acb7881d8ddb85"
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex2-1.png' md5='817abd0c8deb8a0b95acb7881d8ddb85'"
@@ -2212,8 +2079,6 @@ msgstr ""
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
 #: C/merge-ex2.page:70(media)
-#| msgid ""
-#| "@@image: 'figures/merge-ex2-2.png'; md5=2012870be14752300e0cde420471714a"
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex2-2.png' md5='2012870be14752300e0cde420471714a'"
@@ -2225,8 +2090,6 @@ msgstr ""
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
 #: C/merge-ex2.page:88(media)
-#| msgid ""
-#| "@@image: 'figures/merge-ex2-3.png'; md5=c347460091d8eef9f4ec89557fa9f1e2"
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex2-3.png' md5='c347460091d8eef9f4ec89557fa9f1e2'"
@@ -2238,8 +2101,6 @@ msgstr ""
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
 #: C/merge-ex2.page:99(media)
-#| msgid ""
-#| "@@image: 'figures/merge-ex2-4.png'; md5=30d12e946a79e27211b835e38742671c"
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex2-4.png' md5='30d12e946a79e27211b835e38742671c'"
@@ -2292,13 +2153,6 @@ msgstr ""
 "      "
 
 #: C/merge-ex2.page:43(page/p)
-#| msgid ""
-#| "In <app>glabels</app> we have created a new <app>glabels</app> document "
-#| "using the Avery 5512 \"Address Labels\" template. Next we use the "
-#| "<guiseq><gui>Objects</gui><gui>Merge Properties</gui></guiseq> menu item "
-#| "to display the <gui>merge properties</gui> dialog. We use this dialog to "
-#| "select the source type (in our case CSV with keys on line 1) and the "
-#| "merge source (filename) as shown."
 msgid ""
 "In <app>glabels</app> we have created a new <app>glabels</app> document "
 "using the Avery 5512 \"Address Labels\" template. Next we use the <guiseq> "
@@ -2344,10 +2198,6 @@ msgstr ""
 "línea si el campo está vacío."
 
 #: C/merge-ex2.page:82(page/p)
-#| msgid ""
-#| "Now we can print our address labels by selecting the <guiseq><gui>File</"
-#| "gui><gui>Print</gui></guiseq> menu item. This will display print dialog "
-#| "as shown below."
 msgid ""
 "Now we can print our address labels by selecting the <guiseq> <gui>File</"
 "gui> <gui>Print</gui> </guiseq> menu item. This will display print dialog as "
@@ -2380,8 +2230,6 @@ msgstr ""
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
 #: C/merge-ex3.page:53(media)
-#| msgid ""
-#| "@@image: 'figures/merge-ex3-1.png'; md5=fb5bf719857fb0a49517ecb50124384d"
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex3-1.png' md5='fb5bf719857fb0a49517ecb50124384d'"
@@ -2393,8 +2241,6 @@ msgstr ""
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
 #: C/merge-ex3.page:74(media)
-#| msgid ""
-#| "@@image: 'figures/merge-ex3-2.png'; md5=51fe322868241d083ec83ae824d927d7"
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex3-2.png' md5='51fe322868241d083ec83ae824d927d7'"
@@ -2406,8 +2252,6 @@ msgstr ""
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
 #: C/merge-ex3.page:88(media)
-#| msgid ""
-#| "@@image: 'figures/merge-ex3-3.png'; md5=f731f35b38ddd51499e636733bacc7a6"
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex3-3.png' md5='f731f35b38ddd51499e636733bacc7a6'"
@@ -2419,8 +2263,6 @@ msgstr ""
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
 #: C/merge-ex3.page:99(media)
-#| msgid ""
-#| "@@image: 'figures/merge-ex3-4.png'; md5=4415be9d5b59fb57093077bcaece014a"
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex3-4.png' md5='4415be9d5b59fb57093077bcaece014a'"
@@ -2478,13 +2320,6 @@ msgstr ""
 "paquete para solicitarlo."
 
 #: C/merge-ex3.page:44(page/p)
-#| msgid ""
-#| "In <app>glabels</app> we have created a new <app>gLabels</app> document "
-#| "using the Avery 5512 \"Address Labels\" template. Next we use the "
-#| "<guiseq><gui>Objects</gui><gui>Merge Properties</gui></guiseq> menu item "
-#| "to display the <gui>Merge properties</gui> dialog. We use this dialog to "
-#| "select the source type (in our case <gui>Data from default Evolution "
-#| "addressbook</gui>) as shown."
 msgid ""
 "In <app>glabels</app> we have created a new <app>gLabels</app> document "
 "using the Avery 5512 \"Address Labels\" template. Next we use the <guiseq> "
@@ -2543,10 +2378,6 @@ msgstr ""
 "direcciones de correo."
 
 #: C/merge-ex3.page:82(page/p)
-#| msgid ""
-#| "Now we can print our address labels by selecting the <guiseq><gui>File</"
-#| "gui><gui>Print</gui></guiseq> menu item. This will display the print "
-#| "dialog as shown below."
 msgid ""
 "Now we can print our address labels by selecting the <guiseq> <gui>File</"
 "gui> <gui>Print</gui> </guiseq> menu item. This will display the print "
@@ -2587,6 +2418,17 @@ msgstr ""
 "se impriman por cada registro de una fuente de datos externa."
 
 #: C/mergefeatures.page:31(page/p)
+#| msgid ""
+#| "The first step to performing a document merge is to prepare a source "
+#| "document that contains your merge data. This data could be mailing "
+#| "addresses or any other data that you wish to create unique labels or "
+#| "cards for. Currently back-ends only exist for text files and the "
+#| "evolution data server -- others are planned. The currently supported text-"
+#| "file format is very simple: each line is a record; fields are delimited "
+#| "by commas (CSV), tabs, or colons; and newlines can be embedded into "
+#| "fields by using the \"\\n\" entity. This file could be created using any "
+#| "text editor or could be created by another program or script. A common "
+#| "way of creating CSV files is to export them from a spreadsheet program."
 msgid ""
 "The first step to performing a document merge is to prepare a source "
 "document that contains your merge data. This data could be mailing addresses "
@@ -2597,28 +2439,76 @@ msgid ""
 "or colons; and newlines can be embedded into fields by using the \"\\n\" "
 "entity. This file could be created using any text editor or could be created "
 "by another program or script. A common way of creating CSV files is to "
-"export them from a spreadsheet program."
+"export them from a spreadsheet program or from address book applications."
 msgstr ""
 "El primer paso para combinar un documento es preparar un documento fuente "
 "que contenga su datos combinados. Estos datos pueden ser direcciones de "
 "correo o cualquier otro dato que quiera para crear etiquetas o tarjetas "
-"únicas. Los «back-end» actuales sólo existen para archivos de texto y el "
+"únicas. Los «back-end» actuales sólo existen para archivos de texto y el "
 "servidor de datos de Evolution (hay otros planificados). El formato de texto "
-"soportado actualmente es muy sencillo: cada línea es un registro; lo campos "
-"se delimitan por comas (CSV), tabuladores o dos puntos; y las líneas nuevas "
+"soportado actualmente es muy sencillo: cada línea es un registro; lo campos "
+"se delimitan por comas (CSV), tabuladores o dos puntos; y las líneas nuevas "
 "se pueden incrustar usando la entidad «\\n». Este archivo se puede crear "
 "usando cualquier editor de texto u otro programa o script. Una manera "
 "habitual de crear archivos CSV es exportarlos desde un programa de hojas de "
-"cálculo."
+"cálculo."
 
-#: C/mergefeatures.page:43(page/p)
-#| msgid ""
-#| "A label must then be configured to \"point at\" this data file. To "
-#| "configure the merge properties of a document, choose "
-#| "<guiseq><gui>Objects</gui><gui>Merge Properties</gui></guiseq> menu item "
-#| "to display the <gui>merge properties</gui> dialog. This dialog is used to "
-#| "select the exact data file format and file name (location) of the merge "
-#| "data."
+#: C/mergefeatures.page:45(note/p)
+msgid ""
+"To export a CSV file from <app>kaddressbook</app>, first select the contacts "
+"you wish to export. Click on the first contact, then press and hold "
+"<key>Ctrl</key> and click on the other desired contacts to select them. Then "
+"choose <guiseq><gui>File</gui><gui>Export</gui> <gui>Export CSV File</gui></"
+"guiseq>."
+msgstr ""
+"Para exportar a CSV un archivo desde <app>kaddressbook</app>, primero "
+"seleccione los contactos que quiere exportar. Pulse sobre el primer contacto "
+"y mantenga pulsada la tecla <key>Ctrl</key> mientras pulsa sobre los otros "
+"contactos para seleccionarlos. Luego elija <guiseq><gui>Archivo</"
+"gui><gui>Exportar</gui> <gui>Exportar archivo CSV</gui></guiseq>."
+
+#: C/mergefeatures.page:52(note/p)
+msgid ""
+"In the <gui>Select Contacts</gui> window, enable the button <gui>Selected "
+"contacts</gui> (which should be enabled by default anyway). Then click on "
+"<gui>OK</gui>. In the <gui>Save As</gui> dialog, choose the desired folder "
+"and a name for the file and click on <gui>Save</gui>."
+msgstr ""
+"En la ventana <gui>Seleccionar contactos</gui>, active el botón "
+"<gui>Contactos seleccionados</gui> (que, de todas maneras, debería estar "
+"activado). Luegio pulse en <gui>Aceptar</gui>. En el diálogo <gui>Guardar "
+"como</gui>, elija la carpeta que quiere y un nombre para el archivo y pulse "
+"en <gui>Guardar</gui>."
+
+#: C/mergefeatures.page:62(note/p)
+msgid ""
+"To export a CSV file from <app>Thunderbird</app>, click on the <gui>Address "
+"Book</gui> toolbar button or choose <guiseq><gui>Tools </gui><gui>Address "
+"Book</gui></guiseq> from the menu. Then select the contacts you wish to "
+"export. Click on the first contact, then press and hold <key>Ctrl</key> and "
+"click on the other desired contacts to select them. Then choose "
+"<guiseq><gui>Tools</gui><gui>Export</gui> </guiseq>."
+msgstr ""
+"Para exportar un archivo CSV desde <app>Thunderbird</app>, pulse en el botón "
+"de la <gui>Libreta de direcciones</gui> en la barra de herramientas o elija "
+"<guiseq><gui>Herramientas </gui><gui>Libreta de direcciones</gui></guiseq> "
+"en el menú. Seleccione los contactos que quiere exportar. Pulse sobre el "
+"primer contacto y mantenga pulsada la tecla <key>Ctrl</key> mientras pulsa "
+"sobre el resto de contactos para seleccionarlos. Cuando termine, elija "
+"<guiseq><gui>Herramientas</gui><gui>Exportar</gui> </guiseq>."
+
+#: C/mergefeatures.page:71(note/p)
+msgid ""
+"In the file chooser window, choose the desired folder and a name for the "
+"file and change the value of the drop-down button in the right bottom corner "
+"to <gui>Comma Separated</gui>. Finally, click on <gui>Save</gui>."
+msgstr ""
+"En la ventana del selector de archivos, elija la carpeta que quiere y un "
+"nombre para el archivo y cambie el valor en la lista desplegable en la "
+"esquina inferior derecha a <gui>Separado por comas</gui>. Para terminar, "
+"pulse en <gui>Guardar</gui>."
+
+#: C/mergefeatures.page:79(page/p)
 msgid ""
 "A label must then be configured to \"point at\" this data file. To configure "
 "the merge properties of a document, choose <guiseq><gui>Objects</gui> "
@@ -2633,7 +2523,7 @@ msgstr ""
 "gui>. Este diálogo se utiliza para seleccionar el formato de datos exacto "
 "del archivo y nombre de archivo (ubicación) de la combinación de datos."
 
-#: C/mergefeatures.page:51(page/p)
+#: C/mergefeatures.page:87(page/p)
 msgid ""
 "Finally, once the label has been configured for a data file, field keys can "
 "be inserted into text objects and used as source or data for barcode objects "
@@ -2646,7 +2536,7 @@ msgstr ""
 "imágenes para objetos de imagen. Consulte la <link xref=\"editprop\"/> para "
 "obtener más información sobre cómo combinar datos para este tipo de objetos."
 
-#: C/mergefeatures.page:57(page/p)
+#: C/mergefeatures.page:93(page/p)
 msgid ""
 "Now that your label is configured, <app>gLabels</app> will print a unique "
 "label for each record in your source document -- substituting fields from "
@@ -2657,7 +2547,7 @@ msgstr ""
 "campos de cada registro por los campos clave en todo el texto, código de "
 "barras y objetos de imagen."
 
-#: C/mergefeatures.page:62(page/p)
+#: C/mergefeatures.page:98(page/p)
 msgid ""
 "See <link xref=\"merge\"/> for a detailed tutorial on the document merge "
 "feature."
@@ -2707,7 +2597,6 @@ msgstr ""
 "escriba el siguiente comando y pulse <key>Intro</key>:"
 
 #: C/multifile.page:32(page/p)
-#| msgid "file1.glabels file2.glabels file3.glabels"
 msgid ""
 "<cmd>glabels <var>file1.glabels file2.glabels file3.glabels</var> </cmd>"
 msgstr ""
@@ -2750,8 +2639,6 @@ msgstr ""
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
 #: C/printfile.page:47(media)
-#| msgid ""
-#| "@@image: 'figures/print-copies.png'; md5=ee473352947fe25c7adaa9f9a052c3e9"
 msgctxt "_"
 msgid ""
 "external ref='figures/print-copies.png' "
@@ -2765,8 +2652,6 @@ msgstr ""
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
 #: C/printfile.page:70(media)
-#| msgid ""
-#| "@@image: 'figures/print-merge.png'; md5=ee70bd2150a6cd46e96ce5c0531eb47b"
 msgctxt "_"
 msgid ""
 "external ref='figures/print-merge.png' md5='ee70bd2150a6cd46e96ce5c0531eb47b'"
@@ -2782,11 +2667,6 @@ msgid "To print labels and cards"
 msgstr "Imprimir etiquetas y tarjetas"
 
 #: C/printfile.page:27(page/p)
-#| msgid ""
-#| "To print labels or cards, choose <guiseq><gui>File</gui><gui>Print</gui></"
-#| "guiseq> to display the <gui>Print</gui> dialog. Once print options have "
-#| "been selected, click <gui>Print</gui> to print the labels or cards. To "
-#| "simply preview the results, click <gui>Print Preview</gui> instead."
 msgid ""
 "To print labels or cards, choose <guiseq><gui>File</gui><gui>Print</gui> </"
 "guiseq> to display the <gui>Print</gui> dialog. Once print options have been "
@@ -2854,9 +2734,9 @@ msgid ""
 "instead of copy controls."
 msgstr ""
 "Para etiquetas o tarjetas que usan la capacidad de combinación de documentos "
-"(también llamada «combinación de correo»), la sección de trabajos en pestañas "
-"contiene los siguientes controles de combinación en vez de los controles de "
-"copia."
+"(también llamada «combinación de correo»), la sección de trabajos en "
+"pestañas contiene los siguientes controles de combinación en vez de los "
+"controles de copia."
 
 #: C/printfile.page:71(media/p)
 msgid "Print Document Merge Controls"
@@ -2902,7 +2782,6 @@ msgid "The following options can also be selected."
 msgstr "Se pueden seleccionar las siguientes opciones."
 
 #: C/printfile.page:97(item/p)
-#| msgid "print outlines"
 msgid "<gui>print outlines</gui>"
 msgstr "<gui>imprimir márgenes</gui>"
 
@@ -2915,7 +2794,6 @@ msgstr ""
 "ejecuciones en seco, para verificar la alineación de la impresora."
 
 #: C/printfile.page:102(item/p)
-#| msgid "print in reverse"
 msgid "<gui>print in reverse</gui>"
 msgstr "<gui>imprimir en el reverso</gui>"
 
@@ -2930,7 +2808,6 @@ msgstr ""
 "un coche)."
 
 #: C/printfile.page:108(item/p)
-#| msgid "print crop marks"
 msgid "<gui>print crop marks</gui>"
 msgstr "<gui>imprimir marcas de corte</gui>"
 
@@ -2953,13 +2830,6 @@ msgid "To select objects"
 msgstr "Seleccionar objetos"
 
 #: C/select.page:27(page/p)
-#| msgid ""
-#| "A prerequisite for performing operations on objects is the selection of "
-#| "individual objects or groups of objects. The display area must be in the "
-#| "object selection mode to create new selections, as indicated by an arrow "
-#| "cursor. The object selection mode is selected by the "
-#| "<guiseq><gui>Objects</gui><gui>Select Mode</gui></guiseq> menu item, or "
-#| "the corresponding command on the <gui>Drawing Toolbar</gui>."
 msgid ""
 "A prerequisite for performing operations on objects is the selection of "
 "individual objects or groups of objects. The display area must be in the "
@@ -2994,14 +2864,6 @@ msgid "Aggregate object selections"
 msgstr "Agregar selecciones de objetos"
 
 #: C/select.page:47(section/p)
-#| msgid ""
-#| "Multiple objects can be selected by first selecting the first object as "
-#| "above and then by holding the <key>Ctrl</key> key while selecting "
-#| "additional objects. Individual objects can be added to an existing "
-#| "selection at any time by holding the <key>Ctrl</key> key while selecting "
-#| "the desired objects. All objects can also be selected by using the "
-#| "<guiseq><gui>Edit</gui><gui>Select All</gui></guiseq> menu item. All "
-#| "objects in an aggregate object selection will be highlighted."
 msgid ""
 "Multiple objects can be selected by first selecting the first object as "
 "above and then by holding the <key>Ctrl</key> key while selecting additional "
@@ -3043,13 +2905,6 @@ msgid "Unselecting objects"
 msgstr "Deseleccionar objetos"
 
 #: C/select.page:74(section/p)
-#| msgid ""
-#| "Individual objects can be removed from an existing selection by holding "
-#| "the <key>Ctrl</key> key while clicking on a previously selected object. "
-#| "An entire selection can be dismissed by using the <guiseq><gui>Edit</"
-#| "gui><gui>Un-select All</gui></guiseq> menu item or by simply clicking any "
-#| "empty space in the display area. Once an object is unselected its "
-#| "highlight is removed."
 msgid ""
 "Individual objects can be removed from an existing selection by holding the "
 "<key>Ctrl</key> key while clicking on a previously selected object. An "
@@ -3128,9 +2983,6 @@ msgstr "Elimina los objetos seleccionados sin ponerlos en el portapapeles."
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
 #: C/skipfields.page:45(media)
-#| msgid ""
-#| "@@image: 'figures/skip-fields-screenshot.png'; "
-#| "md5=eef4a81f48546bd7d3753656a3df9cb7"
 msgctxt "_"
 msgid ""
 "external ref='figures/skip-fields-screenshot.png' "
@@ -3144,9 +2996,6 @@ msgstr ""
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
 #: C/skipfields.page:53(media)
-#| msgid ""
-#| "@@image: 'figures/skip-fields-output.png'; "
-#| "md5=b64d1a7fdf0d37e9a6d93f0bc2f9fa0d"
 msgctxt "_"
 msgid ""
 "external ref='figures/skip-fields-output.png' "
@@ -3233,41 +3082,6 @@ msgstr "Salida"
 
 #~ msgid "glabels <placeholder-1/>"
 #~ msgstr "glabels <placeholder-1/>"
-
-#~ msgid ""
-#~ "@@image: 'figures/glabels-template-rect-label.png'; "
-#~ "md5=9c7ae1c1a888e1c9eefd19655d093971"
-#~ msgstr ""
-#~ "@@image: 'figures/glabels-template-rect-label.png'; "
-#~ "md5=9c7ae1c1a888e1c9eefd19655d093971"
-
-#~ msgid ""
-#~ "@@image: 'figures/glabels-template-circle-label.png'; "
-#~ "md5=841e36a1f92aeed01e8fbaacc67758f1"
-#~ msgstr ""
-#~ "@@image: 'figures/glabels-template-circle-label.png'; "
-#~ "md5=841e36a1f92aeed01e8fbaacc67758f1"
-
-#~ msgid ""
-#~ "@@image: 'figures/glabels-template-cd-label.png'; "
-#~ "md5=c7952ac1b26ecbfa53facfbbf6486841"
-#~ msgstr ""
-#~ "@@image: 'figures/glabels-template-cd-label.png'; "
-#~ "md5=c7952ac1b26ecbfa53facfbbf6486841"
-
-#~ msgid ""
-#~ "@@image: 'figures/layouts-cdlabel.png'; "
-#~ "md5=0c41a95dc82b5a426e934751faf86872"
-#~ msgstr ""
-#~ "@@image: 'figures/layouts-cdlabel.png'; "
-#~ "md5=0c41a95dc82b5a426e934751faf86872"
-
-#~ msgid ""
-#~ "@@image: 'figures/glabels-template-layout.png'; "
-#~ "md5=fe1c9652d5448b2e0ece086777d3a287"
-#~ msgstr ""
-#~ "@@image: 'figures/glabels-template-layout.png'; "
-#~ "md5=fe1c9652d5448b2e0ece086777d3a287"
 
 #~ msgid "${prefix}/share/libglabels-3.0/templates"
 #~ msgstr "${prefix}/share/libglabels-3.0/templates"
