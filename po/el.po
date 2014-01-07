@@ -2,15 +2,15 @@
 # Copyright (C) 2011 glabels's COPYRIGHT HOLDER
 # This file is distributed under the same license as the glabels package.
 # Efstathios Iosifidis <diamond_gr@freemail.gr>, 2011, 2012.
-# Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>, 2012.
+# Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>, 2012, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels glabels-3_0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2012-07-12 12:18+0000\n"
-"PO-Revision-Date: 2012-10-30 11:33+0300\n"
+"POT-Creation-Date: 2013-12-27 05:21+0000\n"
+"PO-Revision-Date: 2014-01-05 11:46+0300\n"
 "Last-Translator: Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>\n"
-"Language-Team: team@gnome.gr\n"
+"Language-Team: www.gnome.gr\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -548,7 +548,7 @@ msgstr "Κρίσμο σφάλμα gLabels!"
 msgid "New Label or Card"
 msgstr "Νέα Ετικέτα ή Κάρτα"
 
-#: ../src/file.c:175 ../src/label.c:601 ../src/label.c:645
+#: ../src/file.c:175 ../src/label.c:602 ../src/label.c:646
 msgid "Label properties"
 msgstr "Ιδιότητες ετικέτας"
 
@@ -774,93 +774,93 @@ msgid "Create box object"
 msgstr "Δημιουργία αντικειμένου πλαισίου"
 
 #: ../src/label-box.c:230 ../src/label-ellipse.c:232
-#: ../data/ui/property-bar.ui.h:9
+#: ../data/ui/property-bar.ui.h:12
 msgid "Fill color"
 msgstr "Χρώμα γεμίσματος"
 
 #: ../src/label-box.c:261 ../src/label-ellipse.c:261 ../src/label-line.c:212
-#: ../data/ui/property-bar.ui.h:10
+#: ../data/ui/property-bar.ui.h:13
 msgid "Line color"
 msgstr "Χρώμα γραμμής"
 
 #: ../src/label-box.c:289 ../src/label-ellipse.c:290 ../src/label-line.c:241
-#: ../data/ui/property-bar.ui.h:11
+#: ../data/ui/property-bar.ui.h:14
 msgid "Line width"
 msgstr "Πλάτος γραμμής"
 
-#: ../src/label.c:405
+#: ../src/label.c:406
 msgid "Untitled"
 msgstr "Χωρίς Τίτλο"
 
-#: ../src/label.c:719 ../src/ui.c:420
+#: ../src/label.c:720 ../src/ui.c:420
 msgid "Merge properties"
 msgstr "Ιδιότητες συγχώνευσης"
 
-#: ../src/label.c:1215 ../src/ui.c:213
+#: ../src/label.c:1216 ../src/ui.c:213
 msgid "Delete"
 msgstr "Διαγραφή"
 
-#: ../src/label.c:1248 ../src/ui.c:322
+#: ../src/label.c:1251 ../src/ui.c:322
 msgid "Bring to front"
 msgstr "Μεταφορά εμπρός"
 
-#: ../src/label.c:1284 ../src/ui.c:329
+#: ../src/label.c:1287 ../src/ui.c:329
 msgid "Send to back"
 msgstr "Μετάφορά πίσω"
 
-#: ../src/label.c:1325
+#: ../src/label.c:1328
 msgid "Rotate"
 msgstr "Περιστροφή"
 
-#: ../src/label.c:1360 ../src/ui.c:336
+#: ../src/label.c:1363 ../src/ui.c:336
 msgid "Rotate left"
 msgstr "Περιστροφή αριστερά"
 
-#: ../src/label.c:1393 ../src/ui.c:343
+#: ../src/label.c:1396 ../src/ui.c:343
 msgid "Rotate right"
 msgstr "Περιστροφή δεξιά"
 
-#: ../src/label.c:1428 ../src/ui.c:350
+#: ../src/label.c:1431 ../src/ui.c:350
 msgid "Flip horizontally"
 msgstr "Αναστροφή οριζόντια"
 
-#: ../src/label.c:1463 ../src/ui.c:357
+#: ../src/label.c:1466 ../src/ui.c:357
 msgid "Flip vertically"
 msgstr "Αναστροφή κατακόρυφα"
 
-#: ../src/label.c:1503 ../src/ui.c:364
+#: ../src/label.c:1506 ../src/ui.c:364
 msgid "Align left"
 msgstr "Στοίχιση αριστερά"
 
-#: ../src/label.c:1560 ../src/ui.c:378
+#: ../src/label.c:1563 ../src/ui.c:378
 msgid "Align right"
 msgstr "Στοίχιση δεξιά"
 
-#: ../src/label.c:1621
+#: ../src/label.c:1624
 msgid "Align horizontal center"
 msgstr "Στοίχιση οριζόντια στο κέντρο"
 
-#: ../src/label.c:1697
+#: ../src/label.c:1700
 msgid "Align tops"
 msgstr "Στοίχιση επάνω"
 
-#: ../src/label.c:1754
+#: ../src/label.c:1757
 msgid "Align bottoms"
 msgstr "Στοίχιση κάτω"
 
-#: ../src/label.c:1815
+#: ../src/label.c:1818
 msgid "Align vertical center"
 msgstr "Στοίχιση κατακόρυφα στο κέντρο"
 
-#: ../src/label.c:1893 ../src/ui.c:406
+#: ../src/label.c:1896 ../src/ui.c:406
 msgid "Center horizontally"
 msgstr "Οριζόντιο κεντράρισμα"
 
-#: ../src/label.c:1940 ../src/ui.c:413
+#: ../src/label.c:1943 ../src/ui.c:413
 msgid "Center vertically"
 msgstr "Κατακόρυφο κεντράρισμα"
 
-#: ../src/label.c:2628 ../src/label.c:2670 ../src/label.c:2696 ../src/ui.c:206
+#: ../src/label.c:2664 ../src/label.c:2706 ../src/label.c:2732 ../src/ui.c:206
 msgid "Paste"
 msgstr "Επικόλληση"
 
@@ -868,11 +868,11 @@ msgstr "Επικόλληση"
 msgid "Create ellipse object"
 msgstr "Δημιουργία αντικειμένου έλλειψης"
 
-#: ../src/label-image.c:200 ../src/ui.c:310
+#: ../src/label-image.c:199 ../src/ui.c:310
 msgid "Create image object"
 msgstr "Δημιουργία αντικειμένου εικόνας"
 
-#: ../src/label-image.c:333 ../src/label-image.c:474
+#: ../src/label-image.c:332 ../src/label-image.c:473
 msgid "Set image"
 msgstr "Ορισμός εικόνας"
 
@@ -880,67 +880,71 @@ msgstr "Ορισμός εικόνας"
 msgid "Create line object"
 msgstr "Δημιουργία αντικειμένου γραμμής"
 
-#: ../src/label-object.c:394 ../src/label-object.c:428
+#: ../src/label-object.c:392 ../src/label-object.c:423
 msgid "Move"
 msgstr "Μετακίνηση"
 
-#: ../src/label-object.c:479
+#: ../src/label-object.c:474
 msgid "Resize"
 msgstr "Αλλαγή μεγέθους"
 
-#: ../src/label-object.c:1217
+#: ../src/label-object.c:1258
 msgid "Shadow state"
 msgstr "Κατάσταση σκιάς"
 
-#: ../src/label-object.c:1260
+#: ../src/label-object.c:1301
 msgid "Shadow offset"
 msgstr "Αντιστάθμιση σκιάς"
 
-#: ../src/label-object.c:1308
+#: ../src/label-object.c:1349
 msgid "Shadow color"
 msgstr "Χρώμα σκιάς"
 
-#: ../src/label-object.c:1351
+#: ../src/label-object.c:1392
 msgid "Shadow opacity"
 msgstr "Αδιαφάνεια σκιάς"
 
-#: ../src/label-text.c:281 ../src/ui.c:282
+#: ../src/label-text.c:293 ../src/ui.c:282
 msgid "Create text object"
 msgstr "Δημιουργία αντικειμένου κειμένου"
 
-#: ../src/label-text.c:453
+#: ../src/label-text.c:467
 msgid "Typing"
 msgstr "Πληκτρολόγηση"
 
-#: ../src/label-text.c:586 ../data/ui/property-bar.ui.h:1
+#: ../src/label-text.c:601 ../data/ui/property-bar.ui.h:1
 msgid "Font family"
 msgstr "Οικογένεια γραμματοσειράς"
 
-#: ../src/label-text.c:624 ../data/ui/property-bar.ui.h:2
+#: ../src/label-text.c:639 ../data/ui/property-bar.ui.h:2
 msgid "Font size"
 msgstr "Μέγεθος γραμματοσειράς"
 
-#: ../src/label-text.c:657
+#: ../src/label-text.c:672
 msgid "Font weight"
 msgstr "Μέγεθος γραμματοσειράς"
 
-#: ../src/label-text.c:690 ../data/ui/property-bar.ui.h:4
+#: ../src/label-text.c:705 ../data/ui/property-bar.ui.h:4
 msgid "Italic"
 msgstr "Πλάγια"
 
-#: ../src/label-text.c:723
+#: ../src/label-text.c:738
 msgid "Align text"
 msgstr "Στοίχιση κειμένου"
 
-#: ../src/label-text.c:756
+#: ../src/label-text.c:771
+msgid "Vertically align text"
+msgstr "Κάθετη στοίχιση κειμένου"
+
+#: ../src/label-text.c:804
 msgid "Line spacing"
 msgstr "Διάστοιχο γραμμών"
 
-#: ../src/label-text.c:789 ../data/ui/property-bar.ui.h:8
+#: ../src/label-text.c:837 ../data/ui/property-bar.ui.h:11
 msgid "Text color"
 msgstr "Χρώμα κειμένου"
 
-#: ../src/label-text.c:933
+#: ../src/label-text.c:997
 msgid "Auto shrink"
 msgstr "Αυτόματη σμίκρυνση"
 
@@ -1066,7 +1070,7 @@ msgstr "Επιλέξτε"
 msgid "Record/Field"
 msgstr "Καταγραφή/Πεδίο"
 
-#: ../src/merge-properties-dialog.c:356 ../data/ui/object-editor.ui.h:23
+#: ../src/merge-properties-dialog.c:356 ../data/ui/object-editor.ui.h:24
 msgid "Data"
 msgstr "Δεδομένα"
 
@@ -1079,25 +1083,25 @@ msgid "Fixed"
 msgstr "Σταθερό"
 
 #. Translators: "Up" refers to the direction towards the top of a label.
-#: ../src/mini-preview.c:1054
+#: ../src/mini-preview.c:1051
 msgid "Up"
 msgstr "Επάνω"
 
-#: ../src/new-label-dialog.c:203
+#: ../src/new-label-dialog.c:212 ../data/ui/new-label-dialog.ui.h:1
 msgid "Select Product"
 msgstr "Επιλογή προϊόντος"
 
-#: ../src/new-label-dialog.c:215
+#: ../src/new-label-dialog.c:225 ../data/ui/new-label-dialog.ui.h:3
 msgid "Choose Orientation"
 msgstr "Επιλογή προσανατολισμού"
 
-#: ../src/new-label-dialog.c:229
+#: ../src/new-label-dialog.c:240
 msgid "Review"
 msgstr "Αναθεώρηση"
 
 #: ../src/object-editor-bc-page.c:97 ../src/object-editor-shadow-page.c:93
-#: ../src/object-editor-text-page.c:97 ../src/prefs-dialog.c:335
-#: ../src/ui-property-bar.c:277
+#: ../src/object-editor-text-page.c:102 ../src/prefs-dialog.c:335
+#: ../src/ui-property-bar.c:289
 msgid "Default"
 msgstr "Προεπιλογή"
 
@@ -1134,7 +1138,7 @@ msgid "Insert merge field"
 msgstr "Εισαγωγή πεδίου συγχώνευσης"
 
 #: ../src/object-editor-fill-page.c:79 ../src/prefs-dialog.c:341
-#: ../src/ui-property-bar.c:287
+#: ../src/ui-property-bar.c:299
 msgid "No Fill"
 msgstr "Χωρίς γέμισμα"
 
@@ -1152,7 +1156,7 @@ msgid "%s (*.%s)"
 msgstr "%s (*.%s)"
 
 #: ../src/object-editor-line-page.c:79 ../src/prefs-dialog.c:338
-#: ../src/ui-property-bar.c:297
+#: ../src/ui-property-bar.c:309
 msgid "No Line"
 msgstr "Χωρίς γραμμή"
 
@@ -1466,7 +1470,7 @@ msgstr "Πλαίσιο"
 msgid "Create box/rectangle object"
 msgstr "Δημιουργία αντικειμένου πλαισίου/ορθογωνίου"
 
-#: ../src/ui.c:294 ../data/ui/object-editor.ui.h:16
+#: ../src/ui.c:294 ../data/ui/object-editor.ui.h:17
 #: ../data/ui/prefs-dialog.ui.h:20
 msgid "Line"
 msgstr "Γραμμή"
@@ -1479,7 +1483,7 @@ msgstr "Έλλειψη"
 msgid "Create ellipse/circle object"
 msgstr "Δημιουργία αντικειμένου έλλειψη/κύκλος"
 
-#: ../src/ui.c:308 ../data/ui/object-editor.ui.h:19
+#: ../src/ui.c:308 ../data/ui/object-editor.ui.h:20
 msgid "Image"
 msgstr "Εικόνα"
 
@@ -1639,7 +1643,7 @@ msgstr "Ένα πρόγραμμα δημιουργίας ετικετών και
 msgid "translator-credits"
 msgstr ""
 "Ελληνική μεταφραστική ομάδα GNOME\n"
-"Σπίγγος Δημήτρης <dmtrs32@gmail.com>, 2012\n"
+"Σπίγγος Δημήτρης <dmtrs32@gmail.com>, 2012, 2014\n"
 "Ευστάθιος Ιωσηφίδης <diamond_gr@freemail.gr>, 2012\n"
 "Για περισσότερα δείτε http://www.gnome.gr/."
 
@@ -1744,13 +1748,13 @@ msgstr "διάμετρος"
 #. the CSS2 Specification (Section 4.3.2)
 #. This table must be sorted exactly as the enumerations in lglUnits
 #. [LGL_UNITS_POINT]
-#: ../libglabels/lgl-units.c:65 ../data/ui/object-editor.ui.h:14
+#: ../libglabels/lgl-units.c:65 ../data/ui/object-editor.ui.h:15
 #: ../data/ui/prefs-dialog.ui.h:19
 msgid "points"
 msgstr "σημεία"
 
 #. [LGL_UNITS_INCH]
-#: ../libglabels/lgl-units.c:66 ../data/ui/object-editor.ui.h:27
+#: ../libglabels/lgl-units.c:66 ../data/ui/object-editor.ui.h:28
 #: ../data/ui/template-designer.ui.h:15
 msgid "inches"
 msgstr "ίντσες"
@@ -1810,7 +1814,7 @@ msgstr "Πρόσφατο"
 msgid "Brand:"
 msgstr "Μάρκα:"
 
-#: ../data/ui/media-select.ui.h:3 ../data/ui/new-label-dialog.ui.h:7
+#: ../data/ui/media-select.ui.h:3 ../data/ui/new-label-dialog.ui.h:10
 #: ../data/ui/template-designer.ui.h:12
 msgid "Page size:"
 msgstr "Μέγεθος Σελίδας:"
@@ -1827,7 +1831,7 @@ msgstr "Επιλογή όλων"
 msgid "Custom"
 msgstr "Προσαρμοσμένο"
 
-#: ../data/ui/new-label-dialog.ui.h:1
+#: ../data/ui/new-label-dialog.ui.h:2
 msgid ""
 "Choose label or card product from hundreds of predefined templates or define "
 "your own."
@@ -1835,43 +1839,47 @@ msgstr ""
 "Επιλέξτε ετικέτα ή κάρτα από χιλιάδες προκαθορισμένα πρότυπα ή ορίστε ένα "
 "δικό σας."
 
-#: ../data/ui/new-label-dialog.ui.h:2
+#: ../data/ui/new-label-dialog.ui.h:4
 msgid "Select orientation of label content."
 msgstr "Επιλογή προσανατολισμού περιεχομένου ετικέτας."
 
-#: ../data/ui/new-label-dialog.ui.h:3
+#: ../data/ui/new-label-dialog.ui.h:5
 msgid "Normal"
 msgstr "Κανονικό"
 
-#: ../data/ui/new-label-dialog.ui.h:4
+#: ../data/ui/new-label-dialog.ui.h:6
 msgid "Rotated"
 msgstr "Περιστροφή"
 
-#: ../data/ui/new-label-dialog.ui.h:5
+#: ../data/ui/new-label-dialog.ui.h:7
+msgid "Review Selection"
+msgstr "Επιθεώρηση επιλογής"
+
+#: ../data/ui/new-label-dialog.ui.h:8
 msgid "Please review and confirm your selection."
 msgstr "Παρακαλώ επιθεωρήστε και επιβεβαιώστε την επιλογή σας."
 
-#: ../data/ui/new-label-dialog.ui.h:6 ../data/ui/template-designer.ui.h:9
+#: ../data/ui/new-label-dialog.ui.h:9 ../data/ui/template-designer.ui.h:9
 msgid "Description:"
 msgstr "Περιγραφή:"
 
-#: ../data/ui/new-label-dialog.ui.h:8
+#: ../data/ui/new-label-dialog.ui.h:11
 msgid "Label size:"
 msgstr "Μέγεθος ετικέτας:"
 
-#: ../data/ui/new-label-dialog.ui.h:9
+#: ../data/ui/new-label-dialog.ui.h:12
 msgid "Layout:"
 msgstr "Διάταξη:"
 
-#: ../data/ui/new-label-dialog.ui.h:10
+#: ../data/ui/new-label-dialog.ui.h:13
 msgid "Similar products:"
 msgstr "Παρόμοια προϊόντα:"
 
-#: ../data/ui/new-label-dialog.ui.h:11 ../data/ui/template-designer.ui.h:6
+#: ../data/ui/new-label-dialog.ui.h:14 ../data/ui/template-designer.ui.h:6
 msgid "Part #:"
 msgstr "Είδος #:"
 
-#: ../data/ui/new-label-dialog.ui.h:12
+#: ../data/ui/new-label-dialog.ui.h:15
 msgid "Vendor:"
 msgstr "Πωλητής:"
 
@@ -1907,113 +1915,117 @@ msgstr "πλήκτρο:"
 msgid "Alignment:"
 msgstr "Στοίχιση:"
 
-#: ../data/ui/object-editor.ui.h:10 ../data/ui/prefs-dialog.ui.h:16
+#: ../data/ui/object-editor.ui.h:10
+msgid "Vertical alignment:"
+msgstr "Κάθετη στοίχιση:"
+
+#: ../data/ui/object-editor.ui.h:11 ../data/ui/prefs-dialog.ui.h:16
 msgid "Line Spacing:"
 msgstr "Απόσταση γραμμών:"
 
-#: ../data/ui/object-editor.ui.h:11
+#: ../data/ui/object-editor.ui.h:12
 msgid "Allow merge to automatically shrink text"
 msgstr "Να επιτρέπεται η συγχώνευση για αυτόματη συρρίκνωση του κειμένου"
 
-#: ../data/ui/object-editor.ui.h:12
+#: ../data/ui/object-editor.ui.h:13
 msgid "Style"
 msgstr "Τεχνοτοπία"
 
-#: ../data/ui/object-editor.ui.h:13 ../data/ui/prefs-dialog.ui.h:18
+#: ../data/ui/object-editor.ui.h:14 ../data/ui/prefs-dialog.ui.h:18
 #: ../data/ui/template-designer.ui.h:13
 msgid "Width:"
 msgstr "Πλάτος:"
 
-#: ../data/ui/object-editor.ui.h:15
+#: ../data/ui/object-editor.ui.h:16
 msgid "Key:"
 msgstr "Πλήκτρο:"
 
-#: ../data/ui/object-editor.ui.h:17 ../data/ui/prefs-dialog.ui.h:21
+#: ../data/ui/object-editor.ui.h:18 ../data/ui/prefs-dialog.ui.h:21
 msgid "Fill"
 msgstr "Γέμισμα"
 
-#: ../data/ui/object-editor.ui.h:18
+#: ../data/ui/object-editor.ui.h:19
 msgid "File:"
 msgstr "Αρχείο:"
 
-#: ../data/ui/object-editor.ui.h:20
+#: ../data/ui/object-editor.ui.h:21
 msgid "Literal:"
 msgstr "Κυριολεκτικό:"
 
-#: ../data/ui/object-editor.ui.h:21
+#: ../data/ui/object-editor.ui.h:22
 msgid "format:"
 msgstr "μορφή:"
 
-#: ../data/ui/object-editor.ui.h:22
+#: ../data/ui/object-editor.ui.h:23
 msgid "digits:"
 msgstr "ψηφία:"
 
-#: ../data/ui/object-editor.ui.h:24
+#: ../data/ui/object-editor.ui.h:25
 msgid "Backend:"
 msgstr "Σύστημα υποστήριξης:"
 
-#: ../data/ui/object-editor.ui.h:25
+#: ../data/ui/object-editor.ui.h:26
 msgid "Checksum"
 msgstr "άθροισμα ελέγχου"
 
-#: ../data/ui/object-editor.ui.h:26 ../data/ui/template-designer.ui.h:14
+#: ../data/ui/object-editor.ui.h:27 ../data/ui/template-designer.ui.h:14
 msgid "Height:"
 msgstr "Ύψος:"
 
-#: ../data/ui/object-editor.ui.h:28
+#: ../data/ui/object-editor.ui.h:29
 msgid "Reset image size"
 msgstr "Επαναφορά μεγέθους εικόνας"
 
-#: ../data/ui/object-editor.ui.h:29
+#: ../data/ui/object-editor.ui.h:30
 msgid "Size"
 msgstr "Μέγεθος"
 
-#: ../data/ui/object-editor.ui.h:30
+#: ../data/ui/object-editor.ui.h:31
 msgid "Length:"
 msgstr "Μήκος:"
 
-#: ../data/ui/object-editor.ui.h:31
+#: ../data/ui/object-editor.ui.h:32
 msgid "Angle:"
 msgstr "Γωνία:"
 
-#: ../data/ui/object-editor.ui.h:32
+#: ../data/ui/object-editor.ui.h:33
 msgid "degrees"
 msgstr "μοίρες"
 
-#: ../data/ui/object-editor.ui.h:33
+#: ../data/ui/object-editor.ui.h:34
 msgid "X:"
 msgstr "X:"
 
-#: ../data/ui/object-editor.ui.h:34
+#: ../data/ui/object-editor.ui.h:35
 msgid "Y:"
 msgstr "Y:"
 
-#: ../data/ui/object-editor.ui.h:35
+#: ../data/ui/object-editor.ui.h:36
 msgid "Position"
 msgstr "Θέση"
 
-#: ../data/ui/object-editor.ui.h:36
+#: ../data/ui/object-editor.ui.h:37
 msgid "Enable shadow"
 msgstr "Ενεργοποίηση σκίασης"
 
-#: ../data/ui/object-editor.ui.h:37
+#: ../data/ui/object-editor.ui.h:38
 msgid "X Offset:"
 msgstr "Αντιστάθμιση X:"
 
-#: ../data/ui/object-editor.ui.h:38
+#: ../data/ui/object-editor.ui.h:39
 msgid "Y Offset:"
 msgstr "Αντιστάθμιση Υ:"
 
-#: ../data/ui/object-editor.ui.h:39
+#: ../data/ui/object-editor.ui.h:40
 msgid "Opacity:"
 msgstr "Διαφάνεια:"
 
-#: ../data/ui/object-editor.ui.h:41
+#: ../data/ui/object-editor.ui.h:42
 #, no-c-format
 msgid "%"
 msgstr "%"
 
-#: ../data/ui/object-editor.ui.h:42
+#: ../data/ui/object-editor.ui.h:43
 msgid "Shadow"
 msgstr "Σκιά"
 
@@ -2084,6 +2096,18 @@ msgstr "Κεντρική στοίχιση"
 #: ../data/ui/property-bar.ui.h:7
 msgid "Right align"
 msgstr "Δεξιά στοίχιση"
+
+#: ../data/ui/property-bar.ui.h:8
+msgid "Top vertical align"
+msgstr "Κάθετη στοίχιση πάνω"
+
+#: ../data/ui/property-bar.ui.h:9
+msgid "Center vertical align"
+msgstr "Κάθετη στοίχιση στο κέντρο"
+
+#: ../data/ui/property-bar.ui.h:10
+msgid "Bottom vertical align"
+msgstr "Κάθετη στοίχιση κάτω"
 
 #: ../data/ui/template-designer.ui.h:1
 msgid ""
@@ -2367,6 +2391,35 @@ msgstr "Έλεγχος συγχώνευσης"
 msgid "Options"
 msgstr "Επιλογές"
 
+#: ../data/appdata/glabels-3.appdata.xml.in.h:1
+msgid ""
+"gLabels is a program for creating labels and business cards. It is designed "
+"to work with various laser/ink-jet peel-off label and business card sheets "
+"that you'll find at most office supply stores."
+msgstr ""
+"Το gLabels είναι ένα πρόγραμμα για δημιουργία ετικετών και επαγγελματικών "
+"καρτών. Σχεδιάστηκε για να δουλεύει με ποικίλες αυτοκόλλητες ετικέτες λέιζερ/"
+"ψεκασμού και φύλλα επαγγελματικών καρτών που θα βρείτε στα περισσότερα "
+"καταστήματα ειδών γραφείου."
+
+#: ../data/appdata/glabels-3.appdata.xml.in.h:2
+msgid ""
+"gLabels can be used to design address labels, name tags, price tags, cd/dvd "
+"labels, or just about anything else that is organized in a regular pattern "
+"on a sheet of paper. Labels (or cards) can contain text, images, lines, "
+"shapes, and barcodes. gLabels also includes a document-merge feature which "
+"lets you print a unique label for each record from an external data source, "
+"such as a CSV file or an Evolution address book."
+msgstr ""
+"Η εφαρμογή gLabels μπορεί να χρησιμοποιηθεί για την σχεδίαση ετικετών "
+"διευθύνσεων, ετικετών ονομάτων, ετικετών τιμών, ετικετών cd/dvd, ή οτιδήποτε "
+"άλλου που διοργανώνεται σε ένα κανονικό υπόδειγμα ενός φύλλου χαρτιού. Οι "
+"ετικέτες (ή κάρτες) μπορεί να περιέχουν κείμενο, εικόνες, γραμμές, σχήματα, "
+"και ραβδωτούς κώδικες. Το gLabels περιλαμβάνει επίσης το χαρακτηριστικό "
+"συγχώνευσης εγγράφου το οποίο σας επιτρέπει να εκτυπώσετε μια μοναδική "
+"ετικέτα για κάθε εγγραφή από μια εξωτερική πηγή δεδομένων, όπως ένα αρχείο "
+"CSV ή ένα βιβλίο διευθύνσεων του Evolution."
+
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
 msgid "Show/hide main toolbar."
 msgstr "Προβολή/απόκρυψη κύριας εργαλειοθήκης."
@@ -2437,7 +2490,8 @@ msgstr "Προεπιλεγμένη οικογένεια γραμματοσειρ
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:18
 msgid "The default font family for new text objects."
-msgstr "Η προεπιλεγμένη οικογένεια γραμματοσειράς για νέα αντικείμενα κειμένου."
+msgstr ""
+"Η προεπιλεγμένη οικογένεια γραμματοσειράς για νέα αντικείμενα κειμένου."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:19
 msgid "Default font size."
@@ -2743,12 +2797,14 @@ msgstr "Τετράγωνες ετικέτες"
 #. ====================================================================
 #. ===================================================================
 #. ********************************************************************
+#. ===================================================================
 #: ../templates/categories.xml.h:5 ../templates/ascom-iso-templates.xml.h:4
 #: ../templates/endisch-templates.xml.h:3
 #: ../templates/hama-iso-templates.xml.h:27
 #: ../templates/herma-iso-templates.xml.h:20
 #: ../templates/igepa-templates.xml.h:1 ../templates/jac-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:1
+#: ../templates/sheetlabels-us-templates.xml.h:2
 msgid "Rectangular labels"
 msgstr "Ορθογώνιες ετικέτες"
 
@@ -2843,7 +2899,7 @@ msgstr "Ετικέτες φακέλου αρχείου"
 #: ../templates/avery-us-templates.xml.h:10
 #: ../templates/dataline-iso-templates.xml.h:10
 #: ../templates/meritline-us-templates.xml.h:6
-#: ../templates/sheetlabels-us-templates.xml.h:4
+#: ../templates/sheetlabels-us-templates.xml.h:6
 #: ../templates/uline-us-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:4
 msgid "Shipping Labels"
@@ -2860,7 +2916,7 @@ msgstr "Ετικέτες αποστολής"
 #: ../templates/maco-us-templates.xml.h:2
 #: ../templates/meritline-us-templates.xml.h:4
 #: ../templates/pearl-iso-templates.xml.h:2
-#: ../templates/sheetlabels-us-templates.xml.h:2
+#: ../templates/sheetlabels-us-templates.xml.h:4
 #: ../templates/worldlabel-us-templates.xml.h:3
 #: ../templates/zweckform-iso-templates.xml.h:4
 msgid "Address Labels"
@@ -2871,7 +2927,7 @@ msgstr "Ετικέτες διευθύνσεων"
 #: ../templates/avery-us-templates.xml.h:14
 #: ../templates/dymo-other-templates.xml.h:6
 #: ../templates/meritline-us-templates.xml.h:8
-#: ../templates/sheetlabels-us-templates.xml.h:6
+#: ../templates/sheetlabels-us-templates.xml.h:8
 #: ../templates/worldlabel-us-templates.xml.h:2
 msgid "Return Address Labels"
 msgstr "Ετικέτες διευθύνσεων επιστροφής"
@@ -2881,7 +2937,7 @@ msgstr "Ετικέτες διευθύνσεων επιστροφής"
 #: ../templates/maco-us-templates.xml.h:3
 #: ../templates/meritline-us-templates.xml.h:12
 #: ../templates/misc-us-templates.xml.h:23
-#: ../templates/sheetlabels-us-templates.xml.h:8
+#: ../templates/sheetlabels-us-templates.xml.h:10
 #: ../templates/worldlabel-us-templates.xml.h:9
 msgid "Round Labels"
 msgstr "Στρογγυλές ετικέτες"
@@ -2890,7 +2946,7 @@ msgstr "Στρογγυλές ετικέτες"
 #: ../templates/avery-us-templates.xml.h:18
 #: ../templates/avery-iso-templates.xml.h:20
 #: ../templates/meritline-us-templates.xml.h:14
-#: ../templates/sheetlabels-us-templates.xml.h:14
+#: ../templates/sheetlabels-us-templates.xml.h:16
 #: ../templates/worldlabel-us-templates.xml.h:8
 msgid "Diskette Labels"
 msgstr "Ετικέτες δισκετών"
@@ -2902,7 +2958,7 @@ msgstr "Κάρτες στηρίγματος"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:22
-#: ../templates/sheetlabels-us-templates.xml.h:10
+#: ../templates/sheetlabels-us-templates.xml.h:12
 #: ../templates/worldlabel-us-templates.xml.h:7
 msgid "Filing Labels"
 msgstr "Ετικέτες αρχειοθέτησης"
@@ -2954,7 +3010,7 @@ msgstr "Ετικέτες ονόματος σήματος"
 #: ../templates/misc-other-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:64
 #: ../templates/rayfilm-templates.xml.h:10
-#: ../templates/sheetlabels-us-templates.xml.h:12
+#: ../templates/sheetlabels-us-templates.xml.h:14
 #: ../templates/worldlabel-us-templates.xml.h:12
 #: ../templates/zweckform-iso-templates.xml.h:8
 msgid "CD/DVD Labels"
@@ -2962,7 +3018,7 @@ msgstr "Ετικέτες CD/DVD"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:34
-#: ../templates/sheetlabels-us-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:18
 msgid "CD/DVD Labels (Disc Labels)"
 msgstr "Ετικέτες CD/DVD (ετικέτες δίσκων)"
 
@@ -2975,7 +3031,7 @@ msgstr "Ετικέτες CD/DVD (ετικέτες ράχης)"
 #: ../templates/avery-us-templates.xml.h:38
 #: ../templates/geha-iso-templates.xml.h:17
 #: ../templates/meritline-us-templates.xml.h:16
-#: ../templates/sheetlabels-us-templates.xml.h:18
+#: ../templates/sheetlabels-us-templates.xml.h:20
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Video Tape Face Labels"
 msgstr "Ετικέτες όψης κασέτας βίντεο"
