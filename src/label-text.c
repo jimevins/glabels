@@ -1185,7 +1185,7 @@ layout_text (glLabelText      *this,
         }
         else
         {
-                pango_layout_set_width (layout, object_w * PANGO_SCALE / scale_x);
+                pango_layout_set_width (layout, (object_w - 2*GL_LABEL_TEXT_MARGIN) * PANGO_SCALE / scale_x);
         }
         pango_layout_set_wrap (layout, PANGO_WRAP_WORD);
         pango_layout_set_alignment (layout, this->priv->align);
