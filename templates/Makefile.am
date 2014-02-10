@@ -16,6 +16,7 @@ templates_DATA = \
 	avery-iso-templates.xml \
 	avery-other-templates.xml \
 	brother-other-templates.xml \
+	canon-other-templates.xml \
 	databecker-iso-templates.xml \
 	dataline-iso-templates.xml	\
 	decadry-iso-templates.xml \
