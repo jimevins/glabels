@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels glabels-3.2\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2013-10-13 11:17+0000\n"
-"PO-Revision-Date: 2013-10-13 16:04+0200\n"
+"POT-Creation-Date: 2014-02-13 18:50+0000\n"
+"PO-Revision-Date: 2014-02-13 21:36+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -3142,6 +3142,11 @@ msgstr "Víceúčelové etikety 17 × 54 mm"
 #: ../templates/brother-other-templates.xml.h:21
 msgid "Standard Address Labels 38mm x 90mm"
 msgstr "Standardní adresní etikety 38 × 90 mm"
+
+#. ===================================================================
+#: ../templates/canon-other-templates.xml.h:2
+msgid "CD/DVD Tray"
+msgstr "Držák CD/DVD"
 
 #. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:4
