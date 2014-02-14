@@ -1,14 +1,14 @@
 # Spanish translation of glabels.
 # sergio rivadero <sergiorivadero@argentina.com>, 2005.
 # Jorge González <jorgegonz@svn.gnome.org>, 2010.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011, 2012, 2013.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011, 2012, 2013, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2013-10-13 11:17+0000\n"
-"PO-Revision-Date: 2013-10-15 14:34+0200\n"
+"POT-Creation-Date: 2014-02-14 06:42+0000\n"
+"PO-Revision-Date: 2014-02-14 10:35+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Gtranslator 2.91.5\n"
 
 #: ../src/bc-backends.c:81
 msgid "Built-in"
@@ -1850,7 +1851,6 @@ msgid "Rotated"
 msgstr "Rotada"
 
 #: ../data/ui/new-label-dialog.ui.h:7
-#| msgid "Remove all selections"
 msgid "Review Selection"
 msgstr "Revisar la selección"
 
@@ -3149,6 +3149,12 @@ msgstr "Etiquetas multipropósito de 17mm x 54mm"
 #: ../templates/brother-other-templates.xml.h:21
 msgid "Standard Address Labels 38mm x 90mm"
 msgstr "Etiquetas de dirección estándar de 38mm x 90mm"
+
+#. ===================================================================
+#: ../templates/canon-other-templates.xml.h:2
+#| msgid "CD/DVD Labels"
+msgid "CD/DVD Tray"
+msgstr "Bandeja de CD/DVD"
 
 #. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:4
