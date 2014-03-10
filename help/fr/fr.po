@@ -3077,7 +3077,7 @@ msgstr ""
 #. (itstool) path: item/p
 #: C/printfile.page:108
 msgid "<gui>print crop marks</gui>"
-msgstr "<gui>imprimer les guides de coupe<gui>"
+msgstr "<gui>imprimer les guides de coupe</gui>"
 
 #. (itstool) path: item/p
 #: C/printfile.page:109
