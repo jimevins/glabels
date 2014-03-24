@@ -1,13 +1,14 @@
 # Serbian translation for glabels.
+# Courtesy of Prevod.org team (http://prevod.org/) -- 2012—2014.
 # Copyright (C) 2012 glabels's COPYRIGHT HOLDER
 # This file is distributed under the same license as the glabels package.
-# Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2012, 2013.
+# Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2012—2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels glabels-3_2\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2013-10-13 11:17+0000\n"
-"PO-Revision-Date: 2013-11-18 10:52+0200\n"
+"POT-Creation-Date: 2014-02-11 12:42+0000\n"
+"PO-Revision-Date: 2014-03-24 10:21+0200\n"
 "Last-Translator: Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
 "Language: sr\n"
@@ -16,6 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : "
 "n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Project-Style: gnome\n"
 
 #: ../src/bc-backends.c:81
 msgid "Built-in"
@@ -1848,7 +1850,6 @@ msgid "Rotated"
 msgstr "Zaokrenuto"
 
 #: ../data/ui/new-label-dialog.ui.h:7
-#| msgid "Remove all selections"
 msgid "Review Selection"
 msgstr "Pregledaj izbor"
 
@@ -1913,7 +1914,6 @@ msgid "Alignment:"
 msgstr "Poravnanje:"
 
 #: ../data/ui/object-editor.ui.h:10
-#| msgid "Alignment:"
 msgid "Vertical alignment:"
 msgstr "Uspravno poravnanje:"
 
@@ -2096,12 +2096,10 @@ msgid "Right align"
 msgstr "Poravnajte na desno"
 
 #: ../data/ui/property-bar.ui.h:8
-#| msgid "Flip vertically"
 msgid "Top vertical align"
 msgstr "Poravnajte uspravno gore"
 
 #: ../data/ui/property-bar.ui.h:9
-#| msgid "Center vertically"
 msgid "Center vertical align"
 msgstr "Poravnajte uspravno po sredini"
 
@@ -2411,8 +2409,8 @@ msgstr ""
 "regularnom šablonu na listu papira. Nalepnice (ili kartice) mogu da sadrže "
 "tekst, slike, linije, oblike, i trakaste šifre. Gnomove nalepnice takođe "
 "uključuju funkciju stapanja dokumenta koja vam dopušta da štampate jedinstvenu "
-"nalepnicu za svki snimak sa spoljnog izvora podataka, kao što je CSV "
-"datoteka ili adresar Evolucije."
+"nalepnicu za svki snimak sa spoljnog izvora podataka, kao što je CSV datoteka "
+"ili adresar Evolucije."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
 msgid "Show/hide main toolbar."
@@ -3143,6 +3141,12 @@ msgid "Standard Address Labels 38mm x 90mm"
 msgstr "Uobičajene nalepnice za adrese 38mm x 90mm"
 
 #. ===================================================================
+#: ../templates/canon-other-templates.xml.h:2
+#| msgid "CD/DVD Labels"
+msgid "CD/DVD Tray"
+msgstr "CD/DVD fioka"
+
+#. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:4
 msgid "CD/DVD Labels Standard Format (face only)"
 msgstr "CD/DVD nalepnice uobičajenog oblika (samo lice)"
@@ -3592,22 +3596,18 @@ msgid "Membership cards, both sides printable"
 msgstr "Članske kartice, obe strane za štampanje"
 
 #: ../templates/rayfilm-templates.xml.h:11
-#| msgid "Business cards"
 msgid "Business card CD Labels"
 msgstr "CD nalepnice poslovne kartice"
 
 #: ../templates/rayfilm-templates.xml.h:12
-#| msgid "Mini Labels"
 msgid "Mini CD Labels"
 msgstr "Nalepnice za mini CD "
 
 #: ../templates/rayfilm-templates.xml.h:13
-#| msgid "Rectangular labels"
 msgid "Triangular labels"
 msgstr "Trougaone nalepnice"
 
 #: ../templates/rayfilm-templates.xml.h:14
-#| msgid "Allround labels"
 msgid "Trapezoid labels"
 msgstr "Trapezoidne nalepnice"
 
