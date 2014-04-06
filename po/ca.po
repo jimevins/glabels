@@ -406,7 +406,7 @@ msgstr "Verd fosc"
 
 #: ../src/color-combo-menu.c:87
 msgid "Dark Cyan"
-msgstr "Cyan fosc"
+msgstr "Cian fosc"
 
 #: ../src/color-combo-menu.c:88
 msgid "Navy Blue"
@@ -462,7 +462,7 @@ msgstr "Verd"
 
 #: ../src/color-combo-menu.c:103
 msgid "Cyan"
-msgstr "Cyan"
+msgstr "Cian"
 
 #: ../src/color-combo-menu.c:104
 msgid "SkyBlue"
@@ -490,7 +490,7 @@ msgstr "Verd clar"
 
 #: ../src/color-combo-menu.c:111
 msgid "Light Cyan"
-msgstr "Cyan clar"
+msgstr "Cian clar"
 
 #: ../src/color-combo-menu.c:112
 msgid "Slate Gray"
@@ -2842,7 +2842,7 @@ msgstr "Etiquetes d'adreça de retorn"
 #: ../templates/misc-us-templates.xml.h:30
 #: ../templates/worldlabel-us-templates.xml.h:9
 msgid "Round Labels"
-msgstr "Etiquetes arroronides"
+msgstr "Etiquetes arrodonides"
 
 #. ===================================================================
 #. ********************************************************************
