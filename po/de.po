@@ -2,14 +2,14 @@
 # Copyright (C) 2001-2011 Jim Evins <evins@snaught.com>
 # Marcus Bauer <m@7n7.de>, 2001.
 # Christian Neumair <christian-neumair@web.de>, 2002.
-# Mario Blättermann <mario.blaettermann@gmail.com>, 2008-2013.
+# Mario Blättermann <mario.blaettermann@gmail.com>, 2008-2014.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: glabels master\n"
+"Project-Id-Version: glabels glabels-3_2\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2013-10-11 18:32+0000\n"
-"PO-Revision-Date: 2013-10-12 18:35+0100\n"
+"POT-Creation-Date: 2014-04-15 12:22+0000\n"
+"PO-Revision-Date: 2014-04-15 21:29+0100\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -567,7 +567,8 @@ msgstr "Auswahl des Dateinamens ist leer"
 
 #: ../src/file.c:322 ../src/file.c:338
 msgid "Please select a file or supply a valid file name"
-msgstr "Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
+msgstr ""
+"Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
 
 #: ../src/file.c:335
 msgid "File does not exist"
@@ -616,7 +617,8 @@ msgstr "Änderungen am Dokument »%s« vor dem Schließen speichern?"
 
 #: ../src/file.c:748
 msgid "Your changes will be lost if you don't save them."
-msgstr "Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
+msgstr ""
+"Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
 
 #: ../src/file.c:751
 msgid "Close without saving"
@@ -1027,7 +1029,8 @@ msgstr "Text: Durch Tabulatoren getrennte Werte (TSV)"
 
 #: ../src/merge-init.c:79
 msgid "Text: Tab Separated Values (TSV) with keys on line 1"
-msgstr "Text: Durch Tabulatoren getrennte Werte (TSV) mit Schlüsseln in Zeile 1"
+msgstr ""
+"Text: Durch Tabulatoren getrennte Werte (TSV) mit Schlüsseln in Zeile 1"
 
 #: ../src/merge-init.c:87
 msgid "Text: Colon separated values"
@@ -1594,7 +1597,8 @@ msgstr "Eigenschaften-Werkzeugleiste"
 #: ../src/ui.c:450
 msgid "Change the visibility of the property toolbar in the current window"
 msgstr ""
-"Die Sichtbarkeit der Werkzeugleiste im aktuellen Fenster ein- oder ausschalten"
+"Die Sichtbarkeit der Werkzeugleiste im aktuellen Fenster ein- oder "
+"ausschalten"
 
 #: ../src/ui.c:456
 msgid "Grid"
@@ -1602,7 +1606,8 @@ msgstr "Raster"
 
 #: ../src/ui.c:458
 msgid "Change the visibility of the grid in the current window"
-msgstr "Die Sichtbarkeit des Rasters im aktuellen Fenster ein- oder ausschalten"
+msgstr ""
+"Die Sichtbarkeit des Rasters im aktuellen Fenster ein- oder ausschalten"
 
 #: ../src/ui.c:464
 msgid "Markup"
@@ -2216,7 +2221,8 @@ msgstr "3. Ränder"
 
 #: ../data/ui/template-designer.ui.h:30
 msgid ""
-"Please enter the following size parameters of a single label in your template."
+"Please enter the following size parameters of a single label in your "
+"template."
 msgstr ""
 "Bitte geben Sie die folgenden Größenwerte des einzelnen Etiketts in Ihrer "
 "Vorlage an."
@@ -2404,27 +2410,27 @@ msgid ""
 msgstr ""
 "gLabels ist ein Programm zum Entwerfen von Etiketten und Visitenkarten. Es "
 "wurde für die verschiedensten mit Laser- oder Tintenstrahldruckern "
-"bedruckbaren selbstklebenden) Etiketten sowie Visitenkarten entworfen, so wie "
-"Sie sie bei den meisten Anbietern für Bürozubehör finden."
+"bedruckbaren selbstklebenden) Etiketten sowie Visitenkarten entworfen, so "
+"wie Sie sie bei den meisten Anbietern für Bürozubehör finden."
 
 #: ../data/appdata/glabels-3.appdata.xml.in.h:2
 msgid ""
 "gLabels can be used to design address labels, name tags, price tags, cd/dvd "
-"labels, or just about anything else that is organized in a regular pattern on "
-"a sheet of paper. Labels (or cards) can contain text, images, lines, shapes, "
-"and barcodes. gLabels also includes a document-merge feature which lets you "
-"print a unique label for each record from an external data source, such as a "
-"CSV file or an Evolution address book."
+"labels, or just about anything else that is organized in a regular pattern "
+"on a sheet of paper. Labels (or cards) can contain text, images, lines, "
+"shapes, and barcodes. gLabels also includes a document-merge feature which "
+"lets you print a unique label for each record from an external data source, "
+"such as a CSV file or an Evolution address book."
 msgstr ""
 "gLabels kann zum Enwerfen von Adressaufklebern, Namens- und Preisschildern, "
 "Etiketten CDs und DVDs oder für alles Andere verwendet werden, was mit dem "
 "Bedrucken von Papieren zu tun hat, die Etiketten oder Karten in einer "
-"regulären Anordnung enthalten. Die Etiketten oder Karten können Text, Bilder, "
-"Linien, Formen oder Strichcodes enthalten. gLabels verfügt auch über ein "
-"Funktionsmerkmal zur Dokumentmischung. Das bedeutet, dass Sie eine externe "
-"Datenquelle dazu verwenden können, ein Etikett für jeden Datensatz zu "
-"drucken. Als Datenquelle kann dabei beispielsweise eine CSV-Datei oder das "
-"Adressbuch von Evolution genutzt werden."
+"regulären Anordnung enthalten. Die Etiketten oder Karten können Text, "
+"Bilder, Linien, Formen oder Strichcodes enthalten. gLabels verfügt auch über "
+"ein Funktionsmerkmal zur Dokumentmischung. Das bedeutet, dass Sie eine "
+"externe Datenquelle dazu verwenden können, ein Etikett für jeden Datensatz "
+"zu drucken. Als Datenquelle kann dabei beispielsweise eine CSV-Datei oder "
+"das Adressbuch von Evolution genutzt werden."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
 msgid "Show/hide main toolbar."
@@ -3153,6 +3159,11 @@ msgstr "Mehrzwecketiketten 17mm x 54mm"
 #: ../templates/brother-other-templates.xml.h:21
 msgid "Standard Address Labels 38mm x 90mm"
 msgstr "Standard-Adressaufkleber 38mm x 90mm"
+
+#. ===================================================================
+#: ../templates/canon-other-templates.xml.h:2
+msgid "CD/DVD Tray"
+msgstr "CD/DVD-Hülle"
 
 #. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:4
