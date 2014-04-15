@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2014-02-14 06:42+0000\n"
+"POT-Creation-Date: 2014-04-15 06:15+0000\n"
 "PO-Revision-Date: 2014-02-14 10:35+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
@@ -602,7 +602,7 @@ msgstr "Debe proporcionar un nombre de archivo válido"
 #: ../src/file.c:644
 #, c-format
 msgid "Overwrite file \"%s\"?"
-msgstr "¿Sobreescribir el archivo «%s»?"
+msgstr "¿Sobrescribir el archivo «%s»?"
 
 #: ../src/file.c:648
 msgid "File already exists."
@@ -3152,7 +3152,6 @@ msgstr "Etiquetas de dirección estándar de 38mm x 90mm"
 
 #. ===================================================================
 #: ../templates/canon-other-templates.xml.h:2
-#| msgid "CD/DVD Labels"
 msgid "CD/DVD Tray"
 msgstr "Bandeja de CD/DVD"
 
