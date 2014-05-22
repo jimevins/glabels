@@ -436,7 +436,18 @@ namespace glabels
 
 		private void set_text_path( Cairo.Context cr, bool in_editor, MergeRecord? record )
 		{
+			/*
+			 * Workaround for pango Bug#700592, which is a regression of Bug#341481.
+			 * Render font at device scale and scale font size accordingly.
+			 */
+			double scale_x = 1.0;
+			double scale_y = 1.0;
+			cr.device_to_user_distance( ref scale_x, ref scale_y );
+			scale_x = Math.fabs( scale_x );
+			scale_y = Math.fabs( scale_y );
+
 			cr.save();
+			cr.scale( scale_x, scale_y );
 
 			TextLines lines = get_lines();
 			string    text = lines.expand( record );
@@ -463,13 +474,13 @@ namespace glabels
 			Pango.FontDescription desc = new Pango.FontDescription();
 			desc.set_family( font_family );
 			desc.set_weight( font_weight );
-			desc.set_size( (int)(scaled_font_size * Pango.SCALE + 0.5) );
+			desc.set_size( (int)(scaled_font_size * Pango.SCALE/scale_x + 0.5) );
 			desc.set_style( style );
 			layout.set_font_description( desc );
 
 			layout.set_text( text, -1 );
-			layout.set_spacing( (int)(scaled_font_size * (text_line_spacing-1) * Pango.SCALE + 0.5) );
-			layout.set_width( (int)(w * Pango.SCALE + 0.5) );
+			layout.set_spacing( (int)(scaled_font_size * (text_line_spacing-1) * Pango.SCALE/scale_x + 0.5) );
+			layout.set_width( (int)(w * Pango.SCALE/scale_x + 0.5) );
 			layout.set_wrap( Pango.WrapMode.WORD );
 			layout.set_alignment( text_alignment );
 
@@ -480,17 +491,17 @@ namespace glabels
 			switch (text_valignment)
 			{
 			case ValignType.CENTER:
-				y = (h - ih) / 2;
+				y = (h/scale_x - ih) / 2;
 				break;
 			case ValignType.BOTTOM:
-				y = h - ih;
+				y = h/scale_x - ih;
 				break;
 			default:
 				y = 0;
 				break;
 			}
 
-			cr.move_to( TEXT_MARGIN, y );
+			cr.move_to( TEXT_MARGIN/scale_x, y );
 			Pango.cairo_layout_path( cr, layout );
 
 			cr.restore();
@@ -499,7 +510,18 @@ namespace glabels
 
 		private void set_empty_text_path( Cairo.Context cr )
 		{
+			/*
+			 * Workaround for pango Bug#700592, which is a regression of Bug#341481.
+			 * Render font at device scale and scale font size accordingly.
+			 */
+			double scale_x = 1.0;
+			double scale_y = 1.0;
+			cr.device_to_user_distance( ref scale_x, ref scale_y );
+			scale_x = Math.fabs( scale_x );
+			scale_y = Math.fabs( scale_y );
+
 			cr.save();
+			cr.scale( scale_x, scale_y );
 
 			Pango.Layout layout = Pango.cairo_create_layout( cr );
 
@@ -511,13 +533,13 @@ namespace glabels
 			Pango.FontDescription desc = new Pango.FontDescription();
 			desc.set_family( "Sans" );
 			desc.set_weight( Pango.Weight.NORMAL );
-			desc.set_size( (int)(12 * FONT_SCALE * Pango.SCALE) );
+			desc.set_size( (int)(12 * FONT_SCALE * Pango.SCALE/scale_x + 0.5) );
 			desc.set_style( Pango.Style.NORMAL );
 			layout.set_font_description( desc );
 
 			layout.set_text( _("Text"), -1 );
 
-			cr.move_to( TEXT_MARGIN, 0 );
+			cr.move_to( TEXT_MARGIN/scale_x, 0 );
 			Pango.cairo_layout_path( cr, layout );
 
 			cr.restore();
