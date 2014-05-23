@@ -481,7 +481,7 @@ namespace glabels
 
 			layout.set_text( text, -1 );
 			layout.set_spacing( (int)(scaled_font_size * (text_line_spacing-1) * Pango.SCALE/scale_x + 0.5) );
-			layout.set_width( (int)(w * Pango.SCALE/scale_x + 0.5) );
+			layout.set_width( (int)((w - 2*TEXT_MARGIN)*Pango.SCALE/scale_x + 0.5) );
 			layout.set_wrap( Pango.WrapMode.WORD );
 			layout.set_alignment( text_alignment );
 
@@ -653,7 +653,7 @@ namespace glabels
 			}
 			else
 			{
-				layout.set_width( (int)(_w_raw * Pango.SCALE + 0.5) );
+				layout.set_width( (int)((_w_raw - TEXT_MARGIN)*Pango.SCALE + 0.5) );
 			}
 
 			int iw, ih;
@@ -665,10 +665,14 @@ namespace glabels
 			}
 			else
 			{
-				_w = iw / Pango.SCALE + 2*TEXT_MARGIN;
+				/*
+				 * Grow box to include left and right margins.  +1 point to
+				 * to give a little extra room to prevent text from wrapping.
+				 */
+				_w = iw / (double)Pango.SCALE + 2*TEXT_MARGIN + 1;
 			}
 
-			double h_temp = ih / Pango.SCALE;
+			double h_temp = ih / (double)Pango.SCALE;
 			if ( h_temp < _h_raw )
 			{
 				_h = h_raw;
