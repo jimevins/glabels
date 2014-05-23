@@ -395,10 +395,8 @@ namespace glabels
 
 		private void draw_text_real( Cairo.Context cr, bool in_editor, MergeRecord? record, Color color )
 		{
-			set_text_path( cr, in_editor, record );
-
 			cr.set_source_rgba( color.r, color.g, color.b, color.a );
-			cr.fill();
+			layout_text( cr, in_editor, record, false );
 		}
 
 
@@ -413,7 +411,7 @@ namespace glabels
 				}
 				else
 				{
-					set_text_path( cr, true, null);
+					layout_text( cr, true, null, true );
 				}
 				if ( cr.in_fill( x, y ) )
 				{
@@ -434,7 +432,10 @@ namespace glabels
 		}
 
 
-		private void set_text_path( Cairo.Context cr, bool in_editor, MergeRecord? record )
+		private void layout_text( Cairo.Context cr,
+		                          bool in_editor,
+		                          MergeRecord? record,
+		                          bool path_only )
 		{
 			/*
 			 * Workaround for pango Bug#700592, which is a regression of Bug#341481.
@@ -502,7 +503,14 @@ namespace glabels
 			}
 
 			cr.move_to( TEXT_MARGIN/scale_x, y );
-			Pango.cairo_layout_path( cr, layout );
+			if ( path_only )
+			{
+				Pango.cairo_layout_path( cr, layout );
+			}
+			else
+			{
+				Pango.cairo_show_layout( cr, layout );
+			}
 
 			cr.restore();
 		}
