@@ -34,7 +34,6 @@ namespace glabels
 		private const string[] standard_families = { "Sans", "Serif", "Monospace" };
 
 		private FontHistory    font_history;
-		private FontFamilies   font_families;
 
 		public FontMenu()
 		{
@@ -43,9 +42,6 @@ namespace glabels
 			Gtk.MenuItem separator_item;
 			Gtk.MenuItem menu_item;
 			List<string> list;
-
-
-			font_families = new FontFamilies();
 
 
 			for ( i = 0; i < standard_families.length; i++ )
@@ -72,20 +68,20 @@ namespace glabels
 
 			menu_item = new Gtk.MenuItem.with_label( "Proportional fonts" );
 			this.append( menu_item );
-			menu_item.set_submenu( create_font_sub_menu( font_families.proportional ) );
-			menu_item.set_sensitive( font_families.proportional != null );
+			menu_item.set_submenu( create_font_sub_menu( FontFamilies.proportional ) );
+			menu_item.set_sensitive( FontFamilies.proportional != null );
 
 
 			menu_item = new Gtk.MenuItem.with_label( "Fixed-width fonts" );
 			this.append( menu_item );
-			menu_item.set_submenu( create_font_sub_menu( font_families.fixed_width ) );
-			menu_item.set_sensitive( font_families.fixed_width != null );
+			menu_item.set_submenu( create_font_sub_menu( FontFamilies.fixed_width ) );
+			menu_item.set_sensitive( FontFamilies.fixed_width != null );
 
 
 			menu_item = new Gtk.MenuItem.with_label( "All fonts" );
 			this.append( menu_item );
-			menu_item.set_submenu( create_font_sub_menu( font_families.all ) );
-			menu_item.set_sensitive( font_families.all != null );
+			menu_item.set_submenu( create_font_sub_menu( FontFamilies.all ) );
+			menu_item.set_sensitive( FontFamilies.all != null );
 
 
 			this.show_all();
