@@ -185,8 +185,8 @@ namespace glabels
 
 				set_title( _("Open label") );
 				action = Gtk.FileChooserAction.OPEN;
-				add_button( Gtk.Stock.CANCEL, Gtk.ResponseType.CANCEL );
-				add_button(	Gtk.Stock.OPEN, Gtk.ResponseType.ACCEPT );
+				add_button( "gtk-cancel", Gtk.ResponseType.CANCEL );
+				add_button(	"gtk-open",   Gtk.ResponseType.ACCEPT );
 
 				set_transient_for( parent_window );
 
@@ -383,8 +383,8 @@ namespace glabels
 
 				set_title( title );
 				action = Gtk.FileChooserAction.SAVE;
-				add_button( Gtk.Stock.CANCEL, Gtk.ResponseType.CANCEL );
-				add_button(	Gtk.Stock.SAVE, Gtk.ResponseType.ACCEPT );
+				add_button( "gtk-cancel", Gtk.ResponseType.CANCEL );
+				add_button(	"gtk-save",   Gtk.ResponseType.ACCEPT );
 
 				set_transient_for( parent_window );
 
@@ -437,8 +437,8 @@ namespace glabels
 					md.format_secondary_text( _("Your changes will be lost if you don't save them.") );
 
 					md.add_button( _("Close without saving"), Gtk.ResponseType.NO );
-					md.add_button( Gtk.Stock.CANCEL, Gtk.ResponseType.CANCEL );
-					md.add_button( Gtk.Stock.SAVE, Gtk.ResponseType.YES );
+					md.add_button( "gtk-cancel", Gtk.ResponseType.CANCEL );
+					md.add_button( "gtk-save",   Gtk.ResponseType.YES );
 					md.set_default_response( Gtk.ResponseType.YES );
 
 					md.set_resizable( false );

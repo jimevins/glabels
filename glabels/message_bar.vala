@@ -44,16 +44,16 @@ namespace glabels
 			switch( type )
 			{
 			case Gtk.MessageType.INFO:
-				image.set_from_stock( Gtk.Stock.DIALOG_INFO, Gtk.IconSize.DIALOG );
+				image.set_from_icon_name( "dialog-information", Gtk.IconSize.DIALOG );
 				break;
 			case Gtk.MessageType.WARNING:
-				image.set_from_stock( Gtk.Stock.DIALOG_WARNING, Gtk.IconSize.DIALOG );
+				image.set_from_icon_name( "dialog-warning", Gtk.IconSize.DIALOG );
 				break;
 			case Gtk.MessageType.QUESTION:
-				image.set_from_stock( Gtk.Stock.DIALOG_QUESTION, Gtk.IconSize.DIALOG );
+				image.set_from_icon_name( "dialog-question", Gtk.IconSize.DIALOG );
 				break;
 			case Gtk.MessageType.ERROR:
-				image.set_from_stock( Gtk.Stock.DIALOG_ERROR, Gtk.IconSize.DIALOG );
+				image.set_from_icon_name( "dialog-error", Gtk.IconSize.DIALOG );
 				break;
 			default:
 				break;
@@ -75,21 +75,21 @@ namespace glabels
 			switch (buttons)
 			{
 			case Gtk.ButtonsType.OK:
-				add_button( Gtk.Stock.OK, Gtk.ResponseType.ACCEPT );
+				add_button( "gtk-ok", Gtk.ResponseType.ACCEPT );
 				break;
 			case Gtk.ButtonsType.CLOSE:
-				add_button( Gtk.Stock.CLOSE, Gtk.ResponseType.ACCEPT );
+				add_button( "gtk-close", Gtk.ResponseType.ACCEPT );
 				break;
 			case Gtk.ButtonsType.CANCEL:
-				add_button( Gtk.Stock.CANCEL, Gtk.ResponseType.REJECT );
+				add_button( "gtk-cancel", Gtk.ResponseType.REJECT );
 				break;
 			case Gtk.ButtonsType.YES_NO:
-				add_button( Gtk.Stock.YES, Gtk.ResponseType.ACCEPT );
-				add_button( Gtk.Stock.NO,  Gtk.ResponseType.REJECT );
+				add_button( "gtk-yes", Gtk.ResponseType.ACCEPT );
+				add_button( "gtk-no",  Gtk.ResponseType.REJECT );
 				break;
 			case Gtk.ButtonsType.OK_CANCEL:
-				add_button( Gtk.Stock.OK,     Gtk.ResponseType.ACCEPT );
-				add_button( Gtk.Stock.CANCEL, Gtk.ResponseType.REJECT );
+				add_button( "gtk-ok",     Gtk.ResponseType.ACCEPT );
+				add_button( "gtk-cancel", Gtk.ResponseType.REJECT );
 				break;
 			default:
 				break;
