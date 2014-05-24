@@ -44,27 +44,22 @@ namespace glabels
 
 		public override bool draw( Cairo.Context cr )
 		{
-			Gtk.Style             style;
-			double                w, h;
-			Color                 fill_color, line_color;
-			Pango.Layout          layout;
-			Pango.FontDescription desc;
-			Pango.Rectangle       ink_rect, logical_rect;
-			double                layout_x, layout_y, layout_width, layout_height;
+			double w = get_allocated_width();
+			double h = get_allocated_height();
 
-			w = get_allocated_width();
-			h = get_allocated_height();
-
-			style = this.get_style();
+			Gtk.StyleContext style_context = this.get_style_context();
+			Color  text_color, fill_color, border_color;
 			if ( this.is_sensitive() )
 			{
-				fill_color = Color.from_gdk_color( style.light[Gtk.StateType.NORMAL] );
-				line_color = Color.from_gdk_color( style.fg[Gtk.StateType.NORMAL] );
+				text_color   = Color.black();
+				fill_color   = Color.white();
+				border_color = Color.from_gdk_rgba( style_context.get_border_color(Gtk.StateFlags.NORMAL) );
 			}
 			else
 			{
-				fill_color = Color.none();
-				line_color = Color.from_gdk_color( style.fg[Gtk.StateType.INSENSITIVE] );
+				text_color   = Color( 0.75, 0.75, 0.75, 1.0 );
+				fill_color   = Color.none();
+				border_color = Color.from_gdk_rgba( style_context.get_border_color(Gtk.StateFlags.INSENSITIVE) );
 			}
 
 			cr.set_antialias( Cairo.Antialias.NONE );
@@ -74,15 +69,15 @@ namespace glabels
 			cr.set_source_rgba( fill_color.r, fill_color.g, fill_color.b, fill_color.a );
 			cr.fill_preserve();
 
-			cr.set_source_rgb( line_color.r, line_color.g, line_color.b );
+			cr.set_source_rgb( border_color.r, border_color.g, border_color.b );
 			cr.set_line_width( 1.0 );
 			cr.stroke();
 
 			cr.set_antialias( Cairo.Antialias.DEFAULT );
 
-			layout = Pango.cairo_create_layout( cr );
+			Pango.Layout layout = Pango.cairo_create_layout( cr );
 
-			desc   = new Pango.FontDescription();
+			Pango.FontDescription desc = new Pango.FontDescription();
 			desc.set_family( font_family );
 			desc.set_weight( Pango.Weight.NORMAL );
 			desc.set_style( Pango.Style.NORMAL );
@@ -91,12 +86,14 @@ namespace glabels
 			layout.set_font_description( desc );
 			layout.set_text( sample_text, -1 );
 			layout.set_width( -1 );
-			layout.get_pixel_extents( out ink_rect, out logical_rect );
-			layout_width  = double.max( logical_rect.width, ink_rect.width );
-			layout_height = double.max( logical_rect.height, ink_rect.height );
 
-			layout_x = (w - layout_width) / 2.0;
-			layout_y = (h - layout_height) / 2.0;
+			Pango.Rectangle ink_rect, logical_rect;
+			layout.get_pixel_extents( out ink_rect, out logical_rect );
+			double layout_width  = double.max( logical_rect.width, ink_rect.width );
+			double layout_height = double.max( logical_rect.height, ink_rect.height );
+
+			double layout_x = (w - layout_width) / 2.0;
+			double layout_y = (h - layout_height) / 2.0;
 
 			if (ink_rect.x < logical_rect.x)
 			{
@@ -108,14 +105,14 @@ namespace glabels
 				layout_y += logical_rect.y - ink_rect.y;
 			}
 
-			cr.set_source_rgb( line_color.r, line_color.g, line_color.b );
+			cr.set_source_rgb( text_color.r, text_color.g, text_color.b );
 			cr.move_to( layout_x, layout_y );
 			Pango.cairo_show_layout( cr, layout );
 
 			return false;
 		}
 
-		public override void style_set( Gtk.Style? style )
+		public override void style_updated()
 		{
 			redraw_canvas();
 		}

@@ -77,7 +77,7 @@ namespace glabels
 			canvas.set_size_request( width, height );
 
 			canvas.draw.connect( on_draw );
-			canvas.style_set.connect( on_style_set );
+			canvas.style_updated.connect( on_style_updated );
 		}
 
 
@@ -209,7 +209,7 @@ namespace glabels
 		}
 
 
-		private void on_style_set( Gtk.Style? previous_style )
+		private void on_style_updated()
 		{
 			redraw_canvas();
 		}
@@ -329,9 +329,8 @@ namespace glabels
 
 			cr.rectangle( x, y, template.page_width, template.page_height );
 
-			Gtk.Style style = get_style();
-			Color shadow_color = Color.from_gdk_color( style.dark[Gtk.StateType.NORMAL] );
-			cr.set_source_rgb( shadow_color.r, shadow_color.g, shadow_color.b );
+			Color shadow_color = Color( 0, 0, 0, 0.75 );
+			cr.set_source_rgba( shadow_color.r, shadow_color.g, shadow_color.b, shadow_color.a );
 
 			cr.fill();
 
@@ -346,9 +345,9 @@ namespace glabels
 
 			cr.rectangle( 0, 0, template.page_width, template.page_height );
 
-			Gtk.Style style = get_style();
-			Color paper_color = Color.from_gdk_color( style.light[Gtk.StateType.NORMAL] );
-			Color outline_color = Color.from_gdk_color( style.fg[Gtk.StateType.NORMAL] );
+			Gtk.StyleContext style_context = get_style_context();
+			Color paper_color = Color.white();
+			Color outline_color = Color.from_gdk_rgba( style_context.get_border_color(Gtk.StateFlags.NORMAL) );
 
 			cr.set_source_rgb( paper_color.r, paper_color.g, paper_color.b );
 			cr.fill_preserve();
@@ -368,8 +367,16 @@ namespace glabels
 
 			int n_labels = frame.get_n_labels();
 
-			Gtk.Style style = get_style();
-			Color base_color = Color.from_gdk_color( style.base[Gtk.StateType.SELECTED] );
+			Gtk.StyleContext style_context = get_style_context();
+			Gdk.RGBA base_rgba;
+			if ( !style_context.lookup_color( "selected_bg_color", out base_rgba ) )
+			{
+				base_rgba.red   = 0.0;
+				base_rgba.green = 0.6;
+				base_rgba.blue  = 1.0;
+				base_rgba.alpha = 1.0;
+			}
+			Color base_color = Color.from_gdk_rgba( base_rgba );
 			Color highlight_color = Color.from_color_and_opacity( base_color, 0.10 );
 
 			Color outline_color;

@@ -42,23 +42,22 @@ namespace glabels
 
 		public override bool draw( Cairo.Context cr )
 		{
-			Color  fill_color, line_color;
-
 			cr.set_antialias( Cairo.Antialias.NONE );
 
 			double w = get_allocated_width();
 			double h = get_allocated_height();
 
-			Gtk.Style style = this.get_style();
+			Gtk.StyleContext style_context = this.get_style_context();
+			Color  fill_color, border_color;
 			if ( this.is_sensitive() )
 			{
-				fill_color = color;
-				line_color = Color.from_gdk_color( style.fg[Gtk.StateType.NORMAL] );
+				fill_color   = color;
+				border_color = Color.from_gdk_rgba( style_context.get_border_color(Gtk.StateFlags.NORMAL) );
 			}
 			else
 			{
-				fill_color = Color.none();
-				line_color = Color.from_gdk_color( style.fg[Gtk.StateType.INSENSITIVE] );
+				fill_color   = Color.none();
+				border_color = Color.from_gdk_rgba( style_context.get_border_color(Gtk.StateFlags.INSENSITIVE) );
 			}
 
 			cr.rectangle( 1, 1, w-2, h-2 );
@@ -69,7 +68,7 @@ namespace glabels
 				cr.fill_preserve();
 			}
 
-			cr.set_source_rgb( line_color.r, line_color.g, line_color.b );
+			cr.set_source_rgb( border_color.r, border_color.g, border_color.b );
 			cr.set_line_width( 1.0 );
 			cr.stroke();
 
@@ -77,7 +76,7 @@ namespace glabels
 		}
 
 
-		public override void style_set( Gtk.Style? style )
+		public override void style_updated()
 		{
 			redraw_canvas();
 		}
