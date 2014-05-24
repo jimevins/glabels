@@ -53,7 +53,7 @@ namespace glabels
 					new_window.show_all();
 				}
 
-				dialog.hide();
+				dialog.destroy();
 			}
 		}
 

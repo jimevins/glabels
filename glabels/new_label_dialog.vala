@@ -432,13 +432,16 @@ namespace glabels
 		{
 			List<Gtk.TreePath> list = recent_icon_view.get_selected_items();
 
-			Gtk.TreeIter iter;
-			if ( recent_model.get_iter( out iter, list.first().data ) )
+			if ( list != null )
 			{
-				Value value;
-				recent_model.get_value( iter, 0, out value );
+				Gtk.TreeIter iter;
+				if ( recent_model.get_iter( out iter, list.first().data ) )
+				{
+					Value value;
+					recent_model.get_value( iter, 0, out value );
 
-				template_name = value.get_string();
+					template_name = value.get_string();
+				}
 			}
 		}
 
@@ -458,13 +461,16 @@ namespace glabels
 		{
 			List<Gtk.TreePath> list = search_icon_view.get_selected_items();
 
-			Gtk.TreeIter iter;
-			if ( search_filtered_model.get_iter( out iter, list.first().data ) )
+			if ( list != null )
 			{
-				Value value;
-				search_filtered_model.get_value( iter, 0, out value );
+				Gtk.TreeIter iter;
+				if ( search_filtered_model.get_iter( out iter, list.first().data ) )
+				{
+					Value value;
+					search_filtered_model.get_value( iter, 0, out value );
 
-				template_name = value.get_string();
+					template_name = value.get_string();
+				}
 			}
 		}
 
