@@ -84,7 +84,7 @@ namespace glabels
 		public void set_model( Model model )
 		{
 			this.model = model;
-			set_template( model.label.template );
+			set_template_by_template( model.label.template );
 
 			model.label.changed.connect( on_label_changed );
 			model.print.changed.connect( on_label_changed );
@@ -94,11 +94,11 @@ namespace glabels
 		public void set_template_by_name( string name )
 		{
 			Template? template = Db.lookup_template_from_name( name );
-			set_template( template );
+			set_template_by_template( template );
 		}
 
 
-		public void set_template( Template? template )
+		public void set_template_by_template( Template? template )
 		{
 			this.template = template;
 
