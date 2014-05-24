@@ -64,6 +64,19 @@ namespace glabels
 			this( c.red/65535.0, c.green/65535.0, c.blue/65535.0, 1.0 );
 		}
 
+		public Color.from_gdk_rgba( Gdk.RGBA c )
+		{
+			this( c.red, c.green, c.blue, c.alpha );
+		}
+
+		public Color.from_spec( string spec )
+		{
+			Gdk.RGBA c = { 0, 0, 0, 0 };
+			c.parse( spec );
+
+			this( c.red, c.green, c.blue, c.alpha );
+		}
+
 		public Color.from_legacy_color( uint32 c )
 		{
 			this( ((c>>24) & 0xff) / 255.0,
@@ -100,6 +113,18 @@ namespace glabels
 			c.red   = (uint16) (r * 65535);
 			c.green = (uint16) (g * 65535);
 			c.blue  = (uint16) (b * 65535);
+
+			return c;
+		}
+
+		public Gdk.RGBA to_gdk_rgba()
+		{
+			Gdk.RGBA c = Gdk.RGBA();
+
+			c.red   = r;
+			c.green = g;
+			c.blue  = b;
+			c.alpha = a;
 
 			return c;
 		}

@@ -33,62 +33,54 @@ namespace glabels
 		private ColorNode      color_node;
 
 		private struct ColorTableEntry {
-			uchar  r;
-			uchar  g;
-			uchar  b;
+			string color_spec;
 			string name;
 		}
 
 		private const ColorTableEntry color_table[] = {
 
-			{ 139,   0,   0, N_("Dark Red") },
-			{ 165,  42,  42, N_("Brown") },
-			{ 205, 149,  12, N_("Dark Goldenrod") },
-			{   0, 100,   0, N_("Dark Green") },
-			{   0, 139, 139, N_("Dark Cyan") },
-			{   0,   0, 128, N_("Navy Blue") },
-			{ 148,   0, 211, N_("Dark Violet") },
+			{ "#ef2929", NC_("Color name", "Light Scarlet Red") },
+			{ "#fcaf3e", NC_("Color name", "Light Orange")      },
+			{ "#fce94f", NC_("Color name", "Light Butter")      },
+			{ "#8ae234", NC_("Color name", "Light Chameleon")   },
+			{ "#729fcf", NC_("Color name", "Light Sky Blue")    },
+			{ "#ad7fa8", NC_("Color name", "Light Plum")        },
+			{ "#e9b96e", NC_("Color name", "Light Chocolate")   },
+			{ "#888a85", NC_("Color name", "Light Aluminum 1")  },
+			{ "#eeeeec", NC_("Color name", "Light Aluminum 2")  },
 
-			{ 255,   0,   0, N_("Red") },
-			{ 255, 165,   0, N_("Orange") },
-			{ 205, 205,   0, N_("Dark Yellow") },
-			{   0, 205,   0, N_("Medium green") },
-			{  64, 224, 208, N_("Turquoise") },
-			{   0,   0, 255, N_("Blue") },
-			{ 160,  32, 240, N_("Purple") },
+			{ "#cc0000", NC_("Color name", "Scarlet Red")       },
+			{ "#f57900", NC_("Color name", "Orange")            },
+			{ "#edd400", NC_("Color name", "Butter")            },
+			{ "#73d216", NC_("Color name", "Chameleon")         },
+			{ "#3465a4", NC_("Color name", "Sky Blue")          },
+			{ "#75507b", NC_("Color name", "Plum")              },
+			{ "#c17d11", NC_("Color name", "Chocolate")         },
+			{ "#555753", NC_("Color name", "Aluminum 1")        },
+			{ "#d3d7cf", NC_("Color name", "Aluminum 2")        },
 
-			{ 250, 128, 114, N_("Salmon") },
-			{ 255, 215,   0, N_("Gold") },
-			{ 255, 255,   0, N_("Yellow") },
-			{   0, 255,   0, N_("Green") },
-			{   0, 255, 255, N_("Cyan") },
-			{ 135, 206, 235, N_("SkyBlue") },
-			{ 238, 130, 238, N_("Violet") },
+			{ "#a40000", NC_("Color name", "Dark Scarlet Red")  },
+			{ "#ce5c00", NC_("Color name", "Dark Orange")       },
+			{ "#c4a000", NC_("Color name", "Dark Butter")       },
+			{ "#4e9a06", NC_("Color name", "Dark Chameleon")    },
+			{ "#204a87", NC_("Color name", "Dark Sky Blue")     },
+			{ "#5c3566", NC_("Color name", "Dark Plum")         },
+			{ "#8f5902", NC_("Color name", "Dark Chocolate")    },
+			{ "#2e3436", NC_("Color name", "Dark Aluminum 1")   },
+			{ "#babdb6", NC_("Color name", "Dark Aluminum 2")   },
 
-			{ 255, 192, 203, N_("Pink") },
-			{ 255, 246, 143, N_("Khaki") },
-			{ 255, 255, 224, N_("Light Yellow") },
-			{ 144, 238, 144, N_("Light Green") },
-			{ 224, 255, 255, N_("Light Cyan") },
-			{ 198, 226, 255, N_("Slate Gray") },
-			{ 216, 191, 216, N_("Thistle") },
-
-			{ 255, 255, 255, N_("White") },
-			/* xgettext: no-c-format */
-			{ 230, 230, 230, N_("10% Gray") },
-			/* xgettext: no-c-format */
-			{ 192, 192, 192, N_("25% Gray") },
-			/* xgettext: no-c-format */
-			{ 153, 153, 153, N_("40% Gray") },
-			/* xgettext: no-c-format */
-			{ 128, 128, 128, N_("50% Gray") },
-			/* xgettext: no-c-format */
-			{ 102, 102, 102, N_("60% Gray") },
-			{   0,   0,   0, N_("Black") }
-
+			{ "#000000", NC_("Color name", "Black")             },
+			{ "#2e3436", NC_("Color name", "Very Dark Gray")    },
+			{ "#555753", NC_("Color name", "Darker Gray")       },
+			{ "#888a85", NC_("Color name", "Dark Gray")         },
+			{ "#babdb6", NC_("Color name", "Medium Gray")       },
+			{ "#d3d7cf", NC_("Color name", "Light Gray")        },
+			{ "#eeeeec", NC_("Color name", "Lighter Gray")      },
+			{ "#f3f3f3", NC_("Color name", "Very Light Gray")   },
+			{ "#ffffff", NC_("Color name", "White")             }
 		};
 
-		private const int      PALETTE_COLS = 7;
+		private const int      PALETTE_COLS = 9;
 		private const int      PALETTE_ROWS = color_table.length/PALETTE_COLS + 1;
 
 		private const int      ROW_DEFAULT = 0;
@@ -133,12 +125,8 @@ namespace glabels
 				int i_row = i / PALETTE_COLS;
 				int i_col = i % PALETTE_COLS;
 
-				uchar r = color_table[i].r;
-				uchar g = color_table[i].g;
-				uchar b = color_table[i].b;
-
 				var palette_menu_item = new ColorMenuItem( i,
-				                                           Color.from_byte_rgb(r, g, b),
+				                                           Color.from_spec(color_table[i].color_spec),
 				                                           dgettext(null, color_table[i].name) );
 
 				palette_menu_item.activated.connect( on_palette_menu_item_activated );
@@ -210,9 +198,7 @@ namespace glabels
 		private void on_palette_menu_item_activated( int id )
 		{
 			color_node.field_flag = false;
-			color_node.color      = Color.from_byte_rgb( color_table[id].r,
-			                                             color_table[id].g,
-			                                             color_table[id].b );
+			color_node.color      = Color.from_spec( color_table[id].color_spec );
 			color_node.key        = null;
 
 			color_changed( color_node, false );
@@ -231,22 +217,23 @@ namespace glabels
 
 		private void on_custom_menu_item_activate()
 		{
-			Gtk.ColorSelectionDialog dialog     = new Gtk.ColorSelectionDialog( _("Custom Color") );
-			Gtk.ColorSelection       colorsel   = dialog.get_color_selection() as Gtk.ColorSelection;
-			Gdk.Color                gdk_color;
-			int                      response;
+			Gtk.ColorChooserDialog dialog  = new Gtk.ColorChooserDialog( _("Custom Color"), null );
 
-			gdk_color = color_node.color.to_gdk_color();
-			colorsel.set_current_color( gdk_color );
+			dialog.use_alpha   = true;
+			dialog.show_editor = true; // TODO: This gets overwritten when dialog is realized.
+			                           //       I would like to skip over the redundant pallete.
 
-			response = dialog.run();
+			Gdk.RGBA gdk_rgba = color_node.color.to_gdk_rgba();
+			dialog.set_rgba( gdk_rgba );
+
+			int response = dialog.run();
 
 			switch (response) {
 			case Gtk.ResponseType.OK:
-				colorsel.get_current_color( out gdk_color );
+				gdk_rgba = dialog.get_rgba();
 
 				color_node.field_flag = false;
-				color_node.color      = Color.from_gdk_color( gdk_color );
+				color_node.color      = Color.from_gdk_rgba( gdk_rgba );
 				color_node.key        = null;
 
 				custom_color_history.add_color( color_node.color );

@@ -172,7 +172,7 @@ namespace glabels
 			this.set_policy( Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC );
 			this.add( canvas );
 
-			canvas.modify_bg( Gtk.StateType.NORMAL, BG_COLOR.to_gdk_color() );
+			canvas.override_background_color( Gtk.StateFlags.NORMAL, BG_COLOR.to_gdk_rgba() );
 			canvas.set_can_focus( true );
 
 			canvas.add_events( Gdk.EventMask.FOCUS_CHANGE_MASK   |
