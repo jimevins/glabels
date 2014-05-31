@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.16.1 -->
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
+  <requires lib="gtk+" version="3.0"/>
   <object class="GtkWindow" id="new_label_dialog">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">New Label</property>
@@ -81,7 +82,11 @@
                               <object class="GtkIconView" id="recent_icon_view">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
+                                <property name="margin">0</property>
                                 <property name="selection_mode">browse</property>
+                                <property name="item_width">72</property>
+                                <property name="column_spacing">0</property>
+                                <property name="item_padding">0</property>
                               </object>
                             </child>
                           </object>
@@ -165,7 +170,6 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="invisible_char">•</property>
-                                    <property name="invisible_char_set">True</property>
                                     <property name="secondary_icon_stock">gtk-find</property>
                                   </object>
                                   <packing>
@@ -193,10 +197,10 @@
                                             <child>
                                               <object class="GtkRadioButton" id="search_iso_radio">
                                                 <property name="label" translatable="yes">ISO sizes</property>
+                                                <property name="use_action_appearance">False</property>
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">False</property>
-                                                <property name="use_action_appearance">False</property>
                                                 <property name="xalign">0</property>
                                                 <property name="active">True</property>
                                                 <property name="draw_indicator">True</property>
@@ -210,10 +214,10 @@
                                             <child>
                                               <object class="GtkRadioButton" id="search_us_radio">
                                                 <property name="label" translatable="yes">US sizes</property>
+                                                <property name="use_action_appearance">False</property>
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">False</property>
-                                                <property name="use_action_appearance">False</property>
                                                 <property name="xalign">0</property>
                                                 <property name="active">True</property>
                                                 <property name="draw_indicator">True</property>
@@ -228,10 +232,10 @@
                                             <child>
                                               <object class="GtkRadioButton" id="search_other_radio">
                                                 <property name="label" translatable="yes">Other</property>
+                                                <property name="use_action_appearance">False</property>
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">False</property>
-                                                <property name="use_action_appearance">False</property>
                                                 <property name="xalign">0</property>
                                                 <property name="active">True</property>
                                                 <property name="draw_indicator">True</property>
@@ -306,7 +310,11 @@
                               <object class="GtkIconView" id="search_icon_view">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
+                                <property name="margin">0</property>
                                 <property name="selection_mode">browse</property>
+                                <property name="item_width">72</property>
+                                <property name="column_spacing">0</property>
+                                <property name="item_padding">0</property>
                               </object>
                             </child>
                           </object>
@@ -394,10 +402,10 @@
                                 <child>
                                   <object class="GtkButton" id="custom_add_button">
                                     <property name="label">gtk-add</property>
+                                    <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
-                                    <property name="use_action_appearance">False</property>
                                     <property name="use_stock">True</property>
                                   </object>
                                   <packing>
@@ -409,10 +417,10 @@
                                 <child>
                                   <object class="GtkButton" id="custom_edit_button">
                                     <property name="label">gtk-edit</property>
+                                    <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
-                                    <property name="use_action_appearance">False</property>
                                     <property name="use_stock">True</property>
                                   </object>
                                   <packing>
@@ -424,10 +432,10 @@
                                 <child>
                                   <object class="GtkButton" id="custom_delete_button">
                                     <property name="label">gtk-delete</property>
+                                    <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
-                                    <property name="use_action_appearance">False</property>
                                     <property name="use_stock">True</property>
                                   </object>
                                   <packing>
@@ -481,7 +489,11 @@
                               <object class="GtkIconView" id="custom_icon_view">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
+                                <property name="margin">0</property>
                                 <property name="selection_mode">browse</property>
+                                <property name="item_width">72</property>
+                                <property name="column_spacing">0</property>
+                                <property name="item_padding">0</property>
                               </object>
                             </child>
                           </object>
