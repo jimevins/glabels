@@ -1,22 +1,23 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2012, 2013.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2014.
+# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2012, 2013, 2014.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2014-02-11 12:42+0000\n"
-"PO-Revision-Date: 2014-05-21 18:00+0300\n"
-"Last-Translator: Lasse Liehu <lasse.liehu@gmail.com>\n"
-"Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
+"POT-Creation-Date: 2014-09-15 08:04+0000\n"
+"PO-Revision-Date: 2014-09-15 14:56+0300\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
+"Language-Team: suomi <gnome-fi-laatu@lists.sourceforge.net>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Gtranslator 2.91.6\n"
 
 #: ../src/bc-backends.c:81
 msgid "Built-in"
@@ -702,15 +703,15 @@ msgstr ""
 
 #: ../src/glabels-batch.c:61 ../data/ui/print-op-dialog-custom-widget.ui.h:11
 msgid "print outlines (to test printer alignment)"
-msgstr ""
+msgstr "tulosta ääriviivat (testataksesi tulostimen kohdistusta)"
 
 #: ../src/glabels-batch.c:63 ../data/ui/print-op-dialog-custom-widget.ui.h:12
 msgid "print in reverse (i.e. a mirror image)"
-msgstr ""
+msgstr "tulosta käänteisesti (esim. peilikuvat)"
 
 #: ../src/glabels-batch.c:65 ../data/ui/print-op-dialog-custom-widget.ui.h:13
 msgid "print crop marks"
-msgstr ""
+msgstr "tulosta leikkausviivat"
 
 #: ../src/glabels-batch.c:67
 msgid "input file for merging"
@@ -730,6 +731,9 @@ msgid ""
 "%s\n"
 "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
+"%s\n"
+"Suorita '%s --help' nähdäksesi kaikki käytettävissä olevat "
+"komentorivivalinnat.\n"
 
 #: ../src/glabels-batch.c:151
 #, c-format
@@ -930,7 +934,7 @@ msgstr "Tasaa teksti"
 
 #: ../src/label-text.c:771
 msgid "Vertically align text"
-msgstr ""
+msgstr "Tasaa teksti pystysuunnassa"
 
 #: ../src/label-text.c:804
 msgid "Line spacing"
@@ -942,7 +946,7 @@ msgstr "Tekstin väri"
 
 #: ../src/label-text.c:997
 msgid "Auto shrink"
-msgstr ""
+msgstr "Kutista automaattisesti"
 
 #: ../src/media-select.c:358 ../src/media-select.c:361
 #: ../src/media-select.c:506 ../src/media-select.c:723
@@ -976,7 +980,7 @@ msgstr "Viimeisimpiä malleja ei löytynyt."
 
 #: ../src/media-select.c:992
 msgid "Try selecting a template in the \"Search all\" tab."
-msgstr ""
+msgstr "Valitse jokin malli \"Etsi kaikista\"-välilehdeltä."
 
 #. Translators: "No match" means that for the given template search criteria, there
 #. * were no matches found.
@@ -990,13 +994,15 @@ msgstr "Valitse muu malli, sivukoko tai luokka."
 
 #: ../src/media-select.c:1179
 msgid "No custom templates found."
-msgstr ""
+msgstr "Mukautettuja malleja ei löytynyt."
 
 #: ../src/media-select.c:1181
 msgid ""
 "You may create new templates or try searching for pre-defined templates in "
 "the \"Search all\" tab."
 msgstr ""
+"Voit luoda uusia mallipohjia tai etsiä valmiista malleista \"Etsi kaikista\"-"
+"välilehdeltä."
 
 #. Translators: "None" here means that no document-merge source or
 #. * method has been selected.
@@ -1062,7 +1068,7 @@ msgstr "Valitse"
 
 #: ../src/merge-properties-dialog.c:348
 msgid "Record/Field"
-msgstr ""
+msgstr "Merkintä/kenttä"
 
 #: ../src/merge-properties-dialog.c:356 ../data/ui/object-editor.ui.h:24
 msgid "Data"
@@ -1129,7 +1135,7 @@ msgstr "Viivakoodiobjektin ominaisuudet"
 
 #: ../src/object-editor-edit-page.c:76
 msgid "Insert merge field"
-msgstr ""
+msgstr "Syötä yhdistämiskenttä"
 
 #: ../src/object-editor-fill-page.c:79 ../src/prefs-dialog.c:341
 #: ../src/ui-property-bar.c:299
@@ -1156,7 +1162,7 @@ msgstr ""
 
 #: ../src/object-editor-size-page.c:89
 msgid "Lock aspect ratio."
-msgstr ""
+msgstr "Lukitse kuvasuhde."
 
 #: ../src/prefs-dialog.c:168 ../data/ui/prefs-dialog.ui.h:1
 msgid "gLabels Preferences"
@@ -1281,7 +1287,7 @@ msgstr "_Ohje"
 #. Popup entries.
 #: ../src/ui.c:107 ../src/ui.c:108
 msgid "Context Menu"
-msgstr ""
+msgstr "Asiayhteysvalikko"
 
 #: ../src/ui.c:113
 msgid "_New"
@@ -1583,7 +1589,7 @@ msgstr "Ominaisuuspalkki"
 
 #: ../src/ui.c:450
 msgid "Change the visibility of the property toolbar in the current window"
-msgstr ""
+msgstr "Aseta nykyisen ikkunan ominaisuuspalkki päälle/pois"
 
 #: ../src/ui.c:456
 msgid "Grid"
@@ -1591,7 +1597,7 @@ msgstr "Ruudukko"
 
 #: ../src/ui.c:458
 msgid "Change the visibility of the grid in the current window"
-msgstr ""
+msgstr "Aseta nykyisen ikkunan ruudkko päälle/pois"
 
 #: ../src/ui.c:464
 msgid "Markup"
@@ -1599,7 +1605,7 @@ msgstr "Marginaali"
 
 #: ../src/ui.c:466
 msgid "Change the visibility of markup lines in the current window"
-msgstr ""
+msgstr "Aseta nykyisen ikkunan marginaaliviivat päälle/pois"
 
 #: ../src/ui.c:477
 msgid "Main toolbar"
@@ -1607,7 +1613,7 @@ msgstr "Työkalupalkki"
 
 #: ../src/ui.c:479
 msgid "Change the visibility of the main toolbar in the current window"
-msgstr ""
+msgstr "Aseta nykyisen ikkunan ensisijainen työkalupalkki päälle/pois"
 
 #: ../src/ui.c:485
 msgid "Drawing toolbar"
@@ -1615,19 +1621,19 @@ msgstr "Piirtopalkki"
 
 #: ../src/ui.c:487
 msgid "Change the visibility of the drawing toolbar in the current window"
-msgstr ""
+msgstr "Aseta nykyisen ikkunan piirtopalkki päälle/pois"
 
 #: ../src/ui-commands.c:1135
 msgid "Glabels includes contributions from:"
-msgstr ""
+msgstr "Glabels on saanut apua seuraavilta tahoilta:"
 
 #: ../src/ui-commands.c:1144
 msgid "See the file AUTHORS for additional credits,"
-msgstr ""
+msgstr "Lue AUTHORS-tiedosto nähdäksesi lisää avustajia"
 
 #: ../src/ui-commands.c:1145
 msgid "or visit http://glabels.org/"
-msgstr "tai käy osoitteessa http://glabels.org/"
+msgstr "tai käy verkkosivustolla http://glabels.org/"
 
 #: ../src/ui-commands.c:1162
 msgid "A label and business card creation program.\n"
@@ -1783,7 +1789,7 @@ msgstr "Poista kaikki valinnat"
 
 #: ../data/ui/merge-properties-dialog.ui.h:6
 msgid "Record selection/preview"
-msgstr ""
+msgstr "Merkinnän valinta/esikatselu"
 
 #: ../data/ui/media-select.ui.h:1
 msgid "Recent"
@@ -1897,10 +1903,9 @@ msgid "Alignment:"
 msgstr "Tasaus:"
 
 #: ../data/ui/object-editor.ui.h:10
-#, fuzzy
 #| msgid "Alignment:"
 msgid "Vertical alignment:"
-msgstr "Tasaus:"
+msgstr "Pystysuunnan tasaus:"
 
 #: ../data/ui/object-editor.ui.h:11 ../data/ui/prefs-dialog.ui.h:16
 msgid "Line Spacing:"
@@ -1965,7 +1970,7 @@ msgstr "Koko"
 
 #: ../data/ui/object-editor.ui.h:31
 msgid "Length:"
-msgstr ""
+msgstr "Pituus:"
 
 #: ../data/ui/object-editor.ui.h:32
 msgid "Angle:"
@@ -2081,20 +2086,18 @@ msgid "Right align"
 msgstr "Tasaus oikealle"
 
 #: ../data/ui/property-bar.ui.h:8
-#, fuzzy
 #| msgid "Flip vertically"
 msgid "Top vertical align"
-msgstr "Käännä pystysuunnassa"
+msgstr "Tasaa ylös pystysuunnassa"
 
 #: ../data/ui/property-bar.ui.h:9
-#, fuzzy
 #| msgid "Center vertically"
 msgid "Center vertical align"
-msgstr "Keskitä pystysuunnassa"
+msgstr "Tasaa keskelle pystysuunnassa"
 
 #: ../data/ui/property-bar.ui.h:10
 msgid "Bottom vertical align"
-msgstr ""
+msgstr "Tasaa alas pystysuunnassa"
 
 #: ../data/ui/template-designer.ui.h:1
 msgid ""
@@ -2150,7 +2153,7 @@ msgstr "Soikea"
 
 #: ../data/ui/template-designer.ui.h:20
 msgid "CD/DVD (including credit card CDs)"
-msgstr ""
+msgstr "CD/DVD (mukaan lukien pienet \"luottokortti-CD:t\")"
 
 #: ../data/ui/template-designer.ui.h:21
 msgid ""
@@ -2210,19 +2213,19 @@ msgstr "3. Reunus"
 
 #: ../data/ui/template-designer.ui.h:34
 msgid "1. Outer radius:"
-msgstr ""
+msgstr "1. Ulkoinen säde:"
 
 #: ../data/ui/template-designer.ui.h:35
 msgid "2. Inner radius:"
-msgstr ""
+msgstr "2. Sisäinen säde:"
 
 #: ../data/ui/template-designer.ui.h:36
 msgid "3. Clipping width:"
-msgstr ""
+msgstr "3. Leikkausleveys:"
 
 #: ../data/ui/template-designer.ui.h:37
 msgid "4. Clipping height:"
-msgstr ""
+msgstr "4. Leikkauskorkeus:"
 
 #: ../data/ui/template-designer.ui.h:38
 msgid "5. Waste (overprint allowed):"
@@ -2376,6 +2379,9 @@ msgid ""
 "to work with various laser/ink-jet peel-off label and business card sheets "
 "that you'll find at most office supply stores."
 msgstr ""
+"gLabelsilla on mahdollista luoda käyntikortteja, etikettejä ja muita "
+"lappuja. Se on suunniteltu toimimaan useimpiin tulostimiin soveltuvien "
+"tulostetuotteiden, kuten tarralappujen ja käyntikorttipohjien kanssa."
 
 #: ../data/appdata/glabels-3.appdata.xml.in.h:2
 msgid ""
@@ -2386,6 +2392,13 @@ msgid ""
 "lets you print a unique label for each record from an external data source, "
 "such as a CSV file or an Evolution address book."
 msgstr ""
+"gLabelsin avulla voit suunnitella osoite-, nimi- ja hintalappuja, CD-/DVD-"
+"tulosteita sekä paljon paljon muita tulosteita. Etiketit (eli laput, kortit "
+"yms.) voivat sisältää tekstiä, kuvia, viivoja, erilaisia muotoja ja "
+"viivakoodeja. gLabels mahdollistaa myös asiakirjojen yhdistämistoiminnon, "
+"jonka avulla voit asettaa tulosteisiin yksilöllisiä arvoja ulkoisista "
+"tietolähteistä, kuten esimerkiksi nimiä ja osoitteita CSV-tiedostosta tai "
+"Evolutionin osoitekirjasta."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
 msgid "Show/hide main toolbar."
@@ -2521,7 +2534,7 @@ msgstr "Viivan oletusväri"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:34
 msgid "The default line color new objects (0xRRGGBBAA)."
-msgstr ""
+msgstr "Uusien objektien oletusviivaväri (0xRRGGBBAA)."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:35
 msgid "Default fill color."
@@ -2529,7 +2542,7 @@ msgstr "Täytön oletusväri."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:36
 msgid "The default fill color new objects (0xRRGGBBAA)."
-msgstr ""
+msgstr "Uusien objektin oletustäyttöväri (0xRRGGBBAA)."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:37
 msgid "Recent templates."
@@ -2731,7 +2744,7 @@ msgstr "SRA4"
 
 #: ../templates/categories.xml.h:1
 msgid "Any label"
-msgstr ""
+msgstr "Mikä tahansa lappu"
 
 #. ====================================================================
 #. ===================================================================
@@ -2740,21 +2753,21 @@ msgstr ""
 #: ../templates/pearl-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:8
 msgid "Round labels"
-msgstr ""
+msgstr "Pyöreät laput"
 
 #. ===================================================================
 #: ../templates/categories.xml.h:3 ../templates/endisch-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:58
 #: ../templates/rayfilm-templates.xml.h:9
 msgid "Elliptical labels"
-msgstr ""
+msgstr "Soikeat laput"
 
 #. ====================================================================
 #: ../templates/categories.xml.h:4 ../templates/endisch-templates.xml.h:4
 #: ../templates/hama-iso-templates.xml.h:41
 #: ../templates/rayfilm-templates.xml.h:2
 msgid "Square labels"
-msgstr ""
+msgstr "Neliömäiset laput"
 
 #. ===================================================================
 #. ====================================================================
@@ -2769,7 +2782,7 @@ msgstr ""
 #: ../templates/rayfilm-templates.xml.h:1
 #: ../templates/sheetlabels-us-templates.xml.h:2
 msgid "Rectangular labels"
-msgstr ""
+msgstr "Suorakulmiomaiset laput"
 
 #: ../templates/categories.xml.h:6
 msgid "Any card"
@@ -2791,15 +2804,15 @@ msgstr "CD/DVD tai muu media"
 
 #: ../templates/categories.xml.h:9
 msgid "Mailing/shipping products"
-msgstr ""
+msgstr "Postitus- ja lähetystuotteet"
 
 #: ../templates/categories.xml.h:10
 msgid "Foldable cards"
-msgstr ""
+msgstr "Taitettavat kortit"
 
 #: ../templates/categories.xml.h:11
 msgid "Photo products"
-msgstr ""
+msgstr "Kuvatuotteet"
 
 #. TODO: Is this the real part #?
 #. ============================================================
@@ -2816,7 +2829,7 @@ msgstr ""
 #: ../templates/misc-iso-templates.xml.h:2
 #: ../templates/zweckform-iso-templates.xml.h:6
 msgid "Rectangular Labels"
-msgstr ""
+msgstr "Suorakulmiomaiset laput"
 
 #. ===================================================================
 #: ../templates/ascom-iso-templates.xml.h:6
@@ -2838,17 +2851,17 @@ msgstr ""
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:2
 msgid "Square Labels"
-msgstr ""
+msgstr "Neliömäiset etiketit"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:4
 msgid "Small Round Labels"
-msgstr ""
+msgstr "Pienet pyöreät etiketit"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:6
 msgid "Large Round Labels"
-msgstr ""
+msgstr "Suuret pyöreät etiketit"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:8
@@ -2883,7 +2896,7 @@ msgstr ""
 #: ../templates/worldlabel-us-templates.xml.h:3
 #: ../templates/zweckform-iso-templates.xml.h:4
 msgid "Address Labels"
-msgstr ""
+msgstr "Osoitelaput"
 
 #. ===================================================================
 #. ********************************************************************
@@ -2893,7 +2906,7 @@ msgstr ""
 #: ../templates/sheetlabels-us-templates.xml.h:8
 #: ../templates/worldlabel-us-templates.xml.h:2
 msgid "Return Address Labels"
-msgstr ""
+msgstr "Palautusosoitelaput"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:16
@@ -2956,7 +2969,7 @@ msgstr "Postikortit"
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:30
 msgid "Name Badge Labels"
-msgstr ""
+msgstr "Nimikyltit"
 
 #. ===================================================================
 #. ===============================================================
@@ -3035,18 +3048,18 @@ msgstr ""
 #: ../templates/avery-iso-templates.xml.h:10
 #: ../templates/decadry-iso-templates.xml.h:2
 msgid "Mailing labels"
-msgstr ""
+msgstr "Postituslaput"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:12
 #: ../templates/misc-iso-templates.xml.h:12
 msgid "Address labels"
-msgstr ""
+msgstr "Osoitelaput"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:16
 msgid "Shipping labels"
-msgstr ""
+msgstr "Lähetyslaput"
 
 #. ===============================================================
 #. ===================================================================
@@ -3068,12 +3081,12 @@ msgstr ""
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:28
 msgid "Mini Address Labels"
-msgstr ""
+msgstr "Pienet osoitetarrat"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:30
 msgid "Identification Labels"
-msgstr ""
+msgstr "Tunnistelaput"
 
 #. ===================================================================
 #. ====================================================================
@@ -3147,7 +3160,7 @@ msgstr ""
 #: ../templates/dataline-iso-templates.xml.h:8
 #: ../templates/pearl-iso-templates.xml.h:60
 msgid "Membership cards"
-msgstr ""
+msgstr "Jäsenyyskortit"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:2
@@ -3562,12 +3575,12 @@ msgstr ""
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:56
 msgid "Foldable business cards"
-msgstr ""
+msgstr "Taitettavat käyntikortit"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:62
 msgid "Membership cards, both sides printable"
-msgstr ""
+msgstr "Jäsenyyskortit, molemmat puolet tulostettavissa"
 
 #: ../templates/rayfilm-templates.xml.h:11
 msgid "Business card CD Labels"
@@ -3575,7 +3588,7 @@ msgstr ""
 
 #: ../templates/rayfilm-templates.xml.h:12
 msgid "Mini CD Labels"
-msgstr ""
+msgstr "Pienoiskokoisen CD:n tulosteet"
 
 #: ../templates/rayfilm-templates.xml.h:13
 msgid "Triangular labels"
@@ -3614,4 +3627,3 @@ msgstr ""
 #: ../templates/zweckform-iso-templates.xml.h:24
 msgid "Correction and Cover-up Labels"
 msgstr ""
-
