@@ -60,9 +60,11 @@ warning_handler (const gchar    *log_domain,
                  const gchar    *message,
                  gpointer        user_data)
 {
+        GtkWidget *dummy_window;
         GtkWidget *dialog;
 
-        dialog = gtk_message_dialog_new (NULL,
+        dummy_window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+        dialog = gtk_message_dialog_new (GTK_WINDOW (dummy_window),
                                          GTK_DIALOG_MODAL,
                                          GTK_MESSAGE_WARNING,
                                          GTK_BUTTONS_CLOSE,
@@ -73,6 +75,7 @@ warning_handler (const gchar    *log_domain,
         gtk_dialog_run (GTK_DIALOG (dialog));
 
 	gtk_widget_destroy (GTK_WIDGET (dialog));
+        gtk_widget_destroy (GTK_WIDGET (dummy_window));
 }
 
 
