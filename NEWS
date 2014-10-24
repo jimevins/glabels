@@ -1,3 +1,9 @@
+* gLabels 3.2.1 (stable) release.  Release date 2014-11-10
+
+- Fixed "new label dialog" crash introduced with Gtk 3.14
+- Updated translations
+
+
 * gLabels 3.2.0 (stable) release.  Release date 2013-10-28
 
 - Fixed bug causing object editor to remain active after object deleted.
