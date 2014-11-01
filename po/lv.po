@@ -1,13 +1,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>, 2012, 2013.
+# Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>, 2012, 2013, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2013-10-11 18:32+0000\n"
-"PO-Revision-Date: 2013-10-13 14:16+0300\n"
+"POT-Creation-Date: 2014-02-11 12:42+0000\n"
+"PO-Revision-Date: 2014-11-01 21:24+0200\n"
 "Last-Translator: Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>\n"
 "Language-Team: Latvian <lata-l10n@googlegroups.com>\n"
 "Language: lv\n"
@@ -1846,7 +1846,6 @@ msgid "Rotated"
 msgstr "Pagriezts"
 
 #: ../data/ui/new-label-dialog.ui.h:7
-#| msgid "Remove all selections"
 msgid "Review Selection"
 msgstr "Pārskatīt izvēli"
 
@@ -1911,7 +1910,6 @@ msgid "Alignment:"
 msgstr "Līdzinājums:"
 
 #: ../data/ui/object-editor.ui.h:10
-#| msgid "Alignment:"
 msgid "Vertical alignment:"
 msgstr "Vertikālā līdzināšana:"
 
@@ -2094,12 +2092,10 @@ msgid "Right align"
 msgstr "Līdzināt pie labās"
 
 #: ../data/ui/property-bar.ui.h:8
-#| msgid "Flip vertically"
 msgid "Top vertical align"
 msgstr "Augšējā vertikālā līdzināšana"
 
 #: ../data/ui/property-bar.ui.h:9
-#| msgid "Center vertically"
 msgid "Center vertical align"
 msgstr "Centra vertikālā līdzināšana"
 
@@ -2406,8 +2402,8 @@ msgstr ""
 "gLabels var izmantot, lai izstrādātu adrešu etiķetes, vārdu birkas, cenu "
 "birkas, cd/dvd etiķetes vai jebko citu, kas ir izkārtots regulārā rakstā uz "
 "papīra loksnes. Etiķetes (vai kartes) var saturēt tekstu, attēlus, līnijas, "
-"figūras un svītru kodus. gLabels ir arī dokumentu sapludināšanas iespēja, kas "
-"jums ļauj drukāt unikālas etiķetes katram ierakstam no ārēja datu avota, "
+"figūras un svītru kodus. gLabels ir arī dokumentu sapludināšanas iespēja, "
+"kas jums ļauj drukāt unikālas etiķetes katram ierakstam no ārēja datu avota, "
 "piemēram, CSV datnes vai Evolution adrešu grāmatas."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
@@ -3137,6 +3133,12 @@ msgstr "Vairāku pielietojumu etiķetes 17mm x 54mm"
 #: ../templates/brother-other-templates.xml.h:21
 msgid "Standard Address Labels 38mm x 90mm"
 msgstr "Standarta adrešu etiķetes  38mm x 90mm"
+
+#. ===================================================================
+#: ../templates/canon-other-templates.xml.h:2
+#| msgid "CD/DVD Labels"
+msgid "CD/DVD Tray"
+msgstr "CD/DVD paplāte"
 
 #. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:4
