@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2013-10-05 04:42+0000\n"
-"PO-Revision-Date: 2013-10-12 14:02+0200\n"
+"POT-Creation-Date: 2014-02-11 12:40+0000\n"
+"PO-Revision-Date: 2014-11-02 23:00+0100\n"
 "Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "Language: fr\n"
@@ -2434,13 +2434,13 @@ msgid ""
 "such as a CSV file or an Evolution address book."
 msgstr ""
 "gLabels peut être utilisé pour concevoir des étiquettes d'adresses, des "
-"badges nominaux, des étiquettes de prix, des étiquettes pour CD/DVD ou "
-"pour tout autre usage impliquant un motif répétitif sur une feuille de papier. "
-"Les étiquettes (ou cartes) peuvent contenir du texte, des images, des lignes, "
-"des formes et des codes-barres. gLabels propose également une fonctionnalité "
-"de fusion de document permettant d'imprimer une étiquette pour chaque "
-"occurrence d'une source de données externe, telle qu'un fichier CSV ou un "
-"carnet d'adresses Evolution."
+"badges nominaux, des étiquettes de prix, des étiquettes pour CD/DVD ou pour "
+"tout autre usage impliquant un motif répétitif sur une feuille de papier. "
+"Les étiquettes (ou cartes) peuvent contenir du texte, des images, des "
+"lignes, des formes et des codes-barres. gLabels propose également une "
+"fonctionnalité de fusion de document permettant d'imprimer une étiquette "
+"pour chaque occurrence d'une source de données externe, telle qu'un fichier "
+"CSV ou un carnet d'adresses Evolution."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
 msgid "Show/hide main toolbar."
@@ -3174,6 +3174,11 @@ msgstr "Étiquettes multi usages 17x54 mm"
 #: ../templates/brother-other-templates.xml.h:21
 msgid "Standard Address Labels 38mm x 90mm"
 msgstr "Étiquettes d'adresse standard 38x90 mm"
+
+#. ===================================================================
+#: ../templates/canon-other-templates.xml.h:2
+msgid "CD/DVD Tray"
+msgstr "Tiroir du lecteur CD/DVD"
 
 #. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:4
