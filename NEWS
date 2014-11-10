@@ -1,7 +1,24 @@
 * gLabels 3.2.1 (stable) release.  Release date 2014-11-10
 
 - Fixed "new label dialog" crash introduced with Gtk 3.14
-- Updated translations
+- Fixed text box layout problems with center and right alignment
+- Updated UI translations:
+    Andika Triwidada (id)
+    Daniel Mustieles (es)
+    Dimitris Spingos (el)
+    Jiri Grönroos (fi)
+    Lasse Liehu (fi)
+    Marek Černocký (cs)
+    Mario Blättermann (de)
+    Martin Srebotnjak (sl)
+    Matej Urbančič (sl)
+    Rūdolfs Mazurs (lv)
+    Мирослав Николић (sr) (sr@latin)
+- Updated Doc translations:
+    Daniel Mustieles (es)
+    Dimitris Spingos (el)
+    Marek Černocký (cs)
+    Piotr Drąg (fr)
 
 
 * gLabels 3.2.0 (stable) release.  Release date 2013-10-28
