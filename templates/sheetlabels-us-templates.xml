@@ -298,6 +298,22 @@
       <Layout nx="1" ny="2" x0="1.9375in" y0="0.6875in" dx="0" dy="5in"/>
     </Label-cd>
   </Template>
+  
+  <!-- =================================================================== -->
+  <!-- SheetLabels: Mailing Labels, 6 per sheet         	           -->
+  <!-- =================================================================== -->
+  <Template brand="SheetLabels" part="SL573" size="US-Letter" _description="Mailing Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Meta product_url="http://www.sheet-labels.com/labels/SL573"/>
+    <Label-rectangle id="0" width="4in" height="3in" round="0.125in">
+      <Markup-margin size="0.125in"/>
+      <Layout nx="2" ny="3" x0="0.19in" y0="1.in" dx="4.125in" dy="3in"/>
+    </Label-rectangle>
+  </Template>
+
+
+
 
 </Glabels-templates>
 
