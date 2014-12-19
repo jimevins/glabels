@@ -35,7 +35,6 @@
     </Label-rectangle>
   </Template>
 
-
   <!-- =================================================================== -->
   <!-- SheetLabels: Address Labels, 20 per sheet	         	   -->
   <!-- =================================================================== -->
@@ -77,6 +76,19 @@
   </Template>
 
   <!-- =================================================================== -->
+  <!-- SheetLabels: Shipping Labels, 6 per sheet                           -->
+  <!-- =================================================================== -->
+  <Template brand="SheetLabels" part="SL103" size="US-Letter" _description="Shipping Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Meta product_url="http://www.sheet-labels.com/labels/SL103"/>
+    <Label-rectangle id="0" width="4in" height="3.333333333in" round="0.125in">
+      <Markup-margin size="0.125in"/>
+      <Layout nx="2" ny="3" x0="0.15625in" y0="0.5in" dx="4.1875in" dy="3.333333333in"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
   <!-- SheetLabels: Shipping Labels, 6 per sheet	         		   -->
   <!-- =================================================================== -->
   <Template brand="SheetLabels" part="SL104" size="US-Letter" _description="Shipping Labels">
@@ -105,6 +117,19 @@
   <!-- =================================================================== -->
   <!-- SheetLabels: Round Labels, 12 per sheet	        		   -->
   <!-- =================================================================== -->
+  <Template brand="SheetLabels" part="SL107" size="US-Letter" _description="Round Labels">
+    <Meta category="label"/>
+    <Meta category="round-label"/>
+    <Meta product_url="http://www.sheet-labels.com/labels/SL107"/>
+    <Label-round id="0" radius="0.8125in" waste="0pt">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="4" ny="6" x0="0.4157in" y0="0.549in" dx="2.0145in" dy="1.6554in"/>
+    </Label-round>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- SheetLabels: Round Labels, 12 per sheet	        		   -->
+  <!-- =================================================================== -->
   <Template brand="SheetLabels" part="SL108" size="US-Letter" _description="Round Labels">
     <Meta category="label"/>
     <Meta category="round-label"/>
@@ -124,6 +149,18 @@
     <Label-rectangle id="0" width="3.4375in" height="0.666666667in" round="0.0625in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="2" ny="15" x0="0.53125in" y0="0.5in" dx="4in" dy="0.666666667in"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- SheetLabels: Rectangle Labels, 18 per sheet                         -->
+  <!-- =================================================================== -->
+  <Template brand="SheetLabels" part="SL11" size="US-Letter" _description="Shipping Labels">
+    <Meta category="label"/>
+    <Meta product_url="http://www.sheet-labels.com/labels/SL11"/>
+    <Label-rectangle id="0" width="2.3125in" height="1.4375in" round="0in" x_waste="0.125in" y_waste="0.125in">
+      <Markup-margin size="0.125in"/>
+      <Layout nx="3" ny="6" x0="0.53125in" y0="0.563in" dx="2.5625in" dy="1.688in"/>
     </Label-rectangle>
   </Template>
 
@@ -153,6 +190,32 @@
       <Layout nx="1" ny="1" x0="9.4cm" y0="8.25cm" dx="0pt" dy="0pt"/>
       <Layout nx="1" ny="1" x0="0.7cm" y0="15.8cm" dx="0pt" dy="0cm"/>
     </Label-cd>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- SheetLabels: Round Labels, 63 per sheet                             -->
+  <!-- =================================================================== -->
+  <Template brand="SheetLabels" part="SL114" size="US-Letter" _description="Round labels">
+    <Meta category="label"/>
+    <Meta category="round-label"/>
+    <Meta product_url="http://www.sheet-labels.com/labels/SL114"/>
+    <Label-round id="0" radius="0.5in" waste="0.061in">
+      <Markup-margin size="0.061in"/>
+      <Layout nx="7" ny="9" x0="0.375in" y0="0.5in" dx="1.125in" dy="1.125in"/>
+    </Label-round>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- SheetLabels: Round Labels, 108 per sheet                            -->
+  <!-- =================================================================== -->
+  <Template brand="SheetLabels" part="SL115" size="US-Letter" _description="Round labels">
+    <Meta category="label"/>
+    <Meta category="round-label"/>
+    <Meta product_url="http://www.sheet-labels.com/labels/SL115"/>
+    <Label-round id="0" radius="0.375in" waste="0.031in">
+      <Markup-margin size="0.06in"/>
+      <Layout nx="9" ny="12" x0="0.625in" y0="0.656in" dx="0.812in" dy="0.812in"/>
+    </Label-round>
   </Template>
 
   <!-- =================================================================== -->
@@ -311,9 +374,6 @@
       <Layout nx="2" ny="3" x0="0.19in" y0="1.in" dx="4.125in" dy="3in"/>
     </Label-rectangle>
   </Template>
-
-
-
 
 </Glabels-templates>
 
