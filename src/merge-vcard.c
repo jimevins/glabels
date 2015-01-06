@@ -348,7 +348,7 @@ parse_next_vcard (FILE *fp)
 
         vcard = g_malloc0(size);
 
-        while (fgets(line, sizeof(line), fp) && found_end == FALSE)
+        while (found_end == FALSE && fgets(line, sizeof(line), fp))
         {
                 if (found_begin == TRUE)
                 {
