@@ -256,6 +256,23 @@ gl_merge_vcard_close (glMerge *merge)
 }
 
 
+static gchar *
+maybe_field (const gchar *str)
+{
+        if (str && *str) {
+                /* Copy it, allocating enough for an extra newline */
+                gchar *copy = g_strconcat (str, "\n", NULL);
+                /* Strip trailing whitespace */
+                size_t len = strlen (g_strchomp (copy));
+                /* Add back in a single newline */
+                if (len > 0)
+                        copy[len] = '\n';
+                return copy;
+        }
+
+        return g_strdup ("");
+}
+
 /*--------------------------------------------------------------------------*/
 /* Get next record from merge source, NULL if no records left (i.e EOF)     */
 /*--------------------------------------------------------------------------*/
@@ -292,6 +309,51 @@ gl_merge_vcard_get_record (glMerge *merge)
         {
                 gchar *value;
                 value = g_strdup (e_contact_get_const (contact, field_id));
+
+                if (!value &&
+                    field_id >= E_CONTACT_ADDRESS_LABEL_HOME &&
+                    field_id <= E_CONTACT_ADDRESS_LABEL_OTHER) {
+                        EContactAddress *address;
+                        EContactField addrfield;
+                        addrfield = (field_id -
+                                     E_CONTACT_ADDRESS_LABEL_HOME +
+                                     E_CONTACT_ADDRESS_HOME);
+                        address = e_contact_get (contact, addrfield);
+                        if (address) {
+                                gchar *val;
+                                gchar *field;
+                                GString *gstr = g_string_new ("");
+
+                                field = maybe_field (address->street);
+                                g_string_append_printf (gstr, "%s", field);
+                                g_free (field);
+
+                                field = maybe_field (address->ext);
+                                g_string_append_printf (gstr, "%s", field);
+                                g_free (field);
+
+                                field = maybe_field (address->locality);
+                                g_string_append_printf (gstr, "%s", field);
+                                g_free (field);
+
+                                field = maybe_field (address->region);
+                                g_string_append_printf (gstr, "%s", field);
+                                g_free (field);
+
+                                field = maybe_field (address->code);
+                                g_string_append_printf (gstr, "%s", field);
+                                g_free (field);
+
+                                field = maybe_field (address->country);
+                                g_string_append_printf (gstr, "%s", field);
+                                g_free (field);
+
+                                value = g_strdup (gstr->str);
+                                g_strchomp (value);
+                                g_string_free (gstr, TRUE);
+                                e_contact_address_free (address);
+                        }
+                }
 
                 if (value) {
                         field = g_new0 (glMergeField, 1);
