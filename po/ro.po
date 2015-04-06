@@ -1,0 +1,3678 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# , 2011.
+# Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>, 2015.
+# Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>, 2015.
+# Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>, 2015.
+# Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>, 2015.
+# Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
+"POT-Creation-Date: 2014-12-19 17:36+0000\n"
+"PO-Revision-Date: 2015-04-06 21:08+0200\n"
+"Last-Translator: Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>\n"
+"Language-Team: Gnome Romanian Translation Team\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2);;\n"
+"X-Generator: Virtaal 0.7.1\n"
+
+#: ../src/bc-backends.c:81
+msgid "Built-in"
+msgstr "Integrat"
+
+#: ../src/bc-backends.c:101
+msgid "POSTNET (any)"
+msgstr "POSTNET (oricare)"
+
+#: ../src/bc-backends.c:104
+msgid "POSTNET-5 (ZIP only)"
+msgstr "POSTNET-5 (doar ZIP)"
+
+#: ../src/bc-backends.c:107
+msgid "POSTNET-9 (ZIP+4)"
+msgstr "POSTNET-9 (ZIP+4)"
+
+#: ../src/bc-backends.c:110
+msgid "POSTNET-11 (DPBC)"
+msgstr "POSTNET-11 (DPBC)"
+
+#: ../src/bc-backends.c:113
+msgid "CEPNET"
+msgstr "CEPNET"
+
+#: ../src/bc-backends.c:116
+msgid "One Code"
+msgstr "Cod unu"
+
+#: ../src/bc-backends.c:119 ../src/bc-backends.c:175 ../src/bc-backends.c:248
+msgid "Code 39"
+msgstr "Cod 39"
+
+#: ../src/bc-backends.c:122 ../src/bc-backends.c:251
+msgid "Code 39 Extended"
+msgstr "Cod 39 extins"
+
+#: ../src/bc-backends.c:127
+msgid "EAN (any)"
+msgstr "EAN (oricare)"
+
+#: ../src/bc-backends.c:130
+msgid "EAN-8"
+msgstr "EAN-8"
+
+#: ../src/bc-backends.c:133
+msgid "EAN-8 +2"
+msgstr "EAN-8 +2"
+
+#: ../src/bc-backends.c:136
+msgid "EAN-8 +5"
+msgstr "EAN-8 +5"
+
+#: ../src/bc-backends.c:139
+msgid "EAN-13"
+msgstr "EAN-13"
+
+#: ../src/bc-backends.c:142
+msgid "EAN-13 +2"
+msgstr "EAN-13 +2"
+
+#: ../src/bc-backends.c:145
+msgid "EAN-13 +5"
+msgstr "EAN-13 +5"
+
+#: ../src/bc-backends.c:148
+msgid "UPC (UPC-A or UPC-E)"
+msgstr "UPC (UPC-A sau UPC-E)"
+
+#: ../src/bc-backends.c:151 ../src/bc-backends.c:395
+msgid "UPC-A"
+msgstr "UPC-A"
+
+#: ../src/bc-backends.c:154
+msgid "UPC-A +2"
+msgstr "UPC-A +2"
+
+#: ../src/bc-backends.c:157
+msgid "UPC-A +5"
+msgstr "UPC-A +5"
+
+#: ../src/bc-backends.c:160 ../src/bc-backends.c:398
+msgid "UPC-E"
+msgstr "UPC-E"
+
+#: ../src/bc-backends.c:163
+msgid "UPC-E +2"
+msgstr "UPC-E +2"
+
+#: ../src/bc-backends.c:166
+msgid "UPC-E +5"
+msgstr "UPC-E +5"
+
+#: ../src/bc-backends.c:169 ../src/bc-backends.c:332
+msgid "ISBN"
+msgstr "ISBN"
+
+#: ../src/bc-backends.c:172
+msgid "ISBN +5"
+msgstr "ISBN +5"
+
+#: ../src/bc-backends.c:178 ../src/bc-backends.c:260
+msgid "Code 128"
+msgstr "Cod 128"
+
+#: ../src/bc-backends.c:181
+msgid "Code 128C"
+msgstr "Cod 128C"
+
+#: ../src/bc-backends.c:184
+msgid "Code 128B"
+msgstr "Cod 128B"
+
+#: ../src/bc-backends.c:187 ../src/bc-backends.c:329
+msgid "Interleaved 2 of 5"
+msgstr "Intercalate 2 din 5"
+
+#: ../src/bc-backends.c:190 ../src/bc-backends.c:224
+msgid "Codabar"
+msgstr "Codabar"
+
+#: ../src/bc-backends.c:193
+msgid "MSI"
+msgstr "MSI"
+
+#: ../src/bc-backends.c:196
+msgid "Plessey"
+msgstr "Plessey"
+
+#: ../src/bc-backends.c:199 ../src/bc-backends.c:257
+msgid "Code 93"
+msgstr "Cod 93"
+
+#: ../src/bc-backends.c:206
+msgid "Australia Post Standard"
+msgstr "Australia Post Standard"
+
+#: ../src/bc-backends.c:209
+msgid "Australia Post Reply Paid"
+msgstr "Australia Post Reply Paid"
+
+#: ../src/bc-backends.c:212
+msgid "Australia Post Route Code"
+msgstr "Australia Post Route Code"
+
+#: ../src/bc-backends.c:215
+msgid "Australia Post Redirect"
+msgstr "Australia Post Redirect"
+
+#: ../src/bc-backends.c:218
+msgid "Aztec Code"
+msgstr "Cod aztec"
+
+#: ../src/bc-backends.c:221
+msgid "Aztec Rune"
+msgstr "Aztec Rune"
+
+#: ../src/bc-backends.c:227
+msgid "Code One"
+msgstr "Cod unu"
+
+#: ../src/bc-backends.c:230
+msgid "Code 11"
+msgstr "Cod 11"
+
+#: ../src/bc-backends.c:233
+msgid "Code 16K"
+msgstr "Cod 16k"
+
+#: ../src/bc-backends.c:236
+msgid "Code 2 of 5 Matrix"
+msgstr "Cod 2 din 5 Matrix"
+
+#: ../src/bc-backends.c:239
+msgid "Code 2 of 5 IATA"
+msgstr "Cod 2 of 5 IATA"
+
+#: ../src/bc-backends.c:242
+msgid "Code 2 of 5 Data Logic"
+msgstr "Cod 2 of 5 Data Logic"
+
+#: ../src/bc-backends.c:245
+msgid "Code 32 (Italian Pharmacode)"
+msgstr "Cod 32 (Italian Pharmacode)"
+
+#: ../src/bc-backends.c:254
+msgid "Code 49"
+msgstr "Cod 49"
+
+#: ../src/bc-backends.c:263
+msgid "Code 128 (Mode C supression)"
+msgstr "Cod 128 (Mod C suprimat)"
+
+#: ../src/bc-backends.c:266
+msgid "DAFT Code"
+msgstr "Cod DAFT"
+
+#: ../src/bc-backends.c:269
+msgid "Data Matrix"
+msgstr "Data Matrix"
+
+#: ../src/bc-backends.c:272
+msgid "Deutsche Post Leitcode"
+msgstr "Deutsche Post Leitcode"
+
+#: ../src/bc-backends.c:275
+msgid "Deutsche Post Identcode"
+msgstr "Deutsche Post Identcode"
+
+#: ../src/bc-backends.c:278
+msgid "Dutch Post KIX Code"
+msgstr "Dutch Post KIX Code"
+
+#: ../src/bc-backends.c:281
+msgid "EAN"
+msgstr "EAN"
+
+#: ../src/bc-backends.c:284
+msgid "Grid Matrix"
+msgstr "Grid Matrix"
+
+#: ../src/bc-backends.c:287
+msgid "GS1-128"
+msgstr "GS1-128"
+
+#: ../src/bc-backends.c:290
+msgid "GS1 DataBar-14"
+msgstr "GS1 DataBar-14"
+
+#: ../src/bc-backends.c:299
+msgid "GS1 DataBar-14 Stacked"
+msgstr "GS1 DataBar-14 Stacked"
+
+#: ../src/bc-backends.c:302
+msgid "GS1 DataBar-14 Stacked Omni."
+msgstr "GS1 DataBar-14 Stacked Omni."
+
+#: ../src/bc-backends.c:305
+msgid "GS1 DataBar Extended Stacked"
+msgstr "GS1 DataBar Extended Stacked"
+
+#: ../src/bc-backends.c:308
+msgid "HIBC Code 128"
+msgstr "HIBC Cod 128"
+
+#: ../src/bc-backends.c:311
+msgid "HIBC Code 39"
+msgstr "HIBC Cod 39"
+
+#: ../src/bc-backends.c:314
+msgid "HIBC Data Matrix"
+msgstr "HIBC Data Matrix"
+
+#: ../src/bc-backends.c:317
+msgid "HIBC QR Code"
+msgstr "Cod HIBC QR"
+
+#: ../src/bc-backends.c:320
+msgid "HIBC PDF417"
+msgstr "HIBC PDF417"
+
+#: ../src/bc-backends.c:323
+msgid "HIBC Micro PDF417"
+msgstr "HIBC Micro PDF417"
+
+#: ../src/bc-backends.c:326
+msgid "HIBC Aztec Code"
+msgstr "HIBC Aztec Code"
+
+#: ../src/bc-backends.c:335
+msgid "ITF-14"
+msgstr "ITF-14"
+
+#: ../src/bc-backends.c:338
+msgid "Japanese Postal"
+msgstr "Japanese Postal"
+
+#: ../src/bc-backends.c:341
+msgid "Korean Postal"
+msgstr "Korean Postal"
+
+#: ../src/bc-backends.c:344
+msgid "LOGMARS"
+msgstr "LOGMARS"
+
+#: ../src/bc-backends.c:347
+msgid "Maxicode"
+msgstr "Maxicode"
+
+#: ../src/bc-backends.c:350
+msgid "Micro PDF417"
+msgstr "Micro PDF417"
+
+#: ../src/bc-backends.c:353
+msgid "Micro QR Code"
+msgstr "Micro QR Code"
+
+#: ../src/bc-backends.c:356
+msgid "MSI Plessey"
+msgstr "MSI Plessey"
+
+#: ../src/bc-backends.c:359
+msgid "NVE-18"
+msgstr "NVE-18"
+
+#: ../src/bc-backends.c:362
+msgid "PDF417"
+msgstr "PDF417"
+
+#: ../src/bc-backends.c:365
+msgid "PDF417 Truncated"
+msgstr "PDF417 Truncated"
+
+#: ../src/bc-backends.c:368
+msgid "PLANET"
+msgstr "PLANET"
+
+#: ../src/bc-backends.c:371
+msgid "PostNet"
+msgstr "PostNet"
+
+#: ../src/bc-backends.c:374
+msgid "Pharmacode"
+msgstr "Pharmacode"
+
+#: ../src/bc-backends.c:377
+msgid "Pharmacode 2-track"
+msgstr "Pharmacode 2-track"
+
+#: ../src/bc-backends.c:380
+msgid "Pharmazentral Nummer (PZN)"
+msgstr "Pharmazentral Nummer (PZN)"
+
+#: ../src/bc-backends.c:383
+msgid "QR Code"
+msgstr "Cod QR"
+
+#: ../src/bc-backends.c:386
+msgid "Royal Mail 4-State"
+msgstr "Royal Mail 4-State"
+
+#: ../src/bc-backends.c:389
+msgid "Telepen"
+msgstr "Telepen"
+
+#: ../src/bc-backends.c:392
+msgid "Telepen Numeric"
+msgstr "Telepen numeric"
+
+#: ../src/bc-backends.c:401
+msgid "USPS One Code"
+msgstr "USPS One Code"
+
+#: ../src/bc-backends.c:404
+msgid "UK Plessey"
+msgstr "UK Plessey"
+
+#: ../src/bc-backends.c:411
+msgid "IEC16022 (DataMatrix)"
+msgstr "IEC16022 (DataMatrix)"
+
+#: ../src/bc-backends.c:418
+msgid "IEC18004 (QRCode)"
+msgstr "IEC18004 (QRCode)"
+
+#: ../src/color-combo-button.c:198 ../src/color-combo.c:178
+msgid "Default Color"
+msgstr "Culoare implicită"
+
+#: ../src/color-combo-menu.c:83
+msgid "Dark Red"
+msgstr "Roșu închis"
+
+#: ../src/color-combo-menu.c:84
+msgid "Brown"
+msgstr "Maro"
+
+#: ../src/color-combo-menu.c:85
+msgid "Dark Goldenrod"
+msgstr "Goldenrod închis"
+
+#: ../src/color-combo-menu.c:86
+msgid "Dark Green"
+msgstr "Verde închis"
+
+#: ../src/color-combo-menu.c:87
+msgid "Dark Cyan"
+msgstr "Albastru cyan închis"
+
+#: ../src/color-combo-menu.c:88
+msgid "Navy Blue"
+msgstr "Albastru marin"
+
+#: ../src/color-combo-menu.c:89
+msgid "Dark Violet"
+msgstr "Violet închis"
+
+#: ../src/color-combo-menu.c:91
+msgid "Red"
+msgstr "Roșu"
+
+#: ../src/color-combo-menu.c:92
+msgid "Orange"
+msgstr "Portocaliu"
+
+#: ../src/color-combo-menu.c:93
+msgid "Dark Yellow"
+msgstr "Galben închis"
+
+#: ../src/color-combo-menu.c:94
+msgid "Medium green"
+msgstr "Verde normal"
+
+#: ../src/color-combo-menu.c:95
+msgid "Turquoise"
+msgstr "Turcoaz"
+
+#: ../src/color-combo-menu.c:96
+msgid "Blue"
+msgstr "Albastru"
+
+#: ../src/color-combo-menu.c:97
+msgid "Purple"
+msgstr "Mov"
+
+#: ../src/color-combo-menu.c:99
+msgid "Salmon"
+msgstr "Roz portocaliu"
+
+#: ../src/color-combo-menu.c:100
+msgid "Gold"
+msgstr "Auriu"
+
+#: ../src/color-combo-menu.c:101
+msgid "Yellow"
+msgstr "Galben"
+
+#: ../src/color-combo-menu.c:102
+msgid "Green"
+msgstr "Verde"
+
+#: ../src/color-combo-menu.c:103
+msgid "Cyan"
+msgstr "Albastru cyan"
+
+#: ../src/color-combo-menu.c:104
+msgid "SkyBlue"
+msgstr "Albastrul cerului"
+
+#: ../src/color-combo-menu.c:105
+msgid "Violet"
+msgstr "Violet"
+
+#: ../src/color-combo-menu.c:107
+msgid "Pink"
+msgstr "Roz"
+
+#: ../src/color-combo-menu.c:108
+msgid "Khaki"
+msgstr "Kaki"
+
+#: ../src/color-combo-menu.c:109
+msgid "Light Yellow"
+msgstr "Galben deschis"
+
+#: ../src/color-combo-menu.c:110
+msgid "Light Green"
+msgstr "Verde deschis"
+
+#: ../src/color-combo-menu.c:111
+msgid "Light Cyan"
+msgstr "Albastru cyan deschis"
+
+#: ../src/color-combo-menu.c:112
+msgid "Slate Gray"
+msgstr "Slate Gray"
+
+#: ../src/color-combo-menu.c:113
+msgid "Thistle"
+msgstr "Thistle"
+
+#: ../src/color-combo-menu.c:115
+msgid "White"
+msgstr "Alb"
+
+#: ../src/color-combo-menu.c:117
+#, no-c-format
+msgid "10% Gray"
+msgstr "10% gri"
+
+#: ../src/color-combo-menu.c:119
+#, no-c-format
+msgid "25% Gray"
+msgstr "25% gri"
+
+#: ../src/color-combo-menu.c:121
+#, no-c-format
+msgid "40% Gray"
+msgstr "40% gri"
+
+#: ../src/color-combo-menu.c:123
+#, no-c-format
+msgid "50% Gray"
+msgstr "50% gri"
+
+#: ../src/color-combo-menu.c:125
+#, no-c-format
+msgid "60% Gray"
+msgstr "60% gri"
+
+#: ../src/color-combo-menu.c:126
+msgid "Black"
+msgstr "Negru"
+
+#: ../src/color-combo-menu.c:254 ../src/color-combo-menu.c:373
+msgid "Custom Color"
+msgstr "Culoare personalizată"
+
+#: ../src/color-combo-menu.c:319
+#, c-format
+msgid "Custom Color #%u"
+msgstr "Culoare personalizată #%u"
+
+#: ../src/critical-error-handler.c:72
+msgid "gLabels Fatal Error!"
+msgstr "Eroare fatală gLabels!"
+
+#: ../src/file.c:84
+msgid "New Label or Card"
+msgstr "Etichetă nouă sau card nou"
+
+#: ../src/file.c:175 ../src/label.c:602 ../src/label.c:646
+msgid "Label properties"
+msgstr "Proprietățile etichetei"
+
+#: ../src/file.c:267 ../src/file.c:557
+msgid "All files"
+msgstr "Toate fișierele"
+
+#: ../src/file.c:272 ../src/file.c:562
+msgid "gLabels documents"
+msgstr "Documente gLabels"
+
+#: ../src/file.c:319 ../src/file.c:620
+msgid "Empty file name selection"
+msgstr "Selecția numelui fișierului goală"
+
+#: ../src/file.c:322 ../src/file.c:338
+msgid "Please select a file or supply a valid file name"
+msgstr "Selectați un fișier sau furnizați un nume de fișier valid"
+
+#: ../src/file.c:335
+msgid "File does not exist"
+msgstr "Fișierul nu există"
+
+#: ../src/file.c:410
+#, c-format
+msgid "Could not open file \"%s\""
+msgstr "Nu s-a putut deschide fișierul „%s”"
+
+#: ../src/file.c:413
+msgid "Not a supported file format"
+msgstr "Nu este un format de fișier suportat"
+
+#: ../src/file.c:491 ../src/file.c:670
+#, c-format
+msgid "Could not save file \"%s\""
+msgstr "Nu s-a putut salva fișierul „%s”"
+
+#: ../src/file.c:495 ../src/file.c:674
+msgid "Error encountered during save.  The file is still not saved."
+msgstr "Eroare la salvare.  Fișierul nu a fost salvat."
+
+#: ../src/file.c:535
+#, c-format
+msgid "Save \"%s\" as"
+msgstr "Salvează „%s” ca"
+
+#: ../src/file.c:623
+msgid "Please supply a valid file name"
+msgstr "Furnizați un nume valid de fișier"
+
+#: ../src/file.c:644
+#, c-format
+msgid "Overwrite file \"%s\"?"
+msgstr "Suprascrieți fișierul „%s”?"
+
+#: ../src/file.c:648
+msgid "File already exists."
+msgstr "Fișierul există deja."
+
+#: ../src/file.c:744
+#, c-format
+msgid "Save changes to document \"%s\" before closing?"
+msgstr "Salvați modificările în documentul „%s” înainte de închidere?"
+
+#: ../src/file.c:748
+msgid "Your changes will be lost if you don't save them."
+msgstr "Schimbările vor fi pierdute dacă nu le salvați."
+
+#: ../src/file.c:751
+msgid "Close without saving"
+msgstr "Închide fără a salva"
+
+#: ../src/font-combo-menu.c:137
+msgid "Recent fonts"
+msgstr "Fonturi recente"
+
+#: ../src/font-combo-menu.c:152
+msgid "Proportional fonts"
+msgstr "Fonturi proporționale"
+
+#: ../src/font-combo-menu.c:160
+msgid "Fixed-width fonts"
+msgstr "Fonturi cu lățime fixă"
+
+#: ../src/font-combo-menu.c:168
+msgid "All fonts"
+msgstr "Toate fonturile"
+
+#.
+#. * Allow text samples to be localized.
+#. *
+#. * FIXME: if we could extract enough meta information from the fonts
+#. * themselves, perhaps rather than setting these globally for the
+#. * current locale, they could be unique to each font family.
+#.
+#: ../src/font-combo-menu-item.c:132
+msgctxt "Short sample text"
+msgid "Aa"
+msgstr "Aa"
+
+#: ../src/font-combo-menu-item.c:134
+msgctxt "Lower case sample text"
+msgid "abcdefghijklmnopqrstuvwxyz"
+msgstr "aăâbcdefghiîjklmnopqrsștțuvwxyz"
+
+#: ../src/font-combo-menu-item.c:136
+msgctxt "Upper case sample text"
+msgid "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+msgstr "AĂÂBCDEFGHIÎJKLMNOPQRSȘTȚUVWXYZ"
+
+#: ../src/font-combo-menu-item.c:138
+msgctxt "Numbers and special characters sample text"
+msgid "0123456789 .:,;(*!?)"
+msgstr "0123456789 .:,;(*!?)"
+
+#: ../src/font-combo-menu-item.c:157
+msgid "Sample text"
+msgstr "Text mostră"
+
+#: ../src/glabels-batch.c:53
+msgid "set output filename (default=\"output.pdf\")"
+msgstr "stabiliți numele fișierului de ieșire (implicit=„output.pdf”)"
+
+#: ../src/glabels-batch.c:53 ../src/glabels-batch.c:67
+msgid "filename"
+msgstr "nume de fișier"
+
+#: ../src/glabels-batch.c:55
+msgid "number of sheets (default=1)"
+msgstr "număr de foi (implicit=1)"
+
+#: ../src/glabels-batch.c:55
+msgid "sheets"
+msgstr "foi"
+
+#: ../src/glabels-batch.c:57
+msgid "number of copies (default=1)"
+msgstr "număr de cópii (implicit=1)"
+
+#: ../src/glabels-batch.c:57
+msgid "copies"
+msgstr "cópii"
+
+#: ../src/glabels-batch.c:59
+msgid "first label on first sheet (default=1)"
+msgstr "prima etichetă pe prima foaie (implicit=1)"
+
+#: ../src/glabels-batch.c:59
+msgid "first"
+msgstr "prima"
+
+#: ../src/glabels-batch.c:61 ../data/ui/print-op-dialog-custom-widget.ui.h:11
+msgid "print outlines (to test printer alignment)"
+msgstr "tipărește schițe (pentru a testa aranjamentul imprimantei)"
+
+#: ../src/glabels-batch.c:63 ../data/ui/print-op-dialog-custom-widget.ui.h:12
+msgid "print in reverse (i.e. a mirror image)"
+msgstr "tipărește în revers (ex. o imagine în oglindă)"
+
+#: ../src/glabels-batch.c:65 ../data/ui/print-op-dialog-custom-widget.ui.h:13
+msgid "print crop marks"
+msgstr "tipărește marginile de decupare"
+
+#: ../src/glabels-batch.c:67
+msgid "input file for merging"
+msgstr "fișier de intrare pentru fuziune"
+
+#: ../src/glabels-batch.c:69 ../src/glabels.c:63
+msgid "[FILE...]"
+msgstr "[FIȘIER...]"
+
+#: ../src/glabels-batch.c:99
+msgid "Print files created with gLabels."
+msgstr "Tipărește fișierele create cu gLabels."
+
+#: ../src/glabels-batch.c:107 ../src/glabels.c:87
+#, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"Execută „%s --help” pentru a vedea o listă de opțiuni valabile pentru linia "
+"de comandă.\n"
+
+#: ../src/glabels-batch.c:151
+#, c-format
+msgid "cannot perform document merge with glabels file %s\n"
+msgstr "nu se poate fuziona documentul cu fișierul glabels %s\n"
+
+#: ../src/glabels-batch.c:186
+#, c-format
+msgid "cannot open glabels file %s\n"
+msgstr "nu se poate deschide fișierul glabels %s\n"
+
+#: ../src/glabels.c:79
+msgid "Launch gLabels label and business card designer."
+msgstr "Lansați designerul de etichete și cărți de vizită gLabels."
+
+#: ../src/label-barcode.c:183 ../src/ui.c:317
+msgid "Create barcode object"
+msgstr "Crează obiect cod de bare"
+
+#: ../src/label-barcode.c:259 ../src/label-barcode.c:461
+msgid "Barcode data"
+msgstr "Datele codului de bare"
+
+#: ../src/label-barcode.c:290
+msgid "Barcode property"
+msgstr "Proprietate cod de bare"
+
+#: ../src/label-barcode.c:684
+msgid "Barcode data empty"
+msgstr "Cod de bare fără date"
+
+#: ../src/label-barcode.c:688
+msgid "Invalid barcode data"
+msgstr "Date invalide de cod de bare"
+
+#: ../src/label-box.c:156
+msgid "Create box object"
+msgstr "Crează obiect cutie"
+
+#: ../src/label-box.c:230 ../src/label-ellipse.c:232
+#: ../data/ui/property-bar.ui.h:12
+msgid "Fill color"
+msgstr "Culoare de umplere"
+
+#: ../src/label-box.c:261 ../src/label-ellipse.c:261 ../src/label-line.c:212
+#: ../data/ui/property-bar.ui.h:13
+msgid "Line color"
+msgstr "Culoarea liniei"
+
+#: ../src/label-box.c:289 ../src/label-ellipse.c:290 ../src/label-line.c:241
+#: ../data/ui/property-bar.ui.h:14
+msgid "Line width"
+msgstr "Lățimea liniei"
+
+#: ../src/label.c:406
+msgid "Untitled"
+msgstr "Fără nume"
+
+#: ../src/label.c:720 ../src/ui.c:420
+msgid "Merge properties"
+msgstr "Proprietăți de fuzionare"
+
+#: ../src/label.c:1216 ../src/ui.c:213
+msgid "Delete"
+msgstr "Șterge"
+
+#: ../src/label.c:1251 ../src/ui.c:322
+msgid "Bring to front"
+msgstr "Adu în față"
+
+#: ../src/label.c:1287 ../src/ui.c:329
+msgid "Send to back"
+msgstr "Trimite în spate"
+
+#: ../src/label.c:1328
+msgid "Rotate"
+msgstr "Rotește"
+
+#: ../src/label.c:1363 ../src/ui.c:336
+msgid "Rotate left"
+msgstr "Rotește stânga"
+
+#: ../src/label.c:1396 ../src/ui.c:343
+msgid "Rotate right"
+msgstr "Rotește dreapta"
+
+#: ../src/label.c:1431 ../src/ui.c:350
+msgid "Flip horizontally"
+msgstr "Întoarce orizontal"
+
+#: ../src/label.c:1466 ../src/ui.c:357
+msgid "Flip vertically"
+msgstr "Întoarce vertical"
+
+#: ../src/label.c:1506 ../src/ui.c:364
+msgid "Align left"
+msgstr "Aliniere la stânga"
+
+#: ../src/label.c:1563 ../src/ui.c:378
+msgid "Align right"
+msgstr "Aliniere la dreapta"
+
+#: ../src/label.c:1624
+msgid "Align horizontal center"
+msgstr "Aliniere central orizontal"
+
+#: ../src/label.c:1700
+msgid "Align tops"
+msgstr "Aliniere deasupra"
+
+#: ../src/label.c:1757
+msgid "Align bottoms"
+msgstr "Aliniere jos"
+
+#: ../src/label.c:1818
+msgid "Align vertical center"
+msgstr "Aliniere central verticală"
+
+#: ../src/label.c:1896 ../src/ui.c:406
+msgid "Center horizontally"
+msgstr "Central orizontal"
+
+#: ../src/label.c:1943 ../src/ui.c:413
+msgid "Center vertically"
+msgstr "Central vertical"
+
+#: ../src/label.c:2664 ../src/label.c:2706 ../src/label.c:2732 ../src/ui.c:206
+msgid "Paste"
+msgstr "Lipește"
+
+#: ../src/label-ellipse.c:160
+msgid "Create ellipse object"
+msgstr "Crează obiect elipsă"
+
+#: ../src/label-image.c:199 ../src/ui.c:310
+msgid "Create image object"
+msgstr "Crează obiect imagine"
+
+#: ../src/label-image.c:332 ../src/label-image.c:473
+msgid "Set image"
+msgstr "Stabilește imagine"
+
+#: ../src/label-line.c:147 ../src/ui.c:296
+msgid "Create line object"
+msgstr "Crează obiect liniar"
+
+#: ../src/label-object.c:392 ../src/label-object.c:423
+msgid "Move"
+msgstr "Mută"
+
+#: ../src/label-object.c:474
+msgid "Resize"
+msgstr "Redimensionează"
+
+#: ../src/label-object.c:1258
+msgid "Shadow state"
+msgstr "Stare de umbră"
+
+#: ../src/label-object.c:1301
+msgid "Shadow offset"
+msgstr "Decalaj umbră"
+
+#: ../src/label-object.c:1349
+msgid "Shadow color"
+msgstr "Culoare umbră"
+
+#: ../src/label-object.c:1392
+msgid "Shadow opacity"
+msgstr "Opacitate umbră"
+
+#: ../src/label-text.c:293 ../src/ui.c:282
+msgid "Create text object"
+msgstr "Crează obiect text"
+
+#: ../src/label-text.c:467
+msgid "Typing"
+msgstr "Scriere"
+
+#: ../src/label-text.c:601 ../data/ui/property-bar.ui.h:1
+msgid "Font family"
+msgstr "Familie de fonturi"
+
+#: ../src/label-text.c:639 ../data/ui/property-bar.ui.h:2
+msgid "Font size"
+msgstr "Dimensiune fonturi"
+
+#: ../src/label-text.c:672
+msgid "Font weight"
+msgstr "Ponderea fontului"
+
+#: ../src/label-text.c:705 ../data/ui/property-bar.ui.h:4
+msgid "Italic"
+msgstr "Italic"
+
+#: ../src/label-text.c:738
+msgid "Align text"
+msgstr "Alinierea textului"
+
+#: ../src/label-text.c:771
+msgid "Vertically align text"
+msgstr "Aliniere verticală a textului"
+
+#: ../src/label-text.c:804
+msgid "Line spacing"
+msgstr "Spațiere liniară"
+
+#: ../src/label-text.c:837 ../data/ui/property-bar.ui.h:11
+msgid "Text color"
+msgstr "Culoare text"
+
+#: ../src/label-text.c:997
+msgid "Auto shrink"
+msgstr "Automicșorare"
+
+#: ../src/media-select.c:358 ../src/media-select.c:361
+#: ../src/media-select.c:506 ../src/media-select.c:723
+msgctxt "Brand"
+msgid "Any"
+msgstr "Oricare"
+
+#: ../src/media-select.c:365 ../src/media-select.c:893
+msgctxt "Page size"
+msgid "Any"
+msgstr "Oricare"
+
+#: ../src/media-select.c:372 ../src/media-select.c:375
+#: ../src/media-select.c:902
+msgctxt "Category"
+msgid "Any"
+msgstr "Oricare"
+
+#: ../src/media-select.c:648
+#, c-format
+msgid "Delete template \"%s\"?"
+msgstr "Ștergeți șablonul „%s”?"
+
+#: ../src/media-select.c:650
+msgid "This action will permanently delete this template."
+msgstr "Această acțiune va șterge permanent acest șablon."
+
+#: ../src/media-select.c:990
+msgid "No recent templates found."
+msgstr "Niciun șablon recent nu a fost găsit."
+
+#: ../src/media-select.c:992
+msgid "Try selecting a template in the \"Search all\" tab."
+msgstr "Încercați să selectați un șablon în tabul „Caută tot”."
+
+#. Translators: "No match" means that for the given template search criteria, there
+#. * were no matches found.
+#: ../src/media-select.c:1083
+msgid "No match."
+msgstr "Nicio potrivire."
+
+#: ../src/media-select.c:1085
+msgid "Try selecting a different brand, page size or category."
+msgstr "Încercați să selectați tip, dimensiune de pagină sau categorie diferiă."
+
+#: ../src/media-select.c:1179
+msgid "No custom templates found."
+msgstr "Niciun șablon personalizat nu a fost găsit."
+
+#: ../src/media-select.c:1181
+msgid ""
+"You may create new templates or try searching for pre-defined templates in "
+"the \"Search all\" tab."
+msgstr ""
+"Puteți crea un nou șablon sau să încercați să căutați unul predefinit în "
+"tabul „Caută toate”. "
+
+#. Translators: "None" here means that no document-merge source or
+#. * method has been selected.
+#: ../src/merge.c:171 ../src/merge.c:212 ../src/merge.c:376 ../src/merge.c:379
+msgid "None"
+msgstr "Niciunul"
+
+#: ../src/merge-init.c:57
+msgid "Text: Comma Separated Values (CSV)"
+msgstr "Text: Valori separate de virgulă (CSV)"
+
+#: ../src/merge-init.c:64
+msgid "Text: Comma Separated Values (CSV) with keys on line 1"
+msgstr "Text: Valori separate de virgulă (CSV) cu taste pe linia 1"
+
+#: ../src/merge-init.c:72
+msgid "Text: Tab Separated Values (TSV)"
+msgstr "Text: Valori separate de tab (TSV)"
+
+#: ../src/merge-init.c:79
+msgid "Text: Tab Separated Values (TSV) with keys on line 1"
+msgstr "Text: Valori separate de tab (TSV) cu taste pe linia 1"
+
+#: ../src/merge-init.c:87
+msgid "Text: Colon separated values"
+msgstr "Text: Valori separate de două puncte"
+
+#: ../src/merge-init.c:94
+msgid "Text: Colon separated values with keys on line 1"
+msgstr "Text: Valori separate de două puncte cu taste pe linia 1"
+
+#: ../src/merge-init.c:102
+msgid "Text: Semicolon separated values"
+msgstr "Text: Valori separate de punct și virgulă"
+
+#: ../src/merge-init.c:109
+msgid "Text: Semicolon separated values with keys on line 1"
+msgstr "Text: Valori separate de punct și virgulă cu taste pe linia1"
+
+#: ../src/merge-init.c:119
+msgid "Evolution Addressbook"
+msgstr "Carte de adrese Evolution"
+
+#: ../src/merge-init.c:125
+msgid "VCards"
+msgstr "VCard-uri"
+
+#: ../src/merge-properties-dialog.c:280
+msgid "Merge Properties"
+msgstr "Proprietăți de fuziune"
+
+#: ../src/merge-properties-dialog.c:304 ../src/merge-properties-dialog.c:420
+msgid "Select merge-database source"
+msgstr "Selectați sursa bazei de date de fuzionat"
+
+#: ../src/merge-properties-dialog.c:315 ../src/merge-properties-dialog.c:446
+msgid "N/A"
+msgstr "Niciuna"
+
+#: ../src/merge-properties-dialog.c:341
+msgid "Select"
+msgstr "Selectează"
+
+#: ../src/merge-properties-dialog.c:348
+msgid "Record/Field"
+msgstr "Înregistrare/Câmp"
+
+#: ../src/merge-properties-dialog.c:356 ../data/ui/object-editor.ui.h:24
+msgid "Data"
+msgstr "Date"
+
+#. Translators: "Fixed" here means that for the given document-merge method, there are
+#. * no further choices to further define the source of data.  E.g. if you select the
+#. * evolution-data-server, there are no further choices -- the source is "Fixed."
+#.
+#: ../src/merge-properties-dialog.c:439
+msgid "Fixed"
+msgstr "Fixate"
+
+#. Translators: "Up" refers to the direction towards the top of a label.
+#: ../src/mini-preview.c:1051
+msgid "Up"
+msgstr "Sus"
+
+#: ../src/new-label-dialog.c:212 ../data/ui/new-label-dialog.ui.h:1
+msgid "Select Product"
+msgstr "Selectați produs"
+
+#: ../src/new-label-dialog.c:225 ../data/ui/new-label-dialog.ui.h:3
+msgid "Choose Orientation"
+msgstr "Selectați orientare"
+
+#: ../src/new-label-dialog.c:240
+msgid "Review"
+msgstr "Recenzie"
+
+#: ../src/object-editor-bc-page.c:97 ../src/object-editor-shadow-page.c:93
+#: ../src/object-editor-text-page.c:102 ../src/prefs-dialog.c:335
+#: ../src/ui-property-bar.c:289
+msgid "Default"
+msgstr "Implicit"
+
+#: ../src/object-editor.c:161 ../src/object-editor.c:470
+msgid "Object properties"
+msgstr "Proprietățile obiectului"
+
+#: ../src/object-editor.c:314
+msgid "Box object properties"
+msgstr "Proprietățile obiectului cutie"
+
+#: ../src/object-editor.c:333
+msgid "Ellipse object properties"
+msgstr "Proprietățile obiectului elipsă"
+
+#: ../src/object-editor.c:352
+msgid "Line object properties"
+msgstr "Proprietățile obiectului liniar"
+
+#: ../src/object-editor.c:369
+msgid "Image object properties"
+msgstr "Proprietățile obiectului imagine"
+
+#: ../src/object-editor.c:386
+msgid "Text object properties"
+msgstr "Proprietățile obiectului text"
+
+#: ../src/object-editor.c:408
+msgid "Barcode object properties"
+msgstr "Proprietățile obiectului cod de bare"
+
+#: ../src/object-editor-edit-page.c:76
+msgid "Insert merge field"
+msgstr "Introduceți câmp de fuziune"
+
+#: ../src/object-editor-fill-page.c:79 ../src/prefs-dialog.c:341
+#: ../src/ui-property-bar.c:299
+msgid "No Fill"
+msgstr "Nicio umplutură"
+
+#: ../src/object-editor-image-page.c:302
+msgid "All Files"
+msgstr "Toate fișierele"
+
+#: ../src/object-editor-image-page.c:307
+msgid "All Images"
+msgstr "Toate imaginile"
+
+#: ../src/object-editor-image-page.c:323
+#, c-format
+msgid "%s (*.%s)"
+msgstr "%s (*.%s)"
+
+#: ../src/object-editor-line-page.c:79 ../src/prefs-dialog.c:338
+#: ../src/ui-property-bar.c:309
+msgid "No Line"
+msgstr "Nicio linie"
+
+#: ../src/object-editor-size-page.c:89
+msgid "Lock aspect ratio."
+msgstr "Blochează raportul de aspect."
+
+#: ../src/prefs-dialog.c:168 ../data/ui/prefs-dialog.ui.h:1
+msgid "gLabels Preferences"
+msgstr "Preferințe gLabels"
+
+#. TODO: Is this the actual part #?
+#: ../src/print-op.c:205 ../src/print-op-dialog.c:215
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:2
+#: ../templates/misc-iso-templates.xml.h:26
+msgid "Labels"
+msgstr "Etichete"
+
+#: ../src/template-designer.c:429
+msgid "New gLabels Template"
+msgstr "Șablon gLabels nou"
+
+#: ../src/template-designer.c:487
+msgid "Welcome"
+msgstr "Bine ați venit"
+
+#: ../src/template-designer.c:526
+msgid "Name and Description"
+msgstr "Nume și descriere"
+
+#: ../src/template-designer.c:575
+msgid "Page Size"
+msgstr "Dimensiunea paginii"
+
+#: ../src/template-designer.c:642
+msgid "Label or Card Shape"
+msgstr "Forma etichetei sau a cărții"
+
+#: ../src/template-designer.c:689 ../src/template-designer.c:790
+msgid "Label or Card Size"
+msgstr "Dimensiunea etichetei sau a cărții"
+
+#: ../src/template-designer.c:873
+msgid "Label Size (round)"
+msgstr "Dimensiunea etichetei (rotund)"
+
+#: ../src/template-designer.c:954
+msgid "Label Size (CD/DVD)"
+msgstr "Dimensiunea etichetei (CD/DVD)"
+
+#: ../src/template-designer.c:1045
+msgid "Number of Layouts"
+msgstr "Număr de straturi"
+
+#: ../src/template-designer.c:1113
+msgid "Layout(s)"
+msgstr "Straturi"
+
+#: ../src/template-designer.c:1218
+msgid "Design Completed"
+msgstr "Design completat"
+
+#: ../src/template-designer.c:1246
+msgid "Edit gLabels Template"
+msgstr "Editează șabloane gLabels"
+
+#: ../src/template-designer.c:1549
+msgid "Brand and part# match an existing template!"
+msgstr "Tip și partea# se potrivesc cu un șablon existent!"
+
+#. Menu entries.
+#: ../src/ui.c:91
+msgid "_File"
+msgstr "_Fișier"
+
+#: ../src/ui.c:92
+msgid "Open Recent _Files"
+msgstr "Deschide _fișiere recente"
+
+#: ../src/ui.c:93
+msgid "_Edit"
+msgstr "_Editare"
+
+#: ../src/ui.c:94
+msgid "_View"
+msgstr "_Vizualizare"
+
+#: ../src/ui.c:95
+msgid "Customize Main Toolbar"
+msgstr "Modifică bara de unelte principală"
+
+#: ../src/ui.c:96
+msgid "Customize Drawing Toolbar"
+msgstr "Modifică bara de unelte de desenare"
+
+#: ../src/ui.c:97
+msgid "Customize Properties Toolbar"
+msgstr "Modifică bara de unelte de proprietăți"
+
+#: ../src/ui.c:98
+msgid "_Objects"
+msgstr "_Obiecte"
+
+#: ../src/ui.c:99
+msgid "_Create"
+msgstr "_Crează"
+
+#: ../src/ui.c:100
+msgid "_Order"
+msgstr "_Ordine"
+
+#: ../src/ui.c:101
+msgid "_Rotate/Flip"
+msgstr "_Rotește/Întoarce"
+
+#: ../src/ui.c:102
+#| msgid "Alignment:"
+msgid "_Alignment"
+msgstr "_Aliniere"
+
+#: ../src/ui.c:103
+#| msgid "Center align"
+msgid "C_enter"
+msgstr "C_entru"
+
+#: ../src/ui.c:104
+msgid "_Help"
+msgstr "_Ajutor"
+
+#. Popup entries.
+#: ../src/ui.c:107 ../src/ui.c:108
+msgid "Context Menu"
+msgstr "Meniu contextual"
+
+#: ../src/ui.c:113
+msgid "_New"
+msgstr "_Nou"
+
+#: ../src/ui.c:115
+msgid "Create a new file"
+msgstr "Crează un fișier nou"
+
+#: ../src/ui.c:120
+msgid "_Open..."
+msgstr "_Deschide..."
+
+#: ../src/ui.c:122
+msgid "Open a file"
+msgstr "Deschide un fișier"
+
+#: ../src/ui.c:127
+msgid "_Save"
+msgstr "_Salvează"
+
+#: ../src/ui.c:129
+msgid "Save current file"
+msgstr "Salvează fișierul curent"
+
+#: ../src/ui.c:134
+msgid "Save _As..."
+msgstr "Salvează c_a..."
+
+#: ../src/ui.c:136
+msgid "Save the current file to a different name"
+msgstr "Salvează fișierul curent cu un alt nume"
+
+#: ../src/ui.c:141
+msgid "_Print..."
+msgstr "Ti_părește..."
+
+#: ../src/ui.c:143
+msgid "Print the current file"
+msgstr "Tipărește fișierul curent"
+
+#: ../src/ui.c:148
+msgid "Properties..."
+msgstr "Proprietăți..."
+
+#: ../src/ui.c:150
+msgid "Modify document properties"
+msgstr "Modifică proprietățile documentului"
+
+#: ../src/ui.c:155
+msgid "Template _Designer..."
+msgstr "_Designer de șabloane..."
+
+#: ../src/ui.c:157
+msgid "Create a custom template"
+msgstr "Crează un șablon personalizat"
+
+#: ../src/ui.c:162
+msgid "_Close"
+msgstr "În_chide"
+
+#: ../src/ui.c:164
+msgid "Close the current file"
+msgstr "Închide fișierul curent"
+
+#: ../src/ui.c:169
+msgid "_Quit"
+msgstr "_Ieșire"
+
+#: ../src/ui.c:171
+msgid "Quit the program"
+msgstr "Ieși din program"
+
+#: ../src/ui.c:178 ../src/ui.c:180 ../src/ui.c:976
+msgid "Undo"
+msgstr "Anulează"
+
+#: ../src/ui.c:185 ../src/ui.c:187 ../src/ui.c:983
+msgid "Redo"
+msgstr "Refă"
+
+#: ../src/ui.c:192
+msgid "Cut"
+msgstr "Decupează"
+
+#: ../src/ui.c:194
+msgid "Cut the selection"
+msgstr "Decupează selecția"
+
+#: ../src/ui.c:199
+msgid "Copy"
+msgstr "Lipește"
+
+#: ../src/ui.c:201
+msgid "Copy the selection"
+msgstr "Lipește selecția"
+
+#: ../src/ui.c:208
+msgid "Paste the clipboard"
+msgstr "Lipește clipboard-ul"
+
+#: ../src/ui.c:215
+msgid "Delete the selected objects"
+msgstr "Șterge obiectele selectate"
+
+#: ../src/ui.c:220
+msgid "Select All"
+msgstr "Selectează tot"
+
+#: ../src/ui.c:222
+msgid "Select all objects"
+msgstr "Selectează toate obiectele"
+
+#: ../src/ui.c:227
+msgid "Un-select All"
+msgstr "Deselectează tot"
+
+#: ../src/ui.c:229
+msgid "Remove all selections"
+msgstr "Elimină toate selecțiile"
+
+#: ../src/ui.c:234
+msgid "Preferences"
+msgstr "Preferințe"
+
+#: ../src/ui.c:236
+msgid "Configure the application"
+msgstr "Configurați aplicația"
+
+#: ../src/ui.c:243
+msgid "Zoom in"
+msgstr "Mărește"
+
+#: ../src/ui.c:245
+msgid "Increase magnification"
+msgstr "Mărește amplificarea"
+
+#: ../src/ui.c:250
+msgid "Zoom out"
+msgstr "Micșorează"
+
+#: ../src/ui.c:252
+msgid "Decrease magnification"
+msgstr "Micșorează amplificarea"
+
+#: ../src/ui.c:257
+msgid "Zoom 1 to 1"
+msgstr "Zoom 1 la 1"
+
+#: ../src/ui.c:259
+msgid "Restore scale to 100%"
+msgstr "Restabilește scalarea la 100%"
+
+#: ../src/ui.c:264
+msgid "Zoom to fit"
+msgstr "Zoom pentru potrivire"
+
+#: ../src/ui.c:266
+msgid "Set scale to fit window"
+msgstr "Stabilește scalarea pentru a se potrivi ferestrei"
+
+#: ../src/ui.c:273
+msgid "Select Mode"
+msgstr "Selectați modul"
+
+#: ../src/ui.c:275
+msgid "Select, move and modify objects"
+msgstr "Selectați, mișcați și modificați obiecte"
+
+#: ../src/ui.c:280 ../src/view-text.c:94 ../data/ui/object-editor.ui.h:2
+#: ../data/ui/prefs-dialog.ui.h:17
+msgid "Text"
+msgstr "Text"
+
+#: ../src/ui.c:287
+msgid "Box"
+msgstr "Cutie"
+
+#: ../src/ui.c:289
+msgid "Create box/rectangle object"
+msgstr "Crează obiect cutie/dreptunghi"
+
+#: ../src/ui.c:294 ../data/ui/object-editor.ui.h:17
+#: ../data/ui/prefs-dialog.ui.h:20
+msgid "Line"
+msgstr "Linie"
+
+#: ../src/ui.c:301
+msgid "Ellipse"
+msgstr "Elipsă"
+
+#: ../src/ui.c:303
+msgid "Create ellipse/circle object"
+msgstr "Crează obiect elipsă/cerc"
+
+#: ../src/ui.c:308 ../data/ui/object-editor.ui.h:20
+msgid "Image"
+msgstr "Imagine"
+
+#: ../src/ui.c:315
+msgid "Barcode"
+msgstr "Cod de bare"
+
+#: ../src/ui.c:324
+msgid "Raise object to top"
+msgstr "Adu obiectul deasupra"
+
+#: ../src/ui.c:331
+msgid "Lower object to bottom"
+msgstr "Obiectul inferior la bază"
+
+#: ../src/ui.c:338
+msgid "Rotate object 90 degrees counter-clockwise"
+msgstr "Rotește obiectul 90 de grade în sens trigonometric"
+
+#: ../src/ui.c:345
+msgid "Rotate object 90 degrees clockwise"
+msgstr "Rotește obiectul 90 de grade în sensul acelor de ceasornic"
+
+#: ../src/ui.c:352
+msgid "Flip object horizontally"
+msgstr "Întoarce obiectul orizontal"
+
+#: ../src/ui.c:359
+msgid "Flip object vertically"
+msgstr "Întoarce obiectul vertical"
+
+#: ../src/ui.c:366
+msgid "Align objects to left edges"
+msgstr "Aliniază obiecte la marginile stângi"
+
+#: ../src/ui.c:371
+#| msgid "Align vertical center"
+msgid "Align center"
+msgstr "Aliniază central"
+
+#: ../src/ui.c:373
+msgid "Align objects to horizontal centers"
+msgstr "Aliniază obiecte la centrul orizontal"
+
+#: ../src/ui.c:380
+msgid "Align objects to right edges"
+msgstr "Aliniază obiecte la marginile drepte"
+
+#: ../src/ui.c:385
+#| msgid "Align tops"
+msgid "Align top"
+msgstr "Aliniază deasupra"
+
+#: ../src/ui.c:387
+msgid "Align objects to top edges"
+msgstr "Aliniază obiecte la marginile superioare"
+
+#: ../src/ui.c:392
+#| msgid "Align left"
+msgid "Align middle"
+msgstr "Aliniază la mijloc"
+
+#: ../src/ui.c:394
+msgid "Align objects to vertical centers"
+msgstr "Aliniază obiecte la centrele verticale"
+
+#: ../src/ui.c:399
+#| msgid "Align bottoms"
+msgid "Align bottom"
+msgstr "Aliniază jos"
+
+#: ../src/ui.c:401
+msgid "Align objects to bottom edges"
+msgstr "Aliniază obiecte la marginile de la bază"
+
+#: ../src/ui.c:408
+msgid "Center objects to horizontal label center"
+msgstr "Centrare obiecte la centru etichetei orizontale"
+
+#: ../src/ui.c:415
+msgid "Center objects to vertical label center"
+msgstr "Centrare obiecte la centru etichetei verticale"
+
+#: ../src/ui.c:422
+msgid "Edit merge properties"
+msgstr "Proprietăți de editare a fuziunii"
+
+#: ../src/ui.c:429
+msgid "Contents"
+msgstr "Conținut"
+
+#: ../src/ui.c:431
+msgid "Open glabels manual"
+msgstr "Deschide manualul glabels"
+
+#: ../src/ui.c:436
+msgid "About..."
+msgstr "Despre..."
+
+#: ../src/ui.c:438 ../src/ui-commands.c:1198
+msgid "About glabels"
+msgstr "Despre glabels"
+
+#: ../src/ui.c:448
+msgid "Property toolbar"
+msgstr "Bară de unelte de proprietăți"
+
+#: ../src/ui.c:450
+msgid "Change the visibility of the property toolbar in the current window"
+msgstr ""
+"Schimbă vizibilitatea barei de unelte de proprietăți în fereastra curentă"
+
+#: ../src/ui.c:456
+msgid "Grid"
+msgstr "Grilă"
+
+#: ../src/ui.c:458
+msgid "Change the visibility of the grid in the current window"
+msgstr "Schimbă vizibilitatea grilei în fereastra curentă"
+
+#: ../src/ui.c:464
+msgid "Markup"
+msgstr "Marcare"
+
+#: ../src/ui.c:466
+msgid "Change the visibility of markup lines in the current window"
+msgstr "Schimbă vizibilitatea liniei de marcare în fereastra curentă"
+
+#: ../src/ui.c:477
+msgid "Main toolbar"
+msgstr "Bară de unelte principale"
+
+#: ../src/ui.c:479
+msgid "Change the visibility of the main toolbar in the current window"
+msgstr "Schimbă vizibilitatea barei de unelte principale în fereastra curentă"
+
+#: ../src/ui.c:485
+msgid "Drawing toolbar"
+msgstr "Bară de unelte de desenare"
+
+#: ../src/ui.c:487
+msgid "Change the visibility of the drawing toolbar in the current window"
+msgstr "Schimbă vizibilitatea barei de unelte de desenare în fereastra curentă"
+
+#: ../src/ui-commands.c:1135
+msgid "Glabels includes contributions from:"
+msgstr "Glabels include contribuții de la:"
+
+#: ../src/ui-commands.c:1144
+msgid "See the file AUTHORS for additional credits,"
+msgstr "Consultați fișierul AUTHORS pentru autori,"
+
+#: ../src/ui-commands.c:1145
+msgid "or visit http://glabels.org/"
+msgstr "sau vizitați http://glabels.org/"
+
+#: ../src/ui-commands.c:1162
+msgid "A label and business card creation program.\n"
+msgstr "Un program de creat etichete și cărți de vizită.\n"
+
+#: ../src/ui-commands.c:1166
+msgid "translator-credits"
+msgstr "Alexandru Florescu <show_some_originality@yahoo.com>"
+
+#: ../src/ui-commands.c:1169
+msgid ""
+"gLabels is free software: you can redistribute it and/or modify\n"
+"it under the terms of the GNU General Public License as published by\n"
+"the Free Software Foundation, either version 3 of the License, or\n"
+"(at your option) any later version.\n"
+"\n"
+"gLabels is distributed in the hope that it will be useful,\n"
+"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"GNU General Public License for more details.\n"
+msgstr ""
+"gLabels este un program liber: îl puteți redistribui și/sau modifica\n"
+"sub termenii licenței GNU General Public License așa cum este publicată de\n"
+"Free Software Foundation, ori versiunea 3 a licenței, sau\n"
+"(la latitudinea dumneavoastră) orice versiune ulterioară.\n"
+"\n"
+"gLabels este distribuit cu speranța că va fi folositor,\n"
+"dar FĂRĂ NICIO GARANȚIE; fără să implice măcar garanția de\n"
+"VANDABILITATE sau ADECVARE PENTRU UN ANUME SCOP. Consultați\n"
+"GNU General Public License pentru mai multe detalii.\n"
+
+#: ../src/warning-handler.c:71
+msgid "gLabels Error!"
+msgstr "Eroare gLabels!"
+
+#: ../src/window.c:281
+msgid "(none) - gLabels"
+msgstr "(niciuna) - gLabels"
+
+#: ../src/window.c:482
+msgid "(modified)"
+msgstr "(modificat)"
+
+#. Create and append an "Other" entry.
+#. Translators: "Other" here means other page size.  Meaning a page size
+#. * other than the standard ones that libglabels knows about such as
+#. * "letter", "A4", etc.
+#: ../libglabels/lgl-db.c:267
+msgid "Other"
+msgstr "Altele"
+
+#. Create and append a "User defined" entry.
+#: ../libglabels/lgl-db.c:276
+msgid "User defined"
+msgstr "Definit de utilizator"
+
+#: ../libglabels/lgl-db.c:663
+msgid ""
+"Unable to locate paper size definitions.  Libglabels may not be installed "
+"correctly!"
+msgstr ""
+"Nu se pot localiza definițiile pentru dimensiunile hârtiei. Se poate ca "
+"Libglabels să nu fie instalat corect!"
+
+#: ../libglabels/lgl-db.c:1062
+msgid ""
+"Unable to locate category definitions.  Libglabels may not be installed "
+"correctly!"
+msgstr ""
+"Nu se pot localiza definițiile categoriilor. Se poate ca Libglabels să nu "
+"fie instalat corect!"
+
+#: ../libglabels/lgl-db.c:1989
+msgid ""
+"Unable to locate any template files.  Libglabels may not be installed "
+"correctly!"
+msgstr ""
+"Nu se pot localiza fișierele șablon. Se poate ca Libglabels să nu fie "
+"instalat corect"
+
+#: ../libglabels/lgl-db.c:2056
+#, c-format
+msgid "%s full page label"
+msgstr "eticheta pe toată pagina %s"
+
+#.
+#. * Translators: 1st %d = number of labels across a page,
+#. *              2nd %d = number of labels down a page,
+#. *              3rd %d = total number of labels on a page (sheet).
+#.
+#: ../libglabels/lgl-template.c:673
+#, c-format
+msgid "%d × %d (%d per sheet)"
+msgstr "%d x %d (%d per foaie)"
+
+#. Translators: %d is the total number of labels on a page (sheet).
+#: ../libglabels/lgl-template.c:678
+#, c-format
+msgid "%d per sheet"
+msgstr "%d per foaie"
+
+#: ../libglabels/lgl-template.c:759 ../libglabels/lgl-template.c:767
+#: ../libglabels/lgl-template.c:779 ../libglabels/lgl-template.c:787
+msgid "diameter"
+msgstr "diametru"
+
+#. The ids are identical to the absolute length units supported in
+#. the CSS2 Specification (Section 4.3.2)
+#. This table must be sorted exactly as the enumerations in lglUnits
+#. [LGL_UNITS_POINT]
+#: ../libglabels/lgl-units.c:65 ../data/ui/object-editor.ui.h:15
+#: ../data/ui/prefs-dialog.ui.h:19
+msgid "points"
+msgstr "puncte"
+
+#. [LGL_UNITS_INCH]
+#: ../libglabels/lgl-units.c:66 ../data/ui/object-editor.ui.h:28
+#: ../data/ui/template-designer.ui.h:15
+msgid "inches"
+msgstr "țoli"
+
+#. [LGL_UNITS_MM]
+#: ../libglabels/lgl-units.c:67
+msgid "mm"
+msgstr "mm"
+
+#. [LGL_UNITS_CM]
+#: ../libglabels/lgl-units.c:68
+msgid "cm"
+msgstr "cm"
+
+#. [LGL_UNITS_PICA]
+#: ../libglabels/lgl-units.c:69
+msgid "picas"
+msgstr "picas"
+
+#.
+#. * Local Variables:       -- emacs
+#. * mode: C                -- emacs
+#. * c-basic-offset: 8      -- emacs
+#. * tab-width: 8           -- emacs
+#. * indent-tabs-mode: nil  -- emacs
+#. * End:                   -- emacs
+#.
+#: ../data/ui/merge-properties-dialog.ui.h:1
+msgid "Format:"
+msgstr "Format:"
+
+#: ../data/ui/merge-properties-dialog.ui.h:2
+msgid "Location:"
+msgstr "Locație:"
+
+#: ../data/ui/merge-properties-dialog.ui.h:3
+msgid "Source"
+msgstr "Sursă"
+
+#: ../data/ui/merge-properties-dialog.ui.h:4
+msgid "Select all"
+msgstr "Selectează tot"
+
+#: ../data/ui/merge-properties-dialog.ui.h:5
+msgid "Unselect all"
+msgstr "Deselectează tot"
+
+#: ../data/ui/merge-properties-dialog.ui.h:6
+msgid "Record selection/preview"
+msgstr "Înregistrează selecție/previzualizare"
+
+#: ../data/ui/media-select.ui.h:1
+msgid "Recent"
+msgstr "Recent"
+
+#: ../data/ui/media-select.ui.h:2
+msgid "Brand:"
+msgstr "Tip:"
+
+#: ../data/ui/media-select.ui.h:3 ../data/ui/new-label-dialog.ui.h:10
+#: ../data/ui/template-designer.ui.h:12
+msgid "Page size:"
+msgstr "Dimensiune pagină:"
+
+#: ../data/ui/media-select.ui.h:4
+msgid "Category:"
+msgstr "Categorie:"
+
+#: ../data/ui/media-select.ui.h:5
+msgid "Search all"
+msgstr "Caută tot"
+
+#: ../data/ui/media-select.ui.h:6
+msgid "Custom"
+msgstr "Personalizat"
+
+#: ../data/ui/new-label-dialog.ui.h:2
+msgid ""
+"Choose label or card product from hundreds of predefined templates or define "
+"your own."
+msgstr ""
+"Alegeți eticheta sau cartea produsul din sute de șabloane predefinite sau "
+"definiți-vă propriul șablon."
+
+#: ../data/ui/new-label-dialog.ui.h:4
+msgid "Select orientation of label content."
+msgstr "Alegeți orientarea conținutului tabelului."
+
+#: ../data/ui/new-label-dialog.ui.h:5
+msgid "Normal"
+msgstr "Normal"
+
+#: ../data/ui/new-label-dialog.ui.h:6
+msgid "Rotated"
+msgstr "Rotit"
+
+#: ../data/ui/new-label-dialog.ui.h:7
+#| msgid "Remove all selections"
+msgid "Review Selection"
+msgstr "Revizualizează selecția"
+
+#: ../data/ui/new-label-dialog.ui.h:8
+msgid "Please review and confirm your selection."
+msgstr "Revedeți și confirmați selecția."
+
+#: ../data/ui/new-label-dialog.ui.h:9 ../data/ui/template-designer.ui.h:9
+msgid "Description:"
+msgstr "Descriere:"
+
+#: ../data/ui/new-label-dialog.ui.h:11
+msgid "Label size:"
+msgstr "Dimensiunea etichetei:"
+
+#: ../data/ui/new-label-dialog.ui.h:12
+msgid "Layout:"
+msgstr "Aranjament:"
+
+#: ../data/ui/new-label-dialog.ui.h:13
+msgid "Similar products:"
+msgstr "Produse similare:"
+
+#: ../data/ui/new-label-dialog.ui.h:14 ../data/ui/template-designer.ui.h:6
+msgid "Part #:"
+msgstr "Partea #:"
+
+#: ../data/ui/new-label-dialog.ui.h:15
+msgid "Vendor:"
+msgstr "Vânzător:"
+
+#: ../data/ui/object-editor.ui.h:1
+msgid "dialog1"
+msgstr "dialog1"
+
+#: ../data/ui/object-editor.ui.h:3
+msgid "Family:"
+msgstr "Familie:"
+
+#: ../data/ui/object-editor.ui.h:4
+msgid "Size:"
+msgstr "Dimensiune:"
+
+#: ../data/ui/object-editor.ui.h:5
+msgid "Style:"
+msgstr "Stil:"
+
+#: ../data/ui/object-editor.ui.h:6 ../data/ui/prefs-dialog.ui.h:14
+msgid "Color:"
+msgstr "Culoare:"
+
+#: ../data/ui/object-editor.ui.h:7
+msgid " "
+msgstr " "
+
+#: ../data/ui/object-editor.ui.h:8
+msgid "key:"
+msgstr "tastă:"
+
+#: ../data/ui/object-editor.ui.h:9 ../data/ui/prefs-dialog.ui.h:15
+msgid "Alignment:"
+msgstr "Aliniere:"
+
+#: ../data/ui/object-editor.ui.h:10
+#| msgid "Alignment:"
+msgid "Vertical alignment:"
+msgstr "Aliniere verticală:"
+
+#: ../data/ui/object-editor.ui.h:11 ../data/ui/prefs-dialog.ui.h:16
+msgid "Line Spacing:"
+msgstr "Spațiere între linii:"
+
+#: ../data/ui/object-editor.ui.h:12
+msgid "Allow merge to automatically shrink text"
+msgstr "Permite fuziunii să micșoreze automat textul"
+
+#: ../data/ui/object-editor.ui.h:13
+msgid "Style"
+msgstr "Stil"
+
+#: ../data/ui/object-editor.ui.h:14 ../data/ui/prefs-dialog.ui.h:18
+#: ../data/ui/template-designer.ui.h:13
+msgid "Width:"
+msgstr "Lățime:"
+
+#: ../data/ui/object-editor.ui.h:16
+msgid "Key:"
+msgstr "Tastă:"
+
+#: ../data/ui/object-editor.ui.h:18 ../data/ui/prefs-dialog.ui.h:21
+msgid "Fill"
+msgstr "Umple"
+
+#: ../data/ui/object-editor.ui.h:19
+msgid "File:"
+msgstr "Fișier:"
+
+#: ../data/ui/object-editor.ui.h:21
+msgid "Literal:"
+msgstr "Literal:"
+
+#: ../data/ui/object-editor.ui.h:22
+msgid "format:"
+msgstr "format:"
+
+#: ../data/ui/object-editor.ui.h:23
+msgid "digits:"
+msgstr "cifre:"
+
+#: ../data/ui/object-editor.ui.h:25
+msgid "Backend:"
+msgstr "Backend:"
+
+#: ../data/ui/object-editor.ui.h:26
+msgid "Checksum"
+msgstr "Sumă de control"
+
+#: ../data/ui/object-editor.ui.h:27 ../data/ui/template-designer.ui.h:14
+msgid "Height:"
+msgstr "Înălțime:"
+
+#: ../data/ui/object-editor.ui.h:29
+msgid "Reset image size"
+msgstr "Restabilește dimensiunea imaginii"
+
+#: ../data/ui/object-editor.ui.h:30
+msgid "Size"
+msgstr "Dimensiune"
+
+#: ../data/ui/object-editor.ui.h:31
+msgid "Length:"
+msgstr "Lungime:"
+
+#: ../data/ui/object-editor.ui.h:32
+msgid "Angle:"
+msgstr "Unghi:"
+
+#: ../data/ui/object-editor.ui.h:33
+msgid "degrees"
+msgstr "grade"
+
+#: ../data/ui/object-editor.ui.h:34
+msgid "X:"
+msgstr "X:"
+
+#: ../data/ui/object-editor.ui.h:35
+msgid "Y:"
+msgstr "Y:"
+
+#: ../data/ui/object-editor.ui.h:36
+msgid "Position"
+msgstr "Poziție:"
+
+#: ../data/ui/object-editor.ui.h:37
+msgid "Enable shadow"
+msgstr "Activează umbre"
+
+#: ../data/ui/object-editor.ui.h:38
+msgid "X Offset:"
+msgstr "Decalajul coordonatei X:"
+
+#: ../data/ui/object-editor.ui.h:39
+msgid "Y Offset:"
+msgstr "Decalajul coordonatei Y:"
+
+#: ../data/ui/object-editor.ui.h:40
+msgid "Opacity:"
+msgstr "Opacitate:"
+
+#: ../data/ui/object-editor.ui.h:42
+#, no-c-format
+msgid "%"
+msgstr "%"
+
+#: ../data/ui/object-editor.ui.h:43
+msgid "Shadow"
+msgstr "Umbră"
+
+#: ../data/ui/prefs-dialog.ui.h:2
+msgid "Select locale specific behavior."
+msgstr "Alegeți comportamentul local specific."
+
+#: ../data/ui/prefs-dialog.ui.h:3
+msgid "   "
+msgstr "  "
+
+#: ../data/ui/prefs-dialog.ui.h:4
+msgid "Points"
+msgstr "Puncte"
+
+#: ../data/ui/prefs-dialog.ui.h:5
+msgid "Inches"
+msgstr "Țoli"
+
+#: ../data/ui/prefs-dialog.ui.h:6
+msgid "Millimeters"
+msgstr "Milimetrii"
+
+#: ../data/ui/prefs-dialog.ui.h:7
+msgid "Units"
+msgstr "Unități"
+
+#: ../data/ui/prefs-dialog.ui.h:8 ../templates/paper-sizes.xml.h:3
+msgid "US Letter"
+msgstr "Scrisoare US"
+
+#: ../data/ui/prefs-dialog.ui.h:9
+msgid "ISO A4"
+msgstr "ISO A4"
+
+#: ../data/ui/prefs-dialog.ui.h:10
+msgid "Default page size"
+msgstr "Dimensiune pagină implicită"
+
+#: ../data/ui/prefs-dialog.ui.h:11
+msgid "Locale"
+msgstr "Local"
+
+#: ../data/ui/prefs-dialog.ui.h:12
+msgid "Select default properties for new objects."
+msgstr "Alegeți proprietățile implicite pentru obiectele noi."
+
+#: ../data/ui/prefs-dialog.ui.h:13
+msgid "Font:"
+msgstr "Font:"
+
+#: ../data/ui/prefs-dialog.ui.h:22
+msgid "Object defaults"
+msgstr "Implicitele obiectului"
+
+#: ../data/ui/property-bar.ui.h:3
+msgid "Bold"
+msgstr "Îngroșat"
+
+#: ../data/ui/property-bar.ui.h:5
+msgid "Left align"
+msgstr "Aliniază la stânga"
+
+#: ../data/ui/property-bar.ui.h:6
+msgid "Center align"
+msgstr "Aliniază la centru"
+
+#: ../data/ui/property-bar.ui.h:7
+msgid "Right align"
+msgstr "Aliniază la dreapta"
+
+#: ../data/ui/property-bar.ui.h:8
+#| msgid "Flip vertically"
+msgid "Top vertical align"
+msgstr "Aliniază vertical partea de sus"
+
+#: ../data/ui/property-bar.ui.h:9
+#| msgid "Center vertically"
+msgid "Center vertical align"
+msgstr "Aliniază central-vertical"
+
+#: ../data/ui/property-bar.ui.h:10
+msgid "Bottom vertical align"
+msgstr "Aliniază vertical partea de jos"
+
+#: ../data/ui/template-designer.ui.h:1
+msgid ""
+"Welcome to the gLabels Template Designer.\n"
+"\n"
+"This dialog will assist you in the creation of a custom gLabels template."
+msgstr ""
+"Bine ați venit la Creatorul de șabloane gLabels.\n"
+"\n"
+"Acest dialog vă va asista în crearea sau personalizarea unui șablon gLabels."
+
+#: ../data/ui/template-designer.ui.h:4
+msgid ""
+"Please enter the following identifying information about the template "
+"stationery."
+msgstr ""
+"Introduceți următoarele informații de identificare despre hârtia șablonului."
+
+#: ../data/ui/template-designer.ui.h:5
+msgid "Brand/Manufacturer:"
+msgstr "Tip/producător:"
+
+#: ../data/ui/template-designer.ui.h:7
+msgid "(e.g., 8163A)"
+msgstr "(Ex: 8163A)"
+
+#: ../data/ui/template-designer.ui.h:8
+msgid "(e.g., Avery, Acme, ...)"
+msgstr "(Ex: Avery, Acme, ...)"
+
+#: ../data/ui/template-designer.ui.h:10
+msgid "(e.g., \"Mailing Labels,\" \"Business Cards,\" ...)"
+msgstr "(Ex: „Etichete de mail”, „Cărți de vizită” ...)"
+
+#: ../data/ui/template-designer.ui.h:11
+msgid "Please select the page size of the template stationery."
+msgstr "Alegeți dimensiunea paginii pentru hârtia șablonului"
+
+#: ../data/ui/template-designer.ui.h:16
+msgid "Please select the basic shape of the labels or cards."
+msgstr "Alegeți forma de bază a etichetelor sau cărților."
+
+#: ../data/ui/template-designer.ui.h:17
+msgid "Rectangular or square (can have rounded corners)"
+msgstr "Dreptunghiular sau pătrat (poate avea colțuri rotunjite)"
+
+#: ../data/ui/template-designer.ui.h:18
+msgid "Round"
+msgstr "Rotund"
+
+#: ../data/ui/template-designer.ui.h:19
+msgid "Elliptical"
+msgstr "Eliptic"
+
+#: ../data/ui/template-designer.ui.h:20
+msgid "CD/DVD (including credit card CDs)"
+msgstr "CD/DVD (incluzând CD-uri - cărți de credit )"
+
+#: ../data/ui/template-designer.ui.h:21
+msgid ""
+"Please enter the following size parameters of a single label or card in your "
+"template."
+msgstr ""
+"Introduceți următorii parametrii de dimensiune pentru o singură etichetă sau "
+"o singură carte în șablonul dumneavoastră."
+
+#: ../data/ui/template-designer.ui.h:22
+msgid "1. Width:"
+msgstr "1. Lățime:"
+
+#: ../data/ui/template-designer.ui.h:23
+msgid "2. Height:"
+msgstr "2. Înălțime:"
+
+#: ../data/ui/template-designer.ui.h:24
+msgid "3. Round (radius of corner):"
+msgstr "3. Rotunjire (raza colțului):"
+
+#: ../data/ui/template-designer.ui.h:25
+msgid "4. Horiz. waste (overprint allowed):"
+msgstr "4. Risipire orizontală (supraimprimarea permisă):"
+
+#: ../data/ui/template-designer.ui.h:26
+msgid "6. Margin"
+msgstr "6. Margine"
+
+#: ../data/ui/template-designer.ui.h:27
+msgid "5. Vert. waste (overprint allowed):"
+msgstr "5. Risipirea verticală (supraimprimarea permisă):"
+
+#: ../data/ui/template-designer.ui.h:28
+msgid "3. Waste (overprint allowed):"
+msgstr "3. Risipire (supraimprimarea permisă):"
+
+#: ../data/ui/template-designer.ui.h:29
+msgid "4. Margin"
+msgstr "4. Margine"
+
+#: ../data/ui/template-designer.ui.h:30
+msgid ""
+"Please enter the following size parameters of a single label in your "
+"template."
+msgstr ""
+"Introduceți următorii parametrii de dimensiune a unei singure etichete în "
+"șablonul dumneavoastră."
+
+#: ../data/ui/template-designer.ui.h:31
+msgid "1. Radius:"
+msgstr "1. Rază:"
+
+#: ../data/ui/template-designer.ui.h:32
+msgid "2. Waste (overprint allowed):"
+msgstr "2. Risipire (supraimprimarea permisă):"
+
+#: ../data/ui/template-designer.ui.h:33
+msgid "3. Margin"
+msgstr "3. Margine"
+
+#: ../data/ui/template-designer.ui.h:34
+msgid "1. Outer radius:"
+msgstr "1. Raza exterioară:"
+
+#: ../data/ui/template-designer.ui.h:35
+msgid "2. Inner radius:"
+msgstr "2. Raza interioară:"
+
+#: ../data/ui/template-designer.ui.h:36
+msgid "3. Clipping width:"
+msgstr "3. Lățimea perforării:"
+
+#: ../data/ui/template-designer.ui.h:37
+msgid "4. Clipping height:"
+msgstr "4. Înălțimea perforării:"
+
+#: ../data/ui/template-designer.ui.h:38
+msgid "5. Waste (overprint allowed):"
+msgstr "5. Risipirea (supraimprimarea permisă):"
+
+#: ../data/ui/template-designer.ui.h:39
+msgid ""
+"How many layouts will your template contain? \n"
+"\n"
+"A layout is a set of labels or cards that can be arranged in a simple grid.\n"
+"Most templates only need one layout, as in the first example.\n"
+"The second example illustrates when two layouts are needed."
+msgstr ""
+"Câte aranjamente va conține șablonul?\n"
+"\n"
+"Un aranjament este un set de etichete sau cărți care pot fi aranjate într-o "
+"grilă simplă.\n"
+"Cele mai multe șabloane au nevoie doar de un aranjament, ca în primul "
+"exemplu.\n"
+"Al doilea exemplu ilustrează cazul în care două aranjamente sunt necesare."
+
+#: ../data/ui/template-designer.ui.h:44
+msgid ""
+"Templates needing only\n"
+"one layout."
+msgstr ""
+"Șablonul are nevoie de\n"
+"doar un aranjament."
+
+#: ../data/ui/template-designer.ui.h:46
+msgid ""
+"Templates needing\n"
+"two layouts."
+msgstr ""
+"Șablonul are nevoie de\n"
+"două aranjamente."
+
+#: ../data/ui/template-designer.ui.h:48
+msgid ""
+"Note: if more than 2 layouts are required, the template must be edited "
+"manually."
+msgstr ""
+"Notă: dacă mai mult de două aranjamente sunt necesare, șablonul trebuie "
+"editat manual."
+
+#: ../data/ui/template-designer.ui.h:49
+msgid "Number of layouts:"
+msgstr "Număr de aranjamente:"
+
+#: ../data/ui/template-designer.ui.h:50
+msgid "Please enter the following layout information."
+msgstr "Introduceți următoarele informații legate de aranjamente."
+
+#: ../data/ui/template-designer.ui.h:51
+msgid "Layout #1"
+msgstr "Aranjamentul #1"
+
+#: ../data/ui/template-designer.ui.h:52
+msgid "Layout #2"
+msgstr "Aranjamentul #2"
+
+#: ../data/ui/template-designer.ui.h:53
+msgid "Number across (nx):"
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:54
+msgid "Number down (ny):"
+msgstr ""
+
+#: ../data/ui/template-designer.ui.h:55
+msgid "Distance from left edge (x0):"
+msgstr "Distanța de la marginea stângă (x0):"
+
+#: ../data/ui/template-designer.ui.h:56
+msgid "Distance from top edge (y0):"
+msgstr "Distanța de la marginea superioară (y0):"
+
+#: ../data/ui/template-designer.ui.h:57
+msgid "Horizontal pitch (dx):"
+msgstr "Înălțimea orizontală (dx):"
+
+#: ../data/ui/template-designer.ui.h:58
+msgid "Vertical pitch (dy):"
+msgstr "Înălțime verticală (dy):"
+
+#: ../data/ui/template-designer.ui.h:59
+msgid "Print test sheet"
+msgstr "Tipărește foaie de test"
+
+#: ../data/ui/template-designer.ui.h:60
+msgid ""
+"Congratulations!\n"
+"\n"
+"You have completed the gLabels Template Designer.\n"
+"If you wish to accept and save your design, click \"Apply.\"\n"
+"\n"
+"Otherwise, you may click \"Cancel\" to abandon your design\n"
+"or \"Back\" to continue editing this design."
+msgstr ""
+"Felicitări!\n"
+"\n"
+"Ați finalizat Creatorul de șabloane gLabels.\n"
+"Dacă doriți să acceptați și să salvați creația, apăsați „Aplică”.\n"
+"\\ Altfel, puteți apăsa „Anulează” pentru a abandona creația\n"
+"sau „Înapoi” pentru a continua editarea acestei creații."
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:1
+msgid "Sheets:"
+msgstr "Foi:"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:3
+msgid "from:"
+msgstr "din:"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:4
+msgid "to:"
+msgstr "spre:"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:5
+msgid "Copies"
+msgstr "Cópii"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:6
+msgid "Start on label"
+msgstr "Începe pe etichetă"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:7
+msgid "on 1st sheet"
+msgstr "pe prima foaie"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:8
+msgid "Copies:"
+msgstr "Cópii:"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:9
+msgid "Collate"
+msgstr "Confruntă"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:10
+msgid "Merge Control"
+msgstr "Control de fuziune"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:14
+msgid "Options"
+msgstr "Opțiuni"
+
+#: ../data/appdata/glabels-3.appdata.xml.in.h:1
+msgid ""
+"gLabels is a program for creating labels and business cards. It is designed "
+"to work with various laser/ink-jet peel-off label and business card sheets "
+"that you'll find at most office supply stores."
+msgstr ""
+
+#: ../data/appdata/glabels-3.appdata.xml.in.h:2
+msgid ""
+"gLabels can be used to design address labels, name tags, price tags, cd/dvd "
+"labels, or just about anything else that is organized in a regular pattern "
+"on a sheet of paper. Labels (or cards) can contain text, images, lines, "
+"shapes, and barcodes. gLabels also includes a document-merge feature which "
+"lets you print a unique label for each record from an external data source, "
+"such as a CSV file or an Evolution address book."
+msgstr ""
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
+msgid "Show/hide main toolbar."
+msgstr "Arată/ascunde bara principală de unelte."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:2
+msgid "Controls visibility of main toolbar."
+msgstr "Controlează vizibilitatea barei principale de unelte."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:3
+msgid "Show/hide drawing toolbar."
+msgstr "Arată/ascunde bara de unelte de desenare."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:4
+msgid "Controls visibility of drawing toolbar."
+msgstr "Controlează vizibilitatea barei de unelte de desenare."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:5
+msgid "Show/hide property toolbar."
+msgstr "Arată/ascunde bara de unelte de proprietăți."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:6
+msgid "Controls visibility of property toolbar."
+msgstr "Controlează vizibilitatea barei de unelte de proprietăți."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:7
+msgid "Show/hide grid."
+msgstr "Arată/ascunde grilă."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:8
+msgid "Controls visibility of grid."
+msgstr "Controlează vizibilitatea grilei."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:9
+msgid "Show/hide markup."
+msgstr "Arată/ascunde marcaj."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:10
+msgid "Controls visibility of markup lines."
+msgstr "Controlează vizibilitatea liniilor de marcaj"
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:11
+msgid "Maximum recent files."
+msgstr "Număr maxim de fișiere recente."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:12
+msgid "Controls maximum number of recent files tracked."
+msgstr "Controlează numărul maxim de fișiere recente depistate."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:13
+msgid "Units."
+msgstr "Unități."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:14
+msgid "The default unit of measurement."
+msgstr "Unitatea de măsură implicită."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:15
+msgid "Default page size."
+msgstr "Dimensiune implicită pentru pagină."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:16
+msgid "The preferred page size when searching templates."
+msgstr "Dimensiunea de pagină preferată la căutarea de șabloane."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:17
+msgid "Default font family."
+msgstr "Familie implicită de font."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:18
+msgid "The default font family for new text objects."
+msgstr "Familia de fonturi implicită pentru obiectele text noi."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:19
+msgid "Default font size."
+msgstr "Dimensiune implicită font."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:20
+msgid "The default font size for new text objects."
+msgstr "Dimensiunea implicită de font pentru obiectele text noi."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:21
+msgid "Default font weight."
+msgstr "Înălțime implicită de font."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:22
+msgid "The default font weight for new text objects."
+msgstr "Înălțimea implicită a fontului pentru obiectele text noi."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:23
+msgid "Default font italic flag."
+msgstr "Indicator italic implicit de font."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:24
+msgid "The default font italic state for new text objects."
+msgstr "Starea cursivă implicită a fonturilor pentru noile obiecte."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:25
+msgid "Default text color."
+msgstr "Culoare implicită."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:26
+msgid "The default color of text for new text objects (0xRRGGBBAA)."
+msgstr "Culoarea implicită a textului pentru obiecte noi (0xRRGGBBAA)."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:27
+msgid "Default text alignment."
+msgstr "Aliniere implicită."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:28
+msgid "The default text alignment for new text objects."
+msgstr "Alinierea implicită a textului pentru obiectele text noi."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:29
+msgid "Default text line spacing."
+msgstr "Spațiere implicită."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:30
+msgid "The default line spacing for new text objects."
+msgstr "Spațiere implicită pentru obiectele text noi."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:31
+msgid "Default line width."
+msgstr "Lățime implicită pentru linie."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:32
+msgid "The default line width for new objects."
+msgstr "Lățimea implicită a liniei pentru obiectele noi."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:33
+msgid "Default line color."
+msgstr "Culoare implicită pentru linie."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:34
+msgid "The default line color new objects (0xRRGGBBAA)."
+msgstr "Culoarea implicită de linie pentru obiectele noi (0xRRGGBBAA)."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:35
+msgid "Default fill color."
+msgstr "Culoare implicită de umplere."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:36
+msgid "The default fill color new objects (0xRRGGBBAA)."
+msgstr "Culoarea implicită de umplere pentru obiectele noi (0xRRGGBBAA)."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:37
+msgid "Recent templates."
+msgstr "Șabloane recente."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:38
+msgid "Recently used templates."
+msgstr "Șabloane recent folosite."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:39
+msgid "Recent fonts."
+msgstr "Fonturi recente."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:40
+msgid "Recently used font families."
+msgstr "Familii de fonturi recent folosite."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:41
+msgid "Recent colors."
+msgstr "Culori recente."
+
+#: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:42
+msgid "Recently created custom colors."
+msgstr "Culori personalizate recent create."
+
+#: ../data/desktop/glabels-3.0.desktop.in.h:1
+msgid "gLabels Label Designer 3"
+msgstr "Creator de etichete gLabels 3"
+
+#: ../data/desktop/glabels-3.0.desktop.in.h:2
+msgid "Create labels, business cards and media covers"
+msgstr "Crează etichete, cărți de vizită și coperți media."
+
+#: ../data/mime/glabels-3.0.xml.in.h:1
+msgid "gLabels Project File"
+msgstr "Fișier proiect gLabels"
+
+#. Most popular (at top of list)
+#: ../templates/paper-sizes.xml.h:2
+msgid "A4"
+msgstr "A4"
+
+#. Other US paper sizes
+#: ../templates/paper-sizes.xml.h:5
+msgid "US Legal"
+msgstr "Puterea juridică a SU"
+
+#: ../templates/paper-sizes.xml.h:6
+msgid "US Executive"
+msgstr "Executivul SU"
+
+#. Other ISO A series sizes
+#: ../templates/paper-sizes.xml.h:8
+msgid "A0"
+msgstr "A0"
+
+#: ../templates/paper-sizes.xml.h:9
+msgid "A1"
+msgstr "A1"
+
+#: ../templates/paper-sizes.xml.h:10
+msgid "A2"
+msgstr "A2"
+
+#: ../templates/paper-sizes.xml.h:11
+msgid "A3"
+msgstr "A3"
+
+#: ../templates/paper-sizes.xml.h:12
+msgid "A5"
+msgstr "A5"
+
+#: ../templates/paper-sizes.xml.h:13
+msgid "A6"
+msgstr "A6"
+
+#: ../templates/paper-sizes.xml.h:14
+msgid "A7"
+msgstr "A7"
+
+#: ../templates/paper-sizes.xml.h:15
+msgid "A8"
+msgstr "A8"
+
+#: ../templates/paper-sizes.xml.h:16
+msgid "A9"
+msgstr "A9"
+
+#: ../templates/paper-sizes.xml.h:17
+msgid "A10"
+msgstr "A10"
+
+#. ISO B series sizes
+#: ../templates/paper-sizes.xml.h:19
+msgid "B0"
+msgstr "B0"
+
+#: ../templates/paper-sizes.xml.h:20
+msgid "B1"
+msgstr "B1"
+
+#: ../templates/paper-sizes.xml.h:21
+msgid "B2"
+msgstr "B2"
+
+#: ../templates/paper-sizes.xml.h:22
+msgid "B3"
+msgstr "B3"
+
+#: ../templates/paper-sizes.xml.h:23
+msgid "B4"
+msgstr "B4"
+
+#: ../templates/paper-sizes.xml.h:24
+msgid "B5"
+msgstr "B5"
+
+#: ../templates/paper-sizes.xml.h:25
+msgid "B6"
+msgstr "B6"
+
+#: ../templates/paper-sizes.xml.h:26
+msgid "B7"
+msgstr "B7"
+
+#: ../templates/paper-sizes.xml.h:27
+msgid "B8"
+msgstr "B8"
+
+#: ../templates/paper-sizes.xml.h:28
+msgid "B9"
+msgstr "B9"
+
+#: ../templates/paper-sizes.xml.h:29
+msgid "B10"
+msgstr "B10"
+
+#. Envelopes
+#: ../templates/paper-sizes.xml.h:31
+msgid "#10 Envelope"
+msgstr "Plic #10"
+
+#: ../templates/paper-sizes.xml.h:32
+msgid "Monarch Envelope"
+msgstr "Plic monarch"
+
+#: ../templates/paper-sizes.xml.h:33
+msgid "C5"
+msgstr "C5"
+
+#: ../templates/paper-sizes.xml.h:34
+msgid "C6"
+msgstr "C6"
+
+#: ../templates/paper-sizes.xml.h:35
+msgid "DL"
+msgstr "DL"
+
+#. ISO 217
+#: ../templates/paper-sizes.xml.h:37
+#| msgid "A0"
+msgid "RA0"
+msgstr "RA0"
+
+#: ../templates/paper-sizes.xml.h:38
+#| msgid "A1"
+msgid "RA1"
+msgstr "RA1"
+
+#: ../templates/paper-sizes.xml.h:39
+#| msgid "A2"
+msgid "RA2"
+msgstr "RA2"
+
+#: ../templates/paper-sizes.xml.h:40
+#| msgid "A3"
+msgid "RA3"
+msgstr "RA3"
+
+#: ../templates/paper-sizes.xml.h:41
+#| msgid "A4"
+msgid "RA4"
+msgstr "RA4"
+
+#: ../templates/paper-sizes.xml.h:42
+msgid "SRA0"
+msgstr "SRA0"
+
+#: ../templates/paper-sizes.xml.h:43
+msgid "SRA1"
+msgstr "SRA1"
+
+#: ../templates/paper-sizes.xml.h:44
+msgid "SRA2"
+msgstr "SRA2"
+
+#: ../templates/paper-sizes.xml.h:45
+msgid "SRA3"
+msgstr "SRA3"
+
+#: ../templates/paper-sizes.xml.h:46
+msgid "SRA4"
+msgstr "SRA4"
+
+#: ../templates/categories.xml.h:1
+msgid "Any label"
+msgstr "Orice etichetă"
+
+#. ====================================================================
+#. ===================================================================
+#: ../templates/categories.xml.h:2 ../templates/endisch-templates.xml.h:1
+#: ../templates/hama-iso-templates.xml.h:4
+#: ../templates/pearl-iso-templates.xml.h:4
+#: ../templates/rayfilm-templates.xml.h:8
+#: ../templates/sheetlabels-us-templates.xml.h:16
+msgid "Round labels"
+msgstr "Etichete rotunde"
+
+#. ===================================================================
+#: ../templates/categories.xml.h:3 ../templates/endisch-templates.xml.h:2
+#: ../templates/pearl-iso-templates.xml.h:58
+#: ../templates/rayfilm-templates.xml.h:9
+msgid "Elliptical labels"
+msgstr "Etichete eliptice"
+
+#. ====================================================================
+#: ../templates/categories.xml.h:4 ../templates/endisch-templates.xml.h:4
+#: ../templates/hama-iso-templates.xml.h:41
+#: ../templates/rayfilm-templates.xml.h:2
+msgid "Square labels"
+msgstr "Etichete pătrate"
+
+#. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#. ********************************************************************
+#. ===================================================================
+#: ../templates/categories.xml.h:5 ../templates/ascom-iso-templates.xml.h:4
+#: ../templates/endisch-templates.xml.h:3
+#: ../templates/hama-iso-templates.xml.h:27
+#: ../templates/herma-iso-templates.xml.h:20
+#: ../templates/igepa-templates.xml.h:1 ../templates/jac-iso-templates.xml.h:4
+#: ../templates/rayfilm-templates.xml.h:1
+#: ../templates/sheetlabels-us-templates.xml.h:2
+msgid "Rectangular labels"
+msgstr "Etichete dreptunghice"
+
+#: ../templates/categories.xml.h:6
+msgid "Any card"
+msgstr "Orice carte"
+
+#. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#: ../templates/categories.xml.h:7 ../templates/dataline-iso-templates.xml.h:6
+#: ../templates/geha-iso-templates.xml.h:4
+#: ../templates/hama-iso-templates.xml.h:8
+#: ../templates/pearl-iso-templates.xml.h:38
+msgid "Business cards"
+msgstr "Cărți de vizită"
+
+#: ../templates/categories.xml.h:8
+msgid "CD/DVD or other media"
+msgstr "CD/DVD sau alte media"
+
+#: ../templates/categories.xml.h:9
+msgid "Mailing/shipping products"
+msgstr "Produse de corespondeță/transport"
+
+#: ../templates/categories.xml.h:10
+msgid "Foldable cards"
+msgstr "Cărți pliabile"
+
+#: ../templates/categories.xml.h:11
+msgid "Photo products"
+msgstr "Produse foto"
+
+#. TODO: Is this the real part #?
+#. ============================================================
+#. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#. TODO: What is the actual part #?
+#. ===================================================================
+#: ../templates/ascom-iso-templates.xml.h:2
+#: ../templates/avery-iso-templates.xml.h:34
+#: ../templates/databecker-iso-templates.xml.h:10
+#: ../templates/hama-iso-templates.xml.h:29
+#: ../templates/herma-iso-templates.xml.h:18
+#: ../templates/misc-iso-templates.xml.h:2
+#: ../templates/zweckform-iso-templates.xml.h:6
+msgid "Rectangular Labels"
+msgstr "Etichete dreptunghice"
+
+#. ===================================================================
+#: ../templates/ascom-iso-templates.xml.h:6
+#: ../templates/avery-us-templates.xml.h:40
+#: ../templates/geha-iso-templates.xml.h:15
+#: ../templates/meritline-us-templates.xml.h:18
+#: ../templates/worldlabel-us-templates.xml.h:11
+msgid "Video Tape Spine Labels"
+msgstr "Etichete pentru suporturi de casete video"
+
+#. ===================================================================
+#. ===============================================================
+#: ../templates/ascom-iso-templates.xml.h:8
+#: ../templates/avery-iso-templates.xml.h:26
+#: ../templates/zweckform-iso-templates.xml.h:28
+msgid "CD Inlet"
+msgstr "Admisie CD"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:2
+msgid "Square Labels"
+msgstr "Etichete pătrate"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:4
+msgid "Small Round Labels"
+msgstr "Etichete mici și rotunde"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:6
+msgid "Large Round Labels"
+msgstr "Etichete mari și rotunde"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:8
+#: ../templates/avery-other-templates.xml.h:2
+#: ../templates/worldlabel-us-templates.xml.h:5
+msgid "File Folder Labels"
+msgstr "Etichete dosar de fișiere"
+
+#. ===================================================================
+#. ********************************************************************
+#: ../templates/avery-us-templates.xml.h:10
+#: ../templates/dataline-iso-templates.xml.h:10
+#: ../templates/meritline-us-templates.xml.h:6
+#: ../templates/sheetlabels-us-templates.xml.h:6
+#: ../templates/uline-us-templates.xml.h:2
+#: ../templates/worldlabel-us-templates.xml.h:4
+msgid "Shipping Labels"
+msgstr "Etichete de transport"
+
+#. ===================================================================
+#. ********************************************************************
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:12
+#: ../templates/avery-iso-templates.xml.h:14
+#: ../templates/databecker-iso-templates.xml.h:6
+#: ../templates/dymo-other-templates.xml.h:4
+#: ../templates/geha-iso-templates.xml.h:25
+#: ../templates/maco-us-templates.xml.h:2
+#: ../templates/meritline-us-templates.xml.h:4
+#: ../templates/pearl-iso-templates.xml.h:2
+#: ../templates/sheetlabels-us-templates.xml.h:4
+#: ../templates/worldlabel-us-templates.xml.h:3
+#: ../templates/zweckform-iso-templates.xml.h:4
+msgid "Address Labels"
+msgstr "Etichete de adresă"
+
+#. ===================================================================
+#. ********************************************************************
+#: ../templates/avery-us-templates.xml.h:14
+#: ../templates/dymo-other-templates.xml.h:6
+#: ../templates/meritline-us-templates.xml.h:8
+#: ../templates/sheetlabels-us-templates.xml.h:8
+#: ../templates/worldlabel-us-templates.xml.h:2
+msgid "Return Address Labels"
+msgstr "Etichete cu adresă de întoarcere"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:16
+#: ../templates/maco-us-templates.xml.h:3
+#: ../templates/meritline-us-templates.xml.h:12
+#: ../templates/misc-us-templates.xml.h:23
+#: ../templates/sheetlabels-us-templates.xml.h:10
+#: ../templates/worldlabel-us-templates.xml.h:9
+msgid "Round Labels"
+msgstr "Etichete rotunde"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:18
+#: ../templates/avery-iso-templates.xml.h:20
+#: ../templates/meritline-us-templates.xml.h:14
+#: ../templates/sheetlabels-us-templates.xml.h:18
+#: ../templates/worldlabel-us-templates.xml.h:8
+msgid "Diskette Labels"
+msgstr "Etichete pentru dischete"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:20
+#, fuzzy
+msgid "Tent Cards"
+msgstr "Cărți de depozitare"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:22
+#: ../templates/sheetlabels-us-templates.xml.h:12
+#: ../templates/worldlabel-us-templates.xml.h:7
+msgid "Filing Labels"
+msgstr "Etichete de depuneri"
+
+#. ===================================================================
+#. ============================================================
+#. ===================================================================
+#. TODO: Is this the actual part #?
+#. ============================================================
+#: ../templates/avery-us-templates.xml.h:24
+#: ../templates/avery-iso-templates.xml.h:18
+#: ../templates/databecker-iso-templates.xml.h:2
+#: ../templates/dataline-iso-templates.xml.h:4
+#: ../templates/decadry-iso-templates.xml.h:6
+#: ../templates/misc-us-templates.xml.h:25
+#: ../templates/misc-iso-templates.xml.h:4
+#: ../templates/rayfilm-templates.xml.h:15
+#: ../templates/zweckform-iso-templates.xml.h:30
+msgid "Business Cards"
+msgstr "Cărți de vizită"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:26
+msgid "Index Cards"
+msgstr "Cărți index"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:28
+msgid "Post cards"
+msgstr "Cărți poștale"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:30
+msgid "Name Badge Labels"
+msgstr "Etichete de forma insignă cu nume"
+
+#. ===================================================================
+#. ===============================================================
+#. ===================================================================
+#. ********************************************************************
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:32
+#: ../templates/avery-iso-templates.xml.h:6
+#: ../templates/geha-iso-templates.xml.h:10
+#: ../templates/herma-iso-templates.xml.h:14
+#: ../templates/igepa-templates.xml.h:5 ../templates/jac-iso-templates.xml.h:2
+#: ../templates/misc-us-templates.xml.h:8
+#: ../templates/misc-iso-templates.xml.h:22
+#: ../templates/misc-other-templates.xml.h:2
+#: ../templates/pearl-iso-templates.xml.h:64
+#: ../templates/rayfilm-templates.xml.h:10
+#: ../templates/sheetlabels-us-templates.xml.h:14
+#: ../templates/worldlabel-us-templates.xml.h:12
+#: ../templates/zweckform-iso-templates.xml.h:8
+msgid "CD/DVD Labels"
+msgstr "Etichete CD/DVD"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:34
+#: ../templates/sheetlabels-us-templates.xml.h:20
+msgid "CD/DVD Labels (Disc Labels)"
+msgstr "Etichete CD/DVD (etichete disc)"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:36
+msgid "CD/DVD Labels (Spine Labels)"
+msgstr "CD/DVD Labels (etichete pentru suporturi)"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:38
+#: ../templates/geha-iso-templates.xml.h:17
+#: ../templates/meritline-us-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:22
+#: ../templates/worldlabel-us-templates.xml.h:10
+msgid "Video Tape Face Labels"
+msgstr "Etichete pentru fețele casetelor video"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:42
+msgid "ID Labels"
+msgstr "Etichete de ID"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:44
+#: ../templates/meritline-us-templates.xml.h:10
+#: ../templates/worldlabel-us-templates.xml.h:6
+msgid "Full Sheet Labels"
+msgstr "Etichete pe toată foaia"
+
+#. the LSK labels can be torn in half down the center
+#: ../templates/avery-us-templates.xml.h:46
+msgid "Divider Labels"
+msgstr "Etichete împărțitor"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:2
+msgid "Mini Labels"
+msgstr "Mini etichete"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:4
+msgid "Self-Adhesive Name Badges (Acetate Silk)"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:8
+msgid "Allround labels"
+msgstr "Etichete de jur-împrejur"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:10
+#: ../templates/decadry-iso-templates.xml.h:2
+msgid "Mailing labels"
+msgstr "Etichete de corespondență"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:12
+#: ../templates/misc-iso-templates.xml.h:12
+msgid "Address labels"
+msgstr "Etichete de adresă"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:16
+msgid "Shipping labels"
+msgstr "Etichete de transport"
+
+#. ===============================================================
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:22
+#: ../templates/decadry-iso-templates.xml.h:4
+#: ../templates/herma-iso-templates.xml.h:8
+#: ../templates/misc-us-templates.xml.h:21
+#: ../templates/misc-iso-templates.xml.h:6
+#: ../templates/sheetlabels-us-templates.xml.h:24
+#: ../templates/zweckform-iso-templates.xml.h:10
+msgid "Mailing Labels"
+msgstr "Etichete de corespondență"
+
+#. ===============================================================
+#: ../templates/avery-iso-templates.xml.h:24
+#: ../templates/zweckform-iso-templates.xml.h:26
+msgid "CD Booklet"
+msgstr "Broșură CD"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:28
+msgid "Mini Address Labels"
+msgstr "Mini etichete de adresă"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:30
+msgid "Identification Labels"
+msgstr "Etichete identificatori"
+
+#. ===================================================================
+#. ====================================================================
+#: ../templates/avery-iso-templates.xml.h:32
+#: ../templates/hama-iso-templates.xml.h:31
+msgid "Diskette labels"
+msgstr "Etichete dischete"
+
+#.
+#. *********************************************************************
+#. *********************************************************************
+#. Labels for the Brother QL-500/550/650 PC Label Printers
+#.
+#. These templates work with the Brother Linux Printer CUPS Driver.  It
+#. is unknown if these work correctly with the foomatic print driver for
+#. these printers.
+#.
+#. One difference from typical templates is that the template size is
+#. not the actual media size - it is the size of the printable area,
+#. which is smaller than the media size.  This is because (at least with
+#. the Brother driver) coordinates are relative the corner of this area.
+#.
+#. *********************************************************************
+#. *********************************************************************
+#.
+#: ../templates/brother-other-templates.xml.h:18
+msgid "Standard Address Labels 29mm x 90mm"
+msgstr "Etichete standard de adrese 29mm x 90mm"
+
+#: ../templates/brother-other-templates.xml.h:19
+msgid "Shipping Labels 62mm x 100mm"
+msgstr "Etichete de transport 62mm x 100mm"
+
+#: ../templates/brother-other-templates.xml.h:20
+msgid "Multi Purpose Labels 17mm x 54mm"
+msgstr "Etichete multi-funcționale 17mm x 54mm"
+
+#: ../templates/brother-other-templates.xml.h:21
+#, fuzzy
+#| msgid "Standard Address Labels 29mm x 90mm"
+msgid "Standard Address Labels 38mm x 90mm"
+msgstr "Etichete standard de adrese 29mm x 90mm"
+
+#. ===================================================================
+#: ../templates/canon-other-templates.xml.h:2
+#, fuzzy
+#| msgid "CD/DVD Labels"
+msgid "CD/DVD Tray"
+msgstr "Etichete CD/DVD"
+
+#. ===================================================================
+#: ../templates/databecker-iso-templates.xml.h:4
+msgid "CD/DVD Labels Standard Format (face only)"
+msgstr "Etichete CD/DVD în format standard (doar pe față)"
+
+#. ===================================================================
+#. ============================================================
+#. ===================================================================
+#: ../templates/databecker-iso-templates.xml.h:8
+#: ../templates/desmat-templates.xml.h:2
+#: ../templates/misc-iso-templates.xml.h:20
+msgid "CD Labels"
+msgstr "etichete CD"
+
+#. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#: ../templates/dataline-iso-templates.xml.h:2
+#: ../templates/hama-iso-templates.xml.h:35
+#: ../templates/misc-iso-templates.xml.h:32
+msgid "CD/DVD labels"
+msgstr "Etichete CD/DVD"
+
+#. ===================================================================
+#: ../templates/dataline-iso-templates.xml.h:8
+#: ../templates/pearl-iso-templates.xml.h:60
+msgid "Membership cards"
+msgstr "Cărți de membru"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:2
+#: ../templates/geha-iso-templates.xml.h:23
+msgid "Large Address Labels"
+msgstr "Etichete mari de adrese"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:8
+msgid "Shipping Address Labels"
+msgstr "Etichete de adresă de transport"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:10
+msgid "File Folder"
+msgstr "Dosar de fișiere"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:12
+msgid "Hanging Folder"
+msgstr "Dosar cu agățător"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:14
+#, fuzzy
+msgid "3.5in Diskette"
+msgstr "Dischete de 3.5 țoli"
+
+#. ===================================================================
+#: ../templates/endisch-templates.xml.h:5
+#: ../templates/pearl-iso-templates.xml.h:20
+#: ../templates/rayfilm-templates.xml.h:3
+msgid "Labels A6"
+msgstr "Etichete A6"
+
+#. ===================================================================
+#: ../templates/endisch-templates.xml.h:6
+#: ../templates/pearl-iso-templates.xml.h:22
+#: ../templates/rayfilm-templates.xml.h:4
+msgid "Labels A5"
+msgstr "Etichete A5"
+
+#. *******************************************************************
+#. ===================================================================
+#: ../templates/endisch-templates.xml.h:7 ../templates/igepa-templates.xml.h:3
+#: ../templates/jac-iso-templates.xml.h:6
+#: ../templates/pearl-iso-templates.xml.h:6
+#: ../templates/rayfilm-templates.xml.h:5
+msgid "Labels A4"
+msgstr "Etichete A4"
+
+#: ../templates/endisch-templates.xml.h:8
+#: ../templates/rayfilm-templates.xml.h:6
+#, fuzzy
+#| msgid "Labels A4"
+msgid "Labels A3"
+msgstr "Etichete A4"
+
+#: ../templates/endisch-templates.xml.h:9
+#: ../templates/rayfilm-templates.xml.h:7
+#, fuzzy
+#| msgid "Labels A4"
+msgid "Labels SRA3"
+msgstr "Etichete A4"
+
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:2
+msgid "Flyer paper"
+msgstr "Hârtie de afiș"
+
+#. ===================================================================
+#. ====================================================================
+#: ../templates/geha-iso-templates.xml.h:6
+#: ../templates/hama-iso-templates.xml.h:25
+msgid "Greeting cards"
+msgstr "Cărți de întâmpinare"
+
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:8
+msgid "Arch File inserts"
+msgstr ""
+
+#: ../templates/geha-iso-templates.xml.h:11
+msgid "CD/DVD Inlet"
+msgstr "Admisie CD/DVD"
+
+#. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:13
+#: ../templates/hama-iso-templates.xml.h:17
+#: ../templates/pearl-iso-templates.xml.h:32
+msgid "DVD inlet"
+msgstr "Admisie DVD"
+
+#. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:19
+#: ../templates/hama-iso-templates.xml.h:6
+#: ../templates/pearl-iso-templates.xml.h:12
+msgid "Photo labels"
+msgstr "Etichete foto"
+
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:21
+msgid "Passport photo labels"
+msgstr "Etichete cu poze de pașaport"
+
+#. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:27
+#: ../templates/hama-iso-templates.xml.h:37
+#: ../templates/herma-iso-templates.xml.h:6
+msgid "Arch File Labels"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/geha-iso-templates.xml.h:29
+#: ../templates/misc-iso-templates.xml.h:28
+#: ../templates/misc-other-templates.xml.h:4
+msgid "Multi-Purpose Labels"
+msgstr "Etichete multi-funcționale"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:2
+msgid "Printable mousepad"
+msgstr "Mousepad imprimabil"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:10
+msgid "CD inlet"
+msgstr "Admisie CD"
+
+#. ====================================================================
+#. ===================================================================
+#: ../templates/hama-iso-templates.xml.h:12
+#: ../templates/pearl-iso-templates.xml.h:34
+msgid "CD inlet (front)"
+msgstr "Admisie CD (față)"
+
+#. ===================================================================
+#: ../templates/hama-iso-templates.xml.h:13
+#: ../templates/pearl-iso-templates.xml.h:36
+msgid "CD inlet (back)"
+msgstr "Admisie CD (negru)"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:15
+msgid "Zip disc inlet"
+msgstr "Admisie disc zip"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:19
+msgid "VHS-C inlet"
+msgstr "Admisie VHS-C"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:21
+msgid "Video-8 inlet"
+msgstr "Admisie Video-8"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:23
+msgid "VHS inlet"
+msgstr "Admisie VHS"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:33
+msgid "Zip disc labels"
+msgstr "Etichete discuri zip"
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:39
+msgid "Arch File labels"
+msgstr ""
+
+#. ====================================================================
+#: ../templates/hama-iso-templates.xml.h:43
+msgid "Mini Disc labels"
+msgstr "Mini etichete de discuri"
+
+#. ===================================================================
+#: ../templates/herma-iso-templates.xml.h:2
+msgid "Arch File Labels (small)"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/herma-iso-templates.xml.h:4
+msgid "Arch File Labels (large)"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/herma-iso-templates.xml.h:10
+#: ../templates/zweckform-iso-templates.xml.h:20
+msgid "Allround Labels"
+msgstr "Etichete de jur-împrejur"
+
+#. ===================================================================
+#: ../templates/herma-iso-templates.xml.h:12
+msgid "Video Labels (face only)"
+msgstr "Etichete video (doar față)"
+
+#. ===================================================================
+#: ../templates/herma-iso-templates.xml.h:16
+msgid "Diskette Labels (face only)"
+msgstr "Etichete pentru dischete (doar față)"
+
+#. ===================================================================
+#: ../templates/igepa-templates.xml.h:2
+#: ../templates/pearl-iso-templates.xml.h:18
+#, fuzzy
+msgid "Floppy disk labels"
+msgstr "Etichete pentru disc de dischetă"
+
+#. ===================================================================
+#: ../templates/igepa-templates.xml.h:4
+#: ../templates/zweckform-iso-templates.xml.h:2
+msgid "Lever Arch File Labels"
+msgstr ""
+
+#. *******************************************************************
+#: ../templates/jac-iso-templates.xml.h:8
+msgid "PVC labels"
+msgstr "Etichete PVC"
+
+#. ===================================================================
+#: ../templates/meritline-us-templates.xml.h:2
+msgid "Mini-CD Labels"
+msgstr "Etichete mini-CD-uri"
+
+#. ===================================================================
+#: ../templates/microapp-templates.xml.h:2
+#, fuzzy
+#| msgid "Rectangular Labels"
+msgid "Standard Labels"
+msgstr "Etichete dreptunghice"
+
+#. ===================================================================
+#. TODO: Is this the actual part #?
+#: ../templates/misc-us-templates.xml.h:2
+#: ../templates/misc-iso-templates.xml.h:24
+msgid "CD/DVD Labels (face only)"
+msgstr "Etichete CD/DVD (doar față)"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:4
+msgid "CD/DVD Labels (Face Only)"
+msgstr "Etichete CD/DVD (doar față)"
+
+#. TODO: Is this the actual part #?
+#: ../templates/misc-us-templates.xml.h:6
+msgid "Cassette Labels"
+msgstr "Etichete casete"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:10
+msgid "Slimline CD Case (rightside up)"
+msgstr "Casete subțiri de CD (partea dreaptă în sus)"
+
+#: ../templates/misc-us-templates.xml.h:11
+msgid "Slimline CD Case (upside down)"
+msgstr "Casete subțiri de CD (partea superoară în jos)"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:13
+msgid "CD Template Rectangles"
+msgstr "Șabloane dreptunghiulare CD"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:15
+msgid "Business Card CD"
+msgstr "Carte de vizită CD"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:17
+msgid "Jewel Case Booklet"
+msgstr "Broșură casetă de bijuterii"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:19
+msgid "DLT Labels"
+msgstr "Etichete DLT"
+
+#. ===================================================================
+#. TODO: Is this the actual part #?
+#: ../templates/misc-us-templates.xml.h:27
+#: ../templates/misc-iso-templates.xml.h:36
+msgid "PRO CD Labels 2-up (face only)"
+msgstr "Etichete PRO CD 2-up (doar față)"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:29
+msgid "PRO CD Labels 2-up (Face only)"
+msgstr "Etichete PRO CD 2-up (Doar față)"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:31
+msgid "PRO CD Labels 2-up (CD spine only)"
+msgstr "Etichete PRO CD 2-up (doar suport de CD)"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:33
+msgid "Microtube labels"
+msgstr "Etichete microtub"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:8
+msgid "General Labels"
+msgstr "Etichete generale"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:10
+#: ../templates/pearl-iso-templates.xml.h:28
+msgid "Self-adhesive labels"
+msgstr "Etichete auto-lipiciaose"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:14
+msgid "Fridge Magnet Stickers"
+msgstr "Autocolante cu magnet pentru frigider"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:16
+msgid "Inkjet/Laser Labels 70x37mm"
+msgstr "Etichete Inkjet/laser 70x37mm"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:18
+msgid "EPSON Photo Stickers 16"
+msgstr "Autocolante foto EPSON 16"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:30
+msgid "Universal Labels"
+msgstr "Etichete universale"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:34
+#: ../templates/pearl-iso-templates.xml.h:16
+msgid "Bottle labels"
+msgstr "Etichete de stickle"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:38
+msgid "Etiketten"
+msgstr "Etiketten"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:8
+msgid "Self-adhesive film weatherproof"
+msgstr "Peliculă impermeabilă auto-adezivă"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:10
+msgid "Self-adhesive film transparent"
+msgstr "Peliculă transparentă auto-adezivă"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:14
+msgid "Self-adhesive window film"
+msgstr "Folie de geam auto-adezivă"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:24
+msgid "Photo labels semiglossy"
+msgstr "Etichete foto semilucioase"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:26
+msgid "Address Labels (STAMPIT)"
+msgstr "Etichete de adresă (STAMPIT)"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:30
+msgid "SD card labels"
+msgstr "Etichete de carduri SD"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:40
+msgid "Passport photo labels glossy"
+msgstr "Etichete cu poze de pașaport lucioase"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:42
+msgid "Business cards punched"
+msgstr "Cărți de vizită perforate"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:44
+msgid "Business cards punched dull"
+msgstr "Cărți de vizită perforate nelucioase"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:46
+msgid "Business cards high glossy"
+msgstr "Cărți de vizită de înaltă luciozitate"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:48
+msgid "Name plates"
+msgstr "Plăci de nume"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:50
+msgid "Business cards glossy, both sides printable"
+msgstr "Cărți de vizită lucioase, cu ambele părți imprimate"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:52
+msgid "Business cards punched glossy"
+msgstr "Cărți de vizită lucioase și perforate"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:54
+msgid "Foldable business cards glossy/dull"
+msgstr "Cărți de vizită pliabile lucioase/nelucioase"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:56
+msgid "Foldable business cards"
+msgstr "Cărți de vizită pliabile"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:62
+msgid "Membership cards, both sides printable"
+msgstr "Cărți de membru, cu ambele părți imprimabile"
+
+#: ../templates/rayfilm-templates.xml.h:11
+#, fuzzy
+#| msgid "Business Card CD"
+msgid "Business card CD Labels"
+msgstr "Carte de vizită CD"
+
+#: ../templates/rayfilm-templates.xml.h:12
+#, fuzzy
+#| msgid "Mini-CD Labels"
+msgid "Mini CD Labels"
+msgstr "Etichete mini-CD-uri"
+
+#: ../templates/rayfilm-templates.xml.h:13
+#, fuzzy
+#| msgid "Rectangular labels"
+msgid "Triangular labels"
+msgstr "Etichete dreptunghice"
+
+#: ../templates/rayfilm-templates.xml.h:14
+#, fuzzy
+#| msgid "Allround labels"
+msgid "Trapezoid labels"
+msgstr "Etichete de jur-împrejur"
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:12
+msgid "QSL-Karten Etiketten 70mm x 50,8mm"
+msgstr "QSL-Karten Etiketten 70mm x 50,8mm"
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:14
+#, fuzzy
+msgid "File Back Labels"
+msgstr "Etichete de spatele fișierului"
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:16
+msgid "Multi-purpose Stick+Lift Labels"
+msgstr "Etichete multifuncționale lipește+ridică"
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:18
+msgid "Video Labels (back)"
+msgstr "Etichete video (spate)"
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:22
+msgid "Rectangular Copier Labels"
+msgstr "Etichete dreptunghiulare de copiator"
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:24
+msgid "Correction and Cover-up Labels"
+msgstr "Etichete de corecție și acoperire"
+
+#~ msgid "Align _Horizontal"
+#~ msgstr "Aliniază _orizontal"
+
+#~ msgid "Align _Vertical"
+#~ msgstr "Aliniază _vertical"
