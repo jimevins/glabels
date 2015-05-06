@@ -683,7 +683,7 @@ msgstr "nom de fitxer"
 
 #: ../src/glabels-batch.c:55
 msgid "number of sheets (default=1)"
-msgstr "nombre de fulls (valor predeterminat = 1"
+msgstr "nombre de fulls (valor predeterminat = 1)"
 
 #: ../src/glabels-batch.c:55
 msgid "sheets"
@@ -691,7 +691,7 @@ msgstr "fulls"
 
 #: ../src/glabels-batch.c:57
 msgid "number of copies (default=1)"
-msgstr "nombre de còpies (valor predeterminat = 1"
+msgstr "nombre de còpies (valor predeterminat = 1)"
 
 #: ../src/glabels-batch.c:57
 msgid "copies"
@@ -739,7 +739,7 @@ msgstr ""
 #: ../src/glabels-batch.c:151
 #, c-format
 msgid "cannot perform document merge with glabels file %s\n"
-msgstr "no es realitzar la fusió del document amb el fitxer %s del gLabels\n"
+msgstr "no es pot realitzar la fusió del document amb el fitxer %s del gLabels\n"
 
 #: ../src/glabels-batch.c:186
 #, c-format
@@ -844,7 +844,7 @@ msgstr "Alinea a la dreta"
 
 #: ../src/label.c:1603 ../src/ui.c:380
 msgid "Align horizontal center"
-msgstr "Alinea als centre horitzontals"
+msgstr "Alinea al centre horitzontal"
 
 #: ../src/label.c:1679 ../src/ui.c:387
 msgid "Align tops"
@@ -856,7 +856,7 @@ msgstr "Alinea a les vores inferiors"
 
 #: ../src/label.c:1797 ../src/ui.c:401
 msgid "Align vertical center"
-msgstr "Alinea als centre verticals"
+msgstr "Alinea al centre vertical"
 
 #: ../src/label.c:1875 ../src/ui.c:408
 msgid "Center horizontally"
@@ -1564,7 +1564,7 @@ msgstr "Amplia a 1:1"
 
 #: ../src/ui.c:261
 msgid "Restore scale to 100%"
-msgstr "Refés l'escala a 100 %"
+msgstr "Refés l'escala a 100%"
 
 #: ../src/ui.c:266
 msgid "Zoom to fit"
@@ -1871,7 +1871,7 @@ msgid ""
 "correctly!"
 msgstr ""
 "No s'han trobat les definicions de les mides de paper. Pot ser que la "
-"libglables no s'hagi instal·lat correctametn"
+"libglables no s'hagi instal·lat correctament"
 
 #: ../libglabels/db.c:1057
 msgid ""
@@ -1879,7 +1879,7 @@ msgid ""
 "correctly!"
 msgstr ""
 "No s'han trobat les definicions de les categories. Pot ser que la libglables "
-"no s'hagi instal·lat correctametn"
+"no s'hagi instal·lat correctament"
 
 #: ../libglabels/db.c:2097
 msgid ""
@@ -1887,7 +1887,7 @@ msgid ""
 "correctly!"
 msgstr ""
 "No s'ha trobat cap plantilla. Pot ser que la libglables no s'hagi instal·lat "
-"correctametn"
+"correctament"
 
 #: ../libglabels/db.c:2164
 #, fuzzy, c-format
@@ -2294,15 +2294,15 @@ msgstr "Alineació a la dreta"
 
 #: ../data/ui/template-designer.ui.h:1
 msgid "(e.g., \"Mailing Labels,\" \"Business Cards,\" ...)"
-msgstr "(p.ex. «Etiquetes de correu», «Targetes de visita», etc.)"
+msgstr "(p. ex. «Etiquetes de correu», «Targetes de visita», etc.)"
 
 #: ../data/ui/template-designer.ui.h:2
 msgid "(e.g., 8163A)"
-msgstr "(p.ex. 8163A)"
+msgstr "(p. ex. 8163A)"
 
 #: ../data/ui/template-designer.ui.h:3
 msgid "(e.g., Avery, Acme, ...)"
-msgstr "(p.ex. Avery, Acme, ...)"
+msgstr "(p. ex. Avery, Acme, ...)"
 
 #: ../data/ui/template-designer.ui.h:4
 msgid "1. Outer radius:"
@@ -2966,7 +2966,7 @@ msgstr "Etiquetes d'adreça estàndard 29 mm x 90 mm"
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:2
 msgid "3.5in Diskette"
-msgstr "Disquet de 3.5\\\""
+msgstr "Disquet de 3,5 polzades"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:6
@@ -3107,7 +3107,7 @@ msgstr "Etiquetes"
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:28
 msgid "Fridge Magnet Stickers"
-msgstr "Enganxines d'imant de frigorífic"
+msgstr "Adhesius d'imant de frigorífic"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:30
@@ -3289,7 +3289,7 @@ msgstr ""
 #. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:10
 msgid "Correction and Cover-up Labels"
-msgstr "Etiqueted de correcció i cobertura"
+msgstr "Etiquetes de correcció i cobertura"
 
 #. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:12
