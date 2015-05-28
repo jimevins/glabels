@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2014-12-19 17:36+0000\n"
-"PO-Revision-Date: 2015-05-26 01:12+0200\n"
-"Last-Translator: Gabor Kelemen <kelemeng at ubuntu dot com>\n"
+"POT-Creation-Date: 2015-05-26 05:42+0000\n"
+"PO-Revision-Date: 2015-05-28 13:00+0200\n"
+"Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
 "Language-Team: Hungarian <openscope at googlegroups dot com>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
@@ -2250,68 +2250,79 @@ msgid ""
 "Most templates only need one layout, as in the first example.\n"
 "The second example illustrates when two layouts are needed."
 msgstr ""
+"Hány elrendezést fog a sablonja tartalmazni?\n"
+"\n"
+"Az elrendezés címkék vagy kártyák egyszerű rácsba rendezhető halmaza.\n"
+"A legtöbb sablonhoz csak egy elrendezés szükséges, mint az első példában.\n"
+"A második példa bemutatja, mikor kell két elrendezés."
 
 #: ../data/ui/template-designer.ui.h:44
 msgid ""
 "Templates needing only\n"
 "one layout."
 msgstr ""
+"Csak egy elrendezést\n"
+"igénylő sablonok."
 
 #: ../data/ui/template-designer.ui.h:46
 msgid ""
 "Templates needing\n"
 "two layouts."
 msgstr ""
+"Két elrendezést\n"
+"igénylő sablonok."
 
 #: ../data/ui/template-designer.ui.h:48
 msgid ""
 "Note: if more than 2 layouts are required, the template must be edited "
 "manually."
 msgstr ""
+"Megjegyzés: ha kettőnél több elrendezés szükséges, akkor a sablont kézzel "
+"kell szerkeszteni."
 
 #: ../data/ui/template-designer.ui.h:49
 msgid "Number of layouts:"
-msgstr ""
+msgstr "Elrendezések száma:"
 
 #: ../data/ui/template-designer.ui.h:50
 msgid "Please enter the following layout information."
-msgstr ""
+msgstr "Adja meg a következő elrendezés-információkat."
 
 #: ../data/ui/template-designer.ui.h:51
 msgid "Layout #1"
-msgstr ""
+msgstr "1. elrendezés"
 
 #: ../data/ui/template-designer.ui.h:52
 msgid "Layout #2"
-msgstr ""
+msgstr "2. elrendezés"
 
 #: ../data/ui/template-designer.ui.h:53
 msgid "Number across (nx):"
-msgstr ""
+msgstr "Szám keresztbe (nx):"
 
 #: ../data/ui/template-designer.ui.h:54
 msgid "Number down (ny):"
-msgstr ""
+msgstr "Szám lefelé (ny):"
 
 #: ../data/ui/template-designer.ui.h:55
 msgid "Distance from left edge (x0):"
-msgstr ""
+msgstr "Távolság a bal széltől (x0):"
 
 #: ../data/ui/template-designer.ui.h:56
 msgid "Distance from top edge (y0):"
-msgstr ""
+msgstr "Távolság a felső széltől (y0):"
 
 #: ../data/ui/template-designer.ui.h:57
 msgid "Horizontal pitch (dx):"
-msgstr ""
+msgstr "Vízszintes osztóköz (dx):"
 
 #: ../data/ui/template-designer.ui.h:58
 msgid "Vertical pitch (dy):"
-msgstr ""
+msgstr "Függőleges osztóköz (dy):"
 
 #: ../data/ui/template-designer.ui.h:59
 msgid "Print test sheet"
-msgstr ""
+msgstr "Tesztlap nyomtatása"
 
 #: ../data/ui/template-designer.ui.h:60
 msgid ""
@@ -2323,46 +2334,53 @@ msgid ""
 "Otherwise, you may click \"Cancel\" to abandon your design\n"
 "or \"Back\" to continue editing this design."
 msgstr ""
+"Gratulálunk!\n"
+"\n"
+"Végigért a gLabels sablontervezőn.\n"
+"Ha el szeretné fogadni és menteni a tervet, kattintson az Alkalmaz gombra.\n"
+"\n"
+"Ellenkező esetben a Mégse gombra kattintva eldobhatja a tervet, vagy \n"
+"a Vissza gombra kattintva folytathatja a szerkesztését."
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:1
 msgid "Sheets:"
-msgstr ""
+msgstr "Lapok:"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:3
 msgid "from:"
-msgstr ""
+msgstr "ettől:"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:4
 msgid "to:"
-msgstr ""
+msgstr "eddig:"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:5
 msgid "Copies"
-msgstr ""
+msgstr "Példányok"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:6
 msgid "Start on label"
-msgstr ""
+msgstr "Kezdés címkén"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:7
 msgid "on 1st sheet"
-msgstr ""
+msgstr "az 1. lapon"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:8
 msgid "Copies:"
-msgstr ""
+msgstr "Példányok:"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:9
 msgid "Collate"
-msgstr ""
+msgstr "Leválogatás"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:10
 msgid "Merge Control"
-msgstr ""
+msgstr "Egyesítés vezérlése"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:14
 msgid "Options"
-msgstr ""
+msgstr "Beállítások"
 
 #: ../data/appdata/glabels-3.appdata.xml.in.h:1
 msgid ""
@@ -2370,6 +2388,9 @@ msgid ""
 "to work with various laser/ink-jet peel-off label and business card sheets "
 "that you'll find at most office supply stores."
 msgstr ""
+"A gLabels címkék és névjegyek létrehozására szolgál. A legtöbb papírboltban "
+"megtalálható különböző, lézer/tintasugaras nyomtatókhoz készült öntapadós "
+"címkék és névjegykártyaívek kezelésére tervezték."
 
 #: ../data/appdata/glabels-3.appdata.xml.in.h:2
 msgid ""
@@ -2380,182 +2401,194 @@ msgid ""
 "lets you print a unique label for each record from an external data source, "
 "such as a CSV file or an Evolution address book."
 msgstr ""
+"A gLabels használható címző címkék, névcímkék, árcédulák, CD/DVD címkék vagy "
+"bármi más tervezésére, ami szabályos mintába rendeződik egy ív papíron. A "
+"címkék (vagy névjegykártyák) szöveget, képeket, vonalakat, alakzatokat és "
+"vonalkódokat tartalmazhatnak. A gLabels tartalmaz dokumentumegyesítési "
+"funkciót is, ami lehetővé teszi egyedi címkék nyomtatását egy külső "
+"adatforrás, például CSV fájl vagy Evolution címjegyzék minden rekordjához."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
 msgid "Show/hide main toolbar."
-msgstr ""
+msgstr "Fő eszköztár mutatása/rejtése."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:2
 msgid "Controls visibility of main toolbar."
-msgstr ""
+msgstr "A fő eszköztár láthatóságának módosítása."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:3
 msgid "Show/hide drawing toolbar."
-msgstr ""
+msgstr "Rajz eszköztár mutatása/rejtése."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:4
 msgid "Controls visibility of drawing toolbar."
-msgstr ""
+msgstr "A rajz eszköztár láthatóságának módosítása."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:5
 msgid "Show/hide property toolbar."
-msgstr ""
+msgstr "Tulajdonságok eszköztár mutatása/rejtése."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:6
 msgid "Controls visibility of property toolbar."
-msgstr ""
+msgstr "A tulajdonságok eszköztár láthatóságának módosítása."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:7
 msgid "Show/hide grid."
-msgstr ""
+msgstr "Rács mutatása/rejtése."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:8
 msgid "Controls visibility of grid."
-msgstr ""
+msgstr "A rács láthatóságának módosítása."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:9
 msgid "Show/hide markup."
-msgstr ""
+msgstr "Jelölés megjelenítése/rejtése."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:10
 msgid "Controls visibility of markup lines."
-msgstr ""
+msgstr "A jelölővonalak láthatóságának módosítása."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:11
 msgid "Maximum recent files."
-msgstr ""
+msgstr "Legutóbbi fájlok számának maximális értéke."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:12
 msgid "Controls maximum number of recent files tracked."
-msgstr ""
+msgstr "A nyilvántartott legutóbbi fájlok számának maximális értéke."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:13
 msgid "Units."
-msgstr ""
+msgstr "Mértékegység."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:14
 msgid "The default unit of measurement."
-msgstr ""
+msgstr "Az alapértelmezett mértékegység."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:15
 msgid "Default page size."
-msgstr ""
+msgstr "Alapértelmezett oldalméret."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:16
 msgid "The preferred page size when searching templates."
-msgstr ""
+msgstr "A sablonok keresésekor előnyben részesített oldalméret."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:17
 msgid "Default font family."
-msgstr ""
+msgstr "Alapértelmezett betűkészletcsalád."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:18
 msgid "The default font family for new text objects."
 msgstr ""
+"Az új szövegobjektumokhoz alapértelmezésben használandó betűkészletcsalád."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:19
 msgid "Default font size."
-msgstr ""
+msgstr "Alapértelmezett betűméret."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:20
 msgid "The default font size for new text objects."
-msgstr ""
+msgstr "Az új szövegobjektumokhoz alapértelmezésben használandó betűméret."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:21
 msgid "Default font weight."
-msgstr ""
+msgstr "Alapértelmezett betűvastagság."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:22
 msgid "The default font weight for new text objects."
-msgstr ""
+msgstr "Az új szövegobjektumokhoz alapértelmezésben használandó betűvastagság."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:23
 msgid "Default font italic flag."
-msgstr ""
+msgstr "Alapértelmezett betű dőlt állapota."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:24
 msgid "The default font italic state for new text objects."
 msgstr ""
+"Az új szövegobjektumokhoz alapértelmezésben használandó betű dőlt állapota."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:25
 msgid "Default text color."
-msgstr ""
+msgstr "Alapértelmezett szövegszín."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:26
 msgid "The default color of text for new text objects (0xRRGGBBAA)."
 msgstr ""
+"Az új szövegobjektumokhoz alapértelmezésben használandó szín (0xRRGGBBAA)."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:27
 msgid "Default text alignment."
-msgstr ""
+msgstr "Alapértelmezett szövegigazítás."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:28
 msgid "The default text alignment for new text objects."
 msgstr ""
+"Az új szövegobjektumokhoz alapértelmezésben használandó szövegigazítás."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:29
 msgid "Default text line spacing."
-msgstr ""
+msgstr "Alapértelmezett sortávolság."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:30
 msgid "The default line spacing for new text objects."
-msgstr ""
+msgstr "Az új szövegobjektumokhoz alapértelmezésben használandó sortávolság."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:31
 msgid "Default line width."
-msgstr ""
+msgstr "Alapértelmezett vonalvastagság."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:32
 msgid "The default line width for new objects."
-msgstr ""
+msgstr "Az új objektumokhoz alapértelmezésben használandó vonalvastagság."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:33
 msgid "Default line color."
-msgstr ""
+msgstr "Alapértelmezett vonalszín."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:34
 msgid "The default line color new objects (0xRRGGBBAA)."
 msgstr ""
+"Az új objektumokhoz alapértelmezésben használandó vonalszín (0xRRGGBBAA)."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:35
 msgid "Default fill color."
-msgstr ""
+msgstr "Alapértelmezett kitöltőszín."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:36
 msgid "The default fill color new objects (0xRRGGBBAA)."
 msgstr ""
+"Az új objektumokhoz alapértelmezésben használandó kitöltőszín (0xRRGGBBAA)."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:37
 msgid "Recent templates."
-msgstr ""
+msgstr "Legutóbbi sablonok."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:38
 msgid "Recently used templates."
-msgstr ""
+msgstr "Legutóbb használt sablonok."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:39
 msgid "Recent fonts."
-msgstr ""
+msgstr "Legutóbbi betűkészletek."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:40
 msgid "Recently used font families."
-msgstr ""
+msgstr "Legutóbb használt betűcsaládok."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:41
 msgid "Recent colors."
-msgstr ""
+msgstr "Legutóbbi színek."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:42
 msgid "Recently created custom colors."
-msgstr ""
+msgstr "Nemrég létrehozott egyéni színek."
 
 #: ../data/desktop/glabels-3.0.desktop.in.h:1
 msgid "gLabels Label Designer 3"
-msgstr ""
+msgstr "gLabels címketervező"
 
 #: ../data/desktop/glabels-3.0.desktop.in.h:2
 msgid "Create labels, business cards and media covers"
-msgstr ""
+msgstr "Címkék, névjegykártyák és borítók készítése"
 
 #: ../data/mime/glabels-3.0.xml.in.h:1
 msgid "gLabels Project File"
@@ -2742,14 +2775,14 @@ msgstr "Kerek címkék"
 #: ../templates/pearl-iso-templates.xml.h:58
 #: ../templates/rayfilm-templates.xml.h:9
 msgid "Elliptical labels"
-msgstr ""
+msgstr "Elliptikus címkék"
 
 #. ====================================================================
 #: ../templates/categories.xml.h:4 ../templates/endisch-templates.xml.h:4
 #: ../templates/hama-iso-templates.xml.h:41
 #: ../templates/rayfilm-templates.xml.h:2
 msgid "Square labels"
-msgstr ""
+msgstr "Négyzetes címkék"
 
 #. ===================================================================
 #. ====================================================================
@@ -2764,11 +2797,11 @@ msgstr ""
 #: ../templates/rayfilm-templates.xml.h:1
 #: ../templates/sheetlabels-us-templates.xml.h:2
 msgid "Rectangular labels"
-msgstr ""
+msgstr "Négyszögletű címkék"
 
 #: ../templates/categories.xml.h:6
 msgid "Any card"
-msgstr ""
+msgstr "Bármely kártya"
 
 #. ===================================================================
 #. ====================================================================
@@ -2778,23 +2811,23 @@ msgstr ""
 #: ../templates/hama-iso-templates.xml.h:8
 #: ../templates/pearl-iso-templates.xml.h:38
 msgid "Business cards"
-msgstr ""
+msgstr "Névjegyek"
 
 #: ../templates/categories.xml.h:8
 msgid "CD/DVD or other media"
-msgstr ""
+msgstr "CD/DVD vagy más média"
 
 #: ../templates/categories.xml.h:9
 msgid "Mailing/shipping products"
-msgstr ""
+msgstr "Levelezési/csomagküldési termékek"
 
 #: ../templates/categories.xml.h:10
 msgid "Foldable cards"
-msgstr ""
+msgstr "Összehajtható névjegyek"
 
 #: ../templates/categories.xml.h:11
 msgid "Photo products"
-msgstr ""
+msgstr "Fényképtermékek"
 
 #. TODO: Is this the real part #?
 #. ============================================================
@@ -2811,7 +2844,7 @@ msgstr ""
 #: ../templates/misc-iso-templates.xml.h:2
 #: ../templates/zweckform-iso-templates.xml.h:6
 msgid "Rectangular Labels"
-msgstr ""
+msgstr "Négyszögletű címkék"
 
 #. ===================================================================
 #: ../templates/ascom-iso-templates.xml.h:6
@@ -2820,7 +2853,7 @@ msgstr ""
 #: ../templates/meritline-us-templates.xml.h:18
 #: ../templates/worldlabel-us-templates.xml.h:11
 msgid "Video Tape Spine Labels"
-msgstr ""
+msgstr "Videokazetta gerinccímkék"
 
 #. ===================================================================
 #. ===============================================================
@@ -2828,29 +2861,29 @@ msgstr ""
 #: ../templates/avery-iso-templates.xml.h:26
 #: ../templates/zweckform-iso-templates.xml.h:28
 msgid "CD Inlet"
-msgstr ""
+msgstr "CD-melléklet"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:2
 msgid "Square Labels"
-msgstr ""
+msgstr "Négyzetes címkék"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:4
 msgid "Small Round Labels"
-msgstr ""
+msgstr "Kis kerek címkék"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:6
 msgid "Large Round Labels"
-msgstr ""
+msgstr "Nagy kerek címkék"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:8
 #: ../templates/avery-other-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:5
 msgid "File Folder Labels"
-msgstr ""
+msgstr "Iktatómappa címkék"
 
 #. ===================================================================
 #. ********************************************************************
@@ -2861,7 +2894,7 @@ msgstr ""
 #: ../templates/uline-us-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:4
 msgid "Shipping Labels"
-msgstr ""
+msgstr "Szállítási címkék"
 
 #. ===================================================================
 #. ********************************************************************
@@ -2878,7 +2911,7 @@ msgstr ""
 #: ../templates/worldlabel-us-templates.xml.h:3
 #: ../templates/zweckform-iso-templates.xml.h:4
 msgid "Address Labels"
-msgstr ""
+msgstr "Címzési címkék"
 
 #. ===================================================================
 #. ********************************************************************
@@ -2888,7 +2921,7 @@ msgstr ""
 #: ../templates/sheetlabels-us-templates.xml.h:8
 #: ../templates/worldlabel-us-templates.xml.h:2
 msgid "Return Address Labels"
-msgstr ""
+msgstr "Visszaküldési cím címkék"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:16
@@ -2898,7 +2931,7 @@ msgstr ""
 #: ../templates/sheetlabels-us-templates.xml.h:10
 #: ../templates/worldlabel-us-templates.xml.h:9
 msgid "Round Labels"
-msgstr ""
+msgstr "Kerek címkék"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:18
@@ -2907,19 +2940,19 @@ msgstr ""
 #: ../templates/sheetlabels-us-templates.xml.h:18
 #: ../templates/worldlabel-us-templates.xml.h:8
 msgid "Diskette Labels"
-msgstr ""
+msgstr "Kislemez címkék"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:20
 msgid "Tent Cards"
-msgstr ""
+msgstr "Sátor névjegyek"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:22
 #: ../templates/sheetlabels-us-templates.xml.h:12
 #: ../templates/worldlabel-us-templates.xml.h:7
 msgid "Filing Labels"
-msgstr ""
+msgstr "Iktató címkék"
 
 #. ===================================================================
 #. ============================================================
@@ -2936,22 +2969,22 @@ msgstr ""
 #: ../templates/rayfilm-templates.xml.h:15
 #: ../templates/zweckform-iso-templates.xml.h:30
 msgid "Business Cards"
-msgstr ""
+msgstr "Névjegyek"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:26
 msgid "Index Cards"
-msgstr ""
+msgstr "Tárgymutató kártyák"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:28
 msgid "Post cards"
-msgstr ""
+msgstr "Levelezőlapok"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:30
 msgid "Name Badge Labels"
-msgstr ""
+msgstr "Névkitűző címkék"
 
 #. ===================================================================
 #. ===============================================================
@@ -2972,18 +3005,18 @@ msgstr ""
 #: ../templates/worldlabel-us-templates.xml.h:12
 #: ../templates/zweckform-iso-templates.xml.h:8
 msgid "CD/DVD Labels"
-msgstr ""
+msgstr "CD/DVD címkék"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:34
 #: ../templates/sheetlabels-us-templates.xml.h:20
 msgid "CD/DVD Labels (Disc Labels)"
-msgstr ""
+msgstr "CD/DVD címkék (lemezcímkék)"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:36
 msgid "CD/DVD Labels (Spine Labels)"
-msgstr ""
+msgstr "CD/DVD címkék (gerinccímkék)"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:38
@@ -2992,56 +3025,56 @@ msgstr ""
 #: ../templates/sheetlabels-us-templates.xml.h:22
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Video Tape Face Labels"
-msgstr ""
+msgstr "Videokazetta előoldali címkék"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:42
 msgid "ID Labels"
-msgstr ""
+msgstr "Azonosítócímkék"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:44
 #: ../templates/meritline-us-templates.xml.h:10
 #: ../templates/worldlabel-us-templates.xml.h:6
 msgid "Full Sheet Labels"
-msgstr ""
+msgstr "Teljes ív címkék"
 
 #. the LSK labels can be torn in half down the center
 #: ../templates/avery-us-templates.xml.h:46
 msgid "Divider Labels"
-msgstr ""
+msgstr "Osztócímkék"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:2
 msgid "Mini Labels"
-msgstr ""
+msgstr "Mini címkék"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:4
 msgid "Self-Adhesive Name Badges (Acetate Silk)"
-msgstr ""
+msgstr "Öntapadós névcímkék (műselyem)"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:8
 msgid "Allround labels"
-msgstr ""
+msgstr "Teljesen kerek címkék"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:10
 #: ../templates/decadry-iso-templates.xml.h:2
 msgid "Mailing labels"
-msgstr ""
+msgstr "Levelezőcímkék"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:12
 #: ../templates/misc-iso-templates.xml.h:12
 msgid "Address labels"
-msgstr ""
+msgstr "Címzési címkék"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:16
 msgid "Shipping labels"
-msgstr ""
+msgstr "Szállítási címkék"
 
 #. ===============================================================
 #. ===================================================================
@@ -3053,30 +3086,30 @@ msgstr ""
 #: ../templates/sheetlabels-us-templates.xml.h:24
 #: ../templates/zweckform-iso-templates.xml.h:10
 msgid "Mailing Labels"
-msgstr ""
+msgstr "Levelezőcímkék"
 
 #. ===============================================================
 #: ../templates/avery-iso-templates.xml.h:24
 #: ../templates/zweckform-iso-templates.xml.h:26
 msgid "CD Booklet"
-msgstr ""
+msgstr "CD füzet"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:28
 msgid "Mini Address Labels"
-msgstr ""
+msgstr "Mini címzési címkék"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:30
 msgid "Identification Labels"
-msgstr ""
+msgstr "Azonosító címkék"
 
 #. ===================================================================
 #. ====================================================================
 #: ../templates/avery-iso-templates.xml.h:32
 #: ../templates/hama-iso-templates.xml.h:31
 msgid "Diskette labels"
-msgstr ""
+msgstr "Kislemez címkék"
 
 #.
 #. *********************************************************************
@@ -3097,29 +3130,29 @@ msgstr ""
 #.
 #: ../templates/brother-other-templates.xml.h:18
 msgid "Standard Address Labels 29mm x 90mm"
-msgstr ""
+msgstr "Szabványos címzési címkék (29mm x 90mm)"
 
 #: ../templates/brother-other-templates.xml.h:19
 msgid "Shipping Labels 62mm x 100mm"
-msgstr ""
+msgstr "Szállítási címkék (62mm x 100mm)"
 
 #: ../templates/brother-other-templates.xml.h:20
 msgid "Multi Purpose Labels 17mm x 54mm"
-msgstr ""
+msgstr "Többcélú címkék (17mm x 54mm)"
 
 #: ../templates/brother-other-templates.xml.h:21
 msgid "Standard Address Labels 38mm x 90mm"
-msgstr ""
+msgstr "Szabványos címzési címkék (38mm x 90mm)"
 
 #. ===================================================================
 #: ../templates/canon-other-templates.xml.h:2
 msgid "CD/DVD Tray"
-msgstr ""
+msgstr "CD/DVD tálca"
 
 #. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:4
 msgid "CD/DVD Labels Standard Format (face only)"
-msgstr ""
+msgstr "CD/DVD címke szabványos formátum (csak előlap)"
 
 #. ===================================================================
 #. ============================================================
@@ -3128,7 +3161,7 @@ msgstr ""
 #: ../templates/desmat-templates.xml.h:2
 #: ../templates/misc-iso-templates.xml.h:20
 msgid "CD Labels"
-msgstr ""
+msgstr "CD címkék"
 
 #. ===================================================================
 #. ====================================================================
@@ -3137,53 +3170,53 @@ msgstr ""
 #: ../templates/hama-iso-templates.xml.h:35
 #: ../templates/misc-iso-templates.xml.h:32
 msgid "CD/DVD labels"
-msgstr ""
+msgstr "CD/DVD címkék"
 
 #. ===================================================================
 #: ../templates/dataline-iso-templates.xml.h:8
 #: ../templates/pearl-iso-templates.xml.h:60
 msgid "Membership cards"
-msgstr ""
+msgstr "Tagsági kártyák"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:2
 #: ../templates/geha-iso-templates.xml.h:23
 msgid "Large Address Labels"
-msgstr ""
+msgstr "Nagy címzési címkék"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:8
 msgid "Shipping Address Labels"
-msgstr ""
+msgstr "Szállítási címcímkék"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:10
 msgid "File Folder"
-msgstr ""
+msgstr "Iratmappa"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:12
 msgid "Hanging Folder"
-msgstr ""
+msgstr "Lógó mappa"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:14
 msgid "3.5in Diskette"
-msgstr ""
+msgstr "3,5 colos kislemez"
 
 #. ===================================================================
 #: ../templates/endisch-templates.xml.h:5
 #: ../templates/pearl-iso-templates.xml.h:20
 #: ../templates/rayfilm-templates.xml.h:3
 msgid "Labels A6"
-msgstr ""
+msgstr "A6 címkék"
 
 #. ===================================================================
 #: ../templates/endisch-templates.xml.h:6
 #: ../templates/pearl-iso-templates.xml.h:22
 #: ../templates/rayfilm-templates.xml.h:4
 msgid "Labels A5"
-msgstr ""
+msgstr "A5 címkék"
 
 #. *******************************************************************
 #. ===================================================================
@@ -3192,38 +3225,38 @@ msgstr ""
 #: ../templates/pearl-iso-templates.xml.h:6
 #: ../templates/rayfilm-templates.xml.h:5
 msgid "Labels A4"
-msgstr ""
+msgstr "A4 címkék"
 
 #: ../templates/endisch-templates.xml.h:8
 #: ../templates/rayfilm-templates.xml.h:6
 msgid "Labels A3"
-msgstr ""
+msgstr "A3 címkék"
 
 #: ../templates/endisch-templates.xml.h:9
 #: ../templates/rayfilm-templates.xml.h:7
 msgid "Labels SRA3"
-msgstr ""
+msgstr "SRA3 címkék"
 
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:2
 msgid "Flyer paper"
-msgstr ""
+msgstr "Szórólappapír"
 
 #. ===================================================================
 #. ====================================================================
 #: ../templates/geha-iso-templates.xml.h:6
 #: ../templates/hama-iso-templates.xml.h:25
 msgid "Greeting cards"
-msgstr ""
+msgstr "Üdvözlőkártyák"
 
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:8
 msgid "Arch File inserts"
-msgstr ""
+msgstr "Arch iktatóbetétek"
 
 #: ../templates/geha-iso-templates.xml.h:11
 msgid "CD/DVD Inlet"
-msgstr ""
+msgstr "CD/DVD-melléklet"
 
 #. ===================================================================
 #. ====================================================================
@@ -3232,7 +3265,7 @@ msgstr ""
 #: ../templates/hama-iso-templates.xml.h:17
 #: ../templates/pearl-iso-templates.xml.h:32
 msgid "DVD inlet"
-msgstr ""
+msgstr "DVD-melléklet"
 
 #. ===================================================================
 #. ====================================================================
@@ -3241,12 +3274,12 @@ msgstr ""
 #: ../templates/hama-iso-templates.xml.h:6
 #: ../templates/pearl-iso-templates.xml.h:12
 msgid "Photo labels"
-msgstr ""
+msgstr "Fotócímkék"
 
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:21
 msgid "Passport photo labels"
-msgstr ""
+msgstr "Igazolványkép fotócímkék"
 
 #. ===================================================================
 #. ====================================================================
@@ -3255,360 +3288,359 @@ msgstr ""
 #: ../templates/hama-iso-templates.xml.h:37
 #: ../templates/herma-iso-templates.xml.h:6
 msgid "Arch File Labels"
-msgstr ""
+msgstr "Arch iktatócímkék"
 
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:29
 #: ../templates/misc-iso-templates.xml.h:28
 #: ../templates/misc-other-templates.xml.h:4
 msgid "Multi-Purpose Labels"
-msgstr ""
+msgstr "Többcélú címkék"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:2
 msgid "Printable mousepad"
-msgstr ""
+msgstr "Nyomtatható egérpad"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:10
 msgid "CD inlet"
-msgstr ""
+msgstr "CD-melléklet"
 
 #. ====================================================================
 #. ===================================================================
 #: ../templates/hama-iso-templates.xml.h:12
 #: ../templates/pearl-iso-templates.xml.h:34
 msgid "CD inlet (front)"
-msgstr ""
+msgstr "CD-melléklet (előlap)"
 
 #. ===================================================================
 #: ../templates/hama-iso-templates.xml.h:13
 #: ../templates/pearl-iso-templates.xml.h:36
 msgid "CD inlet (back)"
-msgstr ""
+msgstr "CD-melléklet (hátlap)"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:15
 msgid "Zip disc inlet"
-msgstr ""
+msgstr "Zip lemez melléklet"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:19
 msgid "VHS-C inlet"
-msgstr ""
+msgstr "VHS-C melléklet"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:21
 msgid "Video-8 inlet"
-msgstr ""
+msgstr "Video-8 melléklet"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:23
 msgid "VHS inlet"
-msgstr ""
+msgstr "VHS melléklet"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:33
 msgid "Zip disc labels"
-msgstr ""
+msgstr "Zip lemez címkék"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:39
 msgid "Arch File labels"
-msgstr ""
+msgstr "Arch iktatócímkék"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:43
 msgid "Mini Disc labels"
-msgstr ""
+msgstr "Mini Disc címkék"
 
 #. ===================================================================
 #: ../templates/herma-iso-templates.xml.h:2
 msgid "Arch File Labels (small)"
-msgstr ""
+msgstr "Arch iktatócímkék (kicsi)"
 
 #. ===================================================================
 #: ../templates/herma-iso-templates.xml.h:4
 msgid "Arch File Labels (large)"
-msgstr ""
+msgstr "Arch iktatócímkék (nagy)"
 
 #. ===================================================================
 #: ../templates/herma-iso-templates.xml.h:10
 #: ../templates/zweckform-iso-templates.xml.h:20
 msgid "Allround Labels"
-msgstr ""
+msgstr "Teljesen kerek címkék"
 
 #. ===================================================================
 #: ../templates/herma-iso-templates.xml.h:12
 msgid "Video Labels (face only)"
-msgstr ""
+msgstr "Videocímkék (csak előlap)"
 
 #. ===================================================================
 #: ../templates/herma-iso-templates.xml.h:16
 msgid "Diskette Labels (face only)"
-msgstr ""
+msgstr "Kislemez címkék (csak előlap)"
 
 #. ===================================================================
 #: ../templates/igepa-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:18
 msgid "Floppy disk labels"
-msgstr ""
+msgstr "Kislemez címkék (csak előlap)"
 
 #. ===================================================================
 #: ../templates/igepa-templates.xml.h:4
 #: ../templates/zweckform-iso-templates.xml.h:2
 msgid "Lever Arch File Labels"
-msgstr ""
+msgstr "Lever Arch iktatócímkék"
 
 #. *******************************************************************
 #: ../templates/jac-iso-templates.xml.h:8
 msgid "PVC labels"
-msgstr ""
+msgstr "PVC címkék"
 
 #. ===================================================================
 #: ../templates/meritline-us-templates.xml.h:2
 msgid "Mini-CD Labels"
-msgstr ""
+msgstr "Mini-CD címkék"
 
 #. ===================================================================
 #: ../templates/microapp-templates.xml.h:2
 msgid "Standard Labels"
-msgstr ""
+msgstr "Szabványos címkék"
 
 #. ===================================================================
 #. TODO: Is this the actual part #?
 #: ../templates/misc-us-templates.xml.h:2
 #: ../templates/misc-iso-templates.xml.h:24
 msgid "CD/DVD Labels (face only)"
-msgstr ""
+msgstr "CD/DVD címke (csak előlap)"
 
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:4
 msgid "CD/DVD Labels (Face Only)"
-msgstr ""
+msgstr "CD/DVD címke (csak előlap)"
 
 #. TODO: Is this the actual part #?
 #: ../templates/misc-us-templates.xml.h:6
 msgid "Cassette Labels"
-msgstr ""
+msgstr "Kazetta címkék"
 
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:10
 msgid "Slimline CD Case (rightside up)"
-msgstr ""
+msgstr "Vékony CD tok (jobb oldal fent)"
 
 #: ../templates/misc-us-templates.xml.h:11
 msgid "Slimline CD Case (upside down)"
-msgstr ""
+msgstr "Vékony CD tok (fejjel lefelé)"
 
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:13
 msgid "CD Template Rectangles"
-msgstr ""
+msgstr "CD sablon téglalapok"
 
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:15
 msgid "Business Card CD"
-msgstr ""
+msgstr "Névjegykártya CD"
 
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:17
 msgid "Jewel Case Booklet"
-msgstr ""
+msgstr "CD-tok füzet"
 
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:19
 msgid "DLT Labels"
-msgstr ""
+msgstr "DLT címkék"
 
 #. ===================================================================
 #. TODO: Is this the actual part #?
 #: ../templates/misc-us-templates.xml.h:27
 #: ../templates/misc-iso-templates.xml.h:36
 msgid "PRO CD Labels 2-up (face only)"
-msgstr ""
+msgstr "PRO CD címkék, 2 korong (csak előlap)"
 
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:29
 msgid "PRO CD Labels 2-up (Face only)"
-msgstr ""
+msgstr "PRO CD címkék, 2 korong (csak előlap)"
 
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:31
 msgid "PRO CD Labels 2-up (CD spine only)"
-msgstr ""
+msgstr "PRO CD címkék, 2 korong (csak CD-gerinc)"
 
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:33
 msgid "Microtube labels"
-msgstr ""
+msgstr "Mikrocső címkék"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:8
 msgid "General Labels"
-msgstr ""
+msgstr "Általános címkék"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:10
 #: ../templates/pearl-iso-templates.xml.h:28
 msgid "Self-adhesive labels"
-msgstr ""
+msgstr "Öntapadós címkék"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:14
 msgid "Fridge Magnet Stickers"
-msgstr ""
+msgstr "Hűtőmágnes matricák"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:16
 msgid "Inkjet/Laser Labels 70x37mm"
-msgstr ""
+msgstr "Tintasugaras/Lézer címkék (70x37mm)"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:18
 msgid "EPSON Photo Stickers 16"
-msgstr ""
+msgstr "EPSON fotomatricák 16"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:30
 msgid "Universal Labels"
-msgstr ""
+msgstr "Univerzális címkék"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:34
 #: ../templates/pearl-iso-templates.xml.h:16
 msgid "Bottle labels"
-msgstr ""
+msgstr "Palackcímkék"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:38
 msgid "Etiketten"
-msgstr ""
+msgstr "Etikettek"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:8
 msgid "Self-adhesive film weatherproof"
-msgstr ""
+msgstr "Öntapadós időjárásálló film"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:10
 msgid "Self-adhesive film transparent"
-msgstr ""
+msgstr "Öntapadós átlátszó film"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:14
 msgid "Self-adhesive window film"
-msgstr ""
+msgstr "Öntapadós ablakfilm"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:24
 msgid "Photo labels semiglossy"
-msgstr ""
+msgstr "Félig fényes fotócímkék"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:26
 msgid "Address Labels (STAMPIT)"
-msgstr ""
+msgstr "Címcímkék (STAMPIT)"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:30
 msgid "SD card labels"
-msgstr ""
+msgstr "SD kártya címkék"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:40
 msgid "Passport photo labels glossy"
-msgstr ""
+msgstr "Fényes útlevélképcímkék"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:42
 msgid "Business cards punched"
-msgstr ""
+msgstr "Lyukasztott névjegyek"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:44
 msgid "Business cards punched dull"
-msgstr ""
+msgstr "Lyukasztott névjegyek - matt"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:46
 msgid "Business cards high glossy"
-msgstr ""
+msgstr "Magasfényű névjegyek"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:48
 msgid "Name plates"
-msgstr ""
+msgstr "Névtáblák"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:50
 msgid "Business cards glossy, both sides printable"
-msgstr ""
+msgstr "Két oldalon nyomtatható fényes névjegyek"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:52
 msgid "Business cards punched glossy"
-msgstr ""
+msgstr "Fényes, lyukasztott névjegyek"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:54
 msgid "Foldable business cards glossy/dull"
-msgstr ""
+msgstr "Összehajtható névjegyek, fényes/matt"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:56
 msgid "Foldable business cards"
-msgstr ""
+msgstr "Összehajtható névjegyek"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:62
 msgid "Membership cards, both sides printable"
-msgstr ""
+msgstr "Két oldalon nyomtatható tagsági kártyák"
 
 #: ../templates/rayfilm-templates.xml.h:11
 msgid "Business card CD Labels"
-msgstr ""
+msgstr "Névjegykártya CD címkék"
 
 #: ../templates/rayfilm-templates.xml.h:12
 msgid "Mini CD Labels"
-msgstr ""
+msgstr "Mini CD címkék"
 
 #: ../templates/rayfilm-templates.xml.h:13
 msgid "Triangular labels"
-msgstr ""
+msgstr "Háromszög alakú címkék"
 
 #: ../templates/rayfilm-templates.xml.h:14
 msgid "Trapezoid labels"
-msgstr ""
+msgstr "Trapéz alakú címkék"
 
 #. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:12
 msgid "QSL-Karten Etiketten 70mm x 50,8mm"
-msgstr ""
+msgstr "QSL kártya etikett (70mm x 50,8mm)"
 
 #. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:14
 msgid "File Back Labels"
-msgstr ""
+msgstr "Iktató fekete címkék"
 
 #. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:16
 msgid "Multi-purpose Stick+Lift Labels"
-msgstr ""
+msgstr "Többcélú Stick+Lift címkék"
 
 #. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:18
 msgid "Video Labels (back)"
-msgstr ""
+msgstr "Videocímkék (hátsó)"
 
 #. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:22
 msgid "Rectangular Copier Labels"
-msgstr ""
+msgstr "Négyszögletű másolócímkék"
 
 #. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:24
 msgid "Correction and Cover-up Labels"
-msgstr ""
-
+msgstr "Javító- és fedőcímkék"
 
