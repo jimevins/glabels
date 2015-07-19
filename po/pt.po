@@ -1,15 +1,15 @@
 # Portuguese translation of Glabels.
 # Copyright © 2010 Glabels
 # Filipe Roque <fliproque@gmail.com>, 2010.
-# Pedro Albuquerque <palbuquerque73@openmailbox.com>, 2015.
+# Pedro Albuquerque <palbuquerque73o@gmail.com>, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 1.91.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2014-02-11 12:40+0000\n"
-"PO-Revision-Date: 2015-07-07 08:55+0100\n"
-"Last-Translator: Pedro Albuquerque <palbuquerque73@openmailbox.com>\n"
+"POT-Creation-Date: 2015-07-19 05:39+0000\n"
+"PO-Revision-Date: 2015-07-19 08:07+0100\n"
+"Last-Translator: Pedro Albuquerque <palbuquerque73o@gmail.com>\n"
 "Language-Team: Português <palbuquerque73@openmailbox.com>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
@@ -231,7 +231,6 @@ msgid "Dutch Post KIX Code"
 msgstr "Dutch Post KIX Code"
 
 #: ../src/bc-backends.c:281
-#| msgid "EAN-8"
 msgid "EAN"
 msgstr "EAN"
 
@@ -304,7 +303,6 @@ msgid "LOGMARS"
 msgstr "LOGMARS"
 
 #: ../src/bc-backends.c:347
-#| msgid "Barcode"
 msgid "Maxicode"
 msgstr "Maxicode"
 
@@ -538,10 +536,11 @@ msgid "Custom Color"
 msgstr "Cor personalizada"
 
 #: ../src/color-combo-menu.c:319
+#, c-format
 msgid "Custom Color #%u"
 msgstr "Cor personalizada #%u"
 
-#: ../src/critical-error-handler.c:70
+#: ../src/critical-error-handler.c:72
 msgid "gLabels Fatal Error!"
 msgstr "Erro fatal do gLabels!"
 
@@ -1273,12 +1272,10 @@ msgid "_Rotate/Flip"
 msgstr "_Rodar/Inverter"
 
 #: ../src/ui.c:102
-#| msgid "Alignment:"
 msgid "_Alignment"
 msgstr "_Alinhamento"
 
 #: ../src/ui.c:103
-#| msgid "Centers"
 msgid "C_enter"
 msgstr "Centro"
 
@@ -1522,7 +1519,6 @@ msgid "Align objects to left edges"
 msgstr "Alinhar pela margem esquerda"
 
 #: ../src/ui.c:371
-#| msgid "Align vertical center"
 msgid "Align center"
 msgstr "Alinhar ao centro"
 
@@ -1535,7 +1531,6 @@ msgid "Align objects to right edges"
 msgstr "Alinhar pela margem direita"
 
 #: ../src/ui.c:385
-#| msgid "Align tops"
 msgid "Align top"
 msgstr "Alinhar pelo topo"
 
@@ -1544,7 +1539,6 @@ msgid "Align objects to top edges"
 msgstr "Alinhar objetos pela margem superior"
 
 #: ../src/ui.c:392
-#| msgid "Align left"
 msgid "Align middle"
 msgstr "Alinhar ao meio"
 
@@ -1553,7 +1547,6 @@ msgid "Align objects to vertical centers"
 msgstr "Alinhar objetos pelos centros verticais"
 
 #: ../src/ui.c:399
-#| msgid "Align bottoms"
 msgid "Align bottom"
 msgstr "Alinhar pela base"
 
@@ -1674,7 +1667,7 @@ msgstr ""
 "COMERCIALIZAÇÃO ou ADEQUAÇÃO A UM PROPÓSITO PARTICULAR. Veja \n"
 "a Licença Pública Geral GNU para mais detalhes.\n"
 
-#: ../src/warning-handler.c:69
+#: ../src/warning-handler.c:71
 msgid "gLabels Error!"
 msgstr "Erro do gLabels!"
 
@@ -1857,7 +1850,6 @@ msgid "Rotated"
 msgstr "Rodado"
 
 #: ../data/ui/new-label-dialog.ui.h:7
-#| msgid "Remove all selections"
 msgid "Review Selection"
 msgstr "Rever seleção"
 
@@ -1922,7 +1914,6 @@ msgid "Alignment:"
 msgstr "Alinhamento:"
 
 #: ../data/ui/object-editor.ui.h:10
-#| msgid "Alignment:"
 msgid "Vertical alignment:"
 msgstr "Alinhamento vertical:"
 
@@ -2105,12 +2096,10 @@ msgid "Right align"
 msgstr "Alinhar à direita"
 
 #: ../data/ui/property-bar.ui.h:8
-#| msgid "Flip vertically"
 msgid "Top vertical align"
 msgstr "Alinhar ao topo vertical"
 
 #: ../data/ui/property-bar.ui.h:9
-#| msgid "Center vertically"
 msgid "Center vertical align"
 msgstr "Alinhar ao centro vertical"
 
@@ -2169,7 +2158,6 @@ msgid "Round"
 msgstr "Redondo"
 
 #: ../data/ui/template-designer.ui.h:19
-#| msgid "Flip vertically"
 msgid "Elliptical"
 msgstr "Elíptico"
 
@@ -2210,12 +2198,10 @@ msgid "5. Vert. waste (overprint allowed):"
 msgstr "5. Desperdício vertical (impressão sobreposta permitida):"
 
 #: ../data/ui/template-designer.ui.h:28
-#| msgid "2. Waste (overprint allowed):"
 msgid "3. Waste (overprint allowed):"
 msgstr "2. Desperdício (impressão sobreposta permitida)"
 
 #: ../data/ui/template-designer.ui.h:29
-#| msgid "3. Margin"
 msgid "4. Margin"
 msgstr "3. Margem"
 
@@ -2429,34 +2415,28 @@ msgstr ""
 "livro de endereços do Evolution."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
-#| msgid "Main toolbar"
 msgid "Show/hide main toolbar."
 msgstr "Mostrar/Ocultar barra de ferramentas principal."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:2
-#| msgid "Change the visibility of the main toolbar in the current window"
 msgid "Controls visibility of main toolbar."
 msgstr ""
 "Altera a visibilidade da barra de ferramentas principal na janela atual"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:3
-#| msgid "Drawing toolbar"
 msgid "Show/hide drawing toolbar."
 msgstr "Mostrar/Ocultar barra de ferramentas de desenho"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:4
-#| msgid "Change the visibility of the drawing toolbar in the current window"
 msgid "Controls visibility of drawing toolbar."
 msgstr ""
 "Altera a visibilidade da barra de ferramentas de desenho na janela atual"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:5
-#| msgid "Property toolbar"
 msgid "Show/hide property toolbar."
 msgstr "Mostrar/Ocultar barra de ferramentas Propriedades"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:6
-#| msgid "Change the visibility of the property toolbar in the current window"
 msgid "Controls visibility of property toolbar."
 msgstr ""
 "Altera a visibilidade da barra de ferramentas de propriedades na janela atual"
@@ -2474,7 +2454,6 @@ msgid "Show/hide markup."
 msgstr "Mostrar/Ocultar marcação"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:10
-#| msgid "Change the visibility of markup lines in the current window"
 msgid "Controls visibility of markup lines."
 msgstr "Altera a visibilidade das linhas de marcação na janela atual"
 
@@ -2503,12 +2482,10 @@ msgid "The preferred page size when searching templates."
 msgstr "O tamanho de página preferido ao procurar modelos."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:17
-#| msgid "Font family"
 msgid "Default font family."
 msgstr "Família predefinida de letras"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:18
-#| msgid "Select default properties for new objects."
 msgid "The default font family for new text objects."
 msgstr "A família predefinida de letras para novos objetos de texto."
 
@@ -2517,7 +2494,6 @@ msgid "Default font size."
 msgstr "Tamanho predefinido de letra."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:20
-#| msgid "Select default properties for new objects."
 msgid "The default font size for new text objects."
 msgstr "O tamanho predefinido da letra para novos objetos de texto."
 
@@ -2526,7 +2502,6 @@ msgid "Default font weight."
 msgstr "Peso predefinido da letra."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:22
-#| msgid "Select default properties for new objects."
 msgid "The default font weight for new text objects."
 msgstr "O peso predefinido da letra para novos objetos de texto."
 
@@ -2535,7 +2510,6 @@ msgid "Default font italic flag."
 msgstr "Estado predefinido da letra itálica."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:24
-#| msgid "Select default properties for new objects."
 msgid "The default font italic state for new text objects."
 msgstr "O estado predefinido da letra itálica para novos objetos de texto."
 
@@ -2544,7 +2518,6 @@ msgid "Default text color."
 msgstr "Cor predefinida do texto."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:26
-#| msgid "Select default properties for new objects."
 msgid "The default color of text for new text objects (0xRRGGBBAA)."
 msgstr "A cor predefinida da letra para novos objetos de texto. (0xRRGGBBAA)."
 
@@ -2553,7 +2526,6 @@ msgid "Default text alignment."
 msgstr "Alinhamento predefinido do texto."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:28
-#| msgid "Select default properties for new objects."
 msgid "The default text alignment for new text objects."
 msgstr "O alinhamento predefinido do texto para novos objetos de texto."
 
@@ -2562,17 +2534,14 @@ msgid "Default text line spacing."
 msgstr "Espaço predefinido entre linhas."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:30
-#| msgid "Select default properties for new objects."
 msgid "The default line spacing for new text objects."
 msgstr "O espaçamento predefinido entre linhas para novos objetos de texto."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:31
-#| msgid "Line width"
 msgid "Default line width."
 msgstr "Largura predefinida da linha."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:32
-#| msgid "Select default properties for new objects."
 msgid "The default line width for new objects."
 msgstr "A largura predefinida da linha para novos objetos."
 
@@ -2581,7 +2550,6 @@ msgid "Default line color."
 msgstr "Cor predefinida da linha."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:34
-#| msgid "Select default properties for new objects."
 msgid "The default line color new objects (0xRRGGBBAA)."
 msgstr "A cor predefinida da linha para novos objetos (0xRRGGBBAA)."
 
@@ -2590,17 +2558,14 @@ msgid "Default fill color."
 msgstr "Cor predefinida de preenchimento."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:36
-#| msgid "Select default properties for new objects."
 msgid "The default fill color new objects (0xRRGGBBAA)."
 msgstr "A cor predefinida do preenchimento para novos objetos."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:37
-#| msgid "No recent templates found."
 msgid "Recent templates."
 msgstr "Modelos recentes."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:38
-#| msgid "No recent templates found."
 msgid "Recently used templates."
 msgstr "Modelos recentemente usados."
 
@@ -2755,27 +2720,22 @@ msgstr "DL"
 
 #. ISO 217
 #: ../templates/paper-sizes.xml.h:37
-#| msgid "A0"
 msgid "RA0"
 msgstr "RA0"
 
 #: ../templates/paper-sizes.xml.h:38
-#| msgid "A1"
 msgid "RA1"
 msgstr "RA1"
 
 #: ../templates/paper-sizes.xml.h:39
-#| msgid "A2"
 msgid "RA2"
 msgstr "RA2"
 
 #: ../templates/paper-sizes.xml.h:40
-#| msgid "A3"
 msgid "RA3"
 msgstr "RA3"
 
 #: ../templates/paper-sizes.xml.h:41
-#| msgid "A4"
 msgid "RA4"
 msgstr "RA4"
 
@@ -2809,6 +2769,7 @@ msgstr "Qualquer etiqueta"
 #: ../templates/hama-iso-templates.xml.h:4
 #: ../templates/pearl-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:8
+#: ../templates/sheetlabels-us-templates.xml.h:16
 msgid "Round labels"
 msgstr "Etiquetas redondas"
 
@@ -2816,7 +2777,6 @@ msgstr "Etiquetas redondas"
 #: ../templates/categories.xml.h:3 ../templates/endisch-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:58
 #: ../templates/rayfilm-templates.xml.h:9
-#| msgid "Shipping labels"
 msgid "Elliptical labels"
 msgstr "Etiquetas elípticas"
 
@@ -2980,7 +2940,7 @@ msgstr "Etiquetas redondas"
 #: ../templates/avery-us-templates.xml.h:18
 #: ../templates/avery-iso-templates.xml.h:20
 #: ../templates/meritline-us-templates.xml.h:14
-#: ../templates/sheetlabels-us-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:18
 #: ../templates/worldlabel-us-templates.xml.h:8
 msgid "Diskette Labels"
 msgstr "Etiquetas de disquete"
@@ -3039,6 +2999,7 @@ msgstr "Etiquetas de crachá"
 #: ../templates/geha-iso-templates.xml.h:10
 #: ../templates/herma-iso-templates.xml.h:14
 #: ../templates/igepa-templates.xml.h:5 ../templates/jac-iso-templates.xml.h:2
+#: ../templates/mayspies-templates.xml.h:1
 #: ../templates/misc-us-templates.xml.h:8
 #: ../templates/misc-iso-templates.xml.h:22
 #: ../templates/misc-other-templates.xml.h:2
@@ -3052,7 +3013,7 @@ msgstr "Etiquetas de CD/DVD"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:34
-#: ../templates/sheetlabels-us-templates.xml.h:18
+#: ../templates/sheetlabels-us-templates.xml.h:20
 msgid "CD/DVD Labels (Disc Labels)"
 msgstr "Etiquetas de CD/DVD (etiquetas de disco)"
 
@@ -3065,7 +3026,7 @@ msgstr "Etiquetas de CD/DVD (lombada)"
 #: ../templates/avery-us-templates.xml.h:38
 #: ../templates/geha-iso-templates.xml.h:17
 #: ../templates/meritline-us-templates.xml.h:16
-#: ../templates/sheetlabels-us-templates.xml.h:20
+#: ../templates/sheetlabels-us-templates.xml.h:22
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Video Tape Face Labels"
 msgstr "Etiquetas de cassete de vídeo (face)"
@@ -3126,6 +3087,7 @@ msgstr "Etiquetas de expedição"
 #: ../templates/herma-iso-templates.xml.h:8
 #: ../templates/misc-us-templates.xml.h:21
 #: ../templates/misc-iso-templates.xml.h:6
+#: ../templates/sheetlabels-us-templates.xml.h:24
 #: ../templates/zweckform-iso-templates.xml.h:10
 msgid "Mailing Labels"
 msgstr "Etiquetas de correio"
@@ -3158,9 +3120,40 @@ msgstr "Etiquetas de disquete"
 #. *********************************************************************
 #. Labels for the Brother QL-500/550/650 PC Label Printers
 #.
-#. These templates work with the Brother Linux Printer CUPS Driver.  It
-#. is unknown if these work correctly with the foomatic print driver for
-#. these printers.
+#. These templates are based on the exact media sizes and measurements
+#. in version 1.1 of the 'Brother-QL-500-ptouch.ppd' file.  If these
+#. don't work for you, try the old versions (e.g. DK-11201-old) of
+#. these templates.
+#.
+#. Currently only have templates for a few of the popular sizes.
+#.
+#. *********************************************************************
+#. *********************************************************************
+#.
+#: ../templates/brother-other-templates.xml.h:16
+msgid "Standard Address Labels 29mm x 90mm"
+msgstr "Etiquetas padrão de endereços 29mm x 90mm"
+
+#: ../templates/brother-other-templates.xml.h:17
+msgid "Shipping Labels 62mm x 100mm"
+msgstr "Etiquetas de expedição 62mm x 100mm"
+
+#: ../templates/brother-other-templates.xml.h:18
+msgid "Multi Purpose Labels 17mm x 54mm"
+msgstr "Etiquetas genéricas 17mm x 54mm"
+
+#: ../templates/brother-other-templates.xml.h:19
+msgid "Standard Address Labels 38mm x 90mm"
+msgstr "Etiquetas padrão de endereços 29mm x 90mm"
+
+#.
+#. *********************************************************************
+#. *********************************************************************
+#. Labels for the Brother QL-500/550/650 PC Label Printers
+#.
+#. These are the older templates that worked with the Brother Linux
+#. Printer CUPS Driver.  They do not work correctly with newer versions
+#. of the foomatic drivers.
 #.
 #. One difference from typical templates is that the template size is
 #. not the actual media size - it is the size of the printable area,
@@ -3170,26 +3163,28 @@ msgstr "Etiquetas de disquete"
 #. *********************************************************************
 #. *********************************************************************
 #.
-#: ../templates/brother-other-templates.xml.h:18
-msgid "Standard Address Labels 29mm x 90mm"
-msgstr "Etiquetas padrão de endereços 29mm x 90mm"
-
-#: ../templates/brother-other-templates.xml.h:19
-msgid "Shipping Labels 62mm x 100mm"
-msgstr "Etiquetas de expedição 62mm x 100mm"
-
-#: ../templates/brother-other-templates.xml.h:20
-msgid "Multi Purpose Labels 17mm x 54mm"
-msgstr "Etiquetas genéricas 17mm x 54mm"
-
-#: ../templates/brother-other-templates.xml.h:21
+#: ../templates/brother-other-templates.xml.h:37
 #| msgid "Standard Address Labels 29mm x 90mm"
-msgid "Standard Address Labels 38mm x 90mm"
-msgstr "Etiquetas padrão de endereços 29mm x 90mm"
+msgid "Standard Address Labels 29mm x 90mm (Old)"
+msgstr "Etiquetas padrão de endereços 29mm x 90mm (antiga)"
+
+#: ../templates/brother-other-templates.xml.h:38
+#| msgid "Shipping Labels 62mm x 100mm"
+msgid "Shipping Labels 62mm x 100mm (Old)"
+msgstr "Etiquetas de expedição 62mm x 100mm (antiga)"
+
+#: ../templates/brother-other-templates.xml.h:39
+#| msgid "Multi Purpose Labels 17mm x 54mm"
+msgid "Multi Purpose Labels 17mm x 54mm (Old)"
+msgstr "Etiquetas genéricas 17mm x 54mm (antiga)"
+
+#: ../templates/brother-other-templates.xml.h:40
+#| msgid "Standard Address Labels 38mm x 90mm"
+msgid "Standard Address Labels 38mm x 90mm (Old)"
+msgstr "Etiquetas padrão de endereços 29mm x 90mm (antiga)"
 
 #. ===================================================================
 #: ../templates/canon-other-templates.xml.h:2
-#| msgid "CD/DVD Labels"
 msgid "CD/DVD Tray"
 msgstr "Etiquetas de CD/DVD"
 
@@ -3213,7 +3208,6 @@ msgstr "Etiquetas de CD"
 #: ../templates/dataline-iso-templates.xml.h:2
 #: ../templates/hama-iso-templates.xml.h:35
 #: ../templates/misc-iso-templates.xml.h:32
-#| msgid "CD/DVD Labels"
 msgid "CD/DVD labels"
 msgstr "Etiquetas de CD/DVD"
 
@@ -3296,12 +3290,10 @@ msgstr "Cartões de aniversário"
 
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:8
-#| msgid "Arch File Labels"
 msgid "Arch File inserts"
 msgstr "Etiquetas de dossiê"
 
 #: ../templates/geha-iso-templates.xml.h:11
-#| msgid "CD Inlet"
 msgid "CD/DVD Inlet"
 msgstr "Folheto de CD"
 
@@ -3311,7 +3303,6 @@ msgstr "Folheto de CD"
 #: ../templates/geha-iso-templates.xml.h:13
 #: ../templates/hama-iso-templates.xml.h:17
 #: ../templates/pearl-iso-templates.xml.h:32
-#| msgid "CD Inlet"
 msgid "DVD inlet"
 msgstr "Folheto de DVD"
 
@@ -3352,7 +3343,6 @@ msgstr "Tapete de rato imprimível"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:10
-#| msgid "CD Inlet"
 msgid "CD inlet"
 msgstr "Folheto de CD"
 
@@ -3360,14 +3350,12 @@ msgstr "Folheto de CD"
 #. ===================================================================
 #: ../templates/hama-iso-templates.xml.h:12
 #: ../templates/pearl-iso-templates.xml.h:34
-#| msgid "Bring to front"
 msgid "CD inlet (front)"
 msgstr "Folheto de CD (frente)"
 
 #. ===================================================================
 #: ../templates/hama-iso-templates.xml.h:13
 #: ../templates/pearl-iso-templates.xml.h:36
-#| msgid "CD Inlet"
 msgid "CD inlet (back)"
 msgstr "Folheto de CD (verso)"
 
@@ -3378,7 +3366,6 @@ msgstr "Folheto de disco ZIP"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:19
-#| msgid "CD Inlet"
 msgid "VHS-C inlet"
 msgstr "Folheto de VHS-C"
 
@@ -3399,13 +3386,11 @@ msgstr "Etiquetas de disco ZIP"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:39
-#| msgid "Arch File Labels"
 msgid "Arch File labels"
 msgstr "Etiquetas de dossiê"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:43
-#| msgid "Mini Labels"
 msgid "Mini Disc labels"
 msgstr "Etiquetas de mini-disc"
 
@@ -3449,7 +3434,6 @@ msgstr "Etiquetas de dossiê Lever"
 
 #. *******************************************************************
 #: ../templates/jac-iso-templates.xml.h:8
-#| msgid "CD Labels"
 msgid "PVC labels"
 msgstr "Etiquetas de PVC"
 
@@ -3460,7 +3444,6 @@ msgstr "Etiquetas de Mini-CD"
 
 #. ===================================================================
 #: ../templates/microapp-templates.xml.h:2
-#| msgid "Rectangular Labels"
 msgid "Standard Labels"
 msgstr "Etiquetas padrão"
 
@@ -3655,22 +3638,18 @@ msgid "Membership cards, both sides printable"
 msgstr "Cartões de membros, imprimidos dos dois lados"
 
 #: ../templates/rayfilm-templates.xml.h:11
-#| msgid "Business Card CD"
 msgid "Business card CD Labels"
 msgstr "Etiquetas de cartões de visita CD"
 
 #: ../templates/rayfilm-templates.xml.h:12
-#| msgid "Mini-CD Labels"
 msgid "Mini CD Labels"
 msgstr "Etiquetas Mini-CD"
 
 #: ../templates/rayfilm-templates.xml.h:13
-#| msgid "Rectangular labels"
 msgid "Triangular labels"
 msgstr "Etiquetas triangulares"
 
 #: ../templates/rayfilm-templates.xml.h:14
-#| msgid "Allround labels"
 msgid "Trapezoid labels"
 msgstr "Etiquetas trapezoidais"
 
