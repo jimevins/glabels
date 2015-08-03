@@ -18,7 +18,7 @@
    *********************************************************************
   -->
 
-  <Template brand="Brother" part="DK-11201" size="Other" width="82pt" height="255pt" _description="Standard Address Labels 29mm x 90mm">
+  <Template brand="Brother" part="DK-1201" size="Other" width="82pt" height="255pt" _description="Standard Address Labels 29mm x 90mm">
     <Meta category="label"/>
     <Meta category="mail"/>
     <Label-rectangle id="0" width="82pt" height="255pt" round="4pt" x_waste="0" y_waste="0">
@@ -27,7 +27,7 @@
     </Label-rectangle>
   </Template>
 
-  <Template brand="Brother" part="DK-11202" size="Other" width="176pt" height="283pt" _description="Shipping Labels 62mm x 100mm">
+  <Template brand="Brother" part="DK-1202" size="Other" width="176pt" height="283pt" _description="Shipping Labels 62mm x 100mm">
     <Meta category="label"/>
     <Meta category="mail"/>
     <Label-rectangle id="0" width="176pt" height="283pt" round="4pt" x_waste="0" y_waste="0">
@@ -36,7 +36,7 @@
     </Label-rectangle>
   </Template>
 
-  <Template brand="Brother" part="DK-11204" size="Other" width="48pt" height="153pt" _description="Multi Purpose Labels 17mm x 54mm">
+  <Template brand="Brother" part="DK-1204" size="Other" width="48pt" height="153pt" _description="Multi Purpose Labels 17mm x 54mm">
     <Meta category="label"/>
     <Label-rectangle id="0" width="48pt" height="153pt" round="4pt" x_waste="0" y_waste="0">
       <Markup-rect x1="4.25pt" y1="8.5pt" w="39.5pt" h="136pt" r="0" />
@@ -44,7 +44,7 @@
     </Label-rectangle>
   </Template>
 
-  <Template brand="Brother" part="DK-11208" size="Other" width="108pt" height="255pt" _description="Standard Address Labels 38mm x 90mm">
+  <Template brand="Brother" part="DK-1208" size="Other" width="108pt" height="255pt" _description="Standard Address Labels 38mm x 90mm">
     <Meta category="label"/>
     <Meta category="mail"/>
     <Label-rectangle id="0" width="108pt" height="255pt" round="4pt" x_waste="0" y_waste="0">
