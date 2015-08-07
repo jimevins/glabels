@@ -313,7 +313,7 @@
       </tr>
       <tr>
         <td its:translate="no"><p><code>height</code></p></td>
-        <td><p>Heigth of label/card</p></td>
+        <td><p>Height of label/card</p></td>
       </tr>
       <tr>
         <td its:translate="no"><p><code>round</code></p></td>
@@ -376,7 +376,7 @@
       </tr>
       <tr>
         <td its:translate="no"><p><code>height</code></p></td>
-        <td><p>Heigth of the ellipse</p></td>
+        <td><p>Height of the ellipse</p></td>
       </tr>
       <tr>
         <td its:translate="no"><p><code>waste</code></p></td>
@@ -574,11 +574,11 @@
         </tr>
         <tr>
           <td its:translate="no"><p><code>x2</code></p></td>
-          <td><p>x coordinate of 2st endpoint of the line segment.</p></td>
+          <td><p>x coordinate of 2nd endpoint of the line segment.</p></td>
         </tr>
         <tr>
           <td its:translate="no"><p><code>y2</code></p></td>
-          <td><p>y coordinate of 2st endpoint of the line segment.</p></td>
+          <td><p>y coordinate of 2nd endpoint of the line segment.</p></td>
         </tr>
       </table>
     </section>
@@ -739,7 +739,7 @@
 	<note style="tip">
 	<p>You can define multiple layouts only if the labels on the sheet
         have the same shape. If your sheet contains different shapes, you have
-        to define each shape in another template seperately. Future versions
+        to define each shape in another template separately. Future versions
         of <app>gLabels</app> will probably be able to concatenate such sheets
         with different shapes within a single template.</p>
       </note>
