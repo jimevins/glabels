@@ -231,6 +231,7 @@ data/schemas/org.gnome.glabels-3.gschema.xml.in.in
 [type: gettext/xml]templates/avery-iso-templates.xml
 [type: gettext/xml]templates/avery-other-templates.xml
 [type: gettext/xml]templates/brother-other-templates.xml
+[type: gettext/xml]templates/cablelabel-templates.xml
 [type: gettext/xml]templates/canon-other-templates.xml
 [type: gettext/xml]templates/databecker-iso-templates.xml
 [type: gettext/xml]templates/dataline-iso-templates.xml
