@@ -4,6 +4,7 @@
 *.o
 *.lo
 *.la
+*.sublime-*
 .deps
 .libs
 Makefile
