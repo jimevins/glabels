@@ -1,13 +1,13 @@
 # Czech translation for glabels help.
 # Copyright (C) 2010 glabels's COPYRIGHT HOLDER
 # This file is distributed under the same license as the glabels help.
-# Marek Černocký <marek@manet.cz>, 2010, 2011, 2013.
+# Marek Černocký <marek@manet.cz>, 2010, 2011, 2013, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels\n"
-"POT-Creation-Date: 2013-12-18 19:25+0000\n"
-"PO-Revision-Date: 2013-12-27 06:18+0100\n"
+"POT-Creation-Date: 2015-09-13 05:47+0000\n"
+"PO-Revision-Date: 2015-09-13 23:53+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -22,159 +22,51 @@ msgctxt "_"
 msgid "translator-credits"
 msgstr "Marek Černocký <marek@manet.cz>, 2010 – 2013"
 
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#.
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/index.page:24(media)
-msgctxt "_"
-msgid ""
-"external ref='figures/glabels-logo.png' "
-"md5='0c1e32afcbae0d2fc6976020c24a0a43'"
-msgstr ""
-"external ref='figures/glabels-logo.png' "
-"md5='0c1e32afcbae0d2fc6976020c24a0a43'"
-
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#.
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/index.page:47(media)
-msgctxt "_"
-msgid ""
-"external ref='figures/introduction-glabels-main-window.png' "
-"md5='9ee2b2cc026ee8cba3c881b370a14313'"
-msgstr ""
-"external ref='figures/introduction-glabels-main-window.png' "
-"md5='9ee2b2cc026ee8cba3c881b370a14313'"
-
-#: C/index.page:7(info/title)
-msgctxt "link"
-msgid "gLabels label and business card designer"
-msgstr "Návrhář etiket a vizitek gLabels"
-
-#: C/index.page:8(info/title)
-msgctxt "text"
-msgid "gLabels label and business card designer"
-msgstr "Návrhář etiket a vizitek gLabels"
-
-#: C/index.page:11(credit/name) C/about.page:13(credit/name)
-#: C/basicusage.page:13(credit/name) C/createnew.page:13(credit/name)
-#: C/customize.page:11(credit/name) C/customtemplate.page:13(credit/name)
-#: C/editprop.page:13(credit/name) C/labelprop.page:13(credit/name)
-#: C/mancreate.page:15(credit/name) C/merge-ex1.page:13(credit/name)
-#: C/merge-ex2.page:13(credit/name) C/merge-ex3.page:13(credit/name)
-#: C/merge-ex4.page:13(credit/name) C/mergefeatures.page:13(credit/name)
-#: C/merge.page:13(credit/name) C/multifile.page:13(credit/name)
-#: C/newlabel.page:13(credit/name) C/printfile.page:13(credit/name)
-#: C/select.page:13(credit/name) C/skipfields.page:13(credit/name)
-msgid "Jim Evins"
-msgstr "Jim Evins"
-
-#: C/index.page:15(credit/name) C/about.page:17(credit/name)
-#: C/basicusage.page:17(credit/name) C/createnew.page:17(credit/name)
-#: C/customize.page:15(credit/name) C/customtemplate.page:17(credit/name)
-#: C/editprop.page:17(credit/name) C/labelprop.page:17(credit/name)
-#: C/mancreate.page:19(credit/name) C/merge-ex1.page:17(credit/name)
-#: C/merge-ex2.page:17(credit/name) C/merge-ex3.page:17(credit/name)
-#: C/merge-ex4.page:17(credit/name) C/mergefeatures.page:17(credit/name)
-#: C/merge.page:17(credit/name) C/multifile.page:17(credit/name)
-#: C/newlabel.page:17(credit/name) C/printfile.page:17(credit/name)
-#: C/select.page:17(credit/name) C/skipfields.page:17(credit/name)
-msgid "Mario Blättermann"
-msgstr "Mario Blättermann"
-
-#: C/index.page:19(license/p) C/about.page:21(license/p)
-#: C/basicusage.page:21(license/p) C/createnew.page:21(license/p)
-#: C/customize.page:19(license/p) C/customtemplate.page:21(license/p)
-#: C/editprop.page:21(license/p) C/labelprop.page:21(license/p)
-#: C/mancreate.page:23(license/p) C/merge-ex1.page:21(license/p)
-#: C/merge-ex2.page:21(license/p) C/merge-ex3.page:21(license/p)
-#: C/merge-ex4.page:21(license/p) C/mergefeatures.page:21(license/p)
-#: C/merge.page:21(license/p) C/multifile.page:21(license/p)
-#: C/newlabel.page:21(license/p) C/printfile.page:21(license/p)
-#: C/select.page:21(license/p) C/skipfields.page:21(license/p)
-msgid "Creative Commons Share Alike 3.0"
-msgstr "Creative Commons Share Alike 3.0"
-
-#: C/index.page:23(page/title)
-msgid ""
-"<media type=\"image\" mime=\"image/png\" src=\"figures/glabels-logo.png"
-"\">gLabels logo</media> gLabels Manual"
-msgstr ""
-"<media type=\"image\" mime=\"image/png\" src=\"figures/glabels-logo.png"
-"\">logo gLabels</media> Příručka aplikace gLabels"
-
-#: C/index.page:28(page/p)
-msgid ""
-"The <app>gLabels</app> application is a lightweight program for creating "
-"labels and business cards for the GNOME desktop environment. It is designed "
-"to work with various laser/ink-jet peel-off label and business card sheets "
-"that you'll find at most office supply stores."
-msgstr ""
-"Aplikace <application>gLabels</application> je jednoduchý program na "
-"vytváření etiket a vizitek pro pracovní prostředí GNOME. Je navržená pro "
-"práci s různými samolepicími etiketami a vizitkami rozmístěnými na listech "
-"pro laserový/inkoustový tisk, které najdete ve většině obchodů s "
-"kancelářskými potřebami."
-
-#: C/index.page:35(page/p)
-msgid ""
-"<app>gLabels</app> can be used to design address labels, name tags, price "
-"tags, cd/dvd labels, or just about anything else that is organized in a "
-"regular pattern on a sheet of paper. Labels (or cards) can contain text, "
-"images, lines, shapes, and barcodes. <app>gLabels</app> also includes a "
-"document-merge feature which lets you print a unique label for each record "
-"from an external data source, such as a CSV file or an <app>Evolution</app> "
-"address book."
-msgstr ""
-"Aplikaci <app>gLabels</app> můžete používat k návrhu adresních štítků, "
-"visaček, cenovek, obalů na CD/DVD nebo cokoliv jiného, co je uspořádáno na "
-"listu papíru v pravidelném vzoru. Etikety (nebo kartičky) mohou obsahovat "
-"text, obrázky, čáry, tvary a čárové kódy. Aplikace <app>gLabels</app> "
-"obsahuje také funkci slučování dokumentů, díky které můžete tisknout každou "
-"etiketu jinou, podle záznamů v externím zdroji dat, jako jsou soubory CSV "
-"nebo adresář kontaktů <app>Evolution</app>."
-
-#: C/index.page:45(figure/title) C/index.page:46(figure/desc)
-msgid "<app>gLabels</app> main window"
-msgstr "Hlavní okno <app>gLabels</app>"
-
-#: C/index.page:48(media/p)
-msgid "<app>gLabels</app> main window."
-msgstr "Hlavní okno <app>gLabels</app>."
-
-#: C/index.page:53(section/title)
-msgid "Usage"
-msgstr "Použití"
-
-#: C/index.page:57(section/title)
-msgid "Document Merging"
-msgstr "Slučováním dokumentů"
-
-#: C/index.page:61(section/title)
-msgid "Advanced usage"
-msgstr "Pokročilé používání"
-
-#: C/about.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/about.page:9
 msgid "Information about <app>gLabels</app>."
 msgstr "Informace o <app>gLabels</app>."
 
-#: C/about.page:25(page/title)
+#. (itstool) path: credit/name
+#: C/about.page:13 C/basicusage.page:13 C/createnew.page:13
+#: C/customize.page:11 C/customtemplate.page:13 C/editprop.page:13
+#: C/index.page:11 C/labelprop.page:13 C/mancreate.page:15 C/merge-ex1.page:13
+#: C/merge-ex2.page:13 C/merge-ex3.page:13 C/merge-ex4.page:13
+#: C/mergefeatures.page:13 C/merge.page:13 C/multifile.page:13
+#: C/newlabel.page:13 C/printfile.page:13 C/select.page:13
+#: C/skipfields.page:13
+msgid "Jim Evins"
+msgstr "Jim Evins"
+
+#. (itstool) path: credit/name
+#: C/about.page:17 C/basicusage.page:17 C/createnew.page:17
+#: C/customize.page:15 C/customtemplate.page:17 C/editprop.page:17
+#: C/index.page:15 C/labelprop.page:17 C/mancreate.page:19 C/merge-ex1.page:17
+#: C/merge-ex2.page:17 C/merge-ex3.page:17 C/merge-ex4.page:17
+#: C/mergefeatures.page:17 C/merge.page:17 C/multifile.page:17
+#: C/newlabel.page:17 C/printfile.page:17 C/select.page:17
+#: C/skipfields.page:17
+msgid "Mario Blättermann"
+msgstr "Mario Blättermann"
+
+#. (itstool) path: license/p
+#: C/about.page:21 C/basicusage.page:21 C/createnew.page:21
+#: C/customize.page:19 C/customtemplate.page:21 C/editprop.page:21
+#: C/index.page:19 C/labelprop.page:21 C/mancreate.page:23 C/merge-ex1.page:21
+#: C/merge-ex2.page:21 C/merge-ex3.page:21 C/merge-ex4.page:21
+#: C/mergefeatures.page:21 C/merge.page:21 C/multifile.page:21
+#: C/newlabel.page:21 C/printfile.page:21 C/select.page:21
+#: C/skipfields.page:21
+msgid "Creative Commons Share Alike 3.0"
+msgstr "Creative Commons Share Alike 3.0"
+
+#. (itstool) path: page/title
+#: C/about.page:25
 msgid "About <app>gLabels</app>"
 msgstr "O aplikaci <application>gLabels</application>"
 
-#: C/about.page:27(page/p)
+#. (itstool) path: page/p
+#: C/about.page:27
 msgid ""
 "<app>gLabels</app> was written by <link href=\"mailto:evins@snaught.com"
 "\">Jim Evins</link>. To find more information about <app>gLabels</app>, "
@@ -186,7 +78,8 @@ msgstr ""
 "prosím <link href=\"http://glabels.org\" type=\"http\">webovou stránku "
 "<app>gLabels</app></link>."
 
-#: C/about.page:31(page/p)
+#. (itstool) path: page/p
+#: C/about.page:31
 msgid ""
 "To report a bug or make a suggestion regarding this application or this "
 "manual, follow the directions at the <link href=\"http://glabels.org/contact/"
@@ -197,7 +90,8 @@ msgstr ""
 "glabels.org/contact/\" type=\"http\">kontaktní stránce <app>gLabels</app></"
 "link>."
 
-#: C/about.page:37(page/p)
+#. (itstool) path: page/p
+#: C/about.page:37
 msgid ""
 "This program is distributed under the terms of the GNU General Public "
 "license as published by the Free Software Foundation; either version 3 of "
@@ -211,19 +105,23 @@ msgstr ""
 "pod tímto <link href=\"help:gpl\" type=\"help\">odkazem</link> nebo v "
 "souboru COPYING přiloženém ke zdrojovým kódům tohoto programu. "
 
-#: C/basicusage.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/basicusage.page:9
 msgid "Handling files and quit the application."
 msgstr "Práce se soubory a ukončení aplikace."
 
-#: C/basicusage.page:25(page/title)
+#. (itstool) path: page/title
+#: C/basicusage.page:25
 msgid "Basic usage"
 msgstr "Základy používání"
 
-#: C/basicusage.page:28(section/title)
+#. (itstool) path: section/title
+#: C/basicusage.page:28
 msgid "To open a file"
 msgstr "Jak otevřít soubor"
 
-#: C/basicusage.page:30(section/p)
+#. (itstool) path: section/p
+#: C/basicusage.page:30
 msgid ""
 "To open a file, choose <guiseq><gui>File</gui><gui>Open</gui> </guiseq> to "
 "display the <gui>Open File</gui> dialog. Select the file that you want to "
@@ -235,7 +133,8 @@ msgstr ""
 "soubor, který chcete otevřít a klikněte na <gui>OK</gui>. Soubor se zobrazí "
 "v zobrazovací oblasti okna <app>gLabels</app>."
 
-#: C/basicusage.page:37(section/p)
+#. (itstool) path: section/p
+#: C/basicusage.page:37
 msgid ""
 "You can also open multiple files in <app>gLabels</app>. The application "
 "creates a separate application window for each open file."
@@ -243,7 +142,8 @@ msgstr ""
 "V aplikaci <app>gLabels</app> můžete otevřít i více souborů naráz. Aplikace "
 "pro každý otevřený soubor vytvoří samostatné okno."
 
-#: C/basicusage.page:41(section/p)
+#. (itstool) path: section/p
+#: C/basicusage.page:41
 msgid ""
 "The application records the paths and filenames of the most recent files "
 "that you have edited and displays the files as menu items on the "
@@ -253,11 +153,13 @@ msgstr ""
 "a tyto soubory potom zobrazuje v nabídce <guiseq><gui>Soubor</gui> "
 "<gui>Otevřít nedávné soubory</gui></guiseq>."
 
-#: C/basicusage.page:48(section/title)
+#. (itstool) path: section/title
+#: C/basicusage.page:48
 msgid "To close a file"
 msgstr "Jak zavřít soubor"
 
-#: C/basicusage.page:50(section/p)
+#. (itstool) path: section/p
+#: C/basicusage.page:50
 msgid ""
 "To close the current document, choose <guiseq><gui>File</gui> <gui>Close</"
 "gui></guiseq> to close the application window. If the current document is "
@@ -271,15 +173,18 @@ msgstr ""
 "uložit nebo příkaz zrušit. Pokud je zavírané okno jediné otevřené, ukončí se "
 "celá aplikace <app>gLabels</app>."
 
-#: C/basicusage.page:60(section/title)
+#. (itstool) path: section/title
+#: C/basicusage.page:60
 msgid "To save a file"
 msgstr "Jak uložit soubor"
 
-#: C/basicusage.page:62(section/p)
+#. (itstool) path: section/p
+#: C/basicusage.page:62
 msgid "You can save files in the following ways:"
 msgstr "Soubory můžete uložit následujícími způsoby:"
 
-#: C/basicusage.page:66(item/p)
+#. (itstool) path: item/p
+#: C/basicusage.page:66
 msgid ""
 "To save changes to an existing file, choose <guiseq><gui>File</gui> "
 "<gui>Save</gui></guiseq>."
@@ -287,7 +192,8 @@ msgstr ""
 "Pro uložení změn do stávajícího souboru, zvolte <guiseq><gui>Soubor</gui> "
 "<gui>Uložit</gui></guiseq>."
 
-#: C/basicusage.page:73(item/p)
+#. (itstool) path: item/p
+#: C/basicusage.page:73
 msgid ""
 "To save a new file or to save an existing file under a new filename, choose "
 "<guiseq><gui>File</gui> <gui>Save As</gui></guiseq>. Enter a name for the "
@@ -298,11 +204,13 @@ msgstr ""
 "dialogovém okně <gui>Uložení jako</gui> zadejte pro soubor název a klikněte "
 "na <gui>OK</gui>."
 
-#: C/basicusage.page:84(section/title)
+#. (itstool) path: section/title
+#: C/basicusage.page:84
 msgid "To quit <app>gLabels</app>"
 msgstr "Jak ukončit <application>gLabels</application>"
 
-#: C/basicusage.page:86(section/p)
+#. (itstool) path: section/p
+#: C/basicusage.page:86
 msgid ""
 "To quit <app>gLabels</app>, choose <guiseq><gui>File</gui> <gui>Quit</gui></"
 "guiseq>. This is equivalent to closing all open windows. See <link xref="
@@ -312,15 +220,18 @@ msgstr ""
 "gui> <gui>Ukončit</gui></guiseq>. Odpovídá to zavření všech otevřených oken. "
 "Viz <link xref=\"basicusage#closefile\"/>."
 
-#: C/createnew.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/createnew.page:9
 msgid "Create new objects within your document."
 msgstr "Jak vytvořit nový objekt ve vašich dokumentech."
 
-#: C/createnew.page:25(page/title)
+#. (itstool) path: page/title
+#: C/createnew.page:25
 msgid "To create new objects"
 msgstr "Vytváření nových objektů"
 
-#: C/createnew.page:27(page/p)
+#. (itstool) path: page/p
+#: C/createnew.page:27
 msgid ""
 "Objects are created by choosing the appropriate selection under the "
 "<guiseq><gui>Objects</gui><gui>Create Object</gui></guiseq> submenu or the "
@@ -338,15 +249,18 @@ msgstr ""
 "<guiseq><gui>Objekty</gui> <gui>Režim výběru</gui></guiseq>. Ukazatel pro "
 "zobrazovací oblast se změní zpět na výchozí šipku."
 
-#: C/createnew.page:35(page/p)
+#. (itstool) path: page/p
+#: C/createnew.page:35
 msgid "The following describes the object creation mode for each object type:"
 msgstr "Zde je popis režimu vytváření objektu pro jednotlivé typy objektů:"
 
-#: C/createnew.page:39(section/title) C/customize.page:80(section/title)
+#. (itstool) path: section/title
+#: C/createnew.page:39 C/customize.page:80
 msgid "Text"
 msgstr "Text"
 
-#: C/createnew.page:40(section/p)
+#. (itstool) path: section/p
+#: C/createnew.page:40
 msgid ""
 "Click the desired location of the upper left corner of the text object. New "
 "text objects are initialized with the string \"Text.\" To change this text, "
@@ -356,11 +270,13 @@ msgstr ""
 "textový objekt se vytvoří s počátečním řetězcem „Text“. Jak tento text nebo "
 "další vlastnosti změnit uvádí <link xref=\"editprop\"/>."
 
-#: C/createnew.page:47(section/title)
+#. (itstool) path: section/title
+#: C/createnew.page:47
 msgid "Box"
 msgstr "Obdélník"
 
-#: C/createnew.page:48(section/p)
+#. (itstool) path: section/p
+#: C/createnew.page:48
 msgid ""
 "Click the desired location of the upper left corner of the box object and "
 "drag to the desired location of the lower right corner. If you simply click "
@@ -372,11 +288,13 @@ msgstr ""
 "kliknete na jednom místě, vytvoří se čtverec. Jak změnit vlastnosti "
 "obdélníku uvádí <link xref=\"editprop\"/>."
 
-#: C/createnew.page:56(section/title) C/customize.page:101(section/title)
+#. (itstool) path: section/title
+#: C/createnew.page:56 C/customize.page:101
 msgid "Line"
 msgstr "Čára"
 
-#: C/createnew.page:57(section/p)
+#. (itstool) path: section/p
+#: C/createnew.page:57
 msgid ""
 "Click the desired location of one end of the line object and drag to the "
 "desired location of the other end. If you simply click in a single location, "
@@ -388,11 +306,13 @@ msgstr ""
 "jednom místě, vytvoří diagonální úsečka. Jak změnit vlastnosti čáry uvádí "
 "<link xref=\"editprop\"/>."
 
-#: C/createnew.page:65(section/title)
+#. (itstool) path: section/title
+#: C/createnew.page:65
 msgid "Ellipse"
 msgstr "Elipsa"
 
-#: C/createnew.page:66(section/p)
+#. (itstool) path: section/p
+#: C/createnew.page:66
 msgid ""
 "Click the desired location of the upper left corner of the ellipse object "
 "and drag to the desired location of the lower right corner. If you simply "
@@ -404,11 +324,13 @@ msgstr ""
 "jednom místě, vytvoří se kruh. Jak změnit vlastnosti elipsy uvádí <link xref="
 "\"editprop\"/>."
 
-#: C/createnew.page:74(section/title)
+#. (itstool) path: section/title
+#: C/createnew.page:74
 msgid "Image"
 msgstr "Obrázek"
 
-#: C/createnew.page:75(section/p)
+#. (itstool) path: section/p
+#: C/createnew.page:75
 msgid ""
 "Click the desired location of the upper left corner of the image object and "
 "drag to the desired location of the lower right corner. If you simply click "
@@ -422,11 +344,13 @@ msgstr ""
 "vytvoří s jednoduchým počátečním obrázkem šachovnice. Jak změnit tento "
 "obrázek a další vlastnosti uvádí <link xref=\"editprop\"/>."
 
-#: C/createnew.page:85(section/title)
+#. (itstool) path: section/title
+#: C/createnew.page:85
 msgid "Barcode"
 msgstr "Čárový kód"
 
-#: C/createnew.page:86(section/p)
+#. (itstool) path: section/p
+#: C/createnew.page:86
 msgid ""
 "Click the desired location of the upper left corner of the barcode object. "
 "New barcode objects are initialized to a POSTNET barcode with representative "
@@ -438,15 +362,18 @@ msgstr ""
 "daty. Jak tato data nebo další vlastnosti změnit uvádí <link xref=\"editprop"
 "\"/>."
 
-#: C/customize.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/customize.page:9
 msgid "Customize <app>gLabels</app> to match your needs."
 msgstr "Přizpůsobte si aplikaci <app>gLabels</app> svým potřebám."
 
-#: C/customize.page:25(page/title)
+#. (itstool) path: page/title
+#: C/customize.page:25
 msgid "Settings"
 msgstr "Nastavení"
 
-#: C/customize.page:26(page/p)
+#. (itstool) path: page/p
+#: C/customize.page:26
 msgid ""
 "To configure <app>gLabels</app>, choose <guiseq> <gui>Settings</gui> "
 "<gui>Preferences</gui> </guiseq>. The <gui>Preferences</gui> dialog contains "
@@ -456,15 +383,18 @@ msgstr ""
 "<guiseq><gui>Upravit</gui> <gui>Předvolby</gui></guiseq>. Dialogové okno "
 "<gui>Předvolby gLabels</gui> obsahuje následující karty:"
 
-#: C/customize.page:35(section/title)
+#. (itstool) path: section/title
+#: C/customize.page:35
 msgid "Locale"
 msgstr "Národní prostředí"
 
-#: C/customize.page:37(section/title)
+#. (itstool) path: section/title
+#: C/customize.page:37
 msgid "Units"
 msgstr "Jednotky"
 
-#: C/customize.page:38(section/p)
+#. (itstool) path: section/p
+#: C/customize.page:38
 msgid ""
 "Use this radio button group to specify your preferred units. Select one of "
 "the following options:"
@@ -472,41 +402,50 @@ msgstr ""
 "Tento skupinový přepínač použijte k určení svých upřednostňovaných jednotek. "
 "Vyberte jednu z následujících možností:"
 
-#: C/customize.page:42(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:42
 msgid "<gui>Points</gui>"
 msgstr "<gui>Body</gui>"
 
-#: C/customize.page:43(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:43
 msgid "Use points (1 point = 1/72 in = 0.352778 mm)."
 msgstr "Použít body (1 bod = 1/72 palce = 0,352778 mm)."
 
-#: C/customize.page:46(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:46
 msgid "<gui>Inches</gui>"
 msgstr "<gui>Palce</gui>"
 
-#: C/customize.page:47(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:47
 msgid "Use Inches."
 msgstr "Použít palce (1 palec = 25,4 mm)."
 
-#: C/customize.page:50(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:50
 msgid "<gui>Millimeters</gui>"
 msgstr "<gui>Milimetry</gui>"
 
-#: C/customize.page:51(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:51
 msgid "Use Millimeters."
 msgstr "Použít milimetry."
 
-#: C/customize.page:54(section/p)
+#. (itstool) path: section/p
+#: C/customize.page:54
 msgid "Default: <gui>Inches</gui>."
 msgstr "Výchozí : <gui>Palce</gui>."
 
-#: C/customize.page:58(section/title)
+#. (itstool) path: section/title
+#: C/customize.page:58
 msgid "Default page size"
 msgstr "Výchozí velikost stránky"
 
-#: C/customize.page:59(section/p)
+#. (itstool) path: section/p
+#: C/customize.page:59
 msgid ""
-"Use this radio button group to specify your prefered page size. This will "
+"Use this radio button group to specify your preferred page size. This will "
 "make it quicker for you to locate media types when creating a new label or "
 "card."
 msgstr ""
@@ -514,32 +453,39 @@ msgstr ""
 "stránky. Urychlí vám to hledání typu média při vytváření nové etikety nebo "
 "vizitky."
 
-#: C/customize.page:64(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:64
 msgid "<gui>US Letter</gui>"
 msgstr "<gui>US Letter</gui>"
 
-#: C/customize.page:65(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:65
 msgid ""
 "Most of your media will be of the US Letter page size (8.5 x 11 inches)."
 msgstr "Většina vašich médií má velikost stránky US Letter (8,5 × 11 palců)."
 
-#: C/customize.page:68(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:68
 msgid "<gui>ISO A4</gui>"
 msgstr "<gui>ISO A4</gui>"
 
-#: C/customize.page:69(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:69
 msgid "Most of your media will be of the ISO A4 page size (210 x 297 mm)."
 msgstr "Většina vašich médií má velikost stránky ISO A4 (210 × 297 mm)."
 
-#: C/customize.page:72(section/p)
+#. (itstool) path: section/p
+#: C/customize.page:72
 msgid "Default: <gui>US Letter</gui>."
 msgstr "Výchozí: <gui>US Letter</gui>."
 
-#: C/customize.page:77(section/title)
+#. (itstool) path: section/title
+#: C/customize.page:77
 msgid "Object Defaults"
 msgstr "Výchozí hodnoty objektů"
 
-#: C/customize.page:81(section/p)
+#. (itstool) path: section/p
+#: C/customize.page:81
 msgid ""
 "Use these controls to set the default properties of new text objects. These "
 "properties are:"
@@ -547,11 +493,13 @@ msgstr ""
 "Použijte tyto ovládací prvky k nastavení výchozích vlastností nových "
 "textových objektů. Tyto vlastnosti jsou:"
 
-#: C/customize.page:85(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:85
 msgid "<gui>Font</gui>"
 msgstr "<gui>Písmo</gui>"
 
-#: C/customize.page:86(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:86
 msgid ""
 "These controls are used to select font family and font size, and whether the "
 "font should bold or in italics."
@@ -559,20 +507,23 @@ msgstr ""
 "Tyto ovládací prvky slouží k nastavení rodiny písma a velikosti písma a zda "
 "by mělo být písmo tučné nebo kurzívou."
 
-#: C/customize.page:90(item/p) C/customize.page:110(item/p)
-#: C/customize.page:122(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:90 C/customize.page:110 C/customize.page:122
 msgid "<gui>Color</gui>"
 msgstr "<gui>Barva</gui>"
 
-#: C/customize.page:91(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:91
 msgid "This control selects the default text color."
 msgstr "Tímto ovládacím prvkem se vybírá výchozí barva textu."
 
-#: C/customize.page:94(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:94
 msgid "<gui>Alignment</gui>"
 msgstr "<gui>Zarovnání</gui>"
 
-#: C/customize.page:95(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:95
 msgid ""
 "These controls are used to select the default text alignment (left, center "
 "or right)."
@@ -580,7 +531,8 @@ msgstr ""
 "Tyto ovládací prvky slouží k výběru výchozího zarovnání textu (vlevo, na "
 "střed nebo vpravo)."
 
-#: C/customize.page:102(section/p)
+#. (itstool) path: section/p
+#: C/customize.page:102
 msgid ""
 "Use these controls to set the default properties of lines and outlines of "
 "new objects. These properties are:"
@@ -588,23 +540,28 @@ msgstr ""
 "Použijte tyto ovládací prvky k nastavení výchozích vlastností čar a obrysů "
 "nových objektů. Tyto vlastnosti jsou:"
 
-#: C/customize.page:106(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:106
 msgid "<gui>Width</gui>"
 msgstr "<gui>Šířka</gui>"
 
-#: C/customize.page:107(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:107
 msgid "This control selects the default line width."
 msgstr "Tímto ovládacím prvkem se vybírá výchozí šířka čáry."
 
-#: C/customize.page:111(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:111
 msgid "This control selects the default line color."
 msgstr "Tímto ovládacím prvkem se vybírá výchozí barva čáry."
 
-#: C/customize.page:117(section/title)
+#. (itstool) path: section/title
+#: C/customize.page:117
 msgid "Fill"
 msgstr "Výplň"
 
-#: C/customize.page:118(section/p)
+#. (itstool) path: section/p
+#: C/customize.page:118
 msgid ""
 "Use this control to set the default fill property of new objects. This "
 "property is:"
@@ -612,19 +569,23 @@ msgstr ""
 "Použijte tyto ovládací prvky k nastavení výchozích vlastností výplně nových "
 "objektů. Tyto vlastnosti jsou:"
 
-#: C/customize.page:123(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:123
 msgid "This control selects the default fill color."
 msgstr "Tento ovládací prvek slouží k výběru výchozí barvy výplně."
 
-#: C/customtemplate.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/customtemplate.page:9
 msgid "Create your own templates for stationery products."
 msgstr "Jak vytvořit vlastní šablonu pro papírové výrobky."
 
-#: C/customtemplate.page:25(page/title)
+#. (itstool) path: page/title
+#: C/customtemplate.page:25
 msgid "To create a custom template"
 msgstr "Vytvoření vlastní šablony"
 
-#: C/customtemplate.page:27(page/p)
+#. (itstool) path: page/p
+#: C/customtemplate.page:27
 msgid ""
 "To create a new custom template, choose <guiseq><gui>File</gui> "
 "<gui>Template Designer ...</gui></guiseq> to display the <gui>Template "
@@ -636,7 +597,8 @@ msgstr ""
 "šablon gLabels</gui>. Toto dialogové okno vás provede vytvořením vlastní "
 "šablony pro většinu typů etiket nebo vizitek, se kterými se můžete setkat."
 
-#: C/customtemplate.page:34(page/p)
+#. (itstool) path: page/p
+#: C/customtemplate.page:34
 msgid ""
 "If you prefer, you can create your templates manually. For this option see "
 "<link xref=\"mancreate\"/>"
@@ -644,11 +606,12 @@ msgstr ""
 "Pokud dáváte přednost ručnímu vytvoření šablon, přečtěte si <link xref="
 "\"mancreate\"/>"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/editprop.page:35(media)
+#: C/editprop.page:35
 msgctxt "_"
 msgid ""
 "external ref='figures/object-editor-sidebar.png' "
@@ -657,15 +620,18 @@ msgstr ""
 "external ref='figures/object-editor-sidebar.png' "
 "md5='68be18416cc17964992fe0c7e311e0ef'"
 
-#: C/editprop.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/editprop.page:9
 msgid "Change the properties of objects."
 msgstr "Jak upravit vlastnosti objektu."
 
-#: C/editprop.page:25(page/title)
+#. (itstool) path: page/title
+#: C/editprop.page:25
 msgid "To edit object properties"
 msgstr "Změna vlastností objektů"
 
-#: C/editprop.page:29(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:29
 msgid ""
 "Most object properties can be modified through the object editor sidebar, "
 "illustrated below. To use the object editor, a single object must first be "
@@ -675,11 +641,13 @@ msgstr ""
 "liště, který je vyobrazený níže. Abyste mohli editor objektů používat, "
 "musíte nejdříve vybrat jeden objekt. Viz <link xref=\"select\"/>."
 
-#: C/editprop.page:36(media/p) C/printfile.page:48(media/p)
+#. (itstool) path: media/p
+#: C/editprop.page:36 C/printfile.page:48
 msgid "Print Copy Controls"
 msgstr "Ovládací prvky tisku kopií"
 
-#: C/editprop.page:40(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:40
 msgid ""
 "The object editor will contain a subset of the following tabbed sections, "
 "depending on object type:"
@@ -687,11 +655,13 @@ msgstr ""
 "Editor objektů bude obsahovat některé z následujících karet, které závisí na "
 "typu objektu:"
 
-#: C/editprop.page:44(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:44
 msgid "Text Tabbed Section (Text objects)"
 msgstr "Karta Text (textové objekty)"
 
-#: C/editprop.page:46(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:46
 msgid ""
 "This section contains a small editor for changing the content of a text "
 "object. It also contains a dropdown menu of available document merge keys, "
@@ -701,11 +671,13 @@ msgstr ""
 "obsahuje vyskakovací nabídku dostupných klíčů slučování dokumentů, které lze "
 "do textu vkládat."
 
-#: C/editprop.page:53(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:53
 msgid "Image Tabbed Section (Image objects)"
 msgstr "Karta Obrázek (obrázkové objekty)"
 
-#: C/editprop.page:55(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:55
 msgid ""
 "This section contains a file entry with preview to select image files. The "
 "browse button can be used to easily locate image files. Alternatively, a "
@@ -715,11 +687,13 @@ msgstr ""
 "procházení můžete soubor snadno najít. Druhou možností je použití klíče pro "
 "slučování dokumentů, který poskytne název souboru až během tisku."
 
-#: C/editprop.page:63(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:63
 msgid "Data Tabbed Section (Barcode objects)"
 msgstr "Karta Data (objekty čárových kódů)"
 
-#: C/editprop.page:65(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:65
 msgid ""
 "This section contains a text entry to enter literal barcode data. "
 "Alternatively, a document merge key can be used to provide this data at "
@@ -729,11 +703,13 @@ msgstr ""
 "možností je použití klíče pro slučování dokumentů, přes který jsou data "
 "poskytována až během tisku."
 
-#: C/editprop.page:72(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:72
 msgid "Style Tabbed Section (Text objects)"
 msgstr "Karta Styl (textové objekty)"
 
-#: C/editprop.page:74(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:74
 msgid ""
 "This section contains controls to select text properties, including font "
 "family, font size, font weight, color, and text justification."
@@ -741,11 +717,13 @@ msgstr ""
 "Tato karta obsahuje ovládací prvky na výběr vlastností textu, včetně typu "
 "písma, velikosti písma, tloušťky písma, barvy a zarovnání textu."
 
-#: C/editprop.page:81(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:81
 msgid "Style Tabbed Section (Barcode objects)"
 msgstr "Karta Styl (objekty čárových kódů)"
 
-#: C/editprop.page:83(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:83
 msgid ""
 "This section contains controls to select barcode properties, including "
 "barcode style, color, whether to print text, and whether to include a "
@@ -755,11 +733,13 @@ msgstr ""
 "stylu čárového kódu, barvy, zda tisknout text a zda vkládat číslo s "
 "kontrolním součtem."
 
-#: C/editprop.page:90(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:90
 msgid "Line Tabbed Section"
 msgstr "Karta Čára"
 
-#: C/editprop.page:92(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:92
 msgid ""
 "This section contains controls to select properties of lines and outlines. "
 "These properties include line width and color."
@@ -767,11 +747,13 @@ msgstr ""
 "Tato karta obsahuje ovládací prvky na výběr vlastností čar a obrysů. Tyto "
 "vlastnosti zahrnují tloušťku čáry a její barvu."
 
-#: C/editprop.page:98(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:98
 msgid "Fill Tabbed Section"
 msgstr "Karta Výplň"
 
-#: C/editprop.page:100(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:100
 msgid ""
 "This section contains controls to select fill properties of box and ellipse "
 "objects. Currently the only fill property is fill color."
@@ -779,11 +761,13 @@ msgstr ""
 "Tato karta obsahuje ovládací prvky na výběr vlastností výplně objektů "
 "obdélníků a elips. V současnosti obsahuje pouze barvu výplně."
 
-#: C/editprop.page:107(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:107
 msgid "Size Tabbed Section (All except line objects)"
 msgstr "Karta Velikost (všechny objekty vyjma čar)"
 
-#: C/editprop.page:109(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:109
 msgid ""
 "This section contains controls to select the width and height of an object. "
 "A checkbox is provided, so that the current aspect ratio can be locked while "
@@ -795,45 +779,55 @@ msgstr ""
 "úprav šířky a výšky. U obrázků je k dispozici rovněž tlačítko, kterým můžete "
 "nastavit reálné rozměry obrázku (předpokládá se 72 DPI)."
 
-#: C/editprop.page:118(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:118
 msgid "Size Tabbed Section (Line objects)"
 msgstr "Karta Velikost (objekty čar)"
 
-#: C/editprop.page:120(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:120
 msgid ""
 "This section contains controls to select the length and angle of a line "
 "object."
 msgstr "Tato karta obsahuje ovládací prvky pro výběr délky a úhlu čáry."
 
-#: C/editprop.page:126(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:126
 msgid "Position Tabbed Section"
 msgstr "Karta Pozice"
 
-#: C/editprop.page:128(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:128
 msgid "This section contains controls to change the position of an object."
 msgstr "Tato karta obsahuje ovládací prvky pro změnu pozice objektu."
 
-#: C/editprop.page:135(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:135
 msgid "Shadow Tabbed Section (All except barcode objects)"
 msgstr "Karta Stín (všechny objekty vyjma čárových kódů)"
 
-#: C/editprop.page:137(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:137
 msgid "This section contains controls to add a shadow to an object."
 msgstr "Tato karta obsahuje ovládací prvky pro přidání stínu k objektu."
 
-#: C/editprop.page:146(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:146
 msgid "Other Manipulations of Objects"
 msgstr "Ostatní manipulace s objekty"
 
-#: C/editprop.page:148(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:148
 msgid "Objects can also be manipulated in the following ways."
 msgstr "S objekty lze manipulovat ještě následujícími způsoby:"
 
-#: C/editprop.page:151(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:151
 msgid "Moving and Resizing Objects"
 msgstr "Přesouvání a změna velikosti objektů"
 
-#: C/editprop.page:153(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:153
 msgid ""
 "Objects can be moved by simply clicking on a selected object and dragging "
 "the object to its new location. If the object is part of an aggregate "
@@ -848,7 +842,8 @@ msgstr ""
 "zůstane zachovaná. Pokud není žádný objekt vybraný, kliknutí na objekt "
 "provede nový výběr tohoto objektu. Viz <link xref=\"select\"/>."
 
-#: C/editprop.page:161(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:161
 msgid ""
 "A selected object can be resized by clicking one of its resize handle and "
 "dragging it to obtain the new size."
@@ -856,11 +851,13 @@ msgstr ""
 "U vybraných objektů můžete měnit jejich velikost kliknutím na úchyt pro "
 "změnu velikosti a jeho tažením tak, abyste dosáhli správné velikost."
 
-#: C/editprop.page:167(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:167
 msgid "Changing Stacking Order"
 msgstr "Změna pořadí objektů"
 
-#: C/editprop.page:169(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:169
 msgid ""
 "Stacking order refers to relative position in the z-axis of objects. That is "
 "when objects overlap, which object will appear on top of the other. By "
@@ -883,11 +880,13 @@ msgstr ""
 "pravým tlačítkem v zobrazovací oblasti za předpokladu, že jsou vybrané "
 "nějaké objekty."
 
-#: C/editprop.page:187(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:187
 msgid "Rotating and Flipping Objects"
 msgstr "Otáčení a překlápění objektů"
 
-#: C/editprop.page:189(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:189
 msgid ""
 "Objects can be rotated 90 degrees in either direction, or flipped "
 "horizontally or vertically, by choosing the appropriate menuitem in the "
@@ -901,7 +900,8 @@ msgstr ""
 "položky nabídky jsou přístupné i po kliknutí pravým tlačítkem v zobrazovací "
 "oblasti za předpokladu, že jsou vybrané nějaké objekty."
 
-#: C/editprop.page:197(note/p)
+#. (itstool) path: note/p
+#: C/editprop.page:197
 msgid ""
 "This feature could be useful when you are designing CD box inlays. For the "
 "spine caption, you need vertical aligned text. After you have created a "
@@ -913,11 +913,13 @@ msgstr ""
 "základním textem, zvolte <guiseq><gui>Objekty</gui> <gui>Otočit/překlopit</"
 "gui></guiseq>, abyste textový rámec natočili podle svých požadavků."
 
-#: C/editprop.page:208(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:208
 msgid "Aligning Objects"
 msgstr "Zarovnávání objektů"
 
-#: C/editprop.page:210(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:210
 msgid ""
 "Objects can be aligned horizontally or vertically, relative to one another, "
 "or relative to the center line of the label, by choosing the appropriate "
@@ -933,11 +935,13 @@ msgstr ""
 "nabídky jsou přístupné i po kliknutí pravým tlačítkem v zobrazovací oblasti "
 "za předpokladu, že jsou vybrané nějaké objekty."
 
-#: C/editprop.page:223(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:223
 msgid "Using the Property Bar"
 msgstr "Používání lišty vlastností"
 
-#: C/editprop.page:225(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:225
 msgid ""
 "The property bar can be used to change some common properties of objects en-"
 "masse. These properties include font family, font size, font weight, text "
@@ -951,15 +955,126 @@ msgstr ""
 "tloušťku čáry. Přes panel vlastností může také zadat výchozí hodnoty těchto "
 "vlastností pro nově vytvářené objekty."
 
-#: C/labelprop.page:9(info/desc)
+#. (itstool) path: media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/index.page:24
+msgctxt "_"
+msgid ""
+"external ref='figures/glabels-logo.png' "
+"md5='0c1e32afcbae0d2fc6976020c24a0a43'"
+msgstr ""
+"external ref='figures/glabels-logo.png' "
+"md5='0c1e32afcbae0d2fc6976020c24a0a43'"
+
+#. (itstool) path: media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/index.page:47
+msgctxt "_"
+msgid ""
+"external ref='figures/introduction-glabels-main-window.png' "
+"md5='9ee2b2cc026ee8cba3c881b370a14313'"
+msgstr ""
+"external ref='figures/introduction-glabels-main-window.png' "
+"md5='9ee2b2cc026ee8cba3c881b370a14313'"
+
+#. (itstool) path: info/title
+#: C/index.page:7
+msgctxt "link"
+msgid "gLabels label and business card designer"
+msgstr "Návrhář etiket a vizitek gLabels"
+
+#. (itstool) path: info/title
+#: C/index.page:8
+msgctxt "text"
+msgid "gLabels label and business card designer"
+msgstr "Návrhář etiket a vizitek gLabels"
+
+#. (itstool) path: page/title
+#: C/index.page:23
+msgid ""
+"<media type=\"image\" mime=\"image/png\" src=\"figures/glabels-logo.png"
+"\">gLabels logo</media> gLabels Manual"
+msgstr ""
+"<media type=\"image\" mime=\"image/png\" src=\"figures/glabels-logo.png"
+"\">logo gLabels</media> Příručka aplikace gLabels"
+
+#. (itstool) path: page/p
+#: C/index.page:28
+msgid ""
+"The <app>gLabels</app> application is a lightweight program for creating "
+"labels and business cards for the GNOME desktop environment. It is designed "
+"to work with various laser/ink-jet peel-off label and business card sheets "
+"that you'll find at most office supply stores."
+msgstr ""
+"Aplikace <application>gLabels</application> je jednoduchý program na "
+"vytváření etiket a vizitek pro pracovní prostředí GNOME. Je navržená pro "
+"práci s různými samolepicími etiketami a vizitkami rozmístěnými na listech "
+"pro laserový/inkoustový tisk, které najdete ve většině obchodů s "
+"kancelářskými potřebami."
+
+#. (itstool) path: page/p
+#: C/index.page:35
+msgid ""
+"<app>gLabels</app> can be used to design address labels, name tags, price "
+"tags, cd/dvd labels, or just about anything else that is organized in a "
+"regular pattern on a sheet of paper. Labels (or cards) can contain text, "
+"images, lines, shapes, and barcodes. <app>gLabels</app> also includes a "
+"document-merge feature which lets you print a unique label for each record "
+"from an external data source, such as a CSV file or an <app>Evolution</app> "
+"address book."
+msgstr ""
+"Aplikaci <app>gLabels</app> můžete používat k návrhu adresních štítků, "
+"visaček, cenovek, obalů na CD/DVD nebo cokoliv jiného, co je uspořádáno na "
+"listu papíru v pravidelném vzoru. Etikety (nebo kartičky) mohou obsahovat "
+"text, obrázky, čáry, tvary a čárové kódy. Aplikace <app>gLabels</app> "
+"obsahuje také funkci slučování dokumentů, díky které můžete tisknout každou "
+"etiketu jinou, podle záznamů v externím zdroji dat, jako jsou soubory CSV "
+"nebo adresář kontaktů <app>Evolution</app>."
+
+#. (itstool) path: figure/title
+#. (itstool) path: figure/desc
+#: C/index.page:45 C/index.page:46
+msgid "<app>gLabels</app> main window"
+msgstr "Hlavní okno <app>gLabels</app>"
+
+#. (itstool) path: media/p
+#: C/index.page:48
+msgid "<app>gLabels</app> main window."
+msgstr "Hlavní okno <app>gLabels</app>."
+
+#. (itstool) path: section/title
+#: C/index.page:53
+msgid "Usage"
+msgstr "Použití"
+
+#. (itstool) path: section/title
+#: C/index.page:57
+msgid "Document Merging"
+msgstr "Slučováním dokumentů"
+
+#. (itstool) path: section/title
+#: C/index.page:61
+msgid "Advanced usage"
+msgstr "Pokročilé používání"
+
+#. (itstool) path: info/desc
+#: C/labelprop.page:9
 msgid "How to change the properties of a label or business card."
 msgstr "Jak změnit vlastnosti etikety nebo vizitky."
 
-#: C/labelprop.page:25(page/title)
+#. (itstool) path: page/title
+#: C/labelprop.page:25
 msgid "To change label properties"
 msgstr "Změna vlastností etikety"
 
-#: C/labelprop.page:27(page/p)
+#. (itstool) path: page/p
+#: C/labelprop.page:27
 msgid ""
 "To change the media type and/or orientation of a label, choose "
 "<guiseq><gui>File</gui> <gui>Properties</gui></guiseq> to display the "
@@ -971,15 +1086,18 @@ msgstr ""
 "dialogové okno <gui>Vlastnosti etikety</gui>. Zvolte pro dokument nový typ "
 "média a orientaci a klikněte na <gui>OK</gui>."
 
-#: C/license.page:8(info/desc)
+#. (itstool) path: info/desc
+#: C/license.page:8
 msgid "Legal information."
 msgstr "Právní informace."
 
-#: C/license.page:11(page/title)
+#. (itstool) path: page/title
+#: C/license.page:11
 msgid "License"
 msgstr "Licence"
 
-#: C/license.page:12(page/p)
+#. (itstool) path: page/p
+#: C/license.page:12
 msgid ""
 "This work is distributed under a CreativeCommons Attribution-Share Alike 3.0 "
 "Unported license."
@@ -987,35 +1105,43 @@ msgstr ""
 "Tato práce je šířena pod licencí CreativeCommons Attribution-Share Alike 3.0 "
 "Unported Licence."
 
-#: C/license.page:20(page/p)
+#. (itstool) path: page/p
+#: C/license.page:20
 msgid "You are free:"
 msgstr "Můžete volně:"
 
-#: C/license.page:25(item/title)
+#. (itstool) path: item/title
+#: C/license.page:25
 msgid "<em>To share</em>"
 msgstr "<em>Sdílet</em>"
 
-#: C/license.page:26(item/p)
+#. (itstool) path: item/p
+#: C/license.page:26
 msgid "To copy, distribute and transmit the work."
 msgstr "Kopírovat, šířit a rozesílat dílo."
 
-#: C/license.page:29(item/title)
+#. (itstool) path: item/title
+#: C/license.page:29
 msgid "<em>To remix</em>"
 msgstr "<em>Měnit</em>"
 
-#: C/license.page:30(item/p)
+#. (itstool) path: item/p
+#: C/license.page:30
 msgid "To adapt the work."
 msgstr "Přizpůsobovat dílo."
 
-#: C/license.page:33(page/p)
+#. (itstool) path: page/p
+#: C/license.page:33
 msgid "Under the following conditions:"
 msgstr "Za následujících podmínek:"
 
-#: C/license.page:38(item/title)
+#. (itstool) path: item/title
+#: C/license.page:38
 msgid "<em>Attribution</em>"
 msgstr "<em>Označení</em>"
 
-#: C/license.page:39(item/p)
+#. (itstool) path: item/p
+#: C/license.page:39
 msgid ""
 "You must attribute the work in the manner specified by the author or "
 "licensor (but not in any way that suggests that they endorse you or your use "
@@ -1024,11 +1150,13 @@ msgstr ""
 "Musíte dílo označit v souladu s požadavky autora nebo licence (ale ne žádným "
 "způsobem, který předpokládá, že podporují vás nebo vaše použití díla)."
 
-#: C/license.page:46(item/title)
+#. (itstool) path: item/title
+#: C/license.page:46
 msgid "<em>Share Alike</em>"
 msgstr "<em>Stejné sdílení</em>"
 
-#: C/license.page:47(item/p)
+#. (itstool) path: item/p
+#: C/license.page:47
 msgid ""
 "If you alter, transform, or build upon this work, you may distribute the "
 "resulting work only under the same, similar or a compatible license."
@@ -1036,7 +1164,8 @@ msgstr ""
 "Pokud dílo změníte, převedete nebo na něm založíte jiné, můžete výsledek "
 "této práce šířit pouze pod stejnou, podobnou nebo kompatibilní licencí."
 
-#: C/license.page:53(page/p)
+#. (itstool) path: page/p
+#: C/license.page:53
 msgid ""
 "For the full text of the license, see the <link href=\"http://"
 "creativecommons.org/licenses/by-sa/3.0/legalcode\">CreativeCommons website</"
@@ -1048,28 +1177,12 @@ msgstr ""
 "nebo si přečtěte <link href=\"http://creativecommons.org/licenses/by-sa/3.0/"
 "\">výtah dokumentu pro neprávníky</link>."
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/mancreate.page:340(media)
-#| msgctxt "_"
-#| msgid ""
-#| "external ref='figures/glabels-template-ellipse-label.png' "
-#| "md5='ba612c86b5fb8fcd2b5384ecc1c331d2'"
-msgctxt "_"
-msgid ""
-"external ref='figures/glabels-template-rect-label.png' "
-"md5='9c7ae1c1a888e1c9eefd19655d093971'"
-msgstr ""
-"external ref='figures/glabels-template-rect-label.png' "
-"md5='9c7ae1c1a888e1c9eefd19655d093971'"
-
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/mancreate.page:392(media)
+#: C/mancreate.page:392
 msgctxt "_"
 msgid ""
 "external ref='figures/glabels-template-ellipse-label.png' "
@@ -1078,83 +1191,18 @@ msgstr ""
 "external ref='figures/glabels-template-ellipse-label.png' "
 "md5='ba612c86b5fb8fcd2b5384ecc1c331d2'"
 
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/mancreate.page:439(media)
-#| msgctxt "_"
-#| msgid ""
-#| "external ref='figures/glabels-template-ellipse-label.png' "
-#| "md5='ba612c86b5fb8fcd2b5384ecc1c331d2'"
-msgctxt "_"
-msgid ""
-"external ref='figures/glabels-template-circle-label.png' "
-"md5='841e36a1f92aeed01e8fbaacc67758f1'"
-msgstr ""
-"external ref='figures/glabels-template-circle-label.png' "
-"md5='841e36a1f92aeed01e8fbaacc67758f1'"
-
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/mancreate.page:500(media)
-#| msgctxt "_"
-#| msgid ""
-#| "external ref='figures/glabels-template-ellipse-label.png' "
-#| "md5='ba612c86b5fb8fcd2b5384ecc1c331d2'"
-msgctxt "_"
-msgid ""
-"external ref='figures/glabels-template-cd-label.png' "
-"md5='c7952ac1b26ecbfa53facfbbf6486841'"
-msgstr ""
-"external ref='figures/glabels-template-cd-label.png' "
-"md5='c7952ac1b26ecbfa53facfbbf6486841'"
-
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/mancreate.page:726(media)
-#| msgctxt "_"
-#| msgid ""
-#| "external ref='figures/glabels-logo.png' "
-#| "md5='0c1e32afcbae0d2fc6976020c24a0a43'"
-msgctxt "_"
-msgid ""
-"external ref='figures/layouts-cdlabel.png' "
-"md5='0c41a95dc82b5a426e934751faf86872'"
-msgstr ""
-"external ref='figures/layouts-cdlabel.png' "
-"md5='0c41a95dc82b5a426e934751faf86872'"
-
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/mancreate.page:789(media)
-#| msgctxt "_"
-#| msgid ""
-#| "external ref='figures/glabels-template-ellipse-label.png' "
-#| "md5='ba612c86b5fb8fcd2b5384ecc1c331d2'"
-msgctxt "_"
-msgid ""
-"external ref='figures/glabels-template-layout.png' "
-"md5='fe1c9652d5448b2e0ece086777d3a287'"
-msgstr ""
-"external ref='figures/glabels-template-layout.png' "
-"md5='fe1c9652d5448b2e0ece086777d3a287'"
-
-#: C/mancreate.page:11(info/desc)
+#. (itstool) path: info/desc
+#: C/mancreate.page:11
 msgid "Create your templates manually."
 msgstr "Vytvářejte své šablony ručně."
 
-#: C/mancreate.page:27(page/title)
+#. (itstool) path: page/title
+#: C/mancreate.page:27
 msgid "Manually creating new templates"
 msgstr "Ruční vytváření nových šablon"
 
-#: C/mancreate.page:34(page/p)
+#. (itstool) path: page/p
+#: C/mancreate.page:34
 msgid ""
 "This page is a reference guide to manually creating <app>gLabels</app> "
 "templates. <app>gLabels</app> templates are defined in simple XML files as "
@@ -1168,7 +1216,8 @@ msgstr ""
 "glabels-2.3.dtd.txt\">glabels-2.3.dtd</link> (toto DTD popisuje i ostatní "
 "formáty XML používané v aplikaci <application>gLabels</application>)."
 
-#: C/mancreate.page:39(page/p)
+#. (itstool) path: page/p
+#: C/mancreate.page:39
 msgid ""
 "Manually created template files should be placed in the <file>${HOME}/."
 "glabels</file> and be named with a <file>.template</file> extension."
@@ -1177,7 +1226,8 @@ msgstr ""
 "${HOME}/.glabels</file> a jejich název by měl mít příponu <file>.template</"
 "file>."
 
-#: C/mancreate.page:43(note/p)
+#. (itstool) path: note/p
+#: C/mancreate.page:43
 msgid ""
 "<app>gLabels</app> searches for templates in several other locations as "
 "defined here:"
@@ -1185,25 +1235,27 @@ msgstr ""
 "Aplikace <app>gLabels</app> hledá šablony na několika další místech, "
 "konkrétně na těchto:"
 
-#: C/mancreate.page:46(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:46
 msgid "Location"
 msgstr "Umístění"
 
-#: C/mancreate.page:47(td/p) C/mancreate.page:173(td/p)
-#: C/mancreate.page:237(td/p) C/mancreate.page:301(td/p)
-#: C/mancreate.page:364(td/p) C/mancreate.page:415(td/p)
-#: C/mancreate.page:462(td/p) C/mancreate.page:535(td/p)
-#: C/mancreate.page:562(td/p) C/mancreate.page:600(td/p)
-#: C/mancreate.page:634(td/p) C/mancreate.page:676(td/p)
-#: C/mancreate.page:753(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:47 C/mancreate.page:173 C/mancreate.page:237
+#: C/mancreate.page:301 C/mancreate.page:364 C/mancreate.page:415
+#: C/mancreate.page:462 C/mancreate.page:535 C/mancreate.page:562
+#: C/mancreate.page:600 C/mancreate.page:634 C/mancreate.page:676
+#: C/mancreate.page:753
 msgid "Description"
 msgstr "Popis"
 
-#: C/mancreate.page:55(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:55
 msgid "Predefined templates distributed with <app>gLabels</app>."
 msgstr "Předdefinované šablony šířené s aplikací <app>gLabels</app>."
 
-#: C/mancreate.page:56(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:56
 msgid ""
 "<file>${prefix}</file> is usually <file>/usr</file> or <file>/usr/local</"
 "file>, depending on where <app>gLabels</app> was installed."
@@ -1211,7 +1263,8 @@ msgstr ""
 "<file>${prefix}</file> je obvykle <file>/usr</file> nebo <file>/usr/local</"
 "file> podle toho, kde je nainstalována vlastní aplikace <app>gLabels</app>."
 
-#: C/mancreate.page:61(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:61
 msgid ""
 "User defined templates created with the <app>gLabels</app> <gui>Template "
 "Designer</gui>. <em>Do not put manually created templates in this directory."
@@ -1221,7 +1274,8 @@ msgstr ""
 "<app>gLabels</app>. <em>Neumisťujte do této složky ručně vytvořené šablony.</"
 "em>"
 
-#: C/mancreate.page:63(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:63
 msgid ""
 "If <file>${XDG_CONFIG_HOME}</file> is not defined, it defaults to <file>"
 "${HOME}/.config</file>."
@@ -1229,7 +1283,8 @@ msgstr ""
 "Pokud není <file>${XDG_CONFIG_HOME}</file> definováno, použije se výchozí "
 "<file>${HOME}/.config</file>."
 
-#: C/mancreate.page:68(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:68
 msgid ""
 "User defined templates that have been created manually should be placed in "
 "this directory. Older versions of the <app>gLabels</app> <gui>Template "
@@ -1239,7 +1294,8 @@ msgstr ""
 "umístěny v této složce. Do této složky by ukládaly šablony také starší verze "
 "<gui>Návrháře šablon</gui> <app>gLabels</app> (před verzí 3.0)."
 
-#: C/mancreate.page:76(note/p)
+#. (itstool) path: note/p
+#: C/mancreate.page:76
 msgid ""
 "Completed template files can be sent to the <app>gLabels</app> template "
 "<link href=\"mailto:glabels-templates@lists.sourceforge.net\">mailing list</"
@@ -1250,11 +1306,13 @@ msgstr ""
 "<app>gLabels</app> a možná budou zařazeny jako součást příští verze "
 "<app>gLabels</app>."
 
-#: C/mancreate.page:90(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:90
 msgid "Assumptions/caveats"
 msgstr "Předpoklady/upozornění"
 
-#: C/mancreate.page:93(item/p)
+#. (itstool) path: item/p
+#: C/mancreate.page:93
 msgid ""
 "A sheet contains only one size of label or card (if a sheet contains more "
 "than one size of item, it can be split into multiple templates for multiple "
@@ -1264,7 +1322,8 @@ msgstr ""
 "stránka obsahovat více než jednu velikost položky, můžete ji rozdělit do "
 "více šablon a vytisknout na vícekrát)"
 
-#: C/mancreate.page:98(item/p)
+#. (itstool) path: item/p
+#: C/mancreate.page:98
 msgid ""
 "Distances can be expressed in units of <code>pt</code>, <code>in</code>, "
 "<code>mm</code>, <code>cm</code>, or <code>pc</code>. For example: "
@@ -1278,11 +1337,13 @@ msgstr ""
 "code>“. Pokud není žádná jednotka uvedená, budou předpokládány body "
 "<code>pt</code> (1 <em>pt</em> = 1/72 <em>in</em> = 0,352778 <em>mm</em>)."
 
-#: C/mancreate.page:118(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:118
 msgid "Template Files"
 msgstr "Soubory šablon"
 
-#: C/mancreate.page:120(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:120
 msgid ""
 "A template file contains a single <code>Glabels-templates</code> top-level "
 "node."
@@ -1290,7 +1351,8 @@ msgstr ""
 "Soubor se šablonou obsahuje jeden uzel nejvyšší úrovně <code>Glabels-"
 "templates</code>."
 
-#: C/mancreate.page:123(section/code)
+#. (itstool) path: section/code
+#: C/mancreate.page:123
 #, no-wrap
 msgid ""
 "\n"
@@ -1309,11 +1371,13 @@ msgstr ""
 "\n"
 "&lt;/Glabels-templates&gt;"
 
-#: C/mancreate.page:132(listing/title)
+#. (itstool) path: listing/title
+#: C/mancreate.page:132
 msgid "Example Template"
 msgstr "Příklad šablony"
 
-#: C/mancreate.page:133(listing/desc)
+#. (itstool) path: listing/desc
+#: C/mancreate.page:133
 msgid ""
 "Example <app>gLabels</app> template file containing a single <code>Template</"
 "code> node."
@@ -1321,11 +1385,13 @@ msgstr ""
 "Příklad souboru se šablonou <app>gLabels</app> obsahujícího jeden uzel "
 "<code>Template</code>."
 
-#: C/mancreate.page:163(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:163
 msgid "<code>Template</code> Node"
 msgstr "Uzel <code>Template</code>"
 
-#: C/mancreate.page:165(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:165
 msgid ""
 "A <code>Template</code> node describes a single stationery product. It must "
 "contain one instance of any type of Label node (<code>Label-rectangle</"
@@ -1335,34 +1401,38 @@ msgstr ""
 "jednu instanci libovolného uzlu Label (<code>Label-rectangle</code>, "
 "<code>Label-round</code> nebo <code>Label-cd</code>)."
 
-#: C/mancreate.page:173(td/p) C/mancreate.page:301(td/p)
-#: C/mancreate.page:364(td/p) C/mancreate.page:415(td/p)
-#: C/mancreate.page:462(td/p) C/mancreate.page:535(td/p)
-#: C/mancreate.page:562(td/p) C/mancreate.page:600(td/p)
-#: C/mancreate.page:634(td/p) C/mancreate.page:676(td/p)
-#: C/mancreate.page:753(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:173 C/mancreate.page:301 C/mancreate.page:364
+#: C/mancreate.page:415 C/mancreate.page:462 C/mancreate.page:535
+#: C/mancreate.page:562 C/mancreate.page:600 C/mancreate.page:634
+#: C/mancreate.page:676 C/mancreate.page:753
 msgid "Property"
 msgstr "Vlastnost"
 
-#: C/mancreate.page:180(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:180
 msgid "Brand or manufacturer of stationery product. E.g. \"Avery\""
 msgstr "Značka nebo výrobce papírenského produktu. Např. \"S&amp;K Label\""
 
-#: C/mancreate.page:184(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:184
 msgid "Part number or name of stationery product. E.g. \"8160\""
 msgstr "Produktové číslo nebo název papírenského produktu. Např. \"8160\""
 
-#: C/mancreate.page:188(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:188
 msgid ""
 "Size of sheet. E.g., \"<code>US-Letter</code>\", \"<code>A4</code>\", ..."
 msgstr ""
 "Velikost stránky. Např. \"<code>US-Letter</code>\", \"<code>A4</code>\", …"
 
-#: C/mancreate.page:194(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:194
 msgid "Description of stationery product. E.g, \"Mailing Labels.\""
 msgstr "Popis papírenského produktu. Např. \"Mailing Labels.\""
 
-#: C/mancreate.page:198(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:198
 msgid ""
 "Translatable description of stationery product. E.g, \"Mailing Labels."
 "\" (Only useful for predefined templates)"
@@ -1370,15 +1440,18 @@ msgstr ""
 "Popis papírenského produktu s možností překladu. Např. \"Mailing Labels."
 "\" (Použitelné pouze pro předdefinované šablony)"
 
-#: C/mancreate.page:203(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:203
 msgid "Page width. Only valid if size=\"Other\""
 msgstr "Šířka stránky. Platné jen v případě, že size=\"Other\""
 
-#: C/mancreate.page:207(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:207
 msgid "Page height. Only valid if size=\"Other\""
 msgstr "Výška stránky. Platné jen v případě, že size=\"Other\""
 
-#: C/mancreate.page:211(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:211
 msgid ""
 "Equivalent part number. If this property is present, the template is a clone "
 "of another template of the same brand. The template will inherit all "
@@ -1392,11 +1465,13 @@ msgstr ""
 "definovanou dříve – aplikace <app>gLabels</app> v současnosti nepodporuje "
 "dopředné odkazy."
 
-#: C/mancreate.page:229(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:229
 msgid "<code>Meta</code> Node"
 msgstr "Uzel <code>Meta</code>"
 
-#: C/mancreate.page:231(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:231
 msgid ""
 "A <code>Meta</code> node contains some additional information about the "
 "template. A <code>Template</code> node may contain zero or more <code>Meta</"
@@ -1405,11 +1480,13 @@ msgstr ""
 "Uzel <code>Meta</code> obsahuje některé doplňující informace o šabloně. Uzel "
 "<code>Template</code> může obsahovat žádný nebo více uzlů <code>Meta</code>."
 
-#: C/mancreate.page:237(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:237
 msgid "Subnode"
 msgstr "Podřízený uzel"
 
-#: C/mancreate.page:244(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:244
 msgid ""
 "A category for the template. A template can belong to multiple categories by "
 "simply adding multiple <code>Meta</code> nodes to the parent <code>Template</"
@@ -1422,7 +1499,8 @@ msgstr ""
 "okně <gui>Nová etiketa či vizitka</gui>, aby vám mohla vyfiltrovat nalezené "
 "šablony."
 
-#: C/mancreate.page:251(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:251
 msgid ""
 "The value of this category must match a predefined category ID defined in "
 "the file <file>${prefix}/libglabels-3.0/templates/categories.xml</file>. "
@@ -1432,7 +1510,8 @@ msgstr ""
 "souboru <file>${prefix}/libglabels-3.0/templates/categories.xml</file>. "
 "Aktuálně jsou definovány tato ID kategorií:"
 
-#: C/mancreate.page:273(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:273
 msgid ""
 "A URL pointing to the vendor's webpage for the specific product, if "
 "available."
@@ -1440,7 +1519,8 @@ msgstr ""
 "Adresa URL odkazující na webovou stránku výrobce a to tu, pokud existuje, "
 "která se týká konkrétního výrobku."
 
-#: C/mancreate.page:277(note/p)
+#. (itstool) path: note/p
+#: C/mancreate.page:277
 msgid ""
 "Suggestions for additional categories can be sent to the <app>gLabels</app> "
 "developer's <link href=\"mailto:glabels-devel@lists.sourceforge.net"
@@ -1450,17 +1530,20 @@ msgstr ""
 "\"mailto:glabels-devel@lists.sourceforge.net\">poštovní konference</link> "
 "aplikace <app>gLabels</app>."
 
-#: C/mancreate.page:280(note/p)
+#. (itstool) path: note/p
+#: C/mancreate.page:280
 msgid "Product URLs may be of limited use, because they may not be permanent."
 msgstr ""
 "Použití adresy URL výrobku může být omezené, protože adresa nemusí být "
 "trvalá."
 
-#: C/mancreate.page:293(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:293
 msgid "<code>Label-rectangle</code> Node"
 msgstr "Uzel <code>Label-rectangle</code>"
 
-#: C/mancreate.page:295(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:295
 msgid ""
 "A <code>Label-rectangle</code> node describes the dimensions of a single "
 "label or business card that is rectangular in shape (may have rounded edges)."
@@ -1468,20 +1551,24 @@ msgstr ""
 "Uzel <code>Label-rectangle</code> popisuje rozměry jedné etikety nebo "
 "vizitky, která má obdélníkový tvar (může mít zaoblené rohy)."
 
-#: C/mancreate.page:308(td/p) C/mancreate.page:371(td/p)
-#: C/mancreate.page:422(td/p) C/mancreate.page:469(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:308 C/mancreate.page:371 C/mancreate.page:422
+#: C/mancreate.page:469
 msgid "Reserved for future use. Should always be 0."
 msgstr "Rezervované pro pozdější použití. Vždy by mělo být nastavené  na 0."
 
-#: C/mancreate.page:312(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:312
 msgid "Width of label/card"
 msgstr "Šířka etikety/vizitky"
 
-#: C/mancreate.page:316(td/p)
-msgid "Heigth of label/card"
+#. (itstool) path: td/p
+#: C/mancreate.page:316
+msgid "Height of label/card"
 msgstr "Výška etikety/vizitky"
 
-#: C/mancreate.page:320(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:320
 msgid ""
 "Radius of corners. For items with square edges (business cards), the radius "
 "should be 0."
@@ -1489,7 +1576,8 @@ msgstr ""
 "Poloměr rohů. Pro položky s ostrými rohy (např. vizitky) by mělo být "
 "nastaveno na 0."
 
-#: C/mancreate.page:325(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:325
 msgid ""
 "Amount of horizontal waste (over-print) to allow. This is useful for "
 "minimizing alignment problems when using non-white backgrounds (e.g. images)."
@@ -1498,7 +1586,8 @@ msgstr ""
 "kvůli zamezení problémům se zarovnáním v situaci, kdy se nepoužívá bílé "
 "pozadí, ale např. obrázkové."
 
-#: C/mancreate.page:331(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:331
 msgid ""
 "Amount of vertical waste (over-print) to allow. This is useful for "
 "minimizing alignment problems when using non-white backgrounds (e.g. images)."
@@ -1507,15 +1596,18 @@ msgstr ""
 "kvůli zamezení problémům se zarovnáním v situaci, kdy se nepoužívá bílé "
 "pozadí, ale např. obrázkové."
 
-#: C/mancreate.page:339(figure/desc)
+#. (itstool) path: figure/desc
+#: C/mancreate.page:339
 msgid "<code>Label-rectangle</code> parameters"
 msgstr "Parametry uzlu <code>Label-rectangle</code>"
 
-#: C/mancreate.page:356(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:356
 msgid "<code>Label-ellipse</code> Node"
 msgstr "Uzel <code>Label-ellipse</code>"
 
-#: C/mancreate.page:358(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:358
 msgid ""
 "A <code>Label-ellipse</code> node describes the dimensions of a single label "
 "or business card that is elliptic in shape."
@@ -1523,16 +1615,18 @@ msgstr ""
 "Uzel <code>Label-ellipse</code> popisuje rozměry jedné etikety nebo vizitky, "
 "která má eliptický tvar."
 
-#: C/mancreate.page:375(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:375
 msgid "Width of the ellipse"
 msgstr "Šířka elipsy"
 
-#: C/mancreate.page:379(td/p)
-msgid "Heigth of the ellipse"
+#. (itstool) path: td/p
+#: C/mancreate.page:379
+msgid "Height of the ellipse"
 msgstr "Výška elipsy"
 
-#: C/mancreate.page:383(td/p) C/mancreate.page:430(td/p)
-#: C/mancreate.page:491(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:383 C/mancreate.page:430 C/mancreate.page:491
 msgid ""
 "Amount of waste (over-print) to allow. This is useful for minimizing "
 "alignment problems when using non-white backgrounds (e.g. images)."
@@ -1541,19 +1635,24 @@ msgstr ""
 "zamezení problémům se zarovnáním v situaci, kdy se nepoužívá bílé pozadí, "
 "ale např. obrázkové."
 
-#: C/mancreate.page:391(figure/desc)
+#. (itstool) path: figure/desc
+#: C/mancreate.page:391
 msgid "<span>Label-ellipse</span> parameters"
 msgstr "Parametry uzlu <span>Label-ellipse</span>"
 
-#: C/mancreate.page:393(media/p) C/mancreate.page:438(figure/desc)
+#. (itstool) path: media/p
+#. (itstool) path: figure/desc
+#: C/mancreate.page:393 C/mancreate.page:438
 msgid "<code>Label-ellipse</code> parameters"
 msgstr "Parametry uzlu <code>Label-ellipse</code>"
 
-#: C/mancreate.page:408(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:408
 msgid "<code>Label-round</code> Node"
 msgstr "Uzel <code>Label-round</code>"
 
-#: C/mancreate.page:410(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:410
 msgid ""
 "A <code>Label-round</code> node describes the dimensions of a simple round "
 "label (not a CD)."
@@ -1561,15 +1660,18 @@ msgstr ""
 "Uzel <code>Label-round</code> popisuje rozměry jedné kulaté etikety (ale ne "
 "CD)."
 
-#: C/mancreate.page:426(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:426
 msgid "Radius (1/2 diameter) of label"
 msgstr "Poloměr (½ průměru) etikety."
 
-#: C/mancreate.page:455(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:455
 msgid "<code>Label-cd</code> Node"
 msgstr "Uzel <code>Label-cd</code>"
 
-#: C/mancreate.page:457(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:457
 msgid ""
 "A <code>Label-cd</code> node describes the dimensions of a CD, DVD, or "
 "business card CD."
@@ -1577,15 +1679,18 @@ msgstr ""
 "Uzel <code>Label-cd</code> popisuje rozměry etiket na CD, DVD nebo vizitkové "
 "CD."
 
-#: C/mancreate.page:473(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:473
 msgid "Outer radius of label"
 msgstr "Vnější poloměr etikety."
 
-#: C/mancreate.page:477(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:477
 msgid "Radius of concentric hole"
 msgstr "Poloměr středové díry."
 
-#: C/mancreate.page:481(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:481
 msgid ""
 "If present, the label is clipped to the given width. (Useful for \"business "
 "card CDs\")."
@@ -1593,7 +1698,8 @@ msgstr ""
 "Pokud je zadáno, bude etiketa oříznuta na uvedenou šířku. (Vhodné pro "
 "„vizitková CD“)."
 
-#: C/mancreate.page:486(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:486
 msgid ""
 "If present, the label is clipped to the given height. (Useful for \"business "
 "card CDs\")."
@@ -1601,15 +1707,18 @@ msgstr ""
 "Pokud je zadáno, bude etiketa oříznuta na uvedenou výšku. (Vhodné pro "
 "„vizitková CD“)."
 
-#: C/mancreate.page:499(figure/desc)
+#. (itstool) path: figure/desc
+#: C/mancreate.page:499
 msgid "<code>Label-cd</code> parameters"
 msgstr "Parametry uzlu <code>Label-cd</code>"
 
-#: C/mancreate.page:516(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:516
 msgid "<code>Markup</code> Nodes"
 msgstr "Uzly <code>Markup</code>"
 
-#: C/mancreate.page:518(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:518
 msgid ""
 "Templates may contain optional markup nodes. These nodes are used to "
 "describe a simple set of markup lines that are visible in the <app>glabels</"
@@ -1623,124 +1732,153 @@ msgstr ""
 "představovat například okraje, přehyby, speciální oblasti a další pomůcky "
 "užitečné pro uživatele šablony."
 
-#: C/mancreate.page:528(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:528
 msgid "<code>Markup-margin</code> Node"
 msgstr "Uzel <code>Markup-margin</code>"
 
-#: C/mancreate.page:530(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:530
 msgid ""
 "A <code>Markup-margin</code> describes a margin along all edges of a label."
 msgstr ""
 "Uzel <code>Markup-margin</code> popisuje okraj podél všech hran etikety."
 
-#: C/mancreate.page:542(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:542
 msgid ""
 "Size of the margin. I.e. the distance of the margin line from the edge of "
 "the card/label."
 msgstr ""
 "Velikost okraje. Např. vzdálenost hranice okraje od hrany etikety/vizitky."
 
-#: C/mancreate.page:556(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:556
 msgid "<code>Markup-line</code> Node"
 msgstr "Uzel <code>Markup-line</code>"
 
-#: C/mancreate.page:558(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:558
 msgid "A <code>Markup-line</code> node describes a markup line."
 msgstr "Uzel <code>Markup-line</code> popisuje značku v podobě čáry."
 
-#: C/mancreate.page:569(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:569
 msgid "x coordinate of 1st endpoint of the line segment."
 msgstr "x-ová souřadnice 1. koncového bodu úsečky."
 
-#: C/mancreate.page:573(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:573
 msgid "y coordinate of 1st endpoint of the line segment."
 msgstr "y-ová souřadnice 1. koncového bodu úsečky."
 
-#: C/mancreate.page:577(td/p)
-msgid "x coordinate of 2st endpoint of the line segment."
+#. (itstool) path: td/p
+#: C/mancreate.page:577
+msgid "x coordinate of 2nd endpoint of the line segment."
 msgstr "x-ová souřadnice 2. koncového bodu úsečky."
 
-#: C/mancreate.page:581(td/p)
-msgid "y coordinate of 2st endpoint of the line segment."
+#. (itstool) path: td/p
+#: C/mancreate.page:581
+msgid "y coordinate of 2nd endpoint of the line segment."
 msgstr "y-ová souřadnice 2. koncového bodu úsečky."
 
-#: C/mancreate.page:594(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:594
 msgid "<code>Markup-circle</code> Node"
 msgstr "Uzel <code>Markup-circle</code>"
 
-#: C/mancreate.page:596(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:596
 msgid "A <code>Markup-circle</code> describes a markup circle."
 msgstr "Uzel <code>Markup-circle</code> popisuje značku v podobě kruhu."
 
-#: C/mancreate.page:607(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:607
 msgid "x coordinate of circle origin (center)."
 msgstr "x-ová souřadnice středu kruhu."
 
-#: C/mancreate.page:611(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:611
 msgid "y coordinate of circle origin (center)."
 msgstr "y-ová souřadnice středu kruhu."
 
-#: C/mancreate.page:615(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:615
 msgid "Radius of circle."
 msgstr "Poloměr kruhu."
 
-#: C/mancreate.page:628(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:628
 msgid "<code>Markup-rect</code> Node"
 msgstr "Uzel <code>Markup-rect</code>"
 
-#: C/mancreate.page:630(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:630
 msgid "A <code>Markup-rect</code> describes a markup rectangle."
 msgstr "Uzel <code>Markup-rect</code> popisuje značku v podobě obdélníku."
 
-#: C/mancreate.page:641(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:641
 msgid "x coordinate of upper left corner of rectangle."
 msgstr "x-ová souřadnice levého horního rohu obdélníku."
 
-#: C/mancreate.page:645(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:645
 msgid "y coordinate of upper left corner of rectangle."
 msgstr "y-ová souřadnice levého horního rohu obdélníku."
 
-#: C/mancreate.page:649(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:649
 msgid "Width of rectangle."
 msgstr "Šířka obdélníku."
 
-#: C/mancreate.page:653(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:653
 msgid "Height of rectangle."
 msgstr "Výška obdélníku."
 
-#: C/mancreate.page:657(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:657
 msgid "Radius of rounded corners of rectangle."
 msgstr "Poloměr zakulacených rohů obdélníku."
 
-#: C/mancreate.page:670(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:670
 msgid "<code>Markup-ellipse</code> Node"
 msgstr "Uzel <code>Markup-ellipse</code>"
 
-#: C/mancreate.page:672(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:672
 msgid "A <code>Markup-ellipse</code> describes a markup ellipse."
 msgstr "Uzel <code>Markup-ellipse</code> popisuje značku v podobě elipsy."
 
-#: C/mancreate.page:683(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:683
 msgid "x coordinate of upper left corner of ellipse."
 msgstr "x-ová souřadnice levého horního rohu elipsy."
 
-#: C/mancreate.page:687(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:687
 msgid "y coordinate of upper left corner of ellipse."
 msgstr "y-ová souřadnice levého horního rohu elipsy."
 
-#: C/mancreate.page:691(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:691
 msgid "Width of ellipse."
 msgstr "Šířka elipsy."
 
-#: C/mancreate.page:695(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:695
 msgid "Height of ellipse."
 msgstr "Výška elipsy."
 
-#: C/mancreate.page:713(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:713
 msgid "<code>Layout</code> Node"
 msgstr "Uzel <code>Layout</code>"
 
-#: C/mancreate.page:715(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:715
 msgid ""
 "A label node may contain multiple <code>Layout</code> children. If labels "
 "are arranged in a simple grid pattern, only one layout is needed. However, "
@@ -1752,16 +1890,19 @@ msgstr ""
 "uzel Layout. Pokud jsou ale etikety rozmístěné ve více mřížkách, např. mají "
 "podobu cihlové zdi, musí se použít více značek <code>Layout</code>."
 
-#: C/mancreate.page:720(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:720
 msgid "A common example for multiple layouts is a sheet with three CD labels:"
 msgstr ""
 "Typický příklad pro více rozvržení Layout je list se třemi etiketami na CD:"
 
-#: C/mancreate.page:725(figure/desc)
+#. (itstool) path: figure/desc
+#: C/mancreate.page:725
 msgid "CD label sheet"
 msgstr "List s etiketami na CD"
 
-#: C/mancreate.page:732(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:732
 msgid ""
 "The two labels on the left edge can be assigned to a grid, assuming we can "
 "define the coordinates for the top left label and the distance to the second "
@@ -1777,11 +1918,12 @@ msgstr ""
 "musíme nadefinovat druhé rozvržení s odlišnými souřadnicemi pro levý horní "
 "roh této etikety."
 
-#: C/mancreate.page:740(note/p)
+#. (itstool) path: note/p
+#: C/mancreate.page:740
 msgid ""
 "You can define multiple layouts only if the labels on the sheet have the "
 "same shape. If your sheet contains different shapes, you have to define each "
-"shape in another template seperately. Future versions of <app>gLabels</app> "
+"shape in another template separately. Future versions of <app>gLabels</app> "
 "will probably be able to concatenate such sheets with different shapes "
 "within a single template."
 msgstr ""
@@ -1791,19 +1933,23 @@ msgstr ""
 "<app>gLabels</app> bude toto pravděpodobně řešit spojováním takových listů s "
 "různými etiketami do jedné šablony."
 
-#: C/mancreate.page:748(note/p)
+#. (itstool) path: note/p
+#: C/mancreate.page:748
 msgid "A single label can always be treated as a grid of one."
 msgstr "Jedna etiketa může být vždy považována za mřížku s jednou buňkou."
 
-#: C/mancreate.page:760(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:760
 msgid "Number of labels/cards across in the grid (horizontal)"
 msgstr "Počet etiket/vizitek v mřížce (vodorovně)."
 
-#: C/mancreate.page:764(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:764
 msgid "Number of labels/cards across in the grid (vertical)"
 msgstr "Počet etiket/vizitek v mřížce (svisle)."
 
-#: C/mancreate.page:768(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:768
 msgid ""
 "Distance from left edge of sheet to the left edge of the left column of "
 "cards/labels in the layout."
@@ -1811,7 +1957,8 @@ msgstr ""
 "Vzdálenost od levé hrany stránky k levé hraně levého sloupce etiket/vizitek "
 "v rozvržení."
 
-#: C/mancreate.page:773(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:773
 msgid ""
 "Distance from the top edge of sheet to the top edge of the top row of labels/"
 "cards in the layout."
@@ -1819,71 +1966,81 @@ msgstr ""
 "Vzdálenost od horní hrany stránky k horní hraně horní řady etiket/vizitek v "
 "rozvržení."
 
-#: C/mancreate.page:778(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:778
 msgid "Horizontal pitch of grid."
 msgstr "Vodorovná rozteč mřížky."
 
-#: C/mancreate.page:782(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:782
 msgid "Vertical pitch of grid."
 msgstr "Svislá rozteč mřížky."
 
-#: C/mancreate.page:788(figure/desc)
+#. (itstool) path: figure/desc
+#: C/mancreate.page:788
 msgid "<code>Layout</code> parameters"
 msgstr "Parametry uzlu <code>Layout</code>"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex1.page:50(media)
+#: C/merge-ex1.page:50
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex1-1.png' md5='c1fe7f5f05a81d9c04f9d03bb7071798'"
 msgstr ""
 "external ref='figures/merge-ex1-1.png' md5='c1fe7f5f05a81d9c04f9d03bb7071798'"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex1.page:63(media)
+#: C/merge-ex1.page:63
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex1-2.png' md5='45c30ca8de2478387404c7c5f45cf3d0'"
 msgstr ""
 "external ref='figures/merge-ex1-2.png' md5='45c30ca8de2478387404c7c5f45cf3d0'"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex1.page:84(media)
+#: C/merge-ex1.page:84
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex1-3.png' md5='1c23af6c90e5185cdc9e14d19baeb9f6'"
 msgstr ""
 "external ref='figures/merge-ex1-3.png' md5='1c23af6c90e5185cdc9e14d19baeb9f6'"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex1.page:95(media)
+#: C/merge-ex1.page:95
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex1-4.png' md5='1cc9f9adcb5a6e98ff5068531e6933f0'"
 msgstr ""
 "external ref='figures/merge-ex1-4.png' md5='1cc9f9adcb5a6e98ff5068531e6933f0'"
 
-#: C/merge-ex1.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/merge-ex1.page:9
 msgid "Create name tags from a CSV file."
 msgstr "Vytvoření jmenovek ze souboru CSV."
 
-#: C/merge-ex1.page:25(page/title)
+#. (itstool) path: page/title
+#: C/merge-ex1.page:25
 msgid "Example 1: Name Tags"
 msgstr "Příklad 1: Jmenovky"
 
-#: C/merge-ex1.page:27(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex1.page:27
 msgid ""
 "In this example we are organizing an orientation party for the new crew "
 "members of our ship. We have a list of freshman crew members that we created "
@@ -1895,7 +2052,8 @@ msgstr ""
 "app> a následně jej vyexportovali do souboru CSV. Mohli bychom jej vytvořit "
 "i v textovém editoru, ale žijeme přece v 21. století."
 
-#: C/merge-ex1.page:33(page/code)
+#. (itstool) path: page/code
+#: C/merge-ex1.page:33
 #, no-wrap
 msgid ""
 "\n"
@@ -1914,7 +2072,8 @@ msgstr ""
 "\"Viktor Hujer\",technik,SE-197-54T\n"
 "      "
 
-#: C/merge-ex1.page:41(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex1.page:41
 msgid ""
 "In <app>gLabels</app> we have created a new <app>glabels</app> document "
 "using the Avery 5395 \"Name Badge Labels\" template. Next we use the "
@@ -1930,12 +2089,13 @@ msgstr ""
 "dialogové okno použijeme k výběru typu zdroje (v našem případě CSV s klíči "
 "na 1. řádku) a vlastního zdroje (souboru), jak můžete vidět níže."
 
-#: C/merge-ex1.page:51(media/p) C/merge-ex2.page:53(media/p)
-#: C/merge-ex3.page:54(media/p)
+#. (itstool) path: media/p
+#: C/merge-ex1.page:51 C/merge-ex2.page:53 C/merge-ex3.page:54
 msgid "Merge properties dialog"
 msgstr "Dialogové okno vlastností slučování"
 
-#: C/merge-ex1.page:55(page/p) C/merge-ex2.page:62(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex1.page:55 C/merge-ex2.page:62
 msgid ""
 "We can also view each record in more detail by clicking on the appropriate "
 "expander (the little triangles) as shown. Once we are satisfied with the "
@@ -1945,20 +2105,21 @@ msgstr ""
 "kliknutím na malý trojúhelníček. Až jsme s výběrem v dialogovém okně "
 "spokojení, klikneme na <gui>OK</gui> a změny se použijí."
 
-#: C/merge-ex1.page:60(page/p) C/merge-ex2.page:67(page/p)
-#: C/merge-ex3.page:71(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex1.page:60 C/merge-ex2.page:67 C/merge-ex3.page:71
 msgid ""
 "Now we start adding objects to our <app>glabels</app> document as shown."
 msgstr ""
 "Nyní můžeme začít s přidáváním objektů do svého dokumentu <app>glabels</"
 "app>, jak je ukázáno níže."
 
-#: C/merge-ex1.page:64(media/p) C/merge-ex2.page:71(media/p)
-#: C/merge-ex3.page:75(media/p)
+#. (itstool) path: media/p
+#: C/merge-ex1.page:64 C/merge-ex2.page:71 C/merge-ex3.page:75
 msgid "Adding objects"
 msgstr "Přidávání objektů"
 
-#: C/merge-ex1.page:68(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex1.page:68
 msgid ""
 "In this example we have added three text objects and a barcode object. The "
 "first text object contains only simple literal text (\"Hello, my name is\"). "
@@ -1980,7 +2141,8 @@ msgstr ""
 "na použití pole (klíče) „cislo“, které obsahuje identifikační číslo člena "
 "posádky."
 
-#: C/merge-ex1.page:78(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex1.page:78
 msgid ""
 "Now we can print our name tags by selecting the <guiseq> <gui>File</gui> "
 "<gui>Print</gui> </guiseq> menu item. This will display print dialog as "
@@ -1990,12 +2152,13 @@ msgstr ""
 "<guiseq><gui>Soubor</gui> <gui>Tisk</gui></guiseq>. Zobrazí se dialogové "
 "okno jako na následujícím obrázku."
 
-#: C/merge-ex1.page:85(media/p)
+#. (itstool) path: media/p
+#: C/merge-ex1.page:85
 msgid "Printing name tags"
 msgstr "Tisk jmenovek"
 
-#: C/merge-ex1.page:89(page/p) C/merge-ex2.page:93(page/p)
-#: C/merge-ex3.page:93(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex1.page:89 C/merge-ex2.page:93 C/merge-ex3.page:93
 msgid ""
 "Just to make sure our labels are going to look okay, we select the "
 "<gui>Print outlines</gui> option and click <gui>Print Preview</gui>. This "
@@ -2005,11 +2168,13 @@ msgstr ""
 "<gui>Tisk obrysů</gui> a klikneme na <gui>Náhled tisku</gui>. Zobrazí se "
 "dialogové okno s náhledem tisku, stejně jako na následujícím obrázku."
 
-#: C/merge-ex1.page:96(media/p)
+#. (itstool) path: media/p
+#: C/merge-ex1.page:96
 msgid "Name tags preview"
 msgstr "Náhled jmenovek"
 
-#: C/merge-ex1.page:100(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex1.page:100
 msgid ""
 "Everything looks good, so we can now load up our printer with the "
 "appropriate label stock, print our name tags and start beaming our guests "
@@ -2018,59 +2183,66 @@ msgstr ""
 "Vše vypadá v pořádku, takže můžeme do tiskárny vložit správný list s "
 "etiketami, vytisknout jmenovky a vzhůru na palubu nalodit naše hosty."
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex2.page:52(media)
+#: C/merge-ex2.page:52
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex2-1.png' md5='817abd0c8deb8a0b95acb7881d8ddb85'"
 msgstr ""
 "external ref='figures/merge-ex2-1.png' md5='817abd0c8deb8a0b95acb7881d8ddb85'"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex2.page:70(media)
+#: C/merge-ex2.page:70
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex2-2.png' md5='2012870be14752300e0cde420471714a'"
 msgstr ""
 "external ref='figures/merge-ex2-2.png' md5='2012870be14752300e0cde420471714a'"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex2.page:88(media)
+#: C/merge-ex2.page:88
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex2-3.png' md5='c347460091d8eef9f4ec89557fa9f1e2'"
 msgstr ""
 "external ref='figures/merge-ex2-3.png' md5='c347460091d8eef9f4ec89557fa9f1e2'"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex2.page:99(media)
+#: C/merge-ex2.page:99
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex2-4.png' md5='30d12e946a79e27211b835e38742671c'"
 msgstr ""
 "external ref='figures/merge-ex2-4.png' md5='30d12e946a79e27211b835e38742671c'"
 
-#: C/merge-ex2.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/merge-ex2.page:9
 msgid "Create address labels from a CSV file."
 msgstr "Vytvoření adresních štítků ze souboru CSV."
 
-#: C/merge-ex2.page:25(page/title)
+#. (itstool) path: page/title
+#: C/merge-ex2.page:25
 msgid "Example 2: Address labels"
 msgstr "Příklad 2: Adresní štítky"
 
-#: C/merge-ex2.page:27(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex2.page:27
 msgid ""
 "In this example we are going to throw a party and need to print mailing "
 "address labels for our invitations. We have a list of our closest friends "
@@ -2084,7 +2256,8 @@ msgstr ""
 "soubor CSV. Povšimněte si, že ne všichni mají přezdívku nebo dvouřádkovou "
 "adresu."
 
-#: C/merge-ex2.page:33(page/code)
+#. (itstool) path: page/code
+#: C/merge-ex2.page:33
 #, no-wrap
 msgid ""
 "\n"
@@ -2107,7 +2280,8 @@ msgstr ""
 "Bůčková,Alexandra,,\"Korunní 18\",,Praha,\"100 24\"\n"
 "      "
 
-#: C/merge-ex2.page:43(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex2.page:43
 msgid ""
 "In <app>glabels</app> we have created a new <app>glabels</app> document "
 "using the Avery 5512 \"Address Labels\" template. Next we use the <guiseq> "
@@ -2123,7 +2297,8 @@ msgstr ""
 "zdroje (v našem případě CSV s klíči na 1. řádku) a konkrétní zdroj (název "
 "souboru) pro slučování, jak můžete vidět na následujícím obrázku."
 
-#: C/merge-ex2.page:57(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex2.page:57
 msgid ""
 "Before applying the merge source, we uncheck the first record since it only "
 "contains empty fields. It is an artifact of our original <app>gnumeric</app> "
@@ -2136,7 +2311,8 @@ msgstr ""
 "Stejným způsobem můžeme zrušit zaškrtnutí kteréhokoliv záznamu, který "
 "nechceme vytisknout."
 
-#: C/merge-ex2.page:75(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex2.page:75
 msgid ""
 "In this example we have a single text object. This text object contains all "
 "of our merge fields organized on multiple lines as a mailing address. Notice "
@@ -2151,7 +2327,8 @@ msgstr ""
 "aplikace <app>gLabels</app> narazí na pole, které je jediným textem na řádku "
 "a toto pole je prázdné, řádek nebude ve výsledku zabírat žádné místo."
 
-#: C/merge-ex2.page:82(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex2.page:82
 msgid ""
 "Now we can print our address labels by selecting the <guiseq> <gui>File</"
 "gui> <gui>Print</gui> </guiseq> menu item. This will display print dialog as "
@@ -2161,15 +2338,18 @@ msgstr ""
 "<guiseq><gui>Soubor</gui> <gui>Tisk</gui></guiseq> v nabídce. Zobrazí se "
 "dialogové okno tisku jako na následujícím obrázku."
 
-#: C/merge-ex2.page:89(media/p) C/merge-ex3.page:89(media/p)
+#. (itstool) path: media/p
+#: C/merge-ex2.page:89 C/merge-ex3.page:89
 msgid "Printing address labels"
 msgstr "Tisk etiket s adresami"
 
-#: C/merge-ex2.page:100(media/p)
+#. (itstool) path: media/p
+#: C/merge-ex2.page:100 C/merge-ex3.page:100
 msgid "Address labels preview"
 msgstr "Náhled etiket s adresami"
 
-#: C/merge-ex2.page:104(page/p) C/merge-ex3.page:104(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex2.page:104 C/merge-ex3.page:104
 msgid ""
 "Everything looks good, so we can now load up our printer with the "
 "appropriate label stock, print our address labels and start mailing our "
@@ -2178,61 +2358,68 @@ msgstr ""
 "Vše vypadá dobře a tak můžeme vložit do tiskárny správný list s etiketami, "
 "vytisknout adresní štítky a začít rozesílat pozvánky na večírek."
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex3.page:53(media)
+#: C/merge-ex3.page:53
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex3-1.png' md5='fb5bf719857fb0a49517ecb50124384d'"
 msgstr ""
 "external ref='figures/merge-ex3-1.png' md5='fb5bf719857fb0a49517ecb50124384d'"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex3.page:74(media)
+#: C/merge-ex3.page:74
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex3-2.png' md5='51fe322868241d083ec83ae824d927d7'"
 msgstr ""
 "external ref='figures/merge-ex3-2.png' md5='51fe322868241d083ec83ae824d927d7'"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex3.page:88(media)
+#: C/merge-ex3.page:88
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex3-3.png' md5='f731f35b38ddd51499e636733bacc7a6'"
 msgstr ""
 "external ref='figures/merge-ex3-3.png' md5='f731f35b38ddd51499e636733bacc7a6'"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex3.page:99(media)
+#: C/merge-ex3.page:99
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex3-4.png' md5='4415be9d5b59fb57093077bcaece014a'"
 msgstr ""
 "external ref='figures/merge-ex3-4.png' md5='4415be9d5b59fb57093077bcaece014a'"
 
-#: C/merge-ex3.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/merge-ex3.page:9
 msgid ""
 "Create address labels from the <app>Evolution</app> address book entries."
 msgstr ""
 "Vytvoření adresních štítků ze záznamů adresáře aplikace <app>Evolution</app>."
 
-#: C/merge-ex3.page:25(page/title)
+#. (itstool) path: page/title
+#: C/merge-ex3.page:25
 msgid "Example 3: Address Labels Using the <app>Evolution</app> Addressbook"
 msgstr "Příklad 3: Adresní štítky z adresáře aplikace <app>Evolution</app>"
 
-#: C/merge-ex3.page:27(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex3.page:27
 msgid ""
 "Our last party was a great success, and now we need to print mailing address "
 "labels for the invitations to a new one. To simplify this, we can use the "
@@ -2244,7 +2431,8 @@ msgstr ""
 "použít adresář aplikace <app>Evolution</app>, protože adresy všech našich "
 "přátel máme uložené v něm."
 
-#: C/merge-ex3.page:33(note/p)
+#. (itstool) path: note/p
+#: C/merge-ex3.page:33
 msgid ""
 "Depending on how your copy of <app>gLabels</app> was packaged, this option "
 "could be unavailable. Support for the <app>Evolution</app> addressbook will "
@@ -2258,7 +2446,8 @@ msgstr ""
 "dispozici <app>evolution-data-server</app> a k němu vývojářské soubory. "
 "Mějte toto na paměti, pokud si aplikaci překládáte sami ze zdrojových kódů."
 
-#: C/merge-ex3.page:39(note/p)
+#. (itstool) path: note/p
+#: C/merge-ex3.page:39
 msgid ""
 "If the <app>gLabels</app> package from your distribution lacks this support, "
 "you may wish to contact the package maintainer or file a bug against the "
@@ -2268,7 +2457,8 @@ msgstr ""
 "můžete zkusit kontaktovat správce balíčku nebo to zkusit nahlásit jako "
 "požadavek do systému pro hlášení chyb."
 
-#: C/merge-ex3.page:44(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex3.page:44
 msgid ""
 "In <app>glabels</app> we have created a new <app>gLabels</app> document "
 "using the Avery 5512 \"Address Labels\" template. Next we use the <guiseq> "
@@ -2284,7 +2474,8 @@ msgstr ""
 "případě <gui>Data z výchozího adresáře Evolution</gui>), jak je ukázáno na "
 "obrázku."
 
-#: C/merge-ex3.page:58(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex3.page:58
 msgid ""
 "Once we have chosen <gui>Data from default Evolution addressbook </gui> as "
 "our merge source, we will get a full list of its content. Initially, all "
@@ -2303,7 +2494,8 @@ msgstr ""
 "vše</gui> a <gui>Zrušit výběr</gui> pro aktivování nebo deaktivování všech "
 "záznamů v adresáři."
 
-#: C/merge-ex3.page:66(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex3.page:66
 msgid ""
 "We can also view each entry in more detail by clicking on the appropriate "
 "expander (the little triangles) as shown. Once we are satisfied with the "
@@ -2314,7 +2506,8 @@ msgstr ""
 "kliknutím na malý trojúhelníček. Až jsme s výběrem v dialogovém okně "
 "spokojení, klikneme na <gui>OK</gui> a změny se použijí."
 
-#: C/merge-ex3.page:79(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex3.page:79
 msgid ""
 "In this example we have a single text object again. This text object "
 "contains all of our merge fields organized on multiple lines as a mailing "
@@ -2324,7 +2517,8 @@ msgstr ""
 "slučovaná pole uspořádaná v několika řádcích, představujících poštovní "
 "adresy."
 
-#: C/merge-ex3.page:82(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex3.page:82
 msgid ""
 "Now we can print our address labels by selecting the <guiseq> <gui>File</"
 "gui> <gui>Print</gui> </guiseq> menu item. This will display the print "
@@ -2334,27 +2528,28 @@ msgstr ""
 "<guiseq><gui>Soubor</gui> <gui>Tisk</gui></guiseq>. Zobrazí se dialogové "
 "okno tisku, jak jej můžete vidět níže."
 
-#: C/merge-ex3.page:100(media/p)
-msgid "Addess labels preview"
-msgstr "Náhled etiket s adresami"
-
-#: C/merge-ex4.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/merge-ex4.page:9
 msgid "Create address labels from a vCard file."
 msgstr "Vytvoření adresních štítků ze souboru VCard."
 
-#: C/merge-ex4.page:25(page/title)
+#. (itstool) path: page/title
+#: C/merge-ex4.page:25
 msgid "Example 4: Address Labels Using a vCard file"
 msgstr "Příklad 4: Adresní štítky s použitím souboru VCard"
 
-#: C/mergefeatures.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/mergefeatures.page:9
 msgid "What you may expect from a document merge."
 msgstr "Co můžete očekávat od slučování dokumentů."
 
-#: C/mergefeatures.page:25(page/title)
+#. (itstool) path: page/title
+#: C/mergefeatures.page:25
 msgid "Performing a document merge"
 msgstr "Provádění slučování dokumentů"
 
-#: C/mergefeatures.page:27(page/p)
+#. (itstool) path: page/p
+#: C/mergefeatures.page:27
 msgid ""
 "Document Merge (sometimes called \"Mail Merge\") is a powerful feature that "
 "allows a unique label or card to be printed for each record in an external "
@@ -2364,7 +2559,8 @@ msgstr ""
 "funkce, která umožňuje vytisknout na etikety nebo vizitky různé texty podle "
 "jednotlivých záznamů v externím zdroji dat."
 
-#: C/mergefeatures.page:31(page/p)
+#. (itstool) path: page/p
+#: C/mergefeatures.page:31
 msgid ""
 "The first step to performing a document merge is to prepare a source "
 "document that contains your merge data. This data could be mailing addresses "
@@ -2389,7 +2585,8 @@ msgstr ""
 "souborů CSV je jejich export z tabulkového kalkulátoru nebo z aplikace s "
 "adresářem."
 
-#: C/mergefeatures.page:45(note/p)
+#. (itstool) path: note/p
+#: C/mergefeatures.page:45
 msgid ""
 "To export a CSV file from <app>kaddressbook</app>, first select the contacts "
 "you wish to export. Click on the first contact, then press and hold "
@@ -2404,7 +2601,8 @@ msgstr ""
 "<guiseq><gui>Soubor</gui><gui>Export</gui> <gui>Export do souboru CSV</gui></"
 "guiseq>."
 
-#: C/mergefeatures.page:52(note/p)
+#. (itstool) path: note/p
+#: C/mergefeatures.page:52
 msgid ""
 "In the <gui>Select Contacts</gui> window, enable the button <gui>Selected "
 "contacts</gui> (which should be enabled by default anyway). Then click on "
@@ -2416,7 +2614,8 @@ msgstr ""
 "gui>. V dialogovém okně <gui>Uložit jako</gui> zvolte požadovnanou složku a "
 "název pro soubor a klikněte na <gui>Uložit</gui>."
 
-#: C/mergefeatures.page:62(note/p)
+#. (itstool) path: note/p
+#: C/mergefeatures.page:62
 msgid ""
 "To export a CSV file from <app>Thunderbird</app>, click on the <gui>Address "
 "Book</gui> toolbar button or choose <guiseq><gui>Tools </gui><gui>Address "
@@ -2433,7 +2632,8 @@ msgstr ""
 "chcete vybrat. Nakonec zvolte <guiseq><gui>Nástroje</gui><gui>Exportovat</"
 "gui></guiseq>."
 
-#: C/mergefeatures.page:71(note/p)
+#. (itstool) path: note/p
+#: C/mergefeatures.page:71
 msgid ""
 "In the file chooser window, choose the desired folder and a name for the "
 "file and change the value of the drop-down button in the right bottom corner "
@@ -2443,7 +2643,8 @@ msgstr ""
 "rozbalovacím seznamu v pravém dolním rohu změňte hodnotu na <gui>Oddělený "
 "čárkou</gui>. Nakonec klikněte na <gui>Uložit</gui>."
 
-#: C/mergefeatures.page:79(page/p)
+#. (itstool) path: page/p
+#: C/mergefeatures.page:79
 msgid ""
 "A label must then be configured to \"point at\" this data file. To configure "
 "the merge properties of a document, choose <guiseq><gui>Objects</gui> "
@@ -2458,7 +2659,8 @@ msgstr ""
 "okno slouží k výběru přesného formátu datového souboru a názvu (umístění) "
 "souboru se slučovanými daty."
 
-#: C/mergefeatures.page:87(page/p)
+#. (itstool) path: page/p
+#: C/mergefeatures.page:87
 msgid ""
 "Finally, once the label has been configured for a data file, field keys can "
 "be inserted into text objects and used as source or data for barcode objects "
@@ -2471,7 +2673,8 @@ msgstr ""
 "informací o použití slučovaných dat pro tyto typy objektů viz <link xref="
 "\"editprop\"/>."
 
-#: C/mergefeatures.page:93(page/p)
+#. (itstool) path: page/p
+#: C/mergefeatures.page:93
 msgid ""
 "Now that your label is configured, <app>gLabels</app> will print a unique "
 "label for each record in your source document -- substituting fields from "
@@ -2482,21 +2685,25 @@ msgstr ""
 "dokumentu – do klíčů polí se ve všech textech budou dosazovat pole z "
 "jednotlivých záznamů."
 
-#: C/mergefeatures.page:98(page/p)
+#. (itstool) path: page/p
+#: C/mergefeatures.page:98
 msgid ""
 "See <link xref=\"merge\"/> for a detailed tutorial on the document merge "
 "feature."
 msgstr "Podrobný výklad funkcí slučování dokumentů viz <link xref=\"merge\"/>."
 
-#: C/merge.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/merge.page:9
 msgid "Merge a data source to create multiple documents."
 msgstr "Jak slučovat zdroje dat při vytváření více dokumentů."
 
-#: C/merge.page:25(page/title)
+#. (itstool) path: page/title
+#: C/merge.page:25
 msgid "Document merge tutorial"
 msgstr "Výuka slučování dokumentů"
 
-#: C/merge.page:27(page/p)
+#. (itstool) path: page/p
+#: C/merge.page:27
 msgid ""
 "Document Merge (sometimes called \"Mail Merge\") is a powerful feature that "
 "allows a unique label or card to be printed for each record in an external "
@@ -2511,15 +2718,18 @@ msgstr ""
 "provedou několika obvyklými úlohami, které používají funkci slučování "
 "dokumentů."
 
-#: C/multifile.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/multifile.page:9
 msgid "How to open multiple files at once by using the command line."
 msgstr "Jak otevřít více souborů naráz pomocí příkazového řádku."
 
-#: C/multifile.page:25(page/title)
+#. (itstool) path: page/title
+#: C/multifile.page:25
 msgid "To open multiple files from the command line"
 msgstr "Jak otevřít více souborů z příkazového řádku"
 
-#: C/multifile.page:27(page/p)
+#. (itstool) path: page/p
+#: C/multifile.page:27
 msgid ""
 "You can run <app>gLabels</app> from a command line and open a single file or "
 "multiple files. To open multiple files from a command line, type the "
@@ -2529,13 +2739,15 @@ msgstr ""
 "tom jeden nebo více souborů. Pokud chcete otevřít z příkazového řádku více "
 "souborů, napište následující příkaz a zmáčkněte <key>Enter</key>:"
 
-#: C/multifile.page:32(page/p)
+#. (itstool) path: page/p
+#: C/multifile.page:32
 msgid ""
 "<cmd>glabels <var>file1.glabels file2.glabels file3.glabels</var> </cmd>"
 msgstr ""
 "<cmd>glabels <var>soubor1.glabels soubor2.glabels soubor3.glabels</var></cmd>"
 
-#: C/multifile.page:36(page/p)
+#. (itstool) path: page/p
+#: C/multifile.page:36
 msgid ""
 "When the application starts, the files that you specify are displayed in "
 "separate <app>gLabels</app> windows."
@@ -2543,15 +2755,18 @@ msgstr ""
 "Po spuštění aplikace se každý ze zadaných souborů zobrazí v samostatném okně "
 "<application>gLabels</application>."
 
-#: C/newlabel.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/newlabel.page:9
 msgid "Create a new label or card in <app>gLabels</app>."
 msgstr "Jak vytvořit novou etiketu nebo vizitku v aplikaci <app>gLabels</app>."
 
-#: C/newlabel.page:25(page/title)
+#. (itstool) path: page/title
+#: C/newlabel.page:25
 msgid "To create a new label or card"
 msgstr "Vytváření nové etikety nebo vizitky"
 
-#: C/newlabel.page:27(page/p)
+#. (itstool) path: page/p
+#: C/newlabel.page:27
 msgid ""
 "To create a new label or business card, choose <guiseq><gui>File</"
 "gui><gui>New</gui></guiseq> to display the <gui>New Label or Card</gui> "
@@ -2565,11 +2780,12 @@ msgstr ""
 "na <gui>OK</gui>. Nový dokument se zobrazí v zobrazovací oblasti okna "
 "<app>gLabels</app>."
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/printfile.page:47(media)
+#: C/printfile.page:47
 msgctxt "_"
 msgid ""
 "external ref='figures/print-copies.png' "
@@ -2578,26 +2794,30 @@ msgstr ""
 "external ref='figures/print-copies.png' "
 "md5='ee473352947fe25c7adaa9f9a052c3e9'"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/printfile.page:70(media)
+#: C/printfile.page:70
 msgctxt "_"
 msgid ""
 "external ref='figures/print-merge.png' md5='ee70bd2150a6cd46e96ce5c0531eb47b'"
 msgstr ""
 "external ref='figures/print-merge.png' md5='ee70bd2150a6cd46e96ce5c0531eb47b'"
 
-#: C/printfile.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/printfile.page:9
 msgid "How to print your labels and cards."
 msgstr "Jak vytisknout etikety nebo vizitky."
 
-#: C/printfile.page:25(page/title)
+#. (itstool) path: page/title
+#: C/printfile.page:25
 msgid "To print labels and cards"
 msgstr "Tisk etiket a vizitek"
 
-#: C/printfile.page:27(page/p)
+#. (itstool) path: page/p
+#: C/printfile.page:27
 msgid ""
 "To print labels or cards, choose <guiseq><gui>File</gui><gui>Print</gui> </"
 "guiseq> to display the <gui>Print</gui> dialog. Once print options have been "
@@ -2610,22 +2830,26 @@ msgstr ""
 "se vytisknou. Pokud se chcete jen podívat na náhled, klikněte místo toho na "
 "<gui>Náhled tisku</gui>."
 
-#: C/printfile.page:34(page/p)
+#. (itstool) path: page/p
+#: C/printfile.page:34
 msgid ""
 "The <gui>Print</gui> dialog allows you to specify the following print "
 "options:"
 msgstr ""
 "V dialogovém okně <gui>Tisk</gui> můžete nastavit následující volby tisku:"
 
-#: C/printfile.page:38(section/title)
+#. (itstool) path: section/title
+#: C/printfile.page:38
 msgid "The Labels Tab of the Print Dialog"
 msgstr "Karta Etikety v dialogovém okně Tisk"
 
-#: C/printfile.page:41(section/title)
+#. (itstool) path: section/title
+#: C/printfile.page:41
 msgid "Print control (Simple)"
 msgstr "Ovládání tisku (jednoduchý)"
 
-#: C/printfile.page:43(section/p)
+#. (itstool) path: section/p
+#: C/printfile.page:43
 msgid ""
 "For simple labels or cards (no document merge), the job tabbed section "
 "contains the following copy controls."
@@ -2633,7 +2857,8 @@ msgstr ""
 "Pro jednoduché etikety nebo vizitky (bez slučování dokumentů), obsahuje "
 "karta úlohy následující ovládací prvky pro nastavení kopie."
 
-#: C/printfile.page:52(section/p)
+#. (itstool) path: section/p
+#: C/printfile.page:52
 msgid ""
 "The number of copies of the label can be selected by choosing the number of "
 "full sheets to print, or a specific subset of labels on a single sheet."
@@ -2641,7 +2866,8 @@ msgstr ""
 "Počet kopií etikety můžete vybrat zvolením počtu plných listů, které se mají "
 "vytisknout, a nebo vybrat jen část etiket na jednom listu."
 
-#: C/printfile.page:56(section/p)
+#. (itstool) path: section/p
+#: C/printfile.page:56
 msgid ""
 "The mini-preview can also be used to graphically select the subset of labels "
 "by clicking the first label on the mini-preview and dragging to the last "
@@ -2650,11 +2876,13 @@ msgstr ""
 "Minináhled můžete také použít ke grafickému výběru části etiket tak, že "
 "kliknete na první etiketu v minináhledu a táhnete až na poslední etiketu."
 
-#: C/printfile.page:63(section/title)
+#. (itstool) path: section/title
+#: C/printfile.page:63
 msgid "Print control (Merge)"
 msgstr "Ovládání tisku (slučování)"
 
-#: C/printfile.page:65(section/p)
+#. (itstool) path: section/p
+#: C/printfile.page:65
 msgid ""
 "For labels or cards using the document merge (also known as \"mail merge\") "
 "capability, the job tabbed section contains the following merge controls "
@@ -2664,11 +2892,13 @@ msgstr ""
 "nazývané „hromadná korespondence“), obsahuje karta úlohy následující "
 "ovládací prvky slučování, lišící se od ovládacích prvků jednoduchého tisku."
 
-#: C/printfile.page:71(media/p)
+#. (itstool) path: media/p
+#: C/printfile.page:71
 msgid "Print Document Merge Controls"
 msgstr "Ovládací prvky tisku slučovaných dokumentů"
 
-#: C/printfile.page:75(section/p)
+#. (itstool) path: section/p
+#: C/printfile.page:75
 msgid ""
 "The total number of labels or cards printed is the product of the number of "
 "records in the merge source and the number of copies selected. If multiple "
@@ -2681,7 +2911,8 @@ msgstr ""
 "uspořádané (kopie ze stejného záznamu seskupené spolu) nebo neuspořádané "
 "(kopie jednotlivých záznamů za sebou)."
 
-#: C/printfile.page:82(section/p)
+#. (itstool) path: section/p
+#: C/printfile.page:82
 msgid ""
 "Printing can begin on any label on the first sheet. This can be selected "
 "with the <gui>Start on label</gui> spinbutton."
@@ -2689,7 +2920,8 @@ msgstr ""
 "Tisk může začínat na libovolné etiketě na prvním listu. Tu můžete vybrat "
 "pomocí číselníku <gui>Začít na etiketě</gui>."
 
-#: C/printfile.page:86(section/p)
+#. (itstool) path: section/p
+#: C/printfile.page:86
 msgid ""
 "The mini-preview can also be used to graphically select this first label, by "
 "clicking on the desired label in the mini-preview."
@@ -2697,19 +2929,23 @@ msgstr ""
 "Minináhled můžete také použít ke grafickému výběru první etikety tak, že na "
 "ni v minináhledu kliknete."
 
-#: C/printfile.page:93(section/title)
+#. (itstool) path: section/title
+#: C/printfile.page:93
 msgid "Options"
 msgstr "Volby"
 
-#: C/printfile.page:94(section/p)
+#. (itstool) path: section/p
+#: C/printfile.page:94
 msgid "The following options can also be selected."
 msgstr "Můžete rovněž vybrat následující volby."
 
-#: C/printfile.page:97(item/p)
+#. (itstool) path: item/p
+#: C/printfile.page:97
 msgid "<gui>print outlines</gui>"
 msgstr "<gui>tisk obrysů</gui>"
 
-#: C/printfile.page:98(item/p)
+#. (itstool) path: item/p
+#: C/printfile.page:98
 msgid ""
 "Print outlines of labels. This option is useful for dry-runs, to test "
 "printer alignment."
@@ -2717,11 +2953,13 @@ msgstr ""
 "Tisk obrysů etiket. Tato volba je použitelná k tisku nanečisto, k otestování "
 "lícování."
 
-#: C/printfile.page:102(item/p)
+#. (itstool) path: item/p
+#: C/printfile.page:102
 msgid "<gui>print in reverse</gui>"
 msgstr "<gui>obrácený tisk</gui>"
 
-#: C/printfile.page:103(item/p)
+#. (itstool) path: item/p
+#: C/printfile.page:103
 msgid ""
 "Prints the labels as mirror images. This option is useful for printing on "
 "clear labels that will be viewed from the reverse side (e.g. in a car "
@@ -2730,11 +2968,13 @@ msgstr ""
 "Tisknout etikety zrcadlově. Tato volba je použitelná pro tisk na čiré "
 "etikety, na které se bude dívat z druhé strany (např. na okně auta)."
 
-#: C/printfile.page:108(item/p)
+#. (itstool) path: item/p
+#: C/printfile.page:108
 msgid "<gui>print crop marks</gui>"
 msgstr "<gui>tisknout značky pro ořez</gui>"
 
-#: C/printfile.page:109(item/p)
+#. (itstool) path: item/p
+#: C/printfile.page:109
 msgid ""
 "Prints crop marks along the edge of the sheet. This option is useful for "
 "printing on blank stock, to be cut after printing. This option does not work "
@@ -2744,15 +2984,18 @@ msgstr ""
 "na čisté listy, které se budou po tisku rozřezávat. Tato volba nepracuje "
 "úplně správně se všemi šablonami."
 
-#: C/select.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/select.page:9
 msgid "How to select objects."
 msgstr "Jak vybrat objekty."
 
-#: C/select.page:25(page/title)
+#. (itstool) path: page/title
+#: C/select.page:25
 msgid "To select objects"
 msgstr "Výběr objektů"
 
-#: C/select.page:27(page/p)
+#. (itstool) path: page/p
+#: C/select.page:27
 msgid ""
 "A prerequisite for performing operations on objects is the selection of "
 "individual objects or groups of objects. The display area must be in the "
@@ -2768,11 +3011,13 @@ msgstr ""
 "<gui>Režim výběru</gui></guiseq> nebo odpovídajícím příkazem na <gui>Liště "
 "kreslení</gui>."
 
-#: C/select.page:38(section/title)
+#. (itstool) path: section/title
+#: C/select.page:38
 msgid "Selecting a single object"
 msgstr "Výběr jednoho objektu"
 
-#: C/select.page:39(section/p)
+#. (itstool) path: section/p
+#: C/select.page:39
 msgid ""
 "A single object can be selected simply by clicking on the desired object in "
 "the display area. Once selected the object will be highlighted with a set of "
@@ -2781,11 +3026,13 @@ msgstr ""
 "Jeden objekt vyberete prostým kliknutím na něj v zobrazovací oblasti. "
 "Vybraný objekt bude zvýrazněný pomocí úchytů sloužících ke změně velikosti"
 
-#: C/select.page:46(section/title)
+#. (itstool) path: section/title
+#: C/select.page:46
 msgid "Aggregate object selections"
 msgstr "Přidávání objektů do výběru"
 
-#: C/select.page:47(section/p)
+#. (itstool) path: section/p
+#: C/select.page:47
 msgid ""
 "Multiple objects can be selected by first selecting the first object as "
 "above and then by holding the <key>Ctrl</key> key while selecting additional "
@@ -2802,11 +3049,13 @@ msgstr ""
 "vybrat pomocí položky nabídky <guiseq><gui>Upravit</gui> <gui>Vybrat vše</"
 "gui></guiseq>. Všechny objekty ve výběru budou zvýrazněné."
 
-#: C/select.page:60(section/title)
+#. (itstool) path: section/title
+#: C/select.page:60
 msgid "Area selections"
 msgstr "Výběr oblasti"
 
-#: C/select.page:62(section/p)
+#. (itstool) path: section/p
+#: C/select.page:62
 msgid ""
 "Multiple objects can also be selected by clicking an empty area and dragging "
 "to form a rectangular area. When released, all objects contained in the area "
@@ -2820,11 +3069,13 @@ msgstr ""
 "přidání ke stávajícímu výběru podržením klávesy <key>Ctrl</key> během "
 "provádění výběru."
 
-#: C/select.page:72(section/title)
+#. (itstool) path: section/title
+#: C/select.page:72
 msgid "Unselecting objects"
 msgstr "Zrušení výběru objektů"
 
-#: C/select.page:74(section/p)
+#. (itstool) path: section/p
+#: C/select.page:74
 msgid ""
 "Individual objects can be removed from an existing selection by holding the "
 "<key>Ctrl</key> key while clicking on a previously selected object. An "
@@ -2839,11 +3090,13 @@ msgstr ""
 "kliknutím na prázdné místo v zobrazovací oblasti. Jakmile je u objektu "
 "zrušen výběr, zmizí i jeho zvýraznění."
 
-#: C/select.page:86(section/title)
+#. (itstool) path: section/title
+#: C/select.page:86
 msgid "Clipboard Commands"
 msgstr "Příkazy pro práci se schránkou"
 
-#: C/select.page:88(section/p)
+#. (itstool) path: section/p
+#: C/select.page:88
 msgid ""
 "Object selections can be manipulated using the standard clipboard operations "
 "<gui>Cut</gui>, <gui>Copy</gui>, <gui>Paste</gui>, and <gui>Delete</gui>."
@@ -2852,11 +3105,13 @@ msgstr ""
 "<gui>Vyjmout</gui>, <gui>Kopírovat</gui>, <gui>Vložit</gui> a <gui>Smazat</"
 "gui>."
 
-#: C/select.page:94(section/title)
+#. (itstool) path: section/title
+#: C/select.page:94
 msgid "<gui>Cut</gui> (<keyseq><key>Ctrl</key><key>X</key></keyseq>)"
 msgstr "<gui>Vyjmout</gui> (<keyseq><key>Ctrl</key><key>X</key></keyseq>)"
 
-#: C/select.page:96(section/p)
+#. (itstool) path: section/p
+#: C/select.page:96
 msgid ""
 "Moves selected objects to the clipboard. The objects are then available for "
 "pasting back into the current document or another document."
@@ -2864,11 +3119,13 @@ msgstr ""
 "Přesune vybrané objekty do schránky. Objekty jsou potom přístupné pro "
 "vkládání zpátky do aktuálního dokumentu nebo jiného dokumentu."
 
-#: C/select.page:103(section/title)
+#. (itstool) path: section/title
+#: C/select.page:103
 msgid "<gui>Copy</gui> (<keyseq><key>Ctrl</key><key>C</key></keyseq>)"
 msgstr "<gui>Kopírovat</gui> (<keyseq><key>Ctrl</key><key>C</key></keyseq>)"
 
-#: C/select.page:105(section/p)
+#. (itstool) path: section/p
+#: C/select.page:105
 msgid ""
 "Copies selected objects to the clipboard without deleting them. The objects "
 "are then available for pasting back into the current document or another "
@@ -2878,11 +3135,13 @@ msgstr ""
 "potom přístupné pro vkládání zpátky do aktuálního dokumentu nebo jiného "
 "dokumentu."
 
-#: C/select.page:112(section/title)
+#. (itstool) path: section/title
+#: C/select.page:112
 msgid "<gui>Paste</gui> (<keyseq><key>Ctrl</key><key>V</key></keyseq>)"
 msgstr "<gui>Vložit</gui> (<keyseq><key>Ctrl</key><key>V</key></keyseq>)"
 
-#: C/select.page:114(section/p)
+#. (itstool) path: section/p
+#: C/select.page:114
 msgid ""
 "Pastes objects from the clipboard into the current document. <app>gLabels</"
 "app> can only paste objects from another <app>gLabels</app> document."
@@ -2890,19 +3149,22 @@ msgstr ""
 "Vloží objekty ze schránky do aktuálního dokumentu. Aplikace <app>gLabels</"
 "app> umí vkládat pouze objekty z jiného dokumentu <app>gLabels</app>."
 
-#: C/select.page:121(section/title)
+#. (itstool) path: section/title
+#: C/select.page:121
 msgid "<gui>Delete</gui> (<key>Del</key>)"
 msgstr "<gui>Smazat</gui> (<key>Del</key>)"
 
-#: C/select.page:123(section/p)
+#. (itstool) path: section/p
+#: C/select.page:123
 msgid "Deletes selected objects without placing them on the clipboard."
 msgstr "Smaže vybrané objekty, aniž by byly umístěny do schránky."
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/skipfields.page:45(media)
+#: C/skipfields.page:45
 msgctxt "_"
 msgid ""
 "external ref='figures/skip-fields-screenshot.png' "
@@ -2911,11 +3173,12 @@ msgstr ""
 "external ref='figures/skip-fields-screenshot.png' "
 "md5='eef4a81f48546bd7d3753656a3df9cb7'"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/skipfields.page:53(media)
+#: C/skipfields.page:53
 msgctxt "_"
 msgid ""
 "external ref='figures/skip-fields-output.png' "
@@ -2924,15 +3187,18 @@ msgstr ""
 "external ref='figures/skip-fields-output.png' "
 "md5='b64d1a7fdf0d37e9a6d93f0bc2f9fa0d'"
 
-#: C/skipfields.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/skipfields.page:9
 msgid "How to skip blank address lines when doing a document merge."
 msgstr "Jak přeskakovat prázdné řádky v adresách při slučování dokumentu."
 
-#: C/skipfields.page:25(page/title)
+#. (itstool) path: page/title
+#: C/skipfields.page:25
 msgid "Skipping blank address lines"
 msgstr "Přeskakování prázdných řádků v adresách"
 
-#: C/skipfields.page:27(page/p)
+#. (itstool) path: page/p
+#: C/skipfields.page:27
 msgid ""
 "This feature can be best described by a simple example. In the following CSV "
 "file, column 5 (ADDR2) contains the second address line for each record. "
@@ -2946,7 +3212,8 @@ msgstr ""
 "tato funkce pracovala, musí být pole úplně prázdné – jakýkoliv text, a to "
 "včetně mezer, překazí použití této funkce.)"
 
-#: C/skipfields.page:33(page/code)
+#. (itstool) path: page/code
+#: C/skipfields.page:33
 #, no-wrap
 msgid ""
 "\n"
@@ -2963,7 +3230,8 @@ msgstr ""
 "  \"Nábytek holding a.s.\",\"Ing. Jiří Procházka\",\"Vídeňská 95\",Brno,\"619 00\"\n"
 "  "
 
-#: C/skipfields.page:40(page/p)
+#. (itstool) path: page/p
+#: C/skipfields.page:40
 msgid ""
 "In the following screenshot, a single multiline text object has been created "
 "to format these addresses. Notice that ${ADDR2} representing the second "
@@ -2975,11 +3243,13 @@ msgstr ""
 "adres do firmy, je na svém vlastním řádku. (Jakýkoliv další text na stejném "
 "řádku, a to včetně mezer, by překazil tuto funkci.)"
 
-#: C/skipfields.page:46(media/p)
+#. (itstool) path: media/p
+#: C/skipfields.page:46
 msgid "Multi-line address"
 msgstr "Adresa na víc řádků"
 
-#: C/skipfields.page:49(page/p)
+#. (itstool) path: page/p
+#: C/skipfields.page:49
 msgid ""
 "Printing this label results in the following output. Notice that the line "
 "containing the ${ADDR2} field is completely skipped for the first two "
@@ -2989,6 +3259,7 @@ msgstr ""
 "obsahující pole ${OSOBA} byl u prvních dvou záznamů zcela vynechán, "
 "nevytiskl se ani prázdný řádek."
 
-#: C/skipfields.page:54(media/p)
+#. (itstool) path: media/p
+#: C/skipfields.page:54
 msgid "Output"
 msgstr "Výstup"
