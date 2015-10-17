@@ -3,7 +3,7 @@
 # Olivier Berger <oberger@gnu.org>
 #
 # Florent Morel <florent@taket.org>, 2001, 2004.
-# Claude Paroz <claude@2xlibre.net>, 2007-2013.
+# Claude Paroz <claude@2xlibre.net>, 2007-2015.
 # Bruno Brouard <annoa.b@gmail.com>, 2010.
 # Gérard Baylard <Geodebay@gmail.com>, 2010.
 # Pierre Henry <pierrehenry73@yahoo.fr>, 2012
@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2013-10-05 04:42+0000\n"
-"PO-Revision-Date: 2013-10-12 14:02+0200\n"
+"POT-Creation-Date: 2015-10-17 05:57+0000\n"
+"PO-Revision-Date: 2015-10-17 17:02+0200\n"
 "Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "Language: fr\n"
@@ -545,7 +545,7 @@ msgstr "Couleur personnalisée"
 msgid "Custom Color #%u"
 msgstr "Couleur personnalisée n° %u"
 
-#: ../src/critical-error-handler.c:70
+#: ../src/critical-error-handler.c:72
 msgid "gLabels Fatal Error!"
 msgstr "Erreur fatale de gLabels !"
 
@@ -1694,7 +1694,7 @@ msgstr ""
 "de CONFORMITÉ À UNE UTILISATION PARTICULIÈRE. Pour plus de détails, \n"
 "voir la Licence Publique Générale GNU.\n"
 
-#: ../src/warning-handler.c:69
+#: ../src/warning-handler.c:71
 msgid "gLabels Error!"
 msgstr "Erreur de gLabels !"
 
@@ -2434,13 +2434,13 @@ msgid ""
 "such as a CSV file or an Evolution address book."
 msgstr ""
 "gLabels peut être utilisé pour concevoir des étiquettes d'adresses, des "
-"badges nominaux, des étiquettes de prix, des étiquettes pour CD/DVD ou "
-"pour tout autre usage impliquant un motif répétitif sur une feuille de papier. "
-"Les étiquettes (ou cartes) peuvent contenir du texte, des images, des lignes, "
-"des formes et des codes-barres. gLabels propose également une fonctionnalité "
-"de fusion de document permettant d'imprimer une étiquette pour chaque "
-"occurrence d'une source de données externe, telle qu'un fichier CSV ou un "
-"carnet d'adresses Evolution."
+"badges nominaux, des étiquettes de prix, des étiquettes pour CD/DVD ou pour "
+"tout autre usage impliquant un motif répétitif sur une feuille de papier. "
+"Les étiquettes (ou cartes) peuvent contenir du texte, des images, des "
+"lignes, des formes et des codes-barres. gLabels propose également une "
+"fonctionnalité de fusion de document permettant d'imprimer une étiquette "
+"pour chaque occurrence d'une source de données externe, telle qu'un fichier "
+"CSV ou un carnet d'adresses Evolution."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
 msgid "Show/hide main toolbar."
@@ -2799,6 +2799,7 @@ msgstr "Toute étiquette"
 #: ../templates/hama-iso-templates.xml.h:4
 #: ../templates/pearl-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:8
+#: ../templates/sheetlabels-us-templates.xml.h:16
 msgid "Round labels"
 msgstr "Étiquettes circulaires"
 
@@ -2969,7 +2970,7 @@ msgstr "Étiquettes circulaires"
 #: ../templates/avery-us-templates.xml.h:18
 #: ../templates/avery-iso-templates.xml.h:20
 #: ../templates/meritline-us-templates.xml.h:14
-#: ../templates/sheetlabels-us-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:18
 #: ../templates/worldlabel-us-templates.xml.h:8
 msgid "Diskette Labels"
 msgstr "Étiquettes de disquette"
@@ -3028,6 +3029,7 @@ msgstr "Étiquettes pour badges"
 #: ../templates/geha-iso-templates.xml.h:10
 #: ../templates/herma-iso-templates.xml.h:14
 #: ../templates/igepa-templates.xml.h:5 ../templates/jac-iso-templates.xml.h:2
+#: ../templates/mayspies-templates.xml.h:1
 #: ../templates/misc-us-templates.xml.h:8
 #: ../templates/misc-iso-templates.xml.h:22
 #: ../templates/misc-other-templates.xml.h:2
@@ -3041,7 +3043,7 @@ msgstr "Étiquettes de CD/DVD"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:34
-#: ../templates/sheetlabels-us-templates.xml.h:18
+#: ../templates/sheetlabels-us-templates.xml.h:20
 msgid "CD/DVD Labels (Disc Labels)"
 msgstr "Étiquettes de CD/DVD (étiquettes de disque)"
 
@@ -3054,7 +3056,7 @@ msgstr "Étiquettes de CD/DVD (étiquettes de boîtier)"
 #: ../templates/avery-us-templates.xml.h:38
 #: ../templates/geha-iso-templates.xml.h:17
 #: ../templates/meritline-us-templates.xml.h:16
-#: ../templates/sheetlabels-us-templates.xml.h:20
+#: ../templates/sheetlabels-us-templates.xml.h:22
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Video Tape Face Labels"
 msgstr "Étiquettes de face de cassette vidéo"
@@ -3077,7 +3079,9 @@ msgid "Divider Labels"
 msgstr "Étiquettes de division"
 
 #. ===================================================================
+#. ============================================================
 #: ../templates/avery-iso-templates.xml.h:2
+#: ../templates/cablelabel-templates.xml.h:2
 msgid "Mini Labels"
 msgstr "Mini-étiquettes"
 
@@ -3115,6 +3119,7 @@ msgstr "Étiquettes postales"
 #: ../templates/herma-iso-templates.xml.h:8
 #: ../templates/misc-us-templates.xml.h:21
 #: ../templates/misc-iso-templates.xml.h:6
+#: ../templates/sheetlabels-us-templates.xml.h:24
 #: ../templates/zweckform-iso-templates.xml.h:10
 msgid "Mailing Labels"
 msgstr "Étiquettes de publipostage"
@@ -3147,9 +3152,40 @@ msgstr "Étiquettes de disquette"
 #. *********************************************************************
 #. Labels for the Brother QL-500/550/650 PC Label Printers
 #.
-#. These templates work with the Brother Linux Printer CUPS Driver.  It
-#. is unknown if these work correctly with the foomatic print driver for
-#. these printers.
+#. These templates are based on the exact media sizes and measurements
+#. in version 1.1 of the 'Brother-QL-500-ptouch.ppd' file.  If these
+#. don't work for you, try the old versions (e.g. DK-11201-old) of
+#. these templates.
+#.
+#. Currently only have templates for a few of the popular sizes.
+#.
+#. *********************************************************************
+#. *********************************************************************
+#.
+#: ../templates/brother-other-templates.xml.h:16
+msgid "Standard Address Labels 29mm x 90mm"
+msgstr "Étiquettes d'adresse standard 29x90 mm"
+
+#: ../templates/brother-other-templates.xml.h:17
+msgid "Shipping Labels 62mm x 100mm"
+msgstr "Étiquettes postales 62x100 mm"
+
+#: ../templates/brother-other-templates.xml.h:18
+msgid "Multi Purpose Labels 17mm x 54mm"
+msgstr "Étiquettes multi usages 17x54 mm"
+
+#: ../templates/brother-other-templates.xml.h:19
+msgid "Standard Address Labels 38mm x 90mm"
+msgstr "Étiquettes d'adresse standard 38x90 mm"
+
+#.
+#. *********************************************************************
+#. *********************************************************************
+#. Labels for the Brother QL-500/550/650 PC Label Printers
+#.
+#. These are the older templates that worked with the Brother Linux
+#. Printer CUPS Driver.  They do not work correctly with newer versions
+#. of the foomatic drivers.
 #.
 #. One difference from typical templates is that the template size is
 #. not the actual media size - it is the size of the printable area,
@@ -3159,21 +3195,26 @@ msgstr "Étiquettes de disquette"
 #. *********************************************************************
 #. *********************************************************************
 #.
-#: ../templates/brother-other-templates.xml.h:18
-msgid "Standard Address Labels 29mm x 90mm"
-msgstr "Étiquettes d'adresse standard 29x90 mm"
+#: ../templates/brother-other-templates.xml.h:37
+msgid "Standard Address Labels 29mm x 90mm (Old)"
+msgstr "Étiquettes d'adresse standard 29x90 mm (ancien)"
 
-#: ../templates/brother-other-templates.xml.h:19
-msgid "Shipping Labels 62mm x 100mm"
-msgstr "Étiquettes postales 62x100 mm"
+#: ../templates/brother-other-templates.xml.h:38
+msgid "Shipping Labels 62mm x 100mm (Old)"
+msgstr "Étiquettes postales 62x100 mm (ancien)"
 
-#: ../templates/brother-other-templates.xml.h:20
-msgid "Multi Purpose Labels 17mm x 54mm"
-msgstr "Étiquettes multi usages 17x54 mm"
+#: ../templates/brother-other-templates.xml.h:39
+msgid "Multi Purpose Labels 17mm x 54mm (Old)"
+msgstr "Étiquettes multi usages 17x54 mm (ancien)"
 
-#: ../templates/brother-other-templates.xml.h:21
-msgid "Standard Address Labels 38mm x 90mm"
-msgstr "Étiquettes d'adresse standard 38x90 mm"
+#: ../templates/brother-other-templates.xml.h:40
+msgid "Standard Address Labels 38mm x 90mm (Old)"
+msgstr "Étiquettes d'adresse standard 38x90 mm (ancien)"
+
+#. ===================================================================
+#: ../templates/canon-other-templates.xml.h:2
+msgid "CD/DVD Tray"
+msgstr "Bac CD/DVD"
 
 #. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:4
