@@ -1,22 +1,22 @@
 # Spanish translation of glabels.
 # sergio rivadero <sergiorivadero@argentina.com>, 2005.
 # Jorge González <jorgegonz@svn.gnome.org>, 2010.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011, 2012, 2014.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011, 2012, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2013-12-27 05:21+0000\n"
-"PO-Revision-Date: 2014-01-03 17:38+0100\n"
+"POT-Creation-Date: 2015-12-01 07:15+0000\n"
+"PO-Revision-Date: 2015-12-02 15:41+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
-"Language-Team: Español <gnome-es-list@gnome.org>\n"
+"Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Gtranslator 2.91.5\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Gtranslator 2.91.6\n"
 
 #: ../src/bc-backends.c:81
 msgid "Built-in"
@@ -540,7 +540,7 @@ msgstr "Color personalizado"
 msgid "Custom Color #%u"
 msgstr "Color personalizado número %u"
 
-#: ../src/critical-error-handler.c:70
+#: ../src/critical-error-handler.c:72
 msgid "gLabels Fatal Error!"
 msgstr "Error fatal de gLables"
 
@@ -1668,7 +1668,7 @@ msgstr ""
 "MERCANTILIDAD o IDONEIDAD PARA UN PROPÓSITO PARTICULAR; \n"
 "Para más detalles vea la Licencia Pública General de GNU.\n"
 
-#: ../src/warning-handler.c:69
+#: ../src/warning-handler.c:71
 msgid "gLabels Error!"
 msgstr "Error de gLabels"
 
@@ -1851,7 +1851,6 @@ msgid "Rotated"
 msgstr "Rotada"
 
 #: ../data/ui/new-label-dialog.ui.h:7
-#| msgid "Remove all selections"
 msgid "Review Selection"
 msgstr "Revisar la selección"
 
@@ -2774,6 +2773,7 @@ msgstr "Cualquier etiqueta"
 #: ../templates/hama-iso-templates.xml.h:4
 #: ../templates/pearl-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:8
+#: ../templates/sheetlabels-us-templates.xml.h:16
 msgid "Round labels"
 msgstr "Etiquetas redondeadas"
 
@@ -2944,7 +2944,7 @@ msgstr "Etiquetas redondeadas"
 #: ../templates/avery-us-templates.xml.h:18
 #: ../templates/avery-iso-templates.xml.h:20
 #: ../templates/meritline-us-templates.xml.h:14
-#: ../templates/sheetlabels-us-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:18
 #: ../templates/worldlabel-us-templates.xml.h:8
 msgid "Diskette Labels"
 msgstr "Etiquetas de diskettes"
@@ -3003,6 +3003,7 @@ msgstr "Etiquetas de distintivos"
 #: ../templates/geha-iso-templates.xml.h:10
 #: ../templates/herma-iso-templates.xml.h:14
 #: ../templates/igepa-templates.xml.h:5 ../templates/jac-iso-templates.xml.h:2
+#: ../templates/mayspies-templates.xml.h:1
 #: ../templates/misc-us-templates.xml.h:8
 #: ../templates/misc-iso-templates.xml.h:22
 #: ../templates/misc-other-templates.xml.h:2
@@ -3016,7 +3017,7 @@ msgstr "Etiquetas de CD/DVD"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:34
-#: ../templates/sheetlabels-us-templates.xml.h:18
+#: ../templates/sheetlabels-us-templates.xml.h:20
 msgid "CD/DVD Labels (Disc Labels)"
 msgstr "Etiquetas de CD/DVD (etiquetas de discos)"
 
@@ -3029,7 +3030,7 @@ msgstr "Etiquetas de CD/DVD (etiquetas laterales)"
 #: ../templates/avery-us-templates.xml.h:38
 #: ../templates/geha-iso-templates.xml.h:17
 #: ../templates/meritline-us-templates.xml.h:16
-#: ../templates/sheetlabels-us-templates.xml.h:20
+#: ../templates/sheetlabels-us-templates.xml.h:22
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Video Tape Face Labels"
 msgstr "Etiquetas de video (frente)"
@@ -3052,7 +3053,9 @@ msgid "Divider Labels"
 msgstr "Etiquetas divisoras"
 
 #. ===================================================================
+#. ============================================================
 #: ../templates/avery-iso-templates.xml.h:2
+#: ../templates/cablelabel-templates.xml.h:2
 msgid "Mini Labels"
 msgstr "Minietiquetas"
 
@@ -3090,6 +3093,7 @@ msgstr "Etiquetas de envío"
 #: ../templates/herma-iso-templates.xml.h:8
 #: ../templates/misc-us-templates.xml.h:21
 #: ../templates/misc-iso-templates.xml.h:6
+#: ../templates/sheetlabels-us-templates.xml.h:24
 #: ../templates/zweckform-iso-templates.xml.h:10
 msgid "Mailing Labels"
 msgstr "Etiquetas de correo"
@@ -3122,9 +3126,40 @@ msgstr "Etiquetas de disquette"
 #. *********************************************************************
 #. Labels for the Brother QL-500/550/650 PC Label Printers
 #.
-#. These templates work with the Brother Linux Printer CUPS Driver.  It
-#. is unknown if these work correctly with the foomatic print driver for
-#. these printers.
+#. These templates are based on the exact media sizes and measurements
+#. in version 1.1 of the 'Brother-QL-500-ptouch.ppd' file.  If these
+#. don't work for you, try the old versions (e.g. DK-11201-old) of
+#. these templates.
+#.
+#. Currently only have templates for a few of the popular sizes.
+#.
+#. *********************************************************************
+#. *********************************************************************
+#.
+#: ../templates/brother-other-templates.xml.h:16
+msgid "Standard Address Labels 29mm x 90mm"
+msgstr "Etiquetas de dirección estándar de 29mm x 90mm"
+
+#: ../templates/brother-other-templates.xml.h:17
+msgid "Shipping Labels 62mm x 100mm"
+msgstr "Etiquetas de envío de 62mm x 100mm"
+
+#: ../templates/brother-other-templates.xml.h:18
+msgid "Multi Purpose Labels 17mm x 54mm"
+msgstr "Etiquetas multipropósito de 17mm x 54mm"
+
+#: ../templates/brother-other-templates.xml.h:19
+msgid "Standard Address Labels 38mm x 90mm"
+msgstr "Etiquetas de dirección estándar de 38mm x 90mm"
+
+#.
+#. *********************************************************************
+#. *********************************************************************
+#. Labels for the Brother QL-500/550/650 PC Label Printers
+#.
+#. These are the older templates that worked with the Brother Linux
+#. Printer CUPS Driver.  They do not work correctly with newer versions
+#. of the foomatic drivers.
 #.
 #. One difference from typical templates is that the template size is
 #. not the actual media size - it is the size of the printable area,
@@ -3134,21 +3169,31 @@ msgstr "Etiquetas de disquette"
 #. *********************************************************************
 #. *********************************************************************
 #.
-#: ../templates/brother-other-templates.xml.h:18
-msgid "Standard Address Labels 29mm x 90mm"
-msgstr "Etiquetas de dirección estándar de 29mm x 90mm"
+#: ../templates/brother-other-templates.xml.h:37
+#| msgid "Standard Address Labels 29mm x 90mm"
+msgid "Standard Address Labels 29mm x 90mm (Old)"
+msgstr "Etiquetas de dirección estándar de 29mm x 90mm (antiguas)"
 
-#: ../templates/brother-other-templates.xml.h:19
-msgid "Shipping Labels 62mm x 100mm"
-msgstr "Etiquetas de envío de 62mm x 100mm"
+#: ../templates/brother-other-templates.xml.h:38
+#| msgid "Shipping Labels 62mm x 100mm"
+msgid "Shipping Labels 62mm x 100mm (Old)"
+msgstr "Etiquetas de envío de 62mm x 100mm (antiguas)"
 
-#: ../templates/brother-other-templates.xml.h:20
-msgid "Multi Purpose Labels 17mm x 54mm"
-msgstr "Etiquetas multipropósito de 17mm x 54mm"
+#: ../templates/brother-other-templates.xml.h:39
+#| msgid "Multi Purpose Labels 17mm x 54mm"
+msgid "Multi Purpose Labels 17mm x 54mm (Old)"
+msgstr "Etiquetas multipropósito de 17mm x 54mm (antiguas)"
 
-#: ../templates/brother-other-templates.xml.h:21
-msgid "Standard Address Labels 38mm x 90mm"
-msgstr "Etiquetas de dirección estándar de 38mm x 90mm"
+#: ../templates/brother-other-templates.xml.h:40
+#| msgid "Standard Address Labels 38mm x 90mm"
+msgid "Standard Address Labels 38mm x 90mm (Old)"
+msgstr "Etiquetas de dirección estándar de 38mm x 90mm (antiguas)"
+
+#. ===================================================================
+#: ../templates/canon-other-templates.xml.h:2
+#| msgid "CD/DVD Labels"
+msgid "CD/DVD Tray"
+msgstr "Etiquetas de CD/DVD"
 
 #. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:4
