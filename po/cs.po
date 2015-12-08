@@ -4,14 +4,14 @@
 #
 # David Makovský (Yakeen) <yakeen@sannyas-on.net>, 2005.
 # Zbynek Mrkvicka <zbynek@oachot.cz>, 2005.
-# Marek Černocký <marek@manet.cz>, 2009, 2010, 2011, 2012, 2013.
+# Marek Černocký <marek@manet.cz>, 2009, 2010, 2011, 2012, 2013, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2015-07-22 05:40+0000\n"
-"PO-Revision-Date: 2015-07-22 15:19+0200\n"
+"POT-Creation-Date: 2015-12-08 07:17+0000\n"
+"PO-Revision-Date: 2015-12-08 11:53+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -210,8 +210,8 @@ msgid "Code 49"
 msgstr "Code 49"
 
 #: ../src/bc-backends.c:263
-msgid "Code 128 (Mode C supression)"
-msgstr "Code 128 (režim utajení C)"
+msgid "Code 128 (Mode C suppression)"
+msgstr "Code 128 (potlačení režimu C)"
 
 #: ../src/bc-backends.c:266
 msgid "DAFT Code"
@@ -3047,7 +3047,9 @@ msgid "Divider Labels"
 msgstr "Rozdělovací etikety na karty"
 
 #. ===================================================================
+#. ============================================================
 #: ../templates/avery-iso-templates.xml.h:2
+#: ../templates/cablelabel-templates.xml.h:2
 msgid "Mini Labels"
 msgstr "Mini etikety"
 
