@@ -3,21 +3,24 @@
 # This file is distributed under the same license as the glabels package.
 # Yusuf Bolu <yusufbolu@gmail.com>, 2011.
 # Muhammet Kara <muhammetk@gmail.com>, 2014.
+# Necdet Yücel <necdetyucel@gmail.com>, 2015.
+# İşbaran Akçayır <isbaran@gmail.com>, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels glabels-3_0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2014-02-11 12:42+0000\n"
-"PO-Revision-Date: 2014-12-11 18:52+0200\n"
-"Last-Translator: Muhammet Kara <muhammetk@gmail.com>\n"
+"POT-Creation-Date: 2014-12-11 18:30+0000\n"
+"PO-Revision-Date: 2015-01-13 22:09+0000\n"
+"Last-Translator: İşbaran Akçayır <isbaran@gmail.com>\n"
 "Language-Team: Türkçe <gnome-turk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Gtranslator 2.91.6\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1421186963.000000\n"
 
 #: ../src/bc-backends.c:81
 msgid "Built-in"
@@ -541,7 +544,7 @@ msgstr "Özel renk"
 msgid "Custom Color #%u"
 msgstr "Özel Renk #%u"
 
-#: ../src/critical-error-handler.c:70
+#: ../src/critical-error-handler.c:72
 msgid "gLabels Fatal Error!"
 msgstr "gLabels Önemli Hata!"
 
@@ -731,6 +734,8 @@ msgid ""
 "%s\n"
 "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
+"%s\n"
+"Kullanılabilir komut satırı seçenekleri için '%s --help' çalıştırın.\n"
 
 #: ../src/glabels-batch.c:151
 #, c-format
@@ -931,7 +936,7 @@ msgstr "Yazıyı hizala"
 
 #: ../src/label-text.c:771
 msgid "Vertically align text"
-msgstr ""
+msgstr "Metni dikey hizala"
 
 #: ../src/label-text.c:804
 msgid "Line spacing"
@@ -977,7 +982,7 @@ msgstr "Son kullanılan şablon bulunamadı."
 
 #: ../src/media-select.c:992
 msgid "Try selecting a template in the \"Search all\" tab."
-msgstr ""
+msgstr "\"Hepsini ara\" sekmesinde bir şablon seçmeye çalış."
 
 #. Translators: "No match" means that for the given template search criteria, there
 #. * were no matches found.
@@ -998,6 +1003,8 @@ msgid ""
 "You may create new templates or try searching for pre-defined templates in "
 "the \"Search all\" tab."
 msgstr ""
+"\"Hepsini ara\" sekmesinde yeni şablonlar oluşturabilir ya da önceden "
+"tanımlı şablonlar arayabilirsiniz."
 
 #. Translators: "None" here means that no document-merge source or
 #. * method has been selected.
@@ -1148,7 +1155,7 @@ msgstr "Tüm resimler"
 #: ../src/object-editor-image-page.c:323
 #, c-format
 msgid "%s (*.%s)"
-msgstr ""
+msgstr "%s (*.%s)"
 
 #: ../src/object-editor-line-page.c:79 ../src/prefs-dialog.c:338
 #: ../src/ui-property-bar.c:309
@@ -1596,11 +1603,11 @@ msgstr "Geçerli pencerede kılavuz çizgilerin görünürlüğünü değiştir"
 
 #: ../src/ui.c:464
 msgid "Markup"
-msgstr ""
+msgstr "İşaretleme"
 
 #: ../src/ui.c:466
 msgid "Change the visibility of markup lines in the current window"
-msgstr ""
+msgstr "Mevcut penceredeki işaret çizgilerinin görünürlüklerini değiştir"
 
 #: ../src/ui.c:477
 msgid "Main toolbar"
@@ -1641,7 +1648,6 @@ msgstr ""
 "Muhammet Kara <muhammetk@gmail.com>"
 
 #: ../src/ui-commands.c:1169
-#, fuzzy
 msgid ""
 "gLabels is free software: you can redistribute it and/or modify\n"
 "it under the terms of the GNU General Public License as published by\n"
@@ -1653,9 +1659,16 @@ msgid ""
 "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
 "GNU General Public License for more details.\n"
 msgstr ""
-"gLabels ücretsiz bir yazılımdır: dağıtabilir ve/veya modifiye edebilirsiniz\n"
+"gLabels özgür bir yazılımdır: Özgür Yazılım Vakfı'nın yayınladığı\n"
+"GNU Genel Kamu Lisansı'nın 3. veya daha sonraki sürümlerindeki\n"
+"şartlar altında dağıtılabilir ve/veya değiştirilebilir. \n"
+"\n"
+"gLabels faydalı olacağı umut edilerek dağıtılmaktadır,\n"
+"fakat HİÇBİR GARANTİSİ YOKTUR; hatta ÜRÜN DEĞERİ ya da BİR AMACA\n"
+"UYGUNLUK gibi garantiler de vermez.  Lütfen daha fazla ayrıntı için\n"
+"GNU Genel Kamu Lisansı'nı inceleyin.\n"
 
-#: ../src/warning-handler.c:69
+#: ../src/warning-handler.c:71
 msgid "gLabels Error!"
 msgstr "gLabels Hatası!"
 
@@ -1712,13 +1725,13 @@ msgstr "%s tam sayfa etiket"
 #: ../libglabels/lgl-template.c:673
 #, c-format
 msgid "%d × %d (%d per sheet)"
-msgstr ""
+msgstr "%d × %d (sayfa başına %d)"
 
 #. Translators: %d is the total number of labels on a page (sheet).
 #: ../libglabels/lgl-template.c:678
 #, c-format
 msgid "%d per sheet"
-msgstr ""
+msgstr "sayfa başına %d"
 
 #: ../libglabels/lgl-template.c:759 ../libglabels/lgl-template.c:767
 #: ../libglabels/lgl-template.c:779 ../libglabels/lgl-template.c:787
@@ -1753,7 +1766,7 @@ msgstr "cm"
 #. [LGL_UNITS_PICA]
 #: ../libglabels/lgl-units.c:69
 msgid "picas"
-msgstr ""
+msgstr "pika"
 
 #.
 #. * Local Variables:       -- emacs
@@ -1833,7 +1846,6 @@ msgid "Rotated"
 msgstr "Döndürülmüş"
 
 #: ../data/ui/new-label-dialog.ui.h:7
-#| msgid "Remove all selections"
 msgid "Review Selection"
 msgstr "Seçimi İncele"
 
@@ -1867,7 +1879,7 @@ msgstr "Üretici:"
 
 #: ../data/ui/object-editor.ui.h:1
 msgid "dialog1"
-msgstr ""
+msgstr "diyalog1"
 
 #: ../data/ui/object-editor.ui.h:3
 msgid "Family:"
@@ -1898,7 +1910,6 @@ msgid "Alignment:"
 msgstr "Hizalanma:"
 
 #: ../data/ui/object-editor.ui.h:10
-#| msgid "Alignment:"
 msgid "Vertical alignment:"
 msgstr "Dikey hizalama:"
 
@@ -1908,7 +1919,7 @@ msgstr "Satır aralığı:"
 
 #: ../data/ui/object-editor.ui.h:12
 msgid "Allow merge to automatically shrink text"
-msgstr ""
+msgstr "Birleştirmenin metni otomatik daraltmasına izin ver"
 
 #: ../data/ui/object-editor.ui.h:13
 msgid "Style"
@@ -1945,11 +1956,11 @@ msgstr "rakamlar:"
 
 #: ../data/ui/object-editor.ui.h:25
 msgid "Backend:"
-msgstr ""
+msgstr "Arka uç:"
 
 #: ../data/ui/object-editor.ui.h:26
 msgid "Checksum"
-msgstr ""
+msgstr "Sağlama"
 
 #: ../data/ui/object-editor.ui.h:27 ../data/ui/template-designer.ui.h:14
 msgid "Height:"
@@ -2081,12 +2092,10 @@ msgid "Right align"
 msgstr "Sağa hizalı"
 
 #: ../data/ui/property-bar.ui.h:8
-#| msgid "Flip vertically"
 msgid "Top vertical align"
 msgstr "Üst dikey hizala"
 
 #: ../data/ui/property-bar.ui.h:9
-#| msgid "Center vertically"
 msgid "Center vertical align"
 msgstr "Orta dikey hizala"
 
@@ -2100,6 +2109,10 @@ msgid ""
 "\n"
 "This dialog will assist you in the creation of a custom gLabels template."
 msgstr ""
+"gLabels Şablon Tasarımcısı'na hoş geldiniz.\n"
+"\n"
+"Bu iletişim penceresi özel bir gLabels şablonu oluşturmanızda size yardımcı "
+"olacak."
 
 #: ../data/ui/template-designer.ui.h:4
 msgid ""
@@ -2113,15 +2126,15 @@ msgstr "Marka/Üretici:"
 
 #: ../data/ui/template-designer.ui.h:7
 msgid "(e.g., 8163A)"
-msgstr ""
+msgstr "(ör., 8163A)"
 
 #: ../data/ui/template-designer.ui.h:8
 msgid "(e.g., Avery, Acme, ...)"
-msgstr ""
+msgstr "(ör., Avery, Acme, ...)"
 
 #: ../data/ui/template-designer.ui.h:10
 msgid "(e.g., \"Mailing Labels,\" \"Business Cards,\" ...)"
-msgstr ""
+msgstr "(ör., \"E-posta Etiketleri,\" \"İş Kartları,\" ...)"
 
 #: ../data/ui/template-designer.ui.h:11
 msgid "Please select the page size of the template stationery."
@@ -2232,28 +2245,38 @@ msgid ""
 "Most templates only need one layout, as in the first example.\n"
 "The second example illustrates when two layouts are needed."
 msgstr ""
+"Şablonunuz kaç tane yerleşim içerecek?\n"
+"\n"
+"Bir yerleşim, basit bir ızgara üzerinde düzenlenebilen etiketler veya "
+"kartlar kümesidir.\n"
+"Çoğu şablon, ilk örnekteki gibi tek bir yerleşime ihtiyaç duyar.\n"
+"İkinci örnek birden fazla yerleşimin gerektiği durumları gösterir."
 
 #: ../data/ui/template-designer.ui.h:44
 msgid ""
 "Templates needing only\n"
 "one layout."
 msgstr ""
+"Yalnızca bir yerleşim\n"
+"gerektiren şablonlar."
 
 #: ../data/ui/template-designer.ui.h:46
 msgid ""
 "Templates needing\n"
 "two layouts."
 msgstr ""
+"İki yerleşim gerektiren\n"
+"şablonlar."
 
 #: ../data/ui/template-designer.ui.h:48
 msgid ""
 "Note: if more than 2 layouts are required, the template must be edited "
 "manually."
-msgstr ""
+msgstr "Not: 2 yerleşimden fazlası gerektiğinde, şablon elle düzenlenmelidir."
 
 #: ../data/ui/template-designer.ui.h:49
 msgid "Number of layouts:"
-msgstr ""
+msgstr "Yerleşim sayısı:"
 
 #: ../data/ui/template-designer.ui.h:50
 msgid "Please enter the following layout information."
@@ -2269,11 +2292,11 @@ msgstr "Layout #2"
 
 #: ../data/ui/template-designer.ui.h:53
 msgid "Number across (nx):"
-msgstr ""
+msgstr "Genişlik numarası (nx):"
 
 #: ../data/ui/template-designer.ui.h:54
 msgid "Number down (ny):"
-msgstr ""
+msgstr "Aşağı numarası (ny):"
 
 #: ../data/ui/template-designer.ui.h:55
 msgid "Distance from left edge (x0):"
@@ -2285,11 +2308,11 @@ msgstr "Üst kenardan uzaklık (y0):"
 
 #: ../data/ui/template-designer.ui.h:57
 msgid "Horizontal pitch (dx):"
-msgstr ""
+msgstr "Yatayda aşağı yukarı hareket (dx):"
 
 #: ../data/ui/template-designer.ui.h:58
 msgid "Vertical pitch (dy):"
-msgstr ""
+msgstr "Dikeyde aşağı yukarı hareket (dy):"
 
 #: ../data/ui/template-designer.ui.h:59
 msgid "Print test sheet"
@@ -2305,6 +2328,13 @@ msgid ""
 "Otherwise, you may click \"Cancel\" to abandon your design\n"
 "or \"Back\" to continue editing this design."
 msgstr ""
+"Tebrikler!\n"
+"\n"
+"gLabels Şablon Tasarımcısını  tamamladınız.\n"
+"Tasarımınızı kabul etmek ve kaydetmek için \"Uygula\"ya tıklayın.\n"
+"\n"
+"Ya da \"Vaz geç\"e tıklayarak tasarımınızdan vaz geçebilir, veya\n"
+"\"Geri\" düğmesine tıklayarak düzenlemeye devam edebilirsiniz."
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:1
 msgid "Sheets:"
@@ -2352,6 +2382,9 @@ msgid ""
 "to work with various laser/ink-jet peel-off label and business card sheets "
 "that you'll find at most office supply stores."
 msgstr ""
+"gLabels etiket ve iş kartları oluşturmak için yapılmış bir programdır. Çoğu "
+"ofis tedarik mağazasında bulacağınız bir çok lazer/mürekkepli etiket ve iş "
+"kartı sayfasıyla çalışacak şekilde tasarlanmıştır."
 
 #: ../data/appdata/glabels-3.appdata.xml.in.h:2
 msgid ""
@@ -2362,6 +2395,12 @@ msgid ""
 "lets you print a unique label for each record from an external data source, "
 "such as a CSV file or an Evolution address book."
 msgstr ""
+"gLabels adres etiketleri, isim etiketleri, fiyat etiketleri, cd/dvd "
+"etiketleri, veya bir sayfa üzerinde düzenli kalıpla organize edilmiş "
+"herhangi bir şeyi tasarlamak için kullanılabilir. Etiketler (veya kartlar) "
+"metin, resim, çizgiler, şekiller veya barkod içerebilir. gLabels ayrıca "
+"belge-birleştirme özelliği ile bir CSV dosyası veya Evolution adres defteri "
+"gibi harici bir veri kaynağından her kayıt için özel bir etiket basabilir."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
 msgid "Show/hide main toolbar."
@@ -2397,11 +2436,11 @@ msgstr "Kılavuz çizgilerin görünürlüğünü kontrol eder."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:9
 msgid "Show/hide markup."
-msgstr ""
+msgstr "İşaretleri göster/gizle."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:10
 msgid "Controls visibility of markup lines."
-msgstr ""
+msgstr "İşaret çizgilerinin görünürlüğünü kontrol eder."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:11
 msgid "Maximum recent files."
@@ -2666,27 +2705,22 @@ msgstr "DL"
 
 #. ISO 217
 #: ../templates/paper-sizes.xml.h:37
-#| msgid "A0"
 msgid "RA0"
 msgstr "RA0"
 
 #: ../templates/paper-sizes.xml.h:38
-#| msgid "A1"
 msgid "RA1"
 msgstr "RA1"
 
 #: ../templates/paper-sizes.xml.h:39
-#| msgid "A2"
 msgid "RA2"
 msgstr "RA2"
 
 #: ../templates/paper-sizes.xml.h:40
-#| msgid "A3"
 msgid "RA3"
 msgstr "RA3"
 
 #: ../templates/paper-sizes.xml.h:41
-#| msgid "A4"
 msgid "RA4"
 msgstr "RA4"
 
@@ -3005,7 +3039,7 @@ msgstr "Mini etiketler"
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:4
 msgid "Self-Adhesive Name Badges (Acetate Silk)"
-msgstr ""
+msgstr "Kendinden-Yapışkan İsim Rozetleri (Asetat İpek)"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:8
@@ -3098,10 +3132,9 @@ msgstr "Standart adres etiketleri 38mm x 90mm"
 
 #. ===================================================================
 #: ../templates/canon-other-templates.xml.h:2
-#, fuzzy
 #| msgid "CD/DVD Labels"
 msgid "CD/DVD Tray"
-msgstr "CD/DVD etiketleri"
+msgstr "CD/DVD Tepsisi"
 
 #. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:4
@@ -3183,13 +3216,11 @@ msgstr "A4 etiketler"
 
 #: ../templates/endisch-templates.xml.h:8
 #: ../templates/rayfilm-templates.xml.h:6
-#| msgid "Labels A4"
 msgid "Labels A3"
 msgstr "A3 etiketler"
 
 #: ../templates/endisch-templates.xml.h:9
 #: ../templates/rayfilm-templates.xml.h:7
-#| msgid "Labels A4"
 msgid "Labels SRA3"
 msgstr "SRA3 etiketler"
 
@@ -3384,11 +3415,11 @@ msgstr "Kaset Etiketleri"
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:10
 msgid "Slimline CD Case (rightside up)"
-msgstr ""
+msgstr "Slimline CD Kabı (sağ taraf yukarda)"
 
 #: ../templates/misc-us-templates.xml.h:11
 msgid "Slimline CD Case (upside down)"
-msgstr ""
+msgstr "Slimline CD Kabı (baş aşağı)"
 
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:13
@@ -3415,17 +3446,17 @@ msgstr "DLT Etiketler"
 #: ../templates/misc-us-templates.xml.h:27
 #: ../templates/misc-iso-templates.xml.h:36
 msgid "PRO CD Labels 2-up (face only)"
-msgstr ""
+msgstr "PRO CD Etiketleri 2-yukarı (sadece ön yüz)"
 
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:29
 msgid "PRO CD Labels 2-up (Face only)"
-msgstr ""
+msgstr "PRO CD Etiketleri 2-yukarı (Sadece ön yüz)"
 
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:31
 msgid "PRO CD Labels 2-up (CD spine only)"
-msgstr ""
+msgstr "PRO CD Etiketleri 2-yukarı (sadece CD sırtı)"
 
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:33
@@ -3555,26 +3586,22 @@ msgid "Membership cards, both sides printable"
 msgstr "Üyelik kartları, her iki yüzüne yazılabilir"
 
 #: ../templates/rayfilm-templates.xml.h:11
-#, fuzzy
 #| msgid "Business Card CD"
 msgid "Business card CD Labels"
-msgstr "Kart Vizit CD"
+msgstr "İş kartı CD etiketleri"
 
 #: ../templates/rayfilm-templates.xml.h:12
-#| msgid "Mini-CD Labels"
 msgid "Mini CD Labels"
 msgstr "Mini-CD Etiketleri"
 
 #: ../templates/rayfilm-templates.xml.h:13
-#| msgid "Rectangular labels"
 msgid "Triangular labels"
 msgstr "Üçgen etiketler"
 
 #: ../templates/rayfilm-templates.xml.h:14
-#, fuzzy
 #| msgid "Allround labels"
 msgid "Trapezoid labels"
-msgstr "Yuvarlak etiketler"
+msgstr "Yamuk etiketler"
 
 #. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:12
