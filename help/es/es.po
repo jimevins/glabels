@@ -3,183 +3,75 @@
 # Copyright (C) 2010 glabels's COPYRIGHT HOLDER
 # This file is distributed under the same license as the glabels package.
 # Jorge González <jorgegonz@svn.gnome.org>, 2010, 2011.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011, 2012, 2014.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011, 2012, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-27 05:21+0000\n"
-"PO-Revision-Date: 2014-01-03 17:40+0100\n"
+"POT-Creation-Date: 2015-12-07 07:18+0000\n"
+"PO-Revision-Date: 2015-12-07 15:51+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
-"Language-Team: Español <gnome-es-list@gnome.org>\n"
+"Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Gtranslator 2.91.5\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Gtranslator 2.91.6\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
 msgid "translator-credits"
 msgstr ""
-"Daniel Mustieles <daniel.mustieles@gmail.com>, 2010-2014\n"
+"Daniel Mustieles <daniel.mustieles@gmail.com>, 2010-2015\n"
 "Jorge González <jorgegonz@svn.gnome.org>, 2010"
 
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#.
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/index.page:24(media)
-msgctxt "_"
-msgid ""
-"external ref='figures/glabels-logo.png' "
-"md5='0c1e32afcbae0d2fc6976020c24a0a43'"
-msgstr ""
-"external ref='figures/glabels-logo.png' "
-"md5='0c1e32afcbae0d2fc6976020c24a0a43'"
-
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#.
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/index.page:47(media)
-msgctxt "_"
-msgid ""
-"external ref='figures/introduction-glabels-main-window.png' "
-"md5='9ee2b2cc026ee8cba3c881b370a14313'"
-msgstr ""
-"external ref='figures/introduction-glabels-main-window.png' "
-"md5='9ee2b2cc026ee8cba3c881b370a14313'"
-
-#: C/index.page:7(info/title)
-msgctxt "link"
-msgid "gLabels label and business card designer"
-msgstr "Diseñador de etiquetas y de tarjetas de visita gLabels"
-
-#: C/index.page:8(info/title)
-msgctxt "text"
-msgid "gLabels label and business card designer"
-msgstr "Diseñador de etiquetas y de tarjetas de visita gLabels"
-
-#: C/index.page:11(credit/name) C/about.page:13(credit/name)
-#: C/basicusage.page:13(credit/name) C/createnew.page:13(credit/name)
-#: C/customize.page:11(credit/name) C/customtemplate.page:13(credit/name)
-#: C/editprop.page:13(credit/name) C/labelprop.page:13(credit/name)
-#: C/mancreate.page:15(credit/name) C/merge-ex1.page:13(credit/name)
-#: C/merge-ex2.page:13(credit/name) C/merge-ex3.page:13(credit/name)
-#: C/merge-ex4.page:13(credit/name) C/mergefeatures.page:13(credit/name)
-#: C/merge.page:13(credit/name) C/multifile.page:13(credit/name)
-#: C/newlabel.page:13(credit/name) C/printfile.page:13(credit/name)
-#: C/select.page:13(credit/name) C/skipfields.page:13(credit/name)
-msgid "Jim Evins"
-msgstr "Jim Evins"
-
-#: C/index.page:15(credit/name) C/about.page:17(credit/name)
-#: C/basicusage.page:17(credit/name) C/createnew.page:17(credit/name)
-#: C/customize.page:15(credit/name) C/customtemplate.page:17(credit/name)
-#: C/editprop.page:17(credit/name) C/labelprop.page:17(credit/name)
-#: C/mancreate.page:19(credit/name) C/merge-ex1.page:17(credit/name)
-#: C/merge-ex2.page:17(credit/name) C/merge-ex3.page:17(credit/name)
-#: C/merge-ex4.page:17(credit/name) C/mergefeatures.page:17(credit/name)
-#: C/merge.page:17(credit/name) C/multifile.page:17(credit/name)
-#: C/newlabel.page:17(credit/name) C/printfile.page:17(credit/name)
-#: C/select.page:17(credit/name) C/skipfields.page:17(credit/name)
-msgid "Mario Blättermann"
-msgstr "Mario Blättermann"
-
-#: C/index.page:19(license/p) C/about.page:21(license/p)
-#: C/basicusage.page:21(license/p) C/createnew.page:21(license/p)
-#: C/customize.page:19(license/p) C/customtemplate.page:21(license/p)
-#: C/editprop.page:21(license/p) C/labelprop.page:21(license/p)
-#: C/mancreate.page:23(license/p) C/merge-ex1.page:21(license/p)
-#: C/merge-ex2.page:21(license/p) C/merge-ex3.page:21(license/p)
-#: C/merge-ex4.page:21(license/p) C/mergefeatures.page:21(license/p)
-#: C/merge.page:21(license/p) C/multifile.page:21(license/p)
-#: C/newlabel.page:21(license/p) C/printfile.page:21(license/p)
-#: C/select.page:21(license/p) C/skipfields.page:21(license/p)
-msgid "Creative Commons Share Alike 3.0"
-msgstr "Creative Commons Compartir Igual 3.0"
-
-#: C/index.page:23(page/title)
-msgid ""
-"<media type=\"image\" mime=\"image/png\" src=\"figures/glabels-logo.png"
-"\">gLabels logo</media> gLabels Manual"
-msgstr ""
-"<media type=\"image\" mime=\"image/png\" src=\"figures/glabels-logo.png"
-"\">logo de gLabels</media> Manual de gLabels"
-
-#: C/index.page:28(page/p)
-msgid ""
-"The <app>gLabels</app> application is a lightweight program for creating "
-"labels and business cards for the GNOME desktop environment. It is designed "
-"to work with various laser/ink-jet peel-off label and business card sheets "
-"that you'll find at most office supply stores."
-msgstr ""
-"La aplicación <app>gLabels</app> es un programa ligero para crear etiquetas "
-"y tarjetas de visita para el entorno de escritorio GNOME. Está diseñado para "
-"trabajar con varias hojas de etiquetas láser/chorro de tinta que encontrará "
-"en la mayoría de las tiendas de suministros de oficina."
-
-#: C/index.page:35(page/p)
-msgid ""
-"<app>gLabels</app> can be used to design address labels, name tags, price "
-"tags, cd/dvd labels, or just about anything else that is organized in a "
-"regular pattern on a sheet of paper. Labels (or cards) can contain text, "
-"images, lines, shapes, and barcodes. <app>gLabels</app> also includes a "
-"document-merge feature which lets you print a unique label for each record "
-"from an external data source, such as a CSV file or an <app>Evolution</app> "
-"address book."
-msgstr ""
-"<app>gLabels</app> se puede usar para diseñar etiquetas de dirección, de "
-"nombre, de precio, de CD/DVD o para cualquier otra cosa organizada según un "
-"patrón regular en una hoja de papel. Las etiquetas (o las tarjetas) pueden "
-"contener texto, imágenes, líneas, formas y códigos de barras. <app>gLabels</"
-"app> también incluye la característica de combinar documentos, que le "
-"permite imprimir una etiqueta única por cada registro de una fuente de datos "
-"externa, tal como un archivo CSV o una libreta de direcciones de "
-"<app>Evolution</app>."
-
-#: C/index.page:45(figure/title) C/index.page:46(figure/desc)
-msgid "<app>gLabels</app> main window"
-msgstr "Ventana principal de <app>gLabels</app>"
-
-#: C/index.page:48(media/p)
-msgid "<app>gLabels</app> main window."
-msgstr "Ventana principal de <app>gLabels</app>."
-
-#: C/index.page:53(section/title)
-msgid "Usage"
-msgstr "Uso"
-
-#: C/index.page:57(section/title)
-msgid "Document Merging"
-msgstr "Fusión de documentos"
-
-#: C/index.page:61(section/title)
-msgid "Advanced usage"
-msgstr "Uso avanzado"
-
-#: C/about.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/about.page:9
 msgid "Information about <app>gLabels</app>."
 msgstr "Información acerca de <app>gLabels</app>."
 
-#: C/about.page:25(page/title)
+#. (itstool) path: credit/name
+#: C/about.page:13 C/basicusage.page:13 C/createnew.page:13
+#: C/customize.page:11 C/customtemplate.page:13 C/editprop.page:13
+#: C/index.page:11 C/labelprop.page:13 C/mancreate.page:15 C/merge-ex1.page:13
+#: C/merge-ex2.page:13 C/merge-ex3.page:13 C/merge-ex4.page:13
+#: C/mergefeatures.page:13 C/merge.page:13 C/multifile.page:13
+#: C/newlabel.page:13 C/printfile.page:13 C/select.page:13
+#: C/skipfields.page:13
+msgid "Jim Evins"
+msgstr "Jim Evins"
+
+#. (itstool) path: credit/name
+#: C/about.page:17 C/basicusage.page:17 C/createnew.page:17
+#: C/customize.page:15 C/customtemplate.page:17 C/editprop.page:17
+#: C/index.page:15 C/labelprop.page:17 C/mancreate.page:19 C/merge-ex1.page:17
+#: C/merge-ex2.page:17 C/merge-ex3.page:17 C/merge-ex4.page:17
+#: C/mergefeatures.page:17 C/merge.page:17 C/multifile.page:17
+#: C/newlabel.page:17 C/printfile.page:17 C/select.page:17
+#: C/skipfields.page:17
+msgid "Mario Blättermann"
+msgstr "Mario Blättermann"
+
+#. (itstool) path: license/p
+#: C/about.page:21 C/basicusage.page:21 C/createnew.page:21
+#: C/customize.page:19 C/customtemplate.page:21 C/editprop.page:21
+#: C/index.page:19 C/labelprop.page:21 C/mancreate.page:23 C/merge-ex1.page:21
+#: C/merge-ex2.page:21 C/merge-ex3.page:21 C/merge-ex4.page:21
+#: C/mergefeatures.page:21 C/merge.page:21 C/multifile.page:21
+#: C/newlabel.page:21 C/printfile.page:21 C/select.page:21
+#: C/skipfields.page:21
+msgid "Creative Commons Share Alike 3.0"
+msgstr "Creative Commons Compartir Igual 3.0"
+
+#. (itstool) path: page/title
+#: C/about.page:25
 msgid "About <app>gLabels</app>"
 msgstr "Acerca de <app>gLabels</app>"
 
-#: C/about.page:27(page/p)
+#. (itstool) path: page/p
+#: C/about.page:27
 msgid ""
 "<app>gLabels</app> was written by <link href=\"mailto:evins@snaught.com"
 "\">Jim Evins</link>. To find more information about <app>gLabels</app>, "
@@ -191,7 +83,8 @@ msgstr ""
 "app>, visite la <link href=\"http://glabels.org\" type=\"http\">página web "
 "de<app>gLabels</app></link>."
 
-#: C/about.page:31(page/p)
+#. (itstool) path: page/p
+#: C/about.page:31
 msgid ""
 "To report a bug or make a suggestion regarding this application or this "
 "manual, follow the directions at the <link href=\"http://glabels.org/contact/"
@@ -201,7 +94,8 @@ msgstr ""
 "este manual, siga las indicaciones en la <link href=\"http://glabels.org/"
 "contact/\" type=\"http\">página de contacto de <app>gLabels</app></link>."
 
-#: C/about.page:37(page/p)
+#. (itstool) path: page/p
+#: C/about.page:37
 msgid ""
 "This program is distributed under the terms of the GNU General Public "
 "license as published by the Free Software Foundation; either version 3 of "
@@ -216,19 +110,23 @@ msgstr ""
 "\"help\">enlace</link>, o en el archivo COPYING incluido con el código "
 "fuente de este programa."
 
-#: C/basicusage.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/basicusage.page:9
 msgid "Handling files and quit the application."
 msgstr "Manejar archivos y salir de la aplicación."
 
-#: C/basicusage.page:25(page/title)
+#. (itstool) path: page/title
+#: C/basicusage.page:25
 msgid "Basic usage"
 msgstr "Uso básico"
 
-#: C/basicusage.page:28(section/title)
+#. (itstool) path: section/title
+#: C/basicusage.page:28
 msgid "To open a file"
 msgstr "Abrir un archivo"
 
-#: C/basicusage.page:30(section/p)
+#. (itstool) path: section/p
+#: C/basicusage.page:30
 msgid ""
 "To open a file, choose <guiseq><gui>File</gui><gui>Open</gui> </guiseq> to "
 "display the <gui>Open File</gui> dialog. Select the file that you want to "
@@ -240,7 +138,8 @@ msgstr ""
 "archivo que quiere abrir y pulse <gui>Aceptar</gui>. El archivo se muestra "
 "en el área de visualización de la ventana de <app>gLabels</app>."
 
-#: C/basicusage.page:37(section/p)
+#. (itstool) path: section/p
+#: C/basicusage.page:37
 msgid ""
 "You can also open multiple files in <app>gLabels</app>. The application "
 "creates a separate application window for each open file."
@@ -248,7 +147,8 @@ msgstr ""
 "Puede abrir múltiples archivos en <app>gLabels</app>. La aplicación crea una "
 "ventana de aplicación separada para cada archivo abierto."
 
-#: C/basicusage.page:41(section/p)
+#. (itstool) path: section/p
+#: C/basicusage.page:41
 msgid ""
 "The application records the paths and filenames of the most recent files "
 "that you have edited and displays the files as menu items on the "
@@ -258,11 +158,13 @@ msgstr ""
 "recientes que haya editado, y muestra los archivos como elementos del menú "
 "<guiseq><gui>Archivo</gui><gui>Archivos recientes</gui></guiseq>."
 
-#: C/basicusage.page:48(section/title)
+#. (itstool) path: section/title
+#: C/basicusage.page:48
 msgid "To close a file"
 msgstr "Cerrar un archivo"
 
-#: C/basicusage.page:50(section/p)
+#. (itstool) path: section/p
+#: C/basicusage.page:50
 msgid ""
 "To close the current document, choose <guiseq><gui>File</gui> <gui>Close</"
 "gui></guiseq> to close the application window. If the current document is "
@@ -277,15 +179,18 @@ msgstr ""
 "la ventana que va a cerrar es la única que está abierta, <app>gLabels</app> "
 "se cerrará."
 
-#: C/basicusage.page:60(section/title)
+#. (itstool) path: section/title
+#: C/basicusage.page:60
 msgid "To save a file"
 msgstr "Guardar un archivo"
 
-#: C/basicusage.page:62(section/p)
+#. (itstool) path: section/p
+#: C/basicusage.page:62
 msgid "You can save files in the following ways:"
 msgstr "Puede guardar archivos de cualquiera de estas maneras:"
 
-#: C/basicusage.page:66(item/p)
+#. (itstool) path: item/p
+#: C/basicusage.page:66
 msgid ""
 "To save changes to an existing file, choose <guiseq><gui>File</gui> "
 "<gui>Save</gui></guiseq>."
@@ -293,7 +198,8 @@ msgstr ""
 "Para guardar los cambios a un archivo existente, elija <guiseq><gui>Archivo</"
 "gui><gui>Guardar</gui></guiseq>."
 
-#: C/basicusage.page:73(item/p)
+#. (itstool) path: item/p
+#: C/basicusage.page:73
 msgid ""
 "To save a new file or to save an existing file under a new filename, choose "
 "<guiseq><gui>File</gui> <gui>Save As</gui></guiseq>. Enter a name for the "
@@ -304,11 +210,13 @@ msgstr ""
 "gui></guiseq>. Introduzca un nombre para el archivo en el cuadro de diálogo "
 "<gui>Guardar como</gui> y pulse <gui>Aceptar</gui>."
 
-#: C/basicusage.page:84(section/title)
+#. (itstool) path: section/title
+#: C/basicusage.page:84
 msgid "To quit <app>gLabels</app>"
 msgstr "Salir de <application>gLabels</application>"
 
-#: C/basicusage.page:86(section/p)
+#. (itstool) path: section/p
+#: C/basicusage.page:86
 msgid ""
 "To quit <app>gLabels</app>, choose <guiseq><gui>File</gui> <gui>Quit</gui></"
 "guiseq>. This is equivalent to closing all open windows. See <link xref="
@@ -318,15 +226,18 @@ msgstr ""
 "gui><gui>Quitar</gui></guiseq>. Esto es equivalente a cerrar todas las "
 "ventanas abiertas. Consulte la <link xref=\"basicusage#closefile\"/>."
 
-#: C/createnew.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/createnew.page:9
 msgid "Create new objects within your document."
 msgstr "Crear objetos nuevos dentro de su documento."
 
-#: C/createnew.page:25(page/title)
+#. (itstool) path: page/title
+#: C/createnew.page:25
 msgid "To create new objects"
 msgstr "Crear objetos nuevos"
 
-#: C/createnew.page:27(page/p)
+#. (itstool) path: page/p
+#: C/createnew.page:27
 msgid ""
 "Objects are created by choosing the appropriate selection under the "
 "<guiseq><gui>Objects</gui><gui>Create Object</gui></guiseq> submenu or the "
@@ -345,17 +256,20 @@ msgstr ""
 "Esto devolverá el cursor del área de visualización a la flecha de selección "
 "predeterminada."
 
-#: C/createnew.page:35(page/p)
+#. (itstool) path: page/p
+#: C/createnew.page:35
 msgid "The following describes the object creation mode for each object type:"
 msgstr ""
 "A continuación se describe el modo de creación de un objeto para cada tipo "
 "de objeto:"
 
-#: C/createnew.page:39(section/title) C/customize.page:80(section/title)
+#. (itstool) path: section/title
+#: C/createnew.page:39 C/customize.page:80
 msgid "Text"
 msgstr "Texto"
 
-#: C/createnew.page:40(section/p)
+#. (itstool) path: section/p
+#: C/createnew.page:40
 msgid ""
 "Click the desired location of the upper left corner of the text object. New "
 "text objects are initialized with the string \"Text.\" To change this text, "
@@ -366,11 +280,13 @@ msgstr ""
 "cadena «Texto». Para cambiar este texto u otras propiedades, consulte la "
 "<link xref=\"editprop\"/>."
 
-#: C/createnew.page:47(section/title)
+#. (itstool) path: section/title
+#: C/createnew.page:47
 msgid "Box"
 msgstr "Caja"
 
-#: C/createnew.page:48(section/p)
+#. (itstool) path: section/p
+#: C/createnew.page:48
 msgid ""
 "Click the desired location of the upper left corner of the box object and "
 "drag to the desired location of the lower right corner. If you simply click "
@@ -383,11 +299,13 @@ msgstr ""
 "cuadrada. Para cambiar las propiedades del objeto de caja, consulte la <link "
 "xref=\"editprop\"/>."
 
-#: C/createnew.page:56(section/title) C/customize.page:101(section/title)
+#. (itstool) path: section/title
+#: C/createnew.page:56 C/customize.page:101
 msgid "Line"
 msgstr "Línea"
 
-#: C/createnew.page:57(section/p)
+#. (itstool) path: section/p
+#: C/createnew.page:57
 msgid ""
 "Click the desired location of one end of the line object and drag to the "
 "desired location of the other end. If you simply click in a single location, "
@@ -399,11 +317,13 @@ msgstr ""
 "pulsa en una única ubicación, se creará una línea. Para cambiar las "
 "propiedades del objeto de línea, consulte la <link xref=\"editprop\"/>."
 
-#: C/createnew.page:65(section/title)
+#. (itstool) path: section/title
+#: C/createnew.page:65
 msgid "Ellipse"
 msgstr "Elipse"
 
-#: C/createnew.page:66(section/p)
+#. (itstool) path: section/p
+#: C/createnew.page:66
 msgid ""
 "Click the desired location of the upper left corner of the ellipse object "
 "and drag to the desired location of the lower right corner. If you simply "
@@ -416,11 +336,13 @@ msgstr ""
 "Para cambiar las propiedades del objeto de elipse, consulte la <link xref="
 "\"editprop\"/>."
 
-#: C/createnew.page:74(section/title)
+#. (itstool) path: section/title
+#: C/createnew.page:74
 msgid "Image"
 msgstr "Imagen"
 
-#: C/createnew.page:75(section/p)
+#. (itstool) path: section/p
+#: C/createnew.page:75
 msgid ""
 "Click the desired location of the upper left corner of the image object and "
 "drag to the desired location of the lower right corner. If you simply click "
@@ -435,11 +357,13 @@ msgstr ""
 "Para cambiar esta imagen, u otras propiedades del objeto de imagen, consulte "
 "la <link xref=\"editprop\"/>."
 
-#: C/createnew.page:85(section/title)
+#. (itstool) path: section/title
+#: C/createnew.page:85
 msgid "Barcode"
 msgstr "Código de barras"
 
-#: C/createnew.page:86(section/p)
+#. (itstool) path: section/p
+#: C/createnew.page:86
 msgid ""
 "Click the desired location of the upper left corner of the barcode object. "
 "New barcode objects are initialized to a POSTNET barcode with representative "
@@ -452,15 +376,18 @@ msgstr ""
 "datos y las propiedades del objeto de código de barras, consulte la <link "
 "xref=\"editprop\"/>."
 
-#: C/customize.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/customize.page:9
 msgid "Customize <app>gLabels</app> to match your needs."
 msgstr "Personalizar <app>gLabels</app> para ajustarlo a sus necesidades."
 
-#: C/customize.page:25(page/title)
+#. (itstool) path: page/title
+#: C/customize.page:25
 msgid "Settings"
 msgstr "Configuración"
 
-#: C/customize.page:26(page/p)
+#. (itstool) path: page/p
+#: C/customize.page:26
 msgid ""
 "To configure <app>gLabels</app>, choose <guiseq> <gui>Settings</gui> "
 "<gui>Preferences</gui> </guiseq>. The <gui>Preferences</gui> dialog contains "
@@ -470,15 +397,18 @@ msgstr ""
 "gui><gui>Preferencias</gui></guiseq>. El diálogo <gui>Preferencias</gui> "
 "contiene las siguientes secciones en pestañas:"
 
-#: C/customize.page:35(section/title)
+#. (itstool) path: section/title
+#: C/customize.page:35
 msgid "Locale"
 msgstr "Región"
 
-#: C/customize.page:37(section/title)
+#. (itstool) path: section/title
+#: C/customize.page:37
 msgid "Units"
 msgstr "Unidades"
 
-#: C/customize.page:38(section/p)
+#. (itstool) path: section/p
+#: C/customize.page:38
 msgid ""
 "Use this radio button group to specify your preferred units. Select one of "
 "the following options:"
@@ -486,41 +416,54 @@ msgstr ""
 "Use este grupo de botones de radio para especificar sus unidades favoritas. "
 "Seleccione una de las siguientes opciones:"
 
-#: C/customize.page:42(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:42
 msgid "<gui>Points</gui>"
 msgstr "<gui>Puntos</gui>"
 
-#: C/customize.page:43(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:43
 msgid "Use points (1 point = 1/72 in = 0.352778 mm)."
 msgstr "Usar puntos (1 punto = 1/72 pulgadas = 0.352778 mm)."
 
-#: C/customize.page:46(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:46
 msgid "<gui>Inches</gui>"
 msgstr "<gui>Pulgadas</gui>"
 
-#: C/customize.page:47(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:47
 msgid "Use Inches."
 msgstr "Usar pulgadas."
 
-#: C/customize.page:50(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:50
 msgid "<gui>Millimeters</gui>"
 msgstr "<gui>Milímetros</gui>"
 
-#: C/customize.page:51(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:51
 msgid "Use Millimeters."
 msgstr "Usar milímetros."
 
-#: C/customize.page:54(section/p)
+#. (itstool) path: section/p
+#: C/customize.page:54
 msgid "Default: <gui>Inches</gui>."
 msgstr "Predeterminado: <gui>pulgadas</gui>."
 
-#: C/customize.page:58(section/title)
+#. (itstool) path: section/title
+#: C/customize.page:58
 msgid "Default page size"
 msgstr "Tamaño de página predeterminado"
 
-#: C/customize.page:59(section/p)
+#. (itstool) path: section/p
+#: C/customize.page:59
+#| msgid ""
+#| "Use this radio button group to specify your prefered page size. This will "
+#| "make it quicker for you to locate media types when creating a new label "
+#| "or card."
 msgid ""
-"Use this radio button group to specify your prefered page size. This will "
+"Use this radio button group to specify your preferred page size. This will "
 "make it quicker for you to locate media types when creating a new label or "
 "card."
 msgstr ""
@@ -528,35 +471,42 @@ msgstr ""
 "favorito. Esto hará que localice más rápidamente los tipos de medios cuando "
 "crea una etiqueta o una tarjeta nuevas."
 
-#: C/customize.page:64(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:64
 msgid "<gui>US Letter</gui>"
 msgstr "<gui>Carta</gui>"
 
-#: C/customize.page:65(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:65
 msgid ""
 "Most of your media will be of the US Letter page size (8.5 x 11 inches)."
 msgstr ""
 "La mayoría de sus medios serán tendrán un tamaño de página «Carta» (8.5 x 11 "
 "pulgadas)."
 
-#: C/customize.page:68(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:68
 msgid "<gui>ISO A4</gui>"
 msgstr "<gui>ISO A4</gui>"
 
-#: C/customize.page:69(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:69
 msgid "Most of your media will be of the ISO A4 page size (210 x 297 mm)."
 msgstr ""
 "La mayoría de sus medios serán del tamaño de página ISO A4 (210 x 297 mm)."
 
-#: C/customize.page:72(section/p)
+#. (itstool) path: section/p
+#: C/customize.page:72
 msgid "Default: <gui>US Letter</gui>."
 msgstr "Predeterminado: <gui>Carta</gui>."
 
-#: C/customize.page:77(section/title)
+#. (itstool) path: section/title
+#: C/customize.page:77
 msgid "Object Defaults"
 msgstr "Opciones predeterminadas para el objeto"
 
-#: C/customize.page:81(section/p)
+#. (itstool) path: section/p
+#: C/customize.page:81
 msgid ""
 "Use these controls to set the default properties of new text objects. These "
 "properties are:"
@@ -564,11 +514,13 @@ msgstr ""
 "Use estos controles para configurar las propiedades predeterminadas de los "
 "objetos de texto nuevos. Estas propiedades son:"
 
-#: C/customize.page:85(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:85
 msgid "<gui>Font</gui>"
 msgstr "<gui>Tipografía</gui>"
 
-#: C/customize.page:86(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:86
 msgid ""
 "These controls are used to select font family and font size, and whether the "
 "font should bold or in italics."
@@ -576,20 +528,23 @@ msgstr ""
 "Estos controles se usan para seleccionar la familia tipográfica y su tamaño, "
 "y si la tipografía debe ser negrita o cursiva."
 
-#: C/customize.page:90(item/p) C/customize.page:110(item/p)
-#: C/customize.page:122(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:90 C/customize.page:110 C/customize.page:122
 msgid "<gui>Color</gui>"
 msgstr "<gui>Color</gui>"
 
-#: C/customize.page:91(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:91
 msgid "This control selects the default text color."
 msgstr "Este control selecciona el color predeterminado del texto."
 
-#: C/customize.page:94(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:94
 msgid "<gui>Alignment</gui>"
 msgstr "<gui>Alineación</gui>"
 
-#: C/customize.page:95(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:95
 msgid ""
 "These controls are used to select the default text alignment (left, center "
 "or right)."
@@ -597,7 +552,8 @@ msgstr ""
 "Estos controles se usan para seleccionar la alineación predeterminada del "
 "texto (izquierda, centrado o derecha)."
 
-#: C/customize.page:102(section/p)
+#. (itstool) path: section/p
+#: C/customize.page:102
 msgid ""
 "Use these controls to set the default properties of lines and outlines of "
 "new objects. These properties are:"
@@ -605,23 +561,28 @@ msgstr ""
 "Use estos controles para establecer las propiedades predeterminadas de las "
 "líneas y los márgenes de los objetos nuevos. Estas propiedades son:"
 
-#: C/customize.page:106(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:106
 msgid "<gui>Width</gui>"
 msgstr "<gui>Anchura</gui>"
 
-#: C/customize.page:107(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:107
 msgid "This control selects the default line width."
 msgstr "Este control selecciona la anchura predeterminada de la línea."
 
-#: C/customize.page:111(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:111
 msgid "This control selects the default line color."
 msgstr "Este control selecciona el color predeterminado de la línea."
 
-#: C/customize.page:117(section/title)
+#. (itstool) path: section/title
+#: C/customize.page:117
 msgid "Fill"
 msgstr "Relleno"
 
-#: C/customize.page:118(section/p)
+#. (itstool) path: section/p
+#: C/customize.page:118
 msgid ""
 "Use this control to set the default fill property of new objects. This "
 "property is:"
@@ -629,19 +590,23 @@ msgstr ""
 "Use este control para establecer la propiedad predeterminada de relleno de "
 "los objetos nuevos. Esta propiedad es:"
 
-#: C/customize.page:123(item/p)
+#. (itstool) path: item/p
+#: C/customize.page:123
 msgid "This control selects the default fill color."
 msgstr "Este control selecciona el color predeterminado de relleno."
 
-#: C/customtemplate.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/customtemplate.page:9
 msgid "Create your own templates for stationery products."
 msgstr "Crear sus propias plantillas para productos de papelería."
 
-#: C/customtemplate.page:25(page/title)
+#. (itstool) path: page/title
+#: C/customtemplate.page:25
 msgid "To create a custom template"
 msgstr "Crear una plantilla personalizada"
 
-#: C/customtemplate.page:27(page/p)
+#. (itstool) path: page/p
+#: C/customtemplate.page:27
 msgid ""
 "To create a new custom template, choose <guiseq><gui>File</gui> "
 "<gui>Template Designer ...</gui></guiseq> to display the <gui>Template "
@@ -654,7 +619,8 @@ msgstr ""
 "de una plantilla personalizada para la mayoría de tipos de etiquetas o "
 "tarjetas de papelería que pueda encontrar."
 
-#: C/customtemplate.page:34(page/p)
+#. (itstool) path: page/p
+#: C/customtemplate.page:34
 msgid ""
 "If you prefer, you can create your templates manually. For this option see "
 "<link xref=\"mancreate\"/>"
@@ -662,11 +628,12 @@ msgstr ""
 "Si lo prefiere, puede crear sus plantillas manualmente. Para esta opción "
 "consulte la <link xref=\"mancreate\"/>"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/editprop.page:35(media)
+#: C/editprop.page:35
 msgctxt "_"
 msgid ""
 "external ref='figures/object-editor-sidebar.png' "
@@ -675,15 +642,18 @@ msgstr ""
 "external ref='figures/object-editor-sidebar.png' "
 "md5='68be18416cc17964992fe0c7e311e0ef'"
 
-#: C/editprop.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/editprop.page:9
 msgid "Change the properties of objects."
 msgstr "Cambiar las propiedades de objetos."
 
-#: C/editprop.page:25(page/title)
+#. (itstool) path: page/title
+#: C/editprop.page:25
 msgid "To edit object properties"
 msgstr "Editar las propiedades del objeto"
 
-#: C/editprop.page:29(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:29
 msgid ""
 "Most object properties can be modified through the object editor sidebar, "
 "illustrated below. To use the object editor, a single object must first be "
@@ -693,11 +663,13 @@ msgstr ""
 "la barra lateral del editor de objetos. Para usar el editor de objetos, se "
 "debe seleccionar primero un objeto. Consulte la <link xref=\"select\"/>."
 
-#: C/editprop.page:36(media/p) C/printfile.page:48(media/p)
+#. (itstool) path: media/p
+#: C/editprop.page:36 C/printfile.page:48
 msgid "Print Copy Controls"
 msgstr "Controles de impresión de copia"
 
-#: C/editprop.page:40(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:40
 msgid ""
 "The object editor will contain a subset of the following tabbed sections, "
 "depending on object type:"
@@ -705,11 +677,13 @@ msgstr ""
 "El editor de objetos contendrá un subconjunto de las siguientes secciones en "
 "pestañas, dependiendo del tipo de objeto:"
 
-#: C/editprop.page:44(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:44
 msgid "Text Tabbed Section (Text objects)"
 msgstr "Sección de texto en pestañas (objetos de texto)"
 
-#: C/editprop.page:46(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:46
 msgid ""
 "This section contains a small editor for changing the content of a text "
 "object. It also contains a dropdown menu of available document merge keys, "
@@ -719,11 +693,13 @@ msgstr ""
 "objeto de texto. También contiene un menú desplegable con las claves "
 "combinadas del documento disponibles, que se pueden insertar en el texto."
 
-#: C/editprop.page:53(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:53
 msgid "Image Tabbed Section (Image objects)"
 msgstr "Sección de imagen en pestañas (objetos de imagen)"
 
-#: C/editprop.page:55(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:55
 msgid ""
 "This section contains a file entry with preview to select image files. The "
 "browse button can be used to easily locate image files. Alternatively, a "
@@ -735,11 +711,13 @@ msgstr ""
 "usar la clave de combinación de un documento para proporcionar un nombre de "
 "archivo a la hora de imprimir."
 
-#: C/editprop.page:63(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:63
 msgid "Data Tabbed Section (Barcode objects)"
 msgstr "Sección de datos en pestañas (objetos de código de barras)"
 
-#: C/editprop.page:65(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:65
 msgid ""
 "This section contains a text entry to enter literal barcode data. "
 "Alternatively, a document merge key can be used to provide this data at "
@@ -750,11 +728,13 @@ msgstr ""
 "combinación de un documento para proporcionar este dato a la hora de "
 "imprimir."
 
-#: C/editprop.page:72(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:72
 msgid "Style Tabbed Section (Text objects)"
 msgstr "Sección de estilo en pestañas (objetos de texto)"
 
-#: C/editprop.page:74(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:74
 msgid ""
 "This section contains controls to select text properties, including font "
 "family, font size, font weight, color, and text justification."
@@ -763,11 +743,13 @@ msgstr ""
 "incluyendo la familia tipográfica, tamaño, peso, color y justificación del "
 "texto."
 
-#: C/editprop.page:81(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:81
 msgid "Style Tabbed Section (Barcode objects)"
 msgstr "Sección de estilo en pestañas (objetos de código de barras)"
 
-#: C/editprop.page:83(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:83
 msgid ""
 "This section contains controls to select barcode properties, including "
 "barcode style, color, whether to print text, and whether to include a "
@@ -777,11 +759,13 @@ msgstr ""
 "de barras, incluyendo su estilo, color, si se debe imprimir texto y si se "
 "debe incluir un dígito de control."
 
-#: C/editprop.page:90(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:90
 msgid "Line Tabbed Section"
 msgstr "Sección de línea en pestañas"
 
-#: C/editprop.page:92(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:92
 msgid ""
 "This section contains controls to select properties of lines and outlines. "
 "These properties include line width and color."
@@ -790,11 +774,13 @@ msgstr ""
 "líneas y de los márgenes. Estas propiedades incluyen el ancho de línea y el "
 "color."
 
-#: C/editprop.page:98(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:98
 msgid "Fill Tabbed Section"
 msgstr "Sección de relleno en pestañas"
 
-#: C/editprop.page:100(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:100
 msgid ""
 "This section contains controls to select fill properties of box and ellipse "
 "objects. Currently the only fill property is fill color."
@@ -803,11 +789,13 @@ msgstr ""
 "de objetos de caja y de elipse. Actualmente, la única propiedad del relleno "
 "es el color."
 
-#: C/editprop.page:107(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:107
 msgid "Size Tabbed Section (All except line objects)"
 msgstr "Sección de tamaño en pestañas (todos excepto los objetos de línea)"
 
-#: C/editprop.page:109(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:109
 msgid ""
 "This section contains controls to select the width and height of an object. "
 "A checkbox is provided, so that the current aspect ratio can be locked while "
@@ -820,11 +808,13 @@ msgstr ""
 "altura. Los objetos de imagen también proporcionan un botón para reiniciar "
 "el tamaño al original de la imagen (se asumen 72DPI)"
 
-#: C/editprop.page:118(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:118
 msgid "Size Tabbed Section (Line objects)"
 msgstr "Sección de tamaño en pestañas (objetos de línea)"
 
-#: C/editprop.page:120(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:120
 msgid ""
 "This section contains controls to select the length and angle of a line "
 "object."
@@ -832,36 +822,44 @@ msgstr ""
 "Esta sección contiene controles para seleccionar la longitud y el ángulo de "
 "un objeto de línea."
 
-#: C/editprop.page:126(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:126
 msgid "Position Tabbed Section"
 msgstr "Sección de posición en pestañas"
 
-#: C/editprop.page:128(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:128
 msgid "This section contains controls to change the position of an object."
 msgstr "Esta sección contiene controles para cambiar la posición de un objeto."
 
-#: C/editprop.page:135(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:135
 msgid "Shadow Tabbed Section (All except barcode objects)"
 msgstr ""
 "Sección de sombra en pestañas (todos excepto los objetos de código de barras)"
 
-#: C/editprop.page:137(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:137
 msgid "This section contains controls to add a shadow to an object."
 msgstr "Esta sección contiene controles para añadir sombre a un objeto."
 
-#: C/editprop.page:146(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:146
 msgid "Other Manipulations of Objects"
 msgstr "Otras manipulaciones de objetos"
 
-#: C/editprop.page:148(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:148
 msgid "Objects can also be manipulated in the following ways."
 msgstr "Los objetos se pueden manipular de las siguientes maneras."
 
-#: C/editprop.page:151(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:151
 msgid "Moving and Resizing Objects"
 msgstr "Mover y redimensionar objetos"
 
-#: C/editprop.page:153(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:153
 msgid ""
 "Objects can be moved by simply clicking on a selected object and dragging "
 "the object to its new location. If the object is part of an aggregate "
@@ -878,7 +876,8 @@ msgstr ""
 "creará una selección nueva que contenga a ese objeto. Consulte la <link xref="
 "\"select\"/>."
 
-#: C/editprop.page:161(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:161
 msgid ""
 "A selected object can be resized by clicking one of its resize handle and "
 "dragging it to obtain the new size."
@@ -886,11 +885,13 @@ msgstr ""
 "Un objeto seleccionado se puede redimensionar pulsando una vez sobre su "
 "controlador de tamaño y arrastrándolo para obtener el nuevo tamaño."
 
-#: C/editprop.page:167(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:167
 msgid "Changing Stacking Order"
 msgstr "Cambiar el orden de apilamiento"
 
-#: C/editprop.page:169(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:169
 msgid ""
 "Stacking order refers to relative position in the z-axis of objects. That is "
 "when objects overlap, which object will appear on top of the other. By "
@@ -914,11 +915,13 @@ msgstr ""
 "están disponibles pulsando con el botón derecho en el área de visualización "
 "cuando no hay una selección vacía."
 
-#: C/editprop.page:187(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:187
 msgid "Rotating and Flipping Objects"
 msgstr "Rotar y voltear objetos"
 
-#: C/editprop.page:189(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:189
 msgid ""
 "Objects can be rotated 90 degrees in either direction, or flipped "
 "horizontally or vertically, by choosing the appropriate menuitem in the "
@@ -932,7 +935,8 @@ msgstr ""
 "elementos de menú también están disponibles pulsando con el botón derecho en "
 "el área de visualización cuando no hay una selección vacía."
 
-#: C/editprop.page:197(note/p)
+#. (itstool) path: note/p
+#: C/editprop.page:197
 msgid ""
 "This feature could be useful when you are designing CD box inlays. For the "
 "spine caption, you need vertical aligned text. After you have created a "
@@ -945,11 +949,13 @@ msgstr ""
 "gui><gui>Rotar/Voltear</gui></guiseq> para rotar la caja de texto de acuerdo "
 "a sus necesidades."
 
-#: C/editprop.page:208(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:208
 msgid "Aligning Objects"
 msgstr "Alinear objetos"
 
-#: C/editprop.page:210(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:210
 msgid ""
 "Objects can be aligned horizontally or vertically, relative to one another, "
 "or relative to the center line of the label, by choosing the appropriate "
@@ -966,11 +972,13 @@ msgstr ""
 "pulsando con el botón derecho en el área de visualización cuando no hay una "
 "selección vacía."
 
-#: C/editprop.page:223(section/title)
+#. (itstool) path: section/title
+#: C/editprop.page:223
 msgid "Using the Property Bar"
 msgstr "Usar la barra de propiedades"
 
-#: C/editprop.page:225(section/p)
+#. (itstool) path: section/p
+#: C/editprop.page:225
 msgid ""
 "The property bar can be used to change some common properties of objects en-"
 "masse. These properties include font family, font size, font weight, text "
@@ -985,16 +993,127 @@ msgstr ""
 "barra de propiedades también controla los valores predeterminados de estas "
 "propiedades para cualquier objeto nuevo creado."
 
-#: C/labelprop.page:9(info/desc)
+#. (itstool) path: media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/index.page:24
+msgctxt "_"
+msgid ""
+"external ref='figures/glabels-logo.png' "
+"md5='0c1e32afcbae0d2fc6976020c24a0a43'"
+msgstr ""
+"external ref='figures/glabels-logo.png' "
+"md5='0c1e32afcbae0d2fc6976020c24a0a43'"
+
+#. (itstool) path: media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/index.page:47
+msgctxt "_"
+msgid ""
+"external ref='figures/introduction-glabels-main-window.png' "
+"md5='9ee2b2cc026ee8cba3c881b370a14313'"
+msgstr ""
+"external ref='figures/introduction-glabels-main-window.png' "
+"md5='9ee2b2cc026ee8cba3c881b370a14313'"
+
+#. (itstool) path: info/title
+#: C/index.page:7
+msgctxt "link"
+msgid "gLabels label and business card designer"
+msgstr "Diseñador de etiquetas y de tarjetas de visita gLabels"
+
+#. (itstool) path: info/title
+#: C/index.page:8
+msgctxt "text"
+msgid "gLabels label and business card designer"
+msgstr "Diseñador de etiquetas y de tarjetas de visita gLabels"
+
+#. (itstool) path: page/title
+#: C/index.page:23
+msgid ""
+"<media type=\"image\" mime=\"image/png\" src=\"figures/glabels-logo.png"
+"\">gLabels logo</media> gLabels Manual"
+msgstr ""
+"<media type=\"image\" mime=\"image/png\" src=\"figures/glabels-logo.png"
+"\">logo de gLabels</media> Manual de gLabels"
+
+#. (itstool) path: page/p
+#: C/index.page:28
+msgid ""
+"The <app>gLabels</app> application is a lightweight program for creating "
+"labels and business cards for the GNOME desktop environment. It is designed "
+"to work with various laser/ink-jet peel-off label and business card sheets "
+"that you'll find at most office supply stores."
+msgstr ""
+"La aplicación <app>gLabels</app> es un programa ligero para crear etiquetas "
+"y tarjetas de visita para el entorno de escritorio GNOME. Está diseñado para "
+"trabajar con varias hojas de etiquetas láser/chorro de tinta que encontrará "
+"en la mayoría de las tiendas de suministros de oficina."
+
+#. (itstool) path: page/p
+#: C/index.page:35
+msgid ""
+"<app>gLabels</app> can be used to design address labels, name tags, price "
+"tags, cd/dvd labels, or just about anything else that is organized in a "
+"regular pattern on a sheet of paper. Labels (or cards) can contain text, "
+"images, lines, shapes, and barcodes. <app>gLabels</app> also includes a "
+"document-merge feature which lets you print a unique label for each record "
+"from an external data source, such as a CSV file or an <app>Evolution</app> "
+"address book."
+msgstr ""
+"<app>gLabels</app> se puede usar para diseñar etiquetas de dirección, de "
+"nombre, de precio, de CD/DVD o para cualquier otra cosa organizada según un "
+"patrón regular en una hoja de papel. Las etiquetas (o las tarjetas) pueden "
+"contener texto, imágenes, líneas, formas y códigos de barras. <app>gLabels</"
+"app> también incluye la característica de combinar documentos, que le "
+"permite imprimir una etiqueta única por cada registro de una fuente de datos "
+"externa, tal como un archivo CSV o una libreta de direcciones de "
+"<app>Evolution</app>."
+
+#. (itstool) path: figure/title
+#. (itstool) path: figure/desc
+#: C/index.page:45 C/index.page:46
+msgid "<app>gLabels</app> main window"
+msgstr "Ventana principal de <app>gLabels</app>"
+
+#. (itstool) path: media/p
+#: C/index.page:48
+msgid "<app>gLabels</app> main window."
+msgstr "Ventana principal de <app>gLabels</app>."
+
+#. (itstool) path: section/title
+#: C/index.page:53
+msgid "Usage"
+msgstr "Uso"
+
+#. (itstool) path: section/title
+#: C/index.page:57
+msgid "Document Merging"
+msgstr "Fusión de documentos"
+
+#. (itstool) path: section/title
+#: C/index.page:61
+msgid "Advanced usage"
+msgstr "Uso avanzado"
+
+#. (itstool) path: info/desc
+#: C/labelprop.page:9
 msgid "How to change the properties of a label or business card."
 msgstr ""
 "Cómo cambiar las propiedades de una etiqueta o de una tarjeta de visita."
 
-#: C/labelprop.page:25(page/title)
+#. (itstool) path: page/title
+#: C/labelprop.page:25
 msgid "To change label properties"
 msgstr "Cambiar las propiedades de la etiqueta"
 
-#: C/labelprop.page:27(page/p)
+#. (itstool) path: page/p
+#: C/labelprop.page:27
 msgid ""
 "To change the media type and/or orientation of a label, choose "
 "<guiseq><gui>File</gui> <gui>Properties</gui></guiseq> to display the "
@@ -1006,15 +1125,18 @@ msgstr ""
 "diálogo <gui>Propiedades de la etiqueta</gui>. Seleccione el tipo de medio y "
 "la orientación nuevas y pulse <gui>Aceptar</gui>."
 
-#: C/license.page:8(info/desc)
+#. (itstool) path: info/desc
+#: C/license.page:8
 msgid "Legal information."
 msgstr "Información legal."
 
-#: C/license.page:11(page/title)
+#. (itstool) path: page/title
+#: C/license.page:11
 msgid "License"
 msgstr "Licencia"
 
-#: C/license.page:12(page/p)
+#. (itstool) path: page/p
+#: C/license.page:12
 msgid ""
 "This work is distributed under a CreativeCommons Attribution-Share Alike 3.0 "
 "Unported license."
@@ -1022,35 +1144,43 @@ msgstr ""
 "Este trabajo está distribuido bajo una licencia sin soporte CreativeCommons "
 "Compartir-Igual 3.0."
 
-#: C/license.page:20(page/p)
+#. (itstool) path: page/p
+#: C/license.page:20
 msgid "You are free:"
 msgstr "Es libre de:"
 
-#: C/license.page:25(item/title)
+#. (itstool) path: item/title
+#: C/license.page:25
 msgid "<em>To share</em>"
 msgstr "<em>Compartir</em>"
 
-#: C/license.page:26(item/p)
+#. (itstool) path: item/p
+#: C/license.page:26
 msgid "To copy, distribute and transmit the work."
 msgstr "Copiar, distribuir y transmitir el trabajo."
 
-#: C/license.page:29(item/title)
+#. (itstool) path: item/title
+#: C/license.page:29
 msgid "<em>To remix</em>"
 msgstr "<em>Hacer obras derivadas</em>"
 
-#: C/license.page:30(item/p)
+#. (itstool) path: item/p
+#: C/license.page:30
 msgid "To adapt the work."
 msgstr "Adaptar el trabajo."
 
-#: C/license.page:33(page/p)
+#. (itstool) path: page/p
+#: C/license.page:33
 msgid "Under the following conditions:"
 msgstr "Bajo las siguientes condiciones:"
 
-#: C/license.page:38(item/title)
+#. (itstool) path: item/title
+#: C/license.page:38
 msgid "<em>Attribution</em>"
 msgstr "<em>Atribución</em>"
 
-#: C/license.page:39(item/p)
+#. (itstool) path: item/p
+#: C/license.page:39
 msgid ""
 "You must attribute the work in the manner specified by the author or "
 "licensor (but not in any way that suggests that they endorse you or your use "
@@ -1060,11 +1190,13 @@ msgstr ""
 "autor o el licenciador (pero no de una manera que sugiera que tiene su apoyo "
 "o apoyan el uso que hace de su obra)."
 
-#: C/license.page:46(item/title)
+#. (itstool) path: item/title
+#: C/license.page:46
 msgid "<em>Share Alike</em>"
 msgstr "<em>Compartir igual</em>"
 
-#: C/license.page:47(item/p)
+#. (itstool) path: item/p
+#: C/license.page:47
 msgid ""
 "If you alter, transform, or build upon this work, you may distribute the "
 "resulting work only under the same, similar or a compatible license."
@@ -1073,7 +1205,8 @@ msgstr ""
 "puede distribuir la obra resultante bajo la misma licencia, una similar o "
 "una compatible."
 
-#: C/license.page:53(page/p)
+#. (itstool) path: page/p
+#: C/license.page:53
 msgid ""
 "For the full text of the license, see the <link href=\"http://"
 "creativecommons.org/licenses/by-sa/3.0/legalcode\">CreativeCommons website</"
@@ -1085,27 +1218,12 @@ msgstr ""
 "Commons</link> o lea el<link href=\"http://creativecommons.org/licenses/by-"
 "sa/3.0/\">Escrito de Commons</link>."
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/mancreate.page:340(media)
-#| msgid ""
-#| "@@image: 'figures/glabels-template-rect-label.png'; "
-#| "md5=9c7ae1c1a888e1c9eefd19655d093971"
-msgctxt "_"
-msgid ""
-"external ref='figures/glabels-template-rect-label.png' "
-"md5='9c7ae1c1a888e1c9eefd19655d093971'"
-msgstr ""
-"external ref='figures/glabels-template-rect-label.png' "
-"md5='9c7ae1c1a888e1c9eefd19655d093971'"
-
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/mancreate.page:392(media)
+#: C/mancreate.page:392
 msgctxt "_"
 msgid ""
 "external ref='figures/glabels-template-ellipse-label.png' "
@@ -1114,79 +1232,18 @@ msgstr ""
 "external ref='figures/glabels-template-ellipse-label.png' "
 "md5='ba612c86b5fb8fcd2b5384ecc1c331d2'"
 
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/mancreate.page:439(media)
-#| msgid ""
-#| "@@image: 'figures/glabels-template-circle-label.png'; "
-#| "md5=841e36a1f92aeed01e8fbaacc67758f1"
-msgctxt "_"
-msgid ""
-"external ref='figures/glabels-template-circle-label.png' "
-"md5='841e36a1f92aeed01e8fbaacc67758f1'"
-msgstr ""
-"external ref='figures/glabels-template-circle-label.png' "
-"md5='841e36a1f92aeed01e8fbaacc67758f1'"
-
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/mancreate.page:500(media)
-#| msgid ""
-#| "@@image: 'figures/glabels-template-cd-label.png'; "
-#| "md5=c7952ac1b26ecbfa53facfbbf6486841"
-msgctxt "_"
-msgid ""
-"external ref='figures/glabels-template-cd-label.png' "
-"md5='c7952ac1b26ecbfa53facfbbf6486841'"
-msgstr ""
-"external ref='figures/glabels-template-cd-label.png' "
-"md5='c7952ac1b26ecbfa53facfbbf6486841'"
-
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/mancreate.page:726(media)
-#| msgid ""
-#| "@@image: 'figures/layouts-cdlabel.png'; "
-#| "md5=0c41a95dc82b5a426e934751faf86872"
-msgctxt "_"
-msgid ""
-"external ref='figures/layouts-cdlabel.png' "
-"md5='0c41a95dc82b5a426e934751faf86872'"
-msgstr ""
-"external ref='figures/layouts-cdlabel.png' "
-"md5='0c41a95dc82b5a426e934751faf86872'"
-
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/mancreate.page:789(media)
-#| msgid ""
-#| "@@image: 'figures/glabels-template-layout.png'; "
-#| "md5=fe1c9652d5448b2e0ece086777d3a287"
-msgctxt "_"
-msgid ""
-"external ref='figures/glabels-template-layout.png' "
-"md5='fe1c9652d5448b2e0ece086777d3a287'"
-msgstr ""
-"external ref='figures/glabels-template-layout.png' "
-"md5='fe1c9652d5448b2e0ece086777d3a287'"
-
-#: C/mancreate.page:11(info/desc)
+#. (itstool) path: info/desc
+#: C/mancreate.page:11
 msgid "Create your templates manually."
 msgstr "Crear sus plantillas manualmente."
 
-#: C/mancreate.page:27(page/title)
+#. (itstool) path: page/title
+#: C/mancreate.page:27
 msgid "Manually creating new templates"
 msgstr "Crear plantillas nuevas manualmente"
 
-#: C/mancreate.page:34(page/p)
+#. (itstool) path: page/p
+#: C/mancreate.page:34
 msgid ""
 "This page is a reference guide to manually creating <app>gLabels</app> "
 "templates. <app>gLabels</app> templates are defined in simple XML files as "
@@ -1200,7 +1257,8 @@ msgstr ""
 "xmlns/2.3/glabels-2.3.dtd.txt\">glabels-2.3.dtd</link> (Este DTD también "
 "describe otros formatos XML usados por <app>glabels</app>)."
 
-#: C/mancreate.page:39(page/p)
+#. (itstool) path: page/p
+#: C/mancreate.page:39
 msgid ""
 "Manually created template files should be placed in the <file>${HOME}/."
 "glabels</file> and be named with a <file>.template</file> extension."
@@ -1208,7 +1266,8 @@ msgstr ""
 "Las plantillas creadas manualmente se guardarán en <file>${HOME}/.glabels</"
 "file> y se nombrarán con extensión <file>.template</file>."
 
-#: C/mancreate.page:43(note/p)
+#. (itstool) path: note/p
+#: C/mancreate.page:43
 msgid ""
 "<app>gLabels</app> searches for templates in several other locations as "
 "defined here:"
@@ -1216,25 +1275,27 @@ msgstr ""
 "<app>gLabels</app> busca plantillas en varias ubicaciones, como se define "
 "aquí:"
 
-#: C/mancreate.page:46(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:46
 msgid "Location"
 msgstr "Ubicación"
 
-#: C/mancreate.page:47(td/p) C/mancreate.page:173(td/p)
-#: C/mancreate.page:237(td/p) C/mancreate.page:301(td/p)
-#: C/mancreate.page:364(td/p) C/mancreate.page:415(td/p)
-#: C/mancreate.page:462(td/p) C/mancreate.page:535(td/p)
-#: C/mancreate.page:562(td/p) C/mancreate.page:600(td/p)
-#: C/mancreate.page:634(td/p) C/mancreate.page:676(td/p)
-#: C/mancreate.page:753(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:47 C/mancreate.page:173 C/mancreate.page:237
+#: C/mancreate.page:301 C/mancreate.page:364 C/mancreate.page:415
+#: C/mancreate.page:462 C/mancreate.page:535 C/mancreate.page:562
+#: C/mancreate.page:600 C/mancreate.page:634 C/mancreate.page:676
+#: C/mancreate.page:753
 msgid "Description"
 msgstr "Descripción"
 
-#: C/mancreate.page:55(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:55
 msgid "Predefined templates distributed with <app>gLabels</app>."
 msgstr "Plantillas predefinidas distribuidas con <app>gLabels</app>."
 
-#: C/mancreate.page:56(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:56
 msgid ""
 "<file>${prefix}</file> is usually <file>/usr</file> or <file>/usr/local</"
 "file>, depending on where <app>gLabels</app> was installed."
@@ -1242,7 +1303,8 @@ msgstr ""
 "<file>${prefix}</file> normalmente es <file>/usr</file> o <file>/usr/local</"
 "file>, dependiendo de dónde se haya instalado <app>gLabels</app>."
 
-#: C/mancreate.page:61(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:61
 msgid ""
 "User defined templates created with the <app>gLabels</app> <gui>Template "
 "Designer</gui>. <em>Do not put manually created templates in this directory."
@@ -1252,7 +1314,8 @@ msgstr ""
 "plantillas</gui> de <app>gLabels</app>. <em>No ponga plantillas creadas "
 "manualmente en esta carpeta</em>."
 
-#: C/mancreate.page:63(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:63
 msgid ""
 "If <file>${XDG_CONFIG_HOME}</file> is not defined, it defaults to <file>"
 "${HOME}/.config</file>."
@@ -1260,7 +1323,8 @@ msgstr ""
 "Si <file>${XDG_CONFIG_HOME}</file> no está definido, su valor predeterminado "
 "es <file>${HOME}/.config</file>."
 
-#: C/mancreate.page:68(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:68
 msgid ""
 "User defined templates that have been created manually should be placed in "
 "this directory. Older versions of the <app>gLabels</app> <gui>Template "
@@ -1271,7 +1335,8 @@ msgstr ""
 "<app>gLabels</app> (anteriores a 3.0) también pondrían plantillas en esta "
 "carpeta."
 
-#: C/mancreate.page:76(note/p)
+#. (itstool) path: note/p
+#: C/mancreate.page:76
 msgid ""
 "Completed template files can be sent to the <app>gLabels</app> template "
 "<link href=\"mailto:glabels-templates@lists.sourceforge.net\">mailing list</"
@@ -1282,11 +1347,13 @@ msgstr ""
 "plantillas de <app>gLabels</app>, para incluirlas posiblemente en versiones "
 "futuras de <app>gLabels</app>."
 
-#: C/mancreate.page:90(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:90
 msgid "Assumptions/caveats"
 msgstr "Supuestos/advertencias"
 
-#: C/mancreate.page:93(item/p)
+#. (itstool) path: item/p
+#: C/mancreate.page:93
 msgid ""
 "A sheet contains only one size of label or card (if a sheet contains more "
 "than one size of item, it can be split into multiple templates for multiple "
@@ -1296,7 +1363,8 @@ msgstr ""
 "contiene más de un tamaño por elemento, se puede dividir el varias "
 "plantillas para imprimir en múltiples pasadas)"
 
-#: C/mancreate.page:98(item/p)
+#. (itstool) path: item/p
+#: C/mancreate.page:98
 msgid ""
 "Distances can be expressed in units of <code>pt</code>, <code>in</code>, "
 "<code>mm</code>, <code>cm</code>, or <code>pc</code>. For example: "
@@ -1310,11 +1378,13 @@ msgstr ""
 "unidades, se asumirá que son puntos informáticos (<code>pt</code>), donde 1 "
 "<em>pt</em> = 1/72 <em>in</em> = 0.352778 <em>mm</em>."
 
-#: C/mancreate.page:118(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:118
 msgid "Template Files"
 msgstr "Archivos de plantillas"
 
-#: C/mancreate.page:120(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:120
 msgid ""
 "A template file contains a single <code>Glabels-templates</code> top-level "
 "node."
@@ -1322,7 +1392,8 @@ msgstr ""
 "Un archivo de plantilla contiene un único nodo <code>Glabels-templates</"
 "code> de nivel superior."
 
-#: C/mancreate.page:123(section/code)
+#. (itstool) path: section/code
+#: C/mancreate.page:123
 #, no-wrap
 msgid ""
 "\n"
@@ -1341,11 +1412,13 @@ msgstr ""
 "\n"
 "&lt;/Glabels-templates&gt;"
 
-#: C/mancreate.page:132(listing/title)
+#. (itstool) path: listing/title
+#: C/mancreate.page:132
 msgid "Example Template"
 msgstr "Plantilla de ejemplo"
 
-#: C/mancreate.page:133(listing/desc)
+#. (itstool) path: listing/desc
+#: C/mancreate.page:133
 msgid ""
 "Example <app>gLabels</app> template file containing a single <code>Template</"
 "code> node."
@@ -1353,11 +1426,13 @@ msgstr ""
 "Ejemplo de archivo de plantilla de <app>gLabels</app> con un nodo "
 "<code>Template</code>."
 
-#: C/mancreate.page:163(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:163
 msgid "<code>Template</code> Node"
 msgstr "Nodo <code>Plantilla</code>"
 
-#: C/mancreate.page:165(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:165
 msgid ""
 "A <code>Template</code> node describes a single stationery product. It must "
 "contain one instance of any type of Label node (<code>Label-rectangle</"
@@ -1367,36 +1442,40 @@ msgstr ""
 "contener una instancia de cada tipo de nodo «Etiqueta» (<code>Label-"
 "rectangle</code>, <code>Label-round</code>, o <code>Label-cd</code>)."
 
-#: C/mancreate.page:173(td/p) C/mancreate.page:301(td/p)
-#: C/mancreate.page:364(td/p) C/mancreate.page:415(td/p)
-#: C/mancreate.page:462(td/p) C/mancreate.page:535(td/p)
-#: C/mancreate.page:562(td/p) C/mancreate.page:600(td/p)
-#: C/mancreate.page:634(td/p) C/mancreate.page:676(td/p)
-#: C/mancreate.page:753(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:173 C/mancreate.page:301 C/mancreate.page:364
+#: C/mancreate.page:415 C/mancreate.page:462 C/mancreate.page:535
+#: C/mancreate.page:562 C/mancreate.page:600 C/mancreate.page:634
+#: C/mancreate.page:676 C/mancreate.page:753
 msgid "Property"
 msgstr "Propiedad"
 
-#: C/mancreate.page:180(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:180
 msgid "Brand or manufacturer of stationery product. E.g. \"Avery\""
 msgstr "Marca o fabricante de productos de papelería. Por ejemplo «Avery»."
 
-#: C/mancreate.page:184(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:184
 msgid "Part number or name of stationery product. E.g. \"8160\""
 msgstr "Número de pieza o nombre de un producto de papelería. Ej «8160»"
 
-#: C/mancreate.page:188(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:188
 msgid ""
 "Size of sheet. E.g., \"<code>US-Letter</code>\", \"<code>A4</code>\", ..."
 msgstr ""
 "Tamaño de la hoja. Ej. \"<code>Carta</code>\", \"<code>A4</code>\", ...."
 
-#: C/mancreate.page:194(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:194
 msgid "Description of stationery product. E.g, \"Mailing Labels.\""
 msgstr ""
 "Descripción de un producto de papelería. Por ejemplo, «Etiquetas de "
 "dirección»."
 
-#: C/mancreate.page:198(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:198
 msgid ""
 "Translatable description of stationery product. E.g, \"Mailing Labels."
 "\" (Only useful for predefined templates)"
@@ -1404,15 +1483,18 @@ msgstr ""
 "Descripción traducible para un producto de papelería. Por ejemplo, "
 "«Etiquetas de correo». (Útil sólo para plantillas predefinidas.)"
 
-#: C/mancreate.page:203(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:203
 msgid "Page width. Only valid if size=\"Other\""
 msgstr "Ancho de la página. Sólo es válido si tamaño=«Otro»"
 
-#: C/mancreate.page:207(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:207
 msgid "Page height. Only valid if size=\"Other\""
 msgstr "Altura de la página. Sólo es válido si tamaño=«Otro»"
 
-#: C/mancreate.page:211(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:211
 msgid ""
 "Equivalent part number. If this property is present, the template is a clone "
 "of another template of the same brand. The template will inherit all "
@@ -1426,11 +1508,13 @@ msgstr ""
 "propiedad debe referirse a una plantilla definida anteriormente: actualmente "
 "<app>gLabels</app> no soporta hacia adelante."
 
-#: C/mancreate.page:229(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:229
 msgid "<code>Meta</code> Node"
 msgstr "Nodo <code>Meta</code>"
 
-#: C/mancreate.page:231(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:231
 msgid ""
 "A <code>Meta</code> node contains some additional information about the "
 "template. A <code>Template</code> node may contain zero or more <code>Meta</"
@@ -1440,11 +1524,13 @@ msgstr ""
 "Un nodo <code>Template</code> puede contener cero o más nodos <code>Meta</"
 "code>."
 
-#: C/mancreate.page:237(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:237
 msgid "Subnode"
 msgstr "Subnodo"
 
-#: C/mancreate.page:244(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:244
 msgid ""
 "A category for the template. A template can belong to multiple categories by "
 "simply adding multiple <code>Meta</code> nodes to the parent <code>Template</"
@@ -1457,7 +1543,8 @@ msgstr ""
 "<app>gLabels</app> usa las categorías de las plantillas para filtrar los "
 "resultados de búsquedas de plantillas."
 
-#: C/mancreate.page:251(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:251
 msgid ""
 "The value of this category must match a predefined category ID defined in "
 "the file <file>${prefix}/libglabels-3.0/templates/categories.xml</file>. "
@@ -1467,7 +1554,8 @@ msgstr ""
 "en el archivo <file>${prefix}/libglabels-3.0/templates/categories.xml</"
 "file>. Los ID de categoría definidos actualmente incluyen:"
 
-#: C/mancreate.page:273(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:273
 msgid ""
 "A URL pointing to the vendor's webpage for the specific product, if "
 "available."
@@ -1475,7 +1563,8 @@ msgstr ""
 "Un URL que apunta a la página web del fabricante para un producto "
 "determinado, si está disponible."
 
-#: C/mancreate.page:277(note/p)
+#. (itstool) path: note/p
+#: C/mancreate.page:277
 msgid ""
 "Suggestions for additional categories can be sent to the <app>gLabels</app> "
 "developer's <link href=\"mailto:glabels-devel@lists.sourceforge.net"
@@ -1485,17 +1574,20 @@ msgstr ""
 "\"mailto:glabels-devel@lists.sourceforge.net\">lista de correo</link> de los "
 "desarrolladores de <app>gLabels</app>."
 
-#: C/mancreate.page:280(note/p)
+#. (itstool) path: note/p
+#: C/mancreate.page:280
 msgid "Product URLs may be of limited use, because they may not be permanent."
 msgstr ""
 "Los URL de productos deben ser de uso limitado, ya que pueden no ser "
 "permanentes."
 
-#: C/mancreate.page:293(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:293
 msgid "<code>Label-rectangle</code> Node"
 msgstr "Nodo <code>Label-rectangle</code>"
 
-#: C/mancreate.page:295(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:295
 msgid ""
 "A <code>Label-rectangle</code> node describes the dimensions of a single "
 "label or business card that is rectangular in shape (may have rounded edges)."
@@ -1504,20 +1596,25 @@ msgstr ""
 "etiqueta o tarjeta de visita de forma rectangular (Puede tener los bordes "
 "redondeados)."
 
-#: C/mancreate.page:308(td/p) C/mancreate.page:371(td/p)
-#: C/mancreate.page:422(td/p) C/mancreate.page:469(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:308 C/mancreate.page:371 C/mancreate.page:422
+#: C/mancreate.page:469
 msgid "Reserved for future use. Should always be 0."
 msgstr "Reservado para el futuro. Debería ser siempre 0."
 
-#: C/mancreate.page:312(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:312
 msgid "Width of label/card"
 msgstr "Ancho de la etiqueta/tarjeta"
 
-#: C/mancreate.page:316(td/p)
-msgid "Heigth of label/card"
+#. (itstool) path: td/p
+#: C/mancreate.page:316
+#| msgid "Heigth of label/card"
+msgid "Height of label/card"
 msgstr "Altura de la etiqueta/tarjeta"
 
-#: C/mancreate.page:320(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:320
 msgid ""
 "Radius of corners. For items with square edges (business cards), the radius "
 "should be 0."
@@ -1525,7 +1622,8 @@ msgstr ""
 "Radio de la esquina. Para elementos con bordes cuadrados (tarjetas de "
 "visita), el radio debe ser 0."
 
-#: C/mancreate.page:325(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:325
 msgid ""
 "Amount of horizontal waste (over-print) to allow. This is useful for "
 "minimizing alignment problems when using non-white backgrounds (e.g. images)."
@@ -1534,7 +1632,8 @@ msgstr ""
 "útil para minimizar problemas de alineación al usar fondos no blancos (ej. "
 "imágenes)."
 
-#: C/mancreate.page:331(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:331
 msgid ""
 "Amount of vertical waste (over-print) to allow. This is useful for "
 "minimizing alignment problems when using non-white backgrounds (e.g. images)."
@@ -1543,15 +1642,18 @@ msgstr ""
 "para minimizar problemas de alineación al usar fondos no blancos (ej. "
 "imágenes)."
 
-#: C/mancreate.page:339(figure/desc)
+#. (itstool) path: figure/desc
+#: C/mancreate.page:339
 msgid "<code>Label-rectangle</code> parameters"
 msgstr "Parámetros de <code>Label-rectangle</code>"
 
-#: C/mancreate.page:356(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:356
 msgid "<code>Label-ellipse</code> Node"
 msgstr "Nodo <code>Label-ellipse</code>"
 
-#: C/mancreate.page:358(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:358
 msgid ""
 "A <code>Label-ellipse</code> node describes the dimensions of a single label "
 "or business card that is elliptic in shape."
@@ -1559,16 +1661,19 @@ msgstr ""
 "Un nodo <code>Label-ellipse</code> describe las dimensiones de una única "
 "etiqueta o tarjeta de visita de forma elíptica."
 
-#: C/mancreate.page:375(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:375
 msgid "Width of the ellipse"
 msgstr "Anchura de la elipse"
 
-#: C/mancreate.page:379(td/p)
-msgid "Heigth of the ellipse"
+#. (itstool) path: td/p
+#: C/mancreate.page:379
+#| msgid "Heigth of the ellipse"
+msgid "Height of the ellipse"
 msgstr "Altura de la elipse"
 
-#: C/mancreate.page:383(td/p) C/mancreate.page:430(td/p)
-#: C/mancreate.page:491(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:383 C/mancreate.page:430 C/mancreate.page:491
 msgid ""
 "Amount of waste (over-print) to allow. This is useful for minimizing "
 "alignment problems when using non-white backgrounds (e.g. images)."
@@ -1576,19 +1681,24 @@ msgstr ""
 "Cantidad de residuos (sobreimpresión) que permitir. Esto es útil para "
 "minimizar problemas de alineación al usar fondos no blancos (ej. imágenes)."
 
-#: C/mancreate.page:391(figure/desc)
+#. (itstool) path: figure/desc
+#: C/mancreate.page:391
 msgid "<span>Label-ellipse</span> parameters"
 msgstr "Parámetros de <span>Label-ellipse</span>"
 
-#: C/mancreate.page:393(media/p) C/mancreate.page:438(figure/desc)
+#. (itstool) path: media/p
+#. (itstool) path: figure/desc
+#: C/mancreate.page:393 C/mancreate.page:438
 msgid "<code>Label-ellipse</code> parameters"
 msgstr "Parámetros de <code>Label-ellipse</code>"
 
-#: C/mancreate.page:408(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:408
 msgid "<code>Label-round</code> Node"
 msgstr "Nodo <code>Label-round</code>"
 
-#: C/mancreate.page:410(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:410
 msgid ""
 "A <code>Label-round</code> node describes the dimensions of a simple round "
 "label (not a CD)."
@@ -1596,15 +1706,18 @@ msgstr ""
 "Un nodo <code>Label-round</code> describe las dimensiones de una sola "
 "etiqueta circular (no un CD)."
 
-#: C/mancreate.page:426(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:426
 msgid "Radius (1/2 diameter) of label"
 msgstr "Radio (1/2 del diámetro) de la etiqueta"
 
-#: C/mancreate.page:455(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:455
 msgid "<code>Label-cd</code> Node"
 msgstr "Nodo <code>Label-cd</code>"
 
-#: C/mancreate.page:457(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:457
 msgid ""
 "A <code>Label-cd</code> node describes the dimensions of a CD, DVD, or "
 "business card CD."
@@ -1612,15 +1725,18 @@ msgstr ""
 "Un nodo <code>Label-cd</code> describe las dimensiones de un CD, DVD o un CD "
 "de tarjeta de visita."
 
-#: C/mancreate.page:473(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:473
 msgid "Outer radius of label"
 msgstr "Radio exterior de la etiqueta"
 
-#: C/mancreate.page:477(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:477
 msgid "Radius of concentric hole"
 msgstr "Radio del agujero concéntrico"
 
-#: C/mancreate.page:481(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:481
 msgid ""
 "If present, the label is clipped to the given width. (Useful for \"business "
 "card CDs\")."
@@ -1628,7 +1744,8 @@ msgstr ""
 "Si está presente, la etiqueta se recorta a la anchura dada. (Útil para "
 "«tarjetas de visita en CD»)."
 
-#: C/mancreate.page:486(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:486
 msgid ""
 "If present, the label is clipped to the given height. (Useful for \"business "
 "card CDs\")."
@@ -1636,15 +1753,18 @@ msgstr ""
 "Si está presente, la etiqueta se recorta a la altura dada. (Útil para "
 "«tarjetas de visita en CD»)."
 
-#: C/mancreate.page:499(figure/desc)
+#. (itstool) path: figure/desc
+#: C/mancreate.page:499
 msgid "<code>Label-cd</code> parameters"
 msgstr "Parámetros de <code>Label-cd</code>"
 
-#: C/mancreate.page:516(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:516
 msgid "<code>Markup</code> Nodes"
 msgstr "Nodos <code>Markup</code>"
 
-#: C/mancreate.page:518(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:518
 msgid ""
 "Templates may contain optional markup nodes. These nodes are used to "
 "describe a simple set of markup lines that are visible in the <app>glabels</"
@@ -1659,18 +1779,21 @@ msgstr ""
 "centrado, áreas especiales u otros indicios útiles para el usuario de una "
 "plantilla."
 
-#: C/mancreate.page:528(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:528
 msgid "<code>Markup-margin</code> Node"
 msgstr "Nodo <code>Markup-margin</code>"
 
-#: C/mancreate.page:530(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:530
 msgid ""
 "A <code>Markup-margin</code> describes a margin along all edges of a label."
 msgstr ""
 "Un <code>Markup-margin</code> describe un margen a lo largo de los bordes de "
 "una etiqueta."
 
-#: C/mancreate.page:542(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:542
 msgid ""
 "Size of the margin. I.e. the distance of the margin line from the edge of "
 "the card/label."
@@ -1678,107 +1801,135 @@ msgstr ""
 "Tamaño del margen. Ej. la distancia de la línea del margen desde el borde de "
 "la tarjeta/etiqueta."
 
-#: C/mancreate.page:556(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:556
 msgid "<code>Markup-line</code> Node"
 msgstr "Nodo <code>Markup-line</code>"
 
-#: C/mancreate.page:558(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:558
 msgid "A <code>Markup-line</code> node describes a markup line."
 msgstr "Un nodo <code >Markup-line</code> describe una línea de marcado."
 
-#: C/mancreate.page:569(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:569
 msgid "x coordinate of 1st endpoint of the line segment."
 msgstr "coordenada X del primero punto final del segmento de línea."
 
-#: C/mancreate.page:573(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:573
 msgid "y coordinate of 1st endpoint of the line segment."
 msgstr "coordenada Y del primero punto final del segmento de línea."
 
-#: C/mancreate.page:577(td/p)
-msgid "x coordinate of 2st endpoint of the line segment."
+#. (itstool) path: td/p
+#: C/mancreate.page:577
+#| msgid "x coordinate of 2st endpoint of the line segment."
+msgid "x coordinate of 2nd endpoint of the line segment."
 msgstr "coordenada X del segundo punto final del segmento de línea."
 
-#: C/mancreate.page:581(td/p)
-msgid "y coordinate of 2st endpoint of the line segment."
+#. (itstool) path: td/p
+#: C/mancreate.page:581
+#| msgid "y coordinate of 2st endpoint of the line segment."
+msgid "y coordinate of 2nd endpoint of the line segment."
 msgstr "coordenada Y del segundo punto final del segmento de línea."
 
-#: C/mancreate.page:594(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:594
 msgid "<code>Markup-circle</code> Node"
 msgstr "Nodo <code>Markup-circle</code>"
 
-#: C/mancreate.page:596(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:596
 msgid "A <code>Markup-circle</code> describes a markup circle."
 msgstr "Un <code>Markup-circle</code> describe un círculo de marcado."
 
-#: C/mancreate.page:607(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:607
 msgid "x coordinate of circle origin (center)."
 msgstr "coordenada X del círculo origen (centro)."
 
-#: C/mancreate.page:611(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:611
 msgid "y coordinate of circle origin (center)."
 msgstr "coordenada Y del círculo origen (centro)."
 
-#: C/mancreate.page:615(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:615
 msgid "Radius of circle."
 msgstr "Radio del círculo."
 
-#: C/mancreate.page:628(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:628
 msgid "<code>Markup-rect</code> Node"
 msgstr "Nodo <code>Markup-rect</code>"
 
-#: C/mancreate.page:630(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:630
 msgid "A <code>Markup-rect</code> describes a markup rectangle."
 msgstr "Un <code>Markup-rect</code> describe un rectángulo de marcado."
 
-#: C/mancreate.page:641(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:641
 msgid "x coordinate of upper left corner of rectangle."
 msgstr "coordenada X de la esquina superior izquierda del rectángulo"
 
-#: C/mancreate.page:645(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:645
 msgid "y coordinate of upper left corner of rectangle."
 msgstr "coordenada Y de la esquina superior izquierda del rectángulo"
 
-#: C/mancreate.page:649(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:649
 msgid "Width of rectangle."
 msgstr "Anchura del rectángulo."
 
-#: C/mancreate.page:653(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:653
 msgid "Height of rectangle."
 msgstr "Altura del rectángulo."
 
-#: C/mancreate.page:657(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:657
 msgid "Radius of rounded corners of rectangle."
 msgstr "Radio de las esquinas redondeadas del rectángulo."
 
-#: C/mancreate.page:670(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:670
 msgid "<code>Markup-ellipse</code> Node"
 msgstr "Nodo <code>Markup-ellipse</code>"
 
-#: C/mancreate.page:672(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:672
 msgid "A <code>Markup-ellipse</code> describes a markup ellipse."
 msgstr "Un <code>Markup-ellipse</code> describe una elipse de marcado."
 
-#: C/mancreate.page:683(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:683
 msgid "x coordinate of upper left corner of ellipse."
 msgstr "coordenada «x» de la esquina superior izquierda de la elipse."
 
-#: C/mancreate.page:687(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:687
 msgid "y coordinate of upper left corner of ellipse."
 msgstr "coordenada «y» de la esquina superior izquierda de la elipse."
 
-#: C/mancreate.page:691(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:691
 msgid "Width of ellipse."
 msgstr "Anchura de la elipse."
 
-#: C/mancreate.page:695(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:695
 msgid "Height of ellipse."
 msgstr "Altura de la elipse."
 
-#: C/mancreate.page:713(section/title)
+#. (itstool) path: section/title
+#: C/mancreate.page:713
 msgid "<code>Layout</code> Node"
 msgstr "Nodo <code>Layout</code>"
 
-#: C/mancreate.page:715(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:715
 msgid ""
 "A label node may contain multiple <code>Layout</code> children. If labels "
 "are arranged in a simple grid pattern, only one layout is needed. However, "
@@ -1790,15 +1941,18 @@ msgstr ""
 "sin embargo, si las etiquetas se colocan en varias rejillas, como un patrón "
 "de unión, se pueden usar múltiples etiquetas <code>Layout</code>."
 
-#: C/mancreate.page:720(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:720
 msgid "A common example for multiple layouts is a sheet with three CD labels:"
 msgstr "Un ejemplo común de varios diseños es una hoja con etiquetas para CD:"
 
-#: C/mancreate.page:725(figure/desc)
+#. (itstool) path: figure/desc
+#: C/mancreate.page:725
 msgid "CD label sheet"
 msgstr "Hoja de etiquetas de CD"
 
-#: C/mancreate.page:732(section/p)
+#. (itstool) path: section/p
+#: C/mancreate.page:732
 msgid ""
 "The two labels on the left edge can be assigned to a grid, assuming we can "
 "define the coordinates for the top left label and the distance to the second "
@@ -1815,33 +1969,44 @@ msgstr ""
 "definir un segundo diseño, con coordenadas únicas para la esquina superior "
 "izquierda de esa etiqueta."
 
-#: C/mancreate.page:740(note/p)
+#. (itstool) path: note/p
+#: C/mancreate.page:740
+#| msgid ""
+#| "You can define multiple layouts only if the labels on the sheet have the "
+#| "same shape. If your sheet contains different shapes, you have to define "
+#| "each shape in another template seperately. Future versions of "
+#| "<app>gLabels</app> will probably be able to concatenate such sheets with "
+#| "different shapes within a single template."
 msgid ""
 "You can define multiple layouts only if the labels on the sheet have the "
 "same shape. If your sheet contains different shapes, you have to define each "
-"shape in another template seperately. Future versions of <app>gLabels</app> "
+"shape in another template separately. Future versions of <app>gLabels</app> "
 "will probably be able to concatenate such sheets with different shapes "
 "within a single template."
 msgstr ""
 "Sólo puede definir varios diseños si las etiquetas en la hoja tienen la "
-"misma forma. si su hoja contiene diferentes formas, puede definir cada forma "
+"misma forma. Si su hoja contiene diferentes formas, puede definir cada forma "
 "en otra plantilla aparte. Las versiones futuras de <app>gLabels</app>, "
 "probablemente podrán concatenar estas hojas con diferentes formas en una "
 "única plantilla."
 
-#: C/mancreate.page:748(note/p)
+#. (itstool) path: note/p
+#: C/mancreate.page:748
 msgid "A single label can always be treated as a grid of one."
 msgstr "Una única etiqueta se puede tratar con una rejilla de una."
 
-#: C/mancreate.page:760(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:760
 msgid "Number of labels/cards across in the grid (horizontal)"
 msgstr "Número de etiquetas/tarjetas en la rejilla (horizontal)"
 
-#: C/mancreate.page:764(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:764
 msgid "Number of labels/cards across in the grid (vertical)"
 msgstr "Número de etiquetas/tarjetas en la rejilla (vertical)"
 
-#: C/mancreate.page:768(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:768
 msgid ""
 "Distance from left edge of sheet to the left edge of the left column of "
 "cards/labels in the layout."
@@ -1849,7 +2014,8 @@ msgstr ""
 "Distancia desde el borde izquierdo de la hoja hasta el borde izquierdo de la "
 "columna de la izquierda de las tarjetas/etiquetas en la disposición."
 
-#: C/mancreate.page:773(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:773
 msgid ""
 "Distance from the top edge of sheet to the top edge of the top row of labels/"
 "cards in the layout."
@@ -1857,71 +2023,81 @@ msgstr ""
 "Distancia desde el borde superior de la hoja hasta el borde superior de la "
 "fila de arriba de las tarjetas/etiquetas en la disposición."
 
-#: C/mancreate.page:778(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:778
 msgid "Horizontal pitch of grid."
 msgstr "Inclinación horizontal de la rejilla."
 
-#: C/mancreate.page:782(td/p)
+#. (itstool) path: td/p
+#: C/mancreate.page:782
 msgid "Vertical pitch of grid."
 msgstr "Inclinación vertical de la rejilla."
 
-#: C/mancreate.page:788(figure/desc)
+#. (itstool) path: figure/desc
+#: C/mancreate.page:788
 msgid "<code>Layout</code> parameters"
 msgstr "Parámetros de <code>Layout</code>"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex1.page:50(media)
+#: C/merge-ex1.page:50
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex1-1.png' md5='c1fe7f5f05a81d9c04f9d03bb7071798'"
 msgstr ""
 "external ref='figures/merge-ex1-1.png' md5='c1fe7f5f05a81d9c04f9d03bb7071798'"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex1.page:63(media)
+#: C/merge-ex1.page:63
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex1-2.png' md5='45c30ca8de2478387404c7c5f45cf3d0'"
 msgstr ""
 "external ref='figures/merge-ex1-2.png' md5='45c30ca8de2478387404c7c5f45cf3d0'"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex1.page:84(media)
+#: C/merge-ex1.page:84
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex1-3.png' md5='1c23af6c90e5185cdc9e14d19baeb9f6'"
 msgstr ""
 "external ref='figures/merge-ex1-3.png' md5='1c23af6c90e5185cdc9e14d19baeb9f6'"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex1.page:95(media)
+#: C/merge-ex1.page:95
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex1-4.png' md5='1cc9f9adcb5a6e98ff5068531e6933f0'"
 msgstr ""
 "external ref='figures/merge-ex1-4.png' md5='1cc9f9adcb5a6e98ff5068531e6933f0'"
 
-#: C/merge-ex1.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/merge-ex1.page:9
 msgid "Create name tags from a CSV file."
 msgstr "Crear etiquetas de nombre desde un archivo CSV."
 
-#: C/merge-ex1.page:25(page/title)
+#. (itstool) path: page/title
+#: C/merge-ex1.page:25
 msgid "Example 1: Name Tags"
 msgstr "Ejemplo 1: etiquetas de nombre"
 
-#: C/merge-ex1.page:27(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex1.page:27
 msgid ""
 "In this example we are organizing an orientation party for the new crew "
 "members of our ship. We have a list of freshman crew members that we created "
@@ -1934,7 +2110,8 @@ msgstr ""
 "siguiente archivo CSV. Se podría haber creado este archivo utilizando un "
 "editor de texto, pero diablos, es el siglo XXIII."
 
-#: C/merge-ex1.page:33(page/code)
+#. (itstool) path: page/code
+#: C/merge-ex1.page:33
 #, no-wrap
 msgid ""
 "\n"
@@ -1953,7 +2130,8 @@ msgstr ""
 "\"Montgomery Scott\",Engineering,SE-197-54T\n"
 "      "
 
-#: C/merge-ex1.page:41(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex1.page:41
 msgid ""
 "In <app>gLabels</app> we have created a new <app>glabels</app> document "
 "using the Avery 5395 \"Name Badge Labels\" template. Next we use the "
@@ -1970,12 +2148,13 @@ msgstr ""
 "caso, CSV con claves en la línea 1) y la fuente de combinación (nombre de "
 "archivo) como se muestra."
 
-#: C/merge-ex1.page:51(media/p) C/merge-ex2.page:53(media/p)
-#: C/merge-ex3.page:54(media/p)
+#. (itstool) path: media/p
+#: C/merge-ex1.page:51 C/merge-ex2.page:53 C/merge-ex3.page:54
 msgid "Merge properties dialog"
 msgstr "Diálogo de propiedades de fusión"
 
-#: C/merge-ex1.page:55(page/p) C/merge-ex2.page:62(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex1.page:55 C/merge-ex2.page:62
 msgid ""
 "We can also view each record in more detail by clicking on the appropriate "
 "expander (the little triangles) as shown. Once we are satisfied with the "
@@ -1986,20 +2165,21 @@ msgstr ""
 "las selecciones, pulse <gui>Aceptar</gui> en este diálogo para aceptar los "
 "cambios."
 
-#: C/merge-ex1.page:60(page/p) C/merge-ex2.page:67(page/p)
-#: C/merge-ex3.page:71(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex1.page:60 C/merge-ex2.page:67 C/merge-ex3.page:71
 msgid ""
 "Now we start adding objects to our <app>glabels</app> document as shown."
 msgstr ""
 "Ahora puede añadir a añadir objetos al documento de<application>gLabels</"
 "application> como se muestra."
 
-#: C/merge-ex1.page:64(media/p) C/merge-ex2.page:71(media/p)
-#: C/merge-ex3.page:75(media/p)
+#. (itstool) path: media/p
+#: C/merge-ex1.page:64 C/merge-ex2.page:71 C/merge-ex3.page:75
 msgid "Adding objects"
 msgstr "Añadir objetos"
 
-#: C/merge-ex1.page:68(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex1.page:68
 msgid ""
 "In this example we have added three text objects and a barcode object. The "
 "first text object contains only simple literal text (\"Hello, my name is\"). "
@@ -2023,7 +2203,8 @@ msgstr ""
 "campo (o la clave) «SN», que contiene los números de serie de la flota "
 "estelar de los miembros de la tripulación."
 
-#: C/merge-ex1.page:78(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex1.page:78
 msgid ""
 "Now we can print our name tags by selecting the <guiseq> <gui>File</gui> "
 "<gui>Print</gui> </guiseq> menu item. This will display print dialog as "
@@ -2033,12 +2214,13 @@ msgstr ""
 "de menú <guiseq><gui>Archivo</gui><gui>Imprimir</gui></guiseq>. Esto "
 "mostrará el diálogo de impresión como se muestra a continuación."
 
-#: C/merge-ex1.page:85(media/p)
+#. (itstool) path: media/p
+#: C/merge-ex1.page:85
 msgid "Printing name tags"
 msgstr "Imprimir etiquetas de nombre"
 
-#: C/merge-ex1.page:89(page/p) C/merge-ex2.page:93(page/p)
-#: C/merge-ex3.page:93(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex1.page:89 C/merge-ex2.page:93 C/merge-ex3.page:93
 msgid ""
 "Just to make sure our labels are going to look okay, we select the "
 "<gui>Print outlines</gui> option and click <gui>Print Preview</gui>. This "
@@ -2049,11 +2231,13 @@ msgstr ""
 "impresión</gui>. Esto mostrará un diálogo de vista previa, como se muestra a "
 "continuación."
 
-#: C/merge-ex1.page:96(media/p)
+#. (itstool) path: media/p
+#: C/merge-ex1.page:96
 msgid "Name tags preview"
 msgstr "Vista previa de las etiquetas de nombre"
 
-#: C/merge-ex1.page:100(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex1.page:100
 msgid ""
 "Everything looks good, so we can now load up our printer with the "
 "appropriate label stock, print our name tags and start beaming our guests "
@@ -2063,59 +2247,66 @@ msgstr ""
 "etiquetas apropiadas, imprimir sus etiquetas de nombre e invitar a sus "
 "invitados a bordo."
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex2.page:52(media)
+#: C/merge-ex2.page:52
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex2-1.png' md5='817abd0c8deb8a0b95acb7881d8ddb85'"
 msgstr ""
 "external ref='figures/merge-ex2-1.png' md5='817abd0c8deb8a0b95acb7881d8ddb85'"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex2.page:70(media)
+#: C/merge-ex2.page:70
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex2-2.png' md5='2012870be14752300e0cde420471714a'"
 msgstr ""
 "external ref='figures/merge-ex2-2.png' md5='2012870be14752300e0cde420471714a'"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex2.page:88(media)
+#: C/merge-ex2.page:88
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex2-3.png' md5='c347460091d8eef9f4ec89557fa9f1e2'"
 msgstr ""
 "external ref='figures/merge-ex2-3.png' md5='c347460091d8eef9f4ec89557fa9f1e2'"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex2.page:99(media)
+#: C/merge-ex2.page:99
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex2-4.png' md5='30d12e946a79e27211b835e38742671c'"
 msgstr ""
 "external ref='figures/merge-ex2-4.png' md5='30d12e946a79e27211b835e38742671c'"
 
-#: C/merge-ex2.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/merge-ex2.page:9
 msgid "Create address labels from a CSV file."
 msgstr "Crear etiquetas de dirección desde un archivo CSV."
 
-#: C/merge-ex2.page:25(page/title)
+#. (itstool) path: page/title
+#: C/merge-ex2.page:25
 msgid "Example 2: Address labels"
 msgstr "Ejemplo 2: etiquetas de dirección"
 
-#: C/merge-ex2.page:27(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex2.page:27
 msgid ""
 "In this example we are going to throw a party and need to print mailing "
 "address labels for our invitations. We have a list of our closest friends "
@@ -2129,7 +2320,8 @@ msgstr ""
 "exportado como el siguiente archivo CSV. Debe tener en cuenta que no todo el "
 "mundo tiene una inicial intermedia o una dirección de dos líneas."
 
-#: C/merge-ex2.page:33(page/code)
+#. (itstool) path: page/code
+#: C/merge-ex2.page:33
 #, no-wrap
 msgid ""
 "\n"
@@ -2152,7 +2344,8 @@ msgstr ""
 "Kramer,Cosmo,,\"Apt 5B\",\"129 W. 81 St.\",\"New York\",NY,10024-7207\n"
 "      "
 
-#: C/merge-ex2.page:43(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex2.page:43
 msgid ""
 "In <app>glabels</app> we have created a new <app>glabels</app> document "
 "using the Avery 5512 \"Address Labels\" template. Next we use the <guiseq> "
@@ -2169,7 +2362,8 @@ msgstr ""
 "CSV con claves en la línea 1) y la fuente de combinación (nombre de archivo) "
 "como se muestra."
 
-#: C/merge-ex2.page:57(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex2.page:57
 msgid ""
 "Before applying the merge source, we uncheck the first record since it only "
 "contains empty fields. It is an artifact of our original <app>gnumeric</app> "
@@ -2182,7 +2376,8 @@ msgstr ""
 "nuestra primera etiqueta. También se pueden deseleccionar cualquier otro "
 "registro para el que no se quiera imprimir una etiqueta."
 
-#: C/merge-ex2.page:75(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex2.page:75
 msgid ""
 "In this example we have a single text object. This text object contains all "
 "of our merge fields organized on multiple lines as a mailing address. Notice "
@@ -2197,7 +2392,8 @@ msgstr ""
 "app> encuentra un campo como el único texto de una línea, no expandirá la "
 "línea si el campo está vacío."
 
-#: C/merge-ex2.page:82(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex2.page:82
 msgid ""
 "Now we can print our address labels by selecting the <guiseq> <gui>File</"
 "gui> <gui>Print</gui> </guiseq> menu item. This will display print dialog as "
@@ -2207,15 +2403,18 @@ msgstr ""
 "elemento de menú <guiseq><gui>Archivo</gui><gui>Imprimir</gui></guiseq>. "
 "Esto mostrará el diálogo de impresión como se muestra a continuación."
 
-#: C/merge-ex2.page:89(media/p) C/merge-ex3.page:89(media/p)
+#. (itstool) path: media/p
+#: C/merge-ex2.page:89 C/merge-ex3.page:89
 msgid "Printing address labels"
 msgstr "Imprimir etiquetas de dirección"
 
-#: C/merge-ex2.page:100(media/p)
+#. (itstool) path: media/p
+#: C/merge-ex2.page:100 C/merge-ex3.page:100
 msgid "Address labels preview"
 msgstr "Vista previa de las etiquetas de dirección"
 
-#: C/merge-ex2.page:104(page/p) C/merge-ex3.page:104(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex2.page:104 C/merge-ex3.page:104
 msgid ""
 "Everything looks good, so we can now load up our printer with the "
 "appropriate label stock, print our address labels and start mailing our "
@@ -2225,64 +2424,71 @@ msgstr ""
 "etiquetas apropiadas, imprimir nuestras etiquetas de dirección y enviar por "
 "correo nuestras invitaciones a la fiesta."
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex3.page:53(media)
+#: C/merge-ex3.page:53
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex3-1.png' md5='fb5bf719857fb0a49517ecb50124384d'"
 msgstr ""
 "external ref='figures/merge-ex3-1.png' md5='fb5bf719857fb0a49517ecb50124384d'"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex3.page:74(media)
+#: C/merge-ex3.page:74
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex3-2.png' md5='51fe322868241d083ec83ae824d927d7'"
 msgstr ""
 "external ref='figures/merge-ex3-2.png' md5='51fe322868241d083ec83ae824d927d7'"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex3.page:88(media)
+#: C/merge-ex3.page:88
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex3-3.png' md5='f731f35b38ddd51499e636733bacc7a6'"
 msgstr ""
 "external ref='figures/merge-ex3-3.png' md5='f731f35b38ddd51499e636733bacc7a6'"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/merge-ex3.page:99(media)
+#: C/merge-ex3.page:99
 msgctxt "_"
 msgid ""
 "external ref='figures/merge-ex3-4.png' md5='4415be9d5b59fb57093077bcaece014a'"
 msgstr ""
 "external ref='figures/merge-ex3-4.png' md5='4415be9d5b59fb57093077bcaece014a'"
 
-#: C/merge-ex3.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/merge-ex3.page:9
 msgid ""
 "Create address labels from the <app>Evolution</app> address book entries."
 msgstr ""
 "Crear etiquetas de direcciones desde las entradas de la libreta de "
 "direcciones de <app>Evolution</app>."
 
-#: C/merge-ex3.page:25(page/title)
+#. (itstool) path: page/title
+#: C/merge-ex3.page:25
 msgid "Example 3: Address Labels Using the <app>Evolution</app> Addressbook"
 msgstr ""
 "Ejemplo 3: Etiquetas de dirección usando la libreta de direcciones de "
 "<app>Evolution</app>"
 
-#: C/merge-ex3.page:27(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex3.page:27
 msgid ""
 "Our last party was a great success, and now we need to print mailing address "
 "labels for the invitations to a new one. To simplify this, we can use the "
@@ -2294,7 +2500,8 @@ msgstr ""
 "puede usar la libreta de direcciones de <app>Evolution</app>, ya que las "
 "direcciones de sus amigos están guardadas ahí."
 
-#: C/merge-ex3.page:33(note/p)
+#. (itstool) path: note/p
+#: C/merge-ex3.page:33
 msgid ""
 "Depending on how your copy of <app>gLabels</app> was packaged, this option "
 "could be unavailable. Support for the <app>Evolution</app> addressbook will "
@@ -2309,7 +2516,8 @@ msgstr ""
 "compiló <app>gLabels</app>. Tenga esto en cuenta si construye <app>gLabels</"
 "app> directamente desde las fuentes."
 
-#: C/merge-ex3.page:39(note/p)
+#. (itstool) path: note/p
+#: C/merge-ex3.page:39
 msgid ""
 "If the <app>gLabels</app> package from your distribution lacks this support, "
 "you may wish to contact the package maintainer or file a bug against the "
@@ -2319,7 +2527,8 @@ msgstr ""
 "puede contactar con el mantenedor del paquete o informar de un error en este "
 "paquete para solicitarlo."
 
-#: C/merge-ex3.page:44(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex3.page:44
 msgid ""
 "In <app>glabels</app> we have created a new <app>gLabels</app> document "
 "using the Avery 5512 \"Address Labels\" template. Next we use the <guiseq> "
@@ -2335,7 +2544,8 @@ msgstr ""
 "diálogo para seleccionar el tipo de origen (en este caso, <gui>Datos de la "
 "libreta de direcciones predeterminada de Evolution</gui>) como se muestra."
 
-#: C/merge-ex3.page:58(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex3.page:58
 msgid ""
 "Once we have chosen <gui>Data from default Evolution addressbook </gui> as "
 "our merge source, we will get a full list of its content. Initially, all "
@@ -2355,7 +2565,8 @@ msgstr ""
 "todo</gui> para activar o desactivar todas las entradas en la libreta de "
 "direcciones."
 
-#: C/merge-ex3.page:66(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex3.page:66
 msgid ""
 "We can also view each entry in more detail by clicking on the appropriate "
 "expander (the little triangles) as shown. Once we are satisfied with the "
@@ -2367,7 +2578,8 @@ msgstr ""
 "las selecciones en este diálogo, pulse el botón <gui>Aceptar</gui> para "
 "aceptar los cambios."
 
-#: C/merge-ex3.page:79(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex3.page:79
 msgid ""
 "In this example we have a single text object again. This text object "
 "contains all of our merge fields organized on multiple lines as a mailing "
@@ -2377,7 +2589,8 @@ msgstr ""
 "texto contiene todos los campos mezclados organizados en varias líneas como "
 "direcciones de correo."
 
-#: C/merge-ex3.page:82(page/p)
+#. (itstool) path: page/p
+#: C/merge-ex3.page:82
 msgid ""
 "Now we can print our address labels by selecting the <guiseq> <gui>File</"
 "gui> <gui>Print</gui> </guiseq> menu item. This will display the print "
@@ -2387,27 +2600,28 @@ msgstr ""
 "elemento de menú <guiseq><gui>Archivo</gui><gui>Imprimir</gui></guiseq>. "
 "Esto mostrará el diálogo de impresión como se muestra a continuación."
 
-#: C/merge-ex3.page:100(media/p)
-msgid "Addess labels preview"
-msgstr "Vista previa de las etiquetas de dirección"
-
-#: C/merge-ex4.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/merge-ex4.page:9
 msgid "Create address labels from a vCard file."
 msgstr "Crear etiquetas de dirección desde un archivo vCard."
 
-#: C/merge-ex4.page:25(page/title)
+#. (itstool) path: page/title
+#: C/merge-ex4.page:25
 msgid "Example 4: Address Labels Using a vCard file"
 msgstr "Ejemplo 4: etiquetas de dirección usando un archivo vCard"
 
-#: C/mergefeatures.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/mergefeatures.page:9
 msgid "What you may expect from a document merge."
 msgstr "Que puede esperar de la fusión de un documento."
 
-#: C/mergefeatures.page:25(page/title)
+#. (itstool) path: page/title
+#: C/mergefeatures.page:25
 msgid "Performing a document merge"
 msgstr "Fusionar un documento"
 
-#: C/mergefeatures.page:27(page/p)
+#. (itstool) path: page/p
+#: C/mergefeatures.page:27
 msgid ""
 "Document Merge (sometimes called \"Mail Merge\") is a powerful feature that "
 "allows a unique label or card to be printed for each record in an external "
@@ -2417,18 +2631,8 @@ msgstr ""
 "es una potente característica que permite que una única tarjeta o etiqueta "
 "se impriman por cada registro de una fuente de datos externa."
 
-#: C/mergefeatures.page:31(page/p)
-#| msgid ""
-#| "The first step to performing a document merge is to prepare a source "
-#| "document that contains your merge data. This data could be mailing "
-#| "addresses or any other data that you wish to create unique labels or "
-#| "cards for. Currently back-ends only exist for text files and the "
-#| "evolution data server -- others are planned. The currently supported text-"
-#| "file format is very simple: each line is a record; fields are delimited "
-#| "by commas (CSV), tabs, or colons; and newlines can be embedded into "
-#| "fields by using the \"\\n\" entity. This file could be created using any "
-#| "text editor or could be created by another program or script. A common "
-#| "way of creating CSV files is to export them from a spreadsheet program."
+#. (itstool) path: page/p
+#: C/mergefeatures.page:31
 msgid ""
 "The first step to performing a document merge is to prepare a source "
 "document that contains your merge data. This data could be mailing addresses "
@@ -2453,7 +2657,8 @@ msgstr ""
 "habitual de crear archivos CSV es exportarlos desde un programa de hojas de "
 "cálculo."
 
-#: C/mergefeatures.page:45(note/p)
+#. (itstool) path: note/p
+#: C/mergefeatures.page:45
 msgid ""
 "To export a CSV file from <app>kaddressbook</app>, first select the contacts "
 "you wish to export. Click on the first contact, then press and hold "
@@ -2467,7 +2672,8 @@ msgstr ""
 "contactos para seleccionarlos. Luego elija <guiseq><gui>Archivo</"
 "gui><gui>Exportar</gui> <gui>Exportar archivo CSV</gui></guiseq>."
 
-#: C/mergefeatures.page:52(note/p)
+#. (itstool) path: note/p
+#: C/mergefeatures.page:52
 msgid ""
 "In the <gui>Select Contacts</gui> window, enable the button <gui>Selected "
 "contacts</gui> (which should be enabled by default anyway). Then click on "
@@ -2480,7 +2686,8 @@ msgstr ""
 "como</gui>, elija la carpeta que quiere y un nombre para el archivo y pulse "
 "en <gui>Guardar</gui>."
 
-#: C/mergefeatures.page:62(note/p)
+#. (itstool) path: note/p
+#: C/mergefeatures.page:62
 msgid ""
 "To export a CSV file from <app>Thunderbird</app>, click on the <gui>Address "
 "Book</gui> toolbar button or choose <guiseq><gui>Tools </gui><gui>Address "
@@ -2497,7 +2704,8 @@ msgstr ""
 "sobre el resto de contactos para seleccionarlos. Cuando termine, elija "
 "<guiseq><gui>Herramientas</gui><gui>Exportar</gui> </guiseq>."
 
-#: C/mergefeatures.page:71(note/p)
+#. (itstool) path: note/p
+#: C/mergefeatures.page:71
 msgid ""
 "In the file chooser window, choose the desired folder and a name for the "
 "file and change the value of the drop-down button in the right bottom corner "
@@ -2508,7 +2716,8 @@ msgstr ""
 "esquina inferior derecha a <gui>Separado por comas</gui>. Para terminar, "
 "pulse en <gui>Guardar</gui>."
 
-#: C/mergefeatures.page:79(page/p)
+#. (itstool) path: page/p
+#: C/mergefeatures.page:79
 msgid ""
 "A label must then be configured to \"point at\" this data file. To configure "
 "the merge properties of a document, choose <guiseq><gui>Objects</gui> "
@@ -2523,7 +2732,8 @@ msgstr ""
 "gui>. Este diálogo se utiliza para seleccionar el formato de datos exacto "
 "del archivo y nombre de archivo (ubicación) de la combinación de datos."
 
-#: C/mergefeatures.page:87(page/p)
+#. (itstool) path: page/p
+#: C/mergefeatures.page:87
 msgid ""
 "Finally, once the label has been configured for a data file, field keys can "
 "be inserted into text objects and used as source or data for barcode objects "
@@ -2536,7 +2746,8 @@ msgstr ""
 "imágenes para objetos de imagen. Consulte la <link xref=\"editprop\"/> para "
 "obtener más información sobre cómo combinar datos para este tipo de objetos."
 
-#: C/mergefeatures.page:93(page/p)
+#. (itstool) path: page/p
+#: C/mergefeatures.page:93
 msgid ""
 "Now that your label is configured, <app>gLabels</app> will print a unique "
 "label for each record in your source document -- substituting fields from "
@@ -2547,7 +2758,8 @@ msgstr ""
 "campos de cada registro por los campos clave en todo el texto, código de "
 "barras y objetos de imagen."
 
-#: C/mergefeatures.page:98(page/p)
+#. (itstool) path: page/p
+#: C/mergefeatures.page:98
 msgid ""
 "See <link xref=\"merge\"/> for a detailed tutorial on the document merge "
 "feature."
@@ -2555,15 +2767,18 @@ msgstr ""
 "Consulte en <link xref=\"merge\"/> un tutorial detallado sobre la "
 "característica de fusión de documentos."
 
-#: C/merge.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/merge.page:9
 msgid "Merge a data source to create multiple documents."
 msgstr "Combinar un origen de datos para crear múltiples documentos."
 
-#: C/merge.page:25(page/title)
+#. (itstool) path: page/title
+#: C/merge.page:25
 msgid "Document merge tutorial"
 msgstr "Tutorial para fusionar documentos"
 
-#: C/merge.page:27(page/p)
+#. (itstool) path: page/p
+#: C/merge.page:27
 msgid ""
 "Document Merge (sometimes called \"Mail Merge\") is a powerful feature that "
 "allows a unique label or card to be printed for each record in an external "
@@ -2578,15 +2793,18 @@ msgstr ""
 "siguientes ejemplos le guiarán paso a paso a través de un par de de tareas "
 "comunes usando la característica de combinación de documentos."
 
-#: C/multifile.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/multifile.page:9
 msgid "How to open multiple files at once by using the command line."
 msgstr "Cómo abrir varios archivos a la vez usando la línea de comandos."
 
-#: C/multifile.page:25(page/title)
+#. (itstool) path: page/title
+#: C/multifile.page:25
 msgid "To open multiple files from the command line"
 msgstr "Abrir varios archivos desde la línea de comandos"
 
-#: C/multifile.page:27(page/p)
+#. (itstool) path: page/p
+#: C/multifile.page:27
 msgid ""
 "You can run <app>gLabels</app> from a command line and open a single file or "
 "multiple files. To open multiple files from a command line, type the "
@@ -2596,14 +2814,16 @@ msgstr ""
 "varios archivos. Para abrir varios archivos desde una línea de comandos, "
 "escriba el siguiente comando y pulse <key>Intro</key>:"
 
-#: C/multifile.page:32(page/p)
+#. (itstool) path: page/p
+#: C/multifile.page:32
 msgid ""
 "<cmd>glabels <var>file1.glabels file2.glabels file3.glabels</var> </cmd>"
 msgstr ""
 "<cmd>glabels <var>archivo1.glabels archivo2.glabels archivo3.glabels</var> </"
 "cmd>"
 
-#: C/multifile.page:36(page/p)
+#. (itstool) path: page/p
+#: C/multifile.page:36
 msgid ""
 "When the application starts, the files that you specify are displayed in "
 "separate <app>gLabels</app> windows."
@@ -2611,15 +2831,18 @@ msgstr ""
 "Cuando se inicia la aplicación, se muestran los archivos que especifique en "
 "ventanas de <app>gLabels</app> separadas."
 
-#: C/newlabel.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/newlabel.page:9
 msgid "Create a new label or card in <app>gLabels</app>."
 msgstr "Crear una etiqueta o tarjeta nuevas en <app>gLabels</app>."
 
-#: C/newlabel.page:25(page/title)
+#. (itstool) path: page/title
+#: C/newlabel.page:25
 msgid "To create a new label or card"
 msgstr "Crear una etiqueta nueva o una tarjeta"
 
-#: C/newlabel.page:27(page/p)
+#. (itstool) path: page/p
+#: C/newlabel.page:27
 msgid ""
 "To create a new label or business card, choose <guiseq><gui>File</"
 "gui><gui>New</gui></guiseq> to display the <gui>New Label or Card</gui> "
@@ -2634,11 +2857,12 @@ msgstr ""
 "mostrará un documento nuevo en el área de visualización de la ventana "
 "ventana de <app>gLabels</app>."
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/printfile.page:47(media)
+#: C/printfile.page:47
 msgctxt "_"
 msgid ""
 "external ref='figures/print-copies.png' "
@@ -2647,26 +2871,30 @@ msgstr ""
 "external ref='figures/print-copies.png' "
 "md5='ee473352947fe25c7adaa9f9a052c3e9'"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/printfile.page:70(media)
+#: C/printfile.page:70
 msgctxt "_"
 msgid ""
 "external ref='figures/print-merge.png' md5='ee70bd2150a6cd46e96ce5c0531eb47b'"
 msgstr ""
 "external ref='figures/print-merge.png' md5='ee70bd2150a6cd46e96ce5c0531eb47b'"
 
-#: C/printfile.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/printfile.page:9
 msgid "How to print your labels and cards."
 msgstr "Cómo imprimir sus etiquetas y sus tarjetas."
 
-#: C/printfile.page:25(page/title)
+#. (itstool) path: page/title
+#: C/printfile.page:25
 msgid "To print labels and cards"
 msgstr "Imprimir etiquetas y tarjetas"
 
-#: C/printfile.page:27(page/p)
+#. (itstool) path: page/p
+#: C/printfile.page:27
 msgid ""
 "To print labels or cards, choose <guiseq><gui>File</gui><gui>Print</gui> </"
 "guiseq> to display the <gui>Print</gui> dialog. Once print options have been "
@@ -2680,7 +2908,8 @@ msgstr ""
 "previsualizar el resultado, pulse en <gui>Previsualizar la impresión</gui> "
 "en su lugar."
 
-#: C/printfile.page:34(page/p)
+#. (itstool) path: page/p
+#: C/printfile.page:34
 msgid ""
 "The <gui>Print</gui> dialog allows you to specify the following print "
 "options:"
@@ -2688,15 +2917,18 @@ msgstr ""
 "El diálogo <gui>Imprimir</gui> le permite especificar las siguientes "
 "opciones de impresión:"
 
-#: C/printfile.page:38(section/title)
+#. (itstool) path: section/title
+#: C/printfile.page:38
 msgid "The Labels Tab of the Print Dialog"
 msgstr "La pestaña «etiquetas» del diálogo de impresión"
 
-#: C/printfile.page:41(section/title)
+#. (itstool) path: section/title
+#: C/printfile.page:41
 msgid "Print control (Simple)"
 msgstr "Control de impresión (simple)"
 
-#: C/printfile.page:43(section/p)
+#. (itstool) path: section/p
+#: C/printfile.page:43
 msgid ""
 "For simple labels or cards (no document merge), the job tabbed section "
 "contains the following copy controls."
@@ -2704,7 +2936,8 @@ msgstr ""
 "Para etiquetas o tarjetas simples (no para documentos combinados) la sección "
 "de trabajos en pestañas contiene los siguientes controles de copia."
 
-#: C/printfile.page:52(section/p)
+#. (itstool) path: section/p
+#: C/printfile.page:52
 msgid ""
 "The number of copies of the label can be selected by choosing the number of "
 "full sheets to print, or a specific subset of labels on a single sheet."
@@ -2713,7 +2946,8 @@ msgstr ""
 "de hojas completas que imprimir, o un subconjunto específico de etiquetas de "
 "una sola hoja."
 
-#: C/printfile.page:56(section/p)
+#. (itstool) path: section/p
+#: C/printfile.page:56
 msgid ""
 "The mini-preview can also be used to graphically select the subset of labels "
 "by clicking the first label on the mini-preview and dragging to the last "
@@ -2723,11 +2957,13 @@ msgstr ""
 "subconjunto de etiquetas, pulsando en la primera etiqueta de la mini vista "
 "previa y arrastrando hasta la última etiqueta."
 
-#: C/printfile.page:63(section/title)
+#. (itstool) path: section/title
+#: C/printfile.page:63
 msgid "Print control (Merge)"
 msgstr "Control de impresión (fusión)"
 
-#: C/printfile.page:65(section/p)
+#. (itstool) path: section/p
+#: C/printfile.page:65
 msgid ""
 "For labels or cards using the document merge (also known as \"mail merge\") "
 "capability, the job tabbed section contains the following merge controls "
@@ -2738,11 +2974,13 @@ msgstr ""
 "pestañas contiene los siguientes controles de combinación en vez de los "
 "controles de copia."
 
-#: C/printfile.page:71(media/p)
+#. (itstool) path: media/p
+#: C/printfile.page:71
 msgid "Print Document Merge Controls"
 msgstr "Controles de impresión de fusión de documentos"
 
-#: C/printfile.page:75(section/p)
+#. (itstool) path: section/p
+#: C/printfile.page:75
 msgid ""
 "The total number of labels or cards printed is the product of the number of "
 "records in the merge source and the number of copies selected. If multiple "
@@ -2756,7 +2994,8 @@ msgstr ""
 "(copias de un mismo registro agrupados) o sin cotejar (una copia de cada "
 "registro se imprime antes del siguiente copia)."
 
-#: C/printfile.page:82(section/p)
+#. (itstool) path: section/p
+#: C/printfile.page:82
 msgid ""
 "Printing can begin on any label on the first sheet. This can be selected "
 "with the <gui>Start on label</gui> spinbutton."
@@ -2765,7 +3004,8 @@ msgstr ""
 "puede seleccionar con el botón incremental <gui>Comenzar con la etiqueta</"
 "gui>."
 
-#: C/printfile.page:86(section/p)
+#. (itstool) path: section/p
+#: C/printfile.page:86
 msgid ""
 "The mini-preview can also be used to graphically select this first label, by "
 "clicking on the desired label in the mini-preview."
@@ -2773,19 +3013,23 @@ msgstr ""
 "La mini vista previa también se puede usar para seleccionar gráficamente la "
 "primera etiqueta, pulsando en la etiqueta que quiere en la mini vista previa."
 
-#: C/printfile.page:93(section/title)
+#. (itstool) path: section/title
+#: C/printfile.page:93
 msgid "Options"
 msgstr "Opciones"
 
-#: C/printfile.page:94(section/p)
+#. (itstool) path: section/p
+#: C/printfile.page:94
 msgid "The following options can also be selected."
 msgstr "Se pueden seleccionar las siguientes opciones."
 
-#: C/printfile.page:97(item/p)
+#. (itstool) path: item/p
+#: C/printfile.page:97
 msgid "<gui>print outlines</gui>"
 msgstr "<gui>imprimir márgenes</gui>"
 
-#: C/printfile.page:98(item/p)
+#. (itstool) path: item/p
+#: C/printfile.page:98
 msgid ""
 "Print outlines of labels. This option is useful for dry-runs, to test "
 "printer alignment."
@@ -2793,11 +3037,13 @@ msgstr ""
 "Imprimir los contornos de las etiquetas. Esta opción es útil para "
 "ejecuciones en seco, para verificar la alineación de la impresora."
 
-#: C/printfile.page:102(item/p)
+#. (itstool) path: item/p
+#: C/printfile.page:102
 msgid "<gui>print in reverse</gui>"
 msgstr "<gui>imprimir en el reverso</gui>"
 
-#: C/printfile.page:103(item/p)
+#. (itstool) path: item/p
+#: C/printfile.page:103
 msgid ""
 "Prints the labels as mirror images. This option is useful for printing on "
 "clear labels that will be viewed from the reverse side (e.g. in a car "
@@ -2807,11 +3053,13 @@ msgstr ""
 "imprimir en etiquetas que se verán por el reverso (ej. en la ventanilla de "
 "un coche)."
 
-#: C/printfile.page:108(item/p)
+#. (itstool) path: item/p
+#: C/printfile.page:108
 msgid "<gui>print crop marks</gui>"
 msgstr "<gui>imprimir marcas de corte</gui>"
 
-#: C/printfile.page:109(item/p)
+#. (itstool) path: item/p
+#: C/printfile.page:109
 msgid ""
 "Prints crop marks along the edge of the sheet. This option is useful for "
 "printing on blank stock, to be cut after printing. This option does not work "
@@ -2821,15 +3069,18 @@ msgstr ""
 "para imprimir en páginas en blanco, y recortarlas después de imprimir. Esta "
 "opción no funciona bien con todas las plantillas."
 
-#: C/select.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/select.page:9
 msgid "How to select objects."
 msgstr "Cómo seleccionar objetos."
 
-#: C/select.page:25(page/title)
+#. (itstool) path: page/title
+#: C/select.page:25
 msgid "To select objects"
 msgstr "Seleccionar objetos"
 
-#: C/select.page:27(page/p)
+#. (itstool) path: page/p
+#: C/select.page:27
 msgid ""
 "A prerequisite for performing operations on objects is the selection of "
 "individual objects or groups of objects. The display area must be in the "
@@ -2845,11 +3096,13 @@ msgstr ""
 "de menú <guiseq><gui>Objetos</gui><gui>Seleccionar modo</gui></guiseq>, o "
 "con el comando correspondiente de la <gui>Barra de dibujo</gui>."
 
-#: C/select.page:38(section/title)
+#. (itstool) path: section/title
+#: C/select.page:38
 msgid "Selecting a single object"
 msgstr "Seleccionar un sólo objeto"
 
-#: C/select.page:39(section/p)
+#. (itstool) path: section/p
+#: C/select.page:39
 msgid ""
 "A single object can be selected simply by clicking on the desired object in "
 "the display area. Once selected the object will be highlighted with a set of "
@@ -2859,11 +3112,13 @@ msgstr ""
 "objeto que quiere en el área de visualización. Una vez seleccionado, el "
 "objeto se resaltará con un conjunto de manejadores para redimensionarlo."
 
-#: C/select.page:46(section/title)
+#. (itstool) path: section/title
+#: C/select.page:46
 msgid "Aggregate object selections"
 msgstr "Agregar selecciones de objetos"
 
-#: C/select.page:47(section/p)
+#. (itstool) path: section/p
+#: C/select.page:47
 msgid ""
 "Multiple objects can be selected by first selecting the first object as "
 "above and then by holding the <key>Ctrl</key> key while selecting additional "
@@ -2882,11 +3137,13 @@ msgstr ""
 "todo</gui></guiseq>. Todos los objetos de una selección agregada de objetos "
 "se resaltarán."
 
-#: C/select.page:60(section/title)
+#. (itstool) path: section/title
+#: C/select.page:60
 msgid "Area selections"
 msgstr "Selecciones de área"
 
-#: C/select.page:62(section/p)
+#. (itstool) path: section/p
+#: C/select.page:62
 msgid ""
 "Multiple objects can also be selected by clicking an empty area and dragging "
 "to form a rectangular area. When released, all objects contained in the area "
@@ -2900,11 +3157,13 @@ msgstr ""
 "se puede usar para añadirla a una selección existente manteniendo pulsada la "
 "tecla <key>Ctrl</key> mientras se hace la selección."
 
-#: C/select.page:72(section/title)
+#. (itstool) path: section/title
+#: C/select.page:72
 msgid "Unselecting objects"
 msgstr "Deseleccionar objetos"
 
-#: C/select.page:74(section/p)
+#. (itstool) path: section/p
+#: C/select.page:74
 msgid ""
 "Individual objects can be removed from an existing selection by holding the "
 "<key>Ctrl</key> key while clicking on a previously selected object. An "
@@ -2920,11 +3179,13 @@ msgstr ""
 "simplemente pulsando en un espacio vacío en el área de visualización. Una "
 "vez que un objeto no está seleccionado, se quita el resaltado."
 
-#: C/select.page:86(section/title)
+#. (itstool) path: section/title
+#: C/select.page:86
 msgid "Clipboard Commands"
 msgstr "Comandos del portapapeles"
 
-#: C/select.page:88(section/p)
+#. (itstool) path: section/p
+#: C/select.page:88
 msgid ""
 "Object selections can be manipulated using the standard clipboard operations "
 "<gui>Cut</gui>, <gui>Copy</gui>, <gui>Paste</gui>, and <gui>Delete</gui>."
@@ -2933,11 +3194,13 @@ msgstr ""
 "portapapeles <gui>Cortar</gui>, <gui>Copiar</gui>, <gui>Pegar</gui>, y "
 "<gui>Eliminar</gui>."
 
-#: C/select.page:94(section/title)
+#. (itstool) path: section/title
+#: C/select.page:94
 msgid "<gui>Cut</gui> (<keyseq><key>Ctrl</key><key>X</key></keyseq>)"
 msgstr "<gui>Cortar</gui> (<keyseq><key>Ctrl</key><key>X</key></keyseq>)"
 
-#: C/select.page:96(section/p)
+#. (itstool) path: section/p
+#: C/select.page:96
 msgid ""
 "Moves selected objects to the clipboard. The objects are then available for "
 "pasting back into the current document or another document."
@@ -2945,11 +3208,13 @@ msgstr ""
 "Mueve objetos al portapapeles. Los objetos están disponibles para pegarlos "
 "de nuevo en el documento actual o en otro documento."
 
-#: C/select.page:103(section/title)
+#. (itstool) path: section/title
+#: C/select.page:103
 msgid "<gui>Copy</gui> (<keyseq><key>Ctrl</key><key>C</key></keyseq>)"
 msgstr "<gui>Copiar</gui> (<keyseq><key>Ctrl</key><key>C</key></keyseq>)"
 
-#: C/select.page:105(section/p)
+#. (itstool) path: section/p
+#: C/select.page:105
 msgid ""
 "Copies selected objects to the clipboard without deleting them. The objects "
 "are then available for pasting back into the current document or another "
@@ -2958,11 +3223,13 @@ msgstr ""
 "Copia los objetos seleccionados al portapapeles sin borrarlos. Los objetos "
 "están disponibles para pegarlos en el documento actual o en otro documento."
 
-#: C/select.page:112(section/title)
+#. (itstool) path: section/title
+#: C/select.page:112
 msgid "<gui>Paste</gui> (<keyseq><key>Ctrl</key><key>V</key></keyseq>)"
 msgstr "<gui>Pegar</gui> (<keyseq><key>Ctrl</key><key>V</key></keyseq>)"
 
-#: C/select.page:114(section/p)
+#. (itstool) path: section/p
+#: C/select.page:114
 msgid ""
 "Pastes objects from the clipboard into the current document. <app>gLabels</"
 "app> can only paste objects from another <app>gLabels</app> document."
@@ -2970,19 +3237,22 @@ msgstr ""
 "Pega objetos del portapapeles en el documento actual. <app>gLabels</app> "
 "sólo puede pegar objetos de otro documento de <app>gLabels</app>."
 
-#: C/select.page:121(section/title)
+#. (itstool) path: section/title
+#: C/select.page:121
 msgid "<gui>Delete</gui> (<key>Del</key>)"
 msgstr "<gui>Eliminar</gui> (<key>Supr</key>)"
 
-#: C/select.page:123(section/p)
+#. (itstool) path: section/p
+#: C/select.page:123
 msgid "Deletes selected objects without placing them on the clipboard."
 msgstr "Elimina los objetos seleccionados sin ponerlos en el portapapeles."
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/skipfields.page:45(media)
+#: C/skipfields.page:45
 msgctxt "_"
 msgid ""
 "external ref='figures/skip-fields-screenshot.png' "
@@ -2991,11 +3261,12 @@ msgstr ""
 "external ref='figures/skip-fields-screenshot.png' "
 "md5='eef4a81f48546bd7d3753656a3df9cb7'"
 
+#. (itstool) path: media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/skipfields.page:53(media)
+#: C/skipfields.page:53
 msgctxt "_"
 msgid ""
 "external ref='figures/skip-fields-output.png' "
@@ -3004,15 +3275,18 @@ msgstr ""
 "external ref='figures/skip-fields-output.png' "
 "md5='b64d1a7fdf0d37e9a6d93f0bc2f9fa0d'"
 
-#: C/skipfields.page:9(info/desc)
+#. (itstool) path: info/desc
+#: C/skipfields.page:9
 msgid "How to skip blank address lines when doing a document merge."
 msgstr "Cómo omitir líneas de dirección en blanco al fusionar un documento."
 
-#: C/skipfields.page:25(page/title)
+#. (itstool) path: page/title
+#: C/skipfields.page:25
 msgid "Skipping blank address lines"
 msgstr "Omitir líneas de dirección vacías"
 
-#: C/skipfields.page:27(page/p)
+#. (itstool) path: page/p
+#: C/skipfields.page:27
 msgid ""
 "This feature can be best described by a simple example. In the following CSV "
 "file, column 5 (ADDR2) contains the second address line for each record. "
@@ -3026,7 +3300,8 @@ msgstr ""
 "el 3. (Para que esta característica funcione, el campo no debe contener "
 "ningún texto, ni siquiera espacios.)"
 
-#: C/skipfields.page:33(page/code)
+#. (itstool) path: page/code
+#: C/skipfields.page:33
 #, no-wrap
 msgid ""
 "\n"
@@ -3043,7 +3318,8 @@ msgstr ""
 "  Kramer,Cosmo,,\"Apt 5B\",\"129 W. 81 St.\",\"New York\",NY,10024-7207\n"
 "  "
 
-#: C/skipfields.page:40(page/p)
+#. (itstool) path: page/p
+#: C/skipfields.page:40
 msgid ""
 "In the following screenshot, a single multiline text object has been created "
 "to format these addresses. Notice that ${ADDR2} representing the second "
@@ -3056,11 +3332,13 @@ msgstr ""
 "adicional en esta línea, incluyendo los espacios, anularía esta "
 "característica.)"
 
-#: C/skipfields.page:46(media/p)
+#. (itstool) path: media/p
+#: C/skipfields.page:46
 msgid "Multi-line address"
 msgstr "Dirección multilínea"
 
-#: C/skipfields.page:49(page/p)
+#. (itstool) path: page/p
+#: C/skipfields.page:49
 msgid ""
 "Printing this label results in the following output. Notice that the line "
 "containing the ${ADDR2} field is completely skipped for the first two "
@@ -3070,9 +3348,68 @@ msgstr ""
 "que la línea que contiene el campo  ${ADDR2} se omite completamente para los "
 "dos primeros registros, sin imprimir una línea en blanco."
 
-#: C/skipfields.page:54(media/p)
+#. (itstool) path: media/p
+#: C/skipfields.page:54
 msgid "Output"
 msgstr "Salida"
+
+#~| msgid ""
+#~| "@@image: 'figures/glabels-template-rect-label.png'; "
+#~| "md5=9c7ae1c1a888e1c9eefd19655d093971"
+#~ msgctxt "_"
+#~ msgid ""
+#~ "external ref='figures/glabels-template-rect-label.png' "
+#~ "md5='9c7ae1c1a888e1c9eefd19655d093971'"
+#~ msgstr ""
+#~ "external ref='figures/glabels-template-rect-label.png' "
+#~ "md5='9c7ae1c1a888e1c9eefd19655d093971'"
+
+#~| msgid ""
+#~| "@@image: 'figures/glabels-template-circle-label.png'; "
+#~| "md5=841e36a1f92aeed01e8fbaacc67758f1"
+#~ msgctxt "_"
+#~ msgid ""
+#~ "external ref='figures/glabels-template-circle-label.png' "
+#~ "md5='841e36a1f92aeed01e8fbaacc67758f1'"
+#~ msgstr ""
+#~ "external ref='figures/glabels-template-circle-label.png' "
+#~ "md5='841e36a1f92aeed01e8fbaacc67758f1'"
+
+#~| msgid ""
+#~| "@@image: 'figures/glabels-template-cd-label.png'; "
+#~| "md5=c7952ac1b26ecbfa53facfbbf6486841"
+#~ msgctxt "_"
+#~ msgid ""
+#~ "external ref='figures/glabels-template-cd-label.png' "
+#~ "md5='c7952ac1b26ecbfa53facfbbf6486841'"
+#~ msgstr ""
+#~ "external ref='figures/glabels-template-cd-label.png' "
+#~ "md5='c7952ac1b26ecbfa53facfbbf6486841'"
+
+#~| msgid ""
+#~| "@@image: 'figures/layouts-cdlabel.png'; "
+#~| "md5=0c41a95dc82b5a426e934751faf86872"
+#~ msgctxt "_"
+#~ msgid ""
+#~ "external ref='figures/layouts-cdlabel.png' "
+#~ "md5='0c41a95dc82b5a426e934751faf86872'"
+#~ msgstr ""
+#~ "external ref='figures/layouts-cdlabel.png' "
+#~ "md5='0c41a95dc82b5a426e934751faf86872'"
+
+#~| msgid ""
+#~| "@@image: 'figures/glabels-template-layout.png'; "
+#~| "md5=fe1c9652d5448b2e0ece086777d3a287"
+#~ msgctxt "_"
+#~ msgid ""
+#~ "external ref='figures/glabels-template-layout.png' "
+#~ "md5='fe1c9652d5448b2e0ece086777d3a287'"
+#~ msgstr ""
+#~ "external ref='figures/glabels-template-layout.png' "
+#~ "md5='fe1c9652d5448b2e0ece086777d3a287'"
+
+#~ msgid "Addess labels preview"
+#~ msgstr "Vista previa de las etiquetas de dirección"
 
 #~ msgid "evins@snaught.com"
 #~ msgstr "evins@snaught.com"
