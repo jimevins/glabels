@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels 1.91.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2015-07-19 05:39+0000\n"
-"PO-Revision-Date: 2015-07-19 08:03+0100\n"
-"Last-Translator: Pedro Albuquerque <palbuquerque73o@gmail.com>\n"
+"POT-Creation-Date: 2015-12-13 07:18+0000\n"
+"PO-Revision-Date: 2015-12-13 09:08+0000\n"
+"Last-Translator:  <>\n"
 "Language-Team: Português <palbuquerque73@openmailbox.com>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
@@ -207,7 +207,8 @@ msgid "Code 49"
 msgstr "Código 49"
 
 #: ../src/bc-backends.c:263
-msgid "Code 128 (Mode C supression)"
+#| msgid "Code 128 (Mode C supression)"
+msgid "Code 128 (Mode C suppression)"
 msgstr "Código 128 (supressão Mode C)"
 
 #: ../src/bc-backends.c:266
@@ -3049,7 +3050,9 @@ msgid "Divider Labels"
 msgstr "Etiquetas de divisão"
 
 #. ===================================================================
+#. ============================================================
 #: ../templates/avery-iso-templates.xml.h:2
+#: ../templates/cablelabel-templates.xml.h:2
 msgid "Mini Labels"
 msgstr "Mini etiquetas"
 
@@ -3164,22 +3167,18 @@ msgstr "Etiquetas padrão de endereços 29mm x 90mm"
 #. *********************************************************************
 #.
 #: ../templates/brother-other-templates.xml.h:37
-#| msgid "Standard Address Labels 29mm x 90mm"
 msgid "Standard Address Labels 29mm x 90mm (Old)"
 msgstr "Etiquetas padrão de endereços 29mm x 90mm (antiga)"
 
 #: ../templates/brother-other-templates.xml.h:38
-#| msgid "Shipping Labels 62mm x 100mm"
 msgid "Shipping Labels 62mm x 100mm (Old)"
 msgstr "Etiquetas de expedição 62mm x 100mm (antiga)"
 
 #: ../templates/brother-other-templates.xml.h:39
-#| msgid "Multi Purpose Labels 17mm x 54mm"
 msgid "Multi Purpose Labels 17mm x 54mm (Old)"
 msgstr "Etiquetas genéricas 17mm x 54mm (antiga)"
 
 #: ../templates/brother-other-templates.xml.h:40
-#| msgid "Standard Address Labels 38mm x 90mm"
 msgid "Standard Address Labels 38mm x 90mm (Old)"
 msgstr "Etiquetas padrão de endereços 29mm x 90mm (antiga)"
 
