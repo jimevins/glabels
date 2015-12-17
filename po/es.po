@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2015-12-01 07:15+0000\n"
-"PO-Revision-Date: 2015-12-02 15:41+0100\n"
+"POT-Creation-Date: 2015-12-15 07:19+0000\n"
+"PO-Revision-Date: 2015-12-15 12:24+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -207,8 +207,9 @@ msgid "Code 49"
 msgstr "Code 49"
 
 #: ../src/bc-backends.c:263
-msgid "Code 128 (Mode C supression)"
-msgstr "Code 128 (Mode C supression)"
+#| msgid "Code 128 (Mode C supression)"
+msgid "Code 128 (Mode C suppression)"
+msgstr "Code 128 (Supresión de modo C)"
 
 #: ../src/bc-backends.c:266
 msgid "DAFT Code"
@@ -3170,28 +3171,23 @@ msgstr "Etiquetas de dirección estándar de 38mm x 90mm"
 #. *********************************************************************
 #.
 #: ../templates/brother-other-templates.xml.h:37
-#| msgid "Standard Address Labels 29mm x 90mm"
 msgid "Standard Address Labels 29mm x 90mm (Old)"
 msgstr "Etiquetas de dirección estándar de 29mm x 90mm (antiguas)"
 
 #: ../templates/brother-other-templates.xml.h:38
-#| msgid "Shipping Labels 62mm x 100mm"
 msgid "Shipping Labels 62mm x 100mm (Old)"
 msgstr "Etiquetas de envío de 62mm x 100mm (antiguas)"
 
 #: ../templates/brother-other-templates.xml.h:39
-#| msgid "Multi Purpose Labels 17mm x 54mm"
 msgid "Multi Purpose Labels 17mm x 54mm (Old)"
 msgstr "Etiquetas multipropósito de 17mm x 54mm (antiguas)"
 
 #: ../templates/brother-other-templates.xml.h:40
-#| msgid "Standard Address Labels 38mm x 90mm"
 msgid "Standard Address Labels 38mm x 90mm (Old)"
 msgstr "Etiquetas de dirección estándar de 38mm x 90mm (antiguas)"
 
 #. ===================================================================
 #: ../templates/canon-other-templates.xml.h:2
-#| msgid "CD/DVD Labels"
 msgid "CD/DVD Tray"
 msgstr "Etiquetas de CD/DVD"
 
