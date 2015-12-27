@@ -23,12 +23,28 @@
 #include "merge-text.h"
 
 #include <stdio.h>
+#include <errno.h>
+#include <string.h>
 
 #include "debug.h"
 
 #define LINE_BUF_LEN 1024
 
-
+/*
+ * Unicode handling.
+ *  The default encoding assumption is that files are in the system encoding.
+ * However, files are checked for a Unicode BOM (Byte Order Mark), which if found
+ * alters the manner in which files are handled.
+ */
+enum UnicodeEncoding {
+        SYSTEM_ENCODING,
+        UTF8,
+        UTF16_LE,
+        UTF16_BE,
+        UTF32_LE,
+        UTF32_BE
+};
+        
 /*===========================================*/
 /* Private types                             */
 /*===========================================*/
@@ -37,6 +53,12 @@ struct _glMergeTextPrivate {
 
 	gchar             delim;
         gboolean          line1_has_keys;
+
+        enum UnicodeEncoding   encoding;
+        GIConv             g_iconverter;
+        gchar              char_buf[MB_LEN_MAX];
+        gsize              buf_pos;
+        gsize              buf_len;
 
 	FILE             *fp;
 
@@ -88,7 +110,7 @@ static glMergeRecord *gl_merge_text_get_record      (glMerge          *merge);
 static void           gl_merge_text_copy            (glMerge          *dst_merge,
 						     const glMerge    *src_merge);
 
-static GList         *parse_line                    (FILE             *fp,
+static GList         *parse_line                    (glMergeText       *merge_text,
 						     gchar             delim);
 static void           free_fields                   (GList           **fields);
 
@@ -320,6 +342,139 @@ gl_merge_text_get_primary_key (const glMerge *merge)
         return key_from_index (GL_MERGE_TEXT (merge), 0);
 }
 
+/*--------------------------------------------------------------------------*/
+/* Read the byte order marks to determine unicode encoding, if any.         */
+/* See https://en.wikipedia.org/wiki/Byte_order_mark                        */
+/*--------------------------------------------------------------------------*/
+static enum UnicodeEncoding
+gl_read_encoding(FILE* fp) {
+        enum UnicodeEncoding encoding;
+        gchar ch, ch2, ch3, ch4;
+        ch = getc(fp);
+
+        if (ch == '\xff') {
+                ch2 = getc(fp);
+
+                if (ch2 == '\xfe') {
+                        ch3 = getc(fp);
+                        ch4 = getc(fp);
+                        if (ch3 == '\0' && ch4 == '\0') {
+                                encoding = UTF32_LE;
+                        } else {
+                                ungetc(ch4, fp);
+                                ungetc(ch3, fp);
+                                encoding = UTF16_LE;
+                        }
+                } else {
+                        ungetc(ch2, fp);
+                        ungetc(ch, fp);
+                        encoding = SYSTEM_ENCODING;
+                }
+        } else if (ch == '\xfe') {
+                ch2 = getc(fp);
+                if (ch2 == '\xff') {
+                        encoding = UTF16_BE;
+                } else {
+                        ungetc(ch2, fp);
+                        ungetc(ch, fp);
+                        encoding = SYSTEM_ENCODING;
+                }
+        } else if (ch == '\0') {
+                ch2 = getc(fp);
+                ch3 = getc(fp);
+                ch4 = getc(fp);
+                if (ch2 == '\0' && ch3 == '\xfe' && ch4 == '\xff') {
+                        encoding = UTF32_BE;
+                } else {
+                        ungetc(ch4, fp);
+                        ungetc(ch3, fp);
+                        ungetc(ch2, fp);
+                        encoding = SYSTEM_ENCODING;
+                }
+        } else if (ch == '\xef') {
+                ch2 = getc(fp);
+                if (ch2 == '\xbb') {
+                        ch3 = getc(fp);
+                        if (ch3 == '\xbf') {
+                                encoding = UTF8;
+                        } else {
+                                ungetc(ch3, fp);
+                                ungetc(ch2, fp);
+                                ungetc(ch, fp);
+                                encoding = SYSTEM_ENCODING;
+                        }
+                } else {
+                        ungetc(ch2, fp);
+                        ungetc(ch, fp);
+                        encoding = SYSTEM_ENCODING;
+                }
+        } else {
+                ungetc(ch, fp);
+                encoding = SYSTEM_ENCODING;
+        }
+        return encoding;
+}
+
+/*
+ * gLabels get-character routine for possibly Unicode text files.
+ * If the source has a byte order mark (BOM) indicating a Unicode file, 
+ * g_iconv is used to convert input characters to GDK-standard UTF8 format.
+ */
+
+static gchar
+gl_getc(glMergeText *merge_text) {
+        if (merge_text->priv->buf_pos < merge_text->priv->buf_len) {
+                return merge_text->priv->char_buf[merge_text->priv->buf_pos++];
+        } else if (merge_text->priv->encoding == SYSTEM_ENCODING || 
+                   merge_text->priv->encoding == UTF8) {
+                return getc(merge_text->priv->fp);
+        } else {
+                /*
+                 * a UTF-16 stream might include surrogates, which encode
+                 * characters in successive 16-bit units. If we read a
+                 * leading surrogate, read in the trailing one as well for 
+                 * processing.
+                 */
+                gchar wcbuf[4];
+                size_t result;
+                gchar* outbufp;
+                int hob_offset;
+                int unit_len;
+                switch (merge_text->priv->encoding) {
+                case UTF16_BE:
+                        hob_offset = 0;
+                        unit_len = 2;
+                        break;
+                case UTF16_LE:
+                        hob_offset = 1;
+                        unit_len = 2;
+                        break;
+                case UTF32_BE:
+                case UTF32_LE:
+                        hob_offset = -1;
+                        unit_len = 4;
+                        break;
+                }
+                gsize nBytes = fread(wcbuf, 1, unit_len, merge_text->priv->fp);
+                if (nBytes == 0)
+                        return EOF;
+                if (hob_offset >= 0 && (wcbuf[hob_offset] & 0xfd) == 0xd8) {
+                        nBytes += fread(wcbuf+unit_len, 1, unit_len, merge_text->priv->fp);
+                }
+                gchar* wcbufp = wcbuf;
+                outbufp = merge_text->priv->char_buf;
+                gsize buflen = sizeof(merge_text->priv->char_buf);
+                result = g_iconv(merge_text->priv->g_iconverter, &wcbufp, &nBytes,
+                                 &outbufp, &buflen);
+                if (result == EOF) {
+                        g_warning("g_iconv: %s", strerror(errno));
+                }
+                merge_text->priv->buf_len = outbufp - merge_text->priv->char_buf;
+                merge_text->priv->buf_pos = 0;
+                return merge_text->priv->char_buf[merge_text->priv->buf_pos++];
+        }
+}
+
 
 /*--------------------------------------------------------------------------*/
 /* Open merge source.                                                       */
@@ -339,13 +494,42 @@ gl_merge_text_open (glMerge *merge)
 
 	if (src != NULL)
         {
-		if (g_utf8_strlen(src, -1) == 1 && src[0] == '-')
+		if (g_utf8_strlen(src, -1) == 1 && src[0] == '-') {
 			merge_text->priv->fp = stdin;
-		else
-			merge_text->priv->fp = fopen (src, "r");
-
+                        merge_text->priv->encoding = SYSTEM_ENCODING;
+                } else {
+			if ((merge_text->priv->fp = fopen (src, "r")) != NULL) {
+                                merge_text->priv->encoding = gl_read_encoding(merge_text->priv->fp);
+                        } else {
+                                g_warning("gl_merge_text_open: %s (%s)",
+                                        strerror(errno), src);
+                        }
+                }
                 g_free (src);
 
+                gchar* in_codeset = NULL;
+                switch (merge_text->priv->encoding) {
+                case UTF8:
+                case SYSTEM_ENCODING:
+                        break;
+                case UTF16_BE:
+                        in_codeset = "UTF-16BE";
+                        break;
+                case UTF16_LE:
+                        in_codeset = "UTF-16LE";
+                        break;
+                case UTF32_BE:
+                        in_codeset = "UTF-32BE";
+                        break;
+                case UTF32_LE:
+                        in_codeset = "UTF-32LE";
+                        break;
+                }
+                if (in_codeset != NULL) {
+                        merge_text->priv->g_iconverter = g_iconv_open("UTF8", in_codeset);
+                        /* Since we define both codesets, we should always be able to open the converter */
+                        g_assert(merge_text->priv->g_iconverter != (GIConv)-1);
+                }
                 clear_keys (merge_text);
                 merge_text->priv->n_fields_max = 0;
 
@@ -355,7 +539,7 @@ gl_merge_text_open (glMerge *merge)
                          * Extract keys from first line and discard line
                          */
 
-                        line1_fields = parse_line (merge_text->priv->fp, merge_text->priv->delim);
+                        line1_fields = parse_line (merge_text, merge_text->priv->delim);
                         for ( p = line1_fields; p != NULL; p = p->next )
                         {
                                 g_ptr_array_add (merge_text->priv->keys, g_strdup (p->data));
@@ -385,6 +569,10 @@ gl_merge_text_close (glMerge *merge)
 		merge_text->priv->fp = NULL;
 
 	}
+        if (merge_text->priv->g_iconverter != 0) {
+                g_iconv_close(merge_text->priv->g_iconverter);
+                merge_text->priv->g_iconverter = 0;
+        }
 }
 
 
@@ -396,7 +584,6 @@ gl_merge_text_get_record (glMerge *merge)
 {
 	glMergeText   *merge_text;
 	gchar          delim;
-	FILE          *fp;
 	glMergeRecord *record;
 	GList         *fields, *p;
 	gint           i_field;
@@ -405,9 +592,8 @@ gl_merge_text_get_record (glMerge *merge)
 	merge_text = GL_MERGE_TEXT (merge);
 
 	delim = merge_text->priv->delim;
-	fp    = merge_text->priv->fp;
 
-	fields = parse_line (fp, delim);
+	fields = parse_line (merge_text, delim);
 	if ( fields == NULL ) {
 		return NULL;
 	}
@@ -419,7 +605,11 @@ gl_merge_text_get_record (glMerge *merge)
 		field = g_new0 (glMergeField, 1);
                 field->key = key_from_index (merge_text, i_field);
 #ifndef CSV_ALWAYS_UTF8
-		field->value = g_locale_to_utf8 (p->data, -1, NULL, NULL, NULL);
+                if (merge_text->priv->encoding == SYSTEM_ENCODING) {
+                        field->value = g_locale_to_utf8 (p->data, -1, NULL, NULL, NULL);
+                } else {
+                        field->value = g_strdup (p->data);
+                }
 #else
 		field->value = g_strdup (p->data);
 #endif
@@ -482,7 +672,7 @@ gl_merge_text_copy (glMerge       *dst_merge,
 /* empty field.  Returns empty (NULL) when done.                             */
 /*---------------------------------------------------------------------------*/
 static GList *
-parse_line (FILE  *fp,
+parse_line (glMergeText* merge_text,
 	    gchar  delim )
 {
 	GList   *list;
@@ -493,7 +683,7 @@ parse_line (FILE  *fp,
                SIMPLE, SIMPLE_ESCAPED,
                DONE } state;
 
-	if (fp == NULL) {
+	if (merge_text->priv->fp == NULL) {
 		return NULL;
 	}
 	       
@@ -501,7 +691,7 @@ parse_line (FILE  *fp,
         list  = NULL;
 	field = g_string_new( "" );
 	while ( state != DONE ) {
-		c=getc (fp);
+		c=gl_getc (merge_text);
 
 		switch (state) {
 
