@@ -1,13 +1,13 @@
 # Serbian translation for glabels.
 # Copyright (C) 2012 glabels's COPYRIGHT HOLDER
 # This file is distributed under the same license as the glabels package.
-# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2012, 2013.
+# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2012—2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels glabels-3_2\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2013-10-13 11:17+0000\n"
-"PO-Revision-Date: 2013-11-18 10:52+0200\n"
+"POT-Creation-Date: 2015-12-30 07:20+0000\n"
+"PO-Revision-Date: 2015-12-30 10:22+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
 "Language: sr\n"
@@ -206,7 +206,8 @@ msgid "Code 49"
 msgstr "Шифра 49"
 
 #: ../src/bc-backends.c:263
-msgid "Code 128 (Mode C supression)"
+#| msgid "Code 128 (Mode C supression)"
+msgid "Code 128 (Mode C suppression)"
 msgstr "Шифра 128 (Потискивање Ц режима)"
 
 #: ../src/bc-backends.c:266
@@ -539,7 +540,7 @@ msgstr "Произвољна боја"
 msgid "Custom Color #%u"
 msgstr "Произвољна боја #%u"
 
-#: ../src/critical-error-handler.c:70
+#: ../src/critical-error-handler.c:72
 msgid "gLabels Fatal Error!"
 msgstr "Кобна грешка Гномових налепница!"
 
@@ -1665,7 +1666,7 @@ msgstr ""
 "ТРЖИШНЕ ВРЕДНОСТИ или ПРИЛАГОЂЕНОСТИ ОДРЕЂЕНОЈ НАМЕНИ.\n"
 "Погледајте ГНУ Општу јавну лиценцу за више детаља.\n"
 
-#: ../src/warning-handler.c:69
+#: ../src/warning-handler.c:71
 msgid "gLabels Error!"
 msgstr "Грешка Гномових налепница!"
 
@@ -1848,7 +1849,6 @@ msgid "Rotated"
 msgstr "Заокренуто"
 
 #: ../data/ui/new-label-dialog.ui.h:7
-#| msgid "Remove all selections"
 msgid "Review Selection"
 msgstr "Прегледај избор"
 
@@ -1913,7 +1913,6 @@ msgid "Alignment:"
 msgstr "Поравнање:"
 
 #: ../data/ui/object-editor.ui.h:10
-#| msgid "Alignment:"
 msgid "Vertical alignment:"
 msgstr "Усправно поравнање:"
 
@@ -2096,12 +2095,10 @@ msgid "Right align"
 msgstr "Поравнајте на десно"
 
 #: ../data/ui/property-bar.ui.h:8
-#| msgid "Flip vertically"
 msgid "Top vertical align"
 msgstr "Поравнајте усправно горе"
 
 #: ../data/ui/property-bar.ui.h:9
-#| msgid "Center vertically"
 msgid "Center vertical align"
 msgstr "Поравнајте усправно по средини"
 
@@ -2411,8 +2408,8 @@ msgstr ""
 "регуларном шаблону на листу папира. Налепнице (или картице) могу да садрже "
 "текст, слике, линије, облике, и тракасте шифре. Гномове налепнице такође "
 "укључују функцију стапања документа која вам допушта да штампате јединствену "
-"налепницу за свки снимак са спољног извора података, као што је ЦСВ "
-"датотека или адресар Еволуције."
+"налепницу за свки снимак са спољног извора података, као што је ЦСВ датотека "
+"или адресар Еволуције."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
 msgid "Show/hide main toolbar."
@@ -2766,6 +2763,7 @@ msgstr "Било која налепница"
 #: ../templates/hama-iso-templates.xml.h:4
 #: ../templates/pearl-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:8
+#: ../templates/sheetlabels-us-templates.xml.h:16
 msgid "Round labels"
 msgstr "Заобљене налепнице"
 
@@ -2936,7 +2934,7 @@ msgstr "Заобљене налепнице"
 #: ../templates/avery-us-templates.xml.h:18
 #: ../templates/avery-iso-templates.xml.h:20
 #: ../templates/meritline-us-templates.xml.h:14
-#: ../templates/sheetlabels-us-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:18
 #: ../templates/worldlabel-us-templates.xml.h:8
 msgid "Diskette Labels"
 msgstr "Дискетне налепнице"
@@ -2995,6 +2993,7 @@ msgstr "Налепнице за беџеве са именима"
 #: ../templates/geha-iso-templates.xml.h:10
 #: ../templates/herma-iso-templates.xml.h:14
 #: ../templates/igepa-templates.xml.h:5 ../templates/jac-iso-templates.xml.h:2
+#: ../templates/mayspies-templates.xml.h:1
 #: ../templates/misc-us-templates.xml.h:8
 #: ../templates/misc-iso-templates.xml.h:22
 #: ../templates/misc-other-templates.xml.h:2
@@ -3008,7 +3007,7 @@ msgstr "ЦД/ДВД налепнице"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:34
-#: ../templates/sheetlabels-us-templates.xml.h:18
+#: ../templates/sheetlabels-us-templates.xml.h:20
 msgid "CD/DVD Labels (Disc Labels)"
 msgstr "ЦД/ДВД налепнице (налепнице за дискове)"
 
@@ -3021,7 +3020,7 @@ msgstr "ЦД/ДВД налепнице (налепнице за бокове)"
 #: ../templates/avery-us-templates.xml.h:38
 #: ../templates/geha-iso-templates.xml.h:17
 #: ../templates/meritline-us-templates.xml.h:16
-#: ../templates/sheetlabels-us-templates.xml.h:20
+#: ../templates/sheetlabels-us-templates.xml.h:22
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Video Tape Face Labels"
 msgstr "Насловне налепнице видео трака"
@@ -3044,7 +3043,9 @@ msgid "Divider Labels"
 msgstr "Налепнице за раздвајање"
 
 #. ===================================================================
+#. ============================================================
 #: ../templates/avery-iso-templates.xml.h:2
+#: ../templates/cablelabel-templates.xml.h:2
 msgid "Mini Labels"
 msgstr "Мале налепнице"
 
@@ -3082,6 +3083,7 @@ msgstr "Налепнице за доставу"
 #: ../templates/herma-iso-templates.xml.h:8
 #: ../templates/misc-us-templates.xml.h:21
 #: ../templates/misc-iso-templates.xml.h:6
+#: ../templates/sheetlabels-us-templates.xml.h:24
 #: ../templates/zweckform-iso-templates.xml.h:10
 msgid "Mailing Labels"
 msgstr "Поштанске налепнице"
@@ -3114,9 +3116,40 @@ msgstr "Дискетне налепнице"
 #. *********************************************************************
 #. Labels for the Brother QL-500/550/650 PC Label Printers
 #.
-#. These templates work with the Brother Linux Printer CUPS Driver.  It
-#. is unknown if these work correctly with the foomatic print driver for
-#. these printers.
+#. These templates are based on the exact media sizes and measurements
+#. in version 1.1 of the 'Brother-QL-500-ptouch.ppd' file.  If these
+#. don't work for you, try the old versions (e.g. DK-11201-old) of
+#. these templates.
+#.
+#. Currently only have templates for a few of the popular sizes.
+#.
+#. *********************************************************************
+#. *********************************************************************
+#.
+#: ../templates/brother-other-templates.xml.h:16
+msgid "Standard Address Labels 29mm x 90mm"
+msgstr "Уобичајене налепнице за адресе 29mm x 90mm"
+
+#: ../templates/brother-other-templates.xml.h:17
+msgid "Shipping Labels 62mm x 100mm"
+msgstr "Налепнице за доставу 62mm x 100mm"
+
+#: ../templates/brother-other-templates.xml.h:18
+msgid "Multi Purpose Labels 17mm x 54mm"
+msgstr "Вишенаменске налепнице 17mm x 54mm"
+
+#: ../templates/brother-other-templates.xml.h:19
+msgid "Standard Address Labels 38mm x 90mm"
+msgstr "Уобичајене налепнице за адресе 38mm x 90mm"
+
+#.
+#. *********************************************************************
+#. *********************************************************************
+#. Labels for the Brother QL-500/550/650 PC Label Printers
+#.
+#. These are the older templates that worked with the Brother Linux
+#. Printer CUPS Driver.  They do not work correctly with newer versions
+#. of the foomatic drivers.
 #.
 #. One difference from typical templates is that the template size is
 #. not the actual media size - it is the size of the printable area,
@@ -3126,21 +3159,31 @@ msgstr "Дискетне налепнице"
 #. *********************************************************************
 #. *********************************************************************
 #.
-#: ../templates/brother-other-templates.xml.h:18
-msgid "Standard Address Labels 29mm x 90mm"
-msgstr "Уобичајене налепнице за адресе 29mm x 90mm"
+#: ../templates/brother-other-templates.xml.h:37
+#| msgid "Standard Address Labels 29mm x 90mm"
+msgid "Standard Address Labels 29mm x 90mm (Old)"
+msgstr "Уобичајене налепнице за адресе 29mm x 90mm (старе)"
 
-#: ../templates/brother-other-templates.xml.h:19
-msgid "Shipping Labels 62mm x 100mm"
-msgstr "Налепнице за доставу 62mm x 100mm"
+#: ../templates/brother-other-templates.xml.h:38
+#| msgid "Shipping Labels 62mm x 100mm"
+msgid "Shipping Labels 62mm x 100mm (Old)"
+msgstr "Налепнице за доставу 62mm x 100mm (старе)"
 
-#: ../templates/brother-other-templates.xml.h:20
-msgid "Multi Purpose Labels 17mm x 54mm"
-msgstr "Вишенаменске налепнице 17mm x 54mm"
+#: ../templates/brother-other-templates.xml.h:39
+#| msgid "Multi Purpose Labels 17mm x 54mm"
+msgid "Multi Purpose Labels 17mm x 54mm (Old)"
+msgstr "Вишенаменске налепнице 17mm x 54mm (старе)"
 
-#: ../templates/brother-other-templates.xml.h:21
-msgid "Standard Address Labels 38mm x 90mm"
-msgstr "Уобичајене налепнице за адресе 38mm x 90mm"
+#: ../templates/brother-other-templates.xml.h:40
+#| msgid "Standard Address Labels 38mm x 90mm"
+msgid "Standard Address Labels 38mm x 90mm (Old)"
+msgstr "Уобичајене налепнице за адресе 38mm x 90mm (старе)"
+
+#. ===================================================================
+#: ../templates/canon-other-templates.xml.h:2
+#| msgid "CD/DVD Labels"
+msgid "CD/DVD Tray"
+msgstr "ЦД/ДВД налепнице"
 
 #. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:4
@@ -3592,22 +3635,18 @@ msgid "Membership cards, both sides printable"
 msgstr "Чланске картице, обе стране за штампање"
 
 #: ../templates/rayfilm-templates.xml.h:11
-#| msgid "Business cards"
 msgid "Business card CD Labels"
 msgstr "ЦД налепнице пословне картице"
 
 #: ../templates/rayfilm-templates.xml.h:12
-#| msgid "Mini Labels"
 msgid "Mini CD Labels"
 msgstr "Налепнице за мини ЦД "
 
 #: ../templates/rayfilm-templates.xml.h:13
-#| msgid "Rectangular labels"
 msgid "Triangular labels"
 msgstr "Троугаоне налепнице"
 
 #: ../templates/rayfilm-templates.xml.h:14
-#| msgid "Allround labels"
 msgid "Trapezoid labels"
 msgstr "Трапезоидне налепнице"
 
