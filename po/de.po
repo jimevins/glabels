@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2015-07-18 01:27+0000\n"
-"PO-Revision-Date: 2015-11-21 20:14+0100\n"
+"POT-Creation-Date: 2015-12-30 07:20+0000\n"
+"PO-Revision-Date: 2015-12-30 13:19+0100\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -208,7 +208,7 @@ msgid "Code 49"
 msgstr "Code 49"
 
 #: ../src/bc-backends.c:263
-msgid "Code 128 (Mode C supression)"
+msgid "Code 128 (Mode C suppression)"
 msgstr "Code 128 (Modus C unterdrückt)"
 
 #: ../src/bc-backends.c:266
@@ -3064,7 +3064,9 @@ msgid "Divider Labels"
 msgstr "Etiketten für Trennblätter"
 
 #. ===================================================================
+#. ============================================================
 #: ../templates/avery-iso-templates.xml.h:2
+#: ../templates/cablelabel-templates.xml.h:2
 msgid "Mini Labels"
 msgstr "Mini-Etiketten"
 
