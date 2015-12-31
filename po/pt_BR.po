@@ -1,17 +1,17 @@
 # Brazilian Portuguese translation of Glabels.
-# Copyright (C) 2001-2014 Jim Evins <evins@snaught.com>
+# Copyright (C) 2001-2015 Jim Evins <evins@snaught.com>
 # Paulo R. Ormenese <pormenese@uol.com.br>, 2001.
 # Michel Recondo <michel@recondo.com.br>, 2010.
 # Henrique P. Machado <hpmachado@gnome.org>, 2010.
 # Antonio Fernandes C. Neto <fernandes@pelivre.org>, 2010.
-# Enrico Nicoletto <liverig@gmail.com>, 2013, 2014.
+# Enrico Nicoletto <liverig@gmail.com>, 2013, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2014-02-11 12:42+0000\n"
-"PO-Revision-Date: 2014-10-31 21:57-0300\n"
+"POT-Creation-Date: 2015-12-29 07:17+0000\n"
+"PO-Revision-Date: 2015-12-31 12:53-0300\n"
 "Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.6.3\n"
+"X-Generator: Poedit 1.7.3\n"
 
 #: ../src/bc-backends.c:81
 msgid "Built-in"
@@ -543,7 +543,7 @@ msgstr "Cor personalizada"
 msgid "Custom Color #%u"
 msgstr "Cor personalizada #%u"
 
-#: ../src/critical-error-handler.c:70
+#: ../src/critical-error-handler.c:72
 msgid "gLabels Fatal Error!"
 msgstr "Erro fatal do gLabels!"
 
@@ -1674,7 +1674,7 @@ msgstr ""
 "UM PROPÓSITO PARTICULAR. Veja a Licença Pública Geral GNU para mais\n"
 "detalhes.\n"
 
-#: ../src/warning-handler.c:69
+#: ../src/warning-handler.c:71
 msgid "gLabels Error!"
 msgstr "Erro do gLabels!"
 
@@ -2775,6 +2775,7 @@ msgstr "Qualquer etiqueta"
 #: ../templates/hama-iso-templates.xml.h:4
 #: ../templates/pearl-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:8
+#: ../templates/sheetlabels-us-templates.xml.h:16
 msgid "Round labels"
 msgstr "Etiquetas arredondadas"
 
@@ -2945,7 +2946,7 @@ msgstr "Etiquetas arredondadas"
 #: ../templates/avery-us-templates.xml.h:18
 #: ../templates/avery-iso-templates.xml.h:20
 #: ../templates/meritline-us-templates.xml.h:14
-#: ../templates/sheetlabels-us-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:18
 #: ../templates/worldlabel-us-templates.xml.h:8
 msgid "Diskette Labels"
 msgstr "Etiquetas de disquete"
@@ -3004,6 +3005,7 @@ msgstr "Etiquetas de crachás"
 #: ../templates/geha-iso-templates.xml.h:10
 #: ../templates/herma-iso-templates.xml.h:14
 #: ../templates/igepa-templates.xml.h:5 ../templates/jac-iso-templates.xml.h:2
+#: ../templates/mayspies-templates.xml.h:1
 #: ../templates/misc-us-templates.xml.h:8
 #: ../templates/misc-iso-templates.xml.h:22
 #: ../templates/misc-other-templates.xml.h:2
@@ -3017,7 +3019,7 @@ msgstr "Etiquetas de CD/DVD"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:34
-#: ../templates/sheetlabels-us-templates.xml.h:18
+#: ../templates/sheetlabels-us-templates.xml.h:20
 msgid "CD/DVD Labels (Disc Labels)"
 msgstr "Etiquetas de CD/DVD (etiquetas de disco)"
 
@@ -3030,7 +3032,7 @@ msgstr "Etiquetas de CD/DVD (etiquetas de lombada)"
 #: ../templates/avery-us-templates.xml.h:38
 #: ../templates/geha-iso-templates.xml.h:17
 #: ../templates/meritline-us-templates.xml.h:16
-#: ../templates/sheetlabels-us-templates.xml.h:20
+#: ../templates/sheetlabels-us-templates.xml.h:22
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Video Tape Face Labels"
 msgstr "Etiquetas de capa de fita de vídeo"
@@ -3053,7 +3055,9 @@ msgid "Divider Labels"
 msgstr "Etiquetas divisórias"
 
 #. ===================================================================
+#. ============================================================
 #: ../templates/avery-iso-templates.xml.h:2
+#: ../templates/cablelabel-templates.xml.h:2
 msgid "Mini Labels"
 msgstr "Mini etiquetas"
 
@@ -3092,6 +3096,7 @@ msgstr "Etiquetas de envio"
 #: ../templates/herma-iso-templates.xml.h:8
 #: ../templates/misc-us-templates.xml.h:21
 #: ../templates/misc-iso-templates.xml.h:6
+#: ../templates/sheetlabels-us-templates.xml.h:24
 #: ../templates/zweckform-iso-templates.xml.h:10
 msgid "Mailing Labels"
 msgstr "Etiquetas de endereçamento"
@@ -3124,9 +3129,40 @@ msgstr "Etiquetas de disquete"
 #. *********************************************************************
 #. Labels for the Brother QL-500/550/650 PC Label Printers
 #.
-#. These templates work with the Brother Linux Printer CUPS Driver.  It
-#. is unknown if these work correctly with the foomatic print driver for
-#. these printers.
+#. These templates are based on the exact media sizes and measurements
+#. in version 1.1 of the 'Brother-QL-500-ptouch.ppd' file.  If these
+#. don't work for you, try the old versions (e.g. DK-11201-old) of
+#. these templates.
+#.
+#. Currently only have templates for a few of the popular sizes.
+#.
+#. *********************************************************************
+#. *********************************************************************
+#.
+#: ../templates/brother-other-templates.xml.h:16
+msgid "Standard Address Labels 29mm x 90mm"
+msgstr "Etiquetas de endereçamento padrão de 29mm x 90mm"
+
+#: ../templates/brother-other-templates.xml.h:17
+msgid "Shipping Labels 62mm x 100mm"
+msgstr "Etiquetas de envio de 62mm x 100mm"
+
+#: ../templates/brother-other-templates.xml.h:18
+msgid "Multi Purpose Labels 17mm x 54mm"
+msgstr "Etiquetas multiuso de 17mm x 54mm"
+
+#: ../templates/brother-other-templates.xml.h:19
+msgid "Standard Address Labels 38mm x 90mm"
+msgstr "Etiquetas de endereçamento padrão de 38mm x 90mm"
+
+#.
+#. *********************************************************************
+#. *********************************************************************
+#. Labels for the Brother QL-500/550/650 PC Label Printers
+#.
+#. These are the older templates that worked with the Brother Linux
+#. Printer CUPS Driver.  They do not work correctly with newer versions
+#. of the foomatic drivers.
 #.
 #. One difference from typical templates is that the template size is
 #. not the actual media size - it is the size of the printable area,
@@ -3136,25 +3172,24 @@ msgstr "Etiquetas de disquete"
 #. *********************************************************************
 #. *********************************************************************
 #.
-#: ../templates/brother-other-templates.xml.h:18
-msgid "Standard Address Labels 29mm x 90mm"
-msgstr "Etiquetas de endereçamento padrão de 29mm x 90mm"
+#: ../templates/brother-other-templates.xml.h:37
+msgid "Standard Address Labels 29mm x 90mm (Old)"
+msgstr "Etiquetas de endereçamento padrão de 29mm x 90mm (modelo antigo)"
 
-#: ../templates/brother-other-templates.xml.h:19
-msgid "Shipping Labels 62mm x 100mm"
-msgstr "Etiquetas de envio de 62mm x 100mm"
+#: ../templates/brother-other-templates.xml.h:38
+msgid "Shipping Labels 62mm x 100mm (Old)"
+msgstr "Etiquetas de envio de 62mm x 100mm (modelo antigo)"
 
-#: ../templates/brother-other-templates.xml.h:20
-msgid "Multi Purpose Labels 17mm x 54mm"
-msgstr "Etiquetas multiuso de 17mm x 54mm"
+#: ../templates/brother-other-templates.xml.h:39
+msgid "Multi Purpose Labels 17mm x 54mm (Old)"
+msgstr "Etiquetas multiuso de 17mm x 54mm (modelo antigo)"
 
-#: ../templates/brother-other-templates.xml.h:21
-msgid "Standard Address Labels 38mm x 90mm"
-msgstr "Etiquetas de endereçamento padrão de 38mm x 90mm"
+#: ../templates/brother-other-templates.xml.h:40
+msgid "Standard Address Labels 38mm x 90mm (Old)"
+msgstr "Etiquetas de endereçamento padrão de 38mm x 90mm (modelo antigo)"
 
 #. ===================================================================
 #: ../templates/canon-other-templates.xml.h:2
-#| msgid "CD/DVD Labels"
 msgid "CD/DVD Tray"
 msgstr "Bandeja de CD/DVD"
 
