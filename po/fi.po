@@ -1,13 +1,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2012, 2013.
+# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2012, 2013, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2013-08-04 07:53+0000\n"
-"PO-Revision-Date: 2013-09-18 19:50+0300\n"
+"POT-Creation-Date: 2016-01-21 19:21+0000\n"
+"PO-Revision-Date: 2016-01-21 22:55+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <gnome-fi-laatu@lists.sourceforge.net>\n"
 "Language: fi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 2.91.6\n"
+"X-Generator: Gtranslator 2.91.7\n"
 
 #: ../src/bc-backends.c:81
 msgid "Built-in"
@@ -206,7 +206,7 @@ msgid "Code 49"
 msgstr ""
 
 #: ../src/bc-backends.c:263
-msgid "Code 128 (Mode C supression)"
+msgid "Code 128 (Mode C suppression)"
 msgstr ""
 
 #: ../src/bc-backends.c:266
@@ -539,7 +539,7 @@ msgstr "Mukautettu väri"
 msgid "Custom Color #%u"
 msgstr "Mukautettu väri #%u"
 
-#: ../src/critical-error-handler.c:70
+#: ../src/critical-error-handler.c:72
 msgid "gLabels Fatal Error!"
 msgstr "gLabelsin vakava virhe!"
 
@@ -547,7 +547,7 @@ msgstr "gLabelsin vakava virhe!"
 msgid "New Label or Card"
 msgstr "Uusi etiketti tai kortti"
 
-#: ../src/file.c:175 ../src/label.c:601 ../src/label.c:645
+#: ../src/file.c:175 ../src/label.c:602 ../src/label.c:646
 msgid "Label properties"
 msgstr "Etiketin ominaisuudet"
 
@@ -592,7 +592,7 @@ msgstr "Tallennettaessa tapahtui virhe. Tiedostoa ei ole vielä tallennettu."
 #: ../src/file.c:535
 #, c-format
 msgid "Save \"%s\" as"
-msgstr ""
+msgstr "Tallenna \"%s\" nimellä"
 
 #: ../src/file.c:623
 msgid "Please supply a valid file name"
@@ -769,93 +769,93 @@ msgid "Create box object"
 msgstr "Luo laatikko-objekti"
 
 #: ../src/label-box.c:230 ../src/label-ellipse.c:232
-#: ../data/ui/property-bar.ui.h:9
+#: ../data/ui/property-bar.ui.h:12
 msgid "Fill color"
 msgstr "Täyttöväri"
 
 #: ../src/label-box.c:261 ../src/label-ellipse.c:261 ../src/label-line.c:212
-#: ../data/ui/property-bar.ui.h:10
+#: ../data/ui/property-bar.ui.h:13
 msgid "Line color"
 msgstr "Viivan väri"
 
 #: ../src/label-box.c:289 ../src/label-ellipse.c:290 ../src/label-line.c:241
-#: ../data/ui/property-bar.ui.h:11
+#: ../data/ui/property-bar.ui.h:14
 msgid "Line width"
 msgstr "Viivan leveys"
 
-#: ../src/label.c:405
+#: ../src/label.c:406
 msgid "Untitled"
 msgstr "Nimetön"
 
-#: ../src/label.c:719 ../src/ui.c:420
+#: ../src/label.c:720 ../src/ui.c:420
 msgid "Merge properties"
 msgstr "Yhdistä ominaisuudet"
 
-#: ../src/label.c:1215 ../src/ui.c:213
+#: ../src/label.c:1216 ../src/ui.c:213
 msgid "Delete"
 msgstr "Poista"
 
-#: ../src/label.c:1248 ../src/ui.c:322
+#: ../src/label.c:1251 ../src/ui.c:322
 msgid "Bring to front"
 msgstr "Tuo muiden eteen"
 
-#: ../src/label.c:1284 ../src/ui.c:329
+#: ../src/label.c:1287 ../src/ui.c:329
 msgid "Send to back"
 msgstr "Vie muiden taakse"
 
-#: ../src/label.c:1325
+#: ../src/label.c:1328
 msgid "Rotate"
 msgstr "Käännä"
 
-#: ../src/label.c:1360 ../src/ui.c:336
+#: ../src/label.c:1363 ../src/ui.c:336
 msgid "Rotate left"
 msgstr "Käännä vasemmalle"
 
-#: ../src/label.c:1393 ../src/ui.c:343
+#: ../src/label.c:1396 ../src/ui.c:343
 msgid "Rotate right"
 msgstr "Käännä oikealle"
 
-#: ../src/label.c:1428 ../src/ui.c:350
+#: ../src/label.c:1431 ../src/ui.c:350
 msgid "Flip horizontally"
 msgstr "Käännä vaakasuunnassa"
 
-#: ../src/label.c:1463 ../src/ui.c:357
+#: ../src/label.c:1466 ../src/ui.c:357
 msgid "Flip vertically"
 msgstr "Käännä pystysuunnassa"
 
-#: ../src/label.c:1503 ../src/ui.c:364
+#: ../src/label.c:1506 ../src/ui.c:364
 msgid "Align left"
 msgstr "Tasaa vasemmalle"
 
-#: ../src/label.c:1560 ../src/ui.c:378
+#: ../src/label.c:1563 ../src/ui.c:378
 msgid "Align right"
 msgstr "Tasaa oikealle"
 
-#: ../src/label.c:1621
+#: ../src/label.c:1624
 msgid "Align horizontal center"
 msgstr ""
 
-#: ../src/label.c:1697
+#: ../src/label.c:1700
 msgid "Align tops"
 msgstr ""
 
-#: ../src/label.c:1754
+#: ../src/label.c:1757
 msgid "Align bottoms"
 msgstr ""
 
-#: ../src/label.c:1815
+#: ../src/label.c:1818
 msgid "Align vertical center"
 msgstr ""
 
-#: ../src/label.c:1893 ../src/ui.c:406
+#: ../src/label.c:1896 ../src/ui.c:406
 msgid "Center horizontally"
 msgstr "Keskitä vaakasuunnassa"
 
-#: ../src/label.c:1940 ../src/ui.c:413
+#: ../src/label.c:1943 ../src/ui.c:413
 msgid "Center vertically"
 msgstr "Keskitä pystysuunnassa"
 
-#: ../src/label.c:2628 ../src/label.c:2670 ../src/label.c:2696 ../src/ui.c:206
+#: ../src/label.c:2664 ../src/label.c:2706 ../src/label.c:2732 ../src/ui.c:206
 msgid "Paste"
 msgstr "Liitä"
 
@@ -863,11 +863,11 @@ msgstr "Liitä"
 msgid "Create ellipse object"
 msgstr "Luo ellipsiobjekti"
 
-#: ../src/label-image.c:200 ../src/ui.c:310
+#: ../src/label-image.c:199 ../src/ui.c:310
 msgid "Create image object"
 msgstr "Luo kuvaobjekti"
 
-#: ../src/label-image.c:333 ../src/label-image.c:474
+#: ../src/label-image.c:332 ../src/label-image.c:473
 msgid "Set image"
 msgstr "Aseta kuva"
 
@@ -875,67 +875,71 @@ msgstr "Aseta kuva"
 msgid "Create line object"
 msgstr "Luo viivaobjekti"
 
-#: ../src/label-object.c:394 ../src/label-object.c:428
+#: ../src/label-object.c:392 ../src/label-object.c:423
 msgid "Move"
 msgstr "Siirrä"
 
-#: ../src/label-object.c:479
+#: ../src/label-object.c:474
 msgid "Resize"
 msgstr "Muuta kokoa"
 
-#: ../src/label-object.c:1217
+#: ../src/label-object.c:1258
 msgid "Shadow state"
 msgstr ""
 
-#: ../src/label-object.c:1260
+#: ../src/label-object.c:1301
 msgid "Shadow offset"
 msgstr "Varjon siirtymä"
 
-#: ../src/label-object.c:1308
+#: ../src/label-object.c:1349
 msgid "Shadow color"
 msgstr "Varjon väri"
 
-#: ../src/label-object.c:1351
+#: ../src/label-object.c:1392
 msgid "Shadow opacity"
 msgstr "Varjon läpinäkyvyys"
 
-#: ../src/label-text.c:281 ../src/ui.c:282
+#: ../src/label-text.c:293 ../src/ui.c:282
 msgid "Create text object"
 msgstr "Luo tekstiobjekti"
 
-#: ../src/label-text.c:453
+#: ../src/label-text.c:467
 msgid "Typing"
 msgstr "Kirjoitus"
 
-#: ../src/label-text.c:587 ../data/ui/property-bar.ui.h:1
+#: ../src/label-text.c:601 ../data/ui/property-bar.ui.h:1
 msgid "Font family"
 msgstr "Kirjasinperhe"
 
-#: ../src/label-text.c:625 ../data/ui/property-bar.ui.h:2
+#: ../src/label-text.c:639 ../data/ui/property-bar.ui.h:2
 msgid "Font size"
 msgstr "Kirjasimen koko"
 
-#: ../src/label-text.c:658
+#: ../src/label-text.c:672
 msgid "Font weight"
 msgstr "Kirjasimen painotus"
 
-#: ../src/label-text.c:691 ../data/ui/property-bar.ui.h:4
+#: ../src/label-text.c:705 ../data/ui/property-bar.ui.h:4
 msgid "Italic"
 msgstr "Kursivoitu"
 
-#: ../src/label-text.c:724
+#: ../src/label-text.c:738
 msgid "Align text"
 msgstr "Tasaa teksti"
 
-#: ../src/label-text.c:757
+#: ../src/label-text.c:771
+msgid "Vertically align text"
+msgstr ""
+
+#: ../src/label-text.c:804
 msgid "Line spacing"
 msgstr "Riviväli"
 
-#: ../src/label-text.c:790 ../data/ui/property-bar.ui.h:8
+#: ../src/label-text.c:837 ../data/ui/property-bar.ui.h:11
 msgid "Text color"
 msgstr "Tekstin väri"
 
-#: ../src/label-text.c:934
+#: ../src/label-text.c:997
 msgid "Auto shrink"
 msgstr ""
 
@@ -1059,7 +1063,7 @@ msgstr "Valitse"
 msgid "Record/Field"
 msgstr ""
 
-#: ../src/merge-properties-dialog.c:356 ../data/ui/object-editor.ui.h:23
+#: ../src/merge-properties-dialog.c:356 ../data/ui/object-editor.ui.h:24
 msgid "Data"
 msgstr ""
 
@@ -1072,25 +1076,25 @@ msgid "Fixed"
 msgstr ""
 
 #. Translators: "Up" refers to the direction towards the top of a label.
-#: ../src/mini-preview.c:1054
+#: ../src/mini-preview.c:1051
 msgid "Up"
 msgstr ""
 
-#: ../src/new-label-dialog.c:203
+#: ../src/new-label-dialog.c:212 ../data/ui/new-label-dialog.ui.h:1
 msgid "Select Product"
 msgstr "Valitse tuote"
 
-#: ../src/new-label-dialog.c:215
+#: ../src/new-label-dialog.c:225 ../data/ui/new-label-dialog.ui.h:3
 msgid "Choose Orientation"
 msgstr "Valitse suuntaus"
 
-#: ../src/new-label-dialog.c:229
+#: ../src/new-label-dialog.c:240
 msgid "Review"
 msgstr "Esikatsele"
 
 #: ../src/object-editor-bc-page.c:97 ../src/object-editor-shadow-page.c:93
-#: ../src/object-editor-text-page.c:97 ../src/prefs-dialog.c:335
-#: ../src/ui-property-bar.c:277
+#: ../src/object-editor-text-page.c:102 ../src/prefs-dialog.c:335
+#: ../src/ui-property-bar.c:289
 msgid "Default"
 msgstr "Oletus"
 
@@ -1127,7 +1131,7 @@ msgid "Insert merge field"
 msgstr ""
 
 #: ../src/object-editor-fill-page.c:79 ../src/prefs-dialog.c:341
-#: ../src/ui-property-bar.c:287
+#: ../src/ui-property-bar.c:299
 msgid "No Fill"
 msgstr "Ei täyttöä"
 
@@ -1145,13 +1149,13 @@ msgid "%s (*.%s)"
 msgstr "%s (*.%s)"
 
 #: ../src/object-editor-line-page.c:79 ../src/prefs-dialog.c:338
-#: ../src/ui-property-bar.c:297
+#: ../src/ui-property-bar.c:309
 msgid "No Line"
 msgstr ""
 
 #: ../src/object-editor-size-page.c:89
 msgid "Lock aspect ratio."
-msgstr ""
+msgstr "Lukitse kuvasuhde."
 
 #: ../src/prefs-dialog.c:168 ../data/ui/prefs-dialog.ui.h:1
 msgid "gLabels Preferences"
@@ -1459,7 +1463,7 @@ msgstr "Laatikko"
 msgid "Create box/rectangle object"
 msgstr "Luo laatikon/suorakulmion muotoinen objekti"
 
-#: ../src/ui.c:294 ../data/ui/object-editor.ui.h:16
+#: ../src/ui.c:294 ../data/ui/object-editor.ui.h:17
 #: ../data/ui/prefs-dialog.ui.h:20
 msgid "Line"
 msgstr "Viiva"
@@ -1472,7 +1476,7 @@ msgstr "Ellipsi"
 msgid "Create ellipse/circle object"
 msgstr "Luo ellipsin/ympyrän muotoinen objekti"
 
-#: ../src/ui.c:308 ../data/ui/object-editor.ui.h:19
+#: ../src/ui.c:308 ../data/ui/object-editor.ui.h:20
 msgid "Image"
 msgstr "Kuva"
 
@@ -1647,15 +1651,13 @@ msgid ""
 "GNU General Public License for more details.\n"
 msgstr ""
 
-#: ../src/warning-handler.c:69
+#: ../src/warning-handler.c:71
 msgid "gLabels Error!"
 msgstr "gLabels-virhe!"
 
 #: ../src/window.c:281
 msgid "(none) - gLabels"
-msgstr ""
-"(ei mitään\n"
-") - gLabels"
+msgstr "(ei mitään) - gLabels"
 
 #: ../src/window.c:482
 msgid "(modified)"
@@ -1722,13 +1724,13 @@ msgstr ""
 #. the CSS2 Specification (Section 4.3.2)
 #. This table must be sorted exactly as the enumerations in lglUnits
 #. [LGL_UNITS_POINT]
-#: ../libglabels/lgl-units.c:65 ../data/ui/object-editor.ui.h:14
+#: ../libglabels/lgl-units.c:65 ../data/ui/object-editor.ui.h:15
 #: ../data/ui/prefs-dialog.ui.h:19
 msgid "points"
 msgstr "pistettä"
 
 #. [LGL_UNITS_INCH]
-#: ../libglabels/lgl-units.c:66 ../data/ui/object-editor.ui.h:27
+#: ../libglabels/lgl-units.c:66 ../data/ui/object-editor.ui.h:28
 #: ../data/ui/template-designer.ui.h:15
 msgid "inches"
 msgstr "tuumaa"
@@ -1788,7 +1790,7 @@ msgstr "Viimeisimmät"
 msgid "Brand:"
 msgstr "Malli:"
 
-#: ../data/ui/media-select.ui.h:3 ../data/ui/new-label-dialog.ui.h:7
+#: ../data/ui/media-select.ui.h:3 ../data/ui/new-label-dialog.ui.h:10
 #: ../data/ui/template-designer.ui.h:12
 msgid "Page size:"
 msgstr "Sivun koko:"
@@ -1805,7 +1807,7 @@ msgstr "Etsi kaikista"
 msgid "Custom"
 msgstr "Mukautettu"
 
-#: ../data/ui/new-label-dialog.ui.h:1
+#: ../data/ui/new-label-dialog.ui.h:2
 msgid ""
 "Choose label or card product from hundreds of predefined templates or define "
 "your own."
@@ -1813,43 +1815,49 @@ msgstr ""
 "Valitse etiketti- tai korttituote sadoista määritetyistä malleista tai luo "
 "oma malli."
 
-#: ../data/ui/new-label-dialog.ui.h:2
+#: ../data/ui/new-label-dialog.ui.h:4
 msgid "Select orientation of label content."
 msgstr "Valitse etiketin sisällön suuntaus."
 
-#: ../data/ui/new-label-dialog.ui.h:3
+#: ../data/ui/new-label-dialog.ui.h:5
 msgid "Normal"
 msgstr "Tavallinen"
 
-#: ../data/ui/new-label-dialog.ui.h:4
+#: ../data/ui/new-label-dialog.ui.h:6
 msgid "Rotated"
 msgstr "Käännetty"
 
-#: ../data/ui/new-label-dialog.ui.h:5
+#: ../data/ui/new-label-dialog.ui.h:7
+#, fuzzy
+#| msgid "Remove all selections"
+msgid "Review Selection"
+msgstr "Poista kaikki valinnat"
+
+#: ../data/ui/new-label-dialog.ui.h:8
 msgid "Please review and confirm your selection."
 msgstr "Esikatsele ja vahvista valintasi."
 
-#: ../data/ui/new-label-dialog.ui.h:6 ../data/ui/template-designer.ui.h:9
+#: ../data/ui/new-label-dialog.ui.h:9 ../data/ui/template-designer.ui.h:9
 msgid "Description:"
 msgstr "Kuvaus:"
 
-#: ../data/ui/new-label-dialog.ui.h:8
+#: ../data/ui/new-label-dialog.ui.h:11
 msgid "Label size:"
 msgstr "Etiketin koko:"
 
-#: ../data/ui/new-label-dialog.ui.h:9
+#: ../data/ui/new-label-dialog.ui.h:12
 msgid "Layout:"
 msgstr "Asettelu:"
 
-#: ../data/ui/new-label-dialog.ui.h:10
+#: ../data/ui/new-label-dialog.ui.h:13
 msgid "Similar products:"
 msgstr "Vastaavanlaisia tuotteita:"
 
-#: ../data/ui/new-label-dialog.ui.h:11 ../data/ui/template-designer.ui.h:6
+#: ../data/ui/new-label-dialog.ui.h:14 ../data/ui/template-designer.ui.h:6
 msgid "Part #:"
 msgstr "Osa #:"
 
-#: ../data/ui/new-label-dialog.ui.h:12
+#: ../data/ui/new-label-dialog.ui.h:15
 msgid "Vendor:"
 msgstr "Toimittaja:"
 
@@ -1885,113 +1893,119 @@ msgstr "avain:"
 msgid "Alignment:"
 msgstr "Tasaus:"
 
-#: ../data/ui/object-editor.ui.h:10 ../data/ui/prefs-dialog.ui.h:16
+#: ../data/ui/object-editor.ui.h:10
+#, fuzzy
+#| msgid "Alignment:"
+msgid "Vertical alignment:"
+msgstr "Tasaus:"
+
+#: ../data/ui/object-editor.ui.h:11 ../data/ui/prefs-dialog.ui.h:16
 msgid "Line Spacing:"
 msgstr "Riviväli:"
 
-#: ../data/ui/object-editor.ui.h:11
+#: ../data/ui/object-editor.ui.h:12
 msgid "Allow merge to automatically shrink text"
 msgstr "Salli yhdistämisen pienentää tekstiä automaattisesti"
 
-#: ../data/ui/object-editor.ui.h:12
+#: ../data/ui/object-editor.ui.h:13
 msgid "Style"
 msgstr "Tyyli"
 
-#: ../data/ui/object-editor.ui.h:13 ../data/ui/prefs-dialog.ui.h:18
+#: ../data/ui/object-editor.ui.h:14 ../data/ui/prefs-dialog.ui.h:18
 #: ../data/ui/template-designer.ui.h:13
 msgid "Width:"
 msgstr "Leveys:"
 
-#: ../data/ui/object-editor.ui.h:15
+#: ../data/ui/object-editor.ui.h:16
 msgid "Key:"
 msgstr "Avain:"
 
-#: ../data/ui/object-editor.ui.h:17 ../data/ui/prefs-dialog.ui.h:21
+#: ../data/ui/object-editor.ui.h:18 ../data/ui/prefs-dialog.ui.h:21
 msgid "Fill"
 msgstr "Täyttö"
 
-#: ../data/ui/object-editor.ui.h:18
+#: ../data/ui/object-editor.ui.h:19
 msgid "File:"
 msgstr "Tiedosto:"
 
-#: ../data/ui/object-editor.ui.h:20
+#: ../data/ui/object-editor.ui.h:21
 msgid "Literal:"
 msgstr ""
 
-#: ../data/ui/object-editor.ui.h:21
+#: ../data/ui/object-editor.ui.h:22
 msgid "format:"
 msgstr "muoto:"
 
-#: ../data/ui/object-editor.ui.h:22
+#: ../data/ui/object-editor.ui.h:23
 msgid "digits:"
 msgstr "numeroita:"
 
-#: ../data/ui/object-editor.ui.h:24
+#: ../data/ui/object-editor.ui.h:25
 msgid "Backend:"
 msgstr "Taustaosa:"
 
-#: ../data/ui/object-editor.ui.h:25
+#: ../data/ui/object-editor.ui.h:26
 msgid "Checksum"
 msgstr "Tarkistussumma"
 
-#: ../data/ui/object-editor.ui.h:26 ../data/ui/template-designer.ui.h:14
+#: ../data/ui/object-editor.ui.h:27 ../data/ui/template-designer.ui.h:14
 msgid "Height:"
 msgstr "Korkeus:"
 
-#: ../data/ui/object-editor.ui.h:28
+#: ../data/ui/object-editor.ui.h:29
 msgid "Reset image size"
 msgstr "Palauta kuvan alkuperäiskoko"
 
-#: ../data/ui/object-editor.ui.h:29
+#: ../data/ui/object-editor.ui.h:30
 msgid "Size"
 msgstr "Koko"
 
-#: ../data/ui/object-editor.ui.h:30
+#: ../data/ui/object-editor.ui.h:31
 msgid "Length:"
 msgstr ""
 
-#: ../data/ui/object-editor.ui.h:31
+#: ../data/ui/object-editor.ui.h:32
 msgid "Angle:"
 msgstr "Kulma:"
 
-#: ../data/ui/object-editor.ui.h:32
+#: ../data/ui/object-editor.ui.h:33
 msgid "degrees"
 msgstr "astetta"
 
-#: ../data/ui/object-editor.ui.h:33
+#: ../data/ui/object-editor.ui.h:34
 msgid "X:"
 msgstr "X:"
 
-#: ../data/ui/object-editor.ui.h:34
+#: ../data/ui/object-editor.ui.h:35
 msgid "Y:"
 msgstr "Y:"
 
-#: ../data/ui/object-editor.ui.h:35
+#: ../data/ui/object-editor.ui.h:36
 msgid "Position"
 msgstr "Sijainti"
 
-#: ../data/ui/object-editor.ui.h:36
+#: ../data/ui/object-editor.ui.h:37
 msgid "Enable shadow"
 msgstr "Käytä varjostusta"
 
-#: ../data/ui/object-editor.ui.h:37
+#: ../data/ui/object-editor.ui.h:38
 msgid "X Offset:"
 msgstr "X-siirtymä:"
 
-#: ../data/ui/object-editor.ui.h:38
+#: ../data/ui/object-editor.ui.h:39
 msgid "Y Offset:"
 msgstr "Y-siirtymä:"
 
-#: ../data/ui/object-editor.ui.h:39
+#: ../data/ui/object-editor.ui.h:40
 msgid "Opacity:"
 msgstr "Läpinäkyvyys:"
 
-#: ../data/ui/object-editor.ui.h:41
+#: ../data/ui/object-editor.ui.h:42
 #, no-c-format
 msgid "%"
 msgstr "%"
 
-#: ../data/ui/object-editor.ui.h:42
+#: ../data/ui/object-editor.ui.h:43
 msgid "Shadow"
 msgstr "Varjo"
 
@@ -2062,6 +2076,22 @@ msgstr "Tasaus keskelle"
 #: ../data/ui/property-bar.ui.h:7
 msgid "Right align"
 msgstr "Tasaus oikealle"
+
+#: ../data/ui/property-bar.ui.h:8
+#, fuzzy
+#| msgid "Flip vertically"
+msgid "Top vertical align"
+msgstr "Käännä pystysuunnassa"
+
+#: ../data/ui/property-bar.ui.h:9
+#, fuzzy
+#| msgid "Center vertically"
+msgid "Center vertical align"
+msgstr "Keskitä pystysuunnassa"
+
+#: ../data/ui/property-bar.ui.h:10
+msgid "Bottom vertical align"
+msgstr ""
 
 #: ../data/ui/template-designer.ui.h:1
 msgid ""
@@ -2331,11 +2361,28 @@ msgstr "Kokoa"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:10
 msgid "Merge Control"
-msgstr ""
+msgstr "Yhdistämisen hallinta"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:14
 msgid "Options"
 msgstr "Valinnat"
+
+#: ../data/appdata/glabels-3.appdata.xml.in.h:1
+msgid ""
+"gLabels is a program for creating labels and business cards. It is designed "
+"to work with various laser/ink-jet peel-off label and business card sheets "
+"that you'll find at most office supply stores."
+msgstr ""
+
+#: ../data/appdata/glabels-3.appdata.xml.in.h:2
+msgid ""
+"gLabels can be used to design address labels, name tags, price tags, cd/dvd "
+"labels, or just about anything else that is organized in a regular pattern "
+"on a sheet of paper. Labels (or cards) can contain text, images, lines, "
+"shapes, and barcodes. gLabels also includes a document-merge feature which "
+"lets you print a unique label for each record from an external data source, "
+"such as a CSV file or an Evolution address book."
+msgstr ""
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
 msgid "Show/hide main toolbar."
@@ -2689,6 +2736,7 @@ msgstr ""
 #: ../templates/hama-iso-templates.xml.h:4
 #: ../templates/pearl-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:8
+#: ../templates/sheetlabels-us-templates.xml.h:16
 msgid "Round labels"
 msgstr ""
 
@@ -2859,7 +2907,7 @@ msgstr ""
 #: ../templates/avery-us-templates.xml.h:18
 #: ../templates/avery-iso-templates.xml.h:20
 #: ../templates/meritline-us-templates.xml.h:14
-#: ../templates/sheetlabels-us-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:18
 #: ../templates/worldlabel-us-templates.xml.h:8
 msgid "Diskette Labels"
 msgstr ""
@@ -2918,6 +2966,7 @@ msgstr ""
 #: ../templates/geha-iso-templates.xml.h:10
 #: ../templates/herma-iso-templates.xml.h:14
 #: ../templates/igepa-templates.xml.h:5 ../templates/jac-iso-templates.xml.h:2
+#: ../templates/mayspies-templates.xml.h:1
 #: ../templates/misc-us-templates.xml.h:8
 #: ../templates/misc-iso-templates.xml.h:22
 #: ../templates/misc-other-templates.xml.h:2
@@ -2931,7 +2980,7 @@ msgstr ""
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:34
-#: ../templates/sheetlabels-us-templates.xml.h:18
+#: ../templates/sheetlabels-us-templates.xml.h:20
 msgid "CD/DVD Labels (Disc Labels)"
 msgstr ""
 
@@ -2944,7 +2993,7 @@ msgstr ""
 #: ../templates/avery-us-templates.xml.h:38
 #: ../templates/geha-iso-templates.xml.h:17
 #: ../templates/meritline-us-templates.xml.h:16
-#: ../templates/sheetlabels-us-templates.xml.h:20
+#: ../templates/sheetlabels-us-templates.xml.h:22
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Video Tape Face Labels"
 msgstr ""
@@ -2967,7 +3016,9 @@ msgid "Divider Labels"
 msgstr ""
 
 #. ===================================================================
+#. ============================================================
 #: ../templates/avery-iso-templates.xml.h:2
+#: ../templates/cablelabel-templates.xml.h:2
 msgid "Mini Labels"
 msgstr ""
 
@@ -3005,6 +3056,7 @@ msgstr ""
 #: ../templates/herma-iso-templates.xml.h:8
 #: ../templates/misc-us-templates.xml.h:21
 #: ../templates/misc-iso-templates.xml.h:6
+#: ../templates/sheetlabels-us-templates.xml.h:24
 #: ../templates/zweckform-iso-templates.xml.h:10
 msgid "Mailing Labels"
 msgstr ""
@@ -3037,9 +3089,40 @@ msgstr ""
 #. *********************************************************************
 #. Labels for the Brother QL-500/550/650 PC Label Printers
 #.
-#. These templates work with the Brother Linux Printer CUPS Driver.  It
-#. is unknown if these work correctly with the foomatic print driver for
-#. these printers.
+#. These templates are based on the exact media sizes and measurements
+#. in version 1.1 of the 'Brother-QL-500-ptouch.ppd' file.  If these
+#. don't work for you, try the old versions (e.g. DK-11201-old) of
+#. these templates.
+#.
+#. Currently only have templates for a few of the popular sizes.
+#.
+#. *********************************************************************
+#. *********************************************************************
+#.
+#: ../templates/brother-other-templates.xml.h:16
+msgid "Standard Address Labels 29mm x 90mm"
+msgstr ""
+
+#: ../templates/brother-other-templates.xml.h:17
+msgid "Shipping Labels 62mm x 100mm"
+msgstr ""
+
+#: ../templates/brother-other-templates.xml.h:18
+msgid "Multi Purpose Labels 17mm x 54mm"
+msgstr ""
+
+#: ../templates/brother-other-templates.xml.h:19
+msgid "Standard Address Labels 38mm x 90mm"
+msgstr ""
+
+#.
+#. *********************************************************************
+#. *********************************************************************
+#. Labels for the Brother QL-500/550/650 PC Label Printers
+#.
+#. These are the older templates that worked with the Brother Linux
+#. Printer CUPS Driver.  They do not work correctly with newer versions
+#. of the foomatic drivers.
 #.
 #. One difference from typical templates is that the template size is
 #. not the actual media size - it is the size of the printable area,
@@ -3049,20 +3132,25 @@ msgstr ""
 #. *********************************************************************
 #. *********************************************************************
 #.
-#: ../templates/brother-other-templates.xml.h:18
-msgid "Standard Address Labels 29mm x 90mm"
+#: ../templates/brother-other-templates.xml.h:37
+msgid "Standard Address Labels 29mm x 90mm (Old)"
 msgstr ""
 
-#: ../templates/brother-other-templates.xml.h:19
-msgid "Shipping Labels 62mm x 100mm"
+#: ../templates/brother-other-templates.xml.h:38
+msgid "Shipping Labels 62mm x 100mm (Old)"
 msgstr ""
 
-#: ../templates/brother-other-templates.xml.h:20
-msgid "Multi Purpose Labels 17mm x 54mm"
+#: ../templates/brother-other-templates.xml.h:39
+msgid "Multi Purpose Labels 17mm x 54mm (Old)"
 msgstr ""
 
-#: ../templates/brother-other-templates.xml.h:21
-msgid "Standard Address Labels 38mm x 90mm"
+#: ../templates/brother-other-templates.xml.h:40
+msgid "Standard Address Labels 38mm x 90mm (Old)"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/canon-other-templates.xml.h:2
+msgid "CD/DVD Tray"
 msgstr ""
 
 #. ===================================================================
