@@ -1,10 +1,11 @@
 [Desktop Entry]
 _Name=gLabels Label Designer 3
 _Comment=Create labels, business cards and media covers
+_Keywords=label;card;print;office;barcode;
 Exec=glabels-3 %F
 Icon=glabels-3.0
 Terminal=false
 Type=Application
-Categories=GTK;Office;
+Categories=Application;Office;GTK;
 StartupNotify=true
 MimeType=application/x-glabels;
