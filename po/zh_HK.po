@@ -1,14 +1,14 @@
 # Chinese (Hong Kong) Translation for glabels
 # Copyright (C) 2002 Free Software Foundation, Inc.
 # Shell Hung <shell@debian.org>, 2002
-# Walter Cheuk <wwycheuk@gmail.com>, 2012.
+# Walter Cheuk <wwycheuk@gmail.com>, 2012, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 0.4.4\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-06 08:28+0800\n"
-"PO-Revision-Date: 2013-01-06 08:28+0800\n"
+"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
+"POT-Creation-Date: 2015-07-18 01:21+0000\n"
+"PO-Revision-Date: 2015-01-17 08:28+0800\n"
 "Last-Translator: Walter Cheuk <wwycheuk@gmail.com>\n"
 "Language-Team: Chinese (Hong Kong) <community@linuxhall.org>\n"
 "Language: \n"
@@ -42,15 +42,15 @@ msgstr "CEPNET"
 
 #: ../src/bc-backends.c:116
 msgid "One Code"
-msgstr ""
+msgstr "One Code"
 
 #: ../src/bc-backends.c:119 ../src/bc-backends.c:175 ../src/bc-backends.c:248
 msgid "Code 39"
-msgstr ""
+msgstr "Code 39"
 
 #: ../src/bc-backends.c:122 ../src/bc-backends.c:251
 msgid "Code 39 Extended"
-msgstr ""
+msgstr "Code 39 Extended"
 
 #: ../src/bc-backends.c:127
 msgid "EAN (any)"
@@ -118,15 +118,15 @@ msgstr "ISBN +5"
 
 #: ../src/bc-backends.c:178 ../src/bc-backends.c:260
 msgid "Code 128"
-msgstr ""
+msgstr "Code 128"
 
 #: ../src/bc-backends.c:181
 msgid "Code 128C"
-msgstr ""
+msgstr "Code 128C"
 
 #: ../src/bc-backends.c:184
 msgid "Code 128B"
-msgstr ""
+msgstr "Code 128B"
 
 #: ../src/bc-backends.c:187 ../src/bc-backends.c:329
 msgid "Interleaved 2 of 5"
@@ -134,19 +134,19 @@ msgstr ""
 
 #: ../src/bc-backends.c:190 ../src/bc-backends.c:224
 msgid "Codabar"
-msgstr ""
+msgstr "Codabar"
 
 #: ../src/bc-backends.c:193
 msgid "MSI"
-msgstr ""
+msgstr "MSI"
 
 #: ../src/bc-backends.c:196
 msgid "Plessey"
-msgstr ""
+msgstr "Plessey"
 
 #: ../src/bc-backends.c:199 ../src/bc-backends.c:257
 msgid "Code 93"
-msgstr ""
+msgstr "Code 93"
 
 #: ../src/bc-backends.c:206
 msgid "Australia Post Standard"
@@ -350,7 +350,7 @@ msgstr ""
 
 #: ../src/bc-backends.c:383
 msgid "QR Code"
-msgstr ""
+msgstr "QR 碼"
 
 #: ../src/bc-backends.c:386
 msgid "Royal Mail 4-State"
@@ -538,7 +538,7 @@ msgstr "自選顏色"
 msgid "Custom Color #%u"
 msgstr "自選顏色 #%u"
 
-#: ../src/critical-error-handler.c:70
+#: ../src/critical-error-handler.c:72
 msgid "gLabels Fatal Error!"
 msgstr "gLabels 嚴重出錯！"
 
@@ -556,7 +556,7 @@ msgstr "所有檔案"
 
 #: ../src/file.c:272 ../src/file.c:562
 msgid "gLabels documents"
-msgstr "glabels 文件"
+msgstr "gLabels 文件"
 
 #: ../src/file.c:319 ../src/file.c:620
 msgid "Empty file name selection"
@@ -700,15 +700,15 @@ msgstr "首個"
 
 #: ../src/glabels-batch.c:61 ../data/ui/print-op-dialog-custom-widget.ui.h:11
 msgid "print outlines (to test printer alignment)"
-msgstr "印出外邊 (測試打印機是否正確對齊)"
+msgstr "印出外框 (測試打印機是否正確對齊)"
 
 #: ../src/glabels-batch.c:63 ../data/ui/print-op-dialog-custom-widget.ui.h:12
 msgid "print in reverse (i.e. a mirror image)"
-msgstr "反方向列印 (如倒向影像)"
+msgstr "反方向打印 (如鏡像影像)"
 
 #: ../src/glabels-batch.c:65 ../data/ui/print-op-dialog-custom-widget.ui.h:13
 msgid "print crop marks"
-msgstr "列印戳記"
+msgstr "打印戳記"
 
 #: ../src/glabels-batch.c:67
 msgid "input file for merging"
@@ -720,7 +720,7 @@ msgstr "[檔案...]"
 
 #: ../src/glabels-batch.c:99
 msgid "Print files created with gLabels."
-msgstr "列印以 gLabels 製作的檔案。"
+msgstr "打印以 gLabels 製作的檔案。"
 
 #: ../src/glabels-batch.c:107 ../src/glabels.c:87
 #, c-format
@@ -796,79 +796,79 @@ msgstr "合併特性"
 msgid "Delete"
 msgstr "刪除"
 
-#: ../src/label.c:1249 ../src/ui.c:322
+#: ../src/label.c:1251 ../src/ui.c:322
 msgid "Bring to front"
 msgstr "拉到最前"
 
-#: ../src/label.c:1285 ../src/ui.c:329
+#: ../src/label.c:1287 ../src/ui.c:329
 msgid "Send to back"
 msgstr "推到最後"
 
-#: ../src/label.c:1326
+#: ../src/label.c:1328
 msgid "Rotate"
 msgstr "旋轉"
 
-#: ../src/label.c:1361 ../src/ui.c:336
+#: ../src/label.c:1363 ../src/ui.c:336
 msgid "Rotate left"
 msgstr "左轉"
 
-#: ../src/label.c:1394 ../src/ui.c:343
+#: ../src/label.c:1396 ../src/ui.c:343
 msgid "Rotate right"
 msgstr "右轉"
 
-#: ../src/label.c:1429 ../src/ui.c:350
+#: ../src/label.c:1431 ../src/ui.c:350
 msgid "Flip horizontally"
 msgstr "水平翻轉"
 
-#: ../src/label.c:1464 ../src/ui.c:357
+#: ../src/label.c:1466 ../src/ui.c:357
 msgid "Flip vertically"
 msgstr "垂直翻轉"
 
-#: ../src/label.c:1504 ../src/ui.c:364
+#: ../src/label.c:1506 ../src/ui.c:364
 msgid "Align left"
 msgstr "向左對齊"
 
-#: ../src/label.c:1561 ../src/ui.c:378
+#: ../src/label.c:1563 ../src/ui.c:378
 msgid "Align right"
 msgstr "向右對齊"
 
-#: ../src/label.c:1622
+#: ../src/label.c:1624
 msgid "Align horizontal center"
 msgstr "水平置中"
 
-#: ../src/label.c:1698
+#: ../src/label.c:1700
 msgid "Align tops"
 msgstr "向上對齊"
 
-#: ../src/label.c:1755
+#: ../src/label.c:1757
 msgid "Align bottoms"
 msgstr "向下對齊"
 
-#: ../src/label.c:1816
+#: ../src/label.c:1818
 msgid "Align vertical center"
 msgstr "垂直置中"
 
-#: ../src/label.c:1894 ../src/ui.c:406
+#: ../src/label.c:1896 ../src/ui.c:406
 msgid "Center horizontally"
 msgstr "水平置中"
 
-#: ../src/label.c:1941 ../src/ui.c:413
+#: ../src/label.c:1943 ../src/ui.c:413
 msgid "Center vertically"
 msgstr "垂直置中"
 
-#: ../src/label.c:2662 ../src/label.c:2704 ../src/label.c:2730 ../src/ui.c:206
+#: ../src/label.c:2664 ../src/label.c:2706 ../src/label.c:2732 ../src/ui.c:206
 msgid "Paste"
 msgstr "貼上"
 
 #: ../src/label-ellipse.c:160
 msgid "Create ellipse object"
-msgstr "建立橢圓形物件"
+msgstr "建立橢圓物件"
 
-#: ../src/label-image.c:200 ../src/ui.c:310
+#: ../src/label-image.c:199 ../src/ui.c:310
 msgid "Create image object"
 msgstr "建立圖像物件"
 
-#: ../src/label-image.c:333 ../src/label-image.c:474
+#: ../src/label-image.c:332 ../src/label-image.c:473
 msgid "Set image"
 msgstr "設定圖像"
 
@@ -876,71 +876,71 @@ msgstr "設定圖像"
 msgid "Create line object"
 msgstr "建立線條物件"
 
-#: ../src/label-object.c:394 ../src/label-object.c:428
+#: ../src/label-object.c:392 ../src/label-object.c:423
 msgid "Move"
 msgstr "移動"
 
-#: ../src/label-object.c:479
+#: ../src/label-object.c:474
 msgid "Resize"
 msgstr "改變大小"
 
-#: ../src/label-object.c:1263
+#: ../src/label-object.c:1258
 msgid "Shadow state"
 msgstr "陰影狀態"
 
-#: ../src/label-object.c:1306
+#: ../src/label-object.c:1301
 msgid "Shadow offset"
 msgstr "陰影偏移"
 
-#: ../src/label-object.c:1354
+#: ../src/label-object.c:1349
 msgid "Shadow color"
 msgstr "陰影顏色"
 
-#: ../src/label-object.c:1397
+#: ../src/label-object.c:1392
 msgid "Shadow opacity"
 msgstr "陰影混濁度"
 
-#: ../src/label-text.c:292 ../src/ui.c:282
+#: ../src/label-text.c:293 ../src/ui.c:282
 msgid "Create text object"
 msgstr "建立文字物件"
 
-#: ../src/label-text.c:466
+#: ../src/label-text.c:467
 msgid "Typing"
 msgstr "打字"
 
-#: ../src/label-text.c:600 ../data/ui/property-bar.ui.h:1
+#: ../src/label-text.c:601 ../data/ui/property-bar.ui.h:1
 msgid "Font family"
 msgstr "字族"
 
-#: ../src/label-text.c:638 ../data/ui/property-bar.ui.h:2
+#: ../src/label-text.c:639 ../data/ui/property-bar.ui.h:2
 msgid "Font size"
 msgstr "字型大小"
 
-#: ../src/label-text.c:671
+#: ../src/label-text.c:672
 msgid "Font weight"
 msgstr "字型粗細"
 
-#: ../src/label-text.c:704 ../data/ui/property-bar.ui.h:4
+#: ../src/label-text.c:705 ../data/ui/property-bar.ui.h:4
 msgid "Italic"
 msgstr "斜體"
 
-#: ../src/label-text.c:737
+#: ../src/label-text.c:738
 msgid "Align text"
 msgstr "文字對齊"
 
-#: ../src/label-text.c:770
+#: ../src/label-text.c:771
 msgid "Vertically align text"
-msgstr ""
+msgstr "文字垂直對齊"
 
-#: ../src/label-text.c:803
+#: ../src/label-text.c:804
 msgid "Line spacing"
 msgstr "線條間距"
 
-#: ../src/label-text.c:836 ../data/ui/property-bar.ui.h:11
+#: ../src/label-text.c:837 ../data/ui/property-bar.ui.h:11
 msgid "Text color"
 msgstr "文字顏色"
 
-#: ../src/label-text.c:996
+#: ../src/label-text.c:997
 msgid "Auto shrink"
 msgstr "自動縮小"
 
@@ -1077,25 +1077,25 @@ msgid "Fixed"
 msgstr "固定"
 
 #. Translators: "Up" refers to the direction towards the top of a label.
-#: ../src/mini-preview.c:1054
+#: ../src/mini-preview.c:1051
 msgid "Up"
 msgstr "上"
 
-#: ../src/new-label-dialog.c:203
+#: ../src/new-label-dialog.c:212 ../data/ui/new-label-dialog.ui.h:1
 msgid "Select Product"
 msgstr "選擇產品"
 
-#: ../src/new-label-dialog.c:215
+#: ../src/new-label-dialog.c:225 ../data/ui/new-label-dialog.ui.h:3
 msgid "Choose Orientation"
 msgstr "選擇方向"
 
-#: ../src/new-label-dialog.c:229
+#: ../src/new-label-dialog.c:240
 msgid "Review"
-msgstr "檢視"
+msgstr "檢閱"
 
 #: ../src/object-editor-bc-page.c:97 ../src/object-editor-shadow-page.c:93
 #: ../src/object-editor-text-page.c:102 ../src/prefs-dialog.c:335
-#: ../src/ui-property-bar.c:288
+#: ../src/ui-property-bar.c:289
 msgid "Default"
 msgstr "預設"
 
@@ -1109,7 +1109,7 @@ msgstr "方塊物件特性"
 
 #: ../src/object-editor.c:333
 msgid "Ellipse object properties"
-msgstr "橢圓形物件特性"
+msgstr "橢圓物件特性"
 
 #: ../src/object-editor.c:352
 msgid "Line object properties"
@@ -1132,7 +1132,7 @@ msgid "Insert merge field"
 msgstr "插入合併列"
 
 #: ../src/object-editor-fill-page.c:79 ../src/prefs-dialog.c:341
-#: ../src/ui-property-bar.c:298
+#: ../src/ui-property-bar.c:299
 msgid "No Fill"
 msgstr "無填充"
 
@@ -1150,7 +1150,7 @@ msgid "%s (*.%s)"
 msgstr ""
 
 #: ../src/object-editor-line-page.c:79 ../src/prefs-dialog.c:338
-#: ../src/ui-property-bar.c:308
+#: ../src/ui-property-bar.c:309
 msgid "No Line"
 msgstr "無線條"
 
@@ -1301,7 +1301,7 @@ msgstr "開啟檔案"
 
 #: ../src/ui.c:127
 msgid "_Save"
-msgstr "儲存(_S)"
+msgstr "儲存 (_S)"
 
 #: ../src/ui.c:129
 msgid "Save current file"
@@ -1317,11 +1317,11 @@ msgstr "將當前檔案以不同名稱儲存"
 
 #: ../src/ui.c:141
 msgid "_Print..."
-msgstr "列印 (_P)..."
+msgstr "打印 (_P)..."
 
 #: ../src/ui.c:143
 msgid "Print the current file"
-msgstr "列印當前檔案"
+msgstr "打印當前檔案"
 
 #: ../src/ui.c:148
 msgid "Properties..."
@@ -1462,7 +1462,7 @@ msgstr "方塊"
 
 #: ../src/ui.c:289
 msgid "Create box/rectangle object"
-msgstr "建立新的方塊/矩形物件"
+msgstr "建立新的方塊或矩形物件"
 
 #: ../src/ui.c:294 ../data/ui/object-editor.ui.h:17
 #: ../data/ui/prefs-dialog.ui.h:20
@@ -1471,11 +1471,11 @@ msgstr "線條"
 
 #: ../src/ui.c:301
 msgid "Ellipse"
-msgstr "橢圓形"
+msgstr "橢圓"
 
 #: ../src/ui.c:303
 msgid "Create ellipse/circle object"
-msgstr "建立橢圓形/圓形物件"
+msgstr "建立橢圓或圓形物件"
 
 #: ../src/ui.c:308 ../data/ui/object-editor.ui.h:20
 msgid "Image"
@@ -1637,7 +1637,7 @@ msgstr "標籤及卡片製作程式。\n"
 msgid "translator-credits"
 msgstr ""
 "Shell Hung <shell@debian.org>, 2002.\n"
-"Walter Cheuk <wwycheuk@gmail.com>, 2012."
+"Walter Cheuk <wwycheuk@gmail.com>, 2012, 2015."
 
 #: ../src/ui-commands.c:1169
 msgid ""
@@ -1652,7 +1652,7 @@ msgid ""
 "GNU General Public License for more details.\n"
 msgstr ""
 
-#: ../src/warning-handler.c:69
+#: ../src/warning-handler.c:71
 msgid "gLabels Error!"
 msgstr "gLabels 出錯！"
 
@@ -1739,12 +1739,12 @@ msgstr "英吋"
 #. [LGL_UNITS_MM]
 #: ../libglabels/lgl-units.c:67
 msgid "mm"
-msgstr "毫米(mm)"
+msgstr "毫米"
 
 #. [LGL_UNITS_CM]
 #: ../libglabels/lgl-units.c:68
 msgid "cm"
-msgstr "厘米(cm)"
+msgstr "厘米"
 
 #. [LGL_UNITS_PICA]
 #: ../libglabels/lgl-units.c:69
@@ -1791,7 +1791,7 @@ msgstr "最近使用"
 msgid "Brand:"
 msgstr "品牌："
 
-#: ../data/ui/media-select.ui.h:3 ../data/ui/new-label-dialog.ui.h:7
+#: ../data/ui/media-select.ui.h:3 ../data/ui/new-label-dialog.ui.h:10
 #: ../data/ui/template-designer.ui.h:12
 msgid "Page size:"
 msgstr "頁面尺寸："
@@ -1808,49 +1808,53 @@ msgstr "全部搜尋"
 msgid "Custom"
 msgstr "自選"
 
-#: ../data/ui/new-label-dialog.ui.h:1
+#: ../data/ui/new-label-dialog.ui.h:2
 msgid ""
 "Choose label or card product from hundreds of predefined templates or define "
 "your own."
 msgstr "從數百種標籤或卡片產品之中選擇，又或製作自己想要的。"
 
-#: ../data/ui/new-label-dialog.ui.h:2
+#: ../data/ui/new-label-dialog.ui.h:4
 msgid "Select orientation of label content."
 msgstr "選擇標籤內容的方向。"
 
-#: ../data/ui/new-label-dialog.ui.h:3
+#: ../data/ui/new-label-dialog.ui.h:5
 msgid "Normal"
 msgstr "正常"
 
-#: ../data/ui/new-label-dialog.ui.h:4
+#: ../data/ui/new-label-dialog.ui.h:6
 msgid "Rotated"
 msgstr "旋轉"
 
-#: ../data/ui/new-label-dialog.ui.h:5
-msgid "Please review and confirm your selection."
-msgstr "請檢閱並確認選擇。"
+#: ../data/ui/new-label-dialog.ui.h:7
+msgid "Review Selection"
+msgstr "檢閱選項"
 
-#: ../data/ui/new-label-dialog.ui.h:6 ../data/ui/template-designer.ui.h:9
+#: ../data/ui/new-label-dialog.ui.h:8
+msgid "Please review and confirm your selection."
+msgstr "請檢閱並確認選項。"
+
+#: ../data/ui/new-label-dialog.ui.h:9 ../data/ui/template-designer.ui.h:9
 msgid "Description:"
 msgstr "說明："
 
-#: ../data/ui/new-label-dialog.ui.h:8
+#: ../data/ui/new-label-dialog.ui.h:11
 msgid "Label size:"
 msgstr "標籤大小："
 
-#: ../data/ui/new-label-dialog.ui.h:9
+#: ../data/ui/new-label-dialog.ui.h:12
 msgid "Layout:"
 msgstr "版面："
 
-#: ../data/ui/new-label-dialog.ui.h:10
+#: ../data/ui/new-label-dialog.ui.h:13
 msgid "Similar products:"
 msgstr "類似產品："
 
-#: ../data/ui/new-label-dialog.ui.h:11 ../data/ui/template-designer.ui.h:6
+#: ../data/ui/new-label-dialog.ui.h:14 ../data/ui/template-designer.ui.h:6
 msgid "Part #:"
 msgstr "產品號："
 
-#: ../data/ui/new-label-dialog.ui.h:12
+#: ../data/ui/new-label-dialog.ui.h:15
 msgid "Vendor:"
 msgstr "生產商："
 
@@ -1887,10 +1891,8 @@ msgid "Alignment:"
 msgstr "對齊方式："
 
 #: ../data/ui/object-editor.ui.h:10
-#, fuzzy
-#| msgid "Alignment:"
 msgid "Vertical alignment:"
-msgstr "對齊方式："
+msgstr "垂直對齊方式："
 
 #: ../data/ui/object-editor.ui.h:11 ../data/ui/prefs-dialog.ui.h:16
 msgid "Line Spacing:"
@@ -2020,7 +2022,7 @@ msgstr "英吋"
 
 #: ../data/ui/prefs-dialog.ui.h:6
 msgid "Millimeters"
-msgstr "毫米(mm)"
+msgstr "毫米"
 
 #: ../data/ui/prefs-dialog.ui.h:7
 msgid "Units"
@@ -2028,11 +2030,11 @@ msgstr "單位"
 
 #: ../data/ui/prefs-dialog.ui.h:8 ../templates/paper-sizes.xml.h:3
 msgid "US Letter"
-msgstr "美規信紙 (Letter)"
+msgstr "美規信紙(Letter)"
 
 #: ../data/ui/prefs-dialog.ui.h:9
 msgid "ISO A4"
-msgstr ""
+msgstr "ISO A4"
 
 #: ../data/ui/prefs-dialog.ui.h:10
 msgid "Default page size"
@@ -2071,20 +2073,16 @@ msgid "Right align"
 msgstr "向右對齊"
 
 #: ../data/ui/property-bar.ui.h:8
-#, fuzzy
-#| msgid "Flip vertically"
 msgid "Top vertical align"
-msgstr "垂直翻轉"
+msgstr "向上對齊"
 
 #: ../data/ui/property-bar.ui.h:9
-#, fuzzy
-#| msgid "Center vertically"
 msgid "Center vertical align"
 msgstr "垂直置中"
 
 #: ../data/ui/property-bar.ui.h:10
 msgid "Bottom vertical align"
-msgstr ""
+msgstr "向下對齊"
 
 #: ../data/ui/template-designer.ui.h:1
 msgid ""
@@ -2136,11 +2134,11 @@ msgstr "圓形"
 
 #: ../data/ui/template-designer.ui.h:19
 msgid "Elliptical"
-msgstr "橢圓形"
+msgstr "橢圓"
 
 #: ../data/ui/template-designer.ui.h:20
 msgid "CD/DVD (including credit card CDs)"
-msgstr "CD/DVD (包括信用卡 CD)"
+msgstr "CD/DVD (包括信用卡型 CD)"
 
 #: ../data/ui/template-designer.ui.h:21
 msgid ""
@@ -2272,7 +2270,7 @@ msgstr "橫向標籤數 (nx)："
 
 #: ../data/ui/template-designer.ui.h:54
 msgid "Number down (ny):"
-msgstr "縱向標籤數 (ny)："
+msgstr "直向標籤數 (ny)："
 
 #: ../data/ui/template-designer.ui.h:55
 msgid "Distance from left edge (x0):"
@@ -2292,7 +2290,7 @@ msgstr "垂直間距 (dy)："
 
 #: ../data/ui/template-designer.ui.h:59
 msgid "Print test sheet"
-msgstr "列印測試頁"
+msgstr "打印測試頁"
 
 #: ../data/ui/template-designer.ui.h:60
 msgid ""
@@ -2310,7 +2308,7 @@ msgstr ""
 "如想接受並儲存該設計，按「套用」。\n"
 "\n"
 "否則按「取消」放棄該設計，\n"
-"或按「後退」繼續設計。"
+"或按「返回」繼續設計。"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:1
 msgid "Sheets:"
@@ -2351,6 +2349,31 @@ msgstr "合併控制"
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:14
 msgid "Options"
 msgstr "選項"
+
+#: ../data/appdata/glabels-3.appdata.xml.in.h:1
+msgid ""
+"gLabels is a program for creating labels and business cards. It is designed "
+"to work with various laser/ink-jet peel-off label and business card sheets "
+"that you'll find at most office supply stores."
+msgstr ""
+"gLabels 是用來製作標籤和名片的程式，可配合多種適用於鐳射及噴墨打印機的標籤及"
+"卡片紙使用；此等標籤和卡片紙通常可在大型文具店買得到。"
+
+#: ../data/appdata/glabels-3.appdata.xml.in.h:2
+msgid ""
+"gLabels can be used to design address labels, name tags, price tags, cd/dvd "
+"labels, or just about anything else that is organized in a regular pattern "
+"on a sheet of paper. Labels (or cards) can contain text, images, lines, "
+"shapes, and barcodes. gLabels also includes a document-merge feature which "
+"lets you print a unique label for each record from an external data source, "
+"such as a CSV file or an Evolution address book."
+msgstr ""
+"gLabels 用來設計地址標籤、姓名牌、價錢牌、CD/DVD "
+"標籤，或任何在紙面排成特定規律的東西。"
+"標籤可包含文字、圖像、線條、不同形狀，以及條碼。"
+"此外 gLabels 還有「合併文件」功能，可以外來資料來源"
+"製作每張不同的標籤；資料來源可以是 "
+"CSV 檔案或 Evolution 通訊錄。"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
 msgid "Show/hide main toolbar."
@@ -2540,11 +2563,11 @@ msgstr "A4"
 #. Other US paper sizes
 #: ../templates/paper-sizes.xml.h:5
 msgid "US Legal"
-msgstr "美規長信紙 (Legal)"
+msgstr "美規長信紙(Legal)"
 
 #: ../templates/paper-sizes.xml.h:6
 msgid "US Executive"
-msgstr "美規小信紙 (Executive)"
+msgstr "美規小信紙(Executive)"
 
 #. Other ISO A series sizes
 #: ../templates/paper-sizes.xml.h:8
@@ -2704,6 +2727,7 @@ msgstr "任何標籤"
 #: ../templates/hama-iso-templates.xml.h:4
 #: ../templates/pearl-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:8
+#: ../templates/sheetlabels-us-templates.xml.h:16
 msgid "Round labels"
 msgstr "圓形標籤"
 
@@ -2712,7 +2736,7 @@ msgstr "圓形標籤"
 #: ../templates/pearl-iso-templates.xml.h:58
 #: ../templates/rayfilm-templates.xml.h:9
 msgid "Elliptical labels"
-msgstr "橢圓形標籤"
+msgstr "橢圓標籤"
 
 #. ====================================================================
 #: ../templates/categories.xml.h:4 ../templates/endisch-templates.xml.h:4
@@ -2725,12 +2749,14 @@ msgstr "正方形標籤"
 #. ====================================================================
 #. ===================================================================
 #. ********************************************************************
+#. ===================================================================
 #: ../templates/categories.xml.h:5 ../templates/ascom-iso-templates.xml.h:4
 #: ../templates/endisch-templates.xml.h:3
 #: ../templates/hama-iso-templates.xml.h:27
 #: ../templates/herma-iso-templates.xml.h:20
 #: ../templates/igepa-templates.xml.h:1 ../templates/jac-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:1
+#: ../templates/sheetlabels-us-templates.xml.h:2
 msgid "Rectangular labels"
 msgstr "長方形標籤"
 
@@ -2825,7 +2851,7 @@ msgstr "文件夾標籤"
 #: ../templates/avery-us-templates.xml.h:10
 #: ../templates/dataline-iso-templates.xml.h:10
 #: ../templates/meritline-us-templates.xml.h:6
-#: ../templates/sheetlabels-us-templates.xml.h:4
+#: ../templates/sheetlabels-us-templates.xml.h:6
 #: ../templates/uline-us-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:4
 msgid "Shipping Labels"
@@ -2842,7 +2868,7 @@ msgstr "貨運標籤"
 #: ../templates/maco-us-templates.xml.h:2
 #: ../templates/meritline-us-templates.xml.h:4
 #: ../templates/pearl-iso-templates.xml.h:2
-#: ../templates/sheetlabels-us-templates.xml.h:2
+#: ../templates/sheetlabels-us-templates.xml.h:4
 #: ../templates/worldlabel-us-templates.xml.h:3
 #: ../templates/zweckform-iso-templates.xml.h:4
 msgid "Address Labels"
@@ -2853,7 +2879,7 @@ msgstr "地址標籤"
 #: ../templates/avery-us-templates.xml.h:14
 #: ../templates/dymo-other-templates.xml.h:6
 #: ../templates/meritline-us-templates.xml.h:8
-#: ../templates/sheetlabels-us-templates.xml.h:6
+#: ../templates/sheetlabels-us-templates.xml.h:8
 #: ../templates/worldlabel-us-templates.xml.h:2
 msgid "Return Address Labels"
 msgstr "回郵標籤"
@@ -2863,7 +2889,7 @@ msgstr "回郵標籤"
 #: ../templates/maco-us-templates.xml.h:3
 #: ../templates/meritline-us-templates.xml.h:12
 #: ../templates/misc-us-templates.xml.h:23
-#: ../templates/sheetlabels-us-templates.xml.h:8
+#: ../templates/sheetlabels-us-templates.xml.h:10
 #: ../templates/worldlabel-us-templates.xml.h:9
 msgid "Round Labels"
 msgstr "圓形標籤"
@@ -2872,7 +2898,7 @@ msgstr "圓形標籤"
 #: ../templates/avery-us-templates.xml.h:18
 #: ../templates/avery-iso-templates.xml.h:20
 #: ../templates/meritline-us-templates.xml.h:14
-#: ../templates/sheetlabels-us-templates.xml.h:14
+#: ../templates/sheetlabels-us-templates.xml.h:18
 #: ../templates/worldlabel-us-templates.xml.h:8
 msgid "Diskette Labels"
 msgstr "磁碟標籤"
@@ -2884,7 +2910,7 @@ msgstr ""
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:22
-#: ../templates/sheetlabels-us-templates.xml.h:10
+#: ../templates/sheetlabels-us-templates.xml.h:12
 #: ../templates/worldlabel-us-templates.xml.h:7
 msgid "Filing Labels"
 msgstr "檔案標籤"
@@ -2931,12 +2957,13 @@ msgstr "名牌襟章標籤"
 #: ../templates/geha-iso-templates.xml.h:10
 #: ../templates/herma-iso-templates.xml.h:14
 #: ../templates/igepa-templates.xml.h:5 ../templates/jac-iso-templates.xml.h:2
+#: ../templates/mayspies-templates.xml.h:1
 #: ../templates/misc-us-templates.xml.h:8
 #: ../templates/misc-iso-templates.xml.h:22
 #: ../templates/misc-other-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:64
 #: ../templates/rayfilm-templates.xml.h:10
-#: ../templates/sheetlabels-us-templates.xml.h:12
+#: ../templates/sheetlabels-us-templates.xml.h:14
 #: ../templates/worldlabel-us-templates.xml.h:12
 #: ../templates/zweckform-iso-templates.xml.h:8
 msgid "CD/DVD Labels"
@@ -2944,7 +2971,7 @@ msgstr "CD/DVD 標籤"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:34
-#: ../templates/sheetlabels-us-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:20
 msgid "CD/DVD Labels (Disc Labels)"
 msgstr "CD/DVD 標籤 (碟片標籤)"
 
@@ -2957,7 +2984,7 @@ msgstr "CD/DVD 標籤 (條塊標籤)"
 #: ../templates/avery-us-templates.xml.h:38
 #: ../templates/geha-iso-templates.xml.h:17
 #: ../templates/meritline-us-templates.xml.h:16
-#: ../templates/sheetlabels-us-templates.xml.h:18
+#: ../templates/sheetlabels-us-templates.xml.h:22
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Video Tape Face Labels"
 msgstr "錄影帶上面標籤"
@@ -3018,6 +3045,7 @@ msgstr "貨運標籤"
 #: ../templates/herma-iso-templates.xml.h:8
 #: ../templates/misc-us-templates.xml.h:21
 #: ../templates/misc-iso-templates.xml.h:6
+#: ../templates/sheetlabels-us-templates.xml.h:24
 #: ../templates/zweckform-iso-templates.xml.h:10
 msgid "Mailing Labels"
 msgstr "郵遞標籤"
@@ -3050,9 +3078,40 @@ msgstr "磁碟標籤"
 #. *********************************************************************
 #. Labels for the Brother QL-500/550/650 PC Label Printers
 #.
-#. These templates work with the Brother Linux Printer CUPS Driver.  It
-#. is unknown if these work correctly with the foomatic print driver for
-#. these printers.
+#. These templates are based on the exact media sizes and measurements
+#. in version 1.1 of the 'Brother-QL-500-ptouch.ppd' file.  If these
+#. don't work for you, try the old versions (e.g. DK-11201-old) of
+#. these templates.
+#.
+#. Currently only have templates for a few of the popular sizes.
+#.
+#. *********************************************************************
+#. *********************************************************************
+#.
+#: ../templates/brother-other-templates.xml.h:16
+msgid "Standard Address Labels 29mm x 90mm"
+msgstr "標準地址標籤 29mm x 90mm"
+
+#: ../templates/brother-other-templates.xml.h:17
+msgid "Shipping Labels 62mm x 100mm"
+msgstr "貨運標籤 62mm x 100mm"
+
+#: ../templates/brother-other-templates.xml.h:18
+msgid "Multi Purpose Labels 17mm x 54mm"
+msgstr "多用途標籤 17mm x 54mm"
+
+#: ../templates/brother-other-templates.xml.h:19
+msgid "Standard Address Labels 38mm x 90mm"
+msgstr "標準地址標籤 38mm x 90mm"
+
+#.
+#. *********************************************************************
+#. *********************************************************************
+#. Labels for the Brother QL-500/550/650 PC Label Printers
+#.
+#. These are the older templates that worked with the Brother Linux
+#. Printer CUPS Driver.  They do not work correctly with newer versions
+#. of the foomatic drivers.
 #.
 #. One difference from typical templates is that the template size is
 #. not the actual media size - it is the size of the printable area,
@@ -3062,21 +3121,26 @@ msgstr "磁碟標籤"
 #. *********************************************************************
 #. *********************************************************************
 #.
-#: ../templates/brother-other-templates.xml.h:18
-msgid "Standard Address Labels 29mm x 90mm"
-msgstr "標準地址標籤 29mm x 90mm"
+#: ../templates/brother-other-templates.xml.h:37
+msgid "Standard Address Labels 29mm x 90mm (Old)"
+msgstr "標準地址標籤 29mm x 90mm (舊版)"
 
-#: ../templates/brother-other-templates.xml.h:19
-msgid "Shipping Labels 62mm x 100mm"
-msgstr "貨運標籤 62mm x 100mm"
+#: ../templates/brother-other-templates.xml.h:38
+msgid "Shipping Labels 62mm x 100mm (Old)"
+msgstr "貨運標籤 62mm x 100mm (舊版)"
 
-#: ../templates/brother-other-templates.xml.h:20
-msgid "Multi Purpose Labels 17mm x 54mm"
-msgstr "多用途標籤 17mm x 54mm"
+#: ../templates/brother-other-templates.xml.h:39
+msgid "Multi Purpose Labels 17mm x 54mm (Old)"
+msgstr "多用途標籤 17mm x 54mm (舊版)"
 
-#: ../templates/brother-other-templates.xml.h:21
-msgid "Standard Address Labels 38mm x 90mm"
-msgstr "標準地址標籤 38mm x 90mm"
+#: ../templates/brother-other-templates.xml.h:40
+msgid "Standard Address Labels 38mm x 90mm (Old)"
+msgstr "標準地址標籤 38mm x 90mm (舊版)"
+
+#. ===================================================================
+#: ../templates/canon-other-templates.xml.h:2
+msgid "CD/DVD Tray"
+msgstr "CD/DVD 托盤"
 
 #. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:4
@@ -3229,7 +3293,7 @@ msgstr "多用途標籤"
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:2
 msgid "Printable mousepad"
-msgstr "列印式滑鼠墊"
+msgstr "打印式滑鼠墊"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:10
