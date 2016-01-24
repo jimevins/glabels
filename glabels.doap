@@ -6,8 +6,10 @@
 
   <name xml:lang="en">glabels</name>
   <shortdesc xml:lang="en">gLabels label designer</shortdesc>
+  <description>Create labels, business cards and media covers</description>
   <homepage rdf:resource="http://glabels.org" />
-  <category rdf:resource="http://api.gnome.org/doap-extensions#productivity" />
+  <category rdf:resource="http://api.gnome.org/doap-extensions#apps" />
+  <programming-language>C</programming-language>
 
   <maintainer>
     <foaf:Person>
