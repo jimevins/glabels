@@ -11,6 +11,8 @@ Makefile
 Makefile.in
 Makefile.in.in
 glabels-*.tar.gz
+compile
+gtk-doc.m4
 
 #
 # Explicit files and patterns
