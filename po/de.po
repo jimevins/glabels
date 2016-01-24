@@ -2,14 +2,14 @@
 # Copyright (C) 2001-2011 Jim Evins <evins@snaught.com>
 # Marcus Bauer <m@7n7.de>, 2001.
 # Christian Neumair <christian-neumair@web.de>, 2002.
-# Mario Blättermann <mario.blaettermann@gmail.com>, 2008-2015.
+# Mario Blättermann <mario.blaettermann@gmail.com>, 2008-2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2015-12-30 07:20+0000\n"
-"PO-Revision-Date: 2015-12-30 13:19+0100\n"
+"POT-Creation-Date: 2016-01-24 07:20+0000\n"
+"PO-Revision-Date: 2016-01-24 15:43+0100\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 1.8.6\n"
 
 #: ../src/bc-backends.c:81
 msgid "Built-in"
@@ -2607,6 +2607,10 @@ msgstr "gLabels Etiketten-Designer 3"
 #: ../data/desktop/glabels-3.0.desktop.in.h:2
 msgid "Create labels, business cards and media covers"
 msgstr "Erstellen von Etiketten, Visitenkarten und Medien-Covern"
+
+#: ../data/desktop/glabels-3.0.desktop.in.h:3
+msgid "label;card;print;office;barcode;"
+msgstr "Etikett;Karte;Drucken;Büro;Barcode;Visitenkarte;"
 
 #: ../data/mime/glabels-3.0.xml.in.h:1
 msgid "gLabels Project File"
