@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2013 Jim Evins <evins@snaught.com> -->
-<application>
-  <id type="desktop">glabels-3.0.desktop</id>
-  <licence>CC0</licence>
+<component type="desktop">
+  <id>glabels-3.0.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0+</project_license>
+  <_name>gLabels</_name>
+  <_summary>Create labels, business cards and media covers</_summary>
   <description>
     <_p>
       gLabels is a program for creating labels and business cards. It is
@@ -20,9 +23,15 @@
     </_p>
   </description>
   <screenshots>
-    <screenshot type="default" width="881" height="640">http://glabels.org/screenshots/320-screenshot-main.png</screenshot>
+    <screenshot height="640" width="881" type="default">
+      <image>http://glabels.org/screenshots/320-screenshot-main.png</image>
+    </screenshot>
   </screenshots>
   <url type="homepage">http://glabels.org/</url>
-  <updatecontact>evins_at_snaught.com</updatecontact>
+  <url type="bugtracker">https://bugzilla.gnome.org/enter_bug.cgi?product=glabels</url>
+  <url type="donation">http://www.gnome.org/friends/</url>
+  <url type="help">https://help.gnome.org/users/glabels/stable/</url>
+  <update_contact>evins_at_snaught.com</update_contact>
   <project_group>GNOME</project_group>
-</application>
+  <translation type="gettext">glabels-3.0</translation>
+</component>
