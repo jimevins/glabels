@@ -4,14 +4,14 @@
 #
 # David Makovský (Yakeen) <yakeen@sannyas-on.net>, 2005.
 # Zbynek Mrkvicka <zbynek@oachot.cz>, 2005.
-# Marek Černocký <marek@manet.cz>, 2009, 2010, 2011, 2012, 2013, 2015.
+# Marek Černocký <marek@manet.cz>, 2009, 2010, 2011, 2012, 2013, 2015, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2015-12-08 07:17+0000\n"
-"PO-Revision-Date: 2015-12-08 11:53+0100\n"
+"POT-Creation-Date: 2016-01-31 07:20+0000\n"
+"PO-Revision-Date: 2016-01-31 17:47+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Gtranslator 2.91.6\n"
+"X-Generator: Gtranslator 2.91.7\n"
 
 #: ../src/bc-backends.c:81
 msgid "Built-in"
@@ -2388,6 +2388,16 @@ msgid "Options"
 msgstr "Volby"
 
 #: ../data/appdata/glabels-3.appdata.xml.in.h:1
+#| msgid "Labels"
+msgid "gLabels"
+msgstr "gLabels"
+
+#: ../data/appdata/glabels-3.appdata.xml.in.h:2
+#: ../data/desktop/glabels-3.0.desktop.in.h:2
+msgid "Create labels, business cards and media covers"
+msgstr "Vytvářejte etikety, vizitky a obaly médií"
+
+#: ../data/appdata/glabels-3.appdata.xml.in.h:3
 msgid ""
 "gLabels is a program for creating labels and business cards. It is designed "
 "to work with various laser/ink-jet peel-off label and business card sheets "
@@ -2398,7 +2408,7 @@ msgstr ""
 "seženete v obchodech s kancelářskými potřebami, a to jak do laserových, tak "
 "inkoustových tiskáren."
 
-#: ../data/appdata/glabels-3.appdata.xml.in.h:2
+#: ../data/appdata/glabels-3.appdata.xml.in.h:4
 msgid ""
 "gLabels can be used to design address labels, name tags, price tags, cd/dvd "
 "labels, or just about anything else that is organized in a regular pattern "
@@ -2587,9 +2597,9 @@ msgstr "Nedávno vytvořené vlastní barvy."
 msgid "gLabels Label Designer 3"
 msgstr "Návrhář etiket gLabels 3"
 
-#: ../data/desktop/glabels-3.0.desktop.in.h:2
-msgid "Create labels, business cards and media covers"
-msgstr "Vytvářejte etikety, vizitky a obaly médií"
+#: ../data/desktop/glabels-3.0.desktop.in.h:3
+msgid "label;card;print;office;barcode;"
+msgstr "štítek;etiketa;nálepka;kartička;vizitka;tisk;kancelář;čárový kód;"
 
 #: ../data/mime/glabels-3.0.xml.in.h:1
 msgid "gLabels Project File"
