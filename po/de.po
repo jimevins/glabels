@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2016-01-24 14:47+0000\n"
-"PO-Revision-Date: 2016-01-24 15:49+0100\n"
+"POT-Creation-Date: 2016-02-01 07:20+0000\n"
+"PO-Revision-Date: 2016-02-01 19:29+0100\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -2403,6 +2403,16 @@ msgid "Options"
 msgstr "Optionen"
 
 #: ../data/appdata/glabels-3.appdata.xml.in.h:1
+#| msgid "Labels"
+msgid "gLabels"
+msgstr "gLabels"
+
+#: ../data/appdata/glabels-3.appdata.xml.in.h:2
+#: ../data/desktop/glabels-3.0.desktop.in.h:2
+msgid "Create labels, business cards and media covers"
+msgstr "Erstellen von Etiketten, Visitenkarten und Medien-Covern"
+
+#: ../data/appdata/glabels-3.appdata.xml.in.h:3
 msgid ""
 "gLabels is a program for creating labels and business cards. It is designed "
 "to work with various laser/ink-jet peel-off label and business card sheets "
@@ -2410,10 +2420,10 @@ msgid ""
 msgstr ""
 "gLabels ist ein Programm zum Entwerfen von Etiketten und Visitenkarten. Es "
 "wurde für die verschiedensten mit Laser- oder Tintenstrahldruckern "
-"bedruckbaren selbstklebenden) Etiketten sowie Visitenkarten entworfen, so "
+"bedruckbaren (selbstklebenden) Etiketten sowie Visitenkarten entworfen, so "
 "wie Sie sie bei den meisten Anbietern für Bürozubehör finden."
 
-#: ../data/appdata/glabels-3.appdata.xml.in.h:2
+#: ../data/appdata/glabels-3.appdata.xml.in.h:4
 msgid ""
 "gLabels can be used to design address labels, name tags, price tags, cd/dvd "
 "labels, or just about anything else that is organized in a regular pattern "
@@ -2422,8 +2432,8 @@ msgid ""
 "lets you print a unique label for each record from an external data source, "
 "such as a CSV file or an Evolution address book."
 msgstr ""
-"gLabels kann zum Enwerfen von Adressaufklebern, Namens- und Preisschildern, "
-"Etiketten CDs und DVDs oder für alles Andere verwendet werden, was mit dem "
+"gLabels kann zum Entwerfen von Adressaufklebern, Namens- und Preisschildern, "
+"CD- und DVD-Aufklebern oder für alles Andere verwendet werden, was mit dem "
 "Bedrucken von Papieren zu tun hat, die Etiketten oder Karten in einer "
 "regulären Anordnung enthalten. Die Etiketten oder Karten können Text, "
 "Bilder, Linien, Formen oder Strichcodes enthalten. gLabels verfügt auch über "
@@ -2603,10 +2613,6 @@ msgstr "Zuletzt erstellte benutzerdefinierte Farben."
 #: ../data/desktop/glabels-3.0.desktop.in.h:1
 msgid "gLabels Label Designer 3"
 msgstr "gLabels Etiketten-Designer 3"
-
-#: ../data/desktop/glabels-3.0.desktop.in.h:2
-msgid "Create labels, business cards and media covers"
-msgstr "Erstellen von Etiketten, Visitenkarten und Medien-Covern"
 
 #: ../data/desktop/glabels-3.0.desktop.in.h:3
 msgid "label;card;print;office;barcode;"
