@@ -11,6 +11,7 @@ Makefile
 Makefile.in
 Makefile.in.in
 glabels-*.tar.gz
+glabels-*/
 compile
 gtk-doc.m4
 
