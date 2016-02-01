@@ -30,6 +30,7 @@ templates_DATA = \
 	igepa-templates.xml	\
 	jac-iso-templates.xml \
 	maco-us-templates.xml \
+	mayspies-templates.xml \
 	meritline-us-templates.xml \
 	microapp-templates.xml	\
 	misc-us-templates.xml \
