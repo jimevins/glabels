@@ -1,14 +1,14 @@
 # Spanish translation of glabels.
 # sergio rivadero <sergiorivadero@argentina.com>, 2005.
 # Jorge González <jorgegonz@svn.gnome.org>, 2010.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011, 2012, 2014, 2015.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011, 2012, 2014, 2015, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2015-12-15 07:19+0000\n"
-"PO-Revision-Date: 2015-12-15 12:24+0100\n"
+"POT-Creation-Date: 2016-02-01 07:20+0000\n"
+"PO-Revision-Date: 2016-02-01 15:50+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -207,7 +207,6 @@ msgid "Code 49"
 msgstr "Code 49"
 
 #: ../src/bc-backends.c:263
-#| msgid "Code 128 (Mode C supression)"
 msgid "Code 128 (Mode C suppression)"
 msgstr "Code 128 (Supresión de modo C)"
 
@@ -2387,6 +2386,16 @@ msgid "Options"
 msgstr "Opciones"
 
 #: ../data/appdata/glabels-3.appdata.xml.in.h:1
+#| msgid "Labels"
+msgid "gLabels"
+msgstr "gLabels"
+
+#: ../data/appdata/glabels-3.appdata.xml.in.h:2
+#: ../data/desktop/glabels-3.0.desktop.in.h:2
+msgid "Create labels, business cards and media covers"
+msgstr "Crear etiquetas, tarjetas de visita y portadas"
+
+#: ../data/appdata/glabels-3.appdata.xml.in.h:3
 msgid ""
 "gLabels is a program for creating labels and business cards. It is designed "
 "to work with various laser/ink-jet peel-off label and business card sheets "
@@ -2397,7 +2406,7 @@ msgstr ""
 "tinta y con tarjetas de visita que encontrará en la mayoría de las tiendas "
 "de suministros ofimáticos."
 
-#: ../data/appdata/glabels-3.appdata.xml.in.h:2
+#: ../data/appdata/glabels-3.appdata.xml.in.h:4
 msgid ""
 "gLabels can be used to design address labels, name tags, price tags, cd/dvd "
 "labels, or just about anything else that is organized in a regular pattern "
@@ -2594,9 +2603,9 @@ msgstr "Colores personalizados creados recientemente."
 msgid "gLabels Label Designer 3"
 msgstr "Diseñador de etiquetas gLabels 3"
 
-#: ../data/desktop/glabels-3.0.desktop.in.h:2
-msgid "Create labels, business cards and media covers"
-msgstr "Crear etiquetas, tarjetas de visita y portadas"
+#: ../data/desktop/glabels-3.0.desktop.in.h:3
+msgid "label;card;print;office;barcode;"
+msgstr "etiqueta;tarjeta;imprimir;oficina;código de barras;"
 
 #: ../data/mime/glabels-3.0.xml.in.h:1
 msgid "gLabels Project File"
