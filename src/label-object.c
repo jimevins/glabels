@@ -1911,9 +1911,9 @@ gl_label_object_line_handle_at (glLabelObject     *object,
         {
                 return GL_LABEL_OBJECT_HANDLE_P2;
         }
-        
+
         /* P1 */
-        create_handle_path (cr, object, 0, h);
+        create_handle_path (cr, object, 0, 0);
         if (cairo_in_fill (cr, x, y))
         {
                 return GL_LABEL_OBJECT_HANDLE_P1;
