@@ -31,17 +31,19 @@ G_BEGIN_DECLS
 GdkCursor *gl_view_ellipse_get_create_cursor           (void);
 
 /* Object creation handlers. */
-void       gl_view_ellipse_create_button_press_event   (glView *view,
-                                                        gdouble x,
-                                                        gdouble y);
+void       gl_view_ellipse_create_button_press_event   (glView  *view,
+                                                        gdouble  x,
+                                                        gdouble  y);
 
-void       gl_view_ellipse_create_motion_event         (glView *view,
-                                                        gdouble x,
-                                                        gdouble y);
+void       gl_view_ellipse_create_motion_event         (glView  *view,
+                                                        gdouble  x,
+                                                        gdouble  y,
+                                                        gboolean circle);
 
-void       gl_view_ellipse_create_button_release_event (glView *view,
-                                                        gdouble x,
-                                                        gdouble y);
+void       gl_view_ellipse_create_button_release_event (glView  *view,
+                                                        gdouble  x,
+                                                        gdouble  y,
+                                                        gboolean circle);
 
 
 G_END_DECLS

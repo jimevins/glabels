@@ -185,10 +185,17 @@ static gboolean   button_release_event_cb         (glView            *view,
 static gboolean   key_press_event_cb              (glView            *view,
                                                    GdkEventKey       *event);
 
+static void       move_event                      (glView            *view,
+                                                   gdouble            x,
+                                                   gdouble            y,
+                                                   gboolean           keep_direction);
+
 static void       resize_event                    (glView            *view,
                                                    cairo_t           *cr,
                                                    gdouble            x,
-                                                   gdouble            y);
+                                                   gdouble            y,
+                                                   gboolean           keep_ratio,
+                                                   gboolean           keep_direction);
 
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
@@ -1454,15 +1461,11 @@ motion_notify_event_cb (glView            *view,
                         break;
 
                 case GL_VIEW_ARROW_MOVE:
-                        gl_label_move_selection (view->label,
-                                                (x - view->move_last_x),
-                                                (y - view->move_last_y));
-                        view->move_last_x = x;
-                        view->move_last_y = y;
+                        move_event (view, x, y, event->state & GDK_SHIFT_MASK);
                         break;
 
                 case GL_VIEW_ARROW_RESIZE:
-                        resize_event (view, cr, event->x, event->y);
+                        resize_event (view, cr, event->x, event->y, event->state & GDK_CONTROL_MASK, event->state & GDK_SHIFT_MASK);
                         break;
 
                 default:
@@ -1478,13 +1481,13 @@ motion_notify_event_cb (glView            *view,
                         switch (view->create_type)
                         {
                         case GL_LABEL_OBJECT_BOX:
-                                gl_view_box_create_motion_event (view, x, y);
+                                gl_view_box_create_motion_event (view, x, y, event->state & GDK_CONTROL_MASK);
                                 break;
                         case GL_LABEL_OBJECT_ELLIPSE:
-                                gl_view_ellipse_create_motion_event (view, x, y);
+                                gl_view_ellipse_create_motion_event (view, x, y, event->state & GDK_CONTROL_MASK);
                                 break;
                         case GL_LABEL_OBJECT_LINE: 
-                                gl_view_line_create_motion_event (view, x, y);
+                                gl_view_line_create_motion_event (view, x, y, event->state & GDK_SHIFT_MASK);
                                 break;
                         case GL_LABEL_OBJECT_IMAGE:
                                 gl_view_image_create_motion_event (view, x, y);
@@ -1575,7 +1578,10 @@ button_press_event_cb (glView            *view,
                         {
                                 view->resize_object = object;
                                 view->resize_handle = handle;
-                                view->resize_honor_aspect = event->state & GDK_CONTROL_MASK;
+                                gl_label_object_get_size (object, &(view->saved_w), &(view->saved_h));
+                                view->saved_ratio = view->saved_h / view->saved_w;
+                                view->saved_x = x;
+                                view->saved_y = y;
 
                                 view->state = GL_VIEW_ARROW_RESIZE;
                         }
@@ -1604,6 +1610,8 @@ button_press_event_cb (glView            *view,
                                 }
                                 view->move_last_x = x;
                                 view->move_last_y = y;
+                                view->saved_x = x;
+                                view->saved_y = y;
 
                                 view->state = GL_VIEW_ARROW_MOVE;
                         }
@@ -1764,13 +1772,13 @@ button_release_event_cb (glView            *view,
                         switch (view->create_type)
                         {
                         case GL_LABEL_OBJECT_BOX:
-                                gl_view_box_create_button_release_event (view, x, y);
+                                gl_view_box_create_button_release_event (view, x, y, event->state & GDK_CONTROL_MASK);
                                 break;
                         case GL_LABEL_OBJECT_ELLIPSE:
-                                gl_view_ellipse_create_button_release_event (view, x, y);
+                                gl_view_ellipse_create_button_release_event (view, x, y, event->state & GDK_CONTROL_MASK);
                                 break;
                         case GL_LABEL_OBJECT_LINE:
-                                gl_view_line_create_button_release_event (view, x, y);
+                                gl_view_line_create_button_release_event (view, x, y, event->state & GDK_CONTROL_MASK);
                                 break;
                         case GL_LABEL_OBJECT_IMAGE:
                                 gl_view_image_create_button_release_event (view, x, y);
@@ -1850,7 +1858,7 @@ key_press_event_cb (glView            *view,
                         break;
                 default:
                         return FALSE;
- 
+
                }
         }
         return TRUE;    /* We handled this or we were dragging. */
@@ -1858,13 +1866,77 @@ key_press_event_cb (glView            *view,
 
 
 /*---------------------------------------------------------------------------*/
+/* PRIVATE.  Move object.                                                    */
+/*---------------------------------------------------------------------------*/
+static void
+move_event (glView   *view,
+            gdouble   x,
+            gdouble   y,
+            gboolean  keep_direction)
+{
+	gdouble delta_x, delta_y;
+
+	if (keep_direction)
+	{
+		/* Move only on one axis */
+		if (ABS (x - view->saved_x) > ABS (y - view->saved_y))
+		{
+			/* Move only on x axis */
+			delta_x = x - view->move_last_x;
+			view->move_last_x = x;
+			if (view->move_last_y == view->saved_y)
+			{
+				/* Already on origin y */
+				delta_y = 0;
+			}
+			else
+			{
+				/* Move back to origin y */
+				delta_y = view->saved_y - view->move_last_y;
+				view->move_last_y = view->saved_y;
+			}
+		}
+		else
+		{
+			/* Move only on y axis */
+			delta_y = y - view->move_last_y;
+			view->move_last_y = y;
+			if (view->move_last_x == view->saved_x)
+			{
+				/* Already on origin x */
+				delta_x = 0;
+			}
+			else
+			{
+				/* Move back to origin x */
+				delta_x = view->saved_x - view->move_last_x;
+				view->move_last_x = view->saved_x;
+			}
+		}
+	}
+	else
+	{
+		/* Normal move */
+		delta_x = x - view->move_last_x;
+		delta_y = y - view->move_last_y;
+		view->move_last_x = x;
+		view->move_last_y = y;
+	}
+
+	gl_label_move_selection (view->label, delta_x, delta_y);
+}
+
+
+/*---------------------------------------------------------------------------*/
 /* PRIVATE.  Resize object.                                                  */
 /*---------------------------------------------------------------------------*/
 static void
-resize_event (glView             *view,
-              cairo_t            *cr,
-              gdouble             x,
-              gdouble             y)
+resize_event (glView   *view,
+              cairo_t  *cr,
+              gdouble   x,
+              gdouble   y,
+              gboolean  keep_ratio,
+              gboolean  keep_direction)
 {
         cairo_matrix_t matrix;
         gdouble        x0, y0, x1, y1, x2, y2;
@@ -1910,60 +1982,165 @@ resize_event (glView             *view,
         switch (view->resize_handle)
         {
 
-        case GL_LABEL_OBJECT_HANDLE_NW:
-                w = MAX (x2 - x, 0);
-                h = MAX (y2 - y, 0);
-                break;
+	case GL_LABEL_OBJECT_HANDLE_NW:
+		w = MAX (x2 - x, 0);
+		h = MAX (y2 - y, 0);
+		if (keep_ratio)
+		{
+			if (h/w > view->saved_ratio)
+				w = h / view->saved_ratio;
+			else
+				h = w * view->saved_ratio;
+		}
+		break;
 
-        case GL_LABEL_OBJECT_HANDLE_N:
-                w = x2 - x1;
-                h = MAX (y2 - y, 0);
-                break;
+	case GL_LABEL_OBJECT_HANDLE_N:
+		h = MAX (y2 - y, 0);
+		if (keep_ratio)
+			w = h / view->saved_ratio;
+		else
+			w = view->saved_w;
+		x0 = ((x2 - x1) - w)/2;
+		break;
 
-        case GL_LABEL_OBJECT_HANDLE_NE:
-                w = MAX (x - x1, 0);
-                h = MAX (y2 - y, 0);
-                break;
+	case GL_LABEL_OBJECT_HANDLE_NE:
+		w = MAX (x - x1, 0);
+		h = MAX (y2 - y, 0);
+		if (keep_ratio)
+		{
+			if (h/w > view->saved_ratio)
+				w = h / view->saved_ratio;
+			else
+				h = w * view->saved_ratio;
+		}
+		break;
 
-        case GL_LABEL_OBJECT_HANDLE_E:
-                w = MAX (x - x1, 0);
-                h = y2 - y1;
-                break;
+	case GL_LABEL_OBJECT_HANDLE_E:
+		w = MAX (x - x1, 0);
+		if (keep_ratio)
+			h = w * view->saved_ratio;
+		else
+			h = view->saved_h;
+		y0 = ((y2 - y1) - h)/2;
+		break;
 
-        case GL_LABEL_OBJECT_HANDLE_SE:
-                w = MAX (x - x1, 0);
-                h = MAX (y - y1, 0);
-                break;
+	case GL_LABEL_OBJECT_HANDLE_SE:
+		w = MAX (x - x1, 0);
+		h = MAX (y - y1, 0);
+		if (keep_ratio)
+		{
+			if (h/w > view->saved_ratio)
+				w = h / view->saved_ratio;
+			else
+				h = w * view->saved_ratio;
+		}
+		break;
 
-        case GL_LABEL_OBJECT_HANDLE_S:
-                w = x2 - x1;
-                h = MAX (y - y1, 0);
-                break;
+	case GL_LABEL_OBJECT_HANDLE_S:
+		h = MAX (y - y1, 0);
+		if (keep_ratio)
+			w = h / view->saved_ratio;
+		else
+			w = view->saved_w;
+		x0 = ((x2 - x1) - w)/2;
+		break;
 
-        case GL_LABEL_OBJECT_HANDLE_SW:
-                w = MAX (x2 - x, 0);
-                h = MAX (y - y1, 0);
-                break;
+	case GL_LABEL_OBJECT_HANDLE_SW:
+		w = MAX (x2 - x, 0);
+		h = MAX (y - y1, 0);
+		if (keep_ratio)
+		{
+			if (h/w > view->saved_ratio)
+				w = h / view->saved_ratio;
+			else
+				h = w * view->saved_ratio;
+		}
+		break;
 
-        case GL_LABEL_OBJECT_HANDLE_W:
-                w = MAX (x2 - x, 0);
-                h = y2 - y1;
-                break;
-        case GL_LABEL_OBJECT_HANDLE_P1:
-                x1 = x;
-                y1 = y;
-                dx = (x2 - x);
-                dy = (y2 - y);
-                x0 = x0 + x1;
-                y0 = y0 + y1;
-                break;
+	case GL_LABEL_OBJECT_HANDLE_W:
+		w = MAX (x2 - x, 0);
+		if (keep_ratio && !keep_direction)
+			h = w * view->saved_ratio;
+		else
+			h = view->saved_h;
+		y0 = ((y2 - y1) - h)/2;
+		break;
 
-        case GL_LABEL_OBJECT_HANDLE_P2:
-                dx = x - x1;
-                dy = y - y1;
-                x0 = x0 + x1;
-                y0 = y0 + y1;
-                break;
+	case GL_LABEL_OBJECT_HANDLE_P1:
+		x1 = x;
+		y1 = y;
+		dx = (x2 - x);
+		dy = (y2 - y);
+		x0 = x0 + x1;
+		y0 = y0 + y1;
+		if (keep_ratio &&
+		    !keep_direction)                                /* Keep direction with Shift has priority to keep aspect ratio with Ctrl */
+		{
+			if (dy/dx > view->saved_ratio)
+			{
+				dx = dy / view->saved_ratio;
+				x0 = x0 - (dx - (x2 - x));
+			}
+			else
+			{
+				dy = dx * view->saved_ratio;
+				y0 = y0 - (dy - (y2 - y));
+			}
+		}
+		else if (keep_direction &&
+		         dy != 0)                                   /*avoid div by 0*/
+		{
+			if (ABS (dx) / ABS (dy) < 0.414213562)      /* precalculated tangent of 22,5 degree */
+			{
+				dx = 0;                             /* horizontal line */
+				x0 = x0 + (x2 - x);
+			}
+			else if (ABS (dx) / ABS (dy) > 2.414213562) /* precalculated tangent of 67,5 degree */
+			{
+				dy = 0;                             /* vertical line */
+				y0 = y0 + (y2 - y);
+			}
+			else                                        /* diagonal line */
+			{
+				if (dx < dy)
+				{
+					dy = SIGN_AND_VALUE(dy, dx);
+					y0 = y0 - (dy - (y2 - y));
+				}
+				else
+				{
+					dx = SIGN_AND_VALUE(dx, dy);
+					x0 = x0 - (dx - (x2 - x));
+				}
+			}
+		}
+		break;
+
+	case GL_LABEL_OBJECT_HANDLE_P2:
+		dx = x - x1;
+		dy = y - y1;
+		if (keep_ratio && !keep_direction)
+		{
+			if (dy/dx > view->saved_ratio)
+				dx = dy / view->saved_ratio;
+			else
+				dy = dx * view->saved_ratio;
+		}
+		else if (keep_direction && dy != 0 /*avoid div by 0*/)
+		{
+			if (ABS (dx) / ABS (dy) < 0.414213562)      /* precalculated tangent of 22,5 degree */
+				dx = 0;                             /* horizontal line */
+			else if (ABS (dx) / ABS (dy) > 2.414213562) /* precalculated tangent of 67,5 degree */
+				dy = 0;                             /* vertical line */
+			else                                        /* diagonal line */
+				if (dx < dy)
+					dy = SIGN_AND_VALUE(dy, dx);//(dy < 0 ? -ABS (dx) : ABS (dx));
+				else
+					dx = SIGN_AND_VALUE(dx, dy);//(dx < 0 ? -ABS (dy) : ABS (dy));
+		}
+		x0 = x0 + x1;
+		y0 = y0 + y1;
+		break;
 
         default:
                 g_print ("Invalid handle.\n");  /* Should not happen! */
@@ -1973,14 +2150,7 @@ resize_event (glView             *view,
         if ( (view->resize_handle != GL_LABEL_OBJECT_HANDLE_P1) &&
              (view->resize_handle != GL_LABEL_OBJECT_HANDLE_P2) )
         {
-                if ( view->resize_honor_aspect )
-                {
-                        gl_label_object_set_size_honor_aspect (view->resize_object, w, h, TRUE);
-                }
-                else
-                {
-                        gl_label_object_set_size (view->resize_object, w, h, TRUE);
-                }
+                gl_label_object_set_size (view->resize_object, w, h, TRUE);
 
                 /*
                  * Query the new size in case it was constrained.

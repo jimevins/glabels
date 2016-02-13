@@ -32,17 +32,19 @@ G_BEGIN_DECLS
 GdkCursor *gl_view_box_get_create_cursor           (void);
 
 /* Object creation handlers. */
-void       gl_view_box_create_button_press_event   (glView *view,
-                                                    gdouble x,
-                                                    gdouble y);
+void       gl_view_box_create_button_press_event   (glView  *view,
+                                                    gdouble  x,
+                                                    gdouble  y);
 
-void       gl_view_box_create_motion_event         (glView *view,
-                                                    gdouble x,
-                                                    gdouble y);
+void       gl_view_box_create_motion_event         (glView  *view,
+                                                    gdouble  x,
+                                                    gdouble  y,
+                                                    gboolean square);
 
-void       gl_view_box_create_button_release_event (glView *view,
-                                                    gdouble x,
-                                                    gdouble y);
+void       gl_view_box_create_button_release_event (glView  *view,
+                                                    gdouble  x,
+                                                    gdouble  y,
+                                                    gboolean square);
 
 
 G_END_DECLS
