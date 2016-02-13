@@ -1277,12 +1277,13 @@ draw_shadow (glLabelObject *object,
         gl_color_node_free (&color_node);
 
         shadow_color_node = gl_label_object_get_shadow_color (object);
+	shadow_color = gl_color_node_expand (shadow_color_node, record);
         if (shadow_color_node->field_flag)
         {
                 shadow_color_node->color = GL_COLOR_SHADOW_MERGE_DEFAULT;
         }
         shadow_opacity = gl_label_object_get_shadow_opacity (object);
-        shadow_color = gl_color_shadow (shadow_color_node->color, shadow_opacity, color);
+	shadow_color = gl_color_set_opacity (shadow_color, shadow_opacity);
         gl_color_node_free (&shadow_color_node);
 
         draw_text_real (object, cr, screen_flag, record, shadow_color);

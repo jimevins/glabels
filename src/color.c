@@ -40,22 +40,6 @@ gl_color_set_opacity (guint   color,
 }
 
 
-/*****************************************************************************/
-/* Resolve actual shadow color by adjusting opacity.                         */
-/*****************************************************************************/
-guint
-gl_color_shadow (guint   base_color,
-                 gdouble opacity,
-                 guint   object_color)
-{
-        guint color;
-
-        color = gl_color_set_opacity (base_color,
-                                      opacity * GL_COLOR_F_ALPHA (object_color));
-
-        return color;
-}
-
 
 /*****************************************************************************/
 /* Convert gLabels color into a GdkColor                                     */

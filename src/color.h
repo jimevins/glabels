@@ -83,11 +83,8 @@ G_BEGIN_DECLS
 
 
 guint     gl_color_set_opacity            (guint            color,
-					   gdouble          opacity);
+                                           gdouble          opacity);
 
-guint     gl_color_shadow                 (guint            base_color,
-					   gdouble          opacity,
-					   guint            object_color);
 
 /*
  * Routines to convert to/from GdkColor.
