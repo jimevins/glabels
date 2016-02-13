@@ -26,22 +26,27 @@
 
 G_BEGIN_DECLS
 
+/* Macro for value with sign from first argument and absolute value from second argument */
+/* It is used in diagonal lines calculations */
+#define SIGN_AND_VALUE(var_for_sign, var_for_val) (var_for_sign > 0 ? (var_for_val < 0 ? -var_for_val : var_for_val) : (var_for_val < 0 ? var_for_val : -var_for_val))
 
 /* cursor for creating line objects */
 GdkCursor *gl_view_line_get_create_cursor           (void);
 
 /* Object creation handlers. */
-void       gl_view_line_create_button_press_event   (glView *view,
-                                                     gdouble x,
-                                                     gdouble y);
+void       gl_view_line_create_button_press_event   (glView  *view,
+                                                     gdouble  x,
+                                                     gdouble  y);
 
-void       gl_view_line_create_motion_event         (glView *view,
-                                                     gdouble x,
-                                                     gdouble y);
+void       gl_view_line_create_motion_event         (glView  *view,
+                                                     gdouble  x,
+                                                     gdouble  y,
+                                                     gboolean fixed_angle);
 
-void       gl_view_line_create_button_release_event (glView *view,
-                                                     gdouble x,
-                                                     gdouble y);
+void       gl_view_line_create_button_release_event (glView  *view,
+                                                     gdouble  x,
+                                                     gdouble  y,
+                                                     gboolean fixed_angle);
 
 
 G_END_DECLS

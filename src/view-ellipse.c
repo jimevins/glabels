@@ -78,9 +78,9 @@ gl_view_ellipse_get_create_cursor (void)
 /* Object creation handler: button press event.                              */
 /*****************************************************************************/
 void
-gl_view_ellipse_create_button_press_event   (glView *view,
-                                             gdouble x,
-                                             gdouble y)
+gl_view_ellipse_create_button_press_event (glView *view,
+                                           gdouble x,
+                                           gdouble y)
 {
 	GObject             *object;
 
@@ -101,19 +101,28 @@ gl_view_ellipse_create_button_press_event   (glView *view,
 /* Object creation handler: motion event.                                    */
 /*****************************************************************************/
 void
-gl_view_ellipse_create_motion_event     (glView *view,
-                                         gdouble x,
-                                         gdouble y)
+gl_view_ellipse_create_motion_event (glView  *view,
+                                     gdouble  x,
+                                     gdouble  y,
+                                     gboolean circle)
 {
-        gdouble w, h;
+	gdouble w, h;
 
-        gl_label_object_set_position (GL_LABEL_OBJECT(view->create_object),
-                                      MIN (x, view->create_x0), MIN (y, view->create_y0),
-                                      FALSE);
+	w = ABS (x - view->create_x0);
+	h = ABS (y - view->create_y0);
+	if (circle)
+		if (w < h) {
+			h = w;
+			y = (y < view->create_y0 ? view->create_y0 - h : view->create_y0 + h);
+		} else {
+			w = h;
+			x = (x < view->create_x0 ? view->create_x0 - w : view->create_x0 + w);
+		}
 
-        w = MAX (x, view->create_x0) - MIN (x, view->create_x0);
-        h = MAX (y, view->create_y0) - MIN (y, view->create_y0);
-        gl_label_object_set_size (GL_LABEL_OBJECT(view->create_object), w, h, FALSE);
+	gl_label_object_set_position (GL_LABEL_OBJECT(view->create_object),
+	                              MIN (x, view->create_x0), MIN (y, view->create_y0),
+	                              FALSE);
+	gl_label_object_set_size (GL_LABEL_OBJECT(view->create_object), w, h, FALSE);
 }
 
 
@@ -121,23 +130,17 @@ gl_view_ellipse_create_motion_event     (glView *view,
 /* Object creation handler: button relesase event.                           */
 /*****************************************************************************/
 void
-gl_view_ellipse_create_button_release_event (glView *view,
-                                             gdouble x,
-                                             gdouble y)
+gl_view_ellipse_create_button_release_event (glView  *view,
+                                             gdouble  x,
+                                             gdouble  y,
+                                             gboolean circle)
 {
-        gdouble              w, h;
+	if ((view->create_x0 == x) && (view->create_y0 == y)) {
+		x = view->create_x0 + 36.0;
+		y = view->create_y0 + 36.0;
+	}
 
-        if ((view->create_x0 == x) && (view->create_y0 == y)) {
-                x = view->create_x0 + 36.0;
-                y = view->create_y0 + 36.0;
-        }
-        gl_label_object_set_position (GL_LABEL_OBJECT(view->create_object),
-                                      MIN (x, view->create_x0), MIN (y, view->create_y0),
-                                      FALSE);
-
-        w = MAX (x, view->create_x0) - MIN (x, view->create_x0);
-        h = MAX (y, view->create_y0) - MIN (y, view->create_y0);
-        gl_label_object_set_size (GL_LABEL_OBJECT(view->create_object), w, h, FALSE);
+	gl_view_ellipse_create_motion_event (view, x, y, circle);
 }
 
 

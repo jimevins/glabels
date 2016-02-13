@@ -78,9 +78,9 @@ gl_view_line_get_create_cursor (void)
 /* Object creation handler: button press event.                              */
 /*****************************************************************************/
 void
-gl_view_line_create_button_press_event   (glView *view,
-                                          gdouble x,
-                                          gdouble y)
+gl_view_line_create_button_press_event (glView  *view,
+                                        gdouble  x,
+                                        gdouble  y)
 {
 	GObject             *object;
 
@@ -101,15 +101,30 @@ gl_view_line_create_button_press_event   (glView *view,
 /* Object creation handler: motion event.                                    */
 /*****************************************************************************/
 void
-gl_view_line_create_motion_event     (glView *view,
-                                      gdouble x,
-                                      gdouble y)
+gl_view_line_create_motion_event (glView  *view,
+                                  gdouble  x,
+                                  gdouble  y,
+                                  gboolean fixed_angle)
 {
-        gdouble w, h;
+	gdouble w, h;
 
-        w = x - view->create_x0;
-        h = y - view->create_y0;
-        gl_label_object_set_size (GL_LABEL_OBJECT(view->create_object), w, h, FALSE);
+	w = x - view->create_x0;
+	h = y - view->create_y0;
+
+	if (fixed_angle &&                                /* step by 45 degree */
+	    h != 0) {                                     /* avoid divide by 0 */
+		if (ABS (w) / ABS (h) < 0.414213562)      /* precalculated tangent of 22,5 degree */
+			w = 0;                            /* horizontal line */
+		else if (ABS (w) / ABS (h) > 2.414213562) /* precalculated tangent of 67,5 degree */
+			h = 0;                            /* vertical line */
+		else                                      /* diagonal line */
+			if (w < h)
+				h = SIGN_AND_VALUE(h, w);
+			else
+				w = SIGN_AND_VALUE(w, h);
+	}
+
+	gl_label_object_set_size (GL_LABEL_OBJECT(view->create_object), w, h, FALSE);
 }
 
 
@@ -117,19 +132,17 @@ gl_view_line_create_motion_event     (glView *view,
 /* Object creation handler: button relesase event.                           */
 /*****************************************************************************/
 void
-gl_view_line_create_button_release_event (glView *view,
-                                          gdouble x,
-                                          gdouble y)
+gl_view_line_create_button_release_event (glView  *view,
+                                          gdouble  x,
+                                          gdouble  y,
+                                          gboolean fixed_angle)
 {
-        gdouble              w, h;
+	if ((view->create_x0 == x) && (view->create_y0 == y)) {
+		x = view->create_x0 + 36.0;
+		y = view->create_y0 + 36.0;
+	}
 
-        if ((view->create_x0 == x) && (view->create_y0 == y)) {
-                x = view->create_x0 + 36.0;
-                y = view->create_y0 + 36.0;
-        }
-        w = x - view->create_x0;
-        h = y - view->create_y0;
-        gl_label_object_set_size (GL_LABEL_OBJECT(view->create_object), w, h, FALSE);
+	gl_view_line_create_motion_event (view, x, y, fixed_angle);
 }
 
 

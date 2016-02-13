@@ -54,46 +54,49 @@ typedef struct _glViewClass glViewClass;
 
 
 struct _glView {
-	GtkVBox            parent_widget;
+	GtkVBox             parent_widget;
 
-	glLabel           *label;
+	glLabel            *label;
 
-	GtkWidget         *canvas;
-	gdouble            zoom;
-	gboolean           zoom_to_fit_flag;
-	gdouble            home_scale;
-        gdouble            x0, y0;
-        gdouble            w, h;
+	GtkWidget          *canvas;
+	gdouble             zoom;
+	gboolean            zoom_to_fit_flag;
+	gdouble             home_scale;
+	gdouble             x0, y0;
+	gdouble             w, h;
 
-        gboolean           update_scheduled_flag;
-        gboolean           grid_visible;
-	gdouble            grid_spacing;
+	gboolean            update_scheduled_flag;
+	gboolean            grid_visible;
+	gdouble             grid_spacing;
 
-        gboolean           markup_visible;
+	gboolean            markup_visible;
 
-	glViewMode         mode;
-	glLabelObjectType  create_type;
-        glViewState        state;
-        gboolean           grabbed_flag;
+	glViewMode          mode;
+	glLabelObjectType   create_type;
+	glViewState         state;
+	gboolean            grabbed_flag;
 
-        /* GL_VIEW_ARROW_MOVE state */
-        gdouble            move_last_x;
-        gdouble            move_last_y;
+	/* GL_VIEW_ARROW_MOVE state */
+	gdouble             move_last_x;
+	gdouble             move_last_y;
+	gdouble             saved_x;
+	gdouble             saved_y;
 
-        /* GL_VIEW_ARROW_SELECT_REGION state */
-        gboolean           select_region_visible;
-        glLabelRegion      select_region;
+	/* GL_VIEW_ARROW_SELECT_REGION state */
+	gboolean            select_region_visible;
+	glLabelRegion       select_region;
 
-        /* GL_VIEW_ARROW_RESIZE state */
-        glLabelObject      *resize_object;
-        glLabelObjectHandle resize_handle;
-        gboolean            resize_honor_aspect;
+	/* GL_VIEW_ARROW_RESIZE state */
+	glLabelObject      *resize_object;
+	glLabelObjectHandle resize_handle;
+	gdouble             saved_ratio;
+	gdouble             saved_w;
+	gdouble             saved_h;
 
-        /* GL_VIEW_CREATE_DRAG state */
-        glLabelObject     *create_object;
-        gdouble            create_x0;
-        gdouble            create_y0;
-
+	/* GL_VIEW_CREATE_DRAG state */
+	glLabelObject      *create_object;
+	gdouble             create_x0;
+	gdouble             create_y0;
 };
 
 struct _glViewClass {
