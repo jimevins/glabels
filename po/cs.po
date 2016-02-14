@@ -992,7 +992,7 @@ msgstr "Žádná neodpovídá."
 
 #: ../src/media-select.c:1085
 msgid "Try selecting a different brand, page size or category."
-msgstr "Zkuste vybrat jinou značku, velikost stránky nebo kategorii."
+msgstr "Zkuste vybrat jinou značku, rozměr papíru nebo kategorii."
 
 #: ../src/media-select.c:1179
 msgid "No custom templates found."
@@ -1191,7 +1191,7 @@ msgstr "Název a popis"
 
 #: ../src/template-designer.c:575
 msgid "Page Size"
-msgstr "Velikost stránky"
+msgstr "Rozměr papíru"
 
 #: ../src/template-designer.c:642
 msgid "Label or Card Shape"
@@ -1688,7 +1688,7 @@ msgstr "(změněno)"
 #. * "letter", "A4", etc.
 #: ../libglabels/lgl-db.c:267
 msgid "Other"
-msgstr "Jiné"
+msgstr "Jiný"
 
 #. Create and append a "User defined" entry.
 #: ../libglabels/lgl-db.c:276
@@ -1818,7 +1818,7 @@ msgstr "Značka:"
 #: ../data/ui/media-select.ui.h:3 ../data/ui/new-label-dialog.ui.h:10
 #: ../data/ui/template-designer.ui.h:12
 msgid "Page size:"
-msgstr "Velikost stránky:"
+msgstr "Rozměr papíru:"
 
 #: ../data/ui/media-select.ui.h:4
 msgid "Category:"
@@ -2064,7 +2064,7 @@ msgstr "ISO A4"
 
 #: ../data/ui/prefs-dialog.ui.h:10
 msgid "Default page size"
-msgstr "Výchozí velikost stránky"
+msgstr "Výchozí rozměr papíru"
 
 #: ../data/ui/prefs-dialog.ui.h:11
 msgid "Locale"
@@ -2145,11 +2145,11 @@ msgstr "(např. „Adresní štítky“, „Vizitky“, …)"
 
 #: ../data/ui/template-designer.ui.h:11
 msgid "Please select the page size of the template stationery."
-msgstr "Vyberte, prosím, velikost stránky papíru pro šablonu."
+msgstr "Vyberte prosím rozměr papíru pro šablonu."
 
 #: ../data/ui/template-designer.ui.h:16
 msgid "Please select the basic shape of the labels or cards."
-msgstr "Vyberte, prosím, základní tvar etiket nebo vizitek."
+msgstr "Vyberte prosím základní tvar etiket nebo vizitek."
 
 #: ../data/ui/template-designer.ui.h:17
 msgid "Rectangular or square (can have rounded corners)"
@@ -2483,11 +2483,11 @@ msgstr "Výchozí měrná jednotka."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:15
 msgid "Default page size."
-msgstr "Výchozí velikost stránky."
+msgstr "Výchozí rozměr stránky."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:16
 msgid "The preferred page size when searching templates."
-msgstr "Upřednostňovaná velikost stránky při hledání šablon."
+msgstr "Upřednostňovaný rozměr papíru při hledání šablon."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:17
 msgid "Default font family."
