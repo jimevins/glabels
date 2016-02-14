@@ -525,6 +525,8 @@ gl_file_save_as (glLabel   *label,
 	GtkFileFilter    *filter;
 	gboolean          saved_flag = FALSE;
 	gchar            *name, *title;
+	gchar            *filename = NULL;
+	gchar            *path;
 
 	gl_debug (DEBUG_FILE, "START");
 
@@ -547,9 +549,19 @@ gl_file_save_as (glLabel   *label,
 	g_free (title);
 
 	/* Recover proper state of save-as dialog */
-	if (save_path != NULL) {
+	filename = gl_label_get_filename (label);
+	if (filename != NULL)
+	{
+		path = g_path_get_dirname (filename);
 		gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER(chooser),
-						     save_path);
+		                                     path);
+		g_free (path);
+		g_free (filename);
+	}
+	else if (save_path != NULL)
+	{
+		gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER(chooser),
+		                                     save_path);
 	}
 
 	filter = gtk_file_filter_new ();
