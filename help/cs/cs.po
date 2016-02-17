@@ -1,13 +1,13 @@
 # Czech translation for glabels help.
 # Copyright (C) 2010 glabels's COPYRIGHT HOLDER
 # This file is distributed under the same license as the glabels help.
-# Marek Černocký <marek@manet.cz>, 2010, 2011, 2013, 2015.
+# Marek Černocký <marek@manet.cz>, 2010, 2011, 2013, 2015, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels\n"
 "POT-Creation-Date: 2015-09-13 05:47+0000\n"
-"PO-Revision-Date: 2015-09-13 23:53+0200\n"
+"PO-Revision-Date: 2016-02-17 15:22+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -365,7 +365,7 @@ msgstr ""
 #. (itstool) path: info/desc
 #: C/customize.page:9
 msgid "Customize <app>gLabels</app> to match your needs."
-msgstr "Přizpůsobte si aplikaci <app>gLabels</app> svým potřebám."
+msgstr "Jak si přizpůsobit aplikaci <app>gLabels</app> svým potřebám."
 
 #. (itstool) path: page/title
 #: C/customize.page:25
@@ -1194,7 +1194,7 @@ msgstr ""
 #. (itstool) path: info/desc
 #: C/mancreate.page:11
 msgid "Create your templates manually."
-msgstr "Vytvářejte své šablony ručně."
+msgstr "Jak vytvářet své šablony ručně."
 
 #. (itstool) path: page/title
 #: C/mancreate.page:27
