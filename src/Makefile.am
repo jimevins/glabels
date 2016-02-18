@@ -152,6 +152,8 @@ glabels_3_SOURCES = 			\
 	label-image.h			\
 	label-barcode.c			\
 	label-barcode.h			\
+	label-properties-dialog.c	\
+	label-properties-dialog.h	\
 	pixbuf-util.c			\
 	pixbuf-util.h			\
 	xml-label.c			\

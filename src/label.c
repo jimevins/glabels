@@ -704,6 +704,121 @@ gl_label_get_size (glLabel *label,
 
 
 /****************************************************************************/
+/* get string with info about dimensions                                    */
+/****************************************************************************/
+gchar *
+gl_label_get_dimensions_string (glLabel *label)
+{
+	gchar                  *dims;
+	lglTemplate            *template;
+	const lglTemplateFrame *frame;
+	lglUnits                units;
+	gdouble                 units_per_point;
+	gchar                  *s1 = NULL;
+	gchar                  *s2 = NULL;
+	gchar                  *s3 = NULL;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_val_if_fail (label && GL_IS_LABEL (label), NULL);
+
+	template = label->priv->template;
+	if (!template)
+		return g_strdup("");
+        frame = (lglTemplateFrame *)template->frames->data;
+	units = gl_prefs_model_get_units (gl_prefs);
+	units_per_point = lgl_units_get_units_per_point (units);
+
+	switch (frame->shape)
+	{
+	case LGL_TEMPLATE_FRAME_SHAPE_RECT:
+		if (units == LGL_UNITS_INCH)
+		{
+			s1 = lgl_str_format_fraction (frame->rect.w*units_per_point);
+			s2 = lgl_str_format_fraction (frame->rect.h*units_per_point);
+			s3 = lgl_str_format_fraction (frame->rect.r*units_per_point);
+		}
+		else
+		{
+			s1 = g_strdup_printf ("%.5g", frame->rect.w*units_per_point);
+			s2 = g_strdup_printf ("%.5g", frame->rect.h*units_per_point);
+			s3 = g_strdup_printf ("%.5g", frame->rect.r*units_per_point);
+		}
+		if (frame->rect.r == 0)
+			/*Translators: first param is numeric value of width, second is numeric*/
+			/*value of height and third is unit. Example:*/
+			/*"60 mm × 22.5 mm (width / height)"*/
+			dims = g_strdup_printf (_("%s × %s %s (width × height)"),
+			                        s1, s2, lgl_units_get_name (units));
+		else
+			/*Translators: first param is numeric value of width, second is numeric*/
+			/*value of height, third is numeric value of round and fourth is unit. */
+			/*Example:*/
+			/*"50 mm × 30 / 1.5 mm (width × height / round)"*/
+			dims = g_strdup_printf (_("%s × %s / %s %s (width × height / round)"),
+			                        s1, s2, s3, lgl_units_get_name (units));
+		break;
+
+	case LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE:
+		if (units == LGL_UNITS_INCH)
+		{
+			s1 = lgl_str_format_fraction (frame->ellipse.w*units_per_point);
+			s2 = lgl_str_format_fraction (frame->ellipse.h*units_per_point);
+		}
+		else
+		{
+			s1 = g_strdup_printf ("%.5g", frame->ellipse.w*units_per_point);
+			s2 = g_strdup_printf ("%.5g", frame->ellipse.h*units_per_point);
+		}
+		/*Translators: first param is numeric value of width, second is numeric*/
+		/*value of height and third is unit. Example:*/
+		/*"60 mm × 22.5 mm (width / height)"*/
+		dims = g_strdup_printf (_("%s × %s %s (width × height)"),
+		                        s1, s2, lgl_units_get_name (units));
+		break;
+
+	case LGL_TEMPLATE_FRAME_SHAPE_ROUND:
+		if (units == LGL_UNITS_INCH)
+			s1 = lgl_str_format_fraction (2*frame->round.r*units_per_point);
+		else
+			s1 = g_strdup_printf ("%.5g", 2*frame->round.r*units_per_point);
+		/*Translators: first param is numeric value of diameter and secons is*/
+		/*unit. Example:*/
+		/*"120.5 mm (diameter)"*/
+		dims = g_strdup_printf (_("%s %s (diameter)"),
+		                        s1, lgl_units_get_name (units));
+		break;
+
+	case LGL_TEMPLATE_FRAME_SHAPE_CD:
+		if (units == LGL_UNITS_INCH)
+		{
+			s1 = lgl_str_format_fraction (2*frame->cd.r1*units_per_point);
+			s2 = lgl_str_format_fraction (2*frame->cd.r2*units_per_point);
+		}
+		else
+		{
+			s1 = g_strdup_printf ("%.5g", 2*frame->cd.r1*units_per_point);
+			s2 = g_strdup_printf ("%.5g", 2*frame->cd.r2*units_per_point);
+		}
+		/*Translators: first param is numeric value of diameter, second is numeric*/
+		/*value of whole and third is unit. Example:*/
+		/*"120.5 mm / 30 mm (diameter / hole)"*/
+		dims = g_strdup_printf (_("%s / %s %s (diameter / hole)"),
+		                        s1, s2, lgl_units_get_name (units));
+		break;
+	}
+
+	g_free (s1);
+	g_free (s2);
+	g_free (s3);
+
+	gl_debug (DEBUG_LABEL, "END");
+
+	return dims;
+}
+
+
+/****************************************************************************/
 /* set merge information structure.                                         */
 /****************************************************************************/
 void

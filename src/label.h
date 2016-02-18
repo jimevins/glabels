@@ -124,6 +124,7 @@ void          gl_label_get_size                (glLabel       *label,
 						gdouble       *w,
 						gdouble       *h);
 
+gchar        *gl_label_get_dimensions_string   (glLabel       *label);
 
 void          gl_label_set_merge               (glLabel       *label,
 						glMerge       *merge,
