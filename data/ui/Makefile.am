@@ -10,6 +10,7 @@ builder_DATA = \
 	merge-properties-dialog.ui		\
 	template-designer.ui			\
 	prefs-dialog.ui				\
-	object-editor.ui
+	object-editor.ui			\
+	label-properties-dialog.ui
 
 EXTRA_DIST = $(builder_DATA)

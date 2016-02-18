@@ -28,33 +28,36 @@
 
 G_BEGIN_DECLS
 
-void     gl_file_new         (glWindow        *window);
+void     gl_file_new               (glWindow        *window);
 
 
-void     gl_file_properties  (glLabel         *label,
-			      glWindow        *window);
+void     gl_file_properties        (glLabel         *label,
+                                    glWindow        *window);
+
+void     gl_file_choose_properties (glLabel         *label,
+                                    glWindow        *window);
 
 
-void     gl_file_open        (glWindow        *window);
+void     gl_file_open              (glWindow        *window);
 
 
-void     gl_file_open_recent (const gchar     *filename,
-			      glWindow        *window);
+void     gl_file_open_recent       (const gchar     *filename,
+                                    glWindow        *window);
 
-gboolean gl_file_open_real   (const gchar     *filename,
-			      glWindow        *window);
-
-
-gboolean gl_file_save        (glLabel         *label,
-			      glWindow        *window);
-
-gboolean gl_file_save_as     (glLabel         *label,
-			      glWindow        *window);
+gboolean gl_file_open_real         (const gchar     *filename,
+                                    glWindow        *window);
 
 
-gboolean gl_file_close       (glWindow        *window);
+gboolean gl_file_save              (glLabel         *label,
+                                    glWindow        *window);
 
-void     gl_file_exit        (void);
+gboolean gl_file_save_as           (glLabel         *label,
+                                    glWindow        *window);
+
+
+gboolean gl_file_close             (glWindow        *window);
+
+void     gl_file_exit              (void);
 
 G_END_DECLS
 
