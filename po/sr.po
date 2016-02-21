@@ -1,13 +1,13 @@
 # Serbian translation for glabels.
 # Copyright (C) 2012 glabels's COPYRIGHT HOLDER
 # This file is distributed under the same license as the glabels package.
-# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2012—2015.
+# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2012—2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels glabels-3_2\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2015-12-30 07:20+0000\n"
-"PO-Revision-Date: 2015-12-30 10:22+0200\n"
+"POT-Creation-Date: 2016-02-01 07:20+0000\n"
+"PO-Revision-Date: 2016-02-21 06:59+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
 "Language: sr\n"
@@ -206,7 +206,6 @@ msgid "Code 49"
 msgstr "Шифра 49"
 
 #: ../src/bc-backends.c:263
-#| msgid "Code 128 (Mode C supression)"
 msgid "Code 128 (Mode C suppression)"
 msgstr "Шифра 128 (Потискивање Ц режима)"
 
@@ -542,7 +541,7 @@ msgstr "Произвољна боја #%u"
 
 #: ../src/critical-error-handler.c:72
 msgid "gLabels Fatal Error!"
-msgstr "Кобна грешка Гномових налепница!"
+msgstr "Кобна грешка програма!"
 
 #: ../src/file.c:84
 msgid "New Label or Card"
@@ -566,7 +565,7 @@ msgstr "Избор назива празне датотеке"
 
 #: ../src/file.c:322 ../src/file.c:338
 msgid "Please select a file or supply a valid file name"
-msgstr "Молим изаберите датотеку или доставите исправан назив датотеке"
+msgstr "Изаберите датотеку или доставите исправан назив датотеке"
 
 #: ../src/file.c:335
 msgid "File does not exist"
@@ -597,7 +596,7 @@ msgstr "Сачувај „%s“ као"
 
 #: ../src/file.c:623
 msgid "Please supply a valid file name"
-msgstr "Молим доставите исправан назив датотеке"
+msgstr "Доставите исправан назив датотеке"
 
 #: ../src/file.c:644
 #, c-format
@@ -722,7 +721,7 @@ msgstr "[ДАТОТЕКА...]"
 
 #: ../src/glabels-batch.c:99
 msgid "Print files created with gLabels."
-msgstr "Штампајте датотеке направљене Гномовом налепницом."
+msgstr "Штампајте датотеке направљене Гномовим налепницама."
 
 #: ../src/glabels-batch.c:107 ../src/glabels.c:87
 #, c-format
@@ -731,8 +730,8 @@ msgid ""
 "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
 "%s\n"
-"Покрените „%s --help“ да видите потпуну листу доступних опција командне "
-"линије.\n"
+"Покрените „%s --help“ да видите потпуни списак доступних опција линије "
+"наредби.\n"
 
 #: ../src/glabels-batch.c:151
 #, c-format
@@ -743,11 +742,11 @@ msgstr ""
 #: ../src/glabels-batch.c:186
 #, c-format
 msgid "cannot open glabels file %s\n"
-msgstr "не могу да отворим датотеку гномових налеоница „%s“\n"
+msgstr "не могу да отворим датотеку гномових налепница „%s“\n"
 
 #: ../src/glabels.c:79
 msgid "Launch gLabels label and business card designer."
-msgstr "Покрените Гномову налепницу цртача налепница и пословних картица."
+msgstr "Покрените цртача налепница и пословних картица."
 
 #: ../src/label-barcode.c:183 ../src/ui.c:317
 msgid "Create barcode object"
@@ -1226,7 +1225,7 @@ msgstr "Уреди шаблон Гномових налепница"
 
 #: ../src/template-designer.c:1549
 msgid "Brand and part# match an existing template!"
-msgstr "Марка и part# одговарају постојећем шаблону!"
+msgstr "Марка и „part#“ одговарају постојећем шаблону!"
 
 #. Menu entries.
 #: ../src/ui.c:91
@@ -1247,15 +1246,15 @@ msgstr "_Преглед"
 
 #: ../src/ui.c:95
 msgid "Customize Main Toolbar"
-msgstr "Прилагоди главну линију алата"
+msgstr "Прилагоди главну траку алата"
 
 #: ../src/ui.c:96
 msgid "Customize Drawing Toolbar"
-msgstr "Прилагоди линију алата цртања"
+msgstr "Прилагоди траку алата цртања"
 
 #: ../src/ui.c:97
 msgid "Customize Properties Toolbar"
-msgstr "Прилагоди линију алата својстава"
+msgstr "Прилагоди траку алата својстава"
 
 #: ../src/ui.c:98
 msgid "_Objects"
@@ -1657,14 +1656,14 @@ msgid ""
 "GNU General Public License for more details.\n"
 msgstr ""
 "Гномове налепнице је слободан софтвер; можете га прослеђивати\n"
-"и/или мењати под условима ГНУ Опште јавне лиценце коју објављује Задужбина "
-"слободног софтвера; било издања 3 те лиценце, или\n"
+"и/или мењати под условима Гнуове Опште јавне лиценце коју објављује "
+"Задужбина слободног софтвера; било 3. издања те лиценце, или\n"
 "(по вашем избору) било којег новијег издања.\n"
 "\n"
 "Гномове налепнице се расподељује у нади да ће бити користан,\n"
 "али БЕЗ ИКАКВЕ ГАРАНЦИЈЕ; чак и без примењене гаранције\n"
 "ТРЖИШНЕ ВРЕДНОСТИ или ПРИЛАГОЂЕНОСТИ ОДРЕЂЕНОЈ НАМЕНИ.\n"
-"Погледајте ГНУ Општу јавну лиценцу за више детаља.\n"
+"Погледајте Гнуову Општу јавну лиценцу за више детаља.\n"
 
 #: ../src/warning-handler.c:71
 msgid "gLabels Error!"
@@ -2384,6 +2383,16 @@ msgid "Options"
 msgstr "Могућности"
 
 #: ../data/appdata/glabels-3.appdata.xml.in.h:1
+#| msgid "Labels"
+msgid "gLabels"
+msgstr "Гномове налепнице"
+
+#: ../data/appdata/glabels-3.appdata.xml.in.h:2
+#: ../data/desktop/glabels-3.0.desktop.in.h:2
+msgid "Create labels, business cards and media covers"
+msgstr "Направите налепнице, пословне картице и омоте за медије"
+
+#: ../data/appdata/glabels-3.appdata.xml.in.h:3
 msgid ""
 "gLabels is a program for creating labels and business cards. It is designed "
 "to work with various laser/ink-jet peel-off label and business card sheets "
@@ -2394,7 +2403,7 @@ msgstr ""
 "картица за ласерске и штампаче са бризгалицама које можете наћи у већини "
 "радњи канцеларијског прибора."
 
-#: ../data/appdata/glabels-3.appdata.xml.in.h:2
+#: ../data/appdata/glabels-3.appdata.xml.in.h:4
 msgid ""
 "gLabels can be used to design address labels, name tags, price tags, cd/dvd "
 "labels, or just about anything else that is organized in a regular pattern "
@@ -2413,27 +2422,27 @@ msgstr ""
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
 msgid "Show/hide main toolbar."
-msgstr "Приказује/скрива главну линију алата."
+msgstr "Приказује/скрива главну траку алата."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:2
 msgid "Controls visibility of main toolbar."
-msgstr "Управља видљивошћу главне линије алата."
+msgstr "Управља видљивошћу главне траке алата."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:3
 msgid "Show/hide drawing toolbar."
-msgstr "Приказује/скрива линију алата цртања."
+msgstr "Приказује/скрива траку алата цртања."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:4
 msgid "Controls visibility of drawing toolbar."
-msgstr "Управља видљивошћу линије алата цртања."
+msgstr "Управља видљивошћу траке алата цртања."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:5
 msgid "Show/hide property toolbar."
-msgstr "Приказује/скрива линију алата својстава."
+msgstr "Приказује/скрива траку алата својстава."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:6
 msgid "Controls visibility of property toolbar."
-msgstr "Управља видљивошћу линије алата својстава."
+msgstr "Управља видљивошћу траке алата својстава."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:7
 msgid "Show/hide grid."
@@ -2583,9 +2592,9 @@ msgstr "Недавно направљене произвољне боје."
 msgid "gLabels Label Designer 3"
 msgstr "Гномове налепнице 3"
 
-#: ../data/desktop/glabels-3.0.desktop.in.h:2
-msgid "Create labels, business cards and media covers"
-msgstr "Направите налепнице, пословне картице и омоте за медије"
+#: ../data/desktop/glabels-3.0.desktop.in.h:3
+msgid "label;card;print;office;barcode;"
+msgstr "налепница;разгледница;писмо;картица;штампај;канцеларија;баркод;"
 
 #: ../data/mime/glabels-3.0.xml.in.h:1
 msgid "gLabels Project File"
@@ -3160,28 +3169,23 @@ msgstr "Уобичајене налепнице за адресе 38mm x 90mm"
 #. *********************************************************************
 #.
 #: ../templates/brother-other-templates.xml.h:37
-#| msgid "Standard Address Labels 29mm x 90mm"
 msgid "Standard Address Labels 29mm x 90mm (Old)"
 msgstr "Уобичајене налепнице за адресе 29mm x 90mm (старе)"
 
 #: ../templates/brother-other-templates.xml.h:38
-#| msgid "Shipping Labels 62mm x 100mm"
 msgid "Shipping Labels 62mm x 100mm (Old)"
 msgstr "Налепнице за доставу 62mm x 100mm (старе)"
 
 #: ../templates/brother-other-templates.xml.h:39
-#| msgid "Multi Purpose Labels 17mm x 54mm"
 msgid "Multi Purpose Labels 17mm x 54mm (Old)"
 msgstr "Вишенаменске налепнице 17mm x 54mm (старе)"
 
 #: ../templates/brother-other-templates.xml.h:40
-#| msgid "Standard Address Labels 38mm x 90mm"
 msgid "Standard Address Labels 38mm x 90mm (Old)"
 msgstr "Уобичајене налепнице за адресе 38mm x 90mm (старе)"
 
 #. ===================================================================
 #: ../templates/canon-other-templates.xml.h:2
-#| msgid "CD/DVD Labels"
 msgid "CD/DVD Tray"
 msgstr "ЦД/ДВД налепнице"
 
@@ -3640,7 +3644,7 @@ msgstr "ЦД налепнице пословне картице"
 
 #: ../templates/rayfilm-templates.xml.h:12
 msgid "Mini CD Labels"
-msgstr "Налепнице за мини ЦД "
+msgstr "Налепнице за мини ЦД"
 
 #: ../templates/rayfilm-templates.xml.h:13
 msgid "Triangular labels"
