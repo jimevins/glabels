@@ -78,6 +78,8 @@ src/label-line.c
 src/label-line.h
 src/label-object.c
 src/label-object.h
+src/label-properties-dialog.c
+src/label-properties-dialog.h
 src/label-text.c
 src/label-text.h
 src/media-select.c
@@ -207,14 +209,15 @@ libglabels/lgl-xml-template.c
 libglabels/lgl-xml-template.h
 libglabels/libglabels-private.h
 
-[type: gettext/glade]data/ui/merge-properties-dialog.ui
+[type: gettext/glade]data/ui/label-properties-dialog.ui
 [type: gettext/glade]data/ui/media-select.ui
+[type: gettext/glade]data/ui/merge-properties-dialog.ui
 [type: gettext/glade]data/ui/new-label-dialog.ui
 [type: gettext/glade]data/ui/object-editor.ui
 [type: gettext/glade]data/ui/prefs-dialog.ui
+[type: gettext/glade]data/ui/print-op-dialog-custom-widget.ui
 [type: gettext/glade]data/ui/property-bar.ui
 [type: gettext/glade]data/ui/template-designer.ui
-[type: gettext/glade]data/ui/print-op-dialog-custom-widget.ui
 
 data/appdata/glabels-3.appdata.xml.in
 
