@@ -459,24 +459,24 @@ set_object (glObjectEditor  *editor,
                                   G_CALLBACK (object_moved_cb), editor);
         }
         else
-        {
-                editor->priv->object = NULL;
+	{
+		gtk_widget_hide (editor->priv->notebook);
 
-                gtk_image_set_from_icon_name (GTK_IMAGE(editor->priv->title_image),
-                                              "glabels-object-properties",
-                                              GTK_ICON_SIZE_LARGE_TOOLBAR);
+		editor->priv->object = NULL;
+
+		gtk_image_set_from_icon_name (GTK_IMAGE(editor->priv->title_image),
+		                              "glabels-object-properties",
+		                              GTK_ICON_SIZE_LARGE_TOOLBAR);
 
 		s = g_strdup_printf ("<span weight=\"bold\">%s</span>",
-				     _("Object properties"));
+		                      _("Object properties"));
 		gtk_label_set_text (GTK_LABEL(editor->priv->title_label), s);
 		gtk_label_set_use_markup (GTK_LABEL(editor->priv->title_label), TRUE);
 		g_free (s);
 
-                gtk_widget_set_sensitive (editor->priv->title_image, FALSE);
-                gtk_widget_set_sensitive (editor->priv->title_label, FALSE);
-
-                gtk_widget_hide (editor->priv->notebook);
-        }
+		gtk_widget_set_sensitive (editor->priv->title_image, FALSE);
+		gtk_widget_set_sensitive (editor->priv->title_label, FALSE);
+	}
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
