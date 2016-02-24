@@ -747,14 +747,14 @@ gl_label_get_dimensions_string (glLabel *label)
 		if (frame->rect.r == 0)
 			/*Translators: first param is numeric value of width, second is numeric*/
 			/*value of height and third is unit. Example:*/
-			/*"60 mm × 22.5 mm (width / height)"*/
+			/*"60 × 22.5 mm (width / height)"*/
 			dims = g_strdup_printf (_("%s × %s %s (width × height)"),
 			                        s1, s2, lgl_units_get_name (units));
 		else
 			/*Translators: first param is numeric value of width, second is numeric*/
 			/*value of height, third is numeric value of round and fourth is unit. */
 			/*Example:*/
-			/*"50 mm × 30 / 1.5 mm (width × height / round)"*/
+			/*"50 × 30 / 1.5 mm (width × height / round)"*/
 			dims = g_strdup_printf (_("%s × %s / %s %s (width × height / round)"),
 			                        s1, s2, s3, lgl_units_get_name (units));
 		break;
@@ -772,7 +772,7 @@ gl_label_get_dimensions_string (glLabel *label)
 		}
 		/*Translators: first param is numeric value of width, second is numeric*/
 		/*value of height and third is unit. Example:*/
-		/*"60 mm × 22.5 mm (width / height)"*/
+		/*"60 × 22.5 mm (width / height)"*/
 		dims = g_strdup_printf (_("%s × %s %s (width × height)"),
 		                        s1, s2, lgl_units_get_name (units));
 		break;
@@ -801,8 +801,8 @@ gl_label_get_dimensions_string (glLabel *label)
 			s2 = g_strdup_printf ("%.5g", 2*frame->cd.r2*units_per_point);
 		}
 		/*Translators: first param is numeric value of diameter, second is numeric*/
-		/*value of whole and third is unit. Example:*/
-		/*"120.5 mm / 30 mm (diameter / hole)"*/
+		/*value of hole and third is unit. Example:*/
+		/*"120.5 / 30 mm (diameter / hole)"*/
 		dims = g_strdup_printf (_("%s / %s %s (diameter / hole)"),
 		                        s1, s2, lgl_units_get_name (units));
 		break;
