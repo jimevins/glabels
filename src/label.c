@@ -745,15 +745,15 @@ gl_label_get_dimensions_string (glLabel *label)
 			s3 = g_strdup_printf ("%.5g", frame->rect.r*units_per_point);
 		}
 		if (frame->rect.r == 0)
-			/*Translators: first param is numeric value of width, second is numeric*/
-			/*value of height and third is unit. Example:*/
+			/*Translators: A rectangular label dimensions. first param is numeric value*/
+			/* of width, second is numeric value of height and third is unit. Example:*/
 			/*"60 × 22.5 mm (width / height)"*/
 			dims = g_strdup_printf (_("%s × %s %s (width × height)"),
 			                        s1, s2, lgl_units_get_name (units));
 		else
-			/*Translators: first param is numeric value of width, second is numeric*/
-			/*value of height, third is numeric value of round and fourth is unit. */
-			/*Example:*/
+			/*Translators: A rounded rectangular label dimensions. first param is numeric*/
+			/*value of width, second is numeric value of height, third is numeric value*/
+			/*of round and fourth is unit. Example:*/
 			/*"50 × 30 / 1.5 mm (width × height / round)"*/
 			dims = g_strdup_printf (_("%s × %s / %s %s (width × height / round)"),
 			                        s1, s2, s3, lgl_units_get_name (units));
@@ -770,8 +770,8 @@ gl_label_get_dimensions_string (glLabel *label)
 			s1 = g_strdup_printf ("%.5g", frame->ellipse.w*units_per_point);
 			s2 = g_strdup_printf ("%.5g", frame->ellipse.h*units_per_point);
 		}
-		/*Translators: first param is numeric value of width, second is numeric*/
-		/*value of height and third is unit. Example:*/
+		/*Translators: A elliptical label dimensions. first param is numeric value of*/
+		/*width, second is numeric value of height and third is unit. Example:*/
 		/*"60 × 22.5 mm (width / height)"*/
 		dims = g_strdup_printf (_("%s × %s %s (width × height)"),
 		                        s1, s2, lgl_units_get_name (units));
@@ -782,8 +782,8 @@ gl_label_get_dimensions_string (glLabel *label)
 			s1 = lgl_str_format_fraction (2*frame->round.r*units_per_point);
 		else
 			s1 = g_strdup_printf ("%.5g", 2*frame->round.r*units_per_point);
-		/*Translators: first param is numeric value of diameter and secons is*/
-		/*unit. Example:*/
+		/*Translators: A round label dimensions. first param is numeric value of*/
+		/*diameter and secons is unit. Example:*/
 		/*"120.5 mm (diameter)"*/
 		dims = g_strdup_printf (_("%s %s (diameter)"),
 		                        s1, lgl_units_get_name (units));
@@ -800,8 +800,8 @@ gl_label_get_dimensions_string (glLabel *label)
 			s1 = g_strdup_printf ("%.5g", 2*frame->cd.r1*units_per_point);
 			s2 = g_strdup_printf ("%.5g", 2*frame->cd.r2*units_per_point);
 		}
-		/*Translators: first param is numeric value of diameter, second is numeric*/
-		/*value of hole and third is unit. Example:*/
+		/*Translators: A CD/DVD label dimensions. first param is numeric value of*/
+		/*diameter, second is numeric value of hole and third is unit. Example:*/
 		/*"120.5 / 30 mm (diameter / hole)"*/
 		dims = g_strdup_printf (_("%s / %s %s (diameter / hole)"),
 		                        s1, s2, lgl_units_get_name (units));
