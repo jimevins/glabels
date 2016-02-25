@@ -1451,9 +1451,11 @@ gl_label_rotate_selection (glLabel *label,
 		gl_label_object_rotate (object, theta_degs);
 	}
 
-        g_list_free (selection_list);
+	g_list_free (selection_list);
 
-        end_selection_op (label);
+	do_modify (label);
+
+	end_selection_op (label);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -1486,9 +1488,11 @@ gl_label_rotate_selection_left (glLabel *label)
 		gl_label_object_rotate (object, -90.0);
 	}
 
-        g_list_free (selection_list);
+	g_list_free (selection_list);
 
-        end_selection_op (label);
+	do_modify (label);
+
+	end_selection_op (label);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -1521,9 +1525,11 @@ gl_label_rotate_selection_right (glLabel *label)
 		gl_label_object_rotate (object, 90.0);
 	}
 
-        g_list_free (selection_list);
+	g_list_free (selection_list);
 
-        end_selection_op (label);
+	do_modify (label);
+
+	end_selection_op (label);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -1556,9 +1562,11 @@ gl_label_flip_selection_horiz (glLabel *label)
 		gl_label_object_flip_horiz (object);
 	}
 
-        g_list_free (selection_list);
+	g_list_free (selection_list);
 
-        end_selection_op (label);
+	do_modify (label);
+
+	end_selection_op (label);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -1591,9 +1599,11 @@ gl_label_flip_selection_vert (glLabel *label)
 		gl_label_object_flip_vert (object);
 	}
 
-        g_list_free (selection_list);
+	g_list_free (selection_list);
 
-        end_selection_op (label);
+	do_modify (label);
+
+	end_selection_op (label);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
