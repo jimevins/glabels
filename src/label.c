@@ -783,7 +783,7 @@ gl_label_get_dimensions_string (glLabel *label)
 		else
 			s1 = g_strdup_printf ("%.5g", 2*frame->round.r*units_per_point);
 		/*Translators: A round label dimensions. first param is numeric value of*/
-		/*diameter and secons is unit. Example:*/
+		/*diameter and second is unit. Example:*/
 		/*"120.5 mm (diameter)"*/
 		dims = g_strdup_printf (_("%s %s (diameter)"),
 		                        s1, lgl_units_get_name (units));
