@@ -563,6 +563,17 @@ draw_cb (glView         *view,
         bin_window = gtk_layout_get_bin_window (GTK_LAYOUT (view->canvas));
         bin_cr = gdk_cairo_create (bin_window);
 
+        /* Figure out viewport and clip to this region. */
+        GtkAdjustment *hadj = gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (view->canvas));
+        GtkAdjustment *vadj = gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (view->canvas));
+        GdkWindow *window   = gtk_widget_get_window (GTK_WIDGET (view->canvas));
+        gdouble window_x0   = gtk_adjustment_get_value (hadj);
+        gdouble window_y0   = gtk_adjustment_get_value (vadj);
+        gdouble window_w    = gdk_window_get_width (window);
+        gdouble window_h    = gdk_window_get_height (window);
+        cairo_rectangle (bin_cr, window_x0, window_y0, window_w, window_h);
+        cairo_clip (bin_cr);
+
 	draw_layers (view, bin_cr);
 
         cairo_destroy (bin_cr);
