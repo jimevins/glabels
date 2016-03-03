@@ -15,8 +15,9 @@ templates_DATA = \
 	avery-us-templates.xml \
 	avery-iso-templates.xml \
 	avery-other-templates.xml \
-	cablelabel-templates.xml \
+	begalabel-templates.xml \
 	brother-other-templates.xml \
+	cablelabel-templates.xml \
 	canon-other-templates.xml \
 	databecker-iso-templates.xml \
 	dataline-iso-templates.xml	\

@@ -177,7 +177,7 @@
     <Meta category="rectangle-label"/>
     <Meta product_url="http://www.begalabel.com/4-x-1-1-3-Shipping-Labels-Address-Labels-p33.html"/>
     <Label-rectangle id="0" width="4in" height="1.33333in" round="0.095in" x_waste="0.05in">
-      <Layout nx="2" ny="7" x0="0.83333in" y0="0.1875in" dx="4.125in" dy="1.33333in"/>
+      <Layout nx="2" ny="7" x0="0.1875in" y0="0.83333in" dx="4.125in" dy="1.33333in"/>
     </Label-rectangle>
   </Template>
 
@@ -204,7 +204,7 @@
     <Meta category="rectangle-label"/>
     <Meta product_url="http://www.begalabel.com/4-x-3-9-16-Label-Rounded-Corner-Label-p72.html"/>
     <Label-rectangle id="0" width="4in" height="3.5625in" round="0.07in" x_waste="0.04in">
-      <Layout nx="2" ny="3" x0="0.20315in" y0="5.34375in" dx="4.0937in" dy="3.5625in"/>
+      <Layout nx="2" ny="3" x0="0.20315in" y0="0.15625in" dx="4.0937in" dy="3.5625in"/>
     </Label-rectangle>
   </Template>
 
@@ -213,7 +213,7 @@
     <Meta category="rectangle-label"/>
     <Meta product_url="http://www.begalabel.com/4-x-5-Shipping-Labels-Mailing-Labels-p265.html"/>
     <Label-rectangle id="0" width="4in" height="5in" round="0.11in" x_waste="0.05in">
-      <Layout nx="2" ny="2" x0="0.563in" y0="0.5in" dx="4.1875in" dy="5in"/>
+      <Layout nx="2" ny="2" x0="0.16667in" y0="0.5in" dx="4.16667in" dy="5in"/>
     </Label-rectangle>
   </Template>
 
@@ -250,8 +250,8 @@
     <Meta category="label"/>
     <Meta category="rectangle-label"/>
     <Meta product_url="http://www.begalabel.com/17-20-x-11-15-Label-Angled-Corner-p39.html"/>
-    <Label-rectangle id="0" width="0.85in" height="7.3333in">
-      <Layout nx="10" ny="15" x0="0in" y0="0in" dx="0.85in" dy="7.3333in"/>
+    <Label-rectangle id="0" width="0.85in" height="0.7333in">
+      <Layout nx="10" ny="15" x0="0in" y0="0in" dx="0.85in" dy="0.7333in"/>
     </Label-rectangle>
   </Template>
 
@@ -471,32 +471,7 @@
     <Meta category="media"/>
     <Meta product_url="http://www.begalabel.com/4-5-8-CD-&amp;-DVD-Label-2-per-sheet-p68.html"/>
     <Label-rectangle id="0" width="0.222in" height="4.69in" round="0.064in" x_waste="0.05in" y_waste="0.05in">
-      <Layout nx="2" ny="2" x0="0.5in" y0="5.56in" dx="0.47in" dy="4.87in"/>
-    </Label-rectangle>
-  </Template>
-
-  <Template brand="Begalabel" part="M-300 (medium)" size="US-Letter" _description="CD/DVD Labels">
-    <Meta category="label"/>
-    <Meta category="media"/>
-    <Meta product_url="http://www.begalabel.com/Stomper-CD-DVD-Label-2-per-sheet-p277.html"/>
-    <Label-cd id="0" radius="2.3125in" hole="0.814in" waste="0.05in">
-      <Layout nx="1" ny="2" x0="1.9375in" y0="0.6875in" dx="5in" dy="5in"/>
-    </Label-cd>
-  </Template>
-  <Template brand="Begalabel" part="M-300 (box1)" size="US-Letter" _description="Rectangular labels">
-    <Meta category="label"/>
-    <Meta category="media"/>
-    <Meta product_url="http://www.begalabel.com/Stomper-CD-DVD-Label-2-per-sheet-p277.html"/>
-    <Label-rectangle id="0" width="0.222in" height="4.69in" round="0.064in" x_waste="0.05in" y_waste="0.05in">
-      <Layout nx="2" ny="2" x0="0.5in" y0="5.56in" dx="0.47in" dy="4.87in"/>
-    </Label-rectangle>
-  </Template>
-  <Template brand="Begalabel" part="M-300 (box2)" size="US-Letter" _description="Rectangular labels">
-    <Meta category="label"/>
-    <Meta category="media"/>
-    <Meta product_url="http://www.begalabel.com/Stomper-CD-DVD-Label-2-per-sheet-p277.html"/>
-    <Label-rectangle id="0" width="0.222in" height="4.69in" round="0.064in" waste="0.05in">
-      <Layout nx="2" ny="2" x0="0.5in" y0="5.56in" dx="0.47in" dy="4.87in"/>
+      <Layout nx="2" ny="2" x0="0.5in" y0="0.585in" dx="0.47in" dy="4.87in"/>
     </Label-rectangle>
   </Template>
 
@@ -561,9 +536,9 @@
       <Markup-line x1="3.5in" y1="0.16in" x2="3.34in" y2="0"/>
       <Markup-circle x0="0.875in" y0="0.935in" radius="0.316in"/>
       <Markup-circle x0="2.628in" y0="0.935in" radius="0.316in"/>
-      <Markup-line x1="0.875" y1="0.625in" x2="2.628in" y2="0.625"/>
-      <Markup-line x1="0.875" y1="0.941in" x2="2.628in" y2="0.941"/>
-      <Layout nx="6" ny="6" x0="0.5in" y0="0.5in" dx="4in"/>
+      <Markup-line x1="0.875in" y1="0.619in" x2="2.628in" y2="0.619in"/>
+      <Markup-line x1="0.875in" y1="1.251in" x2="2.628in" y2="1.251in"/>
+      <Layout nx="2" ny="6" x0="0.5in" y0="0.5in" dx="4in" dy="1.66667in"/>
     </Label-rectangle>
   </Template>
 
