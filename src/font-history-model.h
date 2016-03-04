@@ -65,6 +65,7 @@ struct _glFontHistoryModelClass {
 GType                gl_font_history_model_get_type         (void) G_GNUC_CONST;
 
 glFontHistoryModel  *gl_font_history_model_new              (guint               n);
+glFontHistoryModel  *gl_font_history_model_new_null         (void);
 
 void                 gl_font_history_model_add_family       (glFontHistoryModel *this,
                                                              const gchar        *family);

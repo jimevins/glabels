@@ -64,6 +64,21 @@ gl_prefs_init (void)
 
 
 
+/*****************************************************************************/
+/* Initialize preferences module with null model.                            */
+/*****************************************************************************/
+void 
+gl_prefs_init_null (void)
+{
+	gl_debug (DEBUG_PREFS, "START");
+
+	gl_prefs = gl_prefs_model_new_null ();
+
+	gl_debug (DEBUG_PREFS, "END");
+}
+
+
+
 /*
  * Local Variables:       -- emacs
  * mode: C                -- emacs

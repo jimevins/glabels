@@ -32,6 +32,7 @@ glFontHistoryModel *gl_font_history;
 
 
 void            gl_font_history_init (void);
+void            gl_font_history_init_null (void);
 
 
 G_END_DECLS

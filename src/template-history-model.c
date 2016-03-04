@@ -98,14 +98,6 @@ static void
 gl_template_history_model_init (glTemplateHistoryModel *this)
 {
         this->priv = g_new0 (glTemplateHistoryModelPrivate, 1);
-
-        this->priv->history = g_settings_new ("org.gnome.glabels-3.history");
-
-        g_return_if_fail (this->priv->history != NULL);
-
-        g_signal_connect_swapped (G_OBJECT (this->priv->history),
-                                  "changed::recent-templates",
-                                  G_CALLBACK (history_changed_cb), this);
 }
 
 
@@ -137,7 +129,29 @@ gl_template_history_model_new (guint n)
 
         this = g_object_new (TYPE_GL_TEMPLATE_HISTORY_MODEL, NULL);
 
+        this->priv->history = g_settings_new ("org.gnome.glabels-3.history");
+
+        g_signal_connect_swapped (G_OBJECT (this->priv->history),
+                                  "changed::recent-templates",
+                                  G_CALLBACK (history_changed_cb), this);
+
         this->priv->max_n = n;
+
+        return this;
+}
+
+
+/*****************************************************************************/
+/** New null Object Generator.                                               */
+/*****************************************************************************/
+glTemplateHistoryModel *
+gl_template_history_model_new_null (void)
+{
+        glTemplateHistoryModel *this;
+
+        this = g_object_new (TYPE_GL_TEMPLATE_HISTORY_MODEL, NULL);
+
+        this->priv->max_n = 0;
 
         return this;
 }
@@ -150,31 +164,34 @@ void
 gl_template_history_model_add_name (glTemplateHistoryModel *this,
                                     const gchar            *name)
 {
-        gchar **old;
-        gchar **new;
-        gint    i, j;
+	if ( this->priv->history )
+	{
+		gchar **old;
+		gchar **new;
+		gint    i, j;
 
-        old = g_settings_get_strv (this->priv->history, "recent-templates");
+		old = g_settings_get_strv (this->priv->history, "recent-templates");
                                    
-        new = g_new0 (gchar *, this->priv->max_n+1);
+		new = g_new0 (gchar *, this->priv->max_n+1);
 
-        /* Put in first slot. */
-        new[0] = g_strdup (name);
+		/* Put in first slot. */
+		new[0] = g_strdup (name);
 
-        /* Push everthing else down, pruning any duplicate found. */
-        for ( i = 0, j = 1; (j < (this->priv->max_n-1)) && old[i]; i++ )
-        {
-                if ( lgl_str_utf8_casecmp (name, old[i]) != 0 )
-                {
-                        new[j++] = g_strdup (old[i]);
-                }
-        }
+		/* Push everthing else down, pruning any duplicate found. */
+		for ( i = 0, j = 1; (j < (this->priv->max_n-1)) && old[i]; i++ )
+		{
+			if ( lgl_str_utf8_casecmp (name, old[i]) != 0 )
+			{
+				new[j++] = g_strdup (old[i]);
+			}
+		}
 
-        g_settings_set_strv (this->priv->history, "recent-templates",
-                             (const gchar * const *)new);
+		g_settings_set_strv (this->priv->history, "recent-templates",
+		                     (const gchar * const *)new);
 
-        g_strfreev (old);
-        g_strfreev (new);
+		g_strfreev (old);
+		g_strfreev (new);
+	}
 }
 
 
@@ -194,24 +211,28 @@ history_changed_cb (glTemplateHistoryModel  *this)
 GList *
 gl_template_history_model_get_name_list (glTemplateHistoryModel *this)
 {
-        gchar **strv;
         GList  *list = NULL;
-        gint    i;
 
-        strv = g_settings_get_strv (this->priv->history, "recent-templates");
+        if ( this->priv->history )
+	{
+		gchar **strv;
+		gint    i;
 
-        /*
-         * Proof read name list; transfer storage to new list.
-         */
-        for ( i = 0; strv[i]; i++ )
-        {
-                if ( lgl_db_does_template_name_exist (strv[i]) )
-                {
-                        list = g_list_append (list, g_strdup (strv[i]));
-                }
-        }
-        g_strfreev (strv);
+		strv = g_settings_get_strv (this->priv->history, "recent-templates");
 
+		/*
+		 * Proof read name list; transfer storage to new list.
+		 */
+		for ( i = 0; strv[i]; i++ )
+		{
+			if ( lgl_db_does_template_name_exist (strv[i]) )
+			{
+				list = g_list_append (list, g_strdup (strv[i]));
+			}
+		}
+		g_strfreev (strv);
+	}
+        
         return list;
 }
 

@@ -56,6 +56,16 @@ gl_template_history_init (void)
 }
 
 
+/*****************************************************************************/
+/* Initialize template history with null model.                              */
+/*****************************************************************************/
+void
+gl_template_history_init_null (void)
+{
+        gl_template_history = gl_template_history_model_new_null ();
+}
+
+
 
 /*
  * Local Variables:       -- emacs

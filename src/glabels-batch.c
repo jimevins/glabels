@@ -100,8 +100,8 @@ main (int argc, char **argv)
 	g_option_context_add_main_entries (option_context, option_entries, GETTEXT_PACKAGE);
 
 
-        /* Initialize minimal gnome program */
-        gtk_init_check (&argc, &argv);
+        /* Initialize minimal gtk program */
+        gtk_parse_args (&argc, &argv);
         if (!g_option_context_parse (option_context, &argc, &argv, &error))
 	{
 	        g_print(_("%s\nRun '%s --help' to see a full list of available command line options.\n"),
@@ -129,9 +129,9 @@ main (int argc, char **argv)
         gl_debug_init ();
         gl_merge_init ();
         lgl_db_init ();
-	gl_prefs_init ();
-	gl_template_history_init ();
-	gl_font_history_init ();
+        gl_prefs_init_null ();
+	gl_template_history_init_null ();
+	gl_font_history_init_null ();
 
         /* now print the files */
         for (p = file_list; p; p = p->next) {
