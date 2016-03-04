@@ -99,14 +99,6 @@ static void
 gl_font_history_model_init (glFontHistoryModel *this)
 {
         this->priv = g_new0 (glFontHistoryModelPrivate, 1);
-
-        this->priv->history = g_settings_new ("org.gnome.glabels-3.history");
-
-        g_return_if_fail (this->priv->history != NULL);
-
-        g_signal_connect_swapped (G_OBJECT (this->priv->history),
-                                  "changed::recent-fonts",
-                                  G_CALLBACK (history_changed_cb), this);
 }
 
 
@@ -138,7 +130,29 @@ gl_font_history_model_new (guint n)
 
         this = g_object_new (TYPE_GL_FONT_HISTORY_MODEL, NULL);
 
+        this->priv->history = g_settings_new ("org.gnome.glabels-3.history");
+
+        g_signal_connect_swapped (G_OBJECT (this->priv->history),
+                                  "changed::recent-fonts",
+                                  G_CALLBACK (history_changed_cb), this);
+
         this->priv->max_n = n;
+
+        return this;
+}
+
+
+/*****************************************************************************/
+/** New Null Object Generator.                                               */
+/*****************************************************************************/
+glFontHistoryModel *
+gl_font_history_model_new_null (void)
+{
+        glFontHistoryModel *this;
+
+        this = g_object_new (TYPE_GL_FONT_HISTORY_MODEL, NULL);
+
+        this->priv->max_n = 0;
 
         return this;
 }
@@ -151,31 +165,34 @@ void
 gl_font_history_model_add_family (glFontHistoryModel *this,
                                   const gchar        *family)
 {
-        gchar **old;
-        gchar **new;
-        gint    i, j;
+	if ( this->priv->history )
+	{
+		gchar **old;
+		gchar **new;
+		gint    i, j;
 
-        old = g_settings_get_strv (this->priv->history, "recent-fonts");
+		old = g_settings_get_strv (this->priv->history, "recent-fonts");
                                    
-        new = g_new0 (gchar *, this->priv->max_n+1);
+		new = g_new0 (gchar *, this->priv->max_n+1);
 
-        /* Put in first slot. */
-        new[0] = g_strdup (family);
+		/* Put in first slot. */
+		new[0] = g_strdup (family);
 
-        /* Push everthing else down, pruning any duplicate found. */
-        for ( i = 0, j = 1; (j < (this->priv->max_n-1)) && old[i]; i++ )
-        {
-                if ( lgl_str_utf8_casecmp (family, old[i]) != 0 )
-                {
-                        new[j++] = g_strdup (old[i]);
-                }
-        }
+		/* Push everthing else down, pruning any duplicate found. */
+		for ( i = 0, j = 1; (j < (this->priv->max_n-1)) && old[i]; i++ )
+		{
+			if ( lgl_str_utf8_casecmp (family, old[i]) != 0 )
+			{
+				new[j++] = g_strdup (old[i]);
+			}
+		}
 
-        g_settings_set_strv (this->priv->history, "recent-fonts",
-                             (const gchar * const *)new);
+		g_settings_set_strv (this->priv->history, "recent-fonts",
+		                     (const gchar * const *)new);
 
-        g_strfreev (old);
-        g_strfreev (new);
+		g_strfreev (old);
+		g_strfreev (new);
+	}
 }
 
 
@@ -195,23 +212,27 @@ history_changed_cb                  (glFontHistoryModel  *this)
 GList *
 gl_font_history_model_get_family_list (glFontHistoryModel *this)
 {
-        gchar **strv;
         GList  *list = NULL;
-        gint    i;
 
-        strv = g_settings_get_strv (this->priv->history, "recent-fonts");
-
-        /*
-         * Proof read name list; transfer storage to new list.
-         */
-        for ( i = 0; strv[i]; i++ )
+        if ( this->priv->history )
         {
-                if ( gl_font_util_is_family_installed (strv[i]) )
-                {
-                        list = g_list_append (list, g_strdup (strv[i]));
-                }
+	        gchar **strv;
+	        gint    i;
+
+	        strv = g_settings_get_strv (this->priv->history, "recent-fonts");
+
+	        /*
+	         * Proof read name list; transfer storage to new list.
+	         */
+	        for ( i = 0; strv[i]; i++ )
+	        {
+		        if ( gl_font_util_is_family_installed (strv[i]) )
+		        {
+			        list = g_list_append (list, g_strdup (strv[i]));
+		        }
+	        }
+	        g_strfreev (strv);
         }
-        g_strfreev (strv);
 
         return list;
 }

@@ -118,21 +118,6 @@ gl_prefs_model_init (glPrefsModel *this)
 
         this->priv = g_new0 (glPrefsModelPrivate, 1);
 
-        this->priv->locale  = g_settings_new ("org.gnome.glabels-3.locale");
-        this->priv->objects = g_settings_new ("org.gnome.glabels-3.objects");
-        this->priv->ui      = g_settings_new ("org.gnome.glabels-3.ui");
-
-        g_return_if_fail (this->priv->locale != NULL);
-        g_return_if_fail (this->priv->objects != NULL);
-        g_return_if_fail (this->priv->ui != NULL);
- 
-        g_signal_connect_swapped (G_OBJECT (this->priv->locale), "changed",
-                                  G_CALLBACK (gsettings_changed_cb), this);
-        g_signal_connect_swapped (G_OBJECT (this->priv->objects), "changed",
-                                  G_CALLBACK (gsettings_changed_cb), this);
-        g_signal_connect_swapped (G_OBJECT (this->priv->ui), "changed",
-                                  G_CALLBACK (gsettings_changed_cb), this);
-
         gl_debug (DEBUG_PREFS, "END");
 }
 
@@ -169,6 +154,35 @@ gl_prefs_model_new (void)
 
         this = GL_PREFS_MODEL (g_object_new (gl_prefs_model_get_type(), NULL));
 
+        this->priv->locale  = g_settings_new ("org.gnome.glabels-3.locale");
+        this->priv->objects = g_settings_new ("org.gnome.glabels-3.objects");
+        this->priv->ui      = g_settings_new ("org.gnome.glabels-3.ui");
+
+        g_signal_connect_swapped (G_OBJECT (this->priv->locale), "changed",
+                                  G_CALLBACK (gsettings_changed_cb), this);
+        g_signal_connect_swapped (G_OBJECT (this->priv->objects), "changed",
+                                  G_CALLBACK (gsettings_changed_cb), this);
+        g_signal_connect_swapped (G_OBJECT (this->priv->ui), "changed",
+                                  G_CALLBACK (gsettings_changed_cb), this);
+
+        gl_debug (DEBUG_PREFS, "END");
+
+        return this;
+}
+
+
+/*****************************************************************************/
+/* New null prefs_model object.                                              */
+/*****************************************************************************/
+glPrefsModel *
+gl_prefs_model_new_null (void)
+{
+        glPrefsModel *this;
+
+        gl_debug (DEBUG_PREFS, "START");
+
+        this = GL_PREFS_MODEL (g_object_new (gl_prefs_model_get_type(), NULL));
+
         gl_debug (DEBUG_PREFS, "END");
 
         return this;
@@ -182,9 +196,12 @@ void
 gl_prefs_model_set_units (glPrefsModel     *this,
                           lglUnits          units)
 {
-        g_settings_set_string (this->priv->locale,
-                               "units",
-                               lgl_units_get_id (units));
+        if ( this->priv->locale )
+        {
+	        g_settings_set_string (this->priv->locale,
+	                               "units",
+	                               lgl_units_get_id (units));
+        }
 }
 
 
@@ -194,6 +211,11 @@ gl_prefs_model_set_units (glPrefsModel     *this,
 lglUnits
 gl_prefs_model_get_units (glPrefsModel     *this)
 {
+        if ( !this->priv->locale )
+        {
+	        return lgl_units_from_id (DEFAULT_UNITS_STRING_METRIC);
+        }
+
         const gchar  *pgsize;
         gchar        *string;
         lglUnits      units;
@@ -242,9 +264,12 @@ void
 gl_prefs_model_set_default_page_size (glPrefsModel     *this,
                                       const gchar      *page_size)
 {
-        g_settings_set_string (this->priv->locale,
-                               "default-page-size",
-                               page_size);
+        if ( this->priv->locale )
+        {
+	        g_settings_set_string (this->priv->locale,
+	                               "default-page-size",
+	                               page_size);
+        }
 }
 
 
@@ -254,6 +279,11 @@ gl_prefs_model_set_default_page_size (glPrefsModel     *this,
 gchar *
 gl_prefs_model_get_default_page_size (glPrefsModel     *this)
 {
+        if ( !this->priv->locale )
+        {
+	        return g_strdup (DEFAULT_PAGE_SIZE_METRIC);
+        }
+
         const gchar *pgsize;
         gchar       *page_size;
         lglPaper    *paper;
@@ -295,9 +325,12 @@ void
 gl_prefs_model_set_default_font_family (glPrefsModel     *this,
                                         const gchar      *family)
 {
-        g_settings_set_string (this->priv->objects,
-                               "default-font-family",
-                               family);
+        if ( this->priv->objects )
+        {
+	        g_settings_set_string (this->priv->objects,
+	                               "default-font-family",
+	                               family);
+        }
 }
 
 
@@ -307,10 +340,13 @@ gl_prefs_model_set_default_font_family (glPrefsModel     *this,
 gchar *
 gl_prefs_model_get_default_font_family (glPrefsModel     *this)
 {
-        gchar *family;
+        if ( !this->priv->objects )
+        {
+	        return g_strdup ("Sans");
+        }
 
-        family = g_settings_get_string (this->priv->objects,
-                                        "default-font-family");
+        gchar *family = g_settings_get_string (this->priv->objects,
+                                               "default-font-family");
 
         return family;
 }
@@ -323,9 +359,12 @@ void
 gl_prefs_model_set_default_font_size (glPrefsModel     *this,
                                       gdouble           size)
 {
-        g_settings_set_double (this->priv->objects,
-                               "default-font-size",
-                               size);
+        if ( this->priv->objects )
+        {
+	        g_settings_set_double (this->priv->objects,
+	                               "default-font-size",
+	                               size);
+        }
 }
 
 
@@ -335,10 +374,13 @@ gl_prefs_model_set_default_font_size (glPrefsModel     *this,
 gdouble
 gl_prefs_model_get_default_font_size (glPrefsModel     *this)
 {
-        gdouble size;
+        if ( !this->priv->objects )
+        {
+	        return 12;
+        }
 
-        size = g_settings_get_double (this->priv->objects,
-                                      "default-font-size");
+        gdouble size = g_settings_get_double (this->priv->objects,
+                                              "default-font-size");
 
         return size;
 }
@@ -351,9 +393,12 @@ void
 gl_prefs_model_set_default_font_weight (glPrefsModel     *this,
                                         PangoWeight       weight)
 {
-        g_settings_set_string (this->priv->objects,
-                               "default-font-weight",
-                               gl_str_util_weight_to_string(weight));
+        if ( this->priv->objects )
+        {
+	        g_settings_set_string (this->priv->objects,
+	                               "default-font-weight",
+	                               gl_str_util_weight_to_string(weight));
+        }
 }
 
 
@@ -363,12 +408,14 @@ gl_prefs_model_set_default_font_weight (glPrefsModel     *this,
 PangoWeight
 gl_prefs_model_get_default_font_weight (glPrefsModel     *this)
 {
-        gchar       *string;
-        PangoWeight  weight;
+        if ( !this->priv->objects )
+        {
+	        return PANGO_WEIGHT_NORMAL;
+        }
 
-        string = g_settings_get_string (this->priv->objects,
+        gchar *string = g_settings_get_string (this->priv->objects,
                                         "default-font-weight");
-        weight = gl_str_util_string_to_weight (string);
+        PangoWeight weight = gl_str_util_string_to_weight (string);
         g_free (string);
 
         return weight;
@@ -382,9 +429,12 @@ void
 gl_prefs_model_set_default_font_italic_flag (glPrefsModel     *this,
                                              gboolean          italic_flag)
 {
-        g_settings_set_boolean (this->priv->objects,
-                                "default-font-italic-flag",
-                                italic_flag);
+        if ( this->priv->objects )
+        {
+	        g_settings_set_boolean (this->priv->objects,
+	                                "default-font-italic-flag",
+	                                italic_flag);
+        }
 }
 
 
@@ -394,10 +444,13 @@ gl_prefs_model_set_default_font_italic_flag (glPrefsModel     *this,
 gboolean
 gl_prefs_model_get_default_font_italic_flag (glPrefsModel     *this)
 {
-        gboolean italic_flag;
+        if ( !this->priv->objects )
+        {
+	        return FALSE;
+        }
 
-        italic_flag = g_settings_get_boolean (this->priv->objects,
-                                              "default-font-italic-flag");
+        gboolean italic_flag = g_settings_get_boolean (this->priv->objects,
+                                                       "default-font-italic-flag");
 
         return italic_flag;
 }
@@ -410,9 +463,12 @@ void
 gl_prefs_model_set_default_text_color (glPrefsModel     *this,
                                        guint             color)
 {
-        g_settings_set_value (this->priv->objects,
-                              "default-text-color",
-                              g_variant_new_uint32 (color));
+        if ( this->priv->objects )
+        {
+	        g_settings_set_value (this->priv->objects,
+	                              "default-text-color",
+	                              g_variant_new_uint32 (color));
+        }
 }
 
 
@@ -422,11 +478,13 @@ gl_prefs_model_set_default_text_color (glPrefsModel     *this,
 guint
 gl_prefs_model_get_default_text_color (glPrefsModel     *this)
 {
-        GVariant *value;
-        guint     color;
+        if ( !this->priv->objects )
+        {
+	        return 0x000000FF;
+        }
 
-        value = g_settings_get_value (this->priv->objects, "default-text-color");
-        color = g_variant_get_uint32 (value);
+        GVariant *value = g_settings_get_value (this->priv->objects, "default-text-color");
+        guint color = g_variant_get_uint32 (value);
         g_variant_unref (value);
 
         return color;
@@ -440,9 +498,12 @@ void
 gl_prefs_model_set_default_text_alignment (glPrefsModel     *this,
                                            PangoAlignment    alignment)
 {
-        g_settings_set_string (this->priv->objects,
-                               "default-text-alignment",
-                               gl_str_util_align_to_string(alignment));
+        if ( this->priv->objects )
+        {
+	        g_settings_set_string (this->priv->objects,
+	                               "default-text-alignment",
+	                               gl_str_util_align_to_string(alignment));
+        }
 }
 
 
@@ -452,12 +513,14 @@ gl_prefs_model_set_default_text_alignment (glPrefsModel     *this,
 PangoAlignment
 gl_prefs_model_get_default_text_alignment (glPrefsModel     *this)
 {
-        gchar          *string;
-        PangoAlignment  alignment;
+        if ( !this->priv->objects )
+        {
+	        return PANGO_ALIGN_LEFT;
+        }
 
-        string = g_settings_get_string (this->priv->objects,
-                                        "default-text-alignment");
-        alignment = gl_str_util_string_to_align (string);
+        gchar *string = g_settings_get_string (this->priv->objects,
+                                               "default-text-alignment");
+        PangoAlignment alignment = gl_str_util_string_to_align (string);
         g_free (string);
 
         return alignment;
@@ -471,9 +534,12 @@ void
 gl_prefs_model_set_default_text_line_spacing (glPrefsModel     *this,
                                               gdouble           spacing)
 {
-        g_settings_set_double (this->priv->objects,
-                               "default-text-line-spacing",
-                               spacing);
+        if ( this->priv->objects )
+        {
+	        g_settings_set_double (this->priv->objects,
+	                               "default-text-line-spacing",
+	                               spacing);
+        }
 }
 
 
@@ -483,10 +549,13 @@ gl_prefs_model_set_default_text_line_spacing (glPrefsModel     *this,
 gdouble
 gl_prefs_model_get_default_text_line_spacing (glPrefsModel     *this)
 {
-        gdouble spacing;
+        if ( !this->priv->objects )
+        {
+	        return 1;
+        }
 
-        spacing = g_settings_get_double (this->priv->objects,
-                                         "default-text-line-spacing");
+        gdouble spacing = g_settings_get_double (this->priv->objects,
+                                                 "default-text-line-spacing");
 
         return spacing;
 }
@@ -499,9 +568,12 @@ void
 gl_prefs_model_set_default_line_width (glPrefsModel     *this,
                                        gdouble           width)
 {
-        g_settings_set_double (this->priv->objects,
-                               "default-line-width",
-                               width);
+        if ( this->priv->objects )
+        {
+	        g_settings_set_double (this->priv->objects,
+	                               "default-line-width",
+	                               width);
+        }
 }
 
 
@@ -511,10 +583,13 @@ gl_prefs_model_set_default_line_width (glPrefsModel     *this,
 gdouble
 gl_prefs_model_get_default_line_width (glPrefsModel     *this)
 {
-        gdouble width;
+        if ( !this->priv->objects )
+        {
+	        return 1;
+        }
 
-        width = g_settings_get_double (this->priv->objects,
-                                       "default-line-width");
+        gdouble width = g_settings_get_double (this->priv->objects,
+                                               "default-line-width");
 
         return width;
 }
@@ -527,9 +602,12 @@ void
 gl_prefs_model_set_default_line_color (glPrefsModel     *this,
                                        guint             color)
 {
-        g_settings_set_value (this->priv->objects,
-                              "default-line-color",
-                              g_variant_new_uint32 (color));
+        if ( this->priv->objects )
+        {
+	        g_settings_set_value (this->priv->objects,
+	                              "default-line-color",
+	                              g_variant_new_uint32 (color));
+        }
 }
 
 
@@ -539,11 +617,13 @@ gl_prefs_model_set_default_line_color (glPrefsModel     *this,
 guint
 gl_prefs_model_get_default_line_color (glPrefsModel     *this)
 {
-        GVariant *value;
-        guint     color;
+        if ( !this->priv->objects )
+        {
+	        return 0x000000FF;
+        }
 
-        value = g_settings_get_value (this->priv->objects, "default-line-color");
-        color = g_variant_get_uint32 (value);
+        GVariant *value = g_settings_get_value (this->priv->objects, "default-line-color");
+        guint color = g_variant_get_uint32 (value);
         g_variant_unref (value);
 
         return color;
@@ -557,9 +637,12 @@ void
 gl_prefs_model_set_default_fill_color (glPrefsModel     *this,
                                        guint             color)
 {
-        g_settings_set_value (this->priv->objects,
-                              "default-fill-color",
-                              g_variant_new_uint32 (color));
+        if ( this->priv->objects )
+        {
+	        g_settings_set_value (this->priv->objects,
+	                              "default-fill-color",
+	                              g_variant_new_uint32 (color));
+        }
 }
 
 
@@ -569,11 +652,13 @@ gl_prefs_model_set_default_fill_color (glPrefsModel     *this,
 guint
 gl_prefs_model_get_default_fill_color (glPrefsModel     *this)
 {
-        GVariant *value;
-        guint     color;
+        if ( !this->priv->objects )
+        {
+	        return 0x00FF00FF;
+        }
 
-        value = g_settings_get_value (this->priv->objects, "default-fill-color");
-        color = g_variant_get_uint32 (value);
+        GVariant *value = g_settings_get_value (this->priv->objects, "default-fill-color");
+        guint color = g_variant_get_uint32 (value);
         g_variant_unref (value);
 
         return color;
@@ -587,9 +672,12 @@ void
 gl_prefs_model_set_main_toolbar_visible (glPrefsModel     *this,
                                          gboolean          visible)
 {
-        g_settings_set_boolean (this->priv->ui,
-                                "main-toolbar-visible",
-                                visible);
+        if ( this->priv->ui )
+        {
+	        g_settings_set_boolean (this->priv->ui,
+	                                "main-toolbar-visible",
+	                                visible);
+        }
 }
 
 
@@ -599,10 +687,13 @@ gl_prefs_model_set_main_toolbar_visible (glPrefsModel     *this,
 gboolean
 gl_prefs_model_get_main_toolbar_visible (glPrefsModel     *this)
 {
-        gboolean visible;
+        if ( !this->priv->ui )
+        {
+	        return TRUE;
+        }
 
-        visible = g_settings_get_boolean (this->priv->ui,
-                                          "main-toolbar-visible");
+        gboolean visible = g_settings_get_boolean (this->priv->ui,
+                                                   "main-toolbar-visible");
 
         return visible;
 }
@@ -615,9 +706,12 @@ void
 gl_prefs_model_set_drawing_toolbar_visible (glPrefsModel     *this,
                                             gboolean          visible)
 {
-        g_settings_set_boolean (this->priv->ui,
-                                "drawing-toolbar-visible",
-                                visible);
+        if ( this->priv->ui )
+        {
+	        g_settings_set_boolean (this->priv->ui,
+	                                "drawing-toolbar-visible",
+	                                visible);
+        }
 }
 
 
@@ -627,10 +721,13 @@ gl_prefs_model_set_drawing_toolbar_visible (glPrefsModel     *this,
 gboolean
 gl_prefs_model_get_drawing_toolbar_visible (glPrefsModel     *this)
 {
-        gboolean visible;
+        if ( !this->priv->ui )
+        {
+	        return TRUE;
+        }
 
-        visible = g_settings_get_boolean (this->priv->ui,
-                                          "drawing-toolbar-visible");
+        gboolean visible = g_settings_get_boolean (this->priv->ui,
+                                                   "drawing-toolbar-visible");
 
         return visible;
 }
@@ -643,9 +740,12 @@ void
 gl_prefs_model_set_property_toolbar_visible (glPrefsModel     *this,
                                              gboolean          visible)
 {
-        g_settings_set_boolean (this->priv->ui,
-                                "property-toolbar-visible",
-                                visible);
+        if ( this->priv->ui )
+        {
+	        g_settings_set_boolean (this->priv->ui,
+	                                "property-toolbar-visible",
+	                                visible);
+        }
 }
 
 
@@ -655,10 +755,13 @@ gl_prefs_model_set_property_toolbar_visible (glPrefsModel     *this,
 gboolean
 gl_prefs_model_get_property_toolbar_visible (glPrefsModel     *this)
 {
-        gboolean visible;
+        if ( !this->priv->ui )
+        {
+	        return TRUE;
+        }
 
-        visible = g_settings_get_boolean (this->priv->ui,
-                                          "property-toolbar-visible");
+        gboolean visible = g_settings_get_boolean (this->priv->ui,
+                                                   "property-toolbar-visible");
 
         return visible;
 }
@@ -671,9 +774,12 @@ void
 gl_prefs_model_set_grid_visible (glPrefsModel     *this,
                                  gboolean          visible)
 {
-        g_settings_set_boolean (this->priv->ui,
-                                "grid-visible",
-                                visible);
+        if ( this->priv->ui )
+        {
+	        g_settings_set_boolean (this->priv->ui,
+	                                "grid-visible",
+	                                visible);
+        }
 }
 
 
@@ -683,10 +789,13 @@ gl_prefs_model_set_grid_visible (glPrefsModel     *this,
 gboolean
 gl_prefs_model_get_grid_visible (glPrefsModel     *this)
 {
-        gboolean visible;
+        if ( !this->priv->ui )
+        {
+	        return TRUE;
+        }
 
-        visible = g_settings_get_boolean (this->priv->ui,
-                                          "grid-visible");
+        gboolean visible = g_settings_get_boolean (this->priv->ui,
+                                                   "grid-visible");
 
         return visible;
 }
@@ -699,9 +808,12 @@ void
 gl_prefs_model_set_markup_visible (glPrefsModel     *this,
                                    gboolean          visible)
 {
-        g_settings_set_boolean (this->priv->ui,
-                                "markup-visible",
-                                visible);
+        if ( this->priv->ui )
+        {
+	        g_settings_set_boolean (this->priv->ui,
+	                                "markup-visible",
+	                                visible);
+        }
 }
 
 
@@ -711,10 +823,13 @@ gl_prefs_model_set_markup_visible (glPrefsModel     *this,
 gboolean
 gl_prefs_model_get_markup_visible (glPrefsModel     *this)
 {
-        gboolean visible;
+        if ( !this->priv->ui )
+        {
+	        return TRUE;
+        }
 
-        visible = g_settings_get_boolean (this->priv->ui,
-                                          "markup-visible");
+        gboolean visible = g_settings_get_boolean (this->priv->ui,
+                                                   "markup-visible");
 
         return visible;
 }
@@ -727,9 +842,12 @@ void
 gl_prefs_model_set_max_recents (glPrefsModel     *this,
                                 gint              max_recents)
 {
-        g_settings_set_int (this->priv->ui,
-                            "max-recents",
-                            max_recents);
+        if ( this->priv->ui )
+        {
+	        g_settings_set_int (this->priv->ui,
+	                            "max-recents",
+	                            max_recents);
+        }
 }
 
 
@@ -739,10 +857,13 @@ gl_prefs_model_set_max_recents (glPrefsModel     *this,
 gint
 gl_prefs_model_get_max_recents (glPrefsModel     *this)
 {
-        gint max_recents;
+        if ( !this->priv->ui )
+        {
+	        return 10;
+        }
 
-        max_recents = g_settings_get_int (this->priv->ui,
-                                          "max-recents");
+        gint max_recents = g_settings_get_int (this->priv->ui,
+                                               "max-recents");
 
         return max_recents;
 }

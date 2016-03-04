@@ -65,6 +65,7 @@ struct _glTemplateHistoryModelClass {
 GType                   gl_template_history_model_get_type       (void) G_GNUC_CONST;
 
 glTemplateHistoryModel *gl_template_history_model_new            (guint                   n);
+glTemplateHistoryModel *gl_template_history_model_new_null       (void);
 
 void                    gl_template_history_model_add_name       (glTemplateHistoryModel *this,
                                                                   const gchar            *name);

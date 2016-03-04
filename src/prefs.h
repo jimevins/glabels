@@ -30,6 +30,7 @@ extern glPrefsModel *gl_prefs;
 
 
 void          gl_prefs_init                (void);
+void          gl_prefs_init_null           (void);
 
 
 G_END_DECLS

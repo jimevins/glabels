@@ -32,6 +32,7 @@ glTemplateHistoryModel *gl_template_history;
 
 
 void            gl_template_history_init (void);
+void            gl_template_history_init_null (void);
 
 
 G_END_DECLS

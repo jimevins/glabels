@@ -56,6 +56,16 @@ gl_font_history_init (void)
 }
 
 
+/*****************************************************************************/
+/* Initialize font history with a null model.                                */
+/*****************************************************************************/
+void
+gl_font_history_init_null (void)
+{
+	gl_font_history = gl_font_history_model_new_null ();
+}
+
+
 
 /*
  * Local Variables:       -- emacs
