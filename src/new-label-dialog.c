@@ -209,7 +209,9 @@ gl_new_label_dialog_init (glNewLabelDialog *this)
         this->priv->builder = builder;
 
         gtk_assistant_append_page (GTK_ASSISTANT (this), this->priv->template_page_vbox);
-        gtk_assistant_set_page_title (GTK_ASSISTANT (this), this->priv->template_page_vbox, _("Select Product"));
+        gtk_assistant_set_page_title (GTK_ASSISTANT (this), this->priv->template_page_vbox,
+                                      C_("Title of dialog page to select a stationary product",
+                                         "Select Product"));
         gtk_assistant_set_page_type (GTK_ASSISTANT (this), this->priv->template_page_vbox, GTK_ASSISTANT_PAGE_INTRO);
         gtk_widget_override_background_color (page_1_banner_eventbox, GTK_STATE_NORMAL, &banner_color);
         logo_filename = g_build_filename (GLABELS_DATA_DIR, "pixmaps", "new-select.png", NULL);
