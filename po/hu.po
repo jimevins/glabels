@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2016-03-06 01:52+0000\n"
-"PO-Revision-Date: 2016-03-06 19:30+0100\n"
+"POT-Creation-Date: 2016-03-06 21:17+0000\n"
+"PO-Revision-Date: 2016-03-07 00:02+0100\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <openscope at googlegroups dot com>\n"
 "Language: hu\n"
@@ -1148,15 +1148,17 @@ msgstr "Rögzített"
 msgid "Up"
 msgstr "Fel"
 
-#: ../src/new-label-dialog.c:212 ../data/ui/new-label-dialog.ui.h:1
+#: ../src/new-label-dialog.c:214
+#| msgid "Select Product"
+msgctxt "Title of dialog page to select a stationary product"
 msgid "Select Product"
 msgstr "Válasszon terméket"
 
-#: ../src/new-label-dialog.c:225 ../data/ui/new-label-dialog.ui.h:3
+#: ../src/new-label-dialog.c:227 ../data/ui/new-label-dialog.ui.h:3
 msgid "Choose Orientation"
 msgstr "Válasszon tájolást"
 
-#: ../src/new-label-dialog.c:240
+#: ../src/new-label-dialog.c:242
 msgid "Review"
 msgstr "Áttekintés"
 
@@ -1942,6 +1944,10 @@ msgstr "Kijelölés megszüntetése"
 #: ../data/ui/merge-properties-dialog.ui.h:6
 msgid "Record selection/preview"
 msgstr "Rekordkijelölés/előnézet"
+
+#: ../data/ui/new-label-dialog.ui.h:1
+msgid "Select Product"
+msgstr "Válasszon terméket"
 
 #: ../data/ui/new-label-dialog.ui.h:2
 msgid ""
@@ -2915,7 +2921,6 @@ msgid "Business cards"
 msgstr "Névjegyek"
 
 #: ../templates/categories.xml.h:8
-#| msgid "Name Badge Labels"
 msgid "Name Badge"
 msgstr "Névkitűző"
 
@@ -2936,7 +2941,6 @@ msgid "Photo products"
 msgstr "Fényképtermékek"
 
 #: ../templates/categories.xml.h:13
-#| msgid "Filing Labels"
 msgid "Filing labels"
 msgstr "Iktató címkék"
 
@@ -3336,7 +3340,6 @@ msgstr "Tagsági kártyák"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:4
-#| msgid "Multi-Purpose Labels"
 msgid "Multipurpose Labels"
 msgstr "Többcélú címkék"
 
@@ -3347,7 +3350,6 @@ msgstr "Iratmappa"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:10
-#| msgid "Name Badge Labels"
 msgid "Name Badges"
 msgstr "Névkitűzők"
 
