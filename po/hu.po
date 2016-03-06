@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2016-03-03 22:54+0000\n"
-"PO-Revision-Date: 2016-03-04 22:43+0100\n"
+"POT-Creation-Date: 2016-03-06 01:52+0000\n"
+"PO-Revision-Date: 2016-03-06 19:30+0100\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <openscope at googlegroups dot com>\n"
 "Language: hu\n"
@@ -208,7 +208,6 @@ msgid "Code 49"
 msgstr "Code 49"
 
 #: ../src/bc-backends.c:263
-#| msgid "Code 128 (Mode C supression)"
 msgid "Code 128 (Mode C suppression)"
 msgstr "Code 128 (C-mód elnyomás)"
 
@@ -557,7 +556,6 @@ msgstr "Címketulajdonságok"
 
 #. Translators: assistent dialog title
 #: ../src/file.c:203
-#| msgid "Label properties"
 msgid "Choose label properties"
 msgstr "Címketulajdonságok kiválasztása"
 
@@ -826,7 +824,6 @@ msgstr "%s × %s / %s %s (szélesség ×magasság /lekerekítés)"
 #. "120.5 mm (diameter)"
 #: ../src/label.c:788
 #, c-format
-#| msgid "diameter"
 msgid "%s %s (diameter)"
 msgstr "%s %s (átmérő)"
 
@@ -1840,7 +1837,6 @@ msgstr "pica"
 #. * End:                   -- emacs
 #.
 #: ../data/ui/label-properties-dialog.ui.h:1
-#| msgid "Labels"
 msgid "Label"
 msgstr "Címke"
 
@@ -1864,7 +1860,6 @@ msgid "Dimensions:"
 msgstr "Dimenziók:"
 
 #: ../data/ui/label-properties-dialog.ui.h:6
-#| msgid "Medium green"
 msgid "Medium size:"
 msgstr "Közepes méret:"
 
@@ -1874,7 +1869,6 @@ msgid "Layout:"
 msgstr "Elrendezés:"
 
 #: ../data/ui/label-properties-dialog.ui.h:8
-#| msgid "6. Margin"
 msgid "Margins:"
 msgstr "Margók:"
 
@@ -1889,17 +1883,14 @@ msgid "Options"
 msgstr "Beállítások"
 
 #: ../data/ui/label-properties-dialog.ui.h:11
-#| msgid "Choose Orientation"
 msgid "Orientation:"
 msgstr "Tájolás:"
 
 #: ../data/ui/label-properties-dialog.ui.h:12
-#| msgid "Normal"
 msgid "_Normal"
 msgstr "_Normál"
 
 #: ../data/ui/label-properties-dialog.ui.h:13
-#| msgid "Rotated"
 msgid "_Rotated"
 msgstr "_Elforgatott"
 
@@ -2481,7 +2472,6 @@ msgstr ""
 "a Vissza gombra kattintva folytathatja a szerkesztését."
 
 #: ../data/appdata/glabels-3.appdata.xml.in.h:1
-#| msgid "Labels"
 msgid "gLabels"
 msgstr "gLabels"
 
@@ -2925,20 +2915,30 @@ msgid "Business cards"
 msgstr "Névjegyek"
 
 #: ../templates/categories.xml.h:8
+#| msgid "Name Badge Labels"
+msgid "Name Badge"
+msgstr "Névkitűző"
+
+#: ../templates/categories.xml.h:9
 msgid "CD/DVD or other media"
 msgstr "CD/DVD vagy más média"
 
-#: ../templates/categories.xml.h:9
+#: ../templates/categories.xml.h:10
 msgid "Mailing/shipping products"
 msgstr "Levelezési/csomagküldési termékek"
 
-#: ../templates/categories.xml.h:10
+#: ../templates/categories.xml.h:11
 msgid "Foldable cards"
 msgstr "Összehajtható névjegyek"
 
-#: ../templates/categories.xml.h:11
+#: ../templates/categories.xml.h:12
 msgid "Photo products"
 msgstr "Fényképtermékek"
+
+#: ../templates/categories.xml.h:13
+#| msgid "Filing Labels"
+msgid "Filing labels"
+msgstr "Iktató címkék"
 
 #. TODO: Is this the real part #?
 #. ============================================================
@@ -3013,7 +3013,7 @@ msgstr "Szállítási címkék"
 #: ../templates/avery-us-templates.xml.h:12
 #: ../templates/avery-iso-templates.xml.h:14
 #: ../templates/databecker-iso-templates.xml.h:6
-#: ../templates/dymo-other-templates.xml.h:4
+#: ../templates/dymo-other-templates.xml.h:14
 #: ../templates/geha-iso-templates.xml.h:25
 #: ../templates/maco-us-templates.xml.h:2
 #: ../templates/meritline-us-templates.xml.h:4
@@ -3027,7 +3027,7 @@ msgstr "Címzési címkék"
 #. ===================================================================
 #. ********************************************************************
 #: ../templates/avery-us-templates.xml.h:14
-#: ../templates/dymo-other-templates.xml.h:6
+#: ../templates/dymo-other-templates.xml.h:2
 #: ../templates/meritline-us-templates.xml.h:8
 #: ../templates/sheetlabels-us-templates.xml.h:8
 #: ../templates/worldlabel-us-templates.xml.h:2
@@ -3183,6 +3183,7 @@ msgstr "Levelezőcímkék"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:12
+#: ../templates/dymo-other-templates.xml.h:6
 #: ../templates/misc-iso-templates.xml.h:12
 msgid "Address labels"
 msgstr "Címzési címkék"
@@ -3228,12 +3229,10 @@ msgid "Diskette labels"
 msgstr "Kislemez címkék"
 
 #: ../templates/begalabel-templates.xml.h:1
-#| msgid "Rectangular labels"
 msgid "Rounded rectangular labels"
 msgstr "Lekerekített négyszögletű címkék"
 
 #: ../templates/begalabel-templates.xml.h:6
-#| msgid "Cassette Labels"
 msgid "Cassette Tape Face"
 msgstr "Magnókazetta előoldal"
 
@@ -3336,20 +3335,21 @@ msgid "Membership cards"
 msgstr "Tagsági kártyák"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:2
-#: ../templates/geha-iso-templates.xml.h:23
-msgid "Large Address Labels"
-msgstr "Nagy címzési címkék"
+#: ../templates/dymo-other-templates.xml.h:4
+#| msgid "Multi-Purpose Labels"
+msgid "Multipurpose Labels"
+msgstr "Többcélú címkék"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:8
-msgid "Shipping Address Labels"
-msgstr "Szállítási címcímkék"
+msgid "File Folder"
+msgstr "Iratmappa"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:10
-msgid "File Folder"
-msgstr "Iratmappa"
+#| msgid "Name Badge Labels"
+msgid "Name Badges"
+msgstr "Névkitűzők"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:12
@@ -3357,9 +3357,15 @@ msgid "Hanging Folder"
 msgstr "Lógó mappa"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:14
-msgid "3.5in Diskette"
-msgstr "3,5 colos kislemez"
+#: ../templates/dymo-other-templates.xml.h:16
+#: ../templates/geha-iso-templates.xml.h:23
+msgid "Large Address Labels"
+msgstr "Nagy címzési címkék"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:18
+msgid "Shipping Address Labels"
+msgstr "Szállítási címcímkék"
 
 #. ===================================================================
 #: ../templates/endisch-templates.xml.h:5
@@ -3801,3 +3807,5 @@ msgstr "Négyszögletű másolócímkék"
 msgid "Correction and Cover-up Labels"
 msgstr "Javító- és fedőcímkék"
 
+#~ msgid "3.5in Diskette"
+#~ msgstr "3,5 colos kislemez"
