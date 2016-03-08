@@ -1,15 +1,18 @@
 # Serbian translation for glabels.
 # Copyright (C) 2012 glabels's COPYRIGHT HOLDER
 # This file is distributed under the same license as the glabels package.
+#
+# Translators: 
 # Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2012—2016.
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels glabels-3_2\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2016-03-06 07:15+0000\n"
-"PO-Revision-Date: 2016-03-06 10:56+0200\n"
+"POT-Creation-Date: 2016-03-08 09:16+0000\n"
+"PO-Revision-Date: 2016-03-08 11:08+0200\n"
 "Last-Translator: Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
-"Language-Team: Serbian <gnom@prevod.org>\n"
+"Language-Team: Serbian <(nothing)>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1146,15 +1149,17 @@ msgstr "Stalno"
 msgid "Up"
 msgstr "Gore"
 
-#: ../src/new-label-dialog.c:212 ../data/ui/new-label-dialog.ui.h:1
+#: ../src/new-label-dialog.c:214
+#| msgid "Select Product"
+msgctxt "Title of dialog page to select a stationary product"
 msgid "Select Product"
-msgstr "Izaberi projekat"
+msgstr "Izaberite proizvod"
 
-#: ../src/new-label-dialog.c:225 ../data/ui/new-label-dialog.ui.h:3
+#: ../src/new-label-dialog.c:227 ../data/ui/new-label-dialog.ui.h:3
 msgid "Choose Orientation"
 msgstr "Izaberi usmerenje"
 
-#: ../src/new-label-dialog.c:240
+#: ../src/new-label-dialog.c:242
 msgid "Review"
 msgstr "Pregled"
 
@@ -1939,6 +1944,10 @@ msgstr "Odznači sve"
 #: ../data/ui/merge-properties-dialog.ui.h:6
 msgid "Record selection/preview"
 msgstr "Snimite izbor/pregled"
+
+#: ../data/ui/new-label-dialog.ui.h:1
+msgid "Select Product"
+msgstr "Izaberi projekat"
 
 #: ../data/ui/new-label-dialog.ui.h:2
 msgid ""
@@ -2911,7 +2920,6 @@ msgid "Business cards"
 msgstr "Poslovna kartica"
 
 #: ../templates/categories.xml.h:8
-#| msgid "Name Badge Labels"
 msgid "Name Badge"
 msgstr "Bedž sa imenom"
 
@@ -2932,7 +2940,6 @@ msgid "Photo products"
 msgstr "Fotografski proizvodi"
 
 #: ../templates/categories.xml.h:13
-#| msgid "Filing Labels"
 msgid "Filing labels"
 msgstr "Nalepnice za odlaganje dokumenata"
 
@@ -3225,12 +3232,10 @@ msgid "Diskette labels"
 msgstr "Nalepnice za diskete"
 
 #: ../templates/begalabel-templates.xml.h:1
-#| msgid "Rectangular labels"
 msgid "Rounded rectangular labels"
 msgstr "Pravougaone zaobljene nalepnice"
 
 #: ../templates/begalabel-templates.xml.h:6
-#| msgid "Cassette Labels"
 msgid "Cassette Tape Face"
 msgstr "Nalepnice za kasete"
 
@@ -3334,7 +3339,6 @@ msgstr "Članske kartice"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:4
-#| msgid "Multi-Purpose Labels"
 msgid "Multipurpose Labels"
 msgstr "Višenamenske nalepnice"
 
@@ -3345,7 +3349,6 @@ msgstr "Fascikla za dokumenta"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:10
-#| msgid "Name Badge Labels"
 msgid "Name Badges"
 msgstr "Bedževi sa imenima"
 
