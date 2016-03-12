@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels glabels-3.4\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2016-02-25 08:29+0000\n"
+"POT-Creation-Date: 2016-03-12 07:19+0000\n"
 "PO-Revision-Date: 2016-02-25 09:58+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
@@ -856,55 +856,55 @@ msgstr "Odsunout dozadu"
 msgid "Rotate"
 msgstr "Otočit"
 
-#: ../src/label.c:1478 ../src/ui.c:336
+#: ../src/label.c:1480 ../src/ui.c:336
 msgid "Rotate left"
 msgstr "Otočit doleva"
 
-#: ../src/label.c:1511 ../src/ui.c:343
+#: ../src/label.c:1515 ../src/ui.c:343
 msgid "Rotate right"
 msgstr "Otočit doprava"
 
-#: ../src/label.c:1546 ../src/ui.c:350
+#: ../src/label.c:1552 ../src/ui.c:350
 msgid "Flip horizontally"
 msgstr "Překlopit vodorovně"
 
-#: ../src/label.c:1581 ../src/ui.c:357
+#: ../src/label.c:1589 ../src/ui.c:357
 msgid "Flip vertically"
 msgstr "Překlopit svisle"
 
-#: ../src/label.c:1621 ../src/ui.c:364
+#: ../src/label.c:1631 ../src/ui.c:364
 msgid "Align left"
 msgstr "Zarovnat doleva"
 
-#: ../src/label.c:1678 ../src/ui.c:378
+#: ../src/label.c:1688 ../src/ui.c:378
 msgid "Align right"
 msgstr "Zarovnat doprava"
 
-#: ../src/label.c:1739
+#: ../src/label.c:1749
 msgid "Align horizontal center"
 msgstr "Zarovnat vodorovně na střed"
 
-#: ../src/label.c:1815
+#: ../src/label.c:1825
 msgid "Align tops"
 msgstr "Zarovnat nahoru"
 
-#: ../src/label.c:1872
+#: ../src/label.c:1882
 msgid "Align bottoms"
 msgstr "Zarovnat dolů"
 
-#: ../src/label.c:1933
+#: ../src/label.c:1943
 msgid "Align vertical center"
 msgstr "Zarovnat svisle na střed"
 
-#: ../src/label.c:2011 ../src/ui.c:406
+#: ../src/label.c:2021 ../src/ui.c:406
 msgid "Center horizontally"
 msgstr "Vystředit vodorovně"
 
-#: ../src/label.c:2058 ../src/ui.c:413
+#: ../src/label.c:2068 ../src/ui.c:413
 msgid "Center vertically"
 msgstr "Vystředit  svisle"
 
-#: ../src/label.c:2779 ../src/label.c:2821 ../src/label.c:2847 ../src/ui.c:206
+#: ../src/label.c:2789 ../src/label.c:2831 ../src/label.c:2857 ../src/ui.c:206
 msgid "Paste"
 msgstr "Vložit"
 
@@ -1148,15 +1148,16 @@ msgstr "Napevno"
 msgid "Up"
 msgstr "Nahoru"
 
-#: ../src/new-label-dialog.c:212 ../data/ui/new-label-dialog.ui.h:1
+#: ../src/new-label-dialog.c:214
+msgctxt "Title of dialog page to select a stationary product"
 msgid "Select Product"
 msgstr "Výběr produktu"
 
-#: ../src/new-label-dialog.c:225 ../data/ui/new-label-dialog.ui.h:3
+#: ../src/new-label-dialog.c:227 ../data/ui/new-label-dialog.ui.h:3
 msgid "Choose Orientation"
 msgstr "Volba otočení"
 
-#: ../src/new-label-dialog.c:240
+#: ../src/new-label-dialog.c:242
 msgid "Review"
 msgstr "Kontrola"
 
@@ -1166,7 +1167,7 @@ msgstr "Kontrola"
 msgid "Default"
 msgstr "Výchozí"
 
-#: ../src/object-editor.c:161 ../src/object-editor.c:470
+#: ../src/object-editor.c:161 ../src/object-editor.c:472
 msgid "Object properties"
 msgstr "Vlastnosti objektu"
 
@@ -1852,8 +1853,8 @@ msgstr "Výrobce:"
 msgid "Part #:"
 msgstr "Produktové číslo:"
 
-#: ../data/ui/label-properties-dialog.ui.h:4
-#: ../data/ui/new-label-dialog.ui.h:9 ../data/ui/template-designer.ui.h:9
+#: ../data/ui/label-properties-dialog.ui.h:4 ../data/ui/new-label-dialog.ui.h:9
+#: ../data/ui/template-designer.ui.h:9
 msgid "Description:"
 msgstr "Popis:"
 
@@ -1944,6 +1945,10 @@ msgstr "Zrušit výběr"
 #: ../data/ui/merge-properties-dialog.ui.h:6
 msgid "Record selection/preview"
 msgstr "Výběr/náhled záznamu"
+
+#: ../data/ui/new-label-dialog.ui.h:1
+msgid "Select Product"
+msgstr "Výběr produktu"
 
 #: ../data/ui/new-label-dialog.ui.h:2
 msgid ""
@@ -2861,7 +2866,8 @@ msgstr "Libovolná etiketa"
 
 #. ====================================================================
 #. ===================================================================
-#: ../templates/categories.xml.h:2 ../templates/endisch-templates.xml.h:1
+#: ../templates/categories.xml.h:2 ../templates/begalabel-templates.xml.h:3
+#: ../templates/endisch-templates.xml.h:1
 #: ../templates/hama-iso-templates.xml.h:4
 #: ../templates/pearl-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:8
@@ -2870,7 +2876,8 @@ msgid "Round labels"
 msgstr "Kulaté etikety"
 
 #. ===================================================================
-#: ../templates/categories.xml.h:3 ../templates/endisch-templates.xml.h:2
+#: ../templates/categories.xml.h:3 ../templates/begalabel-templates.xml.h:4
+#: ../templates/endisch-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:58
 #: ../templates/rayfilm-templates.xml.h:9
 msgid "Elliptical labels"
@@ -2889,6 +2896,7 @@ msgstr "Čtvercové etikety"
 #. ********************************************************************
 #. ===================================================================
 #: ../templates/categories.xml.h:5 ../templates/ascom-iso-templates.xml.h:4
+#: ../templates/begalabel-templates.xml.h:2
 #: ../templates/endisch-templates.xml.h:3
 #: ../templates/hama-iso-templates.xml.h:27
 #: ../templates/herma-iso-templates.xml.h:20
@@ -2913,20 +2921,28 @@ msgid "Business cards"
 msgstr "Vizitky"
 
 #: ../templates/categories.xml.h:8
+msgid "Name Badge"
+msgstr "Jmenovky"
+
+#: ../templates/categories.xml.h:9
 msgid "CD/DVD or other media"
 msgstr "CD/DVD nebo jiná média"
 
-#: ../templates/categories.xml.h:9
+#: ../templates/categories.xml.h:10
 msgid "Mailing/shipping products"
 msgstr "Poštovní/přepravní produkty"
 
-#: ../templates/categories.xml.h:10
+#: ../templates/categories.xml.h:11
 msgid "Foldable cards"
 msgstr "Přání"
 
-#: ../templates/categories.xml.h:11
+#: ../templates/categories.xml.h:12
 msgid "Photo products"
 msgstr "Fotografické produkty"
+
+#: ../templates/categories.xml.h:13
+msgid "Filing labels"
+msgstr "Etikety na kartotéky"
 
 #. TODO: Is this the real part #?
 #. ============================================================
@@ -3001,7 +3017,7 @@ msgstr "Dopravní etikety"
 #: ../templates/avery-us-templates.xml.h:12
 #: ../templates/avery-iso-templates.xml.h:14
 #: ../templates/databecker-iso-templates.xml.h:6
-#: ../templates/dymo-other-templates.xml.h:4
+#: ../templates/dymo-other-templates.xml.h:14
 #: ../templates/geha-iso-templates.xml.h:25
 #: ../templates/maco-us-templates.xml.h:2
 #: ../templates/meritline-us-templates.xml.h:4
@@ -3015,7 +3031,7 @@ msgstr "Adresní etikety"
 #. ===================================================================
 #. ********************************************************************
 #: ../templates/avery-us-templates.xml.h:14
-#: ../templates/dymo-other-templates.xml.h:6
+#: ../templates/dymo-other-templates.xml.h:2
 #: ../templates/meritline-us-templates.xml.h:8
 #: ../templates/sheetlabels-us-templates.xml.h:8
 #: ../templates/worldlabel-us-templates.xml.h:2
@@ -3092,6 +3108,7 @@ msgstr "Etikety na jmenovky"
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:32
 #: ../templates/avery-iso-templates.xml.h:6
+#: ../templates/begalabel-templates.xml.h:5
 #: ../templates/geha-iso-templates.xml.h:10
 #: ../templates/herma-iso-templates.xml.h:14
 #: ../templates/igepa-templates.xml.h:5 ../templates/jac-iso-templates.xml.h:2
@@ -3170,6 +3187,7 @@ msgstr "Poštovní etikety"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:12
+#: ../templates/dymo-other-templates.xml.h:6
 #: ../templates/misc-iso-templates.xml.h:12
 msgid "Address labels"
 msgstr "Adresní etikety"
@@ -3213,6 +3231,14 @@ msgstr "Identifikační etikety"
 #: ../templates/hama-iso-templates.xml.h:31
 msgid "Diskette labels"
 msgstr "Etikety na diskety"
+
+#: ../templates/begalabel-templates.xml.h:1
+msgid "Rounded rectangular labels"
+msgstr "Zaoblené obdélníkové etikety"
+
+#: ../templates/begalabel-templates.xml.h:6
+msgid "Cassette Tape Face"
+msgstr "Etikety na páskové kazety"
 
 #.
 #. *********************************************************************
@@ -3313,20 +3339,19 @@ msgid "Membership cards"
 msgstr "Členské karty"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:2
-#: ../templates/geha-iso-templates.xml.h:23
-msgid "Large Address Labels"
-msgstr "Velké adresní etikety"
+#: ../templates/dymo-other-templates.xml.h:4
+msgid "Multipurpose Labels"
+msgstr "Víceúčelové etikety"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:8
-msgid "Shipping Address Labels"
-msgstr "Přepravní adresní etikety"
+msgid "File Folder"
+msgstr "Kancelářské složka"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:10
-msgid "File Folder"
-msgstr "Kancelářská složka"
+msgid "Name Badges"
+msgstr "Jmenovky"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:12
@@ -3334,9 +3359,15 @@ msgid "Hanging Folder"
 msgstr "Závěsná složka"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:14
-msgid "3.5in Diskette"
-msgstr "3,5ʺ disketa"
+#: ../templates/dymo-other-templates.xml.h:16
+#: ../templates/geha-iso-templates.xml.h:23
+msgid "Large Address Labels"
+msgstr "Velké adresní etikety"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:18
+msgid "Shipping Address Labels"
+msgstr "Přepravní adresní etikety"
 
 #. ===================================================================
 #: ../templates/endisch-templates.xml.h:5
@@ -3777,3 +3808,6 @@ msgstr "Obdélníkové etikety do kopírky"
 #: ../templates/zweckform-iso-templates.xml.h:24
 msgid "Correction and Cover-up Labels"
 msgstr "Opravné a přelepovací etikety"
+
+#~ msgid "3.5in Diskette"
+#~ msgstr "3,5ʺ disketa"
