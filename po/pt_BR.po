@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2016-02-22 19:23+0000\n"
-"PO-Revision-Date: 2016-02-23 12:24-0300\n"
+"POT-Creation-Date: 2016-03-06 21:17+0000\n"
+"PO-Revision-Date: 2016-03-13 16:02-0300\n"
 "Last-Translator: Rafael Fontenelle <rffontenelle@gmail.com>\n"
 "Language-Team: Brazilian portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -802,35 +802,37 @@ msgstr "Largura da linha"
 msgid "Untitled"
 msgstr "Sem_título"
 
-#. Translators: first param is numeric value of width, second is numeric
-#. value of height and third is unit. Example:
-#. "60 mm × 22.5 mm (width / height)"
+#. Translators: A rectangular label dimensions. first param is numeric value
+#. of width, second is numeric value of height and third is unit. Example:
+#. "60 × 22.5 mm (width / height)"
+#. Translators: A elliptical label dimensions. first param is numeric value of
+#. width, second is numeric value of height and third is unit. Example:
+#. "60 × 22.5 mm (width / height)"
 #: ../src/label.c:751 ../src/label.c:776
 #, c-format
 msgid "%s × %s %s (width × height)"
 msgstr "%s × %s %s (largura × altura)"
 
-#. Translators: first param is numeric value of width, second is numeric
-#. value of height, third is numeric value of round and fourth is unit.
-#. Example:
-#. "50 mm × 30 / 1.5 mm (width × height / round)"
+#. Translators: A rounded rectangular label dimensions. first param is numeric
+#. value of width, second is numeric value of height, third is numeric value
+#. of round and fourth is unit. Example:
+#. "50 × 30 / 1.5 mm (width × height / round)"
 #: ../src/label.c:758
 #, c-format
 msgid "%s × %s / %s %s (width × height / round)"
 msgstr "%s × %s / %s %s (altura × largura / arredondado)"
 
-#. Translators: first param is numeric value of diameter and secons is
-#. unit. Example:
+#. Translators: A round label dimensions. first param is numeric value of
+#. diameter and second is unit. Example:
 #. "120.5 mm (diameter)"
 #: ../src/label.c:788
 #, c-format
-#| msgid "%.5g %s diameter"
 msgid "%s %s (diameter)"
 msgstr "%s %s (diâmetro)"
 
-#. Translators: first param is numeric value of diameter, second is numeric
-#. value of whole and third is unit. Example:
-#. "120.5 mm / 30 mm (diameter / hole)"
+#. Translators: A CD/DVD label dimensions. first param is numeric value of
+#. diameter, second is numeric value of hole and third is unit. Example:
+#. "120.5 / 30 mm (diameter / hole)"
 #: ../src/label.c:806
 #, c-format
 msgid "%s / %s %s (diameter / hole)"
@@ -856,55 +858,55 @@ msgstr "Enviar para trás"
 msgid "Rotate"
 msgstr "Girar"
 
-#: ../src/label.c:1478 ../src/ui.c:336
+#: ../src/label.c:1480 ../src/ui.c:336
 msgid "Rotate left"
 msgstr "Girar à esquerda"
 
-#: ../src/label.c:1511 ../src/ui.c:343
+#: ../src/label.c:1515 ../src/ui.c:343
 msgid "Rotate right"
 msgstr "Girar à direita"
 
-#: ../src/label.c:1546 ../src/ui.c:350
+#: ../src/label.c:1552 ../src/ui.c:350
 msgid "Flip horizontally"
 msgstr "Refletir horizontalmente"
 
-#: ../src/label.c:1581 ../src/ui.c:357
+#: ../src/label.c:1589 ../src/ui.c:357
 msgid "Flip vertically"
 msgstr "Refletir verticalmente"
 
-#: ../src/label.c:1621 ../src/ui.c:364
+#: ../src/label.c:1631 ../src/ui.c:364
 msgid "Align left"
 msgstr "Alinha à esquerda"
 
-#: ../src/label.c:1678 ../src/ui.c:378
+#: ../src/label.c:1688 ../src/ui.c:378
 msgid "Align right"
 msgstr "Alinha à direita"
 
-#: ../src/label.c:1739
+#: ../src/label.c:1749
 msgid "Align horizontal center"
 msgstr "Alinha pelo centro horizontal"
 
-#: ../src/label.c:1815
+#: ../src/label.c:1825
 msgid "Align tops"
 msgstr "Alinha pelos topos"
 
-#: ../src/label.c:1872
+#: ../src/label.c:1882
 msgid "Align bottoms"
 msgstr "Alinha pelas bases"
 
-#: ../src/label.c:1933
+#: ../src/label.c:1943
 msgid "Align vertical center"
 msgstr "Alinha pelo centro vertical"
 
-#: ../src/label.c:2011 ../src/ui.c:406
+#: ../src/label.c:2021 ../src/ui.c:406
 msgid "Center horizontally"
 msgstr "Centraliza horizontalmente"
 
-#: ../src/label.c:2058 ../src/ui.c:413
+#: ../src/label.c:2068 ../src/ui.c:413
 msgid "Center vertically"
 msgstr "Centraliza verticalmente"
 
-#: ../src/label.c:2779 ../src/label.c:2821 ../src/label.c:2847 ../src/ui.c:206
+#: ../src/label.c:2789 ../src/label.c:2831 ../src/label.c:2857 ../src/ui.c:206
 msgid "Paste"
 msgstr "Colar"
 
@@ -1148,15 +1150,16 @@ msgstr "Fixo"
 msgid "Up"
 msgstr "Acima"
 
-#: ../src/new-label-dialog.c:212 ../data/ui/new-label-dialog.ui.h:1
+#: ../src/new-label-dialog.c:214
+msgctxt "Title of dialog page to select a stationary product"
 msgid "Select Product"
 msgstr "Selecionar produto"
 
-#: ../src/new-label-dialog.c:225 ../data/ui/new-label-dialog.ui.h:3
+#: ../src/new-label-dialog.c:227 ../data/ui/new-label-dialog.ui.h:3
 msgid "Choose Orientation"
 msgstr "Escolha a orientação"
 
-#: ../src/new-label-dialog.c:240
+#: ../src/new-label-dialog.c:242
 msgid "Review"
 msgstr "Rever"
 
@@ -1166,7 +1169,7 @@ msgstr "Rever"
 msgid "Default"
 msgstr "Padrão"
 
-#: ../src/object-editor.c:161 ../src/object-editor.c:470
+#: ../src/object-editor.c:161 ../src/object-editor.c:472
 msgid "Object properties"
 msgstr "Propriedades do objeto"
 
@@ -1948,6 +1951,10 @@ msgstr "Desmarcar tudo"
 msgid "Record selection/preview"
 msgstr "Seleção/previsão de registro"
 
+#: ../data/ui/new-label-dialog.ui.h:1
+msgid "Select Product"
+msgstr "Selecionar produto"
+
 #: ../data/ui/new-label-dialog.ui.h:2
 msgid ""
 "Choose label or card product from hundreds of predefined templates or define "
@@ -2483,7 +2490,6 @@ msgstr ""
 "ou \"Voltar\" para continuar editando este desenho."
 
 #: ../data/appdata/glabels-3.appdata.xml.in.h:1
-#| msgid "Labels"
 msgid "gLabels"
 msgstr "gLabels"
 
@@ -2869,7 +2875,8 @@ msgstr "Qualquer etiqueta"
 
 #. ====================================================================
 #. ===================================================================
-#: ../templates/categories.xml.h:2 ../templates/endisch-templates.xml.h:1
+#: ../templates/categories.xml.h:2 ../templates/begalabel-templates.xml.h:3
+#: ../templates/endisch-templates.xml.h:1
 #: ../templates/hama-iso-templates.xml.h:4
 #: ../templates/pearl-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:8
@@ -2878,7 +2885,8 @@ msgid "Round labels"
 msgstr "Etiquetas arredondadas"
 
 #. ===================================================================
-#: ../templates/categories.xml.h:3 ../templates/endisch-templates.xml.h:2
+#: ../templates/categories.xml.h:3 ../templates/begalabel-templates.xml.h:4
+#: ../templates/endisch-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:58
 #: ../templates/rayfilm-templates.xml.h:9
 msgid "Elliptical labels"
@@ -2897,6 +2905,7 @@ msgstr "Etiquetas quadradas"
 #. ********************************************************************
 #. ===================================================================
 #: ../templates/categories.xml.h:5 ../templates/ascom-iso-templates.xml.h:4
+#: ../templates/begalabel-templates.xml.h:2
 #: ../templates/endisch-templates.xml.h:3
 #: ../templates/hama-iso-templates.xml.h:27
 #: ../templates/herma-iso-templates.xml.h:20
@@ -2921,20 +2930,28 @@ msgid "Business cards"
 msgstr "Cartões de visita"
 
 #: ../templates/categories.xml.h:8
+msgid "Name Badge"
+msgstr "Crachás"
+
+#: ../templates/categories.xml.h:9
 msgid "CD/DVD or other media"
 msgstr "CD/DVD ou outras mídias"
 
-#: ../templates/categories.xml.h:9
+#: ../templates/categories.xml.h:10
 msgid "Mailing/shipping products"
 msgstr "Correio/Produtos de encomenda"
 
-#: ../templates/categories.xml.h:10
+#: ../templates/categories.xml.h:11
 msgid "Foldable cards"
 msgstr "Cartões dobráveis"
 
-#: ../templates/categories.xml.h:11
+#: ../templates/categories.xml.h:12
 msgid "Photo products"
 msgstr "Produtos para fotos"
+
+#: ../templates/categories.xml.h:13
+msgid "Filing labels"
+msgstr "Etiquetas de classificação/registro"
 
 #. TODO: Is this the real part #?
 #. ============================================================
@@ -3009,7 +3026,7 @@ msgstr "Etiquetas de envio"
 #: ../templates/avery-us-templates.xml.h:12
 #: ../templates/avery-iso-templates.xml.h:14
 #: ../templates/databecker-iso-templates.xml.h:6
-#: ../templates/dymo-other-templates.xml.h:4
+#: ../templates/dymo-other-templates.xml.h:14
 #: ../templates/geha-iso-templates.xml.h:25
 #: ../templates/maco-us-templates.xml.h:2
 #: ../templates/meritline-us-templates.xml.h:4
@@ -3023,7 +3040,7 @@ msgstr "Etiquetas de endereçamento"
 #. ===================================================================
 #. ********************************************************************
 #: ../templates/avery-us-templates.xml.h:14
-#: ../templates/dymo-other-templates.xml.h:6
+#: ../templates/dymo-other-templates.xml.h:2
 #: ../templates/meritline-us-templates.xml.h:8
 #: ../templates/sheetlabels-us-templates.xml.h:8
 #: ../templates/worldlabel-us-templates.xml.h:2
@@ -3100,6 +3117,7 @@ msgstr "Etiquetas de crachás"
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:32
 #: ../templates/avery-iso-templates.xml.h:6
+#: ../templates/begalabel-templates.xml.h:5
 #: ../templates/geha-iso-templates.xml.h:10
 #: ../templates/herma-iso-templates.xml.h:14
 #: ../templates/igepa-templates.xml.h:5 ../templates/jac-iso-templates.xml.h:2
@@ -3179,6 +3197,7 @@ msgstr "Etiquetas de endereçamento"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:12
+#: ../templates/dymo-other-templates.xml.h:6
 #: ../templates/misc-iso-templates.xml.h:12
 msgid "Address labels"
 msgstr "Etiquetas de endereçamento"
@@ -3222,6 +3241,14 @@ msgstr "Identificação de etiquetas"
 #: ../templates/hama-iso-templates.xml.h:31
 msgid "Diskette labels"
 msgstr "Etiquetas de disquete"
+
+#: ../templates/begalabel-templates.xml.h:1
+msgid "Rounded rectangular labels"
+msgstr "Etiquetas retangulares arredondadas"
+
+#: ../templates/begalabel-templates.xml.h:6
+msgid "Cassette Tape Face"
+msgstr "Frente de fita cassete (K7)"
 
 #.
 #. *********************************************************************
@@ -3322,20 +3349,19 @@ msgid "Membership cards"
 msgstr "Cartões de associado"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:2
-#: ../templates/geha-iso-templates.xml.h:23
-msgid "Large Address Labels"
-msgstr "Etiquetas de endereçamento grandes"
+#: ../templates/dymo-other-templates.xml.h:4
+msgid "Multipurpose Labels"
+msgstr "Etiquetas multifunção"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:8
-msgid "Shipping Address Labels"
-msgstr "Etiquetas de endereçamento de envio"
+msgid "File Folder"
+msgstr "Pasta de arquivos"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:10
-msgid "File Folder"
-msgstr "Pasta de arquivos"
+msgid "Name Badges"
+msgstr "Crachás"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:12
@@ -3343,9 +3369,15 @@ msgid "Hanging Folder"
 msgstr "Pasta suspensa"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:14
-msgid "3.5in Diskette"
-msgstr "Disquete de 3,5 pol."
+#: ../templates/dymo-other-templates.xml.h:16
+#: ../templates/geha-iso-templates.xml.h:23
+msgid "Large Address Labels"
+msgstr "Etiquetas de endereçamento grandes"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:18
+msgid "Shipping Address Labels"
+msgstr "Etiquetas de endereçamento de envio"
 
 #. ===================================================================
 #: ../templates/endisch-templates.xml.h:5
@@ -3787,6 +3819,9 @@ msgstr "Etiquetas retangulares para copiadoras"
 #: ../templates/zweckform-iso-templates.xml.h:24
 msgid "Correction and Cover-up Labels"
 msgstr "Etiquetas de correção e cobertura"
+
+#~ msgid "3.5in Diskette"
+#~ msgstr "Disquete de 3,5 pol."
 
 #~ msgid "Couldn't construct query"
 #~ msgstr "Não foi posível construir a consulta"
