@@ -269,6 +269,9 @@ static const Style styles[] = {
         { "zint", "DMTX", N_("Data Matrix"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
+        { "zint", "DMTX-GS1", N_("Data Matrix (GS1)"), gl_barcode_zint_new,
+          FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
+
         { "zint", "DPL", N_("Deutsche Post Leitcode"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "1234567890123", TRUE, 13},
           

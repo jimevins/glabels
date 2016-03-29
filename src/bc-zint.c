@@ -93,6 +93,8 @@ gl_barcode_zint_new (const gchar          *id,
         if (g_ascii_strcasecmp (id, "Code128B") == 0) { symbol->symbology = BARCODE_CODE128B; }
         if (g_ascii_strcasecmp (id, "DAFT") == 0)     { symbol->symbology = BARCODE_DAFT; }
         if (g_ascii_strcasecmp (id, "DMTX") == 0)     { symbol->symbology = BARCODE_DATAMATRIX; }
+        if (g_ascii_strcasecmp (id, "DMTX-GS1") == 0) { symbol->symbology = BARCODE_DATAMATRIX;
+	                                                symbol->input_mode = GS1_MODE; }
         if (g_ascii_strcasecmp (id, "DPL") == 0)      { symbol->symbology = BARCODE_DPLEIT; }
         if (g_ascii_strcasecmp (id, "DPI") == 0)      { symbol->symbology = BARCODE_DPIDENT; }
         if (g_ascii_strcasecmp (id, "KIX") == 0)      { symbol->symbology = BARCODE_KIX; }
