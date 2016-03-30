@@ -305,6 +305,20 @@
   </Template>
 
   <!-- =================================================================== -->
+  <!-- SheetLabels: Round Labels, 4 per sheet	         	   -->
+  <!-- =================================================================== -->
+  <Template brand="SheetLabels" part="SL200" size="US-Letter" _description="Round Labels">
+    <Meta category="label"/>
+    <Meta category="round-label"/>
+    <Meta product_url="http://www.sheet-labels.com/labels/SL200"/>
+    <Label-round id="0" radius="1.969in" waste="0.03in">
+      <Markup-margin size="0.125in"/>
+      <Layout nx="2" ny="2" x0="0.28125in" y0="1.531in" dx="4in" dy="4in"/>
+    </Label-round>
+  </Template>
+
+
+  <!-- =================================================================== -->
   <!-- SheetLabels: VCR Labels, 1_7/8'' x 3_1/16'', 10 per sheet 	   -->
   <!-- =================================================================== -->
   <Template brand="SheetLabels" part="SL302" size="US-Letter"
@@ -315,6 +329,19 @@
     <Label-rectangle id="0" width="220" height="133" round="5">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="5" x0="80" y0="60.5" dx="236" dy="133"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- SheetLabels: Rectangular Labels, 4 per sheet	         	   -->
+  <!-- =================================================================== -->
+  <Template brand="SheetLabels" part="SL522" size="US-Letter" _description="Rectangular labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.sheet-labels.com/labels/SL522"/>
+    <Label-rectangle id="0" width="4in" height="5in" round="0.16in" x_waste="0.09in" y_waste="0in">
+      <Markup-margin size="0.125in"/>
+      <Layout nx="2" ny="2" x0="0.125in" y0="0.5in" dx="4.19in" dy="5in"/>
     </Label-rectangle>
   </Template>
 
@@ -341,6 +368,19 @@
     <Label-rectangle id="0" width="4in" height="1in" round="0.0625in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="2" ny="10" x0="0.15625in" y0="0.5in" dx="4.1875in" dy="1in"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- SheetLabels: Rectangular Labels, 40 per sheet	         	   -->
+  <!-- =================================================================== -->
+  <Template brand="SheetLabels" part="SL556" size="US-Letter" _description="Rectangular labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.sheet-labels.com/labels/SL556"/>
+    <Label-rectangle id="0" width="2in" height="1in" round="0in" x_waste="0in" y_waste="0in">
+      <Markup-margin size="0.125in"/>
+      <Layout nx="4" ny="10" x0="0.25in" y0="0.5in" dx="2in" dy="1in"/>
     </Label-rectangle>
   </Template>
 
