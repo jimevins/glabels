@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2016-03-06 21:17+0000\n"
-"PO-Revision-Date: 2016-03-07 00:02+0100\n"
-"Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
+"POT-Creation-Date: 2016-03-29 23:55+0000\n"
+"PO-Revision-Date: 2016-03-31 21:29+0200\n"
+"Last-Translator: Meskó Balázs <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian <openscope at googlegroups dot com>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 1.2\n"
+"X-Generator: Poedit 1.8.7\n"
 
 #: ../src/bc-backends.c:81
 msgid "Built-in"
@@ -87,7 +87,7 @@ msgstr "EAN-13 +5"
 msgid "UPC (UPC-A or UPC-E)"
 msgstr "UPC (UPC-A vagy UPC-E)"
 
-#: ../src/bc-backends.c:151 ../src/bc-backends.c:395
+#: ../src/bc-backends.c:151 ../src/bc-backends.c:398
 msgid "UPC-A"
 msgstr "UPC-A"
 
@@ -99,7 +99,7 @@ msgstr "UPC-A +2"
 msgid "UPC-A +5"
 msgstr "UPC-A +5"
 
-#: ../src/bc-backends.c:160 ../src/bc-backends.c:398
+#: ../src/bc-backends.c:160 ../src/bc-backends.c:401
 msgid "UPC-E"
 msgstr "UPC-E"
 
@@ -111,7 +111,7 @@ msgstr "UPC-E +2"
 msgid "UPC-E +5"
 msgstr "UPC-E +5"
 
-#: ../src/bc-backends.c:169 ../src/bc-backends.c:332
+#: ../src/bc-backends.c:169 ../src/bc-backends.c:335
 msgid "ISBN"
 msgstr "ISBN"
 
@@ -131,7 +131,7 @@ msgstr "Code 128C"
 msgid "Code 128B"
 msgstr "Code 128B"
 
-#: ../src/bc-backends.c:187 ../src/bc-backends.c:329
+#: ../src/bc-backends.c:187 ../src/bc-backends.c:332
 msgid "Interleaved 2 of 5"
 msgstr "2/5 Interleaved"
 
@@ -220,166 +220,170 @@ msgid "Data Matrix"
 msgstr "Adatmátrix"
 
 #: ../src/bc-backends.c:272
+msgid "Data Matrix (GS1)"
+msgstr "Adatmátrix (GS1)"
+
+#: ../src/bc-backends.c:275
 msgid "Deutsche Post Leitcode"
 msgstr "Német postai útmutatókód"
 
-#: ../src/bc-backends.c:275
+#: ../src/bc-backends.c:278
 msgid "Deutsche Post Identcode"
 msgstr "Német postai azonosítókód"
 
-#: ../src/bc-backends.c:278
+#: ../src/bc-backends.c:281
 msgid "Dutch Post KIX Code"
 msgstr "Holland postai KIX-kód"
 
-#: ../src/bc-backends.c:281
+#: ../src/bc-backends.c:284
 msgid "EAN"
 msgstr "EAN"
 
-#: ../src/bc-backends.c:284
+#: ../src/bc-backends.c:287
 msgid "Grid Matrix"
 msgstr "Rácsmátrix"
 
-#: ../src/bc-backends.c:287
+#: ../src/bc-backends.c:290
 msgid "GS1-128"
 msgstr "GS1-128"
 
-#: ../src/bc-backends.c:290
+#: ../src/bc-backends.c:293
 msgid "GS1 DataBar-14"
 msgstr "GS1 DataBar-14"
 
-#: ../src/bc-backends.c:299
+#: ../src/bc-backends.c:302
 msgid "GS1 DataBar-14 Stacked"
 msgstr "GS1 DataBar-14 halmozott"
 
-#: ../src/bc-backends.c:302
+#: ../src/bc-backends.c:305
 msgid "GS1 DataBar-14 Stacked Omni."
 msgstr "GS1 DataBar-14 halmozott omni."
 
-#: ../src/bc-backends.c:305
+#: ../src/bc-backends.c:308
 msgid "GS1 DataBar Extended Stacked"
 msgstr "GS1 DataBar kiterjesztett halmozott"
 
-#: ../src/bc-backends.c:308
+#: ../src/bc-backends.c:311
 msgid "HIBC Code 128"
 msgstr "HIBC Code 128"
 
-#: ../src/bc-backends.c:311
+#: ../src/bc-backends.c:314
 msgid "HIBC Code 39"
 msgstr "HIBC Code 39"
 
-#: ../src/bc-backends.c:314
+#: ../src/bc-backends.c:317
 msgid "HIBC Data Matrix"
 msgstr "HIBC adatmátrix"
 
-#: ../src/bc-backends.c:317
+#: ../src/bc-backends.c:320
 msgid "HIBC QR Code"
 msgstr "HIBC QR-kód"
 
-#: ../src/bc-backends.c:320
+#: ../src/bc-backends.c:323
 msgid "HIBC PDF417"
 msgstr "HIBC PDF417"
 
-#: ../src/bc-backends.c:323
+#: ../src/bc-backends.c:326
 msgid "HIBC Micro PDF417"
 msgstr "HIBC Micro PDF417"
 
-#: ../src/bc-backends.c:326
+#: ../src/bc-backends.c:329
 msgid "HIBC Aztec Code"
 msgstr "HIBC azték kód"
 
-#: ../src/bc-backends.c:335
+#: ../src/bc-backends.c:338
 msgid "ITF-14"
 msgstr "ITF-14"
 
-#: ../src/bc-backends.c:338
+#: ../src/bc-backends.c:341
 msgid "Japanese Postal"
 msgstr "Japán postai"
 
-#: ../src/bc-backends.c:341
+#: ../src/bc-backends.c:344
 msgid "Korean Postal"
 msgstr "Koreai postai"
 
-#: ../src/bc-backends.c:344
+#: ../src/bc-backends.c:347
 msgid "LOGMARS"
 msgstr "LOGMARS"
 
-#: ../src/bc-backends.c:347
+#: ../src/bc-backends.c:350
 msgid "Maxicode"
 msgstr "Maxicode"
 
-#: ../src/bc-backends.c:350
+#: ../src/bc-backends.c:353
 msgid "Micro PDF417"
 msgstr "Micro PDF417"
 
-#: ../src/bc-backends.c:353
+#: ../src/bc-backends.c:356
 msgid "Micro QR Code"
 msgstr "Micro QR-kód"
 
-#: ../src/bc-backends.c:356
+#: ../src/bc-backends.c:359
 msgid "MSI Plessey"
 msgstr "MSI Plessey"
 
-#: ../src/bc-backends.c:359
+#: ../src/bc-backends.c:362
 msgid "NVE-18"
 msgstr "NVE-18"
 
-#: ../src/bc-backends.c:362
+#: ../src/bc-backends.c:365
 msgid "PDF417"
 msgstr "PDF417"
 
-#: ../src/bc-backends.c:365
+#: ../src/bc-backends.c:368
 msgid "PDF417 Truncated"
 msgstr "PDF417 csonkított"
 
-#: ../src/bc-backends.c:368
+#: ../src/bc-backends.c:371
 msgid "PLANET"
 msgstr "PLANET"
 
-#: ../src/bc-backends.c:371
+#: ../src/bc-backends.c:374
 msgid "PostNet"
 msgstr "PostNet"
 
-#: ../src/bc-backends.c:374
+#: ../src/bc-backends.c:377
 msgid "Pharmacode"
 msgstr "Pharmacode"
 
-#: ../src/bc-backends.c:377
+#: ../src/bc-backends.c:380
 msgid "Pharmacode 2-track"
 msgstr "Pharmacode 2-sáv"
 
-#: ../src/bc-backends.c:380
+#: ../src/bc-backends.c:383
 msgid "Pharmazentral Nummer (PZN)"
 msgstr "Pharmazentral Nummer (PZN)"
 
-#: ../src/bc-backends.c:383
+#: ../src/bc-backends.c:386
 msgid "QR Code"
 msgstr "QR-kód"
 
-#: ../src/bc-backends.c:386
+#: ../src/bc-backends.c:389
 msgid "Royal Mail 4-State"
 msgstr "Királyi levél 4-állapot"
 
-#: ../src/bc-backends.c:389
+#: ../src/bc-backends.c:392
 msgid "Telepen"
 msgstr "Telepen"
 
-#: ../src/bc-backends.c:392
+#: ../src/bc-backends.c:395
 msgid "Telepen Numeric"
 msgstr "Telepen Numeric"
 
-#: ../src/bc-backends.c:401
+#: ../src/bc-backends.c:404
 msgid "USPS One Code"
 msgstr "USPS One Code"
 
-#: ../src/bc-backends.c:404
+#: ../src/bc-backends.c:407
 msgid "UK Plessey"
 msgstr "UK Plessey"
 
-#: ../src/bc-backends.c:411
+#: ../src/bc-backends.c:414
 msgid "IEC16022 (DataMatrix)"
 msgstr "IEC16022 (adatmátrix)"
 
-#: ../src/bc-backends.c:418
+#: ../src/bc-backends.c:421
 msgid "IEC18004 (QRCode)"
 msgstr "IEC18004 (QR-kód)"
 
@@ -1149,7 +1153,6 @@ msgid "Up"
 msgstr "Fel"
 
 #: ../src/new-label-dialog.c:214
-#| msgid "Select Product"
 msgctxt "Title of dialog page to select a stationary product"
 msgid "Select Product"
 msgstr "Válasszon terméket"
@@ -2974,7 +2977,7 @@ msgstr "Videokazetta gerinccímkék"
 #. ===============================================================
 #: ../templates/ascom-iso-templates.xml.h:8
 #: ../templates/avery-iso-templates.xml.h:26
-#: ../templates/zweckform-iso-templates.xml.h:28
+#: ../templates/zweckform-iso-templates.xml.h:26
 msgid "CD Inlet"
 msgstr "CD-melléklet"
 
@@ -3082,7 +3085,7 @@ msgstr "Iktató címkék"
 #: ../templates/misc-us-templates.xml.h:25
 #: ../templates/misc-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:15
-#: ../templates/zweckform-iso-templates.xml.h:30
+#: ../templates/zweckform-iso-templates.xml.h:28
 msgid "Business Cards"
 msgstr "Névjegyek"
 
@@ -3211,7 +3214,7 @@ msgstr "Levelezőcímkék"
 
 #. ===============================================================
 #: ../templates/avery-iso-templates.xml.h:24
-#: ../templates/zweckform-iso-templates.xml.h:26
+#: ../templates/zweckform-iso-templates.xml.h:24
 msgid "CD Booklet"
 msgstr "CD füzet"
 
@@ -3532,7 +3535,7 @@ msgstr "Arch iktatócímkék (nagy)"
 
 #. ===================================================================
 #: ../templates/herma-iso-templates.xml.h:10
-#: ../templates/zweckform-iso-templates.xml.h:20
+#: ../templates/zweckform-iso-templates.xml.h:18
 msgid "Allround Labels"
 msgstr "Teljesen kerek címkék"
 
@@ -3786,28 +3789,26 @@ msgstr "QSL kártya etikett (70mm x 50,8mm)"
 
 #. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:14
-msgid "File Back Labels"
-msgstr "Iktató fekete címkék"
-
-#. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:16
 msgid "Multi-purpose Stick+Lift Labels"
 msgstr "Többcélú Stick+Lift címkék"
 
 #. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:18
+#: ../templates/zweckform-iso-templates.xml.h:16
 msgid "Video Labels (back)"
 msgstr "Videocímkék (hátsó)"
 
 #. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:22
+#: ../templates/zweckform-iso-templates.xml.h:20
 msgid "Rectangular Copier Labels"
 msgstr "Négyszögletű másolócímkék"
 
 #. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:24
+#: ../templates/zweckform-iso-templates.xml.h:22
 msgid "Correction and Cover-up Labels"
 msgstr "Javító- és fedőcímkék"
+
+#~ msgid "File Back Labels"
+#~ msgstr "Iktató fekete címkék"
 
 #~ msgid "3.5in Diskette"
 #~ msgstr "3,5 colos kislemez"
