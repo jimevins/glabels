@@ -1,26 +1,25 @@
 # Brazilian Portuguese translation of Glabels.
-# Copyright (C) 2001-2015 Jim Evins <evins@snaught.com>
+# Copyright (C) 2001-2016 Jim Evins <evins@snaught.com>
 # Paulo R. Ormenese <pormenese@uol.com.br>, 2001.
 # Michel Recondo <michel@recondo.com.br>, 2010.
 # Henrique P. Machado <hpmachado@gnome.org>, 2010.
 # Antonio Fernandes C. Neto <fernandes@pelivre.org>, 2010.
 # Enrico Nicoletto <liverig@gmail.com>, 2013, 2014, 2015.
-# Rafael Fontenelle <rffontenelle@gmail.com>, 2016.
-#
+# Rafael Fontenelle <rafaelff@gnome.org>, 2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2016-03-06 21:17+0000\n"
-"PO-Revision-Date: 2016-03-13 16:02-0300\n"
-"Last-Translator: Rafael Fontenelle <rffontenelle@gmail.com>\n"
+"POT-Creation-Date: 2016-03-31 06:34+0000\n"
+"PO-Revision-Date: 2016-03-31 14:53-0200\n"
+"Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Virtaal 0.7.1\n"
 
 #: ../src/bc-backends.c:81
 msgid "Built-in"
@@ -90,7 +89,7 @@ msgstr "EAN-13 +5"
 msgid "UPC (UPC-A or UPC-E)"
 msgstr "UPC (UPC-A ou UPC-E)"
 
-#: ../src/bc-backends.c:151 ../src/bc-backends.c:395
+#: ../src/bc-backends.c:151 ../src/bc-backends.c:398
 msgid "UPC-A"
 msgstr "UPC-A"
 
@@ -102,7 +101,7 @@ msgstr "UPC-A +2"
 msgid "UPC-A +5"
 msgstr "UPC-A +5"
 
-#: ../src/bc-backends.c:160 ../src/bc-backends.c:398
+#: ../src/bc-backends.c:160 ../src/bc-backends.c:401
 msgid "UPC-E"
 msgstr "UPC-E"
 
@@ -114,7 +113,7 @@ msgstr "UPC-E +2"
 msgid "UPC-E +5"
 msgstr "UPC-E +5"
 
-#: ../src/bc-backends.c:169 ../src/bc-backends.c:332
+#: ../src/bc-backends.c:169 ../src/bc-backends.c:335
 msgid "ISBN"
 msgstr "ISBN"
 
@@ -134,7 +133,7 @@ msgstr "Code 128C"
 msgid "Code 128B"
 msgstr "Code 128B"
 
-#: ../src/bc-backends.c:187 ../src/bc-backends.c:329
+#: ../src/bc-backends.c:187 ../src/bc-backends.c:332
 msgid "Interleaved 2 of 5"
 msgstr "2 de 5 intercalado"
 
@@ -223,166 +222,171 @@ msgid "Data Matrix"
 msgstr "Matriz de dados"
 
 #: ../src/bc-backends.c:272
+#| msgid "Data Matrix"
+msgid "Data Matrix (GS1)"
+msgstr "Matriz de dados (GS1)"
+
+#: ../src/bc-backends.c:275
 msgid "Deutsche Post Leitcode"
 msgstr "Postagem Leitcode alemão"
 
-#: ../src/bc-backends.c:275
+#: ../src/bc-backends.c:278
 msgid "Deutsche Post Identcode"
 msgstr "Postagem Identcode alemão"
 
-#: ../src/bc-backends.c:278
+#: ../src/bc-backends.c:281
 msgid "Dutch Post KIX Code"
 msgstr "Code KIX de postagem holandês"
 
-#: ../src/bc-backends.c:281
+#: ../src/bc-backends.c:284
 msgid "EAN"
 msgstr "EAN"
 
-#: ../src/bc-backends.c:284
+#: ../src/bc-backends.c:287
 msgid "Grid Matrix"
 msgstr "Matriz de grade"
 
-#: ../src/bc-backends.c:287
+#: ../src/bc-backends.c:290
 msgid "GS1-128"
 msgstr "GS1-128"
 
-#: ../src/bc-backends.c:290
+#: ../src/bc-backends.c:293
 msgid "GS1 DataBar-14"
 msgstr "GS1 DataBar-14"
 
-#: ../src/bc-backends.c:299
+#: ../src/bc-backends.c:302
 msgid "GS1 DataBar-14 Stacked"
 msgstr "GS1 DataBar-14 Empilhada"
 
-#: ../src/bc-backends.c:302
+#: ../src/bc-backends.c:305
 msgid "GS1 DataBar-14 Stacked Omni."
 msgstr "GS1 DataBar-14 Empilhada Omni."
 
-#: ../src/bc-backends.c:305
-msgid "GS1 DataBar Extended Stacked"
-msgstr "GS1 DataBar-14 Estendida Empilhada"
-
 #: ../src/bc-backends.c:308
+msgid "GS1 DataBar Extended Stacked"
+msgstr "GS1 DataBar Estendida Empilhada"
+
+#: ../src/bc-backends.c:311
 msgid "HIBC Code 128"
 msgstr "Code HIBC 128"
 
-#: ../src/bc-backends.c:311
+#: ../src/bc-backends.c:314
 msgid "HIBC Code 39"
 msgstr "Code HIBC 39"
 
-#: ../src/bc-backends.c:314
+#: ../src/bc-backends.c:317
 msgid "HIBC Data Matrix"
 msgstr "Data Matrix HIBC"
 
-#: ../src/bc-backends.c:317
+#: ../src/bc-backends.c:320
 msgid "HIBC QR Code"
 msgstr "QR Code HIBC"
 
-#: ../src/bc-backends.c:320
+#: ../src/bc-backends.c:323
 msgid "HIBC PDF417"
 msgstr "HIBC PDF417"
 
-#: ../src/bc-backends.c:323
+#: ../src/bc-backends.c:326
 msgid "HIBC Micro PDF417"
 msgstr "HIBC Micro PDF417"
 
-#: ../src/bc-backends.c:326
+#: ../src/bc-backends.c:329
 msgid "HIBC Aztec Code"
 msgstr "Código Aztec HIBC"
 
-#: ../src/bc-backends.c:335
+#: ../src/bc-backends.c:338
 msgid "ITF-14"
 msgstr "ITF-14"
 
-#: ../src/bc-backends.c:338
+#: ../src/bc-backends.c:341
 msgid "Japanese Postal"
 msgstr "Postal japonês"
 
-#: ../src/bc-backends.c:341
+#: ../src/bc-backends.c:344
 msgid "Korean Postal"
 msgstr "Postal Coreano"
 
-#: ../src/bc-backends.c:344
+#: ../src/bc-backends.c:347
 msgid "LOGMARS"
 msgstr "LOGMARS"
 
-#: ../src/bc-backends.c:347
+#: ../src/bc-backends.c:350
 msgid "Maxicode"
 msgstr "Maxicode"
 
-#: ../src/bc-backends.c:350
+#: ../src/bc-backends.c:353
 msgid "Micro PDF417"
 msgstr "Micro PDF417"
 
-#: ../src/bc-backends.c:353
+#: ../src/bc-backends.c:356
 msgid "Micro QR Code"
 msgstr "Micro QR Code"
 
-#: ../src/bc-backends.c:356
+#: ../src/bc-backends.c:359
 msgid "MSI Plessey"
 msgstr "MSI Plessey"
 
-#: ../src/bc-backends.c:359
+#: ../src/bc-backends.c:362
 msgid "NVE-18"
 msgstr "NVE-18"
 
-#: ../src/bc-backends.c:362
+#: ../src/bc-backends.c:365
 msgid "PDF417"
 msgstr "PDF417"
 
-#: ../src/bc-backends.c:365
+#: ../src/bc-backends.c:368
 msgid "PDF417 Truncated"
 msgstr "PDF417 Truncado"
 
-#: ../src/bc-backends.c:368
+#: ../src/bc-backends.c:371
 msgid "PLANET"
 msgstr "PLANET"
 
-#: ../src/bc-backends.c:371
+#: ../src/bc-backends.c:374
 msgid "PostNet"
 msgstr "PostNet"
 
-#: ../src/bc-backends.c:374
+#: ../src/bc-backends.c:377
 msgid "Pharmacode"
 msgstr "Pharmacode"
 
-#: ../src/bc-backends.c:377
+#: ../src/bc-backends.c:380
 msgid "Pharmacode 2-track"
 msgstr "Pharmacode 2-faixas"
 
-#: ../src/bc-backends.c:380
+#: ../src/bc-backends.c:383
 msgid "Pharmazentral Nummer (PZN)"
 msgstr "Pharmazentral Nummer (PZN)"
 
-#: ../src/bc-backends.c:383
+#: ../src/bc-backends.c:386
 msgid "QR Code"
 msgstr "QR Code"
 
-#: ../src/bc-backends.c:386
+#: ../src/bc-backends.c:389
 msgid "Royal Mail 4-State"
 msgstr "Royal Mail 4-State"
 
-#: ../src/bc-backends.c:389
+#: ../src/bc-backends.c:392
 msgid "Telepen"
 msgstr "Telepen"
 
-#: ../src/bc-backends.c:392
+#: ../src/bc-backends.c:395
 msgid "Telepen Numeric"
 msgstr "Telepen numérico"
 
-#: ../src/bc-backends.c:401
+#: ../src/bc-backends.c:404
 msgid "USPS One Code"
 msgstr "USPS One Code"
 
-#: ../src/bc-backends.c:404
+#: ../src/bc-backends.c:407
 msgid "UK Plessey"
 msgstr "UK Plessey"
 
-#: ../src/bc-backends.c:411
+#: ../src/bc-backends.c:414
 msgid "IEC16022 (DataMatrix)"
 msgstr "IEC16022 (DataMatrix)"
 
-#: ../src/bc-backends.c:418
+#: ../src/bc-backends.c:421
 msgid "IEC18004 (QRCode)"
 msgstr "IEC18004 (QRCode)"
 
@@ -765,7 +769,7 @@ msgstr "Criar objeto código de barras"
 
 #: ../src/label-barcode.c:259 ../src/label-barcode.c:461
 msgid "Barcode data"
-msgstr "Dado do código de barras:"
+msgstr "Dados do código de barras"
 
 #: ../src/label-barcode.c:290
 msgid "Barcode property"
@@ -2122,7 +2126,7 @@ msgstr "Deslocamento Y:"
 
 #: ../data/ui/object-editor.ui.h:40
 msgid "Opacity:"
-msgstr "Opacidade"
+msgstr "Opacidade:"
 
 #: ../data/ui/object-editor.ui.h:42
 #, no-c-format
@@ -2207,7 +2211,7 @@ msgstr "Iniciar na etiqueta"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:7
 msgid "on 1st sheet"
-msgstr "na primeira folha"
+msgstr "na 1ª folha"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:8
 msgid "Copies:"
@@ -2255,7 +2259,7 @@ msgid ""
 "\n"
 "This dialog will assist you in the creation of a custom gLabels template."
 msgstr ""
-"Bem vidno ao Criador de Modelos do gLabels.\n"
+"Bem vindo ao Criador de Modelos do gLabels.\n"
 "\n"
 "Este diálogo irá lhe auxiliar na criação de um modelo gLabels personalizado."
 
@@ -2633,7 +2637,7 @@ msgstr "A cor padrão de texto para novos objetos de texto (0xRRGGBBAA)."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:27
 msgid "Default text alignment."
-msgstr "Alinhamento padrão de texto"
+msgstr "Alinhamento padrão de texto."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:28
 msgid "The default text alignment for new text objects."
@@ -2641,7 +2645,7 @@ msgstr "O alinhamento padrão de texto para novos objetos de texto."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:29
 msgid "Default text line spacing."
-msgstr "Espaçamento padrão de linha de texto"
+msgstr "Espaçamento padrão de linha de texto."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:30
 msgid "The default line spacing for new text objects."
@@ -2649,7 +2653,7 @@ msgstr "O espaçamento padrão de linha de texto para novos objetos de texto."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:31
 msgid "Default line width."
-msgstr "Largura padrão de linha"
+msgstr "Largura padrão de linha."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:32
 msgid "The default line width for new objects."
@@ -2983,7 +2987,7 @@ msgstr "Etiquetas de fita de vídeo"
 #. ===============================================================
 #: ../templates/ascom-iso-templates.xml.h:8
 #: ../templates/avery-iso-templates.xml.h:26
-#: ../templates/zweckform-iso-templates.xml.h:28
+#: ../templates/zweckform-iso-templates.xml.h:26
 msgid "CD Inlet"
 msgstr "Encarte de CD"
 
@@ -3091,7 +3095,7 @@ msgstr "Etiquetas de classificação/registro"
 #: ../templates/misc-us-templates.xml.h:25
 #: ../templates/misc-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:15
-#: ../templates/zweckform-iso-templates.xml.h:30
+#: ../templates/zweckform-iso-templates.xml.h:28
 msgid "Business Cards"
 msgstr "Cartões de visita"
 
@@ -3221,7 +3225,7 @@ msgstr "Etiquetas de endereçamento"
 
 #. ===============================================================
 #: ../templates/avery-iso-templates.xml.h:24
-#: ../templates/zweckform-iso-templates.xml.h:26
+#: ../templates/zweckform-iso-templates.xml.h:24
 msgid "CD Booklet"
 msgstr "Brochura de CD"
 
@@ -3275,7 +3279,7 @@ msgstr "Etiquetas de envio de 62mm x 100mm"
 
 #: ../templates/brother-other-templates.xml.h:18
 msgid "Multi Purpose Labels 17mm x 54mm"
-msgstr "Etiquetas multiuso de 17mm x 54mm"
+msgstr "Etiquetas multiúso de 17mm x 54mm"
 
 #: ../templates/brother-other-templates.xml.h:19
 msgid "Standard Address Labels 38mm x 90mm"
@@ -3308,7 +3312,7 @@ msgstr "Etiquetas de envio de 62mm x 100mm (modelo antigo)"
 
 #: ../templates/brother-other-templates.xml.h:39
 msgid "Multi Purpose Labels 17mm x 54mm (Old)"
-msgstr "Etiquetas multiuso de 17mm x 54mm (modelo antigo)"
+msgstr "Etiquetas multiúso de 17mm x 54mm (modelo antigo)"
 
 #: ../templates/brother-other-templates.xml.h:40
 msgid "Standard Address Labels 38mm x 90mm (Old)"
@@ -3543,7 +3547,7 @@ msgstr "Etiquetas de arquivamento (grandes)"
 
 #. ===================================================================
 #: ../templates/herma-iso-templates.xml.h:10
-#: ../templates/zweckform-iso-templates.xml.h:20
+#: ../templates/zweckform-iso-templates.xml.h:18
 msgid "Allround Labels"
 msgstr "Etiquetas arredondadas"
 
@@ -3797,28 +3801,26 @@ msgstr "QSL-Karten Etiketten 70mm x 50,8mm"
 
 #. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:14
-msgid "File Back Labels"
-msgstr "Etiquetas de arquivo traseiras"
-
-#. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:16
 msgid "Multi-purpose Stick+Lift Labels"
 msgstr "Etiquetas multi-função Stick+Lift (cola/descola)"
 
 #. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:18
+#: ../templates/zweckform-iso-templates.xml.h:16
 msgid "Video Labels (back)"
 msgstr "Etiquetas de vídeo (verso)"
 
 #. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:22
+#: ../templates/zweckform-iso-templates.xml.h:20
 msgid "Rectangular Copier Labels"
 msgstr "Etiquetas retangulares para copiadoras"
 
 #. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:24
+#: ../templates/zweckform-iso-templates.xml.h:22
 msgid "Correction and Cover-up Labels"
 msgstr "Etiquetas de correção e cobertura"
+
+#~ msgid "File Back Labels"
+#~ msgstr "Etiquetas de arquivo traseiras"
 
 #~ msgid "3.5in Diskette"
 #~ msgstr "Disquete de 3,5 pol."
