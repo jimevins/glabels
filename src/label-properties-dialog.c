@@ -40,7 +40,7 @@
 /* Private types.                                         */
 /*========================================================*/
 
-typedef struct
+struct _glLabelPropertiesDialogPrivate
 {
 	glLabel        *label;
 	GtkBox         *box;
@@ -58,15 +58,6 @@ typedef struct
 	GtkBox         *orientation_box;
 	GtkRadioButton *normal_orientation;
 	GtkRadioButton *rotated_orientation;
-
-} glLabelPropertiesDialogPrivate;
-
-
-struct _glLabelPropertiesDialog
-{
-	GtkDialog                       parent;
-
-	glLabelPropertiesDialogPrivate *priv;
 };
 
 
@@ -94,8 +85,7 @@ static void gl_label_properties_dialog_construct   (glLabelPropertiesDialog *dia
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-
-G_DEFINE_TYPE_WITH_PRIVATE (glLabelPropertiesDialog, gl_label_properties_dialog, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE (glLabelPropertiesDialog, gl_label_properties_dialog, GTK_TYPE_DIALOG)
 
 
 
@@ -165,7 +155,7 @@ gl_label_properties_dialog_init (glLabelPropertiesDialog *dialog)
 
   	gl_debug (DEBUG_UI, "START");
 
-	dialog->priv = gl_label_properties_dialog_get_instance_private (dialog);
+	dialog->priv = g_new0 (glLabelPropertiesDialogPrivate, 1);
 
         vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
 

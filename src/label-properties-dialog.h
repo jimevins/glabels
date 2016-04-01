@@ -32,8 +32,34 @@ G_BEGIN_DECLS
 #define GL_RESPONSE_SELECT_OTHER 1
 
 #define GL_TYPE_LABEL_PROPERTIES_DIALOG (gl_label_properties_dialog_get_type ())
+#define GL_LABEL_PROPERTIES_DIALOG(obj) \
+        (G_TYPE_CHECK_INSTANCE_CAST ((obj), GL_TYPE_LABEL_PROPERTIES_DIALOG, glLabelPropertiesDialog))
+#define GL_LABEL_PROPERTIES_DIALOG_CLASS(klass) \
+        (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_LABEL_PROPERTIES_DIALOG, glLabelPropertiesDialogClass))
+#define GL_IS_LABEL_PROPERTIES_DIALOG(obj) \
+        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_LABEL_PROPERTIES_DIALOG))
+#define GL_IS_LABEL_PROPERTIES_DIALOG_CLASS(klass) \
+        (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_LABEL_PROPERTIES_DIALOG))
+#define GL_LABEL_PROPERTIES_DIALOG_GET_CLASS(obj) \
+        (G_TYPE_INSTANCE_GET_CLASS ((obj), GL_TYPE_LABEL_PROPERTIES_DIALOG, glLabelPropertiesDialogClass))
 
-G_DECLARE_FINAL_TYPE (glLabelPropertiesDialog, gl_label_properties_dialog, GL, LABEL_PROPERTIES_DIALOG, GtkDialog)
+typedef struct _glLabelPropertiesDialog         glLabelPropertiesDialog;
+typedef struct _glLabelPropertiesDialogClass    glLabelPropertiesDialogClass;
+
+typedef struct _glLabelPropertiesDialogPrivate  glLabelPropertiesDialogPrivate;
+
+struct _glLabelPropertiesDialog
+{
+	GtkDialog                       parent_instance;
+
+	glLabelPropertiesDialogPrivate *priv;
+};
+
+struct  _glLabelPropertiesDialogClass
+{
+	GtkDialogClass                  parent_class;
+};
+
 
 GtkWidget *gl_label_properties_dialog_new (glLabel *label, GtkWindow *parent);
 
