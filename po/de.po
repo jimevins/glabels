@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2016-03-29 23:55+0000\n"
-"PO-Revision-Date: 2016-03-30 14:36+0200\n"
+"POT-Creation-Date: 2016-04-11 09:04+0000\n"
+"PO-Revision-Date: 2016-04-11 11:05+0200\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -220,7 +220,6 @@ msgid "Data Matrix"
 msgstr "Data Matrix"
 
 #: ../src/bc-backends.c:272
-#| msgid "Data Matrix"
 msgid "Data Matrix (GS1)"
 msgstr "Data Matrix (GS1)"
 
@@ -955,18 +954,18 @@ msgid "Shadow opacity"
 msgstr "Schattierungstransparenz"
 
 #. Translators: Button label to choose different template
-#: ../src/label-properties-dialog.c:173
+#: ../src/label-properties-dialog.c:163
 msgid "Choose _other…"
 msgstr "Weitere _wählen …"
 
-#: ../src/label-properties-dialog.c:174 ../src/ui.c:162
+#: ../src/label-properties-dialog.c:164 ../src/ui.c:162
 msgid "_Close"
 msgstr "S_chließen"
 
 #. Translators: first param is numeric value of horizontal margine, second
 #. is numeric value of vertical margine and third is unit. Example:
 #. "10 / 12.5 mm (horizontal / vertical)"
-#: ../src/label-properties-dialog.c:292
+#: ../src/label-properties-dialog.c:282
 #, c-format
 msgid "%s / %s %s (horizontal / vertical)"
 msgstr "%s / %s %s (horizontal / vertikal)"
@@ -3161,7 +3160,7 @@ msgstr "CD/DVD-Etiketten (Spine Labels)"
 #: ../templates/avery-us-templates.xml.h:38
 #: ../templates/geha-iso-templates.xml.h:17
 #: ../templates/meritline-us-templates.xml.h:16
-#: ../templates/sheetlabels-us-templates.xml.h:22
+#: ../templates/sheetlabels-us-templates.xml.h:24
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Video Tape Face Labels"
 msgstr "Etiketten für Videokassetten (Vorderseite)"
@@ -3226,7 +3225,7 @@ msgstr "Versandaufkleber"
 #: ../templates/herma-iso-templates.xml.h:8
 #: ../templates/misc-us-templates.xml.h:21
 #: ../templates/misc-iso-templates.xml.h:6
-#: ../templates/sheetlabels-us-templates.xml.h:24
+#: ../templates/sheetlabels-us-templates.xml.h:28
 #: ../templates/zweckform-iso-templates.xml.h:10
 msgid "Mailing Labels"
 msgstr "Adressaufkleber"
@@ -3697,6 +3696,7 @@ msgstr "Universelle Etiketten"
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:36
 #: ../templates/pearl-iso-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:26
 msgid "Bottle labels"
 msgstr "Flaschenetiketten"
 
@@ -3800,6 +3800,11 @@ msgstr "Dreieckige Etiketten"
 #: ../templates/rayfilm-templates.xml.h:14
 msgid "Trapezoid labels"
 msgstr "Trapezförmige Etiketten"
+
+#. ===================================================================
+#: ../templates/sheetlabels-us-templates.xml.h:22
+msgid "Oval bottle labels"
+msgstr "Ovale Flaschenetiketten"
 
 #. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:12
