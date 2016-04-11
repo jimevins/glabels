@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2016-04-11 06:31+0000\n"
-"PO-Revision-Date: 2016-04-11 09:27+0200\n"
+"POT-Creation-Date: 2016-04-11 09:03+0000\n"
+"PO-Revision-Date: 2016-04-11 14:21+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -3142,7 +3142,7 @@ msgstr "CD/DVD-etiketter (Ryggetiketter)"
 #: ../templates/avery-us-templates.xml.h:38
 #: ../templates/geha-iso-templates.xml.h:17
 #: ../templates/meritline-us-templates.xml.h:16
-#: ../templates/sheetlabels-us-templates.xml.h:22
+#: ../templates/sheetlabels-us-templates.xml.h:24
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Video Tape Face Labels"
 msgstr "VHS-etiketter"
@@ -3207,7 +3207,7 @@ msgstr "Leveransetiketter"
 #: ../templates/herma-iso-templates.xml.h:8
 #: ../templates/misc-us-templates.xml.h:21
 #: ../templates/misc-iso-templates.xml.h:6
-#: ../templates/sheetlabels-us-templates.xml.h:24
+#: ../templates/sheetlabels-us-templates.xml.h:28
 #: ../templates/zweckform-iso-templates.xml.h:10
 msgid "Mailing Labels"
 msgstr "Försändelseetiketter"
@@ -3678,6 +3678,7 @@ msgstr "Universaletiketter"
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:36
 #: ../templates/pearl-iso-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:26
 msgid "Bottle labels"
 msgstr "Flasketiketter"
 
@@ -3781,6 +3782,11 @@ msgstr "Triangulära etiketter"
 #: ../templates/rayfilm-templates.xml.h:14
 msgid "Trapezoid labels"
 msgstr "Trapetsoida etiketter"
+
+#. ===================================================================
+#: ../templates/sheetlabels-us-templates.xml.h:22
+msgid "Oval bottle labels"
+msgstr "Ovala flasketiketter"
 
 #. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:12
