@@ -22,13 +22,15 @@
     </license>    
   </info>
 
-    <title>To change label properties</title>
+    <title>To view or change label properties</title>
 
-      <p>To change the media type and/or orientation of a label, choose
-        <guiseq><gui>File</gui>
-        <gui>Properties</gui></guiseq> to display the
-        <gui>Label properties</gui> dialog.  Select the
-        new media type and orientation for the document, then click
-        <gui>OK</gui>.</p>
+      <p>To view the current properties of a label, choose <guiseq><gui>File</gui>
+        <gui>Properties</gui></guiseq> to display the <gui>Label properties</gui> dialog.</p>
+
+      <p>To change the orientation of the label, simply click either the <gui>Normal</gui>
+	or <gui>Rotated</gui> Orientation options from this dialog.
+	To select a new media type, click the <gui>Choose other...</gui> button from this dialog.
+	This will launch a second dialog which will allow the selection of a new media type
+	and orientation for the current label.</p>
 
 </page>
