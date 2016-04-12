@@ -3,14 +3,14 @@
 # Copyright (C) 2010 glabels's COPYRIGHT HOLDER
 # This file is distributed under the same license as the glabels package.
 # Jorge González <jorgegonz@svn.gnome.org>, 2010, 2011.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011, 2012, 2014, 2015.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011, 2012, 2014, 2015, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-07 07:18+0000\n"
-"PO-Revision-Date: 2015-12-07 15:51+0100\n"
+"POT-Creation-Date: 2016-04-12 01:38+0000\n"
+"PO-Revision-Date: 2016-04-12 17:02+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -24,7 +24,7 @@ msgstr ""
 msgctxt "_"
 msgid "translator-credits"
 msgstr ""
-"Daniel Mustieles <daniel.mustieles@gmail.com>, 2010-2015\n"
+"Daniel Mustieles <daniel.mustieles@gmail.com>, 2010-2016\n"
 "Jorge González <jorgegonz@svn.gnome.org>, 2010"
 
 #. (itstool) path: info/desc
@@ -458,10 +458,6 @@ msgstr "Tamaño de página predeterminado"
 
 #. (itstool) path: section/p
 #: C/customize.page:59
-#| msgid ""
-#| "Use this radio button group to specify your prefered page size. This will "
-#| "make it quicker for you to locate media types when creating a new label "
-#| "or card."
 msgid ""
 "Use this radio button group to specify your preferred page size. This will "
 "make it quicker for you to locate media types when creating a new label or "
@@ -1109,21 +1105,40 @@ msgstr ""
 
 #. (itstool) path: page/title
 #: C/labelprop.page:25
-msgid "To change label properties"
-msgstr "Cambiar las propiedades de la etiqueta"
+#| msgid "To change label properties"
+msgid "To view or change label properties"
+msgstr "Para ver o cambiar las propiedades de la etiqueta"
 
 #. (itstool) path: page/p
 #: C/labelprop.page:27
+#| msgid ""
+#| "To change the media type and/or orientation of a label, choose "
+#| "<guiseq><gui>File</gui> <gui>Properties</gui></guiseq> to display the "
+#| "<gui>Label properties</gui> dialog. Select the new media type and "
+#| "orientation for the document, then click <gui>OK</gui>."
 msgid ""
-"To change the media type and/or orientation of a label, choose "
-"<guiseq><gui>File</gui> <gui>Properties</gui></guiseq> to display the "
-"<gui>Label properties</gui> dialog. Select the new media type and "
-"orientation for the document, then click <gui>OK</gui>."
+"To view the current properties of a label, choose <guiseq><gui>File</gui> "
+"<gui>Properties</gui></guiseq> to display the <gui>Label properties</gui> "
+"dialog."
 msgstr ""
-"Para cambiar el tipo de medio y/o la orientación de una etiqueta, seleccione "
-"<guiseq><gui>Archivo</gui><gui>Propiedades</gui></guiseq> para mostrar el "
-"diálogo <gui>Propiedades de la etiqueta</gui>. Seleccione el tipo de medio y "
-"la orientación nuevas y pulse <gui>Aceptar</gui>."
+"Para ver las propiedades actuales de una etiqueta, elija "
+"<guiseq><gui>Archivo</gui> <gui>Propiedades</gui></guiseq> para mostrar el "
+"diálogo de the <gui>Propiedades de la etiqueta</gui>."
+
+#. (itstool) path: page/p
+#: C/labelprop.page:30
+msgid ""
+"To change the orientation of the label, simply click either the <gui>Normal</"
+"gui> or <gui>Rotated</gui> Orientation options from this dialog. To select a "
+"new media type, click the <gui>Choose other...</gui> button from this "
+"dialog. This will launch a second dialog which will allow the selection of a "
+"new media type and orientation for the current label."
+msgstr ""
+"Para cambiar la orientación de la etiqueta, simplemente pulse en las "
+"opciones de orientación <gui>Normal</gui> o <gui>Rotada</gui> en este "
+"diálogo. PAra seleccionar un tipo de medio, pulse el botón <gui>Elegir "
+"otro...</gui> en este diálogo. Esto lanzará un segundo diálogo que permitirá "
+"seleccionar un nuevo tipo de medio y una orientación para la etiqueta actual."
 
 #. (itstool) path: info/desc
 #: C/license.page:8
@@ -1609,7 +1624,6 @@ msgstr "Ancho de la etiqueta/tarjeta"
 
 #. (itstool) path: td/p
 #: C/mancreate.page:316
-#| msgid "Heigth of label/card"
 msgid "Height of label/card"
 msgstr "Altura de la etiqueta/tarjeta"
 
@@ -1668,7 +1682,6 @@ msgstr "Anchura de la elipse"
 
 #. (itstool) path: td/p
 #: C/mancreate.page:379
-#| msgid "Heigth of the ellipse"
 msgid "Height of the ellipse"
 msgstr "Altura de la elipse"
 
@@ -1823,13 +1836,11 @@ msgstr "coordenada Y del primero punto final del segmento de línea."
 
 #. (itstool) path: td/p
 #: C/mancreate.page:577
-#| msgid "x coordinate of 2st endpoint of the line segment."
 msgid "x coordinate of 2nd endpoint of the line segment."
 msgstr "coordenada X del segundo punto final del segmento de línea."
 
 #. (itstool) path: td/p
 #: C/mancreate.page:581
-#| msgid "y coordinate of 2st endpoint of the line segment."
 msgid "y coordinate of 2nd endpoint of the line segment."
 msgstr "coordenada Y del segundo punto final del segmento de línea."
 
@@ -1971,12 +1982,6 @@ msgstr ""
 
 #. (itstool) path: note/p
 #: C/mancreate.page:740
-#| msgid ""
-#| "You can define multiple layouts only if the labels on the sheet have the "
-#| "same shape. If your sheet contains different shapes, you have to define "
-#| "each shape in another template seperately. Future versions of "
-#| "<app>gLabels</app> will probably be able to concatenate such sheets with "
-#| "different shapes within a single template."
 msgid ""
 "You can define multiple layouts only if the labels on the sheet have the "
 "same shape. If your sheet contains different shapes, you have to define each "
