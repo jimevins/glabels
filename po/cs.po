@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels glabels-3.4\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2016-03-29 23:55+0000\n"
-"PO-Revision-Date: 2016-03-30 08:22+0100\n"
+"POT-Creation-Date: 2016-04-13 06:33+0000\n"
+"PO-Revision-Date: 2016-04-13 12:03+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -953,18 +953,18 @@ msgid "Shadow opacity"
 msgstr "Krytí stínu"
 
 #. Translators: Button label to choose different template
-#: ../src/label-properties-dialog.c:173
+#: ../src/label-properties-dialog.c:163
 msgid "Choose _other…"
 msgstr "Vybrat _jinou…"
 
-#: ../src/label-properties-dialog.c:174 ../src/ui.c:162
+#: ../src/label-properties-dialog.c:164 ../src/ui.c:162
 msgid "_Close"
 msgstr "_Zavřít"
 
 #. Translators: first param is numeric value of horizontal margine, second
 #. is numeric value of vertical margine and third is unit. Example:
 #. "10 / 12.5 mm (horizontal / vertical)"
-#: ../src/label-properties-dialog.c:292
+#: ../src/label-properties-dialog.c:282
 #, c-format
 msgid "%s / %s %s (horizontal / vertical)"
 msgstr "%s / %s %s (vodorovně / svisle)"
@@ -3143,7 +3143,7 @@ msgstr "Etikety na CD/DVD (hřbetní etikety)"
 #: ../templates/avery-us-templates.xml.h:38
 #: ../templates/geha-iso-templates.xml.h:17
 #: ../templates/meritline-us-templates.xml.h:16
-#: ../templates/sheetlabels-us-templates.xml.h:22
+#: ../templates/sheetlabels-us-templates.xml.h:24
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Video Tape Face Labels"
 msgstr "Etikety na čelní stranu videokazety"
@@ -3208,7 +3208,7 @@ msgstr "Přepravní etikety"
 #: ../templates/herma-iso-templates.xml.h:8
 #: ../templates/misc-us-templates.xml.h:21
 #: ../templates/misc-iso-templates.xml.h:6
-#: ../templates/sheetlabels-us-templates.xml.h:24
+#: ../templates/sheetlabels-us-templates.xml.h:28
 #: ../templates/zweckform-iso-templates.xml.h:10
 msgid "Mailing Labels"
 msgstr "Poštovní etikety"
@@ -3679,6 +3679,7 @@ msgstr "Univerzální etikety"
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:36
 #: ../templates/pearl-iso-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:26
 msgid "Bottle labels"
 msgstr "Etikety na lahve"
 
@@ -3784,6 +3785,11 @@ msgid "Trapezoid labels"
 msgstr "Lichoběžníkové etikety"
 
 #. ===================================================================
+#: ../templates/sheetlabels-us-templates.xml.h:22
+msgid "Oval bottle labels"
+msgstr "Oválné etikety na lahve"
+
+#. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:12
 msgid "QSL-Karten Etiketten 70mm x 50,8mm"
 msgstr "Etikety na QSL karty 70mm × 50,8mm"
@@ -3807,9 +3813,3 @@ msgstr "Obdélníkové etikety do kopírky"
 #: ../templates/zweckform-iso-templates.xml.h:22
 msgid "Correction and Cover-up Labels"
 msgstr "Opravné a přelepovací etikety"
-
-#~ msgid "File Back Labels"
-#~ msgstr "Etikety do diáře"
-
-#~ msgid "3.5in Diskette"
-#~ msgstr "3,5ʺ disketa"
