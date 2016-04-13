@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels\n"
-"POT-Creation-Date: 2015-09-13 05:47+0000\n"
-"PO-Revision-Date: 2016-02-17 15:22+0100\n"
+"POT-Creation-Date: 2016-04-13 06:33+0000\n"
+"PO-Revision-Date: 2016-04-13 12:01+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Gtranslator 2.91.6\n"
+"X-Generator: Gtranslator 2.91.7\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -28,35 +28,32 @@ msgid "Information about <app>gLabels</app>."
 msgstr "Informace o <app>gLabels</app>."
 
 #. (itstool) path: credit/name
-#: C/about.page:13 C/basicusage.page:13 C/createnew.page:13
-#: C/customize.page:11 C/customtemplate.page:13 C/editprop.page:13
-#: C/index.page:11 C/labelprop.page:13 C/mancreate.page:15 C/merge-ex1.page:13
+#: C/about.page:13 C/basicusage.page:13 C/createnew.page:13 C/customize.page:11
+#: C/customtemplate.page:13 C/editprop.page:13 C/index.page:11
+#: C/labelprop.page:13 C/mancreate.page:15 C/merge-ex1.page:13
 #: C/merge-ex2.page:13 C/merge-ex3.page:13 C/merge-ex4.page:13
 #: C/mergefeatures.page:13 C/merge.page:13 C/multifile.page:13
-#: C/newlabel.page:13 C/printfile.page:13 C/select.page:13
-#: C/skipfields.page:13
+#: C/newlabel.page:13 C/printfile.page:13 C/select.page:13 C/skipfields.page:13
 msgid "Jim Evins"
 msgstr "Jim Evins"
 
 #. (itstool) path: credit/name
-#: C/about.page:17 C/basicusage.page:17 C/createnew.page:17
-#: C/customize.page:15 C/customtemplate.page:17 C/editprop.page:17
-#: C/index.page:15 C/labelprop.page:17 C/mancreate.page:19 C/merge-ex1.page:17
+#: C/about.page:17 C/basicusage.page:17 C/createnew.page:17 C/customize.page:15
+#: C/customtemplate.page:17 C/editprop.page:17 C/index.page:15
+#: C/labelprop.page:17 C/mancreate.page:19 C/merge-ex1.page:17
 #: C/merge-ex2.page:17 C/merge-ex3.page:17 C/merge-ex4.page:17
 #: C/mergefeatures.page:17 C/merge.page:17 C/multifile.page:17
-#: C/newlabel.page:17 C/printfile.page:17 C/select.page:17
-#: C/skipfields.page:17
+#: C/newlabel.page:17 C/printfile.page:17 C/select.page:17 C/skipfields.page:17
 msgid "Mario Blättermann"
 msgstr "Mario Blättermann"
 
 #. (itstool) path: license/p
-#: C/about.page:21 C/basicusage.page:21 C/createnew.page:21
-#: C/customize.page:19 C/customtemplate.page:21 C/editprop.page:21
-#: C/index.page:19 C/labelprop.page:21 C/mancreate.page:23 C/merge-ex1.page:21
+#: C/about.page:21 C/basicusage.page:21 C/createnew.page:21 C/customize.page:19
+#: C/customtemplate.page:21 C/editprop.page:21 C/index.page:19
+#: C/labelprop.page:21 C/mancreate.page:23 C/merge-ex1.page:21
 #: C/merge-ex2.page:21 C/merge-ex3.page:21 C/merge-ex4.page:21
 #: C/mergefeatures.page:21 C/merge.page:21 C/multifile.page:21
-#: C/newlabel.page:21 C/printfile.page:21 C/select.page:21
-#: C/skipfields.page:21
+#: C/newlabel.page:21 C/printfile.page:21 C/select.page:21 C/skipfields.page:21
 msgid "Creative Commons Share Alike 3.0"
 msgstr "Creative Commons Share Alike 3.0"
 
@@ -1070,21 +1067,39 @@ msgstr "Jak změnit vlastnosti etikety nebo vizitky."
 
 #. (itstool) path: page/title
 #: C/labelprop.page:25
-msgid "To change label properties"
-msgstr "Změna vlastností etikety"
+msgid "To view or change label properties"
+msgstr "Zobrazení nebo změna vlastností etikety"
 
 #. (itstool) path: page/p
 #: C/labelprop.page:27
+#| msgid ""
+#| "To change the media type and/or orientation of a label, choose "
+#| "<guiseq><gui>File</gui> <gui>Properties</gui></guiseq> to display the "
+#| "<gui>Label properties</gui> dialog. Select the new media type and "
+#| "orientation for the document, then click <gui>OK</gui>."
 msgid ""
-"To change the media type and/or orientation of a label, choose "
-"<guiseq><gui>File</gui> <gui>Properties</gui></guiseq> to display the "
-"<gui>Label properties</gui> dialog. Select the new media type and "
-"orientation for the document, then click <gui>OK</gui>."
+"To view the current properties of a label, choose <guiseq><gui>File</gui> "
+"<gui>Properties</gui></guiseq> to display the <gui>Label properties</gui> "
+"dialog."
 msgstr ""
-"Pokud chcete změnit typ média a/nebo orientaci etiket, zvolte "
-"<guiseq><gui>Soubor</gui> <gui>Vlastnosti</gui></guiseq> a zobrazí se "
-"dialogové okno <gui>Vlastnosti etikety</gui>. Zvolte pro dokument nový typ "
-"média a orientaci a klikněte na <gui>OK</gui>."
+"Když si chcete zobrazit vlastnosti etikety, zvolte <guiseq><gui>Soubor</gui> "
+"<gui>Vlastnosti</gui></guiseq> a zobrazí se vám dialogové okno "
+"<gui>Vlastnosti etikety</gui>."
+
+#. (itstool) path: page/p
+#: C/labelprop.page:30
+msgid ""
+"To change the orientation of the label, simply click either the <gui>Normal</"
+"gui> or <gui>Rotated</gui> Orientation options from this dialog. To select a "
+"new media type, click the <gui>Choose other...</gui> button from this "
+"dialog. This will launch a second dialog which will allow the selection of a "
+"new media type and orientation for the current label."
+msgstr ""
+"Jestliže chcete změnit otočení etikety, stačí kliknou buď na volbu "
+"<gui>Normální</gui> nebo <gui>Otočená</gui> v části <gui>Otočení</gui>. "
+"Pokud chcete vybrat jiný typ média, klikněte na tlačítko <gui>Vybrat jinou…</"
+"gui> v tomto dialogu. Spustí se průvodce, ve kterém si můžete pro aktuální "
+"etiketu vybrat nový typ média, včetně otočení."
 
 #. (itstool) path: info/desc
 #: C/license.page:8
