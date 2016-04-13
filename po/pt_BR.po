@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: glabels\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
 "POT-Creation-Date: 2016-04-12 01:37+0000\n"
-"PO-Revision-Date: 2016-04-11 23:10-0200\n"
+"PO-Revision-Date: 2016-04-11 23:42-0200\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -1824,7 +1824,7 @@ msgstr "pontos"
 #: ../libglabels/lgl-units.c:66 ../data/ui/object-editor.ui.h:28
 #: ../data/ui/template-designer.ui.h:15
 msgid "inches"
-msgstr "pol."
+msgstr "polegadas"
 
 #. [LGL_UNITS_MM]
 #: ../libglabels/lgl-units.c:67
@@ -2140,7 +2140,7 @@ msgstr "Sombra"
 
 #: ../data/ui/prefs-dialog.ui.h:2
 msgid "Select locale specific behavior."
-msgstr "Selecione comportamento específico do local."
+msgstr "Selecione comportamento específico do localidade."
 
 #: ../data/ui/prefs-dialog.ui.h:3
 msgid "   "
@@ -2176,7 +2176,7 @@ msgstr "Tamanho de página padrão"
 
 #: ../data/ui/prefs-dialog.ui.h:11
 msgid "Locale"
-msgstr "Local"
+msgstr "Localidade"
 
 #: ../data/ui/prefs-dialog.ui.h:12
 msgid "Select default properties for new objects."
@@ -2706,7 +2706,7 @@ msgstr "Criador de etiquetas gLabels 3"
 
 #: ../data/desktop/glabels-3.0.desktop.in.h:3
 msgid "label;card;print;office;barcode;"
-msgstr "etiqueta, cartão, impressão;escritório;código de barras;"
+msgstr "etiqueta;cartão;impressão;escritório;código de barras;"
 
 #: ../data/mime/glabels-3.0.xml.in.h:1
 msgid "gLabels Project File"
@@ -2720,11 +2720,11 @@ msgstr "A4"
 #. Other US paper sizes
 #: ../templates/paper-sizes.xml.h:5
 msgid "US Legal"
-msgstr "US Legal"
+msgstr "Ofício"
 
 #: ../templates/paper-sizes.xml.h:6
 msgid "US Executive"
-msgstr "US Executive"
+msgstr "Executivo"
 
 #. Other ISO A series sizes
 #: ../templates/paper-sizes.xml.h:8
