@@ -59,6 +59,7 @@ GType          gl_prefs_model_get_type                      (void) G_GNUC_CONST;
 
 glPrefsModel  *gl_prefs_model_new                           (void);
 
+glPrefsModel  *gl_prefs_model_new_null                      (void);
 
 void           gl_prefs_model_set_units                     (glPrefsModel     *this,
                                                              lglUnits          units);
