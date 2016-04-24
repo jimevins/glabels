@@ -22,13 +22,13 @@ cards using a laser or ink-jet printer.
 System Requirements
 ===================
 
-GTK+-3.6.x
+GTK+-3.14.x
 LIBXML-2.9.x
 
 
 Optional Merge Backends
 =======================
-Evolution Data Server 2.28.0+
+Evolution Data Server 3.12.0+
 
 
 Optional Barcode Backends

@@ -10,6 +10,10 @@ Glabels includes contributions from:
 
 	Mario Blättermann <mario.blaettermann@gmail.com> -- Documentation &
 							    i18n maintainer
+        Marek Černocký <marek@manet.cz>
+	Jim Patterson <sf.rs9z@ncf.ca>
+	Tim Waugh <twaugh@redhat.com>
+	
 	Frederic Ruaudel  <grumz@users.sf.net>
 	Emmanuel Pacaud <emmanuel.pacaud@univ-poitiers.fr>
 	Wayne Schuller <k_wayne@linuxpower.org>
@@ -177,5 +181,8 @@ particular products (I apologize if I have missed anybody):
 	Bao
 	Gernot Hassenpflug
 	Malte Skoruppa
-	
+	GHPS
+	Thomas Steinert
+	Windel Bouwman
+
 And many others for their many helpful suggestions and bug reports -- thanks.

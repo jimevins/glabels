@@ -116,15 +116,15 @@ dnl ---------------------------------------------------------------------------
 dnl - Library dependencies
 dnl ---------------------------------------------------------------------------
 dnl Required dependencies
-GLIB_REQUIRED=2.28.2
-GTK_REQUIRED=3.6.0
+GLIB_REQUIRED=2.42.0
+GTK_REQUIRED=3.14.0
 LIBXML_REQUIRED=2.9.0
-LIBRSVG_REQUIRED=2.32.0
-CAIRO_REQUIRED=1.10.0
-PANGO_REQUIRED=1.28.1
+LIBRSVG_REQUIRED=2.39.0
+CAIRO_REQUIRED=1.14.0
+PANGO_REQUIRED=1.36.0
 
 dnl Optional dependencies
-LIBEBOOK_REQUIRED=2.30.3
+LIBEBOOK_REQUIRED=3.12.0
 LIBBARCODE_REQUIRED=0.98
 LIBQRENCODE_REQUIRED=3.1.0
 LIBIEC16022_REQUIRED=0.2.4
