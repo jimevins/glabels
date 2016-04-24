@@ -1,3 +1,51 @@
+* gLabels 3.4.0 (stable) release.  Release data 2016-04-24
+- Fixed missing contacts when importing from vcard (Tim Waugh)
+- Create vcard composite address entry from components, if missing (Tim Waugh)
+- Auto-detect file encoding of CSV files (Jim Patterson)
+- Fixed sensitivity of first handle of line objects (Marek Černocký)
+- Object dragging enhancements (Marek Černocký)
+- Fixed problem with setting shadow color of line and text objects from key (Marek Černocký)
+- Use current label's path to set default "save as" directory (Marek Černocký)
+- Added properties dialog (Marek Černocký)
+- Fixed potential crash on "Select All" (Marek Černocký)
+- Fixed delayed rotate/flip (Marek Černocký)
+- Fixed clipping issue when drawing beyond label editor's drawing area (me)
+- Removed final windowing system and dbus dependencies from glabels-3-batch (me)
+- Added a GS1 input mode for Datamatrix barcodes using the zint backend (me)
+- Numerous new templates and fixes to the product database
+    (me, Mario Blättermann, GHPS, Marek Černocký, Windel Bouwman, Thomas Steinert, Malte Skoruppa)
+- Updated UI translations:
+    Åke Engelbrektson (sv)
+    Anders Jonsson (sv)
+    Balázs Meskó (hu)
+    Balázs Úr (hu)
+    Daniel Mustieles (es)
+    Daniel Șerbănescu (ro)
+    Dušan Kazik (sk)
+    Enrico Nicoletto (pt_BR)
+    Gabor Kelemen (hu)
+    Gábor Kelemen (hu)
+    Jiri Grönroos (fi)
+    Jordi Mas (ca)
+    Marek Černocký (cs)
+    Mario Blättermann (de)
+    Muhammet Kara (tr)
+    Necdet Yücel (tr)
+    Pedro Albuquerque (pt)
+    Rafael Fontenelle (pt_BR)
+    Samir Ribic (bs)
+    Tom Tryfonidis (el)
+    Walter Cheuk (zh_HK)
+    Walter Cheuk (zh_TW)
+    Мирослав Николић (sr) (sr@latin)
+- Updated Doc translations:
+    Alexandre Franke (fr)
+    Daniel Mustieles (es)
+    Dimitris Spingos (el)
+    Marek Černocký (cs)
+    Mario Blättermann (de)
+
+
 * gLabels 3.2.1 (stable) release.  Release date 2014-11-10
 
 - Fixed "new label dialog" crash introduced with Gtk 3.14
