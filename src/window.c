@@ -329,7 +329,9 @@ gl_window_new_from_file (const gchar *filename)
 	label = gl_xml_label_open (abs_filename, &status);
 	g_free (abs_filename);
 
-	gl_window_set_label (window, label);
+	if (label) {
+		gl_window_set_label (window, label);
+	}
 
 	gl_debug (DEBUG_WINDOW, "END");
 
