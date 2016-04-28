@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2016-04-26 18:26+0000\n"
-"PO-Revision-Date: 2016-04-26 21:12+0200\n"
+"POT-Creation-Date: 2016-04-28 06:33+0000\n"
+"PO-Revision-Date: 2016-04-28 20:29+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -680,47 +680,47 @@ msgstr "Vzorový text"
 
 #: ../src/glabels-batch.c:53
 msgid "set output filename (default=\"output.pdf\")"
-msgstr ""
+msgstr "nastaví názov výstupného súboru (predvolený=„output.pdf“)"
 
 #: ../src/glabels-batch.c:53 ../src/glabels-batch.c:67
 msgid "filename"
-msgstr ""
+msgstr "názov_súboru"
 
 #: ../src/glabels-batch.c:55
 msgid "number of sheets (default=1)"
-msgstr ""
+msgstr "počet listov (predvolený=1)"
 
 #: ../src/glabels-batch.c:55
 msgid "sheets"
-msgstr ""
+msgstr "listy"
 
 #: ../src/glabels-batch.c:57
 msgid "number of copies (default=1)"
-msgstr ""
+msgstr "počet kópií (predvolený=1)"
 
 #: ../src/glabels-batch.c:57
 msgid "copies"
-msgstr ""
+msgstr "kópie"
 
 #: ../src/glabels-batch.c:59
 msgid "first label on first sheet (default=1)"
-msgstr ""
+msgstr "prvý štítok na prvom liste (predvolený=1)"
 
 #: ../src/glabels-batch.c:59
 msgid "first"
-msgstr ""
+msgstr "prvý"
 
 #: ../src/glabels-batch.c:61 ../data/ui/print-op-dialog-custom-widget.ui.h:11
 msgid "print outlines (to test printer alignment)"
-msgstr ""
+msgstr "tlačiť obrysy (na vyskúšanie zarovnania tlačiarne)"
 
 #: ../src/glabels-batch.c:63 ../data/ui/print-op-dialog-custom-widget.ui.h:12
 msgid "print in reverse (i.e. a mirror image)"
-msgstr ""
+msgstr "tlačiť obrátene (napr. zrkadlový obrázok)"
 
 #: ../src/glabels-batch.c:65 ../data/ui/print-op-dialog-custom-widget.ui.h:13
 msgid "print crop marks"
-msgstr ""
+msgstr "tlačiť orezávacie značky"
 
 #: ../src/glabels-batch.c:67
 msgid "input file for merging"
@@ -732,7 +732,7 @@ msgstr "[SÚBOR...]"
 
 #: ../src/glabels-batch.c:99
 msgid "Print files created with gLabels."
-msgstr ""
+msgstr "Tlač súborov vytvorených programom gLabels."
 
 #: ../src/glabels-batch.c:107 ../src/glabels.c:87
 #, c-format
@@ -747,7 +747,7 @@ msgstr ""
 #: ../src/glabels-batch.c:151
 #, c-format
 msgid "cannot perform document merge with glabels file %s\n"
-msgstr ""
+msgstr "nedá sa vykonať zlúčenie dokumentov so súborom programu glabels %s\n"
 
 #: ../src/glabels-batch.c:186
 #, c-format
@@ -768,7 +768,7 @@ msgstr "Údaje čiarového kódu"
 
 #: ../src/label-barcode.c:290
 msgid "Barcode property"
-msgstr ""
+msgstr "Vlastnosť čiarového kódu"
 
 #: ../src/label-barcode.c:684
 msgid "Barcode data empty"
@@ -1070,11 +1070,11 @@ msgstr ""
 #. * method has been selected.
 #: ../src/merge.c:171 ../src/merge.c:212 ../src/merge.c:376 ../src/merge.c:379
 msgid "None"
-msgstr ""
+msgstr "Žiadny"
 
 #: ../src/merge-init.c:57
 msgid "Text: Comma Separated Values (CSV)"
-msgstr ""
+msgstr "Text: Čiarkou oddelené hodnoty (CSV)"
 
 #: ../src/merge-init.c:64
 msgid "Text: Comma Separated Values (CSV) with keys on line 1"
@@ -1082,7 +1082,7 @@ msgstr ""
 
 #: ../src/merge-init.c:72
 msgid "Text: Tab Separated Values (TSV)"
-msgstr ""
+msgstr "Text: Tabulátorom oddelené hodnoty (TSV)"
 
 #: ../src/merge-init.c:79
 msgid "Text: Tab Separated Values (TSV) with keys on line 1"
@@ -1090,7 +1090,7 @@ msgstr ""
 
 #: ../src/merge-init.c:87
 msgid "Text: Colon separated values"
-msgstr ""
+msgstr "Text: Dvojbodkou oddelené hodnoty"
 
 #: ../src/merge-init.c:94
 msgid "Text: Colon separated values with keys on line 1"
@@ -1098,7 +1098,7 @@ msgstr ""
 
 #: ../src/merge-init.c:102
 msgid "Text: Semicolon separated values"
-msgstr ""
+msgstr "Text: Bodkočiarkou oddelené hodnoty"
 
 #: ../src/merge-init.c:109
 msgid "Text: Semicolon separated values with keys on line 1"
@@ -1147,7 +1147,7 @@ msgstr "Pevné"
 #. Translators: "Up" refers to the direction towards the top of a label.
 #: ../src/mini-preview.c:1051
 msgid "Up"
-msgstr ""
+msgstr "Hore"
 
 # DK:https://bugzilla.gnome.org/show_bug.cgi?id=763003
 #: ../src/new-label-dialog.c:214
@@ -1167,7 +1167,7 @@ msgstr "Zhodnotenie"
 #: ../src/object-editor-text-page.c:102 ../src/prefs-dialog.c:335
 #: ../src/ui-property-bar.c:289
 msgid "Default"
-msgstr ""
+msgstr "Predvolené"
 
 #: ../src/object-editor.c:161 ../src/object-editor.c:472
 msgid "Object properties"
@@ -1645,43 +1645,43 @@ msgstr "O programe gLabels"
 
 #: ../src/ui.c:448
 msgid "Property toolbar"
-msgstr ""
+msgstr "Panel s vlastnosťami"
 
 #: ../src/ui.c:450
 msgid "Change the visibility of the property toolbar in the current window"
-msgstr ""
+msgstr "Zmení viditeľnosť panelu s vlastnosťami v aktuálnom okne"
 
 #: ../src/ui.c:456
 msgid "Grid"
-msgstr ""
+msgstr "Mriežka"
 
 #: ../src/ui.c:458
 msgid "Change the visibility of the grid in the current window"
-msgstr ""
+msgstr "Zmení viditeľnosť mriežky v aktuálnom okne"
 
 #: ../src/ui.c:464
 msgid "Markup"
-msgstr ""
+msgstr "Značky"
 
 #: ../src/ui.c:466
 msgid "Change the visibility of markup lines in the current window"
-msgstr ""
+msgstr "Zmení viditeľnosť značkovacích čiar v aktuálnom okne"
 
 #: ../src/ui.c:477
 msgid "Main toolbar"
-msgstr ""
+msgstr "Hlavný panel nástrojov"
 
 #: ../src/ui.c:479
 msgid "Change the visibility of the main toolbar in the current window"
-msgstr ""
+msgstr "Zmení viditeľnosť hlavného panelu nástorjov v aktuálnom okne"
 
 #: ../src/ui.c:485
 msgid "Drawing toolbar"
-msgstr ""
+msgstr "Panel s kresliacimi nástrojmi"
 
 #: ../src/ui.c:487
 msgid "Change the visibility of the drawing toolbar in the current window"
-msgstr ""
+msgstr "Zmení viditeľnosť panelu s kresliacimi nástrojmi v aktuálnom okne"
 
 #: ../src/ui-commands.c:1135
 msgid "Glabels includes contributions from:"
@@ -1724,7 +1724,7 @@ msgstr "Chyba programu gLabels!"
 msgid "(none) - gLabels"
 msgstr "(nič) - gLabels"
 
-#: ../src/window.c:482
+#: ../src/window.c:484
 msgid "(modified)"
 msgstr "(upravené)"
 
@@ -1746,18 +1746,24 @@ msgid ""
 "Unable to locate paper size definitions.  Libglabels may not be installed "
 "correctly!"
 msgstr ""
+"Nie je možné lokalizovať definície veľkostí papiera. Knižnica libglabels asi "
+"nie je nainštalovaná správne!"
 
 #: ../libglabels/lgl-db.c:1062
 msgid ""
 "Unable to locate category definitions.  Libglabels may not be installed "
 "correctly!"
 msgstr ""
+"Nie je možné lokalizovať definície kategórií. Knižnica libglabels asi nie je "
+"nainštalovaná správne!"
 
 #: ../libglabels/lgl-db.c:1989
 msgid ""
 "Unable to locate any template files.  Libglabels may not be installed "
 "correctly!"
 msgstr ""
+"Nie je možné lokalizovať žiadne súbory šablón. Knižnica glabels asi nie je "
+"nainštalovaná správne!"
 
 #: ../libglabels/lgl-db.c:2056
 #, c-format
@@ -2179,11 +2185,11 @@ msgstr "do:"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:5
 msgid "Copies"
-msgstr ""
+msgstr "Kópie"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:6
 msgid "Start on label"
-msgstr ""
+msgstr "Začať so štítkom"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:7
 msgid "on 1st sheet"
@@ -2195,11 +2201,11 @@ msgstr "Kópie:"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:9
 msgid "Collate"
-msgstr ""
+msgstr "Zoradiť"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:10
 msgid "Merge Control"
-msgstr ""
+msgstr "Ovládanie zlúčenia"
 
 #: ../data/ui/property-bar.ui.h:3
 msgid "Bold"
@@ -2498,35 +2504,35 @@ msgstr ""
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
 msgid "Show/hide main toolbar."
-msgstr ""
+msgstr "Zobraziť alebo skryť hlavný panel nástrojov."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:2
 msgid "Controls visibility of main toolbar."
-msgstr ""
+msgstr "Ovláda viditeľnosť hlavného panelu nástrojov."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:3
 msgid "Show/hide drawing toolbar."
-msgstr ""
+msgstr "Zobraziť alebo skryť panel s kresliacimi nástrojmi."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:4
 msgid "Controls visibility of drawing toolbar."
-msgstr ""
+msgstr "Ovláda viditeľnosť panelu s kresliacimi nástrojmi."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:5
 msgid "Show/hide property toolbar."
-msgstr ""
+msgstr "Zobraziť alebo skryť panel s vlastnosťami."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:6
 msgid "Controls visibility of property toolbar."
-msgstr ""
+msgstr "Ovláda viditeľnosť panelu s vlastnosťami."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:7
 msgid "Show/hide grid."
-msgstr ""
+msgstr "Zobraziť alebo skryť mriežku."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:8
 msgid "Controls visibility of grid."
-msgstr ""
+msgstr "Ovláda viditeľnosť mriežky."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:9
 msgid "Show/hide markup."
@@ -2538,43 +2544,43 @@ msgstr ""
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:11
 msgid "Maximum recent files."
-msgstr ""
+msgstr "Maximálny počet nedávnych súborov."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:12
 msgid "Controls maximum number of recent files tracked."
-msgstr ""
+msgstr "Ovláda maximálny počet uložených nedávnych súborov."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:13
 msgid "Units."
-msgstr ""
+msgstr "Jednotky."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:14
 msgid "The default unit of measurement."
-msgstr ""
+msgstr "Predvolená jednotka merania."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:15
 msgid "Default page size."
-msgstr ""
+msgstr "Predvolená veľkosť stránky."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:16
 msgid "The preferred page size when searching templates."
-msgstr ""
+msgstr "Preferovaná veľkosť stránky pri hľadaní šablón."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:17
 msgid "Default font family."
-msgstr ""
+msgstr "Predvolená rodina písma."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:18
 msgid "The default font family for new text objects."
-msgstr ""
+msgstr "Predvolená rodina písma pre nové textové objekty."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:19
 msgid "Default font size."
-msgstr ""
+msgstr "Predvolená veľkosť písma."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:20
 msgid "The default font size for new text objects."
-msgstr ""
+msgstr "Predvolená veľkosť písma pre nové textové objekty."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:21
 msgid "Default font weight."
@@ -2586,27 +2592,27 @@ msgstr ""
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:23
 msgid "Default font italic flag."
-msgstr ""
+msgstr "Predvolená značka kurzívy."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:24
 msgid "The default font italic state for new text objects."
-msgstr ""
+msgstr "Predvolený stav kurzívy pre nové textové objekty."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:25
 msgid "Default text color."
-msgstr ""
+msgstr "Predvolená farba textu."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:26
 msgid "The default color of text for new text objects (0xRRGGBBAA)."
-msgstr ""
+msgstr "Predvolená farba textu pre nové textové objekty (0xRRGGBBAA)."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:27
 msgid "Default text alignment."
-msgstr ""
+msgstr "Predvolené zarovnanie textu."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:28
 msgid "The default text alignment for new text objects."
-msgstr ""
+msgstr "Predvolené zarovnanie textu pre nové textové objekty."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:29
 msgid "Default text line spacing."
@@ -2618,63 +2624,63 @@ msgstr "Predvolené riadkovanie pre nové textové objekty."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:31
 msgid "Default line width."
-msgstr ""
+msgstr "Predvolená šírka čiary."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:32
 msgid "The default line width for new objects."
-msgstr ""
+msgstr "Predvolená šírka čiary pre nové objekty."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:33
 msgid "Default line color."
-msgstr ""
+msgstr "Predvolená farba čiary."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:34
 msgid "The default line color new objects (0xRRGGBBAA)."
-msgstr ""
+msgstr "Predvolená farba čiary pre nové objekty (0xRRGGBBAA)."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:35
 msgid "Default fill color."
-msgstr ""
+msgstr "Predvolená farba výplne."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:36
 msgid "The default fill color new objects (0xRRGGBBAA)."
-msgstr ""
+msgstr "Predvolená farba výplne pre nové objekty (0xRRGGBBAA)."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:37
 msgid "Recent templates."
-msgstr ""
+msgstr "Nedávne šablóny."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:38
 msgid "Recently used templates."
-msgstr ""
+msgstr "Nedávno použité šablóny."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:39
 msgid "Recent fonts."
-msgstr ""
+msgstr "Nedávne písma."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:40
 msgid "Recently used font families."
-msgstr ""
+msgstr "Nedávno použité rodiny písiem."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:41
 msgid "Recent colors."
-msgstr ""
+msgstr "Nedávne farby."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:42
 msgid "Recently created custom colors."
-msgstr ""
+msgstr "Nedávno vytvorené vlastné farby."
 
 #: ../data/desktop/glabels-3.0.desktop.in.h:1
 msgid "gLabels Label Designer 3"
-msgstr ""
+msgstr "gLabels - Návrhár štítkov 3"
 
 #: ../data/desktop/glabels-3.0.desktop.in.h:3
 msgid "label;card;print;office;barcode;"
-msgstr ""
+msgstr "štítok;vizitka;tlač;kancelária;čiarový kód;ean;"
 
 #: ../data/mime/glabels-3.0.xml.in.h:1
 msgid "gLabels Project File"
-msgstr ""
+msgstr "Súbor s projektom programu gLabels"
 
 #. Most popular (at top of list)
 #: ../templates/paper-sizes.xml.h:2
@@ -2840,7 +2846,7 @@ msgstr "SRA4"
 
 #: ../templates/categories.xml.h:1
 msgid "Any label"
-msgstr ""
+msgstr "Akýkoľvek štítok"
 
 #. ====================================================================
 #. ===================================================================
