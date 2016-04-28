@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2016-04-07 06:36+0000\n"
-"PO-Revision-Date: 2016-04-07 12:46+0200\n"
+"POT-Creation-Date: 2016-04-28 06:33+0000\n"
+"PO-Revision-Date: 2016-04-28 13:24+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -219,7 +219,6 @@ msgid "Data Matrix"
 msgstr "Matriz de datos"
 
 #: ../src/bc-backends.c:272
-#| msgid "Data Matrix"
 msgid "Data Matrix (GS1)"
 msgstr "Matriz de datos (GS1)"
 
@@ -560,7 +559,6 @@ msgstr "Propiedades de la etiqueta"
 
 #. Translators: assistent dialog title
 #: ../src/file.c:203
-#| msgid "Label properties"
 msgid "Choose label properties"
 msgstr "Elegir las propiedades de la etiqueta"
 
@@ -828,7 +826,6 @@ msgstr "%s × %s / %s %s (anchura × altura / redondeado)"
 #. "120.5 mm (diameter)"
 #: ../src/label.c:788
 #, c-format
-#| msgid "%.5g %s diameter"
 msgid "%s %s (diameter)"
 msgstr "%s %s (diámetro)"
 
@@ -1154,7 +1151,6 @@ msgid "Up"
 msgstr "Arriba"
 
 #: ../src/new-label-dialog.c:214
-#| msgid "Select Product"
 msgctxt "Title of dialog page to select a stationary product"
 msgid "Select Product"
 msgstr "Seleccionar producto"
@@ -1740,7 +1736,7 @@ msgstr "Error de gLabels"
 msgid "(none) - gLabels"
 msgstr "(sin nombre) - gLabels"
 
-#: ../src/window.c:482
+#: ../src/window.c:484
 msgid "(modified)"
 msgstr "(modificado)"
 
@@ -1846,7 +1842,6 @@ msgstr "picas"
 #. * End:                   -- emacs
 #.
 #: ../data/ui/label-properties-dialog.ui.h:1
-#| msgid "Labels"
 msgid "Label"
 msgstr "Etiqueta"
 
@@ -1870,7 +1865,6 @@ msgid "Dimensions:"
 msgstr "Dimensiones:"
 
 #: ../data/ui/label-properties-dialog.ui.h:6
-#| msgid "Medium green"
 msgid "Medium size:"
 msgstr "Tamaño medio:"
 
@@ -1880,7 +1874,6 @@ msgid "Layout:"
 msgstr "Disposición:"
 
 #: ../data/ui/label-properties-dialog.ui.h:8
-#| msgid "6. Margin"
 msgid "Margins:"
 msgstr "Márgenes:"
 
@@ -1895,17 +1888,14 @@ msgid "Options"
 msgstr "Opciones"
 
 #: ../data/ui/label-properties-dialog.ui.h:11
-#| msgid "Choose Orientation"
 msgid "Orientation:"
 msgstr "Orientación:"
 
 #: ../data/ui/label-properties-dialog.ui.h:12
-#| msgid "Normal"
 msgid "_Normal"
 msgstr "_Normal"
 
 #: ../data/ui/label-properties-dialog.ui.h:13
-#| msgid "Rotated"
 msgid "_Rotated"
 msgstr "_Rotada"
 
@@ -2941,7 +2931,6 @@ msgid "Business cards"
 msgstr "Tarjetas de visita"
 
 #: ../templates/categories.xml.h:8
-#| msgid "Name Badge Labels"
 msgid "Name Badge"
 msgstr "Etiqueta de distintivo"
 
@@ -2962,7 +2951,6 @@ msgid "Photo products"
 msgstr "Productos para fotos"
 
 #: ../templates/categories.xml.h:13
-#| msgid "Filing Labels"
 msgid "Filing labels"
 msgstr "Etiquetas para archivado"
 
@@ -3161,7 +3149,7 @@ msgstr "Etiquetas de CD/DVD (etiquetas laterales)"
 #: ../templates/avery-us-templates.xml.h:38
 #: ../templates/geha-iso-templates.xml.h:17
 #: ../templates/meritline-us-templates.xml.h:16
-#: ../templates/sheetlabels-us-templates.xml.h:22
+#: ../templates/sheetlabels-us-templates.xml.h:24
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Video Tape Face Labels"
 msgstr "Etiquetas de video (frente)"
@@ -3226,7 +3214,7 @@ msgstr "Etiquetas de envío"
 #: ../templates/herma-iso-templates.xml.h:8
 #: ../templates/misc-us-templates.xml.h:21
 #: ../templates/misc-iso-templates.xml.h:6
-#: ../templates/sheetlabels-us-templates.xml.h:24
+#: ../templates/sheetlabels-us-templates.xml.h:28
 #: ../templates/zweckform-iso-templates.xml.h:10
 msgid "Mailing Labels"
 msgstr "Etiquetas de correo"
@@ -3255,12 +3243,10 @@ msgid "Diskette labels"
 msgstr "Etiquetas de disquette"
 
 #: ../templates/begalabel-templates.xml.h:1
-#| msgid "Rectangular labels"
 msgid "Rounded rectangular labels"
 msgstr "Etiquetas rectangulares redondeadas"
 
 #: ../templates/begalabel-templates.xml.h:6
-#| msgid "Cassette Labels"
 msgid "Cassette Tape Face"
 msgstr "Etiquetas de casette"
 
@@ -3364,7 +3350,6 @@ msgstr "Tarjetas de socio"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:4
-#| msgid "Multi-Purpose Labels"
 msgid "Multipurpose Labels"
 msgstr "Etiquetas multipropósito"
 
@@ -3375,7 +3360,6 @@ msgstr "Carpeta de archivos"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:10
-#| msgid "Name Badge Labels"
 msgid "Name Badges"
 msgstr "Etiquetas de distintivos"
 
@@ -3714,6 +3698,7 @@ msgstr "Etiquetas universales"
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:36
 #: ../templates/pearl-iso-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:26
 msgid "Bottle labels"
 msgstr "Etiquetas de botella"
 
@@ -3817,6 +3802,12 @@ msgstr "Etiquetas triangulares"
 #: ../templates/rayfilm-templates.xml.h:14
 msgid "Trapezoid labels"
 msgstr "Etiquetas trapezoidales"
+
+#. ===================================================================
+#: ../templates/sheetlabels-us-templates.xml.h:22
+#| msgid "Bottle labels"
+msgid "Oval bottle labels"
+msgstr "Etiquetas ovales de botella"
 
 # REVISAR
 #. ===================================================================
