@@ -37,6 +37,7 @@ templates_DATA = \
 	misc-us-templates.xml \
 	misc-iso-templates.xml \
 	misc-other-templates.xml \
+	online-templates.xml \
 	pearl-iso-templates.xml \
 	rayfilm-templates.xml	\
 	sheetlabels-us-templates.xml	\
