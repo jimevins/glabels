@@ -196,7 +196,7 @@
     </Label-rectangle>
   </Template>
 
-  <Template brand="Online Labels" part="OL663" size="US-Letter" _description="Lib balm tube labels">
+  <Template brand="Online Labels" part="OL663" size="US-Letter" _description="Lip balm tube labels">
     <Meta category="label"/>
     <Meta category="rectangle-label"/>
     <Meta product_url="http://www.onlinelabels.com/OL663.htm"/>
@@ -870,7 +870,7 @@
     </Label-rectangle>
   </Template>
 
-  <Template brand="Online Labels" part="OL5425" size="US-Letter" _description=" Medical chart labels, square labels">
+  <Template brand="Online Labels" part="OL5425" size="US-Letter" _description="Medical chart labels">
     <Meta category="label"/>
     <Meta category="square-label"/>
     <Meta product_url="http://www.onlinelabels.com/OL5425.htm"/>
@@ -1845,7 +1845,7 @@
     </Label-rectangle>
   </Template>
 
-  <Template brand="Online Labels" part="OL9300 (first)" size="US-Letter" _description="USPS® labels">
+  <Template brand="Online Labels" part="OL9300 (first)" size="US-Letter" _description="USPS® shipping labels">
     <Meta category="label"/>
     <Meta category="rectangle-label"/>
     <Meta category="mail"/>
@@ -1854,7 +1854,7 @@
       <Layout nx="1" ny="1" x0="0.625in" y0="0.375in" dx="6.78in" dy="4.75in"/>
     </Label-rectangle>
   </Template>
-  <Template brand="Online Labels" part="OL9300 (second)" size="US-Letter" _description="USPS® labels">
+  <Template brand="Online Labels" part="OL9300 (second)" size="US-Letter" _description="USPS® shipping labels">
     <Meta category="label"/>
     <Meta category="rectangle-label"/>
     <Meta category="mail"/>
@@ -1864,7 +1864,7 @@
     </Label-rectangle>
   </Template>
 
-  <Template brand="Online Labels" part="OL395" size="US-Letter" _description="USPS® labels">
+  <Template brand="Online Labels" part="OL395" size="US-Letter" _description="USPS® shipping labels">
     <Meta category="label"/>
     <Meta category="rectangle-label"/>
     <Meta category="mail"/>
