@@ -623,7 +623,7 @@
     </Label-rectangle>
   </Template>
 
-  <Template brand="Online Labels" part="OL475" size="US-Letter" _description="Win bottle labels">
+  <Template brand="Online Labels" part="OL475" size="US-Letter" _description="Wine bottle labels">
     <Meta category="label"/>
     <Meta category="rectangle-label"/>
     <Meta product_url="http://www.onlinelabels.com/OL475.htm"/>
