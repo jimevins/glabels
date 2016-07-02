@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2016-06-18 08:10+0000\n"
-"PO-Revision-Date: 2016-07-01 19:00+0200\n"
+"POT-Creation-Date: 2016-07-01 17:01+0000\n"
+"PO-Revision-Date: 2016-07-02 08:24+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -662,7 +662,7 @@ msgstr "Aa"
 #: ../src/font-combo-menu-item.c:134
 msgctxt "Lower case sample text"
 msgid "abcdefghijklmnopqrstuvwxyz"
-msgstr "abcdefghijklmnopqrstuvwxyz"
+msgstr "aáäbcčdďdzdžeéfghchiíjklĺľmnňoóôpqrŕsštťuúvwxyýzž"
 
 #: ../src/font-combo-menu-item.c:136
 msgctxt "Upper case sample text"
@@ -2870,7 +2870,7 @@ msgstr "Akýkoľvek štítok"
 #: ../templates/rayfilm-templates.xml.h:8
 #: ../templates/sheetlabels-us-templates.xml.h:16
 msgid "Round labels"
-msgstr ""
+msgstr "Okrúhle štítky"
 
 #. ===================================================================
 #: ../templates/categories.xml.h:3 ../templates/begalabel-templates.xml.h:4
@@ -2879,7 +2879,7 @@ msgstr ""
 #: ../templates/pearl-iso-templates.xml.h:58
 #: ../templates/rayfilm-templates.xml.h:9
 msgid "Elliptical labels"
-msgstr ""
+msgstr "Elipsové štítky"
 
 #. ====================================================================
 #: ../templates/categories.xml.h:4 ../templates/endisch-templates.xml.h:4
@@ -2887,7 +2887,7 @@ msgstr ""
 #: ../templates/online-templates.xml.h:17
 #: ../templates/rayfilm-templates.xml.h:2
 msgid "Square labels"
-msgstr ""
+msgstr "Štvorcové štítky"
 
 #. ===================================================================
 #. ====================================================================
@@ -2903,7 +2903,7 @@ msgstr ""
 #: ../templates/online-templates.xml.h:7 ../templates/rayfilm-templates.xml.h:1
 #: ../templates/sheetlabels-us-templates.xml.h:2
 msgid "Rectangular labels"
-msgstr ""
+msgstr "Obdĺžnikové štítky"
 
 #: ../templates/categories.xml.h:6
 msgid "Any card"
@@ -2960,7 +2960,7 @@ msgstr "gLabels"
 #: ../templates/misc-iso-templates.xml.h:2
 #: ../templates/zweckform-iso-templates.xml.h:6
 msgid "Rectangular Labels"
-msgstr ""
+msgstr "Obdĺžnikové štítky"
 
 #. ===================================================================
 #: ../templates/ascom-iso-templates.xml.h:6
@@ -3576,7 +3576,7 @@ msgstr ""
 #. ===================================================================
 #: ../templates/microapp-templates.xml.h:2
 msgid "Standard Labels"
-msgstr ""
+msgstr "Štandardné štítky"
 
 #. ===================================================================
 #. TODO: Is this the actual part #?
@@ -3622,7 +3622,7 @@ msgstr ""
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:19
 msgid "DLT Labels"
-msgstr ""
+msgstr "Štítky DLT"
 
 #. ===================================================================
 #. TODO: Is this the actual part #?
@@ -3736,7 +3736,7 @@ msgstr ""
 
 #: ../templates/online-templates.xml.h:15
 msgid "Jar labels, nutritional labels"
-msgstr ""
+msgstr "Štítky na poháre, štítky s nutričnými hodnotami"
 
 #: ../templates/online-templates.xml.h:16
 #, fuzzy
@@ -3746,7 +3746,7 @@ msgstr "Začať so štítkom"
 
 #: ../templates/online-templates.xml.h:18
 msgid "Wine bottle labels, nutritional labels"
-msgstr ""
+msgstr "Štítky na fľaše od vína, štítky s nutričnými hodnotami"
 
 #. OL1102
 #: ../templates/online-templates.xml.h:20
@@ -3760,10 +3760,8 @@ msgid "Pot labels, coffee and tea labels"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:23
-#, fuzzy
-#| msgid "Any label"
 msgid "Candy labels"
-msgstr "Akýkoľvek štítok"
+msgstr ""
 
 #: ../templates/online-templates.xml.h:24
 msgid "Reverse automobile window stickers"
@@ -3848,7 +3846,6 @@ msgid "VHS labels, jar labels, book labels"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:45
-#| msgid "gLabels"
 msgid "USPS® shipping labels"
 msgstr "Doručovacie štítky spoločnosti USPS®"
 
@@ -3867,7 +3864,6 @@ msgid "Jar labels, water bottle labels, wine bottle labels"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:49
-#| msgid "Any label"
 msgid "PayPal® label"
 msgstr "Štítok spoločnosti PayPal®"
 
@@ -3884,20 +3880,16 @@ msgid "Pot labels, barcode labels"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:54
-#, fuzzy
-#| msgid "Start on label"
 msgid "Nutritional labels"
-msgstr "Začať so štítkom"
+msgstr "Štítky s nutričnými hodnotami"
 
 #: ../templates/online-templates.xml.h:55
 msgid "CD case labels"
 msgstr "Štítky na obal CD"
 
 #: ../templates/online-templates.xml.h:56
-#, fuzzy
-#| msgid "Business cards"
 msgid "Business card size labels"
-msgstr "Vizitky"
+msgstr "Štítky s veľkosťou vizitky"
 
 #: ../templates/online-templates.xml.h:57
 msgid "Reverse addendum stickers"
@@ -3918,10 +3910,8 @@ msgid "Water bottle labels, shipping labels"
 msgstr "Štítky na fľaše od vody, doručovacie štítky"
 
 #: ../templates/online-templates.xml.h:61
-#, fuzzy
-#| msgid "Any label"
 msgid "VICS labels"
-msgstr "Akýkoľvek štítok"
+msgstr "Štítky VICS"
 
 #: ../templates/online-templates.xml.h:62
 msgid "Full sheet labels with back slit"
@@ -4043,7 +4033,7 @@ msgstr ""
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:30
 msgid "SD card labels"
-msgstr ""
+msgstr "Štítky na SD karty"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:40
