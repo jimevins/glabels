@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2016-07-01 17:01+0000\n"
-"PO-Revision-Date: 2016-07-02 08:24+0200\n"
+"POT-Creation-Date: 2016-07-02 06:24+0000\n"
+"PO-Revision-Date: 2016-07-03 16:51+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -3746,7 +3746,7 @@ msgstr "Začať so štítkom"
 
 #: ../templates/online-templates.xml.h:18
 msgid "Wine bottle labels, nutritional labels"
-msgstr "Štítky na fľaše od vína, štítky s nutričnými hodnotami"
+msgstr "Štítky na fľaše na víno, štítky s nutričnými hodnotami"
 
 #. OL1102
 #: ../templates/online-templates.xml.h:20
@@ -3821,7 +3821,7 @@ msgstr ""
 
 #: ../templates/online-templates.xml.h:39
 msgid "Wine bottle labels"
-msgstr "Štítky na fľaše od vína"
+msgstr "Štítky na fľaše na víno"
 
 #: ../templates/online-templates.xml.h:40
 msgid "Mail Order Manager labels"
@@ -3898,7 +3898,7 @@ msgstr ""
 #: ../templates/online-templates.xml.h:58
 msgid "Wine bottle labels, shipping labels, UPS® WorldShip® labels"
 msgstr ""
-"Štítky na fľaše od vína, doručovacie štítky, štítky typu WorldShip® "
+"Štítky na fľaše na víno, doručovacie štítky, štítky typu WorldShip® "
 "spoločnosti UPS®"
 
 #: ../templates/online-templates.xml.h:59
