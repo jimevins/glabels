@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2016-07-02 06:24+0000\n"
-"PO-Revision-Date: 2016-07-03 16:51+0200\n"
+"POT-Creation-Date: 2016-07-22 11:12+0000\n"
+"PO-Revision-Date: 2016-08-10 09:27+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.8.8\n"
 
 #: ../src/bc-backends.c:81
 msgid "Built-in"
@@ -1078,7 +1078,7 @@ msgstr "Text: Čiarkou oddelené hodnoty (CSV)"
 
 #: ../src/merge-init.c:64
 msgid "Text: Comma Separated Values (CSV) with keys on line 1"
-msgstr ""
+msgstr "Text: Čiarkami oddelené hodnoty (CSV) s kľúčmi na riadku č. 1"
 
 #: ../src/merge-init.c:72
 msgid "Text: Tab Separated Values (TSV)"
@@ -1086,7 +1086,7 @@ msgstr "Text: Tabulátorom oddelené hodnoty (TSV)"
 
 #: ../src/merge-init.c:79
 msgid "Text: Tab Separated Values (TSV) with keys on line 1"
-msgstr ""
+msgstr "Text: Tabulátormi oddelené hodnoty (TSV) s kľúčmi na riadku č. 1"
 
 #: ../src/merge-init.c:87
 msgid "Text: Colon separated values"
@@ -1094,7 +1094,7 @@ msgstr "Text: Dvojbodkou oddelené hodnoty"
 
 #: ../src/merge-init.c:94
 msgid "Text: Colon separated values with keys on line 1"
-msgstr ""
+msgstr "Text: Dvojbodkami oddelené hodnoty s kľúčmi na riadku č. 1"
 
 #: ../src/merge-init.c:102
 msgid "Text: Semicolon separated values"
@@ -1102,7 +1102,7 @@ msgstr "Text: Bodkočiarkou oddelené hodnoty"
 
 #: ../src/merge-init.c:109
 msgid "Text: Semicolon separated values with keys on line 1"
-msgstr ""
+msgstr "Text: Bodkočiarkami oddelené hodnoty s kľúčmi na riadku č. 1"
 
 #: ../src/merge-init.c:119
 msgid "Evolution Addressbook"
@@ -2999,7 +2999,7 @@ msgstr "Veľké zaoblené štítky"
 #: ../templates/avery-other-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:5
 msgid "File Folder Labels"
-msgstr ""
+msgstr "Štítky na priečinky kartoték"
 
 #. ===================================================================
 #. ********************************************************************
@@ -3324,7 +3324,7 @@ msgstr ""
 #: ../templates/desmat-templates.xml.h:2
 #: ../templates/misc-iso-templates.xml.h:22
 msgid "CD Labels"
-msgstr ""
+msgstr "Štítky na CD"
 
 #. ===================================================================
 #. ====================================================================
@@ -3335,7 +3335,7 @@ msgstr ""
 #: ../templates/misc-iso-templates.xml.h:34
 #: ../templates/online-templates.xml.h:83
 msgid "CD/DVD labels"
-msgstr ""
+msgstr "Štítky na CD/DVD"
 
 #. ===================================================================
 #: ../templates/dataline-iso-templates.xml.h:8
@@ -3351,7 +3351,7 @@ msgstr ""
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:8
 msgid "File Folder"
-msgstr ""
+msgstr "Priečinok kartotéky"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:10
@@ -3417,7 +3417,7 @@ msgstr ""
 #: ../templates/geha-iso-templates.xml.h:6
 #: ../templates/hama-iso-templates.xml.h:25
 msgid "Greeting cards"
-msgstr ""
+msgstr "Pohľadnice"
 
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:8
@@ -3555,7 +3555,7 @@ msgstr ""
 #: ../templates/igepa-templates.xml.h:2 ../templates/online-templates.xml.h:28
 #: ../templates/pearl-iso-templates.xml.h:18
 msgid "Floppy disk labels"
-msgstr ""
+msgstr "Štítky na diskety"
 
 #. ===================================================================
 #: ../templates/igepa-templates.xml.h:4
@@ -3566,12 +3566,12 @@ msgstr ""
 #. *******************************************************************
 #: ../templates/jac-iso-templates.xml.h:8
 msgid "PVC labels"
-msgstr ""
+msgstr "Štítky PVC"
 
 #. ===================================================================
 #: ../templates/meritline-us-templates.xml.h:2
 msgid "Mini-CD Labels"
-msgstr ""
+msgstr "Štítky na Mini-CD"
 
 #. ===================================================================
 #: ../templates/microapp-templates.xml.h:2
@@ -3739,10 +3739,8 @@ msgid "Jar labels, nutritional labels"
 msgstr "Štítky na poháre, štítky s nutričnými hodnotami"
 
 #: ../templates/online-templates.xml.h:16
-#, fuzzy
-#| msgid "Start on label"
 msgid "Jar labels"
-msgstr "Začať so štítkom"
+msgstr "Štítky na poháre"
 
 #: ../templates/online-templates.xml.h:18
 msgid "Wine bottle labels, nutritional labels"
@@ -3784,10 +3782,8 @@ msgid "Jar labels, pot labels, nutritional labels"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:31
-#, fuzzy
-#| msgid "About glabels"
 msgid "File folder labels"
-msgstr "O programe gLabels"
+msgstr "Štítky na priečinky kartoték"
 
 #: ../templates/online-templates.xml.h:32
 msgid "Metal tin container labels, nutritional labels"
