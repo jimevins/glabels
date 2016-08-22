@@ -1,15 +1,15 @@
 # Serbian translation for glabels.
 # Copyright (C) 2012 glabels's COPYRIGHT HOLDER
 # This file is distributed under the same license as the glabels package.
-# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2012—2015.
+# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2012—2015, 2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels glabels-3_2\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2015-12-30 07:20+0000\n"
-"PO-Revision-Date: 2015-12-30 10:22+0200\n"
+"POT-Creation-Date: 2016-08-10 07:29+0000\n"
+"PO-Revision-Date: 2016-08-20 19:06+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
-"Language-Team: Serbian <gnom@prevod.org>\n"
+"Language-Team: српски <gnome-sr@googlegroups.org>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -85,7 +85,7 @@ msgstr "ЕАН-13 +5"
 msgid "UPC (UPC-A or UPC-E)"
 msgstr "УПЦ (УПЦ-А или УПЦ-Е)"
 
-#: ../src/bc-backends.c:151 ../src/bc-backends.c:395
+#: ../src/bc-backends.c:151 ../src/bc-backends.c:398
 msgid "UPC-A"
 msgstr "УПЦ-А"
 
@@ -97,7 +97,7 @@ msgstr "УПЦ-А +2"
 msgid "UPC-A +5"
 msgstr "УПЦ-А +5"
 
-#: ../src/bc-backends.c:160 ../src/bc-backends.c:398
+#: ../src/bc-backends.c:160 ../src/bc-backends.c:401
 msgid "UPC-E"
 msgstr "УПЦ-Е"
 
@@ -109,7 +109,7 @@ msgstr "УПЦ-Е +2"
 msgid "UPC-E +5"
 msgstr "УПЦ-Е +5"
 
-#: ../src/bc-backends.c:169 ../src/bc-backends.c:332
+#: ../src/bc-backends.c:169 ../src/bc-backends.c:335
 msgid "ISBN"
 msgstr "ИСБН"
 
@@ -129,7 +129,7 @@ msgstr "Шифра 128Ц"
 msgid "Code 128B"
 msgstr "Шифра 128Б"
 
-#: ../src/bc-backends.c:187 ../src/bc-backends.c:329
+#: ../src/bc-backends.c:187 ../src/bc-backends.c:332
 msgid "Interleaved 2 of 5"
 msgstr "Преплетено 2 од 5"
 
@@ -206,7 +206,6 @@ msgid "Code 49"
 msgstr "Шифра 49"
 
 #: ../src/bc-backends.c:263
-#| msgid "Code 128 (Mode C supression)"
 msgid "Code 128 (Mode C suppression)"
 msgstr "Шифра 128 (Потискивање Ц режима)"
 
@@ -219,166 +218,171 @@ msgid "Data Matrix"
 msgstr "Матрица података"
 
 #: ../src/bc-backends.c:272
+#| msgid "Data Matrix"
+msgid "Data Matrix (GS1)"
+msgstr "Матрица података (ГС1)"
+
+#: ../src/bc-backends.c:275
 msgid "Deutsche Post Leitcode"
 msgstr "Шифра вођења немачке поште"
 
-#: ../src/bc-backends.c:275
+#: ../src/bc-backends.c:278
 msgid "Deutsche Post Identcode"
 msgstr "Шифра препознавања немачке поште"
 
-#: ../src/bc-backends.c:278
+#: ../src/bc-backends.c:281
 msgid "Dutch Post KIX Code"
 msgstr "Шифра КИКс немачке поште"
 
-#: ../src/bc-backends.c:281
+#: ../src/bc-backends.c:284
 msgid "EAN"
 msgstr "ЕАН"
 
-#: ../src/bc-backends.c:284
+#: ../src/bc-backends.c:287
 msgid "Grid Matrix"
 msgstr "Матрица мреже"
 
-#: ../src/bc-backends.c:287
+#: ../src/bc-backends.c:290
 msgid "GS1-128"
 msgstr "ГС1-128"
 
-#: ../src/bc-backends.c:290
+#: ../src/bc-backends.c:293
 msgid "GS1 DataBar-14"
 msgstr "ГС1 Траке података-14"
 
-#: ../src/bc-backends.c:299
+#: ../src/bc-backends.c:302
 msgid "GS1 DataBar-14 Stacked"
 msgstr "ГС1 Траке података-14 наслагано"
 
-#: ../src/bc-backends.c:302
+#: ../src/bc-backends.c:305
 msgid "GS1 DataBar-14 Stacked Omni."
 msgstr "ГС1 Траке података-14 наслагано омни."
 
-#: ../src/bc-backends.c:305
+#: ../src/bc-backends.c:308
 msgid "GS1 DataBar Extended Stacked"
 msgstr "ГС1 Траке података проширено наслагано"
 
-#: ../src/bc-backends.c:308
+#: ../src/bc-backends.c:311
 msgid "HIBC Code 128"
 msgstr "ХИБЦ шифра 128"
 
-#: ../src/bc-backends.c:311
+#: ../src/bc-backends.c:314
 msgid "HIBC Code 39"
 msgstr "ХИБЦ шифра 39"
 
-#: ../src/bc-backends.c:314
+#: ../src/bc-backends.c:317
 msgid "HIBC Data Matrix"
 msgstr "ХИБЦ матрица података"
 
-#: ../src/bc-backends.c:317
+#: ../src/bc-backends.c:320
 msgid "HIBC QR Code"
 msgstr "ХИБЦ шифра КуР"
 
-#: ../src/bc-backends.c:320
+#: ../src/bc-backends.c:323
 msgid "HIBC PDF417"
 msgstr "ХИБЦ ПДФ417"
 
-#: ../src/bc-backends.c:323
+#: ../src/bc-backends.c:326
 msgid "HIBC Micro PDF417"
 msgstr "ХИБЦ Микро ПДФ417"
 
-#: ../src/bc-backends.c:326
+#: ../src/bc-backends.c:329
 msgid "HIBC Aztec Code"
 msgstr "ХИБЦ астешка шифра"
 
-#: ../src/bc-backends.c:335
+#: ../src/bc-backends.c:338
 msgid "ITF-14"
 msgstr "ИТФ-14"
 
-#: ../src/bc-backends.c:338
+#: ../src/bc-backends.c:341
 msgid "Japanese Postal"
 msgstr "Јапанска поштанска"
 
-#: ../src/bc-backends.c:341
+#: ../src/bc-backends.c:344
 msgid "Korean Postal"
 msgstr "Корејанска поштанска"
 
-#: ../src/bc-backends.c:344
+#: ../src/bc-backends.c:347
 msgid "LOGMARS"
 msgstr "ЛОГМАРС"
 
-#: ../src/bc-backends.c:347
+#: ../src/bc-backends.c:350
 msgid "Maxicode"
 msgstr "Максишифра"
 
-#: ../src/bc-backends.c:350
+#: ../src/bc-backends.c:353
 msgid "Micro PDF417"
 msgstr "Микро ПДФ417"
 
-#: ../src/bc-backends.c:353
+#: ../src/bc-backends.c:356
 msgid "Micro QR Code"
 msgstr "Микро КуР шифра"
 
-#: ../src/bc-backends.c:356
+#: ../src/bc-backends.c:359
 msgid "MSI Plessey"
 msgstr "МСИ Плеси"
 
-#: ../src/bc-backends.c:359
+#: ../src/bc-backends.c:362
 msgid "NVE-18"
 msgstr "НВЕ-18"
 
-#: ../src/bc-backends.c:362
+#: ../src/bc-backends.c:365
 msgid "PDF417"
 msgstr "ПДФ417"
 
-#: ../src/bc-backends.c:365
+#: ../src/bc-backends.c:368
 msgid "PDF417 Truncated"
 msgstr "ПДФ417 скраћени"
 
-#: ../src/bc-backends.c:368
+#: ../src/bc-backends.c:371
 msgid "PLANET"
 msgstr "ПЛАНЕТ"
 
-#: ../src/bc-backends.c:371
+#: ../src/bc-backends.c:374
 msgid "PostNet"
 msgstr "ПостНет"
 
-#: ../src/bc-backends.c:374
+#: ../src/bc-backends.c:377
 msgid "Pharmacode"
 msgstr "Фармацеутска шифра"
 
-#: ../src/bc-backends.c:377
+#: ../src/bc-backends.c:380
 msgid "Pharmacode 2-track"
 msgstr "Фармацеутска шифра 2-трага"
 
-#: ../src/bc-backends.c:380
+#: ../src/bc-backends.c:383
 msgid "Pharmazentral Nummer (PZN)"
 msgstr "Фармацеутски средишњи број (ПЗН)"
 
-#: ../src/bc-backends.c:383
+#: ../src/bc-backends.c:386
 msgid "QR Code"
 msgstr "КуР шифра"
 
-#: ../src/bc-backends.c:386
+#: ../src/bc-backends.c:389
 msgid "Royal Mail 4-State"
 msgstr "Шифра Краљевске поште са 4-стања"
 
-#: ../src/bc-backends.c:389
+#: ../src/bc-backends.c:392
 msgid "Telepen"
 msgstr "Телепен"
 
-#: ../src/bc-backends.c:392
+#: ../src/bc-backends.c:395
 msgid "Telepen Numeric"
 msgstr "Телепен бројевни"
 
-#: ../src/bc-backends.c:401
+#: ../src/bc-backends.c:404
 msgid "USPS One Code"
 msgstr "Шифра УСПС један"
 
-#: ../src/bc-backends.c:404
+#: ../src/bc-backends.c:407
 msgid "UK Plessey"
 msgstr "Британски Плеси"
 
-#: ../src/bc-backends.c:411
+#: ../src/bc-backends.c:414
 msgid "IEC16022 (DataMatrix)"
 msgstr "ИЕЦ16022 (Матрица података)"
 
-#: ../src/bc-backends.c:418
+#: ../src/bc-backends.c:421
 msgid "IEC18004 (QRCode)"
 msgstr "ИЕЦ18004 (КуР шифра)"
 
@@ -544,80 +548,87 @@ msgstr "Произвољна боја #%u"
 msgid "gLabels Fatal Error!"
 msgstr "Кобна грешка Гномових налепница!"
 
-#: ../src/file.c:84
+#: ../src/file.c:85
 msgid "New Label or Card"
 msgstr "Нова налепница или позивница"
 
-#: ../src/file.c:175 ../src/label.c:602 ../src/label.c:646
+#. Translators: dialog title
+#: ../src/file.c:174 ../src/label.c:602 ../src/label.c:646
 msgid "Label properties"
 msgstr "Својства налепнице"
 
-#: ../src/file.c:267 ../src/file.c:557
+#. Translators: assistent dialog title
+#: ../src/file.c:203
+#| msgid "Label properties"
+msgid "Choose label properties"
+msgstr "Изаберите својства налепнице"
+
+#: ../src/file.c:295 ../src/file.c:597
 msgid "All files"
 msgstr "Све датотеке"
 
-#: ../src/file.c:272 ../src/file.c:562
+#: ../src/file.c:300 ../src/file.c:602
 msgid "gLabels documents"
 msgstr "Гномове налепнице"
 
-#: ../src/file.c:319 ../src/file.c:620
+#: ../src/file.c:347 ../src/file.c:660
 msgid "Empty file name selection"
 msgstr "Избор назива празне датотеке"
 
-#: ../src/file.c:322 ../src/file.c:338
+#: ../src/file.c:350 ../src/file.c:366
 msgid "Please select a file or supply a valid file name"
 msgstr "Молим изаберите датотеку или доставите исправан назив датотеке"
 
-#: ../src/file.c:335
+#: ../src/file.c:363
 msgid "File does not exist"
 msgstr "Датотека не постоји"
 
-#: ../src/file.c:410
+#: ../src/file.c:438
 #, c-format
 msgid "Could not open file \"%s\""
 msgstr "Не могу да отворим датотеку „%s“"
 
-#: ../src/file.c:413
+#: ../src/file.c:441
 msgid "Not a supported file format"
 msgstr "Није подржани облик датотеке"
 
-#: ../src/file.c:491 ../src/file.c:670
+#: ../src/file.c:519 ../src/file.c:710
 #, c-format
 msgid "Could not save file \"%s\""
 msgstr "Не могу да сачувам датотеку „%s“"
 
-#: ../src/file.c:495 ../src/file.c:674
+#: ../src/file.c:523 ../src/file.c:714
 msgid "Error encountered during save.  The file is still not saved."
 msgstr "Дошло је до грешке приликом чувања.  Датотека још увек није сачувана."
 
-#: ../src/file.c:535
+#: ../src/file.c:565
 #, c-format
 msgid "Save \"%s\" as"
 msgstr "Сачувај „%s“ као"
 
-#: ../src/file.c:623
+#: ../src/file.c:663
 msgid "Please supply a valid file name"
 msgstr "Молим доставите исправан назив датотеке"
 
-#: ../src/file.c:644
+#: ../src/file.c:684
 #, c-format
 msgid "Overwrite file \"%s\"?"
 msgstr "Да препишем датотеку „%s“?"
 
-#: ../src/file.c:648
+#: ../src/file.c:688
 msgid "File already exists."
 msgstr "Датотека већ постоји."
 
-#: ../src/file.c:744
+#: ../src/file.c:784
 #, c-format
 msgid "Save changes to document \"%s\" before closing?"
 msgstr "Да сачувам измене у документу „%s“ пре затварања?"
 
-#: ../src/file.c:748
+#: ../src/file.c:788
 msgid "Your changes will be lost if you don't save them."
 msgstr "Измене ће бити изгубљене ако их не сачувате."
 
-#: ../src/file.c:751
+#: ../src/file.c:791
 msgid "Close without saving"
 msgstr "Затвори без чувања"
 
@@ -792,75 +803,112 @@ msgstr "Ширина линије"
 msgid "Untitled"
 msgstr "Без наслова"
 
-#: ../src/label.c:720 ../src/ui.c:420
+#. Translators: A rectangular label dimensions. first param is numeric value
+#. of width, second is numeric value of height and third is unit. Example:
+#. "60 × 22.5 mm (width / height)"
+#. Translators: A elliptical label dimensions. first param is numeric value of
+#. width, second is numeric value of height and third is unit. Example:
+#. "60 × 22.5 mm (width / height)"
+#: ../src/label.c:751 ../src/label.c:776
+#, c-format
+msgid "%s × %s %s (width × height)"
+msgstr "%s × %s %s (ширина × висина)"
+
+#. Translators: A rounded rectangular label dimensions. first param is numeric
+#. value of width, second is numeric value of height, third is numeric value
+#. of round and fourth is unit. Example:
+#. "50 × 30 / 1.5 mm (width × height / round)"
+#: ../src/label.c:758
+#, c-format
+msgid "%s × %s / %s %s (width × height / round)"
+msgstr "%s × %s / %s %s (ширина × висина / круг)"
+
+#. Translators: A round label dimensions. first param is numeric value of
+#. diameter and second is unit. Example:
+#. "120.5 mm (diameter)"
+#: ../src/label.c:788
+#, c-format
+#| msgid "diameter"
+msgid "%s %s (diameter)"
+msgstr "%s %s (пречник)"
+
+#. Translators: A CD/DVD label dimensions. first param is numeric value of
+#. diameter, second is numeric value of hole and third is unit. Example:
+#. "120.5 / 30 mm (diameter / hole)"
+#: ../src/label.c:806
+#, c-format
+msgid "%s / %s %s (diameter / hole)"
+msgstr "%s / %s %s (пречник / рупа)"
+
+#: ../src/label.c:835 ../src/ui.c:420
 msgid "Merge properties"
 msgstr "Својства стапања"
 
-#: ../src/label.c:1216 ../src/ui.c:213
+#: ../src/label.c:1331 ../src/ui.c:213
 msgid "Delete"
 msgstr "Обриши"
 
-#: ../src/label.c:1251 ../src/ui.c:322
+#: ../src/label.c:1366 ../src/ui.c:322
 msgid "Bring to front"
 msgstr "Изнад свега"
 
-#: ../src/label.c:1287 ../src/ui.c:329
+#: ../src/label.c:1402 ../src/ui.c:329
 msgid "Send to back"
 msgstr "Пошаљи у позадину"
 
-#: ../src/label.c:1328
+#: ../src/label.c:1443
 msgid "Rotate"
 msgstr "Окрени"
 
-#: ../src/label.c:1363 ../src/ui.c:336
+#: ../src/label.c:1480 ../src/ui.c:336
 msgid "Rotate left"
 msgstr "Окрени на лево"
 
-#: ../src/label.c:1396 ../src/ui.c:343
+#: ../src/label.c:1515 ../src/ui.c:343
 msgid "Rotate right"
 msgstr "Окрени на десно"
 
-#: ../src/label.c:1431 ../src/ui.c:350
+#: ../src/label.c:1552 ../src/ui.c:350
 msgid "Flip horizontally"
 msgstr "Изврни водоравно"
 
-#: ../src/label.c:1466 ../src/ui.c:357
+#: ../src/label.c:1589 ../src/ui.c:357
 msgid "Flip vertically"
 msgstr "Изврни усправно"
 
-#: ../src/label.c:1506 ../src/ui.c:364
+#: ../src/label.c:1631 ../src/ui.c:364
 msgid "Align left"
 msgstr "Поравнај на лево"
 
-#: ../src/label.c:1563 ../src/ui.c:378
+#: ../src/label.c:1688 ../src/ui.c:378
 msgid "Align right"
 msgstr "Поравнај на десно"
 
-#: ../src/label.c:1624
+#: ../src/label.c:1749
 msgid "Align horizontal center"
 msgstr "Водоравно поравнај по средини"
 
-#: ../src/label.c:1700
+#: ../src/label.c:1825
 msgid "Align tops"
 msgstr "Поравнај по горњој ивици"
 
-#: ../src/label.c:1757
+#: ../src/label.c:1882
 msgid "Align bottoms"
 msgstr "Поравнај по доњој ивици"
 
-#: ../src/label.c:1818
+#: ../src/label.c:1943
 msgid "Align vertical center"
 msgstr "Усправно поравнај по средини"
 
-#: ../src/label.c:1896 ../src/ui.c:406
+#: ../src/label.c:2021 ../src/ui.c:406
 msgid "Center horizontally"
 msgstr "Водоравно центрирано"
 
-#: ../src/label.c:1943 ../src/ui.c:413
+#: ../src/label.c:2068 ../src/ui.c:413
 msgid "Center vertically"
 msgstr "Усправно центрирано"
 
-#: ../src/label.c:2664 ../src/label.c:2706 ../src/label.c:2732 ../src/ui.c:206
+#: ../src/label.c:2789 ../src/label.c:2831 ../src/label.c:2857 ../src/ui.c:206
 msgid "Paste"
 msgstr "Убаци"
 
@@ -903,6 +951,23 @@ msgstr "Боја сенке"
 #: ../src/label-object.c:1392
 msgid "Shadow opacity"
 msgstr "Провидност сенке"
+
+#. Translators: Button label to choose different template
+#: ../src/label-properties-dialog.c:163
+msgid "Choose _other…"
+msgstr "Изабери _друго…"
+
+#: ../src/label-properties-dialog.c:164 ../src/ui.c:162
+msgid "_Close"
+msgstr "_Затвори"
+
+#. Translators: first param is numeric value of horizontal margine, second
+#. is numeric value of vertical margine and third is unit. Example:
+#. "10 / 12.5 mm (horizontal / vertical)"
+#: ../src/label-properties-dialog.c:282
+#, c-format
+msgid "%s / %s %s (horizontal / vertical)"
+msgstr "%s / %s %s (водоравно / усправно)"
 
 #: ../src/label-text.c:293 ../src/ui.c:282
 msgid "Create text object"
@@ -1088,15 +1153,17 @@ msgstr "Стално"
 msgid "Up"
 msgstr "Горе"
 
-#: ../src/new-label-dialog.c:212 ../data/ui/new-label-dialog.ui.h:1
+#: ../src/new-label-dialog.c:214
+#| msgid "Select Product"
+msgctxt "Title of dialog page to select a stationary product"
 msgid "Select Product"
-msgstr "Изабери пројекат"
+msgstr "Изаберите производ"
 
-#: ../src/new-label-dialog.c:225 ../data/ui/new-label-dialog.ui.h:3
+#: ../src/new-label-dialog.c:227 ../data/ui/new-label-dialog.ui.h:3
 msgid "Choose Orientation"
 msgstr "Изабери усмерење"
 
-#: ../src/new-label-dialog.c:240
+#: ../src/new-label-dialog.c:242
 msgid "Review"
 msgstr "Преглед"
 
@@ -1106,7 +1173,7 @@ msgstr "Преглед"
 msgid "Default"
 msgstr "Основно"
 
-#: ../src/object-editor.c:161 ../src/object-editor.c:470
+#: ../src/object-editor.c:161 ../src/object-editor.c:472
 msgid "Object properties"
 msgstr "Својства објекта"
 
@@ -1172,7 +1239,7 @@ msgstr "Поставке Гномових налепница"
 #. TODO: Is this the actual part #?
 #: ../src/print-op.c:205 ../src/print-op-dialog.c:215
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:2
-#: ../templates/misc-iso-templates.xml.h:26
+#: ../templates/misc-iso-templates.xml.h:28
 msgid "Labels"
 msgstr "Налепнице"
 
@@ -1345,10 +1412,6 @@ msgstr "Цртач _шаблона..."
 #: ../src/ui.c:157
 msgid "Create a custom template"
 msgstr "Направите произвољни шаблон"
-
-#: ../src/ui.c:162
-msgid "_Close"
-msgstr "_Затвори"
 
 #: ../src/ui.c:164
 msgid "Close the current file"
@@ -1674,7 +1737,7 @@ msgstr "Грешка Гномових налепница!"
 msgid "(none) - gLabels"
 msgstr "(ништа) — Гномове налепнице"
 
-#: ../src/window.c:482
+#: ../src/window.c:484
 msgid "(modified)"
 msgstr "(измењено)"
 
@@ -1779,29 +1842,69 @@ msgstr "цицера"
 #. * indent-tabs-mode: nil  -- emacs
 #. * End:                   -- emacs
 #.
-#: ../data/ui/merge-properties-dialog.ui.h:1
-msgid "Format:"
-msgstr "Облик:"
+#: ../data/ui/label-properties-dialog.ui.h:1
+#| msgid "Labels"
+msgid "Label"
+msgstr "Налепница"
 
-#: ../data/ui/merge-properties-dialog.ui.h:2
-msgid "Location:"
-msgstr "Место:"
+#: ../data/ui/label-properties-dialog.ui.h:2
+#: ../data/ui/new-label-dialog.ui.h:15
+msgid "Vendor:"
+msgstr "Продавац:"
 
-#: ../data/ui/merge-properties-dialog.ui.h:3
-msgid "Source"
-msgstr "Извор"
+#: ../data/ui/label-properties-dialog.ui.h:3
+#: ../data/ui/new-label-dialog.ui.h:14 ../data/ui/template-designer.ui.h:6
+msgid "Part #:"
+msgstr "Део #:"
 
-#: ../data/ui/merge-properties-dialog.ui.h:4
-msgid "Select all"
-msgstr "Изабери све"
+#: ../data/ui/label-properties-dialog.ui.h:4 ../data/ui/new-label-dialog.ui.h:9
+#: ../data/ui/template-designer.ui.h:9
+msgid "Description:"
+msgstr "Опис:"
 
-#: ../data/ui/merge-properties-dialog.ui.h:5
-msgid "Unselect all"
-msgstr "Одзначи све"
+#: ../data/ui/label-properties-dialog.ui.h:5
+msgid "Dimensions:"
+msgstr "Димензије:"
 
-#: ../data/ui/merge-properties-dialog.ui.h:6
-msgid "Record selection/preview"
-msgstr "Снимите избор/преглед"
+#: ../data/ui/label-properties-dialog.ui.h:6
+#| msgid "Medium green"
+msgid "Medium size:"
+msgstr "Средња величина:"
+
+#: ../data/ui/label-properties-dialog.ui.h:7
+#: ../data/ui/new-label-dialog.ui.h:12
+msgid "Layout:"
+msgstr "Распоред:"
+
+#: ../data/ui/label-properties-dialog.ui.h:8
+#| msgid "6. Margin"
+msgid "Margins:"
+msgstr "Маргине:"
+
+#: ../data/ui/label-properties-dialog.ui.h:9
+#: ../data/ui/new-label-dialog.ui.h:13
+msgid "Similar products:"
+msgstr "Слични производи:"
+
+#: ../data/ui/label-properties-dialog.ui.h:10
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:14
+msgid "Options"
+msgstr "Могућности"
+
+#: ../data/ui/label-properties-dialog.ui.h:11
+#| msgid "Choose Orientation"
+msgid "Orientation:"
+msgstr "Усмерење:"
+
+#: ../data/ui/label-properties-dialog.ui.h:12
+#| msgid "Normal"
+msgid "_Normal"
+msgstr "_Обично"
+
+#: ../data/ui/label-properties-dialog.ui.h:13
+#| msgid "Rotated"
+msgid "_Rotated"
+msgstr "_Заокренуто"
 
 #: ../data/ui/media-select.ui.h:1
 msgid "Recent"
@@ -1827,6 +1930,34 @@ msgstr "Тражи све"
 #: ../data/ui/media-select.ui.h:6
 msgid "Custom"
 msgstr "Произвољно"
+
+#: ../data/ui/merge-properties-dialog.ui.h:1
+msgid "Format:"
+msgstr "Облик:"
+
+#: ../data/ui/merge-properties-dialog.ui.h:2
+msgid "Location:"
+msgstr "Место:"
+
+#: ../data/ui/merge-properties-dialog.ui.h:3
+msgid "Source"
+msgstr "Извор"
+
+#: ../data/ui/merge-properties-dialog.ui.h:4
+msgid "Select all"
+msgstr "Изабери све"
+
+#: ../data/ui/merge-properties-dialog.ui.h:5
+msgid "Unselect all"
+msgstr "Одзначи све"
+
+#: ../data/ui/merge-properties-dialog.ui.h:6
+msgid "Record selection/preview"
+msgstr "Снимите избор/преглед"
+
+#: ../data/ui/new-label-dialog.ui.h:1
+msgid "Select Product"
+msgstr "Изабери пројекат"
 
 #: ../data/ui/new-label-dialog.ui.h:2
 msgid ""
@@ -1856,29 +1987,9 @@ msgstr "Прегледај избор"
 msgid "Please review and confirm your selection."
 msgstr "Молим прегледајте и потврдите ваш избор."
 
-#: ../data/ui/new-label-dialog.ui.h:9 ../data/ui/template-designer.ui.h:9
-msgid "Description:"
-msgstr "Опис:"
-
 #: ../data/ui/new-label-dialog.ui.h:11
 msgid "Label size:"
 msgstr "Величина налепнице:"
-
-#: ../data/ui/new-label-dialog.ui.h:12
-msgid "Layout:"
-msgstr "Распоред:"
-
-#: ../data/ui/new-label-dialog.ui.h:13
-msgid "Similar products:"
-msgstr "Слични производи:"
-
-#: ../data/ui/new-label-dialog.ui.h:14 ../data/ui/template-designer.ui.h:6
-msgid "Part #:"
-msgstr "Део #:"
-
-#: ../data/ui/new-label-dialog.ui.h:15
-msgid "Vendor:"
-msgstr "Продавац:"
 
 #: ../data/ui/object-editor.ui.h:1
 msgid "dialog1"
@@ -2077,6 +2188,42 @@ msgstr "Писмо:"
 #: ../data/ui/prefs-dialog.ui.h:22
 msgid "Object defaults"
 msgstr "Основно објекта"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:1
+msgid "Sheets:"
+msgstr "Листови:"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:3
+msgid "from:"
+msgstr "од:"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:4
+msgid "to:"
+msgstr "до:"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:5
+msgid "Copies"
+msgstr "Примерака"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:6
+msgid "Start on label"
+msgstr "Почни са налепницом"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:7
+msgid "on 1st sheet"
+msgstr "на првом листу"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:8
+msgid "Copies:"
+msgstr "Примерака:"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:9
+msgid "Collate"
+msgstr "Сложи"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:10
+msgid "Merge Control"
+msgstr "Споји контролу"
 
 #: ../data/ui/property-bar.ui.h:3
 msgid "Bold"
@@ -2343,47 +2490,17 @@ msgstr ""
 "У супротном, можете да кликнете „Откажи“ да одбаците ваш нацрт\n"
 "или „Назад“ да наставите са уређивањем овог нацрта."
 
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:1
-msgid "Sheets:"
-msgstr "Листови:"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:3
-msgid "from:"
-msgstr "од:"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:4
-msgid "to:"
-msgstr "до:"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:5
-msgid "Copies"
-msgstr "Примерака"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:6
-msgid "Start on label"
-msgstr "Почни са налепницом"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:7
-msgid "on 1st sheet"
-msgstr "на првом листу"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:8
-msgid "Copies:"
-msgstr "Примерака:"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:9
-msgid "Collate"
-msgstr "Сложи"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:10
-msgid "Merge Control"
-msgstr "Споји контролу"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:14
-msgid "Options"
-msgstr "Могућности"
-
 #: ../data/appdata/glabels-3.appdata.xml.in.h:1
+#| msgid "Labels"
+msgid "gLabels"
+msgstr "Гномове налепнице"
+
+#: ../data/appdata/glabels-3.appdata.xml.in.h:2
+#: ../data/desktop/glabels-3.0.desktop.in.h:2
+msgid "Create labels, business cards and media covers"
+msgstr "Направите налепнице, пословне картице и омоте за медије"
+
+#: ../data/appdata/glabels-3.appdata.xml.in.h:3
 msgid ""
 "gLabels is a program for creating labels and business cards. It is designed "
 "to work with various laser/ink-jet peel-off label and business card sheets "
@@ -2394,7 +2511,7 @@ msgstr ""
 "картица за ласерске и штампаче са бризгалицама које можете наћи у већини "
 "радњи канцеларијског прибора."
 
-#: ../data/appdata/glabels-3.appdata.xml.in.h:2
+#: ../data/appdata/glabels-3.appdata.xml.in.h:4
 msgid ""
 "gLabels can be used to design address labels, name tags, price tags, cd/dvd "
 "labels, or just about anything else that is organized in a regular pattern "
@@ -2583,9 +2700,9 @@ msgstr "Недавно направљене произвољне боје."
 msgid "gLabels Label Designer 3"
 msgstr "Гномове налепнице 3"
 
-#: ../data/desktop/glabels-3.0.desktop.in.h:2
-msgid "Create labels, business cards and media covers"
-msgstr "Направите налепнице, пословне картице и омоте за медије"
+#: ../data/desktop/glabels-3.0.desktop.in.h:3
+msgid "label;card;print;office;barcode;"
+msgstr "налепница;картица;штампа;канцеларија;баркод;"
 
 #: ../data/mime/glabels-3.0.xml.in.h:1
 msgid "gLabels Project File"
@@ -2759,7 +2876,8 @@ msgstr "Било која налепница"
 
 #. ====================================================================
 #. ===================================================================
-#: ../templates/categories.xml.h:2 ../templates/endisch-templates.xml.h:1
+#: ../templates/categories.xml.h:2 ../templates/begalabel-templates.xml.h:3
+#: ../templates/endisch-templates.xml.h:1
 #: ../templates/hama-iso-templates.xml.h:4
 #: ../templates/pearl-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:8
@@ -2768,7 +2886,8 @@ msgid "Round labels"
 msgstr "Заобљене налепнице"
 
 #. ===================================================================
-#: ../templates/categories.xml.h:3 ../templates/endisch-templates.xml.h:2
+#: ../templates/categories.xml.h:3 ../templates/begalabel-templates.xml.h:4
+#: ../templates/endisch-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:58
 #: ../templates/rayfilm-templates.xml.h:9
 msgid "Elliptical labels"
@@ -2787,6 +2906,7 @@ msgstr "Четвртасте налепнице"
 #. ********************************************************************
 #. ===================================================================
 #: ../templates/categories.xml.h:5 ../templates/ascom-iso-templates.xml.h:4
+#: ../templates/begalabel-templates.xml.h:2
 #: ../templates/endisch-templates.xml.h:3
 #: ../templates/hama-iso-templates.xml.h:27
 #: ../templates/herma-iso-templates.xml.h:20
@@ -2811,20 +2931,30 @@ msgid "Business cards"
 msgstr "Пословна картица"
 
 #: ../templates/categories.xml.h:8
+#| msgid "Name Badge Labels"
+msgid "Name Badge"
+msgstr "Беџ са именом"
+
+#: ../templates/categories.xml.h:9
 msgid "CD/DVD or other media"
 msgstr "ЦД/ДВД или други медиј"
 
-#: ../templates/categories.xml.h:9
+#: ../templates/categories.xml.h:10
 msgid "Mailing/shipping products"
 msgstr "Поштански/доставни производи"
 
-#: ../templates/categories.xml.h:10
+#: ../templates/categories.xml.h:11
 msgid "Foldable cards"
 msgstr "Склопиве картице"
 
-#: ../templates/categories.xml.h:11
+#: ../templates/categories.xml.h:12
 msgid "Photo products"
 msgstr "Фотографски производи"
+
+#: ../templates/categories.xml.h:13
+#| msgid "Filing Labels"
+msgid "Filing labels"
+msgstr "Одлагање докумената"
 
 #. TODO: Is this the real part #?
 #. ============================================================
@@ -2856,7 +2986,7 @@ msgstr "Бочне налепнице видео трака"
 #. ===============================================================
 #: ../templates/ascom-iso-templates.xml.h:8
 #: ../templates/avery-iso-templates.xml.h:26
-#: ../templates/zweckform-iso-templates.xml.h:28
+#: ../templates/zweckform-iso-templates.xml.h:26
 msgid "CD Inlet"
 msgstr "ЦД уметак"
 
@@ -2899,7 +3029,7 @@ msgstr "Налепнице за доставу"
 #: ../templates/avery-us-templates.xml.h:12
 #: ../templates/avery-iso-templates.xml.h:14
 #: ../templates/databecker-iso-templates.xml.h:6
-#: ../templates/dymo-other-templates.xml.h:4
+#: ../templates/dymo-other-templates.xml.h:14
 #: ../templates/geha-iso-templates.xml.h:25
 #: ../templates/maco-us-templates.xml.h:2
 #: ../templates/meritline-us-templates.xml.h:4
@@ -2913,7 +3043,7 @@ msgstr "Налепнице за адресе"
 #. ===================================================================
 #. ********************************************************************
 #: ../templates/avery-us-templates.xml.h:14
-#: ../templates/dymo-other-templates.xml.h:6
+#: ../templates/dymo-other-templates.xml.h:2
 #: ../templates/meritline-us-templates.xml.h:8
 #: ../templates/sheetlabels-us-templates.xml.h:8
 #: ../templates/worldlabel-us-templates.xml.h:2
@@ -2964,7 +3094,7 @@ msgstr "Налепнице за одлагање докумената"
 #: ../templates/misc-us-templates.xml.h:25
 #: ../templates/misc-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:15
-#: ../templates/zweckform-iso-templates.xml.h:30
+#: ../templates/zweckform-iso-templates.xml.h:28
 msgid "Business Cards"
 msgstr "Пословне картице"
 
@@ -2990,12 +3120,13 @@ msgstr "Налепнице за беџеве са именима"
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:32
 #: ../templates/avery-iso-templates.xml.h:6
+#: ../templates/begalabel-templates.xml.h:5
 #: ../templates/geha-iso-templates.xml.h:10
 #: ../templates/herma-iso-templates.xml.h:14
 #: ../templates/igepa-templates.xml.h:5 ../templates/jac-iso-templates.xml.h:2
 #: ../templates/mayspies-templates.xml.h:1
 #: ../templates/misc-us-templates.xml.h:8
-#: ../templates/misc-iso-templates.xml.h:22
+#: ../templates/misc-iso-templates.xml.h:24
 #: ../templates/misc-other-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:64
 #: ../templates/rayfilm-templates.xml.h:10
@@ -3020,7 +3151,7 @@ msgstr "ЦД/ДВД налепнице (налепнице за бокове)"
 #: ../templates/avery-us-templates.xml.h:38
 #: ../templates/geha-iso-templates.xml.h:17
 #: ../templates/meritline-us-templates.xml.h:16
-#: ../templates/sheetlabels-us-templates.xml.h:22
+#: ../templates/sheetlabels-us-templates.xml.h:24
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Video Tape Face Labels"
 msgstr "Насловне налепнице видео трака"
@@ -3062,11 +3193,13 @@ msgstr "Општенаменске налепнице"
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:10
 #: ../templates/decadry-iso-templates.xml.h:2
+#: ../templates/misc-iso-templates.xml.h:14
 msgid "Mailing labels"
 msgstr "Поштанске налепнице"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:12
+#: ../templates/dymo-other-templates.xml.h:6
 #: ../templates/misc-iso-templates.xml.h:12
 msgid "Address labels"
 msgstr "Налепнице за адресе"
@@ -3083,14 +3216,14 @@ msgstr "Налепнице за доставу"
 #: ../templates/herma-iso-templates.xml.h:8
 #: ../templates/misc-us-templates.xml.h:21
 #: ../templates/misc-iso-templates.xml.h:6
-#: ../templates/sheetlabels-us-templates.xml.h:24
+#: ../templates/sheetlabels-us-templates.xml.h:28
 #: ../templates/zweckform-iso-templates.xml.h:10
 msgid "Mailing Labels"
 msgstr "Поштанске налепнице"
 
 #. ===============================================================
 #: ../templates/avery-iso-templates.xml.h:24
-#: ../templates/zweckform-iso-templates.xml.h:26
+#: ../templates/zweckform-iso-templates.xml.h:24
 msgid "CD Booklet"
 msgstr "ЦД књижица"
 
@@ -3110,6 +3243,16 @@ msgstr "Налепнице за препознавање"
 #: ../templates/hama-iso-templates.xml.h:31
 msgid "Diskette labels"
 msgstr "Дискетне налепнице"
+
+#: ../templates/begalabel-templates.xml.h:1
+#| msgid "Rectangular labels"
+msgid "Rounded rectangular labels"
+msgstr "Правоугаоне заобљене налепнице"
+
+#: ../templates/begalabel-templates.xml.h:6
+#| msgid "Cassette Labels"
+msgid "Cassette Tape Face"
+msgstr "Налепнице за касетне траке"
 
 #.
 #. *********************************************************************
@@ -3160,28 +3303,23 @@ msgstr "Уобичајене налепнице за адресе 38mm x 90mm"
 #. *********************************************************************
 #.
 #: ../templates/brother-other-templates.xml.h:37
-#| msgid "Standard Address Labels 29mm x 90mm"
 msgid "Standard Address Labels 29mm x 90mm (Old)"
 msgstr "Уобичајене налепнице за адресе 29mm x 90mm (старе)"
 
 #: ../templates/brother-other-templates.xml.h:38
-#| msgid "Shipping Labels 62mm x 100mm"
 msgid "Shipping Labels 62mm x 100mm (Old)"
 msgstr "Налепнице за доставу 62mm x 100mm (старе)"
 
 #: ../templates/brother-other-templates.xml.h:39
-#| msgid "Multi Purpose Labels 17mm x 54mm"
 msgid "Multi Purpose Labels 17mm x 54mm (Old)"
 msgstr "Вишенаменске налепнице 17mm x 54mm (старе)"
 
 #: ../templates/brother-other-templates.xml.h:40
-#| msgid "Standard Address Labels 38mm x 90mm"
 msgid "Standard Address Labels 38mm x 90mm (Old)"
 msgstr "Уобичајене налепнице за адресе 38mm x 90mm (старе)"
 
 #. ===================================================================
 #: ../templates/canon-other-templates.xml.h:2
-#| msgid "CD/DVD Labels"
 msgid "CD/DVD Tray"
 msgstr "ЦД/ДВД налепнице"
 
@@ -3195,7 +3333,7 @@ msgstr "ЦД/ДВД налепнице уобичајеног облика (са
 #. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:8
 #: ../templates/desmat-templates.xml.h:2
-#: ../templates/misc-iso-templates.xml.h:20
+#: ../templates/misc-iso-templates.xml.h:22
 msgid "CD Labels"
 msgstr "ЦД налепнице"
 
@@ -3204,7 +3342,7 @@ msgstr "ЦД налепнице"
 #. ===================================================================
 #: ../templates/dataline-iso-templates.xml.h:2
 #: ../templates/hama-iso-templates.xml.h:35
-#: ../templates/misc-iso-templates.xml.h:32
+#: ../templates/misc-iso-templates.xml.h:34
 msgid "CD/DVD labels"
 msgstr "ЦД/ДВД налепнице"
 
@@ -3215,20 +3353,21 @@ msgid "Membership cards"
 msgstr "Чланске картице"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:2
-#: ../templates/geha-iso-templates.xml.h:23
-msgid "Large Address Labels"
-msgstr "Велике налепнице за адресе"
+#: ../templates/dymo-other-templates.xml.h:4
+#| msgid "Multi-Purpose Labels"
+msgid "Multipurpose Labels"
+msgstr "Вишенаменске налепнице"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:8
-msgid "Shipping Address Labels"
-msgstr "Налепнице за адресе достављања"
+msgid "File Folder"
+msgstr "Фасцикла за документа"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:10
-msgid "File Folder"
-msgstr "Фасцикла за документа"
+#| msgid "Name Badge Labels"
+msgid "Name Badges"
+msgstr "Беџеви са именима"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:12
@@ -3236,9 +3375,15 @@ msgid "Hanging Folder"
 msgstr "Фасцикле за качење"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:14
-msgid "3.5in Diskette"
-msgstr "Дискете 3.5 инча"
+#: ../templates/dymo-other-templates.xml.h:16
+#: ../templates/geha-iso-templates.xml.h:23
+msgid "Large Address Labels"
+msgstr "Велике налепнице за адресе"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:18
+msgid "Shipping Address Labels"
+msgstr "Налепнице за адресе достављања"
 
 #. ===================================================================
 #: ../templates/endisch-templates.xml.h:5
@@ -3328,7 +3473,7 @@ msgstr "Налепнице за архиве докумената"
 
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:29
-#: ../templates/misc-iso-templates.xml.h:28
+#: ../templates/misc-iso-templates.xml.h:30
 #: ../templates/misc-other-templates.xml.h:4
 msgid "Multi-Purpose Labels"
 msgstr "Вишенаменске налепнице"
@@ -3403,7 +3548,7 @@ msgstr "Налепнице архиве докумената (велике)"
 
 #. ===================================================================
 #: ../templates/herma-iso-templates.xml.h:10
-#: ../templates/zweckform-iso-templates.xml.h:20
+#: ../templates/zweckform-iso-templates.xml.h:18
 msgid "Allround Labels"
 msgstr "Општенаменске налепнице"
 
@@ -3447,7 +3592,7 @@ msgstr "Уобичајене налепнице"
 #. ===================================================================
 #. TODO: Is this the actual part #?
 #: ../templates/misc-us-templates.xml.h:2
-#: ../templates/misc-iso-templates.xml.h:24
+#: ../templates/misc-iso-templates.xml.h:26
 msgid "CD/DVD Labels (face only)"
 msgstr "ЦД/ДВД налепнице (само лице)"
 
@@ -3493,7 +3638,7 @@ msgstr "ДЛТ налепнице"
 #. ===================================================================
 #. TODO: Is this the actual part #?
 #: ../templates/misc-us-templates.xml.h:27
-#: ../templates/misc-iso-templates.xml.h:36
+#: ../templates/misc-iso-templates.xml.h:38
 msgid "PRO CD Labels 2-up (face only)"
 msgstr "ПРО ЦД налепнице 2-горе (само лице)"
 
@@ -3524,33 +3669,34 @@ msgid "Self-adhesive labels"
 msgstr "Самолепљиве налепнице"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:14
+#: ../templates/misc-iso-templates.xml.h:16
 msgid "Fridge Magnet Stickers"
 msgstr "Магнетне налепнице за фрижидер"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:16
+#: ../templates/misc-iso-templates.xml.h:18
 msgid "Inkjet/Laser Labels 70x37mm"
 msgstr "Налепнице за ласер и млазне штампаче 70x37mm"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:18
+#: ../templates/misc-iso-templates.xml.h:20
 msgid "EPSON Photo Stickers 16"
 msgstr "ЕПСОН-ове фотографске налепнице 16"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:30
+#: ../templates/misc-iso-templates.xml.h:32
 msgid "Universal Labels"
 msgstr "Универзалне налепнице"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:34
+#: ../templates/misc-iso-templates.xml.h:36
 #: ../templates/pearl-iso-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:26
 msgid "Bottle labels"
 msgstr "Налепнице за боце"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:38
+#: ../templates/misc-iso-templates.xml.h:40
 msgid "Etiketten"
 msgstr "Етикете"
 
@@ -3651,31 +3797,38 @@ msgid "Trapezoid labels"
 msgstr "Трапезоидне налепнице"
 
 #. ===================================================================
+#: ../templates/sheetlabels-us-templates.xml.h:22
+#| msgid "Bottle labels"
+msgid "Oval bottle labels"
+msgstr "Округле налепнице за флаше"
+
+#. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:12
 msgid "QSL-Karten Etiketten 70mm x 50,8mm"
 msgstr "КуСЛ-Карте етикете 70mm x 50,8mm"
 
 #. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:14
-msgid "File Back Labels"
-msgstr "Налепнице за полеђину документа"
-
-#. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:16
 msgid "Multi-purpose Stick+Lift Labels"
 msgstr "Вишенаменске налепнице „Залепи+Одлепи“"
 
 #. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:18
+#: ../templates/zweckform-iso-templates.xml.h:16
 msgid "Video Labels (back)"
 msgstr "Налепнице за снимке (полеђина)"
 
 #. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:22
+#: ../templates/zweckform-iso-templates.xml.h:20
 msgid "Rectangular Copier Labels"
 msgstr "Правоугаоне налепнице за умножавање"
 
 #. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:24
+#: ../templates/zweckform-iso-templates.xml.h:22
 msgid "Correction and Cover-up Labels"
 msgstr "Налепнице за исправке и прекривање"
+
+#~ msgid "3.5in Diskette"
+#~ msgstr "Дискете 3.5 инча"
+
+#~ msgid "File Back Labels"
+#~ msgstr "Налепнице за полеђину документа"
