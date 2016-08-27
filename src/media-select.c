@@ -786,14 +786,15 @@ gl_media_select_get_name (glMediaSelect *this)
                 g_assert_not_reached ();
         }
 
-        if (gtk_tree_selection_get_mode (selection) == GTK_SELECTION_NONE)
+        gboolean has_selection = gtk_tree_selection_get_selected (selection, &model, &iter);
+
+        if (has_selection == TRUE)
         {
-                name = NULL;
+                gtk_tree_model_get (model, &iter, NAME_COLUMN, &name, -1);
         }
         else
         {
-                gtk_tree_selection_get_selected (selection, &model, &iter);
-                gtk_tree_model_get (model, &iter, NAME_COLUMN, &name, -1);
+                name = NULL;
         }
 
         gl_debug (DEBUG_MEDIA_SELECT, "END");
