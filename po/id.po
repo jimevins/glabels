@@ -5,18 +5,18 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: glabels glabels-3_0\n"
+"Project-Id-Version: glabels glabels-3_4\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2012-07-22 21:53+0000\n"
-"PO-Revision-Date: 2012-07-23 16:34+0700\n"
+"POT-Creation-Date: 2016-04-11 09:04+0000\n"
+"PO-Revision-Date: 2016-07-04 15:21+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome@i15n.org>\n"
+"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Poedit-Language: Indonesian\n"
-"X-Poedit-Country: INDONESIA\n"
+"X-Generator: Poedit 1.8.8\n"
 
 #: ../src/bc-backends.c:81
 msgid "Built-in"
@@ -46,14 +46,11 @@ msgstr "CEPNET"
 msgid "One Code"
 msgstr "One Code"
 
-#: ../src/bc-backends.c:119
-#: ../src/bc-backends.c:175
-#: ../src/bc-backends.c:248
+#: ../src/bc-backends.c:119 ../src/bc-backends.c:175 ../src/bc-backends.c:248
 msgid "Code 39"
 msgstr "Code 39"
 
-#: ../src/bc-backends.c:122
-#: ../src/bc-backends.c:251
+#: ../src/bc-backends.c:122 ../src/bc-backends.c:251
 msgid "Code 39 Extended"
 msgstr "Code 39 Extended"
 
@@ -89,8 +86,7 @@ msgstr "EAN-13 +5"
 msgid "UPC (UPC-A or UPC-E)"
 msgstr "UPC (UPC-A atau UPC-E)"
 
-#: ../src/bc-backends.c:151
-#: ../src/bc-backends.c:395
+#: ../src/bc-backends.c:151 ../src/bc-backends.c:398
 msgid "UPC-A"
 msgstr "UPC-A"
 
@@ -102,8 +98,7 @@ msgstr "UPC-A +2"
 msgid "UPC-A +5"
 msgstr "UPC-A +5"
 
-#: ../src/bc-backends.c:160
-#: ../src/bc-backends.c:398
+#: ../src/bc-backends.c:160 ../src/bc-backends.c:401
 msgid "UPC-E"
 msgstr "UPC-E"
 
@@ -115,8 +110,7 @@ msgstr "UPC-E +2"
 msgid "UPC-E +5"
 msgstr "UPC-E +5"
 
-#: ../src/bc-backends.c:169
-#: ../src/bc-backends.c:332
+#: ../src/bc-backends.c:169 ../src/bc-backends.c:335
 msgid "ISBN"
 msgstr "ISBN"
 
@@ -124,8 +118,7 @@ msgstr "ISBN"
 msgid "ISBN +5"
 msgstr "ISBN +5"
 
-#: ../src/bc-backends.c:178
-#: ../src/bc-backends.c:260
+#: ../src/bc-backends.c:178 ../src/bc-backends.c:260
 msgid "Code 128"
 msgstr "Code 128"
 
@@ -137,13 +130,12 @@ msgstr "Code 128C"
 msgid "Code 128B"
 msgstr "Code 128B"
 
-#: ../src/bc-backends.c:187
-#: ../src/bc-backends.c:329
+#: ../src/bc-backends.c:187 ../src/bc-backends.c:332
+#, fuzzy
 msgid "Interleaved 2 of 5"
-msgstr ""
+msgstr "5 menit"
 
-#: ../src/bc-backends.c:190
-#: ../src/bc-backends.c:224
+#: ../src/bc-backends.c:190 ../src/bc-backends.c:224
 msgid "Codabar"
 msgstr "Codabar"
 
@@ -155,14 +147,14 @@ msgstr "MSI"
 msgid "Plessey"
 msgstr "Plessey"
 
-#: ../src/bc-backends.c:199
-#: ../src/bc-backends.c:257
+#: ../src/bc-backends.c:199 ../src/bc-backends.c:257
 msgid "Code 93"
 msgstr "Code 93"
 
 #: ../src/bc-backends.c:206
+#, fuzzy
 msgid "Australia Post Standard"
-msgstr ""
+msgstr "XML POST difungsikan\n"
 
 #: ../src/bc-backends.c:209
 msgid "Australia Post Reply Paid"
@@ -173,8 +165,9 @@ msgid "Australia Post Route Code"
 msgstr ""
 
 #: ../src/bc-backends.c:215
+#, fuzzy
 msgid "Australia Post Redirect"
-msgstr ""
+msgstr "URL Redirect Tak Valid"
 
 #: ../src/bc-backends.c:218
 msgid "Aztec Code"
@@ -217,7 +210,7 @@ msgid "Code 49"
 msgstr "Code 49"
 
 #: ../src/bc-backends.c:263
-msgid "Code 128 (Mode C supression)"
+msgid "Code 128 (Mode C suppression)"
 msgstr ""
 
 #: ../src/bc-backends.c:266
@@ -229,171 +222,176 @@ msgid "Data Matrix"
 msgstr "Data Matrix"
 
 #: ../src/bc-backends.c:272
+#, fuzzy
+#| msgid "Data Matrix"
+msgid "Data Matrix (GS1)"
+msgstr "data yang dijatuhkan"
+
+#: ../src/bc-backends.c:275
 msgid "Deutsche Post Leitcode"
 msgstr "Deutsche Post Leitcode"
 
-#: ../src/bc-backends.c:275
+#: ../src/bc-backends.c:278
 msgid "Deutsche Post Identcode"
 msgstr "Deutsche Post Identcode"
 
-#: ../src/bc-backends.c:278
+#: ../src/bc-backends.c:281
 msgid "Dutch Post KIX Code"
 msgstr "Dutch Post KIX Code"
 
-#: ../src/bc-backends.c:281
+#: ../src/bc-backends.c:284
 msgid "EAN"
 msgstr "EAN"
 
-#: ../src/bc-backends.c:284
+#: ../src/bc-backends.c:287
 msgid "Grid Matrix"
 msgstr "Grid Matrix"
 
-#: ../src/bc-backends.c:287
+#: ../src/bc-backends.c:290
 msgid "GS1-128"
 msgstr "GS1-128"
 
-#: ../src/bc-backends.c:290
+#: ../src/bc-backends.c:293
 msgid "GS1 DataBar-14"
 msgstr "GS1 DataBar-14"
 
-#: ../src/bc-backends.c:299
+#: ../src/bc-backends.c:302
 msgid "GS1 DataBar-14 Stacked"
 msgstr ""
 
-#: ../src/bc-backends.c:302
+#: ../src/bc-backends.c:305
 msgid "GS1 DataBar-14 Stacked Omni."
 msgstr ""
 
-#: ../src/bc-backends.c:305
+#: ../src/bc-backends.c:308
 msgid "GS1 DataBar Extended Stacked"
 msgstr ""
 
-#: ../src/bc-backends.c:308
+#: ../src/bc-backends.c:311
 msgid "HIBC Code 128"
 msgstr "HIBC Code 128"
 
-#: ../src/bc-backends.c:311
+#: ../src/bc-backends.c:314
 msgid "HIBC Code 39"
 msgstr "HIBC Code 39"
 
-#: ../src/bc-backends.c:314
+#: ../src/bc-backends.c:317
 msgid "HIBC Data Matrix"
 msgstr "HIBC Data Matrix"
 
-#: ../src/bc-backends.c:317
+#: ../src/bc-backends.c:320
 msgid "HIBC QR Code"
 msgstr "HIBC QR Code"
 
-#: ../src/bc-backends.c:320
+#: ../src/bc-backends.c:323
 msgid "HIBC PDF417"
 msgstr "HIBC PDF417"
 
-#: ../src/bc-backends.c:323
+#: ../src/bc-backends.c:326
 msgid "HIBC Micro PDF417"
 msgstr "HIBC Micro PDF417"
 
-#: ../src/bc-backends.c:326
+#: ../src/bc-backends.c:329
 msgid "HIBC Aztec Code"
 msgstr "HIBC Aztec Code"
 
-#: ../src/bc-backends.c:335
+#: ../src/bc-backends.c:338
 msgid "ITF-14"
 msgstr "ITF-14"
 
-#: ../src/bc-backends.c:338
+#: ../src/bc-backends.c:341
 msgid "Japanese Postal"
 msgstr "Pos Jepang"
 
-#: ../src/bc-backends.c:341
+#: ../src/bc-backends.c:344
 msgid "Korean Postal"
 msgstr "Pos Korea"
 
-#: ../src/bc-backends.c:344
+#: ../src/bc-backends.c:347
 msgid "LOGMARS"
 msgstr "LOGMARS"
 
-#: ../src/bc-backends.c:347
+#: ../src/bc-backends.c:350
 msgid "Maxicode"
 msgstr "Maxicode"
 
-#: ../src/bc-backends.c:350
+#: ../src/bc-backends.c:353
 msgid "Micro PDF417"
 msgstr "Micro PDF417"
 
-#: ../src/bc-backends.c:353
+#: ../src/bc-backends.c:356
 msgid "Micro QR Code"
 msgstr "Micro QR Code"
 
-#: ../src/bc-backends.c:356
+#: ../src/bc-backends.c:359
 msgid "MSI Plessey"
 msgstr "MSI Plessey"
 
-#: ../src/bc-backends.c:359
+#: ../src/bc-backends.c:362
 msgid "NVE-18"
 msgstr "NVE-18"
 
-#: ../src/bc-backends.c:362
+#: ../src/bc-backends.c:365
 msgid "PDF417"
 msgstr "PDF417"
 
-#: ../src/bc-backends.c:365
+#: ../src/bc-backends.c:368
 msgid "PDF417 Truncated"
 msgstr ""
 
-#: ../src/bc-backends.c:368
+#: ../src/bc-backends.c:371
 msgid "PLANET"
 msgstr "PLANET"
 
-#: ../src/bc-backends.c:371
+#: ../src/bc-backends.c:374
 msgid "PostNet"
 msgstr "PostNet"
 
-#: ../src/bc-backends.c:374
+#: ../src/bc-backends.c:377
 msgid "Pharmacode"
 msgstr "Pharmacode"
 
-#: ../src/bc-backends.c:377
+#: ../src/bc-backends.c:380
 msgid "Pharmacode 2-track"
 msgstr "Pharmacode 2-track"
 
-#: ../src/bc-backends.c:380
+#: ../src/bc-backends.c:383
 msgid "Pharmazentral Nummer (PZN)"
 msgstr "Pharmazentral Nummer (PZN)"
 
-#: ../src/bc-backends.c:383
+#: ../src/bc-backends.c:386
 msgid "QR Code"
 msgstr "QR Code"
 
-#: ../src/bc-backends.c:386
+#: ../src/bc-backends.c:389
 msgid "Royal Mail 4-State"
 msgstr "Royal Mail 4-State"
 
-#: ../src/bc-backends.c:389
+#: ../src/bc-backends.c:392
 msgid "Telepen"
 msgstr "Telepen"
 
-#: ../src/bc-backends.c:392
+#: ../src/bc-backends.c:395
 msgid "Telepen Numeric"
 msgstr "Telepen Numeric"
 
-#: ../src/bc-backends.c:401
+#: ../src/bc-backends.c:404
 msgid "USPS One Code"
 msgstr "USPS One Code"
 
-#: ../src/bc-backends.c:404
+#: ../src/bc-backends.c:407
 msgid "UK Plessey"
 msgstr "UK Plessey"
 
-#: ../src/bc-backends.c:411
+#: ../src/bc-backends.c:414
 msgid "IEC16022 (DataMatrix)"
 msgstr "IEC16022 (DataMatrix)"
 
-#: ../src/bc-backends.c:418
+#: ../src/bc-backends.c:421
 msgid "IEC18004 (QRCode)"
 msgstr "IEC18004 (QRCode)"
 
-#: ../src/color-combo-button.c:198
-#: ../src/color-combo.c:178
+#: ../src/color-combo-button.c:198 ../src/color-combo.c:178
 msgid "Default Color"
 msgstr "Warna Baku"
 
@@ -406,8 +404,9 @@ msgid "Brown"
 msgstr "Coklat"
 
 #: ../src/color-combo-menu.c:85
+#, fuzzy
 msgid "Dark Goldenrod"
-msgstr ""
+msgstr "Tema Gelap:"
 
 #: ../src/color-combo-menu.c:86
 msgid "Dark Green"
@@ -502,8 +501,9 @@ msgid "Light Cyan"
 msgstr "Cyan Terang"
 
 #: ../src/color-combo-menu.c:112
+#, fuzzy
 msgid "Slate Gray"
-msgstr ""
+msgstr "Kelabu bawaan"
 
 #: ../src/color-combo-menu.c:113
 msgid "Thistle"
@@ -542,120 +542,131 @@ msgstr "Kelabu 60%"
 msgid "Black"
 msgstr "Hitam"
 
-#: ../src/color-combo-menu.c:254
-#: ../src/color-combo-menu.c:373
+#: ../src/color-combo-menu.c:254 ../src/color-combo-menu.c:373
 #, fuzzy
 msgid "Custom Color"
-msgstr "Pilih warna:"
+msgstr ""
+"Spesifikasi warna tersuai GTK harus memiliki nama warna dan fallback dalam "
+"kurung, mis. gtk:custom(foo,bar); tak dapat mengurai '%s'"
 
 #: ../src/color-combo-menu.c:319
 #, fuzzy, c-format
 msgid "Custom Color #%u"
-msgstr "Pilih warna:"
+msgstr "Gubahan"
 
-#: ../src/critical-error-handler.c:70
+#: ../src/critical-error-handler.c:72
+#, fuzzy
 msgid "gLabels Fatal Error!"
-msgstr ""
+msgstr "Galat fatal dalam penanganan baris perintah\n"
 
-#: ../src/file.c:84
+#: ../src/file.c:85
+#, fuzzy
 msgid "New Label or Card"
-msgstr ""
+msgstr "Kartu SIM tak dipasang"
 
-#: ../src/file.c:175
-#: ../src/label.c:601
-#: ../src/label.c:645
+#. Translators: dialog title
+#: ../src/file.c:174 ../src/label.c:602 ../src/label.c:646
 msgid "Label properties"
 msgstr "Properti label"
 
-#: ../src/file.c:267
-#: ../src/file.c:557
+#. Translators: assistent dialog title
+#: ../src/file.c:203
+#, fuzzy
+#| msgid "Label properties"
+msgid "Choose label properties"
+msgstr "_Properti:"
+
+#: ../src/file.c:295 ../src/file.c:597
 msgid "All files"
 msgstr "Semua berkas"
 
-#: ../src/file.c:272
-#: ../src/file.c:562
+#: ../src/file.c:300 ../src/file.c:602
 msgid "gLabels documents"
 msgstr "Dokumen gLabels"
 
-#: ../src/file.c:319
-#: ../src/file.c:620
+#: ../src/file.c:347 ../src/file.c:660
+#, fuzzy
 msgid "Empty file name selection"
-msgstr ""
+msgstr "Membuat berkas kosong '%s'"
 
-#: ../src/file.c:322
-#: ../src/file.c:338
+#: ../src/file.c:350 ../src/file.c:366
 msgid "Please select a file or supply a valid file name"
-msgstr ""
+msgstr "Harap pilih sebuah berkas atau berikan nama berkas yang valid"
 
-#: ../src/file.c:335
+#: ../src/file.c:363
+#, fuzzy
 msgid "File does not exist"
-msgstr ""
+msgstr "Tak bisa membuka '%s', berkas tak ada.\n"
 
-#: ../src/file.c:410
+#: ../src/file.c:438
 #, fuzzy, c-format
 msgid "Could not open file \"%s\""
 msgstr "Tidak bisa membuka berkas: %s: %s"
 
-#: ../src/file.c:413
+#: ../src/file.c:441
+#, fuzzy
 msgid "Not a supported file format"
-msgstr ""
+msgstr "Format berkas tidak benar."
 
-#: ../src/file.c:491
-#: ../src/file.c:670
+#: ../src/file.c:519 ../src/file.c:710
 #, fuzzy, c-format
 msgid "Could not save file \"%s\""
-msgstr "Tak bisa menyimpan berkas %s"
-
-#: ../src/file.c:495
-#: ../src/file.c:674
-msgid "Error encountered during save.  The file is still not saved."
 msgstr ""
+"Tak bisa menyimpan berkas %s. Projek lain dengan path tersebut sedang dibuka."
 
-#: ../src/file.c:535
+#: ../src/file.c:523 ../src/file.c:714
+msgid "Error encountered during save.  The file is still not saved."
+msgstr "Galat ditemui saat menyimpan. Berkas masih belum disimpan."
+
+#: ../src/file.c:565
 #, fuzzy, c-format
 msgid "Save \"%s\" as"
-msgstr "Simpan sebagai..."
+msgstr "Gagal menyimpan %s: %s"
 
-#: ../src/file.c:623
+#: ../src/file.c:663
+#, fuzzy
 msgid "Please supply a valid file name"
-msgstr ""
+msgstr "Nama “%s” tidak sah. Gunakanlah nama yang lain."
 
-#: ../src/file.c:644
-#, c-format
+#: ../src/file.c:684
+#, fuzzy, c-format
 msgid "Overwrite file \"%s\"?"
-msgstr ""
+msgstr "Modus Timpa"
 
-#: ../src/file.c:648
+#: ../src/file.c:688
 #, fuzzy
 msgid "File already exists."
-msgstr "Berkas {0} telah ada"
+msgstr "Berkas bernama \"%s\" sudah ada."
 
-#: ../src/file.c:744
+#: ../src/file.c:784
 #, fuzzy, c-format
 msgid "Save changes to document \"%s\" before closing?"
-msgstr "Simpan perubahan ke dokumen \"%s\" sebelum menutup?"
+msgstr "Simpan perubahan ke projek \"%s\" sebelum ditutup?"
 
-#: ../src/file.c:748
+#: ../src/file.c:788
 #, fuzzy
 msgid "Your changes will be lost if you don't save them."
 msgstr "Perubahan yang Anda buat akan hilang bila tidak Anda simpan."
 
-#: ../src/file.c:751
+#: ../src/file.c:791
 #, fuzzy
 msgid "Close without saving"
 msgstr "Tutup _tanpa Menyimpan"
 
 #: ../src/font-combo-menu.c:137
+#, fuzzy
 msgid "Recent fonts"
-msgstr ""
+msgstr "Resolusi fonta pada layar"
 
 #: ../src/font-combo-menu.c:152
+#, fuzzy
 msgid "Proportional fonts"
-msgstr ""
+msgstr "Tempelkan fonta GhostScript saja"
 
 #: ../src/font-combo-menu.c:160
+#, fuzzy
 msgid "Fixed-width fonts"
-msgstr ""
+msgstr "Lebar tetap"
 
 #: ../src/font-combo-menu.c:168
 msgid "All fonts"
@@ -694,25 +705,26 @@ msgstr "Contoh teks"
 
 #: ../src/glabels-batch.c:53
 msgid "set output filename (default=\"output.pdf\")"
-msgstr ""
+msgstr "atur nama berkas keluaran (baku=\"output.pdf\")"
 
-#: ../src/glabels-batch.c:53
-#: ../src/glabels-batch.c:67
+#: ../src/glabels-batch.c:53 ../src/glabels-batch.c:67
 #, fuzzy
 msgid "filename"
 msgstr "Nama berkas"
 
 #: ../src/glabels-batch.c:55
+#, fuzzy
 msgid "number of sheets (default=1)"
-msgstr ""
+msgstr "1 (Bawaan)"
 
 #: ../src/glabels-batch.c:55
 msgid "sheets"
-msgstr ""
+msgstr "lembar"
 
 #: ../src/glabels-batch.c:57
+#, fuzzy
 msgid "number of copies (default=1)"
-msgstr ""
+msgstr "1 (Bawaan)"
 
 #: ../src/glabels-batch.c:57
 #, fuzzy
@@ -721,433 +733,503 @@ msgstr "Copies"
 
 #: ../src/glabels-batch.c:59
 msgid "first label on first sheet (default=1)"
-msgstr ""
+msgstr "label pertama pada lembar pertama (baku=1)"
 
 #: ../src/glabels-batch.c:59
 #, fuzzy
 msgid "first"
-msgstr "pertama"
+msgstr "Pertama kali menjalankan GNOME To Do"
 
-#: ../src/glabels-batch.c:61
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:11
+#: ../src/glabels-batch.c:61 ../data/ui/print-op-dialog-custom-widget.ui.h:11
 msgid "print outlines (to test printer alignment)"
 msgstr ""
 
-#: ../src/glabels-batch.c:63
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:12
+#: ../src/glabels-batch.c:63 ../data/ui/print-op-dialog-custom-widget.ui.h:12
 msgid "print in reverse (i.e. a mirror image)"
-msgstr ""
+msgstr "cetak terbalik (citra cermin)"
 
-#: ../src/glabels-batch.c:65
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:13
+#: ../src/glabels-batch.c:65 ../data/ui/print-op-dialog-custom-widget.ui.h:13
+#, fuzzy
 msgid "print crop marks"
-msgstr ""
+msgstr "Dialog Pencetakan"
 
 #: ../src/glabels-batch.c:67
+#, fuzzy
 msgid "input file for merging"
-msgstr ""
+msgstr "Sumber masukan"
 
-#: ../src/glabels-batch.c:69
-#: ../src/glabels.c:63
+#: ../src/glabels-batch.c:69 ../src/glabels.c:63
 #, fuzzy
 msgid "[FILE...]"
 msgstr "[FILE...]"
 
 #: ../src/glabels-batch.c:99
 msgid "Print files created with gLabels."
-msgstr ""
+msgstr "Cetak berkas yang dibuat dengan gLabels."
 
-#: ../src/glabels-batch.c:107
-#: ../src/glabels.c:87
+#: ../src/glabels-batch.c:107 ../src/glabels.c:87
 #, fuzzy, c-format
 msgid ""
 "%s\n"
 "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
 "%s\n"
-"Jalankan '%s --help' untuk melihat daftar lengkap dari opsi baris perintah yang tersedia.\n"
+"Jalankan '%s --help' untuk melihat daftar lengkap dari opsi baris perintah "
+"yang tersedia.\n"
 
 #: ../src/glabels-batch.c:151
 #, c-format
 msgid "cannot perform document merge with glabels file %s\n"
-msgstr ""
+msgstr "tidak bisa lakukan penggabungan dengan berkas glabel %s\n"
 
 #: ../src/glabels-batch.c:186
-#, c-format
+#, fuzzy, c-format
 msgid "cannot open glabels file %s\n"
-msgstr ""
+msgstr "Tak bisa membuka berkas konfig '%s': %s\n"
 
 #: ../src/glabels.c:79
 msgid "Launch gLabels label and business card designer."
-msgstr ""
+msgstr "Luncurkan perancangan kartu bisnis dan label."
 
-#: ../src/label-barcode.c:183
-#: ../src/ui.c:317
+#: ../src/label-barcode.c:183 ../src/ui.c:317
+#, fuzzy
 msgid "Create barcode object"
-msgstr ""
+msgstr "Tidak dapat membuat objek kalender: "
 
-#: ../src/label-barcode.c:259
-#: ../src/label-barcode.c:461
+#: ../src/label-barcode.c:259 ../src/label-barcode.c:461
+#, fuzzy
 msgid "Barcode data"
-msgstr ""
+msgstr "Data"
 
 #: ../src/label-barcode.c:290
+#, fuzzy
 msgid "Barcode property"
-msgstr ""
+msgstr "Properti"
 
 #: ../src/label-barcode.c:684
+#, fuzzy
 msgid "Barcode data empty"
-msgstr ""
+msgstr "Data"
 
 #: ../src/label-barcode.c:688
+#, fuzzy
 msgid "Invalid barcode data"
-msgstr ""
+msgstr "Data"
 
 #: ../src/label-box.c:156
+#, fuzzy
 msgid "Create box object"
-msgstr ""
+msgstr "Buat Sebuah Box"
 
-#: ../src/label-box.c:230
-#: ../src/label-ellipse.c:232
-#: ../data/ui/property-bar.ui.h:9
+#: ../src/label-box.c:230 ../src/label-ellipse.c:232
+#: ../data/ui/property-bar.ui.h:12
+#, fuzzy
 msgid "Fill color"
-msgstr ""
+msgstr "Isi"
 
-#: ../src/label-box.c:261
-#: ../src/label-ellipse.c:261
-#: ../src/label-line.c:212
-#: ../data/ui/property-bar.ui.h:10
+#: ../src/label-box.c:261 ../src/label-ellipse.c:261 ../src/label-line.c:212
+#: ../data/ui/property-bar.ui.h:13
 #, fuzzy
 msgid "Line color"
-msgstr "Warna Garis:\n"
+msgstr "Warna"
 
-#: ../src/label-box.c:289
-#: ../src/label-ellipse.c:290
-#: ../src/label-line.c:241
-#: ../data/ui/property-bar.ui.h:11
+#: ../src/label-box.c:289 ../src/label-ellipse.c:290 ../src/label-line.c:241
+#: ../data/ui/property-bar.ui.h:14
 #, fuzzy
 msgid "Line width"
-msgstr "Lebar Garis:"
+msgstr "Lebar garis kisi"
 
-#: ../src/label.c:405
+#: ../src/label.c:406
 #, fuzzy
 msgid "Untitled"
-msgstr "Tak ada judul"
+msgstr "%s Tanpa Judul"
 
-#: ../src/label.c:719
-#: ../src/ui.c:420
+#. Translators: A rectangular label dimensions. first param is numeric value
+#. of width, second is numeric value of height and third is unit. Example:
+#. "60 × 22.5 mm (width / height)"
+#. Translators: A elliptical label dimensions. first param is numeric value of
+#. width, second is numeric value of height and third is unit. Example:
+#. "60 × 22.5 mm (width / height)"
+#: ../src/label.c:751 ../src/label.c:776
+#, fuzzy, c-format
+msgid "%s × %s %s (width × height)"
+msgstr "U+%s, %s: %s"
+
+#. Translators: A rounded rectangular label dimensions. first param is numeric
+#. value of width, second is numeric value of height, third is numeric value
+#. of round and fourth is unit. Example:
+#. "50 × 30 / 1.5 mm (width × height / round)"
+#: ../src/label.c:758
+#, c-format
+msgid "%s × %s / %s %s (width × height / round)"
+msgstr "%s × %s / %s %s (lebar × tinggi / lengkung)"
+
+#. Translators: A round label dimensions. first param is numeric value of
+#. diameter and second is unit. Example:
+#. "120.5 mm (diameter)"
+#: ../src/label.c:788
+#, fuzzy, c-format
+#| msgid "diameter"
+msgid "%s %s (diameter)"
+msgstr "%s %s"
+
+#. Translators: A CD/DVD label dimensions. first param is numeric value of
+#. diameter, second is numeric value of hole and third is unit. Example:
+#. "120.5 / 30 mm (diameter / hole)"
+#: ../src/label.c:806
+#, fuzzy, c-format
+msgid "%s / %s %s (diameter / hole)"
+msgstr "U+%s, %s: %s"
+
+#: ../src/label.c:835 ../src/ui.c:420
+#, fuzzy
 msgid "Merge properties"
-msgstr ""
+msgstr "_Gabung"
 
-#: ../src/label.c:1215
-#: ../src/ui.c:213
+#: ../src/label.c:1331 ../src/ui.c:213
 #, fuzzy
 msgid "Delete"
 msgstr "Hapus"
 
-#: ../src/label.c:1248
-#: ../src/ui.c:322
+#: ../src/label.c:1366 ../src/ui.c:322
+#, fuzzy
 msgid "Bring to front"
-msgstr ""
+msgstr "Depan"
 
-#: ../src/label.c:1284
-#: ../src/ui.c:329
+#: ../src/label.c:1402 ../src/ui.c:329
+#, fuzzy
 msgid "Send to back"
 msgstr ""
+"Satu-satunya tujuan survey ini adalah untuk memahami lebih baik basis "
+"pengguna kami.\n"
+"Alamat surel Anda akan dipakai untuk mengidentifikasi Anda secara unik "
+"sebagai seorang pengguna Glade dan mengirimi Anda kembali token modifikasi "
+"bila Anda ingin mengubah sesuatu atau menambahkan komentar ekstra.\n"
+"Hanya statistik yang dikompail dari seluruh dataset yang akan dibagikan "
+"secara publik.\n"
+"Data individu akan disimpan dalam suatu basis data pribadi dan tidak akan "
+"dibagikan ke publik atau pihak ketiga manapun."
 
-#: ../src/label.c:1325
+#: ../src/label.c:1443
 #, fuzzy
 msgid "Rotate"
-msgstr "Puta_r:"
+msgstr "Putar berlawanan arah jarum jam 90°"
 
-#: ../src/label.c:1360
-#: ../src/ui.c:336
+#: ../src/label.c:1480 ../src/ui.c:336
 #, fuzzy
 msgid "Rotate left"
-msgstr "Putar _Kiri"
+msgstr "Putar 180°"
 
-#: ../src/label.c:1393
-#: ../src/ui.c:343
+#: ../src/label.c:1515 ../src/ui.c:343
 #, fuzzy
 msgid "Rotate right"
-msgstr "_Putar Kanan"
+msgstr "Putar 180°"
 
-#: ../src/label.c:1428
-#: ../src/ui.c:350
+#: ../src/label.c:1552 ../src/ui.c:350
 #, fuzzy
 msgid "Flip horizontally"
-msgstr "Balikkan Secara _Horisontal"
+msgstr "Homogen secara horisontal"
 
-#: ../src/label.c:1463
-#: ../src/ui.c:357
+#: ../src/label.c:1589 ../src/ui.c:357
+#, fuzzy
 msgid "Flip vertically"
-msgstr ""
+msgstr "Homogen secara vertikal"
 
-#: ../src/label.c:1503
-#: ../src/ui.c:364
+#: ../src/label.c:1631 ../src/ui.c:364
 #, fuzzy
 msgid "Align left"
-msgstr "Rata kiri"
+msgstr "Ratakan dengan"
 
-#: ../src/label.c:1560
-#: ../src/ui.c:378
+#: ../src/label.c:1688 ../src/ui.c:378
 #, fuzzy
 msgid "Align right"
-msgstr "Rata kanan"
+msgstr "Ratakan dengan"
 
-#: ../src/label.c:1621
+#: ../src/label.c:1749
+#, fuzzy
 msgid "Align horizontal center"
-msgstr ""
+msgstr "Rataan"
 
-#: ../src/label.c:1697
+#: ../src/label.c:1825
+#, fuzzy
 msgid "Align tops"
-msgstr ""
+msgstr "Ratakan dengan"
 
-#: ../src/label.c:1754
+#: ../src/label.c:1882
+#, fuzzy
 msgid "Align bottoms"
-msgstr ""
+msgstr "Ratakan dengan"
 
-#: ../src/label.c:1815
+#: ../src/label.c:1943
+#, fuzzy
 msgid "Align vertical center"
-msgstr ""
+msgstr "Rataan"
 
-#: ../src/label.c:1893
-#: ../src/ui.c:406
+#: ../src/label.c:2021 ../src/ui.c:406
+#, fuzzy
 msgid "Center horizontally"
-msgstr ""
+msgstr "Tengah"
 
-#: ../src/label.c:1940
-#: ../src/ui.c:413
+#: ../src/label.c:2068 ../src/ui.c:413
+#, fuzzy
 msgid "Center vertically"
-msgstr ""
+msgstr "Tengah"
 
-#: ../src/label.c:2628
-#: ../src/label.c:2670
-#: ../src/label.c:2696
-#: ../src/ui.c:206
+#: ../src/label.c:2789 ../src/label.c:2831 ../src/label.c:2857 ../src/ui.c:206
 #, fuzzy
 msgid "Paste"
 msgstr "Tempel"
 
 #: ../src/label-ellipse.c:160
+#, fuzzy
 msgid "Create ellipse object"
-msgstr ""
+msgstr "Tidak dapat membuat objek kalender: "
 
-#: ../src/label-image.c:200
-#: ../src/ui.c:310
+#: ../src/label-image.c:199 ../src/ui.c:310
+#, fuzzy
 msgid "Create image object"
-msgstr ""
+msgstr "Tidak dapat membuat objek kalender: "
 
-#: ../src/label-image.c:333
-#: ../src/label-image.c:474
+#: ../src/label-image.c:332 ../src/label-image.c:473
 #, fuzzy
 msgid "Set image"
-msgstr "Tetapkan Ukuran Gambar"
+msgstr "Gambar:"
 
-#: ../src/label-line.c:147
-#: ../src/ui.c:296
+#: ../src/label-line.c:147 ../src/ui.c:296
+#, fuzzy
 msgid "Create line object"
-msgstr ""
+msgstr "Tidak dapat membuat objek kalender: "
 
-#: ../src/label-object.c:394
-#: ../src/label-object.c:428
+#: ../src/label-object.c:392 ../src/label-object.c:423
 #, fuzzy
 msgid "Move"
 msgstr "_Pindahkan"
 
-#: ../src/label-object.c:479
+#: ../src/label-object.c:474
 #, fuzzy
 msgid "Resize"
-msgstr "Ubah Uku_ran"
+msgstr "Ganti ukuran"
 
-#: ../src/label-object.c:1217
+#: ../src/label-object.c:1258
+#, fuzzy
 msgid "Shadow state"
-msgstr ""
+msgstr "Bayangan panah"
 
-#: ../src/label-object.c:1260
+#: ../src/label-object.c:1301
+#, fuzzy
 msgid "Shadow offset"
-msgstr ""
+msgstr "Letak scroll"
 
-#: ../src/label-object.c:1308
+#: ../src/label-object.c:1349
+#, fuzzy
 msgid "Shadow color"
-msgstr ""
+msgstr "Bayangan panah"
 
-#: ../src/label-object.c:1351
+#: ../src/label-object.c:1392
+#, fuzzy
 msgid "Shadow opacity"
-msgstr ""
+msgstr "Bayangan panah"
 
-#: ../src/label-text.c:281
-#: ../src/ui.c:282
+#. Translators: Button label to choose different template
+#: ../src/label-properties-dialog.c:163
+#, fuzzy
+msgid "Choose _other…"
+msgstr "Lainnya…"
+
+#: ../src/label-properties-dialog.c:164 ../src/ui.c:162
+msgid "_Close"
+msgstr "_Tutup"
+
+#. Translators: first param is numeric value of horizontal margine, second
+#. is numeric value of vertical margine and third is unit. Example:
+#. "10 / 12.5 mm (horizontal / vertical)"
+#: ../src/label-properties-dialog.c:282
+#, fuzzy, c-format
+msgid "%s / %s %s (horizontal / vertical)"
+msgstr "U+%s, %s: %s"
+
+#: ../src/label-text.c:293 ../src/ui.c:282
+#, fuzzy
 msgid "Create text object"
-msgstr ""
+msgstr "Tidak dapat membuat objek kalender: "
 
-#: ../src/label-text.c:453
+#: ../src/label-text.c:467
+#, fuzzy
 msgid "Typing"
-msgstr ""
+msgstr "Mengetik"
 
-#: ../src/label-text.c:587
-#: ../data/ui/property-bar.ui.h:1
+#: ../src/label-text.c:601 ../data/ui/property-bar.ui.h:1
 #, fuzzy
 msgid "Font family"
-msgstr "Keluarga _Fonta"
+msgstr "Keluarga fonta"
 
-#: ../src/label-text.c:625
-#: ../data/ui/property-bar.ui.h:2
+#: ../src/label-text.c:639 ../data/ui/property-bar.ui.h:2
 #, fuzzy
 msgid "Font size"
-msgstr "Reset ukuran fonta"
+msgstr "Ukuran fonta"
 
-#: ../src/label-text.c:658
+#: ../src/label-text.c:672
+#, fuzzy
 msgid "Font weight"
-msgstr ""
+msgstr "Tebal fonta"
 
-#: ../src/label-text.c:691
-#: ../data/ui/property-bar.ui.h:4
+#: ../src/label-text.c:705 ../data/ui/property-bar.ui.h:4
 msgid "Italic"
 msgstr "Miring"
 
-#: ../src/label-text.c:724
+#: ../src/label-text.c:738
+#, fuzzy
 msgid "Align text"
-msgstr ""
+msgstr "Ratakan dengan"
 
-#: ../src/label-text.c:757
+#: ../src/label-text.c:771
+#, fuzzy
+msgid "Vertically align text"
+msgstr "Homogen secara vertikal"
+
+#: ../src/label-text.c:804
 #, fuzzy
 msgid "Line spacing"
-msgstr "Jarak baris:"
+msgstr "Jarak Antara:"
 
-#: ../src/label-text.c:790
-#: ../data/ui/property-bar.ui.h:8
+#: ../src/label-text.c:837 ../data/ui/property-bar.ui.h:11
 #, fuzzy
 msgid "Text color"
-msgstr "Warna teks"
+msgstr "Warna garis bawah bagi teks ini"
 
-#: ../src/label-text.c:934
+#: ../src/label-text.c:997
+#, fuzzy
 msgid "Auto shrink"
-msgstr ""
+msgstr "Dikecilkan"
 
-#: ../src/media-select.c:358
-#: ../src/media-select.c:361
-#: ../src/media-select.c:506
-#: ../src/media-select.c:723
+#: ../src/media-select.c:358 ../src/media-select.c:361
+#: ../src/media-select.c:506 ../src/media-select.c:723
 #, fuzzy
 msgctxt "Brand"
 msgid "Any"
-msgstr "Sebarang Kolom"
+msgstr "Apapun"
 
-#: ../src/media-select.c:365
-#: ../src/media-select.c:893
+#: ../src/media-select.c:365 ../src/media-select.c:893
 #, fuzzy
 msgctxt "Page size"
 msgid "Any"
-msgstr "Sebarang Kolom"
+msgstr "Apapun"
 
-#: ../src/media-select.c:372
-#: ../src/media-select.c:375
+#: ../src/media-select.c:372 ../src/media-select.c:375
 #: ../src/media-select.c:902
 #, fuzzy
 msgctxt "Category"
 msgid "Any"
-msgstr "Sebarang Kolom"
+msgstr "Apapun"
 
 #: ../src/media-select.c:648
 #, fuzzy, c-format
 msgid "Delete template \"%s\"?"
-msgstr "_Hapus Templat..."
+msgstr "Hapus %s"
 
 #: ../src/media-select.c:650
+#, fuzzy
 msgid "This action will permanently delete this template."
-msgstr ""
+msgstr "Jika dihapus, maka akan dihapus permanen."
 
 #: ../src/media-select.c:990
+#, fuzzy
 msgid "No recent templates found."
-msgstr ""
+msgstr "Tak ada karakter baru-baru ini yang ditemukan"
 
 #: ../src/media-select.c:992
 msgid "Try selecting a template in the \"Search all\" tab."
-msgstr ""
+msgstr "Cobalah memilih suatu templat dalam tab \"Cari semua\"."
 
 #. Translators: "No match" means that for the given template search criteria, there
 #. * were no matches found.
 #: ../src/media-select.c:1083
+#, fuzzy
 msgid "No match."
-msgstr ""
+msgstr "_Cocok huruf besar kecil"
 
 #: ../src/media-select.c:1085
 msgid "Try selecting a different brand, page size or category."
-msgstr ""
+msgstr "Cobalah memilih kategori, ukuran halaman, atau merk berbeda."
 
 #: ../src/media-select.c:1179
+#, fuzzy
 msgid "No custom templates found."
-msgstr ""
+msgstr "Templat"
 
 #: ../src/media-select.c:1181
-msgid "You may create new templates or try searching for pre-defined templates in the \"Search all\" tab."
+msgid ""
+"You may create new templates or try searching for pre-defined templates in "
+"the \"Search all\" tab."
 msgstr ""
+"Anda dapat membuat templat baru atau mencoba mencari templat terpradefinisi "
+"dalam tab \"Cari semua\"."
 
 #. Translators: "None" here means that no document-merge source or
 #. * method has been selected.
-#: ../src/merge.c:171
-#: ../src/merge.c:212
-#: ../src/merge.c:376
-#: ../src/merge.c:379
+#: ../src/merge.c:171 ../src/merge.c:212 ../src/merge.c:376 ../src/merge.c:379
 #, fuzzy
 msgid "None"
-msgstr "Tak ada"
+msgstr "Tak Ada"
 
 #: ../src/merge-init.c:57
 msgid "Text: Comma Separated Values (CSV)"
-msgstr ""
+msgstr "Teks: Comma Separated Values (CSV)"
 
 #: ../src/merge-init.c:64
 msgid "Text: Comma Separated Values (CSV) with keys on line 1"
-msgstr ""
+msgstr "Teks: Comma Separated Values (CSV) dengan kunci pada baris 1"
 
 #: ../src/merge-init.c:72
 msgid "Text: Tab Separated Values (TSV)"
-msgstr ""
+msgstr "Teks: Tab Separated Values (TSV)"
 
 #: ../src/merge-init.c:79
 msgid "Text: Tab Separated Values (TSV) with keys on line 1"
-msgstr ""
+msgstr "Teks: Tab Separated Values (TSV) dengan kunci pada baris 1"
 
 #: ../src/merge-init.c:87
 msgid "Text: Colon separated values"
-msgstr ""
+msgstr "Teks: Nilai dipisah titik dua"
 
 #: ../src/merge-init.c:94
 msgid "Text: Colon separated values with keys on line 1"
-msgstr ""
+msgstr "Teks: Nilai dipisah titik dua dengan kunci pada baris 1"
 
 #: ../src/merge-init.c:102
 msgid "Text: Semicolon separated values"
-msgstr ""
+msgstr "Teks: Nilai dipisah titik koma"
 
 #: ../src/merge-init.c:109
 msgid "Text: Semicolon separated values with keys on line 1"
-msgstr ""
+msgstr "Teks: Nilai dipisah titik koma dengan kunci pada baris 1"
 
 #: ../src/merge-init.c:119
+#, fuzzy
 msgid "Evolution Addressbook"
-msgstr ""
+msgstr "Server Data Evolution"
 
 #: ../src/merge-init.c:125
 #, fuzzy
 msgid "VCards"
-msgstr "vCard Ganda"
+msgstr ""
+"search_contacts lengkap tak disimpan dalam singgahan. vcard tak bisa "
+"dikembalikan."
 
 #: ../src/merge-properties-dialog.c:280
+#, fuzzy
 msgid "Merge Properties"
-msgstr ""
+msgstr "_Gabung"
 
-#: ../src/merge-properties-dialog.c:304
-#: ../src/merge-properties-dialog.c:420
+#: ../src/merge-properties-dialog.c:304 ../src/merge-properties-dialog.c:420
+#, fuzzy
 msgid "Select merge-database source"
-msgstr ""
+msgstr "Pilih dari basis data…"
 
-#: ../src/merge-properties-dialog.c:315
-#: ../src/merge-properties-dialog.c:446
+#: ../src/merge-properties-dialog.c:315 ../src/merge-properties-dialog.c:446
+#, fuzzy
 msgid "N/A"
-msgstr ""
+msgstr "Area Kerja %d%n"
 
 #: ../src/merge-properties-dialog.c:341
 #, fuzzy
@@ -1155,11 +1237,11 @@ msgid "Select"
 msgstr "Pilih"
 
 #: ../src/merge-properties-dialog.c:348
+#, fuzzy
 msgid "Record/Field"
-msgstr ""
+msgstr "Rekam"
 
-#: ../src/merge-properties-dialog.c:356
-#: ../data/ui/object-editor.ui.h:23
+#: ../src/merge-properties-dialog.c:356 ../data/ui/object-editor.ui.h:24
 #, fuzzy
 msgid "Data"
 msgstr "Data"
@@ -1174,111 +1256,121 @@ msgid "Fixed"
 msgstr "Tetap"
 
 #. Translators: "Up" refers to the direction towards the top of a label.
-#: ../src/mini-preview.c:1054
+#: ../src/mini-preview.c:1051
 #, fuzzy
 msgid "Up"
 msgstr "Naik"
 
-#: ../src/new-label-dialog.c:203
+#: ../src/new-label-dialog.c:214
+#, fuzzy
+msgctxt "Title of dialog page to select a stationary product"
 msgid "Select Product"
-msgstr ""
+msgstr "Kunci Produk"
 
-#: ../src/new-label-dialog.c:215
+#: ../src/new-label-dialog.c:227 ../data/ui/new-label-dialog.ui.h:3
+#, fuzzy
 msgid "Choose Orientation"
-msgstr ""
+msgstr "Orientasi"
 
-#: ../src/new-label-dialog.c:229
+#: ../src/new-label-dialog.c:242
 #, fuzzy
 msgid "Review"
-msgstr "Tinjau"
+msgstr "Ulasan"
 
-#: ../src/object-editor-bc-page.c:97
-#: ../src/object-editor-shadow-page.c:93
-#: ../src/object-editor-text-page.c:97
-#: ../src/prefs-dialog.c:335
-#: ../src/ui-property-bar.c:277
+#: ../src/object-editor-bc-page.c:97 ../src/object-editor-shadow-page.c:93
+#: ../src/object-editor-text-page.c:102 ../src/prefs-dialog.c:335
+#: ../src/ui-property-bar.c:289
 #, fuzzy
 msgid "Default"
-msgstr "Default"
+msgstr "Baku"
 
-#: ../src/object-editor.c:161
-#: ../src/object-editor.c:470
+#: ../src/object-editor.c:161 ../src/object-editor.c:472
+#, fuzzy
 msgid "Object properties"
-msgstr ""
+msgstr "_Properti:"
 
 #: ../src/object-editor.c:314
+#, fuzzy
 msgid "Box object properties"
-msgstr ""
+msgstr "Properti dan Pembuatan Box"
 
 #: ../src/object-editor.c:333
+#, fuzzy
 msgid "Ellipse object properties"
-msgstr ""
+msgstr "_Properti:"
 
 #: ../src/object-editor.c:352
+#, fuzzy
 msgid "Line object properties"
-msgstr ""
+msgstr "_Properti:"
 
 #: ../src/object-editor.c:369
+#, fuzzy
 msgid "Image object properties"
-msgstr ""
+msgstr "_Properti:"
 
 #: ../src/object-editor.c:386
+#, fuzzy
 msgid "Text object properties"
-msgstr ""
+msgstr "_Properti:"
 
 #: ../src/object-editor.c:408
+#, fuzzy
 msgid "Barcode object properties"
-msgstr ""
+msgstr "_Properti:"
 
 #: ../src/object-editor-edit-page.c:76
+#, fuzzy
 msgid "Insert merge field"
-msgstr ""
+msgstr "_Gabung"
 
-#: ../src/object-editor-fill-page.c:79
-#: ../src/prefs-dialog.c:341
-#: ../src/ui-property-bar.c:287
+#: ../src/object-editor-fill-page.c:79 ../src/prefs-dialog.c:341
+#: ../src/ui-property-bar.c:299
+#, fuzzy
 msgid "No Fill"
-msgstr ""
+msgstr "Isi"
 
 #: ../src/object-editor-image-page.c:302
 msgid "All Files"
 msgstr "Semua Berkas"
 
 #: ../src/object-editor-image-page.c:307
+#, fuzzy
 msgid "All Images"
-msgstr ""
+msgstr "Tampilkan gambar pada tombol"
 
 #: ../src/object-editor-image-page.c:323
 #, c-format
 msgid "%s (*.%s)"
 msgstr "%s (*.%s)"
 
-#: ../src/object-editor-line-page.c:79
-#: ../src/prefs-dialog.c:338
-#: ../src/ui-property-bar.c:297
+#: ../src/object-editor-line-page.c:79 ../src/prefs-dialog.c:338
+#: ../src/ui-property-bar.c:309
+#, fuzzy
 msgid "No Line"
-msgstr ""
+msgstr "potong baris"
 
 #: ../src/object-editor-size-page.c:89
+#, fuzzy
 msgid "Lock aspect ratio."
-msgstr ""
+msgstr "Rasio Aspek"
 
-#: ../src/prefs-dialog.c:168
-#: ../data/ui/prefs-dialog.ui.h:1
+#: ../src/prefs-dialog.c:168 ../data/ui/prefs-dialog.ui.h:1
+#, fuzzy
 msgid "gLabels Preferences"
-msgstr ""
+msgstr "Preferensi"
 
 #. TODO: Is this the actual part #?
-#: ../src/print-op.c:205
-#: ../src/print-op-dialog.c:215
+#: ../src/print-op.c:205 ../src/print-op-dialog.c:215
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:2
-#: ../templates/misc-iso-templates.xml.h:26
+#: ../templates/misc-iso-templates.xml.h:28
 msgid "Labels"
 msgstr "Label"
 
 #: ../src/template-designer.c:429
+#, fuzzy
 msgid "New gLabels Template"
-msgstr ""
+msgstr "Templat GladeWidget sebagai basis widget baru"
 
 #: ../src/template-designer.c:487
 #, fuzzy
@@ -1286,33 +1378,40 @@ msgid "Welcome"
 msgstr "Selamat Datang"
 
 #: ../src/template-designer.c:526
+#, fuzzy
 msgid "Name and Description"
 msgstr ""
+"Elemen <%s> tidak diperbolehkan berada elemen name/author/date/description"
 
 #: ../src/template-designer.c:575
+#, fuzzy
 msgid "Page Size"
-msgstr ""
+msgstr "Ukuran Halaman"
 
 #: ../src/template-designer.c:642
+#, fuzzy
 msgid "Label or Card Shape"
-msgstr ""
+msgstr "Kartu SIM tak dipasang"
 
-#: ../src/template-designer.c:689
-#: ../src/template-designer.c:790
+#: ../src/template-designer.c:689 ../src/template-designer.c:790
+#, fuzzy
 msgid "Label or Card Size"
-msgstr ""
+msgstr "Gunakan ukuran ini pada label"
 
 #: ../src/template-designer.c:873
+#, fuzzy
 msgid "Label Size (round)"
-msgstr ""
+msgstr "Gunakan ukuran ini pada label"
 
 #: ../src/template-designer.c:954
+#, fuzzy
 msgid "Label Size (CD/DVD)"
-msgstr ""
+msgstr "CD/DVD"
 
 #: ../src/template-designer.c:1045
+#, fuzzy
 msgid "Number of Layouts"
-msgstr ""
+msgstr "Angka"
 
 #: ../src/template-designer.c:1113
 #, fuzzy
@@ -1320,16 +1419,18 @@ msgid "Layout(s)"
 msgstr "Tata Letak"
 
 #: ../src/template-designer.c:1218
+#, fuzzy
 msgid "Design Completed"
-msgstr ""
+msgstr "Tilikan Rancangan"
 
 #: ../src/template-designer.c:1246
+#, fuzzy
 msgid "Edit gLabels Template"
-msgstr ""
+msgstr "_Sunting"
 
 #: ../src/template-designer.c:1549
 msgid "Brand and part# match an existing template!"
-msgstr ""
+msgstr "Merk dan nomor suku cocok dengan templat yang ada!"
 
 #. Menu entries.
 #: ../src/ui.c:91
@@ -1339,7 +1440,7 @@ msgstr "_Berkas"
 #: ../src/ui.c:92
 #, fuzzy
 msgid "Open Recent _Files"
-msgstr "Buka berkas-berkas yang baru-baru ini dipakai"
+msgstr "Buka Te_rkini"
 
 #: ../src/ui.c:93
 msgid "_Edit"
@@ -1348,37 +1449,42 @@ msgstr "_Sunting"
 #: ../src/ui.c:94
 #, fuzzy
 msgid "_View"
-msgstr "_Tampilan"
+msgstr "_Tilik"
 
 #: ../src/ui.c:95
+#, fuzzy
 msgid "Customize Main Toolbar"
-msgstr ""
+msgstr "Sesuaikan Sumber Daya"
 
 #: ../src/ui.c:96
+#, fuzzy
 msgid "Customize Drawing Toolbar"
-msgstr ""
+msgstr "Sesuaikan Sumber Daya"
 
 #: ../src/ui.c:97
+#, fuzzy
 msgid "Customize Properties Toolbar"
-msgstr ""
+msgstr "Sesuaikan Sumber Daya"
 
 #: ../src/ui.c:98
 #, fuzzy
 msgid "_Objects"
-msgstr "Objek"
+msgstr "Objek:"
 
 #: ../src/ui.c:99
 #, fuzzy
 msgid "_Create"
-msgstr "Buat %s"
+msgstr "Buat"
 
 #: ../src/ui.c:100
+#, fuzzy
 msgid "_Order"
-msgstr ""
+msgstr "Urutan pengurutan dari butir yang ditampilkan"
 
 #: ../src/ui.c:101
+#, fuzzy
 msgid "_Rotate/Flip"
-msgstr ""
+msgstr "Sisi Pendek (Putar)"
 
 #: ../src/ui.c:102
 msgid "_Alignment"
@@ -1393,18 +1499,19 @@ msgid "_Help"
 msgstr "Ba_ntuan"
 
 #. Popup entries.
-#: ../src/ui.c:107
-#: ../src/ui.c:108
+#: ../src/ui.c:107 ../src/ui.c:108
+#, fuzzy
 msgid "Context Menu"
-msgstr ""
+msgstr "Konteks"
 
 #: ../src/ui.c:113
 msgid "_New"
 msgstr "Bar_u"
 
 #: ../src/ui.c:115
+#, fuzzy
 msgid "Create a new file"
-msgstr ""
+msgstr "Membuat berkas baru '%s' dari palet "
 
 #: ../src/ui.c:120
 msgid "_Open..."
@@ -1427,8 +1534,9 @@ msgid "Save _As..."
 msgstr "Simpan Seb_agai..."
 
 #: ../src/ui.c:136
+#, fuzzy
 msgid "Save the current file to a different name"
-msgstr ""
+msgstr "Simpan projek kini dengan nama yang berbeda"
 
 #: ../src/ui.c:141
 msgid "_Print..."
@@ -1443,25 +1551,24 @@ msgid "Properties..."
 msgstr "Properti..."
 
 #: ../src/ui.c:150
+#, fuzzy
 msgid "Modify document properties"
-msgstr ""
+msgstr "Properti dokumen %s"
 
 #: ../src/ui.c:155
+#, fuzzy
 msgid "Template _Designer..."
-msgstr ""
+msgstr "Perancang Antar Muka"
 
 #: ../src/ui.c:157
+#, fuzzy
 msgid "Create a custom template"
-msgstr ""
-
-#: ../src/ui.c:162
-msgid "_Close"
-msgstr "_Tutup"
+msgstr "Tak Jadi Memb_uat dari Palet"
 
 #: ../src/ui.c:164
 #, fuzzy
 msgid "Close the current file"
-msgstr "Menutup berkas yang aktif saat ini"
+msgstr "Tutup projek kini"
 
 #: ../src/ui.c:169
 msgid "_Quit"
@@ -1471,16 +1578,12 @@ msgstr "_Keluar"
 msgid "Quit the program"
 msgstr "Keluar dari program"
 
-#: ../src/ui.c:178
-#: ../src/ui.c:180
-#: ../src/ui.c:976
+#: ../src/ui.c:178 ../src/ui.c:180 ../src/ui.c:976
 #, fuzzy
 msgid "Undo"
 msgstr "Batalkan"
 
-#: ../src/ui.c:185
-#: ../src/ui.c:187
-#: ../src/ui.c:983
+#: ../src/ui.c:185 ../src/ui.c:187 ../src/ui.c:983
 #, fuzzy
 msgid "Redo"
 msgstr "Jadi Lagi"
@@ -1509,24 +1612,28 @@ msgid "Paste the clipboard"
 msgstr "Tempel isi clipboard"
 
 #: ../src/ui.c:215
+#, fuzzy
 msgid "Delete the selected objects"
-msgstr ""
+msgstr "Hapus akun pengguna yang dipilih"
 
 #: ../src/ui.c:220
 msgid "Select All"
 msgstr "Pilih Semua"
 
 #: ../src/ui.c:222
+#, fuzzy
 msgid "Select all objects"
-msgstr ""
+msgstr "Pilih _Semua"
 
 #: ../src/ui.c:227
+#, fuzzy
 msgid "Un-select All"
-msgstr ""
+msgstr "Pilih _Semua"
 
 #: ../src/ui.c:229
+#, fuzzy
 msgid "Remove all selections"
-msgstr ""
+msgstr "Menimpanya akan membuang semua berkas di dalam folder tersebut."
 
 #: ../src/ui.c:234
 msgid "Preferences"
@@ -1535,51 +1642,57 @@ msgstr "Preferensi"
 #: ../src/ui.c:236
 #, fuzzy
 msgid "Configure the application"
-msgstr "Mengonfigurasi aplikasi"
+msgstr "Atur konfigurasi sumber masukan"
 
 #: ../src/ui.c:243
 msgid "Zoom in"
 msgstr "Perbesar"
 
 #: ../src/ui.c:245
+#, fuzzy
 msgid "Increase magnification"
-msgstr ""
+msgstr "Per_besaran:"
 
 #: ../src/ui.c:250
 msgid "Zoom out"
 msgstr "Perkecil"
 
 #: ../src/ui.c:252
+#, fuzzy
 msgid "Decrease magnification"
-msgstr ""
+msgstr "Per_besaran:"
 
 #: ../src/ui.c:257
+#, fuzzy
 msgid "Zoom 1 to 1"
-msgstr ""
+msgstr "1 (Bawaan)"
 
 #: ../src/ui.c:259
+#, fuzzy
 msgid "Restore scale to 100%"
-msgstr ""
+msgstr "K_embalikan"
 
 #: ../src/ui.c:264
+#, fuzzy
 msgid "Zoom to fit"
-msgstr ""
+msgstr "Perbesar"
 
 #: ../src/ui.c:266
+#, fuzzy
 msgid "Set scale to fit window"
-msgstr ""
+msgstr "Set skala fonta"
 
 #: ../src/ui.c:273
+#, fuzzy
 msgid "Select Mode"
-msgstr ""
+msgstr "mode"
 
 #: ../src/ui.c:275
+#, fuzzy
 msgid "Select, move and modify objects"
-msgstr ""
+msgstr "Pilih Tujuan Pindah"
 
-#: ../src/ui.c:280
-#: ../src/view-text.c:94
-#: ../data/ui/object-editor.ui.h:2
+#: ../src/ui.c:280 ../src/view-text.c:94 ../data/ui/object-editor.ui.h:2
 #: ../data/ui/prefs-dialog.ui.h:17
 msgid "Text"
 msgstr "Teks"
@@ -1590,72 +1703,80 @@ msgid "Box"
 msgstr "Kotak"
 
 #: ../src/ui.c:289
+#, fuzzy
 msgid "Create box/rectangle object"
-msgstr ""
+msgstr "Buat box baru"
 
-#: ../src/ui.c:294
-#: ../data/ui/object-editor.ui.h:16
+#: ../src/ui.c:294 ../data/ui/object-editor.ui.h:17
 #: ../data/ui/prefs-dialog.ui.h:20
 #, fuzzy
 msgid "Line"
-msgstr "Baris"
+msgstr "Minimum Anak Per Baris"
 
 #: ../src/ui.c:301
 msgid "Ellipse"
-msgstr ""
+msgstr "Elips"
 
 #: ../src/ui.c:303
+#, fuzzy
 msgid "Create ellipse/circle object"
-msgstr ""
+msgstr "Tidak dapat membuat objek kalender: "
 
-#: ../src/ui.c:308
-#: ../data/ui/object-editor.ui.h:19
+#: ../src/ui.c:308 ../data/ui/object-editor.ui.h:20
 msgid "Image"
 msgstr "Gambar"
 
 #: ../src/ui.c:315
 msgid "Barcode"
-msgstr ""
+msgstr "Barcode"
 
 #: ../src/ui.c:324
+#, fuzzy
 msgid "Raise object to top"
-msgstr ""
+msgstr "Puncak"
 
 #: ../src/ui.c:331
+#, fuzzy
 msgid "Lower object to bottom"
-msgstr ""
+msgstr "bawah"
 
 #: ../src/ui.c:338
 msgid "Rotate object 90 degrees counter-clockwise"
-msgstr ""
+msgstr "Putar objek 90 derajat berlawanan arah jarum jam"
 
 #: ../src/ui.c:345
+#, fuzzy
 msgid "Rotate object 90 degrees clockwise"
-msgstr ""
+msgstr "Putar searah jarum jam 90°"
 
 #: ../src/ui.c:352
+#, fuzzy
 msgid "Flip object horizontally"
-msgstr ""
+msgstr "Homogen secara horisontal"
 
 #: ../src/ui.c:359
+#, fuzzy
 msgid "Flip object vertically"
-msgstr ""
+msgstr "Homogen secara vertikal"
 
 #: ../src/ui.c:366
+#, fuzzy
 msgid "Align objects to left edges"
-msgstr ""
+msgstr "Ruang tambahan di kiri dan kanan tepi menu"
 
 #: ../src/ui.c:371
+#, fuzzy
 msgid "Align center"
-msgstr ""
+msgstr "Tengah"
 
 #: ../src/ui.c:373
 msgid "Align objects to horizontal centers"
-msgstr ""
+msgstr "Ratakan objek ke tengah horisontal"
 
 #: ../src/ui.c:380
+#, fuzzy
 msgid "Align objects to right edges"
-msgstr ""
+msgstr "Ruang tambahan di kiri dan kanan tepi menu"
 
 #: ../src/ui.c:385
 msgid "Align top"
@@ -1663,15 +1784,16 @@ msgstr "Rata atas"
 
 #: ../src/ui.c:387
 msgid "Align objects to top edges"
-msgstr ""
+msgstr "Ratakan objek ke tepi atas"
 
 #: ../src/ui.c:392
+#, fuzzy
 msgid "Align middle"
-msgstr ""
+msgstr "Rataan"
 
 #: ../src/ui.c:394
 msgid "Align objects to vertical centers"
-msgstr ""
+msgstr "Ratakan objek ke tengah vertikal"
 
 #: ../src/ui.c:399
 msgid "Align bottom"
@@ -1679,44 +1801,47 @@ msgstr "Rata bawah"
 
 #: ../src/ui.c:401
 msgid "Align objects to bottom edges"
-msgstr ""
+msgstr "Ratakan objek ke tepi bawah"
 
 #: ../src/ui.c:408
 msgid "Center objects to horizontal label center"
-msgstr ""
+msgstr "Tengahkan objek ke pusat label horisontal"
 
 #: ../src/ui.c:415
 msgid "Center objects to vertical label center"
-msgstr ""
+msgstr "Tengahkan objek ke pusat label vertikal"
 
 #: ../src/ui.c:422
+#, fuzzy
 msgid "Edit merge properties"
-msgstr ""
+msgstr "Sunting properti projek"
 
 #: ../src/ui.c:429
 msgid "Contents"
 msgstr "Isi"
 
 #: ../src/ui.c:431
+#, fuzzy
 msgid "Open glabels manual"
-msgstr ""
+msgstr "Manual"
 
 #: ../src/ui.c:436
 msgid "About..."
 msgstr "Tentang..."
 
-#: ../src/ui.c:438
-#: ../src/ui-commands.c:1198
+#: ../src/ui.c:438 ../src/ui-commands.c:1198
+#, fuzzy
 msgid "About glabels"
-msgstr ""
+msgstr "Tent_ang"
 
 #: ../src/ui.c:448
+#, fuzzy
 msgid "Property toolbar"
-msgstr ""
+msgstr "Bilah alat"
 
 #: ../src/ui.c:450
 msgid "Change the visibility of the property toolbar in the current window"
-msgstr ""
+msgstr "Ubah kemunculan bilah alat properti dalam jendela saat ini"
 
 #: ../src/ui.c:456
 msgid "Grid"
@@ -1724,16 +1849,16 @@ msgstr "Kisi"
 
 #: ../src/ui.c:458
 msgid "Change the visibility of the grid in the current window"
-msgstr ""
+msgstr "Ubah kenampakan kisi dalam jendela saat ini"
 
 #: ../src/ui.c:464
 #, fuzzy
 msgid "Markup"
-msgstr "Kolom markup"
+msgstr "Markup"
 
 #: ../src/ui.c:466
 msgid "Change the visibility of markup lines in the current window"
-msgstr ""
+msgstr "Ubah kenampakan garis tanda dalam jendela saat ini"
 
 #: ../src/ui.c:477
 msgid "Main toolbar"
@@ -1741,35 +1866,37 @@ msgstr "Bilah alat utama"
 
 #: ../src/ui.c:479
 msgid "Change the visibility of the main toolbar in the current window"
-msgstr ""
+msgstr "Ubah kenampakan bilah alat utama dalam jendela saat ini"
 
 #: ../src/ui.c:485
+#, fuzzy
 msgid "Drawing toolbar"
-msgstr ""
+msgstr "Area Menggambar"
 
 #: ../src/ui.c:487
 msgid "Change the visibility of the drawing toolbar in the current window"
-msgstr ""
+msgstr "Ubah kenampakan bilah alat menggambar dalam jendela saat ini"
 
 #: ../src/ui-commands.c:1135
 msgid "Glabels includes contributions from:"
-msgstr ""
+msgstr "Glabels menyertakan kontribusi dari:"
 
 #: ../src/ui-commands.c:1144
 msgid "See the file AUTHORS for additional credits,"
-msgstr ""
+msgstr "Lihat berkas AUTHORS untuk kredit tambahan,"
 
 #: ../src/ui-commands.c:1145
+#, fuzzy
 msgid "or visit http://glabels.org/"
-msgstr ""
+msgstr "Kunjungi situs web Glade"
 
 #: ../src/ui-commands.c:1162
 msgid "A label and business card creation program.\n"
-msgstr ""
+msgstr "Suatu program pembuatan kartu nama dan label.\n"
 
 #: ../src/ui-commands.c:1166
 msgid "translator-credits"
-msgstr "Andika Triwidada <andika@gmail.com>, 2012"
+msgstr "Andika Triwidada <andika@gmail.com>, 2012, 2016"
 
 #: ../src/ui-commands.c:1169
 msgid ""
@@ -1784,13 +1911,15 @@ msgid ""
 "GNU General Public License for more details.\n"
 msgstr ""
 
-#: ../src/warning-handler.c:69
+#: ../src/warning-handler.c:71
+#, fuzzy
 msgid "gLabels Error!"
-msgstr ""
+msgstr "Galat"
 
 #: ../src/window.c:281
+#, fuzzy
 msgid "(none) - gLabels"
-msgstr ""
+msgstr "(nihil)"
 
 #: ../src/window.c:482
 msgid "(modified)"
@@ -1806,25 +1935,38 @@ msgstr "Lainnya"
 
 #. Create and append a "User defined" entry.
 #: ../libglabels/lgl-db.c:276
+#, fuzzy
 msgid "User defined"
-msgstr ""
+msgstr "Konstanta buatan pengguna harus dimulai dengan huruf besar; '%s' tidak"
 
 #: ../libglabels/lgl-db.c:663
-msgid "Unable to locate paper size definitions.  Libglabels may not be installed correctly!"
+msgid ""
+"Unable to locate paper size definitions.  Libglabels may not be installed "
+"correctly!"
 msgstr ""
+"Tak bisa temukan definisi ukuran kertas. Libglabels mungkin tidak terpasang "
+"dengan benar!"
 
 #: ../libglabels/lgl-db.c:1062
-msgid "Unable to locate category definitions.  Libglabels may not be installed correctly!"
+msgid ""
+"Unable to locate category definitions.  Libglabels may not be installed "
+"correctly!"
 msgstr ""
+"Tak bisa temukan definisi kategori. Libglabel mungkin tak terpasang dengan "
+"benar!"
 
 #: ../libglabels/lgl-db.c:1989
-msgid "Unable to locate any template files.  Libglabels may not be installed correctly!"
+msgid ""
+"Unable to locate any template files.  Libglabels may not be installed "
+"correctly!"
 msgstr ""
+"Tak bisa temukan berkas templat apapun. Libglabels mungkin tak terpasang "
+"dengan benar!"
 
 #: ../libglabels/lgl-db.c:2056
-#, c-format
+#, fuzzy, c-format
 msgid "%s full page label"
-msgstr ""
+msgstr "Gunakan halaman penuh"
 
 #.
 #. * Translators: 1st %d = number of labels across a page,
@@ -1832,20 +1974,18 @@ msgstr ""
 #. *              3rd %d = total number of labels on a page (sheet).
 #.
 #: ../libglabels/lgl-template.c:673
-#, c-format
+#, fuzzy, c-format
 msgid "%d × %d (%d per sheet)"
-msgstr ""
+msgstr "%d x %d"
 
 #. Translators: %d is the total number of labels on a page (sheet).
 #: ../libglabels/lgl-template.c:678
-#, c-format
+#, fuzzy, c-format
 msgid "%d per sheet"
-msgstr ""
+msgstr "Minimum Anak Per Baris"
 
-#: ../libglabels/lgl-template.c:759
-#: ../libglabels/lgl-template.c:767
-#: ../libglabels/lgl-template.c:779
-#: ../libglabels/lgl-template.c:787
+#: ../libglabels/lgl-template.c:759 ../libglabels/lgl-template.c:767
+#: ../libglabels/lgl-template.c:779 ../libglabels/lgl-template.c:787
 msgid "diameter"
 msgstr "diameter"
 
@@ -1853,15 +1993,13 @@ msgstr "diameter"
 #. the CSS2 Specification (Section 4.3.2)
 #. This table must be sorted exactly as the enumerations in lglUnits
 #. [LGL_UNITS_POINT]
-#: ../libglabels/lgl-units.c:65
-#: ../data/ui/object-editor.ui.h:14
+#: ../libglabels/lgl-units.c:65 ../data/ui/object-editor.ui.h:15
 #: ../data/ui/prefs-dialog.ui.h:19
 msgid "points"
 msgstr "point"
 
 #. [LGL_UNITS_INCH]
-#: ../libglabels/lgl-units.c:66
-#: ../data/ui/object-editor.ui.h:27
+#: ../libglabels/lgl-units.c:66 ../data/ui/object-editor.ui.h:28
 #: ../data/ui/template-designer.ui.h:15
 msgid "inches"
 msgstr "inci"
@@ -1889,6 +2027,101 @@ msgstr "pica"
 #. * indent-tabs-mode: nil  -- emacs
 #. * End:                   -- emacs
 #.
+#: ../data/ui/label-properties-dialog.ui.h:1
+#, fuzzy
+#| msgid "Labels"
+msgid "Label"
+msgstr "Label"
+
+#: ../data/ui/label-properties-dialog.ui.h:2
+#: ../data/ui/new-label-dialog.ui.h:15
+msgid "Vendor:"
+msgstr "Vendor:"
+
+#: ../data/ui/label-properties-dialog.ui.h:3
+#: ../data/ui/new-label-dialog.ui.h:14 ../data/ui/template-designer.ui.h:6
+msgid "Part #:"
+msgstr "Bagian #:"
+
+#: ../data/ui/label-properties-dialog.ui.h:4 ../data/ui/new-label-dialog.ui.h:9
+#: ../data/ui/template-designer.ui.h:9
+msgid "Description:"
+msgstr "Deskripsi:"
+
+#: ../data/ui/label-properties-dialog.ui.h:5
+msgid "Dimensions:"
+msgstr "Dimensi:"
+
+#: ../data/ui/label-properties-dialog.ui.h:6
+#, fuzzy
+#| msgid "Medium green"
+msgid "Medium size:"
+msgstr "Sedang"
+
+#: ../data/ui/label-properties-dialog.ui.h:7
+#: ../data/ui/new-label-dialog.ui.h:12
+msgid "Layout:"
+msgstr "Tata Letak:"
+
+#: ../data/ui/label-properties-dialog.ui.h:8
+#, fuzzy
+msgid "Margins:"
+msgstr "Marjin"
+
+#: ../data/ui/label-properties-dialog.ui.h:9
+#: ../data/ui/new-label-dialog.ui.h:13
+msgid "Similar products:"
+msgstr "Produk serupa:"
+
+#: ../data/ui/label-properties-dialog.ui.h:10
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:14
+#, fuzzy
+msgid "Options"
+msgstr "Pilihan"
+
+#: ../data/ui/label-properties-dialog.ui.h:11
+#, fuzzy
+msgid "Orientation:"
+msgstr "Orientasi"
+
+#: ../data/ui/label-properties-dialog.ui.h:12
+#, fuzzy
+#| msgid "Normal"
+msgid "_Normal"
+msgstr "Normal"
+
+#: ../data/ui/label-properties-dialog.ui.h:13
+#, fuzzy
+msgid "_Rotated"
+msgstr "Sudut rotasi label"
+
+#: ../data/ui/media-select.ui.h:1
+msgid "Recent"
+msgstr "Terkini"
+
+#: ../data/ui/media-select.ui.h:2
+#, fuzzy
+msgid "Brand:"
+msgstr "Merek Kamera"
+
+#: ../data/ui/media-select.ui.h:3 ../data/ui/new-label-dialog.ui.h:10
+#: ../data/ui/template-designer.ui.h:12
+#, fuzzy
+msgid "Page size:"
+msgstr "Ukuran Halaman"
+
+#: ../data/ui/media-select.ui.h:4
+msgid "Category:"
+msgstr "Kategori:"
+
+#: ../data/ui/media-select.ui.h:5
+msgid "Search all"
+msgstr "Cari semua"
+
+#: ../data/ui/media-select.ui.h:6
+msgid "Custom"
+msgstr "Gubahan"
+
 #: ../data/ui/merge-properties-dialog.ui.h:1
 msgid "Format:"
 msgstr "Format:"
@@ -1910,84 +2143,53 @@ msgid "Unselect all"
 msgstr "Pilih tak satupun"
 
 #: ../data/ui/merge-properties-dialog.ui.h:6
+#, fuzzy
 msgid "Record selection/preview"
-msgstr ""
-
-#: ../data/ui/media-select.ui.h:1
-msgid "Recent"
-msgstr "Terkini"
-
-#: ../data/ui/media-select.ui.h:2
-msgid "Brand:"
-msgstr ""
-
-#: ../data/ui/media-select.ui.h:3
-#: ../data/ui/new-label-dialog.ui.h:7
-#: ../data/ui/template-designer.ui.h:12
-msgid "Page size:"
-msgstr ""
-
-#: ../data/ui/media-select.ui.h:4
-msgid "Category:"
-msgstr "Kategori:"
-
-#: ../data/ui/media-select.ui.h:5
-msgid "Search all"
-msgstr "Cari semua"
-
-#: ../data/ui/media-select.ui.h:6
-msgid "Custom"
-msgstr "Gubahan"
+msgstr "Pratinjau"
 
 #: ../data/ui/new-label-dialog.ui.h:1
-msgid "Choose label or card product from hundreds of predefined templates or define your own."
-msgstr ""
+#, fuzzy
+msgid "Select Product"
+msgstr "Kunci Produk"
 
 #: ../data/ui/new-label-dialog.ui.h:2
-msgid "Select orientation of label content."
+msgid ""
+"Choose label or card product from hundreds of predefined templates or define "
+"your own."
 msgstr ""
+"Pilih produk kartu atau label dari ratusan templat terpradefinisi atau "
+"definisikan milik Anda."
 
-#: ../data/ui/new-label-dialog.ui.h:3
+#: ../data/ui/new-label-dialog.ui.h:4
+msgid "Select orientation of label content."
+msgstr "Pilih orientasi isi label."
+
+#: ../data/ui/new-label-dialog.ui.h:5
 msgid "Normal"
 msgstr "Normal"
 
-#: ../data/ui/new-label-dialog.ui.h:4
-msgid "Rotated"
-msgstr ""
-
-#: ../data/ui/new-label-dialog.ui.h:5
-msgid "Please review and confirm your selection."
-msgstr ""
-
 #: ../data/ui/new-label-dialog.ui.h:6
-#: ../data/ui/template-designer.ui.h:9
-msgid "Description:"
-msgstr "Deskripsi:"
+#, fuzzy
+msgid "Rotated"
+msgstr "Sudut rotasi label"
+
+#: ../data/ui/new-label-dialog.ui.h:7
+#, fuzzy
+msgid "Review Selection"
+msgstr "Ulasan"
 
 #: ../data/ui/new-label-dialog.ui.h:8
-msgid "Label size:"
-msgstr ""
-
-#: ../data/ui/new-label-dialog.ui.h:9
-msgid "Layout:"
-msgstr "Tata Letak:"
-
-#: ../data/ui/new-label-dialog.ui.h:10
-msgid "Similar products:"
-msgstr ""
+msgid "Please review and confirm your selection."
+msgstr "Harap pratinjau dan konfirmasikan pilihan Anda."
 
 #: ../data/ui/new-label-dialog.ui.h:11
-#: ../data/ui/template-designer.ui.h:6
-msgid "Part #:"
-msgstr "Bagian #:"
-
-#: ../data/ui/new-label-dialog.ui.h:12
-msgid "Vendor:"
-msgstr "Vendor:"
+#, fuzzy
+msgid "Label size:"
+msgstr "Gunakan ukuran ini pada label"
 
 #: ../data/ui/object-editor.ui.h:1
 msgid "dialog1"
-msgstr ""
+msgstr "dialog1"
 
 #: ../data/ui/object-editor.ui.h:3
 msgid "Family:"
@@ -2001,8 +2203,7 @@ msgstr "Ukuran:"
 msgid "Style:"
 msgstr "Gaya:"
 
-#: ../data/ui/object-editor.ui.h:6
-#: ../data/ui/prefs-dialog.ui.h:14
+#: ../data/ui/object-editor.ui.h:6 ../data/ui/prefs-dialog.ui.h:14
 msgid "Color:"
 msgstr "Warna:"
 
@@ -2014,133 +2215,139 @@ msgstr " "
 msgid "key:"
 msgstr "kunci:"
 
-#: ../data/ui/object-editor.ui.h:9
-#: ../data/ui/prefs-dialog.ui.h:15
+#: ../data/ui/object-editor.ui.h:9 ../data/ui/prefs-dialog.ui.h:15
 msgid "Alignment:"
 msgstr "Perataan:"
 
 #: ../data/ui/object-editor.ui.h:10
-#: ../data/ui/prefs-dialog.ui.h:16
+#, fuzzy
+#| msgid "Alignment:"
+msgid "Vertical alignment:"
+msgstr "Perataan vertikal"
+
+#: ../data/ui/object-editor.ui.h:11 ../data/ui/prefs-dialog.ui.h:16
 msgid "Line Spacing:"
 msgstr "Jarak Baris:"
 
-#: ../data/ui/object-editor.ui.h:11
-msgid "Allow merge to automatically shrink text"
-msgstr ""
-
 #: ../data/ui/object-editor.ui.h:12
+msgid "Allow merge to automatically shrink text"
+msgstr "Ijinkan penggabungan untuk memampatkan teks secara otomatis"
+
+#: ../data/ui/object-editor.ui.h:13
 msgid "Style"
 msgstr "Gaya"
 
-#: ../data/ui/object-editor.ui.h:13
-#: ../data/ui/prefs-dialog.ui.h:18
+#: ../data/ui/object-editor.ui.h:14 ../data/ui/prefs-dialog.ui.h:18
 #: ../data/ui/template-designer.ui.h:13
 msgid "Width:"
 msgstr "Lebar:"
 
-#: ../data/ui/object-editor.ui.h:15
+#: ../data/ui/object-editor.ui.h:16
 msgid "Key:"
 msgstr "Kunci:"
 
-#: ../data/ui/object-editor.ui.h:17
-#: ../data/ui/prefs-dialog.ui.h:21
+#: ../data/ui/object-editor.ui.h:18 ../data/ui/prefs-dialog.ui.h:21
 #, fuzzy
 msgid "Fill"
 msgstr "Isi"
 
-#: ../data/ui/object-editor.ui.h:18
+#: ../data/ui/object-editor.ui.h:19
 msgid "File:"
 msgstr "Berkas:"
 
-#: ../data/ui/object-editor.ui.h:20
-msgid "Literal:"
-msgstr ""
-
 #: ../data/ui/object-editor.ui.h:21
 #, fuzzy
-msgid "format:"
-msgstr "Format:"
+msgid "Literal:"
+msgstr ""
+"Pakai \"query-tooltip\" untuk menyajikan tooltip\n"
+"sebagai ganti menata tooltip literal"
 
 #: ../data/ui/object-editor.ui.h:22
 #, fuzzy
-msgid "digits:"
-msgstr "Kolom digit"
+msgid "format:"
+msgstr "_Format…"
 
-#: ../data/ui/object-editor.ui.h:24
+#: ../data/ui/object-editor.ui.h:23
 #, fuzzy
-msgid "Backend:"
-msgstr "Backed autotool"
+msgid "digits:"
+msgstr "Digit"
 
 #: ../data/ui/object-editor.ui.h:25
+#, fuzzy
+msgid "Backend:"
+msgstr "Backend"
+
+#: ../data/ui/object-editor.ui.h:26
 #, fuzzy
 msgid "Checksum"
 msgstr "Checksum"
 
-#: ../data/ui/object-editor.ui.h:26
-#: ../data/ui/template-designer.ui.h:14
+#: ../data/ui/object-editor.ui.h:27 ../data/ui/template-designer.ui.h:14
 msgid "Height:"
 msgstr "Tinggi:"
 
-#: ../data/ui/object-editor.ui.h:28
-msgid "Reset image size"
-msgstr ""
-
 #: ../data/ui/object-editor.ui.h:29
+#, fuzzy
+msgid "Reset image size"
+msgstr "Reset"
+
+#: ../data/ui/object-editor.ui.h:30
 msgid "Size"
 msgstr "Ukuran"
 
-#: ../data/ui/object-editor.ui.h:30
+#: ../data/ui/object-editor.ui.h:31
 msgid "Length:"
 msgstr "Panjang:"
 
-#: ../data/ui/object-editor.ui.h:31
+#: ../data/ui/object-editor.ui.h:32
 msgid "Angle:"
 msgstr "Sudut:"
 
-#: ../data/ui/object-editor.ui.h:32
+#: ../data/ui/object-editor.ui.h:33
 msgid "degrees"
 msgstr "derajat"
 
-#: ../data/ui/object-editor.ui.h:33
+#: ../data/ui/object-editor.ui.h:34
 msgid "X:"
 msgstr "X:"
 
-#: ../data/ui/object-editor.ui.h:34
+#: ../data/ui/object-editor.ui.h:35
 msgid "Y:"
 msgstr "Y:"
 
-#: ../data/ui/object-editor.ui.h:35
+#: ../data/ui/object-editor.ui.h:36
 msgid "Position"
 msgstr "Posisi"
 
-#: ../data/ui/object-editor.ui.h:36
-msgid "Enable shadow"
-msgstr ""
-
 #: ../data/ui/object-editor.ui.h:37
-msgid "X Offset:"
-msgstr ""
+#, fuzzy
+msgid "Enable shadow"
+msgstr "Bayangan panah"
 
 #: ../data/ui/object-editor.ui.h:38
-msgid "Y Offset:"
-msgstr ""
+msgid "X Offset:"
+msgstr "Ofset X:"
 
 #: ../data/ui/object-editor.ui.h:39
-msgid "Opacity:"
-msgstr ""
+msgid "Y Offset:"
+msgstr "Ofset Y:"
 
-#: ../data/ui/object-editor.ui.h:41
+#: ../data/ui/object-editor.ui.h:40
+msgid "Opacity:"
+msgstr "Tingkat tembus pandang"
+
+#: ../data/ui/object-editor.ui.h:42
 #, no-c-format
 msgid "%"
 msgstr "%"
 
-#: ../data/ui/object-editor.ui.h:42
+#: ../data/ui/object-editor.ui.h:43
 msgid "Shadow"
-msgstr ""
+msgstr "Bayangan"
 
 #: ../data/ui/prefs-dialog.ui.h:2
 msgid "Select locale specific behavior."
-msgstr ""
+msgstr "Pilih perilaku spesifik locale."
 
 #: ../data/ui/prefs-dialog.ui.h:3
 msgid "   "
@@ -2162,8 +2369,7 @@ msgstr "Milimeter"
 msgid "Units"
 msgstr "Unit"
 
-#: ../data/ui/prefs-dialog.ui.h:8
-#: ../templates/paper-sizes.xml.h:3
+#: ../data/ui/prefs-dialog.ui.h:8 ../templates/paper-sizes.xml.h:3
 msgid "US Letter"
 msgstr "US Letter"
 
@@ -2173,16 +2379,15 @@ msgstr "ISO A4"
 
 #: ../data/ui/prefs-dialog.ui.h:10
 msgid "Default page size"
-msgstr ""
+msgstr "Ukuran halaman baku"
 
 #: ../data/ui/prefs-dialog.ui.h:11
-#, fuzzy
 msgid "Locale"
-msgstr "Locale:"
+msgstr "Locale"
 
 #: ../data/ui/prefs-dialog.ui.h:12
 msgid "Select default properties for new objects."
-msgstr ""
+msgstr "Pilih properti baku bagi objek-objek baru."
 
 #: ../data/ui/prefs-dialog.ui.h:13
 msgid "Font:"
@@ -2190,7 +2395,43 @@ msgstr "Fonta:"
 
 #: ../data/ui/prefs-dialog.ui.h:22
 msgid "Object defaults"
-msgstr ""
+msgstr "Baku objek"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:1
+msgid "Sheets:"
+msgstr "Lembar:"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:3
+msgid "from:"
+msgstr "dari:"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:4
+msgid "to:"
+msgstr "ke:"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:5
+msgid "Copies"
+msgstr "Salinan"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:6
+msgid "Start on label"
+msgstr "Mulai pada label"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:7
+msgid "on 1st sheet"
+msgstr "pada lembar ke-1"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:8
+msgid "Copies:"
+msgstr "Salinan:"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:9
+msgid "Collate"
+msgstr "Kolasi"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:10
+msgid "Merge Control"
+msgstr "Gabungkan Kendali"
 
 #: ../data/ui/property-bar.ui.h:3
 msgid "Bold"
@@ -2208,24 +2449,48 @@ msgstr "Rata tengah"
 msgid "Right align"
 msgstr "Rata kanan"
 
+#: ../data/ui/property-bar.ui.h:8
+#, fuzzy
+msgid "Top vertical align"
+msgstr "Rataan"
+
+#: ../data/ui/property-bar.ui.h:9
+#, fuzzy
+#| msgid "Center align"
+msgid "Center vertical align"
+msgstr "Rataan"
+
+#: ../data/ui/property-bar.ui.h:10
+#, fuzzy
+msgid "Bottom vertical align"
+msgstr "Rataan"
+
 #: ../data/ui/template-designer.ui.h:1
 msgid ""
 "Welcome to the gLabels Template Designer.\n"
 "\n"
 "This dialog will assist you in the creation of a custom gLabels template."
 msgstr ""
+"Selamat datang ke Perancang Templat gLabels.\n"
+"\n"
+"Dialog ini akan membantu Anda dalam penciptaan templat gLabels ubahan."
 
 #: ../data/ui/template-designer.ui.h:4
-msgid "Please enter the following identifying information about the template stationery."
+#, fuzzy
+msgid ""
+"Please enter the following identifying information about the template "
+"stationery."
 msgstr ""
+"Harap masukkan informasi pengidentifikasi berikut tentang stasioner templat."
 
 #: ../data/ui/template-designer.ui.h:5
+#, fuzzy
 msgid "Brand/Manufacturer:"
-msgstr ""
+msgstr "Pabrikan"
 
 #: ../data/ui/template-designer.ui.h:7
 msgid "(e.g., 8163A)"
-msgstr ""
+msgstr "(mis., 8163A)"
 
 #: ../data/ui/template-designer.ui.h:8
 msgid "(e.g., Avery, Acme, ...)"
@@ -2236,32 +2501,38 @@ msgid "(e.g., \"Mailing Labels,\" \"Business Cards,\" ...)"
 msgstr ""
 
 #: ../data/ui/template-designer.ui.h:11
+#, fuzzy
 msgid "Please select the page size of the template stationery."
-msgstr ""
+msgstr "Harap pilih ukuran halaman dari stasioner templat."
 
 #: ../data/ui/template-designer.ui.h:16
 msgid "Please select the basic shape of the labels or cards."
-msgstr ""
+msgstr "Harap pilih bentuk dasar dari label atau kartu."
 
 #: ../data/ui/template-designer.ui.h:17
 msgid "Rectangular or square (can have rounded corners)"
-msgstr ""
+msgstr "Persegi panjang atau bujur sangkar (bisa punya pojok lengkung)"
 
 #: ../data/ui/template-designer.ui.h:18
+#, fuzzy
 msgid "Round"
-msgstr ""
+msgstr "Nilai dibulatkan ke cacah digit ini."
 
 #: ../data/ui/template-designer.ui.h:19
 msgid "Elliptical"
-msgstr ""
+msgstr "Eliptis"
 
 #: ../data/ui/template-designer.ui.h:20
 msgid "CD/DVD (including credit card CDs)"
-msgstr ""
+msgstr "CD/DVD (termasuk CD kartu kredit)"
 
 #: ../data/ui/template-designer.ui.h:21
-msgid "Please enter the following size parameters of a single label or card in your template."
+msgid ""
+"Please enter the following size parameters of a single label or card in your "
+"template."
 msgstr ""
+"Harap masukkan parameter ukuran berikut dari sebuah kartu atau label tunggal "
+"dalam templat Anda."
 
 #: ../data/ui/template-designer.ui.h:22
 msgid "1. Width:"
@@ -2273,7 +2544,7 @@ msgstr "2. Tinggi:"
 
 #: ../data/ui/template-designer.ui.h:24
 msgid "3. Round (radius of corner):"
-msgstr ""
+msgstr "3. Lengkungan (jari-jari sudut):"
 
 #: ../data/ui/template-designer.ui.h:25
 msgid "4. Horiz. waste (overprint allowed):"
@@ -2282,7 +2553,7 @@ msgstr ""
 #: ../data/ui/template-designer.ui.h:26
 #, fuzzy
 msgid "6. Margin"
-msgstr "Sunting Tepi"
+msgstr "Batas"
 
 #: ../data/ui/template-designer.ui.h:27
 msgid "5. Vert. waste (overprint allowed):"
@@ -2295,15 +2566,20 @@ msgstr ""
 #: ../data/ui/template-designer.ui.h:29
 #, fuzzy
 msgid "4. Margin"
-msgstr "Sunting Tepi"
+msgstr "Batas"
 
 #: ../data/ui/template-designer.ui.h:30
-msgid "Please enter the following size parameters of a single label in your template."
+msgid ""
+"Please enter the following size parameters of a single label in your "
+"template."
 msgstr ""
+"Harap masukkan parameter ukuran berikut dari suatu label tunggal dalam "
+"templat Anda."
 
 #: ../data/ui/template-designer.ui.h:31
+#, fuzzy
 msgid "1. Radius:"
-msgstr ""
+msgstr "1 (Bawaan)"
 
 #: ../data/ui/template-designer.ui.h:32
 msgid "2. Waste (overprint allowed):"
@@ -2312,23 +2588,27 @@ msgstr ""
 #: ../data/ui/template-designer.ui.h:33
 #, fuzzy
 msgid "3. Margin"
-msgstr "Sunting Tepi"
+msgstr "3"
 
 #: ../data/ui/template-designer.ui.h:34
+#, fuzzy
 msgid "1. Outer radius:"
-msgstr ""
+msgstr "Surel 1"
 
 #: ../data/ui/template-designer.ui.h:35
+#, fuzzy
 msgid "2. Inner radius:"
-msgstr ""
+msgstr "2"
 
 #: ../data/ui/template-designer.ui.h:36
+#, fuzzy
 msgid "3. Clipping width:"
-msgstr ""
+msgstr "lebar"
 
 #: ../data/ui/template-designer.ui.h:37
+#, fuzzy
 msgid "4. Clipping height:"
-msgstr ""
+msgstr "4 x 4"
 
 #: ../data/ui/template-designer.ui.h:38
 msgid "5. Waste (overprint allowed):"
@@ -2348,24 +2628,31 @@ msgid ""
 "Templates needing only\n"
 "one layout."
 msgstr ""
+"Templat hanya perlu\n"
+"satu tata letak."
 
 #: ../data/ui/template-designer.ui.h:46
 msgid ""
 "Templates needing\n"
 "two layouts."
 msgstr ""
+"Templat perlu\n"
+"dua tata letak."
 
 #: ../data/ui/template-designer.ui.h:48
-msgid "Note: if more than 2 layouts are required, the template must be edited manually."
+msgid ""
+"Note: if more than 2 layouts are required, the template must be edited "
+"manually."
 msgstr ""
 
 #: ../data/ui/template-designer.ui.h:49
+#, fuzzy
 msgid "Number of layouts:"
-msgstr ""
+msgstr "Angka"
 
 #: ../data/ui/template-designer.ui.h:50
 msgid "Please enter the following layout information."
-msgstr ""
+msgstr "Harap masukkan informasi tata letak berikut."
 
 #: ../data/ui/template-designer.ui.h:51
 msgid "Layout #1"
@@ -2376,32 +2663,37 @@ msgid "Layout #2"
 msgstr "Tata Letak #2"
 
 #: ../data/ui/template-designer.ui.h:53
+#, fuzzy
 msgid "Number across (nx):"
-msgstr ""
+msgstr "Cacah baris"
 
 #: ../data/ui/template-designer.ui.h:54
+#, fuzzy
 msgid "Number down (ny):"
-msgstr ""
+msgstr "Kecilkan suara"
 
 #: ../data/ui/template-designer.ui.h:55
 msgid "Distance from left edge (x0):"
-msgstr ""
+msgstr "Jarak dari tepi kiri (x0):"
 
 #: ../data/ui/template-designer.ui.h:56
 msgid "Distance from top edge (y0):"
-msgstr ""
+msgstr "Jarak dari tepi atas (y0):"
 
 #: ../data/ui/template-designer.ui.h:57
+#, fuzzy
 msgid "Horizontal pitch (dx):"
-msgstr ""
+msgstr "%dx%d"
 
 #: ../data/ui/template-designer.ui.h:58
+#, fuzzy
 msgid "Vertical pitch (dy):"
-msgstr ""
+msgstr "Vertikal:"
 
 #: ../data/ui/template-designer.ui.h:59
+#, fuzzy
 msgid "Print test sheet"
-msgstr ""
+msgstr "Ce_tak Halaman Uji"
 
 #: ../data/ui/template-designer.ui.h:60
 msgid ""
@@ -2413,232 +2705,262 @@ msgid ""
 "Otherwise, you may click \"Cancel\" to abandon your design\n"
 "or \"Back\" to continue editing this design."
 msgstr ""
+"Selamat!\n"
+"\n"
+"Anda telah melengkapi Perancang Templat gLabels.\n"
+"Bila Anda hendak menerima dan menyimpan rancangan\n"
+"Anda, klik \"Terapkan\".\n"
+"\n"
+"Bila tidak, Anda boleh mengklik \"Batal\" untuk meninggalkan\n"
+"rancangan Anda atau \"Mundur\" untuk melanjutkan menyunting\n"
+"rancangan ini."
 
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:1
-msgid "Sheets:"
+#: ../data/appdata/glabels-3.appdata.xml.in.h:1
+#| msgid "Labels"
+msgid "gLabels"
+msgstr "gLabels"
+
+#: ../data/appdata/glabels-3.appdata.xml.in.h:2
+#: ../data/desktop/glabels-3.0.desktop.in.h:2
+msgid "Create labels, business cards and media covers"
+msgstr "Buat label, kartu nama, dan sampul media"
+
+#: ../data/appdata/glabels-3.appdata.xml.in.h:3
+msgid ""
+"gLabels is a program for creating labels and business cards. It is designed "
+"to work with various laser/ink-jet peel-off label and business card sheets "
+"that you'll find at most office supply stores."
 msgstr ""
+"gLabels adalah program untuk membuat label dan kartu nama. Ini dirancang "
+"untuk bekerja dengan berbagai lembar kartu nama dan label stiker laser/ink-"
+"jet yang akan Anda temukan pada kebanyakan toko alat tulis."
 
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:3
-msgid "from:"
-msgstr "dari:"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:4
-#, fuzzy
-msgid "to:"
-msgstr "Untuk"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:5
-#, fuzzy
-msgid "Copies"
-msgstr "Copies"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:6
-msgid "Start on label"
+#: ../data/appdata/glabels-3.appdata.xml.in.h:4
+msgid ""
+"gLabels can be used to design address labels, name tags, price tags, cd/dvd "
+"labels, or just about anything else that is organized in a regular pattern "
+"on a sheet of paper. Labels (or cards) can contain text, images, lines, "
+"shapes, and barcodes. gLabels also includes a document-merge feature which "
+"lets you print a unique label for each record from an external data source, "
+"such as a CSV file or an Evolution address book."
 msgstr ""
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:7
-msgid "on 1st sheet"
-msgstr ""
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:8
-#, fuzzy
-msgid "Copies:"
-msgstr "Copies"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:9
-#, fuzzy
-msgid "Collate"
-msgstr "Collate"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:10
-msgid "Merge Control"
-msgstr ""
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:14
-#, fuzzy
-msgid "Options"
-msgstr "Opsi"
+"gLabels dapat digunakan untuk merancang label alamat, tanda pengenal, label "
+"harga, label cd/dvd, atau apapun yang diatur dalam pola teratur pada "
+"selembar kertas. Label (atau kartu) bisa memuat teks, gambar, garis, bentuk, "
+"dan barcode. gLabels juga termasuk fitur gabung dokumen yang memungkinkan "
+"Anda mencetak label yang unik bagi setiap rekaman dari sumber data "
+"eksternal, seperti misalnya berkas CSV atau buku alamat Evolution."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
 #, fuzzy
 msgid "Show/hide main toolbar."
-msgstr "Tampilkan atau sembunyikan bilah alat utama"
+msgstr "Tampilkan bilah alat"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:2
 msgid "Controls visibility of main toolbar."
-msgstr ""
+msgstr "Mengendalikan kenampakan bilah alat utama."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:3
+#, fuzzy
 msgid "Show/hide drawing toolbar."
-msgstr ""
+msgstr "Tampilkan bilah alat"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:4
 msgid "Controls visibility of drawing toolbar."
-msgstr ""
+msgstr "Mengendalikan kenampakan bilah alat menggambar."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:5
+#, fuzzy
 msgid "Show/hide property toolbar."
-msgstr ""
+msgstr "Tampilkan bilah alat"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:6
 msgid "Controls visibility of property toolbar."
-msgstr ""
+msgstr "Mengendalikan kenampakan bilah alat properti."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:7
+#, fuzzy
 msgid "Show/hide grid."
-msgstr ""
+msgstr "Apakah transisi tampil/sembunyi difungsikan atau tidak"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:8
+#, fuzzy
 msgid "Controls visibility of grid."
-msgstr ""
+msgstr "Visibilitas"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:9
+#, fuzzy
 msgid "Show/hide markup."
-msgstr ""
+msgstr "Apakah transisi tampil/sembunyi difungsikan atau tidak"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:10
 msgid "Controls visibility of markup lines."
-msgstr ""
+msgstr "Mengendalikan kenampakan garis tanda."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:11
+#, fuzzy
 msgid "Maximum recent files."
-msgstr ""
+msgstr "Maksimum karakter baru-baru ini"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:12
 msgid "Controls maximum number of recent files tracked."
 msgstr ""
+"Mengendalikan cacah maksimum lacakan berkas yang baru-baru ini dipakai."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:13
 msgid "Units."
-msgstr ""
+msgstr "Unit."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:14
+#, fuzzy
 msgid "The default unit of measurement."
-msgstr ""
+msgstr "Unit"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:15
+#, fuzzy
 msgid "Default page size."
-msgstr ""
+msgstr "Tatanan Halaman Baku"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:16
 msgid "The preferred page size when searching templates."
-msgstr ""
+msgstr "Ukuran halaman yang disukan saat mencari templat."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:17
+#, fuzzy
 msgid "Default font family."
-msgstr ""
+msgstr "Keluarga dan ukuran fonta baku yang akan dipakai"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:18
 msgid "The default font family for new text objects."
-msgstr ""
+msgstr "Keluarga fonta baku bagi objek teks baru."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:19
+#, fuzzy
 msgid "Default font size."
 msgstr ""
+"Ukuran font dalam faktor skala relatif ke ukuran font standar. Nilai ini "
+"beradaptasi otomatis saat berganti tematik dan sangat dianjurkan untuk "
+"diset.  Pango memiliki konstanta untuk beberapa ukuran, sebagai misal "
+"PANGO_SCALE_X_LARGE"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:20
 msgid "The default font size for new text objects."
-msgstr ""
+msgstr "Ukuran fonta baku bagi objek teks baru."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:21
+#, fuzzy
 msgid "Default font weight."
-msgstr ""
+msgstr "Set tebal fonta"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:22
 msgid "The default font weight for new text objects."
-msgstr ""
+msgstr "Bobot fonta baku bagi objek teks baru."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:23
+#, fuzzy
 msgid "Default font italic flag."
-msgstr ""
+msgstr "Opsi fonta baku bagi layar"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:24
 msgid "The default font italic state for new text objects."
-msgstr ""
+msgstr "Keadaan kemiringan fonta baku bagi objek teks baru."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:25
+#, fuzzy
 msgid "Default text color."
-msgstr ""
+msgstr "Warna teks bawaan dalam terminal"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:26
 msgid "The default color of text for new text objects (0xRRGGBBAA)."
-msgstr ""
+msgstr "Warna baku teks bagi objek teks baru (0xRRGGBBAA)."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:27
+#, fuzzy
 msgid "Default text alignment."
-msgstr ""
+msgstr "Kolom Perataan Horisontal Teks"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:28
 msgid "The default text alignment for new text objects."
-msgstr ""
+msgstr "Perataan teks baku bagi objek teks baru."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:29
+#, fuzzy
 msgid "Default text line spacing."
-msgstr ""
+msgstr "Jarak luar default"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:30
 msgid "The default line spacing for new text objects."
-msgstr ""
+msgstr "Spasi baris baku bagi objek teks baru."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:31
+#, fuzzy
 msgid "Default line width."
-msgstr ""
+msgstr "Lebar garis kisi"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:32
+#, fuzzy
 msgid "The default line width for new objects."
-msgstr ""
+msgstr "Lebar panel samping pada jendela baru."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:33
+#, fuzzy
 msgid "Default line color."
-msgstr ""
+msgstr "Warna utama latar terminal"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:34
 msgid "The default line color new objects (0xRRGGBBAA)."
-msgstr ""
+msgstr "Warna garis baku bagi objek baru (0xRRGGBBAA)."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:35
+#, fuzzy
 msgid "Default fill color."
-msgstr ""
+msgstr "Warna teks bawaan dalam terminal"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:36
 msgid "The default fill color new objects (0xRRGGBBAA)."
-msgstr ""
+msgstr "Warna isi baku bagi objek baru (0xRRGGBBAA)."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:37
+#, fuzzy
 msgid "Recent templates."
-msgstr ""
+msgstr "Templat"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:38
+#, fuzzy
 msgid "Recently used templates."
-msgstr ""
+msgstr "Templat"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:39
+#, fuzzy
 msgid "Recent fonts."
-msgstr ""
+msgstr "Resolusi fonta pada layar"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:40
+#, fuzzy
 msgid "Recently used font families."
-msgstr ""
+msgstr "Cacah berkas yang baru-baru ini dipakai"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:41
+#, fuzzy
 msgid "Recent colors."
-msgstr ""
+msgstr "Terkini"
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:42
 msgid "Recently created custom colors."
-msgstr ""
+msgstr "Warna ubahan yang baru-baru ini dibuat."
 
 #: ../data/desktop/glabels-3.0.desktop.in.h:1
 msgid "gLabels Label Designer 3"
-msgstr ""
+msgstr "gLabels Label Designer 3"
 
-#: ../data/desktop/glabels-3.0.desktop.in.h:2
-msgid "Create labels, business cards and media covers"
-msgstr ""
+#: ../data/desktop/glabels-3.0.desktop.in.h:3
+msgid "label;card;print;office;barcode;"
+msgstr "label;kartu;cetak;kantor;barcode;"
 
 #: ../data/mime/glabels-3.0.xml.in.h:1
+#, fuzzy
 msgid "gLabels Project File"
-msgstr ""
+msgstr "Projek"
 
 #. Most popular (at top of list)
 #: ../templates/paper-sizes.xml.h:2
@@ -2648,11 +2970,11 @@ msgstr "A4"
 #. Other US paper sizes
 #: ../templates/paper-sizes.xml.h:5
 msgid "US Legal"
-msgstr ""
+msgstr "US Legal"
 
 #: ../templates/paper-sizes.xml.h:6
 msgid "US Executive"
-msgstr ""
+msgstr "US Executive"
 
 #. Other ISO A series sizes
 #: ../templates/paper-sizes.xml.h:8
@@ -2743,11 +3065,11 @@ msgstr "B10"
 #. Envelopes
 #: ../templates/paper-sizes.xml.h:31
 msgid "#10 Envelope"
-msgstr ""
+msgstr "Amplop #10"
 
 #: ../templates/paper-sizes.xml.h:32
 msgid "Monarch Envelope"
-msgstr ""
+msgstr "Monarch Envelope"
 
 #: ../templates/paper-sizes.xml.h:33
 msgid "C5"
@@ -2804,78 +3126,92 @@ msgstr "SRA4"
 
 #: ../templates/categories.xml.h:1
 msgid "Any label"
-msgstr ""
+msgstr "Sebarang label"
 
 #. ====================================================================
 #. ===================================================================
-#: ../templates/categories.xml.h:2
+#: ../templates/categories.xml.h:2 ../templates/begalabel-templates.xml.h:3
 #: ../templates/endisch-templates.xml.h:1
 #: ../templates/hama-iso-templates.xml.h:4
 #: ../templates/pearl-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:8
+#: ../templates/sheetlabels-us-templates.xml.h:16
+#, fuzzy
 msgid "Round labels"
-msgstr ""
+msgstr "Digit Pembulatan"
 
 #. ===================================================================
-#: ../templates/categories.xml.h:3
+#: ../templates/categories.xml.h:3 ../templates/begalabel-templates.xml.h:4
 #: ../templates/endisch-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:58
 #: ../templates/rayfilm-templates.xml.h:9
 msgid "Elliptical labels"
-msgstr ""
+msgstr "Label eliptis"
 
 #. ====================================================================
-#: ../templates/categories.xml.h:4
-#: ../templates/endisch-templates.xml.h:4
+#: ../templates/categories.xml.h:4 ../templates/endisch-templates.xml.h:4
 #: ../templates/hama-iso-templates.xml.h:41
 #: ../templates/rayfilm-templates.xml.h:2
 msgid "Square labels"
-msgstr ""
+msgstr "Label bujur sangkar"
 
 #. ===================================================================
 #. ====================================================================
 #. ===================================================================
 #. ********************************************************************
-#: ../templates/categories.xml.h:5
-#: ../templates/ascom-iso-templates.xml.h:4
+#. ===================================================================
+#: ../templates/categories.xml.h:5 ../templates/ascom-iso-templates.xml.h:4
+#: ../templates/begalabel-templates.xml.h:2
 #: ../templates/endisch-templates.xml.h:3
 #: ../templates/hama-iso-templates.xml.h:27
 #: ../templates/herma-iso-templates.xml.h:20
-#: ../templates/igepa-templates.xml.h:1
-#: ../templates/jac-iso-templates.xml.h:4
+#: ../templates/igepa-templates.xml.h:1 ../templates/jac-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:1
+#: ../templates/sheetlabels-us-templates.xml.h:2
 msgid "Rectangular labels"
-msgstr ""
+msgstr "Label persegi panjang"
 
 #: ../templates/categories.xml.h:6
 msgid "Any card"
-msgstr ""
+msgstr "Sebarang kartu"
 
 #. ===================================================================
 #. ====================================================================
 #. ===================================================================
-#: ../templates/categories.xml.h:7
-#: ../templates/dataline-iso-templates.xml.h:6
+#: ../templates/categories.xml.h:7 ../templates/dataline-iso-templates.xml.h:6
 #: ../templates/geha-iso-templates.xml.h:4
 #: ../templates/hama-iso-templates.xml.h:8
 #: ../templates/pearl-iso-templates.xml.h:38
 msgid "Business cards"
-msgstr ""
+msgstr "Kartu nama"
 
 #: ../templates/categories.xml.h:8
-msgid "CD/DVD or other media"
-msgstr ""
+#, fuzzy
+msgid "Name Badge"
+msgstr "Nama:"
 
 #: ../templates/categories.xml.h:9
-msgid "Mailing/shipping products"
-msgstr ""
+#, fuzzy
+msgid "CD/DVD or other media"
+msgstr "Media Lain"
 
 #: ../templates/categories.xml.h:10
-msgid "Foldable cards"
-msgstr ""
+#, fuzzy
+msgid "Mailing/shipping products"
+msgstr "Jadikan saya berlangganan ke milis"
 
 #: ../templates/categories.xml.h:11
+#, fuzzy
+msgid "Foldable cards"
+msgstr "Kartu Hari Libur"
+
+#: ../templates/categories.xml.h:12
+#, fuzzy
 msgid "Photo products"
+msgstr "Foto"
+
+#: ../templates/categories.xml.h:13
+msgid "Filing labels"
 msgstr ""
 
 #. TODO: Is this the real part #?
@@ -2893,7 +3229,7 @@ msgstr ""
 #: ../templates/misc-iso-templates.xml.h:2
 #: ../templates/zweckform-iso-templates.xml.h:6
 msgid "Rectangular Labels"
-msgstr ""
+msgstr "Label Persegi Panjang"
 
 #. ===================================================================
 #: ../templates/ascom-iso-templates.xml.h:6
@@ -2908,38 +3244,42 @@ msgstr ""
 #. ===============================================================
 #: ../templates/ascom-iso-templates.xml.h:8
 #: ../templates/avery-iso-templates.xml.h:26
-#: ../templates/zweckform-iso-templates.xml.h:28
+#: ../templates/zweckform-iso-templates.xml.h:26
+#, fuzzy
 msgid "CD Inlet"
-msgstr ""
+msgstr "CD video"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:2
 msgid "Square Labels"
-msgstr ""
+msgstr "Label Bujur Sangkar"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:4
+#, fuzzy
 msgid "Small Round Labels"
-msgstr ""
+msgstr "Digit Pembulatan"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:6
+#, fuzzy
 msgid "Large Round Labels"
-msgstr ""
+msgstr "Digit Pembulatan"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:8
 #: ../templates/avery-other-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:5
+#, fuzzy
 msgid "File Folder Labels"
-msgstr ""
+msgstr "Apakah label mesti memiliki mnemonik"
 
 #. ===================================================================
 #. ********************************************************************
 #: ../templates/avery-us-templates.xml.h:10
 #: ../templates/dataline-iso-templates.xml.h:10
 #: ../templates/meritline-us-templates.xml.h:6
-#: ../templates/sheetlabels-us-templates.xml.h:4
+#: ../templates/sheetlabels-us-templates.xml.h:6
 #: ../templates/uline-us-templates.xml.h:2
 #: ../templates/worldlabel-us-templates.xml.h:4
 msgid "Shipping Labels"
@@ -2951,54 +3291,56 @@ msgstr ""
 #: ../templates/avery-us-templates.xml.h:12
 #: ../templates/avery-iso-templates.xml.h:14
 #: ../templates/databecker-iso-templates.xml.h:6
-#: ../templates/dymo-other-templates.xml.h:4
+#: ../templates/dymo-other-templates.xml.h:14
 #: ../templates/geha-iso-templates.xml.h:25
 #: ../templates/maco-us-templates.xml.h:2
 #: ../templates/meritline-us-templates.xml.h:4
 #: ../templates/pearl-iso-templates.xml.h:2
-#: ../templates/sheetlabels-us-templates.xml.h:2
+#: ../templates/sheetlabels-us-templates.xml.h:4
 #: ../templates/worldlabel-us-templates.xml.h:3
 #: ../templates/zweckform-iso-templates.xml.h:4
 msgid "Address Labels"
-msgstr ""
+msgstr "Label Alamat"
 
 #. ===================================================================
 #. ********************************************************************
 #: ../templates/avery-us-templates.xml.h:14
-#: ../templates/dymo-other-templates.xml.h:6
+#: ../templates/dymo-other-templates.xml.h:2
 #: ../templates/meritline-us-templates.xml.h:8
-#: ../templates/sheetlabels-us-templates.xml.h:6
+#: ../templates/sheetlabels-us-templates.xml.h:8
 #: ../templates/worldlabel-us-templates.xml.h:2
 msgid "Return Address Labels"
-msgstr ""
+msgstr "Label Alamat Balik"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:16
 #: ../templates/maco-us-templates.xml.h:3
 #: ../templates/meritline-us-templates.xml.h:12
 #: ../templates/misc-us-templates.xml.h:23
-#: ../templates/sheetlabels-us-templates.xml.h:8
+#: ../templates/sheetlabels-us-templates.xml.h:10
 #: ../templates/worldlabel-us-templates.xml.h:9
+#, fuzzy
 msgid "Round Labels"
-msgstr ""
+msgstr "Digit Pembulatan"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:18
 #: ../templates/avery-iso-templates.xml.h:20
 #: ../templates/meritline-us-templates.xml.h:14
-#: ../templates/sheetlabels-us-templates.xml.h:14
+#: ../templates/sheetlabels-us-templates.xml.h:18
 #: ../templates/worldlabel-us-templates.xml.h:8
 msgid "Diskette Labels"
-msgstr ""
+msgstr "Label Disket"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:20
+#, fuzzy
 msgid "Tent Cards"
-msgstr ""
+msgstr "Kartu Hari Libur"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:22
-#: ../templates/sheetlabels-us-templates.xml.h:10
+#: ../templates/sheetlabels-us-templates.xml.h:12
 #: ../templates/worldlabel-us-templates.xml.h:7
 msgid "Filing Labels"
 msgstr ""
@@ -3016,24 +3358,25 @@ msgstr ""
 #: ../templates/misc-us-templates.xml.h:25
 #: ../templates/misc-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:15
-#: ../templates/zweckform-iso-templates.xml.h:30
+#: ../templates/zweckform-iso-templates.xml.h:28
 msgid "Business Cards"
-msgstr ""
+msgstr "Kartu Nama"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:26
 msgid "Index Cards"
-msgstr ""
+msgstr "Kartu Indeks"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:28
 msgid "Post cards"
-msgstr ""
+msgstr "Kartu pos"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:30
+#, fuzzy
 msgid "Name Badge Labels"
-msgstr ""
+msgstr "Apakah label mesti memiliki mnemonik"
 
 #. ===================================================================
 #. ===============================================================
@@ -3042,26 +3385,27 @@ msgstr ""
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:32
 #: ../templates/avery-iso-templates.xml.h:6
+#: ../templates/begalabel-templates.xml.h:5
 #: ../templates/geha-iso-templates.xml.h:10
 #: ../templates/herma-iso-templates.xml.h:14
-#: ../templates/igepa-templates.xml.h:5
-#: ../templates/jac-iso-templates.xml.h:2
+#: ../templates/igepa-templates.xml.h:5 ../templates/jac-iso-templates.xml.h:2
+#: ../templates/mayspies-templates.xml.h:1
 #: ../templates/misc-us-templates.xml.h:8
-#: ../templates/misc-iso-templates.xml.h:22
+#: ../templates/misc-iso-templates.xml.h:24
 #: ../templates/misc-other-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:64
 #: ../templates/rayfilm-templates.xml.h:10
-#: ../templates/sheetlabels-us-templates.xml.h:12
+#: ../templates/sheetlabels-us-templates.xml.h:14
 #: ../templates/worldlabel-us-templates.xml.h:12
 #: ../templates/zweckform-iso-templates.xml.h:8
 msgid "CD/DVD Labels"
-msgstr ""
+msgstr "Label CD/DVD"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:34
-#: ../templates/sheetlabels-us-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:20
 msgid "CD/DVD Labels (Disc Labels)"
-msgstr ""
+msgstr "Label CD/DVD (Label Cakram)"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:36
@@ -3072,7 +3416,7 @@ msgstr ""
 #: ../templates/avery-us-templates.xml.h:38
 #: ../templates/geha-iso-templates.xml.h:17
 #: ../templates/meritline-us-templates.xml.h:16
-#: ../templates/sheetlabels-us-templates.xml.h:18
+#: ../templates/sheetlabels-us-templates.xml.h:24
 #: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Video Tape Face Labels"
 msgstr ""
@@ -3080,14 +3424,14 @@ msgstr ""
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:42
 msgid "ID Labels"
-msgstr ""
+msgstr "Label ID"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:44
 #: ../templates/meritline-us-templates.xml.h:10
 #: ../templates/worldlabel-us-templates.xml.h:6
 msgid "Full Sheet Labels"
-msgstr ""
+msgstr "Label Lembar Penuh"
 
 #. the LSK labels can be torn in half down the center
 #: ../templates/avery-us-templates.xml.h:46
@@ -3095,9 +3439,11 @@ msgid "Divider Labels"
 msgstr ""
 
 #. ===================================================================
+#. ============================================================
 #: ../templates/avery-iso-templates.xml.h:2
+#: ../templates/cablelabel-templates.xml.h:2
 msgid "Mini Labels"
-msgstr ""
+msgstr "Label Mini"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:4
@@ -3112,14 +3458,17 @@ msgstr ""
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:10
 #: ../templates/decadry-iso-templates.xml.h:2
+#: ../templates/misc-iso-templates.xml.h:14
+#, fuzzy
 msgid "Mailing labels"
-msgstr ""
+msgstr "Label "
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:12
+#: ../templates/dymo-other-templates.xml.h:6
 #: ../templates/misc-iso-templates.xml.h:12
 msgid "Address labels"
-msgstr ""
+msgstr "Label Alamat"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:16
@@ -3133,31 +3482,41 @@ msgstr ""
 #: ../templates/herma-iso-templates.xml.h:8
 #: ../templates/misc-us-templates.xml.h:21
 #: ../templates/misc-iso-templates.xml.h:6
+#: ../templates/sheetlabels-us-templates.xml.h:28
 #: ../templates/zweckform-iso-templates.xml.h:10
 msgid "Mailing Labels"
-msgstr ""
+msgstr "Label "
 
 #. ===============================================================
 #: ../templates/avery-iso-templates.xml.h:24
-#: ../templates/zweckform-iso-templates.xml.h:26
+#: ../templates/zweckform-iso-templates.xml.h:24
 msgid "CD Booklet"
-msgstr ""
+msgstr "Booklet CD"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:28
 msgid "Mini Address Labels"
-msgstr ""
+msgstr "Label Alamat Mini"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:30
 msgid "Identification Labels"
-msgstr ""
+msgstr "Label Identifikasi"
 
 #. ===================================================================
 #. ====================================================================
 #: ../templates/avery-iso-templates.xml.h:32
 #: ../templates/hama-iso-templates.xml.h:31
 msgid "Diskette labels"
+msgstr "Label disket"
+
+#: ../templates/begalabel-templates.xml.h:1
+#, fuzzy
+msgid "Rounded rectangular labels"
+msgstr "Apakah label mesti memiliki mnemonik"
+
+#: ../templates/begalabel-templates.xml.h:6
+msgid "Cassette Tape Face"
 msgstr ""
 
 #.
@@ -3165,9 +3524,40 @@ msgstr ""
 #. *********************************************************************
 #. Labels for the Brother QL-500/550/650 PC Label Printers
 #.
-#. These templates work with the Brother Linux Printer CUPS Driver.  It
-#. is unknown if these work correctly with the foomatic print driver for
-#. these printers.
+#. These templates are based on the exact media sizes and measurements
+#. in version 1.1 of the 'Brother-QL-500-ptouch.ppd' file.  If these
+#. don't work for you, try the old versions (e.g. DK-11201-old) of
+#. these templates.
+#.
+#. Currently only have templates for a few of the popular sizes.
+#.
+#. *********************************************************************
+#. *********************************************************************
+#.
+#: ../templates/brother-other-templates.xml.h:16
+msgid "Standard Address Labels 29mm x 90mm"
+msgstr ""
+
+#: ../templates/brother-other-templates.xml.h:17
+msgid "Shipping Labels 62mm x 100mm"
+msgstr ""
+
+#: ../templates/brother-other-templates.xml.h:18
+msgid "Multi Purpose Labels 17mm x 54mm"
+msgstr "Label Serba Guna 17mm x 54mm"
+
+#: ../templates/brother-other-templates.xml.h:19
+msgid "Standard Address Labels 38mm x 90mm"
+msgstr "Label Alamat Standar 38mm x 90mm"
+
+#.
+#. *********************************************************************
+#. *********************************************************************
+#. Labels for the Brother QL-500/550/650 PC Label Printers
+#.
+#. These are the older templates that worked with the Brother Linux
+#. Printer CUPS Driver.  They do not work correctly with newer versions
+#. of the foomatic drivers.
 #.
 #. One difference from typical templates is that the template size is
 #. not the actual media size - it is the size of the printable area,
@@ -3177,21 +3567,28 @@ msgstr ""
 #. *********************************************************************
 #. *********************************************************************
 #.
-#: ../templates/brother-other-templates.xml.h:18
-msgid "Standard Address Labels 29mm x 90mm"
+#: ../templates/brother-other-templates.xml.h:37
+msgid "Standard Address Labels 29mm x 90mm (Old)"
+msgstr "Label Alamat Standar 29mm x 90mm (Kuno)"
+
+#: ../templates/brother-other-templates.xml.h:38
+msgid "Shipping Labels 62mm x 100mm (Old)"
 msgstr ""
 
-#: ../templates/brother-other-templates.xml.h:19
-msgid "Shipping Labels 62mm x 100mm"
-msgstr ""
+#: ../templates/brother-other-templates.xml.h:39
+msgid "Multi Purpose Labels 17mm x 54mm (Old)"
+msgstr "Label Serba Guna 17mm x 54mm (Kuno)"
 
-#: ../templates/brother-other-templates.xml.h:20
-msgid "Multi Purpose Labels 17mm x 54mm"
-msgstr ""
+#: ../templates/brother-other-templates.xml.h:40
+msgid "Standard Address Labels 38mm x 90mm (Old)"
+msgstr "Label Alamat Standar 38mm x 90mm (Kuno)"
 
-#: ../templates/brother-other-templates.xml.h:21
-msgid "Standard Address Labels 38mm x 90mm"
-msgstr ""
+#. ===================================================================
+#: ../templates/canon-other-templates.xml.h:2
+#, fuzzy
+#| msgid "CD/DVD labels"
+msgid "CD/DVD Tray"
+msgstr "CD/DVD"
 
 #. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:4
@@ -3203,7 +3600,7 @@ msgstr ""
 #. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:8
 #: ../templates/desmat-templates.xml.h:2
-#: ../templates/misc-iso-templates.xml.h:20
+#: ../templates/misc-iso-templates.xml.h:22
 msgid "CD Labels"
 msgstr "Label CD"
 
@@ -3212,7 +3609,7 @@ msgstr "Label CD"
 #. ===================================================================
 #: ../templates/dataline-iso-templates.xml.h:2
 #: ../templates/hama-iso-templates.xml.h:35
-#: ../templates/misc-iso-templates.xml.h:32
+#: ../templates/misc-iso-templates.xml.h:34
 msgid "CD/DVD labels"
 msgstr "Label CD/DVD"
 
@@ -3223,30 +3620,37 @@ msgid "Membership cards"
 msgstr "Kartu anggota"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:2
+#: ../templates/dymo-other-templates.xml.h:4
+msgid "Multipurpose Labels"
+msgstr "Label Serba Guna"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:8
+msgid "File Folder"
+msgstr "Folder Berkas"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:10
+#, fuzzy
+msgid "Name Badges"
+msgstr "Nama:"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:12
+#, fuzzy
+msgid "Hanging Folder"
+msgstr "Folder"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:16
 #: ../templates/geha-iso-templates.xml.h:23
 msgid "Large Address Labels"
 msgstr "Label Alamat Besar"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:8
+#: ../templates/dymo-other-templates.xml.h:18
 msgid "Shipping Address Labels"
 msgstr "Label Alamat Pengapalan"
-
-#. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:10
-msgid "File Folder"
-msgstr "Folder Berkas"
-
-#. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:12
-msgid "Hanging Folder"
-msgstr ""
-
-#. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:14
-msgid "3.5in Diskette"
-msgstr "Disket 3.5in"
 
 #. ===================================================================
 #: ../templates/endisch-templates.xml.h:5
@@ -3264,8 +3668,7 @@ msgstr "Label A5"
 
 #. *******************************************************************
 #. ===================================================================
-#: ../templates/endisch-templates.xml.h:7
-#: ../templates/igepa-templates.xml.h:3
+#: ../templates/endisch-templates.xml.h:7 ../templates/igepa-templates.xml.h:3
 #: ../templates/jac-iso-templates.xml.h:6
 #: ../templates/pearl-iso-templates.xml.h:6
 #: ../templates/rayfilm-templates.xml.h:5
@@ -3284,24 +3687,27 @@ msgstr "Label SRA3"
 
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:2
+#, fuzzy
 msgid "Flyer paper"
-msgstr ""
+msgstr "Kertas"
 
 #. ===================================================================
 #. ====================================================================
 #: ../templates/geha-iso-templates.xml.h:6
 #: ../templates/hama-iso-templates.xml.h:25
 msgid "Greeting cards"
-msgstr ""
+msgstr "Kartu ucapan"
 
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:8
+#, fuzzy
 msgid "Arch File inserts"
-msgstr ""
+msgstr "Arch Linux"
 
 #: ../templates/geha-iso-templates.xml.h:11
+#, fuzzy
 msgid "CD/DVD Inlet"
-msgstr ""
+msgstr "CD/DVD"
 
 #. ===================================================================
 #. ====================================================================
@@ -3309,8 +3715,9 @@ msgstr ""
 #: ../templates/geha-iso-templates.xml.h:13
 #: ../templates/hama-iso-templates.xml.h:17
 #: ../templates/pearl-iso-templates.xml.h:32
+#, fuzzy
 msgid "DVD inlet"
-msgstr ""
+msgstr "DVD suara"
 
 #. ===================================================================
 #. ====================================================================
@@ -3332,15 +3739,17 @@ msgstr "Label foto paspor"
 #: ../templates/geha-iso-templates.xml.h:27
 #: ../templates/hama-iso-templates.xml.h:37
 #: ../templates/herma-iso-templates.xml.h:6
+#, fuzzy
 msgid "Arch File Labels"
-msgstr ""
+msgstr "Arch Linux"
 
 #. ===================================================================
 #: ../templates/geha-iso-templates.xml.h:29
-#: ../templates/misc-iso-templates.xml.h:28
+#: ../templates/misc-iso-templates.xml.h:30
 #: ../templates/misc-other-templates.xml.h:4
+#, fuzzy
 msgid "Multi-Purpose Labels"
-msgstr ""
+msgstr "Kegunaan"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:2
@@ -3349,31 +3758,36 @@ msgstr ""
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:10
+#, fuzzy
 msgid "CD inlet"
-msgstr ""
+msgstr "CD video"
 
 #. ====================================================================
 #. ===================================================================
 #: ../templates/hama-iso-templates.xml.h:12
 #: ../templates/pearl-iso-templates.xml.h:34
+#, fuzzy
 msgid "CD inlet (front)"
-msgstr ""
+msgstr "Depan"
 
 #. ===================================================================
 #: ../templates/hama-iso-templates.xml.h:13
 #: ../templates/pearl-iso-templates.xml.h:36
+#, fuzzy
 msgid "CD inlet (back)"
-msgstr ""
+msgstr "CD gambar"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:15
+#, fuzzy
 msgid "Zip disc inlet"
-msgstr ""
+msgstr "diska DVD kosong"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:19
+#, fuzzy
 msgid "VHS-C inlet"
-msgstr ""
+msgstr "C"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:21
@@ -3387,18 +3801,21 @@ msgstr ""
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:33
+#, fuzzy
 msgid "Zip disc labels"
-msgstr ""
+msgstr "diska Blu-ray kosong"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:39
+#, fuzzy
 msgid "Arch File labels"
-msgstr ""
+msgstr "Arch Linux"
 
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:43
+#, fuzzy
 msgid "Mini Disc labels"
-msgstr ""
+msgstr "diska Blu-ray kosong"
 
 #. ===================================================================
 #: ../templates/herma-iso-templates.xml.h:2
@@ -3412,7 +3829,7 @@ msgstr ""
 
 #. ===================================================================
 #: ../templates/herma-iso-templates.xml.h:10
-#: ../templates/zweckform-iso-templates.xml.h:20
+#: ../templates/zweckform-iso-templates.xml.h:18
 msgid "Allround Labels"
 msgstr ""
 
@@ -3429,8 +3846,9 @@ msgstr ""
 #. ===================================================================
 #: ../templates/igepa-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:18
+#, fuzzy
 msgid "Floppy disk labels"
-msgstr ""
+msgstr "Apakah label mesti memiliki mnemonik"
 
 #. ===================================================================
 #: ../templates/igepa-templates.xml.h:4
@@ -3441,22 +3859,23 @@ msgstr ""
 #. *******************************************************************
 #: ../templates/jac-iso-templates.xml.h:8
 msgid "PVC labels"
-msgstr ""
+msgstr "Label PVC"
 
 #. ===================================================================
 #: ../templates/meritline-us-templates.xml.h:2
+#, fuzzy
 msgid "Mini-CD Labels"
-msgstr ""
+msgstr "CD gambar"
 
 #. ===================================================================
 #: ../templates/microapp-templates.xml.h:2
 msgid "Standard Labels"
-msgstr ""
+msgstr "Label Standar"
 
 #. ===================================================================
 #. TODO: Is this the actual part #?
 #: ../templates/misc-us-templates.xml.h:2
-#: ../templates/misc-iso-templates.xml.h:24
+#: ../templates/misc-iso-templates.xml.h:26
 msgid "CD/DVD Labels (face only)"
 msgstr ""
 
@@ -3481,18 +3900,21 @@ msgstr ""
 
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:13
+#, fuzzy
 msgid "CD Template Rectangles"
-msgstr ""
+msgstr "CD gambar"
 
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:15
+#, fuzzy
 msgid "Business Card CD"
-msgstr ""
+msgstr "Bisnis"
 
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:17
+#, fuzzy
 msgid "Jewel Case Booklet"
-msgstr ""
+msgstr "_Cocok huruf besar kecil"
 
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:19
@@ -3502,7 +3924,7 @@ msgstr ""
 #. ===================================================================
 #. TODO: Is this the actual part #?
 #: ../templates/misc-us-templates.xml.h:27
-#: ../templates/misc-iso-templates.xml.h:36
+#: ../templates/misc-iso-templates.xml.h:38
 msgid "PRO CD Labels 2-up (face only)"
 msgstr ""
 
@@ -3523,43 +3945,46 @@ msgstr ""
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:8
+#, fuzzy
 msgid "General Labels"
-msgstr ""
+msgstr "_Umum"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:10
 #: ../templates/pearl-iso-templates.xml.h:28
+#, fuzzy
 msgid "Self-adhesive labels"
-msgstr ""
+msgstr "Apakah label mesti memiliki mnemonik"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:14
+#: ../templates/misc-iso-templates.xml.h:16
 msgid "Fridge Magnet Stickers"
 msgstr ""
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:16
+#: ../templates/misc-iso-templates.xml.h:18
 msgid "Inkjet/Laser Labels 70x37mm"
 msgstr ""
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:18
+#: ../templates/misc-iso-templates.xml.h:20
 msgid "EPSON Photo Stickers 16"
 msgstr ""
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:30
+#: ../templates/misc-iso-templates.xml.h:32
 msgid "Universal Labels"
-msgstr ""
+msgstr "Label Universal"
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:34
+#: ../templates/misc-iso-templates.xml.h:36
 #: ../templates/pearl-iso-templates.xml.h:16
+#: ../templates/sheetlabels-us-templates.xml.h:26
 msgid "Bottle labels"
 msgstr ""
 
 #. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:38
+#: ../templates/misc-iso-templates.xml.h:40
 msgid "Etiketten"
 msgstr ""
 
@@ -3580,18 +4005,21 @@ msgstr ""
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:24
+#, fuzzy
 msgid "Photo labels semiglossy"
-msgstr ""
+msgstr "Ambil foto…"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:26
+#, fuzzy
 msgid "Address Labels (STAMPIT)"
-msgstr ""
+msgstr "Apakah label mesti memiliki mnemonik"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:30
+#, fuzzy
 msgid "SD card labels"
-msgstr ""
+msgstr "Apakah label mesti memiliki mnemonik"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:40
@@ -3600,8 +4028,9 @@ msgstr ""
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:42
+#, fuzzy
 msgid "Business cards punched"
-msgstr ""
+msgstr "Kartu Hari Libur"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:44
@@ -3616,7 +4045,7 @@ msgstr ""
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:48
 msgid "Name plates"
-msgstr ""
+msgstr "Papan nama"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:50
@@ -3635,8 +4064,9 @@ msgstr ""
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:56
+#, fuzzy
 msgid "Foldable business cards"
-msgstr ""
+msgstr "Kartu Hari Libur"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:62
@@ -3649,7 +4079,7 @@ msgstr ""
 
 #: ../templates/rayfilm-templates.xml.h:12
 msgid "Mini CD Labels"
-msgstr ""
+msgstr "Label CD Mini"
 
 #: ../templates/rayfilm-templates.xml.h:13
 msgid "Triangular labels"
@@ -3660,32 +4090,32 @@ msgid "Trapezoid labels"
 msgstr ""
 
 #. ===================================================================
+#: ../templates/sheetlabels-us-templates.xml.h:22
+msgid "Oval bottle labels"
+msgstr "Label botol oval"
+
+#. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:12
 msgid "QSL-Karten Etiketten 70mm x 50,8mm"
 msgstr ""
 
 #. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:14
-msgid "File Back Labels"
-msgstr ""
-
-#. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:16
 msgid "Multi-purpose Stick+Lift Labels"
 msgstr ""
 
 #. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:18
+#: ../templates/zweckform-iso-templates.xml.h:16
 msgid "Video Labels (back)"
-msgstr ""
+msgstr "Label Video (belakang)"
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:20
+#, fuzzy
+msgid "Rectangular Copier Labels"
+msgstr "Apakah label mesti memiliki mnemonik"
 
 #. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:22
-msgid "Rectangular Copier Labels"
-msgstr ""
-
-#. ===================================================================
-#: ../templates/zweckform-iso-templates.xml.h:24
 msgid "Correction and Cover-up Labels"
 msgstr ""
-

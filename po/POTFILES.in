@@ -255,6 +255,7 @@ data/schemas/org.gnome.glabels-3.gschema.xml.in.in
 [type: gettext/xml]templates/misc-us-templates.xml
 [type: gettext/xml]templates/misc-iso-templates.xml
 [type: gettext/xml]templates/misc-other-templates.xml
+[type: gettext/xml]templates/online-templates.xml
 [type: gettext/xml]templates/pearl-iso-templates.xml
 [type: gettext/xml]templates/rayfilm-templates.xml
 [type: gettext/xml]templates/sheetlabels-us-templates.xml
