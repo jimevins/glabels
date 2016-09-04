@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels 1.91.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2016-06-18 08:10+0000\n"
-"PO-Revision-Date: 2016-07-04 15:41+0100\n"
+"POT-Creation-Date: 2016-07-13 17:04+0000\n"
+"PO-Revision-Date: 2016-09-04 13:17+0100\n"
 "Last-Translator: Tiago Santos <tiagofsantos81@sapo.pt>\n"
 "Language-Team: Português\n"
 "Language: pt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../src/bc-backends.c:81
 msgid "Built-in"
@@ -220,7 +220,6 @@ msgid "Data Matrix"
 msgstr "Data Matrix"
 
 #: ../src/bc-backends.c:272
-#| msgid "Data Matrix"
 msgid "Data Matrix (GS1)"
 msgstr "Data Matrix (GS1)"
 
@@ -561,7 +560,6 @@ msgstr "Propriedades da etiqueta"
 
 #. Translators: assistent dialog title
 #: ../src/file.c:203
-#| msgid "Label properties"
 msgid "Choose label properties"
 msgstr "Escolha as propriedades da etiqueta"
 
@@ -829,7 +827,6 @@ msgstr "%s × %s / %s %s (largura × altura / redonda)"
 #. "120.5 mm (diameter)"
 #: ../src/label.c:788
 #, c-format
-#| msgid "diameter"
 msgid "%s %s (diameter)"
 msgstr "%s %s (diâmetro)"
 
@@ -1154,7 +1151,6 @@ msgid "Up"
 msgstr "Acima"
 
 #: ../src/new-label-dialog.c:214
-#| msgid "Select Product"
 msgctxt "Title of dialog page to select a stationary product"
 msgid "Select Product"
 msgstr "Selecionar produto"
@@ -1302,7 +1298,7 @@ msgstr "_Ficheiro"
 
 #: ../src/ui.c:92
 msgid "Open Recent _Files"
-msgstr "Abir _Ficheiros recentes"
+msgstr "Abrir _ficheiros recentes"
 
 #: ../src/ui.c:93
 msgid "_Edit"
@@ -1350,7 +1346,7 @@ msgstr "Centro"
 
 #: ../src/ui.c:104
 msgid "_Help"
-msgstr "A_Juda"
+msgstr "A_juda"
 
 #. Popup entries.
 #: ../src/ui.c:107 ../src/ui.c:108
@@ -1383,7 +1379,7 @@ msgstr "Grava o ficheiro atual"
 
 #: ../src/ui.c:134
 msgid "Save _As..."
-msgstr "Gravar _Como..."
+msgstr "Gravar _como..."
 
 #: ../src/ui.c:136
 msgid "Save the current file to a different name"
@@ -1708,7 +1704,8 @@ msgstr "Um programa de criação de etiquetas e cartões de visita.\n"
 
 #: ../src/ui-commands.c:1166
 msgid "translator-credits"
-msgstr "Pedro Albuquerque <palbuquerque73@gmail.com>\n"
+msgstr ""
+"Pedro Albuquerque <palbuquerque73@gmail.com>\n"
 "Tiago Santos <tiagofsantos81@sapo.pt>"
 
 #: ../src/ui-commands.c:1169
@@ -1847,7 +1844,6 @@ msgstr "picas"
 #. * End:                   -- emacs
 #.
 #: ../data/ui/label-properties-dialog.ui.h:1
-#| msgid "Labels"
 msgid "Label"
 msgstr "Etiqueta"
 
@@ -1861,8 +1857,8 @@ msgstr "Vendedor:"
 msgid "Part #:"
 msgstr "Série #:"
 
-#: ../data/ui/label-properties-dialog.ui.h:4
-#: ../data/ui/new-label-dialog.ui.h:9 ../data/ui/template-designer.ui.h:9
+#: ../data/ui/label-properties-dialog.ui.h:4 ../data/ui/new-label-dialog.ui.h:9
+#: ../data/ui/template-designer.ui.h:9
 msgid "Description:"
 msgstr "Descrição:"
 
@@ -1871,7 +1867,6 @@ msgid "Dimensions:"
 msgstr "Dimensões:"
 
 #: ../data/ui/label-properties-dialog.ui.h:6
-#| msgid "Medium green"
 msgid "Medium size:"
 msgstr "Tamanho médio:"
 
@@ -1881,7 +1876,6 @@ msgid "Layout:"
 msgstr "Disposição:"
 
 #: ../data/ui/label-properties-dialog.ui.h:8
-#| msgid "6. Margin"
 msgid "Margins:"
 msgstr "Margens:"
 
@@ -1896,17 +1890,14 @@ msgid "Options"
 msgstr "Opções"
 
 #: ../data/ui/label-properties-dialog.ui.h:11
-#| msgid "Choose Orientation"
 msgid "Orientation:"
 msgstr "Orientação:"
 
 #: ../data/ui/label-properties-dialog.ui.h:12
-#| msgid "Normal"
 msgid "_Normal"
 msgstr "_Normal"
 
 #: ../data/ui/label-properties-dialog.ui.h:13
-#| msgid "Rotated"
 msgid "_Rotated"
 msgstr "_Rodado"
 
@@ -2497,7 +2488,6 @@ msgstr ""
 "ou \"Recuar\" para continuar a editar."
 
 #: ../data/appdata/glabels-3.appdata.xml.in.h:1
-#| msgid "Labels"
 msgid "gLabels"
 msgstr "Etiquetas"
 
@@ -2923,8 +2913,7 @@ msgstr "Etiquetas quadradas"
 #: ../templates/hama-iso-templates.xml.h:27
 #: ../templates/herma-iso-templates.xml.h:20
 #: ../templates/igepa-templates.xml.h:1 ../templates/jac-iso-templates.xml.h:4
-#: ../templates/online-templates.xml.h:7
-#: ../templates/rayfilm-templates.xml.h:1
+#: ../templates/online-templates.xml.h:7 ../templates/rayfilm-templates.xml.h:1
 #: ../templates/sheetlabels-us-templates.xml.h:2
 msgid "Rectangular labels"
 msgstr "Etiquetas retangulares"
@@ -2944,7 +2933,6 @@ msgid "Business cards"
 msgstr "Cartões de visita"
 
 #: ../templates/categories.xml.h:8
-#| msgid "Name Badge Labels"
 msgid "Name Badge"
 msgstr "Crachá"
 
@@ -2965,7 +2953,6 @@ msgid "Photo products"
 msgstr "Produtos fotográficos"
 
 #: ../templates/categories.xml.h:13
-#| msgid "Filing Labels"
 msgid "Filing labels"
 msgstr "Etiquetas de enchimento"
 
@@ -3260,12 +3247,10 @@ msgid "Diskette labels"
 msgstr "Etiquetas de disquete"
 
 #: ../templates/begalabel-templates.xml.h:1
-#| msgid "Rectangular labels"
 msgid "Rounded rectangular labels"
 msgstr "Etiquetas retangulares arredondadas"
 
 #: ../templates/begalabel-templates.xml.h:6
-#| msgid "Cassette Labels"
 msgid "Cassette Tape Face"
 msgstr "Etiquetas de cassete"
 
@@ -3371,7 +3356,6 @@ msgstr "Cartões de membros"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:4
-#| msgid "Multi-Purpose Labels"
 msgid "Multipurpose Labels"
 msgstr "Etiquetas genéricas"
 
@@ -3382,7 +3366,6 @@ msgstr "Pasta de arquivo"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:10
-#| msgid "Name Badge Labels"
 msgid "Name Badges"
 msgstr "Crachás"
 
@@ -3728,7 +3711,6 @@ msgid "Jar labels, candle labels"
 msgstr "Etiquetas para jarras, etiquetas para candeeiros"
 
 #: ../templates/online-templates.xml.h:3
-#| msgid "Square labels"
 msgid "Barcode labels"
 msgstr "Etiquetas de código de barras"
 
@@ -3737,7 +3719,6 @@ msgid "Classification labels, library book labels"
 msgstr "Etiquetas de classificação, etiquetas para livros de biblioteca"
 
 #: ../templates/online-templates.xml.h:5
-#| msgid "Bottle labels"
 msgid "Water bottle labels"
 msgstr "Rótulos de garrafa"
 
@@ -3747,19 +3728,16 @@ msgstr "Etiquetas para jarras, etiquetas para vasos, etiquetas para candeeiros"
 
 #. OL120
 #: ../templates/online-templates.xml.h:9
-#| msgid "Rectangular labels"
 msgid "Medical chart labels"
 msgstr "Etiquetas para gráficos médicos"
 
 #. OL8325
 #: ../templates/online-templates.xml.h:11
-#| msgid "Microtube labels"
 msgid "Lip balm tube labels"
 msgstr "Etiquetas para baton de cieiro"
 
 #. OL2162
 #: ../templates/online-templates.xml.h:13
-#| msgid "Return Address Labels"
 msgid "Return address labels"
 msgstr "Etiquetas de endereço de remetente"
 
@@ -3774,7 +3752,6 @@ msgid "Jar labels, nutritional labels"
 msgstr "Etiquetas para jarros, etiquetas nutricionais"
 
 #: ../templates/online-templates.xml.h:16
-#| msgid "Square labels"
 msgid "Jar labels"
 msgstr "Etiquetas para jarros"
 
@@ -3784,7 +3761,6 @@ msgstr "Etiquetas para garrafas de vinho, etiquetas nutricionais"
 
 #. OL1102
 #: ../templates/online-templates.xml.h:20
-#| msgid "Divider Labels"
 msgid "Digital video labels"
 msgstr "Etiquetas para vídeo digital"
 
@@ -3793,7 +3769,6 @@ msgid "Pot labels, coffee and tea labels"
 msgstr "etiquetas para jarros, etiquetas para café e chá"
 
 #: ../templates/online-templates.xml.h:23
-#| msgid "Any label"
 msgid "Candy labels"
 msgstr "Etiquetas para doces"
 
@@ -3820,7 +3795,6 @@ msgid "Jar labels, pot labels, nutritional labels"
 msgstr "Etiquetas para jarros, etiquetas para vasos, etiquetas nutricionais"
 
 #: ../templates/online-templates.xml.h:31
-#| msgid "File Folder Labels"
 msgid "File folder labels"
 msgstr "Etiquetas para pastas de arquivo"
 
@@ -3833,7 +3807,6 @@ msgid "Bookplate labels, coffee and tea labels"
 msgstr "Etiquetas para prateleiras, etiquetas para café e chá"
 
 #: ../templates/online-templates.xml.h:34
-#| msgid "Shipping labels"
 msgid "Amazon FBA shipping labels"
 msgstr "Etiquetas para expedição pela Amazon"
 
@@ -3847,7 +3820,6 @@ msgid "Jar labels, pot labels, coffee and tea labels"
 msgstr "Etiquetas para jarros, etiquetas para café e chá"
 
 #: ../templates/online-templates.xml.h:37
-#| msgid "Diskette labels"
 msgid "Digital media labels"
 msgstr "Etiquetas de multimédia digital"
 
@@ -3856,22 +3828,18 @@ msgid "Jar labels, Coffee and tea labels"
 msgstr "Etiquetas para jarros, etiquetas para café e chá"
 
 #: ../templates/online-templates.xml.h:39
-#| msgid "Bottle labels"
 msgid "Wine bottle labels"
 msgstr "Rótulos de garrafa"
 
 #: ../templates/online-templates.xml.h:40
-#| msgid "Mailing labels"
 msgid "Mail Order Manager labels"
 msgstr "Etiquetas de gestão de encomendas de correio"
 
 #: ../templates/online-templates.xml.h:41
-#| msgid "Bottle labels"
 msgid "Liquor bottle labels"
 msgstr "Rótulos de bebidas espirituosas"
 
 #: ../templates/online-templates.xml.h:42
-#| msgid "Microtube labels"
 msgid "Metal tin container labels"
 msgstr "Etiquetas para vasilhas de metal"
 
@@ -3884,7 +3852,6 @@ msgid "VHS labels, jar labels, book labels"
 msgstr "Etiquetas VHS, etiquetas para jarros, etiquetas para livros"
 
 #: ../templates/online-templates.xml.h:45
-#| msgid "Shipping labels"
 msgid "USPS® shipping labels"
 msgstr "Etiquetas de expedição USPS®"
 
@@ -3905,7 +3872,6 @@ msgstr ""
 "garrafas de vinho"
 
 #: ../templates/online-templates.xml.h:49
-#| msgid "Any label"
 msgid "PayPal® label"
 msgstr "Etiqueta PayPal®"
 
@@ -3924,17 +3890,14 @@ msgid "Pot labels, barcode labels"
 msgstr "Etiquetas para jarros, etiquetas para códigos de barras"
 
 #: ../templates/online-templates.xml.h:54
-#| msgid "Start on label"
 msgid "Nutritional labels"
 msgstr "Etiqueta nutricional"
 
 #: ../templates/online-templates.xml.h:55
-#| msgid "SD card labels"
 msgid "CD case labels"
 msgstr "Etiquetas de caixa de CD"
 
 #: ../templates/online-templates.xml.h:56
-#| msgid "Business card CD Labels"
 msgid "Business card size labels"
 msgstr "Etiquetas com tamanho de cartões de visita"
 
@@ -3949,7 +3912,6 @@ msgstr ""
 "WorldShip®"
 
 #: ../templates/online-templates.xml.h:59
-#| msgid "Round labels"
 msgid "Coffee and tea labels"
 msgstr "Etiquetas de café e chá"
 
@@ -3958,22 +3920,18 @@ msgid "Water bottle labels, shipping labels"
 msgstr "Etiquetas para garrafas de água, etiquetas de expedição"
 
 #: ../templates/online-templates.xml.h:61
-#| msgid "PVC labels"
 msgid "VICS labels"
 msgstr "Etiquetas VICS"
 
 #: ../templates/online-templates.xml.h:62
-#| msgid "Full Sheet Labels"
 msgid "Full sheet labels with back slit"
 msgstr "Etiquetas de folha inteira com ranhura no verso"
 
 #: ../templates/online-templates.xml.h:63
-#| msgid "Full Sheet Labels"
 msgid "Full sheet labels"
 msgstr "Etiquetas de folha inteira"
 
 #: ../templates/online-templates.xml.h:64
-#| msgid "Elliptical labels"
 msgid "Lip balm labels"
 msgstr "Etiquetas de baton de cieiro"
 
@@ -3986,7 +3944,6 @@ msgid "Candle labels, lip balm labels"
 msgstr "Etiquetas para candeeiros, etiquetas para baton de cieiro"
 
 #: ../templates/online-templates.xml.h:69
-#| msgid "Square labels"
 msgid "Seal labels"
 msgstr "Etiquetas de selagem"
 
@@ -4032,37 +3989,30 @@ msgid "Beer bottle label, jar label"
 msgstr "Etiquetas para cerveja,  etiquetas para jarros"
 
 #: ../templates/online-templates.xml.h:77
-#| msgid "Fridge Magnet Stickers"
 msgid "Target stickers"
 msgstr "Autocolantes alvo"
 
 #: ../templates/online-templates.xml.h:78
-#| msgid "Rectangular labels"
 msgid "Round and rectangular labels"
 msgstr "Etiquetas redondas e retangulares"
 
 #: ../templates/online-templates.xml.h:79
-#| msgid "CD/DVD labels"
 msgid "CD/DVD center hub labels"
 msgstr "Etiquetas de CD/DVD"
 
 #: ../templates/online-templates.xml.h:80
-#| msgid "Business card CD Labels"
 msgid "Business card CD labels"
 msgstr "Etiquetas de cartões de visita CD"
 
 #: ../templates/online-templates.xml.h:81
-#| msgid "Mini CD Labels"
 msgid "Mini CD labels"
 msgstr "Etiquetas para Mini CD"
 
 #: ../templates/online-templates.xml.h:84
-#| msgid "CD/DVD labels"
 msgid "Full face CD/DVD labels"
 msgstr "Etiquetas de CD/DVD"
 
 #: ../templates/online-templates.xml.h:85
-#| msgid "Shipping labels"
 msgid "eBay® shipping labels"
 msgstr "Etiquetas de expedição eBay®"
 
@@ -4164,7 +4114,6 @@ msgstr "Etiquetas trapezoidais"
 
 #. ===================================================================
 #: ../templates/sheetlabels-us-templates.xml.h:22
-#| msgid "Bottle labels"
 msgid "Oval bottle labels"
 msgstr "Rótulos de garrafa oval"
 
