@@ -3730,7 +3730,6 @@ msgid "Jar labels, candle labels"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:3
-#, fuzzy
 msgid "Barcode labels"
 msgstr "Etiquetas carradas"
 
@@ -3739,7 +3738,6 @@ msgid "Classification labels, library book labels"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:5
-#, fuzzy
 msgid "Water bottle labels"
 msgstr "Etiquetas de botelha ovala"
 
@@ -3749,19 +3747,16 @@ msgstr ""
 
 #. OL120
 #: ../templates/online-templates.xml.h:9
-#, fuzzy
 msgid "Medical chart labels"
 msgstr "Etiquetas rectangularas"
 
 #. OL8325
 #: ../templates/online-templates.xml.h:11
-#, fuzzy
 msgid "Lip balm tube labels"
 msgstr "Etiquetas microtub"
 
 #. OL2162
 #: ../templates/online-templates.xml.h:13
-#, fuzzy
 msgid "Return address labels"
 msgstr "Etiquetas d'adreça de retorn"
 
@@ -3774,7 +3769,6 @@ msgid "Jar labels, nutritional labels"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:16
-#, fuzzy
 msgid "Jar labels"
 msgstr "Etiquetas carradas"
 
@@ -3784,7 +3778,6 @@ msgstr ""
 
 #. OL1102
 #: ../templates/online-templates.xml.h:20
-#, fuzzy
 msgid "Digital video labels"
 msgstr "Etiquetas de division"
 
@@ -3793,7 +3786,6 @@ msgid "Pot labels, coffee and tea labels"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:23
-#, fuzzy
 msgid "Candy labels"
 msgstr "Tota etiqueta"
 
@@ -3818,7 +3810,6 @@ msgid "Jar labels, pot labels, nutritional labels"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:31
-#, fuzzy
 msgid "File folder labels"
 msgstr "Etiquetas de dorsièr d'archius"
 
@@ -3831,7 +3822,6 @@ msgid "Bookplate labels, coffee and tea labels"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:34
-#, fuzzy
 msgid "Amazon FBA shipping labels"
 msgstr "Etiquetas postalas"
 
@@ -3844,7 +3834,6 @@ msgid "Jar labels, pot labels, coffee and tea labels"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:37
-#, fuzzy
 msgid "Digital media labels"
 msgstr "Etiquetas de disqueta"
 
@@ -3853,22 +3842,18 @@ msgid "Jar labels, Coffee and tea labels"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:39
-#, fuzzy
 msgid "Wine bottle labels"
 msgstr "Etiquetas de botelha ovala"
 
 #: ../templates/online-templates.xml.h:40
-#, fuzzy
 msgid "Mail Order Manager labels"
 msgstr "Etiquetas de publipostatge"
 
 #: ../templates/online-templates.xml.h:41
-#, fuzzy
 msgid "Liquor bottle labels"
 msgstr "Etiquetas de botelha ovala"
 
 #: ../templates/online-templates.xml.h:42
-#, fuzzy
 msgid "Metal tin container labels"
 msgstr "Etiquetas microtub"
 
@@ -3889,7 +3874,6 @@ msgid "Jar labels, candle labels, metal tin container labels"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:47
-#, fuzzy
 msgid "Jar labels, water bottle labels"
 msgstr "Etiquetas de botelha ovala"
 
@@ -3914,17 +3898,14 @@ msgid "Pot labels, barcode labels"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:54
-#, fuzzy
 msgid "Nutritional labels"
 msgstr "Començar per l'etiqueta"
 
 #: ../templates/online-templates.xml.h:55
-#, fuzzy
 msgid "CD case labels"
 msgstr "Etiquetas per cartas SD"
 
 #: ../templates/online-templates.xml.h:56
-#, fuzzy
 msgid "Business card size labels"
 msgstr "Etiquetas CD carta de visita"
 
@@ -3937,7 +3918,6 @@ msgid "Wine bottle labels, shipping labels, UPSÂ® WorldShipÂ® labels"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:59
-#, fuzzy
 msgid "Coffee and tea labels"
 msgstr "Etiquetas circularas"
 
@@ -3946,22 +3926,18 @@ msgid "Water bottle labels, shipping labels"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:61
-#, fuzzy
 msgid "VICS labels"
 msgstr "Etiquetas PVC"
 
 #: ../templates/online-templates.xml.h:62
-#, fuzzy
 msgid "Full sheet labels with back slit"
 msgstr "Etiquetas plena pagina"
 
 #: ../templates/online-templates.xml.h:63
-#, fuzzy
 msgid "Full sheet labels"
 msgstr "Etiquetas plena pagina"
 
 #: ../templates/online-templates.xml.h:64
-#, fuzzy
 msgid "Lip balm labels"
 msgstr "Etiquetas ellipticas"
 
@@ -3974,7 +3950,6 @@ msgid "Candle labels, lip balm labels"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:69
-#, fuzzy
 msgid "Seal labels"
 msgstr "Etiquetas carradas"
 
@@ -4009,32 +3984,26 @@ msgid "Beer bottle label, jar label"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:77
-#, fuzzy
 msgid "Target stickers"
 msgstr "Pegasolets magnetics"
 
 #: ../templates/online-templates.xml.h:78
-#, fuzzy
 msgid "Round and rectangular labels"
 msgstr "Etiquetas rectangularas arredondidas"
 
 #: ../templates/online-templates.xml.h:79
-#, fuzzy
 msgid "CD/DVD center hub labels"
 msgstr "Etiquetas de CD/DVD"
 
 #: ../templates/online-templates.xml.h:80
-#, fuzzy
 msgid "Business card CD labels"
 msgstr "Etiquetas CD carta de visita"
 
 #: ../templates/online-templates.xml.h:81
-#, fuzzy
 msgid "Mini CD labels"
 msgstr "Etiquetas mini-CD"
 
 #: ../templates/online-templates.xml.h:84
-#, fuzzy
 msgid "Full face CD/DVD labels"
 msgstr "Etiquetas de CD/DVD"
 
