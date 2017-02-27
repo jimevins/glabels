@@ -1322,11 +1322,11 @@ msgstr "Mida de l'etiqueta o targeta"
 
 #: ../src/template-designer.c:760
 msgid "Label Size (round)"
-msgstr "Mida de 'etiqueta (circular)"
+msgstr "Mida d'etiqueta (circular)"
 
 #: ../src/template-designer.c:841
 msgid "Label Size (CD/DVD)"
-msgstr "Mida de 'etiqueta (CD/DVD)"
+msgstr "Mida d'etiqueta (CD/DVD)"
 
 #: ../src/template-designer.c:932
 msgid "Number of Layouts"
@@ -2148,7 +2148,7 @@ msgstr "Llargada:"
 
 #: ../data/ui/object-editor.ui.h:18 ../data/ui/prefs-dialog.ui.h:10
 msgid "Line Spacing:"
-msgstr "Espaiat de línia:"
+msgstr "Interlineat:"
 
 #: ../data/ui/object-editor.ui.h:19
 msgid "Literal:"
@@ -2234,7 +2234,7 @@ msgstr "Reinicialitza la mida de la imatge"
 
 #: ../data/ui/prefs-dialog.ui.h:6
 msgid "Font:"
-msgstr "Tipus de lletra"
+msgstr "Tipus de lletra:"
 
 #: ../data/ui/prefs-dialog.ui.h:7
 msgid "ISO A4"
@@ -2262,11 +2262,11 @@ msgstr "Punts"
 
 #: ../data/ui/prefs-dialog.ui.h:15
 msgid "Select default properties for new objects."
-msgstr "Seleccioneu els valors predeterminats dels objectes nous"
+msgstr "Seleccioneu els valors predeterminats dels objectes nous."
 
 #: ../data/ui/prefs-dialog.ui.h:16
 msgid "Select locale specific behavior."
-msgstr "Seleccioneu el comportament específic de la localització"
+msgstr "Seleccioneu el comportament específic de la localització."
 
 #: ../data/ui/prefs-dialog.ui.h:18 ../templates/paper-sizes.xml.h:35
 msgid "US Letter"
@@ -2343,7 +2343,7 @@ msgstr "3. Corba (radi de la cantonada):"
 
 #: ../data/ui/template-designer.ui.h:13
 msgid "4. Clipping height:"
-msgstr "4. Alçada de retallada"
+msgstr "4. Alçada de retallada:"
 
 #: ../data/ui/template-designer.ui.h:14
 msgid "4. Horiz. waste (overprint allowed):"
@@ -2460,7 +2460,7 @@ msgid ""
 "template."
 msgstr ""
 "Introduïu els paràmetres de mida següents d'una etiqueta única o targeta a "
-"la vostra plantilla"
+"la vostra plantilla."
 
 #: ../data/ui/template-designer.ui.h:48
 msgid "Please select the basic shape of the labels or cards."
@@ -2524,7 +2524,7 @@ msgstr "Còpies"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:3
 msgid "Copies:"
-msgstr "Còpies"
+msgstr "Còpies:"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:5
 msgid "Merge Control"
