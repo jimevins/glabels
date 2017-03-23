@@ -1,25 +1,27 @@
 # Swedish translation for glabels.
-# Copyright © 2009-2016 Free Software Foundation, Inc.
+# Copyright © 2009-2017 Free Software Foundation, Inc.
 # This file is distributed under the same license as the glabels package.
 # Daniel Nylander <po@danielnylander.se>, 2009, 2010.
 # Åke Engelbrektson <eson57@gmail.com>, 2014.
-# Josef Andersson <josef.andersson@fripost.org>, 2016.
+# Josef Andersson <josef.andersson@fripost.org>, 2016, 2017.
 # Anders Jonsson <anders.jonsson@norsjovallen.se>, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels\n"
-"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2016-04-11 09:03+0000\n"
-"PO-Revision-Date: 2016-04-11 14:21+0200\n"
-"Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
+"product=glabels&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2017-02-27 16:34+0000\n"
+"PO-Revision-Date: 2017-03-21 22:37+0100\n"
+"Last-Translator: Josef Andersson <l10nl18nsweja@gmail.com>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-Bookmarks: -1,794,-1,799,-1,-1,-1,-1,-1,-1\n"
 
 #: ../src/bc-backends.c:81
 msgid "Built-in"
@@ -1740,7 +1742,7 @@ msgstr "Fel i gLabels!"
 msgid "(none) - gLabels"
 msgstr "(ingen) - gLabels"
 
-#: ../src/window.c:482
+#: ../src/window.c:484
 msgid "(modified)"
 msgstr "(ändrad)"
 
@@ -2872,6 +2874,7 @@ msgstr "Valfri etikett"
 #: ../templates/categories.xml.h:2 ../templates/begalabel-templates.xml.h:3
 #: ../templates/endisch-templates.xml.h:1
 #: ../templates/hama-iso-templates.xml.h:4
+#: ../templates/hisago-templates.xml.h:7 ../templates/online-templates.xml.h:66
 #: ../templates/pearl-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:8
 #: ../templates/sheetlabels-us-templates.xml.h:16
@@ -2880,7 +2883,8 @@ msgstr "Runda etiketter"
 
 #. ===================================================================
 #: ../templates/categories.xml.h:3 ../templates/begalabel-templates.xml.h:4
-#: ../templates/endisch-templates.xml.h:2
+#: ../templates/endisch-templates.xml.h:2 ../templates/hisago-templates.xml.h:9
+#: ../templates/online-templates.xml.h:67
 #: ../templates/pearl-iso-templates.xml.h:58
 #: ../templates/rayfilm-templates.xml.h:9
 msgid "Elliptical labels"
@@ -2889,6 +2893,7 @@ msgstr "Elliptiska etiketter"
 #. ====================================================================
 #: ../templates/categories.xml.h:4 ../templates/endisch-templates.xml.h:4
 #: ../templates/hama-iso-templates.xml.h:41
+#: ../templates/hisago-templates.xml.h:8 ../templates/online-templates.xml.h:17
 #: ../templates/rayfilm-templates.xml.h:2
 msgid "Square labels"
 msgstr "Fyrkantiga etiketter"
@@ -2896,6 +2901,7 @@ msgstr "Fyrkantiga etiketter"
 #. ===================================================================
 #. ====================================================================
 #. ===================================================================
+#. OP920-R
 #. ********************************************************************
 #. ===================================================================
 #: ../templates/categories.xml.h:5 ../templates/ascom-iso-templates.xml.h:4
@@ -2903,7 +2909,8 @@ msgstr "Fyrkantiga etiketter"
 #: ../templates/endisch-templates.xml.h:3
 #: ../templates/hama-iso-templates.xml.h:27
 #: ../templates/herma-iso-templates.xml.h:20
-#: ../templates/igepa-templates.xml.h:1 ../templates/jac-iso-templates.xml.h:4
+#: ../templates/hisago-templates.xml.h:5 ../templates/igepa-templates.xml.h:1
+#: ../templates/jac-iso-templates.xml.h:4 ../templates/online-templates.xml.h:7
 #: ../templates/rayfilm-templates.xml.h:1
 #: ../templates/sheetlabels-us-templates.xml.h:2
 msgid "Rectangular labels"
@@ -3045,7 +3052,6 @@ msgstr "Avsändaretiketter"
 #: ../templates/avery-us-templates.xml.h:16
 #: ../templates/maco-us-templates.xml.h:3
 #: ../templates/meritline-us-templates.xml.h:12
-#: ../templates/misc-us-templates.xml.h:23
 #: ../templates/sheetlabels-us-templates.xml.h:10
 #: ../templates/worldlabel-us-templates.xml.h:9
 msgid "Round Labels"
@@ -3082,7 +3088,7 @@ msgstr "Märketiketter"
 #: ../templates/databecker-iso-templates.xml.h:2
 #: ../templates/dataline-iso-templates.xml.h:4
 #: ../templates/decadry-iso-templates.xml.h:6
-#: ../templates/misc-us-templates.xml.h:25
+#: ../templates/misc-us-templates.xml.h:23
 #: ../templates/misc-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:15
 #: ../templates/zweckform-iso-templates.xml.h:28
@@ -3185,6 +3191,7 @@ msgstr "Universaletiketter"
 #: ../templates/avery-iso-templates.xml.h:10
 #: ../templates/decadry-iso-templates.xml.h:2
 #: ../templates/misc-iso-templates.xml.h:14
+#: ../templates/online-templates.xml.h:21
 msgid "Mailing labels"
 msgstr "Försändelseetiketter"
 
@@ -3192,11 +3199,13 @@ msgstr "Försändelseetiketter"
 #: ../templates/avery-iso-templates.xml.h:12
 #: ../templates/dymo-other-templates.xml.h:6
 #: ../templates/misc-iso-templates.xml.h:12
+#: ../templates/online-templates.xml.h:53
 msgid "Address labels"
 msgstr "Adressetiketter"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:16
+#: ../templates/hisago-templates.xml.h:6 ../templates/online-templates.xml.h:26
 msgid "Shipping labels"
 msgstr "Leveransetiketter"
 
@@ -3329,9 +3338,11 @@ msgstr "CD-etiketter"
 #. ===================================================================
 #. ====================================================================
 #. ===================================================================
+#. OL6075
 #: ../templates/dataline-iso-templates.xml.h:2
 #: ../templates/hama-iso-templates.xml.h:35
 #: ../templates/misc-iso-templates.xml.h:34
+#: ../templates/online-templates.xml.h:83
 msgid "CD/DVD labels"
 msgstr "CD/DVD-etiketter"
 
@@ -3373,14 +3384,14 @@ msgid "Shipping Address Labels"
 msgstr "Försändelseetiketter"
 
 #. ===================================================================
-#: ../templates/endisch-templates.xml.h:5
+#: ../templates/endisch-templates.xml.h:5 ../templates/hisago-templates.xml.h:3
 #: ../templates/pearl-iso-templates.xml.h:20
 #: ../templates/rayfilm-templates.xml.h:3
 msgid "Labels A6"
 msgstr "Etiketter A6"
 
 #. ===================================================================
-#: ../templates/endisch-templates.xml.h:6
+#: ../templates/endisch-templates.xml.h:6 ../templates/hisago-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:22
 #: ../templates/rayfilm-templates.xml.h:4
 msgid "Labels A5"
@@ -3388,8 +3399,8 @@ msgstr "Etiketter A5"
 
 #. *******************************************************************
 #. ===================================================================
-#: ../templates/endisch-templates.xml.h:7 ../templates/igepa-templates.xml.h:3
-#: ../templates/jac-iso-templates.xml.h:6
+#: ../templates/endisch-templates.xml.h:7 ../templates/hisago-templates.xml.h:1
+#: ../templates/igepa-templates.xml.h:3 ../templates/jac-iso-templates.xml.h:6
 #: ../templates/pearl-iso-templates.xml.h:6
 #: ../templates/rayfilm-templates.xml.h:5
 msgid "Labels A4"
@@ -3550,7 +3561,7 @@ msgid "Diskette Labels (face only)"
 msgstr "Diskettetiketter (endast framsida)"
 
 #. ===================================================================
-#: ../templates/igepa-templates.xml.h:2
+#: ../templates/igepa-templates.xml.h:2 ../templates/online-templates.xml.h:28
 #: ../templates/pearl-iso-templates.xml.h:18
 msgid "Floppy disk labels"
 msgstr "Diskettetiketter"
@@ -3624,23 +3635,23 @@ msgstr "DLT Labels"
 
 #. ===================================================================
 #. TODO: Is this the actual part #?
-#: ../templates/misc-us-templates.xml.h:27
+#: ../templates/misc-us-templates.xml.h:25
 #: ../templates/misc-iso-templates.xml.h:38
 msgid "PRO CD Labels 2-up (face only)"
 msgstr "PRO CD Labels 2-up (endast framsida)"
 
 #. ===================================================================
-#: ../templates/misc-us-templates.xml.h:29
+#: ../templates/misc-us-templates.xml.h:27
 msgid "PRO CD Labels 2-up (Face only)"
 msgstr "PRO CD Labels 2-up (endast framsida)"
 
 #. ===================================================================
-#: ../templates/misc-us-templates.xml.h:31
+#: ../templates/misc-us-templates.xml.h:29
 msgid "PRO CD Labels 2-up (CD spine only)"
 msgstr "PRO CD Labels 2-up (endast rygg)"
 
 #. ===================================================================
-#: ../templates/misc-us-templates.xml.h:33
+#: ../templates/misc-us-templates.xml.h:31
 msgid "Microtube labels"
 msgstr "Microtube labels"
 
@@ -3685,7 +3696,300 @@ msgstr "Flasketiketter"
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:40
 msgid "Etiketten"
-msgstr "Etiketten"
+msgstr "Etiketter"
+
+#: ../templates/online-templates.xml.h:1
+msgid "SD Card labels, library book labels, classification labels"
+msgstr "SD-kortetiketter, bibliotekboksetiketter, klassificeringsetiketter"
+
+#: ../templates/online-templates.xml.h:2
+msgid "Jar labels, candle labels"
+msgstr "Burketiketter, ljusetiketter"
+
+#: ../templates/online-templates.xml.h:3
+msgid "Barcode labels"
+msgstr "Streckkodsetiketter"
+
+#: ../templates/online-templates.xml.h:4
+msgid "Classification labels, library book labels"
+msgstr "Klassificeringsetiketter, bibliotekboksetiketter"
+
+#: ../templates/online-templates.xml.h:5
+msgid "Water bottle labels"
+msgstr "Vattenflasketiketter"
+
+#: ../templates/online-templates.xml.h:6
+msgid "Jar labels, pot labels, candle labels"
+msgstr "Burketiketter, kruketiketter, ljusetiketter"
+
+#. OL120
+#: ../templates/online-templates.xml.h:9
+msgid "Medical chart labels"
+msgstr "Medicinska diagrametiketter"
+
+#. OL8325
+#: ../templates/online-templates.xml.h:11
+msgid "Lip balm tube labels"
+msgstr "Läppbalsamtubetiketter"
+
+#. OL2162
+#: ../templates/online-templates.xml.h:13
+msgid "Return address labels"
+msgstr "Returadressetiketter"
+
+#: ../templates/online-templates.xml.h:14
+msgid "File labels, return address labels, medical chart labels"
+msgstr "Arkivetiketter, returadressetiketter, medicinska diagrametiketter"
+
+#: ../templates/online-templates.xml.h:15
+msgid "Jar labels, nutritional labels"
+msgstr "Burketiketter, näringsdeklarationer"
+
+#: ../templates/online-templates.xml.h:16
+msgid "Jar labels"
+msgstr "Burketiketter"
+
+#: ../templates/online-templates.xml.h:18
+msgid "Wine bottle labels, nutritional labels"
+msgstr "Vinflasketiketter, näringsdeklarationer"
+
+#. OL1102
+#: ../templates/online-templates.xml.h:20
+msgid "Digital video labels"
+msgstr "Digital video-etiketter"
+
+#: ../templates/online-templates.xml.h:22
+msgid "Pot labels, coffee and tea labels"
+msgstr "Burketiketter, kaffe- och teetiketter"
+
+#: ../templates/online-templates.xml.h:23
+msgid "Candy labels"
+msgstr "Godisetiketter"
+
+#: ../templates/online-templates.xml.h:24
+msgid "Reverse automobile window stickers"
+msgstr "Omvända bilfönsterklistermärken"
+
+#: ../templates/online-templates.xml.h:25
+msgid "Jar labels, candy labels, nutritional labels"
+msgstr "Burketiketter, godisetiketter, näringsdeklarationer"
+
+#: ../templates/online-templates.xml.h:27
+msgid "Address labels, barcode labels, candy labels"
+msgstr "Adressetiketter, streckkodsetiketter, godisetiketter"
+
+#: ../templates/online-templates.xml.h:29
+msgid "VHS face labels, nutritional labels"
+msgstr "VHS-etiketter, näringsdeklarationer"
+
+#: ../templates/online-templates.xml.h:30
+msgid "Jar labels, pot labels, nutritional labels"
+msgstr "Burketiketter, kruketiketter, näringsdeklarationer"
+
+#: ../templates/online-templates.xml.h:31
+msgid "File folder labels"
+msgstr "Arkivmappsetiketter"
+
+#: ../templates/online-templates.xml.h:32
+msgid "Metal tin container labels, nutritional labels"
+msgstr "Tennbehållaretiketter, näringsdeklarationer"
+
+#: ../templates/online-templates.xml.h:33
+msgid "Bookplate labels, coffee and tea labels"
+msgstr "Bokägarmärkesetiketter, kaffe- och teetiketter"
+
+#: ../templates/online-templates.xml.h:34
+msgid "Amazon FBA shipping labels"
+msgstr "Amazon FBA-fraktsedlar"
+
+#: ../templates/online-templates.xml.h:35
+msgid "Jar labels, coffee and tea labels, nutritional labels"
+msgstr "Burketiketter, kaffe- och teetiketter, näringsdeklarationer"
+
+#: ../templates/online-templates.xml.h:36
+msgid "Jar labels, pot labels, coffee and tea labels"
+msgstr "Burketiketter, kruketiketter, kaffe- och teetiketter"
+
+#: ../templates/online-templates.xml.h:37
+msgid "Digital media labels"
+msgstr "Digital media-etiketter"
+
+#: ../templates/online-templates.xml.h:38
+msgid "Jar labels, Coffee and tea labels"
+msgstr "Burketiketter, kaffe- och teetiketter"
+
+#: ../templates/online-templates.xml.h:39
+msgid "Wine bottle labels"
+msgstr "Vinflasketiketter"
+
+#: ../templates/online-templates.xml.h:40
+msgid "Mail Order Manager labels"
+msgstr "Postorderetiketter"
+
+#: ../templates/online-templates.xml.h:41
+msgid "Liquor bottle labels"
+msgstr "Spritflasketiketter"
+
+#: ../templates/online-templates.xml.h:42
+msgid "Metal tin container labels"
+msgstr "Tennbehållaretiketter"
+
+#: ../templates/online-templates.xml.h:43
+msgid "Hershey's® chocolate labels"
+msgstr "Hershey's® chokladetiketter"
+
+#: ../templates/online-templates.xml.h:44
+msgid "VHS labels, jar labels, book labels"
+msgstr "VHS-etiketter, kruketiketter, boketiketter"
+
+#: ../templates/online-templates.xml.h:45
+msgid "USPS® shipping labels"
+msgstr "USPS®-fraktsedlar"
+
+#: ../templates/online-templates.xml.h:46
+msgid "Jar labels, candle labels, metal tin container labels"
+msgstr "Burketiketter, ljusetiketter, tennbehållaretiketter"
+
+#: ../templates/online-templates.xml.h:47
+msgid "Jar labels, water bottle labels"
+msgstr "Burketiketter, vattenflasketiketter"
+
+#: ../templates/online-templates.xml.h:48
+msgid "Jar labels, water bottle labels, wine bottle labels"
+msgstr "Burketiketter, vattenflasketiketter, vinflasketiketter"
+
+#: ../templates/online-templates.xml.h:49
+msgid "PayPal® label"
+msgstr "Paypal®-etikett"
+
+#: ../templates/online-templates.xml.h:50
+msgid "Water bottle labels, jar labels, candle labels"
+msgstr "Vattenflasketiketter, burketiketter, ljusetiketter"
+
+#: ../templates/online-templates.xml.h:51
+msgid "Medical chart labels, barcode labels"
+msgstr "Medicinska diagrametiketter, streckkodsetiketter"
+
+#: ../templates/online-templates.xml.h:52
+msgid "Pot labels, barcode labels"
+msgstr "Kruketiketter, streckkodsetiketter"
+
+#: ../templates/online-templates.xml.h:54
+msgid "Nutritional labels"
+msgstr "Näringsdeklarationer"
+
+#: ../templates/online-templates.xml.h:55
+msgid "CD case labels"
+msgstr "CD-omslagsetiketter"
+
+#: ../templates/online-templates.xml.h:56
+msgid "Business card size labels"
+msgstr "Visitkorts-etiketter"
+
+#: ../templates/online-templates.xml.h:57
+msgid "Reverse addendum stickers"
+msgstr "Omvända tilläggsklistermärken"
+
+#: ../templates/online-templates.xml.h:58
+msgid "Wine bottle labels, shipping labels, UPS® WorldShip® labels"
+msgstr "Vinflasketiketter, fraktsedlar, UPS® WorldShip®-etiketter"
+
+#: ../templates/online-templates.xml.h:59
+msgid "Coffee and tea labels"
+msgstr "Kaffe- och teetiketter"
+
+#: ../templates/online-templates.xml.h:60
+msgid "Water bottle labels, shipping labels"
+msgstr "Vattenflasketiketter, fraktsedlar"
+
+#: ../templates/online-templates.xml.h:61
+msgid "VICS labels"
+msgstr "VICS-etiketter"
+
+#: ../templates/online-templates.xml.h:62
+msgid "Full sheet labels with back slit"
+msgstr "Helbladsetiketter med revor på baksidan"
+
+#: ../templates/online-templates.xml.h:63
+msgid "Full sheet labels"
+msgstr "Helbladsetiketter"
+
+#: ../templates/online-templates.xml.h:64
+msgid "Lip balm labels"
+msgstr "Läppbalsametiketter"
+
+#: ../templates/online-templates.xml.h:65
+msgid "Paper hole reinforcement labels"
+msgstr "Pappershålsförstärkningsetiketter"
+
+#: ../templates/online-templates.xml.h:68
+msgid "Candle labels, lip balm labels"
+msgstr "Ljusetiketter, läppbalsametiketter"
+
+#: ../templates/online-templates.xml.h:69
+msgid "Seal labels"
+msgstr "Tätningsetiketter"
+
+#: ../templates/online-templates.xml.h:70
+msgid "Jar labels, candle labels, lip balm labels"
+msgstr "Burketiketter, ljusetiketter, läppbalsametiketter"
+
+#: ../templates/online-templates.xml.h:71
+msgid "Jar labels, nutritional labels, pot labels, soap labels"
+msgstr "Burketiketter, näringsdeklarationer, kruketiketter, tvåletiketter"
+
+#: ../templates/online-templates.xml.h:72
+msgid ""
+"Jar labels, nutritional labels, soap labels, candle labels, coffee and tea "
+"labels"
+msgstr ""
+"Burketiketter, näringsdeklarationer, tvåletiketter, ljusetiketter, kaffe- "
+"och teetiketter"
+
+#: ../templates/online-templates.xml.h:73
+msgid "Jar labels, candle labels, nutritional labels"
+msgstr "Burketiketter, ljusetiketter, näringsdeklarationer"
+
+#: ../templates/online-templates.xml.h:74
+msgid "Nutritional labels, soap labels, coffee and tea labels, candle labels"
+msgstr ""
+"Näringsdeklarationer, tvåletiketter, kaffe- och teetiketter, ljusetiketter"
+
+#: ../templates/online-templates.xml.h:75
+msgid "Beer bottle labels, jar labels, nutritional labels, soap labels"
+msgstr "Ölflasketiketter, burketiketter, näringsdeklarationer, tvåletiketter"
+
+#: ../templates/online-templates.xml.h:76
+msgid "Beer bottle label, jar label"
+msgstr "Ölflasketikett, burketikett"
+
+#: ../templates/online-templates.xml.h:77
+msgid "Target stickers"
+msgstr "Måldekaler"
+
+#: ../templates/online-templates.xml.h:78
+msgid "Round and rectangular labels"
+msgstr "Rundade och rektangulära etiketter"
+
+#: ../templates/online-templates.xml.h:79
+msgid "CD/DVD center hub labels"
+msgstr "CD/DVD-centeretiketter"
+
+#: ../templates/online-templates.xml.h:80
+msgid "Business card CD labels"
+msgstr "Visitkorts-CD-etiketter"
+
+#: ../templates/online-templates.xml.h:81
+msgid "Mini CD labels"
+msgstr "Mini-CD-etiketter"
+
+#: ../templates/online-templates.xml.h:84
+msgid "Full face CD/DVD labels"
+msgstr "Helside-CD/DVD-etiketter"
+
+#: ../templates/online-templates.xml.h:85
+msgid "eBay® shipping labels"
+msgstr "eBay®-fraktsedlar"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:8
