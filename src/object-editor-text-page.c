@@ -92,6 +92,7 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
                                      "text_bottom_toggle",     &editor->priv->text_bottom_toggle,
                                      "text_line_spacing_spin", &editor->priv->text_line_spacing_spin,
                                      "text_auto_shrink_check", &editor->priv->text_auto_shrink_check,
+                                     "text_merge_nonl_check",  &editor->priv->text_merge_nonl_check,
                                      NULL);
 
 	editor->priv->text_family_combo = gl_font_combo_new ("Sans");
@@ -186,6 +187,11 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 				  G_OBJECT (editor));
 
 	g_signal_connect_swapped (G_OBJECT (editor->priv->text_auto_shrink_check),
+				  "toggled",
+				  G_CALLBACK (gl_object_editor_changed_cb),
+				  G_OBJECT (editor));
+
+	g_signal_connect_swapped (G_OBJECT (editor->priv->text_merge_nonl_check),
 				  "toggled",
 				  G_CALLBACK (gl_object_editor_changed_cb),
 				  G_OBJECT (editor));
@@ -796,6 +802,49 @@ gboolean    gl_object_editor_get_text_auto_shrink (glObjectEditor      *editor)
 	gl_debug (DEBUG_EDITOR, "END");
 
 	return auto_shrink;
+}
+
+/*****************************************************************************/
+/* Set merge nonl checkbox.                                                  */
+/*****************************************************************************/
+void
+gl_object_editor_set_text_merge_nonl (glObjectEditor      *editor,
+				       gboolean             merge_nonl)
+{
+	gl_debug (DEBUG_EDITOR, "START");
+
+
+        g_signal_handlers_block_by_func (G_OBJECT (editor->priv->text_merge_nonl_check),
+                                         gl_object_editor_changed_cb, editor);
+
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->text_merge_nonl_check),
+                                      merge_nonl);
+
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->text_merge_nonl_check),
+                                           gl_object_editor_changed_cb, editor);
+
+
+	gl_debug (DEBUG_EDITOR, "END");
+}
+
+
+/*****************************************************************************/
+/* Query merge nonl checkbox.                                                */
+/*****************************************************************************/
+gboolean    gl_object_editor_get_text_merge_nonl (glObjectEditor      *editor)
+{
+	gboolean merge_nonl;
+
+	gl_debug (DEBUG_EDITOR, "START");
+
+	merge_nonl = 
+		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->text_merge_nonl_check));
+
+	gl_debug (DEBUG_EDITOR, "END");
+
+	return merge_nonl;
 }
 
 

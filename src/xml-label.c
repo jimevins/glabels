@@ -438,6 +438,7 @@ xml_parse_object_text (xmlNodePtr  node,
 	PangoAlignment    align;
 	glValignment      valign;
 	gboolean          auto_shrink;
+	gboolean          merge_nonl;
 	xmlNodePtr        child;
 
 	gl_debug (DEBUG_XML, "START");
@@ -469,6 +470,10 @@ xml_parse_object_text (xmlNodePtr  node,
 	/* auto_shrink attr */
 	auto_shrink = lgl_xml_get_prop_boolean (node, "auto_shrink", FALSE);
 	gl_label_text_set_auto_shrink (GL_LABEL_TEXT(object), auto_shrink, FALSE);
+
+	/* merge_nonl attr */
+	merge_nonl = lgl_xml_get_prop_boolean (node, "merge_nonl", FALSE);
+	gl_label_text_set_merge_nonl (GL_LABEL_TEXT(object), merge_nonl, FALSE);
 
 	/* affine attrs */
 	xml_parse_affine_attrs (node, GL_LABEL_OBJECT(object));
@@ -1330,6 +1335,7 @@ xml_create_object_text (xmlNodePtr     parent,
 	PangoAlignment    align;
 	glValignment      valign;
 	gboolean          auto_shrink;
+	gboolean          merge_nonl;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -1356,6 +1362,10 @@ xml_create_object_text (xmlNodePtr     parent,
 	/* auto_shrink attr */
 	auto_shrink = gl_label_text_get_auto_shrink (GL_LABEL_TEXT (object));
 	lgl_xml_set_prop_boolean (node, "auto_shrink", auto_shrink);
+
+	/* merge_nonlk attr */
+	merge_nonl = gl_label_text_get_merge_nonl (GL_LABEL_TEXT (object));
+	lgl_xml_set_prop_boolean (node, "merge_nonl", merge_nonl);
 
 	/* affine attrs */
 	xml_create_affine_attrs (node, object);

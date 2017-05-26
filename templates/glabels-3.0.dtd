@@ -347,6 +347,7 @@
                  justify         %JUSTIFY_TYPE;          #REQUIRED
                  valign          %VALIGN_TYPE;           #REQUIRED
                  auto_shrink     %BOOLEAN_TYPE;          #IMPLIED
+                 merge_nonl      %BOOLEAN_TYPE;          #IMPLIED
                  %affine_attrs;
                  %shadow_attrs;
 >

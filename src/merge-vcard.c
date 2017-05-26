@@ -299,7 +299,7 @@ gl_merge_vcard_get_record (glMerge *merge)
         }
 
         record = g_new0 (glMergeRecord, 1);
-        record->select_flag = TRUE;
+        record->select_flag = FALSE;
 
         /* Take the interesting fields one by one from the contact, and put them
          * into the glMergeRecord structure. When done, free up the resources for

@@ -64,6 +64,7 @@ struct _glLabelTextPrivate {
 	glColorNode     *color_node;
 	gdouble          line_spacing;
 	gboolean         auto_shrink;
+	gboolean         merge_nonl;
 
         gboolean         size_changed;
         gdouble          w;
@@ -344,6 +345,7 @@ copy (glLabelObject *dst_object,
 	new_ltext->priv->valign           = ltext->priv->valign;
 	new_ltext->priv->line_spacing     = ltext->priv->line_spacing;
 	new_ltext->priv->auto_shrink      = ltext->priv->auto_shrink;
+	new_ltext->priv->merge_nonl       = ltext->priv->merge_nonl;
 
         new_ltext->priv->size_changed     = ltext->priv->size_changed;
         new_ltext->priv->w                = ltext->priv->w;
@@ -1018,6 +1020,49 @@ gl_label_text_get_auto_shrink (glLabelText      *ltext)
 	return ltext->priv->auto_shrink;
 }
 
+/*****************************************************************************/
+/* Set merge nonl flag.                                                      */
+/*****************************************************************************/
+void
+gl_label_text_set_merge_nonl (glLabelText      *ltext,
+			       gboolean          merge_nonl,
+                               gboolean          checkpoint)
+{
+        glLabel *label;
+
+	gl_debug (DEBUG_LABEL, "BEGIN");
+
+	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
+
+	if (ltext->priv->merge_nonl != merge_nonl)
+        {
+                if ( checkpoint )
+                {
+                        label = gl_label_object_get_parent (GL_LABEL_OBJECT (ltext));
+                        gl_label_checkpoint (label, _("Merge nonl"));
+                }
+
+		ltext->priv->merge_nonl = merge_nonl;
+		gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/*****************************************************************************/
+/* Query merge_nonl flag.                                                    */
+/*****************************************************************************/
+gboolean
+gl_label_text_get_merge_nonl (glLabelText      *ltext)
+{
+	gl_debug (DEBUG_LABEL, "");
+
+	g_return_val_if_fail (ltext && GL_IS_LABEL_TEXT (ltext), 0);
+
+	return ltext->priv->merge_nonl;
+}
+
 
 /*****************************************************************************/
 /* Automatically shrink text size to fit within bounding box.                */
@@ -1114,6 +1159,7 @@ layout_text (glLabelText      *this,
         GList                *lines;
         gdouble               font_size;
         gboolean              auto_shrink;
+        gboolean              merge_nonl;
         PangoLayout          *layout;
         PangoStyle            style;
         PangoFontDescription *desc;
@@ -1146,6 +1192,8 @@ layout_text (glLabelText      *this,
 
         font_size   = this->priv->font_size * FONT_SCALE;
         auto_shrink = gl_label_text_get_auto_shrink (this);
+        merge_nonl = gl_label_text_get_merge_nonl (this);
+
         if (!screen_flag && record && auto_shrink && (raw_w != 0.0))
         {
                 font_size = auto_shrink_font_size (cr,
@@ -1177,6 +1225,8 @@ layout_text (glLabelText      *this,
         pango_layout_set_font_description (layout, desc);
         pango_font_description_free       (desc);
 
+        if (!screen_flag && record && merge_nonl)
+	    text = g_strdelimit(text, "\n\r", ' ');
         pango_layout_set_text (layout, text, -1);
         pango_layout_set_spacing (layout, font_size * (this->priv->line_spacing-1) * PANGO_SCALE / scale_x);
         if (raw_w == 0.0)
