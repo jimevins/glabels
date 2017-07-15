@@ -1179,7 +1179,7 @@ layout_text (glLabelText      *this,
 
         pango_layout_set_text (layout, text, -1);
         pango_layout_set_spacing (layout, font_size * (this->priv->line_spacing-1) * PANGO_SCALE / scale_x);
-        if (raw_w == 0.0)
+        if ( (raw_w == 0.0) || auto_shrink )
         {
                 pango_layout_set_width (layout, -1);
         }
