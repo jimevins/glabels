@@ -88,7 +88,7 @@
   <!-- =================================================================== -->
   <!-- Avery L6043 family: CD/DVD Labels, 2 per sheet                      -->
   <!-- =================================================================== -->
-  <Template brand="Avery" part="L6043" size="A4" _description="CD/DVD lables">
+  <Template brand="Avery" part="L6043" size="A4" _description="CD/DVD labels">
     <Meta category="label"/>
     <Meta category="media"/>
     <Label-cd id="0" radius="58.7mm" hole="20.6mm" waste="3.175mm">
