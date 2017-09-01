@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=glabels&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-02-27 16:34+0000\n"
-"PO-Revision-Date: 2017-03-11 20:27+0200\n"
+"POT-Creation-Date: 2017-08-01 09:23+0000\n"
+"PO-Revision-Date: 2017-09-01 21:40+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 2.91.7\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../src/bc-backends.c:81
 msgid "Built-in"
@@ -452,7 +452,7 @@ msgstr ""
 
 #: ../src/color-combo-menu.c:100
 msgid "Gold"
-msgstr ""
+msgstr "Kulta"
 
 #: ../src/color-combo-menu.c:101
 msgid "Yellow"
@@ -559,7 +559,6 @@ msgstr "Etiketin ominaisuudet"
 
 #. Translators: assistent dialog title
 #: ../src/file.c:203
-#| msgid "Label properties"
 msgid "Choose label properties"
 msgstr "Valitse etiketin ominaisuudet"
 
@@ -741,6 +740,9 @@ msgid ""
 "%s\n"
 "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
+"%s\n"
+"Suorita '%s --help' nähdäksesi kaikki saatavilla olevat "
+"komentorivivalitsimet.\n"
 
 #: ../src/glabels-batch.c:151
 #, c-format
@@ -770,7 +772,7 @@ msgstr "Viivakoodin ominaisuus"
 
 #: ../src/label-barcode.c:684
 msgid "Barcode data empty"
-msgstr ""
+msgstr "Viivakoodin data on tyhjää"
 
 #: ../src/label-barcode.c:688
 msgid "Invalid barcode data"
@@ -1146,7 +1148,6 @@ msgid "Up"
 msgstr ""
 
 #: ../src/new-label-dialog.c:214
-#| msgid "Select Product"
 msgctxt "Title of dialog page to select a stationary product"
 msgid "Select Product"
 msgstr "Valitse tuote"
@@ -1822,7 +1823,6 @@ msgstr ""
 #. * End:                   -- emacs
 #.
 #: ../data/ui/label-properties-dialog.ui.h:1
-#| msgid "Labels"
 msgid "Label"
 msgstr "Etiketti"
 
@@ -1857,7 +1857,6 @@ msgid "Layout:"
 msgstr "Asettelu:"
 
 #: ../data/ui/label-properties-dialog.ui.h:8
-#| msgid "6. Margin"
 msgid "Margins:"
 msgstr "Marginaalit:"
 
@@ -1872,17 +1871,14 @@ msgid "Options"
 msgstr "Valinnat"
 
 #: ../data/ui/label-properties-dialog.ui.h:11
-#| msgid "Choose Orientation"
 msgid "Orientation:"
 msgstr "Suuntaus:"
 
 #: ../data/ui/label-properties-dialog.ui.h:12
-#| msgid "Normal"
 msgid "_Normal"
 msgstr "_Tavallinen"
 
 #: ../data/ui/label-properties-dialog.ui.h:13
-#| msgid "Rotated"
 msgid "_Rotated"
 msgstr "_Käännetty"
 
@@ -2680,7 +2676,7 @@ msgstr "Viimeisimmät omavalintaiset värit."
 
 #: ../data/desktop/glabels-3.0.desktop.in.h:1
 msgid "gLabels Label Designer 3"
-msgstr ""
+msgstr "gLabels-etikettisuunnittelu 3"
 
 #: ../data/desktop/glabels-3.0.desktop.in.h:3
 msgid "label;card;print;office;barcode;"
@@ -2919,7 +2915,6 @@ msgid "Business cards"
 msgstr "Käyntikortit"
 
 #: ../templates/categories.xml.h:8
-#| msgid "Name plates"
 msgid "Name Badge"
 msgstr "Nimikyltti"
 
@@ -2937,7 +2932,7 @@ msgstr ""
 
 #: ../templates/categories.xml.h:12
 msgid "Photo products"
-msgstr ""
+msgstr "Valokuvatuotteet"
 
 #: ../templates/categories.xml.h:13
 #, fuzzy
@@ -2953,7 +2948,7 @@ msgstr "Pullojen etiketit"
 #. TODO: What is the actual part #?
 #. ===================================================================
 #: ../templates/ascom-iso-templates.xml.h:2
-#: ../templates/avery-iso-templates.xml.h:34
+#: ../templates/avery-iso-templates.xml.h:36
 #: ../templates/databecker-iso-templates.xml.h:10
 #: ../templates/hama-iso-templates.xml.h:29
 #: ../templates/herma-iso-templates.xml.h:18
@@ -2974,7 +2969,7 @@ msgstr ""
 #. ===================================================================
 #. ===============================================================
 #: ../templates/ascom-iso-templates.xml.h:8
-#: ../templates/avery-iso-templates.xml.h:26
+#: ../templates/avery-iso-templates.xml.h:28
 #: ../templates/zweckform-iso-templates.xml.h:26
 msgid "CD Inlet"
 msgstr ""
@@ -3016,7 +3011,7 @@ msgstr ""
 #. ********************************************************************
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:12
-#: ../templates/avery-iso-templates.xml.h:14
+#: ../templates/avery-iso-templates.xml.h:16
 #: ../templates/databecker-iso-templates.xml.h:6
 #: ../templates/dymo-other-templates.xml.h:14
 #: ../templates/geha-iso-templates.xml.h:25
@@ -3027,7 +3022,7 @@ msgstr ""
 #: ../templates/worldlabel-us-templates.xml.h:3
 #: ../templates/zweckform-iso-templates.xml.h:4
 msgid "Address Labels"
-msgstr ""
+msgstr "Osoite-etiketit"
 
 #. ===================================================================
 #. ********************************************************************
@@ -3050,7 +3045,7 @@ msgstr ""
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:18
-#: ../templates/avery-iso-templates.xml.h:20
+#: ../templates/avery-iso-templates.xml.h:22
 #: ../templates/meritline-us-templates.xml.h:14
 #: ../templates/sheetlabels-us-templates.xml.h:18
 #: ../templates/worldlabel-us-templates.xml.h:8
@@ -3075,7 +3070,7 @@ msgstr ""
 #. TODO: Is this the actual part #?
 #. ============================================================
 #: ../templates/avery-us-templates.xml.h:24
-#: ../templates/avery-iso-templates.xml.h:18
+#: ../templates/avery-iso-templates.xml.h:20
 #: ../templates/databecker-iso-templates.xml.h:2
 #: ../templates/dataline-iso-templates.xml.h:4
 #: ../templates/decadry-iso-templates.xml.h:6
@@ -3174,12 +3169,24 @@ msgid "Self-Adhesive Name Badges (Acetate Silk)"
 msgstr ""
 
 #. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#. OL6075
 #: ../templates/avery-iso-templates.xml.h:8
+#: ../templates/dataline-iso-templates.xml.h:2
+#: ../templates/hama-iso-templates.xml.h:35
+#: ../templates/misc-iso-templates.xml.h:34
+#: ../templates/online-templates.xml.h:83
+msgid "CD/DVD labels"
+msgstr "CD/DVD-etiketit"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:10
 msgid "Allround labels"
 msgstr ""
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:10
+#: ../templates/avery-iso-templates.xml.h:12
 #: ../templates/decadry-iso-templates.xml.h:2
 #: ../templates/misc-iso-templates.xml.h:14
 #: ../templates/online-templates.xml.h:21
@@ -3187,7 +3194,7 @@ msgid "Mailing labels"
 msgstr ""
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:12
+#: ../templates/avery-iso-templates.xml.h:14
 #: ../templates/dymo-other-templates.xml.h:6
 #: ../templates/misc-iso-templates.xml.h:12
 #: ../templates/online-templates.xml.h:53
@@ -3195,14 +3202,14 @@ msgid "Address labels"
 msgstr ""
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:16
+#: ../templates/avery-iso-templates.xml.h:18
 #: ../templates/hisago-templates.xml.h:6 ../templates/online-templates.xml.h:26
 msgid "Shipping labels"
 msgstr ""
 
 #. ===============================================================
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:22
+#: ../templates/avery-iso-templates.xml.h:24
 #: ../templates/decadry-iso-templates.xml.h:4
 #: ../templates/herma-iso-templates.xml.h:8
 #: ../templates/misc-us-templates.xml.h:21
@@ -3213,24 +3220,24 @@ msgid "Mailing Labels"
 msgstr ""
 
 #. ===============================================================
-#: ../templates/avery-iso-templates.xml.h:24
+#: ../templates/avery-iso-templates.xml.h:26
 #: ../templates/zweckform-iso-templates.xml.h:24
 msgid "CD Booklet"
 msgstr ""
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:28
+#: ../templates/avery-iso-templates.xml.h:30
 msgid "Mini Address Labels"
 msgstr ""
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:30
+#: ../templates/avery-iso-templates.xml.h:32
 msgid "Identification Labels"
 msgstr ""
 
 #. ===================================================================
 #. ====================================================================
-#: ../templates/avery-iso-templates.xml.h:32
+#: ../templates/avery-iso-templates.xml.h:34
 #: ../templates/hama-iso-templates.xml.h:31
 msgid "Diskette labels"
 msgstr ""
@@ -3327,21 +3334,10 @@ msgid "CD Labels"
 msgstr "CD-etiketit"
 
 #. ===================================================================
-#. ====================================================================
-#. ===================================================================
-#. OL6075
-#: ../templates/dataline-iso-templates.xml.h:2
-#: ../templates/hama-iso-templates.xml.h:35
-#: ../templates/misc-iso-templates.xml.h:34
-#: ../templates/online-templates.xml.h:83
-msgid "CD/DVD labels"
-msgstr "CD/DVD-etiketit"
-
-#. ===================================================================
 #: ../templates/dataline-iso-templates.xml.h:8
 #: ../templates/pearl-iso-templates.xml.h:60
 msgid "Membership cards"
-msgstr ""
+msgstr "Jäsenkortit"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:4
@@ -3355,10 +3351,8 @@ msgstr ""
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:10
-#, fuzzy
-#| msgid "Name plates"
 msgid "Name Badges"
-msgstr "Nimikyltit"
+msgstr "Nimilaput"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:12
@@ -3525,7 +3519,7 @@ msgstr ""
 #. ====================================================================
 #: ../templates/hama-iso-templates.xml.h:43
 msgid "Mini Disc labels"
-msgstr ""
+msgstr "Mini Disc -etiketit"
 
 #. ===================================================================
 #: ../templates/herma-iso-templates.xml.h:2
@@ -3557,7 +3551,7 @@ msgstr ""
 #: ../templates/igepa-templates.xml.h:2 ../templates/online-templates.xml.h:28
 #: ../templates/pearl-iso-templates.xml.h:18
 msgid "Floppy disk labels"
-msgstr ""
+msgstr "Diskettien etiketit"
 
 #. ===================================================================
 #: ../templates/igepa-templates.xml.h:4
@@ -3700,17 +3694,14 @@ msgid "Jar labels, candle labels"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:3
-#, fuzzy
-#| msgid "Bottle labels"
 msgid "Barcode labels"
-msgstr "Pullojen etiketit"
+msgstr "Viivakoodietiketit"
 
 #: ../templates/online-templates.xml.h:4
 msgid "Classification labels, library book labels"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:5
-#| msgid "Bottle labels"
 msgid "Water bottle labels"
 msgstr "Vesipullojen etiketit"
 
@@ -3765,7 +3756,6 @@ msgid "Pot labels, coffee and tea labels"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:23
-#| msgid "SD card labels"
 msgid "Candy labels"
 msgstr "Makeisten etiketit"
 
@@ -3826,20 +3816,16 @@ msgid "Jar labels, Coffee and tea labels"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:39
-#, fuzzy
-#| msgid "Bottle labels"
 msgid "Wine bottle labels"
-msgstr "Pullojen etiketit"
+msgstr "Viinipullojen etiketit"
 
 #: ../templates/online-templates.xml.h:40
 msgid "Mail Order Manager labels"
 msgstr ""
 
 #: ../templates/online-templates.xml.h:41
-#, fuzzy
-#| msgid "Bottle labels"
 msgid "Liquor bottle labels"
-msgstr "Pullojen etiketit"
+msgstr "Likööripullojen etiketit"
 
 #: ../templates/online-templates.xml.h:42
 msgid "Metal tin container labels"
@@ -3847,7 +3833,7 @@ msgstr ""
 
 #: ../templates/online-templates.xml.h:43
 msgid "Hershey's® chocolate labels"
-msgstr ""
+msgstr "Hershey's®-suklaaetiketit"
 
 #: ../templates/online-templates.xml.h:44
 msgid "VHS labels, jar labels, book labels"
@@ -3855,7 +3841,7 @@ msgstr ""
 
 #: ../templates/online-templates.xml.h:45
 msgid "USPS® shipping labels"
-msgstr ""
+msgstr "USPS®-lähetysetiketit"
 
 #: ../templates/online-templates.xml.h:46
 msgid "Jar labels, candle labels, metal tin container labels"
@@ -3871,7 +3857,7 @@ msgstr ""
 
 #: ../templates/online-templates.xml.h:49
 msgid "PayPal® label"
-msgstr ""
+msgstr "PayPal®-etiketti"
 
 #: ../templates/online-templates.xml.h:50
 msgid "Water bottle labels, jar labels, candle labels"
@@ -4013,7 +3999,7 @@ msgstr ""
 
 #: ../templates/online-templates.xml.h:85
 msgid "eBay® shipping labels"
-msgstr ""
+msgstr "eBay®-lähetysetiketit"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:8
@@ -4093,7 +4079,7 @@ msgstr ""
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:62
 msgid "Membership cards, both sides printable"
-msgstr ""
+msgstr "Jäsenkortit, molemmat puolet tulostettavissa"
 
 #: ../templates/rayfilm-templates.xml.h:11
 msgid "Business card CD Labels"
