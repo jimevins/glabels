@@ -283,7 +283,7 @@ gl_text_node_lines_new_from_text (const gchar *text)
 			nodes = NULL;
 		}
 	}
-	if (*(p - 1) != '\n') {
+	if (p != text && *(p - 1) != '\n') {
 		lines = g_list_append (lines, nodes);
 	}
 
