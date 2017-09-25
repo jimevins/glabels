@@ -26,18 +26,18 @@
 
     <p> <app>gLabels</app> was written by <link href="mailto:evins@snaught.com">Jim Evins</link>.
       To find more information about <app>gLabels</app>, please visit the 
-      <link href="http://glabels.org" type="http"><app>gLabels</app> Web
+      <link href="http://glabels.org"><app>gLabels</app> Web
 	page</link>. </p>
     <p>
       To report a bug or make a suggestion regarding this application or
       this manual, follow the directions at the
-      <link href="http://glabels.org/contact/" type="http"><app>gLabels</app> Contact Page</link>.
+      <link href="http://glabels.org/contact/"><app>gLabels</app> Contact Page</link>.
     </p>
 
     <p> This program is distributed under the terms of the GNU
       General Public license as published by the Free Software
       Foundation; either version 3 of the License, or (at your option)
       any later version. A copy of this license can be found at this
-      <link href="help:gpl" type="help">link</link>, or in the file
+      <link xref="help:gpl">link</link>, or in the file
       COPYING included with the source code of this program. </p>
 </page>
