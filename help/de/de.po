@@ -4,15 +4,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
-"POT-Creation-Date: 2016-04-12 01:38+0000\n"
-"PO-Revision-Date: 2016-04-12 17:24+0200\n"
+"POT-Creation-Date: 2017-09-25 16:05+0000\n"
+"PO-Revision-Date: 2017-10-20 23:11+0200\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.0.3\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -64,25 +64,25 @@ msgstr "Info zu <app>gLabels</app>"
 msgid ""
 "<app>gLabels</app> was written by <link href=\"mailto:evins@snaught.com"
 "\">Jim Evins</link>. To find more information about <app>gLabels</app>, "
-"please visit the <link href=\"http://glabels.org\" type=\"http"
-"\"><app>gLabels</app> Web page</link>."
+"please visit the <link href=\"http://glabels.org\"><app>gLabels</app> Web "
+"page</link>."
 msgstr ""
 "<app>gLabels</app> wurde von <link href=\"mailto:evins@snaught.com\">Jim "
 "Evins</link> geschrieben. Weitere Informationen zu <app>gLabels</app> finden "
-"Sie auf der <link href=\"http://glabels.org\" type=\"http\"><app>gLabels</"
-"app>-Webseite</link>."
+"Sie auf der <link href=\"https://glabels.org\"><app>gLabels</app>-Webseite</"
+"link>."
 
 #. (itstool) path: page/p
 #: C/about.page:31
 msgid ""
 "To report a bug or make a suggestion regarding this application or this "
 "manual, follow the directions at the <link href=\"http://glabels.org/contact/"
-"\" type=\"http\"><app>gLabels</app> Contact Page</link>."
+"\"><app>gLabels</app> Contact Page</link>."
 msgstr ""
 "Um einen Fehler zu melden oder einen Vorschlag zur Anwendung <app>gLabels</"
 "app> oder zu diesem Handbuch zu machen, folgen Sie den Anweisungen auf der "
-"<link href=\"http://glabels.org/contact/\" type=\"http\"><app>gLabels</app>-"
-"Kontaktseite</link>."
+"<link href=\"http://glabels.org/contact/\"><app>gLabels</app>-Kontaktseite</"
+"link>."
 
 #. (itstool) path: page/p
 #: C/about.page:37
@@ -90,16 +90,16 @@ msgid ""
 "This program is distributed under the terms of the GNU General Public "
 "license as published by the Free Software Foundation; either version 3 of "
 "the License, or (at your option) any later version. A copy of this license "
-"can be found at this <link href=\"help:gpl\" type=\"help\">link</link>, or "
-"in the file COPYING included with the source code of this program."
+"can be found at this <link xref=\"help:gpl\">link</link>, or in the file "
+"COPYING included with the source code of this program."
 msgstr ""
 "Dieses Programm ist freie Software. Sie können es unter den Bedingungen der "
 "GNU General Public License, wie von der Free Software Foundation "
 "veröffentlicht, weitergeben und/oder modifizieren, entweder gemäß Version 3 "
 "der Lizenz oder (nach Ihrer Option) jeder späteren Version. Eine Kopie der "
-"GNU General Public License finden Sie unter diesem <link href=\"help:gpl\" "
-"type=\"help\">Link</link> oder in der Datei COPYING, die im Quellcode dieses "
-"Programms enthalten ist."
+"GNU General Public License finden Sie unter diesem <link xref=\"help:gpl"
+"\">Link</link> oder in der Datei COPYING, die im Quellcode dieses Programms "
+"enthalten ist."
 
 #. (itstool) path: info/desc
 #: C/basicusage.page:9
@@ -200,7 +200,7 @@ msgstr ""
 "Um eine neue Datei oder eine bestehende Datei unter einem neuen Dateinamen "
 "zu speichern, wählen Sie <guiseq><gui>Datei</gui><gui>Speichern unter</gui></"
 "guiseq>. Geben Sie einen Namen für die Datei im Dialogfeld <gui>Speichern "
-"unter</gui> ein und klicken Sie anschließend auf <gui>OK</gui>. "
+"unter</gui> ein und klicken Sie anschließend auf <gui>OK</gui>."
 
 #. (itstool) path: section/title
 #: C/basicusage.page:84
@@ -617,18 +617,6 @@ msgstr ""
 "Falls Sie dies bevorzugen, können Sie Ihre Vorlagen auch manuell erstellen. "
 "Weitere Informationen hierzu finden Sie in <link xref=\"mancreate\"/>"
 
-#. (itstool) path: media
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/editprop.page:35
-msgctxt "_"
-msgid ""
-"external ref='figures/object-editor-sidebar.png' "
-"md5='68be18416cc17964992fe0c7e311e0ef'"
-msgstr "translated"
-
 #. (itstool) path: info/desc
 #: C/editprop.page:9
 msgid "Change the properties of objects."
@@ -650,6 +638,18 @@ msgstr ""
 "Seitenleiste verändern, wie unten illustriert. Um den Objekteditor zu "
 "verwenden, muss zunächst ein einzelnes Objekt ausgewählt werden. Siehe <link "
 "xref=\"select\"/>."
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/editprop.page:35
+msgctxt "_"
+msgid ""
+"external ref='figures/object-editor-sidebar.png' "
+"md5='68be18416cc17964992fe0c7e311e0ef'"
+msgstr "translated"
 
 #. (itstool) path: media/p
 #: C/editprop.page:36 C/printfile.page:48
@@ -982,30 +982,6 @@ msgstr ""
 "regelt auch die Vorgaben für diese Eigenschaften, wenn neue Objekte erzeugt "
 "werden."
 
-#. (itstool) path: media
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/index.page:24
-msgctxt "_"
-msgid ""
-"external ref='figures/glabels-logo.png' "
-"md5='0c1e32afcbae0d2fc6976020c24a0a43'"
-msgstr "translated"
-
-#. (itstool) path: media
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/index.page:47
-msgctxt "_"
-msgid ""
-"external ref='figures/introduction-glabels-main-window.png' "
-"md5='9ee2b2cc026ee8cba3c881b370a14313'"
-msgstr "translated"
-
 #. (itstool) path: info/title
 #: C/index.page:7
 msgctxt "link"
@@ -1017,6 +993,18 @@ msgstr "gLabels Etiketten- und Visitenkarten-Designer"
 msgctxt "text"
 msgid "gLabels label and business card designer"
 msgstr "gLabels Etiketten- und Visitenkarten-Designer"
+
+#. (itstool) path: title/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/index.page:24
+msgctxt "_"
+msgid ""
+"external ref='figures/glabels-logo.png' "
+"md5='0c1e32afcbae0d2fc6976020c24a0a43'"
+msgstr "translated"
 
 #. (itstool) path: page/title
 #: C/index.page:23
@@ -1069,10 +1057,22 @@ msgstr ""
 msgid "<app>gLabels</app> main window"
 msgstr "<app>gLabels</app>-Hauptfenster"
 
+#. (itstool) path: figure/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/index.page:47
+msgctxt "_"
+msgid ""
+"external ref='figures/introduction-glabels-main-window.png' "
+"md5='9ee2b2cc026ee8cba3c881b370a14313'"
+msgstr "translated"
+
 #. (itstool) path: media/p
 #: C/index.page:48
 msgid "<app>gLabels</app> main window."
-msgstr "<app>gLabels</app>-Hauptfenster"
+msgstr "<app>gLabels</app>-Hauptfenster."
 
 #. (itstool) path: section/title
 #: C/index.page:53
@@ -1221,18 +1221,6 @@ msgstr ""
 "creativecommons.org/licenses/by-sa/3.0/legalcode\">CreativeCommons-Webseite</"
 "link>. Oder Sie können den vollständigen <link href=\"http://creativecommons."
 "org/licenses/by-sa/3.0/\">Commons Deed</link> lesen."
-
-#. (itstool) path: media
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/mancreate.page:392
-msgctxt "_"
-msgid ""
-"external ref='figures/glabels-template-ellipse-label.png' "
-"md5='ba612c86b5fb8fcd2b5384ecc1c331d2'"
-msgstr "translated"
 
 #. (itstool) path: info/desc
 #: C/mancreate.page:11
@@ -1685,6 +1673,18 @@ msgstr ""
 msgid "<span>Label-ellipse</span> parameters"
 msgstr "<span>Label-ellipse</span>-Parameter"
 
+#. (itstool) path: figure/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/mancreate.page:392
+msgctxt "_"
+msgid ""
+"external ref='figures/glabels-template-ellipse-label.png' "
+"md5='ba612c86b5fb8fcd2b5384ecc1c331d2'"
+msgstr "translated"
+
 #. (itstool) path: media/p
 #. (itstool) path: figure/desc
 #: C/mancreate.page:393 C/mancreate.page:438
@@ -2039,50 +2039,6 @@ msgstr "Vertikaler Rasterabstand des Zeichengitters."
 msgid "<code>Layout</code> parameters"
 msgstr "<code>Layout</code>-Parameter"
 
-#. (itstool) path: media
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/merge-ex1.page:50
-msgctxt "_"
-msgid ""
-"external ref='figures/merge-ex1-1.png' md5='c1fe7f5f05a81d9c04f9d03bb7071798'"
-msgstr ""
-
-#. (itstool) path: media
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/merge-ex1.page:63
-msgctxt "_"
-msgid ""
-"external ref='figures/merge-ex1-2.png' md5='45c30ca8de2478387404c7c5f45cf3d0'"
-msgstr ""
-
-#. (itstool) path: media
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/merge-ex1.page:84
-msgctxt "_"
-msgid ""
-"external ref='figures/merge-ex1-3.png' md5='1c23af6c90e5185cdc9e14d19baeb9f6'"
-msgstr ""
-
-#. (itstool) path: media
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/merge-ex1.page:95
-msgctxt "_"
-msgid ""
-"external ref='figures/merge-ex1-4.png' md5='1cc9f9adcb5a6e98ff5068531e6933f0'"
-msgstr ""
-
 #. (itstool) path: info/desc
 #: C/merge-ex1.page:9
 msgid "Create name tags from a CSV file."
@@ -2144,6 +2100,17 @@ msgstr ""
 "gezeigt die Datenquelle aus, in diesem Fall »CSV mit Schlüsseln in Zeile 1«, "
 "sowie die Mischquelle (Dateiname)."
 
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/merge-ex1.page:50
+msgctxt "_"
+msgid ""
+"external ref='figures/merge-ex1-1.png' md5='c1fe7f5f05a81d9c04f9d03bb7071798'"
+msgstr ""
+
 #. (itstool) path: media/p
 #: C/merge-ex1.page:51 C/merge-ex2.page:53 C/merge-ex3.page:54
 msgid "Merge properties dialog"
@@ -2167,6 +2134,17 @@ msgid ""
 msgstr ""
 "Nun beginnen wir mit dem Hinzufügen von Objekten zu unserem <app>gLabels</"
 "app>-Dokument, wie gezeigt."
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/merge-ex1.page:63
+msgctxt "_"
+msgid ""
+"external ref='figures/merge-ex1-2.png' md5='45c30ca8de2478387404c7c5f45cf3d0'"
+msgstr ""
 
 #. (itstool) path: media/p
 #: C/merge-ex1.page:64 C/merge-ex2.page:71 C/merge-ex3.page:75
@@ -2209,6 +2187,17 @@ msgstr ""
 "gui><gui>Drucken</gui></guiseq> wählen. Der unten angezeigte Druckdialog "
 "wird geöffnet."
 
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/merge-ex1.page:84
+msgctxt "_"
+msgid ""
+"external ref='figures/merge-ex1-3.png' md5='1c23af6c90e5185cdc9e14d19baeb9f6'"
+msgstr ""
+
 #. (itstool) path: media/p
 #: C/merge-ex1.page:85
 msgid "Printing name tags"
@@ -2225,6 +2214,17 @@ msgstr ""
 "Option <gui>Begrenzungen drucken</gui> und klicken auf <gui>Druckvorschau</"
 "gui>. Der Druckvorschaudialog wird geöffnet, wie unten angezeigt."
 
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/merge-ex1.page:95
+msgctxt "_"
+msgid ""
+"external ref='figures/merge-ex1-4.png' md5='1cc9f9adcb5a6e98ff5068531e6933f0'"
+msgstr ""
+
 #. (itstool) path: media/p
 #: C/merge-ex1.page:96
 msgid "Name tags preview"
@@ -2240,50 +2240,6 @@ msgstr ""
 "Alles sieht gut aus, also können wir jetzt den Drucker mit den "
 "entsprechenden Etiketten bestücken, die Namensschilder drucken und die Gäste "
 "an Bord beamen."
-
-#. (itstool) path: media
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/merge-ex2.page:52
-msgctxt "_"
-msgid ""
-"external ref='figures/merge-ex2-1.png' md5='817abd0c8deb8a0b95acb7881d8ddb85'"
-msgstr ""
-
-#. (itstool) path: media
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/merge-ex2.page:70
-msgctxt "_"
-msgid ""
-"external ref='figures/merge-ex2-2.png' md5='2012870be14752300e0cde420471714a'"
-msgstr ""
-
-#. (itstool) path: media
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/merge-ex2.page:88
-msgctxt "_"
-msgid ""
-"external ref='figures/merge-ex2-3.png' md5='c347460091d8eef9f4ec89557fa9f1e2'"
-msgstr ""
-
-#. (itstool) path: media
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/merge-ex2.page:99
-msgctxt "_"
-msgid ""
-"external ref='figures/merge-ex2-4.png' md5='30d12e946a79e27211b835e38742671c'"
-msgstr ""
 
 #. (itstool) path: info/desc
 #: C/merge-ex2.page:9
@@ -2351,6 +2307,17 @@ msgstr ""
 "gezeigt die Datenquelle aus, in diesem Fall »CSV mit Schlüsseln in Zeile 1«, "
 "sowie die Mischquelle (Dateiname)."
 
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/merge-ex2.page:52
+msgctxt "_"
+msgid ""
+"external ref='figures/merge-ex2-1.png' md5='817abd0c8deb8a0b95acb7881d8ddb85'"
+msgstr ""
+
 #. (itstool) path: page/p
 #: C/merge-ex2.page:57
 msgid ""
@@ -2364,6 +2331,17 @@ msgstr ""
 "<app>gnumeric</app>-Tabelle enthält. Dadurch würde nur das erste Etikett "
 "verschwendet. Weiterhin können Sie alle anderen Datensätze entfernen, die "
 "Sie nicht für ein Etikett verwenden wollen."
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/merge-ex2.page:70
+msgctxt "_"
+msgid ""
+"external ref='figures/merge-ex2-2.png' md5='2012870be14752300e0cde420471714a'"
+msgstr ""
 
 #. (itstool) path: page/p
 #: C/merge-ex2.page:75
@@ -2392,10 +2370,32 @@ msgstr ""
 "gui><gui>Drucken</gui></guiseq> wählen. Der unten angezeigte Druckdialog "
 "wird geöffnet."
 
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/merge-ex2.page:88
+msgctxt "_"
+msgid ""
+"external ref='figures/merge-ex2-3.png' md5='c347460091d8eef9f4ec89557fa9f1e2'"
+msgstr ""
+
 #. (itstool) path: media/p
 #: C/merge-ex2.page:89 C/merge-ex3.page:89
 msgid "Printing address labels"
 msgstr "Adressetiketten drucken"
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/merge-ex2.page:99
+msgctxt "_"
+msgid ""
+"external ref='figures/merge-ex2-4.png' md5='30d12e946a79e27211b835e38742671c'"
+msgstr ""
 
 #. (itstool) path: media/p
 #: C/merge-ex2.page:100 C/merge-ex3.page:100
@@ -2412,50 +2412,6 @@ msgstr ""
 "Alles sieht gut aus, also können wir jetzt den Drucker mit den "
 "entsprechenden Etiketten bestücken, die Adressetiketten drucken und die "
 "Einladungen zur Party versenden."
-
-#. (itstool) path: media
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/merge-ex3.page:53
-msgctxt "_"
-msgid ""
-"external ref='figures/merge-ex3-1.png' md5='fb5bf719857fb0a49517ecb50124384d'"
-msgstr ""
-
-#. (itstool) path: media
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/merge-ex3.page:74
-msgctxt "_"
-msgid ""
-"external ref='figures/merge-ex3-2.png' md5='51fe322868241d083ec83ae824d927d7'"
-msgstr ""
-
-#. (itstool) path: media
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/merge-ex3.page:88
-msgctxt "_"
-msgid ""
-"external ref='figures/merge-ex3-3.png' md5='f731f35b38ddd51499e636733bacc7a6'"
-msgstr ""
-
-#. (itstool) path: media
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/merge-ex3.page:99
-msgctxt "_"
-msgid ""
-"external ref='figures/merge-ex3-4.png' md5='4415be9d5b59fb57093077bcaece014a'"
-msgstr ""
 
 #. (itstool) path: info/desc
 #: C/merge-ex3.page:9
@@ -2529,6 +2485,17 @@ msgstr ""
 "gezeigt die Datenquelle aus, in diesem Fall <gui>Evolution-Adressbuch</gui>, "
 "sowie die Mischquelle (Dateiname)."
 
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/merge-ex3.page:53
+msgctxt "_"
+msgid ""
+"external ref='figures/merge-ex3-1.png' md5='fb5bf719857fb0a49517ecb50124384d'"
+msgstr ""
+
 #. (itstool) path: page/p
 #: C/merge-ex3.page:58
 msgid ""
@@ -2548,7 +2515,7 @@ msgstr ""
 "können bestimmte Einträge auswählen oder wieder abwählen, indem Sie die "
 "entsprechenden Ankreuzfelder anklicken. Alternativ können Sie durch "
 "Anklicken der Knöpfe <gui>Alle markieren</gui> oder <gui>Markierung "
-"aufheben</gui> alle Einträge des Adressbuchs aktivieren oder deaktivieren. "
+"aufheben</gui> alle Einträge des Adressbuchs aktivieren oder deaktivieren."
 
 #. (itstool) path: page/p
 #: C/merge-ex3.page:66
@@ -2561,6 +2528,17 @@ msgstr ""
 "Sie können jeden Datensatz detailliert betrachten, indem Sie auf die kleinen "
 "Dreiecke klicken. Sobald Sie mit der Auswahl zufrieden sind, klicken Sie auf "
 "<gui>OK</gui>, um die Änderungen anzuwenden."
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/merge-ex3.page:74
+msgctxt "_"
+msgid ""
+"external ref='figures/merge-ex3-2.png' md5='51fe322868241d083ec83ae824d927d7'"
+msgstr ""
 
 #. (itstool) path: page/p
 #: C/merge-ex3.page:79
@@ -2583,6 +2561,28 @@ msgstr ""
 "Nun können Sie Ihre Adressetiketten drucken, indem Sie <guiseq><gui>Datei</"
 "gui><gui>Drucken</gui></guiseq> wählen. Der unten angezeigte Druckdialog "
 "wird geöffnet."
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/merge-ex3.page:88
+msgctxt "_"
+msgid ""
+"external ref='figures/merge-ex3-3.png' md5='f731f35b38ddd51499e636733bacc7a6'"
+msgstr ""
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/merge-ex3.page:99
+msgctxt "_"
+msgid ""
+"external ref='figures/merge-ex3-4.png' md5='4415be9d5b59fb57093077bcaece014a'"
+msgstr ""
 
 #. (itstool) path: info/desc
 #: C/merge-ex4.page:9
@@ -2844,29 +2844,6 @@ msgstr ""
 "<gui>OK</gui>. Ein neues Dokument erscheint im Anzeigebereich des "
 "<app>gLabels</app>-Fensters."
 
-#. (itstool) path: media
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/printfile.page:47
-msgctxt "_"
-msgid ""
-"external ref='figures/print-copies.png' "
-"md5='ee473352947fe25c7adaa9f9a052c3e9'"
-msgstr ""
-
-#. (itstool) path: media
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/printfile.page:70
-msgctxt "_"
-msgid ""
-"external ref='figures/print-merge.png' md5='ee70bd2150a6cd46e96ce5c0531eb47b'"
-msgstr ""
-
 #. (itstool) path: info/desc
 #: C/printfile.page:9
 msgid "How to print your labels and cards."
@@ -2920,6 +2897,18 @@ msgstr ""
 "Für einfache Etiketten oder Karten (keine Dokumentmischung) enthält der "
 "Reiter »Labels« die folgenden Einstellmöglichkeiten."
 
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/printfile.page:47
+msgctxt "_"
+msgid ""
+"external ref='figures/print-copies.png' "
+"md5='ee473352947fe25c7adaa9f9a052c3e9'"
+msgstr ""
+
 #. (itstool) path: section/p
 #: C/printfile.page:52
 msgid ""
@@ -2956,6 +2945,17 @@ msgstr ""
 "Für Etiketten oder Karten unter Verwendung der Dokumentmischung enthält "
 "dieser Reiter die folgenden Einstellungen zur Mischung von Dokumenten "
 "anstelle der Festlegung der Kopien."
+
+#. (itstool) path: section/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/printfile.page:70
+msgctxt "_"
+msgid ""
+"external ref='figures/print-merge.png' md5='ee70bd2150a6cd46e96ce5c0531eb47b'"
+msgstr ""
 
 #. (itstool) path: media/p
 #: C/printfile.page:71
@@ -3236,30 +3236,6 @@ msgstr ""
 "Entfernt die ausgewählten Objekte, ohne sie in die Zwischenablage zu "
 "verschieben."
 
-#. (itstool) path: media
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/skipfields.page:45
-msgctxt "_"
-msgid ""
-"external ref='figures/skip-fields-screenshot.png' "
-"md5='eef4a81f48546bd7d3753656a3df9cb7'"
-msgstr ""
-
-#. (itstool) path: media
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: C/skipfields.page:53
-msgctxt "_"
-msgid ""
-"external ref='figures/skip-fields-output.png' "
-"md5='b64d1a7fdf0d37e9a6d93f0bc2f9fa0d'"
-msgstr "original"
-
 #. (itstool) path: info/desc
 #: C/skipfields.page:9
 msgid "How to skip blank address lines when doing a document merge."
@@ -3320,6 +3296,18 @@ msgstr ""
 "zweite Adresszeile darstellt, in einer eigenen Zeile steht. Jeder "
 "zusätzliche Text, auch Leerzeichen, lassen diese Funktion scheitern."
 
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/skipfields.page:45
+msgctxt "_"
+msgid ""
+"external ref='figures/skip-fields-screenshot.png' "
+"md5='eef4a81f48546bd7d3753656a3df9cb7'"
+msgstr ""
+
 #. (itstool) path: media/p
 #: C/skipfields.page:46
 msgid "Multi-line address"
@@ -3336,6 +3324,18 @@ msgstr ""
 "dass die Zeile, welche das Feld ${ADDR2} enthält, für die ersten zwei "
 "Datensätze komplett übersprungen wurde, ohne dass eine leere Zeile gedruckt "
 "wird."
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/skipfields.page:53
+msgctxt "_"
+msgid ""
+"external ref='figures/skip-fields-output.png' "
+"md5='b64d1a7fdf0d37e9a6d93f0bc2f9fa0d'"
+msgstr "original"
 
 #. (itstool) path: media/p
 #: C/skipfields.page:54
