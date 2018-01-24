@@ -6,6 +6,6 @@ Exec=glabels-3 %F
 Icon=glabels-3.0
 Terminal=false
 Type=Application
-Categories=Application;Office;GTK;
+Categories=Office;GTK;
 StartupNotify=true
 MimeType=application/x-glabels;
