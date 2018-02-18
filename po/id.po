@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: glabels glabels-3_4\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=glabels&keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2017-08-01 10:41+0000\n"
-"PO-Revision-Date: 2018-02-11 21:00+0700\n"
-"Last-Translator: Andika Triwidada <atriwidada@gnome.org>\n"
+"PO-Revision-Date: 2018-02-18 09:37+0000\n"
+"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome@i15n.org>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../src/bc-backends.c:81
 msgid "Built-in"
@@ -573,7 +573,7 @@ msgstr "Dokumen gLabels"
 
 #: ../src/file.c:347 ../src/file.c:660
 msgid "Empty file name selection"
-msgstr ""
+msgstr "Pilihan nama berkas kosong"
 
 #: ../src/file.c:350 ../src/file.c:366
 msgid "Please select a file or supply a valid file name"
@@ -590,7 +590,7 @@ msgstr "Tak bisa membuka berkas \"%s\""
 
 #: ../src/file.c:441
 msgid "Not a supported file format"
-msgstr ""
+msgstr "Bukan format berkas yang didukung"
 
 #: ../src/file.c:519 ../src/file.c:710
 #, c-format
@@ -604,20 +604,20 @@ msgstr "Galat ditemui saat menyimpan. Berkas masih belum disimpan."
 #: ../src/file.c:565
 #, c-format
 msgid "Save \"%s\" as"
-msgstr ""
+msgstr "Simpan \"%s\" sebagai"
 
 #: ../src/file.c:663
 msgid "Please supply a valid file name"
-msgstr ""
+msgstr "Harap isikan nama berkas yang valid"
 
 #: ../src/file.c:684
 #, c-format
 msgid "Overwrite file \"%s\"?"
-msgstr ""
+msgstr "Timpa berkas \"%s\"?"
 
 #: ../src/file.c:688
 msgid "File already exists."
-msgstr ""
+msgstr "Berkas sudah ada."
 
 #: ../src/file.c:784
 #, c-format
@@ -634,15 +634,15 @@ msgstr "Tutup tanpa menyimpan"
 
 #: ../src/font-combo-menu.c:137
 msgid "Recent fonts"
-msgstr ""
+msgstr "Fonta baru-baru ini"
 
 #: ../src/font-combo-menu.c:152
 msgid "Proportional fonts"
-msgstr ""
+msgstr "Fonta proporsional"
 
 #: ../src/font-combo-menu.c:160
 msgid "Fixed-width fonts"
-msgstr ""
+msgstr "Fonta lebar tetap"
 
 #: ../src/font-combo-menu.c:168
 msgid "All fonts"
@@ -689,7 +689,7 @@ msgstr "nama berkas"
 
 #: ../src/glabels-batch.c:55
 msgid "number of sheets (default=1)"
-msgstr ""
+msgstr "cacah lembar (baku=1)"
 
 #: ../src/glabels-batch.c:55
 msgid "sheets"
@@ -697,11 +697,11 @@ msgstr "lembar"
 
 #: ../src/glabels-batch.c:57
 msgid "number of copies (default=1)"
-msgstr ""
+msgstr "cacah salinan (baku=1)"
 
 #: ../src/glabels-batch.c:57
 msgid "copies"
-msgstr ""
+msgstr "salinan"
 
 #: ../src/glabels-batch.c:59
 msgid "first label on first sheet (default=1)"
@@ -712,8 +712,9 @@ msgid "first"
 msgstr "pertama"
 
 #: ../src/glabels-batch.c:61 ../data/ui/print-op-dialog-custom-widget.ui.h:11
+#, fuzzy
 msgid "print outlines (to test printer alignment)"
-msgstr ""
+msgstr "cetak "
 
 #: ../src/glabels-batch.c:63 ../data/ui/print-op-dialog-custom-widget.ui.h:12
 msgid "print in reverse (i.e. a mirror image)"
@@ -721,11 +722,11 @@ msgstr "cetak terbalik (citra cermin)"
 
 #: ../src/glabels-batch.c:65 ../data/ui/print-op-dialog-custom-widget.ui.h:13
 msgid "print crop marks"
-msgstr ""
+msgstr "cetak tanda potong"
 
 #: ../src/glabels-batch.c:67
 msgid "input file for merging"
-msgstr ""
+msgstr "berkas masukan untuk penggabungan"
 
 #: ../src/glabels-batch.c:69 ../src/glabels.c:63
 msgid "[FILE...]"
@@ -752,7 +753,7 @@ msgstr "tidak bisa lakukan penggabungan dengan berkas glabel %s\n"
 #: ../src/glabels-batch.c:186
 #, c-format
 msgid "cannot open glabels file %s\n"
-msgstr ""
+msgstr "tidak bisa membuka berkas glabels %s\n"
 
 #: ../src/glabels.c:79
 msgid "Launch gLabels label and business card designer."
@@ -760,27 +761,27 @@ msgstr "Luncurkan perancangan kartu bisnis dan label."
 
 #: ../src/label-barcode.c:183 ../src/ui.c:317
 msgid "Create barcode object"
-msgstr ""
+msgstr "Buat objek kode batang"
 
 #: ../src/label-barcode.c:259 ../src/label-barcode.c:461
 msgid "Barcode data"
-msgstr ""
+msgstr "Data kode batang"
 
 #: ../src/label-barcode.c:290
 msgid "Barcode property"
-msgstr ""
+msgstr "Properti kode batang"
 
 #: ../src/label-barcode.c:684
 msgid "Barcode data empty"
-msgstr ""
+msgstr "Data kode batang kosong"
 
 #: ../src/label-barcode.c:688
 msgid "Invalid barcode data"
-msgstr ""
+msgstr "Data kode batang tidak valid"
 
 #: ../src/label-box.c:156
 msgid "Create box object"
-msgstr ""
+msgstr "Buat objek kotak"
 
 #: ../src/label-box.c:230 ../src/label-ellipse.c:232
 #: ../data/ui/property-bar.ui.h:12
@@ -836,11 +837,11 @@ msgstr "%s %s (diameter)"
 #: ../src/label.c:806
 #, c-format
 msgid "%s / %s %s (diameter / hole)"
-msgstr ""
+msgstr "%s/%s %s (jari-jari/lubang)"
 
 #: ../src/label.c:835 ../src/ui.c:420
 msgid "Merge properties"
-msgstr ""
+msgstr "Gabungkan properti"
 
 #: ../src/label.c:1331 ../src/ui.c:213
 msgid "Delete"
@@ -848,11 +849,11 @@ msgstr "Hapus"
 
 #: ../src/label.c:1366 ../src/ui.c:322
 msgid "Bring to front"
-msgstr ""
+msgstr "Bawa ke depan"
 
 #: ../src/label.c:1402 ../src/ui.c:329
 msgid "Send to back"
-msgstr ""
+msgstr "Kirim ke belakang"
 
 #: ../src/label.c:1443
 msgid "Rotate"
@@ -868,11 +869,11 @@ msgstr "Putar kanan"
 
 #: ../src/label.c:1552 ../src/ui.c:350
 msgid "Flip horizontally"
-msgstr ""
+msgstr "Balik arah horisontal"
 
 #: ../src/label.c:1589 ../src/ui.c:357
 msgid "Flip vertically"
-msgstr ""
+msgstr "Balik arah vertikal"
 
 #: ../src/label.c:1631 ../src/ui.c:364
 msgid "Align left"
@@ -884,19 +885,19 @@ msgstr "Rata kanan"
 
 #: ../src/label.c:1749
 msgid "Align horizontal center"
-msgstr ""
+msgstr "Ratakan mendatar ke tengah"
 
 #: ../src/label.c:1825
 msgid "Align tops"
-msgstr ""
+msgstr "Ratakan ke puncak"
 
 #: ../src/label.c:1882
 msgid "Align bottoms"
-msgstr ""
+msgstr "Ratakan ke dasar"
 
 #: ../src/label.c:1943
 msgid "Align vertical center"
-msgstr ""
+msgstr "Ratakan tegak ke tengah"
 
 #: ../src/label.c:2021 ../src/ui.c:406
 msgid "Center horizontally"
@@ -904,7 +905,7 @@ msgstr "Tengahkan secara horisontal"
 
 #: ../src/label.c:2068 ../src/ui.c:413
 msgid "Center vertically"
-msgstr ""
+msgstr "Tengahkan secara vertikal"
 
 #: ../src/label.c:2789 ../src/label.c:2831 ../src/label.c:2857 ../src/ui.c:206
 msgid "Paste"
@@ -912,19 +913,19 @@ msgstr "Tempel"
 
 #: ../src/label-ellipse.c:160
 msgid "Create ellipse object"
-msgstr ""
+msgstr "Buat objek elips"
 
 #: ../src/label-image.c:199 ../src/ui.c:310
 msgid "Create image object"
-msgstr ""
+msgstr "Buat objek citra"
 
 #: ../src/label-image.c:332 ../src/label-image.c:473
 msgid "Set image"
-msgstr ""
+msgstr "Tata citra"
 
 #: ../src/label-line.c:147 ../src/ui.c:296
 msgid "Create line object"
-msgstr ""
+msgstr "Buat objek garis"
 
 #: ../src/label-object.c:392 ../src/label-object.c:423
 msgid "Move"
@@ -936,24 +937,24 @@ msgstr "Ubah Ukuran"
 
 #: ../src/label-object.c:1258
 msgid "Shadow state"
-msgstr ""
+msgstr "Keadaan berbayang"
 
 #: ../src/label-object.c:1301
 msgid "Shadow offset"
-msgstr ""
+msgstr "Ofset bayangan"
 
 #: ../src/label-object.c:1349
 msgid "Shadow color"
-msgstr ""
+msgstr "Warna bayangan"
 
 #: ../src/label-object.c:1392
 msgid "Shadow opacity"
-msgstr ""
+msgstr "Kelegapan bayangan"
 
 #. Translators: Button label to choose different template
 #: ../src/label-properties-dialog.c:163
 msgid "Choose _other…"
-msgstr ""
+msgstr "Pilih yang l_ain…"
 
 #: ../src/label-properties-dialog.c:164 ../src/ui.c:162
 msgid "_Close"
@@ -965,11 +966,11 @@ msgstr "_Tutup"
 #: ../src/label-properties-dialog.c:282
 #, c-format
 msgid "%s / %s %s (horizontal / vertical)"
-msgstr ""
+msgstr "%s / %s %s (horisontal / vertikal)"
 
 #: ../src/label-text.c:293 ../src/ui.c:282
 msgid "Create text object"
-msgstr ""
+msgstr "Buat objek teks"
 
 #: ../src/label-text.c:467
 msgid "Typing"
@@ -984,9 +985,8 @@ msgid "Font size"
 msgstr "Ukuran fonta"
 
 #: ../src/label-text.c:672
-#, fuzzy
 msgid "Font weight"
-msgstr "Tebal fonta"
+msgstr "Bobot fonta"
 
 #: ../src/label-text.c:705 ../data/ui/property-bar.ui.h:4
 msgid "Italic"
@@ -994,15 +994,15 @@ msgstr "Miring"
 
 #: ../src/label-text.c:738
 msgid "Align text"
-msgstr ""
+msgstr "Ratakan teks"
 
 #: ../src/label-text.c:771
 msgid "Vertically align text"
-msgstr ""
+msgstr "Ratakan teks pada arah vertikal"
 
 #: ../src/label-text.c:804
 msgid "Line spacing"
-msgstr ""
+msgstr "Jarak spasi baris"
 
 #: ../src/label-text.c:837 ../data/ui/property-bar.ui.h:11
 msgid "Text color"
@@ -1032,15 +1032,15 @@ msgstr "Sebarang"
 #: ../src/media-select.c:648
 #, c-format
 msgid "Delete template \"%s\"?"
-msgstr ""
+msgstr "Hapus templat \"%s\"?"
 
 #: ../src/media-select.c:650
 msgid "This action will permanently delete this template."
-msgstr ""
+msgstr "Aksi ini akan menghapus templat ini secara permanen."
 
 #: ../src/media-select.c:990
 msgid "No recent templates found."
-msgstr ""
+msgstr "Tidak ditemukan templat baru-baru ini."
 
 #: ../src/media-select.c:992
 msgid "Try selecting a template in the \"Search all\" tab."
@@ -1050,7 +1050,7 @@ msgstr "Cobalah memilih suatu templat dalam tab \"Cari semua\"."
 #. * were no matches found.
 #: ../src/media-select.c:1083
 msgid "No match."
-msgstr ""
+msgstr "Tidak ada yang cocok."
 
 #: ../src/media-select.c:1085
 msgid "Try selecting a different brand, page size or category."
@@ -1058,7 +1058,7 @@ msgstr "Cobalah memilih kategori, ukuran halaman, atau merk berbeda."
 
 #: ../src/media-select.c:1179
 msgid "No custom templates found."
-msgstr ""
+msgstr "Tidak ditemukan templat ubahan."
 
 #: ../src/media-select.c:1181
 msgid "You may create new templates or try searching for pre-defined templates in the \"Search all\" tab."
@@ -1104,7 +1104,7 @@ msgstr "Teks: Nilai dipisah titik koma dengan kunci pada baris 1"
 
 #: ../src/merge-init.c:119
 msgid "Evolution Addressbook"
-msgstr ""
+msgstr "Buku Alamat Evolution"
 
 #: ../src/merge-init.c:125
 msgid "VCards"
@@ -1112,15 +1112,15 @@ msgstr ""
 
 #: ../src/merge-properties-dialog.c:280
 msgid "Merge Properties"
-msgstr ""
+msgstr "Gabungkan Properti"
 
 #: ../src/merge-properties-dialog.c:304 ../src/merge-properties-dialog.c:420
 msgid "Select merge-database source"
-msgstr ""
+msgstr "Pilih sumber basis data gabung"
 
 #: ../src/merge-properties-dialog.c:315 ../src/merge-properties-dialog.c:446
 msgid "N/A"
-msgstr ""
+msgstr "T/T"
 
 #: ../src/merge-properties-dialog.c:341
 msgid "Select"
@@ -1128,7 +1128,7 @@ msgstr "Pilih"
 
 #: ../src/merge-properties-dialog.c:348
 msgid "Record/Field"
-msgstr ""
+msgstr "Rekaman/Ruas"
 
 #: ../src/merge-properties-dialog.c:356 ../data/ui/object-editor.ui.h:24
 msgid "Data"
@@ -1150,11 +1150,11 @@ msgstr "Naik"
 #: ../src/new-label-dialog.c:214
 msgctxt "Title of dialog page to select a stationary product"
 msgid "Select Product"
-msgstr ""
+msgstr "Pilih Produk"
 
 #: ../src/new-label-dialog.c:227 ../data/ui/new-label-dialog.ui.h:3
 msgid "Choose Orientation"
-msgstr ""
+msgstr "Pilih Orientasi"
 
 #: ../src/new-label-dialog.c:242
 msgid "Review"
@@ -1172,31 +1172,31 @@ msgstr "Properti obyek"
 
 #: ../src/object-editor.c:314
 msgid "Box object properties"
-msgstr ""
+msgstr "Properti objek kotak"
 
 #: ../src/object-editor.c:333
 msgid "Ellipse object properties"
-msgstr ""
+msgstr "Properti objek elips"
 
 #: ../src/object-editor.c:352
 msgid "Line object properties"
-msgstr ""
+msgstr "Properti objek garis"
 
 #: ../src/object-editor.c:369
 msgid "Image object properties"
-msgstr ""
+msgstr "Properti objek citra"
 
 #: ../src/object-editor.c:386
 msgid "Text object properties"
-msgstr ""
+msgstr "Properti objek teks"
 
 #: ../src/object-editor.c:408
 msgid "Barcode object properties"
-msgstr ""
+msgstr "Properti objek kode batang"
 
 #: ../src/object-editor-edit-page.c:76
 msgid "Insert merge field"
-msgstr ""
+msgstr "Sisipkan ruas gabung"
 
 #: ../src/object-editor-fill-page.c:79 ../src/prefs-dialog.c:341
 #: ../src/ui-property-bar.c:299
@@ -1223,11 +1223,11 @@ msgstr ""
 
 #: ../src/object-editor-size-page.c:89
 msgid "Lock aspect ratio."
-msgstr ""
+msgstr "Kunci rasio aspek."
 
 #: ../src/prefs-dialog.c:168 ../data/ui/prefs-dialog.ui.h:1
 msgid "gLabels Preferences"
-msgstr ""
+msgstr "Preferensi gLabels"
 
 #. TODO: Is this the actual part #?
 #: ../src/print-op.c:205 ../src/print-op-dialog.c:215
@@ -1238,7 +1238,7 @@ msgstr "Label"
 
 #: ../src/template-designer.c:429
 msgid "New gLabels Template"
-msgstr ""
+msgstr "Templat gLabels Baru"
 
 #: ../src/template-designer.c:487
 msgid "Welcome"
@@ -1246,7 +1246,7 @@ msgstr "Selamat Datang"
 
 #: ../src/template-designer.c:526
 msgid "Name and Description"
-msgstr ""
+msgstr "Nama dan Deskripsi"
 
 #: ../src/template-designer.c:575
 msgid "Page Size"
@@ -1254,23 +1254,23 @@ msgstr "Ukuran Halaman"
 
 #: ../src/template-designer.c:642
 msgid "Label or Card Shape"
-msgstr ""
+msgstr "Bentuk Kartu atau Label"
 
 #: ../src/template-designer.c:689 ../src/template-designer.c:790
 msgid "Label or Card Size"
-msgstr ""
+msgstr "Ukuran Kartu atau Label"
 
 #: ../src/template-designer.c:873
 msgid "Label Size (round)"
-msgstr ""
+msgstr "Ukuran Label (bulat)"
 
 #: ../src/template-designer.c:954
 msgid "Label Size (CD/DVD)"
-msgstr ""
+msgstr "Ukuran Label (CD/DVD)"
 
 #: ../src/template-designer.c:1045
 msgid "Number of Layouts"
-msgstr ""
+msgstr "Cacah Tata Letak"
 
 #: ../src/template-designer.c:1113
 msgid "Layout(s)"
@@ -1278,11 +1278,11 @@ msgstr "Tata Letak"
 
 #: ../src/template-designer.c:1218
 msgid "Design Completed"
-msgstr ""
+msgstr "Desain Selesai"
 
 #: ../src/template-designer.c:1246
 msgid "Edit gLabels Template"
-msgstr ""
+msgstr "Sunting Templat gLabels"
 
 #: ../src/template-designer.c:1549
 msgid "Brand and part# match an existing template!"
@@ -1295,7 +1295,7 @@ msgstr "_Berkas"
 
 #: ../src/ui.c:92
 msgid "Open Recent _Files"
-msgstr ""
+msgstr "_Buka Berkas Baru-baru Ini"
 
 #: ../src/ui.c:93
 msgid "_Edit"
@@ -1331,7 +1331,7 @@ msgstr "_Urutan"
 
 #: ../src/ui.c:101
 msgid "_Rotate/Flip"
-msgstr ""
+msgstr "Puta_r/Balik"
 
 #: ../src/ui.c:102
 msgid "_Alignment"
@@ -1356,7 +1356,7 @@ msgstr "Bar_u"
 
 #: ../src/ui.c:115
 msgid "Create a new file"
-msgstr ""
+msgstr "Buat suatu berkas baru"
 
 #: ../src/ui.c:120
 msgid "_Open..."
@@ -1380,7 +1380,7 @@ msgstr "Simpan Seb_agai..."
 
 #: ../src/ui.c:136
 msgid "Save the current file to a different name"
-msgstr ""
+msgstr "Simpan berkas saat ini dengan nama lain"
 
 #: ../src/ui.c:141
 msgid "_Print..."
@@ -1396,15 +1396,15 @@ msgstr "Properti..."
 
 #: ../src/ui.c:150
 msgid "Modify document properties"
-msgstr ""
+msgstr "Ubah properti dokumen"
 
 #: ../src/ui.c:155
 msgid "Template _Designer..."
-msgstr ""
+msgstr "_Perancang Templat..."
 
 #: ../src/ui.c:157
 msgid "Create a custom template"
-msgstr ""
+msgstr "Buat suatu templat ubahan"
 
 #: ../src/ui.c:164
 msgid "Close the current file"
@@ -1448,7 +1448,7 @@ msgstr "Tempel papan klip"
 
 #: ../src/ui.c:215
 msgid "Delete the selected objects"
-msgstr ""
+msgstr "Hapus objek yang dipilih"
 
 #: ../src/ui.c:220
 msgid "Select All"
@@ -1456,15 +1456,15 @@ msgstr "Pilih Semua"
 
 #: ../src/ui.c:222
 msgid "Select all objects"
-msgstr ""
+msgstr "Pilih semua objek"
 
 #: ../src/ui.c:227
 msgid "Un-select All"
-msgstr ""
+msgstr "Pilih Tak Satupun"
 
 #: ../src/ui.c:229
 msgid "Remove all selections"
-msgstr ""
+msgstr "Buang semua pilihan"
 
 #: ../src/ui.c:234
 msgid "Preferences"
@@ -1480,7 +1480,7 @@ msgstr "Perbesar"
 
 #: ../src/ui.c:245
 msgid "Increase magnification"
-msgstr ""
+msgstr "Naikkan pembesaran"
 
 #: ../src/ui.c:250
 msgid "Zoom out"
@@ -1488,15 +1488,15 @@ msgstr "Perkecil"
 
 #: ../src/ui.c:252
 msgid "Decrease magnification"
-msgstr ""
+msgstr "Turunkan pembesaran"
 
 #: ../src/ui.c:257
 msgid "Zoom 1 to 1"
-msgstr ""
+msgstr "Zum 1:1"
 
 #: ../src/ui.c:259
 msgid "Restore scale to 100%"
-msgstr ""
+msgstr "Pulihkan skala ke 100%"
 
 #: ../src/ui.c:264
 msgid "Zoom to fit"
@@ -1504,15 +1504,15 @@ msgstr "Zum sampai pas"
 
 #: ../src/ui.c:266
 msgid "Set scale to fit window"
-msgstr ""
+msgstr "Atur skala agar pas jendela"
 
 #: ../src/ui.c:273
 msgid "Select Mode"
-msgstr ""
+msgstr "Mode Pilih"
 
 #: ../src/ui.c:275
 msgid "Select, move and modify objects"
-msgstr ""
+msgstr "Pilih, pindah, dan ubah objek"
 
 #: ../src/ui.c:280 ../src/view-text.c:94 ../data/ui/object-editor.ui.h:2
 #: ../data/ui/prefs-dialog.ui.h:17
@@ -1525,7 +1525,7 @@ msgstr "Kotak"
 
 #: ../src/ui.c:289
 msgid "Create box/rectangle object"
-msgstr ""
+msgstr "Buat objek kotak/persegi panjang"
 
 #: ../src/ui.c:294 ../data/ui/object-editor.ui.h:17
 #: ../data/ui/prefs-dialog.ui.h:20
@@ -1538,7 +1538,7 @@ msgstr "Elips"
 
 #: ../src/ui.c:303
 msgid "Create ellipse/circle object"
-msgstr ""
+msgstr "Buat objek elips/lingkaran"
 
 #: ../src/ui.c:308 ../data/ui/object-editor.ui.h:20
 msgid "Image"
@@ -1550,11 +1550,11 @@ msgstr "Barcode"
 
 #: ../src/ui.c:324
 msgid "Raise object to top"
-msgstr ""
+msgstr "Naikkan objek ke puncak"
 
 #: ../src/ui.c:331
 msgid "Lower object to bottom"
-msgstr ""
+msgstr "Turunkan objek ke dasar"
 
 #: ../src/ui.c:338
 msgid "Rotate object 90 degrees counter-clockwise"
@@ -1562,23 +1562,23 @@ msgstr "Putar objek 90 derajat berlawanan arah jarum jam"
 
 #: ../src/ui.c:345
 msgid "Rotate object 90 degrees clockwise"
-msgstr ""
+msgstr "Putar objek 90 derajat searah jarum jam"
 
 #: ../src/ui.c:352
 msgid "Flip object horizontally"
-msgstr ""
+msgstr "Balikkan objek arah horisontal"
 
 #: ../src/ui.c:359
 msgid "Flip object vertically"
-msgstr ""
+msgstr "Balikkan objek arah vertikal"
 
 #: ../src/ui.c:366
 msgid "Align objects to left edges"
-msgstr ""
+msgstr "Ratakan objek ke tepi kiri"
 
 #: ../src/ui.c:371
 msgid "Align center"
-msgstr ""
+msgstr "Rata tengah"
 
 #: ../src/ui.c:373
 msgid "Align objects to horizontal centers"
@@ -1586,7 +1586,7 @@ msgstr "Ratakan objek ke tengah horisontal"
 
 #: ../src/ui.c:380
 msgid "Align objects to right edges"
-msgstr ""
+msgstr "Ratakan objek ke tepi kanan"
 
 #: ../src/ui.c:385
 msgid "Align top"
@@ -1598,7 +1598,7 @@ msgstr "Ratakan objek ke tepi atas"
 
 #: ../src/ui.c:392
 msgid "Align middle"
-msgstr ""
+msgstr "Rata tengah"
 
 #: ../src/ui.c:394
 msgid "Align objects to vertical centers"
@@ -1622,7 +1622,7 @@ msgstr "Tengahkan objek ke pusat label vertikal"
 
 #: ../src/ui.c:422
 msgid "Edit merge properties"
-msgstr ""
+msgstr "Sunting properti gabung"
 
 #: ../src/ui.c:429
 msgid "Contents"
@@ -1630,7 +1630,7 @@ msgstr "Isi"
 
 #: ../src/ui.c:431
 msgid "Open glabels manual"
-msgstr ""
+msgstr "Buka manual glabels"
 
 #: ../src/ui.c:436
 msgid "About..."
@@ -1638,11 +1638,11 @@ msgstr "Tentang..."
 
 #: ../src/ui.c:438 ../src/ui-commands.c:1198
 msgid "About glabels"
-msgstr ""
+msgstr "Tentang glabels"
 
 #: ../src/ui.c:448
 msgid "Property toolbar"
-msgstr ""
+msgstr "Bilah alat properti"
 
 #: ../src/ui.c:450
 msgid "Change the visibility of the property toolbar in the current window"
@@ -1674,7 +1674,7 @@ msgstr "Ubah kenampakan bilah alat utama dalam jendela saat ini"
 
 #: ../src/ui.c:485
 msgid "Drawing toolbar"
-msgstr ""
+msgstr "Bilah alat menggambar"
 
 #: ../src/ui.c:487
 msgid "Change the visibility of the drawing toolbar in the current window"
@@ -1690,7 +1690,7 @@ msgstr "Lihat berkas AUTHORS untuk kredit tambahan,"
 
 #: ../src/ui-commands.c:1145
 msgid "or visit http://glabels.org/"
-msgstr ""
+msgstr "atau kunjungi http://glabels.org/"
 
 #: ../src/ui-commands.c:1162
 msgid "A label and business card creation program.\n"
@@ -1698,7 +1698,7 @@ msgstr "Suatu program pembuatan kartu nama dan label.\n"
 
 #: ../src/ui-commands.c:1166
 msgid "translator-credits"
-msgstr "Andika Triwidada <andika@gmail.com>, 2012, 2016"
+msgstr "Andika Triwidada <andika@gmail.com>, 2012, 2016, 2018"
 
 #: ../src/ui-commands.c:1169
 msgid ""
@@ -1840,7 +1840,7 @@ msgstr "Dimensi:"
 #: ../data/ui/label-properties-dialog.ui.h:6
 #| msgid "Medium green"
 msgid "Medium size:"
-msgstr ""
+msgstr "Ukuran sedang:"
 
 #: ../data/ui/label-properties-dialog.ui.h:7
 #: ../data/ui/new-label-dialog.ui.h:12
@@ -1849,7 +1849,7 @@ msgstr "Tata Letak:"
 
 #: ../data/ui/label-properties-dialog.ui.h:8
 msgid "Margins:"
-msgstr ""
+msgstr "Margin"
 
 #: ../data/ui/label-properties-dialog.ui.h:9
 #: ../data/ui/new-label-dialog.ui.h:13
@@ -1863,7 +1863,7 @@ msgstr "Opsi"
 
 #: ../data/ui/label-properties-dialog.ui.h:11
 msgid "Orientation:"
-msgstr ""
+msgstr "Orientasi:"
 
 #: ../data/ui/label-properties-dialog.ui.h:12
 msgid "_Normal"
@@ -1871,7 +1871,7 @@ msgstr "_Normal"
 
 #: ../data/ui/label-properties-dialog.ui.h:13
 msgid "_Rotated"
-msgstr ""
+msgstr "Diputa_r"
 
 #: ../data/ui/media-select.ui.h:1
 msgid "Recent"
@@ -1879,12 +1879,12 @@ msgstr "Terkini"
 
 #: ../data/ui/media-select.ui.h:2
 msgid "Brand:"
-msgstr ""
+msgstr "Merek:"
 
 #: ../data/ui/media-select.ui.h:3 ../data/ui/new-label-dialog.ui.h:10
 #: ../data/ui/template-designer.ui.h:12
 msgid "Page size:"
-msgstr ""
+msgstr "Ukuran halaman:"
 
 #: ../data/ui/media-select.ui.h:4
 msgid "Category:"
@@ -1940,7 +1940,7 @@ msgstr "Normal"
 
 #: ../data/ui/new-label-dialog.ui.h:6
 msgid "Rotated"
-msgstr ""
+msgstr "Diputar"
 
 #: ../data/ui/new-label-dialog.ui.h:7
 msgid "Review Selection"
@@ -2090,7 +2090,7 @@ msgstr "Ofset Y:"
 
 #: ../data/ui/object-editor.ui.h:40
 msgid "Opacity:"
-msgstr "Tingkat tembus pandang"
+msgstr "Tingkat tembus pandang:"
 
 #: ../data/ui/object-editor.ui.h:42
 #, no-c-format
@@ -2456,7 +2456,7 @@ msgstr "gLabels dapat digunakan untuk merancang label alamat, tanda pengenal, la
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
 msgid "Show/hide main toolbar."
-msgstr ""
+msgstr "Tampilkan/sembunyikan bilah alat utama."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:2
 msgid "Controls visibility of main toolbar."
@@ -2464,7 +2464,7 @@ msgstr "Mengendalikan kenampakan bilah alat utama."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:3
 msgid "Show/hide drawing toolbar."
-msgstr ""
+msgstr "Tampilkan/sembunyikan bilah alat menggambar."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:4
 msgid "Controls visibility of drawing toolbar."
@@ -2472,7 +2472,7 @@ msgstr "Mengendalikan kenampakan bilah alat menggambar."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:5
 msgid "Show/hide property toolbar."
-msgstr ""
+msgstr "Tampilkan/sembunyikan bilah alat properti."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:6
 msgid "Controls visibility of property toolbar."
@@ -2480,15 +2480,15 @@ msgstr "Mengendalikan kenampakan bilah alat properti."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:7
 msgid "Show/hide grid."
-msgstr ""
+msgstr "Tampilkan/sembunyikan kisi."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:8
 msgid "Controls visibility of grid."
-msgstr ""
+msgstr "Mengendalikan kenampakan kisi."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:9
 msgid "Show/hide markup."
-msgstr ""
+msgstr "Tampilkan/sembunyikan markup."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:10
 msgid "Controls visibility of markup lines."
@@ -2496,7 +2496,7 @@ msgstr "Mengendalikan kenampakan garis tanda."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:11
 msgid "Maximum recent files."
-msgstr ""
+msgstr "Berkas baru-baru ini maksimum."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:12
 msgid "Controls maximum number of recent files tracked."
@@ -2508,11 +2508,11 @@ msgstr "Unit."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:14
 msgid "The default unit of measurement."
-msgstr ""
+msgstr "Satuan pengukuran baku."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:15
 msgid "Default page size."
-msgstr ""
+msgstr "Ukuran halaman baku."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:16
 msgid "The preferred page size when searching templates."
@@ -2520,7 +2520,7 @@ msgstr "Ukuran halaman yang disukan saat mencari templat."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:17
 msgid "Default font family."
-msgstr ""
+msgstr "Keluarga fonta baku."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:18
 msgid "The default font family for new text objects."
@@ -2528,7 +2528,7 @@ msgstr "Keluarga fonta baku bagi objek teks baru."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:19
 msgid "Default font size."
-msgstr ""
+msgstr "Ukuran fonta baku."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:20
 msgid "The default font size for new text objects."
@@ -2536,7 +2536,7 @@ msgstr "Ukuran fonta baku bagi objek teks baru."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:21
 msgid "Default font weight."
-msgstr ""
+msgstr "Bobot fonta baku."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:22
 msgid "The default font weight for new text objects."
@@ -2552,7 +2552,7 @@ msgstr "Keadaan kemiringan fonta baku bagi objek teks baru."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:25
 msgid "Default text color."
-msgstr ""
+msgstr "Warna teks baku."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:26
 msgid "The default color of text for new text objects (0xRRGGBBAA)."
@@ -2560,7 +2560,7 @@ msgstr "Warna baku teks bagi objek teks baru (0xRRGGBBAA)."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:27
 msgid "Default text alignment."
-msgstr ""
+msgstr "Perataan teks baku."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:28
 msgid "The default text alignment for new text objects."
@@ -2576,7 +2576,7 @@ msgstr "Spasi baris baku bagi objek teks baru."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:31
 msgid "Default line width."
-msgstr ""
+msgstr "Lebar garis baku."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:32
 msgid "The default line width for new objects."
@@ -2584,7 +2584,7 @@ msgstr ""
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:33
 msgid "Default line color."
-msgstr ""
+msgstr "Warna garis baku."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:34
 msgid "The default line color new objects (0xRRGGBBAA)."
@@ -2592,7 +2592,7 @@ msgstr "Warna garis baku bagi objek baru (0xRRGGBBAA)."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:35
 msgid "Default fill color."
-msgstr ""
+msgstr "Warna isi baku."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:36
 msgid "The default fill color new objects (0xRRGGBBAA)."
@@ -2600,23 +2600,23 @@ msgstr "Warna isi baku bagi objek baru (0xRRGGBBAA)."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:37
 msgid "Recent templates."
-msgstr ""
+msgstr "Templat baru-baru ini."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:38
 msgid "Recently used templates."
-msgstr ""
+msgstr "Templat yang baru-baru ini dipakai."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:39
 msgid "Recent fonts."
-msgstr ""
+msgstr "Fonta baru-baru ini."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:40
 msgid "Recently used font families."
-msgstr ""
+msgstr "Keluarga fonta yang baru-baru ini dipakai."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:41
 msgid "Recent colors."
-msgstr ""
+msgstr "Warna baru-baru ini."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:42
 msgid "Recently created custom colors."
@@ -2632,7 +2632,7 @@ msgstr "label;kartu;cetak;kantor;barcode;"
 
 #: ../data/mime/glabels-3.0.xml.in.h:1
 msgid "gLabels Project File"
-msgstr ""
+msgstr "Berkas Proyek gLabels"
 
 #. Most popular (at top of list)
 #: ../templates/paper-sizes.xml.h:2
@@ -2809,7 +2809,7 @@ msgstr "Sebarang label"
 #: ../templates/rayfilm-templates.xml.h:8
 #: ../templates/sheetlabels-us-templates.xml.h:16
 msgid "Round labels"
-msgstr ""
+msgstr "Label bulat"
 
 #. ===================================================================
 #: ../templates/categories.xml.h:3 ../templates/begalabel-templates.xml.h:4
@@ -3129,7 +3129,7 @@ msgstr ""
 #: ../templates/decadry-iso-templates.xml.h:2
 #: ../templates/misc-iso-templates.xml.h:14
 msgid "Mailing labels"
-msgstr ""
+msgstr "Label surat"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:14
@@ -3141,7 +3141,7 @@ msgstr "Label Alamat"
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:18
 msgid "Shipping labels"
-msgstr ""
+msgstr "Label pengiriman"
 
 #. ===============================================================
 #. ===================================================================
@@ -3153,7 +3153,7 @@ msgstr ""
 #: ../templates/sheetlabels-us-templates.xml.h:28
 #: ../templates/zweckform-iso-templates.xml.h:10
 msgid "Mailing Labels"
-msgstr "Label "
+msgstr "Label Surat"
 
 #. ===============================================================
 #: ../templates/avery-iso-templates.xml.h:26
@@ -3504,7 +3504,7 @@ msgstr "Label PVC"
 #. ===================================================================
 #: ../templates/meritline-us-templates.xml.h:2
 msgid "Mini-CD Labels"
-msgstr ""
+msgstr "Label Mini-CD"
 
 #. ===================================================================
 #: ../templates/microapp-templates.xml.h:2
@@ -3526,7 +3526,7 @@ msgstr ""
 #. TODO: Is this the actual part #?
 #: ../templates/misc-us-templates.xml.h:6
 msgid "Cassette Labels"
-msgstr ""
+msgstr "Label Kaset"
 
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:10
@@ -3582,13 +3582,13 @@ msgstr ""
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:8
 msgid "General Labels"
-msgstr ""
+msgstr "Label Umum"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:10
 #: ../templates/pearl-iso-templates.xml.h:28
 msgid "Self-adhesive labels"
-msgstr ""
+msgstr "Label berperekat"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:16
@@ -3615,7 +3615,7 @@ msgstr "Label Universal"
 #: ../templates/pearl-iso-templates.xml.h:16
 #: ../templates/sheetlabels-us-templates.xml.h:26
 msgid "Bottle labels"
-msgstr ""
+msgstr "Label botol"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:40
@@ -3650,12 +3650,12 @@ msgstr ""
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:30
 msgid "SD card labels"
-msgstr ""
+msgstr "Label SD card"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:40
 msgid "Passport photo labels glossy"
-msgstr ""
+msgstr "Label foto paspor mengkilat"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:42
@@ -3712,11 +3712,11 @@ msgstr "Label CD Mini"
 
 #: ../templates/rayfilm-templates.xml.h:13
 msgid "Triangular labels"
-msgstr ""
+msgstr "Label segi tiga"
 
 #: ../templates/rayfilm-templates.xml.h:14
 msgid "Trapezoid labels"
-msgstr ""
+msgstr "Label trapesium"
 
 #. ===================================================================
 #: ../templates/sheetlabels-us-templates.xml.h:22
