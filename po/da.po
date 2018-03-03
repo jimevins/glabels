@@ -1,24 +1,26 @@
 # Danish translation for glabels.
-# Copyright (C) 2012 glabels og nedenstående oversættere.
+# Copyright (C) 2018 glabels og nedenstående oversættere.
 # This file is distributed under the same license as the glabels package.
-# Joe Hansen (joedalton2@yahoo.dk), 2010, 2012.
+# Joe Hansen (joedalton2@yahoo.dk), 2010, 2012, 2017, 2018.
 #
 # https://sourceforge.net/tracker/?func=detail&aid=2955732&group_id=46122&atid=445116
 # ovenstående gav desværre ikke rigtig noget.
 #
+# Business Cards -> visitkort
 # dull -> mat
 # flyer (paper) -> folder
 # inserts -> indlæg
-# matrix -> matrice
+# matrix -> matrix men matricen
+# metal tin container - > konservesdåse
 # name plate -> navneskilt
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: glabels glabels_2_2\n"
+"Project-Id-Version: glabels\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=glabels&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-08-01 09:23+0000\n"
-"PO-Revision-Date: 2012-04-14 14:52+0000\n"
+"POT-Creation-Date: 2018-02-18 09:39+0000\n"
+"PO-Revision-Date: 2018-03-03 14:52+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -201,7 +203,7 @@ msgstr "Kode 16K"
 
 #: ../src/bc-backends.c:236
 msgid "Code 2 of 5 Matrix"
-msgstr "Kode 2 af 5 matrice"
+msgstr "Kode 2 af 5 matrix"
 
 #: ../src/bc-backends.c:239
 msgid "Code 2 of 5 IATA"
@@ -220,7 +222,6 @@ msgid "Code 49"
 msgstr "Kode 49"
 
 #: ../src/bc-backends.c:263
-#, fuzzy
 msgid "Code 128 (Mode C suppression)"
 msgstr "Kode 128 (tilstand c-undertrykkelse)"
 
@@ -230,12 +231,11 @@ msgstr "DAFT-kode"
 
 #: ../src/bc-backends.c:269
 msgid "Data Matrix"
-msgstr "Datamatrice"
+msgstr "Datamatrix"
 
 #: ../src/bc-backends.c:272
-#, fuzzy
 msgid "Data Matrix (GS1)"
-msgstr "Datamatrice"
+msgstr "Datamatrix (GS1)"
 
 #: ../src/bc-backends.c:275
 msgid "Deutsche Post Leitcode"
@@ -255,7 +255,7 @@ msgstr "EAN"
 
 #: ../src/bc-backends.c:287
 msgid "Grid Matrix"
-msgstr "Gittermatrice"
+msgstr "Gittermatrix"
 
 #: ../src/bc-backends.c:290
 msgid "GS1-128"
@@ -287,7 +287,7 @@ msgstr "HIBC kode 39"
 
 #: ../src/bc-backends.c:317
 msgid "HIBC Data Matrix"
-msgstr "HIBC-datamatrice"
+msgstr "HIBC-datamatrix"
 
 #: ../src/bc-backends.c:320
 msgid "HIBC QR Code"
@@ -397,7 +397,7 @@ msgstr "UK Plessey"
 
 #: ../src/bc-backends.c:414
 msgid "IEC16022 (DataMatrix)"
-msgstr "IEC16022 (Datamatrice)"
+msgstr "IEC16022 (DataMatrix)"
 
 #: ../src/bc-backends.c:421
 msgid "IEC18004 (QRCode)"
@@ -576,9 +576,8 @@ msgstr "Etiketegenskaber"
 
 #. Translators: assistent dialog title
 #: ../src/file.c:203
-#, fuzzy
 msgid "Choose label properties"
-msgstr "Etiketegenskaber"
+msgstr "Vælg etiketegenskaber"
 
 #: ../src/file.c:295 ../src/file.c:597
 msgid "All files"
@@ -830,7 +829,7 @@ msgstr "Uden titel"
 #: ../src/label.c:751 ../src/label.c:776
 #, c-format
 msgid "%s × %s %s (width × height)"
-msgstr ""
+msgstr "%s × %s %s (bredde × højde)"
 
 #. Translators: A rounded rectangular label dimensions. first param is numeric
 #. value of width, second is numeric value of height, third is numeric value
@@ -839,15 +838,15 @@ msgstr ""
 #: ../src/label.c:758
 #, c-format
 msgid "%s × %s / %s %s (width × height / round)"
-msgstr ""
+msgstr "%s × %s / %s %s (bredde × højde / rund)"
 
 #. Translators: A round label dimensions. first param is numeric value of
 #. diameter and second is unit. Example:
 #. "120.5 mm (diameter)"
 #: ../src/label.c:788
-#, fuzzy, c-format
+#, c-format
 msgid "%s %s (diameter)"
-msgstr "diameter"
+msgstr "%s %s (diameter)"
 
 #. Translators: A CD/DVD label dimensions. first param is numeric value of
 #. diameter, second is numeric value of hole and third is unit. Example:
@@ -855,7 +854,7 @@ msgstr "diameter"
 #: ../src/label.c:806
 #, c-format
 msgid "%s / %s %s (diameter / hole)"
-msgstr ""
+msgstr "%s / %s %s (diameter / hul)"
 
 #: ../src/label.c:835 ../src/ui.c:420
 msgid "Merge properties"
@@ -974,7 +973,7 @@ msgstr "Skyggeuigennemsigtighed"
 #. Translators: Button label to choose different template
 #: ../src/label-properties-dialog.c:163
 msgid "Choose _other…"
-msgstr ""
+msgstr "Vælg en anden …"
 
 #: ../src/label-properties-dialog.c:164 ../src/ui.c:162
 msgid "_Close"
@@ -986,7 +985,7 @@ msgstr "_Luk"
 #: ../src/label-properties-dialog.c:282
 #, c-format
 msgid "%s / %s %s (horizontal / vertical)"
-msgstr ""
+msgstr "%s / %s %s (vandret/lodret)"
 
 #: ../src/label-text.c:293 ../src/ui.c:282
 msgid "Create text object"
@@ -1020,7 +1019,7 @@ msgstr "Juster tekst"
 
 #: ../src/label-text.c:771
 msgid "Vertically align text"
-msgstr ""
+msgstr "Juster tekst lodret"
 
 #: ../src/label-text.c:804
 msgid "Line spacing"
@@ -1178,7 +1177,6 @@ msgid "Up"
 msgstr "Op"
 
 #: ../src/new-label-dialog.c:214
-#, fuzzy
 msgctxt "Title of dialog page to select a stationary product"
 msgid "Select Product"
 msgstr "Vælg produkt"
@@ -1872,9 +1870,8 @@ msgstr "pica"
 #. * End:                   -- emacs
 #.
 #: ../data/ui/label-properties-dialog.ui.h:1
-#, fuzzy
 msgid "Label"
-msgstr "Etiketter"
+msgstr "Etiket"
 
 #: ../data/ui/label-properties-dialog.ui.h:2
 #: ../data/ui/new-label-dialog.ui.h:15
@@ -1893,12 +1890,11 @@ msgstr "Beskrivelse:"
 
 #: ../data/ui/label-properties-dialog.ui.h:5
 msgid "Dimensions:"
-msgstr ""
+msgstr "Dimensioner:"
 
 #: ../data/ui/label-properties-dialog.ui.h:6
-#, fuzzy
 msgid "Medium size:"
-msgstr "Mellemgrøn"
+msgstr "Mellemstørrelse:"
 
 #: ../data/ui/label-properties-dialog.ui.h:7
 #: ../data/ui/new-label-dialog.ui.h:12
@@ -1906,9 +1902,8 @@ msgid "Layout:"
 msgstr "Layout:"
 
 #: ../data/ui/label-properties-dialog.ui.h:8
-#, fuzzy
 msgid "Margins:"
-msgstr "3. Margen"
+msgstr "Margener:"
 
 #: ../data/ui/label-properties-dialog.ui.h:9
 #: ../data/ui/new-label-dialog.ui.h:13
@@ -1921,19 +1916,16 @@ msgid "Options"
 msgstr "Indstillinger"
 
 #: ../data/ui/label-properties-dialog.ui.h:11
-#, fuzzy
 msgid "Orientation:"
-msgstr "Vælg retning"
+msgstr "Retning:"
 
 #: ../data/ui/label-properties-dialog.ui.h:12
-#, fuzzy
 msgid "_Normal"
-msgstr "Normal"
+msgstr "_Normal"
 
 #: ../data/ui/label-properties-dialog.ui.h:13
-#, fuzzy
 msgid "_Rotated"
-msgstr "Roteret"
+msgstr "_Roteret"
 
 #: ../data/ui/media-select.ui.h:1
 msgid "Recent"
@@ -2009,9 +2001,8 @@ msgid "Rotated"
 msgstr "Roteret"
 
 #: ../data/ui/new-label-dialog.ui.h:7
-#, fuzzy
 msgid "Review Selection"
-msgstr "Fjern alle markeringer"
+msgstr "Gennemse markering"
 
 #: ../data/ui/new-label-dialog.ui.h:8
 msgid "Please review and confirm your selection."
@@ -2054,9 +2045,8 @@ msgid "Alignment:"
 msgstr "Justering:"
 
 #: ../data/ui/object-editor.ui.h:10
-#, fuzzy
 msgid "Vertical alignment:"
-msgstr "Justering:"
+msgstr "Lodret justering:"
 
 #: ../data/ui/object-editor.ui.h:11 ../data/ui/prefs-dialog.ui.h:16
 msgid "Line Spacing:"
@@ -2275,18 +2265,16 @@ msgid "Right align"
 msgstr "Højrejustering"
 
 #: ../data/ui/property-bar.ui.h:8
-#, fuzzy
 msgid "Top vertical align"
-msgstr "Vend lodret"
+msgstr "Lodret justering øverst"
 
 #: ../data/ui/property-bar.ui.h:9
-#, fuzzy
 msgid "Center vertical align"
-msgstr "Centrer lodret"
+msgstr "Lodret justering centreret"
 
 #: ../data/ui/property-bar.ui.h:10
 msgid "Bottom vertical align"
-msgstr ""
+msgstr "Lodret justering nederst"
 
 #: ../data/ui/template-designer.ui.h:1
 msgid ""
@@ -2320,7 +2308,7 @@ msgstr "(f.eks, Carlsberg, LEGO, …)"
 
 #: ../data/ui/template-designer.ui.h:10
 msgid "(e.g., \"Mailing Labels,\" \"Business Cards,\" ...)"
-msgstr "(f.eks., “E-post-etiketter,” “Forretningskort,” …)"
+msgstr "(f.eks. “E-postetiketter”, “Visitkort” …)"
 
 #: ../data/ui/template-designer.ui.h:11
 msgid "Please select the page size of the template stationery."
@@ -2524,20 +2512,19 @@ msgstr ""
 "Tillykke!\n"
 "\n"
 "Du har fuldført glabels' skabelondesigner.\n"
-"Hvis du ønsker at acceptere og gemme dit design så klik på “Anvend.”\n"
+"Hvis du ønsker at acceptere og gemme dit design så klik på “Anvend”.\n"
 "\n"
-"Ellers kan du trykke “Afbryd” for at droppe dit design\n"
+"Ellers kan du trykke “Annullér” for at droppe dit design\n"
 "eller “Tilbage” for at fortsætte med at redigere dette design."
 
 #: ../data/appdata/glabels-3.appdata.xml.in.h:1
-#, fuzzy
 msgid "gLabels"
-msgstr "Etiketter"
+msgstr "gLabels"
 
 #: ../data/appdata/glabels-3.appdata.xml.in.h:2
 #: ../data/desktop/glabels-3.0.desktop.in.h:2
 msgid "Create labels, business cards and media covers"
-msgstr "Opret etiketter, forretningskort og mediecovere"
+msgstr "Opret etiketter, visitkort og mediecovere"
 
 #: ../data/appdata/glabels-3.appdata.xml.in.h:3
 msgid ""
@@ -2545,6 +2532,9 @@ msgid ""
 "to work with various laser/ink-jet peel-off label and business card sheets "
 "that you'll find at most office supply stores."
 msgstr ""
+"gLabels er et program til at oprette etiketter og visitkort. "
+"Programmet er designet til at fungere med diverse laser/blæk aftagelige "
+"etiket- og visitkortark, som du kan finde i de fleste kontorforsyninger."
 
 #: ../data/appdata/glabels-3.appdata.xml.in.h:4
 msgid ""
@@ -2555,6 +2545,13 @@ msgid ""
 "lets you print a unique label for each record from an external data source, "
 "such as a CSV file or an Evolution address book."
 msgstr ""
+"gLabels kan bruges til at designe adresseetiketter, navnemærkater, "
+"prismærkater, cd/dvd-etiketter eller bare alt som er organiseret i et "
+"regulært mønster på et stykke papir. Etiketter (eller kort) kan indeholde "
+"tekst, billeder, linjer, former og stregkoder. gLabels inkluderer også en "
+"funktion til at sammenføje dokumenter, som giver dig mulighed for at "
+"udskrive en unik etiket for hver post fra en ekstern datakilde, såsom en "
+"CSV-fil eller en adressebog fra Evolution."
 
 #: ../data/schemas/org.gnome.glabels-3.gschema.xml.in.in.h:1
 msgid "Show/hide main toolbar."
@@ -2733,7 +2730,7 @@ msgstr "gLabels 3 - etiketdesigner"
 
 #: ../data/desktop/glabels-3.0.desktop.in.h:3
 msgid "label;card;print;office;barcode;"
-msgstr ""
+msgstr "etiket;label;kort;print;udskriv;kontor;office;stregkode;barcode;"
 
 #: ../data/mime/glabels-3.0.xml.in.h:1
 msgid "gLabels Project File"
@@ -2964,12 +2961,11 @@ msgstr "Ethvert kort"
 #: ../templates/hama-iso-templates.xml.h:8
 #: ../templates/pearl-iso-templates.xml.h:38
 msgid "Business cards"
-msgstr "Forretningskort"
+msgstr "Visitkort"
 
 #: ../templates/categories.xml.h:8
-#, fuzzy
 msgid "Name Badge"
-msgstr "Navneskiltsetiketter"
+msgstr "Navneskilt"
 
 #: ../templates/categories.xml.h:9
 msgid "CD/DVD or other media"
@@ -2991,7 +2987,6 @@ msgstr "Billedprodukter"
 # manglende l i filing? ja medmindre det betyder arkiveringsetiketter 
 # som måske også giver lidt mere mening.
 #: ../templates/categories.xml.h:13
-#, fuzzy
 msgid "Filing labels"
 msgstr "Arkiveringsetiketter"
 
@@ -3139,7 +3134,7 @@ msgstr "Arkiveringsetiketter"
 #: ../templates/rayfilm-templates.xml.h:15
 #: ../templates/zweckform-iso-templates.xml.h:28
 msgid "Business Cards"
-msgstr "Forretningskort"
+msgstr "Visitkort"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:26
@@ -3303,14 +3298,12 @@ msgid "Diskette labels"
 msgstr "Disketteetiketter"
 
 #: ../templates/begalabel-templates.xml.h:1
-#, fuzzy
 msgid "Rounded rectangular labels"
-msgstr "Rektangulære etiketter"
+msgstr "Afrundede rektangulære etiketter"
 
 #: ../templates/begalabel-templates.xml.h:6
-#, fuzzy
 msgid "Cassette Tape Face"
-msgstr "Kassetteetiketter"
+msgstr "Kassettebåndfront"
 
 #.
 #. *********************************************************************
@@ -3361,30 +3354,25 @@ msgstr "Standardadresseetiketter 38mm x 90mm"
 #. *********************************************************************
 #.
 #: ../templates/brother-other-templates.xml.h:37
-#, fuzzy
 msgid "Standard Address Labels 29mm x 90mm (Old)"
-msgstr "Standardadresseetiketter 29mm x 90mm"
+msgstr "Standardadresseetiketter 29mm x 90mm (gammel)"
 
 #: ../templates/brother-other-templates.xml.h:38
-#, fuzzy
 msgid "Shipping Labels 62mm x 100mm (Old)"
-msgstr "Forsendelsesetiketter 62mm x 100mm"
+msgstr "Forsendelsesetiketter 62mm x 100mm (gammel)"
 
 #: ../templates/brother-other-templates.xml.h:39
-#, fuzzy
 msgid "Multi Purpose Labels 17mm x 54mm (Old)"
-msgstr "Multietiketter 17mm x 54mm"
+msgstr "Multietiketter 17mm x 54mm (gammel)"
 
 #: ../templates/brother-other-templates.xml.h:40
-#, fuzzy
 msgid "Standard Address Labels 38mm x 90mm (Old)"
-msgstr "Standardadresseetiketter 38mm x 90mm"
+msgstr "Standardadresseetiketter 38mm x 90mm (gammel)"
 
 #. ===================================================================
 #: ../templates/canon-other-templates.xml.h:2
-#, fuzzy
 msgid "CD/DVD Tray"
-msgstr "Cd-/dvd-etiketter"
+msgstr "Cd-/dvd-bakke"
 
 #. ===================================================================
 #: ../templates/databecker-iso-templates.xml.h:4
@@ -3408,7 +3396,6 @@ msgstr "Medlemskort"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:4
-#, fuzzy
 msgid "Multipurpose Labels"
 msgstr "Etiketter til flere formål"
 
@@ -3419,9 +3406,8 @@ msgstr "Filmappe"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:10
-#, fuzzy
 msgid "Name Badges"
-msgstr "Navneskiltsetiketter"
+msgstr "Navneskilte"
 
 #. ===================================================================
 #: ../templates/dymo-other-templates.xml.h:12
@@ -3774,325 +3760,294 @@ msgstr "Etiketter"
 #: ../templates/online-templates.xml.h:1
 msgid "SD Card labels, library book labels, classification labels"
 msgstr ""
+"SD-kortetiketter, etiketter for biblioteksbøger, klassifikationsetiketter"
 
 #: ../templates/online-templates.xml.h:2
 msgid "Jar labels, candle labels"
-msgstr ""
+msgstr "Krukkeetiketter, lysetiketter"
 
 #: ../templates/online-templates.xml.h:3
-#, fuzzy
 msgid "Barcode labels"
-msgstr "Firkantede etiketter"
+msgstr "Stregkodeetiketter"
 
 #: ../templates/online-templates.xml.h:4
 msgid "Classification labels, library book labels"
-msgstr ""
+msgstr "Klassifikationsetiketter, etiketter for biblioteksbøger"
 
 #: ../templates/online-templates.xml.h:5
-#, fuzzy
 msgid "Water bottle labels"
-msgstr "Flaskeetiketter"
+msgstr "Vandflaskeetiketter"
 
 #: ../templates/online-templates.xml.h:6
 msgid "Jar labels, pot labels, candle labels"
-msgstr ""
+msgstr "Krukkeetiketter, grydeetiketter, lysetiketter"
 
 #. OL120
 #: ../templates/online-templates.xml.h:9
-#, fuzzy
 msgid "Medical chart labels"
-msgstr "Rektangulære etiketter"
+msgstr "Medicinske diagrametiketter"
 
 #. OL8325
 #: ../templates/online-templates.xml.h:11
-#, fuzzy
 msgid "Lip balm tube labels"
-msgstr "Mikrotubeetiketter"
+msgstr "Etiketter for læbepomaderør"
 
 #. OL2162
 #: ../templates/online-templates.xml.h:13
-#, fuzzy
 msgid "Return address labels"
 msgstr "Returadresseetiketter"
 
 #: ../templates/online-templates.xml.h:14
 msgid "File labels, return address labels, medical chart labels"
-msgstr ""
+msgstr "Filetiketter, returadresseetiketter, medicinske diagrametiketter"
 
 #: ../templates/online-templates.xml.h:15
 msgid "Jar labels, nutritional labels"
-msgstr ""
+msgstr "Krukkeetiketter, ernæringsmæssige etiketter"
 
 #: ../templates/online-templates.xml.h:16
-#, fuzzy
 msgid "Jar labels"
-msgstr "Firkantede etiketter"
+msgstr "Krukkeetiketter"
 
 #: ../templates/online-templates.xml.h:18
 msgid "Wine bottle labels, nutritional labels"
-msgstr ""
+msgstr "Vinflaskeetiketter, ernæringsmæssige etiketter"
 
 #. OL1102
 #: ../templates/online-templates.xml.h:20
-#, fuzzy
 msgid "Digital video labels"
-msgstr "Adskillelsesetiketter"
+msgstr "Digitale videoetiketter"
 
 #: ../templates/online-templates.xml.h:22
 msgid "Pot labels, coffee and tea labels"
-msgstr ""
+msgstr "Grydeetiketter, kaffe- og teetiketter"
 
 #: ../templates/online-templates.xml.h:23
-#, fuzzy
 msgid "Candy labels"
-msgstr "Enhver etiket"
+msgstr "Sliketiketter"
 
 #: ../templates/online-templates.xml.h:24
 msgid "Reverse automobile window stickers"
-msgstr ""
+msgstr "Omvendt bilvinduesklistermærke"
 
 #: ../templates/online-templates.xml.h:25
 msgid "Jar labels, candy labels, nutritional labels"
-msgstr ""
+msgstr "Krukkeetiketter, sliketiketter, ernæringsmæssige etiketter"
 
 #: ../templates/online-templates.xml.h:27
 msgid "Address labels, barcode labels, candy labels"
-msgstr ""
+msgstr "Adresseetiketter, stregkodeetiketter, sliketiketter"
 
 #: ../templates/online-templates.xml.h:29
 msgid "VHS face labels, nutritional labels"
-msgstr ""
+msgstr "VHS-frontetiketter, ernæringsmæssige etiketter"
 
 #: ../templates/online-templates.xml.h:30
 msgid "Jar labels, pot labels, nutritional labels"
-msgstr ""
+msgstr "Krukkeetiketter, grydeetiketter, ernæringsmæssige etiketter"
 
 #: ../templates/online-templates.xml.h:31
-#, fuzzy
 msgid "File folder labels"
 msgstr "Filmappeetiketter"
 
 #: ../templates/online-templates.xml.h:32
 msgid "Metal tin container labels, nutritional labels"
-msgstr ""
+msgstr "Konservesdåseetiketter, ernæringsmæssige etiketter"
 
 #: ../templates/online-templates.xml.h:33
 msgid "Bookplate labels, coffee and tea labels"
-msgstr ""
+msgstr "Bogomslagsetiketter, kaffe- og teetiketter"
 
 #: ../templates/online-templates.xml.h:34
-#, fuzzy
 msgid "Amazon FBA shipping labels"
-msgstr "Forsendelsesetiketter"
+msgstr "Amazon FBA-forsendelsesetiketter"
 
 #: ../templates/online-templates.xml.h:35
 msgid "Jar labels, coffee and tea labels, nutritional labels"
-msgstr ""
+msgstr "Krukkeetiketter, kaffe- og teetiketter, ernæringsmæssige etiketter"
 
 #: ../templates/online-templates.xml.h:36
 msgid "Jar labels, pot labels, coffee and tea labels"
-msgstr ""
+msgstr "Krukkeetiketter, grydeetiketter, kaffe- og teetiketter"
 
 #: ../templates/online-templates.xml.h:37
-#, fuzzy
 msgid "Digital media labels"
-msgstr "Disketteetiketter"
+msgstr "Digitale medieetiketter"
 
 #: ../templates/online-templates.xml.h:38
 msgid "Jar labels, Coffee and tea labels"
-msgstr ""
+msgstr "Krukkeetiketter, kaffe- og teetiketter"
 
 #: ../templates/online-templates.xml.h:39
-#, fuzzy
 msgid "Wine bottle labels"
-msgstr "Flaskeetiketter"
+msgstr "Etiketter for vinflasker"
 
 #: ../templates/online-templates.xml.h:40
-#, fuzzy
 msgid "Mail Order Manager labels"
-msgstr "Postetiketter"
+msgstr "Etiketter for postordre"
 
 #: ../templates/online-templates.xml.h:41
-#, fuzzy
 msgid "Liquor bottle labels"
-msgstr "Flaskeetiketter"
+msgstr "Etiketter for spiritusflasker"
 
 #: ../templates/online-templates.xml.h:42
-#, fuzzy
 msgid "Metal tin container labels"
-msgstr "Mikrotubeetiketter"
+msgstr "Etiketter for konservesdåser"
 
 #: ../templates/online-templates.xml.h:43
 msgid "Hershey's® chocolate labels"
-msgstr ""
+msgstr "Hershey's® chokoladeetiketter"
 
 #: ../templates/online-templates.xml.h:44
 msgid "VHS labels, jar labels, book labels"
-msgstr ""
+msgstr "VHS-etiketter, krukkeetiketter, bogetiketter"
 
 #: ../templates/online-templates.xml.h:45
-#, fuzzy
 msgid "USPS® shipping labels"
-msgstr "Forsendelsesetiketter"
+msgstr "USPS®-forsendelsesetiketter"
 
 #: ../templates/online-templates.xml.h:46
 msgid "Jar labels, candle labels, metal tin container labels"
-msgstr ""
+msgstr "Krukkeetiketter, lysetiketter, etiketter for konservesdåser"
 
 #: ../templates/online-templates.xml.h:47
 msgid "Jar labels, water bottle labels"
-msgstr ""
+msgstr "Krukkeetiketter, etiketter for vandflasker"
 
 #: ../templates/online-templates.xml.h:48
 msgid "Jar labels, water bottle labels, wine bottle labels"
-msgstr ""
+msgstr "Krukkeetiketter, etiketter for vandflaster, etiketter for vinflasker"
 
 #: ../templates/online-templates.xml.h:49
-#, fuzzy
 msgid "PayPal® label"
-msgstr "Enhver etiket"
+msgstr "PayPal®-etiket"
 
 #: ../templates/online-templates.xml.h:50
 msgid "Water bottle labels, jar labels, candle labels"
-msgstr ""
+msgstr "Vandflaskeetiketter, krukketiketter, lysetiketter"
 
 #: ../templates/online-templates.xml.h:51
 msgid "Medical chart labels, barcode labels"
-msgstr ""
+msgstr "Medicinske diagrametiketter, stregkodeetiketter"
 
 #: ../templates/online-templates.xml.h:52
 msgid "Pot labels, barcode labels"
-msgstr ""
+msgstr "Grydeetiketter, stregkodeetiketter"
 
 #: ../templates/online-templates.xml.h:54
-#, fuzzy
 msgid "Nutritional labels"
-msgstr "Start på etiket"
+msgstr "Ernæringsmæssige etiketter"
 
 #: ../templates/online-templates.xml.h:55
-#, fuzzy
 msgid "CD case labels"
-msgstr "SD-kort-etiketter"
+msgstr "CD-etui-etiketter"
 
 #: ../templates/online-templates.xml.h:56
-#, fuzzy
 msgid "Business card size labels"
-msgstr "Etiketter til forretningskort-cd'er"
+msgstr "Etiketter til forretningskort"
 
 #: ../templates/online-templates.xml.h:57
 msgid "Reverse addendum stickers"
-msgstr ""
+msgstr "Omvendt addendumklistermærker"
 
 #: ../templates/online-templates.xml.h:58
 msgid "Wine bottle labels, shipping labels, UPS® WorldShip® labels"
-msgstr ""
+msgstr "Vinflaskeetiketter, forsendelsesetiketter, UPS® WorldShip®-etiketter"
 
 #: ../templates/online-templates.xml.h:59
-#, fuzzy
 msgid "Coffee and tea labels"
-msgstr "Afrundede etiketter"
+msgstr "Kaffe- og teetiketter"
 
 #: ../templates/online-templates.xml.h:60
 msgid "Water bottle labels, shipping labels"
-msgstr ""
+msgstr "Vandflaskeetiketter, forsendelsesetiketter"
 
 #: ../templates/online-templates.xml.h:61
-#, fuzzy
 msgid "VICS labels"
-msgstr "PVC-etiketter"
+msgstr "VICS-etiketter"
 
 #: ../templates/online-templates.xml.h:62
-#, fuzzy
 msgid "Full sheet labels with back slit"
-msgstr "Fuldarksetiketter"
+msgstr "Fuldarksetiketter med rygspalte"
 
 #: ../templates/online-templates.xml.h:63
-#, fuzzy
 msgid "Full sheet labels"
 msgstr "Fuldarksetiketter"
 
 #: ../templates/online-templates.xml.h:64
-#, fuzzy
 msgid "Lip balm labels"
-msgstr "Elliptiske etiketter"
+msgstr "Etiketter for læbepomader"
 
 #: ../templates/online-templates.xml.h:65
 msgid "Paper hole reinforcement labels"
-msgstr ""
+msgstr "Papirhulforstærkningsetiketter"
 
 #: ../templates/online-templates.xml.h:68
 msgid "Candle labels, lip balm labels"
-msgstr ""
+msgstr "Lysetiketter, etiketter for læbepomader"
 
 #: ../templates/online-templates.xml.h:69
-#, fuzzy
 msgid "Seal labels"
-msgstr "Firkantede etiketter"
+msgstr "Segletiketter"
 
 #: ../templates/online-templates.xml.h:70
 msgid "Jar labels, candle labels, lip balm labels"
-msgstr ""
+msgstr "Krukkeetiketter, lysetiketter, etiketter for læbepomader"
 
 #: ../templates/online-templates.xml.h:71
 msgid "Jar labels, nutritional labels, pot labels, soap labels"
-msgstr ""
+msgstr "Krukkeetiketter, ernæringsmæssige etiketter, grydeetiketter, sæbeetiketter."
 
 #: ../templates/online-templates.xml.h:72
 msgid ""
 "Jar labels, nutritional labels, soap labels, candle labels, coffee and tea "
 "labels"
 msgstr ""
+"Krukkeetiketter, ernæringsmæssige etiketter, sæbeetiketter, lysetiketter, kaffe- og teetiketter"
 
 #: ../templates/online-templates.xml.h:73
 msgid "Jar labels, candle labels, nutritional labels"
-msgstr ""
+msgstr "Krukkeetiketter, lydetiketter, ernæringsmæsse etiketter"
 
 #: ../templates/online-templates.xml.h:74
 msgid "Nutritional labels, soap labels, coffee and tea labels, candle labels"
-msgstr ""
+msgstr "Ernæringsmæssige etiketter, sæbeetiketter, kaffe- og teetiketter, lysetiketter"
 
 #: ../templates/online-templates.xml.h:75
 msgid "Beer bottle labels, jar labels, nutritional labels, soap labels"
-msgstr ""
+msgstr "Ølflaskeetiketter, krukkeetiketter, ernæringsmæssige etiketter, sæbeetiketter"
 
 #: ../templates/online-templates.xml.h:76
 msgid "Beer bottle label, jar label"
-msgstr ""
+msgstr "Ølflaskeetiketter, krukkeetiketter"
 
 #: ../templates/online-templates.xml.h:77
-#, fuzzy
 msgid "Target stickers"
-msgstr "Klistermærker til køleskabsmagneter"
+msgstr "Klistermærker med skydeskiver"
 
 #: ../templates/online-templates.xml.h:78
-#, fuzzy
 msgid "Round and rectangular labels"
-msgstr "Rektangulære etiketter"
+msgstr "Runde og rektangulære etiketter"
 
 #: ../templates/online-templates.xml.h:79
-#, fuzzy
 msgid "CD/DVD center hub labels"
-msgstr "Cd-/dvd-etiketter"
+msgstr "Etiketter til cd-/dvd-center hub"
 
 #: ../templates/online-templates.xml.h:80
-#, fuzzy
 msgid "Business card CD labels"
 msgstr "Etiketter til forretningskort-cd'er"
 
 #: ../templates/online-templates.xml.h:81
-#, fuzzy
 msgid "Mini CD labels"
 msgstr "Etiketter til mini-cd'er"
 
 #: ../templates/online-templates.xml.h:84
-#, fuzzy
 msgid "Full face CD/DVD labels"
-msgstr "Cd-/dvd-etiketter"
+msgstr "Cd-/dvd-etiketter med fuld front"
 
 #: ../templates/online-templates.xml.h:85
-#, fuzzy
 msgid "eBay® shipping labels"
-msgstr "Forsendelsesetiketter"
+msgstr "eBay®-forsendelsesetiketter"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:8
@@ -4132,17 +4087,17 @@ msgstr "Pasfotoetiketter, blanke"
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:42
 msgid "Business cards punched"
-msgstr "Forretningskort, hullet"
+msgstr "Visitkort, hullet"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:44
 msgid "Business cards punched dull"
-msgstr "Forretningskort, hullet, mat"
+msgstr "Visitkort, hullet, mat"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:46
 msgid "Business cards high glossy"
-msgstr "Forretningskort, meget blankt"
+msgstr "Visitkort, meget blankt"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:48
@@ -4152,22 +4107,22 @@ msgstr "Navneskilte"
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:50
 msgid "Business cards glossy, both sides printable"
-msgstr "Forretningskort, blankt, begge sider udskrivbare"
+msgstr "Visitkort, blankt, begge sider udskrivbare"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:52
 msgid "Business cards punched glossy"
-msgstr "Forretningskort, hullet, blankt"
+msgstr "Visitkort, hullet, blankt"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:54
 msgid "Foldable business cards glossy/dull"
-msgstr "Foldbare forretningskort, blanke/mat"
+msgstr "Foldbare visitkort, blanke/mat"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:56
 msgid "Foldable business cards"
-msgstr "Foldbare forretningskort"
+msgstr "Foldbare visitkort"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:62
@@ -4192,9 +4147,8 @@ msgstr "Trapezetiketter"
 
 #. ===================================================================
 #: ../templates/sheetlabels-us-templates.xml.h:22
-#, fuzzy
 msgid "Oval bottle labels"
-msgstr "Flaskeetiketter"
+msgstr "Ovale flaskeetiketter"
 
 # er det mon en form for specifik tysk etiket?
 #. ===================================================================
@@ -4224,190 +4178,3 @@ msgstr "Rektangulær Copieretiketter"
 msgid "Correction and Cover-up Labels"
 msgstr "Rettelses- og overdækningsetiketter"
 
-#~ msgid "3.5in Diskette"
-#~ msgstr "3,5 tomme diskette"
-
-# helt blank på hvad det her er
-#~ msgid "File Back Labels"
-#~ msgstr "Filrygetiketter"
-
-#~ msgid "Align _Horizontal"
-#~ msgstr "Juster _vandret"
-
-#~ msgid "Align _Vertical"
-#~ msgstr "Juster _lodret"
-
-#~ msgid "Couldn't construct query"
-#~ msgstr "Kunne ikke konstruere forespørgsel"
-
-#~ msgid "Couldn't open addressbook."
-#~ msgstr "Kunne ikke åbne adressebog."
-
-#~ msgid "Couldn't list available fields."
-#~ msgstr "Kunne ikke vise tilgængelige felter."
-
-#~ msgid "Couldn't get contacts."
-#~ msgstr "Kunne ikke få kontakt."
-
-#~ msgid "Bad root node = \"%s\""
-#~ msgstr "Ugyldig rodknude = “%s”"
-
-#~ msgid "bad node =  \"%s\""
-#~ msgstr "dårlig knude =  “%s”"
-
-#~ msgid "xmlParseFile error"
-#~ msgstr "xmlParseFile-fejl"
-
-#~ msgid "No document root"
-#~ msgstr "Ingen dokumentrod"
-
-#~ msgid "Importing from glabels 0.1 format"
-#~ msgstr "Importerer fra glabels 0.1 format"
-
-#~ msgid "Importing from glabels 0.4 format"
-#~ msgstr "Importerer fra glabels 0.4 format"
-
-#~ msgid "Unknown glabels Namespace -- Using %s"
-#~ msgstr "Ukendt glabelsnavnerum -- bruger %s"
-
-#~ msgid "bad node in Document node =  \"%s\""
-#~ msgstr "dårlig knude i dokumentknude =  “%s”"
-
-#~ msgid "bad node in Data node =  \"%s\""
-#~ msgstr "dårlig knude i dataknude =  “%s”"
-
-#~ msgid "Unknown embedded file format: \"%s\""
-#~ msgstr "Ukendt indlejret filformat “%s”"
-
-#~ msgid "Utf8 conversion error."
-#~ msgstr "Utf8 - konverteringsfejl."
-
-# Kunne ikke gemme xml-fil.
-#~ msgid "Problem saving xml file."
-#~ msgstr "Problem under gemning af xml-fil."
-
-#~ msgid "Equivalent part (\"%s\") for \"%s\", not previously defined."
-#~ msgstr "Tilsvarende del (“%s”) for “%s”, er ikke tidligere defineret."
-
-#~ msgid "Missing name or brand/part attributes."
-#~ msgstr "Manglende navn eller mærke-/delattributter."
-
-#~ msgid "Unknown page size id \"%s\", trying as name"
-#~ msgstr "Ukendt sidestørrelse-id “%s”, forsøger som navn"
-
-#~ msgid "Unknown page size id or name \"%s\""
-#~ msgstr "Ukendt sidestørrelse-id eller navn “%s”"
-
-# Fremadreferencer understøttes ikke el. lign.
-# (typisk en reference til et element defineret længere henne i en fil el. lign.)
-#~ msgid "Forward references not supported."
-#~ msgstr "Fremadreferencer understøttes ikke."
-
-#~ msgid ""
-#~ "Missing required \"brand\" or \"part\" attribute, trying deprecated name."
-#~ msgstr "Mangler krævet mærke- eller delattribut, forsøger forældet navn."
-
-#~ msgid "Name attribute also missing."
-#~ msgstr "Navneattribut mangler også."
-
-#~ msgid "Mailing Labels-2 columns"
-#~ msgstr "Postetiketter - 2 kolonner"
-
-#~ msgid "Mailing Labels-3 columns"
-#~ msgstr "Postetiketter - 3 kolonner"
-
-#~ msgid "_Select Mode"
-#~ msgstr "_Vælg tilstand"
-
-#~ msgid "_Text"
-#~ msgstr "_Tekst"
-
-#~ msgid "_Line"
-#~ msgstr "_Linje"
-
-#~ msgid "_Box"
-#~ msgstr "_Boks"
-
-#~ msgid "_Ellipse"
-#~ msgstr "_Ellipse"
-
-#~ msgid "_Image"
-#~ msgstr "_Billede"
-
-#~ msgid "Bar_code"
-#~ msgstr "Streg_kode"
-
-# eller flet egenskaber
-#~ msgid "_Merge Properties"
-#~ msgstr "_Sammenføj egenskaber"
-
-#~ msgid "Object _Properties"
-#~ msgstr "Objekt_egenskaber"
-
-#~ msgid "Bring to _Front"
-#~ msgstr "Hent _frem"
-
-#~ msgid "Send to _Back"
-#~ msgstr "Send til_bage"
-
-#~ msgid "Rotate _Left"
-#~ msgstr "Roter til _venstre"
-
-#~ msgid "Rotate _Right"
-#~ msgstr "Roter til _højre"
-
-#~ msgid "Flip _Horizontally"
-#~ msgstr "Vend _vandret"
-
-#~ msgid "Flip _Vertically"
-#~ msgstr "Vend _lodret"
-
-# godt nok i tvivl her
-#~ msgid "_Lefts"
-#~ msgstr "_Venstredrejninger"
-
-# godt nok i tvivl her
-#~ msgid "_Rights"
-#~ msgstr "_Højredrejninger"
-
-#~ msgid "_Centers"
-#~ msgstr "_Centrum"
-
-#~ msgid "_Tops"
-#~ msgstr "_Øverste"
-
-#~ msgid "Bottoms"
-#~ msgstr "Nederste kanter"
-
-#~ msgid "Label Ce_nter"
-#~ msgstr "Etiketce_ntrum"
-
-#~ msgid "Linked"
-#~ msgstr "Forbundet"
-
-#~ msgid "Not Linked"
-#~ msgstr "Ikke forbundet"
-
-#~ msgid "glabels"
-#~ msgstr "glabels"
-
-#~ msgid "<span weight=\"bold\" size=\"larger\">Xxx object properties</span>"
-#~ msgstr "<span weight=\"bold\" size=\"larger\">Xxx-objektegenskaber</span>"
-
-#~ msgid "<span weight=\"bold\">Default page size</span>"
-#~ msgstr "<span weight=\"bold\">Standard for sidestørrelse</span>"
-
-#~ msgid "<span weight=\"bold\">Fill</span>"
-#~ msgstr "<span weight=\"bold\">Fyld</span>"
-
-#~ msgid "<span weight=\"bold\">Line</span>"
-#~ msgstr "<span weight=\"bold\">Linje</span>"
-
-#~ msgid "<span weight=\"bold\">Text</span>"
-#~ msgstr "<span weight=\"bold\">Tekst</span>"
-
-#~ msgid "<span weight=\"bold\">Units</span>"
-#~ msgstr "<span weight=\"bold\">Enheder</span>"
-
-#~ msgid "<b>Copies</b>"
-#~ msgstr "<b>Kopier</b>"
