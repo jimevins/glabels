@@ -421,7 +421,7 @@ gl_read_encoding(FILE* fp) {
  * g_iconv is used to convert input characters to GDK-standard UTF8 format.
  */
 
-static gchar
+static gint
 gl_getc(glMergeText *merge_text) {
         if (merge_text->priv->buf_pos < merge_text->priv->buf_len) {
                 return merge_text->priv->char_buf[merge_text->priv->buf_pos++];
