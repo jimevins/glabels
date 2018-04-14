@@ -14,7 +14,7 @@
       <Layout nx="1" ny="1" x0="0pt" y0="0pt" dx="25mm" dy="54mm"/>
     </Label-rectangle>
   </Template>
-  
+
   <!-- =================================================================== -->
   <!-- Dymo 11353 Multipurpose Labels.                                     -->
   <!-- =================================================================== -->
@@ -25,8 +25,8 @@
       <Markup-margin size="0pt"/>
       <Layout nx="1" ny="1" x0="0pt" y0="0pt" dx="13mm" dy="25mm"/>
     </Label-rectangle>
-  </Template>  
-  
+  </Template>
+
   <!-- =================================================================== -->
   <!-- Dymo 11354 Return Address labels.                                   -->
   <!-- =================================================================== -->
@@ -38,7 +38,7 @@
       <Layout nx="1" ny="1" x0="0pt" y0="0pt" dx="32mm" dy="57mm"/>
     </Label-rectangle>
   </Template>
-  
+
   <!-- =================================================================== -->
   <!-- Dymo 11355 Return Address labels.                                   -->
   <!-- =================================================================== -->
@@ -46,6 +46,18 @@
     <Meta category="label"/>
     <Meta category="mail"/>
     <Label-rectangle id="0" width="19mm" height="51mm" round="0pt" x_waste="0pt" y_waste="0pt">
+      <Markup-margin size="0pt"/>
+      <Layout nx="1" ny="1" x0="0pt" y0="0pt" dx="19mm" dy="51mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Dymo 11356 Small Name Badge labels.                                 -->
+  <!-- =================================================================== -->
+  <Template brand="Dymo" part="11356" size="Other" width="19mm" height="51mm" _description="Small Name Badge Labels">
+    <Meta category="label"/>
+    <Meta category="name-badge"/>
+    <Label-rectangle id="0" width="41mm" height="89mm" round="0pt" x_waste="0pt" y_waste="0pt">
       <Markup-margin size="0pt"/>
       <Layout nx="1" ny="1" x0="0pt" y0="0pt" dx="19mm" dy="51mm"/>
     </Label-rectangle>
@@ -61,8 +73,8 @@
       <Markup-margin size="0pt"/>
       <Layout nx="1" ny="1" x0="0pt" y0="0pt" dx="59mm" dy="102mm"/>
     </Label-rectangle>
-  </Template>   
-  
+  </Template>
+
   <!-- =================================================================== -->
   <!-- Dymo 30327 File Folder labels.                                      -->
   <!-- =================================================================== -->
@@ -74,8 +86,8 @@
       <Markup-margin size="0pt"/>
       <Layout nx="1" ny="1" x0="0pt" y0="0pt" dx="14mm" dy="87mm"/>
     </Label-rectangle>
-  </Template>  
-  
+  </Template>
+
   <!-- =================================================================== -->
   <!-- Dymo 30258 Multipurpose Labels (was 3.5" Disk labels).              -->
   <!-- =================================================================== -->
@@ -86,8 +98,8 @@
       <Markup-margin size="0pt"/>
       <Layout nx="1" ny="1" x0="0pt" y0="0pt" dx="54mm" dy="70mm"/>
     </Label-rectangle>
-  </Template>  
-  
+  </Template>
+
   <!-- =================================================================== -->
   <!-- Dymo 30332 File Folder labels.                                      -->
   <!-- =================================================================== -->
@@ -99,8 +111,8 @@
       <Markup-margin size="0pt"/>
       <Layout nx="1" ny="1" x0="0pt" y0="0pt" dx="25mm" dy="25mm"/>
     </Label-rectangle>
-  </Template>  
-  
+  </Template>
+
  <!-- =================================================================== -->
  <!-- Dymo 30374 Name Badge.                                              -->
  <!-- =================================================================== -->
@@ -111,8 +123,8 @@
       <Markup-margin size="0pt"/>
       <Layout nx="1" ny="1" x0="0pt" y0="0pt" dx="51mm" dy="89mm"/>
     </Label-rectangle>
-  </Template>   
-  
+  </Template>
+
   <!-- =================================================================== -->
   <!-- Dymo 30376 Hanging Folder labels.                                   -->
   <!-- =================================================================== -->
@@ -125,7 +137,7 @@
       <Layout nx="1" ny="1" x0="0pt" y0="0pt" dx="14mm" dy="51mm"/>
     </Label-rectangle>
   </Template>
-  
+
   <!-- =================================================================== -->
   <!-- Dymo 30856 Name Badge                                               -->
   <!-- =================================================================== -->
@@ -136,8 +148,8 @@
       <Markup-margin size="0pt"/>
       <Layout nx="1" ny="1" x0="0pt" y0="0pt" dx="62mm" dy="106mm"/>
     </Label-rectangle>
-  </Template>  
-  
+  </Template>
+
   <!-- =================================================================== -->
   <!-- Dymo 99010 Address labels.                                          -->
   <!-- =================================================================== -->
@@ -148,8 +160,8 @@
       <Markup-margin size="0pt"/>
       <Layout nx="1" ny="1" x0="0pt" y0="0pt" dx="28mm" dy="89mm"/>
     </Label-rectangle>
-  </Template> 
-  
+  </Template>
+
   <!-- =================================================================== -->
   <!-- Dymo 99012 Large Address labels.                                    -->
   <!-- =================================================================== -->
@@ -161,7 +173,7 @@
       <Layout nx="1" ny="1" x0="0pt" y0="0pt" dx="36mm" dy="89mm"/>
     </Label-rectangle>
   </Template>
-  
+
   <!-- =================================================================== -->
   <!-- Dymo 99013 Large Address labels. Transparent Plastic                -->
   <!-- =================================================================== -->
@@ -173,7 +185,7 @@
       <Layout nx="1" ny="1" x0="0pt" y0="0pt" dx="36mm" dy="89mm"/>
     </Label-rectangle>
   </Template>
-  
+
   <!-- =================================================================== -->
   <!-- Dymo 99014 Shipping Address labels.                                 -->
   <!-- =================================================================== -->
@@ -186,7 +198,7 @@
       <Layout nx="1" ny="1" x0="0pt" y0="0pt" dx="54mm" dy="101mm"/>
     </Label-rectangle>
   </Template>
-  
+
   <!-- =================================================================== -->
   <!-- Dymo 99015 Name Badge.                                              -->
   <!-- =================================================================== -->
@@ -198,7 +210,7 @@
       <Layout nx="1" ny="1" x0="0pt" y0="0pt" dx="54mm" dy="70mm"/>
     </Label-rectangle>
   </Template>
-  
+
   <!-- =================================================================== -->
   <!-- Dymo 99017 Hanging Folder labels.                                   -->
   <!-- =================================================================== -->
@@ -211,7 +223,7 @@
       <Layout nx="1" ny="1" x0="0pt" y0="0pt" dx="12mm" dy="50mm"/>
     </Label-rectangle>
   </Template>
-  
+
   <!-- =================================================================== -->
   <!-- Dymo 99019 Lever Arch labels.                                       -->
   <!-- =================================================================== -->
@@ -224,5 +236,5 @@
       <Layout nx="1" ny="1" x0="0pt" y0="0pt" dx="59mm" dy="190mm"/>
     </Label-rectangle>
   </Template>
-  
+
 </Glabels-templates>
