@@ -54,7 +54,7 @@
   <!-- =================================================================== -->
   <!-- Dymo 11356 Small Name Badge labels.                                 -->
   <!-- =================================================================== -->
-  <Template brand="Dymo" part="11356" size="Other" width="19mm" height="51mm" _description="Small Name Badge Labels">
+  <Template brand="Dymo" part="11356" size="Other" width="41mm" height="89mm" _description="Small Name Badge Labels">
     <Meta category="label"/>
     <Meta category="name-badge"/>
     <Label-rectangle id="0" width="41mm" height="89mm" round="0pt" x_waste="0pt" y_waste="0pt">
