@@ -243,6 +243,7 @@ data/schemas/org.gnome.glabels-3.gschema.xml.in.in
 [type: gettext/xml]templates/desmat-templates.xml
 [type: gettext/xml]templates/dymo-other-templates.xml
 [type: gettext/xml]templates/endisch-templates.xml
+[type: gettext/xml]templates/felga-templates.xml
 [type: gettext/xml]templates/geha-iso-templates.xml
 [type: gettext/xml]templates/hama-iso-templates.xml
 [type: gettext/xml]templates/herma-iso-templates.xml

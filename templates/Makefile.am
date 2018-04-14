@@ -25,6 +25,7 @@ templates_DATA = \
 	desmat-templates.xml \
 	dymo-other-templates.xml \
 	endisch-templates.xml \
+	felga-templates.xml \
 	geha-iso-templates.xml \
 	hama-iso-templates.xml \
 	herma-iso-templates.xml \
