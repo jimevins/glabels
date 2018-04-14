@@ -234,8 +234,8 @@
     <Meta category="media"/>
     <Meta product_url="http://www.onlinelabels.com/OL9600.htm"/>
     <Label-rectangle id="0" width="3.8667in" height="0.3333in" round="0.0625in" x_waste="0.05in" y_waste="0.05in">
-      <Layout nx="1" ny="3" x0="2,31665in" y0="3.14in" dx="3.8667in" dy="3.167in"/>
-      <Layout nx="1" ny="3" x0="2,31665in" y0="3.723in" dx="3.8667in" dy="3.167in"/>
+      <Layout nx="1" ny="3" x0="2.31665in" y0="3.14in" dx="3.8667in" dy="3.167in"/>
+      <Layout nx="1" ny="3" x0="2.31665in" y0="3.723in" dx="3.8667in" dy="3.167in"/>
     </Label-rectangle>
   </Template>
 
