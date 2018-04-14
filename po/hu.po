@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
-"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2016-07-22 11:12+0000\n"
-"PO-Revision-Date: 2016-07-31 13:55+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-25 22:41+0200\n"
+"PO-Revision-Date: 2016-03-31 21:29+0200\n"
 "Last-Translator: Meskó Balázs <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian <openscope at googlegroups dot com>\n"
 "Language: hu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 1.8.7\n"
 
 #: ../src/bc-backends.c:81
 msgid "Built-in"
@@ -968,49 +968,54 @@ msgstr "_Bezárás"
 msgid "%s / %s %s (horizontal / vertical)"
 msgstr "%s / %s %s (vízszintes/ függőleges)"
 
-#: ../src/label-text.c:293 ../src/ui.c:282
+#: ../src/label-text.c:294 ../src/ui.c:282
 msgid "Create text object"
 msgstr "Szövegobjektum létrehozása"
 
-#: ../src/label-text.c:467
+#: ../src/label-text.c:469
 msgid "Typing"
 msgstr "Gépelés"
 
-#: ../src/label-text.c:601 ../data/ui/property-bar.ui.h:1
+#: ../src/label-text.c:603 ../data/ui/property-bar.ui.h:1
 msgid "Font family"
 msgstr "Betűkészlet-család"
 
-#: ../src/label-text.c:639 ../data/ui/property-bar.ui.h:2
+#: ../src/label-text.c:641 ../data/ui/property-bar.ui.h:2
 msgid "Font size"
 msgstr "Betűméret"
 
-#: ../src/label-text.c:672
+#: ../src/label-text.c:674
 msgid "Font weight"
 msgstr "Betűvastagság"
 
-#: ../src/label-text.c:705 ../data/ui/property-bar.ui.h:4
+#: ../src/label-text.c:707 ../data/ui/property-bar.ui.h:4
 msgid "Italic"
 msgstr "Dőlt"
 
-#: ../src/label-text.c:738
+#: ../src/label-text.c:740
 msgid "Align text"
 msgstr "Szöveg igazítása"
 
-#: ../src/label-text.c:771
+#: ../src/label-text.c:773
 msgid "Vertically align text"
 msgstr "Szöveg függőleges igazítása"
 
-#: ../src/label-text.c:804
+#: ../src/label-text.c:806
 msgid "Line spacing"
 msgstr "Sorköz"
 
-#: ../src/label-text.c:837 ../data/ui/property-bar.ui.h:11
+#: ../src/label-text.c:839 ../data/ui/property-bar.ui.h:11
 msgid "Text color"
 msgstr "Szövegszín"
 
-#: ../src/label-text.c:997
+#: ../src/label-text.c:999
 msgid "Auto shrink"
 msgstr "Automatikus zsugorítás"
+
+#: ../src/label-text.c:1042
+#, fuzzy
+msgid "Merge nonl"
+msgstr "Egyesítés vezérlése"
 
 #: ../src/media-select.c:358 ../src/media-select.c:361
 #: ../src/media-select.c:506 ../src/media-select.c:723
@@ -1135,7 +1140,7 @@ msgstr "Kijelölés"
 msgid "Record/Field"
 msgstr "Rekord/mező"
 
-#: ../src/merge-properties-dialog.c:356 ../data/ui/object-editor.ui.h:24
+#: ../src/merge-properties-dialog.c:356 ../data/ui/object-editor.ui.h:25
 msgid "Data"
 msgstr "Adat"
 
@@ -1166,7 +1171,7 @@ msgid "Review"
 msgstr "Áttekintés"
 
 #: ../src/object-editor-bc-page.c:97 ../src/object-editor-shadow-page.c:93
-#: ../src/object-editor-text-page.c:102 ../src/prefs-dialog.c:335
+#: ../src/object-editor-text-page.c:103 ../src/prefs-dialog.c:335
 #: ../src/ui-property-bar.c:289
 msgid "Default"
 msgstr "Alapértelmezett"
@@ -1532,7 +1537,7 @@ msgstr "Doboz"
 msgid "Create box/rectangle object"
 msgstr "Doboz/téglalapobjektum létrehozása"
 
-#: ../src/ui.c:294 ../data/ui/object-editor.ui.h:17
+#: ../src/ui.c:294 ../data/ui/object-editor.ui.h:18
 #: ../data/ui/prefs-dialog.ui.h:20
 msgid "Line"
 msgstr "Vonal"
@@ -1545,7 +1550,7 @@ msgstr "Ellipszis"
 msgid "Create ellipse/circle object"
 msgstr "Ellipszis/körobjektum létrehozása"
 
-#: ../src/ui.c:308 ../data/ui/object-editor.ui.h:20
+#: ../src/ui.c:308 ../data/ui/object-editor.ui.h:21
 msgid "Image"
 msgstr "Kép"
 
@@ -1736,7 +1741,7 @@ msgstr "gLabels hiba!"
 msgid "(none) - gLabels"
 msgstr "(nincs) – gLabels"
 
-#: ../src/window.c:484
+#: ../src/window.c:482
 msgid "(modified)"
 msgstr "(módosítva)"
 
@@ -1807,13 +1812,13 @@ msgstr "átmérő"
 #. the CSS2 Specification (Section 4.3.2)
 #. This table must be sorted exactly as the enumerations in lglUnits
 #. [LGL_UNITS_POINT]
-#: ../libglabels/lgl-units.c:65 ../data/ui/object-editor.ui.h:15
+#: ../libglabels/lgl-units.c:65 ../data/ui/object-editor.ui.h:16
 #: ../data/ui/prefs-dialog.ui.h:19
 msgid "points"
 msgstr "pont"
 
 #. [LGL_UNITS_INCH]
-#: ../libglabels/lgl-units.c:66 ../data/ui/object-editor.ui.h:28
+#: ../libglabels/lgl-units.c:66 ../data/ui/object-editor.ui.h:29
 #: ../data/ui/template-designer.ui.h:15
 msgid "inches"
 msgstr "hüvelyk"
@@ -2026,107 +2031,111 @@ msgstr "Sorköz:"
 
 #: ../data/ui/object-editor.ui.h:12
 msgid "Allow merge to automatically shrink text"
-msgstr "Az egyesítés automatikusan zsugoríthatja a szöveget"
+msgstr "Az eggyesítés automatikusan zsugoríthatja a szöveget"
 
 #: ../data/ui/object-editor.ui.h:13
+msgid "Merge removes CR/LF"
+msgstr "Az eggyesítés eltávolitja a CR/LF karaktereket"
+
+#: ../data/ui/object-editor.ui.h:14
 msgid "Style"
 msgstr "Stílus"
 
-#: ../data/ui/object-editor.ui.h:14 ../data/ui/prefs-dialog.ui.h:18
+#: ../data/ui/object-editor.ui.h:15 ../data/ui/prefs-dialog.ui.h:18
 #: ../data/ui/template-designer.ui.h:13
 msgid "Width:"
 msgstr "Szélesség:"
 
-#: ../data/ui/object-editor.ui.h:16
+#: ../data/ui/object-editor.ui.h:17
 msgid "Key:"
 msgstr "Kulcs:"
 
-#: ../data/ui/object-editor.ui.h:18 ../data/ui/prefs-dialog.ui.h:21
+#: ../data/ui/object-editor.ui.h:19 ../data/ui/prefs-dialog.ui.h:21
 msgid "Fill"
 msgstr "Kitöltés"
 
-#: ../data/ui/object-editor.ui.h:19
+#: ../data/ui/object-editor.ui.h:20
 msgid "File:"
 msgstr "Fájl:"
 
-#: ../data/ui/object-editor.ui.h:21
+#: ../data/ui/object-editor.ui.h:22
 msgid "Literal:"
 msgstr "Literál:"
 
-#: ../data/ui/object-editor.ui.h:22
+#: ../data/ui/object-editor.ui.h:23
 msgid "format:"
 msgstr "formátum:"
 
-#: ../data/ui/object-editor.ui.h:23
+#: ../data/ui/object-editor.ui.h:24
 msgid "digits:"
 msgstr "számjegyek:"
 
-#: ../data/ui/object-editor.ui.h:25
+#: ../data/ui/object-editor.ui.h:26
 msgid "Backend:"
 msgstr "Háttérprogram:"
 
-#: ../data/ui/object-editor.ui.h:26
+#: ../data/ui/object-editor.ui.h:27
 msgid "Checksum"
 msgstr "Ellenőrzőösszeg"
 
-#: ../data/ui/object-editor.ui.h:27 ../data/ui/template-designer.ui.h:14
+#: ../data/ui/object-editor.ui.h:28 ../data/ui/template-designer.ui.h:14
 msgid "Height:"
 msgstr "Magasság:"
 
-#: ../data/ui/object-editor.ui.h:29
+#: ../data/ui/object-editor.ui.h:30
 msgid "Reset image size"
 msgstr "Képméret visszaállítása"
 
-#: ../data/ui/object-editor.ui.h:30
+#: ../data/ui/object-editor.ui.h:31
 msgid "Size"
 msgstr "Méret"
 
-#: ../data/ui/object-editor.ui.h:31
+#: ../data/ui/object-editor.ui.h:32
 msgid "Length:"
 msgstr "Hossz:"
 
-#: ../data/ui/object-editor.ui.h:32
+#: ../data/ui/object-editor.ui.h:33
 msgid "Angle:"
 msgstr "Szög:"
 
-#: ../data/ui/object-editor.ui.h:33
+#: ../data/ui/object-editor.ui.h:34
 msgid "degrees"
 msgstr "fok"
 
-#: ../data/ui/object-editor.ui.h:34
+#: ../data/ui/object-editor.ui.h:35
 msgid "X:"
 msgstr "X:"
 
-#: ../data/ui/object-editor.ui.h:35
+#: ../data/ui/object-editor.ui.h:36
 msgid "Y:"
 msgstr "Y:"
 
-#: ../data/ui/object-editor.ui.h:36
+#: ../data/ui/object-editor.ui.h:37
 msgid "Position"
 msgstr "Pozíció"
 
-#: ../data/ui/object-editor.ui.h:37
+#: ../data/ui/object-editor.ui.h:38
 msgid "Enable shadow"
 msgstr "Árnyék engedélyezése"
 
-#: ../data/ui/object-editor.ui.h:38
+#: ../data/ui/object-editor.ui.h:39
 msgid "X Offset:"
 msgstr "X-eltolás:"
 
-#: ../data/ui/object-editor.ui.h:39
+#: ../data/ui/object-editor.ui.h:40
 msgid "Y Offset:"
 msgstr "Y-eltolás:"
 
-#: ../data/ui/object-editor.ui.h:40
+#: ../data/ui/object-editor.ui.h:41
 msgid "Opacity:"
 msgstr "Átlátszatlanság:"
 
-#: ../data/ui/object-editor.ui.h:42
+#: ../data/ui/object-editor.ui.h:43
 #, no-c-format
 msgid "%"
 msgstr "%"
 
-#: ../data/ui/object-editor.ui.h:43
+#: ../data/ui/object-editor.ui.h:44
 msgid "Shadow"
 msgstr "Árnyék"
 
@@ -2872,7 +2881,6 @@ msgstr "Bármely címke"
 #: ../templates/categories.xml.h:2 ../templates/begalabel-templates.xml.h:3
 #: ../templates/endisch-templates.xml.h:1
 #: ../templates/hama-iso-templates.xml.h:4
-#: ../templates/online-templates.xml.h:66
 #: ../templates/pearl-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:8
 #: ../templates/sheetlabels-us-templates.xml.h:16
@@ -2882,7 +2890,6 @@ msgstr "Kerek címkék"
 #. ===================================================================
 #: ../templates/categories.xml.h:3 ../templates/begalabel-templates.xml.h:4
 #: ../templates/endisch-templates.xml.h:2
-#: ../templates/online-templates.xml.h:67
 #: ../templates/pearl-iso-templates.xml.h:58
 #: ../templates/rayfilm-templates.xml.h:9
 msgid "Elliptical labels"
@@ -2891,7 +2898,6 @@ msgstr "Elliptikus címkék"
 #. ====================================================================
 #: ../templates/categories.xml.h:4 ../templates/endisch-templates.xml.h:4
 #: ../templates/hama-iso-templates.xml.h:41
-#: ../templates/online-templates.xml.h:17
 #: ../templates/rayfilm-templates.xml.h:2
 msgid "Square labels"
 msgstr "Négyzetes címkék"
@@ -2907,7 +2913,7 @@ msgstr "Négyzetes címkék"
 #: ../templates/hama-iso-templates.xml.h:27
 #: ../templates/herma-iso-templates.xml.h:20
 #: ../templates/igepa-templates.xml.h:1 ../templates/jac-iso-templates.xml.h:4
-#: ../templates/online-templates.xml.h:7 ../templates/rayfilm-templates.xml.h:1
+#: ../templates/rayfilm-templates.xml.h:1
 #: ../templates/sheetlabels-us-templates.xml.h:2
 msgid "Rectangular labels"
 msgstr "Négyszögletű címkék"
@@ -3048,6 +3054,7 @@ msgstr "Visszaküldési cím címkék"
 #: ../templates/avery-us-templates.xml.h:16
 #: ../templates/maco-us-templates.xml.h:3
 #: ../templates/meritline-us-templates.xml.h:12
+#: ../templates/misc-us-templates.xml.h:23
 #: ../templates/sheetlabels-us-templates.xml.h:10
 #: ../templates/worldlabel-us-templates.xml.h:9
 msgid "Round Labels"
@@ -3084,7 +3091,7 @@ msgstr "Iktató címkék"
 #: ../templates/databecker-iso-templates.xml.h:2
 #: ../templates/dataline-iso-templates.xml.h:4
 #: ../templates/decadry-iso-templates.xml.h:6
-#: ../templates/misc-us-templates.xml.h:23
+#: ../templates/misc-us-templates.xml.h:25
 #: ../templates/misc-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:15
 #: ../templates/zweckform-iso-templates.xml.h:28
@@ -3187,7 +3194,6 @@ msgstr "Teljesen kerek címkék"
 #: ../templates/avery-iso-templates.xml.h:10
 #: ../templates/decadry-iso-templates.xml.h:2
 #: ../templates/misc-iso-templates.xml.h:14
-#: ../templates/online-templates.xml.h:21
 msgid "Mailing labels"
 msgstr "Levelezőcímkék"
 
@@ -3195,13 +3201,11 @@ msgstr "Levelezőcímkék"
 #: ../templates/avery-iso-templates.xml.h:12
 #: ../templates/dymo-other-templates.xml.h:6
 #: ../templates/misc-iso-templates.xml.h:12
-#: ../templates/online-templates.xml.h:53
 msgid "Address labels"
 msgstr "Címzési címkék"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:16
-#: ../templates/online-templates.xml.h:26
 msgid "Shipping labels"
 msgstr "Szállítási címkék"
 
@@ -3334,11 +3338,9 @@ msgstr "CD címkék"
 #. ===================================================================
 #. ====================================================================
 #. ===================================================================
-#. OL6075
 #: ../templates/dataline-iso-templates.xml.h:2
 #: ../templates/hama-iso-templates.xml.h:35
 #: ../templates/misc-iso-templates.xml.h:34
-#: ../templates/online-templates.xml.h:83
 msgid "CD/DVD labels"
 msgstr "CD/DVD címkék"
 
@@ -3557,7 +3559,7 @@ msgid "Diskette Labels (face only)"
 msgstr "Kislemez címkék (csak előlap)"
 
 #. ===================================================================
-#: ../templates/igepa-templates.xml.h:2 ../templates/online-templates.xml.h:28
+#: ../templates/igepa-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:18
 msgid "Floppy disk labels"
 msgstr "Kislemez címkék (csak előlap)"
@@ -3631,23 +3633,23 @@ msgstr "DLT címkék"
 
 #. ===================================================================
 #. TODO: Is this the actual part #?
-#: ../templates/misc-us-templates.xml.h:25
+#: ../templates/misc-us-templates.xml.h:27
 #: ../templates/misc-iso-templates.xml.h:38
 msgid "PRO CD Labels 2-up (face only)"
 msgstr "PRO CD címkék, 2 korong (csak előlap)"
 
 #. ===================================================================
-#: ../templates/misc-us-templates.xml.h:27
+#: ../templates/misc-us-templates.xml.h:29
 msgid "PRO CD Labels 2-up (Face only)"
 msgstr "PRO CD címkék, 2 korong (csak előlap)"
 
 #. ===================================================================
-#: ../templates/misc-us-templates.xml.h:29
+#: ../templates/misc-us-templates.xml.h:31
 msgid "PRO CD Labels 2-up (CD spine only)"
 msgstr "PRO CD címkék, 2 korong (csak CD-gerinc)"
 
 #. ===================================================================
-#: ../templates/misc-us-templates.xml.h:31
+#: ../templates/misc-us-templates.xml.h:33
 msgid "Microtube labels"
 msgstr "Mikrocső címkék"
 
@@ -3675,7 +3677,7 @@ msgstr "Tintasugaras/Lézer címkék (70x37mm)"
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:20
 msgid "EPSON Photo Stickers 16"
-msgstr "EPSON fotómatricák 16"
+msgstr "EPSON fotomatricák 16"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:32
@@ -3687,304 +3689,12 @@ msgstr "Univerzális címkék"
 #: ../templates/pearl-iso-templates.xml.h:16
 #: ../templates/sheetlabels-us-templates.xml.h:26
 msgid "Bottle labels"
-msgstr "Palack címkék"
+msgstr "Palackcímkék"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:40
 msgid "Etiketten"
 msgstr "Etikettek"
-
-#: ../templates/online-templates.xml.h:1
-msgid "SD Card labels, library book labels, classification labels"
-msgstr "SD kártya címkék, könyvtári könyv címkék, osztályozási címkék"
-
-#: ../templates/online-templates.xml.h:2
-msgid "Jar labels, candle labels"
-msgstr "Üveg címkék, mécses címkék"
-
-#: ../templates/online-templates.xml.h:3
-msgid "Barcode labels"
-msgstr "Vonalkód címkék"
-
-#: ../templates/online-templates.xml.h:4
-msgid "Classification labels, library book labels"
-msgstr "Osztályozási címkék, könyvtári könyv címkék"
-
-#: ../templates/online-templates.xml.h:5
-msgid "Water bottle labels"
-msgstr "Vizes palack címkék"
-
-#: ../templates/online-templates.xml.h:6
-msgid "Jar labels, pot labels, candle labels"
-msgstr "Üveg címkék, edény címkék, mécses címkék"
-
-#. OL120
-#: ../templates/online-templates.xml.h:9
-msgid "Medical chart labels"
-msgstr "Egészségügyi címkék"
-
-#. OL8325
-#: ../templates/online-templates.xml.h:11
-msgid "Lip balm tube labels"
-msgstr "Ajakbalzsam címkék"
-
-#. OL2162
-#: ../templates/online-templates.xml.h:13
-msgid "Return address labels"
-msgstr "Visszaküldési cím címkék"
-
-#: ../templates/online-templates.xml.h:14
-msgid "File labels, return address labels, medical chart labels"
-msgstr "Akta címkék, visszaküldési cím címkék, egészségügyi címkék"
-
-#: ../templates/online-templates.xml.h:15
-msgid "Jar labels, nutritional labels"
-msgstr "Üveg címkék, táplálkozási címkék"
-
-#: ../templates/online-templates.xml.h:16
-msgid "Jar labels"
-msgstr "Üveg címkék"
-
-#: ../templates/online-templates.xml.h:18
-msgid "Wine bottle labels, nutritional labels"
-msgstr "Borosüveg címkék, táplálkozási címkék"
-
-#. OL1102
-#: ../templates/online-templates.xml.h:20
-msgid "Digital video labels"
-msgstr "Digitális videó címkék"
-
-#: ../templates/online-templates.xml.h:22
-msgid "Pot labels, coffee and tea labels"
-msgstr "Üveg címkék, kávé és teacímkék"
-
-#: ../templates/online-templates.xml.h:23
-msgid "Candy labels"
-msgstr "Édesség címkék"
-
-#: ../templates/online-templates.xml.h:24
-msgid "Reverse automobile window stickers"
-msgstr "Tükrözött személygépjármű ablakmatricák"
-
-#: ../templates/online-templates.xml.h:25
-msgid "Jar labels, candy labels, nutritional labels"
-msgstr "Üveg címkék, édesség címkék, táplálkozási címkék"
-
-#: ../templates/online-templates.xml.h:27
-msgid "Address labels, barcode labels, candy labels"
-msgstr "Cím címkék, vonalkód címkék, édesség címkék"
-
-#: ../templates/online-templates.xml.h:29
-msgid "VHS face labels, nutritional labels"
-msgstr "VHS borító címkék, táplálkozási címkék"
-
-#: ../templates/online-templates.xml.h:30
-msgid "Jar labels, pot labels, nutritional labels"
-msgstr "Üveg címkék, edény címkék, táplálkozási címkék"
-
-#: ../templates/online-templates.xml.h:31
-msgid "File folder labels"
-msgstr "Iktatómappa címkék"
-
-#: ../templates/online-templates.xml.h:32
-msgid "Metal tin container labels, nutritional labels"
-msgstr "Fém tároló címkék, táplálkozási címkék"
-
-#: ../templates/online-templates.xml.h:33
-msgid "Bookplate labels, coffee and tea labels"
-msgstr "Ex libris címkék, kávé és teacímkék"
-
-#: ../templates/online-templates.xml.h:34
-msgid "Amazon FBA shipping labels"
-msgstr "Amazon FBA szállítási címkék"
-
-#: ../templates/online-templates.xml.h:35
-msgid "Jar labels, coffee and tea labels, nutritional labels"
-msgstr "Üveg címkék, kávé és tea címkék, táplálkozási címkék"
-
-#: ../templates/online-templates.xml.h:36
-msgid "Jar labels, pot labels, coffee and tea labels"
-msgstr "Üveg címkék, edény címkék, kávé és tea címkék"
-
-#: ../templates/online-templates.xml.h:37
-msgid "Digital media labels"
-msgstr "Digitális média címkék"
-
-#: ../templates/online-templates.xml.h:38
-msgid "Jar labels, Coffee and tea labels"
-msgstr "Üveg címkék, kávé és tea címkék"
-
-#: ../templates/online-templates.xml.h:39
-msgid "Wine bottle labels"
-msgstr "Borosüveg címkék"
-
-#: ../templates/online-templates.xml.h:40
-msgid "Mail Order Manager labels"
-msgstr "Csomagküldés-kezelő címkék"
-
-#: ../templates/online-templates.xml.h:41
-msgid "Liquor bottle labels"
-msgstr "Italos üveg címkék"
-
-#: ../templates/online-templates.xml.h:42
-msgid "Metal tin container labels"
-msgstr "Fém tároló címkék"
-
-#: ../templates/online-templates.xml.h:43
-msgid "Hershey's® chocolate labels"
-msgstr "Hershey's® csokoládé címkék"
-
-#: ../templates/online-templates.xml.h:44
-msgid "VHS labels, jar labels, book labels"
-msgstr "VHS címkék, üveg címkék, könyv címkék"
-
-#: ../templates/online-templates.xml.h:45
-msgid "USPS® shipping labels"
-msgstr "USPS® szállítási címkék"
-
-#: ../templates/online-templates.xml.h:46
-msgid "Jar labels, candle labels, metal tin container labels"
-msgstr "Üveg címkék, mécses címkék, fém tároló címkék"
-
-#: ../templates/online-templates.xml.h:47
-msgid "Jar labels, water bottle labels"
-msgstr "Üveg címkék, vizes palack címkék"
-
-#: ../templates/online-templates.xml.h:48
-msgid "Jar labels, water bottle labels, wine bottle labels"
-msgstr "Üveg címkék, vizes palack címkék, borosüveg címkék"
-
-#: ../templates/online-templates.xml.h:49
-msgid "PayPal® label"
-msgstr "PayPal® címke"
-
-#: ../templates/online-templates.xml.h:50
-msgid "Water bottle labels, jar labels, candle labels"
-msgstr "Vizes palack címkék, üveg címkék, mécses címkék"
-
-#: ../templates/online-templates.xml.h:51
-msgid "Medical chart labels, barcode labels"
-msgstr "Egészségügyi címkék, vonalkód címkék"
-
-#: ../templates/online-templates.xml.h:52
-msgid "Pot labels, barcode labels"
-msgstr "Edény címkék, vonalkód címkék"
-
-#: ../templates/online-templates.xml.h:54
-msgid "Nutritional labels"
-msgstr "Táplálkozási címkék"
-
-#: ../templates/online-templates.xml.h:55
-msgid "CD case labels"
-msgstr "CD tok címkék"
-
-#: ../templates/online-templates.xml.h:56
-msgid "Business card size labels"
-msgstr "Névjegykártya méretű címkék"
-
-#: ../templates/online-templates.xml.h:57
-msgid "Reverse addendum stickers"
-msgstr "Tükrözött kiegészítő címkék"
-
-#: ../templates/online-templates.xml.h:58
-msgid "Wine bottle labels, shipping labels, UPS® WorldShip® labels"
-msgstr "Borosüveg címkék, szállítási címkék, UPS® WorldShip® címkék"
-
-#: ../templates/online-templates.xml.h:59
-msgid "Coffee and tea labels"
-msgstr "Kávé és tea címkék"
-
-#: ../templates/online-templates.xml.h:60
-msgid "Water bottle labels, shipping labels"
-msgstr "Vizes palack címkék, szállítási címkék"
-
-#: ../templates/online-templates.xml.h:61
-msgid "VICS labels"
-msgstr "VICS címkék"
-
-#: ../templates/online-templates.xml.h:62
-msgid "Full sheet labels with back slit"
-msgstr "Teljes ív címkék hátsó hasítással"
-
-#: ../templates/online-templates.xml.h:63
-msgid "Full sheet labels"
-msgstr "Teljes ív címkék"
-
-#: ../templates/online-templates.xml.h:64
-msgid "Lip balm labels"
-msgstr "Ajakbalzsam címkék"
-
-#: ../templates/online-templates.xml.h:65
-msgid "Paper hole reinforcement labels"
-msgstr "Papír lyuk megerősítő címkék"
-
-#: ../templates/online-templates.xml.h:68
-msgid "Candle labels, lip balm labels"
-msgstr "Mécses címkék, ajakbalzsam címkék"
-
-#: ../templates/online-templates.xml.h:69
-msgid "Seal labels"
-msgstr "Pecsét címkék"
-
-#: ../templates/online-templates.xml.h:70
-msgid "Jar labels, candle labels, lip balm labels"
-msgstr "Üveg címkék, mécses címkék, ajakbalzsam címkék"
-
-#: ../templates/online-templates.xml.h:71
-msgid "Jar labels, nutritional labels, pot labels, soap labels"
-msgstr "Üveg címkék, táplálkozási címkék, edény címkék, szappan címkék"
-
-#: ../templates/online-templates.xml.h:72
-msgid ""
-"Jar labels, nutritional labels, soap labels, candle labels, coffee and tea "
-"labels"
-msgstr ""
-"Üveg címkék, táplálkozási címkék, szappan címkék, mécses címkék, kávé és tea "
-"címkék"
-
-#: ../templates/online-templates.xml.h:73
-msgid "Jar labels, candle labels, nutritional labels"
-msgstr "Üveg címkék, mécses címkék, táplálkozási címkék"
-
-#: ../templates/online-templates.xml.h:74
-msgid "Nutritional labels, soap labels, coffee and tea labels, candle labels"
-msgstr "Táplálkozási címkék, szappan címkék, kávé és tea címkék, mécses címkék"
-
-#: ../templates/online-templates.xml.h:75
-msgid "Beer bottle labels, jar labels, nutritional labels, soap labels"
-msgstr "Sörösüveg címkék, üveg címkék, táplálkozási címkék, szappan címkék"
-
-#: ../templates/online-templates.xml.h:76
-msgid "Beer bottle label, jar label"
-msgstr "Sörösüveg címkék, üveg címkék"
-
-#: ../templates/online-templates.xml.h:77
-msgid "Target stickers"
-msgstr "Céltábla matricák"
-
-#: ../templates/online-templates.xml.h:78
-msgid "Round and rectangular labels"
-msgstr "Kerek és négyszögletű címkék"
-
-#: ../templates/online-templates.xml.h:79
-msgid "CD/DVD center hub labels"
-msgstr "CD/DVD belső címkék"
-
-#: ../templates/online-templates.xml.h:80
-msgid "Business card CD labels"
-msgstr "Névjegykártya CD címkék"
-
-#: ../templates/online-templates.xml.h:81
-msgid "Mini CD labels"
-msgstr "Mini CD címkék"
-
-#: ../templates/online-templates.xml.h:84
-msgid "Full face CD/DVD labels"
-msgstr "Teljes arcos CD/DVD címkék"
-
-#: ../templates/online-templates.xml.h:85
-msgid "eBay® shipping labels"
-msgstr "eBay® szállítási címkék"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:8
@@ -4084,8 +3794,9 @@ msgstr "Trapéz alakú címkék"
 
 #. ===================================================================
 #: ../templates/sheetlabels-us-templates.xml.h:22
+#, fuzzy
 msgid "Oval bottle labels"
-msgstr "Ovális palackcímkék"
+msgstr "Palackcímkék"
 
 #. ===================================================================
 #: ../templates/zweckform-iso-templates.xml.h:12
@@ -4111,6 +3822,10 @@ msgstr "Négyszögletű másolócímkék"
 #: ../templates/zweckform-iso-templates.xml.h:22
 msgid "Correction and Cover-up Labels"
 msgstr "Javító- és fedőcímkék"
+
+#, fuzzy
+#~ msgid "Allow merge to remove newlines"
+#~ msgstr "Az eggyesítés eltávolítja a sortöréseket"
 
 #~ msgid "File Back Labels"
 #~ msgstr "Iktató fekete címkék"

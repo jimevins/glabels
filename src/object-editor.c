@@ -599,6 +599,9 @@ set_key_names (glObjectEditor      *editor,
         gtk_widget_set_sensitive (editor->priv->text_auto_shrink_check,
                                   merge != NULL);
  
+        gtk_widget_set_sensitive (editor->priv->text_merge_nonl_check,
+                                  merge != NULL);
+ 
         gtk_widget_set_sensitive (editor->priv->text_color_key_radio, merge != NULL);
         if (merge == NULL)
         {
@@ -752,6 +755,7 @@ object_changed_cb (glLabelObject  *object,
         glValignment          valign;
         gdouble              text_line_spacing;
         gboolean             auto_shrink;
+        gboolean             merge_nonl;
         gdouble              image_w, image_h;
         glTextNode          *filename;
         glTextNode          *bc_data;
@@ -829,6 +833,7 @@ object_changed_cb (glLabelObject  *object,
                 valign            = gl_label_object_get_text_valignment (object);
                 text_line_spacing = gl_label_object_get_text_line_spacing (object);
                 auto_shrink       = gl_label_text_get_auto_shrink (GL_LABEL_TEXT (object));
+                merge_nonl        = gl_label_text_get_merge_nonl (GL_LABEL_TEXT (object));
 
                 gl_object_editor_set_size (editor, w, h);
                 gl_object_editor_set_font_family (editor, font_family);
@@ -840,6 +845,7 @@ object_changed_cb (glLabelObject  *object,
                 gl_object_editor_set_text_valignment (editor, valign);
                 gl_object_editor_set_text_line_spacing (editor, text_line_spacing);
                 gl_object_editor_set_text_auto_shrink (editor, auto_shrink);
+                gl_object_editor_set_text_merge_nonl (editor, merge_nonl);
 
                 gl_color_node_free (&text_color_node);
                 g_free (font_family);
@@ -919,6 +925,7 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
         glValignment          valign;
         gdouble              text_line_spacing;
         gboolean             auto_shrink;
+        gboolean             merge_nonl;
         glTextNode          *filename;
         gdouble              w, h;
         gdouble              image_w, image_h;
@@ -1002,6 +1009,7 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
                 valign            = gl_object_editor_get_text_valignment (editor);
                 text_line_spacing = gl_object_editor_get_text_line_spacing (editor);
                 auto_shrink       = gl_object_editor_get_text_auto_shrink (editor);
+                merge_nonl        = gl_object_editor_get_text_merge_nonl (editor);
 
                 gl_label_object_set_font_family (object, font_family, TRUE);
                 gl_label_object_set_font_size (object, font_size, TRUE);
@@ -1012,6 +1020,7 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
                 gl_label_object_set_text_valignment (object, valign, TRUE);
                 gl_label_object_set_text_line_spacing (object, text_line_spacing, TRUE);
                 gl_label_text_set_auto_shrink (GL_LABEL_TEXT (object), auto_shrink, TRUE);
+                gl_label_text_set_merge_nonl (GL_LABEL_TEXT (object), merge_nonl, TRUE);
 
                 gl_color_node_free (&text_color_node);
                 g_free (font_family);

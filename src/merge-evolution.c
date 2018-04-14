@@ -486,7 +486,7 @@ gl_merge_evolution_get_record (glMerge *merge)
         contact = E_CONTACT(head->data);
 
         record = g_new0 (glMergeRecord, 1);
-        record->select_flag = TRUE;
+        record->select_flag = FALSE;
 
         /* Take the interesting fields one by one from the contact, and put them
          * into the glMergeRecord structure. When done, free up the resources for
@@ -500,7 +500,7 @@ gl_merge_evolution_get_record (glMerge *merge)
                 gchar *value;
                 field_id = *(EContactField *)iter->data;
                 value = g_strdup (e_contact_get_const (contact, field_id));
-
+		//value = g_strdelimit (value, "\n\r", ' ');
                 if (value) {
                         field = g_new0 (glMergeField, 1);
                         field->key = g_strdup (e_contact_pretty_name (field_id));

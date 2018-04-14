@@ -119,6 +119,7 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *text_bottom_toggle;
 	GtkWidget  *text_line_spacing_spin;
 	GtkWidget  *text_auto_shrink_check;
+	GtkWidget  *text_merge_nonl_check;
 
 	GtkWidget  *edit_page_vbox;
 	GtkWidget  *edit_text_view;

@@ -79,6 +79,12 @@ void           gl_label_text_set_auto_shrink (glLabelText      *ltext,
 
 gboolean       gl_label_text_get_auto_shrink (glLabelText      *ltext);
 
+void           gl_label_text_set_merge_nonl (glLabelText      *ltext,
+					      gboolean          merge_nonl,
+                                              gboolean          checkpoint);
+
+gboolean       gl_label_text_get_merge_nonl (glLabelText      *ltext);
+
 
 G_END_DECLS
 
