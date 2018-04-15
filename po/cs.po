@@ -4,14 +4,15 @@
 #
 # David Makovský (Yakeen) <yakeen@sannyas-on.net>, 2005.
 # Zbynek Mrkvicka <zbynek@oachot.cz>, 2005.
-# Marek Černocký <marek@manet.cz>, 2009, 2010, 2011, 2012, 2013, 2015, 2016.
+# Marek Černocký <marek@manet.cz>, 2009, 2010, 2011, 2012, 2013, 2015, 2016, 2018.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels\n"
-"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2016-06-09 21:47+0000\n"
-"PO-Revision-Date: 2016-06-10 08:32+0200\n"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
+"product=glabels&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2018-04-14 22:16+0000\n"
+"PO-Revision-Date: 2018-04-15 22:40+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -1019,13 +1020,13 @@ msgctxt "Brand"
 msgid "Any"
 msgstr "Libovolná"
 
-#: ../src/media-select.c:365 ../src/media-select.c:893
+#: ../src/media-select.c:365 ../src/media-select.c:894
 msgctxt "Page size"
 msgid "Any"
 msgstr "Libovolná"
 
 #: ../src/media-select.c:372 ../src/media-select.c:375
-#: ../src/media-select.c:902
+#: ../src/media-select.c:903
 msgctxt "Category"
 msgid "Any"
 msgstr "Libovolná"
@@ -1039,29 +1040,29 @@ msgstr "Smazat šablonu „%s“?"
 msgid "This action will permanently delete this template."
 msgstr "Tato akce trvale vymaže tuto šablonu."
 
-#: ../src/media-select.c:990
+#: ../src/media-select.c:991
 msgid "No recent templates found."
 msgstr "Nenalezeny žádné nedávno použité šablony."
 
-#: ../src/media-select.c:992
+#: ../src/media-select.c:993
 msgid "Try selecting a template in the \"Search all\" tab."
 msgstr "Zkuste vybrat šablonu na kartě „Prohledat všechny“."
 
 #. Translators: "No match" means that for the given template search criteria, there
 #. * were no matches found.
-#: ../src/media-select.c:1083
+#: ../src/media-select.c:1084
 msgid "No match."
 msgstr "Žádná neodpovídá."
 
-#: ../src/media-select.c:1085
+#: ../src/media-select.c:1086
 msgid "Try selecting a different brand, page size or category."
 msgstr "Zkuste vybrat jinou značku, rozměr papíru nebo kategorii."
 
-#: ../src/media-select.c:1179
+#: ../src/media-select.c:1180
 msgid "No custom templates found."
 msgstr "Nenalezena žádná vlastní šablona."
 
-#: ../src/media-select.c:1181
+#: ../src/media-select.c:1182
 msgid ""
 "You may create new templates or try searching for pre-defined templates in "
 "the \"Search all\" tab."
@@ -2873,7 +2874,7 @@ msgstr "Libovolná etiketa"
 #: ../templates/categories.xml.h:2 ../templates/begalabel-templates.xml.h:3
 #: ../templates/endisch-templates.xml.h:1
 #: ../templates/hama-iso-templates.xml.h:4
-#: ../templates/online-templates.xml.h:69
+#: ../templates/hisago-templates.xml.h:7 ../templates/online-templates.xml.h:66
 #: ../templates/pearl-iso-templates.xml.h:4
 #: ../templates/rayfilm-templates.xml.h:8
 #: ../templates/sheetlabels-us-templates.xml.h:16
@@ -2882,8 +2883,8 @@ msgstr "Kulaté etikety"
 
 #. ===================================================================
 #: ../templates/categories.xml.h:3 ../templates/begalabel-templates.xml.h:4
-#: ../templates/endisch-templates.xml.h:2
-#: ../templates/online-templates.xml.h:70
+#: ../templates/endisch-templates.xml.h:2 ../templates/hisago-templates.xml.h:9
+#: ../templates/online-templates.xml.h:67
 #: ../templates/pearl-iso-templates.xml.h:58
 #: ../templates/rayfilm-templates.xml.h:9
 msgid "Elliptical labels"
@@ -2892,7 +2893,7 @@ msgstr "Oválné etikety"
 #. ====================================================================
 #: ../templates/categories.xml.h:4 ../templates/endisch-templates.xml.h:4
 #: ../templates/hama-iso-templates.xml.h:41
-#: ../templates/online-templates.xml.h:17
+#: ../templates/hisago-templates.xml.h:8 ../templates/online-templates.xml.h:17
 #: ../templates/rayfilm-templates.xml.h:2
 msgid "Square labels"
 msgstr "Čtvercové etikety"
@@ -2900,6 +2901,7 @@ msgstr "Čtvercové etikety"
 #. ===================================================================
 #. ====================================================================
 #. ===================================================================
+#. OP920-R
 #. ********************************************************************
 #. ===================================================================
 #: ../templates/categories.xml.h:5 ../templates/ascom-iso-templates.xml.h:4
@@ -2907,8 +2909,9 @@ msgstr "Čtvercové etikety"
 #: ../templates/endisch-templates.xml.h:3
 #: ../templates/hama-iso-templates.xml.h:27
 #: ../templates/herma-iso-templates.xml.h:20
-#: ../templates/igepa-templates.xml.h:1 ../templates/jac-iso-templates.xml.h:4
-#: ../templates/online-templates.xml.h:7 ../templates/rayfilm-templates.xml.h:1
+#: ../templates/hisago-templates.xml.h:5 ../templates/igepa-templates.xml.h:1
+#: ../templates/jac-iso-templates.xml.h:4 ../templates/online-templates.xml.h:7
+#: ../templates/rayfilm-templates.xml.h:1
 #: ../templates/sheetlabels-us-templates.xml.h:2
 msgid "Rectangular labels"
 msgstr "Obdélníkové etikety"
@@ -2959,7 +2962,7 @@ msgstr "Etikety na kartotéky"
 #. TODO: What is the actual part #?
 #. ===================================================================
 #: ../templates/ascom-iso-templates.xml.h:2
-#: ../templates/avery-iso-templates.xml.h:34
+#: ../templates/avery-iso-templates.xml.h:36
 #: ../templates/databecker-iso-templates.xml.h:10
 #: ../templates/hama-iso-templates.xml.h:29
 #: ../templates/herma-iso-templates.xml.h:18
@@ -2980,7 +2983,7 @@ msgstr "Etikety na hřbet videokazet"
 #. ===================================================================
 #. ===============================================================
 #: ../templates/ascom-iso-templates.xml.h:8
-#: ../templates/avery-iso-templates.xml.h:26
+#: ../templates/avery-iso-templates.xml.h:28
 #: ../templates/zweckform-iso-templates.xml.h:26
 msgid "CD Inlet"
 msgstr "Přebal CD"
@@ -3022,9 +3025,9 @@ msgstr "Dopravní etikety"
 #. ********************************************************************
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:12
-#: ../templates/avery-iso-templates.xml.h:14
+#: ../templates/avery-iso-templates.xml.h:16
 #: ../templates/databecker-iso-templates.xml.h:6
-#: ../templates/dymo-other-templates.xml.h:14
+#: ../templates/dymo-other-templates.xml.h:16
 #: ../templates/geha-iso-templates.xml.h:25
 #: ../templates/maco-us-templates.xml.h:2
 #: ../templates/meritline-us-templates.xml.h:4
@@ -3056,7 +3059,7 @@ msgstr "Kulaté etikety"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:18
-#: ../templates/avery-iso-templates.xml.h:20
+#: ../templates/avery-iso-templates.xml.h:22
 #: ../templates/meritline-us-templates.xml.h:14
 #: ../templates/sheetlabels-us-templates.xml.h:18
 #: ../templates/worldlabel-us-templates.xml.h:8
@@ -3081,7 +3084,7 @@ msgstr "Etikety na kartotéky"
 #. TODO: Is this the actual part #?
 #. ============================================================
 #: ../templates/avery-us-templates.xml.h:24
-#: ../templates/avery-iso-templates.xml.h:18
+#: ../templates/avery-iso-templates.xml.h:20
 #: ../templates/databecker-iso-templates.xml.h:2
 #: ../templates/dataline-iso-templates.xml.h:4
 #: ../templates/decadry-iso-templates.xml.h:6
@@ -3180,35 +3183,47 @@ msgid "Self-Adhesive Name Badges (Acetate Silk)"
 msgstr "Samolepicí nášivky na jméno (acetátové hedvábí)"
 
 #. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#. OL6075
 #: ../templates/avery-iso-templates.xml.h:8
+#: ../templates/dataline-iso-templates.xml.h:2
+#: ../templates/hama-iso-templates.xml.h:35
+#: ../templates/misc-iso-templates.xml.h:34
+#: ../templates/online-templates.xml.h:83
+msgid "CD/DVD labels"
+msgstr "Etikety na CD/DVD"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:10
 msgid "Allround labels"
 msgstr "Univerzální etikety"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:10
+#: ../templates/avery-iso-templates.xml.h:12
 #: ../templates/decadry-iso-templates.xml.h:2
 #: ../templates/misc-iso-templates.xml.h:14
-#: ../templates/online-templates.xml.h:22
+#: ../templates/online-templates.xml.h:21
 msgid "Mailing labels"
 msgstr "Poštovní etikety"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:12
-#: ../templates/dymo-other-templates.xml.h:6
+#: ../templates/avery-iso-templates.xml.h:14
+#: ../templates/dymo-other-templates.xml.h:8
 #: ../templates/misc-iso-templates.xml.h:12
-#: ../templates/online-templates.xml.h:56
+#: ../templates/online-templates.xml.h:53
 msgid "Address labels"
 msgstr "Adresní etikety"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:16
-#: ../templates/online-templates.xml.h:27
+#: ../templates/avery-iso-templates.xml.h:18
+#: ../templates/hisago-templates.xml.h:6 ../templates/online-templates.xml.h:26
 msgid "Shipping labels"
 msgstr "Přepravní etikety"
 
 #. ===============================================================
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:22
+#: ../templates/avery-iso-templates.xml.h:24
 #: ../templates/decadry-iso-templates.xml.h:4
 #: ../templates/herma-iso-templates.xml.h:8
 #: ../templates/misc-us-templates.xml.h:21
@@ -3219,24 +3234,24 @@ msgid "Mailing Labels"
 msgstr "Poštovní etikety"
 
 #. ===============================================================
-#: ../templates/avery-iso-templates.xml.h:24
+#: ../templates/avery-iso-templates.xml.h:26
 #: ../templates/zweckform-iso-templates.xml.h:24
 msgid "CD Booklet"
 msgstr "Brožurka do CD"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:28
+#: ../templates/avery-iso-templates.xml.h:30
 msgid "Mini Address Labels"
 msgstr "Mini adresní etikety"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:30
+#: ../templates/avery-iso-templates.xml.h:32
 msgid "Identification Labels"
 msgstr "Identifikační etikety"
 
 #. ===================================================================
 #. ====================================================================
-#: ../templates/avery-iso-templates.xml.h:32
+#: ../templates/avery-iso-templates.xml.h:34
 #: ../templates/hama-iso-templates.xml.h:31
 msgid "Diskette labels"
 msgstr "Etikety na diskety"
@@ -3333,17 +3348,6 @@ msgid "CD Labels"
 msgstr "Etikety na CD"
 
 #. ===================================================================
-#. ====================================================================
-#. ===================================================================
-#. OL6075
-#: ../templates/dataline-iso-templates.xml.h:2
-#: ../templates/hama-iso-templates.xml.h:35
-#: ../templates/misc-iso-templates.xml.h:34
-#: ../templates/online-templates.xml.h:86
-msgid "CD/DVD labels"
-msgstr "Etikety na CD/DVD"
-
-#. ===================================================================
 #: ../templates/dataline-iso-templates.xml.h:8
 #: ../templates/pearl-iso-templates.xml.h:60
 msgid "Membership cards"
@@ -3355,40 +3359,45 @@ msgid "Multipurpose Labels"
 msgstr "Víceúčelové etikety"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:8
+#: ../templates/dymo-other-templates.xml.h:6
+msgid "Small Name Badge Labels"
+msgstr "Malé etikety na jmenovky"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:10
 msgid "File Folder"
 msgstr "Kancelářské složka"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:10
+#: ../templates/dymo-other-templates.xml.h:12
 msgid "Name Badges"
 msgstr "Jmenovky"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:12
+#: ../templates/dymo-other-templates.xml.h:14
 msgid "Hanging Folder"
 msgstr "Závěsná složka"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:16
+#: ../templates/dymo-other-templates.xml.h:18
 #: ../templates/geha-iso-templates.xml.h:23
 msgid "Large Address Labels"
 msgstr "Velké adresní etikety"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:18
+#: ../templates/dymo-other-templates.xml.h:20
 msgid "Shipping Address Labels"
 msgstr "Přepravní adresní etikety"
 
 #. ===================================================================
-#: ../templates/endisch-templates.xml.h:5
+#: ../templates/endisch-templates.xml.h:5 ../templates/hisago-templates.xml.h:3
 #: ../templates/pearl-iso-templates.xml.h:20
 #: ../templates/rayfilm-templates.xml.h:3
 msgid "Labels A6"
 msgstr "Etikety A6"
 
 #. ===================================================================
-#: ../templates/endisch-templates.xml.h:6
+#: ../templates/endisch-templates.xml.h:6 ../templates/hisago-templates.xml.h:2
 #: ../templates/pearl-iso-templates.xml.h:22
 #: ../templates/rayfilm-templates.xml.h:4
 msgid "Labels A5"
@@ -3396,8 +3405,8 @@ msgstr "Etikety A5"
 
 #. *******************************************************************
 #. ===================================================================
-#: ../templates/endisch-templates.xml.h:7 ../templates/igepa-templates.xml.h:3
-#: ../templates/jac-iso-templates.xml.h:6
+#: ../templates/endisch-templates.xml.h:7 ../templates/hisago-templates.xml.h:1
+#: ../templates/igepa-templates.xml.h:3 ../templates/jac-iso-templates.xml.h:6
 #: ../templates/pearl-iso-templates.xml.h:6
 #: ../templates/rayfilm-templates.xml.h:5
 msgid "Labels A4"
@@ -3558,7 +3567,7 @@ msgid "Diskette Labels (face only)"
 msgstr "Etikety na diskety (pouze předek)"
 
 #. ===================================================================
-#: ../templates/igepa-templates.xml.h:2 ../templates/online-templates.xml.h:29
+#: ../templates/igepa-templates.xml.h:2 ../templates/online-templates.xml.h:28
 #: ../templates/pearl-iso-templates.xml.h:18
 msgid "Floppy disk labels"
 msgstr "Etikety na diskety"
@@ -3704,7 +3713,6 @@ msgid "Jar labels, candle labels"
 msgstr "Etikety na zavařovací sklenice a svíčky"
 
 #: ../templates/online-templates.xml.h:3
-#| msgid "Square labels"
 msgid "Barcode labels"
 msgstr "Etikety pro čárové kódy"
 
@@ -3713,7 +3721,6 @@ msgid "Classification labels, library book labels"
 msgstr "Etikety pro knihovní a třídící systémy"
 
 #: ../templates/online-templates.xml.h:5
-#| msgid "Oval bottle labels"
 msgid "Water bottle labels"
 msgstr "Etikety na lahve na vodu"
 
@@ -3723,19 +3730,16 @@ msgstr "Etikety na zavařovací sklenice, květináče a svíčky"
 
 #. OL120
 #: ../templates/online-templates.xml.h:9
-#| msgid "Rectangular labels"
 msgid "Medical chart labels"
 msgstr "Etikety na lékařské záznamy"
 
 #. OL8325
 #: ../templates/online-templates.xml.h:11
-#| msgid "Microtube labels"
 msgid "Lip balm tube labels"
 msgstr "Etikety na balzámy na rty"
 
 #. OL2162
 #: ../templates/online-templates.xml.h:13
-#| msgid "Return Address Labels"
 msgid "Return address labels"
 msgstr "Etikety pro zpáteční adresu"
 
@@ -3748,7 +3752,6 @@ msgid "Jar labels, nutritional labels"
 msgstr "Etikety na zavařovací sklenice, složení potravin"
 
 #: ../templates/online-templates.xml.h:16
-#| msgid "Square labels"
 msgid "Jar labels"
 msgstr "Etikety na zavařovací sklenice"
 
@@ -3756,286 +3759,239 @@ msgstr "Etikety na zavařovací sklenice"
 msgid "Wine bottle labels, nutritional labels"
 msgstr "Etikety na lahve na víno a složení potravin"
 
-#: ../templates/online-templates.xml.h:19
-#| msgid "Microtube labels"
-msgid "Lib balm tube labels"
-msgstr "Etikety na balzámy na rty"
-
 #. OL1102
-#: ../templates/online-templates.xml.h:21
-#| msgid "Divider Labels"
+#: ../templates/online-templates.xml.h:20
 msgid "Digital video labels"
 msgstr "Etikety pro digitální video"
 
-#: ../templates/online-templates.xml.h:23
+#: ../templates/online-templates.xml.h:22
 msgid "Pot labels, coffee and tea labels"
 msgstr "Etikety na květináče, kávy a čaje"
 
-#: ../templates/online-templates.xml.h:24
-#| msgid "Any label"
+#: ../templates/online-templates.xml.h:23
 msgid "Candy labels"
 msgstr "Etikety na cukrovinky"
 
-#: ../templates/online-templates.xml.h:25
+#: ../templates/online-templates.xml.h:24
 msgid "Reverse automobile window stickers"
 msgstr "Sundávací nálepka na vnitřní stranu automobilového skla"
 
-#: ../templates/online-templates.xml.h:26
+#: ../templates/online-templates.xml.h:25
 msgid "Jar labels, candy labels, nutritional labels"
 msgstr "Etikety na zavařovací sklenice, cukrovinky, složení potravin"
 
-#: ../templates/online-templates.xml.h:28
+#: ../templates/online-templates.xml.h:27
 msgid "Address labels, barcode labels, candy labels"
 msgstr "Adresní etikety, etikety pro čárové kódy a na cukrovinky"
 
-#: ../templates/online-templates.xml.h:30
+#: ../templates/online-templates.xml.h:29
 msgid "VHS face labels, nutritional labels"
 msgstr "Etikety na přední stranu VHS, složení potravin"
 
-#: ../templates/online-templates.xml.h:31
+#: ../templates/online-templates.xml.h:30
 msgid "Jar labels, pot labels, nutritional labels"
 msgstr "Etikety na zavařovací sklenice, květináče a složení potravin"
 
-#: ../templates/online-templates.xml.h:32
-#| msgid "File Folder Labels"
+#: ../templates/online-templates.xml.h:31
 msgid "File folder labels"
 msgstr "Etikety na složky"
 
-#: ../templates/online-templates.xml.h:33
+#: ../templates/online-templates.xml.h:32
 msgid "Metal tin container labels, nutritional labels"
 msgstr "Etikety na plechové krabičky a složení potravin"
 
-#: ../templates/online-templates.xml.h:34
+#: ../templates/online-templates.xml.h:33
 msgid "Bookplate labels, coffee and tea labels"
 msgstr "Etikety na poličky s knihami, kávy a čaje"
 
-#: ../templates/online-templates.xml.h:35
-#| msgid "Shipping labels"
+#: ../templates/online-templates.xml.h:34
 msgid "Amazon FBA shipping labels"
 msgstr "Přepravní etikety Amazon FBA"
 
-#: ../templates/online-templates.xml.h:36
+#: ../templates/online-templates.xml.h:35
 msgid "Jar labels, coffee and tea labels, nutritional labels"
 msgstr "Etikety na zavařovací sklenice, kávy a čaje, složení potravin"
 
-#: ../templates/online-templates.xml.h:37
+#: ../templates/online-templates.xml.h:36
 msgid "Jar labels, pot labels, coffee and tea labels"
 msgstr "Etikety na zavařovací sklenice, květináče, kávy a čaje"
 
-#: ../templates/online-templates.xml.h:38
-#| msgid "Diskette labels"
+#: ../templates/online-templates.xml.h:37
 msgid "Digital media labels"
 msgstr "Etikety na digitální média"
 
-#: ../templates/online-templates.xml.h:39
+#: ../templates/online-templates.xml.h:38
 msgid "Jar labels, Coffee and tea labels"
 msgstr "Etikety na zavařovací sklenice, kávy a čaje"
 
-#: ../templates/online-templates.xml.h:40
-#| msgid "Oval bottle labels"
-msgid "Win bottle labels"
-msgstr "Etikety na lahve na víno"
-
-#: ../templates/online-templates.xml.h:41
-#| msgid "Mailing labels"
-msgid "Mail Order Manager labels"
-msgstr "Etikety pro Mail Order Manager"
-
-#: ../templates/online-templates.xml.h:42
-#| msgid "Oval bottle labels"
-msgid "Liquor bottle labels"
-msgstr "Etikety na lahve na likéry"
-
-#: ../templates/online-templates.xml.h:43
-#| msgid "Microtube labels"
-msgid "Metal tin container labels"
-msgstr "Etikety na plechové krabičky"
-
-#: ../templates/online-templates.xml.h:44
-#| msgid "Oval bottle labels"
+#: ../templates/online-templates.xml.h:39
 msgid "Wine bottle labels"
 msgstr "Etikety na lahve na víno"
 
-#: ../templates/online-templates.xml.h:45
+#: ../templates/online-templates.xml.h:40
+msgid "Mail Order Manager labels"
+msgstr "Etikety pro Mail Order Manager"
+
+#: ../templates/online-templates.xml.h:41
+msgid "Liquor bottle labels"
+msgstr "Etikety na lahve na likéry"
+
+#: ../templates/online-templates.xml.h:42
+msgid "Metal tin container labels"
+msgstr "Etikety na plechové krabičky"
+
+#: ../templates/online-templates.xml.h:43
 msgid "Hershey's® chocolate labels"
 msgstr "Etikety na čokolády Hershey®"
 
-#: ../templates/online-templates.xml.h:46
+#: ../templates/online-templates.xml.h:44
 msgid "VHS labels, jar labels, book labels"
 msgstr "Etikety na VHS, zavařovací sklenice, knihy"
 
-#: ../templates/online-templates.xml.h:47
-#| msgid "Shipping labels"
+#: ../templates/online-templates.xml.h:45
 msgid "USPS® shipping labels"
 msgstr "Přepravní etikety USPS®"
 
-#: ../templates/online-templates.xml.h:48
+#: ../templates/online-templates.xml.h:46
 msgid "Jar labels, candle labels, metal tin container labels"
 msgstr "Etikety na zavařovací sklenice, svíčky, plechové krabičky"
 
-#: ../templates/online-templates.xml.h:49
-#| msgid "Oval bottle labels"
+#: ../templates/online-templates.xml.h:47
 msgid "Jar labels, water bottle labels"
 msgstr "Etikety na zavařovací sklenice a lahve na vodu"
 
-#: ../templates/online-templates.xml.h:50
+#: ../templates/online-templates.xml.h:48
 msgid "Jar labels, water bottle labels, wine bottle labels"
 msgstr "Etikety na zavařovací sklenice a lahve na vodu a víno"
 
-#: ../templates/online-templates.xml.h:51
-#| msgid "Any label"
+#: ../templates/online-templates.xml.h:49
 msgid "PayPal® label"
 msgstr "Etikety PayPal®"
 
-#: ../templates/online-templates.xml.h:52
+#: ../templates/online-templates.xml.h:50
 msgid "Water bottle labels, jar labels, candle labels"
 msgstr "Etikety na lahve na vodu, zavařovací sklenice, svíčky"
 
-#: ../templates/online-templates.xml.h:53
-msgid " Medical chart labels, square labels"
-msgstr "Etikety na lékařské záznamy, čtvercové etikety"
-
-#: ../templates/online-templates.xml.h:54
+#: ../templates/online-templates.xml.h:51
 msgid "Medical chart labels, barcode labels"
 msgstr "Etikety na lékařské záznamy a pro čárové kódy"
 
-#: ../templates/online-templates.xml.h:55
+#: ../templates/online-templates.xml.h:52
 msgid "Pot labels, barcode labels"
 msgstr "Etikety na květináče a pro čárové kódy"
 
-#: ../templates/online-templates.xml.h:57
-#| msgid "Start on label"
+#: ../templates/online-templates.xml.h:54
 msgid "Nutritional labels"
 msgstr "Etikety na složení potravin"
 
-#: ../templates/online-templates.xml.h:58
-#| msgid "SD card labels"
+#: ../templates/online-templates.xml.h:55
 msgid "CD case labels"
 msgstr "Etikety na krabičky pro SD"
 
-#: ../templates/online-templates.xml.h:59
-#| msgid "Business card CD Labels"
+#: ../templates/online-templates.xml.h:56
 msgid "Business card size labels"
 msgstr "Etikety na vizitkové CD"
 
-#: ../templates/online-templates.xml.h:60
+#: ../templates/online-templates.xml.h:57
 msgid "Reverse addendum stickers"
 msgstr "Sundávací nálepka na vnitřní stranu skla"
 
-#: ../templates/online-templates.xml.h:61
+#: ../templates/online-templates.xml.h:58
 msgid "Wine bottle labels, shipping labels, UPS® WorldShip® labels"
 msgstr "Etikety na lahve na víny, přepravní etikety, etikety UPS® WorldShip®"
 
-#: ../templates/online-templates.xml.h:62
-#| msgid "Round labels"
+#: ../templates/online-templates.xml.h:59
 msgid "Coffee and tea labels"
 msgstr "Etikety na kávy a čaje"
 
-#: ../templates/online-templates.xml.h:63
+#: ../templates/online-templates.xml.h:60
 msgid "Water bottle labels, shipping labels"
 msgstr "Etikety pro přepravu a lahve na vodu"
 
-#: ../templates/online-templates.xml.h:64
-#| msgid "PVC labels"
+#: ../templates/online-templates.xml.h:61
 msgid "VICS labels"
 msgstr "Etikety VICS"
 
-#: ../templates/online-templates.xml.h:65
-#| msgid "Full Sheet Labels"
+#: ../templates/online-templates.xml.h:62
 msgid "Full sheet labels with back slit"
 msgstr "Celostránkové etikety s perforací"
 
-#: ../templates/online-templates.xml.h:66
-#| msgid "Full Sheet Labels"
+#: ../templates/online-templates.xml.h:63
 msgid "Full sheet labels"
 msgstr "Celostránkové etikety"
 
-#: ../templates/online-templates.xml.h:67
-#| msgid "Elliptical labels"
+#: ../templates/online-templates.xml.h:64
 msgid "Lip balm labels"
 msgstr "Etikety na balzámy na rty"
 
-#: ../templates/online-templates.xml.h:68
+#: ../templates/online-templates.xml.h:65
 msgid "Paper hole reinforcement labels"
 msgstr "Zpevnění pořadačových děr v papíru"
 
-#: ../templates/online-templates.xml.h:71
+#: ../templates/online-templates.xml.h:68
 msgid "Candle labels, lip balm labels"
 msgstr "Etikety na svíčky a balzámy na rty"
 
-#: ../templates/online-templates.xml.h:72
-#| msgid "Square labels"
+#: ../templates/online-templates.xml.h:69
 msgid "Seal labels"
 msgstr "Bezpečnostní etikety"
 
-#: ../templates/online-templates.xml.h:73
+#: ../templates/online-templates.xml.h:70
 msgid "Jar labels, candle labels, lip balm labels"
 msgstr "Etikety na zavařovací sklenice, svíčky, balzámy na rty"
 
-#: ../templates/online-templates.xml.h:74
+#: ../templates/online-templates.xml.h:71
 msgid "Jar labels, nutritional labels, pot labels, soap labels"
 msgstr "Etikety na zavařovací sklenice, složení potravin, květináče, mýdla"
 
-#: ../templates/online-templates.xml.h:75
+#: ../templates/online-templates.xml.h:72
 msgid ""
 "Jar labels, nutritional labels, soap labels, candle labels, coffee and tea "
 "labels"
 msgstr ""
 "Etikety na zavařovací sklenice, složení potravin, mýdle, svíčky, kávy a čaje"
 
-#: ../templates/online-templates.xml.h:76
+#: ../templates/online-templates.xml.h:73
 msgid "Jar labels, candle labels, nutritional labels"
 msgstr "Etikety na zavařovací sklenice, svíčky, složení potravin"
 
-#: ../templates/online-templates.xml.h:77
+#: ../templates/online-templates.xml.h:74
 msgid "Nutritional labels, soap labels, coffee and tea labels, candle labels"
 msgstr "Etikety na mýdla, kávy a čaje, svíčky, složení potravin"
 
-#: ../templates/online-templates.xml.h:78
+#: ../templates/online-templates.xml.h:75
 msgid "Beer bottle labels, jar labels, nutritional labels, soap labels"
 msgstr "Etikety na lahve na pivo, zavařovací sklenice, mýdla, složení potravin"
 
-#: ../templates/online-templates.xml.h:79
+#: ../templates/online-templates.xml.h:76
 msgid "Beer bottle label, jar label"
 msgstr "Etikety na lahve na pivo a na zavařovací sklenice"
 
-#: ../templates/online-templates.xml.h:80
-#| msgid "Fridge Magnet Stickers"
+#: ../templates/online-templates.xml.h:77
 msgid "Target stickers"
 msgstr "Samolepky na terče"
 
-#: ../templates/online-templates.xml.h:81
-#| msgid "Rounded rectangular labels"
+#: ../templates/online-templates.xml.h:78
 msgid "Round and rectangular labels"
 msgstr "Kulaté a obdélníkové etikety"
 
-#: ../templates/online-templates.xml.h:82
-#| msgid "CD/DVD labels"
+#: ../templates/online-templates.xml.h:79
 msgid "CD/DVD center hub labels"
 msgstr "Etikety na střed CD/DVD"
 
-#: ../templates/online-templates.xml.h:83
-#| msgid "Business card CD Labels"
+#: ../templates/online-templates.xml.h:80
 msgid "Business card CD labels"
 msgstr "Etikety na vizitkové CD"
 
-#: ../templates/online-templates.xml.h:84
-#| msgid "Mini CD Labels"
+#: ../templates/online-templates.xml.h:81
 msgid "Mini CD labels"
 msgstr "Etikety na mini CD"
 
-#: ../templates/online-templates.xml.h:87
-#| msgid "CD/DVD labels"
+#: ../templates/online-templates.xml.h:84
 msgid "Full face CD/DVD labels"
 msgstr "Etikety na celé CD/DVD"
 
-#: ../templates/online-templates.xml.h:88
-#| msgid "PVC labels"
-msgid "USPS® labels"
-msgstr "Etikety USPS®"
-
-#: ../templates/online-templates.xml.h:89
-#| msgid "Shipping labels"
+#: ../templates/online-templates.xml.h:85
 msgid "eBay® shipping labels"
 msgstr "Přepravní etikety eBay®"
 
@@ -4164,3 +4120,18 @@ msgstr "Obdélníkové etikety do kopírky"
 #: ../templates/zweckform-iso-templates.xml.h:22
 msgid "Correction and Cover-up Labels"
 msgstr "Opravné a přelepovací etikety"
+
+#~| msgid "Microtube labels"
+#~ msgid "Lib balm tube labels"
+#~ msgstr "Etikety na balzámy na rty"
+
+#~| msgid "Oval bottle labels"
+#~ msgid "Win bottle labels"
+#~ msgstr "Etikety na lahve na víno"
+
+#~ msgid " Medical chart labels, square labels"
+#~ msgstr "Etikety na lékařské záznamy, čtvercové etikety"
+
+#~| msgid "PVC labels"
+#~ msgid "USPS® labels"
+#~ msgstr "Etikety USPS®"
