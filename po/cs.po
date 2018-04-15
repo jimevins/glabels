@@ -3706,7 +3706,7 @@ msgstr "Etikety"
 
 #: ../templates/online-templates.xml.h:1
 msgid "SD Card labels, library book labels, classification labels"
-msgstr "Etikety karty SD, pro knihovní a třídící systémy"
+msgstr "Etikety na karty SD, pro knihovní a třídící systémy"
 
 #: ../templates/online-templates.xml.h:2
 msgid "Jar labels, candle labels"
@@ -3745,7 +3745,7 @@ msgstr "Etikety pro zpáteční adresu"
 
 #: ../templates/online-templates.xml.h:14
 msgid "File labels, return address labels, medical chart labels"
-msgstr "Etikety na složky, návratové adresy, lékařské záznamy"
+msgstr "Etikety na složky, zpáteční adresy, lékařské záznamy"
 
 #: ../templates/online-templates.xml.h:15
 msgid "Jar labels, nutritional labels"
@@ -3766,7 +3766,7 @@ msgstr "Etikety pro digitální video"
 
 #: ../templates/online-templates.xml.h:22
 msgid "Pot labels, coffee and tea labels"
-msgstr "Etikety na květináče, kávy a čaje"
+msgstr "Etikety na dózy, kávy a čaje"
 
 #: ../templates/online-templates.xml.h:23
 msgid "Candy labels"
@@ -3826,7 +3826,7 @@ msgstr "Etikety na zavařovací sklenice, kávy a čaje"
 
 #: ../templates/online-templates.xml.h:39
 msgid "Wine bottle labels"
-msgstr "Etikety na lahve na víno"
+msgstr "Etikety na vinné lahve"
 
 #: ../templates/online-templates.xml.h:40
 msgid "Mail Order Manager labels"
@@ -3834,7 +3834,7 @@ msgstr "Etikety pro Mail Order Manager"
 
 #: ../templates/online-templates.xml.h:41
 msgid "Liquor bottle labels"
-msgstr "Etikety na lahve na likéry"
+msgstr "Etikety na likérové lahve"
 
 #: ../templates/online-templates.xml.h:42
 msgid "Metal tin container labels"
@@ -3886,7 +3886,7 @@ msgstr "Etikety na složení potravin"
 
 #: ../templates/online-templates.xml.h:55
 msgid "CD case labels"
-msgstr "Etikety na krabičky pro SD"
+msgstr "Etikety na krabičky pro CD"
 
 #: ../templates/online-templates.xml.h:56
 msgid "Business card size labels"
