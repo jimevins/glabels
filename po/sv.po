@@ -1,26 +1,26 @@
 # Swedish translation for glabels.
-# Copyright © 2009-2017 Free Software Foundation, Inc.
+# Copyright © 2009-2018 Free Software Foundation, Inc.
 # This file is distributed under the same license as the glabels package.
 # Daniel Nylander <po@danielnylander.se>, 2009, 2010.
 # Åke Engelbrektson <eson57@gmail.com>, 2014.
 # Josef Andersson <josef.andersson@fripost.org>, 2016, 2017.
-# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2016.
+# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2016, 2018.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=glabels&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-02-27 16:34+0000\n"
-"PO-Revision-Date: 2017-03-21 22:37+0100\n"
-"Last-Translator: Josef Andersson <l10nl18nsweja@gmail.com>\n"
+"POT-Creation-Date: 2018-04-18 19:08+0000\n"
+"PO-Revision-Date: 2018-04-15 10:30+0200\n"
+"Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.0.6\n"
 "X-Poedit-Bookmarks: -1,794,-1,799,-1,-1,-1,-1,-1,-1\n"
 
 #: ../src/bc-backends.c:81
@@ -1021,13 +1021,13 @@ msgctxt "Brand"
 msgid "Any"
 msgstr "Valfri"
 
-#: ../src/media-select.c:365 ../src/media-select.c:893
+#: ../src/media-select.c:365 ../src/media-select.c:894
 msgctxt "Page size"
 msgid "Any"
 msgstr "Valfri"
 
 #: ../src/media-select.c:372 ../src/media-select.c:375
-#: ../src/media-select.c:902
+#: ../src/media-select.c:903
 msgctxt "Category"
 msgid "Any"
 msgstr "Valfri"
@@ -1041,29 +1041,29 @@ msgstr "Vill du ta bort mallen ˮ%sˮ"
 msgid "This action will permanently delete this template."
 msgstr "Åtgärden kommer att ta bort mallen permanent."
 
-#: ../src/media-select.c:990
+#: ../src/media-select.c:991
 msgid "No recent templates found."
 msgstr "Inga tidigare mallar hittades."
 
-#: ../src/media-select.c:992
+#: ../src/media-select.c:993
 msgid "Try selecting a template in the \"Search all\" tab."
 msgstr "Försök välja en mall under fliken ˮSök allaˮ."
 
 #. Translators: "No match" means that for the given template search criteria, there
 #. * were no matches found.
-#: ../src/media-select.c:1083
+#: ../src/media-select.c:1084
 msgid "No match."
 msgstr "Ingen sökträff."
 
-#: ../src/media-select.c:1085
+#: ../src/media-select.c:1086
 msgid "Try selecting a different brand, page size or category."
 msgstr "Försök välja ett annat varumärke, annan sidstorlek eller kategori."
 
-#: ../src/media-select.c:1179
+#: ../src/media-select.c:1180
 msgid "No custom templates found."
 msgstr "Inga anpassade mallar hittades."
 
-#: ../src/media-select.c:1181
+#: ../src/media-select.c:1182
 msgid ""
 "You may create new templates or try searching for pre-defined templates in "
 "the \"Search all\" tab."
@@ -2962,7 +2962,7 @@ msgstr "Märketiketter"
 #. TODO: What is the actual part #?
 #. ===================================================================
 #: ../templates/ascom-iso-templates.xml.h:2
-#: ../templates/avery-iso-templates.xml.h:34
+#: ../templates/avery-iso-templates.xml.h:36
 #: ../templates/databecker-iso-templates.xml.h:10
 #: ../templates/hama-iso-templates.xml.h:29
 #: ../templates/herma-iso-templates.xml.h:18
@@ -2983,7 +2983,7 @@ msgstr "Ryggetiketter för VHS-band"
 #. ===================================================================
 #. ===============================================================
 #: ../templates/ascom-iso-templates.xml.h:8
-#: ../templates/avery-iso-templates.xml.h:26
+#: ../templates/avery-iso-templates.xml.h:28
 #: ../templates/zweckform-iso-templates.xml.h:26
 msgid "CD Inlet"
 msgstr "CD-inlagor"
@@ -3025,9 +3025,9 @@ msgstr "Leveransetiketter"
 #. ********************************************************************
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:12
-#: ../templates/avery-iso-templates.xml.h:14
+#: ../templates/avery-iso-templates.xml.h:16
 #: ../templates/databecker-iso-templates.xml.h:6
-#: ../templates/dymo-other-templates.xml.h:14
+#: ../templates/dymo-other-templates.xml.h:16
 #: ../templates/geha-iso-templates.xml.h:25
 #: ../templates/maco-us-templates.xml.h:2
 #: ../templates/meritline-us-templates.xml.h:4
@@ -3059,7 +3059,7 @@ msgstr "Runda etiketter"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:18
-#: ../templates/avery-iso-templates.xml.h:20
+#: ../templates/avery-iso-templates.xml.h:22
 #: ../templates/meritline-us-templates.xml.h:14
 #: ../templates/sheetlabels-us-templates.xml.h:18
 #: ../templates/worldlabel-us-templates.xml.h:8
@@ -3084,7 +3084,7 @@ msgstr "Märketiketter"
 #. TODO: Is this the actual part #?
 #. ============================================================
 #: ../templates/avery-us-templates.xml.h:24
-#: ../templates/avery-iso-templates.xml.h:18
+#: ../templates/avery-iso-templates.xml.h:20
 #: ../templates/databecker-iso-templates.xml.h:2
 #: ../templates/dataline-iso-templates.xml.h:4
 #: ../templates/decadry-iso-templates.xml.h:6
@@ -3183,12 +3183,24 @@ msgid "Self-Adhesive Name Badges (Acetate Silk)"
 msgstr "Självhäftande namnbrickor (Acetatsilke)"
 
 #. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#. OL6075
 #: ../templates/avery-iso-templates.xml.h:8
+#: ../templates/dataline-iso-templates.xml.h:2
+#: ../templates/hama-iso-templates.xml.h:35
+#: ../templates/misc-iso-templates.xml.h:34
+#: ../templates/online-templates.xml.h:83
+msgid "CD/DVD labels"
+msgstr "CD/DVD-etiketter"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:10
 msgid "Allround labels"
 msgstr "Universaletiketter"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:10
+#: ../templates/avery-iso-templates.xml.h:12
 #: ../templates/decadry-iso-templates.xml.h:2
 #: ../templates/misc-iso-templates.xml.h:14
 #: ../templates/online-templates.xml.h:21
@@ -3196,22 +3208,22 @@ msgid "Mailing labels"
 msgstr "Försändelseetiketter"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:12
-#: ../templates/dymo-other-templates.xml.h:6
+#: ../templates/avery-iso-templates.xml.h:14
+#: ../templates/dymo-other-templates.xml.h:8
 #: ../templates/misc-iso-templates.xml.h:12
 #: ../templates/online-templates.xml.h:53
 msgid "Address labels"
 msgstr "Adressetiketter"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:16
+#: ../templates/avery-iso-templates.xml.h:18
 #: ../templates/hisago-templates.xml.h:6 ../templates/online-templates.xml.h:26
 msgid "Shipping labels"
 msgstr "Leveransetiketter"
 
 #. ===============================================================
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:22
+#: ../templates/avery-iso-templates.xml.h:24
 #: ../templates/decadry-iso-templates.xml.h:4
 #: ../templates/herma-iso-templates.xml.h:8
 #: ../templates/misc-us-templates.xml.h:21
@@ -3222,24 +3234,24 @@ msgid "Mailing Labels"
 msgstr "Försändelseetiketter"
 
 #. ===============================================================
-#: ../templates/avery-iso-templates.xml.h:24
+#: ../templates/avery-iso-templates.xml.h:26
 #: ../templates/zweckform-iso-templates.xml.h:24
 msgid "CD Booklet"
 msgstr "CD-häfte"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:28
+#: ../templates/avery-iso-templates.xml.h:30
 msgid "Mini Address Labels"
 msgstr "Miniadressetiketter"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:30
+#: ../templates/avery-iso-templates.xml.h:32
 msgid "Identification Labels"
 msgstr "ID-etiketter"
 
 #. ===================================================================
 #. ====================================================================
-#: ../templates/avery-iso-templates.xml.h:32
+#: ../templates/avery-iso-templates.xml.h:34
 #: ../templates/hama-iso-templates.xml.h:31
 msgid "Diskette labels"
 msgstr "Diskettetiketter"
@@ -3336,17 +3348,6 @@ msgid "CD Labels"
 msgstr "CD-etiketter"
 
 #. ===================================================================
-#. ====================================================================
-#. ===================================================================
-#. OL6075
-#: ../templates/dataline-iso-templates.xml.h:2
-#: ../templates/hama-iso-templates.xml.h:35
-#: ../templates/misc-iso-templates.xml.h:34
-#: ../templates/online-templates.xml.h:83
-msgid "CD/DVD labels"
-msgstr "CD/DVD-etiketter"
-
-#. ===================================================================
 #: ../templates/dataline-iso-templates.xml.h:8
 #: ../templates/pearl-iso-templates.xml.h:60
 msgid "Membership cards"
@@ -3358,28 +3359,33 @@ msgid "Multipurpose Labels"
 msgstr "Flerfunktionsetiketter"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:8
+#: ../templates/dymo-other-templates.xml.h:6
+msgid "Small Name Badge Labels"
+msgstr "Små namnbrickor"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:10
 msgid "File Folder"
 msgstr "Dokumentmapp"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:10
+#: ../templates/dymo-other-templates.xml.h:12
 msgid "Name Badges"
 msgstr "Namnbrickor"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:12
+#: ../templates/dymo-other-templates.xml.h:14
 msgid "Hanging Folder"
 msgstr "Hängmapp"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:16
+#: ../templates/dymo-other-templates.xml.h:18
 #: ../templates/geha-iso-templates.xml.h:23
 msgid "Large Address Labels"
 msgstr "Stora adressetiketter"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:18
+#: ../templates/dymo-other-templates.xml.h:20
 msgid "Shipping Address Labels"
 msgstr "Försändelseetiketter"
 
