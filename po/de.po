@@ -2,15 +2,15 @@
 # Copyright (C) 2001-2011 Jim Evins <evins@snaught.com>
 # Marcus Bauer <m@7n7.de>, 2001.
 # Christian Neumair <christian-neumair@web.de>, 2002.
-# Mario Blättermann <mario.blaettermann@gmail.com>, 2008-2017.
+# Mario Blättermann <mario.blaettermann@gmail.com>, 2008-2018.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=glabels&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-07-16 01:24+0000\n"
-"PO-Revision-Date: 2017-07-24 10:09+0200\n"
+"POT-Creation-Date: 2018-04-18 20:40+0000\n"
+"PO-Revision-Date: 2018-04-22 15:53+0200\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.2\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../src/bc-backends.c:81
 msgid "Built-in"
@@ -1021,13 +1021,13 @@ msgctxt "Brand"
 msgid "Any"
 msgstr "Beliebig"
 
-#: ../src/media-select.c:365 ../src/media-select.c:893
+#: ../src/media-select.c:365 ../src/media-select.c:894
 msgctxt "Page size"
 msgid "Any"
 msgstr "Beliebig"
 
 #: ../src/media-select.c:372 ../src/media-select.c:375
-#: ../src/media-select.c:902
+#: ../src/media-select.c:903
 msgctxt "Category"
 msgid "Any"
 msgstr "Beliebig"
@@ -1041,31 +1041,31 @@ msgstr "Vorlagen »%s« löschen?"
 msgid "This action will permanently delete this template."
 msgstr "Dadurch wird diese Vorlage dauerhaft gelöscht."
 
-#: ../src/media-select.c:990
+#: ../src/media-select.c:991
 msgid "No recent templates found."
 msgstr "Keine zuletzt benutzte Vorlagen gefunden"
 
-#: ../src/media-select.c:992
+#: ../src/media-select.c:993
 msgid "Try selecting a template in the \"Search all\" tab."
 msgstr ""
 "Bitte versuchen Sie, eine Vorlage im Reiter »Alle durchsuchen« auszuwählen."
 
 #. Translators: "No match" means that for the given template search criteria, there
 #. * were no matches found.
-#: ../src/media-select.c:1083
+#: ../src/media-select.c:1084
 msgid "No match."
 msgstr "Keine Treffer."
 
-#: ../src/media-select.c:1085
+#: ../src/media-select.c:1086
 msgid "Try selecting a different brand, page size or category."
 msgstr ""
 "Versuchen Sie eine andere Marke, Seitengröße oder Kategorie auszuwählen."
 
-#: ../src/media-select.c:1179
+#: ../src/media-select.c:1180
 msgid "No custom templates found."
 msgstr "Keine benutzerdefinierten Vorlage gefunden."
 
-#: ../src/media-select.c:1181
+#: ../src/media-select.c:1182
 msgid ""
 "You may create new templates or try searching for pre-defined templates in "
 "the \"Search all\" tab."
@@ -3044,7 +3044,7 @@ msgstr "Versandetiketten"
 #: ../templates/avery-us-templates.xml.h:12
 #: ../templates/avery-iso-templates.xml.h:16
 #: ../templates/databecker-iso-templates.xml.h:6
-#: ../templates/dymo-other-templates.xml.h:14
+#: ../templates/dymo-other-templates.xml.h:16
 #: ../templates/geha-iso-templates.xml.h:25
 #: ../templates/maco-us-templates.xml.h:2
 #: ../templates/meritline-us-templates.xml.h:4
@@ -3200,8 +3200,15 @@ msgid "Self-Adhesive Name Badges (Acetate Silk)"
 msgstr "Selbstklebende Namensschilder (Acetatseide)"
 
 #. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#. OL6075
 #: ../templates/avery-iso-templates.xml.h:8
-msgid "CD/DVD lables"
+#: ../templates/dataline-iso-templates.xml.h:2
+#: ../templates/hama-iso-templates.xml.h:35
+#: ../templates/misc-iso-templates.xml.h:34
+#: ../templates/online-templates.xml.h:83
+msgid "CD/DVD labels"
 msgstr "CD/DVD-Etiketten"
 
 #. ===================================================================
@@ -3219,7 +3226,7 @@ msgstr "Adressaufkleber"
 
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:14
-#: ../templates/dymo-other-templates.xml.h:6
+#: ../templates/dymo-other-templates.xml.h:8
 #: ../templates/misc-iso-templates.xml.h:12
 #: ../templates/online-templates.xml.h:53
 msgid "Address labels"
@@ -3358,17 +3365,6 @@ msgid "CD Labels"
 msgstr "CD-Aufkleber"
 
 #. ===================================================================
-#. ====================================================================
-#. ===================================================================
-#. OL6075
-#: ../templates/dataline-iso-templates.xml.h:2
-#: ../templates/hama-iso-templates.xml.h:35
-#: ../templates/misc-iso-templates.xml.h:34
-#: ../templates/online-templates.xml.h:83
-msgid "CD/DVD labels"
-msgstr "CD/DVD-Etiketten"
-
-#. ===================================================================
 #: ../templates/dataline-iso-templates.xml.h:8
 #: ../templates/pearl-iso-templates.xml.h:60
 msgid "Membership cards"
@@ -3380,28 +3376,33 @@ msgid "Multipurpose Labels"
 msgstr "Mehrzweck-Etiketten"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:8
+#: ../templates/dymo-other-templates.xml.h:6
+msgid "Small Name Badge Labels"
+msgstr "Kleine Namensschild-Etiketten"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:10
 msgid "File Folder"
 msgstr "Aktenordner"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:10
+#: ../templates/dymo-other-templates.xml.h:12
 msgid "Name Badges"
 msgstr "Namensschilder"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:12
+#: ../templates/dymo-other-templates.xml.h:14
 msgid "Hanging Folder"
 msgstr "Hängemappe"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:16
+#: ../templates/dymo-other-templates.xml.h:18
 #: ../templates/geha-iso-templates.xml.h:23
 msgid "Large Address Labels"
 msgstr "Große Adressaufkleber"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:18
+#: ../templates/dymo-other-templates.xml.h:20
 msgid "Shipping Address Labels"
 msgstr "Versand-Adressaufkleber"
 
