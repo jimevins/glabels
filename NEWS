@@ -1,4 +1,36 @@
-* gLabels 3.4.0 (stable) release.  Release data 2016-04-24
+* gLabels 3.4.1 (stable) release.  Release date 2018-04-28
+
+- Fixed crash when providing invalid file on command line (Clemens Fries)
+- Fixed crash of glabels-batch due to missing function prototype (me)
+- Added "Language" headers to po files (Piotr Drag)
+- Fixed wrapping issue with text objects when auto_shrink is enabled (me)
+- Fixed out-of-bounds read in text_nodes (Clemens Fries)
+- Fixed crash when searching select product combo boxes (Clemens Fries)
+- Fixed portability issue to signedness of char type (me)
+- New templates
+- Updated UI translations:
+    Mario Blättermann (de)
+    Marek Černocký (cs)
+    Rafael Fontenelle (pt_BR)
+    Jiri Grönroos (fi)
+    Joe Hansen (da)
+    Мирослав Николић (sr) (sr@latin)
+    Anders Jonsson (sv)
+    Dušan Kazik (sk)
+    Rūdolfs Mazurs (lv)
+    Balázs Meskó (hu)
+    Daniel Mustieles (es)
+    Claude Paroz (fr)
+    Tiago Santos (pt)
+    Kristjan SCHMIDT (eo)
+    Andika Triwidada (id)
+    Cédric Valmary (oc)
+- Updated Doc translations
+    Claude Paroz (fr)
+
+
+* gLabels 3.4.0 (stable) release.  Release date 2016-04-24
+
 - Fixed missing contacts when importing from vcard (Tim Waugh)
 - Create vcard composite address entry from components, if missing (Tim Waugh)
 - Auto-detect file encoding of CSV files (Jim Patterson)

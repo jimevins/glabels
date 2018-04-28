@@ -6,7 +6,7 @@ dnl - GLABELS version
 dnl ---------------------------------------------------------------------------
 m4_define([glabels_major_version], [3])
 m4_define([glabels_minor_version], [4])
-m4_define([glabels_micro_version], [0])
+m4_define([glabels_micro_version], [1])
 
 m4_define([glabels_version],
           [glabels_major_version.glabels_minor_version.glabels_micro_version])
