@@ -1,15 +1,15 @@
 # Spanish translation of glabels.
 # sergio rivadero <sergiorivadero@argentina.com>, 2005.
 # Jorge González <jorgegonz@svn.gnome.org>, 2010.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011, 2012, 2014, 2015, 2016.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011, 2012, 2014, 2015, 2016, 2018.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=glabels&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-10-24 09:29+0000\n"
-"PO-Revision-Date: 2016-12-22 12:32+0100\n"
+"POT-Creation-Date: 2018-04-23 00:16+0000\n"
+"PO-Revision-Date: 2018-05-29 10:19+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -1017,13 +1017,13 @@ msgctxt "Brand"
 msgid "Any"
 msgstr "Cualquiera"
 
-#: ../src/media-select.c:365 ../src/media-select.c:893
+#: ../src/media-select.c:365 ../src/media-select.c:894
 msgctxt "Page size"
 msgid "Any"
 msgstr "Cualquiera"
 
 #: ../src/media-select.c:372 ../src/media-select.c:375
-#: ../src/media-select.c:902
+#: ../src/media-select.c:903
 msgctxt "Category"
 msgid "Any"
 msgstr "Cualquiera"
@@ -1037,29 +1037,29 @@ msgstr "¿Eliminar la plantilla «%s»?"
 msgid "This action will permanently delete this template."
 msgstr "Esta acción eliminará esta plantilla permanentemente."
 
-#: ../src/media-select.c:990
+#: ../src/media-select.c:991
 msgid "No recent templates found."
 msgstr "No se encontraron plantillas recientes."
 
-#: ../src/media-select.c:992
+#: ../src/media-select.c:993
 msgid "Try selecting a template in the \"Search all\" tab."
 msgstr "Inténtelo seleccionando una plantilla en la pestaña «Buscar todo."
 
 #. Translators: "No match" means that for the given template search criteria, there
 #. * were no matches found.
-#: ../src/media-select.c:1083
+#: ../src/media-select.c:1084
 msgid "No match."
 msgstr "Sin coincidencia."
 
-#: ../src/media-select.c:1085
+#: ../src/media-select.c:1086
 msgid "Try selecting a different brand, page size or category."
 msgstr "Intente seleccionar otra marca, tamaño de página o categoría."
 
-#: ../src/media-select.c:1179
+#: ../src/media-select.c:1180
 msgid "No custom templates found."
 msgstr "No se encontraron plantillas personalizadas."
 
-#: ../src/media-select.c:1181
+#: ../src/media-select.c:1182
 msgid ""
 "You may create new templates or try searching for pre-defined templates in "
 "the \"Search all\" tab."
@@ -2973,7 +2973,7 @@ msgstr "Etiquetas para archivado"
 #. TODO: What is the actual part #?
 #. ===================================================================
 #: ../templates/ascom-iso-templates.xml.h:2
-#: ../templates/avery-iso-templates.xml.h:34
+#: ../templates/avery-iso-templates.xml.h:36
 #: ../templates/databecker-iso-templates.xml.h:10
 #: ../templates/hama-iso-templates.xml.h:29
 #: ../templates/herma-iso-templates.xml.h:18
@@ -2994,7 +2994,7 @@ msgstr "Etiquetas de video (lateral)"
 #. ===================================================================
 #. ===============================================================
 #: ../templates/ascom-iso-templates.xml.h:8
-#: ../templates/avery-iso-templates.xml.h:26
+#: ../templates/avery-iso-templates.xml.h:28
 #: ../templates/zweckform-iso-templates.xml.h:26
 msgid "CD Inlet"
 msgstr "Interior de CD"
@@ -3036,9 +3036,9 @@ msgstr "Etiquetas de envío"
 #. ********************************************************************
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:12
-#: ../templates/avery-iso-templates.xml.h:14
+#: ../templates/avery-iso-templates.xml.h:16
 #: ../templates/databecker-iso-templates.xml.h:6
-#: ../templates/dymo-other-templates.xml.h:14
+#: ../templates/dymo-other-templates.xml.h:16
 #: ../templates/geha-iso-templates.xml.h:25
 #: ../templates/maco-us-templates.xml.h:2
 #: ../templates/meritline-us-templates.xml.h:4
@@ -3070,7 +3070,7 @@ msgstr "Etiquetas redondeadas"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:18
-#: ../templates/avery-iso-templates.xml.h:20
+#: ../templates/avery-iso-templates.xml.h:22
 #: ../templates/meritline-us-templates.xml.h:14
 #: ../templates/sheetlabels-us-templates.xml.h:18
 #: ../templates/worldlabel-us-templates.xml.h:8
@@ -3095,7 +3095,7 @@ msgstr "Etiquetas para archivado"
 #. TODO: Is this the actual part #?
 #. ============================================================
 #: ../templates/avery-us-templates.xml.h:24
-#: ../templates/avery-iso-templates.xml.h:18
+#: ../templates/avery-iso-templates.xml.h:20
 #: ../templates/databecker-iso-templates.xml.h:2
 #: ../templates/dataline-iso-templates.xml.h:4
 #: ../templates/decadry-iso-templates.xml.h:6
@@ -3194,12 +3194,24 @@ msgid "Self-Adhesive Name Badges (Acetate Silk)"
 msgstr "Distintivos autoadhesivos (acetato de seda)"
 
 #. ===================================================================
+#. ====================================================================
+#. ===================================================================
+#. OL6075
 #: ../templates/avery-iso-templates.xml.h:8
+#: ../templates/dataline-iso-templates.xml.h:2
+#: ../templates/hama-iso-templates.xml.h:35
+#: ../templates/misc-iso-templates.xml.h:34
+#: ../templates/online-templates.xml.h:83
+msgid "CD/DVD labels"
+msgstr "Etiquetas de CD/DVD"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:10
 msgid "Allround labels"
 msgstr "Etiquetas redondas"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:10
+#: ../templates/avery-iso-templates.xml.h:12
 #: ../templates/decadry-iso-templates.xml.h:2
 #: ../templates/misc-iso-templates.xml.h:14
 #: ../templates/online-templates.xml.h:21
@@ -3207,15 +3219,15 @@ msgid "Mailing labels"
 msgstr "Etiquetas de correo"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:12
-#: ../templates/dymo-other-templates.xml.h:6
+#: ../templates/avery-iso-templates.xml.h:14
+#: ../templates/dymo-other-templates.xml.h:8
 #: ../templates/misc-iso-templates.xml.h:12
 #: ../templates/online-templates.xml.h:53
 msgid "Address labels"
 msgstr "Etiquetas de dirección"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:16
+#: ../templates/avery-iso-templates.xml.h:18
 #: ../templates/hisago-templates.xml.h:6
 #: ../templates/online-templates.xml.h:26
 msgid "Shipping labels"
@@ -3223,7 +3235,7 @@ msgstr "Etiquetas de envío"
 
 #. ===============================================================
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:22
+#: ../templates/avery-iso-templates.xml.h:24
 #: ../templates/decadry-iso-templates.xml.h:4
 #: ../templates/herma-iso-templates.xml.h:8
 #: ../templates/misc-us-templates.xml.h:21
@@ -3234,24 +3246,24 @@ msgid "Mailing Labels"
 msgstr "Etiquetas de correo"
 
 #. ===============================================================
-#: ../templates/avery-iso-templates.xml.h:24
+#: ../templates/avery-iso-templates.xml.h:26
 #: ../templates/zweckform-iso-templates.xml.h:24
 msgid "CD Booklet"
 msgstr "Tapa de CD"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:28
+#: ../templates/avery-iso-templates.xml.h:30
 msgid "Mini Address Labels"
 msgstr "Etiquetas de dirección pequeñas"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:30
+#: ../templates/avery-iso-templates.xml.h:32
 msgid "Identification Labels"
 msgstr "Etiquetas de identificación"
 
 #. ===================================================================
 #. ====================================================================
-#: ../templates/avery-iso-templates.xml.h:32
+#: ../templates/avery-iso-templates.xml.h:34
 #: ../templates/hama-iso-templates.xml.h:31
 msgid "Diskette labels"
 msgstr "Etiquetas de disquette"
@@ -3348,17 +3360,6 @@ msgid "CD Labels"
 msgstr "Etiquetas para CD"
 
 #. ===================================================================
-#. ====================================================================
-#. ===================================================================
-#. OL6075
-#: ../templates/dataline-iso-templates.xml.h:2
-#: ../templates/hama-iso-templates.xml.h:35
-#: ../templates/misc-iso-templates.xml.h:34
-#: ../templates/online-templates.xml.h:83
-msgid "CD/DVD labels"
-msgstr "Etiquetas de CD/DVD"
-
-#. ===================================================================
 #: ../templates/dataline-iso-templates.xml.h:8
 #: ../templates/pearl-iso-templates.xml.h:60
 msgid "Membership cards"
@@ -3370,28 +3371,34 @@ msgid "Multipurpose Labels"
 msgstr "Etiquetas multipropósito"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:8
+#: ../templates/dymo-other-templates.xml.h:6
+#| msgid "Name Badge Labels"
+msgid "Small Name Badge Labels"
+msgstr "Etiquetas con insignias de nombre pequeño"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:10
 msgid "File Folder"
 msgstr "Carpeta de archivos"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:10
+#: ../templates/dymo-other-templates.xml.h:12
 msgid "Name Badges"
 msgstr "Etiquetas de distintivos"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:12
+#: ../templates/dymo-other-templates.xml.h:14
 msgid "Hanging Folder"
 msgstr "Carpeta pendiente"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:16
+#: ../templates/dymo-other-templates.xml.h:18
 #: ../templates/geha-iso-templates.xml.h:23
 msgid "Large Address Labels"
 msgstr "Etiquetas grandes de dirección"
 
 #. ===================================================================
-#: ../templates/dymo-other-templates.xml.h:18
+#: ../templates/dymo-other-templates.xml.h:20
 msgid "Shipping Address Labels"
 msgstr "Etiquetas de dirección para transporte"
 
@@ -3729,10 +3736,12 @@ msgstr "Etiketten"
 #: ../templates/online-templates.xml.h:1
 msgid "SD Card labels, library book labels, classification labels"
 msgstr ""
+"Etiquetas de tarjetas SD, etiquetas de libros de la biblioteca, etiquetas de "
+"clasificación"
 
 #: ../templates/online-templates.xml.h:2
 msgid "Jar labels, candle labels"
-msgstr ""
+msgstr "Etiquetas de tarro, etiquetas de vela"
 
 #: ../templates/online-templates.xml.h:3
 msgid "Barcode labels"
@@ -3740,7 +3749,7 @@ msgstr "Etiquetas de código de barras"
 
 #: ../templates/online-templates.xml.h:4
 msgid "Classification labels, library book labels"
-msgstr ""
+msgstr "Etiquetas de clasificación, etiquetas de libros de la biblioteca"
 
 #: ../templates/online-templates.xml.h:5
 msgid "Water bottle labels"
@@ -3748,21 +3757,19 @@ msgstr "Etiquetas de botella de agua"
 
 #: ../templates/online-templates.xml.h:6
 msgid "Jar labels, pot labels, candle labels"
-msgstr ""
+msgstr "Etiquetas de tarro, etiquetas de bote, etiquetas de vela"
 
 #. OL120
 #: ../templates/online-templates.xml.h:9
-#, fuzzy
 #| msgid "Rectangular labels"
 msgid "Medical chart labels"
-msgstr "Etiquetas rectangulares"
+msgstr "Etiquetas de cartas médicas"
 
 #. OL8325
 #: ../templates/online-templates.xml.h:11
-#, fuzzy
 #| msgid "Microtube labels"
 msgid "Lip balm tube labels"
-msgstr "Etiquetas microtubo"
+msgstr "Etiquetas para tubo de bálsamo labial"
 
 #. OL2162
 #: ../templates/online-templates.xml.h:13
@@ -3772,10 +3779,12 @@ msgstr "Etiquetas de dirección de remitente"
 #: ../templates/online-templates.xml.h:14
 msgid "File labels, return address labels, medical chart labels"
 msgstr ""
+"Etiquetas de archivo, etiquetas de dirección de devolución, etiquetas de "
+"cartas médicas"
 
 #: ../templates/online-templates.xml.h:15
 msgid "Jar labels, nutritional labels"
-msgstr ""
+msgstr "Etiquetas de tarro, etiquetas nutricionales"
 
 #: ../templates/online-templates.xml.h:16
 msgid "Jar labels"
@@ -3783,7 +3792,7 @@ msgstr "Etiquetas para jarras"
 
 #: ../templates/online-templates.xml.h:18
 msgid "Wine bottle labels, nutritional labels"
-msgstr ""
+msgstr "Etiquetas de botellas de vino, etiquetas nutricionales"
 
 #. OL1102
 #: ../templates/online-templates.xml.h:20
@@ -3792,7 +3801,7 @@ msgstr "Etiquetas de vídeo digital"
 
 #: ../templates/online-templates.xml.h:22
 msgid "Pot labels, coffee and tea labels"
-msgstr ""
+msgstr "Etiquetas de bote, café y té"
 
 #: ../templates/online-templates.xml.h:23
 msgid "Candy labels"
@@ -3800,23 +3809,24 @@ msgstr "Etiquetas de caramelos"
 
 #: ../templates/online-templates.xml.h:24
 msgid "Reverse automobile window stickers"
-msgstr ""
+msgstr "Pegatinas inversas de ventanilla del coche"
 
 #: ../templates/online-templates.xml.h:25
 msgid "Jar labels, candy labels, nutritional labels"
-msgstr ""
+msgstr "Etiquetas de tarro, etiquetas de dulces, etiquetas nutricionales"
 
 #: ../templates/online-templates.xml.h:27
 msgid "Address labels, barcode labels, candy labels"
 msgstr ""
+"Etiquetas de direcciones, etiquetas de códigos de barras, etiquetas de dulces"
 
 #: ../templates/online-templates.xml.h:29
 msgid "VHS face labels, nutritional labels"
-msgstr ""
+msgstr "Etiquetas de VHS, etiquetas nutricionales"
 
 #: ../templates/online-templates.xml.h:30
 msgid "Jar labels, pot labels, nutritional labels"
-msgstr ""
+msgstr "Etiquetas de tarro, etiquetas de bote, etiquetas nutricionales"
 
 #: ../templates/online-templates.xml.h:31
 msgid "File folder labels"
@@ -3824,11 +3834,11 @@ msgstr "Etiquetas de carpetas de archivos"
 
 #: ../templates/online-templates.xml.h:32
 msgid "Metal tin container labels, nutritional labels"
-msgstr ""
+msgstr "Etiquetas de envases metálicos, etiquetas nutricionales"
 
 #: ../templates/online-templates.xml.h:33
 msgid "Bookplate labels, coffee and tea labels"
-msgstr ""
+msgstr "Etiquetas Bookplate, etiquetas de café y té"
 
 #: ../templates/online-templates.xml.h:34
 msgid "Amazon FBA shipping labels"
@@ -3836,11 +3846,11 @@ msgstr "Etiquetas de envío de Amazon FBA"
 
 #: ../templates/online-templates.xml.h:35
 msgid "Jar labels, coffee and tea labels, nutritional labels"
-msgstr ""
+msgstr "Etiquetas de tarro, etiquetas de café y té, etiquetas nutricionales"
 
 #: ../templates/online-templates.xml.h:36
 msgid "Jar labels, pot labels, coffee and tea labels"
-msgstr ""
+msgstr "Etiquetas de tarro, etiquetas de bote, etiquetas de café y té"
 
 #: ../templates/online-templates.xml.h:37
 msgid "Digital media labels"
@@ -3848,27 +3858,25 @@ msgstr "Etiquetas de medios digitales"
 
 #: ../templates/online-templates.xml.h:38
 msgid "Jar labels, Coffee and tea labels"
-msgstr ""
+msgstr "Etiquetas de tarro, etiquetas de café y té"
 
 #: ../templates/online-templates.xml.h:39
 msgid "Wine bottle labels"
 msgstr "Etiquetas de botella de vino"
 
 #: ../templates/online-templates.xml.h:40
-#, fuzzy
 #| msgid "Mailing labels"
 msgid "Mail Order Manager labels"
-msgstr "Etiquetas de correo"
+msgstr "Etiquetas del administrador de pedidos por correo"
 
 #: ../templates/online-templates.xml.h:41
 msgid "Liquor bottle labels"
 msgstr "Etiquetas de botella de licor"
 
 #: ../templates/online-templates.xml.h:42
-#, fuzzy
 #| msgid "Microtube labels"
 msgid "Metal tin container labels"
-msgstr "Etiquetas microtubo"
+msgstr "Etiquetas para envases metálicos"
 
 #: ../templates/online-templates.xml.h:43
 msgid "Hershey's® chocolate labels"
@@ -3884,7 +3892,7 @@ msgstr "Etiquetas de envío de USPS®"
 
 #: ../templates/online-templates.xml.h:46
 msgid "Jar labels, candle labels, metal tin container labels"
-msgstr ""
+msgstr "Etiquetas de tarro, etiquetas de velas, etiquetas de latas metálicas"
 
 #: ../templates/online-templates.xml.h:47
 msgid "Jar labels, water bottle labels"
@@ -3893,6 +3901,8 @@ msgstr "Etiquetas de jarras o botellas de agua"
 #: ../templates/online-templates.xml.h:48
 msgid "Jar labels, water bottle labels, wine bottle labels"
 msgstr ""
+"Etiquetas de tarro, etiquetas de botellas de agua, etiquetas de botellas de "
+"vino"
 
 #: ../templates/online-templates.xml.h:49
 msgid "PayPal® label"
@@ -3900,15 +3910,15 @@ msgstr "Etiqueta de PayPal®"
 
 #: ../templates/online-templates.xml.h:50
 msgid "Water bottle labels, jar labels, candle labels"
-msgstr ""
+msgstr "Etiquetas de botellas de agua, etiquetas de tarro, etiquetas de vela"
 
 #: ../templates/online-templates.xml.h:51
 msgid "Medical chart labels, barcode labels"
-msgstr ""
+msgstr "Etiquetas de cartas médicas, etiquetas de códigos de barras"
 
 #: ../templates/online-templates.xml.h:52
 msgid "Pot labels, barcode labels"
-msgstr ""
+msgstr "Etiquetas de bote, etiquetas de código de barras"
 
 #: ../templates/online-templates.xml.h:54
 msgid "Nutritional labels"
@@ -3919,18 +3929,19 @@ msgid "CD case labels"
 msgstr "Etiquetas de caja de CD"
 
 #: ../templates/online-templates.xml.h:56
-#, fuzzy
 #| msgid "Business card CD Labels"
 msgid "Business card size labels"
-msgstr "Etiquetas de CD-tarjeta"
+msgstr "Etiquetas tamaño tarjeta de visita"
 
 #: ../templates/online-templates.xml.h:57
 msgid "Reverse addendum stickers"
-msgstr ""
+msgstr "Pegatinas de addendum inversa"
 
 #: ../templates/online-templates.xml.h:58
 msgid "Wine bottle labels, shipping labels, UPS® WorldShip® labels"
 msgstr ""
+"Etiquetas de botellas de vino, etiquetas de envío, etiquetas de UPS® "
+"WorldShip®"
 
 #: ../templates/online-templates.xml.h:59
 msgid "Coffee and tea labels"
@@ -3938,17 +3949,16 @@ msgstr "Etiquetas de café y té"
 
 #: ../templates/online-templates.xml.h:60
 msgid "Water bottle labels, shipping labels"
-msgstr ""
+msgstr "Etiquetas de botellas de agua, etiquetas de envío"
 
 #: ../templates/online-templates.xml.h:61
 msgid "VICS labels"
 msgstr "Etiquetas VICS"
 
 #: ../templates/online-templates.xml.h:62
-#, fuzzy
 #| msgid "Full Sheet Labels"
 msgid "Full sheet labels with back slit"
-msgstr "Etiquetas de página completa"
+msgstr "Etiquetas de hoja completa con ranura trasera"
 
 #: ../templates/online-templates.xml.h:63
 msgid "Full sheet labels"
@@ -3960,63 +3970,68 @@ msgstr "Etiquetas de bálsamo labial"
 
 #: ../templates/online-templates.xml.h:65
 msgid "Paper hole reinforcement labels"
-msgstr ""
+msgstr "Etiquetas de refuerzo de orificio de papel"
 
 #: ../templates/online-templates.xml.h:68
 msgid "Candle labels, lip balm labels"
-msgstr ""
+msgstr "Etiquetas de velas, etiquetas de bálsamo labial"
 
 #: ../templates/online-templates.xml.h:69
-#, fuzzy
 #| msgid "Square labels"
 msgid "Seal labels"
-msgstr "Etiquetas cuadradas"
+msgstr "Etiquetas de sello"
 
 #: ../templates/online-templates.xml.h:70
 msgid "Jar labels, candle labels, lip balm labels"
-msgstr ""
+msgstr "Etiquetas de tarro, etiquetas de vela, etiquetas de bálsamo labial"
 
 #: ../templates/online-templates.xml.h:71
 msgid "Jar labels, nutritional labels, pot labels, soap labels"
 msgstr ""
+"Etiquetas de tarro, etiquetas nutricionales, etiquetas de bote, etiquetas de "
+"jabón"
 
 #: ../templates/online-templates.xml.h:72
 msgid ""
 "Jar labels, nutritional labels, soap labels, candle labels, coffee and tea "
 "labels"
 msgstr ""
+"Etiquetas de tarro, etiquetas nutricionales, etiquetas de jabón, etiquetas "
+"de velas, etiquetas de café y té"
 
 #: ../templates/online-templates.xml.h:73
 msgid "Jar labels, candle labels, nutritional labels"
-msgstr ""
+msgstr "Etiquetas de tarro, velas etiquetas, etiquetas nutricionales"
 
 #: ../templates/online-templates.xml.h:74
 msgid "Nutritional labels, soap labels, coffee and tea labels, candle labels"
 msgstr ""
+"Etiquetas nutricionales, etiquetas de jabón, etiquetas de café y té, "
+"etiquetas de velas"
 
 #: ../templates/online-templates.xml.h:75
 msgid "Beer bottle labels, jar labels, nutritional labels, soap labels"
 msgstr ""
+"Etiquetas de botella de cerveza, etiquetas de tarro, etiquetas "
+"nutricionales, etiquetas de jabón"
 
 #: ../templates/online-templates.xml.h:76
 msgid "Beer bottle label, jar label"
-msgstr ""
+msgstr "Etiqueta de la botella de cerveza, etiqueta de jarra"
 
 #: ../templates/online-templates.xml.h:77
-#, fuzzy
 #| msgid "Fridge Magnet Stickers"
 msgid "Target stickers"
-msgstr "Pegatinas magnéticas para frigorífico"
+msgstr "Pegatinas de destino"
 
 #: ../templates/online-templates.xml.h:78
 msgid "Round and rectangular labels"
 msgstr "Etiquetas rectangulares y redondeadas"
 
 #: ../templates/online-templates.xml.h:79
-#, fuzzy
 #| msgid "CD/DVD labels"
 msgid "CD/DVD center hub labels"
-msgstr "Etiquetas de CD/DVD"
+msgstr "Etiquetas del centro de CD / DVD"
 
 #: ../templates/online-templates.xml.h:80
 msgid "Business card CD labels"
@@ -4027,10 +4042,9 @@ msgid "Mini CD labels"
 msgstr "Etiquetas de Mini-CD"
 
 #: ../templates/online-templates.xml.h:84
-#, fuzzy
 #| msgid "CD/DVD labels"
 msgid "Full face CD/DVD labels"
-msgstr "Etiquetas de CD/DVD"
+msgstr "Etiquetas de CD/DVD completas"
 
 #: ../templates/online-templates.xml.h:85
 msgid "eBay® shipping labels"
