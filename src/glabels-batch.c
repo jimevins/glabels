@@ -44,6 +44,7 @@ static gint     n_sheets         = 1;
 static gint     first            = 1;
 static gboolean outline_flag     = FALSE;
 static gboolean reverse_flag     = FALSE;
+static gboolean collate_flag     = FALSE;
 static gboolean crop_marks_flag  = FALSE;
 static gchar    *input           = NULL;
 static gchar    **remaining_args = NULL;
@@ -60,6 +61,8 @@ static GOptionEntry option_entries[] = {
         {"outline", 'l', 0, G_OPTION_ARG_NONE, &outline_flag,
          N_("print outlines (to test printer alignment)"), NULL},
         {"reverse", 'r', 0, G_OPTION_ARG_NONE, &reverse_flag,
+         N_("print in reverse (i.e. a mirror image)"), NULL},
+        {"collate", 'a', 0, G_OPTION_ARG_NONE, &collate_flag,
          N_("print in reverse (i.e. a mirror image)"), NULL},
         {"cropmarks", 'C', 0, G_OPTION_ARG_NONE, &crop_marks_flag,
          N_("print crop marks"), NULL},
@@ -162,6 +165,7 @@ main (int argc, char **argv)
                         gl_print_op_set_first           (print_op, first);
                         gl_print_op_set_outline_flag    (print_op, outline_flag);
                         gl_print_op_set_reverse_flag    (print_op, reverse_flag);
+                        gl_print_op_set_collate_flag    (print_op, collate_flag);
                         gl_print_op_set_crop_marks_flag (print_op, crop_marks_flag);
                         if (merge)
                         {
