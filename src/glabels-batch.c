@@ -63,7 +63,7 @@ static GOptionEntry option_entries[] = {
         {"reverse", 'r', 0, G_OPTION_ARG_NONE, &reverse_flag,
          N_("print in reverse (i.e. a mirror image)"), NULL},
         {"collate", 'a', 0, G_OPTION_ARG_NONE, &collate_flag,
-         N_("print in reverse (i.e. a mirror image)"), NULL},
+         N_("collate if more copies are present (e.g. to print same label on one page)"), NULL},
         {"cropmarks", 'C', 0, G_OPTION_ARG_NONE, &crop_marks_flag,
          N_("print crop marks"), NULL},
         {"input", 'i', 0, G_OPTION_ARG_STRING, &input,
