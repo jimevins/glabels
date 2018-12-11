@@ -99,6 +99,17 @@
 
 
   <!-- =================================================================== -->
+  <!-- Avery L7110 family: Product Labels, 62 x 42 mm, 20 per sheet        -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="L7110" size="A4" description="Product labels">
+    <Meta category="label"/>
+    <Label-rectangle id="0" width="62mm" height="42mm" round="1mm">
+      <Markup-margin size="1mm"/>
+      <Layout nx="3" ny="6" x0="7mm" y0="10mm" dx="67mm" dy="47mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
   <!-- Avery 6121 family: Allround labels.                                 -->
   <!-- =================================================================== -->
   <Template brand="Avery" part="6121" size="A4" _description="Allround labels">
