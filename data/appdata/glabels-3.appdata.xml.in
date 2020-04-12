@@ -23,7 +23,7 @@
     </_p>
   </description>
   <screenshots>
-    <screenshot height="640" width="881" type="default">
+    <screenshot type="default" height="640" width="881">
       <image>http://glabels.org/images/320-screenshot-main.png</image>
     </screenshot>
   </screenshots>
@@ -34,4 +34,14 @@
   <update_contact>evins_at_snaught.com</update_contact>
   <project_group>GNOME</project_group>
   <translation type="gettext">glabels-3.0</translation>
+  <releases>
+    <release date="2018-04-28" version="3.4.1"/>
+  </releases>
+  <content_rating type="oars-1.1" />
+
+  <!--FIXME: this is a translatable version of project_group-->
+  <_developer_name>The GNOME Project</_developer_name>
+
+  <!--FIXME: where to submit translations-->
+  <url type="translate">https://wiki.gnome.org/TranslationProject</url>
 </component>
