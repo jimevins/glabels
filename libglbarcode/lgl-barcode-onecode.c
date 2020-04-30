@@ -666,9 +666,9 @@ int104_print (Int104  *x)
 
         for ( i = 0; i < 13; i++ )
         {
-                g_print ("%02x ", x->byte[i] & 0xFF);
+                fprintf (stderr, "%02x ", x->byte[i] & 0xFF);
         }
-        g_print ("\n");
+        fprintf (stderr, "\n");
 }
 #endif
 

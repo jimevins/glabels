@@ -782,7 +782,7 @@ gl_media_select_get_name (glMediaSelect *this)
         }
         else
         {
-                g_print ("notebook page = %d\n", page_num);
+                g_error ("notebook page = %d\n", page_num);
                 g_assert_not_reached ();
         }
 

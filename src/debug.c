@@ -122,7 +122,7 @@ gl_debug (glDebugSection  section,
 		msg = g_strdup_vprintf (format, args);
 		va_end (args);
 
-		g_print ("%s:%d (%s) %s\n", file, line, function, msg);
+		g_debug ("%s:%d (%s) %s\n", file, line, function, msg);
 
 		g_free (msg);
 	}

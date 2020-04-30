@@ -356,7 +356,7 @@ gl_text_node_lines_print (GList * lines )
 		for (p_node = (GList *) p_line->data, i_node=0; p_node != NULL;
 		     p_node = p_node->next, i_node++) {
 			text_node = (glTextNode *) p_node->data;
-			g_print( "LINE[%d], NODE[%d] = { %d, \"%s\" }\n",
+			fprintf (stderr,  "LINE[%d], NODE[%d] = { %d, \"%s\" }\n",
 				 i_line, i_node,
 				 text_node->field_flag, text_node->data );
 

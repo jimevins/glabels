@@ -104,7 +104,7 @@ main (int argc, char **argv)
         gtk_parse_args (&argc, &argv);
         if (!g_option_context_parse (option_context, &argc, &argv, &error))
 	{
-	        g_print(_("%s\nRun '%s --help' to see a full list of available command line options.\n"),
+	        fprintf (stderr, _("%s\nRun '%s --help' to see a full list of available command line options.\n"),
 			error->message, argv[0]);
 		g_error_free (error);
 		return 1;
@@ -135,7 +135,8 @@ main (int argc, char **argv)
 
         /* now print the files */
         for (p = file_list; p; p = p->next) {
-                g_print ("LABEL FILE = %s\n", (gchar *) p->data);
+                fprintf (stderr, "LABEL FILE = %s\n", (gchar *) p->data);
+
                 label = gl_xml_label_open (p->data, &status);
 
 
