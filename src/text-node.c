@@ -23,6 +23,7 @@
 #include "text-node.h"
 
 #include <string.h>
+#include <stdio.h>
 
 #include "merge.h"
 

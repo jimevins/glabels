@@ -27,6 +27,7 @@
 #include <pango/pango.h>
 #include <math.h>
 #include <string.h>
+#include <stdio.h>
 
 #include "font-util.h"
 #include "font-history.h"

@@ -30,6 +30,7 @@
 #include <glib.h>
 #include <ctype.h>
 #include <string.h>
+#include <stdio.h>
 
 /*========================================================*/
 /* Private macros and constants.                          */

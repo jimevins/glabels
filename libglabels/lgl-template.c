@@ -28,6 +28,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <math.h>
+#include <stdio.h>
 
 #include "libglabels-private.h"
 
