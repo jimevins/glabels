@@ -744,15 +744,15 @@ lgl_db_print_known_papers (void)
                 lgl_db_init ();
         }
 
-        g_print ("%s():\n", __FUNCTION__);
+        fprintf (stderr, "%s():\n", __FUNCTION__);
         for (p = model->papers; p != NULL; p = p->next)
         {
                 paper = (lglPaper *) p->data;
 
-                g_print ("PAPER id=\"%s\", name=\"%s\", width=%gpts, height=%gpts\n",
+                fprintf (stderr, "PAPER id=\"%s\", name=\"%s\", width=%gpts, height=%gpts\n",
                          paper->id, paper->name, paper->width, paper->height);
         }
-        g_print ("\n");
+        fprintf (stderr, "\n");
 
 }
 
@@ -1143,14 +1143,14 @@ lgl_db_print_known_categories (void)
                 lgl_db_init ();
         }
 
-        g_print ("%s():\n", __FUNCTION__);
+        fprintf (stderr, "%s():\n", __FUNCTION__);
         for (p = model->categories; p != NULL; p = p->next)
         {
                 category = (lglCategory *) p->data;
 
-                g_print ("CATEGORY id=\"%s\", name=\"%s\"\n", category->id, category->name);
+                fprintf (stderr, "CATEGORY id=\"%s\", name=\"%s\"\n", category->id, category->name);
         }
-        g_print ("\n");
+        fprintf (stderr, "\n");
 
 }
 
@@ -1384,15 +1384,15 @@ lgl_db_print_known_vendors (void)
                 lgl_db_init ();
         }
 
-        g_print ("%s():\n", __FUNCTION__);
+        fprintf (stderr, "%s():\n", __FUNCTION__);
         for (p = model->vendors; p != NULL; p = p->next)
         {
                 vendor = (lglVendor *) p->data;
 
-                g_print ("VENDOR name=\"%s\", url=\"%s\"\n",
+                fprintf (stderr, "VENDOR name=\"%s\", url=\"%s\"\n",
                          vendor->name, vendor->url);
         }
-        g_print ("\n");
+        fprintf (stderr, "\n");
 
 }
 
@@ -2097,16 +2097,16 @@ lgl_db_print_known_templates (void)
                 lgl_db_init ();
         }
 
-        g_print ("%s():\n", __FUNCTION__);
+        fprintf (stderr, "%s():\n", __FUNCTION__);
         for (p=model->templates; p!=NULL; p=p->next)
         {
                 template = (lglTemplate *)p->data;
 
-                g_print("TEMPLATE brand=\"%s\", part=\"%s\", description=\"%s\"\n",
+                fprintf (stderr, "TEMPLATE brand=\"%s\", part=\"%s\", description=\"%s\"\n",
                         template->brand, template->part, template->description);
 
         }
-        g_print ("\n");
+        fprintf (stderr, "\n");
 
 }
 

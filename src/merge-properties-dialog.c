@@ -515,7 +515,7 @@ response_cb (glMergePropertiesDialog *dialog,
 	case GTK_RESPONSE_DELETE_EVENT:
 		break;
 	default:
-		g_print ("response = %d", response);
+		g_error ("response = %d", response);
 		g_assert_not_reached ();
 	}
 

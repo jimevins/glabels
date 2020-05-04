@@ -136,7 +136,7 @@ gl_label_properties_dialog_response_cb (glLabelPropertiesDialog *dialog,
 		gtk_widget_hide (GTK_WIDGET (dialog));
 		break;
 	default:
-		g_print ("response = %d", response);
+		g_error ("response = %d", response);
 		g_assert_not_reached ();
 	}
 

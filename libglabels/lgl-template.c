@@ -28,6 +28,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <math.h>
+#include <stdio.h>
 
 #include "libglabels-private.h"
 
@@ -1414,15 +1415,15 @@ compare_origins (gconstpointer a,
 void
 lgl_template_print (const lglTemplate *template)
 {
-        g_print ("---- %s( TEMPLATE=%p ) ----\n", __FUNCTION__, template);
+        fprintf (stderr, "---- %s( TEMPLATE=%p ) ----\n", __FUNCTION__, template);
 
-        g_print("brand=\"%s\", part=\"%s\", description=\"%s\"\n",
+        fprintf (stderr, "brand=\"%s\", part=\"%s\", description=\"%s\"\n",
                 template->brand, template->part, template->description);
 
-        g_print("paper_id=\"%s\", page_width=%g, page_height=%g\n",
+        fprintf (stderr, "paper_id=\"%s\", page_width=%g, page_height=%g\n",
                 template->paper_id, template->page_width, template->page_height);
 
-        g_print ("\n");
+        fprintf (stderr, "\n");
 
 }
 

@@ -2154,7 +2154,7 @@ resize_event (glView   *view,
 		break;
 
         default:
-                g_print ("Invalid handle.\n");  /* Should not happen! */
+                g_warning ("Invalid handle.\n");  /* Should not happen! */
 
         }
 
@@ -2198,7 +2198,7 @@ resize_event (glView   *view,
                         break;
 
                 default:
-                        g_print ("Invalid handle.\n");  /* Should not happen! */
+                        g_warning ("Invalid handle.\n");  /* Should not happen! */
                 }
         }
         else

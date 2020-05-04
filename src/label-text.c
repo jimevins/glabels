@@ -27,6 +27,7 @@
 #include <pango/pango.h>
 #include <math.h>
 #include <string.h>
+#include <stdio.h>
 
 #include "font-util.h"
 #include "font-history.h"
@@ -1059,8 +1060,8 @@ auto_shrink_font_size (cairo_t     *cr,
 
         g_object_unref (layout);
 
-        g_print ("Object w = %g, layout w = %g\n", width, layout_width);
-        g_print ("Object h = %g, layout h = %g\n", height, layout_height);
+        fprintf (stderr, "Object w = %g, layout w = %g\n", width, layout_width);
+        fprintf (stderr, "Object h = %g, layout h = %g\n", height, layout_height);
 
         new_wsize = new_hsize = size;
         if ( layout_width > width )
