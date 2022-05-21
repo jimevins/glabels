@@ -28,7 +28,7 @@
 G_BEGIN_DECLS
 
 
-glFontHistoryModel *gl_font_history;
+extern glFontHistoryModel *gl_font_history;
 
 
 void            gl_font_history_init (void);
