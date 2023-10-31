@@ -51,3 +51,10 @@ Website
 
 http://glabels.org/
 
+
+Brozkeff's fork information
+===========================
+
+This fork adds --collate (-a) flag to the glabels-3-batch binary because it is missing in the upstream version and it does not allow using this flag when using glabels for automation in scripts. 
+
+Ubuntu 22.04 deb package compiled against older Debian's barcode library to keep EAN13 and other barcode support. May need to manually put the relevant libraries to /usr/local/lib, the package was not tested much on a default ubuntu install.
