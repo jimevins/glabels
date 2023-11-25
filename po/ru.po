@@ -134,7 +134,7 @@ msgstr "Code 128B"
 
 #: ../src/bc-backends.c:187 ../src/bc-backends.c:329
 msgid "Interleaved 2 of 5"
-msgstr "Interleaved 2 of 5"
+msgstr "Чередование 2 из 5"
 
 #: ../src/bc-backends.c:190 ../src/bc-backends.c:224
 msgid "Codabar"
@@ -178,7 +178,7 @@ msgstr "Aztec Rune"
 
 #: ../src/bc-backends.c:227
 msgid "Code One"
-msgstr "Code 1"
+msgstr "Code One"
 
 #: ../src/bc-backends.c:230
 msgid "Code 11"
@@ -202,7 +202,7 @@ msgstr "Code 2 of 5 Data Logic"
 
 #: ../src/bc-backends.c:245
 msgid "Code 32 (Italian Pharmacode)"
-msgstr "Code 32 (Italian Pharmacode)"
+msgstr "Code 32 (Итальянский Pharmacode)"
 
 #: ../src/bc-backends.c:254
 msgid "Code 49"
@@ -314,7 +314,7 @@ msgstr "Micro PDF417"
 
 #: ../src/bc-backends.c:353
 msgid "Micro QR Code"
-msgstr "Micro QR Code"
+msgstr "Микро QR код"
 
 #: ../src/bc-backends.c:356
 msgid "MSI Plessey"
@@ -410,7 +410,7 @@ msgstr "Темно-циановый"
 
 #: ../src/color-combo-menu.c:88
 msgid "Navy Blue"
-msgstr "Тёмно-синий"
+msgstr "Морской волны"
 
 #: ../src/color-combo-menu.c:89
 msgid "Dark Violet"
@@ -426,7 +426,7 @@ msgstr "Оранжевый"
 
 #: ../src/color-combo-menu.c:93
 msgid "Dark Yellow"
-msgstr "Темно-желтый"
+msgstr "Темно-жёлтый"
 
 #: ../src/color-combo-menu.c:94
 msgid "Medium green"
@@ -446,7 +446,7 @@ msgstr "Пурпурный"
 
 #: ../src/color-combo-menu.c:99
 msgid "Salmon"
-msgstr "Сомон"
+msgstr "Лосось"
 
 #: ../src/color-combo-menu.c:100
 msgid "Gold"
@@ -466,7 +466,7 @@ msgstr "Циановый"
 
 #: ../src/color-combo-menu.c:104
 msgid "SkyBlue"
-msgstr "Небесно-синий"
+msgstr "Небесно-голубой"
 
 #: ../src/color-combo-menu.c:105
 msgid "Violet"
@@ -577,7 +577,7 @@ msgstr "Файл не существует"
 #: ../src/file.c:410
 #, c-format
 msgid "Could not open file \"%s\""
-msgstr "Не удалось открыть файл «%s»"
+msgstr "Не удалось открыть файл \"%s\""
 
 #: ../src/file.c:413
 msgid "Not a supported file format"
@@ -586,7 +586,7 @@ msgstr "Файл неподдерживаемого формата"
 #: ../src/file.c:491 ../src/file.c:670
 #, c-format
 msgid "Could not save file \"%s\""
-msgstr "Невозможно сохранить файл «%s»"
+msgstr "Невозможно сохранить файл \"%s\""
 
 #: ../src/file.c:495 ../src/file.c:674
 msgid "Error encountered during save.  The file is still not saved."
@@ -595,7 +595,7 @@ msgstr "Произошла ошибка при сохранении файла. 
 #: ../src/file.c:535
 #, c-format
 msgid "Save \"%s\" as"
-msgstr "Сохранить «%s» как"
+msgstr "Сохранить \"%s\" как"
 
 #: ../src/file.c:623
 msgid "Please supply a valid file name"
@@ -604,7 +604,7 @@ msgstr "Укажите корректное название файла"
 #: ../src/file.c:644
 #, c-format
 msgid "Overwrite file \"%s\"?"
-msgstr "Перезаписать файл «%s»?"
+msgstr "Перезаписать файл \"%s\"?"
 
 #: ../src/file.c:648
 msgid "File already exists."
@@ -613,7 +613,7 @@ msgstr "Файл уже существует."
 #: ../src/file.c:744
 #, c-format
 msgid "Save changes to document \"%s\" before closing?"
-msgstr "Сохранить изменения в документе «%s» перед закрытием?"
+msgstr "Сохранить изменения в документе \"%s\" перед закрытием?"
 
 #: ../src/file.c:748
 msgid "Your changes will be lost if you don't save them."
@@ -668,7 +668,7 @@ msgstr "0123456789 .:,;(*!?)"
 
 #: ../src/font-combo-menu-item.c:157
 msgid "Sample text"
-msgstr "Образец текста:"
+msgstr "Образец текста"
 
 #: ../src/glabels-batch.c:53
 msgid "set output filename (default=\"output.pdf\")"
@@ -680,7 +680,7 @@ msgstr "имя файла"
 
 #: ../src/glabels-batch.c:55
 msgid "number of sheets (default=1)"
-msgstr "количество страниц (по умолчанию = 1)"
+msgstr "количество страниц (по умолчанию=1)"
 
 #: ../src/glabels-batch.c:55
 msgid "sheets"
@@ -688,7 +688,7 @@ msgstr "страницы"
 
 #: ../src/glabels-batch.c:57
 msgid "number of copies (default=1)"
-msgstr "количество копий (по умолчанию = 1)"
+msgstr "количество копий (по умолчанию=1)"
 
 #: ../src/glabels-batch.c:57
 msgid "copies"
@@ -696,7 +696,7 @@ msgstr "копии"
 
 #: ../src/glabels-batch.c:59
 msgid "first label on first sheet (default=1)"
-msgstr "первая этикетка на первой странице (по умолчанию = 1)"
+msgstr "первая этикетка на первой странице (по умолчанию=1)"
 
 #: ../src/glabels-batch.c:59
 msgid "first"
@@ -708,7 +708,7 @@ msgstr "печатать контуры этикеток (для тестиро�
 
 #: ../src/glabels-batch.c:63 ../data/ui/print-op-dialog-custom-widget.ui.h:12
 msgid "print in reverse (i.e. a mirror image)"
-msgstr "печатать  в зеркальном отображении"
+msgstr "печатать в зеркальном отображении"
 
 #: ../src/glabels-batch.c:65 ../data/ui/print-op-dialog-custom-widget.ui.h:13
 msgid "print crop marks"
@@ -733,7 +733,7 @@ msgid ""
 "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
 "%s\n"
-"Запустите «%s --help», чтобы вывести полный список всех доступных параметров "
+"Запустите '%s --help', чтобы вывести полный список всех доступных параметров "
 "командной строки.\n"
 
 #: ../src/glabels-batch.c:151
@@ -839,7 +839,7 @@ msgstr "По правому краю"
 
 #: ../src/label.c:1622
 msgid "Align horizontal center"
-msgstr "Выровнять по горизонтальным центрам"
+msgstr "Выровнять горизонтально по центру"
 
 #: ../src/label.c:1698
 msgid "Align tops"
@@ -851,7 +851,7 @@ msgstr "Выровнять по нижнему краю"
 
 #: ../src/label.c:1816
 msgid "Align vertical center"
-msgstr "Выровнять по вертикальным центрам"
+msgstr "Выровнять вертикально по центру"
 
 #: ../src/label.c:1894 ../src/ui.c:406
 msgid "Center horizontally"
@@ -871,7 +871,7 @@ msgstr "Добавить эллипс"
 
 #: ../src/label-image.c:200 ../src/ui.c:310
 msgid "Create image object"
-msgstr "Добавить растровое изображение"
+msgstr "Добавить изображение"
 
 #: ../src/label-image.c:333 ../src/label-image.c:474
 msgid "Set image"
@@ -969,7 +969,7 @@ msgstr "Любой вариант"
 #: ../src/media-select.c:648
 #, c-format
 msgid "Delete template \"%s\"?"
-msgstr "Удалить шаблон «%s»?"
+msgstr "Удалить шаблон \"%s\"?"
 
 #: ../src/media-select.c:650
 msgid "This action will permanently delete this template."
@@ -1228,7 +1228,7 @@ msgstr "Изменение шаблона gLabels"
 
 #: ../src/template-designer.c:1549
 msgid "Brand and part# match an existing template!"
-msgstr "Брэнд и номер соответствуют существующему шаблону!"
+msgstr "Марка и номер соответствуют существующему шаблону!"
 
 #. Menu entries.
 #: ../src/ui.c:91
@@ -1476,7 +1476,7 @@ msgstr "Добавить прямоугольник"
 #: ../src/ui.c:294 ../data/ui/object-editor.ui.h:17
 #: ../data/ui/prefs-dialog.ui.h:20
 msgid "Line"
-msgstr "Обводка"
+msgstr "Линия"
 
 #: ../src/ui.c:301
 msgid "Ellipse"
@@ -1524,11 +1524,11 @@ msgstr "Выровнять объекты по левому краю"
 
 #: ../src/ui.c:371
 msgid "Align center"
-msgstr "По центрам"
+msgstr "По центру"
 
 #: ../src/ui.c:373
 msgid "Align objects to horizontal centers"
-msgstr "Выровнять объекты по горизонтальным центрам"
+msgstr "Выровнять объекты горизонтально по центру"
 
 #: ../src/ui.c:380
 msgid "Align objects to right edges"
@@ -1548,7 +1548,7 @@ msgstr "По середине"
 
 #: ../src/ui.c:394
 msgid "Align objects to vertical centers"
-msgstr "Выровнять объекты по вертикальным центрам"
+msgstr "Выровнять объекты вертикально по центру"
 
 #: ../src/ui.c:399
 msgid "Align bottom"
@@ -1628,7 +1628,7 @@ msgstr "Изменить видимость панели инструменто�
 
 #: ../src/ui-commands.c:1135
 msgid "Glabels includes contributions from:"
-msgstr "В разработке gLabels поучаствовали:"
+msgstr "В разработке gLabels участвовали:"
 
 #: ../src/ui-commands.c:1144
 msgid "See the file AUTHORS for additional credits,"
@@ -1638,11 +1638,11 @@ msgstr ""
 
 #: ../src/ui-commands.c:1145
 msgid "or visit http://glabels.org/"
-msgstr "или откройте http://glabels.org/"
+msgstr "или посетите http://glabels.org/"
 
 #: ../src/ui-commands.c:1162
 msgid "A label and business card creation program.\n"
-msgstr "Программа для создания этикетов и визитных карточек.\n"
+msgstr "Программа для создания этикеток и визитных карточек.\n"
 
 #: ../src/ui-commands.c:1166
 msgid "translator-credits"
@@ -1664,11 +1664,11 @@ msgid ""
 msgstr ""
 "gLabels является свободным программным обеспечением, которое можно "
 "распространять и/или изменять на условиях GNU General Public License,\n"
-"опубликованной Free Software Foundation, версии 3 или (на ваше усмотрение)\n"
+"опубликованной Free Software Foundation, версии 3 или (на Ваше усмотрение)\n"
 "любой более поздней версии.\n"
 "\n"
 "gLabels распространяется в надежде на то, что она\n"
-"будет вам полезной, однако мы НЕ ПРЕДОСТАВЛЯЕМ НА НЕЁ НИКАКИХ\n"
+"будет Вам полезной, однако мы НЕ ПРЕДОСТАВЛЯЕМ НА НЕЁ НИКАКИХ\n"
 "ГАРАНТИЙ, в том числе ГАРАНТИИ ТОВАРНОГО СОСТОЯНИЯ ПРИ\n"
 "ПРОДАЖЕ И ПРИГОДНОСТИ ДЛЯ ИСПОЛЬЗОВАНИЯ В КОНКРЕТНЫХ\n"
 "ЦЕЛЯХ. Для получения более подробной информации ознакомьтесь\n"
@@ -1726,7 +1726,7 @@ msgstr ""
 #: ../libglabels/lgl-db.c:2056
 #, c-format
 msgid "%s full page label"
-msgstr "Этикетка на полную страницу (%s)"
+msgstr "Этикетка %s на полную страницу"
 
 #.
 #. * Translators: 1st %d = number of labels across a page,
@@ -1822,7 +1822,7 @@ msgstr "Марка:"
 #: ../data/ui/media-select.ui.h:3 ../data/ui/new-label-dialog.ui.h:7
 #: ../data/ui/template-designer.ui.h:12
 msgid "Page size:"
-msgstr "Формат страницы:"
+msgstr "Размер страницы:"
 
 #: ../data/ui/media-select.ui.h:4
 msgid "Category:"
@@ -1963,7 +1963,7 @@ msgstr "Цифр:"
 
 #: ../data/ui/object-editor.ui.h:25
 msgid "Backend:"
-msgstr "Движок:"
+msgstr "Фон:"
 
 #: ../data/ui/object-editor.ui.h:26
 msgid "Checksum"
@@ -2189,7 +2189,7 @@ msgstr "3. Закругление (радиус вершины):"
 
 #: ../data/ui/template-designer.ui.h:25
 msgid "4. Horiz. waste (overprint allowed):"
-msgstr "5. Пустое гор. поле (на нём возможна печать):"
+msgstr "4. Пустое гор. поле (на нём возможна печать):"
 
 #: ../data/ui/template-designer.ui.h:26
 msgid "6. Margin"
@@ -2211,7 +2211,7 @@ msgstr "4. Поле"
 msgid ""
 "Please enter the following size parameters of a single label in your "
 "template."
-msgstr "Введите геометрические размеры одиночной этикетки в вашем шаблоне."
+msgstr "Введите геометрические размеры одиночной этикетки в Вашем шаблоне."
 
 #: ../data/ui/template-designer.ui.h:31
 msgid "1. Radius:"
@@ -3467,13 +3467,13 @@ msgstr "EPSON Photo Stickers 16"
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:30
 msgid "Universal Labels"
-msgstr "Этикетки общего назначения"
+msgstr "Универсальные этикетки"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:34
 #: ../templates/pearl-iso-templates.xml.h:16
 msgid "Bottle labels"
-msgstr "Этикети на бутылки"
+msgstr "Бутылочные этикетки"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:38
